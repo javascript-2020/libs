@@ -19,6 +19,7 @@ boolean
 ## examples
 
 glob('*.js','example.js')        //  true
+
 glob('http*.js','example.js')    //  false
 
 
