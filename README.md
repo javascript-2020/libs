@@ -1,2 +1,7 @@
-# js-libs
-various javascript libraries for requiring and importing
+# libs
+
+various libraries for different languages
+
+
+
+
