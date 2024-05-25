@@ -4,7 +4,7 @@
             
             function fn(){
             
-                  alert(2);
+                  alert(3);
                   
             }//fn
       
