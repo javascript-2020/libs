@@ -6,12 +6,13 @@
   page-hdr
 */
 
-      #hdr {
+      page-hdr #hdr {
         font-family:arial;
         position:relative;
         margin-bottom:20px;
       }
-      .icon {
+
+      page-hdr .icon {
         display:inline-block;
         text-align:center;
         background:whitesmoke;
@@ -22,10 +23,11 @@
         margin-right:10px;
         min-width:50px;
       }
-      .icon-label {
+
+      page-hdr .icon-label {
         margin:2px 0 0;
       }
-      #title {
+      page-hdr #title {
         text-align:center;
         position:absolute;
         left:0;
