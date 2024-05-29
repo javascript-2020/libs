@@ -1,11 +1,18 @@
 <html>
     <head style="display: block;">
         <style style="display: none;">
-/* body */
+html {
+              height                      : 100%;
+        }
+        
+  /* body */
   
         body {
               font-family                 : arial;
               margin                      : 20px;
+              height                      : calc(100% - 40px);
+              display                     : flex;
+              flex-direction              : column;
         }
         
         
@@ -65,8 +72,10 @@
   /* center */
   
         #center {
+              width                       : 100%;
               max-width                   : 1000px;
               margin                      : auto;
+              flex                        : 1;
         }
         
         
