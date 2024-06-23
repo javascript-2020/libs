@@ -1,0 +1,148 @@
+(()=>{
+
+        function $(root,sel){
+        
+              if(!sel){
+                    if(datatype.is.node(root)){
+                          return root;
+                    }
+                    sel     = root;
+                    root    = document;
+              }
+              var node    = root.querySelector(sel);
+              return node;
+              
+        }//$$
+        
+        $.input   = {};
+        
+        
+        $.all=function(root,sel){
+        
+              if(!sel){
+                    if(datatype.is.node(root)){
+                          return root;
+                    }
+                    sel   = root;
+                    root    = document;
+              }
+              var list    = [...root.querySelectorAll(sel)];
+              return list;
+              
+        }//all
+        
+        
+        $.show=function(root,sel){
+        
+              var node    = $(root,sel);
+              if(!node){
+                    return;
+              }
+              node.style.display    = '';
+              
+        }//show
+        
+        
+        $.hide=function(root,sel){
+        
+              var node    = $(root,sel);
+              if(!node){
+                    return;
+              }
+              node.style.display    = 'none';
+              
+        }//hide
+        
+        
+        $.rem=function(root,sel){
+        
+              var node    = $(root,sel);
+              if(!node){
+                    return;
+              }
+              node.remove();
+              return node;
+              
+        }//remove
+        
+        
+        $.chkbox=function(root,sel,callback){
+        
+              if(!callback){
+                    callback    = sel;
+                    sel         = root;
+                    root        = document;
+              }
+              
+              var node        = $(root,sel);
+              var chkbox      = $(node,'[type=checkbox]');
+              node.onclick    = click;
+              
+              var chk   = {read,set,id:node.id};
+              return chk;
+              
+              
+              function click(e){
+              
+                    if(e.target!==chkbox){
+                          chkbox.checked    = !chkbox.checked;
+                    }
+                    callback(chk);
+                    
+              }//click
+              
+              function read(){return chkbox.checked}
+              function set(v=true){chkbox.checked=v}
+              
+        }//chkbox
+        
+        
+        $.chkbox.group=function(root,sel0){
+        
+              var list    = [];
+              var n       = arguments.length;
+              for(var i=1;i<n;i++){
+              
+                    var sel     = arguments[i];
+                    var chk     = $.chkbox(root,sel,chk=>set(chk.id));
+                    list.push(chk);
+                    
+              }//for
+              
+              
+              function read(){
+              
+                    var n   = list.length;
+                    for(var i=0;i<n;i++){
+                    
+                          var chk   = list[i];
+                          if(chk.read()){
+                                return chk;
+                          }
+                          
+                    }//for
+                    
+              }//read
+              
+              function set(id){list.forEach(chk=>chk.id==id ? chk.set() : chk.set(false))}
+              set.index=function(index){set(list[index].id)}
+              
+              
+              var group   = {read,set};
+              return group;
+              
+        }//group
+        
+        
+        $.input.paste=function(root,name,def=''){
+        
+              $(root,`#${name}-paste`).onclick    = async e=>{
+                                                        var txt                   = await navigator.clipboard.readText();
+                                                        $(root,`#${name}`).value    = txt;
+                                                  };
+              $(root,`#${name}`).value            = def;
+              
+        }//input.paste
+
+  
+})();
