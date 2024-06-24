@@ -1,5 +1,3 @@
-        
-        
         function modproxy(notfound){
               
               var mem     = {};          
@@ -52,9 +50,9 @@
               function newproxy(target=()=>{},lname=''){
               
                     return new Proxy(target,{
-                          get (target,name,receiver)=>getter(target,name,receiver,lname),
-                          set (target,name,newval)=>setter(target,name,newval,lname),
-                          apply (target,thisArg,args)=>applyer(target,thisArg,args,lname)
+                          get   : (target,name,receiver)=>getter(target,name,receiver,lname),
+                          set   : (target,name,newval)=>setter(target,name,newval,lname),
+                          apply : (target,thisArg,args)=>applyer(target,thisArg,args,lname)
                     });
               
               }//proxy
@@ -70,5 +68,3 @@
               }//log
               
         }//modproxy
-        
-        
