@@ -1,4 +1,4 @@
-        function modproxy(notfound){
+        function modproxy(notfound,opts={}){
               
               var mem     = {};          
               return newproxy();
@@ -14,7 +14,11 @@
                                                                                 log(`rd : ${lname} - ${v}`);
                           return v;
                     }
-                    
+                    if(opts.promiseCompat){
+                            if(lname=='then'){
+                                    return null;
+                            }
+                    }
                     return newproxy(()=>{},lname);
               
               }//getter
