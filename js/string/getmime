@@ -1,3 +1,5 @@
+getmime();
+getmime.display('mp4');
 
 
 
@@ -1163,6 +1165,20 @@ mime    = {
                     return js;
                     
               }//update
+              
+              getmime.display=function(ext){
+              
+                    var list    = [];
+                    for(var key in mime){
+                    
+                          if(mime[key].includes(ext)){
+                                list.push(key);
+                          }
+                          
+                    }//for
+                    list.forEach(console.log);
+                    
+              }//display
               
         }//api
         
