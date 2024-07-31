@@ -1,0 +1,21 @@
+
+
+
+  function resolve(url){
+
+        url         = url.slice(1);
+        url         = decodeURI(url);
+        var p2      = path.resolve(docroot);
+        var file    = path.resolve(docroot,url);
+        var s       = file.substring(0,p2.length);
+        var p1      = path.resolve(s);
+        if(p1!==p2){
+              return false;
+        }
+        return file;
+        
+  }//resolve
+
+
+
+
