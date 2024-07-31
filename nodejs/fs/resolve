@@ -1,7 +1,7 @@
 
 
 
-  function resolve(url){
+  function resolve(url,docroot='.'){
 
         url         = url.slice(1);
         url         = decodeURI(url);
