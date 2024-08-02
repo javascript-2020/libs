@@ -37,8 +37,8 @@ download a github repo
                                                                                 console.log('\n','downloading',url,'\n');
               var buf     = await fetch(url).then(res=>res.arrayBuffer());
               
-              var url     = 'https://raw.githubusercontent.com/stuk/jszip/main/dist/jszip.min.js';
-              var JSZip   = (await fetch(url).then(res=>res.text()
+              var zip_url = 'https://raw.githubusercontent.com/stuk/jszip/main/dist/jszip.min.js';
+              var JSZip   = (await fetch(zip_url).then(res=>res.text()
                                 .then(txt=>Promise.resolve(eval(txt))))) && module.exports;
                                 
               var zip     = new JSZip();
