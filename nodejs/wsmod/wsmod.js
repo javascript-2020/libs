@@ -43,13 +43,13 @@ function wsmod(){
   //:
   
   
-        obj.client=function(url,onrec,onerror,onclose,callback){    //d
+        obj.client=function(url,origin,onrec,onerror,onclose,callback){    //d
         
               if(!callback){
                     var promise   = new Promise(res=>callback=res);
               }
               
-              handshake.client(url,complete);
+              handshake.client(url,origin,complete);
               
               return promise;
               
@@ -399,7 +399,7 @@ function wsmod(){
               
         }//handshake
         
-        handshake.client=function(url,callback){
+        handshake.client=function(url,origin,callback){
         
               if(!callback){
                     var promise   = new Promise((res,rej)=>callback=res);
@@ -425,7 +425,8 @@ function wsmod(){
                   'Connection'              : 'Upgrade',
                   'Sec-WebSocket-Version'   : 13,
                   'Sec-WebSocket-Key'       : b64,
-                  'Host'                    : hostname+':'+port
+                  'Host'                    : hostname+':'+port,
+                  'origin'                  : origin
               }
               
               var opts    = {
