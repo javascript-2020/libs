@@ -12,8 +12,6 @@ wsmod:d
 */
 
 
-      module.exports    = wsmod;
-      
       
 function wsmod(){
 
@@ -43,13 +41,13 @@ function wsmod(){
   //:
   
   
-        obj.client=function(url,origin,onrec,onerror,onclose,callback){    //d
+        obj.client=function(url,user_hdrs,onrec,onerror,onclose,callback){    //d
         
               if(!callback){
                     var promise   = new Promise(res=>callback=res);
               }
               
-              handshake.client(url,origin,complete);
+              handshake.client(url,user_hdrs,complete);
               
               return promise;
               
@@ -399,7 +397,7 @@ function wsmod(){
               
         }//handshake
         
-        handshake.client=function(url,origin,callback){
+        handshake.client=function(url,user_hdrs,callback){
         
               if(!callback){
                     var promise   = new Promise((res,rej)=>callback=res);
@@ -419,6 +417,9 @@ function wsmod(){
               }//for
               var b64   = num.toString('base64');
               
+              if(typeof user_hdrs=='string'){
+                    user_hdrs   = {origin:user_hdrs};
+              }
               
               var hdrs    = {
                   'Upgrade'                 : 'websocket',
@@ -426,15 +427,15 @@ function wsmod(){
                   'Sec-WebSocket-Version'   : 13,
                   'Sec-WebSocket-Key'       : b64,
                   'Host'                    : hostname+':'+port,
-                  'origin'                  : origin
               }
+              Object.assign(hdrs,user_hdrs);
               
               var opts    = {
-                  hostname    : hostname,
-                  port        : port,
-                  method      : 'GET',
-                  path        : path,
-                  headers     : hdrs,
+                  hostname              : hostname,
+                  port                  : port,
+                  method                : 'GET',
+                  path                  : path,
+                  headers               : hdrs,
                   rejectUnauthorized    : false
               }
               
