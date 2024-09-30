@@ -2,7 +2,13 @@
 
         function $(root,sel){
         
-              if(!sel){
+              if(arguments.length==2){
+                    if(typeof root=='string'){
+                          var t   = root;
+                          root    = sel;
+                          sel     = t;
+                    }
+              }else{
                     if(datatype.is.node(root)){
                           return root;
                     }
