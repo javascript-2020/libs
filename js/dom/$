@@ -144,5 +144,6 @@
               
         }//input.paste
 
-  
+return $;
+
 })();
