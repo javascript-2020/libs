@@ -1,3 +1,6 @@
+
+        datatype;
+
         function datatype(v){
         
               var str   = Object.prototype.toString.call(v);
