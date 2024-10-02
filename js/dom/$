@@ -22,6 +22,7 @@
         
         $.input   = {};
         $.is      = {};
+        $.center  = {};
         
         
         $.all=function(root,sel){
