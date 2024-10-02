@@ -18,7 +18,7 @@
               var node    = root.querySelector(sel);
               return node;
               
-        }//$$
+        }//$
         
         $.input   = {};
         $.is      = {};
