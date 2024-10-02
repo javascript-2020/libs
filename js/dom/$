@@ -21,6 +21,7 @@
         }//$$
         
         $.input   = {};
+        $.is      = {};
         
         
         $.all=function(root,sel){
@@ -149,6 +150,21 @@
               $(root,`#${name}`).value            = def;
               
         }//input.paste
+
+
+        $.is.parent=function(par,node){
+        
+              while(node){
+              
+                    if(node===par)return true;
+                    node    = node.parentNode;
+                    
+              }//while
+              return false;
+              
+        }//is.parent
+
+
 
 return $;
 
