@@ -165,6 +165,213 @@
         }//is.parent
 
 
+        $.center.width=function(node){
+        
+              var w             = $.computed.width(node)||$.style.width(node);
+              if(!w){
+                    return;
+              }
+              var mw            = document.body.clientWidth;
+              var l             = (mw-w)/2;
+              node.style.left   = l+'px';
+              
+        }//width
+        
+        $.center.height=function(node){
+        
+              var h               = $.computed.height(node)||$.style.height(node);
+              if(!h){
+                    return;
+              }
+              var mh              = document.body.clientHeight;
+              var h               = (mh-h)/2;
+              node.style.height   = h+'px';
+              
+        }//height
+        
+        
+        $.drag=function(el,callback,type,params){
+        
+              params    = params||{};
+              type      = type||'both';
+              
+              timer     = timer(mu);
+              
+              var dragtype;
+              var top;
+              var left;
+              var width;
+              var height;
+              var mx;
+              var my;
+              var doc;
+              
+              el.addEventListener('mousedown',md);
+              
+              
+              function md(e){
+              
+                    doc   = el.ownerDocument;
+                    mx    = e.pageX;
+                    my    = e.pageY;
+                    
+                    dragtype    = null;
+                    
+                    if(params.cancelevent2===true){
+                          if(e.shiftKey){
+                                e.stopPropagation();
+                          }
+                    }else{
+                          if(params.cancelevent!==false){
+                                e.stopPropagation();
+                          }
+                    }
+                    
+                    if(type==='both'||type==='pos'){
+                          if(e.button===0){
+                                dragtype    = 'pos';
+                                left        = get.left(el);
+                                top         = get.top(el);
+                          }//left
+                    }
+                    
+                    if(type==='both'||type==='size'){
+                          if(e.button===2){
+                                dragtype    = 'size';
+                                width       = get.width(el);
+                                height      = get.height(el);
+                          }//right
+                    }
+                    
+                    if(type==='horiz'){
+                          if(e.btnname==='right'){
+                                dragtype    = 'horiz';
+                                width       = get.width(el);
+                          }
+                    }
+                    
+                    if(type==='vert'){
+                          if(e.btnname==='right'){
+                                dragtype    = 'vert';
+                                height      = get.height(el);
+                          }
+                    }
+                    
+                    doc.addEventListener('mouseup',mu);
+                    doc.addEventListener('mousemove',mm);
+                    doc.addEventListener('contextmenu',cm);
+                    el.addEventListener('contextmenu',cm);
+                    
+                    timer.reset();
+                    
+                    return false;
+                    
+              }//md
+              
+              
+              function cm(e){
+              
+                    e.preventDefault();
+                    
+              }//contextmenu
+              
+              function mu(e){
+              
+                    timer.abort();
+                    
+                    doc.removeEventListener('mouseup',mu);
+                    doc.removeEventListener('mousemove',mm);
+                    doc.removeEventListener('contextmenu',cm);
+                    
+              }//mu
+              
+              
+              function mm(e){
+              
+                    timer.reset();
+                    
+                    var ox    = e.pageX-mx;
+                    var oy    = e.pageY-my;
+                    mx        = e.pageX;
+                    my        = e.pageY;
+                    
+                    e.preventDefault();
+                    
+                    if(dragtype==='pos'){
+                          left    = left+ox;
+                          el.style.left   = left+'px';
+                          
+                          top     = top+oy;
+                          el.style.top    = top+'px';
+                    }
+                    
+                    if( (dragtype==='horiz')    ||
+                        (dragtype==='size')     ){
+                          var w   = width+ox;
+                          if(params.minw){
+                                if(h<params.minw){
+                                      w   = params.minw;
+                                }
+                          }
+                          if(params.maxw){
+                                if(w>params.maxw){
+                                      w   = params.maxw;
+                                }
+                          }
+                          width   = w;
+                          el.style.width    = width+'px';
+                    }
+                    
+                    if( (dragtype==='vert')   ||
+                        (dragtype==='size')   ){
+                          var h   = height+oy;
+                          if(params.minh){
+                                if(h<params.minh){
+                                      h   = params.minh;
+                                }
+                          }
+                          if(params.maxh){
+                                if(h>params.maxh){
+                                      h   = params.maxh;
+                                }
+                          }
+                          height    = h;
+                          el.style.height   = height+'px';
+                    }
+                    
+                    if(callback){
+                          callback(e,dragtype,ox,oy,el);
+                    }
+                    
+              }//mm
+              
+              var get   = new Proxy({},{get:(target,prop)=>node=>{
+              
+                    var doc       = node.ownerDocument;
+                    var win       = doc.defaultView;
+                    var cstyle    = win.getComputedStyle(node);
+                    var value     = cstyle.getPropertyValue(prop);
+                    value         = parseInt(value);
+                    return value;
+                    
+              }});
+              
+              
+              function timer(callback,auto=false,delay=500){
+              
+                    var timer;
+                    var abort   = ()=>clearTimeout(timer);
+                    var reset   = ()=>(abort(),timer=setTimeout(callback,delay));
+                    auto && reset();
+                    return {reset,abort};
+                    
+              }//timer
+              
+        }//drag
+
+
+
+
 
 return $;
 
