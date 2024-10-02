@@ -294,7 +294,7 @@
                           opt.style.background    = 'lightyellow';
                     }
                     
-                    dom.display(node,'');
+                    node.style.display  = '';
                     node.focus();
                     callback('show');
                     
@@ -312,7 +312,7 @@
                           state.opt               = null;
                     }
                     
-                    dom.display(node,'none');
+                    node.style.display  = 'none';
                     callback('hide');
                     
               }//hide
@@ -509,7 +509,7 @@
                           for(var i=0;i<n;i++){
                           
                                 var o    = list[i];
-                                if(extdom.isparent(o.node,focus)){
+                                if($.is.parent(o.node,focus)){
                                                                                 //console.log('list',o.node);
                                       return true;
                                 }
@@ -520,7 +520,7 @@
                           for(var i=0;i<n;i++){
                           
                                 var o   = stack[i];
-                                if(extdom.isparent(o.node,focus)){
+                                if($.is.parent(o.node,focus)){
                                                                                 //console.log('stack',o.node);
                                       return true;
                                 }
@@ -560,7 +560,7 @@
               
               get.opts=function(node){
               
-                    var list    = extdom.$.all(node,'.menu-opt');
+                    var list    = $.all(node,'.menu-opt');
                     list        = list.filter(opt=>{
                     
                           var menu    = opt.closest('.menu');
