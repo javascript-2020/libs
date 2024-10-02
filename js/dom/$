@@ -72,7 +72,103 @@
               return node;
               
         }//remove
+
+
+        $.nodename=function(root,sel){
         
+              var node    = $(root,sel);
+              if(!node)return;
+              var nn    = node.nodeName.toLowerCase();
+              return nn;
+              
+        }//nodename
+        
+        
+
+        //$.computed:b
+        $.computed=new Proxy({},{get:(target,prop)=>(node,numeric)=>{
+        
+              var doc       = node.ownerDocument;
+              var win       = doc.defaultView;
+              if(!win){
+                    return null;
+              }
+              var cstyle    = win.getComputedStyle(node);
+              var value     = cstyle.getPropertyValue(prop);
+              if(numeric!==false){
+                    value   = parseFloat(value);
+              }
+              return value;
+              
+        }});
+        
+        //$.style:b
+        $.style=new Proxy({},{get:(target,prop)=>(node,numeric=true)=>{
+        
+              var value     = node.style[prop];
+              if(numeric!==false){
+                    value   = parseFloat(value);
+              }
+              return value;
+              
+        }});
+        
+        //$.create:b
+        $.create=new Proxy({},{get (target,prop){
+        
+              var node    = document.createElement(prop);
+              
+              function set(...args){
+              
+                    args.forEach(arg=>{
+                    
+                          var type    = datatype(arg);
+                          set[type](arg);
+                          
+                    });
+                    
+                    return node;
+                    
+              }//set
+              
+              set.object=function(attr){
+              
+                    var keys    = Object.keys(attr);
+                    keys.forEach(name=>{
+                    
+                          if(name=='text'){
+                                name    = 'textContent';
+                          }
+                          if(name=='append'){
+                                attr['append'].append(node);
+                                return;
+                          }
+                          
+                          if(name=='style'){
+                                for(var sname in attr.style)
+                                      node.style[sname]    = attr.style[sname];
+                          }else{
+                                node[name]    = attr[name];
+                          }
+                          
+                    })//for
+                    
+              }//object
+              
+              set.string=function(str){
+              
+                    var tn    = document.createTextNode(str);
+                    node.append(tn);
+                    
+              }//string
+              
+              
+              return set;
+              
+        }});
+        
+  //:
+
         
         $.chkbox=function(root,sel,callback){
         
