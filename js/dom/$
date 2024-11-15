@@ -3,6 +3,11 @@
         function $(root,sel){
         
               if(arguments.length==2){
+                    if(!sel){
+                          if(datatype.is.node(root)){
+                                return root;
+                          }
+                    }
                     if(typeof root=='string'){
                           var t   = root;
                           root    = sel;
