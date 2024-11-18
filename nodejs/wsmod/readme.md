@@ -60,13 +60,12 @@ websocket server
         
 websocket client
 
-
         
         var wsmod   = require('wsmod');
         wsmod       = wsmod();
         
-        
-        var con     = await wsmod.client('wss://127.0.0.1:3000',{origin:'my-origin.com'},onrec,onerror,onclose);
+        var headers   = {origin:'my-origin.com'};
+        var con       = await wsmod.client('wss://127.0.0.1:3000',headers,onrec,onerror,onclose);
         
         con.send.text('helloworld');
         con.send.json({hello:'world'});
@@ -96,4 +95,5 @@ websocket client
               console.log('ws closed');
               
         }//onclose
+        
         
