@@ -11,19 +11,25 @@ wsmod:d
 
 */
 
+        module.exports    = wsmod;
+        
+        
+function wsmod(debug){
 
-      
-function wsmod(){
-
-  var obj               = {};
+  var obj   = {};
   
-  
+        var df          = typeof debug!='undefined' ? debug : true;
+        
+        
         var crypto      = require('crypto');
         var http        = require('http');
         var https       = require('https');
         
         const two16     = Math.pow(2,16);
         const two64     = Math.pow(2,64);
+        
+        
+        
         
         
         var op          = {};
@@ -40,14 +46,13 @@ function wsmod(){
         
   //:
   
-  
-        obj.client=function(url,user_hdrs,onrec,onerror,onclose,callback){    //d
+        obj.client=function(url,hdrs,onrec,onerror,onclose,callback){    //d
         
               if(!callback){
                     var promise   = new Promise(res=>callback=res);
               }
               
-              handshake.client(url,user_hdrs,complete);
+              handshake.client(url,hdrs,complete);
               
               return promise;
               
@@ -67,7 +72,6 @@ function wsmod(){
               
         }//client
         
-        
   //:
   
         obj.upgrade=function(socket,onrec,onerror,onclose){return upgrade(socket,onrec,onerror,onclose)}    //d
@@ -75,29 +79,6 @@ function wsmod(){
         function upgrade(socket,onrec,onerror,onclose){
         
               var con   = connection(socket,onrec,onerror,onclose);
-              
-              socket.on('data',data=>rec(con,data));
-              
-              socket.on('error',err=>{
-              
-                    console.log('error');
-                    console.error(err);
-                    if(typeof onerror==='function'){
-                          onerror(err);
-                    }
-                    
-              });
-              
-              socket.on('close',()=>{
-              
-                    list.remove(con);
-                    console.log('closed');
-                    if(typeof onclose==='function'){
-                          onclose();
-                    }
-                    
-              });
-              
               return con;
               
         }//upgrade
@@ -106,9 +87,9 @@ function wsmod(){
         obj.upgrade.server=function(req,socket,onrec,onerror,onclose){return upgrade.server(req,socket,onrec,onerror,onclose)}    //d
         
         upgrade.server=function(req,socket,onrec,onerror,onclose){
-                                                                              console.log('upgrade');
+                                                                                df && console.log('upgrade');
               if(req.headers['upgrade'].toLowerCase()!=='websocket'){
-                                                                              console.log(req.url,'bad request',req.headers['upgrade']);
+                                                                                df && console.log(req.url,'bad request',req.headers['upgrade']);
                     socket.end('HTTP/1.1 400 Bad Request');
                     return;
               }
@@ -136,6 +117,7 @@ function wsmod(){
         }//deny
         
   //:
+  //:
   
         function connection(socket,onrec,onerror,onclose){   //c
         
@@ -144,59 +126,42 @@ function wsmod(){
                 list.push(con);
                 
                 
-                con.onrec       = onrec;
-                con.onerror     = onerror;
-                con.onclose     = onclose;
+                con.onrec         = onrec;
+                con.onerror       = onerror;
+                con.onclose       = onclose;
                 
-                con.websocket   = socket;
-                con.buffer      = Buffer.alloc(0);
+                con.websocket     = socket;
+                con.buffer        = Buffer.alloc(0);
                 
-                con.send        = {};
+                con.send          = {};
                 
-                var payload     = {
                 
-                      buffer      : null,
-                      type        : null,
-                      
-                      add         : function(frame){
-                      
-                            var fragment      = rd.payload(frame);
-                            payload.buffer    = Buffer.concat([payload.buffer,fragment]);
-                            
-                            var fin           = rd.fin(frame);
-                            if(fin){
-                                  rec(payload.buffer,payload.type,con);
-                                  payload.reset();
-                            }
-                            
-                      },
-                      
-                      reset       : function(){
-                      
-                            payload.buffer   = Buffer.alloc(0);
-                            payload.type     = null;
-                            
-                      }
-                      
-                };
+                var payload       = {};
+                payload.buffer    = null;
+                payload.type      = null
+                payload.add       = function(frame){
                 
-                con.payload   = payload;
+                                        var fragment      = rd.payload(frame);
+                                        payload.buffer    = Buffer.concat([payload.buffer,fragment]);
+                                        
+                                        var fin           = rd.fin(frame);
+                                        if(fin){
+                                              call('rec',payload.buffer,payload.type,con);
+                                              payload.reset();
+                                        }
+                                        
+                                    }//add
+                payload.reset     = function(){
                 
-                payload.reset();
-                
+                                          payload.buffer   = Buffer.alloc(0);
+                                          payload.type     = null;
+                                          return payload;
+                                          
+                                    }//reset
+                                    
+                con.payload       = payload.reset();
                 
   //:
-  
-  
-                function rec(payload,type,con){
-                
-                      call('rec',payload,type,con);
-                      
-                }//rec
-                
-                
-  //:
-  
   
                 con.send.frame=function(buffer){
                 
@@ -234,9 +199,7 @@ function wsmod(){
                       
                 }//send.json
                 
-                
   //:
-  
   
                 con.close=function(){
                 
@@ -244,10 +207,14 @@ function wsmod(){
                       
                 }//close
                 
-                
   //:
   
-  
+                socket.on('data',data=>{
+                
+                      rec(con,data)
+                      
+                });
+                
                 socket.on('error',err=>{
                 
                       call('error',err,con);
@@ -260,13 +227,13 @@ function wsmod(){
                       
                 });
                 
-                
   //:
   
                 var fn          = {};
                 fn.rec          = [];
                 fn.error        = [];
                 fn.close        = [];
+                
                 
                 con.on=function(name,userfn){
                 
@@ -304,20 +271,18 @@ function wsmod(){
                 function call(name){
                 
                       var args    = Array.prototype.slice.call(arguments,1);
+                      var main    = con['on'+name];
+                      call(main);
+                      fn[name].forEach(call);
                       
-                      var mainfn    = con['on'+name];
-                      callfn(mainfn);
-                      
-                      fn[name].forEach(userfn=>userfn.apply(null,args));
-                      
-                      function callfn(fn){
+                      function call(fn){
                       
                             if(typeof fn!=='function'){
                                   return;
                             }
                             fn.apply(null,args);
                             
-                      }//callfn
+                      }//call
                       
                 }//call
                 
@@ -325,7 +290,6 @@ function wsmod(){
             return con;
             
         }//connection
-        
         
   //:
   
@@ -440,7 +404,9 @@ function wsmod(){
               }
               
               var req   = (secure ? https : http).request(opts);
-              req.on('error',err=>console.log(err));
+              req.on('error',err=>{
+                                                                                console.log(err)
+              });
               req.on('upgrade',upgrade);
               req.on('response',response);
               req.end();
@@ -454,7 +420,7 @@ function wsmod(){
                         callback(null);
                         return;
                   }
-                                                                                console.log('upgrade ok');
+                                                                                df && console.log('upgrade ok');
                   callback(socket,head);
                   
               }//upgrade
@@ -485,14 +451,10 @@ function wsmod(){
                     
               }//validateHandshake
               
-              
-              
         }//handshake.client
         
-        
-        
-        
-        
+  //:
+  
         function rec(con,buf){
         
               if(buf.length===0)return;
@@ -521,7 +483,6 @@ function wsmod(){
               
         }//rec
         
-        
         function close(con){
         
               send.close(con);
@@ -530,9 +491,7 @@ function wsmod(){
               
         }//close
         
-        
-  //:-
-  
+  //:
   
         op.continuation=function(con,frame){
         
@@ -576,19 +535,17 @@ function wsmod(){
         }//close
         
         op.ping=function(con){
-                                                        console.log('ping received');
+                                                                                df && console.log('ping received');
               var buf   = frame.create.pong();
               send(con,buf);
               
         }//ping
         
         op.pong=function(){
-                                                        console.log('pong received');
+                                                                                df && console.log('pong received');
         }//pong
         
-        
   //:
-  
   
         function send(con,buffer){
         
@@ -597,10 +554,10 @@ function wsmod(){
         }//send
         
         send.text=function(con,txt){
-                                                                      //console.log('send : '+txt);
+                                                                                //console.log('send : '+txt);
               var payload   = Buffer.from(txt,'utf8');
               var buffer    = frame.create(1,1,false,payload);
-                                                                      //display.buffer(buffer);
+                                                                                //display.buffer(buffer);
               send(con,buffer);
               
         }//text
@@ -626,9 +583,7 @@ function wsmod(){
               
         }//close
         
-        
   //:
-  
   
         frame.rd=function(buffer){
         
@@ -664,7 +619,7 @@ function wsmod(){
         }//create
         
         frame.remove=function(buffer){
-                                                                    //console.log('removeframe');
+                                                                                //console.log('removeframe');
               var len   = pos.endframe(buffer);
               var num   = buffer.length-len;
               var buf   = Buffer.alloc(num);
@@ -714,9 +669,7 @@ function wsmod(){
               
         }//available
         
-        
-  //:-
-  
+  //:
   
         frame.create.binary=function(buf){
         
@@ -754,9 +707,7 @@ function wsmod(){
               
         }//pong
         
-        
   //:
-  
   
         rd.fin=function(buffer){
         
@@ -789,7 +740,6 @@ function wsmod(){
               return paylen;
               
         }//payloadlength
-        
         
         rd.extpaylen=function(buffer){
         
@@ -851,9 +801,7 @@ function wsmod(){
               
         }//payload
         
-        
   //:
-  
   
         wt.fin=function(buffer,fin){
         
@@ -955,9 +903,7 @@ function wsmod(){
               
         }//payload
         
-        
   //:
-  
   
         pos.mask=function(buffer){
         
@@ -970,7 +916,6 @@ function wsmod(){
               
         }//mask
         
-        
         pos.payload=function(buffer){
         
               var mindex      = pos.mask(buffer);
@@ -982,7 +927,6 @@ function wsmod(){
               
         }//payload
         
-        
         pos.endframe=function(buffer){
         
               var pindex      = pos.payload(buffer);
@@ -992,9 +936,7 @@ function wsmod(){
               
         }//frame
         
-        
   //:
-  
   
         mask.create=function(){
         
@@ -1025,9 +967,7 @@ function wsmod(){
               
         }//mask
         
-        
   //:
-  
   
         extlen.len=function(len){
         
@@ -1057,18 +997,14 @@ function wsmod(){
               
         }//payloadlength
         
-        
   //:
-  
   
         bit.set       = function(num,n){return num | (1<<n)}
         bit.clear     = function(num,n){return num & ~(1<<n)}
         bit.wt        = function(num,n,v){return v ? bit.set(num,n) : bit.clear(num,n)}
         bit.rd        = function(num,n){return (num>>n) & 1}
         
-        
   //:
-  
   
         display.buffer=function(buffer,str){
         
@@ -1103,7 +1039,3 @@ function wsmod(){
   
 //wsmod:d-
 }
-
-
-
-
