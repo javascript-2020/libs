@@ -1,5 +1,5 @@
 
-(()=>{
+function create(){
 
         var create    = new Proxy({},{get (target,prop){
               var node    = document.createElement(prop);
@@ -17,6 +17,6 @@
         }});
         return create;
 
-})();
+}
 
 
