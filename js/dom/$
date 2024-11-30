@@ -497,7 +497,20 @@
               
         }//select
 
-
+        
+        $.buildnode2=function(node,params){
+        
+              for(var key in params){
+              
+                    if(key in node.style){
+                          node.style[key]   = params[key];
+                    }
+                    
+              }//for
+              
+        }//buildnode2
+        
+        
 return $;
 
 })();
