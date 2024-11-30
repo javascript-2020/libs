@@ -79,6 +79,13 @@
         }//remove
 
 
+        $.clear=function(root){
+        
+              root.replaceChildren();
+              
+        }//clear
+        
+        
         $.nodename=function(root,sel){
         
               var node    = $(root,sel);
