@@ -518,6 +518,15 @@
         }//buildnode2
         
         
+        $.scrollbottom=function(node){
+        
+              var h             = node.scrollHeight;
+              node.scrollTop    = h;
+              
+        }//scrollbottom
+        
+        
+        
 return $;
 
 })();
