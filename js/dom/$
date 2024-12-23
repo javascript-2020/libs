@@ -526,6 +526,45 @@
         }//scrollbottom
         
         
+        $.track=function(node,callback){
+        
+              node.addEventListener('mousedown',md);
+              
+              var mx;
+              var my;
+
+              
+              function md(e){
+              
+                    mx    = e.pageX;
+                    my    = e.pageY;
+                    document.addEventListener('mousemove',mm);
+                    document.addEventListener('mouseup',mu);
+                    
+              }//md
+
+              
+              function mm(e){
+              
+                    var ox    = e.pageX-mx;
+                    var oy    = e.pageY-my;
+                    mx        = e.pageX;
+                    my        = e.pageY;
+                    callback(ox,oy);
+                    
+              }//mm
+
+              
+              function mu(e){
+              
+                    document.removeEventListener('mousemove',mm);
+                    document.removeEventListener('mouseup',mu);
+                    
+              }//mu
+              
+        }//track
+
+        
         
 return $;
 
