@@ -403,8 +403,6 @@
                     opt.style.background    = 'lightyellow';
                     state.select[node.id]   = false;
                     
-                    both    = true;
-                    
               }//arrowup
               
               
@@ -423,8 +421,6 @@
                     node        = list.find(cur,'node');
                     show(node);
                     
-                    both    = true;
-                    
               }//arrowleft
               
               
@@ -442,8 +438,6 @@
                     state.cur   = cur;
                     node        = list.find(cur,'node');
                     show(node);
-                    
-                    both    = true;
                     
               }//arrowright
               
@@ -470,8 +464,6 @@
                     }
                     close();
                     
-                    both    = true;
-                    
               }//escape
               
               
@@ -484,8 +476,7 @@
                     state.cur   = 0;
                     node        = list.find(0,'node');
                     show(node);
-                    both    = true;
-                    
+                      
               }//tab
               
               
