@@ -541,6 +541,10 @@
                     document.addEventListener('mousemove',mm);
                     document.addEventListener('mouseup',mu);
                     
+                    if(callback.md){
+                          callback.md();
+                    }
+                    
               }//md
 
               
@@ -550,7 +554,12 @@
                     var oy    = e.pageY-my;
                     mx        = e.pageX;
                     my        = e.pageY;
-                    callback(ox,oy);
+                    
+                    if(typeof callback=='function'){
+                          callback(ox,oy);
+                    }else{
+                          callback.mm(ox,oy);
+                    }
                     
               }//mm
 
@@ -560,9 +569,14 @@
                     document.removeEventListener('mousemove',mm);
                     document.removeEventListener('mouseup',mu);
                     
+                    if(callback.mu){
+                          callback.mu();
+                    }
+                    
               }//mu
               
         }//track
+
 
         
         $.caret=function(node,timeout=50){
