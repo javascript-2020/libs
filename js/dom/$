@@ -541,7 +541,7 @@
                     document.addEventListener('mousemove',mm);
                     document.addEventListener('mouseup',mu);
                     
-                    if(callback.md){
+                    if(typeof callback.md=='function'){
                           callback.md();
                     }
                     
@@ -558,7 +558,10 @@
                     if(typeof callback=='function'){
                           callback(ox,oy);
                     }else{
-                          callback.mm(ox,oy);
+                          if(typeof callback.mm=='function'){
+                                callback.mm(ox,oy);
+                          }
+                          
                     }
                     
               }//mm
@@ -569,7 +572,7 @@
                     document.removeEventListener('mousemove',mm);
                     document.removeEventListener('mouseup',mu);
                     
-                    if(callback.mu){
+                    if(typeof callback.mu=='function'){
                           callback.mu();
                     }
                     
