@@ -149,6 +149,7 @@
                     keys.forEach(name=>{
 
                           if(name=='text'){
+                                attr['textContent']    = attr['text'];
                                 name    = 'textContent';
                           }
                           if(name=='append'){
