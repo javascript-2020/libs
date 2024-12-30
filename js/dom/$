@@ -147,12 +147,16 @@
               
                     var keys    = Object.keys(attr);
                     keys.forEach(name=>{
-                    
+
                           if(name=='text'){
                                 name    = 'textContent';
                           }
                           if(name=='append'){
-                                attr['append'].append(node);
+                                var par    = attr['append'];
+                                if(par===null || par==='body'){
+                                      par   = document.body;
+                                }
+                                par.append(node);
                                 return;
                           }
                           
