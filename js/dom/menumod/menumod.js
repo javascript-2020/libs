@@ -564,8 +564,68 @@
                     return list;
                     
               }//opts
-              
-              
+
+                
+        var css    = `
+        
+        /*
+          //menu:
+        */
+                .menu-hdr {
+                      white-space           : nowrap;
+                      align-items           : center;
+                      border                : 1px solid lightgray;
+                      box-sizing            : border-box;
+                      border-radius         : 5px;
+                      position              : relative;
+                      cursor                : pointer;
+                      display               : inline-flex;
+                      margin-right          : 10px;
+                      padding               : 0px 10px;
+                      height                : 30px;
+                }
+                
+                .menu {
+                      border                : 3px solid cyan;
+                      border-radius         : 7px;
+                      box-shadow            : rgba(0, 0, 250, 0.5) 0px 13px 45px -10px;
+                      background            : whitesmoke;
+                      box-sizing            : border-box;
+                      padding               : 10px;
+                      outline               : none;
+                }
+                
+                .menu-title {
+                      text-align            : center;
+                      background            : rgb(13,152,186);
+                      margin-bottom         : 10px;
+                      padding               : 3px;
+                      color                 : white;
+                      font-weight           : bold;
+                }
+                
+                .menu-opt {
+                      white-space           : nowrap;
+                      cursor                : pointer;
+                      margin-bottom         : 10px;
+                      display               : flex;
+                      justify-content       : space-between;
+                      align-items           : center;
+                      padding               : 5px 10px;
+                }
+                
+                .menu-sep {
+                      margin                : 10px 0;
+                      border-top            : 1px solid lightgray;
+                }
+                                
+        `;
+                
+          var style    = document.createElement('style');
+          style.textContent    = css;
+          document.head.append(style);
+
+                
           return obj;
           
         }//menumodmod
