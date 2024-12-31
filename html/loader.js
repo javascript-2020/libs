@@ -1,4 +1,5 @@
-  (async()=>{
+
+(async()=>{
     
         var script=document.currentScript;
         var par=script.parentNode;
@@ -17,4 +18,4 @@
         nscript.textContent=script.textContent;
         script.parentNode.replaceChild(nscript,script);
     
-  })();
+})();
