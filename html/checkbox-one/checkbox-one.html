@@ -1,0 +1,90 @@
+
+
+<checkbox-one>
+
+      <template id=checkbox-one-template>
+      
+            <style>
+            
+                  .slider {position:relative;display:inline-flex;align-items:center;cursor:pointer;
+                            border:1px solid gray;border-radius:3px;height:30px;box-sizing:border-box;padding:0 5px}
+                  .slider input {opacity:0;width:0;height:0}
+                  .slider .label {margin-left:30px}
+                  .slider .hldr {position:absolute;top:4px;left:5px;width:30px;height:20px;background-color:#ccc}
+                  .slider .hldr:before {position:absolute;content:"";height:17px;width:17px;left:2px;bottom:2px;background-color:white;transition:.2s}
+                  .slider input:checked + .hldr {background-color:#2196F3}
+                  .slider input:checked + .hldr:before {transform:translateX(9px)}
+                  .slider .hldr {border-radius:34px}
+                  .slider .hldr:before {border-radius:50%}
+            
+            </style>
+            
+            <label id=autosave class=slider>
+                  <span class=track></span>
+                  <input type=checkbox>
+                  <span class=hldr></span>
+                  <span class=label>
+                        <slot></slot>
+                  </span>
+            </label>
+            
+      </template>
+      
+      <script>
+      
+            (()=>{
+            
+                  class checkboxOne extends HTMLElement {
+                  
+                        constructor() {
+        
+                              super();
+                              
+                              var root              = this;
+                              var template          = document.getElementById("checkbox-one-template");
+                              var templateContent   = template.content;
+                              var shadow            = root.attachShadow({mode:"open"});
+                              shadow.appendChild(templateContent.cloneNode(true));
+                
+                  
+                              var chk         = shadow.querySelector('[type=checkbox]');
+                              chk.onchange    = e=>{
+                                                        
+                                                        root.checked    = chk.checked;
+                                                        if(typeof root.onchange=='function'){
+                                                              root.onchange(e);
+                                                        }
+                                                        
+                                                };
+                                                
+                              Object.defineProperty(root,'checked',{get:()=>chk.checked,set:v=>chk.checked=v});
+                              
+                              if(root.hasAttribute('checked')){
+                                    root.checked   = true;
+                              }
+                              if('checked' in root){
+                                    chk.checked   = root.checked;
+                              }
+                           
+                              setTimeout(()=>{
+                              
+                                    var str   = root.innerHTML.trim();
+                                    if(str==''){
+                                          root.innerHTML    = root.id;
+                                    }
+                                    
+                              },50);
+                              
+                        }//constructor
+                        
+                  }//class          
+                  
+                  customElements.define('checkbox-one',checkboxOne);
+                  
+            })();
+          
+      </script>
+      
+</checkbox-one>
+
+
