@@ -88,7 +88,6 @@ mime    = {
         'application/java-archive'                                                     : ['jar','war','ear'],
         'application/java-serialized-object'                                           : ['ser'],
         'application/java-vm'                                                          : ['class'],
-        'application/javascript'                                                       : ['js'],
         'application/json'                                                             : ['json','map'],
         'application/json5'                                                            : ['json5'],
         'application/jsonml+json'                                                      : ['jsonml'],
