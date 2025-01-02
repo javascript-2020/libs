@@ -1,6 +1,13 @@
 
 (async()=>{
     
+        var complete;
+        if(typeof init!='undefined'){
+            if(init.stack){
+                complete  = init.stack.add();
+            }
+        }
+    
         var script            = document.currentScript;
         var par               = script.parentNode;
         var nn                = par.nodeName.toLowerCase();
@@ -16,6 +23,10 @@
         var nscript           = document.createElement('script');
         nscript.textContent   = script.textContent;
         script.parentNode.replaceChild(nscript,script);
+
+        if(complete){
+            complete();
+        }
     
 })();
 
