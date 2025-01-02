@@ -18,17 +18,10 @@
 
 ```
 
-<button onclick='clickfn()'>click</button>
-
 <script>
 
-  var chk=document.querySelector('checkbox-one');
-  
-  function clickfn(){
-  
-        console.log(chk.checked);
-        
-  }//clickfn
+  var chk         = document.querySelector('checkbox-one');
+  chk.onchange    = ()=>console.log(chk.checked);
   
 </script>
 
