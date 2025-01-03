@@ -314,8 +314,10 @@
                           btn.parse=function(){
                           }//parse
                           
+                          
                           btn.load=function(){
                           }//load
+                          
                           
                           btn.save=function(){
                           }//save
@@ -323,12 +325,84 @@
 
                           function parse(url){
                           
+                                if(!url.startsWith('http')){
+                                      url   = 'https://'+url;
+                                }
+                                url   = new URL(url);
+                                if(url.hostname=='javascript-2020.github.io'){
+                                      parse['github.io'](url);
+                                }
+                                if(url.hostname=='github.com'){
+                                      if(url.pathname.indexOf('blob')!=-1){
+                                            parse.file(url);
+                                      }else 
+                                      if(url.pathname.indexOf('tree')!=-1){
+                                            parse.dir(url);
+                                      }else{
+                                            parse.repo(url);
+                                      }
+                                }
+                                
                                 
                           }//parse
+
+                          
+                          //  https://javascript-2020.github.io/html-components/log/log.html
+                          parse['github.io']=function(url){
+                                                                                    console.log('github.io');
+                                var i         = url.hostname.indexOf('.');
+                                var owner     = url.hostname.slice(0,i);
+                                var repo      = ur.hostname;
+                                var branch    = 'main';
+                                var path      = url.pathname;
+                                write(owner,repo,branch,path);
+                                
+                          }//github.io
+                          
+                          //  https://github.com/javascript-2020/libs
+                          parse.repo=function(url){
+                                                                                    console.log('repo');
+                                var parts     = url.pathname.split('/');
+                                var owner     = parts.shift();
+                                var repo      = parts.shift();
+                                var branch    = 'main';
+                                var path      = '';
+                                write(owner,repo,branch,path);
+                                
+                          }//repo
+                          
+                          //  https://github.com/javascript-2020/libs/blob/main/docker/nodejs-min.dockerfile
+                          parse.file=function(url){
+                                                                                    console.log('file');
+                                var parts     = url.pathname.split('/');
+                                var owner     = parts.shift();
+                                var repo      = parts.shift();
+                                parts.shift();
+                                var branch    = parts.shift();
+                                var path      = parts.join('/');
+                                write(owner,repo,branch,path);
+                          
+                          }//file
+                          
+                          //  https://github.com/javascript-2020/libs/tree/main/docker
+                          parse.dir=function(url){
+                                                                                    console.log('dir');
+                                var parts     = url.pathname.split('/');
+                                var owner     = parts.shift();
+                                var repo      = parts.shift();
+                                parts.shift();
+                                var branch    = parts.shift();
+                                var path      = parts.join('/');
+                                write(owner,repo,branch,path);
+                                
+                          }//dir
+                          
+                          
                           
                           function callback(type){console.log(type);
                           
                                 if(type=='show'){
+                                      
                                 }
                                 
                           }//callback
@@ -347,6 +421,14 @@
                                 
                           }//read
 
+                          function write(owner,repo,branch,path){
+                                                                                    console.log(owner,repo,branch,path);
+                                $(shadow,'#owner').value    = owner;
+                                $(shadow,'#repo').value     = repo;
+                                $(shadow,'#branch').value   = branch;
+                                $(shadow,'#path').value     = pathl
+                                
+                          }//write
                           
                           async function load(){
                           
