@@ -91,6 +91,8 @@
                   input:not([type]) {flex:1}
                   input[type=button] {cursor:pointer}
                   
+                  #parse {margin-right:10px}
+                  
             </style>
       
       
@@ -115,7 +117,7 @@
                           
                           <div class=hldr>
                               <img class=paste>
-                              <input id=parse-url style='margin-right:10px;'>
+                              <input id=parse>
                               <input type=button value=parse>
                           </div>
                           
@@ -171,7 +173,7 @@
                             
                             <div class=hldr>
                                 <img class=paste>
-                                <input id=branch autocomplete=off>
+                                <input id=branch autocomplete=off value=main>
                             </div>
                             
                       </section>
@@ -223,25 +225,30 @@
                     
                     var obj   = {};
 
-
+                          
+                          var root;
+                          var shadow;
                                                     
                           var btn   = {};
                           
                           
                           obj.initdom=function(rootnode){   //c
                           
-                                var root      = document.querySelector('github-root');
-                                var shadow    = root.shadowRoot;
+                                root      = document.querySelector('github-root');
+                                shadow    = root.shadowRoot;
 
                                 menu.add.style(shadow);
                                 
                                 var node      = $(shadow,'#github-menu');
                                 $(shadow,'#icon').onclick   = menu.click(node,false,false,callback);
+
                                 
                                 var list    = $.all(node,'input:not([type])');
                                 list.forEach((input,i)=>{
                                 
-                                      input.onkeydown   = e=>{
+                                      input.addEventListener('keydown',keydown);
+                                      
+                                      function keydown(e){
                                       
                                             if(e.key=='ArrowDown'){
                                                   e.stopPropagation();
@@ -262,7 +269,7 @@
                                                   input2.focus();
                                             }
                                             
-                                      }
+                                      }//keydown
                                       
                                 });
                                 
@@ -281,7 +288,22 @@
                                 });
                                 
                                 
+                                $(shadow,'#parse').onkeydown    = e=>{
                                 
+                                                                        if(e.key=='Enter'){
+                                                                              btn.parse();
+                                                                              $(shadow,'#load').focus();
+                                                                        }
+                                                                    
+                                                                  };
+                                $(shadow,'#path').onkeydown     = e=>{
+                                                                  
+                                                                        if(e.key=='Enter'){
+                                                                              $(shadow,'#load').focus();
+                                                                        }
+                                                                        
+                                                                  };
+                                                                  
                                 $(shadow,'#load').onclick   = btn.load;
                                 $(shadow,'#save').onclick   = btn.save;
 
@@ -289,12 +311,20 @@
                           }//initdom
                           
                           
+                          btn.parse=function(){
+                          }//parse
+                          
                           btn.load=function(){
                           }//load
                           
                           btn.save=function(){
                           }//save
+
+
+                          function parse(url){
                           
+                                
+                          }//parse
                           
                           function callback(type){console.log(type);
                           
@@ -302,6 +332,124 @@
                                 }
                                 
                           }//callback
+
+
+                          
+                          function read(){
+                          
+                                var token     = $(shadow,'#token').value;
+                                var owner     = $(shadow,'#owner').value;
+                                var repo      = $(shadow,'#repo').value;
+                                var branch    = $(shadow,'#branch').value;
+                                var path      = $(shadow,'#path').value;
+                                                                                    console.log(owner,repo,branch,path);
+                                return {token,owner,repo,branch,path};
+                                
+                          }//read
+
+                          
+                          async function load(){
+                          
+                                var {token,owner,repo,branch,path}    = read();
+                                
+                                var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
+                                                                                    console.log('load',url);
+                                var err;
+                                try{
+                                
+                                      var res   = await fetch(url);
+                                      
+                                }
+                                catch(err2){
+                                
+                                      err   = err2;
+                                      
+                                }
+                                if(err){
+                                      log.red(err.message);
+                                      return;
+                                }
+                                
+                                var txt   = await res.text();
+                                
+                                if(!res.ok){
+                                      log.red(txt);
+                                      return;
+                                }
+                                
+                                filename(path);
+                                editor.setValue(txt,-1);
+                                
+                                
+                                cur   = {type:'github'};
+
+                          
+                          }//load
+
+      
+                          obj.save=function(){return save()}    //d
+                          
+                          async function save(){
+                          
+                                var {token,owner,repo,branch,path}    = read();
+                                
+                                var txt         = editor.getValue();
+                                var content     = window.btoa(txt);
+                                var message     = 'save text';
+                                var url         = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+                                
+                                var err;
+                                try{
+                                
+                                      var json        = await fetch(url).then(res=>res.json());
+                                      
+                                }
+                                catch(err2){
+                                
+                                      err   = err2;
+                                      
+                                }
+                                if(err){
+                                      log.red(err.message);
+                                      return;
+                                }
+                                
+                                var sha         = json.sha;
+                                var body        = {content,sha,message};
+                                body            = JSON.stringify(body);
+                                var headers     = {authorization:`Bearer ${token}`};
+                                var opts        = {method:'put',headers,body};
+                                
+                                var err;
+                                try{
+                                
+                                      var res         = await fetch(url,opts);
+                                      
+                                }
+                                catch(err2){
+                                
+                                      err   = err2;
+                                      
+                                }
+                                if(err){
+                                      log.red(err.message);
+                                      return;
+                                }
+                                if(!res.ok){
+                                      var txt         = await res.text();
+                                      log.red(txt);
+                                      return;
+                                }
+                                                                                              console.log('saved');
+                                var fn    = filename(path);
+                                log.green(fn,'saved');
+
+
+                                cur       = {type:'github'};
+
+                                
+                          }//save
+
                           
                     return obj;
                     
