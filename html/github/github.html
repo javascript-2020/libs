@@ -74,14 +74,20 @@
                   
                   #github-menu {right:0;position:absolute;top:50px;/*width:700px;*/outline:none}
 
-                  section {margin-bottom:10px}            
+                  section {margin-bottom:10px}          
+                  .sep {margin-bottom: 20px; border-bottom: 1px solid lightgray;padding-bottom:10px}
                   .label{}
+                  
+                  .hldr {display:flex}
+                  
                   .paste {height: 32px; width: 32px; border: 1px solid dimgray; box-sizing: border-box; cursor: pointer; margin-right: 3px;border-radius:3px;
                           content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAVlJREFUSEvtlj1ug0AQhcdIW6RLeiQy6XKElLRIlOlp6LmBlRsgtzTUOQAtcZMzpMpInAGlQSjRWl7LxrM/dlhZUbwtu/PNvH07zAIutBYX4oIzGBG/95MkIuezXHFOh6MoegqC4F0GEELAMAybWL+BG8GI+AwArypjRFTAgyLOSeAIHIbhjRDii5NHgcdxhK7rWHu4JnEEnt6ljK6AUxIRcfAPInq0mVYL/lwSrNa3UL7d2WKA3CvXw8vuKqzeMYKtxMmGK9ik2FVq+XQ2rVE5VSeXMpLNgLp3fZbUrlCVFAc/GaygbdvaioU4jrU9/W+CVUVc6U3TQJIkfio2geVV/C+pi6KAsiz9SN33PaRpyrrbu9R1XbPgLMv83bHJXHmeQ1VVp0tt6w6zN5DtqHMwynJJeAGbqkVEOefc2xTZ/+7Uq10CcgOh7pzz38kFPMce6zQ4B4SL8QNf7+YfCGbtNAAAAABJRU5ErkJggg==);
                           }
                   .value {}
                   
-                  input {font-size:16px;padding:5px 10px}
+                  #btns {display:flex;justify-content:center;gap:25px};
+                  
+                  input {font-size:16px;padding:5px 10px;box-sizing:border-box;}
                   input:not([type]) {flex:1}
                   input[type=button] {cursor:pointer}
                   
@@ -93,40 +99,37 @@
             
                   <img id=icon class=icon style='padding:2px'>
                   
-                  <div id="github-menu" class="menu" style='display:none'>
+                  <div id=github-menu class=menu style='display:none'>
                   
                   
-                      <div class="menu-title">
+                      <div class=menu-title>
                             github params
                       </div>
                       
                       
-                      <section style="margin-bottom: 20px; border-bottom: 1px solid lightgray;">
+                      <section class=sep>
                       
-                          <div id="parse-url-label">
+                          <div>
                                 parse url
                           </div>
                           
-                          <div style="display: flex;" id="parse-url-root" class="menu-opt">
-                              <img id="parse-url-paste" class=paste>
-                              <input id="parse-url" style="margin-right: 10px;">
-                              </input>
-                              <input style="cursor: pointer; font-size: 16px; box-sizing: border-box;" type="button" value="parse" id="parse" autocomplete='off'>
-                              </input>
+                          <div class=hldr>
+                              <img class=paste>
+                              <input id=parse-url style='margin-right:10px;'>
+                              <input type=button value=parse>
                           </div>
                           
                       </section>
                       
                       <section>
                       
-                            <div id="token-label">
+                            <div>
                                   token
                             </div>
                             
-                            <div style="display: flex;" id="token-root" class="menu-opt">
-                                <img id="token-paste" class=paste>
-                                <input id="token" style="flex: 1 1 0%;" autocomplete='off'>
-                                </input>
+                            <div class=hldr>
+                                <img class=paste>
+                                <input id=token autocomplete=off>
                             </div>
                             
                       </section>
@@ -134,14 +137,13 @@
                       
                       <section>
                       
-                            <div id="owner-label">
+                            <div>
                                   owner
                             </div>
                             
-                            <div style="display: flex;" id="owner-root" class="menu-opt">
-                                <img id="owner-paste" class=paste>
-                                <input id="owner" style="flex: 1 1 0%;" autocomplete='off'>
-                                </input>
+                            <div class=hldr>
+                                <img class=paste>
+                                <input id=owner autocomplete=off>
                             </div>
                             
                       </section>
@@ -149,14 +151,13 @@
                       
                       <section>
                       
-                            <div id="repo-label">
+                            <div>
                                   repo
                             </div>
                             
-                            <div style="display: flex;" id="repo-root" class="menu-opt">
-                                <img id="repo-paste" class=paste>
-                                <input id="repo" style="flex: 1 1 0%;" autocomplete="off">
-                                </input>
+                            <div class=hldr>
+                                <img class=paste>
+                                <input id=repo autocomplete=off>
                             </div>
                             
                       </section>
@@ -164,14 +165,13 @@
                       
                       <section>
                       
-                            <div id="branch-label">
+                            <div>
                                   branch
                             </div>
                             
-                            <div style="display: flex;" id="branch-root" class="menu-opt">
-                                <img id="branch-paste" class=paste>
-                                <input id="branch" style="flex: 1 1 0%;" autocomplete='off'>
-                                </input>
+                            <div class=hldr>
+                                <img class=paste>
+                                <input id=branch autocomplete=off>
                             </div>
                             
                       </section>
@@ -179,22 +179,21 @@
                       
                       <section>
                       
-                            <div id="path-label">
+                            <div>
                                   path
                             </div>
                             
-                            <div style="display: flex;" id="branch-root" class="menu-opt">
-                                <img id="path-paste" class=paste>
-                                <input id="path" style="flex: 1 1 0%;" autocomplete='off'>
-                                </input>
+                            <div class=hldr>
+                                <img class=paste>
+                                <input id=path autocomplete=off>
                             </div>
                             
                       </section>
 
                       
-                      <div style='display:flex;justify-content:center;gap:25px'>
-                            <button id=github-load class=menu-opt>load</button>
-                            <button id=github-save class=menu-opt>save</button>
+                      <div id=btns>
+                            <button id=load>load</button>
+                            <button id=save>save</button>
                       </div>
 
                       
@@ -224,6 +223,10 @@
                     
                     var obj   = {};
 
+
+                                                    
+                          var btn   = {};
+                          
                           
                           obj.initdom=function(rootnode){   //c
                           
@@ -233,22 +236,67 @@
                                 menu.add.style(shadow);
                                 
                                 var node      = $(shadow,'#github-menu');
-                                $(shadow,'#icon').onclick   = menu.click(node,false,false,github.menu);
+                                $(shadow,'#icon').onclick   = menu.click(node,false,false);
+                                
+                                var list    = $.all(node,'input:not([type])');
+                                list.forEach((input,i)=>{
+                                
+                                      input.onkeydown   = e=>{
+                                      
+                                            if(e.key=='ArrowDown'){
+                                                  e.stopPropagation();
+                                                  i++;
+                                                  if(i==list.length){
+                                                        i   = 0;
+                                                  }
+                                                  var input2    = list[i];
+                                                  input2.focus();
+                                            }
+                                            if(e.key=='ArrowUp'){
+                                                  e.stopPropagation();
+                                                  i--;
+                                                  if(i<0){
+                                                        i   = list.length-1;
+                                                  }
+                                                  var input2    = list[i];
+                                                  input2.focus();
+                                            }
+                                            
+                                      }
+                                      
+                                });
+                                
+                                $.all(shadow,'.paste').forEach(icon=>{
+                                
+                                      icon.onclick    = async e=>{
+                                                              
+                                                              var txt       = await navigator.clipboard.readText();
+                                                              var par       = icon.parentNode;
+                                                              var input     = $(par,'input:not([type])');
+                                                              input.value   = txt;
+                                                              input.focus();
+                                                              
+                                                        };
+                                                        
+                                });
                                 
                                 
+                                
+                                $(shadow,'#load').onclick   = btn.load;
+                                $(shadow,'#save').onclick   = btn.save;
+
                                 
                           }//initdom
                           
                           
+                          btn.load=function(){
+                          }//load
+                          
+                          btn.save=function(){
+                          }//save
                           
                           
-                          obj.menu=function(type,opt){
                           
-                                console.log(type);
-                                
-                          }//menu
-                          
-                    
                     return obj;
                     
                   }//github
