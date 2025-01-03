@@ -626,7 +626,7 @@
           style.textContent    = css;
           document.head.append(style);
           
-          obj.add.style=function(par){
+          obj.add.style=function(par){    //d
           
                 var style   = document.createElement('style');
                 style.textContent   = css;
