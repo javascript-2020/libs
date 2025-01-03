@@ -619,9 +619,10 @@
                       border-top            : 1px solid lightgray;
                 }
                                 
-        `;
-                
-          var style    = document.createElement('style');
+          `;
+          obj.css     = css;
+          
+          var style   = document.createElement('style');
           style.textContent    = css;
           document.head.append(style);
 
