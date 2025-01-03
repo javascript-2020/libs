@@ -277,7 +277,7 @@
                     state.prev    = state.cur;
                     state.cur     = null;
                     
-                    editor.focus();
+                    //editor.focus();
                     
               }//close
               
