@@ -85,7 +85,7 @@
                           }
                   .value {}
                   
-                  #btns {display:flex;justify-content:center;gap:25px};
+                  #btns {display:flex;justify-content:center;gap:25px}
                   
                   input {font-size:16px;padding:5px 10px;box-sizing:border-box;}
                   input:not([type]) {flex:1}
@@ -236,7 +236,7 @@
                                 menu.add.style(shadow);
                                 
                                 var node      = $(shadow,'#github-menu');
-                                $(shadow,'#icon').onclick   = menu.click(node,false,false);
+                                $(shadow,'#icon').onclick   = menu.click(node,false,false,callback);
                                 
                                 var list    = $.all(node,'input:not([type])');
                                 list.forEach((input,i)=>{
@@ -296,6 +296,12 @@
                           }//save
                           
                           
+                          function callback(type){console.log(type);
+                          
+                                if(type=='show'){
+                                }
+                                
+                          }//callback
                           
                     return obj;
                     
