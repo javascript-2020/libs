@@ -625,6 +625,16 @@
           var style   = document.createElement('style');
           style.textContent    = css;
           document.head.append(style);
+          
+          obj.add.style=function(par){
+          
+                var style   = document.createElement('style');
+                style.textContent   = css;
+                par.append(style);
+                
+          }//style
+          
+          
 
                 
           return obj;
