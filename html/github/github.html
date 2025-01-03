@@ -194,8 +194,8 @@
 
                       
                       <div id=btns>
-                            <button id=load>load</button>
-                            <button id=save>save</button>
+                            <input value=load type=button>
+                            <input value=save type=button>
                       </div>
 
                       
@@ -206,21 +206,6 @@
       
       <script>
       
-                  /*
-                  class Github extends HTMLElement {
-                  
-                        constructor(){
-                        
-                              super();
-                              
-                        }//constructor
-                        
-                  }//github
-                  
-                  customElements.define('github-root',Github);
-                  */
-                  
-                  
                   function github(){
                     
                     var obj   = {};
@@ -359,7 +344,7 @@
                                 var owner     = url.hostname.slice(0,i);
                                 var repo      = url.hostname;
                                 var branch    = 'main';
-                                var path      = url.pathname;
+                                var path      = url.pathname.slice(1);
                                 write(owner,repo,branch,path);
                                 
                           }//github.io
@@ -380,6 +365,7 @@
                           parse.file=function(url){
                                                                                     console.log('file');
                                 var parts     = url.pathname.split('/');
+                                parts.shift();
                                 var owner     = parts.shift();
                                 var repo      = parts.shift();
                                 parts.shift();
@@ -426,6 +412,7 @@
                                 
                           }//read
 
+
                           function write(owner,repo,branch,path){
                                                                                     console.log(owner,repo,branch,path);
                                 $(shadow,'#owner').value    = owner;
@@ -434,6 +421,7 @@
                                 $(shadow,'#path').value     = path;
                                 
                           }//write
+
                           
                           async function load(){
                           
