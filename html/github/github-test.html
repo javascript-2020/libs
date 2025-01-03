@@ -1,0 +1,559 @@
+
+
+
+<script>
+                                                            console.clear();
+                                                            console.log('github');
+                                                            
+        var ext;
+        var $,datatype,jsonblob,menumod,keydown;
+        
+        fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
+          .then(res=>res.text().then(async txt=>{
+          
+              ext   = eval(txt);
+              
+              var promise   = ext.load.libs(
+                    'js/dom/$.js','js/core/datatype.js','js/io/jsonblob/jsonblob.js','js/dom/menumod/menumod.js',
+                    'js/dom/keydown/keydown.js'
+              );
+              [$,datatype,jsonblob,menumod,keydown]   = await promise;
+  
+              
+              window.$          = $;
+              window.datatype   = datatype;
+              
+              init();
+              
+          }));
+    
+
+
+        var menu;
+
+        
+        function init(){
+        
+              menu            = menumod();
+              
+              github          = github();
+
+        
+              initdom();
+
+              
+        }//init
+        
+        
+        function initdom(){
+        
+              github.initdom(document.body);
+              
+        }//initdom
+
+
+        
+</script>
+
+
+<github-root>
+
+      <template shadowrootmode=open>
+      
+            <style>
+
+                  .icon {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:30px;height:30px;cursor:pointer}
+        
+
+            
+                  .github {position:relative;font-family:arial;display:inline}
+                  
+                  #icon {
+                        content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAZ9JREFUSEvNls8uBEEQxn9DXFgughNZ3sBNwk3iMYTH4GJPvIQEryFxI3HyBkLcEBf/DsKiNmbSad1d1TO7oW/T/fX31VddPdUF+WMKOAbaP1uvgTXgPoeqMIJfgNEMbEvDasLPwJhGEll/Te1NCX/WFPS3BTViwv0SLYP4peNPjABvfXLq0wj3eywS3+k5sFQzkBNg1dtbGXUdh9Lrrn8AQ4YgTJwlSAiF2FQYBvESEjIzDHRL4VgxaddNiyHK+6fCR8D6ANKcSve+OB5UmlPCxIQPgU3tAI3rB8BGqGpDjleAMyOxBlsGTq3C28Cexmhc3wJ2rcLSY+eNxBrsyundFfbfFZdE1vTnoVb1LHATyVdT8dhVndP+XE2cp3p6ERKWuQXg0smC9FHpp5YhWGkEqVEJC8iNMJWJpq+W3n6X5BaYdsKUtZ3v744zJ5mQ6xEai8CF4vQOmAmdX8i14KRfdw151t5qwRdIqPxzqzpZUG7gueelBWLudLnv6jrCWe/qMivjwKNXcKmjdh1PAE8xsObA3fcATCoFZsH0KL4ABKpK0CB/GK0AAAAASUVORK5CYII=);
+                  }
+                  
+                  #github-menu {right:0;position:absolute;top:50px;/*width:700px;*/outline:none}
+
+                  section {margin-bottom:10px}          
+                  
+                  .label{}
+                  
+                  .hldr {display:flex}
+                  
+                  .paste {height: 32px; width: 32px; border: 1px solid dimgray; box-sizing: border-box; cursor: pointer; margin-right: 3px;border-radius:3px;
+                          content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAVlJREFUSEvtlj1ug0AQhcdIW6RLeiQy6XKElLRIlOlp6LmBlRsgtzTUOQAtcZMzpMpInAGlQSjRWl7LxrM/dlhZUbwtu/PNvH07zAIutBYX4oIzGBG/95MkIuezXHFOh6MoegqC4F0GEELAMAybWL+BG8GI+AwArypjRFTAgyLOSeAIHIbhjRDii5NHgcdxhK7rWHu4JnEEnt6ljK6AUxIRcfAPInq0mVYL/lwSrNa3UL7d2WKA3CvXw8vuKqzeMYKtxMmGK9ik2FVq+XQ2rVE5VSeXMpLNgLp3fZbUrlCVFAc/GaygbdvaioU4jrU9/W+CVUVc6U3TQJIkfio2geVV/C+pi6KAsiz9SN33PaRpyrrbu9R1XbPgLMv83bHJXHmeQ1VVp0tt6w6zN5DtqHMwynJJeAGbqkVEOefc2xTZ/+7Uq10CcgOh7pzz38kFPMce6zQ4B4SL8QNf7+YfCGbtNAAAAABJRU5ErkJggg==);
+                          }
+                  .value {}
+                  
+                  #btns {display:flex;justify-content:center;gap:25px}
+                  
+                  input {font-size:16px;padding:5px 10px;box-sizing:border-box;}
+                  input:not([type]) {flex:1}
+                  input[type=button] {cursor:pointer}
+                  
+                  #url {margin-right:10px}
+                  
+            </style>
+      
+      
+          
+            <div class=github>
+            
+                  <img id=icon class=icon style='padding:2px'>
+                  
+                  <div id=github-menu class=menu style='display:none'>
+                  
+                  
+                      <div class=menu-title>
+                            github params
+                      </div>
+                      
+                      
+                      <section>
+                      
+                            <div>
+                                  token
+                            </div>
+                            
+                            <div class=hldr>
+                                <img class=paste>
+                                <input id=token autocomplete=off>
+                            </div>
+                            
+                      </section>
+                      
+                      <div class=menu-sep></div>
+                      
+                      <section>
+                      
+                          <div>
+                                parse url
+                          </div>
+                          
+                          <div class=hldr>
+                              <img class=paste>
+                              <input id=url>
+                              <input type=button value=parse>
+                          </div>
+                          
+                      </section>
+                      
+                      <div class=menu-sep></div>
+                      
+                      <section>
+                      
+                            <div>
+                                  owner
+                            </div>
+                            
+                            <div class=hldr>
+                                <img class=paste>
+                                <input id=owner autocomplete=off>
+                            </div>
+                            
+                      </section>
+                      
+                      
+                      <section>
+                      
+                            <div>
+                                  repo
+                            </div>
+                            
+                            <div class=hldr>
+                                <img class=paste>
+                                <input id=repo autocomplete=off>
+                            </div>
+                            
+                      </section>
+                      
+                      
+                      <section>
+                      
+                            <div>
+                                  branch
+                            </div>
+                            
+                            <div class=hldr>
+                                <img class=paste>
+                                <input id=branch autocomplete=off value=main>
+                            </div>
+                            
+                      </section>
+
+                      
+                      <section>
+                      
+                            <div>
+                                  path
+                            </div>
+                            
+                            <div class=hldr>
+                                <img class=paste>
+                                <input id=path autocomplete=off>
+                            </div>
+                            
+                      </section>
+
+                      
+                      <div id=btns>
+                            <input value=load type=button>
+                            <input value=save type=button>
+                      </div>
+
+                      
+                  </div>
+            </div>
+
+      </template>
+      
+      <script>
+      
+                  window.github   = github();
+                  
+                  function github(){
+                    
+                    var obj   = {};
+
+                          
+                          var root;
+                          var shadow;
+                                                    
+                          var btn   = {};
+                          
+                          
+                          obj.initdom=function(rootnode){   //c
+                          
+                                root      = document.querySelector('github-root');
+                                shadow    = root.shadowRoot;
+
+                                menu.add.style(shadow);
+                                
+                                var node      = $(shadow,'#github-menu');
+                                $(shadow,'#icon').onclick   = menu.click(node,false,false,callback);
+
+                                
+                                var list    = $.all(node,'input:not([type])');
+                                list.forEach((input,i)=>{
+                                
+                                      input.addEventListener('keydown',keydown);
+                                      
+                                      function keydown(e){
+                                      
+                                            if(e.key=='ArrowDown'){
+                                                  e.stopPropagation();
+                                                  i++;
+                                                  if(i==list.length){
+                                                        i   = 0;
+                                                  }
+                                                  var input2    = list[i];
+                                                  input2.focus();
+                                            }
+                                            if(e.key=='ArrowUp'){
+                                                  e.stopPropagation();
+                                                  i--;
+                                                  if(i<0){
+                                                        i   = list.length-1;
+                                                  }
+                                                  var input2    = list[i];
+                                                  input2.focus();
+                                            }
+                                            
+                                      }//keydown
+                                      
+                                });
+                                
+                                $.all(shadow,'.paste').forEach(icon=>{
+                                
+                                      icon.onclick    = async e=>{
+                                                              
+                                                              var txt       = await navigator.clipboard.readText();
+                                                              var par       = icon.parentNode;
+                                                              var input     = $(par,'input:not([type])');
+                                                              input.value   = txt;
+                                                              input.focus();
+                                                              
+                                                        };
+                                                        
+                                });
+                                
+                                
+                                $(shadow,'[value=parse]').onclick   = btn.parse;
+                                $(shadow,'#url').onkeydown    = e=>{
+                                
+                                                                        if(e.key=='Enter'){
+                                                                              btn.parse();
+                                                                              $(shadow,'#load').focus();
+                                                                        }
+                                                                    
+                                                                  };
+                                $(shadow,'#path').onkeydown     = e=>{
+                                                                  
+                                                                        if(e.key=='Enter'){
+                                                                              $(shadow,'#load').focus();
+                                                                        }
+                                                                        
+                                                                  };
+                                                                  
+                                $(shadow,'[value=load]').onclick   = btn.load;
+                                $(shadow,'[value=save]').onclick   = btn.save;
+
+                                
+                          }//initdom
+                          
+                          
+                          btn.parse=function(){
+                          
+                                var url   = $(shadow,'#url').value;
+                                parse(url);
+                                
+                          }//parse
+                          
+                          
+                          btn.load=function(){
+                          }//load
+                          
+                          
+                          btn.save=function(){
+                          }//save
+
+
+                          function parse(url){
+                          
+                                if(!url.startsWith('http')){
+                                      url   = 'https://'+url;
+                                }
+                                url   = new URL(url);
+                                if(url.hostname=='javascript-2020.github.io'){
+                                      parse['github.io'](url);
+                                }
+                                if(url.hostname=='github.com'){
+                                      if(url.pathname.indexOf('blob')!=-1){
+                                            parse.file(url);
+                                      }else 
+                                      if(url.pathname.indexOf('tree')!=-1){
+                                            parse.dir(url);
+                                      }else{
+                                            parse.repo(url);
+                                      }
+                                }
+                                
+                                
+                          }//parse
+                          
+                          //  https://javascript-2020.github.io/html-components/log/log.html
+                          parse['github.io']=function(url){
+                                                                                    console.log('github.io');
+                                var i         = url.hostname.indexOf('.');
+                                var owner     = url.hostname.slice(0,i);
+                                var repo      = url.hostname;
+                                var branch    = 'main';
+                                var path      = url.pathname.slice(1);
+                                write(owner,repo,branch,path);
+                                
+                          }//github.io
+                          
+                          //  https://github.com/javascript-2020/libs
+                          parse.repo=function(url){
+                                                                                    console.log('repo');
+                                var parts     = url.pathname.split('/');
+                                var owner     = parts.shift();
+                                var repo      = parts.shift();
+                                var branch    = 'main';
+                                var path      = '';
+                                write(owner,repo,branch,path);
+                                
+                          }//repo
+                          
+                          //  https://github.com/javascript-2020/libs/blob/main/docker/nodejs-min.dockerfile
+                          parse.file=function(url){
+                                                                                    console.log('file');
+                                var parts     = url.pathname.split('/');
+                                parts.shift();
+                                var owner     = parts.shift();
+                                var repo      = parts.shift();
+                                parts.shift();
+                                var branch    = parts.shift();
+                                var path      = parts.join('/');
+                                write(owner,repo,branch,path);
+                          
+                          }//file
+                          
+                          //  https://github.com/javascript-2020/libs/tree/main/docker
+                          parse.dir=function(url){
+                                                                                    console.log('dir');
+                                var parts     = url.pathname.split('/');
+                                var owner     = parts.shift();
+                                var repo      = parts.shift();
+                                parts.shift();
+                                var branch    = parts.shift();
+                                var path      = parts.join('/');
+                                write(owner,repo,branch,path);
+                                
+                          }//dir
+                          
+                          
+                          
+                          function callback(type){console.log(type);
+                          
+                                if(type=='show'){
+                                      
+                                }
+                                
+                          }//callback
+
+
+                          
+                          function read(){
+                          
+                                var token     = $(shadow,'#token').value;
+                                var owner     = $(shadow,'#owner').value;
+                                var repo      = $(shadow,'#repo').value;
+                                var branch    = $(shadow,'#branch').value;
+                                var path      = $(shadow,'#path').value;
+                                                                                    console.log(owner,repo,branch,path);
+                                return {token,owner,repo,branch,path};
+                                
+                          }//read
+
+
+                          function write(owner,repo,branch,path){
+                                                                                    console.log(owner,repo,branch,path);
+                                $(shadow,'#owner').value    = owner;
+                                $(shadow,'#repo').value     = repo;
+                                $(shadow,'#branch').value   = branch;
+                                $(shadow,'#path').value     = path;
+                                
+                          }//write
+
+
+                          obj.load=function(){return load()}
+                          
+                          async function load(){
+                          
+                                var {token,owner,repo,branch,path}    = read();
+                                
+                                var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
+                                                                                    console.log('load',url);
+                                var err;
+                                try{
+                                
+                                      var res   = await fetch(url);
+                                      
+                                }
+                                catch(err2){
+                                
+                                      err   = err2;
+                                      
+                                }
+                                if(err){
+                                      log.red(err.message);
+                                      return;
+                                }
+                                
+                                var txt   = await res.text();
+                                
+                                if(!res.ok){
+                                      log.red(txt);
+                                      return;
+                                }
+                                
+                                filename(path);
+                                editor.setValue(txt,-1);
+
+                                
+                                if(typeof obj.load.complete=='function'){
+                                      obj.load.complete();
+                                }
+                                
+                                
+                                //cur   = {type:'github'};
+
+                          
+                          }//load
+
+      
+                          obj.save=function(){return save()}    //d
+                          
+                          async function save(){
+                          
+                                var {token,owner,repo,branch,path}    = read();
+                                
+                                var txt         = editor.getValue();
+                                var content     = window.btoa(txt);
+                                var message     = 'save text';
+                                var url         = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+                                
+                                var err;
+                                try{
+                                
+                                      var json        = await fetch(url).then(res=>res.json());
+                                      
+                                }
+                                catch(err2){
+                                
+                                      err   = err2;
+                                      
+                                }
+                                if(err){
+                                      log.red(err.message);
+                                      return;
+                                }
+                                
+                                var sha         = json.sha;
+                                var body        = {content,sha,message};
+                                body            = JSON.stringify(body);
+                                var headers     = {authorization:`Bearer ${token}`};
+                                var opts        = {method:'put',headers,body};
+                                
+                                var err;
+                                try{
+                                
+                                      var res         = await fetch(url,opts);
+                                      
+                                }
+                                catch(err2){
+                                
+                                      err   = err2;
+                                      
+                                }
+                                if(err){
+                                      log.red(err.message);
+                                      return;
+                                }
+                                if(!res.ok){
+                                      var txt         = await res.text();
+                                      log.red(txt);
+                                      return;
+                                }
+                                                                                              console.log('saved');
+                                var fn    = filename(path);
+                                log.green(fn,'saved');
+
+  
+                                if(typeof obj.save.complete=='function'){
+                                      obj.save.complete();
+                                }
+                                
+                                cur       = {type:'github'};
+
+                                
+                          }//save
+
+                          
+                    return obj;
+                    
+                  }//github
+
+
+                  
+      </script>
+    
+</github-root>
+
+
+
+
+
+
+
