@@ -1,0 +1,267 @@
+
+
+
+<script>
+                                                            console.clear();
+                                                            console.log('github');
+                                                            
+        var ext;
+        var $,datatype,jsonblob,menumod,keydown;
+        
+        fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
+          .then(res=>res.text().then(async txt=>{
+          
+              ext   = eval(txt);
+              
+              var promise   = ext.load.libs(
+                    'js/dom/$.js','js/core/datatype.js','js/io/jsonblob/jsonblob.js','js/dom/menumod/menumod.js',
+                    'js/dom/keydown/keydown.js'
+              );
+              [$,datatype,jsonblob,menumod,keydown]   = await promise;
+  
+              
+              window.$          = $;
+              window.datatype   = datatype;
+              
+              init();
+              
+          }));
+    
+
+
+        var menu;
+
+        
+        function init(){
+        
+              menu            = menumod();
+              
+              github          = github();
+
+        
+              initdom();
+
+              
+        }//init
+        
+        
+        function initdom(){
+        
+              github.initdom(document.body);
+              
+        }//initdom
+
+
+        
+</script>
+
+
+<github-root>
+
+      <template shadowrootmode=open>
+      
+            <style>
+
+                  .icon {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:30px;height:30px;cursor:pointer}
+        
+
+            
+                  .github {position:relative;font-family:arial}
+                  
+                  #icon {
+                        content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAZ9JREFUSEvNls8uBEEQxn9DXFgughNZ3sBNwk3iMYTH4GJPvIQEryFxI3HyBkLcEBf/DsKiNmbSad1d1TO7oW/T/fX31VddPdUF+WMKOAbaP1uvgTXgPoeqMIJfgNEMbEvDasLPwJhGEll/Te1NCX/WFPS3BTViwv0SLYP4peNPjABvfXLq0wj3eywS3+k5sFQzkBNg1dtbGXUdh9Lrrn8AQ4YgTJwlSAiF2FQYBvESEjIzDHRL4VgxaddNiyHK+6fCR8D6ANKcSve+OB5UmlPCxIQPgU3tAI3rB8BGqGpDjleAMyOxBlsGTq3C28Cexmhc3wJ2rcLSY+eNxBrsyundFfbfFZdE1vTnoVb1LHATyVdT8dhVndP+XE2cp3p6ERKWuQXg0smC9FHpp5YhWGkEqVEJC8iNMJWJpq+W3n6X5BaYdsKUtZ3v744zJ5mQ6xEai8CF4vQOmAmdX8i14KRfdw151t5qwRdIqPxzqzpZUG7gueelBWLudLnv6jrCWe/qMivjwKNXcKmjdh1PAE8xsObA3fcATCoFZsH0KL4ABKpK0CB/GK0AAAAASUVORK5CYII=);
+                  }
+                  
+                  #github-menu {right:0;position:absolute;top:50px;/*width:700px;*/outline:none}
+
+                  section {margin-bottom:10px}            
+                  .label{}
+                  .paste {height: 32px; width: 32px; border: 1px solid dimgray; box-sizing: border-box; cursor: pointer; margin-right: 3px;border-radius:3px;
+                          content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAVlJREFUSEvtlj1ug0AQhcdIW6RLeiQy6XKElLRIlOlp6LmBlRsgtzTUOQAtcZMzpMpInAGlQSjRWl7LxrM/dlhZUbwtu/PNvH07zAIutBYX4oIzGBG/95MkIuezXHFOh6MoegqC4F0GEELAMAybWL+BG8GI+AwArypjRFTAgyLOSeAIHIbhjRDii5NHgcdxhK7rWHu4JnEEnt6ljK6AUxIRcfAPInq0mVYL/lwSrNa3UL7d2WKA3CvXw8vuKqzeMYKtxMmGK9ik2FVq+XQ2rVE5VSeXMpLNgLp3fZbUrlCVFAc/GaygbdvaioU4jrU9/W+CVUVc6U3TQJIkfio2geVV/C+pi6KAsiz9SN33PaRpyrrbu9R1XbPgLMv83bHJXHmeQ1VVp0tt6w6zN5DtqHMwynJJeAGbqkVEOefc2xTZ/+7Uq10CcgOh7pzz38kFPMce6zQ4B4SL8QNf7+YfCGbtNAAAAABJRU5ErkJggg==);
+                          }
+                  .value {}
+                  
+                  input {font-size:16px;padding:5px 10px}
+                  input:not([type]) {flex:1}
+                  input[type=button] {cursor:pointer}
+                  
+            </style>
+      
+      
+          
+            <div class=github>
+            
+                  <img id=icon class=icon style='padding:2px'>
+                  
+                  <div id="github-menu" class="menu" style='display:none'>
+                  
+                  
+                      <div class="menu-title">
+                            github params
+                      </div>
+                      
+                      
+                      <section style="margin-bottom: 20px; border-bottom: 1px solid lightgray;">
+                      
+                          <div id="parse-url-label">
+                                parse url
+                          </div>
+                          
+                          <div style="display: flex;" id="parse-url-root" class="menu-opt">
+                              <img id="parse-url-paste" class=paste>
+                              <input id="parse-url" style="margin-right: 10px;">
+                              </input>
+                              <input style="cursor: pointer; font-size: 16px; box-sizing: border-box;" type="button" value="parse" id="parse" autocomplete='off'>
+                              </input>
+                          </div>
+                          
+                      </section>
+                      
+                      <section>
+                      
+                            <div id="token-label">
+                                  token
+                            </div>
+                            
+                            <div style="display: flex;" id="token-root" class="menu-opt">
+                                <img id="token-paste" class=paste>
+                                <input id="token" style="flex: 1 1 0%;" autocomplete='off'>
+                                </input>
+                            </div>
+                            
+                      </section>
+                      
+                      
+                      <section>
+                      
+                            <div id="owner-label">
+                                  owner
+                            </div>
+                            
+                            <div style="display: flex;" id="owner-root" class="menu-opt">
+                                <img id="owner-paste" class=paste>
+                                <input id="owner" style="flex: 1 1 0%;" autocomplete='off'>
+                                </input>
+                            </div>
+                            
+                      </section>
+                      
+                      
+                      <section>
+                      
+                            <div id="repo-label">
+                                  repo
+                            </div>
+                            
+                            <div style="display: flex;" id="repo-root" class="menu-opt">
+                                <img id="repo-paste" class=paste>
+                                <input id="repo" style="flex: 1 1 0%;" autocomplete="off">
+                                </input>
+                            </div>
+                            
+                      </section>
+                      
+                      
+                      <section>
+                      
+                            <div id="branch-label">
+                                  branch
+                            </div>
+                            
+                            <div style="display: flex;" id="branch-root" class="menu-opt">
+                                <img id="branch-paste" class=paste>
+                                <input id="branch" style="flex: 1 1 0%;" autocomplete='off'>
+                                </input>
+                            </div>
+                            
+                      </section>
+
+                      
+                      <section>
+                      
+                            <div id="path-label">
+                                  path
+                            </div>
+                            
+                            <div style="display: flex;" id="branch-root" class="menu-opt">
+                                <img id="path-paste" class=paste>
+                                <input id="path" style="flex: 1 1 0%;" autocomplete='off'>
+                                </input>
+                            </div>
+                            
+                      </section>
+
+                      
+                      <div style='display:flex;justify-content:center;gap:25px'>
+                            <button id=github-load class=menu-opt>load</button>
+                            <button id=github-save class=menu-opt>save</button>
+                      </div>
+
+                      
+                  </div>
+            </div>
+
+      </template>
+      
+      <script>
+      
+                  /*
+                  class Github extends HTMLElement {
+                  
+                        constructor(){
+                        
+                              super();
+                              
+                        }//constructor
+                        
+                  }//github
+                  
+                  customElements.define('github-root',Github);
+                  */
+                  
+                  
+                  function github(){
+                    
+                    var obj   = {};
+
+                          
+                          obj.initdom=function(rootnode){   //c
+                          
+                                var root      = document.querySelector('github-root');
+                                var shadow    = root.shadowRoot;
+
+                                menu.add.style(shadow);
+                                
+                                var node      = $(shadow,'#github-menu');
+                                $(shadow,'#icon').onclick   = menu.click(node,false,false,github.menu);
+                                
+                                
+                                
+                          }//initdom
+                          
+                          
+                          
+                          
+                          obj.menu=function(type,opt){
+                          
+                                console.log(type);
+                                
+                          }//menu
+                          
+                    
+                    return obj;
+                    
+                  }//github
+
+
+                  
+      </script>
+    
+</github-root>
+
+
+
+
+
+
+
