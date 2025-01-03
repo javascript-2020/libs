@@ -353,7 +353,7 @@
                       case 'ArrowRight'   : kd.arrowright(e,node,opts);       break;
                       case 'Enter'        : kd.enter(e,node,opts);            break;
                       case 'Escape'       : kd.escape(e,node,opts);           break;
-                      case 'Tab'          : kd.tab(e,node,opts);              break;
+                      //case 'Tab'          : kd.tab(e,node,opts);              break;
                       
                       default             : both    = false;
                       
