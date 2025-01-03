@@ -75,7 +75,7 @@
                   #github-menu {right:0;position:absolute;top:50px;/*width:700px;*/outline:none}
 
                   section {margin-bottom:10px}          
-                  .sep {margin-bottom: 20px; border-bottom: 1px solid lightgray;padding-bottom:10px}
+                  
                   .label{}
                   
                   .hldr {display:flex}
@@ -91,7 +91,7 @@
                   input:not([type]) {flex:1}
                   input[type=button] {cursor:pointer}
                   
-                  #parse {margin-right:10px}
+                  #url {margin-right:10px}
                   
             </style>
       
@@ -109,20 +109,6 @@
                       </div>
                       
                       
-                      <section class=sep>
-                      
-                          <div>
-                                parse url
-                          </div>
-                          
-                          <div class=hldr>
-                              <img class=paste>
-                              <input id=url>
-                              <input type=button value=parse>
-                          </div>
-                          
-                      </section>
-                      
                       <section>
                       
                             <div>
@@ -136,6 +122,23 @@
                             
                       </section>
                       
+                      <div class=menu-sep></div>
+                      
+                      <section>
+                      
+                          <div>
+                                parse url
+                          </div>
+                          
+                          <div class=hldr>
+                              <img class=paste>
+                              <input id=url>
+                              <input type=button value=parse>
+                          </div>
+                          
+                      </section>
+                      
+                      <div class=menu-sep></div>
                       
                       <section>
                       
@@ -290,8 +293,8 @@
                                                                         
                                                                   };
                                                                   
-                                $(shadow,'#load').onclick   = btn.load;
-                                $(shadow,'#save').onclick   = btn.save;
+                                $(shadow,'[value=load]').onclick   = btn.load;
+                                $(shadow,'[value=save]').onclick   = btn.save;
 
                                 
                           }//initdom
