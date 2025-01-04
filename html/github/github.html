@@ -378,6 +378,8 @@
                           }//write
 
                           
+                          obj.load=function(){return load()}
+                          
                           async function load(){
                           
                                 var {token,owner,repo,branch,path}    = read();
