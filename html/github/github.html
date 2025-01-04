@@ -7,11 +7,11 @@
       
             <style>
 
-                  .github {position:relative;font-family:arial}
-                  
-                  #github-menu {right:0;position:absolute;top:50px;/*width:700px;*/outline:none}
+                  .menu {right:0;position:absolute;top:50px;/*width:700px;*/outline:none;font-family:arial}
 
                   section {margin-bottom:10px}          
+                  
+                  #hdr {text-align:right}
                   
                   .label{}
                   
@@ -39,111 +39,113 @@
       
       
           
-            <div class=github>
+            <div class=menu style='display:none'>
             
-                  <div id=github-menu class=menu style='display:none'>
-                  
-                  
-                      <div class=menu-title>
-                            github params
+            
+                <div class=menu-title>
+                      github params
+                </div>
+                
+                <section id=hdr>
+                
+                      <a href='https://github.com/settings/personal-access-tokens'>github token</a>
+                      
+                </section>
+                
+                <section>
+                
+                      <div>
+                            token
                       </div>
                       
-                      
-                      <section>
-                      
-                            <div>
-                                  token
-                            </div>
-                            
-                            <div class=hldr>
-                                <img class='paste icon'>
-                                <input id=token autocomplete=off>
-                                <img class='copy icon'>
-                            </div>
-                            
-                      </section>
-                      
-                      <div class=menu-sep></div>
-                      
-                      <section>
-                      
-                          <div>
-                                parse url
-                          </div>
-                          
-                          <div class=hldr>
-                              <img class='paste icon'>
-                              <input id=url>
-                              <input type=button value=parse>
-                          </div>
-                          
-                      </section>
-                      
-                      <div class=menu-sep></div>
-                      
-                      <section>
-                      
-                            <div>
-                                  owner
-                            </div>
-                            
-                            <div class=hldr>
-                                <img class='paste icon'>
-                                <input id=owner autocomplete=off>
-                            </div>
-                            
-                      </section>
-                      
-                      
-                      <section>
-                      
-                            <div>
-                                  repo
-                            </div>
-                            
-                            <div class=hldr>
-                                <img class='paste icon'>
-                                <input id=repo autocomplete=off>
-                            </div>
-                            
-                      </section>
-                      
-                      
-                      <section>
-                      
-                            <div>
-                                  branch
-                            </div>
-                            
-                            <div class=hldr>
-                                <img class='icon paste'>
-                                <input id=branch autocomplete=off value=main>
-                            </div>
-                            
-                      </section>
-
-                      
-                      <section>
-                      
-                            <div>
-                                  path
-                            </div>
-                            
-                            <div class=hldr>
-                                <img class='icon paste'>
-                                <input id=path autocomplete=off>
-                            </div>
-                            
-                      </section>
-
-                      
-                      <div id=btns>
-                            <input value=load type=button>
-                            <input value=save type=button>
+                      <div class=hldr>
+                          <img class='paste icon'>
+                          <input id=token autocomplete=off>
+                          <img class='copy icon'>
                       </div>
-
                       
-                  </div>
+                </section>
+                
+                <div class=menu-sep></div>
+                
+                <section>
+                
+                    <div>
+                          parse url
+                    </div>
+                    
+                    <div class=hldr>
+                        <img class='paste icon'>
+                        <input id=url>
+                        <input type=button value=parse>
+                    </div>
+                    
+                </section>
+                
+                <div class=menu-sep></div>
+                
+                <section>
+                
+                      <div>
+                            owner
+                      </div>
+                      
+                      <div class=hldr>
+                          <img class='paste icon'>
+                          <input id=owner autocomplete=off>
+                      </div>
+                      
+                </section>
+                
+                
+                <section>
+                
+                      <div>
+                            repo
+                      </div>
+                      
+                      <div class=hldr>
+                          <img class='paste icon'>
+                          <input id=repo autocomplete=off>
+                      </div>
+                      
+                </section>
+                
+                
+                <section>
+                
+                      <div>
+                            branch
+                      </div>
+                      
+                      <div class=hldr>
+                          <img class='icon paste'>
+                          <input id=branch autocomplete=off value=main>
+                      </div>
+                      
+                </section>
+
+                
+                <section>
+                
+                      <div>
+                            path
+                      </div>
+                      
+                      <div class=hldr>
+                          <img class='icon paste'>
+                          <input id=path autocomplete=off>
+                      </div>
+                      
+                </section>
+
+                
+                <div id=btns>
+                      <input value=load type=button>
+                      <input value=save type=button>
+                </div>
+
+                
             </div>
 
       </template>
