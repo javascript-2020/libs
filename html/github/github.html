@@ -427,13 +427,12 @@
                           }//load
 
       
-                          obj.save=function(){return save()}    //d
+                          obj.save=function(txt){return save(txt)}    //d
                           
-                          async function save(){
+                          async function save(txt){
                           
                                 var {token,owner,repo,branch,path}    = read();
                                 
-                                var txt         = editor.getValue();
                                 var content     = window.btoa(txt);
                                 var message     = 'save text';
                                 var url         = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
