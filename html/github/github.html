@@ -160,6 +160,18 @@
                     var obj   = {};
 
                           
+                          var editor,load_complete,save_complete;
+                          
+                          
+                          obj.initmod=function(params){
+                          
+                                if(params.editor)editor                 = params.editor;
+                                if(params.load_complete)load_complete   = params.load_complete;
+                                if(params.save_complete)save_complete   = params.save_complete;
+                                
+                          }//initmod
+                          
+                          
                           var root;
                           var shadow;
                                                     
@@ -255,10 +267,16 @@
                           
                           
                           btn.load=function(){
+                          
+                                load();
+                                
                           }//load
                           
                           
                           btn.save=function(){
+                          
+                              save();
+                              
                           }//save
 
 
@@ -402,10 +420,18 @@
                                 }
                                 
                                 filename(path);
+                                
+                                
+                                if(typeof obj.load.complete=='function'){
+                                      obj.load.complete(txt);
+                                }
+                                
+                                
+                                /*
                                 editor.setValue(txt,-1);
                                 
-                                
                                 cur   = {type:'github'};
+                                */
 
                           
                           }//load
@@ -469,7 +495,15 @@
                                 log.green(fn,'saved');
 
 
+
+                                if(typeof save_complete=='function'){
+                                      save_compplete();
+                                }  
+                                   
+                                   
+                                /* 
                                 cur       = {type:'github'};
+                                */
 
                                 
                           }//save
