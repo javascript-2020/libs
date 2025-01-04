@@ -14,6 +14,12 @@
         
         var txt;
         var mode    = 'raw';
+        
+        if(nn.endsWith('-api')){
+              nn      = nn.slice(-4);
+              mode    = 'api';
+        }
+        
         if(mode=='api'){
               txt   = await api();
         }else{
@@ -46,6 +52,19 @@
         
         
         function api(){
+
+              var headers   = {accept:'application/vnd.github+json'};
+          
+              var user      = 'javascript-2020';
+              var repo      = 'libs';
+              var path      = 'html/github/github.html';
+              
+              var url       = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
+              var res       = await fetch(url,{headers});
+              var json      = await res.json();
+              var b64       = json.content;
+              var txt       = window.atob(b64);
+        
         }//api
     
 })();
