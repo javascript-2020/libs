@@ -160,18 +160,6 @@
                     var obj   = {};
 
                           
-                          var editor,load_complete,save_complete;
-                          
-                          
-                          obj.initmod=function(params){
-                          
-                                if(params.editor)editor                 = params.editor;
-                                if(params.load_complete)load_complete   = params.load_complete;
-                                if(params.save_complete)save_complete   = params.save_complete;
-                                
-                          }//initmod
-                          
-                          
                           var root;
                           var shadow;
                                                     
@@ -496,8 +484,8 @@
 
 
 
-                                if(typeof save_complete=='function'){
-                                      save_compplete();
+                                if(typeof obj.save.complete=='function'){
+                                      obj.save.compplete();
                                 }  
                                    
                                    
