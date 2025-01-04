@@ -225,7 +225,8 @@
                                 
                                 $(shadow,'.copy').onclick   = async e=>{
                                 
-                                                                    var input   = $(this.parentNode,'not:([type])');
+                                                                    var icon    = e.target;
+                                                                    var input   = $(icon.parentNode,'not:([type])');
                                                                     var txt     = input.value;
                                                                     await navigator.clipboard.writeText(txt);
                                                                     
