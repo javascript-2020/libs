@@ -1,7 +1,7 @@
 
 <github-root>
 
-      <img id=icon class=icon style='padding:2px'>
+      <img class=icon style='padding:2px'>
 
       <template shadowrootmode=open>
       
@@ -172,7 +172,7 @@
                                 menu.add.style(shadow);
                                 
                                 var node      = $(shadow,'#github-menu');
-                                $(root,'#icon').onclick   = menu.click(node,false,false,callback);
+                                $(root,'.icon').onclick   = menu.click(node,false,false,callback);
 
                                 
                                 var list    = $.all(node,'input:not([type])');
