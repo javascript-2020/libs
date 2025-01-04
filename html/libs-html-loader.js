@@ -11,9 +11,15 @@
         var script            = document.currentScript;
         var par               = script.parentNode;
         var nn                = par.nodeName.toLowerCase();
-        var url               = `https://raw.githubusercontent.com/javascript-2020/libs/main/html/${nn}/${nn}.html`;
-        var res               = await fetch(url);
-        var txt               = await res.text();
+        
+        var txt;
+        var mode    = 'raw';
+        if(mode=='api'){
+              txt   = await api();
+        }else{
+              txt   = await raw();
+        }
+        
         txt                   = txt.trim();
         var div               = document.createElement('div');
         div.setHTMLUnsafe(txt);
@@ -27,6 +33,20 @@
         if(complete){
             complete();
         }
+        
+        
+        async function raw(){
+        
+              var url               = `https://raw.githubusercontent.com/javascript-2020/libs/main/html/${nn}/${nn}.html`;
+              var res               = await fetch(url);
+              var txt               = await res.text();
+              return txt;
+              
+        }//raw
+        
+        
+        function api(){
+        }//api
     
 })();
 
