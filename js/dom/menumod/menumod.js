@@ -287,7 +287,7 @@
   //:
   
               function show(node){
-                                                                                //console.log('show',node.id);
+                                                                                console.log('show',node.id);
                     state.opt   = null;
                     
                     var opts    = get.opts(node);
@@ -306,7 +306,7 @@
   //:
   
               function hide(node){
-                                                                              //console.log('hide',node.id);
+                                                                              console.log('hide',node.id);
                     state.prev_opt[node.id]       = state.opt;
                     if(typeof state.opt=='number'){
                           var opts                = get.opts(node);
