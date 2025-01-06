@@ -139,11 +139,11 @@
                           timer    = setTimeout(fn,500);
                           
                           function fn(){
-                                                                                //console.log('mouseleave',node);
+                                                                                console.log('mouseleave',node);
                                 var cur       = get.cur('node');
-                                                                                //console.log('cur',cur);
+                                                                                console.log('cur',cur);
                                 if(cur!==node){
-                                                                                //console.log('cur');
+                                                                                console.log('cur');
                                       return;
                                 }
                                 
@@ -256,7 +256,7 @@
               obj.close=function(){return close()}
               
               function close(){
-                                                                                //console.log('close',state.cur);
+                                                                                console.log('close',state.cur);
                     keydown.rem(kd);
                     
                     if(state.cur===null){
@@ -487,7 +487,7 @@
   
   
               function focusout(e){
-                                                                                //console.log('focusout');
+                                                                                console.log('focusout');
                     var focus   = e.relatedTarget;
                                                                                 //console.log(focus);
                     if(chk(focus)){
