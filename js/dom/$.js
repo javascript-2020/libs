@@ -619,6 +619,21 @@
               
         }//caret
         
+        
+        $.mousetext=function(e,text){
+        
+              var left            = e.pageX+'px';
+              var top             = e.pageY+'px';
+              var style           = {postion:absolute;left,top};
+              var append          = document.body;
+              var div             = $.create.div({style,text,append});
+              var rem             = ()=>div.remove();
+              div.onmouseleave    = rem;
+              div.onclick         = rem;
+              
+        }//mousetext
+        
+        
 return $;
 
 })();
