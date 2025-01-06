@@ -284,6 +284,7 @@
 
                           function parse(url){
                           
+                                url   = window.decodeURIComponent(url);
                                 if(!url.startsWith('http')){
                                       url   = 'https://'+url;
                                 }
