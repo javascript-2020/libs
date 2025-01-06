@@ -4,7 +4,7 @@
         var complete;
         if(typeof init!='undefined'){
             if(init.stack){
-                init.stack.add();
+                init.stack.add;
             }
         }
     
@@ -37,7 +37,7 @@
         script.parentNode.replaceChild(nscript,script);
 
         if(init.stack){
-            init.stack.complete();
+            init.stack.complete;
         }
         
         
