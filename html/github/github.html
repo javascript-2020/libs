@@ -184,7 +184,7 @@
                                 
                                       input.addEventListener('keydown',keydown);
                                       
-                                      function keydown(e){
+                                      function keydown(e){console.log(e.key);
                                       
                                             if(e.key=='ArrowDown'){
                                                   e.stopPropagation();
@@ -367,21 +367,11 @@
                           }//dir
                           
                           
-                          function kd(){
-                          debugger;
-                                return {both:true};
-                                
-                          }//kd
-                          
-                          
                           function callback(type){console.log('github',type);
                           
                                 if(type=='show'){
-                                debugger;
-                                      keydown.add(kd);
                                 }
                                 if(type=='hide'){
-                                      keydown.rem(kd);
                                 }
                                 
                           }//callback
