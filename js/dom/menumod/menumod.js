@@ -121,10 +121,13 @@
                     node.style.zIndex   = defz;
                     node.tabIndex       = -1;
                     
+                    if(drag===true){
+                          drag    = 'both';
+                    }
                     if(drag){
                           $.drag(node,null,drag);
                     }
-                    if(center){
+                    if(center){debugger;
                           $.center.width(node);
                     }
                     
