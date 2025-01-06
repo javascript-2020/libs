@@ -6,15 +6,19 @@
                                                                                           console.log('menumod',1);
           var obj   = {};
           
-  //:
-              obj.callback    = {};
+  
+              var df                  = false;
+
+
               
-              var list      = [];
-              list.find     = (v,rtype)=>find(list,v,rtype);
+              obj.callback            = {};
+              
+              var list                = [];
+              list.find               = (v,rtype)=>find(list,v,rtype);
               
               
-              var stack     = [];
-              stack.find    = (v,rtype)=>find(stack,v,rtype);
+              var stack               = [];
+              stack.find              = (v,rtype)=>find(stack,v,rtype);
               
               
               function find(list,v,rtype){
@@ -143,11 +147,11 @@
                           timer    = setTimeout(fn,500);
                           
                           function fn(){
-                                                                                console.log('mouseleave',node);
+                                                                                            debug('mouseleave',node);
                                 var cur       = get.cur('node');
-                                                                                console.log('cur',cur);
+                                                                                            debug('cur',cur);
                                 if(cur!==node){
-                                                                                console.log('cur');
+                                                                                            debug('cur');
                                       return;
                                 }
                                 
@@ -258,9 +262,9 @@
               
               
               obj.close=function(){return close()}
-              
+              t
               function close(){
-                                                                                console.log('close',state.cur);
+                                                                                      debug('close',state.cur);
                     keydown.rem(kd);
                     
                     if(state.cur===null){
@@ -291,7 +295,7 @@
   //:
   
               function show(node){
-                                                                                console.log('show',node.id);
+                                                                                      debug('show',node.id);
                     state.opt   = null;
                     
                     var opts    = get.opts(node);
@@ -310,7 +314,7 @@
   //:
   
               function hide(node){
-                                                                              console.log('hide',node.id);
+                                                                                      debug('hide',node.id);
                     state.prev_opt[node.id]       = state.opt;
                     if(typeof state.opt=='number'){
                           var opts                = get.opts(node);
@@ -432,7 +436,7 @@
               
               
               kd.arrowright=function(e,node,opts){
-                                                                                //console.clear();console.log('arrowright');
+                                                                                
                     if(stack.length){
                           return;
                     }
@@ -491,11 +495,11 @@
   
   
               function focusout(e){
-                                                                                console.log('focusout');
+                                                                                debug('focusout');
                     var focus   = e.relatedTarget;
-                                                                                console.log(focus);
+                                                                                debug(focus);
                     if(chk(focus)){
-                                                                                console.log('list');
+                                                                                debug('chk');
                           return;
                     }
                     close();
@@ -642,8 +646,20 @@
           }//style
           
           
+  //:          
+          
+          function debug(){
+          
+                if(!df)return;
 
+                var str   = [...argumens].join(' ');
+                console.log(str);
+                
+          }//debug
+          
+          
+          
                 
           return obj;
           
-        }//menumodmod
+}//menumodmod
