@@ -3,7 +3,7 @@
 
 
         function menumod(){
-                                                                                          console.log('menumod',1);
+                                                                                          //console.log('menumod',1);
           var obj   = {};
           
   
@@ -261,8 +261,8 @@
               }//open
               
               
-              obj.close=function(){return close()}
-              t
+              obj.close=function(){return close()};
+              
               function close(){
                                                                                       debug('close',state.cur);
                     keydown.rem(kd);
