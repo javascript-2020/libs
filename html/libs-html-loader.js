@@ -64,6 +64,7 @@
               var json      = await res.json();
               var b64       = json.content;
               var txt       = window.atob(b64);
+              return txt;
         
         }//api
     
