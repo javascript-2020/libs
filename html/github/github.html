@@ -204,6 +204,16 @@
                                                   var input2    = list[i];
                                                   input2.focus();
                                             }
+                                            if(e.key=='ArrowLeft'){
+                                                  if(!e.ctrlKey){
+                                                        e.stopPropagation();
+                                                  }
+                                            }
+                                            if(e.key=='ArrowRight'){
+                                                  if(!e.ctrlKey){
+                                                        e.stopPropagation();
+                                                  }
+                                            }
                                             
                                       }//keydown
                                       
