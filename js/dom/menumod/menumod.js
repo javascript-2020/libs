@@ -652,7 +652,7 @@
           
                 if(!df)return;
 
-                var str   = [...argumens].join(' ');
+                var str   = [...arguments].join(' ');
                 console.log(str);
                 
           }//debug
