@@ -1,6 +1,7 @@
 (()=>{
 
         keydown.initdom=function(){
+        console.log('keydown');
         
               document.addEventListener('keydown',keydown,true);
               
