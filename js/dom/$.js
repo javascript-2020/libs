@@ -624,10 +624,10 @@
         
               var left            = e.pageX+'px';
               var top             = e.pageY+'px';
-              var style           = {position:'absolute',left,top,padding:'10px',border:'1px solid dimgray'};
+              var style           = {position:'absolute',left,top,padding:'10px',border:'1px solid dimgray',borderRadius:'3px'};
               var append          = document.body;
               var div             = $.create.div({style,text,append});
-              var rem             = ()=>{};//div.remove();
+              var rem             = ()=>div.remove();
               div.onmouseleave    = rem;
               div.onclick         = rem;
               var time            = 700;
