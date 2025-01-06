@@ -1,5 +1,9 @@
+
+
+
+
         function menumod(){
-        
+                                                                                          console.log('menumod',1);
           var obj   = {};
           
   //:
