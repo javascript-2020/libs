@@ -367,11 +367,19 @@
                           }//dir
                           
                           
+                          function kd(){
+                          
+                                console.log('kd');
+                                
+                          }//kd
+                          
                           function callback(type){console.log('github',type);
                           
                                 if(type=='show'){
+                                      keydown.add(kd);
                                 }
                                 if(type=='hide'){
+                                      keydown.rem(kd);
                                 }
                                 
                           }//callback
