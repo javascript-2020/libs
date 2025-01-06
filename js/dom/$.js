@@ -627,7 +627,7 @@
               var style           = {postion:'absolute',left,top,padding:'10px';border:'1px solid dimgray'};
               var append          = document.body;
               var div             = $.create.div({style,text,append});
-              var rem             = ()=>div.remove();
+              var rem             = ()=>{};//div.remove();
               div.onmouseleave    = rem;
               div.onclick         = rem;
               var time            = 700;
