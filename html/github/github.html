@@ -239,9 +239,7 @@
                                                                     var input   = $(icon.parentNode,'input:not([type])');
                                                                     var txt     = input.value;
                                                                     await navigator.clipboard.writeText(txt);
-                                                                    
-                                                                    log.config.time   = 500;
-                                                                    log.green('copied');
+                                                                    $.mousetext(e,'copied');
                                                                     
                                                               };
                                                               
