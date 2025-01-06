@@ -2,7 +2,7 @@
 
         keydown.initdom=function(){
         
-              document.addEventListener('keydown',keydown,false);
+              document.addEventListener('keydown',keydown,true);
               
               
         }//initdom
