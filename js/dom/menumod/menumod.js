@@ -229,7 +229,7 @@
               obj.open=function(node){return open(node)}
               
               function open(node){
-                                                                                //console.log('open',node);
+                                                                                debug('open',node);
                     if(typeof node=='string'){
                           node    = list.find(node,'node');
                     }
