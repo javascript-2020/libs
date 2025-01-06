@@ -51,7 +51,7 @@
         }//raw
         
         
-        function api(){
+        async function api(){
 
               var headers   = {accept:'application/vnd.github+json'};
           
