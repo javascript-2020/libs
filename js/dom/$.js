@@ -630,6 +630,8 @@
               var rem             = ()=>div.remove();
               div.onmouseleave    = rem;
               div.onclick         = rem;
+              var time            = 700;
+              setTimeout(rem,time);
               
         }//mousetext
         
