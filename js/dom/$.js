@@ -624,7 +624,7 @@
         
               var left            = e.pageX+'px';
               var top             = e.pageY+'px';
-              var style           = {postion:'absolute',left,top,padding:'10px';border:'1px solid dimgray'};
+              var style           = {postion:'absolute',left,top,padding:'10px',border:'1px solid dimgray'};
               var append          = document.body;
               var div             = $.create.div({style,text,append});
               var rem             = ()=>{};//div.remove();
