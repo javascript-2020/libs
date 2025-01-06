@@ -124,7 +124,7 @@
                     if(drag){
                           $.drag(node,null,drag);
                     }
-                    if(center){debugger;
+                    if(center){
                           $.center.width(node);
                     }
                     
