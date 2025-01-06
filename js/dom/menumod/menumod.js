@@ -489,9 +489,9 @@
               function focusout(e){
                                                                                 console.log('focusout');
                     var focus   = e.relatedTarget;
-                                                                                //console.log(focus);
+                                                                                console.log(focus);
                     if(chk(focus)){
-                                                                                //console.log('list');
+                                                                                console.log('list');
                           return;
                     }
                     close();
