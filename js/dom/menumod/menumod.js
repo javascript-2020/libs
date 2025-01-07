@@ -253,10 +253,11 @@
                           index   = list.find(node,'index');
                     }
                     
+                    keydown.add(menu_kd);
+                    
                     state.cur   = index;
                     show(node);
                     
-                    keydown.add(menu_kd);
                     
               }//open
               
