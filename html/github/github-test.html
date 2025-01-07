@@ -9,13 +9,14 @@
                         console.clear();
                         
       var menu;
-                        
-      init.stack            = [];
-      init.stack.ct         = 0;
-      init.stack.add        = callback=>init.stack.push(callback);
-      init.stack.complete   = ()=>(init.stack.ct++,init.stack.ct==init.stack.length && init());
 
                         
+      init.stack            = {};
+      init.stack.ct         = 0;
+      init.stack.total      = 1;
+      Object.defineProperty(init.stack,'add',{get:()=>init.stack.total++});
+      Object.defineProperty(init.stack,'complete',{get:()=>(init.stack.ct++,init.stack.ct==init.stack.total && init())});
+
       function init(){
       
             menu            = menumod();
@@ -29,7 +30,7 @@
 </script>
 
 <github-api>
-      <script src='https://script-tag-q0dit4tshpll.runkit.sh/libs/html/libs-html-loader.js.api'></script>
+      <script src='https://script-tag-q0dit4tshpll.runkit.sh/libs/html/libs-html-loader.js'></script>
 </github-api>
 
 
@@ -40,30 +41,28 @@
                                                             console.log('github');                                                            
         var ext;
         var $,datatype,jsonblob,menumod,keydown;
-        
-        var setup   = new Promise(resolve=>{
-        
-              fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
-                .then(res=>res.text().then(async txt=>{
-                
-                    ext   = eval(txt);
-                    
-                    var promise   = ext.load.libs(
-                          'js/dom/$.js.api','js/core/datatype.js','js/io/jsonblob/jsonblob.js','js/dom/menumod/menumod.js',
-                          'js/dom/keydown/keydown.js'
-                    );
-                    [$,datatype,jsonblob,menumod,keydown]   = await promise;
-        
-                    
-                    window.$          = $;
-                    window.datatype   = datatype;
 
-                    
-                    resolve();
-                    
-                }));
-                
-          });
+        init.stack.add;
+        
+        fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
+          .then(res=>res.text().then(async txt=>{
+          
+              ext   = eval(txt);
+              
+              var promise   = ext.load.libs(
+                    'js/dom/$.js.api','js/core/datatype.js','js/io/jsonblob/jsonblob.js','js/dom/menumod/menumod.js',
+                    'js/dom/keydown/keydown.js'
+              );
+              [$,datatype,jsonblob,menumod,keydown]   = await promise;
+  
+              
+              window.$          = $;
+              window.datatype   = datatype;
+
+              
+              init.stack.complete;
+              
+          }));
     
 
 
@@ -76,6 +75,8 @@
         }//initdom
 
 
+
+        init.stack.complete;
         
 </script>
 
