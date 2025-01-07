@@ -208,6 +208,7 @@
                                                   if(e.ctrlKey){
                                                         //debugger;
                                                         menu.prev();
+                                                        e.stopPropagation();
                                                   }
                                             }
                                             if(e.key=='ArrowRight'){
@@ -379,7 +380,7 @@
                                       keydown.add(github_kd);
                                 }
                                 if(type=='hide'){
-                                      keydown.rem(kd);
+                                      keydown.rem(github_kd);
                                 }
                                 
                           }//callback
