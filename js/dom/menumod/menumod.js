@@ -293,6 +293,47 @@
                     
               }//close
               
+              
+              obj.prev=function(){return prev()}
+              
+              function prev(){
+              
+                    if(stack.length){
+                          return;
+                    }
+                    var cur       = state.cur;
+                    hide(node);
+                    cur--;
+                    if(cur<0){
+                          cur   = list.length-1;
+                    }
+                    state.cur   = cur;
+                    node        = list.find(cur,'node');
+                    show(node);
+                    
+              }//prev
+              
+              
+              obj.next=function(){return next()}
+              
+              function next(){
+              
+                    if(stack.length){
+                          return;
+                    }
+                    var cur     = state.cur;
+                    hide(node);
+                    cur++;
+                    if(cur==list.length){
+                          cur   = 0;
+                    }
+                    state.cur   = cur;
+                    node        = list.find(cur,'node');
+                    show(node);
+              
+              }//next
+
+              
   //:
   
               function show(node){
@@ -422,36 +463,14 @@
               
               kd.arrowleft=function(e,node,opts){
               
-                    if(stack.length){
-                          return;
-                    }
-                    var cur       = state.cur;
-                    hide(node);
-                    cur--;
-                    if(cur<0){
-                          cur   = list.length-1;
-                    }
-                    state.cur   = cur;
-                    node        = list.find(cur,'node');
-                    show(node);
+                    prev();
                     
               }//arrowleft
               
               
               kd.arrowright=function(e,node,opts){
                                                                                 
-                    if(stack.length){
-                          return;
-                    }
-                    var cur     = state.cur;
-                    hide(node);
-                    cur++;
-                    if(cur==list.length){
-                          cur   = 0;
-                    }
-                    state.cur   = cur;
-                    node        = list.find(cur,'node');
-                    show(node);
+                    next();
                     
               }//arrowright
               
