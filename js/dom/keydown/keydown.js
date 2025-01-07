@@ -35,7 +35,8 @@
               
         }//pop
         
-        function keydown(e){console.log(e.key);
+        function keydown(e){
+                                                                                //console.log(e.key);
                                                                                 var str   = 'keydown';
               var stop      = false;
               var both      = false;
