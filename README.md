@@ -3,7 +3,19 @@
 various libraries for different languages
 
 
+```
+                  init.stack            = {};
+                  init.stack.ct         = 0;
+                  init.stack.total      = 1;
+                  Object.defineProperty(init.stack,'add',{get:()=>init.stack.total++});
+                  Object.defineProperty(init.stack,'complete',{get:()=>(init.stack.ct++,init.stack.ct==init.stack.total && init())});
 
+
+
+                  innit.stack.complete;
+
+
+```
 
 
 ```
