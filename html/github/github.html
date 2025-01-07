@@ -475,12 +475,13 @@
                                 
                                 var content     = window.btoa(txt);
                                 var message     = 'save text';
+                                var headers     = {authorization:`Bearer ${token}`};
                                 var url         = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
                                 
                                 var err;
                                 try{
                                 
-                                      var json        = await fetch(url).then(res=>res.json());
+                                      var json        = await fetch(url,headers).then(res=>res.json());
                                       
                                 }
                                 catch(err2){
