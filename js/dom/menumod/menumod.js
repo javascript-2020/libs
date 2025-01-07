@@ -256,7 +256,7 @@
                     state.cur   = index;
                     show(node);
                     
-                    keydown.add(kd);
+                    keydown.add(menu_kd);
                     
               }//open
               
@@ -349,7 +349,9 @@
               
   //:
   
-              function kd(e){
+              var kd={};
+              
+              function menu_kd(e){
                                                                                 //console.log('menu.kd',e.key);
                     var node      = get.cur('node');
                     var opts      = get.opts(node);
@@ -466,7 +468,7 @@
                     
               }//enter
               
-              
+
               kd.escape=function(e,node,opts){
               
                     if(stack.length){
