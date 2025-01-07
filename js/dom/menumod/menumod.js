@@ -302,6 +302,7 @@
                           return;
                     }
                     var cur       = state.cur;
+                    var node      = get.cur('node');
                     hide(node);
                     cur--;
                     if(cur<0){
@@ -322,6 +323,7 @@
                           return;
                     }
                     var cur     = state.cur;
+                    var node    = get.cur('node');
                     hide(node);
                     cur++;
                     if(cur==list.length){
