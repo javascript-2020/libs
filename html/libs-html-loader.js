@@ -54,7 +54,12 @@
         async function api(){
 
               var headers   = {accept:'application/vnd.github+json'};
-          
+              
+              var token     = localStorage.getItem('github-token');console.log(token);
+              if(token){
+                    headers.authorization   = 'Bearer '+token;
+              }
+              
               var user      = 'javascript-2020';
               var repo      = 'libs';
               var path      = 'html/github/github.html';
