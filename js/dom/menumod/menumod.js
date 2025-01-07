@@ -266,7 +266,7 @@
               
               function close(){
                                                                                       debug('close',state.cur);
-                    keydown.rem(kd);
+                    keydown.rem(menu_kd);
                     
                     if(state.cur===null){
                           return;
