@@ -248,6 +248,7 @@
                                                                     $.mousetext(e,'copied');
                                                                     
                                                               };
+                                                              
                                 $(shadow,'.storage').onclick    = async e=>{
                                                                         
                                                                         var token   = localStorage.getItem('github-token');
@@ -260,8 +261,10 @@
                                                                         input.value   = token;
                                                                         
                                                                   };
+
                                                               
                                 $(shadow,'[value=parse]').onclick   = btn.parse;
+                                
                                 $(shadow,'#url').onkeydown    = e=>{
                                 
                                                                         if(e.key=='Enter'){
@@ -270,6 +273,7 @@
                                                                         }
                                                                     
                                                                   };
+                                                                  
                                 $(shadow,'#path').onkeydown     = e=>{
                                                                   
                                                                         if(e.key=='Enter'){
@@ -332,8 +336,7 @@
                                             parse.repo(url);
                                       }
                                 }
-                                
-                                
+                                                                
                           }//parse
 
                           
@@ -390,8 +393,8 @@
                           
                           
                           function github_kd(){
-                          
-                          }//kd
+                          }//github_kd
+
                           
                           function callback(type){console.log('github',type);
                           
@@ -479,8 +482,6 @@
                                       obj.load.complete(txt);
                                 }
                                 
-                                menu.close();
-                                
                           }//load
 
       
@@ -546,8 +547,6 @@
                                       obj.save.complete();
                                 }  
                                 
-                                menu.close();
-                                   
                           }//save
 
   //:
