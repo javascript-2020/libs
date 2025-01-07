@@ -205,13 +205,13 @@
                                                   input2.focus();
                                             }
                                             if(e.key=='ArrowLeft'){
-                                                  if(!e.ctrlKey){
-                                                        e.stopPropagation();
+                                                  if(e.ctrlKey){
+                                                        menu.prev();
                                                   }
                                             }
                                             if(e.key=='ArrowRight'){
-                                                  if(!e.ctrlKey){
-                                                        e.stopPropagation();
+                                                  if(e.ctrlKey){
+                                                        menu.next();
                                                   }
                                             }
                                             
