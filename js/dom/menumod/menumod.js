@@ -398,6 +398,9 @@
               function menu_kd(e){
                                                                                 //console.log('menu.kd',e.key);
                     var node      = get.cur('node');
+                    if(!node){
+                          return;
+                    }
                     var opts      = get.opts(node);
                     
                     var both      = true;
