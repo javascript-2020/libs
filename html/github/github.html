@@ -162,7 +162,7 @@
                   
                   
                   function github(){
-                                                                                        console.log('github2');
+                                                                                        debug('github2');
                     var obj   = {};
 
                           
@@ -173,7 +173,7 @@
                           
                           
                           obj.initdom=function(rootnode){   //c
-                                                                                        console.log('github.initdom');
+                                                                                        debug('github.initdom');
                                 root      = document.querySelector('github-root');
                                 shadow    = root.shadowRoot;
 
@@ -252,7 +252,7 @@
                                                                         
                                                                         var token   = localStorage.getItem('github-token');
                                                                         if(!token){
-                                                                              $.mousetext('no stored token');
+                                                                              $.mousetext('no stored token, localStorage[\'github-token\']');
                                                                               return;
                                                                         }
                                                                         var icon      = e.target;
@@ -335,7 +335,7 @@
                           
                           //  https://javascript-2020.github.io/html-components/log/log.html
                           parse['github.io']=function(url){
-                                                                                    console.log('github.io');
+                                                                                    debug('github.io');
                                 var i         = url.hostname.indexOf('.');
                                 var owner     = url.hostname.slice(0,i);
                                 var repo      = url.hostname;
@@ -347,7 +347,7 @@
                           
                           //  https://github.com/javascript-2020/libs
                           parse.repo=function(url){
-                                                                                    console.log('repo');
+                                                                                    debug('repo');
                                 var parts     = url.pathname.split('/');
                                 var owner     = parts.shift();
                                 var repo      = parts.shift();
@@ -359,7 +359,7 @@
                           
                           //  https://github.com/javascript-2020/libs/blob/main/docker/nodejs-min.dockerfile
                           parse.file=function(url){
-                                                                                    console.log('file');
+                                                                                    debug('file');
                                 var parts     = url.pathname.split('/');
                                 parts.shift();
                                 var owner     = parts.shift();
@@ -373,7 +373,7 @@
                           
                           //  https://github.com/javascript-2020/libs/tree/main/docker
                           parse.dir=function(url){
-                                                                                    console.log('dir');
+                                                                                    debug('dir');
                                 var parts     = url.pathname.split('/');
                                 var owner     = parts.shift();
                                 var repo      = parts.shift();
@@ -410,14 +410,14 @@
                                 var repo      = $(shadow,'#repo').value;
                                 var branch    = $(shadow,'#branch').value;
                                 var path      = $(shadow,'#path').value;
-                                                                                    console.log(owner,repo,branch,path);
+                                                                                    debug(owner,repo,branch,path);
                                 return {token,owner,repo,branch,path};
                                 
                           }//read
 
 
                           function write(owner,repo,branch,path){
-                                                                                    console.log(owner,repo,branch,path);
+                                                                                    debug(owner,repo,branch,path);
                                 $(shadow,'#owner').value    = owner;
                                 $(shadow,'#repo').value     = repo;
                                 $(shadow,'#branch').value   = branch;
@@ -433,7 +433,7 @@
                                 var {token,owner,repo,branch,path}    = read();
                                 
                                 var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
-                                                                                    console.log('load',url);
+                                                                                        debug('load',url);
                                 var err;
                                 try{
                                 
@@ -522,7 +522,7 @@
                                       log.red(txt);
                                       return;
                                 }
-                                                                                              console.log('saved');
+                                                                                              debug('saved');
                                 var fn    = filename(path);
                                 log.green(fn,'saved');
 
@@ -535,6 +535,16 @@
                                    
                           }//save
 
+  //:
+  
+                          function debug(){
+                          
+                                if(!df)return;
+                                var str   = [...arguments].join(' ');
+                                str      += 'github '+str;
+                                console.log(str);
+                                
+                          }//debug
                           
                     return obj;
                     
