@@ -293,9 +293,13 @@
                           }//parse
                           
                           
-                          btn.load=function(){
+                          btn.load=function(e){
                           
-                                load();
+                                var api   = false;
+                                if(e.shiftKey){
+                                      api   = true;
+                                }
+                                load(api);
                                 
                           }//load
                           
@@ -428,16 +432,28 @@
                           
                           obj.load=function(){return load()}
                           
-                          async function load(){
+                          async function load(api){
                           
                                 var {token,owner,repo,branch,path}    = read();
                                 
                                 var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
+                                var headers;
+                                if(api){
+                                      if(!token){
+                                            token       = localStorage.getItem('github-token');
+                                      }
+                                      if(token){
+                                            headers   = {authorization:`Bearer ${token}`};
+                                      }
+                                      url             = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+                                
+                                }
+                                
                                                                                         debug('load',url);
                                 var err;
                                 try{
                                 
-                                      var res   = await fetch(url);
+                                      var res   = await fetch(url,{headers});
                                       
                                 }
                                 catch(err2){
