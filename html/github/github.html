@@ -65,9 +65,9 @@
                       
                       <div class=hldr>
                           <img class='paste icon'>
+                          <img class='storage icon'>
                           <input id=token autocomplete=off>
                           <img class='copy icon'>
-                          <img class='storage icon'>
                       </div>
                       
                 </section>
@@ -291,10 +291,14 @@
                           }//initdom
                           
                           
-                          btn.parse=function(){
+                          btn.parse=function(e){
                           
                                 var url   = $(shadow,'#url').value;
                                 parse(url);
+                                
+                                if(e.ctrlKey){
+                                      btn.load(e);
+                                }
                                 
                           }//parse
                           
