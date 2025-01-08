@@ -249,6 +249,21 @@
                                                         
                                 });
                                 
+                                var root2   = $(shadow,'#token').parentNode;
+                                $(root2,'.paste').onclick   = async e=>{
+                                                              
+                                                                    var txt       = await navigator.clipboard.readText();
+                                                                    var par       = icon.parentNode;
+                                                                    var input     = $(par,'input:not([type])');
+                                                                    input.value   = txt;
+                                                                    
+                                                                    if(e.ctrlKey){
+                                                                          btn.parse();
+                                                                          btn.load(e);
+                                                                    }
+                                                                    
+                                                              };
+                                                              
                                 var token   = window.localStorage['github-token'];
                                 if(token){
                                       $(shadow,'#token').value    = token;
