@@ -5,7 +5,7 @@
       
             <style>
             
-                  :host(.test ) {
+                  :host {
                       font-family:arial;
                   }
 
@@ -244,6 +244,11 @@
                                                         };
                                                         
                                 });
+                                
+                                var token   = window.localStorage['github-token'];
+                                if(token){
+                                      $(shadow,'#token').value    = token;
+                                }
                                 
                                 $(shadow,'.copy').onclick   = async e=>{
                                 
