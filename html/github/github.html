@@ -88,6 +88,7 @@
                         <img class='paste icon'>
                         <input id=url>
                         <input type=button value=parse>
+                        <input type=button value='.'>
                     </div>
                     
                 </section>
@@ -275,6 +276,7 @@
 
                                                               
                                 $(shadow,'[value=parse]').onclick   = btn.parse;
+                                $(shadow,'[value="."]').onclick     = btn.parse.load;
                                 
                                 $(shadow,'#url').onkeydown    = e=>{
                                 
@@ -300,7 +302,7 @@
                           }//initdom
                           
                           
-                          btn.parse=function(e){
+                          btn.parse=function(e={}){
                           
                                 var url   = $(shadow,'#url').value;
                                 parse(url);
@@ -310,6 +312,13 @@
                                 }
                                 
                           }//parse
+                          
+                          btn.parse.load=function(e){
+                          
+                                btn.parse();
+                                btn.load(e);
+                                
+                          ]//parse.load
                           
                           
                           btn.load=function(e){
