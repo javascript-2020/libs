@@ -88,7 +88,7 @@
                         <img class='paste icon'>
                         <input id=url>
                         <input type=button value=parse>
-                        <input type=button value='.'>
+                        <input type=button value='+'>
                     </div>
                     
                 </section>
@@ -276,7 +276,7 @@
 
                                                               
                                 $(shadow,'[value=parse]').onclick   = btn.parse;
-                                $(shadow,'[value="."]').onclick     = btn.parse.load;
+                                $(shadow,'[value="+"]').onclick     = btn.parse.load;
                                 
                                 $(shadow,'#url').onkeydown    = e=>{
                                 
@@ -312,6 +312,7 @@
                                 }
                                 
                           }//parse
+
                           
                           btn.parse.load=function(e){
                           
