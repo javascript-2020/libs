@@ -183,14 +183,14 @@
                           
                           obj.initdom=function(rootnode){   //c
                                                                                         debug('github.initdom');
-                                root      = document.querySelector('github-root');
-                                shadow    = root.shadowRoot;
+                                root                            = document.querySelector('github-root');
+                                shadow                          = root.shadowRoot;
 
-                                menu.add.style(shadow);
+                                menumod.add.style(shadow);
                                 
                                 var node                        = $(shadow,'.menu');
                                 icon                            = $(shadow,'.hdr-icon');
-                                icon.onclick                    = menu.click(node,'both',true,callback);
+                                icon.onclick                    = menumod.click(node,'both',true,callback);
 
                                 
                                 var list    = $.all(node,'input:not([type])');
@@ -221,13 +221,13 @@
                                             if(e.key=='ArrowLeft'){
                                                   if(e.ctrlKey){
                                                         //debugger;
-                                                        menu.prev();
+                                                        menumod.prev();
                                                         e.stopPropagation();
                                                   }
                                             }
                                             if(e.key=='ArrowRight'){
                                                   if(e.ctrlKey){
-                                                        menu.next();
+                                                        menumod.next();
                                                   }
                                             }
                                             
