@@ -55,7 +55,7 @@
 
               var headers   = {accept:'application/vnd.github+json'};
               
-              var token     = localStorage.getItem('github-token');console.log(token);
+              var token     = localStorage.getItem('github-token');
               if(token){
                     headers.authorization   = 'Bearer '+token;
               }
