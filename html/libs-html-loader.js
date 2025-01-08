@@ -20,6 +20,10 @@
               mode    = 'api';
         }
         
+        var user      = 'javascript-2020';
+        var repo      = 'libs';
+        var path      = `html/${nn}/${nn}.html`;
+        
         if(mode=='api'){
               txt   = await api();
         }else{
@@ -43,7 +47,7 @@
         
         async function raw(){
         
-              var url               = `https://raw.githubusercontent.com/javascript-2020/libs/main/html/${nn}/${nn}.html`;
+              var url               = `https://raw.githubusercontent.com/${user}/${repo}/main/${path}`;
               var res               = await fetch(url);
               var txt               = await res.text();
               return txt;
@@ -59,10 +63,6 @@
               if(token){
                     headers.authorization   = 'Bearer '+token;
               }
-              
-              var user      = 'javascript-2020';
-              var repo      = 'libs';
-              var path      = `html/${nn}/${nn}.html`;
               
               var url       = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
               var res       = await fetch(url,{headers});
