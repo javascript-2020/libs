@@ -175,6 +175,8 @@
                           
                           var root;
                           var shadow;
+                          
+                          var icon;
                                                     
                           var btn   = {};
                           
@@ -187,7 +189,8 @@
                                 menu.add.style(shadow);
                                 
                                 var node                        = $(shadow,'.menu');
-                                $(shadow,'.hdr-icon').onclick   = menu.click(node,'both',true,callback);
+                                icon                            = $(shadow,'.hdr-icon');
+                                icon.onclick                    = menu.click(node,'both',true,callback);
 
                                 
                                 var list    = $.all(node,'input:not([type])');
@@ -418,6 +421,9 @@
                           
                           
                           function github_kd(){
+                          
+                                //  only needs to return undefined to stop keydown stack from running
+                                
                           }//github_kd
 
                           
@@ -500,11 +506,9 @@
                                       return;
                                 }
                                 
-                                filename(path);
-                                
                                 
                                 if(typeof obj.load.complete=='function'){
-                                      obj.load.complete(txt);
+                                      obj.load.complete(txt,path,icon.src);
                                 }
                                 
                           }//load
@@ -569,7 +573,7 @@
 
 
                                 if(typeof obj.save.complete=='function'){
-                                      obj.save.complete();
+                                      obj.save.complete(path,icon.src);
                                 }  
                                 
                           }//save
@@ -580,7 +584,6 @@
   
                           obj.icon=function(){
                           
-                                var icon    = $(shadow,'.hdr-icon');
                                 return icon.src;
                                 
                           }//icon
