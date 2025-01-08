@@ -16,7 +16,7 @@
         var mode    = 'raw';
         
         if(nn.endsWith('-api')){
-              nn      = nn.slice(-4);
+              nn      = nn.slice(0,-4);
               mode    = 'api';
         }
         
