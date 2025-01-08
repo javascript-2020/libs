@@ -62,7 +62,7 @@
               
               var user      = 'javascript-2020';
               var repo      = 'libs';
-              var path      = 'html/github/github.html';
+              var path      = `html/${nn}/${nn}.html`;
               
               var url       = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
               var res       = await fetch(url,{headers});
