@@ -70,7 +70,7 @@
               path    = window.location.pathname;
               var i   = path.lastIndexOf('/');
               path    = path.slice(0,i);
-              path   += nn;
+              path   += nn+'.html';
               
         }//get_params
         
