@@ -675,7 +675,7 @@
               for(var i=0;i<n;i++){
               
                     var rule    = rules[i];
-                    if(rule.selectorText===sel){
+                    if(rule.selectorText===selector){
                           css   = rule.cssText;
                           break;
                     }
