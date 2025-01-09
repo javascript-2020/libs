@@ -635,9 +635,12 @@
               
         }//mousetext
         
+
         
-        $.stylesheet    = {};
-        $.stylesheet.find   = function(selector){
+        $.stylesheet        = {};
+        $.stylesheet.find   = {};
+        
+        $.stylesheet.find.css   = function(selector){
         
               var list    = document.stylesheets;
               var n       = list.length;
