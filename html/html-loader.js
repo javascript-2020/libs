@@ -68,6 +68,7 @@
         
               repo    = 'javascript-2020.github.io';
               path    = window.location.pathname;
+                                                                    console.log(path);
               var i   = path.lastIndexOf('/');
               path    = path.slice(0,i);
               path   += nn+'.html';
