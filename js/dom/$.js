@@ -642,7 +642,7 @@
         
         $.stylesheet.find.css   = function(selector){
         
-              var list    = document.stylesheets;
+              var list    = document.styleSheets;
               var n       = list.length;
               for(var i=0;i<n;i++){
               
