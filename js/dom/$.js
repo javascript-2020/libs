@@ -636,7 +636,31 @@
         }//mousetext
         
         
-        $.copycssrule=function(style,selector,style2){
+        $.stylesheet    = {};
+        $.stylesheet.find   = function(selector){
+        
+              var list    = document.stylesheets;
+              var n       = list.length;
+              for(var i=0;i<n;i++){
+              
+                    var stylesheet    = list[i];
+                    var rules         = stylesheet.sheet.cssRules;
+                    var n             = rules.length;
+                    for(var j=0;j<n;j++){
+                    
+                          var rule    = rules[j];
+                          if(rule.selectorText===selector){
+                                return rule.cssText;
+                          }
+                          
+                    }//for
+                    
+              }//for
+              return null;
+                    
+        }//find
+        
+        $.stylesheet.copyrule=function(style,selector,style2){
 
               if(typeof style=='string'){
                     style     = $(style);
