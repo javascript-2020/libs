@@ -647,7 +647,7 @@
               for(var i=0;i<n;i++){
               
                     var stylesheet    = list[i];
-                    var rules         = stylesheet.sheet.cssRules;
+                    var rules         = stylesheet.cssRules;
                     var n             = rules.length;
                     for(var j=0;j<n;j++){
                     
