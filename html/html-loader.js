@@ -36,8 +36,8 @@
         if(type=='local'){
               get_params();
         }
+                                                      console.log(user,repo,path);
 
-        
         var txt;
         if(mode=='api'){
               txt   = await api();
