@@ -36,7 +36,7 @@
         if(type=='local'){
               get_params();
         }
-                                                      //console.log(user,repo,path);
+                                                      console.log(path);
 
         var txt;
         if(mode=='api'){
@@ -68,7 +68,7 @@
         
               repo    = 'javascript-2020.github.io';
               path    = window.location.pathname;
-                                                                    console.log(path);
+                                                                    //console.log(path);
               if(path==='srcdoc'){
                     path    = window.parent.location.pathname;
               }
