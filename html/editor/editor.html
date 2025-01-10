@@ -185,7 +185,7 @@
                         
                         function onchange(e){
           
-                              $('#filename-save').style.display   = '';
+                              filename.save(false);
                               update();
                                                 
                         }//onchange
@@ -204,15 +204,22 @@
 
   //:
   
-  
-                  obj.set=function(txt){
+                  obj.setValue=function(txt){return set(txt)}
+                  
+                  obj.set=function(txt){return set(txt)}
+                  
+                  function set(txt){
                   
                         editor.setValue(txt,-1);
                         
                   }//set
                   
               
-                  obj.get=function(){
+                  obj.getValue=function(){return get()}
+                  
+                  obj.get=function(){return get()}
+                  
+                  function get(){
                   
                         var txt   = editor.getValue();
                         return txt;
