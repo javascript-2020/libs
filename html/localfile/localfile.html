@@ -89,10 +89,11 @@
               
                     menu.save=function(){
               
-                          var name      = '';
+                          var name;
                           if(typeof cur!='undefined' && cur){
-                                name    = cur.name||'';
+                                name    = cur.name;
                           }
+                          name    = name||'file.html';
                                 
                           var blob      = new Blob([editor.getValue()]);
                           var url       = window.URL.createObjectURL(blob);
