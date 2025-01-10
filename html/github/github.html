@@ -9,7 +9,7 @@
                       font-family:arial;
                   }
 
-                  .hdr-icon {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:30px;height:30px;cursor:pointer}
+                  .hdr-icon {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
 
                   .menu {position:absolute;outline:none;font-family:arial}
 
@@ -163,463 +163,464 @@
       
       <script>
       
-                  github    = github();
-                  
-                  
-                  function github(){
-                                                                                        debug('github');
-                    var obj   = {};
+            github    = github();
+            
+            function github(){
+                                                                                  debug('github');
+              var obj   = {};
 
-                          var df          = false;
-                          
-                          
-                          var root;
-                          var shadow;
-                          
-                          var icon;
-                                                    
-                          var btn   = {};
-                          
-                          
-                          obj.initdom=function(rootnode){   //c
-                                                                                        debug('github.initdom');
-                                root                            = document.querySelector('github-root');
-                                shadow                          = root.shadowRoot;
+                    var df          = false;
+                    
+                    
+                    var root;
+                    var shadow;
+                    
+                    var icon;
+                                              
+                    var btn   = {};
+                    
+                    
+                    obj.initdom=function(rootnode){   //c
+                                                                                  debug('github.initdom');
+                          root                            = document.querySelector('github-root');
+                          shadow                          = root.shadowRoot;
 
-                                menumod.add.style(shadow);
-                                
-                                var node                        = $(shadow,'.menu');
-                                icon                            = $(shadow,'.hdr-icon');
-                                icon.onclick                    = menumod.click(node,'both',true,callback);
+                          menumod.add.style(shadow);
+                          
+                          var css       = $.stylesheet.find.css('.hdr-icon');
+                          var style     = $(shadow,'style');
+                          style.sheet.insertRule(css);
+                          
+                          var node                        = $(shadow,'.menu');
+                          icon                            = $(shadow,'.hdr-icon');
+                          icon.onclick                    = menumod.click(node,'both',true,callback);
 
+                          
+                          var list    = $.all(node,'input:not([type])');
+                          list.forEach((input,i)=>{
+                          
+                                input.addEventListener('keydown',keydown);
                                 
-                                var list    = $.all(node,'input:not([type])');
-                                list.forEach((input,i)=>{
+                                function keydown(e){
                                 
-                                      input.addEventListener('keydown',keydown);
-                                      
-                                      function keydown(e){
-                                      
-                                            if(e.key=='ArrowDown'){
+                                      if(e.key=='ArrowDown'){
+                                            e.stopPropagation();
+                                            i++;
+                                            if(i==list.length){
+                                                  i   = 0;
+                                            }
+                                            var input2    = list[i];
+                                            input2.focus();
+                                      }
+                                      if(e.key=='ArrowUp'){
+                                            e.stopPropagation();
+                                            i--;
+                                            if(i<0){
+                                                  i   = list.length-1;
+                                            }
+                                            var input2    = list[i];
+                                            input2.focus();
+                                      }
+                                      if(e.key=='ArrowLeft'){
+                                            if(e.ctrlKey){
+                                                  //debugger;
+                                                  menumod.prev();
                                                   e.stopPropagation();
-                                                  i++;
-                                                  if(i==list.length){
-                                                        i   = 0;
-                                                  }
-                                                  var input2    = list[i];
-                                                  input2.focus();
                                             }
-                                            if(e.key=='ArrowUp'){
-                                                  e.stopPropagation();
-                                                  i--;
-                                                  if(i<0){
-                                                        i   = list.length-1;
-                                                  }
-                                                  var input2    = list[i];
-                                                  input2.focus();
+                                      }
+                                      if(e.key=='ArrowRight'){
+                                            if(e.ctrlKey){
+                                                  menumod.next();
                                             }
-                                            if(e.key=='ArrowLeft'){
-                                                  if(e.ctrlKey){
-                                                        //debugger;
-                                                        menumod.prev();
-                                                        e.stopPropagation();
-                                                  }
-                                            }
-                                            if(e.key=='ArrowRight'){
-                                                  if(e.ctrlKey){
-                                                        menumod.next();
-                                                  }
-                                            }
-                                            
-                                      }//keydown
+                                      }
                                       
-                                });
+                                }//keydown
                                 
-                                $.all(shadow,'.paste').forEach(icon=>{
-                                
-                                      icon.onclick    = async e=>{
-                                                              
+                          });
+                          
+                          $.all(shadow,'.paste').forEach(icon=>{
+                          
+                                icon.onclick    = async e=>{
+                                                        
+                                                        var txt       = await navigator.clipboard.readText();
+                                                        var par       = icon.parentNode;
+                                                        var input     = $(par,'input:not([type])');
+                                                        input.value   = txt;
+                                                        input.focus();
+                                                        
+                                                  };
+                                                  
+                          });
+                          
+                          var root2   = $(shadow,'#token').parentNode;
+                          $(root2,'.paste').onclick   = async e=>{
+                                                        
                                                               var txt       = await navigator.clipboard.readText();
                                                               var par       = icon.parentNode;
                                                               var input     = $(par,'input:not([type])');
                                                               input.value   = txt;
-                                                              input.focus();
+                                                              
+                                                              if(e.ctrlKey){
+                                                                    btn.parse();
+                                                                    btn.load(e);
+                                                              }
                                                               
                                                         };
                                                         
-                                });
-                                
-                                var root2   = $(shadow,'#token').parentNode;
-                                $(root2,'.paste').onclick   = async e=>{
+                          var token   = window.localStorage['github-token'];
+                          if(token){
+                                $(shadow,'#token').value    = token;
+                          }
+                          
+                          $(shadow,'.copy').onclick   = async e=>{
+                          
+                                                              var icon    = e.target;
+                                                              var input   = $(icon.parentNode,'input:not([type])');
+                                                              var txt     = input.value;
+                                                              await navigator.clipboard.writeText(txt);
+                                                              $.mousetext(e,'copied');
                                                               
-                                                                    var txt       = await navigator.clipboard.readText();
-                                                                    var par       = icon.parentNode;
-                                                                    var input     = $(par,'input:not([type])');
-                                                                    input.value   = txt;
-                                                                    
-                                                                    if(e.ctrlKey){
-                                                                          btn.parse();
-                                                                          btn.load(e);
-                                                                    }
-                                                                    
-                                                              };
-                                                              
-                                var token   = window.localStorage['github-token'];
-                                if(token){
-                                      $(shadow,'#token').value    = token;
-                                }
-                                
-                                $(shadow,'.copy').onclick   = async e=>{
-                                
-                                                                    var icon    = e.target;
-                                                                    var input   = $(icon.parentNode,'input:not([type])');
-                                                                    var txt     = input.value;
-                                                                    await navigator.clipboard.writeText(txt);
-                                                                    $.mousetext(e,'copied');
-                                                                    
-                                                              };
-                                                              
-                                $(shadow,'.storage').onclick    = async e=>{
-                                                                        
-                                                                        var token   = localStorage.getItem('github-token');
-                                                                        if(!token){
-                                                                              $.mousetext('no stored token, localStorage[\'github-token\']');
-                                                                              return;
-                                                                        }
-                                                                        var icon      = e.target;
-                                                                        var input     = $(icon.parentNode,'input:not([type])');
-                                                                        input.value   = token;
-                                                                        
-                                                                  };
-
-                                                              
-                                $(shadow,'[value=parse]').onclick   = btn.parse;
-                                $(shadow,'[value="+"]').onclick     = btn.parse.load;
-                                
-                                $(shadow,'#url').onkeydown    = e=>{
-                                
-                                                                        if(e.key=='Enter'){
-                                                                              btn.parse();
-                                                                              $(shadow,'#load').focus();
-                                                                        }
-                                                                    
-                                                                  };
+                                                        };
+                                                        
+                          $(shadow,'.storage').onclick    = async e=>{
                                                                   
-                                $(shadow,'#path').onkeydown     = e=>{
+                                                                  var token   = localStorage.getItem('github-token');
+                                                                  if(!token){
+                                                                        $.mousetext('no stored token, localStorage[\'github-token\']');
+                                                                        return;
+                                                                  }
+                                                                  var icon      = e.target;
+                                                                  var input     = $(icon.parentNode,'input:not([type])');
+                                                                  input.value   = token;
                                                                   
-                                                                        if(e.key=='Enter'){
-                                                                              $(shadow,'#load').focus();
-                                                                        }
-                                                                        
-                                                                  };
+                                                            };
+
+                                                        
+                          $(shadow,'[value=parse]').onclick   = btn.parse;
+                          $(shadow,'[value="+"]').onclick     = btn.parse.load;
+                          
+                          $(shadow,'#url').onkeydown    = e=>{
+                          
+                                                                  if(e.key=='Enter'){
+                                                                        btn.parse();
+                                                                        $(shadow,'#load').focus();
+                                                                  }
+                                                              
+                                                            };
+                                                            
+                          $(shadow,'#path').onkeydown     = e=>{
+                                                            
+                                                                  if(e.key=='Enter'){
+                                                                        $(shadow,'#load').focus();
+                                                                  }
                                                                   
-                                $(shadow,'[value=load]').onclick   = btn.load;
-                                $(shadow,'[value=save]').onclick   = btn.save;
-
-                                
-                          }//initdom
-                          
-                          
-                          btn.parse=function(e={}){
-                          
-                                var url   = $(shadow,'#url').value;
-                                parse(url);
-                                
-                                if(e.ctrlKey){
-                                      btn.load(e);
-                                }
-                                
-                          }//parse
+                                                            };
+                                                            
+                          $(shadow,'[value=load]').onclick   = btn.load;
+                          $(shadow,'[value=save]').onclick   = btn.save;
 
                           
-                          btn.parse.load=function(e){
-                          
-                                btn.parse();
-                                btn.load(e);
-                                
-                          }//parse.load
-                          
-                          
-                          btn.load=function(e){
-                          
-                                var api   = false;
-                                if(e.shiftKey){
-                                      api   = true;
-                                }
-                                load(api);
-                                
-                          }//load
-                          
-                          
-                          btn.save=function(){
-                          
-                              var txt   = editor.getValue();
-                              save(txt);
-                              
-                          }//save
-
-
-                          function parse(url){
-                          
-                                url   = window.decodeURIComponent(url);
-                                if(!url.startsWith('http')){
-                                      url   = 'https://'+url;
-                                }
-                                url   = new URL(url);
-                                if(url.hostname=='javascript-2020.github.io'){
-                                      parse['github.io'](url);
-                                }
-                                if(url.hostname=='github.com'){
-                                      if(url.pathname.indexOf('blob')!=-1){
-                                            parse.file(url);
-                                      }else 
-                                      if(url.pathname.indexOf('tree')!=-1){
-                                            parse.dir(url);
-                                      }else{
-                                            parse.repo(url);
-                                      }
-                                }
-                                                                
-                          }//parse
-
-                          
-                          //  https://javascript-2020.github.io/html-components/log/log.html
-                          parse['github.io']=function(url){
-                                                                                    debug('github.io');
-                                var i         = url.hostname.indexOf('.');
-                                var owner     = url.hostname.slice(0,i);
-                                var repo      = url.hostname;
-                                var branch    = 'main';
-                                var path      = url.pathname.slice(1);
-                                write(owner,repo,branch,path);
-                                
-                          }//github.io
-                          
-                          //  https://github.com/javascript-2020/libs
-                          parse.repo=function(url){
-                                                                                    debug('repo');
-                                var parts     = url.pathname.split('/');
-                                var owner     = parts.shift();
-                                var repo      = parts.shift();
-                                var branch    = 'main';
-                                var path      = '';
-                                write(owner,repo,branch,path);
-                                
-                          }//repo
-                          
-                          //  https://github.com/javascript-2020/libs/blob/main/docker/nodejs-min.dockerfile
-                          parse.file=function(url){
-                                                                                    debug('file');
-                                var parts     = url.pathname.split('/');
-                                parts.shift();
-                                var owner     = parts.shift();
-                                var repo      = parts.shift();
-                                parts.shift();
-                                var branch    = parts.shift();
-                                var path      = parts.join('/');
-                                write(owner,repo,branch,path);
-                          
-                          }//file
-                          
-                          //  https://github.com/javascript-2020/libs/tree/main/docker
-                          parse.dir=function(url){
-                                                                                    debug('dir');
-                                var parts     = url.pathname.split('/');
-                                var owner     = parts.shift();
-                                var repo      = parts.shift();
-                                parts.shift();
-                                var branch    = parts.shift();
-                                var path      = parts.join('/');
-                                write(owner,repo,branch,path);
-                                
-                          }//dir
-                          
-                          
-                          function github_kd(){
-                          
-                                //  only needs to return undefined to stop keydown stack from running
-                                
-                          }//github_kd
-
-                          
-                          function callback(type){
-                          
-                                if(type=='show'){
-                                      $(shadow,'#token').focus();
-                                      keydown.add(github_kd);
-                                }
-                                if(type=='hide'){
-                                      keydown.rem(github_kd);
-                                }
-                                
-                          }//callback
-
-
-                          
-                          function read(){
-                          
-                                var token     = $(shadow,'#token').value;
-                                var owner     = $(shadow,'#owner').value;
-                                var repo      = $(shadow,'#repo').value;
-                                var branch    = $(shadow,'#branch').value;
-                                var path      = $(shadow,'#path').value;
-                                                                                    debug(owner,repo,branch,path);
-                                return {token,owner,repo,branch,path};
-                                
-                          }//read
-
-
-                          function write(owner,repo,branch,path){
-                                                                                    debug(owner,repo,branch,path);
-                                $(shadow,'#owner').value    = owner;
-                                $(shadow,'#repo').value     = repo;
-                                $(shadow,'#branch').value   = branch;
-                                $(shadow,'#path').value     = path;
-                                
-                          }//write
-
-                          
-                          obj.load=function(){return load()}
-                          
-                          async function load(api){
-                          
-                                var {token,owner,repo,branch,path}    = read();
-                                
-                                var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
-                                var headers;
-                                if(api){
-                                      if(!token){
-                                            token       = localStorage.getItem('github-token');
-                                      }
-                                      if(token){
-                                            headers   = {authorization:`Bearer ${token}`};
-                                      }
-                                      url             = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;                                
-                                }
-                                
-                                                                                        debug('load',url);
-                                var err;
-                                try{
-                                
-                                      var res   = await fetch(url,{headers});
-                                      
-                                }
-                                catch(err2){
-                                
-                                      err   = err2;
-                                      
-                                }
-                                if(err){
-                                      log.red(err.message);
-                                      return;
-                                }
-                                
-                                var txt   = await res.text();
-                                
-                                if(!res.ok){
-                                      log.red(txt);
-                                      return;
-                                }
-                                
-                                
-                                if(typeof obj.load.complete=='function'){
-                                      obj.load.complete(txt,path,icon.src);
-                                }
-                                
-                          }//load
-
-      
-                          obj.save=function(txt){return save(txt)}    //d
-                          
-                          async function save(txt){
-                          
-                                var {token,owner,repo,branch,path}    = read();
-                                
-                                var content     = window.btoa(txt);
-                                var message     = 'save text';
-                                var headers     = {authorization:`Bearer ${token}`};
-                                var url         = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-                                
-                                var err;
-                                try{
-                                
-                                      var json        = await fetch(url,headers).then(res=>res.json());
-                                      
-                                }
-                                catch(err2){
-                                
-                                      err   = err2;
-                                      
-                                }
-                                if(err){
-                                      log.red(err.message);
-                                      return;
-                                }
-                                
-                                var sha         = json.sha;
-                                var body        = {content,sha,message};
-                                body            = JSON.stringify(body);
-                                var headers     = {authorization:`Bearer ${token}`};
-                                var opts        = {method:'put',headers,body};
-                                
-                                var err;
-                                try{
-                                
-                                      var res         = await fetch(url,opts);
-                                      
-                                }
-                                catch(err2){
-                                
-                                      err   = err2;
-                                      
-                                }
-                                if(err){
-                                      log.red(err.message);
-                                      return;
-                                }
-                                if(!res.ok){
-                                      var txt         = await res.text();
-                                      log.red(txt);
-                                      return;
-                                }
-                                                                                              debug('saved');
-                                var fn    = filename(path);
-                                log.green(fn,'saved');
-
-
-                                if(typeof obj.save.complete=='function'){
-                                      obj.save.complete(path,icon.src);
-                                }  
-                                
-                          }//save
-                          
-                          
-  //:
-  
-  
-                          obj.icon=function(){
-                          
-                                return icon.src;
-                                
-                          }//icon
-
-  //:
-  
-                          function debug(){
-                          
-                                if(!df)return;
-                                var str   = [...arguments].join(' ');
-                                str      += 'github '+str;
-                                console.log(str);
-                                
-                          }//debug
-                          
-                    return obj;
+                    }//initdom
                     
-                  }//github
+                    
+                    btn.parse=function(e={}){
+                    
+                          var url   = $(shadow,'#url').value;
+                          parse(url);
+                          
+                          if(e.ctrlKey){
+                                btn.load(e);
+                          }
+                          
+                    }//parse
+
+                    
+                    btn.parse.load=function(e){
+                    
+                          btn.parse();
+                          btn.load(e);
+                          
+                    }//parse.load
+                    
+                    
+                    btn.load=function(e){
+                    
+                          var api   = false;
+                          if(e.shiftKey){
+                                api   = true;
+                          }
+                          load(api);
+                          
+                    }//load
+                    
+                    
+                    btn.save=function(){
+                    
+                        var txt   = editor.getValue();
+                        save(txt);
+                        
+                    }//save
 
 
-                  
+                    function parse(url){
+                    
+                          url   = window.decodeURIComponent(url);
+                          if(!url.startsWith('http')){
+                                url   = 'https://'+url;
+                          }
+                          url   = new URL(url);
+                          if(url.hostname=='javascript-2020.github.io'){
+                                parse['github.io'](url);
+                          }
+                          if(url.hostname=='github.com'){
+                                if(url.pathname.indexOf('blob')!=-1){
+                                      parse.file(url);
+                                }else 
+                                if(url.pathname.indexOf('tree')!=-1){
+                                      parse.dir(url);
+                                }else{
+                                      parse.repo(url);
+                                }
+                          }
+                                                          
+                    }//parse
+
+                    
+                    //  https://javascript-2020.github.io/html-components/log/log.html
+                    parse['github.io']=function(url){
+                                                                              debug('github.io');
+                          var i         = url.hostname.indexOf('.');
+                          var owner     = url.hostname.slice(0,i);
+                          var repo      = url.hostname;
+                          var branch    = 'main';
+                          var path      = url.pathname.slice(1);
+                          write(owner,repo,branch,path);
+                          
+                    }//github.io
+                    
+                    //  https://github.com/javascript-2020/libs
+                    parse.repo=function(url){
+                                                                              debug('repo');
+                          var parts     = url.pathname.split('/');
+                          var owner     = parts.shift();
+                          var repo      = parts.shift();
+                          var branch    = 'main';
+                          var path      = '';
+                          write(owner,repo,branch,path);
+                          
+                    }//repo
+                    
+                    //  https://github.com/javascript-2020/libs/blob/main/docker/nodejs-min.dockerfile
+                    parse.file=function(url){
+                                                                              debug('file');
+                          var parts     = url.pathname.split('/');
+                          parts.shift();
+                          var owner     = parts.shift();
+                          var repo      = parts.shift();
+                          parts.shift();
+                          var branch    = parts.shift();
+                          var path      = parts.join('/');
+                          write(owner,repo,branch,path);
+                    
+                    }//file
+                    
+                    //  https://github.com/javascript-2020/libs/tree/main/docker
+                    parse.dir=function(url){
+                                                                              debug('dir');
+                          var parts     = url.pathname.split('/');
+                          var owner     = parts.shift();
+                          var repo      = parts.shift();
+                          parts.shift();
+                          var branch    = parts.shift();
+                          var path      = parts.join('/');
+                          write(owner,repo,branch,path);
+                          
+                    }//dir
+                    
+                    
+                    function github_kd(){
+                    
+                          //  only needs to return undefined to stop keydown stack from running
+                          
+                    }//github_kd
+
+                    
+                    function callback(type){
+                    
+                          if(type=='show'){
+                                $(shadow,'#token').focus();
+                                keydown.add(github_kd);
+                          }
+                          if(type=='hide'){
+                                keydown.rem(github_kd);
+                          }
+                          
+                    }//callback
+
+
+                    
+                    function read(){
+                    
+                          var token     = $(shadow,'#token').value;
+                          var owner     = $(shadow,'#owner').value;
+                          var repo      = $(shadow,'#repo').value;
+                          var branch    = $(shadow,'#branch').value;
+                          var path      = $(shadow,'#path').value;
+                                                                              debug(owner,repo,branch,path);
+                          return {token,owner,repo,branch,path};
+                          
+                    }//read
+
+
+                    function write(owner,repo,branch,path){
+                                                                              debug(owner,repo,branch,path);
+                          $(shadow,'#owner').value    = owner;
+                          $(shadow,'#repo').value     = repo;
+                          $(shadow,'#branch').value   = branch;
+                          $(shadow,'#path').value     = path;
+                          
+                    }//write
+
+                    
+                    obj.load=function(){return load()}
+                    
+                    async function load(api){
+                    
+                          var {token,owner,repo,branch,path}    = read();
+                          
+                          var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
+                          var headers;
+                          if(api){
+                                if(!token){
+                                      token       = localStorage.getItem('github-token');
+                                }
+                                if(token){
+                                      headers   = {authorization:`Bearer ${token}`};
+                                }
+                                url             = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;                                
+                          }
+                          
+                                                                                  debug('load',url);
+                          var err;
+                          try{
+                          
+                                var res   = await fetch(url,{headers});
+                                
+                          }
+                          catch(err2){
+                          
+                                err   = err2;
+                                
+                          }
+                          if(err){
+                                log.red(err.message);
+                                return;
+                          }
+                          
+                          var txt   = await res.text();
+                          
+                          if(!res.ok){
+                                log.red(txt);
+                                return;
+                          }
+                          
+                          
+                          if(typeof obj.load.complete=='function'){
+                                obj.load.complete(txt,path,icon.src);
+                          }
+                          
+                    }//load
+
+
+                    obj.save=function(txt){return save(txt)}    //d
+                    
+                    async function save(txt){
+                    
+                          var {token,owner,repo,branch,path}    = read();
+                          
+                          var content     = window.btoa(txt);
+                          var message     = 'save text';
+                          var headers     = {authorization:`Bearer ${token}`};
+                          var url         = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+                          
+                          var err;
+                          try{
+                          
+                                var json        = await fetch(url,headers).then(res=>res.json());
+                                
+                          }
+                          catch(err2){
+                          
+                                err   = err2;
+                                
+                          }
+                          if(err){
+                                log.red(err.message);
+                                return;
+                          }
+                          
+                          var sha         = json.sha;
+                          var body        = {content,sha,message};
+                          body            = JSON.stringify(body);
+                          var headers     = {authorization:`Bearer ${token}`};
+                          var opts        = {method:'put',headers,body};
+                          
+                          var err;
+                          try{
+                          
+                                var res         = await fetch(url,opts);
+                                
+                          }
+                          catch(err2){
+                          
+                                err   = err2;
+                                
+                          }
+                          if(err){
+                                log.red(err.message);
+                                return;
+                          }
+                          if(!res.ok){
+                                var txt         = await res.text();
+                                log.red(txt);
+                                return;
+                          }
+                                                                                        debug('saved');
+                          var fn    = filename(path);
+                          log.green(fn,'saved');
+
+
+                          if(typeof obj.save.complete=='function'){
+                                obj.save.complete(path,icon.src);
+                          }  
+                          
+                    }//save
+                    
+                    
+//:
+
+
+                    obj.icon=function(){
+                    
+                          return icon.src;
+                          
+                    }//icon
+
+//:
+
+                    function debug(){
+                    
+                          if(!df)return;
+                          var str   = [...arguments].join(' ');
+                          str      += 'github '+str;
+                          console.log(str);
+                          
+                    }//debug
+                    
+              return obj;
+              
+            }//github
+
       </script>
     
 </github-root>
