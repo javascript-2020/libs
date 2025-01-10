@@ -22,7 +22,9 @@
                   
                     var obj   = {};
 
-
+                          
+                          var icon;
+                          
                           obj.initdom=function(){
                           
                                 var root      = $('localfile-menu');
@@ -32,7 +34,9 @@
 
                                 
                                 var card                    = $(shadow,'.menu');
-                                $(shadow,'#icon').onclick   = menumod.click(card,false,false,menu);
+                                
+                                icon                        = $(shadow,'#icon');
+                                icon.onclick   = menumod.click(card,false,false,menu);
 
 
                           }//initdom
@@ -57,10 +61,11 @@
                                 async function onchange(){
                     
                                       var file    = input.files[0];
-                                      filename(file.name);
                                       var txt     = await file.text();
-                                      editor.setValue(txt,-1);
-                                      cur         = {type:'local'};
+                                
+                                      if(typeof obj.load.complete=='function'){
+                                            obj.load.complete(txt,file.name,icon.src);
+                                      }
 
                                 }//onchange
                     
@@ -69,13 +74,21 @@
                     
                           menu.save=function(){
                     
+                                var name      = '';
+                                if(typeof cur!='undefined' && cur){
+                                      name    = cur.name||'';
+                                }
+                                      
                                 var blob      = new Blob([editor.getValue()]);
                                 var url       = window.URL.createObjectURL(blob);
                                 var a         = document.createElement('a');
                                 a.href        = url;
-                                a.download    = 'file.txt';
+                                a.download    = name;
                                 a.click();
-                                cur           = {type:'local'};
+                                
+                                if(typeof obj.save.complete=='function'){
+                                      obj.save.complete('localfile',name,icon.src);
+                                }
                     
                           }//save
                           
