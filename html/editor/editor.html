@@ -1,0 +1,240 @@
+
+
+<editor-root>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+            </style>
+            
+            <div id=root>
+            
+                  <div id=hdr>
+                        <div id=filename-root>
+                              <img id=filename-icon>
+                              <img id=filename-save style='display:none'>
+                              <span id=filename>filename</span>
+                        </div>
+                        <input id=row value=0>
+                        <input id=col value=0>
+                        <img id=top>
+                        <img id=bottom>
+                  </div>
+                  
+                  <div id=editor></div>
+                  
+            </div>
+            
+      </template>
+      
+      <script>
+      
+            editor    = editor();
+            
+            function editor(){
+            
+              var obj   = {};
+
+            
+                  var deficon;
+                  
+                  
+                  var kd    = {};
+                  var btn   = {};
+                  
+                  
+                  obj.initdom=function(){
+                  
+                        var root                      = $('editor-root');
+                        var shadow                    = root.shadowRoot;
+
+                        var hdr                       = $(shadow,'#hdr');
+                        
+                        deficon                       = $(hdr,'#filename-icon').src;
+                        
+                        $(hdr,'#row').onkeydown       = kd.row;
+                        $(hdr,'#row').onmousedown     = e=>e.target.select();
+                        $(hdr,'#col').onkeydown       = kd.col;
+                        $(hdr,'#col').onmousedown     = e=>e.target.select();
+                        
+                        $(hdr,'#top').onclick         = btn.top;
+                        $(hdr,'#bottom').onclick      = btn.bottom;
+
+
+                        setup(shadow);
+
+                        
+                  }//initdom
+
+
+          
+                  kd.row=function(e){
+                        
+                        if(e.key=='Enter'){
+                              e.preventDefault();
+                              var pos   = editor.getCursorPosition();
+                              var row   = $(hdr2,'#row').value;
+                              var col   = pos.column;
+                              editor.gotoLine(row,col);
+                              editor.focus();
+                        }
+                        
+                  }//row
+          
+                  
+                  kd.col=function(e){
+                        
+                        if(e.key=='Enter'){
+                              e.preventDefault();
+                              var pos   = editor.getCursorPosition();
+                              var row   = pos.row;
+                              var col   = $(hdr2,'#col').value;
+                              editor.gotoLine(row,col);
+                              editor.focus();
+                        }
+                        
+                  }//col
+
+
+                  btn.top=function(){
+                  
+                        editor.gotoLine(0,0);
+                        editor.focus();
+                        
+                  }//top
+          
+                  
+                  btn.bottom=function(){
+                  
+                        editor.gotoLine(999999,0);
+                        editor.focus();
+                        
+                  }//bottom
+
+
+
+                  obj.filename=filename;
+                  
+                  function filename(path,icon){
+          
+                        icon                      = icon||deficon;
+                        $('#filename-icon').src   = icon;
+                        
+                        var fn    = '';
+                        if(path){
+                              var i   = path.lastIndexOf('/');
+                              if(i==-1){
+                                    fn    = path;
+                              }else{
+                                    fn    = path.slice(i+1);
+                              }
+                        }
+                        
+                        document.title                = fn||'html-editor';
+                        $('#filename').textContent    = fn;
+                        $('#filename').title          = path||'';
+                        return fn;
+          
+                  }//filename
+          
+          
+                  filename.getname=function(path){
+                  
+                        var name;
+                        var i   = path.lastIndexOf('/');
+                        if(i==-1){
+                              name    = path;
+                        }else{
+                              name    = path.slice(i+1);
+                        }
+                      
+                  }//getname
+                  
+                  
+                  filename.save=function(status){
+          
+                        var display   = '';
+                        if(!status){
+                              display   = 'none';
+                        }
+                        $('#filename-save').style.display   = display;
+          
+                  }//save
+                  
+          
+                  function setup(root){
+          
+                        var node    = $(root,'#editor');
+                        node.addEventListener('mousedown',update);
+                        node.addEventListener('keydown',update);
+                        
+                        editor      = ace.edit(node);
+                        editor.setShowInvisibles(false);
+                        editor.setShowPrintMargin(false);
+                        editor.setPrintMarginColumn(false);
+                        editor.setBehavioursEnabled(false);
+                        editor.setDisplayIndentGuides(false);
+                        editor.setScrollSpeed(2);
+                        editor.setFontSize(16);
+                        editor.session.setOptions({tabSize:2,useSoftTabs:true});
+                        //editor.setGhostText('\n\nctrl-enter - run & autosave\nctrl-s - save\nctrl-del - delete');
+                        editor.focus();
+                        editor.session.on('change',onchange);
+                        
+                        
+                        function onchange(e){
+          
+                              $('#filename-save').style.display   = '';
+                              update();
+                                                
+                        }//onchange
+                        
+                        function update(){
+                        
+                              var pos                 = editor.getCursorPosition();
+                              $(hdr2,'#row').value    = pos.row+1;
+                              $(hdr2,'#col').value    = pos.column;
+                              
+                        }//update
+                        
+                  }//editor
+          
+
+
+  //:
+  
+  
+                  obj.set=function(txt){
+                  
+                        editor.setValue(txt,-1);
+                        
+                  }//set
+                  
+              
+                  obj.get=function(){
+                  
+                        var txt   = editor.getValue();
+                        return txt;
+                        
+                  }//get
+                  
+
+                  obj.focus=function(){
+                  
+                        editor.focus();
+                        
+                  }//focus
+
+
+
+
+                  
+              return obj;
+              
+            }//editor
+            
+      </script>
+
+</editor-root>
+
