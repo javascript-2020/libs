@@ -216,7 +216,7 @@
                         
                         function onchange(e){
           
-                              filename.save(false);
+                              filename.save(true);
                               update();
                                                 
                         }//onchange
@@ -265,7 +265,13 @@
                   }//focus
 
 
-
+                  obj.resize=function(){
+                  
+                        editor.resize();
+                        
+                  }//resize
+                  
+                  
 
                   
               return obj;
