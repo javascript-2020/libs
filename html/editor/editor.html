@@ -80,16 +80,8 @@
                         var root                      = $('editor-root');
                         var shadow                    = root.shadowRoot;
 
-                        
-                        var ids   = ['ace_searchbox','error_marker.css','ace-tm','ace_editor.css','ace_scrollbar.css'];
-                        ids.forEach(id=>{console.log(id);
-                        
-                              var style   = $(document.head,'#'+id);
-                              if(!style)debugger;
-                              var copy    = style.cloneNode(true);
-                              shadow.append(copy);
-                              
-                        });
+
+                        style();
                         
                         
 
@@ -113,8 +105,33 @@
                         
                   }//initdom
 
-
-          
+                  
+                  var ct=0;
+                  function style(){
+                  
+                        ct++;
+                        ifct==10){
+                              console.log('timeout');
+                              return;
+                        }
+                        
+                        var ids   = ['ace_searchbox','error_marker.css','ace-tm','ace_editor.css','ace_scrollbar.css'];
+                        ids.forEach(id=>{console.log(id);
+                        
+                              var style   = $(document.head,'#'+id);
+                              if(!style){
+                                    setTimeout(style,500);
+                                    return;
+                              }
+                              
+                              var copy    = style.cloneNode(true);
+                              shadow.append(copy);
+                              
+                        });
+                        
+                  }//style
+                  
+                  
                   kd.row=function(e){
                         
                         if(e.key=='Enter'){
