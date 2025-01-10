@@ -85,7 +85,7 @@
                         shadow                        = root.shadowRoot;
 
 
-                        fn();
+                        import_style();
                         
                         
 
@@ -110,17 +110,17 @@
                   }//initdom
 
                   
-                  var ct=0;
-                  function fn(){
+                  import_style.ct   = 0;
+                  
+                  function import_style(){
                   
                         ct++;
                         if(ct>=10){
-                              console.log('timeout');
+                              console.log('import_style timeout');
                               return;
                         }
                         
-                        //'ace_searchbox','error_marker.css',
-                        var ids   = ['ace-tm','ace_editor\\.css','ace_scrollbar\\.css'];
+                        var ids   = ['ace-tm','ace_editor\\.css','ace_scrollbar\\.css','error_marker\\.css',];
                         var n     = ids.length;
                         for(var i=0;i<n;i++){
                         
