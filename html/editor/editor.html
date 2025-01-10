@@ -84,7 +84,7 @@
                         var ids   = ['ace_searchbox','error_marker.css','ace-tm','ace_editor.css','ace_scrollbar.css'];
                         ids.forEach(id=>{
                         
-                              var style   = $(document.head,id);
+                              var style   = $(document.head,'#'+id);
                               var copy    = style.cloneNode(true);
                               shadow.append(copy);
                               
