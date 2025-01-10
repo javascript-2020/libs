@@ -584,10 +584,6 @@
                                 return;
                           }
                                                                                         debug('saved');
-                          var fn    = filename(path);
-                          log.green(fn,'saved');
-
-
                           if(typeof obj.save.complete=='function'){
                                 obj.save.complete(path,icon.src);
                           }  
