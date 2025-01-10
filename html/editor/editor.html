@@ -119,7 +119,11 @@
                         }
                         
                         var ids   = ['ace_searchbox','error_marker.css','ace-tm','ace_editor.css','ace_scrollbar.css'];
-                        ids.forEach(id=>{console.log(id);
+                        var n     = ids.length;
+                        for(var i=0;i<n;i++){
+                        
+                              var id    = ids[i];
+                              console.log(id);
                         
                               var style   = $(document.head,'#'+id);
                               if(!style){
