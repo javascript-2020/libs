@@ -126,7 +126,7 @@
                               var id    = ids[i];
                               console.log(id);
                         
-                              var style   = $(document.head,'#'+id);
+                              var style   = document.head.querySelector('#'+id);
                               if(!style){
                                     setTimeout(fn,500);
                                     return;
