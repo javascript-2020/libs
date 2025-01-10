@@ -4,6 +4,8 @@
 
       <template shadowrootmode=open>
       
+            <script src='https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/ace.js'></script>
+      
             <style>
 
                   #root {display:flex;flex-direction:column}
@@ -78,6 +80,7 @@
                         var root                      = $('editor-root');
                         var shadow                    = root.shadowRoot;
 
+                        /*
                         var ids   = ['ace_searchbox','error_marker.css','ace-tm','ace_editor.css','ace_scrollbar.css'];
                         ids.forEach(id=>{
                         
@@ -86,6 +89,7 @@
                               shadow.append(copy);
                               
                         });
+                        */
                         
 
                         var hdr                       = $(shadow,'#hdr');
