@@ -14,90 +14,86 @@
       
       <script>
       
-            (()=>{
+            localfile   = localfile();
             
-                  localfile   = localfile();
-                  
-                  function localfile(){
-                  
-                    var obj   = {};
+            function localfile(){
+            
+              var obj   = {};
+
+                    
+                    var icon;
+                    
+                    obj.initdom=function(){
+                    
+                          var root      = $('localfile-menu');
+                          var shadow    = root.shadowRoot;
+                          
+                          menumod.add.style(shadow);
 
                           
-                          var icon;
+                          var card                    = $(shadow,'.menu');
                           
-                          obj.initdom=function(){
-                          
-                                var root      = $('localfile-menu');
-                                var shadow    = root.shadowRoot;
-                                
-                                menumod.add.style(shadow);
-
-                                
-                                var card                    = $(shadow,'.menu');
-                                
-                                icon                        = $(shadow,'#icon');
-                                icon.onclick   = menumod.click(card,false,false,menu);
+                          icon                        = $(shadow,'#icon');
+                          icon.onclick   = menumod.click(card,false,false,menu);
 
 
-                          }//initdom
+                    }//initdom
+                    
+                    
+                    function menu(type,opt){
+                    
+                          if(type=='opt'){
+                                menu[opt]();
+                          }
                           
+                    }//menu
+
+
+                    menu.load=function(){
+              
+                          var input         = document.createElement('input');
+                          input.type        = 'file';
+                          input.click();
+                          input.onchange    = onchange;
                           
-                          function menu(type,opt){
+                          async function onchange(){
+              
+                                var file    = input.files[0];
+                                var txt     = await file.text();
                           
-                                if(type=='opt'){
-                                      menu[opt]();
+                                if(typeof obj.load.complete=='function'){
+                                      obj.load.complete(txt,file.name,icon.src);
                                 }
-                                
-                          }//menu
 
+                          }//onchange
+              
+                    }//load
 
-                          menu.load=function(){
-                    
-                                var input         = document.createElement('input');
-                                input.type        = 'file';
-                                input.click();
-                                input.onchange    = onchange;
+              
+                    menu.save=function(){
+              
+                          var name      = '';
+                          if(typeof cur!='undefined' && cur){
+                                name    = cur.name||'';
+                          }
                                 
-                                async function onchange(){
-                    
-                                      var file    = input.files[0];
-                                      var txt     = await file.text();
-                                
-                                      if(typeof obj.load.complete=='function'){
-                                            obj.load.complete(txt,file.name,icon.src);
-                                      }
-
-                                }//onchange
-                    
-                          }//load
-
-                    
-                          menu.save=function(){
-                    
-                                var name      = '';
-                                if(typeof cur!='undefined' && cur){
-                                      name    = cur.name||'';
-                                }
-                                      
-                                var blob      = new Blob([editor.getValue()]);
-                                var url       = window.URL.createObjectURL(blob);
-                                var a         = document.createElement('a');
-                                a.href        = url;
-                                a.download    = name;
-                                a.click();
-                                
-                                if(typeof obj.save.complete=='function'){
-                                      obj.save.complete('localfile',name,icon.src);
-                                }
-                    
-                          }//save
+                          var blob      = new Blob([editor.getValue()]);
+                          var url       = window.URL.createObjectURL(blob);
+                          var a         = document.createElement('a');
+                          a.href        = url;
+                          a.download    = name;
+                          a.click();
                           
-                          
-                    return obj;
+                          if(typeof obj.save.complete=='function'){
+                                obj.save.complete('localfile',name,icon.src);
+                          }
+              
+                    }//save
                     
-                  }//mode
-                  
-            })();
+                    
+              return obj;
+              
+            }//mode
             
       </script>
       
