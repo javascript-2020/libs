@@ -5,6 +5,30 @@
       <template shadowrootmode=open>
       
             <style>
+
+                  #root {display:flex;flex-direction:column}
+                  
+                  #filename-root {flex:1;display:flex;align-content:center}
+                  #filename-icon {width:20px;height:20px;margin-right:5px;
+                                  content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAP1BMVEVHcEwVFRUICAgkJCQMDAwLCwsNDQ1QUFAICAgrKysQEBAVFRUHBwcLCwsZGRkKCgoHBwfd3d0ICAgkJCQEBATHNF52AAAAFXRSTlMAQ9IblZl1BbQOXDbHiiWj1wG2H/ZbTuAhAAAA5klEQVQ4y72V2w6DIAxAKQjIRRT1/791gkg226mJc+elSE5qqYCMPQV0zY4uUF7grdwxc0cl5NNuxvjBO0oUuxnhbUPkxKLxYCQ2yYzMSPT2LMbCmpFbRphJtH0B0ozu/TJsZy+QCF1hTTKpNG4GOKlxK5XfEKNOsBIzkRTt2C5AVDkmRkuKTiUCA1Vx92q8LDqFcAeLeefLYt7actyeyzUKVwnM5ChIUQ2VJgJPUZGiCZXtwdyrURuEpvvoEXQfg0XQX0b/fFN84PIxgwuiTAfX/mXjTtdE4iJdaXk4u5rLBQ2P/Q1eGdEQZZzIbegAAAAASUVORK5CYII=)
+                                }
+                  #filename-save {width:20px;height:20px;margin-right:5px;padding:2px;
+                                  content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAKlBMVEX/pQD/////qhH/pAD/rhr/zHH/yGT/wlP//vz/8dn/tjD/+u//6MD/2ZUL9bZAAAAA30lEQVQoz2OQvuWihARUMgUFBRlamRkYlqXBQLoy10Sg4CUGBisgDQLSu3dLXGBeAxRczMBg3ggR3LZqaeMhBquDggzOCMFdxuZAQWYfQQYHuKDELgOQINA0JEFBqCDzSiwqGdiwqGRgYlDAVIksSIpKYyyC28E+ggoi/L5D8AJMkGFZKAyEKcAFjRGAAS6IBsCCzMbGKGpBgkwqLshAASzoOxMFHDEACjJXCKKANmyCYkNI0IEGgs7YBBdjCpowXGBejSq43YCVYSszV1ooEkgrMMhmkL6lhAIUlJZuBAAfSYTf2T2EkwAAAABJRU5ErkJggg==)
+                                }
+                  #filename { margin:5px 0;flex:1;margin-right:10px}
+
+
+                  #row,#col {width:40px;text-align:center}
+                  #row {margin-right:5px}
+                  #col {margin-right:10px}
+                  
+                  #top,#bottom {width:20px;height:20px;border:1px solid dimgray;padding:2px;border-radius:3px;cursor:pointer;}
+                  #top {  margin-right:5px;
+                          content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAdCAMAAADvl95BAAAAS1BMVEVHcEwPDikfO2MkR3MQES0OCyMnTnsPDyoODCYiQWwGAQgdNVsdNFsOCiIpVYUNCiFLsv5LtP9FouhHpu1EnuJCmdxAlNY/kNBJrve1TSxXAAAAEHRSTlMAV+PvbkDxYkzsAdXeMvYjWjmjswAAANtJREFUOMul1O0WRCAQBuBI2wehEPd/pVvZmCjbnvVP53Gapncg9MczDGWOtC0pc+vaFUjSGaUKJKmNGsfvknnnJXt2i3dWmid5OidrVuKeZMWhs3Kpq7SbI5eTd+ckv8kKn27b8pJiHZya+n46XmZOs+7VNBkp6CtyQkQSU/FxDXDaOrcEpMaNyDi/yVVad/84JSmGC6Ecd0C4ke0SCIwtO2rtIZVxwxHktWWn3F0Iq3WJ69I+7mHYXPxTbr9Y6yQYlIUnI8XwDJwbvXT0XF3QISRlLvZy+PE/8wZTOhuNMbwXWAAAAABJRU5ErkJggg==)
+                      }
+                  #bottom {  transform:rotate(180deg);
+                          content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAdCAMAAADvl95BAAAAS1BMVEVHcEwPDikfO2MkR3MQES0OCyMnTnsPDyoODCYiQWwGAQgdNVsdNFsOCiIpVYUNCiFLsv5LtP9FouhHpu1EnuJCmdxAlNY/kNBJrve1TSxXAAAAEHRSTlMAV+PvbkDxYkzsAdXeMvYjWjmjswAAANtJREFUOMul1O0WRCAQBuBI2wehEPd/pVvZmCjbnvVP53Gapncg9MczDGWOtC0pc+vaFUjSGaUKJKmNGsfvknnnJXt2i3dWmid5OidrVuKeZMWhs3Kpq7SbI5eTd+ckv8kKn27b8pJiHZya+n46XmZOs+7VNBkp6CtyQkQSU/FxDXDaOrcEpMaNyDi/yVVad/84JSmGC6Ecd0C4ke0SCIwtO2rtIZVxwxHktWWn3F0Iq3WJ69I+7mHYXPxTbr9Y6yQYlIUnI8XwDJwbvXT0XF3QISRlLvZy+PE/8wZTOhuNMbwXWAAAAABJRU5ErkJggg==)
+                      }
             
             </style>
             
@@ -38,7 +62,8 @@
 
             
                   var deficon;
-                  
+                  var row;
+                  var col;
                   
                   var kd    = {};
                   var btn   = {};
@@ -53,10 +78,11 @@
                         
                         deficon                       = $(hdr,'#filename-icon').src;
                         
-                        $(hdr,'#row').onkeydown       = kd.row;
-                        $(hdr,'#row').onmousedown     = e=>e.target.select();
-                        $(hdr,'#col').onkeydown       = kd.col;
-                        $(hdr,'#col').onmousedown     = e=>e.target.select();
+                        row                           = $(hdr,'#row');
+                        row.onkeydown                 = kd.row;
+                        row.onmousedown               = e=>e.target.select();
+                        col.onkeydown                 = kd.col;
+                        col.onmousedown               = e=>e.target.select();
                         
                         $(hdr,'#top').onclick         = btn.top;
                         $(hdr,'#bottom').onclick      = btn.bottom;
@@ -74,9 +100,9 @@
                         if(e.key=='Enter'){
                               e.preventDefault();
                               var pos   = editor.getCursorPosition();
-                              var row   = $(hdr2,'#row').value;
+                              var r     = row.value;
                               var col   = pos.column;
-                              editor.gotoLine(row,col);
+                              editor.gotoLine(r,col);
                               editor.focus();
                         }
                         
@@ -89,8 +115,8 @@
                               e.preventDefault();
                               var pos   = editor.getCursorPosition();
                               var row   = pos.row;
-                              var col   = $(hdr2,'#col').value;
-                              editor.gotoLine(row,col);
+                              var c     = col.value;
+                              editor.gotoLine(row,c);
                               editor.focus();
                         }
                         
@@ -116,7 +142,7 @@
 
                   obj.filename=filename;
                   
-                  function filename(path,icon){
+                  function filename(path,icon){console.log(icon);
           
                         icon                      = icon||deficon;
                         $('#filename-icon').src   = icon;
@@ -192,9 +218,9 @@
                         
                         function update(){
                         
-                              var pos                 = editor.getCursorPosition();
-                              $(hdr2,'#row').value    = pos.row+1;
-                              $(hdr2,'#col').value    = pos.column;
+                              var pos     = editor.getCursorPosition();
+                              row.value   = pos.row+1;
+                              col.value   = pos.column;
                               
                         }//update
                         
