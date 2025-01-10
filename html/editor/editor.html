@@ -112,8 +112,8 @@
                   
                   function import_style(){
                   
-                        ct++;
-                        if(ct>=10){
+                        import_style.ct++;
+                        if(import_style.ct>=10){
                               console.log('import_style timeout');
                               return;
                         }
@@ -125,7 +125,7 @@
                               var id      = ids[i];
                               var style   = $('#'+id);
                               if(!style){
-                                    setTimeout(fn,500);
+                                    setTimeout(import_style,500);
                                     return;
                               }
                               
