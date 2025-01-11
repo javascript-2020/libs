@@ -648,8 +648,6 @@
                     node2   = $(view,node2);
               }
 
-
-              ui.slider.node    = slider_node;
               $.track(slider_node,slider);
 
 
