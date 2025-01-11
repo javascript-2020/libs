@@ -1,11 +1,7 @@
 
 (async()=>{
 
-        if(typeof init!='undefined'){
-            if(init?.stack){
-                init.stack.add;
-            }
-        }
+        (typeof init!='undefined' && init?.stack && init.stack.add);
 
     
         var script            = document.currentScript;
@@ -57,10 +53,7 @@
         script.parentNode.replaceChild(nscript,script);
 
 
-
-        if(init.stack){
-            init.stack.complete;
-        }
+        (typeof init!='undefined' && init?.stack && init.stack.complete);
 
 
         function get_params(){
