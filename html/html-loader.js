@@ -1,7 +1,6 @@
 
 (async()=>{
 
-        var complete;
         if(typeof init!='undefined'){
             if(init.stack){
                 init.stack.add;
