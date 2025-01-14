@@ -666,7 +666,7 @@
           
           obj.add.style=function(par){    //d
           
-                var style   = document.createElement('style');
+                var style           = document.createElement('style');
                 style.textContent   = css;
                 par.append(style);
                 
