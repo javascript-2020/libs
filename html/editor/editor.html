@@ -8,7 +8,7 @@
 
                   #root {display:flex;flex-direction:column;height:100%}
                   
-                  #hdr {display:flex;align-content:center;flex-wrap:wrap}
+                  #hdr {display:flex}
                   
                   #filename-root {flex:1;display:flex;align-content:center}
                   #filename-icon {width:20px;height:20px;margin-right:5px}
@@ -17,7 +17,7 @@
                                 }
                   #filename {margin:5px 0;flex:1;margin-right:10px}
 
-                  
+                  #info {display:flex;align-content:center}
                   #sep {margin:0 10px}
                   
                   #row,#col {width:40px;text-align:center}
@@ -46,9 +46,11 @@
                               <span id=filename>filename</span>
                         </div>
                         
-                        <div id=lines>0</div>
-                        <div id=sep>/</div>
-                        <div id=chars>0</div>
+                        <div id=info>
+                              <div id=lines>0</div>
+                              <div id=sep>/</div>
+                              <div id=chars>0</div>
+                        </div>
                         
                         <input id=row value=0>
                         <input id=col value=0>
