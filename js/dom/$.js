@@ -782,7 +782,6 @@
               for(var i=1;i<n;i++){
               
                     var sel   = arguments[i];
-                    console.log('insert',sel);
                     var css   = $.stylesheet.find.css(sel);
                     if(css){
                           style.sheet.insertRule(css);
