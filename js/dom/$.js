@@ -778,7 +778,7 @@
         
         $.stylesheet.insert=function(style){
         
-              var n   = arguments.length-1;
+              var n   = arguments.length;
               for(var i=1;i<n;i++){
               
                     var sel   = arguments[i];
