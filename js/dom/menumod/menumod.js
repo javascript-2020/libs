@@ -534,6 +534,10 @@
                     
                     function chk(){
                     
+                          if(!focus){
+                                return true;
+                          }
+                          
                           var n   = list.length;
                           for(var i=0;i<n;i++){
                           
