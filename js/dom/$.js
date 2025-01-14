@@ -713,7 +713,7 @@
         $.stylesheet        = {};
         $.stylesheet.find   = {};
         
-        $.stylesheet.find.css   = function(selector){
+        $.stylesheet.find.css   = function(selector,rtype){
         
               var list    = document.styleSheets;
               var n       = list.length;
@@ -726,6 +726,15 @@
                     
                           var rule    = rules[j];
                           if(rule.selectorText===selector){
+                                switch(rtype){
+                                
+                                  case 'cssText'    :
+                                  case 'csstext'    : return rule.cssText;
+                                  case 'style'      : return rule.parentStyleSheet;
+                                  case 'selector'   :
+                                  case 'sel'        : return rule.selectorText;
+                                  
+                                }//switch
                                 return rule.cssText;
                           }
                           
@@ -762,6 +771,9 @@
               }
         
         }//copycssrule
+        
+        
+        
         
         
 return $;
