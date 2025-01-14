@@ -660,8 +660,8 @@
           `;
           obj.css     = css;
           
-          var style   = document.createElement('style');
-          style.textContent    = css;
+          var style           = document.createElement('style');
+          style.textContent   = css;
           document.head.append(style);
           
           obj.add.style=function(par){    //d
