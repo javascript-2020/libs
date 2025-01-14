@@ -8,7 +8,9 @@
 
                   #root {display:flex;flex-direction:column;height:100%}
                   
-                  #hdr {display:flex}
+                  #hdr {display:flex;position:relative}
+                  
+                  #menu-icon {}
                   
                   #filename-root {flex:1;display:flex;align-items:center}
                   #filename-icon {width:20px;height:20px;margin-right:5px}
@@ -38,6 +40,12 @@
             <div id=root>
             
                   <div id=hdr>
+                  
+                        <img id=menu-icon class=icon src='data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAt1BMVEVHcEwbmPYcgfMchvQbsfkay/wbtvkbnfccefMayfwbmfYch/QchvQbtfkbmfYa1P0ddfIcivQcl/Ycj/Ubp/gcmfYdbPEbrvkazPwcmfYbqfgayfwayPwbv/sbvvobsvkazPwbqvga0fwbvPobtvocjvUbofcbpvccfPMcgPMcgvMdafAdbfEckfUbtvka0PwcfPIaxvsbwfsbvPodb/EcnPYclvYckfUbpvccjPQdd/IbofcbrPiPy8D0AAAAMHRSTlMAA/79/v7+5ycVZ3Y3h0xhu9jp8kFeF9OkVfQOrZi+Mh1z/iUJQ+/dx4fOYq7hybzs5xU1AAABIklEQVQ4y+2Ux3aDMBBFpTR6M92AwYB7S6EG/v+7MsJJnBBKVsnGdwHozT1HQgxC6MrfEkiSM+Y4khSgUxhazLDHWGF4QveAO2gyLnGQ9QS4wcDaXGJYiPGegVnU50UzUvdgTsd7AfrMaEaqXvO+sfAAHP0uzz+SmhCfR7FwB5gdpm+SyoeHEJ5P67o2tbanmRBP5/iSgFkUxaplaisIv3kAu6yqihK/RiIF0ZJtT6NTaZpS9iWwm0D/uXB7kmXZ5LOgN0O7ayvEQ57nKtssCbMqDA5i9+YulLIsVQ5MzKnwqCz6Phev3AIcxhy5K3x/A/DbG2CzIdctP9RS9PrxnTU92KOYll8bZHqs7Wk5AcY9hIx9kuyN3/xuxm5nXA+df+cNJSAgjMbiFSoAAAAASUVORK5CYII='>
+            
+                        <div class=menu>
+                              <div id=trim class=menu-opt>trim</div>      
+                        </div>
                   
                         <div id=filename-root>
                               <img id=filename-icon src='data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAP1BMVEVHcEwVFRUICAgkJCQMDAwLCwsNDQ1QUFAICAgrKysQEBAVFRUHBwcLCwsZGRkKCgoHBwfd3d0ICAgkJCQEBATHNF52AAAAFXRSTlMAQ9IblZl1BbQOXDbHiiWj1wG2H/ZbTuAhAAAA5klEQVQ4y72V2w6DIAxAKQjIRRT1/791gkg226mJc+elSE5qqYCMPQV0zY4uUF7grdwxc0cl5NNuxvjBO0oUuxnhbUPkxKLxYCQ2yYzMSPT2LMbCmpFbRphJtH0B0ozu/TJsZy+QCF1hTTKpNG4GOKlxK5XfEKNOsBIzkRTt2C5AVDkmRkuKTiUCA1Vx92q8LDqFcAeLeefLYt7actyeyzUKVwnM5ChIUQ2VJgJPUZGiCZXtwdyrURuEpvvoEXQfg0XQX0b/fFN84PIxgwuiTAfX/mXjTtdE4iJdaXk4u5rLBQ2P/Q1eGdEQZZzIbegAAAAASUVORK5CYII='>
@@ -90,25 +98,29 @@
                   
                   obj.initdom=function(){
                   
-                        root                          = $('editor-root');
-                        shadow                        = root.shadowRoot;
+                        root                              = $('editor-root');
+                        shadow                            = root.shadowRoot;
 
                         import_style();
+                        menumod.add.style(shadow);
 
 
-                        hdr                           = $(shadow,'#hdr');
+                        hdr                               = $(shadow,'#hdr');
                         
-                        deficon                       = $(hdr,'#filename-icon').src;
+                        var card                          = $(shadow,'.menu');
+                        $(shadow,'#menu-icon').onclick    = menumod.click(card,false,false,menu);
                         
-                        row                           = $(hdr,'#row');
-                        row.onkeydown                 = kd.row;
-                        row.onmousedown               = e=>e.target.select();
-                        col                           = $(hdr,'#col');
-                        col.onkeydown                 = kd.col;
-                        col.onmousedown               = e=>e.target.select();
+                        deficon                           = $(hdr,'#filename-icon').src;
                         
-                        $(hdr,'#top').onclick         = btn.top;
-                        $(hdr,'#bottom').onclick      = btn.bottom;
+                        row                               = $(hdr,'#row');
+                        row.onkeydown                     = kd.row;
+                        row.onmousedown                   = e=>e.target.select();
+                        col                               = $(hdr,'#col');
+                        col.onkeydown                     = kd.col;
+                        col.onmousedown                   = e=>e.target.select();
+                        
+                        $(hdr,'#top').onclick             = btn.top;
+                        $(hdr,'#bottom').onclick          = btn.bottom;
 
 
                         setup(shadow);
@@ -345,6 +357,29 @@
                         editor.container.style.height   = '100%';
                   
                   }//vert
+                  
+  //:
+  
+                  function menu(type,opt){
+                  
+                        if(type=='opt'){
+                              menu[opt.id]();
+                        }
+                        
+                  }//menu
+
+                  
+                  menu.trim=function(){
+                  
+                        var pos     = editor.getCursorPostion();
+                        var txt     = editor.getValue();
+                        var lines   = txt.split('\n');
+                        lines       = lines.map(line=>line.trimEnd());
+                        txt         = lines.join('\n');
+                        editor.setValue(txt,-1);
+                        editor.gotoLine(pos.row+1,pos.col);
+                        
+                  }//trim
                   
                   
               return obj;
