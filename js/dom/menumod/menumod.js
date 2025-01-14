@@ -350,7 +350,7 @@
                     }
                     
                     $.show(node);
-                    //node.focus();
+                    node.focus();
                     callback('show');
                     
               }//show
