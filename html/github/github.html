@@ -8,8 +8,6 @@
             
                   :host {font-family:arial}
 
-                  .hdr-icon {width:32px;height:32px}
-
                   .menu {position:absolute;outline:none;font-family:arial}
 
                   section {margin-bottom:10px}          
@@ -20,7 +18,8 @@
                   
                   .hldr {display:flex}
                   
-                  .icon {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
+                  .icon {padding:2px}
+                  
                   .paste {  margin-right:5px;
                             content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAVlJREFUSEvtlj1ug0AQhcdIW6RLeiQy6XKElLRIlOlp6LmBlRsgtzTUOQAtcZMzpMpInAGlQSjRWl7LxrM/dlhZUbwtu/PNvH07zAIutBYX4oIzGBG/95MkIuezXHFOh6MoegqC4F0GEELAMAybWL+BG8GI+AwArypjRFTAgyLOSeAIHIbhjRDii5NHgcdxhK7rWHu4JnEEnt6ljK6AUxIRcfAPInq0mVYL/lwSrNa3UL7d2WKA3CvXw8vuKqzeMYKtxMmGK9ik2FVq+XQ2rVE5VSeXMpLNgLp3fZbUrlCVFAc/GaygbdvaioU4jrU9/W+CVUVc6U3TQJIkfio2geVV/C+pi6KAsiz9SN33PaRpyrrbu9R1XbPgLMv83bHJXHmeQ1VVp0tt6w6zN5DtqHMwynJJeAGbqkVEOefc2xTZ/+7Uq10CcgOh7pzz38kFPMce6zQ4B4SL8QNf7+YfCGbtNAAAAABJRU5ErkJggg==);
                         }
@@ -44,7 +43,7 @@
             </style>
       
       
-            <img class=hdr-icon style='padding:2px;margin-right:50px' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAZ9JREFUSEvNls8uBEEQxn9DXFgughNZ3sBNwk3iMYTH4GJPvIQEryFxI3HyBkLcEBf/DsKiNmbSad1d1TO7oW/T/fX31VddPdUF+WMKOAbaP1uvgTXgPoeqMIJfgNEMbEvDasLPwJhGEll/Te1NCX/WFPS3BTViwv0SLYP4peNPjABvfXLq0wj3eywS3+k5sFQzkBNg1dtbGXUdh9Lrrn8AQ4YgTJwlSAiF2FQYBvESEjIzDHRL4VgxaddNiyHK+6fCR8D6ANKcSve+OB5UmlPCxIQPgU3tAI3rB8BGqGpDjleAMyOxBlsGTq3C28Cexmhc3wJ2rcLSY+eNxBrsyundFfbfFZdE1vTnoVb1LHATyVdT8dhVndP+XE2cp3p6ERKWuQXg0smC9FHpp5YhWGkEqVEJC8iNMJWJpq+W3n6X5BaYdsKUtZ3v744zJ5mQ6xEai8CF4vQOmAmdX8i14KRfdw151t5qwRdIqPxzqzpZUG7gueelBWLudLnv6jrCWe/qMivjwKNXcKmjdh1PAE8xsObA3fcATCoFZsH0KL4ABKpK0CB/GK0AAAAASUVORK5CYII='>
+            <img class=icon src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAZ9JREFUSEvNls8uBEEQxn9DXFgughNZ3sBNwk3iMYTH4GJPvIQEryFxI3HyBkLcEBf/DsKiNmbSad1d1TO7oW/T/fX31VddPdUF+WMKOAbaP1uvgTXgPoeqMIJfgNEMbEvDasLPwJhGEll/Te1NCX/WFPS3BTViwv0SLYP4peNPjABvfXLq0wj3eywS3+k5sFQzkBNg1dtbGXUdh9Lrrn8AQ4YgTJwlSAiF2FQYBvESEjIzDHRL4VgxaddNiyHK+6fCR8D6ANKcSve+OB5UmlPCxIQPgU3tAI3rB8BGqGpDjleAMyOxBlsGTq3C28Cexmhc3wJ2rcLSY+eNxBrsyundFfbfFZdE1vTnoVb1LHATyVdT8dhVndP+XE2cp3p6ERKWuQXg0smC9FHpp5YhWGkEqVEJC8iNMJWJpq+W3n6X5BaYdsKUtZ3v744zJ5mQ6xEai8CF4vQOmAmdX8i14KRfdw151t5qwRdIqPxzqzpZUG7gueelBWLudLnv6jrCWe/qMivjwKNXcKmjdh1PAE8xsObA3fcATCoFZsH0KL4ABKpK0CB/GK0AAAAASUVORK5CYII='>
 
           
             <div id=github class=menu style='display:none;left:-225px;top:100px;width:450px'>
@@ -186,9 +185,8 @@
 
                           menumod.add.style(shadow);
                           
-                          var css       = $.stylesheet.find.css('.hdr-icon');
                           var style     = $(shadow,'style');
-                          style.sheet.insertRule(css);
+                          var css       = $.stylesheet.insert(style,'.hdr-icon','.icon');
                           
                           var node                        = $(shadow,'.menu');
                           icon                            = $(shadow,'.hdr-icon');
