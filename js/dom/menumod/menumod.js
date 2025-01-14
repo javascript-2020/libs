@@ -11,7 +11,8 @@
 
 
               
-              obj.callback            = {};
+              obj.on                  = {};
+              
               
               var list                = [];
               list.find               = (v,rtype)=>find(list,v,rtype);
