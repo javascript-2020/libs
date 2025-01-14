@@ -727,6 +727,8 @@
               for(var i=0;i<n;i++){
               
                     var stylesheet    = list[i];
+                                                                      stylesheet.ownerNode &&
+                                                                      console.log(stylesheet.ownerNode.id);
                     var rules         = stylesheet.cssRules;
                     var n             = rules.length;
                     for(var j=0;j<n;j++){
