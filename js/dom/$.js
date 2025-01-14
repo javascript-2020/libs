@@ -714,8 +714,7 @@
         $.stylesheet.find   = {};
         
         $.stylesheet.find.css   = function(selector,rtype){
-
-                                                                        console.log(document.title);        
+                                                                        //console.log(document.title);        
               var list    = document.styleSheets;
               var n       = list.length;
               for(var i=0;i<n;i++){
