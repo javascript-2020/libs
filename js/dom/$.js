@@ -636,7 +636,7 @@
         }//mousetext
         
         
-        $.slider=function(node1,slider_node,node2,callback,params){
+        $.slider=function(node1,slider_node,node2,callback,params={}){
 
               if(typeof node1=='string'){
                     node1   = $(view,node1);
@@ -653,7 +653,7 @@
 
               function slider(ox,oy){
 
-                    if(params && params.mode=='vert'){
+                    if(params.mode=='vert'){
                           slider.vert(ox);
                     }else{
                           slider.horiz(oy);
