@@ -714,11 +714,8 @@
         $.stylesheet.find   = {};
         
         $.stylesheet.find.css   = function(selector,rtype){
-        
-              if(datatype(selector)=='array'){
-                    selector    = selector;
-              }
-              
+
+                                                                        console.log(document.title);        
               var list    = document.styleSheets;
               var n       = list.length;
               for(var i=0;i<n;i++){
@@ -747,7 +744,8 @@
               }//for
               return null;
                     
-        }//find
+        }//find.css
+        
         
         $.stylesheet.copyrule=function(style,selector,style2){
 
@@ -775,6 +773,7 @@
               }
         
         }//copyrule
+
         
         $.stylesheet.insert=function(style){
         
