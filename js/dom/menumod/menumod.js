@@ -524,7 +524,7 @@
               function focusout(e){
                                                                                 debug('focusout');
                     var focus   = e.relatedTarget;
-                                                                                debug(focus);
+                                                                                console.log(focus);
                     if(chk(focus)){
                                                                                 debug('chk');
                           return;
