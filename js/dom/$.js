@@ -776,7 +776,7 @@
         
         }//copyrule
         
-        $.stylesheet.insert(style){
+        $.stylesheet.insert=function(style){
         
               var n   = arguments.length-1;
               for(var i=1;i<n;i++){
