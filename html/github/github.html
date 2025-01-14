@@ -14,6 +14,8 @@
                   
                   #hdr {text-align:right}
                   
+                  #icon {padding:2px}
+                  
                   .label{}
                   
                   .hldr {display:flex}
@@ -183,8 +185,8 @@
 
                           menumod.add.style(shadow);
                           
-                          var style     = $(shadow,'style');
-                          var css       = $.stylesheet.insert(style,'.hdr-icon','.icon');
+                          var style                       = $(shadow,'style');
+                          var css                         = $.stylesheet.insert(style,'.hdr-icon','.icon');
                           
                           var node                        = $(shadow,'.menu');
                           icon                            = $(shadow,'#icon');
