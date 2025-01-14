@@ -289,7 +289,9 @@
                     state.prev    = state.cur;
                     state.cur     = null;
                     
-                    //editor.focus();
+                    if(typeof obj.on.close=='function'){
+                          obj.on.close();
+                    }
                     
               }//close
               
