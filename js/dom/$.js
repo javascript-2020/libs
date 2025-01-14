@@ -783,7 +783,11 @@
               
                     var sel   = arguments[i];
                     var css   = $.stylesheet.find.css(sel);
-                    style.sheet.insertRule(css);
+                    if(css){
+                          style.sheet.insertRule(css);
+                    }else{
+                          console.log(sel,'not found');
+                    }
                     
               }//for
               
