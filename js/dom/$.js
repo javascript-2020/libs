@@ -714,8 +714,15 @@
         $.stylesheet.find   = {};
         
         $.stylesheet.find.css   = function(selector,rtype){
+        
+              var doc   = document;
+              if(arguments.length==3){
+                    doc         = arguments[0];
+                    selector    = arguments[1];
+                    rtype       = arguments[2];
+              }
                                                                         //console.log(document.title);        
-              var list    = document.styleSheets;
+              var list    = doc.styleSheets;
               var n       = list.length;
               for(var i=0;i<n;i++){
               
@@ -776,11 +783,12 @@
         
         $.stylesheet.insert=function(style){
         
-              var n   = arguments.length;
+              var doc   = document;
+              var n     = arguments.length;
               for(var i=1;i<n;i++){
               
                     var sel   = arguments[i];
-                    var css   = $.stylesheet.find.css(sel);
+                    var css   = $.stylesheet.find.css(doc,sel,'csstext');
                     if(css){
                           style.sheet.insertRule(css);
                     }else{
