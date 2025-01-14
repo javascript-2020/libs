@@ -197,6 +197,7 @@
                           list.forEach((input,i)=>{
                           
                                 input.addEventListener('keydown',keydown);
+                                input.onfocus   = e=>input.select();
                                 
                                 function keydown(e){
                                 
@@ -221,12 +222,13 @@
                                       if(e.key=='ArrowLeft'){
                                             if(e.ctrlKey){
                                                   //debugger;
-                                                  menumod.prev();
                                                   e.stopPropagation();
+                                                  menumod.prev();
                                             }
                                       }
                                       if(e.key=='ArrowRight'){
                                             if(e.ctrlKey){
+                                                  e.stopPropagation();
                                                   menumod.next();
                                             }
                                       }
