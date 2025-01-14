@@ -45,7 +45,7 @@
               
               var result;
               var n   = keydown.stack.length;
-              for(var i=n-1;i>=0;i++){
+              for(var i=n-1;i>=0;i--){
               
                     var fn    = keydown.stack[i];
                     result    = fn(e);
