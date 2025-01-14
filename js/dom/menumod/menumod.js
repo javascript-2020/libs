@@ -310,7 +310,7 @@
                     }
                     state.cur   = cur;
                     node        = list.find(cur,'node');
-                    show(node);
+                    setTimeout(show,50,node);
                     
               }//prev
               
@@ -331,7 +331,7 @@
                     }
                     state.cur   = cur;
                     node        = list.find(cur,'node');
-                    show(node);
+                    setTimeout(show,50,node);
               
               }//next
 
