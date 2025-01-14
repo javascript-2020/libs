@@ -715,6 +715,10 @@
         
         $.stylesheet.find.css   = function(selector,rtype){
         
+              if(datatype(selector)=='array'){
+                    selector    = selector;
+              }
+              
               var list    = document.styleSheets;
               var n       = list.length;
               for(var i=0;i<n;i++){
@@ -770,7 +774,20 @@
                     style2.sheet.insertRule(css);
               }
         
-        }//copycssrule
+        }//copyrule
+        
+        $.stylesheet.insert(style){
+        
+              var n   = arguments.length-1;
+              for(var i=1;i<n;i++){
+              
+                    var sel   = arguments[i];
+                    var css   = $.stylesheet.find.css(sel);
+                    style.sheet.insertRule(css);
+                    
+              }//for
+              
+        }//insert
         
         
         
