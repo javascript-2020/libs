@@ -152,6 +152,7 @@
                 <div id=btns>
                       <input value=load type=button>
                       <input value=save type=button>
+                      <input value=backup type=button>
                 </div>
 
                 
@@ -326,9 +327,9 @@
                                                                   
                                                             };
                                                             
-                          $(shadow,'[value=load]').onclick   = btn.load;
-                          $(shadow,'[value=save]').onclick   = btn.save;
-
+                          $(shadow,'[value=load]').onclick      = btn.load;
+                          $(shadow,'[value=save]').onclick      = btn.save;
+                          $(shadow,'[value=backup]').onclick    = btn.backup;
                           
                     }//initdom
                     
@@ -370,6 +371,10 @@
                         save(txt);
                         
                     }//save
+                    
+                    
+                    btn.backup=function(){
+                    }//backup
 
 
                     function parse(url){
@@ -547,12 +552,17 @@
                     }//load
 
 
-                    obj.save=function(txt){return save(txt)}    //d
-                    
-                    async function save(txt){
+                    obj.save=function(txt){   //d
                     
                           var {token,owner,repo,branch,path}    = read();
-                          
+                          var result    = await save(token,owner,repo,branch,path,txt);
+                          return result;
+                    
+                    }//save
+                    
+                    
+                    async function save(token,owner,repo,branch,path,txt){
+                    
                           var content     = window.btoa(txt);
                           var message     = 'save text';
                           var headers     = {authorization:`Bearer ${token}`};
@@ -604,6 +614,7 @@
                           if(typeof obj.save.complete=='function'){
                                 obj.save.complete(path,icon.src);
                           }  
+                          return true;
                           
                     }//save
                     
