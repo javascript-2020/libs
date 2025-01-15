@@ -44,16 +44,22 @@
               var prevent   = false;
               
               var result;
+              var fn;
               var n   = keydown.stack.length;
-              for(var i=n-1;i>=0;i--){
+              if(n==0){
+                    return;
+              }
+              var i   = n-1;
+              while(i!==null){
               
-                    var fn    = keydown.stack[i];
+                    fn        = keydown.stack[i];
                     result    = fn(e);
                     if(result!==false){
                           break;
                     }
+                    i   = prev();
                     
-              }//for
+              }//while
               
               
               if(result){
@@ -66,6 +72,24 @@
               if(prevent || both){
                     e.preventDefault();
               }
+
+              
+              function prev(){
+
+                    var n   = keydown.stack.length;
+                    for(var j=0;j<n;j++){
+                    
+                          if(keydown.stack[j]===fn){
+                                if(j==0){
+                                      return null;
+                                }
+                                return j-1;
+                          }
+                                
+                    }//for
+                    return null;
+                    
+              }//prev
               
         }//keydown
 
