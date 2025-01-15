@@ -676,7 +676,7 @@
                           var json    = await res.json();
                           
                           var max     = 0;
-                          json.forEach(item=>{
+                          json.forEach(async item=>{
                           
                                 if(item.path.startsWith(`backup/${fn}`)){
                                       var i   = item.path.lastIndexOf('-');
