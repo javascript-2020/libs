@@ -635,7 +635,7 @@
                     }//save
                     
 
-                    function backup(token,owner,repo,branch,path){
+                    async function backup(token,owner,repo,branch,path){
                     
                           var txt   = load.text(token,owner,repo,branch,path);
                           
@@ -699,7 +699,7 @@
                     }//backup
                     
                     
-                    backup.clear=function(token,owner,repo,branch,path,all){
+                    backup.clear=async function(token,owner,repo,branch,path,all){
                     
                           var fn;
                           var i   = path.lastIndexOf('/');
