@@ -283,13 +283,24 @@
                                                         
                           $(shadow,'.storage').onclick    = async e=>{
                                                                   
+                                                                  var icon      = e.target;
+                                                                  var input     = $(icon.parentNode,'input:not([type])');
+                                                                  if(e.shiftKey){
+                                                                        var token   = input.value;
+                                                                        if(!token){
+                                                                              $.mousetext('no token');
+                                                                              return;
+                                                                        }
+                                                                        localStorage.setItem('github-token',token);
+                                                                        $.mousetext(e,'localStorage[\'github-token\'] saved');
+                                                                        return;
+                                                                  }
+                                                                  
                                                                   var token   = localStorage.getItem('github-token');
                                                                   if(!token){
                                                                         $.mousetext('no stored token, localStorage[\'github-token\']');
                                                                         return;
                                                                   }
-                                                                  var icon      = e.target;
-                                                                  var input     = $(icon.parentNode,'input:not([type])');
                                                                   input.value   = token;
                                                                   
                                                             };
