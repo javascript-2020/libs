@@ -15,11 +15,11 @@
       init.stack.ct         = 0;
       init.stack.total      = 1;
       Object.defineProperty(init.stack,'add',{get:()=>init.stack.total++});
-      Object.defineProperty(init.stack,'complete',{get:()=>(init.stack.ct++,init.stack.ct==init.stack.total && init())});
+      Object.defineProperty(init.stack,'complete',{get:()=>(init.stack.ct++,init.stack.ct>=init.stack.total && init())});
 
       function init(){
-      
-            menu            = menumod();
+                                                              console.log('init');
+            menumod         = menumod();
             
       
             initdom();
@@ -30,7 +30,7 @@
 </script>
 
 <github-api>
-      <script src='https://script-tag-q0dit4tshpll.runkit.sh/libs/html/libs-html-loader.js'></script>
+      <script src='https://script-tag-q0dit4tshpll.runkit.sh/libs/html/html-loader.js'></script>
 </github-api>
 
 
@@ -66,11 +66,11 @@
     
 
 
-        
-        
         function initdom(){
+
         
-              github.initdom(document.body);
+              github.initdom();
+
               
         }//initdom
 
