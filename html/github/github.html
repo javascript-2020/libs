@@ -581,7 +581,7 @@
                     }//load.txt
 
 
-                    obj.save=function(txt){   //d
+                    obj.save=async function(txt){   //d
                     
                           var {token,owner,repo,branch,path}    = read();
                           var result    = await save(token,owner,repo,branch,path,txt);
