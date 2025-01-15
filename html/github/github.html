@@ -33,6 +33,7 @@
                   .value {}
                   
                   #btns {display:flex;justify-content:center;gap:25px}
+                  [value=save] {margin-right:20px}
                   
                   input {font-size:16px;padding:5px 10px;box-sizing:border-box;}
                   input:not([type]) {flex:1}
@@ -368,12 +369,32 @@
                     btn.save=function(){
                     
                         var txt   = editor.getValue();
-                        save(txt);
+                        var {token,owner,repo,branch,path}    = read();
+                        save(token,owner,repo,branch,path,txt);
                         
                     }//save
                     
                     
                     btn.backup=function(){
+                    
+                          var {token,owner,repo,branch,path}    = read();
+                          
+                          var txt   = load.text(token,owner,repo,branch,path);
+                          
+                          var fn;
+                          var i   = path.lastIndexOf('/');
+                          
+                          if(i==-1){
+                                fn      = path;
+                                path    = '';
+                          }else{
+                                fn      = path.slice(i+1);
+                                path    = path.slice(0,i);
+                          }
+                          path   += 'backup/'+fn;
+                          
+                          save(token,owner,repo,branch,path,txt);
+                    
                     }//backup
 
 
@@ -508,6 +529,17 @@
                     
                           var {token,owner,repo,branch,path}    = read();
                           
+                          var txt   = await load.text(token,owner,repo,branch,path);
+                          
+                          if(typeof obj.load.complete=='function'){
+                                obj.load.complete(txt,path,icon.src);
+                          }
+                          
+                    }//load
+                    
+                    
+                    load.text=async function(token,owner,repo,branch,path){
+                    
                           var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
                           var headers;
                           if(api){
@@ -544,12 +576,9 @@
                                 return;
                           }
                           
+                          return txt;
                           
-                          if(typeof obj.load.complete=='function'){
-                                obj.load.complete(txt,path,icon.src);
-                          }
-                          
-                    }//load
+                    }//load.txt
 
 
                     obj.save=function(txt){   //d
