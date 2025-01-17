@@ -97,7 +97,7 @@
                   var btn   = {};
                   
                   
-                  obj.initdom=function(){
+                  obj.initdom=function(mode){
                   
                         root                              = $('editor-root');
                         shadow                            = root.shadowRoot;
@@ -126,7 +126,7 @@
                         $(hdr,'#bottom').onclick          = btn.bottom;
 
 
-                        setup(shadow);
+                        setup(shadow,mode);
 
                         
                   }//initdom
@@ -264,7 +264,7 @@
                   }//save
                   
           
-                  function setup(root){
+                  function setup(root,mode='javascript'){
           
                         var node    = $(root,'#editor');
                         node.addEventListener('mousedown',update);
@@ -280,6 +280,7 @@
                         editor.setFontSize(16);
                         editor.session.setOptions({tabSize:2,useSoftTabs:true});
                         //editor.setGhostText('\n\nctrl-enter - run & autosave\nctrl-s - save\nctrl-del - delete');
+                        editor.session.setMode('ace/mode/'+mode)                        
                         editor.focus();
                         editor.session.on('change',onchange);
                         
