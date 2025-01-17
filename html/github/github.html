@@ -524,7 +524,7 @@
                     }//load
                     
                     
-                    load.text=async function(token,owner,repo,branch,path){
+                    load.text=async function(api,token,owner,repo,branch,path){
                     
                           var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
                           var headers;
