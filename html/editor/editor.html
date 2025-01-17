@@ -200,6 +200,7 @@
                   
                         editor.gotoLine(0,0);
                         editor.focus();
+                        update();
                         
                   }//top
           
@@ -208,6 +209,7 @@
                   
                         editor.gotoLine(999999,0);
                         editor.focus();
+                        update();
                         
                   }//bottom
 
@@ -289,22 +291,22 @@
                                                 
                         }//onchange
                         
-                        function update(){
-                        
-                              var pos     = editor.getCursorPosition();
-                              row.value   = pos.row+1;
-                              col.value   = pos.column;
-                              
-                              var n       = editor.getValue().split('\n').length;
-                              $(hdr,'#lines').textContent   = n;
-                              
-                              var n       = editor.getValue().length;
-                              $(hdr,'#chars').textCottent   = n;
-                              
-                        }//update
-                        
                   }//editor
           
+
+                  function update(){
+                  
+                        var pos     = editor.getCursorPosition();
+                        row.value   = pos.row+1;
+                        col.value   = pos.column;
+                        
+                        var n       = editor.getValue().split('\n').length;
+                        $(hdr,'#lines').textContent   = n;
+                        
+                        var n       = editor.getValue().length;
+                        $(hdr,'#chars').textCottent   = n;
+                        
+                  }//update
 
 
   //:
