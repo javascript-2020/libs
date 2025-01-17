@@ -515,7 +515,7 @@
                     
                           var {token,owner,repo,branch,path}    = read();
                           
-                          var txt   = await load.text(token,owner,repo,branch,path);
+                          var txt   = await load.text(api,token,owner,repo,branch,path);
                           
                           if(typeof obj.load.complete=='function'){
                                 obj.load.complete(txt,path,icon.src);
@@ -637,7 +637,8 @@
 
                     async function backup(token,owner,repo,branch,path){
                     
-                          var txt   = load.text(token,owner,repo,branch,path);
+                          var api   = true;
+                          var txt   = load.text(api,token,owner,repo,branch,path);
                           
                           var fn;
                           var i   = path.lastIndexOf('/');
