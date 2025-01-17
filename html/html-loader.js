@@ -67,7 +67,7 @@
               
               var i   = path.lastIndexOf('/');
               path    = path.slice(0,i+1);
-              path   += nn+'.html';
+              path   += `html/${nn}.html`;
               
         }//get_params
         
