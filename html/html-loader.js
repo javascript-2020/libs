@@ -121,6 +121,7 @@
               return txt;
         
         }//api
+
                       
         function $(nodename){
         
@@ -146,6 +147,7 @@
               return null;
               
         }//$
+
         
 })();
 
