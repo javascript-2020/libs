@@ -47,6 +47,7 @@
         div.setHTMLUnsafe(txt);
         var root              = div.firstElementChild;
         par.parentNode.replaceChild(root,par);
+        
         var script            = root.getElementsByTagName('script')[0];
         var nscript           = document.createElement('script');
         nscript.textContent   = script.textContent;
@@ -75,7 +76,7 @@
               var i   = path.lastIndexOf('/');
               path    = path.slice(0,i+1);
               path   += `html/${nn}.html`;
-                                                                                //console.log(path);
+
         }//get_params
         
         
