@@ -10,8 +10,8 @@
         var nn                = par.nodeName.toLowerCase();
 
         
-        var mode    = 'raw';
-        var type    = 'libs';
+        var mode      = 'raw';
+        var type      = 'libs';
 
 
         if(nn.endsWith('-api')){
