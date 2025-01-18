@@ -60,7 +60,7 @@
         var node              = div.firstElementChild;
         root.parentNode.replaceChild(node,root);
         
-        var list              = root.getElementsByTagName('script');
+        var list              = node.getElementsByTagName('script');
         [...list].forEach(script=>{
         
               var nscript           = document.createElement('script');
