@@ -2,9 +2,13 @@
 
 (async()=>{
 
+        var nodename;
+        /* params */
+        
         (typeof init!='undefined' && init?.stack && init.stack.add);
 
-    
+        var nn;
+        
         var script            = document.currentScript;
         var par               = script.parentNode;
         var nn                = par.nodeName.toLowerCase();
