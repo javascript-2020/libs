@@ -25,7 +25,7 @@
       <script>
       
             filemod   = filemod();
-            filemod.initdom();
+            filemod.init();
             
             function filemod(){
                                                                                 console.log('filemod');
@@ -34,7 +34,7 @@
                     var root;
                     var shadow;
                     
-                    obj.initdom=function(){
+                    obj.init=function(){
                     
                           root          = $('filemod-root');
                           shadow        = root.shadowRoot;
@@ -48,7 +48,11 @@
                                 par.replaceChild(nscript,script);
                                 
                           });
-
+                          
+                    }//init
+                    
+                    
+                    obj.initdom=function(){
                           
                           localfile.initdom();
                           github.initdom();
