@@ -62,13 +62,13 @@
               path    = window.location.pathname;
                                                                     //console.log(path);
               if(path==='srcdoc'){
-                    var base    = document.querySelector('base');
+                    var base          = document.querySelector('base');
                     if(base){
                           var href    = base.href;
                           var url     = new URL(href);
                           path        = url.pathname;
                     }else{
-                          path    = window.parent.location.pathname;
+                          path        = window.parent.location.pathname;
                     }
               }
               
