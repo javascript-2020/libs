@@ -49,10 +49,14 @@
         var root              = div.firstElementChild;
         par.parentNode.replaceChild(root,par);
         
-        var script            = root.getElementsByTagName('script')[0];
-        var nscript           = document.createElement('script');
-        nscript.textContent   = script.textContent;
-        script.parentNode.replaceChild(nscript,script);
+        var list              = root.getElementsByTagName('script');
+        list.forEach(script=>{
+        
+              var nscript           = document.createElement('script');
+              nscript.textContent   = script.textContent;
+              script.parentNode.replaceChild(nscript,script);
+              
+        });
 
 
         (typeof init!='undefined' && init?.stack && init.stack.complete);
