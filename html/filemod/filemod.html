@@ -1,0 +1,51 @@
+<filemod>
+
+      <template shadowrootmode=open>
+      
+            <div>
+            
+                  <localfile>
+                        <script src='https://script-tag-q0dit4tshpll.runkit.sh/libs/html/html-loader.js'></script>
+                  </localfile>
+
+                  <github>
+                        <script src='https://script-tag-q0dit4tshpll.runkit.sh/libs/html/html-loader.js'></script>
+                  </github>
+
+            </div>
+            
+      </template>
+      
+      <script>
+      
+            filemod   = filemod();
+            
+            funciton filemod(){
+            
+              var obj   = {};
+            
+                    var root;
+                    var shadow;
+                    
+                    obj.initdom=function(){
+                    
+                          root          = $('filemod');
+                          shadow        = root.shadowRoot;
+                          
+                          localfile.initdom();
+                          github.initdom();
+
+                          
+                    }//initdom
+                    
+
+                    
+              return obj;
+              
+            }//filemod
+            
+      </script>
+
+</filemod>
+
+
