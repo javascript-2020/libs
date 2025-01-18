@@ -66,7 +66,7 @@
                     if(base){
                           var href    = base.href;
                           var url     = new URL(href);
-                          path        = pathname;
+                          path        = url.pathname;
                     }else{
                           path    = window.parent.location.pathname;
                     }
