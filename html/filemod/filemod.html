@@ -42,8 +42,12 @@
                           var list      = shadow.querySelectorAll('script');
                           [...list].forEach(script=>{
                           
-                                var nscript   = document.createElement('script');
-                                nscript.textContent   = script.textContent;
+                                var nscript                 = document.createElement('script');
+                                if(script.src){
+                                      nscript.src           = script.src;
+                                }else{
+                                      nscript.textContent   = script.textContent;
+                                }
                                 var par   = script.parentNode;
                                 par.replaceChild(nscript,script);
                                 
