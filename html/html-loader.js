@@ -60,7 +60,7 @@
         
               repo    = 'javascript-2020.github.io';
               path    = window.location.pathname;
-                                                                    //console.log(path);
+              
               if(path==='srcdoc'){
                     var base          = document.querySelector('base');
                     if(base){
@@ -75,7 +75,7 @@
               var i   = path.lastIndexOf('/');
               path    = path.slice(0,i+1);
               path   += `html/${nn}.html`;
-              
+                                                                                //console.log(path);
         }//get_params
         
         
