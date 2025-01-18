@@ -50,7 +50,7 @@
         par.parentNode.replaceChild(root,par);
         
         var list              = root.getElementsByTagName('script');
-        list.forEach(script=>{
+        [...list].forEach(script=>{
         
               var nscript           = document.createElement('script');
               nscript.textContent   = script.textContent;
