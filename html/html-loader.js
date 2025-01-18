@@ -4,14 +4,21 @@
 
         var nodename;
         /* params */
+
         
         (typeof init!='undefined' && init?.stack && init.stack.add);
 
+
+        var root;
         var nn;
-        
-        var script            = document.currentScript;
-        var par               = script.parentNode;
-        var nn                = par.nodeName.toLowerCase();
+        if(nodename){
+              root          = $(nodename);
+              nn            = nodename;
+        }else{
+              var script    = document.currentScript;
+              root          = script.parentNode;
+              nn            = root.nodeName.toLowerCase();
+        }
 
         
         var mode      = 'raw';
@@ -50,8 +57,8 @@
         txt                   = txt.trim();
         var div               = document.createElement('div');
         div.setHTMLUnsafe(txt);
-        var root              = div.firstElementChild;
-        par.parentNode.replaceChild(root,par);
+        var node              = div.firstElementChild;
+        root.parentNode.replaceChild(node,root);
         
         var list              = root.getElementsByTagName('script');
         [...list].forEach(script=>{
@@ -115,6 +122,30 @@
         
         }//api
                       
-    
+        function $(nodename){
+        
+              var list    = [document.head,document.body];
+              while(list.length){
+              
+                    var node    = list.shift();
+                    
+                    if(node){
+                          if(node.nodeName.toLowerCase()===nodename){
+                                return node;
+                          }
+                          
+                          if(node.shadowRoot){
+                                list.push(node.shadowRoot);
+                          }
+                          if(node.childNodes){
+                                [...node.childNodes].forEach(node=>list.push(node));
+                          }
+                    }
+                    
+              }//while
+              return null;
+              
+        }//$
+        
 })();
 
