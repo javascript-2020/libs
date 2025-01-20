@@ -46,6 +46,7 @@
                           }
                           
                           if(node.shadowRoot){
+                                console.log('shadowroot',node.nodeName);
                                 list.push(node.shadowRoot);
                           }
                           if(node.childNodes){
