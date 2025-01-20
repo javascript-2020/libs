@@ -34,7 +34,7 @@
               
                     var node    = list.shift();
                     
-                    if(node){
+                    if(node && node.nodeType==Node.ELEMENT_NODE){
                           var f   = false;
                           if(node.matches(sel))f    = true;
                           if(node.nodeName.toLowerCase()===sel)f   = true;
