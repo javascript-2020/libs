@@ -5,7 +5,7 @@
         var nodename;
         /* params */
 
-        debugger;        
+                
         (typeof init!='undefined' && init?.stack && init.stack.add);
 
 
