@@ -360,12 +360,13 @@
               
   //:
   
-              function hide(node){debugger;
+              function hide(node){//debugger;
                                                                                       debug('hide',node.id);
                     state.prev_opt[node.id]       = state.opt;
                     if(typeof state.opt=='number'){
                           var opts                = get.opts(node);
                           var opt                 = opts[state.opt];
+                          if(!opt)debugger;
                           opt.style.background    = '';
                           state.opt               = null;
                     }
