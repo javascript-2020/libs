@@ -10,13 +10,13 @@
                         console.log('hello');
                   </script>
                   
-                  <localfile>
+                  <localfile-api>
                         <script src='https://html-loader-dblv8aserliq.runkit.sh?localfile.api'></script>
-                  </localfile>
+                  </localfile-api>
 
-                  <github>
+                  <github-api>
                         <script src='https://html-loader-dblv8aserliq.runkit.sh?github.api'></script>
-                  </github>
+                  </github-api>
 
             </div>
             
@@ -36,7 +36,7 @@
                     
                     obj.init=function(){
                     
-                          root          = $('filemod-root');
+                          root          = $.nodename('filemod-root');
                           shadow        = root.shadowRoot;
                           
                           
