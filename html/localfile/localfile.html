@@ -1,4 +1,4 @@
-<localfile-menu style='position:relative'>
+<localfile-root style='position:relative'>
 
       <template shadowrootmode=open>
 
@@ -24,7 +24,7 @@
             localfile   = localfile();
             
             function localfile(){
-            
+                                                                                true && console.log('localfile');
               var obj   = {};
 
                     
@@ -37,8 +37,8 @@
   //:
   
                     obj.initdom=function(){
-                    
-                          var root      = $.full('localfile-menu');
+                                                                                console.log('localfile.initdom');
+                          var root      = $.full('localfile-root');
                           var shadow    = root.shadowRoot;
                           
                           menumod.add.style(shadow);
@@ -115,4 +115,4 @@
             
       </script>
       
-</localfile-menu>
+</localfile-root>
