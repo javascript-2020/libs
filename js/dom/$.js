@@ -25,8 +25,7 @@
               
         }//$
 
-        
-        $.nodename=function(nodename,par,all){
+        $.full    = function(sel,par,all){
         
               var list      = par ? [par] : [document.head,document.body];
               var result    = [];
@@ -36,7 +35,10 @@
                     var node    = list.shift();
                     
                     if(node){
-                          if(node.nodeName.toLowerCase()===nodename){
+                          var f   = false;
+                          if(node.matches(sel))f    = true;
+                          if(node.nodeName.toLowerCase()===nodename)f   = true;
+                          if(f){
                                 if(!all){
                                       return node;
                                 }
@@ -52,12 +54,13 @@
                     }
                     
               }//while
+              
               if(!all){
                     return null;
               }
               return result;
               
-        }//nodedname
+        }//full
 
         
         $.input   = {};
