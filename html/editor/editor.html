@@ -82,6 +82,8 @@
                                                                                   true && console.log('editor');
               var obj   = {};
 
+                  load    = load();
+                  
                   var editor;
                   
                   var root;
@@ -95,6 +97,19 @@
                   
                   var kd    = {};
                   var btn   = {};
+
+                  
+                  function load(){
+
+                        var resolve,load    = new Promise(res=>resolve=res);
+                        
+                        var script      = document.createElement('script');
+                        script.src      = 'https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/ace.js';
+                        script.onload   = resolve;
+                        
+                        return load;
+                        
+                  }//load
                   
                   
                   obj.initdom=function(mode){
@@ -264,8 +279,10 @@
                   }//save
                   
           
-                  function setup(root,mode='javascript'){
+                  async function setup(root,mode='javascript'){
           
+                        await load;
+                        
                         var node    = $(root,'#editor');
                         node.addEventListener('mousedown',update);
                         node.addEventListener('keyup',update);
