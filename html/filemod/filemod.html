@@ -23,14 +23,14 @@
                                                                                 console.log('filemod');
               var obj   = {};
             
-                    var root;
-                    var shadow;
-                    
                     obj.init=function(){
                     
-                          root          = $.full('filemod-root');
-                          shadow        = root.shadowRoot;
-                          
+                        localfile.load.complete   = (txt,path,icon)=>complete.load('localfile',txt,path,icon);
+                        localfile.save.complete   = (path,icon)=>complete.save('localfile',path,icon);
+                        
+                        github.load.complete      = (txt,path,icon)=>complete.load('github',txt,path,icon);
+                        github.save.complete      = (path,icon)=>complete.save('github',path,icon);
+                        
                     }//init
                     
                     
