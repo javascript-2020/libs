@@ -39,7 +39,7 @@
                               node.nodeType==Node.DOCUMENT_FRAGMENT_NODE
                           ){
                                 var f   = false;
-                                if(node.matches(sel))f    = true;
+                                if(node.matches && node.matches(sel))f    = true;
                                 if(node.nodeName.toLowerCase()===sel)f   = true;
                                 if(f){
                                       if(!all){
