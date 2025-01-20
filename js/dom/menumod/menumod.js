@@ -360,7 +360,7 @@
               
   //:
   
-              function hide(node){
+              function hide(node){debugger;
                                                                                       debug('hide',node.id);
                     state.prev_opt[node.id]       = state.opt;
                     if(typeof state.opt=='number'){
