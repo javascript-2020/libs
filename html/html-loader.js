@@ -6,7 +6,10 @@
         /* params */
 
                 
-        (typeof init!='undefined' && init?.stack && init.stack.add);
+        var add         = ()=>(typeof init!='undefined' && init?.stack && init.stack.add);
+        var complete    = ()=>(typeof init!='undefined' && init?.stack && init.stack.complete);
+        add();
+
 
 
         var root;
@@ -67,17 +70,24 @@
               if(script.src){
                                                                                 //console.log(script.src);
                     nscript.src           = script.src;
+                    nscript.onload        = complete;
+                    add();
               }else{
                                                                                 //console.log(script.id);
                     nscript.textContent   = script.textContent;
               }
               script.parentNode.replaceChild(nscript,script);
               
+              function onload(){
+              
+                    init.stack.complete;
+                    
+              }//onload
         });
 
 
-        (typeof init!='undefined' && init?.stack && init.stack.complete);
-
+        complete();
+        
 
         function get_params(){
         
