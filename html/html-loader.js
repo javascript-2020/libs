@@ -63,8 +63,12 @@
         var list              = node.getElementsByTagName('script');
         [...list].forEach(script=>{
         
-              var nscript           = document.createElement('script');
-              nscript.textContent   = script.textContent;
+              var nscript                 = document.createElement('script');
+              if(script.src){
+                    nscript.src           = script.src;
+              }else{
+                    nscript.textContent   = script.textContent;
+              }
               script.parentNode.replaceChild(nscript,script);
               
         });
