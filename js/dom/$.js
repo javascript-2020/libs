@@ -765,15 +765,15 @@
               }
                                                                         //console.log(document.title);        
               var list    = doc.styleSheets;
-              var n       = list.length;
-              for(var i=0;i<n;i++){
+              var ni      = list.length;
+              for(var i=0;i<ni;i++){
               
                     var stylesheet    = list[i];
                                                                       //stylesheet.ownerNode &&
                                                                       //console.log(stylesheet.ownerNode.id);
                     var rules         = stylesheet.cssRules;
-                    var n             = rules.length;
-                    for(var j=0;j<n;j++){
+                    var nj             = rules.length;
+                    for(var j=0;j<nj;j++){
                     
                           var rule    = rules[j];
                           if(rule.selectorText===selector){
