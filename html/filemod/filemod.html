@@ -4,21 +4,13 @@
 
       <template shadowrootmode=open>
       
-            <div>
-            
-                  <script id=hello>
-                        console.log('hello');
-                  </script>
-                  
-                  <localfile>
-                        <script src='https://html-loader-dblv8aserliq.runkit.sh?localfile.api'></script>
-                  </localfile>
+            <localfile>
+                  <script src='https://html-loader-dblv8aserliq.runkit.sh?localfile.api'></script>
+            </localfile>
 
-                  <github>
-                        <script src='https://html-loader-dblv8aserliq.runkit.sh?github.api'></script>
-                  </github>
-
-            </div>
+            <github>
+                  <script src='https://html-loader-dblv8aserliq.runkit.sh?github.api'></script>
+            </github>
             
       </template>
       
@@ -38,23 +30,6 @@
                     
                           root          = $.full('filemod-root');
                           shadow        = root.shadowRoot;
-                          
-                          
-                          /*
-                          var list      = shadow.querySelectorAll('script');
-                          [...list].forEach(script=>{
-                          
-                                var nscript                 = document.createElement('script');
-                                if(script.src){
-                                      nscript.src           = script.src;
-                                }else{
-                                      nscript.textContent   = script.textContent;
-                                }
-                                var par   = script.parentNode;
-                                par.replaceChild(nscript,script);
-                                
-                          });
-                          */
                           
                     }//init
                     
