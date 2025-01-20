@@ -65,10 +65,10 @@
         
               var nscript                 = document.createElement('script');
               if(script.src){
-                                            console.log(script.src);
+                                                                                //console.log(script.src);
                     nscript.src           = script.src;
               }else{
-                                            console.log(script.id);
+                                                                                //console.log(script.id);
                     nscript.textContent   = script.textContent;
               }
               script.parentNode.replaceChild(nscript,script);
