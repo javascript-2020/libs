@@ -60,7 +60,7 @@
         var node              = div.firstElementChild;
         root.parentNode.replaceChild(node,root);
         
-        var list              = node.getElementsByTagName('script');
+        var list              = $('script',node,true);
         [...list].forEach(script=>{
         
               var nscript                 = document.createElement('script');
@@ -129,16 +129,21 @@
         }//api
 
                       
-        function $(nodename){
+        function $(nodename,par,all){
         
-              var list    = [document.head,document.body];
+              var list      = par ? [par] : [document.head,document.body];
+              var result    = [];
+              
               while(list.length){
               
                     var node    = list.shift();
                     
                     if(node){
                           if(node.nodeName.toLowerCase()===nodename){
-                                return node;
+                                if(!all){
+                                      return node;
+                                }
+                                result.push(node);
                           }
                           
                           if(node.shadowRoot){
@@ -150,7 +155,10 @@
                     }
                     
               }//while
-              return null;
+              if(!all){
+                    return null;
+              }
+              return result;
               
         }//$
 
