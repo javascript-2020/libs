@@ -34,23 +34,27 @@
               
                     var node    = list.shift();
                     
-                    if(node && node.nodeType==Node.ELEMENT_NODE){
-                          var f   = false;
-                          if(node.matches(sel))f    = true;
-                          if(node.nodeName.toLowerCase()===sel)f   = true;
-                          if(f){
-                                if(!all){
-                                      return node;
+                    if(node){
+                          if( node.nodeType==Node.ELEMENT_NODE              ||
+                              node.nodeType==Node.DOCUMENT_FRAGMENT_NODE
+                          ){
+                                var f   = false;
+                                if(node.matches(sel))f    = true;
+                                if(node.nodeName.toLowerCase()===sel)f   = true;
+                                if(f){
+                                      if(!all){
+                                            return node;
+                                      }
+                                      result.push(node);
                                 }
-                                result.push(node);
-                          }
-                          
-                          if(node.shadowRoot){
-                                console.log('shadowroot',node.nodeName);
-                                list.push(node.shadowRoot);
-                          }
-                          if(node.childNodes){
-                                [...node.childNodes].forEach(node=>list.push(node));
+                                
+                                if(node.shadowRoot){
+                                      console.log('shadowroot',node.nodeName);
+                                      list.push(node.shadowRoot);
+                                }
+                                if(node.childNodes){
+                                      [...node.childNodes].forEach(node=>list.push(node));
+                                }
                           }
                     }
                     
