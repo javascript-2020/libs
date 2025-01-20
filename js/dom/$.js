@@ -24,6 +24,41 @@
               return node;
               
         }//$
+
+        
+        $.nodename=function(nodename,par,all){
+        
+              var list      = par ? [par] : [document.head,document.body];
+              var result    = [];
+              
+              while(list.length){
+              
+                    var node    = list.shift();
+                    
+                    if(node){
+                          if(node.nodeName.toLowerCase()===nodename){
+                                if(!all){
+                                      return node;
+                                }
+                                result.push(node);
+                          }
+                          
+                          if(node.shadowRoot){
+                                list.push(node.shadowRoot);
+                          }
+                          if(node.childNodes){
+                                [...node.childNodes].forEach(node=>list.push(node));
+                          }
+                    }
+                    
+              }//while
+              if(!all){
+                    return null;
+              }
+              return result;
+              
+        }//nodedname
+
         
         $.input   = {};
         $.is      = {};
