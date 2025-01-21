@@ -73,7 +73,7 @@
         div.setHTMLUnsafe(txt);
         var node              = div.firstElementChild;
         
-        slots.forEach(slot=>node.insertAfter(slot,node.lastChild));
+        slots.forEach(slot=>node.append(slot));
         
         root.parentNode.replaceChild(node,root);
 
