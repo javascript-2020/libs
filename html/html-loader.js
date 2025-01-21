@@ -37,6 +37,10 @@
               nn      = nn.slice(0,-6);
               type    = 'local';
         }
+        if(nn.endsWith('-utils')){
+              nn      = nn.slice(0,-6);
+              type    = 'utils';
+        }
         
         
         var user      = 'javascript-2020';
@@ -45,6 +49,9 @@
 
         if(type=='local'){
               get_params();
+        }
+        if(type=='utils'){
+              get_params_utils(nn);
         }
                                                       console.log(path);
 
@@ -110,6 +117,14 @@
               path   += `html/${nn}.html`;
 
         }//get_params
+        
+        
+        function get_params_utils(nn){
+        
+              repo    = 'javascript-2020.github.io';
+              path    = `utils/html/${nn}/${nn}.html`;
+              
+        }//get_params_utils
         
         
         async function raw(){
