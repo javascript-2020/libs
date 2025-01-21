@@ -118,7 +118,6 @@
                         root                              = $(rootnode,'editor-root');
                         shadow                            = root.shadowRoot;
 
-                        import_style();
                         menumod.add.style(shadow);
                         var style                         = $(shadow,'style');
                         $.stylesheet.insert(style,'.icon');
@@ -283,6 +282,8 @@
                   async function setup(root,mode='javascript'){
           
                         await load;
+
+                        import_style();
                         
                         var node    = $(root,'#editor');
                         node.addEventListener('mousedown',update);
