@@ -61,7 +61,7 @@
         }else{
               txt   = await raw();
         }
-                                                      console.log(txt);
+                                                      //console.log(txt);
 
         var loader_script   = root.querySelector('script');
         slots               = [...root.childNodes];
