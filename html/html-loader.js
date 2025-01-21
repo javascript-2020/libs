@@ -149,7 +149,11 @@
                     var node    = list.shift();
                     
                     if(node){
-                          if(node.nodeName.toLowerCase()===nodename){
+                          var nn=node.nodeName.toLowerCase();
+                          if(nn.endsWith('-api')){
+                                nn    = nn.slice(0,-4);
+                          }
+                          if(nn===nodename){
                                 if(!all){
                                       return node;
                                 }
