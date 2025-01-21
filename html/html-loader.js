@@ -61,7 +61,7 @@
         }else{
               txt   = await raw();
         }
-
+                                                      console.log(txt);
 
         var loader_script   = root.querySelector('script');
         slots               = [...root.childNodes];
@@ -125,7 +125,7 @@
         function get_params_utils(nn){
         
               repo    = 'javascript-2020.github.io';
-              path    = `utils/html/${nn}/${nn}.html`;
+              path    = `utils/html/${nn}.html`;
               
         }//get_params_utils
         
