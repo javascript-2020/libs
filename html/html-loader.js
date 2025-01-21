@@ -66,7 +66,7 @@
         var loader_script   = root.querySelector('script');
         slots               = [...root.childNodes];
         var i               = slots.indexOf(loader_script);
-        slots.split(i,1);
+        slots.splice(i,1);
         
         txt                   = txt.trim();
         var div               = document.createElement('div');
