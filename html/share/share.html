@@ -1,0 +1,41 @@
+<share-root>
+
+      <template shadowrootmode=open>
+      
+            <button id=jsonblob style='margin-right:20px'>jsonblob</button>
+
+      </template>
+      
+      <script>
+      
+            share   = share();
+            
+            function share(){
+              
+              var obj   = {};
+              
+
+                    var mode    = 'jsonblob';
+
+                    
+                    var btn   = {};
+                    
+                    obj.initdom=function(rootnode){
+                      
+                          $(root,'button').onclick    = btn.share;
+                          
+                    }//initdom
+                    
+                    btn.share=function(e){
+                      
+                          
+                    }//share
+
+                    
+              return obj;
+              
+            }//share
+            
+      </script>
+      
+</share-root>
