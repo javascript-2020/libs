@@ -113,9 +113,9 @@
                   }//load
                   
                   
-                  obj.initdom=function(mode){
+                  obj.initdom=function(rootnode,mode){
                   
-                        root                              = $('editor-root');
+                        root                              = $(rootnode,'editor-root');
                         shadow                            = root.shadowRoot;
 
                         import_style();
