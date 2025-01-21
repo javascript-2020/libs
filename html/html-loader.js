@@ -63,12 +63,20 @@
         }
 
 
+        var loader_script   = root.querySelector('script');
+        slots               = [...root.childNodes];
+        var i               = slots.indexOf(loader_script);
+        slots.split(i,1);
         
         txt                   = txt.trim();
         var div               = document.createElement('div');
         div.setHTMLUnsafe(txt);
         var node              = div.firstElementChild;
+        
+        slots.forEach(slot=>node.insertAfter(slot,node.lastChild));
+        
         root.parentNode.replaceChild(node,root);
+
         
         var list              = $('script',node,true);
         [...list].forEach(script=>{
@@ -85,11 +93,6 @@
               }
               script.parentNode.replaceChild(nscript,script);
               
-              function onload(){
-              
-                    init.stack.complete;
-                    
-              }//onload
         });
 
 
