@@ -29,9 +29,14 @@
                                                                                 true && console.log('localfile');
               var obj   = {};
 
+                    var root,shadow;
+                    customElements.define('localfile-root',class extends HTMLElement{
+                          constructor(){super(),root=this}
+                    });
+                    shadow    = root.shadowRoot;
+
                     
                     var icon;
-
                     
                     obj.load    = {};
                     obj.save    = {};
@@ -40,8 +45,12 @@
   
                     obj.initdom=function(){
                                                                                 console.log('localfile.initdom');
-                          var root      = $.full('localfile-root');
+                          //var root      = $.full('localfile-root');
+                          //var shadow    = root.shadowRoot;
+                          
+                          var root      = localfile.root;
                           var shadow    = root.shadowRoot;
+
                           
                           menumod.add.style(shadow);
                           
