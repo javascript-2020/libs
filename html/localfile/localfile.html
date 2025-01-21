@@ -47,9 +47,8 @@
                                                                                 console.log('localfile.initdom');
                           menumod.add.style(shadow);
                           
-                          var css       = $.stylesheet.find.css('.icon');
-                          var style     = $(shadow,'style');
-                          style.sheet.insertRule(css);
+                          var style                       = $(shadow,'style');
+                          $.stylesheet.insert(style,'.icon');
 
                           
                           var card                    = $(shadow,'.menu');
