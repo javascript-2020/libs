@@ -1,3 +1,5 @@
+
+
 <share-root>
 
       <template shadowrootmode=open>
@@ -16,7 +18,8 @@
               
 
                     var mode    = 'jsonblob';
-
+                    jsonblob    = jsonblob();
+                    
                     
                     var btn   = {};
                     
@@ -32,6 +35,43 @@
                     }//share
 
                     
+                    function jsonblob(){
+                      
+                      var obj   = {};
+                      
+
+                          obj.load=function(){
+                            
+                                var json    = await jsonblob.util.query();
+                                if(json){
+                                      editor.setValue(json.txt,-1);
+                                      if(autorun.checked){
+                                            run();
+                                      }
+                                }
+                                
+                          }//load
+                          
+
+                          obj.save=function(){
+                            
+                                var json    = ui.read();
+                                jsonblob.util.save(json);
+                            
+                          }//save
+                          
+
+                          obj.delete=function(){
+                            
+                                jsonblob.util.delete()
+                            
+                          }//delete
+
+                          
+                      return obj;
+                      
+                    }//jsonblob
+                    
               return obj;
               
             }//share
@@ -39,3 +79,4 @@
       </script>
       
 </share-root>
+
