@@ -113,7 +113,8 @@
                   }//load
                   
                   
-                  obj.initdom=function(rootnode,mode){
+                  obj.initdom=function(rootnode,mode='js'){
+                  
                   
                         root                              = $(rootnode,'editor-root');
                         shadow                            = root.shadowRoot;
@@ -146,6 +147,48 @@
                         
                   }//initdom
 
+
+                  async function setup(root,mode='javascript'){
+          
+                        await load;
+
+                        import_style();
+
+                        switch(mode){
+                        
+                          case 'js'   : mode    = 'javascript';       break;
+                          
+                        }//switch
+                        
+                        
+                        var node    = $(root,'#editor');
+                        node.addEventListener('mousedown',update);
+                        node.addEventListener('keyup',update);
+                        
+                        editor      = ace.edit(node);
+                        editor.setShowInvisibles(false);
+                        editor.setShowPrintMargin(false);
+                        editor.setPrintMarginColumn(false);
+                        editor.setBehavioursEnabled(false);
+                        editor.setDisplayIndentGuides(false);
+                        editor.setScrollSpeed(2);
+                        editor.setFontSize(16);
+                        editor.session.setOptions({tabSize:2,useSoftTabs:true});
+                        //editor.setGhostText('\n\nctrl-enter - run & autosave\nctrl-s - save\nctrl-del - delete');
+                        editor.session.setMode('ace/mode/'+mode)                        
+                        editor.focus();
+                        editor.session.on('change',onchange);
+                        
+                        
+                        function onchange(e){
+          
+                              filename.save(true);
+                              update();
+                                                
+                        }//onchange
+                        
+                  }//editor
+
                   
                   import_style.ct   = 0;
                   
@@ -153,7 +196,7 @@
                   
                         import_style.ct++;
                         if(import_style.ct>=10){
-                              console.log('import_style timeout');
+                                                                                console.log('import_style timeout');
                               return;
                         }
                         
@@ -279,41 +322,6 @@
                   }//save
                   
           
-                  async function setup(root,mode='javascript'){
-          
-                        await load;
-
-                        import_style();
-                        
-                        var node    = $(root,'#editor');
-                        node.addEventListener('mousedown',update);
-                        node.addEventListener('keyup',update);
-                        
-                        editor      = ace.edit(node);
-                        editor.setShowInvisibles(false);
-                        editor.setShowPrintMargin(false);
-                        editor.setPrintMarginColumn(false);
-                        editor.setBehavioursEnabled(false);
-                        editor.setDisplayIndentGuides(false);
-                        editor.setScrollSpeed(2);
-                        editor.setFontSize(16);
-                        editor.session.setOptions({tabSize:2,useSoftTabs:true});
-                        //editor.setGhostText('\n\nctrl-enter - run & autosave\nctrl-s - save\nctrl-del - delete');
-                        editor.session.setMode('ace/mode/'+mode)                        
-                        editor.focus();
-                        editor.session.on('change',onchange);
-                        
-                        
-                        function onchange(e){
-          
-                              filename.save(true);
-                              update();
-                                                
-                        }//onchange
-                        
-                  }//editor
-          
-
                   function update(){
                   
                         var pos     = editor.getCursorPosition();
