@@ -749,6 +749,8 @@
 
               }//horiz
 
+              return slider_node;
+                
         }//slider
 
         
