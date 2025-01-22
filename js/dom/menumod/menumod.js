@@ -668,12 +668,9 @@
           `;
           obj.css     = css;
           
-          var style           = document.createElement('style');
-          style.textContent   = css;
-          document.head.append(style);
-          
           obj.add.style=function(par){    //d
-          
+
+                par                 = par||document.head;
                 var style           = document.createElement('style');
                 style.textContent   = css;
                 par.append(style);
