@@ -38,7 +38,9 @@
                     
                     function init(){
 
-                          var resolve,init.complete=new Promise(res=>resolve=res);
+                          var resolve;
+                          init.complete   = new Promise(res=>resolve=res);
+                          
                           ext.load.libs('js/io/jsonblob/jsonblob.js')
                             .then(result){
                                               
