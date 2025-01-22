@@ -42,7 +42,7 @@
                           init.complete   = new Promise(res=>resolve=res);
                           
                           ext.load.libs('js/io/jsonblob/jsonblob.js')
-                            .then(result){
+                            .then(result=>{
                                               
                                   [jsonblob]    = result;
                                   
@@ -50,7 +50,7 @@
                                   
                                   resolve();
                                   
-                            };
+                            });
 
                           
                           
