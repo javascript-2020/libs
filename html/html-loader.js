@@ -8,6 +8,7 @@
                 
         var add         = ()=>(typeof init!='undefined' && init?.stack && init.stack.add);
         var complete    = ()=>(typeof init!='undefined' && init?.stack && init.stack.complete);
+        
         add();
 
 
