@@ -4,7 +4,9 @@
 
       <template shadowrootmode=open>
       
-            <button id=jsonblob style='margin-right:20px'>jsonblob</button>
+            <style></style>
+            
+            <button style='margin-right:20px'>share</button>
 
       </template>
       
@@ -30,6 +32,9 @@
                     var mode    = 'jsonblob';
                     var jsonblob;
 
+                    var root;
+                    var shadow;
+
                     
                     var btn     = {};
 
@@ -39,7 +44,7 @@
                     function init(){
 
                           var resolve;
-                          init.complete   = new Promise(res=>resolve=res);
+                          init.complete   = new Promise(res=>resolve    = res);
                           
                           ext.load.libs('js/io/jsonblob/jsonblob.js')
                             .then(result=>{
@@ -55,7 +60,13 @@
                     }//init
                     
                     
-                    obj.initdom=function(rootnode){
+                    obj.initdom=function(rootnode){   //c
+                      
+                          root        = $.full('share-root');
+                          shadow      = root.shadowRoot;
+                          
+                          var style   = $(shadow,'style');
+                          $.stylesheet.insert(style,'button');
                       
                           $(root,'button').onclick    = btn.share;
                           
@@ -77,9 +88,10 @@
                       
                           await init.complete;
                           
+                          var json;
                           switch(mode){
                             
-                            case 'jsonblob'   : var json    = await jsonblob.util.query();        break;
+                            case 'jsonblob'   : json    = await jsonblob.util.query();        break;
                             
                           }//switch
                             
