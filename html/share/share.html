@@ -26,7 +26,7 @@
                           
                     }//initmod
 
-                    
+                                        
                     var mode    = 'jsonblob';
                     var jsonblob;
 
@@ -34,11 +34,22 @@
                     var btn     = {};
 
 
-                    obj.init=function(){
+                    obj.init=function(){return init()}
+                    
+                    function init(){
 
-                          [jsonblob]    = ext.load.libs('js/io/jsonblob/jsonblob.js');
+                          var resolve,init.complete=new Promise(res=>resolve=res);
+                          ext.load.libs('js/io/jsonblob/jsonblob.js')
+                            .then(result){
+                                              
+                                  [jsonblob]    = result;
+                                  
+                                  jsonblob      = jsonblob();
+                                  
+                                  resolve();
+                                  
+                            };
 
-                          jsonblob      = jsonblob();
                           
                           
                     }//init
@@ -64,6 +75,8 @@
 
                     obj.query=async function(){
                       
+                          await init.complete;
+                          
                           switch(mode){
                             
                             case 'jsonblob'   : var json    = await jsonblob.util.query();        break;
