@@ -28,11 +28,21 @@
 
                     
                     var mode    = 'jsonblob';
-                    jsonblob    = jsonblob();
+                    var jsonblob;
 
                     
                     var btn     = {};
 
+
+                    obj.init=function(){
+
+                          [jsonblob]    = ext.load.libs('js/io/jsonblob/jsonblob.js');
+
+                          jsonblob      = jsonblob();
+                          
+                          
+                    }//init
+                    
                     
                     obj.initdom=function(rootnode){
                       
@@ -40,6 +50,7 @@
                           
                     }//initdom
                     
+
                     btn.share=function(e){
                       
                           switch(mode){
@@ -49,46 +60,49 @@
                           }//switch
                           
                     }//share
-
                     
-                    function jsonblob(){
-                      
-                      var obj   = {};
-                      
 
-                          obj.load=function(){
+                    obj.load=function(){
+                      
+                          switch(mode){
                             
-                                var json    = await jsonblob.util.query();
-                                if(json){
-                                      editor.setValue(json.txt,-1);
-                                      if(autorun.checked){
-                                            run();
-                                      }
+                            case 'jsonblob'   : var json    = await jsonblob.util.query();        break;
+                            
+                          }//switch
+                            
+                          if(json){
+                                editor.setValue(json.txt,-1);
+                                if(autorun.checked){
+                                      run();
                                 }
-                                
-                          }//load
+                          }
                           
+                    }//load
+                    
 
-                          obj.save=function(){
-                            
-                                var json    = ui.read();
-                                jsonblob.util.save(json);
-                            
-                          }//save
-                          
-
-                          obj.delete=function(){
-                            
-                                jsonblob.util.delete()
-                            
-                          }//delete
-
-                          
-                      return obj;
+                    obj.save=function(){
                       
-                    }//jsonblob
+                          var json    = ui.read();
+                          switch(mode){
+                            
+                            case 'jsonblob'   : jsonblob.util.save(json);       break;
+                            
+                          }//switch
+                      
+                    }//save
+                    
 
+                    obj.delete=function(){
 
+                          switch(mode){
+                            
+                            case 'jsonblob'   : jsonblob.util.delete();       break;
+                            
+                          }//switch
+                      
+                    }//delete
+
+                          
                     
               return obj;
               
