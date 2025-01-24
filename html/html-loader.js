@@ -1,6 +1,6 @@
 
 
-(async()=>{debugger;
+(async()=>{
 
         var nodename;
         /* params */
