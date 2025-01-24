@@ -147,6 +147,10 @@
 
                         setup(shadow,mode);
 
+
+                        update();
+                        editor.focus();
+
                         
                   }//initdom
 
@@ -179,10 +183,9 @@
                         editor.session.setOptions({tabSize:2,useSoftTabs:true});
                         //editor.setGhostText('\n\nctrl-enter - run & autosave\nctrl-s - save\nctrl-del - delete');
                         editor.session.setMode('ace/mode/'+mode)                        
-                        editor.focus();
                         editor.session.on('change',onchange);
                         
-                        
+                                                
                         function onchange(e){
           
                               filename.save(true);
