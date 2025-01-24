@@ -2,6 +2,11 @@
 
 various libraries for different languages
 
+```
+                                                                                console.clear();
+                                                                                console.json=v=>console.log(JSON.strinigify(v,null,4));
+```
+
 
 ```
                   init.stack            = [];
