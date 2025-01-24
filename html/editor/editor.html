@@ -113,9 +113,9 @@
                   }//load
                   
                   
-                  obj.initdom=function(rootnode,mode='javascript'){debugger;
+                  obj.initdom=function(rootnode,mode='javascript'){
                   
-                        if(rootnode){
+                        if(rootnode){console.log('rootnode',rootnode);
                               root                        = $(rootnode,'editor-root');
                         }else{
                               root                        = $.full('editor-root');
