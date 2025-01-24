@@ -4,15 +4,28 @@ various libraries for different languages
 
 
 ```
-                  init.stack            = {};
+                  init.stack            = [];
                   init.stack.ct         = 0;
                   init.stack.total      = 1;
-                  Object.defineProperty(init.stack,'add',{get:()=>init.stack.total++});
-                  Object.defineProperty(init.stack,'complete',{get:()=>(init.stack.ct++,init.stack.ct==init.stack.total && init())});
+                  init.stack.mode       = 'log';
+                  init.stack.complete   = false;
+                  Object.defineProperty(init.stack,'add',{get:()=>{
+                        init.stack.total++;
+                        init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
+                  }});
+                  Object.defineProperty(init.stack,'complete',{get:()=>{
+                        init.stack.ct++;
+                        init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
+                        init.stack.ct>=init.stack.total && init();
+                  }});
+                  
+
+                  //  (typeof init!='undefined' && init?.stack && init.stack.add)
+                  //  (typeof init!='undefined' && init?.stack && init.stack.complete)
 
 
-
-                  innit.stack.complete;
+                  init.stack.add;
+                  init.stack.complete;
 
 
 ```
