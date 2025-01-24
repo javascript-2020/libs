@@ -113,10 +113,13 @@
                   }//load
                   
                   
-                  obj.initdom=function(rootnode,mode='js'){
+                  obj.initdom=function(rootnode,mode='javascript'){debugger;
                   
-                  
-                        root                              = $(rootnode,'editor-root');
+                        if(rootnode){
+                              root                        = $(rootnode,'editor-root');
+                        }else{
+                              root                        = $.full('editor-root');
+                        }
                         shadow                            = root.shadowRoot;
 
                         menumod.add.style(shadow);
