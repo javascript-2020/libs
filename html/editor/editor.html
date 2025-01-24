@@ -148,10 +148,6 @@
                         setup(shadow,mode);
 
 
-                        update();
-                        editor.focus();
-
-                        
                   }//initdom
 
 
@@ -185,6 +181,9 @@
                         editor.session.setMode('ace/mode/'+mode)                        
                         editor.session.on('change',onchange);
                         
+                        update();
+                        editor.focus();
+
                                                 
                         function onchange(e){
           
