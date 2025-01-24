@@ -144,6 +144,10 @@
                         
                         deficon                           = $(hdr,'#filename-icon').src;
                         
+                        $(shadow,'#clear').onclick        = btn.clear;
+                        $(shadow,'#copy').onclick         = btn.copy;
+                        $(shadow,'#paste').onclick        = btn.paste;
+                        
                         row                               = $(hdr,'#row');
                         row.onkeydown                     = kd.row;
                         row.onmousedown                   = e=>e.target.select();
@@ -267,6 +271,35 @@
                         }
                         
                   }//col
+
+
+                  btn.clear=function(e){
+            
+                        editor.setValue('',-1);
+                        cur   = null;
+                        editor.filename();
+                        editor.filename.save(false);
+                        output.kill();
+            
+                  }//clear
+            
+            
+                  btn.copy=function(){
+            
+                        var txt       = editor.getValue();
+                        navigator.clipboard.writeText(txt)
+                          .catch(err=>log.error(err));
+            
+                  }//copy
+            
+            
+                  btn.paste=function(){
+            
+                        navigator.clipboard.readText()
+                          .then(txt=>editor.setValue(txt,-1))
+                          .catch(err=>log.error(err));
+            
+                  }//paste
 
 
                   btn.top=function(){
