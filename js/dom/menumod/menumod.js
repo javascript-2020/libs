@@ -617,6 +617,12 @@
         /*
           //menu:
         */
+        
+                .menu-root {
+                      display               : inline;
+                      position              : relative;
+                }
+                
                 .menu-icon {
                       padding               : 3px;
                       width                 : 20px;
