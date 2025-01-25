@@ -32,12 +32,13 @@
               var obj   = {};
               
 
-                    var ui
+                    var ui,menumod
                     ;
                     
                     obj.initmod=function(params){
                       
-                          ui    = params.ui;
+                          ui        = params.ui;
+                          menumod   = params.menumod;
                           
                     }//initmod
 
@@ -110,8 +111,14 @@
                           }//switch
                           
                     }//share
+  
+  //:
+  
+                    function menu(type,opt){
+                    }//menu
                     
-
+  //:
+  
                     obj.query=async function(){
                       
                           await init.complete;
