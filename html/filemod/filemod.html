@@ -12,7 +12,7 @@
                   
             </style>
             
-            <div id=root>
+            <div id=root style='display:none'>
             
                   <localfile-api>
                         <script src='https://html-loader-dblv8aserliq.runkit.sh?localfile'></script>
@@ -99,6 +99,7 @@
                           autosave.onchange                 = e=>obj.autosave   = autosave.checked;
                           obj.autosave                      = autosave.checked;
 
+                          $(shadow,'#root').style.display   = '';
                           
                     }//initdom
                     
