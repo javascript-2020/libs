@@ -706,6 +706,7 @@
 
               slider.md=function(){
 
+                    document.body.style.userSelect    = 'none';
                     if(typeof callback?.md=='function'){
                           callback.md();
                     }
@@ -715,6 +716,7 @@
 
               slider.mu=function(){
 
+                    document.body.style.userSelect    = '';
                     if(typeof callback?.mu=='function'){
                           callback.mu();
                     }
