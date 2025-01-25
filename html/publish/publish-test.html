@@ -1,0 +1,124 @@
+
+
+      <style>
+            html{height:100%}
+            body {height:calc(100% - 16px);font-family:arial}
+            
+            .icon {width:30px;height:30px;border:1px solid gray;border-radius:3px;box-sizing:border-box;cursor:pointer;}
+            button {padding:5px 10px;cursor:pointer;height:30px;font-size:16px}            
+      </style>
+      
+      <script init>
+                                                                          console.clear();
+                                                                          console.json=v=>console.log(JSON.stringify(v,null,4));
+                                                                          console.log('publish test');
+            var publish;
+
+            
+            async function init(){
+                                                                          console.log('init');
+                  keydown.add(kd);
+                  
+                  menumod                   = menumod();
+                  menumod.on.close          = ()=>{};
+                  
+                  publish.initmod({menumod});
+                  
+                  
+                  initdom();
+
+            }//init
+
+
+            init.stack            = [];
+            init.stack.ct         = 0;
+            init.stack.total      = 1;
+            init.stack.mode       = 'log';
+            init.stack.complete   = false;
+            Object.defineProperty(init.stack,'add',{get:()=>{
+                  init.stack.total++;
+                  init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
+            }});
+            Object.defineProperty(init.stack,'complete',{get:()=>{
+                  init.stack.ct++;
+                  init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
+                  init.stack.ct>=init.stack.total && init();
+            }});
+
+      </script>
+      
+
+      <div>
+            <publish-api>
+                  <script src='https://html-loader-dblv8aserliq.runkit.sh/'></script>
+            </publish-api>
+      </div>
+      
+      <div>
+            <button id=test>test</button>
+      </div>
+
+
+      <script libs>
+                                                                                console.log('libs');
+            init.stack.add;
+            
+            var ext;
+            var $,datatype,menumod,keydown;
+            
+            fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
+              .then(res=>res.text().then(async txt=>{
+
+                  ext   = eval(txt);
+
+                  var promise   = ext.load.libs(
+                        'js/dom/$.js',
+                        'js/core/datatype.js',
+                        'js/dom/menumod/menumod.js.api',
+                        'js/dom/keydown/keydown.js'
+                  );
+                  
+                  [$,datatype,menumod,keydown]   = await promise;
+
+                  init.stack.complete;
+
+              }));
+
+      </script>
+
+      
+      <script initdom>
+      
+            function initdom(){
+            
+                  publish.initdom();
+                  
+                  
+                  $('#test').onclick    = e=>{};
+                  
+                  
+                  
+            }//initdom
+
+            function kd(e){
+    
+                  if(e.key==' ' && e.ctrlKey){
+                        menumod.open();
+                  }
+                  
+            }//kd
+            
+      </script>
+      
+
+
+<checkbox-one-template>
+      <script src='https://html-loader-dblv8aserliq.runkit.sh/?checkbox-one-template'></script>
+</checkbox-one-template>
+
+
+      <script>
+            init.stack.complete
+      </script>
+      
+      
