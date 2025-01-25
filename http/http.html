@@ -15,6 +15,29 @@
             
             <div class=menu>
             
+                  <section class=menu-title>
+                        http-io
+                  </section>
+                  
+                  <section host>
+                        <div class=menu-hdr>
+                              host
+                        </div>
+                        <input id=host>
+                  </section>
+                  
+                  <section port>
+                        <div class=menu-hdr>
+                              port
+                        </div>
+                        <input id=port>
+                  </section>
+                  
+                  <section btns>
+                        <button id=load>load</button>
+                        <button id=save>save</button>
+                  </section>
+                  
             </div>
             
       </template>
@@ -29,6 +52,16 @@
             
               
                   obj.initdom=function(){
+                    
+                        root                              = $.full('http-root');
+                        shadow                            = root.shadowRoot;
+                        
+                        var style                         = $(shadow,'style');
+                        menumod.add.style(shadow);
+                        
+                        var card                          = $(shadow,'.menu');
+                        $(shadow,'.menu-icon').onclick    = menumod.click(card,true,true,menu);
+                        
                   }//initdom
                   
               return obj;
