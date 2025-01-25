@@ -12,6 +12,9 @@
                   <script src='https://html-loader-dblv8aserliq.runkit.sh?github'></script>
             </github-api>
             
+            <button id=save>save</button>
+            <checkbox-one id=autosave></checkbox-one>
+            
       </template>
       
       <script>
@@ -21,7 +24,26 @@
             function filemod(){
                                                                                 console.log('filemod');
               var obj   = {};
+
             
+                    var menumod
+                    ;
+                    
+                    obj.initmod=function(params){
+                      
+                          menumod   = params.menumod;
+                          
+                    }//initmod
+
+                    
+                    var cur;
+
+                    var autosave;
+
+                    
+                    var btn   = {};
+                    
+                    
                     obj.init=function(){
                     
                         localfile.load.complete   = (txt,path,icon)=>complete.load('localfile',txt,path,icon);
@@ -34,14 +56,54 @@
                     
                     
                     obj.initdom=function(){
+                    
+                          root                          = $.full('filemod-root');
+                          shadow                        = root.shadowRoot;
+
+                          var style                     = $(shadow,'style');                          
+                          $.stylesheet.insert(style,'button');
+
                           
                           localfile.initdom();
                           github.initdom();
+
+
+                          $(shadow,'#save').onclick     = btn.save;
+
+                          var card                      = $(shadow,'.menu');
+                          $(shadow,'#icon').onclick     = menumod.click(card,false,false,menu);
+
+                          autosave                      = $(shadow,'#autosave');
+                          autosave.checked              = false;
 
                           
                     }//initdom
                     
 
+                    btn.save=function(e){save()}
+                    
+                    
+                    obj.save=function(){return save()}
+                    
+                    function save(){
+                    
+                          e.preventDefault();
+                          
+                          if(!cur){
+                                log.orange('no file');
+                                return;
+                          }
+                          
+                          var txt   = editor.getValue();
+                          
+                          if(cur.type=='github'){
+                                github.save(txt);
+                          }
+                          if(cur.type=='local'){
+                                localfile.save();
+                          }
+                    
+                    }//save
                     
               return obj;
               
