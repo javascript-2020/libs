@@ -11,6 +11,9 @@
       <script init>
                                                                           console.clear();
                                                                           console.json=v=>console.log(JSON.stringify(v,null,4));
+            var filemod;
+
+            
             async function init(){
                                                                           console.log('init');
                   keydown.add(kd);
@@ -44,9 +47,15 @@
       </script>
       
 
-      <filemod-api>
-            <script src='https://html-loader-dblv8aserliq.runkit.sh/'></script>
-      </filemod-api>
+      <div>
+            <filemod-api>
+                  <script src='https://html-loader-dblv8aserliq.runkit.sh/'></script>
+            </filemod-api>
+      </div>
+      
+      <div>
+            <button id=test>test</button>
+      </div>
 
 
       <script libs>
@@ -96,9 +105,14 @@
       </script>
       
 
+
+<checkbox-one-template>
+      <script src='https://html-loader-dblv8aserliq.runkit.sh/?checkbox-one-template'></script>
+</checkbox-one-template>
+
+
       <script>
             init.stack.complete
       </script>
-
       
       
