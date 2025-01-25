@@ -95,7 +95,7 @@
 
                           autosave                          = $(shadow,'#autosave');
                           autosave.checked                  = false;
-                          autosave.onchange                 = v=>obj.autosave   = v;
+                          autosave.onchange                 = e=>obj.autosave   = autosave.checked;
                           obj.autosave                      = autosave.checked;
 
                           
