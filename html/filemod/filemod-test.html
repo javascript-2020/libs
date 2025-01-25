@@ -2,10 +2,10 @@
 
       <style>
             html{height:100%}
-            body {height:calc(100% - 16px)}
+            body {height:calc(100% - 16px);font-family:arial}
             
             .icon {width:30px;height:30px;border:1px solid gray;border-radius:3px;box-sizing:border-box;cursor:pointer;}
-            
+            button {padding:5px 10px;cursor:pointer;height:30px;font-size:16px}            
       </style>
       
       <script init>
@@ -17,6 +17,9 @@
                   
                   menumod                   = menumod();
                   menumod.on.close          = ()=>{};
+                  
+                  filemod.initmod({menumod});
+                  
                   
                   initdom();
 
@@ -61,7 +64,7 @@
                   var promise   = ext.load.libs(
                         'js/dom/$.js',
                         'js/core/datatype.js',
-                        'js/dom/menumod/menumod.js',
+                        'js/dom/menumod/menumod.js.api',
                         'js/dom/keydown/keydown.js'
                   );
                   
