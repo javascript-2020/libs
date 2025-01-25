@@ -1,18 +1,25 @@
 
 
-<share-root>
+<publish-root>
 
       <template shadowrootmode=open>
       
             <style>
             
-                  img {}
+                  #root {display:inline-flex}
                   
             </style>
             
-            <button style='margin-right:20px'>publish</button>
-            
-            <img id=menu>
+            <div id=root style='display:none'>
+                  <button style='margin-right:20px'>publish</button>
+                  
+                  <div class=menu-root>
+                        <img class=menu-icon>
+                        <div class=menu style='display:none'>
+                              <checkbox-one id=autorun></checkbox-one>
+                        </div>
+                  </div>
+            </div>
 
       </template>
       
@@ -41,6 +48,7 @@
                     var root;
                     var shadow;
 
+                    var autorun;
                     
                     var btn     = {};
 
@@ -68,18 +76,32 @@
                     
                     obj.initdom=function(rootnode){   //c
                       
-                          root        = $.full('share-root');
-                          shadow      = root.shadowRoot;
+                          root                              = $.full('publish-root');
+                          shadow                            = root.shadowRoot;
                           
-                          var style   = $(shadow,'style');
+                          var style                         = $(shadow,'style');
+                          menumod.add.style(shadow);
                           $.stylesheet.insert(style,'button');
+                          
                       
-                          $(shadow,'button').onclick    = btn.share;
+                          $(shadow,'button').onclick        = btn.publish;
+
+                          var card                          = $(shadow,'.menu');
+                          $(shadow,'.menu-icon').onclick    = menumod.click(card,false,false,menu);
+
+                          autorun                           = $(shadow,'#autorun');
+                          autorun.checked                   = false;
+                          autorun.onchange                  = e=>obj.autorun   = autorun.checked;
+                          obj.autorun                       = autorun.checked;
+
+
+                          $(shadow,'#root').style.display   = '';
+                          
                           
                     }//initdom
                     
 
-                    btn.share=function(e){
+                    btn.publish=function(e){
                       
                           switch(mode){
                             
@@ -141,5 +163,5 @@
             
       </script>
       
-</share-root>
+</publish-root>
 
