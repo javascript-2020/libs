@@ -69,7 +69,8 @@
                           root                          = $.full('filemod-root');
                           shadow                        = root.shadowRoot;
 
-                          var style                     = $(shadow,'style');                          
+                          var style                     = $(shadow,'style'); 
+                          menumod.add.style(shadow);
                           $.stylesheet.insert(style,'button');
 
                           
