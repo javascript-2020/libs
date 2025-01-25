@@ -3,6 +3,9 @@
       <style>
             html{height:100%}
             body {height:calc(100% - 16px)}
+            
+            .icon {width:30px;height:30px;border:1px solid gray;border-radius:3px;box-sizing:border-box;cursor:pointer;}
+            
       </style>
       
       <script init>
@@ -13,7 +16,7 @@
                   keydown.add(kd);
                   
                   menumod                   = menumod();
-                  menumod.on.close          = ()=>editor.focus();
+                  menumod.on.close          = ()=>{};
                   
                   initdom();
 
