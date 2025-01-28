@@ -253,7 +253,10 @@
                     if(e.target!==chkbox){
                           chkbox.checked    = !chkbox.checked;
                     }
-                    callback(chk);
+                      
+                    if(typeof callback=='function'){
+                          callback(chk);
+                    }
                     
               }//click
               
