@@ -234,7 +234,7 @@
         
         $.chkbox=function(root,sel,callback){
         
-              if(!callback){
+              if(callback===undefined){
                     callback    = sel;
                     sel         = root;
                     root        = document;
