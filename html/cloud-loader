@@ -16,7 +16,7 @@
 							}
 
 					
-							var loader_url	=	'https://raw.githubusercontent.com/javascript-2020/libs/html/html-loader.js';
+							var loader_url	=	'https://raw.githubusercontent.com/javascript-2020/libs/main/html/html-loader.js';
 							
 							var err;
 							try{
