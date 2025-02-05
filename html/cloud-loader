@@ -1,0 +1,47 @@
+
+
+
+
+				exports['html-loader']    = request;
+
+
+				async function request(req,res){
+
+
+							var url   = req.url.slice(1);
+
+							var i	=	url.indexOf('?');
+							if(i!=-1){
+										var nodename		=	url.slice(i+1);										
+							}
+
+					
+							var loader_url	=	'https://raw.githubusercontent.com/javascript-2020/libs/html/html-loader.js';
+							
+							var err;
+							try{
+										var res	=	await fetch(loader_url);
+										var txt		=	await res.text();
+							}
+							catch(err2){
+										err		=	err2;
+							}
+							if(err){
+										res.writeHead(500);
+										res.end(err.toString());
+										return;
+							}
+							
+							if(nodename){
+										var i		=	txt.indexOf('/* params */');
+										i			=	txt.indexOf('\n',i)+1;
+										txt		=	txt.slice(0,i)+`var nodename='${nodedname}';`+txt.slice(i+1);
+							}
+							
+							res.writeHead(200,{'content-type':'text/javascript'});
+							res.end(txt);
+
+				}//request
+
+
+
