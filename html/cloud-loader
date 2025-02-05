@@ -20,8 +20,8 @@
 							
 							var err;
 							try{
-										var res	=	await fetch(loader_url);
-										var txt		=	await res.text();
+										var res2		=	await fetch(loader_url);
+										var txt			=	await res2.text();
 							}
 							catch(err2){
 										err		=	err2;
