@@ -128,7 +128,7 @@
                   }//load
                   
                   
-                  obj.initdom=function(rootnode,mode='javascript'){
+                  obj.initdom=async function(rootnode,mode='javascript'){
                   
                         if(rootnode){
                               root                        = $(rootnode,'editor-root');
@@ -163,7 +163,7 @@
                         $(hdr,'#bottom').onclick          = btn.bottom;
 
 
-                        setup(shadow,mode);
+                        await setup(shadow,mode);
 
 
                   }//initdom
