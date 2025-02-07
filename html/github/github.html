@@ -514,7 +514,7 @@
                     async function load(api){
                     
                           var {token,owner,repo,branch,path}    = read();
-                          
+                          var api   = true;
                           var txt   = await load.text(api,token,owner,repo,branch,path);
                           
                           if(typeof obj.load.complete=='function'){
