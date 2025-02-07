@@ -152,6 +152,7 @@
                 
                 <div id=btns>
                       <input value=load type=button>
+                      <input value=load-raw type=button>
                       <input value=save type=button>
                       <input value=backup type=button>
                 </div>
@@ -328,9 +329,10 @@
                                                                   
                                                             };
                                                             
-                          $(shadow,'[value=load]').onclick      = btn.load;
-                          $(shadow,'[value=save]').onclick      = btn.save;
-                          $(shadow,'[value=backup]').onclick    = btn.backup;
+                          $(shadow,'[value=load]').onclick        = btn.load;
+                          $(shadow,'[value=load-raw]').onclick    = btn.load.raw;
+                          $(shadow,'[value=save]').onclick        = btn.save;
+                          $(shadow,'[value=backup]').onclick      = btn.backup;
                           
                     }//initdom
                     
@@ -357,14 +359,20 @@
                     
                     btn.load=function(e){
                     
-                          var api   = false;
+                          var api   = true;
                           if(e.shiftKey){
-                                api   = true;
+                                api   = false;
                           }
                           load(api);
                           
                     }//load
                     
+                    
+                    btn.load.raw=function(){
+                      
+                          load(false);
+                          
+                    }//raw
                     
                     btn.save=function(){
                     
