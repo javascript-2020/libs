@@ -561,8 +561,13 @@
                                 log.red(err.message);
                                 return;
                           }
-                          
-                          var txt   = await res.text();
+                          var txt;
+                          if(api){
+                                var json    = await res.json();
+                                txt         = window.atob(json.content);
+                          }else{
+                                txt   = await res.text();
+                          }
                           
                           if(!res.ok){
                                 log.red(txt);
