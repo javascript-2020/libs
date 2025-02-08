@@ -104,14 +104,14 @@
         
               repo    = 'javascript-2020.github.io';
               path    = window.location.pathname;
-              
-              if(path==='srcdoc'){
-                    var base          = document.querySelector('base');
-                    if(base){
-                          var href    = base.href;
-                          var url     = new URL(href);
-                          path        = url.pathname;
-                    }else{
+                
+              var base    = document.querySelector('base');
+              if(base){
+                    var href    = base.href;
+                    var url     = new URL(href);
+                    path        = url.pathname;
+              }else{
+                    if(path==='srcdoc'){
                           path        = window.parent.location.pathname;
                     }
               }
