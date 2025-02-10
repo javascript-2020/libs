@@ -32,11 +32,13 @@
                   
                 //vars:-
                 
-                    var root,shadow;
+                    var root;
+                    var shadow;
+                    /*
                     customElements.define('localfile-root',class extends HTMLElement{
                           constructor(){super(),root=this}
                     });
-                    shadow    = root.shadowRoot;
+                    */
 
                     
                     var icon;
@@ -51,18 +53,21 @@
                     
                 //:
   
-                    obj.initdom=function(){
+                    obj.initdom=function(rootnode){
 
+                          var root          = rootnode;
+                          shadow            = root.shadowRoot;
+                          
                           menumod.add.style(shadow);
                           
-                          var style                       = $(shadow,'style');
+                          var style         = $(shadow,'style');
                           $.stylesheet.insert(style,'.icon');
 
                           
-                          var card                    = $(shadow,'.menu');
+                          var card          = $(shadow,'.menu');
                           
-                          icon                        = $(shadow,'.icon');
-                          icon.onclick   = menumod.click(card,false,false,menu);
+                          icon              = $(shadow,'.icon');
+                          icon.onclick      = menumod.click(card,false,false,menu);
 
 
                     }//initdom
