@@ -49,7 +49,7 @@
 
       <div>
             <filemod-api>
-                  <script src='https://html-loader-dblv8aserliq.runkit.sh/'></script>
+                  <script src='https://html-loader-1024713184986.us-central1.run.app/?localfile'></script>
             </filemod-api>
       </div>
       
@@ -90,7 +90,9 @@
       
             function initdom(){
             
-                  filemod.initdom();
+                  filemod.root    = $('filemod-root');
+                  debugger;
+                  filemod.initdom(filemod.root);
                   
                   
                   $('#test').onclick    = e=>alert(filemod.autosave);
