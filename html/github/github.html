@@ -198,7 +198,7 @@
                 
                   obj.initdom=function(rootnode){   //c
 
-                        root                            = rootnode||$.full('github-root');
+                        root                            = $.$(rootnode,'github-root');
                         shadow                          = root.shadowRoot;
 
                         menumod.add.style(shadow);
