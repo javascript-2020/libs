@@ -25,6 +25,7 @@
               
         }//$
 
+
         $.full    = function(sel,par,all){
         
               var list      = par ? [par] : [document.head,document.body];
@@ -65,6 +66,18 @@
               return result;
               
         }//full
+
+        
+        $.$=function(rootnode,nodename){
+        
+              if(rootnode){
+                    var node    = $(rootnode,nodename);
+                    return node;
+              }
+              var node    = $.full(nodename);
+              return node;
+              
+        }//$
 
         
         $.input   = {};
