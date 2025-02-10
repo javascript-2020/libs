@@ -52,9 +52,9 @@
                     var btn     = {};
 
 
-                    init();
-                    
-                    function init(){
+                //:
+                
+                    obj.init=function(){
 
                           var resolve;
                           init.complete   = new Promise(res=>resolve    = res);
@@ -72,7 +72,8 @@
                           
                     }//init
                     
-                    
+                //:
+                
                     obj.initdom=function(rootnode){   //c
                       
                           root                              = $.full('publish-root');
