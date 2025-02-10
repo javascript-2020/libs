@@ -140,11 +140,7 @@
                   
                   obj.initdom=async function(rootnode,mode='javascript'){
                   
-                        if(rootnode){
-                              root                        = $(rootnode,'editor-root');
-                        }else{
-                              root                        = $.full('editor-root');
-                        }
+                        root                              = $.$(rootnode,'editor-root');
                         shadow                            = root.shadowRoot;
 
                         menumod.add.style(shadow);
