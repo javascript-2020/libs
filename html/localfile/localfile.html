@@ -61,7 +61,7 @@
   
                     obj.initdom=function(rootnode){
 
-                          var root          = rootnode;
+                          var root          = rootnode||$.full('localfile-root');
                           shadow            = root.shadowRoot;
                           
                           menumod.add.style(shadow);
