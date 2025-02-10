@@ -96,13 +96,8 @@
                         menumod.add.style(shadow);
                         $.stylesheet.insert(style,'button');
 
-
-                        var node    = $(shadow,'localfile-root');
-                        localfile.initdom(node);
-                        
-                        var node    = $(shadow,'github-root');
-                        github.initdom(node);
-
+                        localfile.initdom(shadow);
+                        github.initdom(shadow);
 
                         $(shadow,'#save').onclick         = btn.save;
 
