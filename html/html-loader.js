@@ -1,5 +1,15 @@
 
 
+
+/*
+
+//github:libs/html/html-loader.js:d
+
+10-02-25
+
+*/
+
+
 (async()=>{
 
         var nodename;
@@ -28,7 +38,10 @@
         var mode      = 'raw';
         var type      = 'libs';
 
-
+        if(nn.endsWith('-debugger')){
+              nn      = nn.slice(0,-9);
+              debugger;
+        }
         if(nn.endsWith('-api')){
               nn      = nn.slice(0,-4);
               mode    = 'api';
@@ -204,4 +217,3 @@
 
         
 })();
-
