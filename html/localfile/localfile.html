@@ -27,6 +27,11 @@
                                                                                 true && console.log('localfile');
               var obj   = {};
 
+                  obj.initmod=function(params){
+                  }//initmod
+                  
+                //vars:-
+                
                     var root,shadow;
                     customElements.define('localfile-root',class extends HTMLElement{
                           constructor(){super(),root=this}
@@ -39,10 +44,15 @@
                     obj.load    = {};
                     obj.save    = {};
 
-  //:
+                //:
+                
+                    obj.init=function(){
+                    }//init
+                    
+                //:
   
                     obj.initdom=function(){
-                                                                                console.log('localfile.initdom');
+
                           menumod.add.style(shadow);
                           
                           var style                       = $(shadow,'style');
