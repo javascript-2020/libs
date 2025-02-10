@@ -23,66 +23,70 @@
       
       <script>
       
-            (()=>{
-                                                                        console.log('top-menu');      
-                  menu.top    = mod();
+            mod.menu.top=function(){
+                                                                  console.log('top-menu');      
+              var obj   = {};
+              
+                  var menumod
+                  ;
                   
-                  function mod(){
-                  
-                    var obj   = {};
+                  obj.initmod=function(params){
                     
+                        menumod   = params.menumod;
+                        
+                  }//initmod
+                  
+              //:
+              
+                  obj.initdom=function(rootnode){
+                  
+                        var root      = rootnode||$.full('top-menu');
+                        var shadow    = root.shadowRoot;
+
+                        menumod.add.style(shadow);
+                        
+                        
+                        var card                    = $(shadow,'.menu');
+                        $(shadow,'#icon').onclick   = menumod.click(card,false,false,menu);
+
+                        
+                  }//initdom
+                  
+                  
+                  function menu(type,opt){
+                  
+                      if(type=='opt'){
+                            menu[opt.id]();
+                      }
+                  
+                  }//menu
                     
-                        obj.initdom=function(){
-                        
-                              var root      = $.full('top-menu');
-                              var shadow    = root.shadowRoot;
-    
-                              menumod.add.style(shadow);
-                              
-                              
-                              var card                    = $(shadow,'.menu');
-                              $(shadow,'#icon').onclick   = menumod.click(card,false,false,menu);
-    
-                              
-                        }//initdom
-                        
-                        
-                        function menu(type,opt){
-                        
-                            if(type=='opt'){
-                                  menu[opt.id]();
-                            }
-                        
-                        }//menu
-                          
-                        
-                        menu.editor=function(){
                   
-                              window.open('/utils/editor/editor.html');
-                  
-                        }//editor
+                  menu.editor=function(){
             
-                  
-                        menu['js-console']=function(){
-                  
-                              window.open('/utils/js-console/js-console.html');
-                  
-                        }//js-console
-                          
-                        
-                        menu['html-editor']=function(){
-                        
-                              window.open('/utils/html-editor/html-editor.html');
-                        
-                        }//html-editor
-                        
-                          
-                    return obj;
-                    
-                  }//mod
-                  
-            })();
+                        window.open('/utils/editor/editor.html');
             
+                  }//editor
+      
+            
+                  menu['js-console']=function(){
+            
+                        window.open('/utils/js-console/js-console.html');
+            
+                  }//js-console
+                    
+                  
+                  menu['html-editor']=function(){
+                  
+                        window.open('/utils/html-editor/html-editor.html');
+                  
+                  }//html-editor
+                  
+                    
+              return obj;
+              
+            }//mod
+                  
       </script>
       
 </top-menu>
