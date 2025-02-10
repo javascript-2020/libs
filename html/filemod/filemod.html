@@ -44,30 +44,43 @@
               var obj   = {};
 
             
-                    var menumod
-                    ;
+                  var menumod,complete
+                  ;
+                  
+                  obj.initmod=function(params){
                     
-                    obj.initmod=function(params){
-                      
-                          menumod   = params.menumod;
-                          
-                    }//initmod
+                        menumod     = params.menumod;
+                        complete    = params.complete;
+                        
+                  }//initmod
 
+              //vars:-
 
-                    var cur;
-                    Object.defineProperty(obj,'cur',{get:()=>cur,set:v=>cur=v});
+                  var localfile;
+                  var github;
+                  
+                  var cur;
+                  Object.defineProperty(obj,'cur',{get:()=>cur,set:v=>cur=v});
 
-                    var autosave;
+                  var autosave;
 
                     
-                    var btn   = {};
+                  var btn   = {};
                     
                     
                     obj.init=function(){
                     
+                        localfile                 = localfile();
+                        github                    = github();
+
+                        localfile.initmod({});
+                        github.initmod({});
+                        
+                        localfile.init();
+                        github.init();
+                        
                         localfile.load.complete   = (txt,path,icon)=>complete.load('localfile',txt,path,icon);
                         localfile.save.complete   = (path,icon)=>complete.save('localfile',path,icon);
-                        
                         github.load.complete      = (txt,path,icon)=>complete.load('github',txt,path,icon);
                         github.save.complete      = (path,icon)=>complete.save('github',path,icon);
                         
@@ -83,9 +96,11 @@
                           menumod.add.style(shadow);
                           $.stylesheet.insert(style,'button');
 
+                          var node    = $(root,'localfile');
+                          localfile.initdom(node);
                           
-                          localfile.initdom();
-                          github.initdom();
+                          var node    = $(root,'github');
+                          github.initdom(node);
 
 
                           $(shadow,'#save').onclick         = btn.save;
