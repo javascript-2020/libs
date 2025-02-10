@@ -76,9 +76,9 @@
                     }//init
                     
                     
-                    obj.initdom=function(){
+                    obj.initdom=function(rootnode){
                     
-                          root                          = $.full('filemod-root');
+                          root                          = rootnode||$.full('filemod-root');
                           shadow                        = root.shadowRoot;
 
                           var style                     = $(shadow,'style'); 
