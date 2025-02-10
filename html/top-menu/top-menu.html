@@ -24,7 +24,7 @@
       <script>
       
             mod.menu.top=function(){
-                                                                  console.log('top-menu');      
+                                                                  true && console.log('top-menu');      
               var obj   = {};
               
                   var menumod
@@ -44,6 +44,7 @@
                   }//init
                   
               //:
+              
                   obj.initdom=function(rootnode){
                   
                         var root      = rootnode||$.full('top-menu');
