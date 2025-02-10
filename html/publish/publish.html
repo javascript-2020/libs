@@ -76,7 +76,7 @@
                 
                     obj.initdom=function(rootnode){   //c
                       
-                          root                              = rootnode||$.full('publish-root');
+                          root                              = $.$(rootnode,'publish-root');
                           shadow                            = root.shadowRoot;
                           
                           var style                         = $(shadow,'style');
