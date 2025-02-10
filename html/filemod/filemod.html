@@ -67,84 +67,87 @@
                     
                   var btn   = {};
                     
-                    
-                    obj.init=function(){
-                    
-                        localfile                 = localfile();
-                        github                    = github();
+              //:
+              
+                  obj.init=function(){
+                  
+                      localfile                 = localfile();
+                      github                    = github();
 
-                        localfile.initmod({});
-                        github.initmod({});
+                      localfile.initmod({});
+                      github.initmod({});
+                      
+                      localfile.init();
+                      github.init();
+                      
+                      localfile.load.complete   = (txt,path,icon)=>complete.load('localfile',txt,path,icon);
+                      localfile.save.complete   = (path,icon)=>complete.save('localfile',path,icon);
+                      github.load.complete      = (txt,path,icon)=>complete.load('github',txt,path,icon);
+                      github.save.complete      = (path,icon)=>complete.save('github',path,icon);
+                      
+                  }//init
+                                      
+              //:
+              
+                  obj.initdom=function(rootnode){
+                  
+                        root                          = rootnode||$.full('filemod-root');
+                        shadow                        = root.shadowRoot;
+
+                        var style                     = $(shadow,'style'); 
+                        menumod.add.style(shadow);
+                        $.stylesheet.insert(style,'button');
+
+
+                        var node    = $(root,'localfile-root');
+                        localfile.initdom(node);
                         
-                        localfile.init();
-                        github.init();
+                        var node    = $(root,'github-root');
+                        github.initdom(node);
+
+
+                        $(shadow,'#save').onclick         = btn.save;
+
+                        var card                          = $(shadow,'.menu');
+                        $(shadow,'.menu-icon').onclick    = menumod.click(card,false,false,menu);
+
+                        autosave                          = $(shadow,'#autosave');
+                        autosave.checked                  = false;
+                        autosave.onchange                 = e=>obj.autosave   = autosave.checked;
+                        obj.autosave                      = autosave.checked;
+
+
+                        $(shadow,'#root').style.visibility    = '';
                         
-                        localfile.load.complete   = (txt,path,icon)=>complete.load('localfile',txt,path,icon);
-                        localfile.save.complete   = (path,icon)=>complete.save('localfile',path,icon);
-                        github.load.complete      = (txt,path,icon)=>complete.load('github',txt,path,icon);
-                        github.save.complete      = (path,icon)=>complete.save('github',path,icon);
+                  }//initdom
+                    
+
+                  btn.save=function(e){save()}
+                    
+                    
+                  obj.save=function(){return save()}
+                    
+                  function save(){
+                  
+                        if(!cur){
+                              log.orange('no file');
+                              return;
+                        }
                         
-                    }//init
-                    
-                    
-                    obj.initdom=function(rootnode){
-                    
-                          root                          = rootnode||$.full('filemod-root');
-                          shadow                        = root.shadowRoot;
-
-                          var style                     = $(shadow,'style'); 
-                          menumod.add.style(shadow);
-                          $.stylesheet.insert(style,'button');
-
-                          var node    = $(root,'localfile');
-                          localfile.initdom(node);
-                          
-                          var node    = $(root,'github');
-                          github.initdom(node);
-
-
-                          $(shadow,'#save').onclick         = btn.save;
-
-                          var card                          = $(shadow,'.menu');
-                          $(shadow,'.menu-icon').onclick    = menumod.click(card,false,false,menu);
-
-                          autosave                          = $(shadow,'#autosave');
-                          autosave.checked                  = false;
-                          autosave.onchange                 = e=>obj.autosave   = autosave.checked;
-                          obj.autosave                      = autosave.checked;
-
-
-                          $(shadow,'#root').style.visibility    = '';
-                          
-                    }//initdom
-                    
-
-                    btn.save=function(e){save()}
-                    
-                    
-                    obj.save=function(){return save()}
-                    
-                    function save(){
-                    
-                          if(!cur){
-                                log.orange('no file');
-                                return;
-                          }
-                          
-                          var txt   = editor.getValue();
-                          
-                          if(cur.type=='github'){
-                                github.save(txt);
-                          }
-                          if(cur.type=='local'){
-                                localfile.save();
-                          }
-                    
-                    }//save
-                    
-                    
-                    function menu(type,opt){
-                    }//menu
+                        var txt   = editor.getValue();
+                        
+                        if(cur.type=='github'){
+                              github.save(txt);
+                        }
+                        if(cur.type=='local'){
+                              localfile.save();
+                        }
+                  
+                  }//save
+                  
+                  
+                  function menu(type,opt){
+                  }//menu
                     
                     
               return obj;
