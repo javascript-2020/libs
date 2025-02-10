@@ -168,171 +168,188 @@
                                                                                   true && console.log('github');
               var obj   = {};
 
-                    var df          = false;
+                  var df=false
+                  ;
                     
+                  var menumod
+                  ;
+                  
+                  obj.initmod=function(params){
                     
-                    var root;
-                    var shadow;
+                        menumod   = params.menumod;
+                        
+                  }//initmod
+                                        
+              //vars:-                    
                     
-                    var icon;
+                  var root;
+                  var shadow;
+                    
+                  var icon;
                                               
-                    var btn   = {};
+                  var btn   = {};
                     
+              //:
+                
+                  obj.init=function(){
+                  }//init
                     
-                    obj.initdom=function(){   //c
-                                                                                  debug('github.initdom');
-                          root                            = $.full('github-root');
-                          shadow                          = root.shadowRoot;
+              //:
+                
+                  obj.initdom=function(rootnode){   //c
 
-                          menumod.add.style(shadow);
-                          
-                          var style                       = $(shadow,'style');
-                          $.stylesheet.insert(style,'.icon');
-                          
-                          var node                        = $(shadow,'.menu');
-                          icon                            = $(shadow,'#icon');
-                          icon.onclick                    = menumod.click(node,'both',true,callback);
+                        root                            = rootnode||$.full('github-root');
+                        shadow                          = root.shadowRoot;
 
-                          
-                          var list    = $.all(node,'input:not([type])');
-                          list.forEach((input,i)=>{
-                          
-                                input.addEventListener('keydown',keydown);
-                                input.onfocus   = e=>input.select();
-                                
-                                function keydown(e){
-                                
-                                      if(e.key=='ArrowDown'){
-                                            e.stopPropagation();
-                                            i++;
-                                            if(i==list.length){
-                                                  i   = 0;
-                                            }
-                                            var input2    = list[i];
-                                            input2.focus();
-                                      }
-                                      if(e.key=='ArrowUp'){
-                                            e.stopPropagation();
-                                            i--;
-                                            if(i<0){
-                                                  i   = list.length-1;
-                                            }
-                                            var input2    = list[i];
-                                            input2.focus();
-                                      }
-                                      if(e.key=='ArrowLeft'){
-                                            if(e.ctrlKey){
-                                                  //debugger;
-                                                  e.stopPropagation();
-                                                  menumod.prev();
-                                            }
-                                      }
-                                      if(e.key=='ArrowRight'){
-                                            if(e.ctrlKey){
-                                                  e.stopPropagation();
-                                                  menumod.next();
-                                            }
-                                      }
-                                      
-                                }//keydown
-                                
-                          });
-                          
-                          $.all(shadow,'.paste').forEach(icon=>{
-                          
-                                icon.onclick    = async e=>{
-                                                        
-                                                        var txt       = await navigator.clipboard.readText();
-                                                        var par       = icon.parentNode;
-                                                        var input     = $(par,'input:not([type])');
-                                                        input.value   = txt;
-                                                        input.focus();
-                                                        
-                                                  };
-                                                  
-                          });
-                          
-                          var root2   = $(shadow,'#token').parentNode;
-                          $(root2,'.paste').onclick   = async e=>{
-                                                        
-                                                              var txt       = await navigator.clipboard.readText();
-                                                              var par       = icon.parentNode;
-                                                              var input     = $(par,'input:not([type])');
-                                                              input.value   = txt;
-                                                              
-                                                              if(e.ctrlKey){
-                                                                    btn.parse();
-                                                                    btn.load(e);
-                                                              }
-                                                              
-                                                        };
-                                                        
-                          var token   = window.localStorage['github-token'];
-                          if(token){
-                                $(shadow,'#token').value    = token;
-                          }
-                          
-                          $(shadow,'.copy').onclick   = async e=>{
-                          
-                                                              var icon    = e.target;
-                                                              var input   = $(icon.parentNode,'input:not([type])');
-                                                              var txt     = input.value;
-                                                              await navigator.clipboard.writeText(txt);
-                                                              $.mousetext(e,'copied');
-                                                              
-                                                        };
-                                                        
-                          $(shadow,'.storage').onclick    = async e=>{
-                                                                  
-                                                                  var icon      = e.target;
-                                                                  var input     = $(icon.parentNode,'input:not([type])');
-                                                                  if(e.shiftKey){
-                                                                        var token   = input.value;
-                                                                        if(!token){
-                                                                              $.mousetext('no token');
-                                                                              return;
-                                                                        }
-                                                                        localStorage.setItem('github-token',token);
-                                                                        $.mousetext(e,'localStorage[\'github-token\'] saved');
-                                                                        return;
-                                                                  }
-                                                                  
-                                                                  var token   = localStorage.getItem('github-token');
-                                                                  if(!token){
-                                                                        $.mousetext('no stored token, localStorage[\'github-token\']');
-                                                                        return;
-                                                                  }
-                                                                  input.value   = token;
-                                                                  
-                                                            };
+                        menumod.add.style(shadow);
+                        
+                        var style                       = $(shadow,'style');
+                        $.stylesheet.insert(style,'.icon');
+                        
+                        var node                        = $(shadow,'.menu');
+                        icon                            = $(shadow,'#icon');
+                        icon.onclick                    = menumod.click(node,'both',true,callback);
 
-                                                        
-                          $(shadow,'[value=parse]').onclick   = btn.parse;
-                          $(shadow,'[value="+"]').onclick     = btn.parse.load;
-                          
-                          $(shadow,'#url').onkeydown    = e=>{
-                          
-                                                                  if(e.key=='Enter'){
-                                                                        btn.parse();
-                                                                        $(shadow,'#load').focus();
-                                                                  }
-                                                              
-                                                            };
+                        
+                        var list    = $.all(node,'input:not([type])');
+                        list.forEach((input,i)=>{
+                        
+                              input.addEventListener('keydown',keydown);
+                              input.onfocus   = e=>input.select();
+                              
+                              function keydown(e){
+                              
+                                    if(e.key=='ArrowDown'){
+                                          e.stopPropagation();
+                                          i++;
+                                          if(i==list.length){
+                                                i   = 0;
+                                          }
+                                          var input2    = list[i];
+                                          input2.focus();
+                                    }
+                                    if(e.key=='ArrowUp'){
+                                          e.stopPropagation();
+                                          i--;
+                                          if(i<0){
+                                                i   = list.length-1;
+                                          }
+                                          var input2    = list[i];
+                                          input2.focus();
+                                    }
+                                    if(e.key=='ArrowLeft'){
+                                          if(e.ctrlKey){
+                                                //debugger;
+                                                e.stopPropagation();
+                                                menumod.prev();
+                                          }
+                                    }
+                                    if(e.key=='ArrowRight'){
+                                          if(e.ctrlKey){
+                                                e.stopPropagation();
+                                                menumod.next();
+                                          }
+                                    }
+                                    
+                              }//keydown
+                              
+                        });
+                        
+                        $.all(shadow,'.paste').forEach(icon=>{
+                        
+                              icon.onclick    = async e=>{
+                                                      
+                                                      var txt       = await navigator.clipboard.readText();
+                                                      var par       = icon.parentNode;
+                                                      var input     = $(par,'input:not([type])');
+                                                      input.value   = txt;
+                                                      input.focus();
+                                                      
+                                                };
+                                                
+                        });
+                        
+                        var root2   = $(shadow,'#token').parentNode;
+                        $(root2,'.paste').onclick   = async e=>{
+                                                      
+                                                            var txt       = await navigator.clipboard.readText();
+                                                            var par       = icon.parentNode;
+                                                            var input     = $(par,'input:not([type])');
+                                                            input.value   = txt;
                                                             
-                          $(shadow,'#path').onkeydown     = e=>{
+                                                            if(e.ctrlKey){
+                                                                  btn.parse();
+                                                                  btn.load(e);
+                                                            }
                                                             
-                                                                  if(e.key=='Enter'){
-                                                                        $(shadow,'#load').focus();
-                                                                  }
-                                                                  
-                                                            };
+                                                      };
+                                                      
+                        var token   = window.localStorage['github-token'];
+                        if(token){
+                              $(shadow,'#token').value    = token;
+                        }
+                        
+                        $(shadow,'.copy').onclick   = async e=>{
+                        
+                                                            var icon    = e.target;
+                                                            var input   = $(icon.parentNode,'input:not([type])');
+                                                            var txt     = input.value;
+                                                            await navigator.clipboard.writeText(txt);
+                                                            $.mousetext(e,'copied');
                                                             
-                          $(shadow,'[value=load]').onclick        = btn.load;
-                          $(shadow,'[value=load-raw]').onclick    = btn.load.raw;
-                          $(shadow,'[value=save]').onclick        = btn.save;
-                          $(shadow,'[value=backup]').onclick      = btn.backup;
-                          
-                    }//initdom
+                                                      };
+                                                      
+                        $(shadow,'.storage').onclick    = async e=>{
+                                                                
+                                                                var icon      = e.target;
+                                                                var input     = $(icon.parentNode,'input:not([type])');
+                                                                if(e.shiftKey){
+                                                                      var token   = input.value;
+                                                                      if(!token){
+                                                                            $.mousetext('no token');
+                                                                            return;
+                                                                      }
+                                                                      localStorage.setItem('github-token',token);
+                                                                      $.mousetext(e,'localStorage[\'github-token\'] saved');
+                                                                      return;
+                                                                }
+                                                                
+                                                                var token   = localStorage.getItem('github-token');
+                                                                if(!token){
+                                                                      $.mousetext('no stored token, localStorage[\'github-token\']');
+                                                                      return;
+                                                                }
+                                                                input.value   = token;
+                                                                
+                                                          };
+
+                                                      
+                        $(shadow,'[value=parse]').onclick   = btn.parse;
+                        $(shadow,'[value="+"]').onclick     = btn.parse.load;
+                        
+                        $(shadow,'#url').onkeydown    = e=>{
+                        
+                                                                if(e.key=='Enter'){
+                                                                      btn.parse();
+                                                                      $(shadow,'#load').focus();
+                                                                }
+                                                            
+                                                          };
+                                                          
+                        $(shadow,'#path').onkeydown     = e=>{
+                                                          
+                                                                if(e.key=='Enter'){
+                                                                      $(shadow,'#load').focus();
+                                                                }
+                                                                
+                                                          };
+                                                          
+                        $(shadow,'[value=load]').onclick        = btn.load;
+                        $(shadow,'[value=load-raw]').onclick    = btn.load.raw;
+                        $(shadow,'[value=save]').onclick        = btn.save;
+                        $(shadow,'[value=backup]').onclick      = btn.backup;
+                        
+                  }//initdom
                     
                     
                     btn.parse=function(e={}){
