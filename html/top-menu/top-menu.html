@@ -47,8 +47,8 @@
               
                   obj.initdom=function(rootnode){
                   
-                        var root      = rootnode||$.full('top-menu');
-                        var shadow    = root.shadowRoot;
+                        var root                = $.$(rootnode,'top-menu');
+                        var shadow              = root.shadowRoot;
 
                         menumod.add.style(shadow);
                         
