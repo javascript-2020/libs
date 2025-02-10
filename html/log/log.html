@@ -92,7 +92,7 @@
                   }//log
                               
                               
-                  log.red=function(){
+                  obj.red=function(){
                   
                         var nlog    = log.apply(null,arguments);
                         nlog.style.borderColor    = 'red';
@@ -101,7 +101,7 @@
                   }//red
                   
                   
-                  log.green=function(){
+                  obj.green=function(){
           
                         var nlog    = log.apply(null,arguments);
                         nlog.style.borderColor    = 'green';
@@ -110,7 +110,7 @@
                   }//green
                       
                       
-                  log.orange=function(){
+                  obj.orange=function(){
                   
                         var nlog    = log.apply(null,arguments);
                         nlog.style.borderColor    = 'orange';
@@ -119,7 +119,7 @@
                   }//orange
                   
                   
-                  log.error=function(err){
+                  obj.error=function(err){
                   
                         log.red(err.message);
                         
