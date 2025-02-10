@@ -50,7 +50,7 @@
               
                   obj.initdom=function(rootnode){
                     
-                        var root                = rootnode||$.full('log-root');
+                        var root                = $.$(rootnode,'log-root');
                         var shadow              = root.shadowRoot;
                         
                         log.root                = $(shadow,'#log-root');
