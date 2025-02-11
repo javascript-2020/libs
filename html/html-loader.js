@@ -199,7 +199,7 @@
                     if(node){
                           var f   = false;
                           
-                          if(node.matches(nodename)){
+                          if(node.matches && node.matches(nodename)){
                                 f   = true;
                           }
                           var nn    = node.nodeName.toLowerCase();                          
