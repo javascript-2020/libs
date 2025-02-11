@@ -27,18 +27,20 @@
         var nn;
         if(nodename){
               root          = $(nodename);
-              nn            = nodename;
+              if(root.nodeName=='SCRIPT'){
+                    root    = root.parentNode;
+              }
         }else{
               var script    = document.currentScript;
               root          = script.parentNode;
-              nn            = root.nodeName.toLowerCase();
         }
+        var nn    = root.nodeName.toLowerCase();
 
         
         var mode      = 'raw';
         var type      = 'libs';
 
-        if(nn.endsWith('-debugger')){
+        if(nn.endsWith('-debug')){
               nn      = nn.slice(0,-9);
               debugger;
         }
