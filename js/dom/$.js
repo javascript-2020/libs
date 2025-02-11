@@ -773,11 +773,13 @@
         
         $.slider.glass=function(node1,slider_node,node2,callback,params={},mod){
         
-              if(!callback.md){
-                    callback.md   = ()=>mod.glass();
-              }
-              if(!callback.mu){
-                    callback.mu   = ()=>mod.glass(false);
+              if(typeof mod.glass=='function'){
+                    if(!callback.md){
+                          callback.md   = ()=>mod.glass();
+                    }
+                    if(!callback.mu){
+                          callback.mu   = ()=>mod.glass(false);
+                    }
               }
               
               var node    = $.slider('editor-root','#page-slider','output-root',slider,ui);
