@@ -100,7 +100,13 @@
               var nscript                 = document.createElement('script');
               if(script.src){
                                                                                 //console.log(script.src);
-                    nscript.src           = script.src;
+                    var src   = script.src;
+                    if(script.hasAttribute('html-loader')){
+                          var id    = gen();
+                          nscript.setAttribute('html-loader',id);
+                          src  += `?[html-loader=${id}]`;
+                    }
+                    nscript.src           = src;
                     nscript.onload        = complete;
                     add();
               }else{
@@ -115,6 +121,14 @@
         complete();
         
 
+        function gen(){
+        
+              var id    = (Math.random()+'').slice(2);
+              return id;
+              
+        }//gen
+        
+        
         function get_params(){
         
               repo    = 'javascript-2020.github.io';
