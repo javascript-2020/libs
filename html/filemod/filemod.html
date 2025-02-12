@@ -56,6 +56,8 @@
 
               //vars:-
 
+                  var localfile;
+                  var github;
                   
                   var cur;
                   Object.defineProperty(obj,'cur',{get:()=>cur,set:v=>cur=v});
@@ -69,8 +71,8 @@
               
                   obj.init=function(){
                   
-                      localfile                 = localfile();
-                      github                    = github();
+                      localfile                 = mod.localfile();
+                      github                    = mod.github();
 
                       localfile.initmod({menumod});
                       github.initmod({menumod});
