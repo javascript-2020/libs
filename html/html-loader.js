@@ -89,6 +89,7 @@
         var div               = document.createElement('div');
         div.setHTMLUnsafe(txt);
         var node              = div.firstElementChild;
+        if(!node)debugger;
         
         slots.forEach(slot=>node.append(slot));
         
