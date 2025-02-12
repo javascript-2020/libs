@@ -36,6 +36,7 @@
         }
         var nn    = root.nodeName.toLowerCase();
 
+
         
         var mode      = 'raw';
         var type      = 'libs';
@@ -101,7 +102,7 @@
               if(script.src){
                                                                                 //console.log(script.src);
                     var src   = script.src;
-                    if(script.hasAttribute('html-loader')){
+                    if(script.hasAttribute('html-loader')){debugger;
                           var id    = gen();
                           nscript.setAttribute('html-loader',id);
                           src  += `?[html-loader=${id}]`;
