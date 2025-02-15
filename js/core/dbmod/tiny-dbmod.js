@@ -1,6 +1,6 @@
 function dbmod(){
   
-      var resolve,promise=()=>new Promise(res=>resolve=res),db
+      var db,resolve,promise=()=>new Promise(res=>resolve=res)
       dbmod.create            = (data,name='data')=>{
                                       var req               = window.indexedDB.open(name,1)
                                       req.onsuccess         = e=>{db=req.result;resolve()}
