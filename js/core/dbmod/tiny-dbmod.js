@@ -1,3 +1,4 @@
+
         function dbmod(data,name='data'){
         
               var db,resolve,promise=()=>new Promise(res=>resolve=res)
@@ -9,7 +10,7 @@
                                                                   resolve()}
                                       return promise()
                                 }
-              dbmod.delete    = ()=>(window.indexedDB.deleteDatabase(name).onsuccess=e=>resolve(),promise())
+              dbmod.delete    = name2=>(window.indexedDB.deleteDatabase(name2||name).onsuccess=e=>resolve(),promise())
               dbmod.list      = async()=>(await window.indexedDB.databases()).forEach((db,i)=>console.log(i,':',db.name,db.version))
               dbmod.put       = data=>(db.transaction(name,'readwrite').objectStore(name).put({key:name,data}).onsuccess=e=>resolve(),promise())
               dbmod.get       = ()=>(db.transaction(name,'readwrite').objectStore(name).get(name).onsuccess=e=>resolve(e.target.result?.data),promise());
