@@ -21,11 +21,18 @@
                   
                   menumod                   = menumod();
                   menumod.on.close          = ()=>{};
+
+
+                  publish                   = publish();
                   
                   publish.initmod({menumod});
                   
+
+                  publish.init();
+
                   
                   initdom();
+
 
             }//init
 
