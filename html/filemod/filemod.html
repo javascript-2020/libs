@@ -47,12 +47,13 @@
                   var menumod,complete
                   ;
                   
-                  obj.initmod=function(params){
+                  obj.initmod   = function(params){
                     
                         menumod     = params.menumod;
                         complete    = params.complete;
                         
                   }//initmod
+
 
               //vars:-
 
@@ -66,10 +67,12 @@
 
                     
                   var btn   = {};
+
                     
               //:
+
               
-                  obj.init=function(){
+                  obj.init    = function(){
                   
                       localfile                 = mod.localfile();
                       github                    = mod.github();
@@ -86,10 +89,12 @@
                       github.save.complete      = (path,icon)=>complete.save('github',path,icon);
                       
                   }//init
+
                                       
               //:
+
               
-                  obj.initdom=function(rootnode){
+                  obj.initdom   = function(rootnode){
                   
                         root                          = $.$(rootnode,'filemod-root');
                         shadow                        = root.shadowRoot;
@@ -117,10 +122,10 @@
                   }//initdom
                     
 
-                  btn.save=function(e){save()}
+                  btn.save    = function(e){save()}
                     
                     
-                  obj.save=function(){return save()}
+                  obj.save    = function(){return save()}
                     
                   function save(){
                   
@@ -144,6 +149,32 @@
                   function menu(type,opt){
                   }//menu
                     
+
+
+                  obj.export    = function(){
+                  
+                        if(!cur){
+                              return 'no file';
+                        }
+                        
+                        var file;
+                        switch(cur.type){
+                          
+                          case 'github'   : file    = github.export(cur);       break;
+                          case 'local'    : return 'local';
+                          
+                        }//switch
+                          
+                        return file;
+                        
+                  }//export
+                  
+                  
+                  obj.imort    = function(file){
+                    
+                  }//import
+
+
                     
               return obj;
               
