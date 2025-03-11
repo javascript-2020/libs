@@ -680,6 +680,7 @@
                                 fn      = path.slice(i+1);
                                 path    = path.slice(0,i);
                           }
+                          if(path && path.at(-1)!='/')path   += '/';
                           
                           var err;
                           try{
@@ -709,7 +710,7 @@
                           var max     = 0;
                           json.tree.forEach(async item=>{
                           
-                                if(item.path.startsWith(`backup/${fn}`)){
+                                if(item.path.startsWith(`${path}backup/${fn}`)){
                                       var i   = item.path.lastIndexOf('-');
                                       var s   = item.path.slice(i+1);
                                       var v   = Number(s);
@@ -723,7 +724,7 @@
                           });
                           max++;
                           
-                          path   += `backup/${fn}-${max}`;
+                          path   += `${path}backup/${fn}-${max}`;
                                                                                 debug(path);
                           save(token,owner,repo,branch,path,txt);
                           
