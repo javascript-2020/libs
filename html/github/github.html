@@ -705,10 +705,9 @@
                           }
                           
                           var json    = await res.json();
-                          console.log(json);
                           
                           var max     = 0;
-                          json.forEach(async item=>{
+                          json.tree.forEach(async item=>{
                           
                                 if(item.path.startsWith(`backup/${fn}`)){
                                       var i   = item.path.lastIndexOf('-');
