@@ -75,7 +75,9 @@
                   obj.init    = function(){
                   
                       localfile                 = mod.localfile();
+                      obj.localfile             = localfile;
                       github                    = mod.github();
+                      obj.github                = github;
 
                       localfile.initmod({menumod});
                       github.initmod({menumod});
