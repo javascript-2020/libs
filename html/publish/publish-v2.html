@@ -1,0 +1,215 @@
+
+
+<publish-root>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+                  #root {display:inline-flex;margin-right:5px}
+                  
+                  .menu {} /*width:300px;height:200px}*/
+                  
+                  .txt {display:flex;align-items:center;
+                        border:1px solid lightgray;padding:10px;border-radius:5px}
+                        
+                  #autorun {margin-right:10px}
+                        
+                  .file {border:1px solid lightgray;padding:10px;border-radius:5px}
+            </style>
+            
+            <div id=root style='visibility:hidden'>
+            
+                  <button>publish</button>
+                  
+                  <div class=menu-root>
+                        <img class=menu-icon>
+                        <div class=menu style='display:none'>
+                              <div class=txt>
+                                    <checkbox-one id=autorun></checkbox-one>
+                                    <button class=txt-publish>publish txt only</button>
+                              </div>
+                              <div class=file>
+                                    <button class=file-publish>publish file</button>
+                              </div>
+                        </div>
+                  </div>
+                  
+            </div>
+
+      </template>
+      
+      <script>
+      
+            function publish(){
+              
+              var obj   = {};
+              
+
+                    var ui,menumod
+                    ;
+                    
+                    obj.initmod=function(params){
+                      
+                          ui        = params.ui;
+                          menumod   = params.menumod;
+                          
+                    }//initmod
+
+                                        
+                    var mode    = 'jsonblob';
+                    var jsonblob;
+
+                    var root;
+                    var shadow;
+
+                    var autorun;
+                    
+                    var btn     = {};
+
+
+                //:
+                
+                    obj.init=function(){
+
+                          var resolve;
+                          init.complete   = new Promise(res=>resolve    = res);
+                          
+                          ext.load.libs('js/io/jsonblob/jsonblob.js')
+                            .then(result=>{
+                                              
+                                  [jsonblob]    = result;
+                                  
+                                  jsonblob      = jsonblob();
+                                  
+                                  resolve();
+                                  
+                            });
+                          
+                    }//init
+                    
+                //:
+                
+                    obj.initdom=function(rootnode){   //c
+                      
+                          root                                  = $.$(rootnode,'publish-root');
+                          shadow                                = root.shadowRoot;
+                          
+                          var style                             = $(shadow,'style');
+                          menumod.add.style(shadow);
+                          $.stylesheet.insert(style,'button');
+                          
+                      
+                          $(shadow,'button').onclick            = btn.publish;
+
+                          var card                              = $(shadow,'.menu');
+                          $(shadow,'.menu-icon').onclick        = menumod.click(card,false,false,menu);
+
+
+                        //txt:-
+                        
+                          autorun                               = $(shadow,'#autorun');
+                          autorun.checked                       = false;
+                          autorun.onchange                      = e=>obj.autorun   = autorun.checked;
+                          obj.autorun                           = autorun.checked;
+                          
+                          $(shadow,'#txt-publish').onclick      = btn.txt;
+                          
+                          
+                        //file:-
+                        
+                          $(shadow,'#file-publish').onclick     = btn.file;
+                          
+
+
+                          $(shadow,'#root').style.visibility    = '';                          
+                          
+                    }//initdom
+                    
+
+                    btn.publish=function(e){
+                      
+                          switch(mode){
+                            
+                            case 'jsonblob'   : jsonblob.save();
+                            
+                          }//switch
+                          
+                    }//share
+                    
+                    
+                    btn.txt   = function(){
+                      
+                          
+                    }//txt
+
+                    
+                    btn.file    = function(){
+                      
+                      
+                    }//file
+                    
+  
+  //:
+  
+  
+                    function menu(type,opt){
+                    }//menu
+  
+                    
+  //:
+  
+  
+                    obj.query   = async function(){
+                      
+                          await init.complete;
+                          
+                          var json;
+                          switch(mode){
+                            
+                            case 'jsonblob'   : json    = await jsonblob.util.query();        break;
+                            
+                          }//switch
+                            
+                          if(json){
+                                editor.setValue(json.txt,-1);
+                                if(autorun.checked){
+                                      run();
+                                }
+                          }
+                          
+                    }//load
+                    
+
+                    obj.save    = function(){
+                      
+                          var json    = ui.read();
+                          switch(mode){
+                            
+                            case 'jsonblob'   : jsonblob.util.save(json);       break;
+                            
+                          }//switch
+                      
+                    }//save
+                    
+
+                    obj.delete    = function(){
+
+                          switch(mode){
+                            
+                            case 'jsonblob'   : jsonblob.util.delete();       break;
+                            
+                          }//switch
+                      
+                    }//delete
+
+                          
+                    
+              return obj;
+              
+            }//share
+            
+      </script>
+      
+</publish-root>
+
