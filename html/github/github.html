@@ -664,7 +664,7 @@
                     
 
                     async function backup(token,owner,repo,branch,path){
-                    
+                                                                                        debug('backup',path);
                           var api   = true;
                           var txt   = load.text(api,token,owner,repo,branch,path);
                           
@@ -722,7 +722,7 @@
                           max++;
                           
                           path   += `backup/${fn}-${max}`;
-                          
+                                                                                debug(path);
                           save(token,owner,repo,branch,path,txt);
                           
                     }//backup
