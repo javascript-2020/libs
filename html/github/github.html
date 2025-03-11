@@ -324,32 +324,32 @@
                                                           };
 
                                                       
-                        $(shadow,'[value=parse]').onclick   = btn.parse;
-                        $(shadow,'[value="+"]').onclick     = btn.parse.load;
-                        
-                        $(shadow,'#url').onkeydown    = e=>{
-                        
-                                                                if(e.key=='Enter'){
-                                                                      btn.parse();
-                                                                      $(shadow,'#load').focus();
-                                                                }
+                          $(shadow,'[value=parse]').onclick   = btn.parse;
+                          $(shadow,'[value="+"]').onclick     = btn.parse.load;
+                          
+                          $(shadow,'#url').onkeydown    = e=>{
+                          
+                                                                  if(e.key=='Enter'){
+                                                                        btn.parse();
+                                                                        $(shadow,'#load').focus();
+                                                                  }
+                                                              
+                                                            };
                                                             
-                                                          };
+                          $(shadow,'#path').onkeydown     = e=>{
+                                                            
+                                                                  if(e.key=='Enter'){
+                                                                        $(shadow,'#load').focus();
+                                                                  }
+                                                                  
+                                                            };
                                                           
-                        $(shadow,'#path').onkeydown     = e=>{
-                                                          
-                                                                if(e.key=='Enter'){
-                                                                      $(shadow,'#load').focus();
-                                                                }
-                                                                
-                                                          };
-                                                          
-                        $(shadow,'[value=load]').onclick        = btn.load;
-                        $(shadow,'[value=load-raw]').onclick    = btn.load.raw;
-                        $(shadow,'[value=save]').onclick        = btn.save;
-                        $(shadow,'[value=backup]').onclick      = btn.backup;
-                        
-                  }//initdom
+                          $(shadow,'[value=load]').onclick        = btn.load;
+                          $(shadow,'[value=load-raw]').onclick    = btn.load.raw;
+                          $(shadow,'[value=save]').onclick        = btn.save;
+                          $(shadow,'[value=backup]').onclick      = btn.backup;
+                          
+                    }//initdom
                     
                     
                     btn.parse=function(e={}){
@@ -705,6 +705,7 @@
                           }
                           
                           var json    = await res.json();
+                          console.log(json);
                           
                           var max     = 0;
                           json.forEach(async item=>{
