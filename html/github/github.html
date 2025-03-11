@@ -402,6 +402,8 @@
                     btn.backup=function(){
                     
                           var {token,owner,repo,branch,path}    = read();
+                          console.log('btn.backup');
+                          console.log(token,owner,repo,branch,path);
                           
                           backup(token,owner,repo,branch,path);
                           
