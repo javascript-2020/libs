@@ -15,6 +15,7 @@
                         
                   #autorun {margin-right:10px}
                         
+                  .file {border:1px solid lightgray;padding:10px;border-radius:5px}
             </style>
             
             <div id=root style='visibility:hidden'>
@@ -27,6 +28,9 @@
                               <div class=txt>
                                     <checkbox-one id=autorun></checkbox-one>
                                     <button class=txt-publish>publish txt only</button>
+                              </div>
+                              <div class=file>
+                                    <button class=file-publish>publish file</button>
                               </div>
                         </div>
                   </div>
@@ -88,23 +92,34 @@
                 
                     obj.initdom=function(rootnode){   //c
                       
-                          root                              = $.$(rootnode,'publish-root');
-                          shadow                            = root.shadowRoot;
+                          root                                  = $.$(rootnode,'publish-root');
+                          shadow                                = root.shadowRoot;
                           
-                          var style                         = $(shadow,'style');
+                          var style                             = $(shadow,'style');
                           menumod.add.style(shadow);
                           $.stylesheet.insert(style,'button');
                           
                       
-                          $(shadow,'button').onclick        = btn.publish;
+                          $(shadow,'button').onclick            = btn.publish;
 
-                          var card                          = $(shadow,'.menu');
-                          $(shadow,'.menu-icon').onclick    = menumod.click(card,false,false,menu);
+                          var card                              = $(shadow,'.menu');
+                          $(shadow,'.menu-icon').onclick        = menumod.click(card,false,false,menu);
 
-                          autorun                           = $(shadow,'#autorun');
-                          autorun.checked                   = false;
-                          autorun.onchange                  = e=>obj.autorun   = autorun.checked;
-                          obj.autorun                       = autorun.checked;
+
+                        //txt:-
+                        
+                          autorun                               = $(shadow,'#autorun');
+                          autorun.checked                       = false;
+                          autorun.onchange                      = e=>obj.autorun   = autorun.checked;
+                          obj.autorun                           = autorun.checked;
+                          
+                          $(shadow,'#txt-publish').onclick      = btn.txt;
+                          
+                          
+                        //file:-
+                        
+                          $(shadow,'#file-publish').onclick     = btn.file;
+                          
 
 
                           $(shadow,'#root').style.visibility    = '';                          
@@ -121,15 +136,31 @@
                           }//switch
                           
                     }//share
+                    
+                    
+                    btn.txt   = function(){
+                      
+                          
+                    }//txt
+
+                    
+                    btn.file    = function(){
+                      
+                      
+                    }//file
+                    
   
   //:
+  
   
                     function menu(type,opt){
                     }//menu
+  
                     
   //:
   
-                    obj.query=async function(){
+  
+                    obj.query   = async function(){
                       
                           await init.complete;
                           
@@ -150,7 +181,7 @@
                     }//load
                     
 
-                    obj.save=function(){
+                    obj.save    = function(){
                       
                           var json    = ui.read();
                           switch(mode){
@@ -162,7 +193,7 @@
                     }//save
                     
 
-                    obj.delete=function(){
+                    obj.delete    = function(){
 
                           switch(mode){
                             
