@@ -139,13 +139,30 @@
                     
                     
                     btn.txt   = function(){
-                      
+                    
+                          var txt     = editor.getvalue();
+                          var chk     = autorun.checked;
+                          var json    = {txt,chk};
+                          console.log(json);
                           
                     }//txt
 
                     
                     btn.file    = function(){
                       
+                          var file    = filemod.export();
+                          
+                          if(file==='no file'){
+                                alert('no file');
+                                return;
+                          }
+                          
+                          if(file==='local'){
+                                alert('local file cannot be published');
+                                return;
+                          }
+
+                          console.json(file);                          
                       
                     }//file
                     
