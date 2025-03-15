@@ -850,8 +850,8 @@
                     
                     obj.export    = function(){
                       
-                          var file    = read();
-                          return file;
+                          var {owner,repo,branch,path}    = read();
+                          return {owner,repo,branch,path};
                           
                     }//export
                     
