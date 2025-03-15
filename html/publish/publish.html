@@ -65,13 +65,16 @@
                     var shadow;
 
                     var autorun;
+
                     
                     var btn     = {};
 
 
                 //:
                 
-                    obj.init=function(){
+                    obj.init=function(){return init()}
+                    
+                    function init(){
 
                           var resolve;
                           init.complete   = new Promise(res=>resolve    = res);
