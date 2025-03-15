@@ -510,6 +510,7 @@
                     }//callback
 
 
+                    obj.read    = read;
                     
                     function read(){
                     
@@ -524,6 +525,8 @@
                     }//read
 
 
+                    obj.write   = write;
+                    
                     function write(owner,repo,branch,path){
                                                                               debug(owner,repo,branch,path);
                           $(shadow,'#owner').value    = owner;
