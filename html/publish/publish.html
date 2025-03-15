@@ -68,16 +68,18 @@
 
                     
                     var btn     = {};
+                    var load    = {};
+                    
 
 
                 //:
                 
-                    obj.init=function(){return init()}
-                    
-                    function init(){
+                    obj.init=function(){
 
+                          init.complete.add(query);
+                          
                           var resolve;
-                          init.complete   = new Promise(res=>resolve    = res);
+                          load.complete   = new Promise(res=>resolve    = res);
                           
                           ext.load.libs('js/io/jsonblob/jsonblob.js')
                             .then(result=>{
@@ -181,9 +183,12 @@
   //:
   
   
-                    obj.query   = async function(){
-                      
-                          await init.complete;
+                    obj.query   = function(){return query()}
+                    
+                    async function query(){
+                                                                                console.log('[ publish ]','query loading ...');
+                          await load.complete;
+                                                                                console.log('[ publish ]','query load complete');
                           
                           var json;
                           switch(mode){
@@ -192,14 +197,27 @@
                             
                           }//switch
                             
-                          if(json){
-                                editor.setValue(json.txt,-1);
-                                if(autorun.checked){
-                                      run();
-                                }
-                          }
+                          query.complete(json);
                           
-                    }//load
+                    }//query
+                    
+                    
+                    query.complete    = function(json){
+
+                          if(!json){
+                                                                                console.log('[ publish ]','query.complete','no json');
+                                return;
+                          }
+                                                                                console.log('[ publish ]','query.complete');
+                                                                                console.json(json);
+                          editor.setValue(json.txt,-1);
+                          
+                          if(autorun.checked){
+                                run();
+                          }
+
+                      
+                    }//complete
                     
 
                     obj.save    = function(){
