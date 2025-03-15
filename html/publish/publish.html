@@ -197,32 +197,11 @@
                             
                           }//switch
                             
-                          query.complete(json);
+                          load(json);
                           
                     }//query
                     
                     
-                    query.complete    = function(json){
-
-                          if(!json){
-                                                                                console.log('[ publish ]','query.complete','no json');
-                                return;
-                          }
-                                                                                console.log('[ publish ]','query.complete');
-                                                                                console.json(json);
-                          return;
-                          
-                          
-                          editor.setValue(json.txt,-1);
-                          
-                          if(autorun.checked){
-                                run();
-                          }
-
-                      
-                    }//complete
-                    
-
                     obj.save    = function(){
                       
                           var json    = ui.read();
@@ -246,6 +225,43 @@
                     }//delete
 
                           
+                    function load(json){
+
+                          if(!json){
+                                                                                console.log('[ publish ]','query.complete','no json');
+                                return;
+                          }
+                                                                                console.log('[ publish ]','query.complete');
+                                                                                console.json(json);
+                          return;
+                          
+                          switch(json.type){
+                            
+                            case 'github'   : load.github(json);        break;
+                            case 'text'     : load.text(json);          break;
+                            
+                          }//switch
+                          
+                          if(autorun.checked){
+                                run();
+                          }
+                      
+                    }//load
+                    
+                    
+                    load.github   = function(json){
+                      
+                          
+                    }//github
+                    
+                    
+                    load.text   = function(json){
+                      
+                          editor.setValue(json.txt,-1);
+                          
+                    }//text
+                    
+                    
                     
               return obj;
               
