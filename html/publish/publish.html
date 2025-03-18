@@ -238,7 +238,7 @@
                     }//load
                     
                     
-                    load.github   = function(json){
+                    load.github   = async function(json){
                       
                           var {owner,repo,branch,path}    = json;
                           filemod.github.write(owner,repo,branch,path);
