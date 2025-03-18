@@ -273,6 +273,7 @@
                           filemod.github.write(owner,repo,branch,path);
                           var api   = true;
                           var txt   = await filemod.github.load(api);
+                                                                              console.log('[ publish ]','load.github','complete',txt.length);
                           return txt;
                           
                     }//github
