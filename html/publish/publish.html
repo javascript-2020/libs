@@ -251,7 +251,7 @@
                           var txt;
                           switch(json.type){
                             
-                            case 'github'   : await load.github(json);        break;
+                            case 'github'   : await load.github(json.file);        break;
                             case 'text'     : txt   = load.text(json);        break;
                             
                           }//switch
@@ -319,7 +319,7 @@
                                 return;
                           }
 
-                          var json      = {file};
+                          var json      = {type:'github',file};
                           save(json);
                           
                     }//file
