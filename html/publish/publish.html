@@ -192,6 +192,18 @@
   //:
   
   
+                    obj.clear   = function(){
+                      
+                          var url       = window.location.toString();
+                          var search    = window.location.search;
+                          if(search){
+                                url     = url.slice(0,-search.length);
+                          }
+                          window.history.replaceState(null,'',url);
+                          
+                    }//clear
+                    
+  
                     obj.query   = function(){return query()}
                     
                     async function query(){
@@ -324,6 +336,8 @@
                           jsonblob.util.save(json);
                       
                     }//complete
+
+
                     
                     
               return obj;
