@@ -73,7 +73,7 @@
                                         
                     var mode    = 'jsonblob';
                     var jsonblob;
-
+                    var cur;
 
                     var ui      = {};
                     
@@ -156,11 +156,7 @@
 
                     btn.publish   = function(e){
                       
-                          switch(mode){
-                            
-                            case 'jsonblob'   : jsonblob.save();
-                            
-                          }//switch
+                          save();
                           
                     }//share
                     
@@ -214,15 +210,17 @@
                           
                     }//query
                     
+
+                    obj.save    = save;
                     
-                    obj.save    = function(){
-                      
-                          var json    = ui.read();
-                          switch(mode){
-                            
-                            case 'jsonblob'   : jsonblob.util.save(json);       break;
-                            
-                          }//switch
+                    function save(json){
+
+                          if(!cur){
+                                alert('no current publish type');
+                                return;
+                          }
+                          
+                          save[cur.type]();
                       
                     }//save
                     
@@ -286,21 +284,15 @@
                           
                     }//text
                     
-                    
-                    function save(json){
 
-                          json.autorun    = ui.autorun.checked;
-                                                                                console.json(json);
-                          jsonblob.util.save(json);
-                      
-                    }//save
-                    
-                    
+  //:
+  
+  
                     save.text   = function(){
                       
                           var txt       = editor.getvalue();
                           var json      = {type:'text',txt};
-                          save(json);
+                          save.complete(json);
                           
                     }//text
 
@@ -320,11 +312,18 @@
                           }
 
                           var json      = {type:'github',file};
-                          save(json);
+                          save.complete(json);
                           
                     }//file
                     
                     
+                    save.complete   = function(json){
+                      
+                          json.autorun    = ui.autorun.checked;
+                                                                                console.json(json);
+                          jsonblob.util.save(json);
+                      
+                    }//complete
                     
                     
               return obj;
