@@ -6,7 +6,30 @@
               github    = {};
         }
         github.parse    = {};
-      
+
+    function parse(url){
+    
+          url   = window.decodeURIComponent(url);
+          if(!url.startsWith('http')){
+                url   = 'https://'+url;
+          }
+          url   = new URL(url);
+          if(url.hostname=='javascript-2020.github.io'){
+                parse['github.io'](url);
+          }
+          if(url.hostname=='github.com'){
+                if(url.pathname.indexOf('blob')!=-1){
+                      parse.file(url);
+                }else 
+                if(url.pathname.indexOf('tree')!=-1){
+                      parse.dir(url);
+                }else{
+                      parse.repo(url);
+                }
+          }
+                                          
+    }//parse
+
       
         //  https://javascript-2020.github.io/html-components/log/log.html
         parse['github.io']=function(url){
