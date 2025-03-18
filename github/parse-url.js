@@ -1,8 +1,3 @@
-
-
-
-
-
         var parse   = {};
       
         parse.github    = function(url){
@@ -14,19 +9,24 @@
               url   = new URL(url);
               var result;
               if(url.hostname=='javascript-2020.github.io'){
-                    result    = parse['github.io'](url);
+                    result    = parse.github.io(url);
               }
               if(url.hostname=='github.com'){
                     if(url.pathname.indexOf('blob')!=-1){
-                          result    = parse.file(url);
+                          result    = parse.github.file(url);
                     }else 
                     if(url.pathname.indexOf('tree')!=-1){
-                          result    = parse.dir(url);
+                          result    = parse.github.dir(url);
                     }else{
-                          result    = parse.repo(url);
+                          result    = parse.github.repo(url);
                     }
               }
-              return result;
+              var {owner,repo,branch,path}    = result;
+              
+              var api   = true;
+              var url   = parse.github.build(api,null,owner,repo,branch,path);
+              
+              return url;
               
         }//parse
 
@@ -47,6 +47,28 @@
               return url;
 
         }//build
+        
+        
+        parse.github.is   = {};
+        
+        parse.github.is.api   = function(url){
+          
+          
+              if(url.includes('api.github.com')){
+                    return true;
+              }
+              return false;
+              
+        }//api
+        
+        parse.github.is.raw   = function(url){
+          
+              if(url.includes('raw.githubusercontent.com')){
+                    return true;
+              }
+              return false;
+              
+        }//raw
         
         
         //  https://javascript-2020.github.io/html-components/log/log.html
