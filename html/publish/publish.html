@@ -211,20 +211,6 @@
                     }//query
                     
 
-                    obj.save    = save;
-                    
-                    function save(json){
-
-                          if(!cur){
-                                alert('no current publish type');
-                                return;
-                          }
-                          
-                          save[cur.type]();
-                      
-                    }//save
-                    
-
                     obj.delete    = function(){return del()}
                     
                     function del(){
@@ -236,8 +222,8 @@
                           }//switch
                       
                     }//delete
-
-                          
+                    
+                    
                     async function load(json){
 
                           if(!json){
@@ -249,8 +235,8 @@
                           var txt;
                           switch(json.type){
                             
-                            case 'github'   : await load.github(json.file);        break;
-                            case 'text'     : txt   = load.text(json);        break;
+                            case 'github'   : await load.github(json.file);       break;
+                            case 'text'     : txt   = load.text(json);            break;
                             
                           }//switch
                           if(txt){
@@ -287,6 +273,20 @@
 
   //:
   
+
+                    obj.save    = save;
+                    
+                    function save(json){
+
+                          if(!cur){
+                                alert('no current publish type');
+                                return;
+                          }
+                          
+                          save[cur.type]();
+                      
+                    }//save
+
   
                     save.text   = function(){
                       
