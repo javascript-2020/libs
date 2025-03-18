@@ -256,10 +256,13 @@
                           }//switch
                           editor.setValue(txt,-1);
                           
-                          autorun.checked   = json.autorun;
-                          if(autorun.checked){
+                          ui.autorun.checked   = json.autorun;
+                          
+                          
+                          if(ui.autorun.checked){
                                 run();
                           }
+
                       
                     }//load
                     
