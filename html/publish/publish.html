@@ -250,11 +250,13 @@
                           var txt;
                           switch(json.type){
                             
-                            case 'github'   : txt   = await load.github(json);        break;
-                            case 'text'     : txt   = load.text(json);                break;
+                            case 'github'   : await load.github(json);        break;
+                            case 'text'     : txt   = load.text(json);        break;
                             
                           }//switch
-                          editor.setValue(txt,-1);
+                          if(txt){
+                                editor.setValue(txt,-1);
+                          }
                           
                           ui.autorun.checked   = json.autorun;
                           
