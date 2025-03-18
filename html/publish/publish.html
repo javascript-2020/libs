@@ -274,10 +274,7 @@
                           var {owner,repo,branch,path}    = json;
                           filemod.github.write(owner,repo,branch,path);
                           var api   = true;
-                          debugger;
-                          var txt   = await filemod.github.load(api);
-                                                                              console.log('[ publish ]','load.github','complete',txt.length);
-                          return txt;
+                          await filemod.github.load(api);
                           
                     }//github
                     
