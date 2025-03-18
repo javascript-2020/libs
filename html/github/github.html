@@ -548,8 +548,16 @@
                           if(typeof obj.load.complete=='function'){
                                 obj.load.complete(txt,path,icon.src);
                           }
+                          return txt;
                           
                     }//load
+                    
+                    
+                    obj.load.text   = function(api,token,owner,repo,branch,path){
+                      
+                          return load.text.apply(null,arguments);
+                          
+                    }//text
                     
                     
                     load.text=async function(api,token,owner,repo,branch,path){
