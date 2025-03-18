@@ -2,7 +2,9 @@
 
 
 
-
+        if(typeof github=='undefined'){
+              github    = {};
+        }
         github.parse    = {};
       
       
