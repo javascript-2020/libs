@@ -3,7 +3,6 @@
 
 
 
-
         var parse   = {};
       
         parse.github    = function(url){
@@ -30,7 +29,26 @@
               return result;
               
         }//parse
+
       
+        parse.github.build    = function(api,token,owner,repo,branch,path){
+
+              var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
+              var headers;
+              if(api){
+                    if(!token){
+                          token     = localStorage.getItem('github-token');
+                    }
+                    if(token){
+                          headers   = {authorization:`Bearer ${token}`};
+                    }
+                    url             = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;                                
+              }                          
+              return url;
+
+        }//build
+        
+        
         //  https://javascript-2020.github.io/html-components/log/log.html
         parse.github.io=function(url){
                                                                   debug('github.io');
@@ -42,6 +60,7 @@
               return {owner,repo,branch,path};
               
         }//github.io
+
         
         //  https://github.com/javascript-2020/libs
         parse.github.repo=function(url){
@@ -54,6 +73,7 @@
               return {owner,repo,branch,path};
               
         }//repo
+
         
         //  https://github.com/javascript-2020/libs/blob/main/docker/nodejs-min.dockerfile
         parse.github.file=function(url){
@@ -69,6 +89,7 @@
         
         }//file
         
+
         //  https://github.com/javascript-2020/libs/tree/main/docker
         parse.github.dir=function(url){
                                                                   debug('dir');
@@ -82,3 +103,4 @@
               
         }//dir
 
+                  
