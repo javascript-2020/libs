@@ -29,7 +29,7 @@
             
             <div id=root style='visibility:hidden'>
             
-                  <button>publish</button>
+                  <button id=publish>publish</button>
                   
                   <div class=menu-root>
                         <img class=menu-icon>
@@ -120,20 +120,24 @@
                           $.stylesheet.insert(style,'button');
                           
                       
-                          $(shadow,'button').onclick            = btn.publish;
+                          $(shadow,'#publish').onclick          = btn.publish;
+                          
 
                           var card                              = $(shadow,'.menu');
                           $(shadow,'.menu-icon').onclick        = menumod.click(card,false,false,menu);
 
 
-                        //txt:-
-                        
+                          $(card,'.delete').onclick             = btn.delete;
+                          
+                          
                           ui.autorun                            = $(shadow,'#autorun');
                           ui.autorun.checked                    = false;
                           /*
                           ui.autorun.onchange                   = e=>obj.autorun   = autorun.checked;
                           obj.autorun                           = autorun.checked;
                           */
+
+                        //txt:-
                           
                           $(shadow,'.txt-publish').onclick      = btn.txt;
                           
@@ -149,7 +153,7 @@
                     }//initdom
                     
 
-                    btn.publish=function(e){
+                    btn.publish   = function(e){
                       
                           switch(mode){
                             
@@ -158,6 +162,13 @@
                           }//switch
                           
                     }//share
+                    
+                    
+                    btn.delete    = function(){
+                      
+                          del();
+                          
+                    }//delete
                     
                     
                     btn.txt   = function(){
@@ -215,7 +226,9 @@
                     }//save
                     
 
-                    obj.delete    = function(){
+                    obj.delete    = function(){return del()}
+                    
+                    function del(){
 
                           switch(mode){
                             
@@ -238,7 +251,7 @@
                           switch(json.type){
                             
                             case 'github'   : txt   = await load.github(json);        break;
-                            case 'text'     : txt   - load.text(json);                break;
+                            case 'text'     : txt   = load.text(json);                break;
                             
                           }//switch
                           editor.setValue(txt,-1);
