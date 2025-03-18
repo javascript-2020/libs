@@ -47,12 +47,11 @@
               var obj   = {};
               
 
-                    var ui,menumod
+                    var menumod
                     ;
                     
                     obj.initmod=function(params){
                       
-                          ui        = params.ui;
                           menumod   = params.menumod;
                           
                     }//initmod
@@ -61,6 +60,9 @@
                     var mode    = 'jsonblob';
                     var jsonblob;
 
+
+                    var ui      = {};
+                    
                     var root;
                     var shadow;
 
@@ -114,10 +116,12 @@
 
                         //txt:-
                         
-                          autorun                               = $(shadow,'#autorun');
-                          autorun.checked                       = false;
-                          autorun.onchange                      = e=>obj.autorun   = autorun.checked;
+                          ui.autorun                            = $(shadow,'#autorun');
+                          ui.autorun.checked                    = false;
+                          /*
+                          ui.autorun.onchange                   = e=>obj.autorun   = autorun.checked;
                           obj.autorun                           = autorun.checked;
+                          */
                           
                           $(shadow,'.txt-publish').onclick      = btn.txt;
                           
@@ -146,29 +150,14 @@
                     
                     btn.txt   = function(){
                     
-                          var txt     = editor.getvalue();
-                          var chk     = autorun.checked;
-                          var json    = {txt,chk};
-                          console.log(json);
+                          save.text();
                           
                     }//txt
 
                     
                     btn.file    = function(){
                       
-                          var file    = filemod.export();
-                          
-                          if(file==='no file'){
-                                alert('no file');
-                                return;
-                          }
-                          
-                          if(file==='local'){
-                                alert('local file cannot be published');
-                                return;
-                          }
-                                                                                console.json(file);
-                          jsonblob.util.save(file);
+                          save.file();
                           
                     }//file
                     
@@ -225,7 +214,7 @@
                     }//delete
 
                           
-                    function load(json){
+                    async function load(json){
 
                           if(!json){
                                                                                 console.log('[ publish ]','query.complete','no json');
@@ -233,15 +222,16 @@
                           }
                                                                                 console.log('[ publish ]','query.complete');
                                                                                 console.json(json);
-                          return;
-                          
+                          var txt;
                           switch(json.type){
                             
-                            case 'github'   : load.github(json);        break;
-                            case 'text'     : load.text(json);          break;
+                            case 'github'   : txt   = await load.github(json);        break;
+                            case 'text'     : txt   - load.text(json);                break;
                             
                           }//switch
+                          editor.setValue(txt,-1);
                           
+                          autorun.checked   = json.autorun;
                           if(autorun.checked){
                                 run();
                           }
@@ -251,15 +241,59 @@
                     
                     load.github   = function(json){
                       
+                          var {owner,repo,branch,path}    = json;
+                          filemod.github.write(owner,repo,branch,path);
+                          var api   = true;
+                          var txt   = await filemod.github.load(api);
+                          return txt;
                           
                     }//github
                     
                     
                     load.text   = function(json){
                       
-                          editor.setValue(json.txt,-1);
+                          return json.txt;
                           
                     }//text
+                    
+                    
+                    function save(json){
+                                                                                console.json(file);
+                          json.autorun    = ui.autorun.checked;
+                          
+                          jsonblob.util.save(json);
+                      
+                    }//save
+                    
+                    
+                    save.text   = function(){
+                      
+                          var txt       = editor.getvalue();
+                          var json      = {type:'text',txt};
+                          save(json);
+                          
+                    }//text
+
+                    
+                    save.file   = function(){
+                      
+                          var file    = filemod.export();
+                          
+                          if(file==='no file'){
+                                alert('no file');
+                                return;
+                          }
+                          
+                          if(file==='local'){
+                                alert('local file cannot be published');
+                                return;
+                          }
+
+                          var json      = {file};
+                          save(json);
+                          
+                    }//file
+                    
                     
                     
                     
