@@ -10,7 +10,7 @@
                         {position:absolute;outline:none;font-family:arial}
             
                   #url-root
-                        {display:flex}
+                        {display:flex;gap:5px}
                   #url
                         {flex:1}
                         
@@ -30,6 +30,12 @@
                         </div>
                         <input id=url>
                   </div>
+                  
+                  <div id=btns>
+                        <input value=load type=button>
+                        <input value=save type=button>
+                  </div>
+                  
             </div>
             
       </template>
@@ -80,6 +86,8 @@ mod.httpsfile   = function(){
               icon                            = $(shadow,'.icon');
               icon.onclick                    = menumod.click(node,'both',true,callback);
 
+              url   = $(node,'#url);
+              console.log(url);
           
         }//initdom
         
