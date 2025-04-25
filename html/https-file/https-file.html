@@ -51,13 +51,14 @@ mod.httpsfile   = function(){
       
         var df=obj.df=true;
         
-        var menumod;
-        var $;
+        var menumod,$,editor
+        ;
         
         obj.initmod   = function(params){
           
               menumod   = params.menumod;
               $         = params.$;
+              editor    = params.editor;
               
         }//initmod
         
@@ -106,14 +107,30 @@ mod.httpsfile   = function(){
   //:
   
   
-        btn.load    = function(){
-          
-              load();
+        btn.load    = async function(){
+
+              var url         = ui.url.value;
+              var i           = url.lastIndexOf('/');
+              var filename    = url.slice(i+1);
+                                                                                console.log(i,url,filename);
+              var txt         = await load(url);
+
+              obj.load.complete(txt,filename,icon.src);
               
         }//load
         
         
-        btn.save    = function(){
+        btn.save    = async function(){
+          
+              var txt         = editor.getValue();
+              var url         = ui.url.value;
+              var i           = url.lastIndexOf('/');
+              var filename    = url.slice(i+1);
+                                                                                console.log('save',url,filename);
+              await save(txt,url);
+
+              obj.save.complete(filename,icon.src);
+              
         }//save
         
         
@@ -129,26 +146,26 @@ mod.httpsfile   = function(){
   
         obj.load    = function(){return load()}   //d
         
-        async function load(){
+        async function load(url){
           
-              var url         = ui.url.value;
-              var i           = url.lastIndexOf('/');
-              var filename    = url.slice(i+1);
-              console.log(url,filename);
-              
               var headers     = {mode:'load'};
               var res         = await fetch(url,{headers});
               var txt         = await res.text();
-              
-              obj.load.complete(txt,filename,icon.src);
+              return txt;
               
         }//load
         
         
         obj.save    = function(){return save()}   //d
         
-        function save(){
+        function save(txt,url){
           
+              var headers   = {mode:'save'};
+              var body      = txt;
+              var res       = await fetch(url,{headers});
+              var txt       = await res.text();
+              return txt;
+              
         }//save
         
         
