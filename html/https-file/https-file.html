@@ -158,7 +158,7 @@ mod.httpsfile   = function(){
         
         obj.save    = function(){return save()}   //d
         
-        function save(txt,url){
+        async function save(txt,url){
           
               var headers   = {mode:'save'};
               var body      = txt;
