@@ -29,9 +29,9 @@
                   #dir-root
                         {position:relative;flex:1;display:flex}
                   #dirs
-                        {flex:1;position:relative}
+                        {flex:1;position:relative;padding:5px 10px}
                   #files
-                        {flex:1;position:relative}
+                        {flex:1;position:relative;padding:5px 10px}
                         
                   .spc
                         {flex:1}
@@ -349,6 +349,16 @@ mod.httpsfile   = function(){
                           nitem.style.top       = i*ih+'px';
                           ui.root[name].append(nitem);
                           display.nodes[name][i]   = nitem;
+                          
+                          nitem.onmouseenter    = e=>nitem.style.background   = 'lightyellow';
+                          nitem.onmouseleave    = e=>nitem.style.background   = '';
+                          nitem.ondblclick    = e=>{
+                            
+                                if(name=='dirs'){
+                                }else{
+                                }
+                                
+                          }//ondblclick
                     }
                     
               }//for
