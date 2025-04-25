@@ -3,14 +3,14 @@
 
 /*
 
-https-file.server:d
+https-file-server:d
 
 25-04-25
 
 
 */
                                                                                 console.clear();
-                                                                                console.log('https-file.server');
+                                                                                console.log('https-file-server');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var dir           = argv('d','dir')||'';
