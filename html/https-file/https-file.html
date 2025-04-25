@@ -344,25 +344,27 @@ mod.httpsfile   = function(){
                     
               }//for
                           
-              for(var i=i1;i<i2;i++){
+              for(let i=i1;i<i2;i++){
                 
                     if(!display.nodes[name][i]){
-                          let nitem   = ui.item[name].cloneNode(true);
-                          $(nitem,'.name').textContent    = list[i];
-                          nitem.style.cssText   = 'position:absolute;left:0;right:0';
-                          nitem.style.top       = i*ih+'px';
+                          let nitem                       = ui.item[name].cloneNode(true);
+                          let name                        = list[i];
+                          $(nitem,'.name').textContent    = name;
+                          nitem.style.cssText             = 'position:absolute;left:0;right:0';
+                          nitem.style.top                 = i*ih+'px';
                           ui.root[name].append(nitem);
-                          display.nodes[name][i]   = nitem;
+                          display.nodes[name][i]          = nitem;
                           
-                          nitem.onmouseenter    = e=>nitem.style.background   = 'lightyellow';
-                          nitem.onmouseleave    = e=>nitem.style.background   = '';
-                          nitem.ondblclick    = e=>{
+                          nitem.onmouseenter              = e=>nitem.style.background   = 'lightyellow';
+                          nitem.onmouseleave              = e=>nitem.style.background   = '';
+                          nitem.ondblclick                = e=>{
                             
-                                if(name=='dirs'){
-                                }else{
-                                }
-                                
-                          }//ondblclick
+                                                                  if(name=='dirs'){
+                                                                        console.log('dir',
+                                                                  }else{
+                                                                  }
+                                                                  
+                                                            }//ondblclick
                     }
                     
               }//for
