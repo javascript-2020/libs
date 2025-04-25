@@ -54,13 +54,14 @@
               var obj   = {};
 
             
-                  var menumod,complete
+                  var menumod,complete,editor
                   ;
                   
                   obj.initmod   = function(params){
                     
                         menumod     = params.menumod;
                         complete    = params.complete;
+                        editor      = params.editor;
                         
                   }//initmod
 
@@ -94,7 +95,7 @@
 
                       localfile.initmod({menumod});
                       github.initmod({menumod});
-                      httpsfile.initmod({menumod,$});
+                      httpsfile.initmod({menumod,$,editor});
                       
                       localfile.init();
                       github.init();
@@ -160,10 +161,10 @@
                               github.save(txt);
                         }
                         if(cur.type=='local'){
-                              localfile.save();
+                              localfile.save(txt);
                         }
                         if(cur.type=='httpsfile'){
-                              httpsfile.save();
+                              httpsfile.save(txt);
                         }
                   
                   }//save
