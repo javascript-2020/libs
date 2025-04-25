@@ -198,7 +198,7 @@ mod.httpsfile   = function(){
               var res       = await fetch(url,{headers});
               var json      = await res.json();
               
-              ui.root.dir.style.display   = 'block';
+              ui.root.dir.style.display   = 'flex';
               //display('dirs',json.dirs);
               display('files',json.files);
               
