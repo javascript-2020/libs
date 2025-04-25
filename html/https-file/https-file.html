@@ -343,7 +343,7 @@ mod.httpsfile   = function(){
               for(var i=i1;i<i2;i++){
                 
                     if(!display.nodes[name][i]){
-                          var nitem   = ui.item[name].cloneNode(true);
+                          let nitem   = ui.item[name].cloneNode(true);
                           $(nitem,'.name').textContent    = list[i];
                           nitem.style.cssText   = 'position:absolute;left:0;right:0';
                           nitem.style.top       = i*ih+'px';
