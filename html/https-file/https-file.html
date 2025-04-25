@@ -29,11 +29,11 @@
                   #dir-root
                         {position:relative;flex:1;display:flex}
                   #dirs
-                        {flex:1;position:relative}
+                        {flex:1;position:relative;overflow:auto}
                   .dir
                         {padding:5px 10px;cursor:pointer}
                   #files
-                        {flex:1;position:relative}
+                        {flex:1;position:relative;overflow:auto}
                   .file
                         {padding:5px 10px;cursor:pointer}
                         
@@ -203,7 +203,7 @@ mod.httpsfile   = function(){
               var json      = await res.json();
               
               ui.root.dir.style.display   = 'flex';
-              //display('dirs',json.dirs);
+              display('dirs',json.dirs);
               display('files',json.files,url);
               
         }//dir
