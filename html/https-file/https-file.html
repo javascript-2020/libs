@@ -134,6 +134,7 @@ mod.httpsfile   = function(){
               var url         = ui.url.value;
               var i           = url.lastIndexOf('/');
               var filename    = url.slice(i+1);
+              console.log(url,filename);
               
               var headers     = {mode:'load'};
               var res         = await fetch(url,{headers});
