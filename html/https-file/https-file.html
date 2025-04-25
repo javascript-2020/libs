@@ -187,6 +187,18 @@ mod.httpsfile   = function(){
         }//save
         
         
+        btn.dir   = async function(){
+          
+              var url       = ui.url.value;
+              var headers   = {mode:'dir'};
+              var res       = await fetch(url,{headers});
+              var json      = await res.json();
+              console.json(json);
+              
+              
+        }//dir
+        
+        
         btn.server    = async function(e){
           
               if(e.shiftKey){
