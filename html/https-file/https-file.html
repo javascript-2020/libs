@@ -420,7 +420,8 @@ mod.httpsfile   = function(){
                           
                     }else{
                                                                                 console.log('file',url,filename);
-                          var fn    = url+filename;
+                          var fn          = url+filename;
+                          ui.url.value    = fn;
                           load(fn);
                     }
                     
