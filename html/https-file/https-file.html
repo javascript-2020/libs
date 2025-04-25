@@ -17,11 +17,15 @@
                         }
                   .copy {margin-left:5px;padding:2px;width:24px;height:24px;border:1px solid gray;cursor:pointer;border-radius:3px;
                           content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAABSlBMVEVHcEwnz/4C8P4g1P4L6P43wf5Mr/4a2v4Y3P4/uv5PrP4+vf5Auv4ozv5KsP4vyv45wP5Jsf5Auf49vP5Mrv4zxf44wf5Lr/46wP4h1P5Lr/46vv5Jsv4R5P5Hs/5Etv44wf5Hs/41w/4uyv47vv49vP5Ftf5GtP4c2f4rzP4tyv4m0f5Etv5Nrv4xxv4xxv4xx/4W3/5KsP5Mr/4/u/4uyv5Isv4K6f4l0f4qzv4W3/4V3/5Nrv5Mrv5Mrv5Mr/4W3v4e2P5BuP5Hsv4N5v4K6f4O5v42w/5Dt/4E7/4uyf4C8P4nz/4M5/4K6v4oz/4P5f4k0v4b2v5Gs/4E7v4I6/5Nrf4e1/4H7P4E7v5Auv5Dtv4sy/5Isv5GtP4wx/49vP4zxf47vv44wP42w/5LsP5Jsf4i1P4n0P4N5v4k0v4a2v4S4v4X3v6OfcqkAAAAVnRSTlMACo7CjQWN/VczjgIJMfIXJzHtjj5iVekR71Hvtz7CjelXjre2wiJj2PCFIWbR7+fEnXaodz3544/USfOC22Tm7CXOnqfUZ+/3VTV9bsTzqGDahpb2tyRB6bIAAAIDSURBVDjLrZVpV9pAFIYntdFiQkZsLCQECtJSlqAsFRBU3Kuta1sncYGuJEDt///aISkkkyHo6enzLTlP5s5758wNAC526pd3d1++/fzx/evNze1tp210wxURUMTWBz2v2EWtLc7jBTPmoJfNrqy8i0ajixgB00VISJIeW9JMKbcWDAYDNiFMQN1EqAAJcUfSBif0fsQWQjLxpjGnXUJa5CoIbTiP8KJ0OqfNMLQIZhGad/Ke3t///vWwGKv1+yPxfW55+TnmJWZW5ggxcqX3m6WSVTpSdPcxHCLExmf97AI8e1j8cK1f8X9Fq/Sotrf0k2v9KRiJ08L8mwhf2CQx8oK/yJyPw3Q67ULaV4Tr7tRCwFfkllLF4ushccwGPyUMzwzhMQz/X1Kz+QVMmh2LcjgsTxDZ3OpqIpFYfDu+KGwoxE5JvTtpF9NX9BEB792jn0gD4eNEsVAQHyXOO7fQFmNNLZOnPV5BqEyI+Yxm1qkluS0BCWRp8FEze6mTJQtVVd8MUfcEhBSGFOGMOWmaoc0AmRoXP5cmiHEReEXANOopzCsLRYlXjWolGXE2jK/r/ujEWAdOFIxWGrjO8ljXazG6MeynthEn2gAP9P7B4XCE2thzdG2v2jbK5LfHZ3hINbclSco6o/kIh1Einq4e1qxp5m2PkqZ/CPvbXvFot+xe7w/EpaiUrJ24NAAAAABJRU5ErkJggg==);
-                        }
-                        
+                        }                        
                   #url
                         {flex:1}
                        
+                  #auth-root
+                        {display:flex;align-items:center;margin-bottom:10px;gap:5px}
+                  #auth
+                        {flex:1}
+                        
                   #btns
                         {display:flex;gap:5px;margin-bottom:10px}
                         
@@ -67,6 +71,14 @@
                         <img class=copy>
                         <img class=paste>
                         <input id=url spellcheck=false autocomplete=off value='https://localhost:3010/'>
+                  </div>
+                  
+                  <div id=auth-root>
+                        <div>
+                              auth
+                        </div>
+                        <input id=auth-chk type=checkbox>
+                        <input id=auth spellcheck=false autocomplete=off value='matt-123'>
                   </div>
                   
                   <div id=btns>
@@ -163,6 +175,9 @@ mod.httpsfile   = function(){
               $(node,'.paste').onclick              = btn.paste;
               ui.url                                = $(node,'#url');
               
+              ui.auth                               = $(node,'#uath');
+              ui.['auth-chk']                       = $(node,'#auth-chk');
+              
               $(node,'[value=load]').onclick        = btn.load;
               $(node,'[value=save]').onclick        = btn.save;
               $(node,'[value=dir]').onclick         = btn.dir;
@@ -184,6 +199,8 @@ mod.httpsfile   = function(){
 
         
   //:
+  
+  
   
   
         btn.copy    = async function(){
@@ -290,6 +307,12 @@ mod.httpsfile   = function(){
         async function loadfile(url){
           
               var headers     = {mode:'load'};
+              
+              if(ui.['auth-chk'].checked){
+                    var auth        = ui.auth.value;
+                    headers.auth    = auth;
+              }
+              
               var res         = await fetch(url,{headers});
               var txt         = await res.text();
               return txt;
@@ -300,6 +323,12 @@ mod.httpsfile   = function(){
         async function savefile(txt,url){
           
               var headers   = {mode:'save'};
+              
+              if(ui.['auth-chk'].checked){
+                    var auth        = ui.auth.value;
+                    headers.auth    = auth;
+              }
+              
               var body      = txt;
               var res       = await fetch(url,{method:'post',headers,body});
               var txt       = await res.text();
@@ -316,6 +345,12 @@ mod.httpsfile   = function(){
               }
               
               var headers   = {mode:'dir'};
+              
+              if(ui.['auth-chk'].checked){
+                    var auth        = ui.auth.value;
+                    headers.auth    = auth;
+              }
+              
               var res       = await fetch(url,{headers});
               var json      = await res.json();
               
