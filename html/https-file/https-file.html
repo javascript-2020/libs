@@ -74,7 +74,7 @@
                         <input value=save type=button>
                         <input value=dir type=button>
                         <div class=spc></div>
-                        <input value=server type=button>
+                        <input value='download server' type=button>
                   </div>
                   
                   <div id=dir-list-root>
@@ -219,18 +219,7 @@ mod.httpsfile   = function(){
         btn.dir   = async function(){
           
               var url       = ui.url.value;
-              if(!url.endsWith('/')){
-                    alert('url not directory?');
-                    return;
-              }
-              
-              var headers   = {mode:'dir'};
-              var res       = await fetch(url,{headers});
-              var json      = await res.json();
-              
-              ui.root.dir.style.display   = 'flex';
-              display('dirs',json.dirs);
-              display('files',json.files,url);
+              readdir(url);              
               
         }//dir
         
@@ -319,9 +308,39 @@ mod.httpsfile   = function(){
         }//save
         
         
+        function readdir(url){
+          
+              if(!url.endsWith('/')){
+                    alert('url not directory?');
+                    return;
+              }
+              
+              var headers   = {mode:'dir'};
+              var res       = await fetch(url,{headers});
+              var json      = await res.json();
+              
+              display.clear();
+              display('dirs',json.dirs);
+              display('files',json.files,url);
+          
+        }//readdir
+        
+        
   //:
 
   
+        display.clear   = function(){
+          
+              ui.root.dirs.replaceChildren();
+              ui.root.files.replaceChildren();
+              
+              display.nodes.dirs    = {};
+              display.nodes.files   = {};
+              
+              
+        }//clear
+        
+        
         display.div           = {};
         display.nodes         = {};
         display.nodes.dirs    = {};
@@ -388,6 +407,7 @@ mod.httpsfile   = function(){
                                                                   var url   = ui.url.value;
                                                                   if(name=='dirs'){
                                                                         console.log('dir',url,filename);
+                                                                        
                                                                   }else{
                                                                         console.log('file',url,filename);
                                                                   }
@@ -397,7 +417,8 @@ mod.httpsfile   = function(){
                     
               }//for
                 
-                    
+                                                                                var n   = Object.keys(display.nodes[name]).length;
+                                                                                console.log(name,n);
         }//display
         
         
