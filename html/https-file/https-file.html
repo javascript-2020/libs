@@ -402,23 +402,30 @@ mod.httpsfile   = function(){
                           
                           nitem.onmouseenter              = e=>nitem.style.background   = 'lightyellow';
                           nitem.onmouseleave              = e=>nitem.style.background   = '';
-                          nitem.ondblclick                = e=>{
-                            
-                                                                  var url   = ui.url.value;
-                                                                  if(name=='dirs'){
-                                                                        console.log('dir',url,filename);
-                                                                        
-                                                                  }else{
-                                                                        console.log('file',url,filename);
-                                                                  }
-                                                                  
-                                                            }//ondblclick
+                          nitem.ondblclick                = e=>dblclick(filename);
                     }
                     
               }//for
-                
                                                                                 var n   = Object.keys(display.nodes[name]).length;
                                                                                 console.log(name,n);
+              function dblclick(filename){
+                            
+                    var url   = ui.url.value;
+                    if(name=='dirs'){
+                                                                                console.log('dir',url,filename);
+                          var fn          = url+filename+'/';
+                          ui.url.value    = fn;
+                          readdir(fn);
+                          
+                          
+                    }else{
+                                                                                console.log('file',url,filename);
+                          var fn    = url+filename;
+                          load(fn);
+                    }
+                    
+              }//ondblclick
+              
         }//display
         
         
