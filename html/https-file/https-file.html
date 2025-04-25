@@ -202,21 +202,21 @@ mod.httpsfile   = function(){
         }//paste
   
   
-        btn.load    = async function(){
+        btn.load    = function(){
 
               load();
               
         }//load
         
         
-        btn.save    = async function(){
+        btn.save    = function(){
           
               save();
               
         }//save
         
         
-        btn.dir   = async function(){
+        btn.dir   = function(){
           
               var url       = ui.url.value;
               readdir(url);              
@@ -308,7 +308,7 @@ mod.httpsfile   = function(){
         }//save
         
         
-        function readdir(url){
+        async function readdir(url){
           
               if(!url.endsWith('/')){
                     alert('url not directory?');
