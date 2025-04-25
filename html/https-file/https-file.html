@@ -145,11 +145,11 @@ mod.httpsfile   = function(){
 
               ui.root.dir                           = $(node,'#dir-root');
               ui.root.dirs                          = $(ui.root.dir,'#dirs');
-              ui.item.dir                           = $(ui.root.dirs,'.dir');
-              ui.item.dir.remove();
+              ui.item.dirs                          = $(ui.root.dirs,'.dir');
+              ui.item.dirs.remove();
               ui.root.files                         = $(ui.root.dir,'#files');
-              ui.item.file                          = $(ui.root.files,'.file');
-              ui.item.file.remove();
+              ui.item.files                         = $(ui.root.files,'.file');
+              ui.item.files.remove();
           
         }//initdom
 
