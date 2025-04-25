@@ -180,7 +180,7 @@ debugger;
           
               var headers   = {mode:'save'};
               var body      = txt;
-              var res       = await fetch(url,{headers,body});
+              var res       = await fetch(url,{method:'post',headers,body});
               var txt       = await res.text();
               return txt;
               
