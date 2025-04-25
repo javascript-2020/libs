@@ -66,6 +66,7 @@
 
                   var localfile;
                   var github;
+                  var httpsfile;
                   
                   var cur;
                   Object.defineProperty(obj,'cur',{get:()=>cur,set:v=>cur=v});
@@ -85,12 +86,16 @@
                       obj.localfile             = localfile;
                       github                    = mod.github();
                       obj.github                = github;
+                      httpsfile                 = mod.httpsfile();
+                      obj.httpsfile             = httpsfile;
 
                       localfile.initmod({menumod});
                       github.initmod({menumod});
+                      httpsfile.initmod({menumod,$});
                       
                       localfile.init();
                       github.init();
+                      httpsfile.init();
                       
                       localfile.load.complete   = (txt,path,icon)=>complete.load('localfile',txt,path,icon);
                       localfile.save.complete   = (path,icon)=>complete.save('localfile',path,icon);
@@ -114,6 +119,7 @@
 
                         localfile.initdom(shadow);
                         github.initdom(shadow);
+                        httpsfile.initdom(shadow);
 
                         $(shadow,'#save').onclick         = btn.save;
 
