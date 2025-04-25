@@ -306,9 +306,9 @@ mod.httpsfile   = function(){
               if(!display.div[name]){
                     display.div[name]                  = document.createElement('div');
                     display.div[name].style.cssText    = 'height:5px;background:lightblue;position:absolute;left:0;right:0';
-                    display.div[name].style.top        = t+'px';
                     ui.root[name].append(display.div[name]);
               }
+              display.div[name].style.top        = t+'px';
               
               var st    = ui.root[name].scrollTop;
               var i1    = Math.floor(st/20)-3;
