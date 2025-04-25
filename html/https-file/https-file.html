@@ -300,8 +300,11 @@ mod.httpsfile   = function(){
         
         function display(name,list){
           
-              var n   = list.length;
-              var t   = n*20;
+              var ih    = 25;
+              var pad   = 5;
+              
+              var n     = list.length;
+              var t     = n*ih;
               
               if(!display.div[name]){
                     display.div[name]                  = document.createElement('div');
@@ -311,13 +314,13 @@ mod.httpsfile   = function(){
               display.div[name].style.top        = t+'px';
               
               var st    = ui.root[name].scrollTop;
-              var i1    = Math.floor(st/20)-3;
+              var i1    = Math.floor(st/ih)-3;
               if(i1<0){
                     i1    = 0;
               }
               
               var h     = ui.root[name].offsetHeight;
-              var nh    = Math.floor(h/20)+3;
+              var nh    = Math.floor(h/ih)+3;
               
               var i2    = i1+nh;
               if(i2>list.length){
@@ -339,7 +342,7 @@ mod.httpsfile   = function(){
                           var nitem   = ui.item[name].cloneNode(true);
                           $(nitem,'.name').textContent    = list[i];
                           nitem.style.cssText   = 'position:absolute;left:0;right:0';
-                          nitem.style.top       = i*20+'px';
+                          nitem.style.top       = i*ih+'px';
                           ui.root[name].append(nitem);
                           display.nodes[name][i]   = nitem;
                     }
