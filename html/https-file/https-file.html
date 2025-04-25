@@ -26,14 +26,18 @@
                         {display:flex;gap:5px}
                         
                         
-                  #dir-root
+                  #dir-list-root
                         {position:relative;flex:1;display:flex}
                   #dirs
-                        {flex:1;position:relative;overflow:auto}
+                        {flex:1}
+                  #dirs-list
+                        {height:100%;overflow:auto;position:relative}
                   .dir
                         {padding:5px 10px;cursor:pointer;user-select:none}
                   #files
-                        {flex:1;position:relative;overflow:auto}
+                        {flex:1}
+                  #files-list
+                        {height:100%;position:relative;overflow:auto}
                   .file
                         {padding:5px 10px;cursor:pointer;user-select:none}
                         
@@ -69,16 +73,20 @@
                         <input value=server type=button>
                   </div>
                   
-                  <div id=dir-root>
+                  <div id=dir-list-root>
                         <div id=dirs>
-                              <div class=dir>
-                                    <div class=name>
+                              <div id=dirs-list>
+                                    <div class=dir>
+                                          <div class=name>
+                                          </div>
                                     </div>
                               </div>
                         </div>
                         <div id=files>
-                              <div class=file>
-                                    <div class=name>
+                              <div id=files-list>
+                                    <div class=file>
+                                          <div class=name>
+                                          </div>
                                     </div>
                               </div>
                         </div>
@@ -101,9 +109,9 @@ mod.httpsfile   = function(){
         
         obj.initmod   = function(params){
           
-              menumod   = params.menumod;
-              $         = params.$;
-              editor    = params.editor;
+              menumod       = params.menumod;
+              $             = params.$;
+              editor        = params.editor;
               
         }//initmod
         
@@ -151,13 +159,16 @@ mod.httpsfile   = function(){
               $(node,'[value=server]').onclick      = btn.server;
 
 
-              ui.root.dir                           = $(node,'#dir-root');
-              ui.root.dirs                          = $(ui.root.dir,'#dirs');
+              ui.root.dir                           = $(node,'#dir-list-root');
+              
+              ui.root.dirs                          = $(ui.root.dir,'#dirs-list');
               ui.item.dirs                          = $(ui.root.dirs,'.dir');
               ui.item.dirs.remove();
-              ui.root.files                         = $(ui.root.dir,'#files');
+              
+              ui.root.files                         = $(ui.root.dir,'#files-list');
               ui.item.files                         = $(ui.root.files,'.file');
               ui.item.files.remove();
+
           
         }//initdom
 
@@ -198,6 +209,11 @@ mod.httpsfile   = function(){
         btn.dir   = async function(){
           
               var url       = ui.url.value;
+              if(!url.endsWith('/')){
+                    alert('url not directory?');
+                    return;
+              }
+              
               var headers   = {mode:'dir'};
               var res       = await fetch(url,{headers});
               var json      = await res.json();
