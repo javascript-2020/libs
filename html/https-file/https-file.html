@@ -1,0 +1,81 @@
+
+
+<https-file>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+            </style>
+            
+            <img>
+
+            <div id=httpsfile class=menu style='display:none;left:-225px;top:100px;width:450px'>
+            
+                  <div class=menu-title>
+                        https file params
+                  </div>
+            
+            </div>
+            
+      </template>
+      
+      <script>
+      
+mod.httpsfile   = function(){
+                                                                    true && console.log('httpsfile');
+  var obj   = {};
+      
+        var df=obj.df=true;
+        
+        var menumod;
+        var $;
+        
+        obj.initmod   = function(params){
+          
+              menumod   = params.menumod;
+              $         = params.$;
+              
+        }//initmod
+        
+  //vars:-
+
+
+        var root;
+        var shadow;
+        var icon;
+        
+  
+  //
+  
+        obj.init    = function(){
+        }//init
+
+        
+        obj.initdom   = function(rootnode){
+          
+              root              = $.$(rootnode,'httpsfile');
+              shadow            = root.shadowRoot;
+              
+              menumod.add.style(shadow);
+              
+              var style                       = $(shadow,'style');
+              $.stylesheet.insert(style,'.icon');
+              
+              var node                        = $(shadow,'.menu');
+              icon                            = $(shadow,'#icon');
+              icon.onclick                    = menumod.click(node,'both',true,callback);
+
+          
+        }//initdom
+        
+
+
+
+  return obj;
+      
+}//httpsfile
+            
+      </script>
+      
+</https-file>
