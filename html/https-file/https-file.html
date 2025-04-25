@@ -67,6 +67,10 @@ mod.httpsfile   = function(){
         var root;
         var shadow;
         var icon;
+        var ui          = {};
+
+
+        var btn         = {};
         
   
   //
@@ -77,28 +81,77 @@ mod.httpsfile   = function(){
         
         obj.initdom   = function(rootnode){
           
-              root              = $.$(rootnode,'https-file');
-              shadow            = root.shadowRoot;
+              root                                  = $.$(rootnode,'https-file');
+              shadow                                = root.shadowRoot;
               
               menumod.add.style(shadow);
               
-              var style                       = $(shadow,'style');
+              var style                             = $(shadow,'style');
               $.stylesheet.insert(style,'.icon');
               
-              var node                        = $(shadow,'.menu');
-              icon                            = $(shadow,'.icon');
-              icon.onclick                    = menumod.click(node,'both',true,callback);
+              var node                              = $(shadow,'.menu');
+              icon                                  = $(shadow,'.icon');
+              icon.onclick                          = menumod.click(node,'both',true,callback);
 
-              url   = $(node,'#url');
-              console.log(url);
+              ui.url                                = $(node,'#url');
+              
+              $(node,'[value=load]').onclick        = btn.load;
+              $(node,'[value=save]').onclick        = btn.save;
+
+
           
         }//initdom
-        
 
+        
+  //:
+  
+  
+        btn.load    = function(){
+          
+              load();
+              
+        }//load
+        
+        
+        btn.save    = function(){
+        }//save
+        
+        
+  //:
+  
+  
         function callback(){
         }//callback
         
 
+  //:
+  
+  
+        obj.load    = function(){return load()}   //d
+        
+        function load(){
+          
+              var url         = ui.url.value;
+              var i           = url.lastIndexOf('/');
+              var filename    = url.slice(i+1);
+              
+              var headers     = {mode:'load'};
+              var res         = await fetch(url,{headers});
+              var txt         = await res.text();
+              
+              obj.load.complete(txt,filename,icon.src);
+              
+        }//load
+        
+        
+        obj.save    = function(){return save()}   //d
+        
+        function save(){
+          
+        }//save
+        
+        
+        
   return obj;
       
 }//httpsfile
