@@ -204,7 +204,7 @@ mod.httpsfile   = function(){
               
               ui.root.dir.style.display   = 'flex';
               //display('dirs',json.dirs);
-              display('files',json.files);
+              display('files',json.files,url);
               
         }//dir
         
@@ -359,9 +359,11 @@ mod.httpsfile   = function(){
                           nitem.onmouseleave              = e=>nitem.style.background   = '';
                           nitem.ondblclick                = e=>{
                             
+                                                                  var url   = ui.url.value;
                                                                   if(name=='dirs'){
-                                                                        console.log('dir',
+                                                                        console.log('dir',url,name);
                                                                   }else{
+                                                                        console.log('file',url,name);
                                                                   }
                                                                   
                                                             }//ondblclick
