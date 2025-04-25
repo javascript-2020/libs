@@ -193,8 +193,10 @@ mod.httpsfile   = function(){
               var headers   = {mode:'dir'};
               var res       = await fetch(url,{headers});
               var json      = await res.json();
-              console.json(json);
               
+              ui.root.dir.style.display   = 'block';
+              //display('dirs',json.dirs);
+              display('files',json.files);
               
         }//dir
         
@@ -281,6 +283,67 @@ mod.httpsfile   = function(){
               return txt;
               
         }//save
+        
+        
+  //:
+
+  
+        display.div           = {};
+        display.nodes         = {};
+        display.nodes.dirs    = {};
+        display.nodes.files   = {};
+        
+        
+        function display(name,list){
+          
+              var n   = list.length;
+              var t   = n*20;
+              
+              if(!display.div[name]){
+                    display.div[name]                  = document.createElement('div');
+                    display.div[name].style.cssText    = 'height:5px;background:lightblue;position:absolute;left:0;right:0';
+                    display.div[name].style.top        = h+'px';
+                    ui.root[name].append(display.div[name]);
+              }
+              
+              var st    = ui.root[name].scrollTop;
+              var i1    = Math.floor(st/20)-3;
+              if(i1<0){
+                    i1    = 0;
+              }
+              
+              var h     = ui[name].offsetHeight;
+              var nh    = Math.floor(h/20)+3;
+              
+              var i2    = i1+nh;
+              if(i2>list.length){
+                    i2    = list.length;
+              }
+        
+              for(var key in display.nodes[name]){
+                
+                    if(key<i1 || key>=i2){
+                          display.nodes[name][key].remove();
+                          delete display.nodes[name][key];
+                    }
+                    
+              }//for
+                          
+              for(var i=i1;i<i2;i++){
+                
+                    if(!display.nodes[name][i]){
+                          var nitem   = ui.item[name].cloneNode(true);
+                          $(nitem,'.name').textContent    = list[i];
+                          nitem.style.cssText   = 'position:absolute;left:0;right:0';
+                          nitem.style.top       = i*20+'px';
+                          ui.root[name].append(nitem);
+                          display.nodes[name][i]   = nitem;
+                    }
+                    
+              }//for
+                
+                    
+        }//display
         
         
         
