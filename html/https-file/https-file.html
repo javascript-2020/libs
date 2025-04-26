@@ -9,6 +9,9 @@
                   .menu
                         {position:absolute;outline:none;font-family:arial;display:flex;flex-direction:column}
             
+                  #server-root
+                        {display:flex;gap:5px;align-items:center;margin-bottom:10px}
+                        
                   #url-root
                         {display:flex;gap:5px;align-items:center;margin-bottom:10px}
                   .paste
@@ -68,6 +71,14 @@
                         https file server
                   </div>
             
+                  <div id=server-root>
+                        <label>
+                              server
+                        </label>
+                        <div class=spc></div>
+                        <input value='quit' type=button>
+                        <input value='download server' type=button>
+                  </div>
                   <div id=url-root>
                         <label>
                               url
@@ -90,7 +101,6 @@
                         <input value=save type=button>
                         <input value=dir type=button>
                         <div class=spc></div>
-                        <input value='download server' type=button>
                   </div>
                   
                   <div id=dir-list-root>
