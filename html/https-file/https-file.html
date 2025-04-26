@@ -203,6 +203,7 @@ mod.httpsfile   = function(){
               $(node,'[value=save]').onclick                    = btn.save;
               $(node,'[value=dir]').onclick                     = btn.dir;
               $(node,'[value=mkdir').onclick                    = btn.mkdir;
+              $(node,'[value=del').onclick                      = btn.del;
 
 
               ui.root.dir                                       = $(node,'#dir-list-root');
@@ -306,6 +307,14 @@ mod.httpsfile   = function(){
               mkdir(url);
               
         }//mkdir
+        
+        
+        btn.del   = function(){
+          
+              var url   = ui.url.value;
+              del(url);
+              
+        }//del
         
         
   //:
@@ -455,6 +464,32 @@ mod.httpsfile   = function(){
               display('files',json.files,url);
           
         }//mkdir
+        
+        
+        function del(url){
+          
+              var headers   = {mode:'del'};
+
+              if(ui['auth-chk'].checked){
+                    var auth        = ui.auth.value;
+                    headers.auth    = auth;
+              }
+              
+              var res       = await fetch(url,{headers});
+              var txt       = await res.text();
+              if(!res.ok){
+                    alert('mkdir :'+url+'\n'+txt);
+                    return false;
+              }
+
+              var json    = JSON.parse(txt);
+
+              ui.url.value    = json.cwd;              
+              display.clear();
+              display('dirs',json.dirs);
+              display('files',json.files,url);
+              
+        }//del
         
         
   //:
