@@ -300,11 +300,6 @@ mod.httpsfile   = function(){
         btn.dir   = function(){
           
               var url       = ui.url.value;
-              if(!url.endsWith('/')){
-                    alert('url does not appear to be a directory ( endsWith / )');
-                    return;
-              }
-              
               readdir(url);              
               
         }//dir
