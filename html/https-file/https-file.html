@@ -654,8 +654,8 @@ mod.httpsfile   = function(){
               console.log(cwd);
               
               var p       = new URL(url);
-              //var url2    = p.protocol+'//'+p.host+
-              return url;
+              var url2    = p.protocol+'//'+p.host+cwd;
+              return url2;
               
         }//build
         
