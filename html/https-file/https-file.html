@@ -473,9 +473,8 @@ mod.httpsfile   = function(){
 
               var json    = JSON.parse(txt);
               
-              var url     = new URL(url);
-              
-              ui.url.value    = json.cwd;
+              var url         = build(url,json.cwd);
+              ui.url.value    = url
               
               display.clear();
               display('dirs',json.dirs);
@@ -502,7 +501,8 @@ mod.httpsfile   = function(){
 
               var json    = JSON.parse(txt);
 
-              ui.url.value    = json.cwd;
+              var url         = build(url,json.cwd);
+              ui.url.value    = url
               
               display.clear();
               display('dirs',json.dirs);
@@ -529,7 +529,8 @@ mod.httpsfile   = function(){
 
               var json    = JSON.parse(txt);
 
-              ui.url.value    = json.cwd;
+              var url         = build(url,json.cwd);
+              ui.url.value    = url
               
               display.clear();
               display('dirs',json.dirs);
