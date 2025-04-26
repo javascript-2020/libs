@@ -160,6 +160,7 @@ mod.httpsfile   = function(){
         var ui          = {};
         ui.root         = {};
         ui.item         = {};
+        ui.rd           = {};
 
 
         var btn         = {};
@@ -173,50 +174,50 @@ mod.httpsfile   = function(){
         
         obj.initdom   = function(rootnode){
           
-              root                                  = $.$(rootnode,'https-file');
-              shadow                                = root.shadowRoot;
+              root                                              = $.$(rootnode,'https-file');
+              shadow                                            = root.shadowRoot;
               
               menumod.add.style(shadow);
               
-              var style                             = $(shadow,'style');
+              var style                                         = $(shadow,'style');
               $.stylesheet.insert(style,'.icon');
               
-              var node                              = $(shadow,'.menu');
-              icon                                  = $(shadow,'.icon');
-              icon.onclick                          = menumod.click(node,'both',true,callback);
+              var node                                          = $(shadow,'.menu');
+              icon                                              = $(shadow,'.icon');
+              icon.onclick                                      = menumod.click(node,'both',true,callback);
 
-              $(node,'[value=quit]').onclick        = btn.quit;
-              $(node,'[value=download]').onclick    = btn.server;
+              ui.root.server                                    = $(node,'#server-root');
               
-              $(node,'.copy').onclick               = btn.copy;
-              $(node,'.paste').onclick              = btn.paste;
-              ui.url                                = $(node,'#url');
+              $(ui.root.server,'[value=quit]').onclick          = btn.quit;
+              $(ui.root.server,'[value=download]').onclick      = btn.server;
               
-              ui.auth                               = $(node,'#auth');
-              ui['auth-chk']                        = $(node,'#auth-chk');
+              $(node,'.copy').onclick                           = btn.copy;
+              $(node,'.paste').onclick                          = btn.paste;
+              ui.url                                            = $(node,'#url');
               
-              $(node,'[value=load]').onclick        = btn.load;
-              $(node,'[value=save]').onclick        = btn.save;
-              $(node,'[value=dir]').onclick         = btn.dir;
+              ui.auth                                           = $(node,'#auth');
+              ui['auth-chk']                                    = $(node,'#auth-chk');
+              
+              $(node,'[value=load]').onclick                    = btn.load;
+              $(node,'[value=save]').onclick                    = btn.save;
+              $(node,'[value=dir]').onclick                     = btn.dir;
 
 
-              ui.root.dir                           = $(node,'#dir-list-root');
+              ui.root.dir                                       = $(node,'#dir-list-root');
               
-              ui.root.dirs                          = $(ui.root.dir,'#dirs-list');
-              ui.item.dirs                          = $(ui.root.dirs,'.dir');
+              ui.root.dirs                                      = $(ui.root.dir,'#dirs-list');
+              ui.item.dirs                                      = $(ui.root.dirs,'.dir');
               ui.item.dirs.remove();
               
-              ui.root.files                         = $(ui.root.dir,'#files-list');
-              ui.item.files                         = $(ui.root.files,'.file');
+              ui.root.files                                     = $(ui.root.dir,'#files-list');
+              ui.item.files                                     = $(ui.root.files,'.file');
               ui.item.files.remove();
 
           
         }//initdom
 
         
-  //:
-  
-  
+  //:    
   
   
         btn.copy    = async function(){
@@ -253,6 +254,11 @@ mod.httpsfile   = function(){
         btn.dir   = function(){
           
               var url       = ui.url.value;
+              if(!url.endsWith('/')){
+                    alert('url does not appear to be a directory ( endsWith / )');
+                    return;
+              }
+              
               readdir(url);              
               
         }//dir
@@ -286,7 +292,7 @@ mod.httpsfile   = function(){
               
         }//server
 
-        
+
   //:
   
   
@@ -366,7 +372,7 @@ mod.httpsfile   = function(){
         async function readdir(url){
           
               if(!url.endsWith('/')){
-                    alert('url not directory?');
+                    alert('url not directory? ( ends with / )');
                     return;
               }
               
@@ -410,7 +416,7 @@ mod.httpsfile   = function(){
         
         function display(name,list){
 
-        
+              var url   = ui.url.value;
               ui.root[name].onscroll    = e=>display(name,list);
               
               
@@ -472,7 +478,11 @@ mod.httpsfile   = function(){
                                                                                 console.log(name,n);
               function click(filename){
                 
-                    console.log('click',filename);
+                    var fn    = url+filename;
+                    if(name==='dirs'){
+                          fn   += '/';
+                    }
+                    ui.url.value    = fn
                     
               }//click
               
@@ -482,16 +492,12 @@ mod.httpsfile   = function(){
                     var url   = ui.url.value;
                     if(name=='dirs'){
                                                                                 console.log('dir',url,filename);
-                          var fn          = url+filename+'/';
-                          ui.url.value    = fn;
-                          readdir(fn);
+                          readdir(url);
                           
                           
                     }else{
                                                                                 console.log('file',url,filename);
-                          var fn          = url+filename;
-                          ui.url.value    = fn;
-                          load(fn);
+                          load(url);
                     }
                     
               }//ondblclick
