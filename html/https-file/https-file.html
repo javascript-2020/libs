@@ -460,6 +460,8 @@ mod.httpsfile   = function(){
 
               var json    = JSON.parse(txt);
               
+              ui.url.value    = json.cwd;
+              
               display.clear();
               display('dirs',json.dirs);
               display('files',json.files,url);
