@@ -204,6 +204,7 @@ mod.httpsfile   = function(){
               ui.auth                                           = $(node,'#auth');
               ui['auth-chk']                                    = $(node,'#auth-chk');
               
+              $(node,'#parent-dir').onclick                     = btn.parent;
               $(node,'[value=load]').onclick                    = btn.load;
               $(node,'[value=save]').onclick                    = btn.save;
               $(node,'[value=dir]').onclick                     = btn.dir;
@@ -273,6 +274,14 @@ mod.httpsfile   = function(){
         }//paste
   
   
+        btn.parent    = function(){
+          
+              var url   = ui.url.value;
+              parent(url);
+              
+        }//parent
+        
+        
         btn.load    = function(){
 
               var url   = ui.url.value;
@@ -500,6 +509,31 @@ mod.httpsfile   = function(){
         }//del
         
         
+        function parent(url){
+
+              var headers   = {mode:'parent'};
+
+              if(ui['auth-chk'].checked){
+                    var auth        = ui.auth.value;
+                    headers.auth    = auth;
+              }
+              
+              var res       = await fetch(url,{headers});
+              var txt       = await res.text();
+              if(!res.ok){
+                    alert('parent :'+url+'\n'+txt);
+                    return false;
+              }
+
+              var json    = JSON.parse(txt);
+
+              ui.url.value    = json.cwd;
+              
+              display.clear();
+              display('dirs',json.dirs);
+              display('files',json.files,url);
+
+        }//parent
   //:
 
   
