@@ -463,12 +463,20 @@ mod.httpsfile   = function(){
                           
                           nitem.onmouseenter              = e=>nitem.style.background   = 'lightyellow';
                           nitem.onmouseleave              = e=>nitem.style.background   = '';
+                          nitem.onclick                   = e=>click(filename);
                           nitem.ondblclick                = e=>dblclick(filename);
                     }
                     
               }//for
                                                                                 var n   = Object.keys(display.nodes[name]).length;
                                                                                 console.log(name,n);
+              function click(filename){
+                
+                    console.log('click',filename);
+                    
+              }//click
+              
+              
               function dblclick(filename){
                             
                     var url   = ui.url.value;
