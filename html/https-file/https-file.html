@@ -77,7 +77,7 @@
                         </label>
                         <div class=spc></div>
                         <input value='quit' type=button>
-                        <input value='download server' type=button>
+                        <input value=download type=button>
                   </div>
                   <div id=url-root>
                         <label>
@@ -185,6 +185,9 @@ mod.httpsfile   = function(){
               icon                                  = $(shadow,'.icon');
               icon.onclick                          = menumod.click(node,'both',true,callback);
 
+              $(node,'[value=quit]').onclick        = btn.quit;
+              $(node,'[value=download]').onclick    = btn.server;
+              
               $(node,'.copy').onclick               = btn.copy;
               $(node,'.paste').onclick              = btn.paste;
               ui.url                                = $(node,'#url');
@@ -195,7 +198,6 @@ mod.httpsfile   = function(){
               $(node,'[value=load]').onclick        = btn.load;
               $(node,'[value=save]').onclick        = btn.save;
               $(node,'[value=dir]').onclick         = btn.dir;
-              $(node,'[value="download server"]').onclick   = btn.server;
 
 
               ui.root.dir                           = $(node,'#dir-list-root');
@@ -254,6 +256,16 @@ mod.httpsfile   = function(){
               readdir(url);              
               
         }//dir
+        
+        
+        btn.quit    = async function(){
+          
+              var url   = ui.url.value;
+              
+              var res   = await fetch(url+'quit');
+              var txt   = await res.text();
+              
+        }//quit
         
         
         btn.server    = async function(e){
