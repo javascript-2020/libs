@@ -429,11 +429,6 @@ mod.httpsfile   = function(){
         
         async function readdir(url){
           
-              if(!url.endsWith('/')){
-                    alert('url not directory? ( ends with / )');
-                    return;
-              }
-              
               var headers   = {mode:'dir'};
               
               if(ui['auth-chk'].checked){
