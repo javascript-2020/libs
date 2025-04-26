@@ -189,7 +189,7 @@ mod.httpsfile   = function(){
               ui.root.server                                    = $(node,'#server-root');
               
               $(ui.root.server,'[value=quit]').onclick          = btn.quit;
-              $(ui.root.server,'[value=download]').onclick      = btn.server;
+              $(ui.root.server,'[value=download]').onclick      = btn.download;
               
               $(node,'.copy').onclick                           = btn.copy;
               $(node,'.paste').onclick                          = btn.paste;
@@ -201,6 +201,7 @@ mod.httpsfile   = function(){
               $(node,'[value=load]').onclick                    = btn.load;
               $(node,'[value=save]').onclick                    = btn.save;
               $(node,'[value=dir]').onclick                     = btn.dir;
+              $(node,'[value=mkdir').onclick                    = btn.mkdir;
 
 
               ui.root.dir                                       = $(node,'#dir-list-root');
@@ -219,6 +220,35 @@ mod.httpsfile   = function(){
         
   //:    
   
+
+        btn.quit    = async function(){
+          
+              var url   = ui.url.value;
+              
+              var res   = await fetch(url+'quit');
+              var txt   = await res.text();
+              
+        }//quit
+        
+        
+        btn.download    = async function(e){
+          
+              if(e.shiftKey){
+                    window.open('https://github.com/javascript-2020/libs/blob/main/nodejs/server/https-file-server/https-file-server.js','_blank');
+                    return;
+              }
+          
+              var res       = await fetch('https:/raw.githubusercontent/javascript-2020/libs/main/nodejs/server/https-file-server/https-file-server.js');
+              var blob      = await res.blob();
+              var url       = window.URL.createObjectURL(blob);
+              
+              var a         = document.createElement('a');
+              a.download    = 'https-file-server.js';
+              a.href        = url;
+              a.click();
+              
+        }//download
+
   
         btn.copy    = async function(){
           
@@ -263,36 +293,20 @@ mod.httpsfile   = function(){
               
         }//dir
         
-        
-        btn.quit    = async function(){
+
+        btn.mkdir   = function(){
           
               var url   = ui.url.value;
-              
-              var res   = await fetch(url+'quit');
-              var txt   = await res.text();
-              
-        }//quit
-        
-        
-        btn.server    = async function(e){
-          
-              if(e.shiftKey){
-                    window.open('https://github.com/javascript-2020/libs/blob/main/nodejs/server/https-file-server/https-file-server.js','_blank');
+              if(!url.endsWith('/')){
+                    alert('url does not appear to be a directory ( endsWith / )');
                     return;
               }
-          
-              var res       = await fetch('https:/raw.githubusercontent/javascript-2020/libs/main/nodejs/server/https-file-server/https-file-server.js');
-              var blob      = await res.blob();
-              var url       = window.URL.createObjectURL(blob);
-              
-              var a         = document.createElement('a');
-              a.download    = 'https-file-server.js';
-              a.href        = url;
-              a.click();
-              
-        }//server
 
-
+              mkdir(url);
+              
+        }//mkdir
+        
+        
   //:
   
   
@@ -310,7 +324,11 @@ mod.httpsfile   = function(){
               var i           = url.lastIndexOf('/');
               var filename    = url.slice(i+1);
                                                                                 console.log(i,url,filename);
-              var txt         = await loadfile(url);
+              var result      = await loadfile(url);
+              
+              if(result===false){
+                    return;
+              }
 
               obj.load.complete(txt,filename,icon.src);
                       
@@ -326,7 +344,11 @@ mod.httpsfile   = function(){
               var i           = url.lastIndexOf('/');
               var filename    = url.slice(i+1);
                                                                                 console.log('save',url,filename);
-              await savefile(txt,url);
+              var result    = await savefile(txt,url);
+              
+              if(result===false){
+                    return;
+              }
 
               obj.save.complete(filename,icon.src);
               
@@ -347,6 +369,10 @@ mod.httpsfile   = function(){
               
               var res         = await fetch(url,{headers});
               var txt         = await res.text();
+              if(!res.ok){
+                    alert('loadfile : '+url+'\n'+txt);
+                    return false;
+              }
               return txt;
               
         }//loadfile
@@ -364,6 +390,10 @@ mod.httpsfile   = function(){
               var body      = txt;
               var res       = await fetch(url,{method:'post',headers,body});
               var txt       = await res.text();
+              if(!res.ok){
+                    alert('savefile : '+url+'\n'+txt);
+                    return false;
+              }
               return txt;
               
         }//save
@@ -384,13 +414,43 @@ mod.httpsfile   = function(){
               }
               
               var res       = await fetch(url,{headers});
-              var json      = await res.json();
+              var txt       = await res.text();
+              if(!res.ok){
+                    alert('readdir :'+url+'\n'+txt);
+                    return false;
+              }
+              var json    = JSON.parse(txt);
               
               display.clear();
               display('dirs',json.dirs);
               display('files',json.files,url);
           
         }//readdir
+        
+        
+        function mkdir(url){
+          
+              var headers   = {mode:'mkdir'};
+              
+              if(ui['auth-chk'].checked){
+                    var auth        = ui.auth.value;
+                    headers.auth    = auth;
+              }
+              
+              var res       = await fetch(url,{headers});
+              var txt       = await res.text();
+              if(!res.ok){
+                    alert('mkdir :'+url+'\n'+txt);
+                    return false;
+              }
+
+              var json    = JSON.parse(txt);
+              
+              display.clear();
+              display('dirs',json.dirs);
+              display('files',json.files,url);
+          
+        }//mkdir
         
         
   //:
