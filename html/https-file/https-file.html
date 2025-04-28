@@ -283,7 +283,7 @@ mod.httpsfile   = function(){
         }//parent
         
         
-        btn.load    = async function(){
+        btn.load    = function(){
                                                                                 console.log('btn.load');
               var url         = ui.url.value;
               btn.load.ui(url);
@@ -291,7 +291,7 @@ mod.httpsfile   = function(){
         }//load
         
         
-        btn.load.ui   = function(url){
+        btn.load.ui   = async function(url){
                                                                                 console.log('btn.load.ui',url);
               var i           = url.lastIndexOf('/');
               var filename    = url.slice(i+1);
