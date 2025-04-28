@@ -22,118 +22,188 @@
       </template>
       
       <script>
+
       
-            mod.localfile=function(){
+mod.localfile=function(){
                                                                                 true && console.log('localfile');
-              var obj   = {};
+  var obj   = {};
 
-                  var menumod
-                  ;
-                  
-                  obj.initmod=function(params){
-                    
-                        menumod   = params.menumod;
-                        
-                  }//initmod
-                  
-                //vars:-
-                
-                    var root;
-                    var shadow;
-                    /*
-                    customElements.define('localfile-root',class extends HTMLElement{
-                          constructor(){super(),root=this}
-                    });
-                    */
+      var menumod,editor,$
+      ;
+      
+      obj.initmod=function(params){
+        
+            menumod   = params.menumod;
+            editor    = params.editor;
+            $         = params.$;
+            
+      }//initmod
 
-                    
-                    var icon;
-                    
-                    obj.load    = {};
-                    obj.save    = {};
+      
+  //vars:-
+    
+        var cur;
+        
+        var root;
+        var shadow;
 
-                //:
-                
-                    obj.init=function(){
-                    }//init
-                    
-                //:
+        var icon;
+
+        
+        obj.load    = {};
+        obj.save    = {};
+
+
+  //:
+
+    
+        obj.init=function(){
+        }//init
+
+        
+  //:
+
+
+        obj.initdom=function(rootnode){
+
+              var root          = $.$(rootnode,'localfile-root');
+              shadow            = root.shadowRoot;
+              
+              menumod.add.style(shadow);
+              
+              var style         = $(shadow,'style');
+              $.stylesheet.insert(style,'.icon');
+
+              
+              var card          = $(shadow,'.menu');
+              
+              icon              = $(shadow,'.icon');
+              icon.onclick      = menumod.click(card,false,false,menu);
+
+
+        }//initdom
+        
+
+  //:
   
-                    obj.initdom=function(rootnode){
-
-                          var root          = $.$(rootnode,'localfile-root');
-                          shadow            = root.shadowRoot;
-                          
-                          menumod.add.style(shadow);
-                          
-                          var style         = $(shadow,'style');
-                          $.stylesheet.insert(style,'.icon');
-
-                          
-                          var card          = $(shadow,'.menu');
-                          
-                          icon              = $(shadow,'.icon');
-                          icon.onclick      = menumod.click(card,false,false,menu);
+  
+        function menu(type,opt){
+        
+              if(type=='opt'){
+                    menu[opt.id]();
+              }
+              
+        }//menu
 
 
-                    }//initdom
+        menu.load=function(){
+    
+              var {file,txt}    = loadfile();
+              cur               = file.filename;
+              obj.load.complete(file,txt);
+  
+        }//load
+
+  
+        menu.save=function(){
+  
+              var filename    = '';
+              if(cur){
+                    filename    = cur;
+              }
+              var txt     = editor.getValue();
+              var file    = await savefile(filename,txt);
+              
+              obj.save.complete(file,txt);
+  
+        }//save
+        
+
+  //:
+  
+  
+        obj.load    = function(file){return load(file)}
+        
+        function load(file){
+          
+              var result      = await loadfile();
+              if(result===false){
+                    return;
+              }
+              var txt   = result;
+              
+              obj.load.complete(file,txt);
+              
+              return txt;
+              
+        }//load
+        
+                
+        obj.save    = function(file,txt){return save(file,txt)}
+        
+        function save(file,txt){
+          
+              var filename    = file.filename;
+              var result      = await savefile(filename,txt);
+              if(result===false){
+                    return;
+              }
+              
+              ob.save.complete(file);
+              
+        }//save
+        
+        
+  //:
+  
+  
+        function loadfile(){
+          
+              var resolve,promise=new Promise(res=>resolve=res);
+              
+              var input         = document.createElement('input');
+              input.type        = 'file';
+              input.onchange    = onchange;
+              input.click();
+              
+              return promise;
+
+              
+              function onchange(){
+                
+                    var file    = input.files[0];
+                    var txt     = await file.text();
                     
+                    var file        = {};
+                    file.type       = 'localfile';
+                    file.filename   = file.name;
+                    file.path       = 'localfile : '+file.name;
+                    file.title      = file.path;
+                    file.icon       = icon.src;
+                
+                    resolve({file,txt});
                     
-                    function menu(type,opt){
-                    
-                          if(type=='opt'){
-                                menu[opt.id]();
-                          }
-                          
-                    }//menu
-
-
-                    menu.load=function(){
+              }//onchange
               
-                          var input         = document.createElement('input');
-                          input.type        = 'file';
-                          input.click();
-                          input.onchange    = onchange;
-                          
-                          async function onchange(){
-              
-                                var file    = input.files[0];
-                                var txt     = await file.text();
-                          
-                                if(typeof obj.load.complete=='function'){
-                                      obj.load.complete(txt,file.name,icon.src);
-                                }
-
-                          }//onchange
-              
-                    }//load
-
-              
-                    menu.save=function(){
-              
-                          var name;
-                          if(typeof cur!='undefined' && cur){
-                                name    = cur.name;
-                          }
-                          name    = name||'file.html';
-                                
-                          var blob      = new Blob([editor.getValue()]);
-                          var url       = window.URL.createObjectURL(blob);
-                          var a         = document.createElement('a');
-                          a.href        = url;
-                          a.download    = name;
-                          a.click();
-                          
-                          if(typeof obj.save.complete=='function'){
-                                obj.save.complete(name,icon.src);
-                          }
-              
-                    }//save
-                    
-                    
-              return obj;
-              
-            }//localfile
+        }//loadfile
+        
+        
+        function savefile(filename,txt){
+          
+              var blob      = new Blob([txt]);
+              var url       = window.URL.createObjectURL(blob);
+              var a         = document.createElement('a');
+              a.href        = url;
+              a.download    = filename;
+              a.click();
+          
+        }//savefile
+        
+        
+        
+  return obj;
+  
+}//localfile
             
       </script>
       
