@@ -8,6 +8,7 @@
             
                   .icon {margin-right:5px}
                   .menu {position:absolute;left:0;top:35px;width:100px;}
+                  .spc  {height:10px}
                   
             </style>
             
@@ -17,6 +18,8 @@
                   <div class=menu-title>local file</div>
                   <div id=load class=menu-opt>load</div>
                   <div id=save class=menu-opt>save</div>
+                  <div class=spc></div>
+                  <div id=clear class=menu-opt>clear filename</div>
             </div>
       
       </template>
@@ -121,6 +124,13 @@ mod.localfile   = function(){
         }//save
         
 
+        menu.clear    = function(){
+          
+              cur   = '';
+              
+        }//clear
+
+        
   //:
   
   
