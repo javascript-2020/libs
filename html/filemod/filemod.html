@@ -101,12 +101,12 @@
                       github.init();
                       httpsfile.init();
                       
-                      localfile.load.complete   = (file,txt)=>complete.load(file,txt);
-                      localfile.save.complete   = file=>complete.save(file);
-                      github.load.complete      = (file,txt)=>complete.load(file,txt);
-                      github.save.complete      = file=>complete.save(file);
-                      httpsfile.load.complete   = (file,txt)=>complete.load(file,txt);
-                      httpsfile.save.complete   = file=>complete.save(file);
+                      localfile.load.complete   = complete.load;
+                      localfile.save.complete   = complete.save;
+                      github.load.complete      = complete.load;
+                      github.save.complete      = complete.save;
+                      httpsfile.load.complete   = complete.load;
+                      httpsfile.save.complete   = complete.save;
                       
                   }//init
 
@@ -158,13 +158,13 @@
                         var txt   = editor.getValue();
                         
                         if(cur.type=='github'){
-                              github.save(cur,txt);
+                              await github.save(cur,txt);
                         }
                         if(cur.type=='localfile'){
-                              localfile.save(cur,txt);
+                              await localfile.save(cur,txt);
                         }
                         if(cur.type=='https-file'){
-                              httpsfile.save(cur,txt);
+                              await httpsfile.save(cur,txt);
                         }
                   
                   }//save
