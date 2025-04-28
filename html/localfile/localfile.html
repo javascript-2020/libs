@@ -111,7 +111,9 @@ mod.localfile   = function(){
               if(cur){
                     filename    = cur;
               }
+              
               var txt     = editor.getValue();
+              
               var file    = await savefile(filename,txt);
               
               obj.save.complete(file,txt);
@@ -171,8 +173,8 @@ mod.localfile   = function(){
               
               async function onchange(){
                 
-                    var file    = input.files[0];
-                    var txt     = await file.text();
+                    var file        = input.files[0];
+                    var txt         = await file.text();
                     
                     var file        = {};
                     file.type       = 'localfile';
@@ -197,6 +199,15 @@ mod.localfile   = function(){
               a.download    = filename;
               a.click();
           
+              var file        = {};
+              file.type       = 'localfile';
+              file.filename   = filename;
+              file.path       = 'localfile : '+filename;
+              file.title      = file.path;
+              file.icon       = icon.src;
+              
+              return file;
+              
         }//savefile
         
         
