@@ -93,9 +93,9 @@
                       httpsfile                 = mod.httpsfile();
                       obj.httpsfile             = httpsfile;
 
-                      localfile.initmod({menumod});
-                      github.initmod({menumod});
-                      httpsfile.initmod({menumod,$,editor});
+                      localfile.initmod({menumod,editor,$});
+                      github.initmod({menumod,editor,$});
+                      httpsfile.initmod({menumod,editor,$});
                       
                       localfile.init();
                       github.init();
@@ -103,10 +103,10 @@
                       
                       localfile.load.complete   = (txt,path,icon)=>complete.load('localfile',txt,path,icon);
                       localfile.save.complete   = (path,icon)=>complete.save('localfile',path,icon);
-                      github.load.complete      = (txt,path,icon)=>complete.load('github',txt,path,icon);
-                      github.save.complete      = (path,icon)=>complete.save('github',path,icon);
-                      httpsfile.load.complete   = (txt,path,icon)=>complete.load('httpsfile',txt,path,icon);
-                      httpsfile.save.complete   = (path,icon)=>complete.save('httpsfile',path,icon);
+                      github.load.complete      = (file,txt)=>complete.load(file,txt);
+                      github.save.complete      = file=>complete.save(file);
+                      httpsfile.load.complete   = (file,txt)=>complete.load(file,txt);
+                      httpsfile.save.complete   = file=>complete.save(file);
                       
                   }//init
 
@@ -158,13 +158,13 @@
                         var txt   = editor.getValue();
                         
                         if(cur.type=='github'){
-                              github.save(txt);
+                              github.save(cur,txt);
                         }
                         if(cur.type=='local'){
                               localfile.save(txt);
                         }
-                        if(cur.type=='httpsfile'){
-                              httpsfile.save(txt);
+                        if(cur.type=='https-file'){
+                              httpsfile.save(cur,txt);
                         }
                   
                   }//save
