@@ -186,11 +186,12 @@ mod.localfile   = function(){
                     var file        = input.files[0];
                     var txt         = await file.text();
                     
+                    var filename    = file.name;                    
                     var path        = 'localfile : '+file.name;
                     
                     var file        = {};
                     file.type       = 'localfile';
-                    file.filename   = file.name;
+                    file.filename   = filename;
                     file.path       = path;
                     file.title      = path;
                     file.icon       = icon.src;
