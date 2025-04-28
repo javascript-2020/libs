@@ -161,7 +161,7 @@ mod.localfile   = function(){
                     return;
               }
               
-              obj.save.complete(file);
+              obj.save.complete(file,false);
               
         }//save
         
@@ -176,6 +176,7 @@ mod.localfile   = function(){
               var input         = document.createElement('input');
               input.type        = 'file';
               input.onchange    = onchange;
+              input.oncancel    = oncancel;
               input.click();
               
               return promise;
@@ -199,6 +200,10 @@ mod.localfile   = function(){
                     resolve({file,txt});
                     
               }//onchange
+              
+              
+              function oncancel(){
+              }//oncancel
               
         }//loadfile
         
