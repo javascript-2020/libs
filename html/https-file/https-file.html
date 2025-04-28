@@ -322,13 +322,7 @@ mod.httpsfile   = function(){
               file.title      = url;
               file.icon       = icon.src;
               
-              var result    = await save(file,txt);
-              if(result===false){
-                    return;
-              }
-              var filename    = result;
-              
-              obj.save.complete(file);
+              await save(file,txt);
               
         }//save
         
@@ -401,10 +395,12 @@ mod.httpsfile   = function(){
               var url       = file.path;
                                                                                 console.log('save',url);
               var result    = await savefile(url,txt);
-              return result;
               if(result===false){
                     return false;
               }
+              
+              obj.save.complete(file);
+              
               return true;
               
         }//save
