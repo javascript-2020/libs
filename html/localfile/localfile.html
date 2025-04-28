@@ -24,14 +24,14 @@
       <script>
 
       
-mod.localfile=function(){
+mod.localfile   = function(){
                                                                                 true && console.log('localfile');
   var obj   = {};
 
       var menumod,editor,$
       ;
       
-      obj.initmod=function(params){
+      obj.initmod   = function(params){
         
             menumod   = params.menumod;
             editor    = params.editor;
@@ -57,14 +57,14 @@ mod.localfile=function(){
   //:
 
     
-        obj.init=function(){
+        obj.init    = function(){
         }//init
 
         
   //:
 
 
-        obj.initdom=function(rootnode){
+        obj.initdom   = function(rootnode){
 
               var root          = $.$(rootnode,'localfile-root');
               shadow            = root.shadowRoot;
@@ -96,7 +96,7 @@ mod.localfile=function(){
         }//menu
 
 
-        menu.load=function(){
+        menu.load   = function(){
     
               var {file,txt}    = loadfile();
               cur               = file.filename;
@@ -105,7 +105,7 @@ mod.localfile=function(){
         }//load
 
   
-        menu.save=function(){
+        menu.save   = function(){
   
               var filename    = '';
               if(cur){
@@ -124,7 +124,7 @@ mod.localfile=function(){
   
         obj.load    = function(file){return load(file)}
         
-        function load(file){
+        async function load(file){
           
               var result      = await loadfile();
               if(result===false){
@@ -141,7 +141,7 @@ mod.localfile=function(){
                 
         obj.save    = function(file,txt){return save(file,txt)}
         
-        function save(file,txt){
+        async function save(file,txt){
           
               var filename    = file.filename;
               var result      = await savefile(filename,txt);
