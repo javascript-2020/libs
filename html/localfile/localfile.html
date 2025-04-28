@@ -127,6 +127,7 @@ mod.localfile   = function(){
         menu.clear    = function(){
           
               cur   = 'file.txt';
+              menumod.close();
               
         }//clear
 
@@ -208,7 +209,7 @@ mod.localfile   = function(){
         }//loadfile
         
         
-        function savefile(filename,txt){console.log('savefile',filename);
+        function savefile(filename,txt){
           
               var blob      = new Blob([txt]);
               var url       = window.URL.createObjectURL(blob);
