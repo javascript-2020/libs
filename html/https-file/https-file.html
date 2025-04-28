@@ -286,7 +286,13 @@ mod.httpsfile   = function(){
         btn.load    = async function(){
                                                                                 console.log('btn.load');
               var url         = ui.url.value;
-                                                                                console.log(url);
+              btn.load.ui(url);
+              
+        }//load
+        
+        
+        btn.load.ui   = function(url){
+                                                                                console.log('btn.load.ui',url);
               var i           = url.lastIndexOf('/');
               var filename    = url.slice(i+1);
                                                                                 console.log(filename);
@@ -305,7 +311,8 @@ mod.httpsfile   = function(){
               
               obj.load.complete(file,txt);
               
-        }//load
+          
+        }//ui
         
         
         btn.save    = async function(){
@@ -662,7 +669,7 @@ mod.httpsfile   = function(){
                           
                     }else{
                                                                                 console.log('file',url,filename);
-                          load(url);
+                          btn.load.ui(url);
                     }
                     
               }//ondblclick
