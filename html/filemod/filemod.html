@@ -101,8 +101,8 @@
                       github.init();
                       httpsfile.init();
                       
-                      localfile.load.complete   = (txt,path,icon)=>complete.load('localfile',txt,path,icon);
-                      localfile.save.complete   = (path,icon)=>complete.save('localfile',path,icon);
+                      localfile.load.complete   = (file,txt)=>complete.load(file,txt);
+                      localfile.save.complete   = file=>complete.save(file);
                       github.load.complete      = (file,txt)=>complete.load(file,txt);
                       github.save.complete      = file=>complete.save(file);
                       httpsfile.load.complete   = (file,txt)=>complete.load(file,txt);
