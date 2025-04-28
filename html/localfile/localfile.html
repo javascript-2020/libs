@@ -169,7 +169,7 @@ mod.localfile   = function(){
               return promise;
 
               
-              function onchange(){
+              async function onchange(){
                 
                     var file    = input.files[0];
                     var txt     = await file.text();
