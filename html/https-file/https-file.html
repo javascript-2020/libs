@@ -139,26 +139,27 @@
       </template>
       
       <script>
+
       
 mod.httpsfile   = function(){
-                                                                    true && console.log('httpsfile');
+                                                                                true && console.log('httpsfile');
   var obj   = {};
       
         var df=obj.df=true;
         
-        var menumod,$,editor
+        var menumod,editor,$
         ;
         
         obj.initmod   = function(params){
           
               menumod       = params.menumod;
-              $             = params.$;
               editor        = params.editor;
+              $             = params.$;
               
         }//initmod
+
         
   //vars:-
-
 
         var root;
         var shadow;
@@ -282,17 +283,45 @@ mod.httpsfile   = function(){
         }//parent
         
         
-        btn.load    = function(){
+        btn.load    = async function(){
 
-              var url   = ui.url.value;
-              load(url);
+              var url         = ui.url.value;
+              var i           = url.lastIndexOf('/');
+              var filename    = url.slice(i+1);
+
+              var file        = {};
+              file.type       = 'https-file';
+              file.filename   = filename;
+              file.title      = url;
+              file.icon       = icon.src;
+                            
+              var txt         = await load(file);
+              
+              obj.load.complete(file,txt);
               
         }//load
         
         
-        btn.save    = function(){
-          
-              save();
+        btn.save    = async function(){
+
+              var txt         = editor.getValue();
+              var url         = ui.url.value;
+              var i           = url.lastIndexOf('/');
+              var filename    = url.slice(i+1);
+
+              var file        = {};
+              file.type       = 'https-file';
+              file.filename   = filename;
+              file.title      = url;
+              file.icon       = icon.src;
+              
+              var result    = await save(file,txt);
+              if(result===false){
+                    return;
+              }
+              var filename    = result;
+              
+              obj.save.complete(file);
               
         }//save
         
@@ -341,41 +370,34 @@ mod.httpsfile   = function(){
   //:
   
   
-        obj.load    = function(){return load()}   //d
+        obj.load    = function(file){return load(file)}   //d
         
-        async function load(url){
-          
-              var i           = url.lastIndexOf('/');
-              var filename    = url.slice(i+1);
-                                                                                console.log(i,url,filename);
-              var result      = await loadfile(url);
-              
+        async function load(file){
+
+              var url       = file.path;          
+                                                                                console.log('load',url);
+              var result    = await loadfile(url);
               if(result===false){
                     return;
               }
               var txt   = result;
+              return txt;
               
-              obj.load.complete(txt,filename,icon.src);
-                      
         }//load
         
         
-        obj.save    = function(){return save()}   //d
+        obj.save    = function(file,txt){return save(file,txt)}   //d
         
-        async function save(){
+        async function save(file,txt){
         
-              var txt         = editor.getValue();
-              var url         = ui.url.value;
-              var i           = url.lastIndexOf('/');
-              var filename    = url.slice(i+1);
-                                                                                console.log('save',url,filename);
-              var result    = await savefile(txt,url);
-              
+              var url       = file.path;
+                                                                                console.log('save',url);
+              var result    = await savefile(url,txt);
+              return result;
               if(result===false){
-                    return;
+                    return false;
               }
-
-              obj.save.complete(filename,icon.src);
+              return true;
               
         }//save
         
@@ -403,7 +425,7 @@ mod.httpsfile   = function(){
         }//loadfile
         
         
-        async function savefile(txt,url){
+        async function savefile(url,txt){
           
               var headers   = {mode:'save'};
               
@@ -530,6 +552,8 @@ mod.httpsfile   = function(){
               display('files',json.files,url);
 
         }//parent
+
+        
   //:
 
   
@@ -640,7 +664,10 @@ mod.httpsfile   = function(){
               }//ondblclick
               
         }//display
-        
+
+
+  //:
+  
         
         function build(url,cwd){
           
@@ -652,6 +679,9 @@ mod.httpsfile   = function(){
               
         }//build
         
+
+
+
         
   return obj;
       
