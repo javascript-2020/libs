@@ -560,7 +560,8 @@ mod.github=function(){
         
         async function save(file,txt){debugger;
         
-              var {token,owner,repo,branch,path}    = file;
+              var token                       = read.token();
+              var {owner,repo,branch,path}    = file;
               
               var result    = await savefile(token,owner,repo,branch,path,txt);
               return result;
