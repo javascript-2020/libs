@@ -558,7 +558,7 @@ mod.github=function(){
 
         obj.save=async function(file,txt){return save(file,txt)}   //d
         
-        function save(file,txt){
+        async function save(file,txt){
         
               var {token,owner,repo,branch,path}    = file;
               
