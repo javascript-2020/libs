@@ -326,27 +326,19 @@
 
 
 
-                  obj.filename=filename;
+                  obj.filename    = filename;
                   
-                  function filename(path,icon){
+                  function filename(file){
           
-                        icon                              = icon||deficon;
-                        $(shadow,'#filename-icon').src    = icon;
+                        var src                           = file.icon||deficon;
+                        $(shadow,'#filename-icon').src    = src;
+
+                        var filename    = file.filename||'html-editor';                        
+                        var title       = file.title||'';
                         
-                        var fn    = '';
-                        if(path){
-                              var i   = path.lastIndexOf('/');
-                              if(i==-1){
-                                    fn    = path;
-                              }else{
-                                    fn    = path.slice(i+1);
-                              }
-                        }
-                        
-                        document.title                       = fn||'html-editor';
-                        $(shadow,'#filename').textContent    = fn;
-                        $(shadow,'#filename').title          = path||'';
-                        return fn;
+                        document.title                       = filename;
+                        $(shadow,'#filename').textContent    = filename;
+                        $(shadow,'#filename').title          = title;
           
                   }//filename
           
@@ -363,16 +355,30 @@
                       
                   }//getname
                   
-                  
-                  filename.save=function(status){
-          
+
+                  filename.save   = function(status){
+                    
                         var display   = '';
                         if(!status){
                               display   = 'none';
                         }
                         $(shadow,'#filename-save').style.display   = display;
-          
-                  }//save
+                        
+                  }//saveicon
+                  
+
+                  filename.save.show    = function(){
+                    
+                        filename.save(true);
+                        
+                  }//show
+
+                  
+                  filename.save.hide    = function(){
+                    
+                        filename.save(false);
+                        
+                  }//hide
                   
           
                   function update(){
@@ -452,7 +458,7 @@
 
                         editor.setValue('',-1);
                         filename();
-                        filename.save(false);
+                        filename.save.hide();
 
                   }//clear
                   
