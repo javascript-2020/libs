@@ -308,11 +308,13 @@ mod.httpsfile   = function(){
         btn.mkdir   = function(){
           
               var url   = ui.url.value;
+              /*
               if(!url.endsWith('/')){
                     alert('url does not appear to be a directory ( endsWith / )');
                     return;
               }
-
+              */
+              
               mkdir(url);
               
         }//mkdir
