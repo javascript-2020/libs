@@ -96,16 +96,16 @@ mod.localfile   = function(){
         }//menu
 
 
-        menu.load   = function(){
+        menu.load   = async function(){
     
-              var {file,txt}    = loadfile();
+              var {file,txt}    = await loadfile();
               cur               = file.filename;
               obj.load.complete(file,txt);
   
         }//load
 
   
-        menu.save   = function(){
+        menu.save   = async function(){
   
               var filename    = '';
               if(cur){
