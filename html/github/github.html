@@ -462,7 +462,7 @@ mod.github=function(){
                     return;
               }
               
-              obj.complete.save(file);
+              //obj.complete.save(file);
             
         }//save
         
@@ -564,6 +564,12 @@ mod.github=function(){
               var {owner,repo,branch,path}    = file;
               
               var result    = await savefile(token,owner,repo,branch,path,txt);
+              if(result===false){
+                    return;
+              }
+              
+              obj.save.complete(file);
+              
               return result;
         
         }//save
