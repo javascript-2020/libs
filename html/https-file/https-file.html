@@ -284,18 +284,23 @@ mod.httpsfile   = function(){
         
         
         btn.load    = async function(){
-
+                                                                                console.log('btn.load');
               var url         = ui.url.value;
+                                                                                console.log(url);
               var i           = url.lastIndexOf('/');
               var filename    = url.slice(i+1);
-
+                                                                                console.log(filename);
               var file        = {};
               file.type       = 'https-file';
               file.filename   = filename;
               file.title      = url;
               file.icon       = icon.src;
                             
-              var txt         = await load(file);
+              var result      = await load(file);
+              if(result===false){
+                     return;
+              }
+              var txt   = result;
               
               obj.load.complete(file,txt);
               
@@ -378,9 +383,10 @@ mod.httpsfile   = function(){
                                                                                 console.log('load',url);
               var result    = await loadfile(url);
               if(result===false){
-                    return;
+                    return false;
               }
               var txt   = result;
+              
               return txt;
               
         }//load
