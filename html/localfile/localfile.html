@@ -208,7 +208,7 @@ mod.localfile   = function(){
         }//loadfile
         
         
-        function savefile(filename,txt){
+        function savefile(filename,txt){console.log('savefile',filename);
           
               var blob      = new Blob([txt]);
               var url       = window.URL.createObjectURL(blob);
