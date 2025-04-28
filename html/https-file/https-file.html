@@ -486,7 +486,7 @@ mod.httpsfile   = function(){
               var res       = await fetch(url,{headers});
               var txt       = await res.text();
               if(!res.ok){
-                    alert('mkdir :'+url+'\n'+txt);
+                    alert('del :'+url+'\n'+txt);
                     return false;
               }
 
