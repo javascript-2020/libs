@@ -6,10 +6,11 @@
 </style>
 
 <script>
-                        console.clear();
-                        
+                                                                                console.clear();
+      var mod   = {};
+      
       var menu;
-
+      var github;
                         
       init.stack            = {};
       init.stack.ct         = 0;
@@ -21,7 +22,11 @@
                                                               console.log('init');
             menumod         = menumod();
             
-      
+            github          = mod.github();
+            github.initmod({menumod});
+            github.init();
+            
+            
             initdom();
 
             
