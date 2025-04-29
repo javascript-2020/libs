@@ -1,126 +1,704 @@
 
-<style>
 
-      .icon {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
+<https-file>
 
-</style>
-
-<script>
-                                                                                console.clear();
-                                                                                console.log('https-file test');
-                                                                                console.log();
-                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
-      var mod   = {};
+      <template shadowrootmode=open>
       
-      var menu;
-      var httpsfile;
-      
+            <style>
+            
+                  .menu
+                        {position:absolute;outline:none;font-family:arial;display:flex;flex-direction:column}
+            
+                  #server-root
+                        {display:flex;gap:5px;align-items:center;margin-bottom:15px}
                         
-      function init(){
-                                                                                console.log('init');
-            menumod         = menumod();
+                  #url-root
+                        {display:flex;gap:5px;align-items:center;margin-bottom:10px}
+                  .copy {padding:2px;width:24px;height:24px;border:1px solid gray;cursor:pointer;border-radius:3px;
+                          content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAABSlBMVEVHcEwnz/4C8P4g1P4L6P43wf5Mr/4a2v4Y3P4/uv5PrP4+vf5Auv4ozv5KsP4vyv45wP5Jsf5Auf49vP5Mrv4zxf44wf5Lr/46wP4h1P5Lr/46vv5Jsv4R5P5Hs/5Etv44wf5Hs/41w/4uyv47vv49vP5Ftf5GtP4c2f4rzP4tyv4m0f5Etv5Nrv4xxv4xxv4xx/4W3/5KsP5Mr/4/u/4uyv5Isv4K6f4l0f4qzv4W3/4V3/5Nrv5Mrv5Mrv5Mr/4W3v4e2P5BuP5Hsv4N5v4K6f4O5v42w/5Dt/4E7/4uyf4C8P4nz/4M5/4K6v4oz/4P5f4k0v4b2v5Gs/4E7v4I6/5Nrf4e1/4H7P4E7v5Auv5Dtv4sy/5Isv5GtP4wx/49vP4zxf47vv44wP42w/5LsP5Jsf4i1P4n0P4N5v4k0v4a2v4S4v4X3v6OfcqkAAAAVnRSTlMACo7CjQWN/VczjgIJMfIXJzHtjj5iVekR71Hvtz7CjelXjre2wiJj2PCFIWbR7+fEnXaodz3544/USfOC22Tm7CXOnqfUZ+/3VTV9bsTzqGDahpb2tyRB6bIAAAIDSURBVDjLrZVpV9pAFIYntdFiQkZsLCQECtJSlqAsFRBU3Kuta1sncYGuJEDt///aISkkkyHo6enzLTlP5s5758wNAC526pd3d1++/fzx/evNze1tp210wxURUMTWBz2v2EWtLc7jBTPmoJfNrqy8i0ajixgB00VISJIeW9JMKbcWDAYDNiFMQN1EqAAJcUfSBif0fsQWQjLxpjGnXUJa5CoIbTiP8KJ0OqfNMLQIZhGad/Ke3t///vWwGKv1+yPxfW55+TnmJWZW5ggxcqX3m6WSVTpSdPcxHCLExmf97AI8e1j8cK1f8X9Fq/Sotrf0k2v9KRiJ08L8mwhf2CQx8oK/yJyPw3Q67ULaV4Tr7tRCwFfkllLF4ushccwGPyUMzwzhMQz/X1Kz+QVMmh2LcjgsTxDZ3OpqIpFYfDu+KGwoxE5JvTtpF9NX9BEB792jn0gD4eNEsVAQHyXOO7fQFmNNLZOnPV5BqEyI+Yxm1qkluS0BCWRp8FEze6mTJQtVVd8MUfcEhBSGFOGMOWmaoc0AmRoXP5cmiHEReEXANOopzCsLRYlXjWolGXE2jK/r/ujEWAdOFIxWGrjO8ljXazG6MeynthEn2gAP9P7B4XCE2thzdG2v2jbK5LfHZ3hINbclSco6o/kIh1Einq4e1qxp5m2PkqZ/CPvbXvFot+xe7w/EpaiUrJ24NAAAAABJRU5ErkJggg==);
+                        }                        
+                  .paste
+                        {padding:2px;width:24px;height:24px;border:1px solid gray;cursor:pointer;border-radius:3px;
+                            content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAVlJREFUSEvtlj1ug0AQhcdIW6RLeiQy6XKElLRIlOlp6LmBlRsgtzTUOQAtcZMzpMpInAGlQSjRWl7LxrM/dlhZUbwtu/PNvH07zAIutBYX4oIzGBG/95MkIuezXHFOh6MoegqC4F0GEELAMAybWL+BG8GI+AwArypjRFTAgyLOSeAIHIbhjRDii5NHgcdxhK7rWHu4JnEEnt6ljK6AUxIRcfAPInq0mVYL/lwSrNa3UL7d2WKA3CvXw8vuKqzeMYKtxMmGK9ik2FVq+XQ2rVE5VSeXMpLNgLp3fZbUrlCVFAc/GaygbdvaioU4jrU9/W+CVUVc6U3TQJIkfio2geVV/C+pi6KAsiz9SN33PaRpyrrbu9R1XbPgLMv83bHJXHmeQ1VVp0tt6w6zN5DtqHMwynJJeAGbqkVEOefc2xTZ/+7Uq10CcgOh7pzz38kFPMce6zQ4B4SL8QNf7+YfCGbtNAAAAABJRU5ErkJggg==);
+                        }
+                  #url
+                        {flex:1}
+                       
+                  #auth-root
+                        {display:flex;align-items:center;margin-bottom:10px;gap:5px}
+                  #auth
+                        {flex:1}
+                  #auth-chk
+                        {margin:0;width:30px;height:30px;box-sizing:border-box;cursor:pointer}
+                        
+                  #btns
+                        {display:flex;gap:5px;margin-bottom:10px}
+                        
+                  #parent-dir
+                        {cursor:pointer;width:32px;height:32px;border:1px solid gray;box-sizing:border-box;padding:1px;border-radius:3px;
+                          content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAACUlBMVEVHcExuOx0oGCWETB3654yOUhicYhejaByKTRiZXiCwdBPBgw/RkxC3i0P64nz77JTXpzecZR+rejPdohDfohGvcRC3fRPJkR1DoSczaSzKpFDoy3C4gijjukurcyKxdxo/iCXFjB/1yTvKlRD67pnz2G6iZxLz3XbBlEHNplHkvUnOrEvkyGWPizrbnhJBmiforRhClSpHqSbSr1c4fyrVtlv0y0nz0FqygTf10WPXr1TlyW7s2IVRsi7VpR7ry2HSoSW9hg312WX13321fA3EjA7TnxOnaRG3fQ3XuF1AmCjSozr45oeLgzKiZA+jZxDEkCvSlhHDhRDFiRC5izrev1z7xCL7whtNtif7xyn5yTDY0Ef732T63V77zz371k3511P62lj8wRr70kT67IL642/7yzT7xiX5vxr66HrZ11ja3mLa2l5o2jt06kLssBPX1FP74WpRvCv65XPLkw/g02Fu5T5x6ED3xy7gxjXY001OuSj61EjuzElanSz2uxbwxDfbqRrn2m9cyjFk1Tdg0TTpxC/pyj3Xyz/lz0dKsib3533kujT864Ll01FTwCy2vlDowT/KlhbgtDb34m3aqzRXxS56qDnx2V2wmh3ptSpxvjHTujbz0UzRmBb66X5Uvi7quCFztDrX0F6Jqyb32V386nr33miUpCpr3zxfsjJuxTveyzzVxzv0uhXUxTjs4Hb664GBs0SfwVVlqDXfrh7SnCHo1FnGqipIqCbJmiVp3z1syzTDiQjPrSvrzlPbrjjU1WrWpDLv1GbDpSfAyVlltKRaAAAAVnRSTlMACAMNzBkyPBIjdaXVYc3M3CpE+vJqjb/RE53LZdtNYG2i/erK3lXug6jwzPSC7q39fvC7N8j061PTtNrN6fvj5sb71Z7X+qe/15PE05REhZXes9Zt6emRpTMAAAImSURBVCjPY2AY/IBRkgmnHDMjg6GEvoKJJJDNwS7EiCzHyStlaqxrGxHRZSThpeCrraOjgWSQkGdT98aNEyKAoLpoQdGqRQeXhQrCZVm1u1M2buzdDJLsn9bc2rqqtPhwCFyaXWvZxo0buzdFgCVbcleuPpq6XJOJgYNNRoYZaLPAlPnzMzdsqY7oagZKluXlrV68VIArwFvW3pqXgYFJcW5mZmZTXd30up0tZeV5eeW5Kw4d0FL14VexAUozyPcUFxdPWVw6pXT6gvK88rLcJUf2p6qr8POzaHIApQUdYlOnFBYWxsSULsot271nxb6splR1FhYWaSFwcInXAqViYoFgwuzZS2bOycnOWe7kzMInBQkdsR6gXGJiwsSpu2bumBOdk5OTNWOpKp+0BcRranaJQMmEqZMm127PBsplFRT0xZvzWbFCpAWV5ybEx0+eVBsTMyMHKFdVFd2ZbGapAYsPx4b4moaSiSAL+qqigaCjPU5JVg4WcC4Lk+O2NSYAjajpBMqtXV8ZlVYhwAmT5mqMm1WiFF+TnBzXvqaysq2tIjI9TJwZJi3nFjVva3JcXFxaWlQFUCo9PSwsQxEeK2zKs0oaQHJRkUBtYWHhQGAgj4hT13mNYCmgXHhSeFLGunw9MWZEMvPYuzASISXCwy3KhpSemNxLMoAmJmXUg6XYOdBSor9weFJ9vjAPNxc7K5b0yhYsHBjE5ceKKymzqXEyYpUAALU5uvKbCeLBAAAAAElFTkSuQmCC)
+                        }
+                  #dir-list-root
+                        {position:relative;flex:1;display:flex;gap:10px}
+                  #dirs
+                        {flex:1;display:flex;flex-direction:column;border:1px solid lightgray}
+                  #dirs-hdr
+                        {font-size:12px;}
+                  #dirs-list
+                        {flex:1;overflow:auto;position:relative}
+                  .dir
+                        {padding:5px 10px;cursor:pointer;user-select:none}
+                  #files
+                        {flex:1;display:flex;flex-direction:column;border:1px solid lightgray}
+                  #files-hdr
+                        {font-size:12px}
+                  #files-list
+                        {flex:1;position:relative;overflow:auto}
+                  .file
+                        {padding:5px 10px;cursor:pointer;user-select:none}
+                        
+                  .spc
+                        {flex:1}
+                  label
+                        {width:50;text-align:right;margin-right:10px}
+                  input
+                        {font-size:16px;padding:5px 10px}
+                        
+            </style>
             
-            httpsfile       = mod.httpsfile();
+            <img class=icon src='data:image/webp;base64,UklGRh4DAABXRUJQVlA4TBIDAAAvHUAHEIcFOZJkV1H2oDVH5b9NeMFNs/vGDTeOJClSVvUeM5v46fvieevNckNsJEmRFNXH+AaQ/8Yx8xfk2LZVRevd/3FnBimQCGkThEMAMHXrfi/A9XlzLs20QgUXKFCgdCroFT01mKLxkOlBkkoD2gk0DvCJkuAd+Yc15EjAG/lBpgpaBBT4hwItqKGShmQGAQuoIsswbTKH1NkWJAjoQw1NiAoreKI9uUyhA0jx/PHXraE8/xGoMKki1aSCErM81mGUUwzL/4lXYpbVQcWoQPUZncXyhAkKTp55EUT6Q44YI6/pLr7z54w3/wOoX7P2qNs8fX+/Ico70/U7VI7FBFbjiDAuFBHRj1p4Z+k3x/3K1EvEX7sn+bv/2Mat9Wkh1YNv+6+n2O23VpuNmBCT1b+IjjtEmTLz+YiIq4ejiRcm8x+ociy7S5Og2SrHFELFIEJQxYQY01mP/PVj5BMJqrPe5d+v5f7/1XA/MLJuvwtj/Pc3G6kvohTExAvlcEiUbNu0nf1s27Zt27YdvRcnL7Zt2843nrP2Pfv9wV7rKKL/DNy2jSPubrvtHUM7NzYxydGlQKPdyw6w38OasbIc/yAoILOTOTILSqne2LdXZa9XRUZHQTHphQwU13z23h3V3duHOto5bXmpSrNE8S2nbl4Hbty6cA46f6IpgdEslWf5NZ65ehm6Qpxrpxv8rHJGaS5LaycvXdRkWvqSLYlKPI+/ffNaAOrHPEvof33w/idPheiGJBxiEYufXjwTQPqiZIgU2/r1pUiGbEUlZeCoWEeUEcQ/9cFbj0WiLVlvIMIB4REw8OXVc02mBUbAwOEH9zWZZJeA/taHbD58pMnaRDKHEAwsfP7wEXj3HgFpLigjsKTK+VVg5cdPicB8ZSJfQXZ4mCrUaaBfDzVV4bKA619tMVBU6jU+gqVGMVBnc4dkDzeVu6vzwQPO0iCVh864MmoGp6dse+bX9rfv23LGtu3pQTPDQfk9fYreud275B4L+xR2voMqcr19VL6BCgv8AukVXGNdy0IMidw2KUTiziE='>
+
+            <div id=httpsfile class=menu style='display:none;left:-225px;top:100px;width:450px;height:500px'>
             
+                  <div class=menu-title>
+                        https file server
+                  </div>
             
-            httpsfile.initmod({menumod,$});
+                  <div id=server-root>
+                        <label>
+                              server
+                        </label>
+                        <div class=spc></div>
+                        <input value='quit' type=button>
+                        <input value=download type=button>
+                  </div>
+                  <div id=url-root>
+                        <label>
+                              url
+                        </label>
+                        <img class=copy>
+                        <img class=paste>
+                        <input id=url spellcheck=false autocomplete=off value='https://localhost:3000/'>
+                  </div>
+                  
+                  <div id=auth-root>
+                        <label>
+                              auth
+                        </label>
+                        <input id=auth-chk type=checkbox>
+                        <input id=auth spellcheck=false autocomplete=off value='matt-123'>
+                  </div>
+                  
+                  <div id=btns>
+                        <img id=parent-dir>
+                        <input value=load type=button>
+                        <input value=save type=button>
+                        <input value=dir type=button>
+                        <input value=mkdir type=button>
+                        <div class=spc></div>
+                        <input value=del type=button>
+                  </div>
+                  
+                  <div id=dir-list-root>
+                        <div id=dirs>
+                              <div id=dirs-hdr>
+                                    dirs
+                              </div>
+                              <div id=dirs-list>
+                                    <div class=dir>
+                                          <div class=name>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div id=files>
+                              <div id=files-hdr>
+                                    files
+                              </div>
+                              <div id=files-list>
+                                    <div class=file>
+                                          <div class=name>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+                  
+            </div>
             
+      </template>
       
-            httpsfile.init();
-            
-            
-            initdom();
-
-            
-      }//init
-
-
-      init.stack            = [];
-      init.stack.ct         = 0;
-      init.stack.total      = 1;
-      init.stack.mode       = '';
-      init.stack.complete   = false;
-      Object.defineProperty(init.stack,'add',{get:()=>{console.log('add');
-            init.stack.total++;
-            init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
-      }});
-      Object.defineProperty(init.stack,'complete',{get:()=>{console.log('complete');
-            init.stack.ct++;
-            init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
-            init.stack.ct>=init.stack.total && init();
-      }});
-      
-      //  (typeof init!='undefined' && init?.stack && init.stack.add)
-      //  (typeof init!='undefined' && init?.stack && init.stack.complete)
+      <script>
 
       
-      init.complete   = function(){
-        
-            init.complete.stack.forEach(fn=>fn());
-            
-      }//complete
+mod.httpsfile   = function(){
+                                                                                true && console.log('httpsfile');
+  var obj   = {};
       
-      init.complete.stack   = [];
-      init.complete.add     = fn=>init.complete.stack.push(fn);
-      
-</script>
-
-<https-file-api>
-      <script src='https://localhost:3000/cloud-html-loader.js'></script>
-</https-file-api>
-
-
-
-
-<script>
-
-        var ext
+        var df=obj.df=true
         ;
-        var $,datatype,jsonblob,menumod,keydown
-        ;
-
-        init.stack.add;
         
-        fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
-          .then(res=>res.text().then(async txt=>{
+        var menumod,editor,$
+        ;
+        
+        obj.initmod   = function(params){
           
-              ext   = eval(txt);
+              menumod       = params.menumod;
+              editor        = params.editor;
+              $             = params.$;
               
-              var promise   = ext.load.libs(
-                    'js/dom/$.js.api','js/core/datatype.js','js/io/jsonblob/jsonblob.js','js/dom/menumod/menumod.js',
-                    'js/dom/keydown/keydown.js'
-              );
-              [$,datatype,jsonblob,menumod,keydown]   = await promise;
-  
-              
-              window.$          = $;
-              window.datatype   = datatype;
-
-              
-              init.stack.complete;
-              
-          }));
-    
-
-
-        function initdom(){
+        }//initmod
 
         
-              httpsfile.initdom();
+  //vars:-
 
+        var root;
+        var shadow;
+        var icon;
+        var ui          = {};
+        ui.root         = {};
+        ui.item         = {};
+        ui.rd           = {};
+
+
+        var btn         = {};
+        
+  
+  //
+  
+        obj.init    = function(){
+        }//init
+
+        
+        obj.initdom   = function(rootnode){
+          
+              root                                              = $.$(rootnode,'https-file');
+              shadow                                            = root.shadowRoot;
               
+              menumod.add.style(shadow);
+              
+              var style                                         = $(shadow,'style');
+              $.stylesheet.insert(style,'.icon');
+              
+              var node                                          = $(shadow,'.menu');
+              icon                                              = $(shadow,'.icon');
+              icon.onclick                                      = menumod.click(node,'both',true,callback);
+
+              ui.root.server                                    = $(node,'#server-root');
+              
+              $(ui.root.server,'[value=quit]').onclick          = btn.quit;
+              $(ui.root.server,'[value=download]').onclick      = btn.download;
+              
+              $(node,'.copy').onclick                           = btn.copy;
+              $(node,'.paste').onclick                          = btn.paste;
+              ui.url                                            = $(node,'#url');
+              
+              ui.auth                                           = $(node,'#auth');
+              ui['auth-chk']                                    = $(node,'#auth-chk');
+              
+              $(node,'#parent-dir').onclick                     = btn.parent;
+              $(node,'[value=load]').onclick                    = btn.load;
+              $(node,'[value=save]').onclick                    = btn.save;
+              $(node,'[value=dir]').onclick                     = btn.dir;
+              $(node,'[value=mkdir').onclick                    = btn.mkdir;
+              $(node,'[value=del').onclick                      = btn.del;
+
+
+              ui.root.dir                                       = $(node,'#dir-list-root');
+              
+              ui.root.dirs                                      = $(ui.root.dir,'#dirs-list');
+              ui.item.dirs                                      = $(ui.root.dirs,'.dir');
+              ui.item.dirs.remove();
+              
+              ui.root.files                                     = $(ui.root.dir,'#files-list');
+              ui.item.files                                     = $(ui.root.files,'.file');
+              ui.item.files.remove();
+
+          
         }//initdom
 
-
-
-        init.stack.complete;
         
-</script>
+  //:    
+  
+
+        btn.quit    = async function(){
+          
+              var url   = ui.url.value;
+              
+              var res   = await fetch(url+'quit');
+              var txt   = await res.text();
+              
+        }//quit
+        
+        
+        btn.download    = async function(e){
+          
+              if(e.shiftKey){
+                    window.open('https://github.com/javascript-2020/libs/blob/main/nodejs/server/https-file-server/https-file-server.js','_blank');
+                    return;
+              }
+          
+              var res       = await fetch('https:/raw.githubusercontent/javascript-2020/libs/main/nodejs/server/https-file-server/https-file-server.js');
+              var blob      = await res.blob();
+              var url       = window.URL.createObjectURL(blob);
+              
+              var a         = document.createElement('a');
+              a.download    = 'https-file-server.js';
+              a.href        = url;
+              a.click();
+              
+        }//download
+
+  
+        btn.copy    = async function(){
+          
+              var txt         = await navigator.clipboard.readText();
+              ui.url.value    = txt;
+              
+        }//copy
+        
+        
+        btn.paste   = async function(){
+          
+              var txt   = ui.url.value;
+              await navigator.clipboard.writeText(txt);
+              
+        }//paste
+  
+  
+        btn.parent    = function(){
+          
+              var url   = ui.url.value;
+              parent(url);
+              
+        }//parent
+        
+        
+        btn.load    = function(){
+                                                                                console.log('btn.load');
+              var url         = ui.url.value;
+              btn.load.ui(url);
+              
+        }//load
+        
+        
+        btn.load.ui   = async function(url){
+                                                                                console.log('btn.load.ui',url);
+              var i           = url.lastIndexOf('/');
+              var filename    = url.slice(i+1);
+                                                                                console.log(filename);
+              var file        = {};
+              file.type       = 'https-file';
+              file.filename   = filename;
+              file.path       = url;
+              file.title      = url;
+              file.icon       = icon.src;
+                            
+              var result      = await load(file);
+              if(result===false){
+                     return;
+              }
+              var txt   = result;
+              
+              obj.load.complete(file,txt);
+              
+          
+        }//ui
+        
+        
+        btn.save    = async function(){
+
+              var txt         = editor.getValue();
+              var url         = ui.url.value;
+              var i           = url.lastIndexOf('/');
+              var filename    = url.slice(i+1);
+
+              var file        = {};
+              file.type       = 'https-file';
+              file.filename   = filename;
+              file.path       = url;
+              file.title      = url;
+              file.icon       = icon.src;
+              
+              await save(file,txt);
+              
+        }//save
+        
+        
+        btn.dir   = function(){
+          
+              var url       = ui.url.value;
+              readdir(url);              
+              
+        }//dir
+        
+
+        btn.mkdir   = function(){
+          
+              var url   = ui.url.value;
+              /*
+              if(!url.endsWith('/')){
+                    alert('url does not appear to be a directory ( endsWith / )');
+                    return;
+              }
+              */
+              
+              mkdir(url);
+              
+        }//mkdir
+        
+        
+        btn.del   = function(){
+          
+              var url   = ui.url.value;
+              del(url);
+              
+        }//del
+        
+        
+  //:
+  
+  
+        function callback(){
+          
+              console.log('callback');
+              
+        }//callback
+        
+
+  //:
+  
+  
+        obj.load    = function(file){return load(file)}   //d
+        
+        async function load(file){
+
+              var url       = file.path;          
+                                                                                console.log('load',url);
+              var result    = await loadfile(url);
+              if(result===false){
+                    return false;
+              }
+              var txt   = result;
+              
+              return txt;
+              
+        }//load
+        
+        
+        obj.save    = function(file,txt){return save(file,txt)}   //d
+        
+        async function save(file,txt){
+        
+              var url       = file.path;
+                                                                                console.log('save',url);
+              var result    = await savefile(url,txt);
+              if(result===false){
+                    return false;
+              }
+              
+              obj.save.complete(file);
+              
+              return true;
+              
+        }//save
+        
+        
+  //:
+  
+  
+        async function loadfile(url){
+          
+              var headers     = {mode:'load'};
+              
+              if(ui['auth-chk'].checked){
+                    var auth        = ui.auth.value;
+                    headers.auth    = auth;
+              }
+              
+              var res         = await fetch(url,{headers});
+              var txt         = await res.text();
+              if(!res.ok){
+                    alert('loadfile : '+url+'\n'+txt);
+                    return false;
+              }
+              return txt;
+              
+        }//loadfile
+        
+        
+        async function savefile(url,txt){
+          
+              var headers   = {mode:'save'};
+              
+              if(ui['auth-chk'].checked){
+                    var auth        = ui.auth.value;
+                    headers.auth    = auth;
+              }
+              
+              var body      = txt;
+              var res       = await fetch(url,{method:'post',headers,body});
+              var txt       = await res.text();
+              if(!res.ok){
+                    alert('savefile : '+url+'\n'+txt);
+                    return false;
+              }
+              return txt;
+              
+        }//save
+        
+        
+        async function readdir(url){
+          
+              var headers   = {mode:'dir'};
+              
+              if(ui['auth-chk'].checked){
+                    var auth        = ui.auth.value;
+                    headers.auth    = auth;
+              }
+              
+              var res       = await fetch(url,{headers});
+              var txt       = await res.text();
+              if(!res.ok){
+                    alert('readdir :'+url+'\n'+txt);
+                    return false;
+              }
+              var json    = JSON.parse(txt);
+              
+              display.clear();
+              display('dirs',json.dirs);
+              display('files',json.files,url);
+          
+        }//readdir
+        
+        
+        async function mkdir(url){
+          
+              var headers   = {mode:'mkdir'};
+              
+              if(ui['auth-chk'].checked){
+                    var auth        = ui.auth.value;
+                    headers.auth    = auth;
+              }
+              
+              var res       = await fetch(url,{headers});
+              var txt       = await res.text();
+              if(!res.ok){
+                    alert('mkdir :'+url+'\n'+txt);
+                    return false;
+              }
+
+              var json    = JSON.parse(txt);
+              
+              var url         = build(url,json.cwd);
+              ui.url.value    = url
+              
+              display.clear();
+              display('dirs',json.dirs);
+              display('files',json.files,url);
+          
+        }//mkdir
+        
+        
+        async function del(url){
+          
+              var headers   = {mode:'del'};
+
+              if(ui['auth-chk'].checked){
+                    var auth        = ui.auth.value;
+                    headers.auth    = auth;
+              }
+              
+              var res       = await fetch(url,{headers});
+              var txt       = await res.text();
+              if(!res.ok){
+                    alert('del :'+url+'\n'+txt);
+                    return false;
+              }
+
+              var json    = JSON.parse(txt);
+
+              var url         = build(url,json.cwd);
+              ui.url.value    = url
+              
+              display.clear();
+              display('dirs',json.dirs);
+              display('files',json.files,url);
+              
+        }//del
+        
+        
+        async function parent(url){
+
+              var headers   = {mode:'parent'};
+
+              if(ui['auth-chk'].checked){
+                    var auth        = ui.auth.value;
+                    headers.auth    = auth;
+              }
+              
+              var res       = await fetch(url,{headers});
+              var txt       = await res.text();
+              if(!res.ok){
+                    alert('parent :'+url+'\n'+txt);
+                    return false;
+              }
+
+              var json    = JSON.parse(txt);
+
+              var url         = build(url,json.cwd);
+              ui.url.value    = url
+              
+              display.clear();
+              display('dirs',json.dirs);
+              display('files',json.files,url);
+
+        }//parent
+
+        
+  //:
+
+  
+        display.clear   = function(){
+          
+              ui.root.dirs.replaceChildren();
+              ui.root.files.replaceChildren();
+              
+              display.nodes.dirs    = {};
+              display.nodes.files   = {};
+              
+              
+        }//clear
+        
+        
+        display.div           = {};
+        display.nodes         = {};
+        display.nodes.dirs    = {};
+        display.nodes.files   = {};
+        
+        
+        function display(name,list){
+
+              var url   = ui.url.value;
+              ui.root[name].onscroll    = e=>display(name,list);
+              
+              
+              var ih    = 25;
+              var pad   = 5;
+              
+              var n     = list.length;
+              var t     = n*ih;
+              
+              if(!display.div[name]){
+                    display.div[name]                  = document.createElement('div');
+                    display.div[name].style.cssText    = 'height:5px;background:lightblue;position:absolute;left:0;right:0';
+                    ui.root[name].append(display.div[name]);
+              }
+              display.div[name].style.top   = t+'px';
+              
+              var st    = ui.root[name].scrollTop;
+              var i1    = Math.floor(st/ih)-3;
+              if(i1<0){
+                    i1    = 0;
+              }
+              
+              var h     = ui.root[name].offsetHeight;
+              var nh    = Math.floor(h/ih)+3;
+              
+              var i2    = i1+nh;
+              if(i2>list.length){
+                    i2    = list.length;
+              }
+        
+              for(var key in display.nodes[name]){
+                
+                    if(key<i1 || key>=i2){
+                          display.nodes[name][key].remove();
+                          delete display.nodes[name][key];
+                    }
+                    
+              }//for
+                          
+              for(let i=i1;i<i2;i++){
+                
+                    if(!display.nodes[name][i]){
+                          let nitem                       = ui.item[name].cloneNode(true);
+                          let filename                    = list[i];
+                          $(nitem,'.name').textContent    = filename;
+                          nitem.style.cssText             = 'position:absolute;left:0;right:0';
+                          nitem.style.top                 = i*ih+'px';
+                          ui.root[name].append(nitem);
+                          display.nodes[name][i]          = nitem;
+                          
+                          nitem.onmouseenter              = e=>nitem.style.background   = 'lightyellow';
+                          nitem.onmouseleave              = e=>nitem.style.background   = '';
+                          nitem.onclick                   = e=>click(filename);
+                          nitem.ondblclick                = e=>dblclick(filename);
+                    }
+                    
+              }//for
+                                                                                var n   = Object.keys(display.nodes[name]).length;
+                                                                                console.log(name,n);
+              function click(filename){
+                
+                    var fn    = url+filename;
+                    if(name==='dirs'){
+                          fn   += '/';
+                    }
+                    ui.url.value    = fn
+                    
+              }//click
+              
+              
+              function dblclick(filename){
+                            
+                    var url   = ui.url.value;
+                    if(name=='dirs'){
+                                                                                console.log('dir',url,filename);
+                          readdir(url);
+                          
+                          
+                    }else{
+                                                                                console.log('file',url,filename);
+                          btn.load.ui(url);
+                    }
+                    
+              }//ondblclick
+              
+        }//display
+
+
+  //:
+  
+        
+        function build(url,cwd){
+          
+              console.log(cwd);
+              
+              var p       = new URL(url);
+              var url2    = p.protocol+'//'+p.host+cwd;
+              return url2;
+              
+        }//build
+        
 
 
 
-
-
-
-
-
+        
+  return obj;
+      
+}//httpsfile
+            
+      </script>
+      
+</https-file>
