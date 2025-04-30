@@ -210,7 +210,7 @@
         }//get_params_grp
         
         
-        function get_params_utils(nn){
+        function get_params_utils(){
         
               repo    = 'javascript-2020.github.io';
               path    = `utils/html/${nn}.html`;
