@@ -193,7 +193,7 @@
         
         
         function get_params_grp(){
-                                                                                console.log('get_params_grp');
+                                                                                console.log('get_params_grp',nn);
               repo    = 'javascript-2020.github.io';
               path    = window.location.pathname;
                                                                                 console.log(path);
