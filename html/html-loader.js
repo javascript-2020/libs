@@ -205,7 +205,7 @@
                           path    = window.location.pathname;
                     }
               }
-              path    = get_slash(path,2);
+              path    = slashes(path,2);
                                                                                 console.log(path);              
         }//get_params_grp
         
@@ -246,7 +246,7 @@
         }//api
 
 
-        function getslash(path,num){
+        function slashes(path,num){
         
               var index   = path.length;
               for(var i=0;i<num;i++){
