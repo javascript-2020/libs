@@ -55,17 +55,19 @@
         var mode      = 'raw';
 
 
-        if(nn.endsWith('-debug')){
-              nn      = nn.slice(0,-9);
-              debugger;
-        }
-
         if(root.hasAttribute('github')){
               type    = 'github';
               path    = root.getAttribute('github');
               path   += `html/${nn}/${nn}.html`;
         }
-        
+
+
+        if(nn.endsWith('-debug')){
+              nn      = nn.slice(0,-9);
+              debugger;
+        }
+
+
         if(nn.endsWith('-api')){
               nn      = nn.slice(0,-4);
               mode    = 'api';
@@ -220,7 +222,8 @@
 
         
         async function raw(){
-        
+                                                                                console.log('html-loader.raw');
+                                                                                console.log(repo,path);
               var url               = `https://raw.githubusercontent.com/${user}/${repo}/main/${path}`;
               var res               = await fetch(url);
               var txt               = await res.text();
@@ -230,7 +233,8 @@
 
 
         async function api(){
-
+                                                                                console.log('html-loader.api');
+                                                                                console.log(repo,path);
               var headers   = {accept:'application/vnd.github+json'};
               var token     = localStorage.getItem('github-token');
               if(token){
