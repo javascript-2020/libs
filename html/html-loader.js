@@ -1,5 +1,5 @@
 
-
+                
 
 /*
 
@@ -9,25 +9,8 @@
 30-04-25        version 2
 
 */
-
-
-(async()=>{
-
-        var nodename;
-        /* params */
-
-                
-
-
-/*
-
-//github:libs/html/html-loader.js:d
-
-10-02-25
-
-*/
-
-
+                                                                        console.log('html-loader-v2.0');
+                                                                        console.log();
 (async()=>{
 //debugger;
 
