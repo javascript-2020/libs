@@ -252,6 +252,7 @@
               }
               catch(err){
                                                                                 console.log('html-loader.api');
+                                                                                console.log(nn);
                                                                                 console.log(repo,path);
                     throw err;
               }
