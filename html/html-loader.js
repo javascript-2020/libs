@@ -208,6 +208,8 @@
                     }
               }
               path    = slashes(path,2);
+              path   += `html/${nn}/${nn}.html`;
+              
                                                                                 console.log(path);              
         }//get_params_grp
         
