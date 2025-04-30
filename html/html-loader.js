@@ -244,7 +244,18 @@
               var res       = await fetch(url,{headers});
               var json      = await res.json();
               var b64       = json.content;
-              var txt       = window.atob(b64);
+              
+              try{
+              
+                    var txt       = window.atob(b64);
+                    
+              }
+              catch(err){
+                                                                                console.log('html-loader.api');
+                                                                                console.log(repo,path);
+                    throw err;
+              }
+              
               return txt;
         
         }//api
