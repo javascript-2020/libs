@@ -191,10 +191,10 @@
         
         
         function get_params_grp(){
-        
+                                                                                console.log('get_params_grp');
               repo    = 'javascript-2020.github.io';
               path    = window.location.pathname;
-              
+                                                                                console.log(path);
               var base    = document.querySelector('base');
               if(base){
                     var href    = base.href;
@@ -206,7 +206,7 @@
                     }
               }
               path    = get_slash(path,2);
-              
+                                                                                console.log(path);              
         }//get_params_grp
         
         
