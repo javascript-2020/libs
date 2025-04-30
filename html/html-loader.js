@@ -70,12 +70,12 @@
               nn      = nn.slice(0,-4);
               mode    = 'api';
         }
+
         
         if(nn.endsWith('-grp')){
               nn      = nn.slice(0,-4);
-              mode    = 'grp';
+              type    = 'grp';
         }
-        
         if(nn.endsWith('-page')){
               nn      = nn.slice(0,-5);
               type    = 'page';
