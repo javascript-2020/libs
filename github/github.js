@@ -15,24 +15,31 @@
         function parse(url){
         
               url   = window.decodeURIComponent(url);
+              
               if(!url.startsWith('http')){
                     url   = 'https://'+url;
               }
+              
               url   = new URL(url);
+              
+              var result;
+              
               if(url.hostname=='javascript-2020.github.io'){
-                    parse['github.io'](url);
+                    result    = parse['github.io'](url);
               }
+              
               if(url.hostname=='github.com'){
                     if(url.pathname.indexOf('blob')!=-1){
-                          parse.file(url);
+                          result    = parse.file(url);
                     }else 
                     if(url.pathname.indexOf('tree')!=-1){
-                          parse.dir(url);
+                          result    = parse.dir(url);
                     }else{
-                          parse.repo(url);
+                          result    = parse.repo(url);
                     }
               }
-                                              
+              return result;
+              
         }//parse
 
         
@@ -44,7 +51,7 @@
               var repo      = url.hostname;
               var branch    = 'main';
               var path      = url.pathname.slice(1);
-              write(owner,repo,branch,path);
+              return {owner,repo,branch,path};
               
         }//github.io
         
@@ -56,7 +63,7 @@
               var repo      = parts.shift();
               var branch    = 'main';
               var path      = '';
-              write(owner,repo,branch,path);
+              return {owner,repo,branch,path};
               
         }//repo
         
@@ -70,7 +77,7 @@
               parts.shift();
               var branch    = parts.shift();
               var path      = parts.join('/');
-              write(owner,repo,branch,path);
+              return {owner,repo,branch,path};
         
         }//file
         
@@ -83,7 +90,7 @@
               parts.shift();
               var branch    = parts.shift();
               var path      = parts.join('/');
-              write(owner,repo,branch,path);
+              return {owner,repo,branch,path};
               
         }//dir
 
@@ -91,6 +98,17 @@
   //:        
 
 
+        function load(){
+        }//load
+        
+        
+  //:
+  
+  
+        function save(){
+        }//save
+  
+  
         function debug(){
         
               var str   = [...arguments].join(' ');
