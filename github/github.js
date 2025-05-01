@@ -101,19 +101,53 @@
   //:        
 
 
-        async function load(api,token,owner,repo,branch,path){
+        async function load({token,owner,repo,branch,path}){
+        
+              var result;
+              if(token){
+                    result    = load.api(token,owner,repo,branch,path);
+              }else{
+                    result    = load.raw(owner,repo,branch,path);
+              }
+              return result;
+              
+        }//load
+        
+        
+        load.raw    = function(owner,repo,branch,path){
         
               var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
-              var headers;
-              if(api){
-                    if(!token){
-                          token     = localStorage.getItem('github-token');
-                    }
-                    if(token){
-                          headers   = {authorization:`Bearer ${token}`};
-                    }
-                    url             = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;                                
-              }                          
+                                                                                debug('load.raw',url);
+              var err;
+              try{
+              
+                    var res   = await fetch(url);
+                    
+              }
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }
+              if(err){
+                    return {error:err};
+              }
+              
+              var txt   = await res.text();
+              
+              if(!res.ok){
+                    return {error:txt};
+              }
+              
+              return {ok:txt};
+              
+        }//raw
+        
+        
+        load.api    = function(token,owner,repo,branch,path){
+
+              var url       = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;                                
+              var headers   = {authorization:`Bearer ${token}`};
                                                                                 debug('load',url);
               var err;
               try{
@@ -127,27 +161,24 @@
                     
               }
               if(err){
-                    log.red(err.message);
-                    return;
+                    return {error:err};
               }
-              var txt;
-              if(api){
-                    var json    = await res.json();
-                    txt         = window.atob(json.content);
-              }else{
-                    txt   = await res.text();
-              }
+              
+              var json    = await res.json();
+              var txt     = window.atob(json.content);
               
               if(!res.ok){
-                    log.red(txt);
-                    return false;
+                    return {error:txt};
               }
               
-              return txt;
+              return {ok:txt};
               
-        }//load
+        }//api
 
 
+  //:
+  
+  
         async function save(token,owner,repo,branch,path,txt){
         
               var headers     = {authorization:`Bearer ${token}`};
