@@ -54,14 +54,15 @@
               var obj   = {};
 
             
-                  var menumod,complete,editor
+                  var menumod,complete,editor,par_init,ext
                   ;
                   
                   obj.initmod   = function(params){
                     
-                        menumod     = params.menumod;
-                        complete    = params.complete;
-                        editor      = params.editor;
+                        menumod         = params.menumod;
+                        complete        = params.complete;
+                        editor          = params.editor;
+                        ext             = params.ext;
                         
                   }//initmod
 
@@ -93,9 +94,9 @@
                       httpsfile                 = mod.httpsfile();
                       obj.httpsfile             = httpsfile;
 
-                      localfile.initmod({menumod,editor,$});
-                      github.initmod({menumod,editor,$});
-                      httpsfile.initmod({menumod,editor,$});
+                      localfile.initmod({menumod,editor,$,ext});
+                      github.initmod({menumod,editor,$,ext});
+                      httpsfile.initmod({menumod,editor,$,ext});
                       
                       localfile.init();
                       github.init();
