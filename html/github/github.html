@@ -188,14 +188,15 @@ mod.github=function(){
       var df=obj.df=false
       ;
         
-      var menumod,editor,$
+      var menumod,editor,$,par_init
       ;
       
       obj.initmod   = function(params){
         
-            menumod   = params.menumod;
-            editor    = params.editor;
-            $         = params.$;
+            menumod       = params.menumod;
+            editor        = params.editor;
+            $             = params.$;
+            par_init      = params.init;
             
       }//initmod
 
@@ -212,10 +213,21 @@ mod.github=function(){
 
         
   //:
+  
+      load();
 
     
       obj.init    = function(){
+        
+            
       }//init
+      
+      
+      function load(){
+        
+            console.log('github.ext',ext);
+            
+      }//load
         
 
   //:
