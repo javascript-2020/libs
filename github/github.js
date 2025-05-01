@@ -93,7 +93,7 @@
 
         function debug(){
         
-              var str   = [...arguments].join(' ')];
+              var str   = [...arguments].join(' ');
               console.log('[ github ]',str);
               
         }//debug
