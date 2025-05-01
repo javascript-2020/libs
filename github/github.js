@@ -6,7 +6,10 @@
 
         var github      = {};
         
-        github.parse    = parse;      
+        github.parse    = parse;  
+        github.load     = load;
+        github.save     = save;
+        github.backup   = backup;
 
         
   //:
@@ -98,16 +101,291 @@
   //:        
 
 
-        function load(){
+        async function load(api,token,owner,repo,branch,path){
+        
+              var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
+              var headers;
+              if(api){
+                    if(!token){
+                          token     = localStorage.getItem('github-token');
+                    }
+                    if(token){
+                          headers   = {authorization:`Bearer ${token}`};
+                    }
+                    url             = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;                                
+              }                          
+                                                                                debug('load',url);
+              var err;
+              try{
+              
+                    var res   = await fetch(url,{headers});
+                    
+              }
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }
+              if(err){
+                    log.red(err.message);
+                    return;
+              }
+              var txt;
+              if(api){
+                    var json    = await res.json();
+                    txt         = window.atob(json.content);
+              }else{
+                    txt   = await res.text();
+              }
+              
+              if(!res.ok){
+                    log.red(txt);
+                    return false;
+              }
+              
+              return txt;
+              
         }//load
+
+
+        async function save(token,owner,repo,branch,path,txt){
         
-        
-  //:
-  
-  
-        function save(){
+              var headers     = {authorization:`Bearer ${token}`};
+              var url         = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+              
+              var err;
+              try{
+              
+                    var json        = await fetch(url,headers).then(res=>res.json());
+                    
+              }
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }
+              if(err){
+                    log.red(err.message);
+                    return;
+              }
+              
+              var sha         = json.sha;
+              
+              var content     = window.btoa(txt);
+              var message     = 'save text';
+              var body        = {content,sha,message};
+              body            = JSON.stringify(body);
+              var headers     = {authorization:`Bearer ${token}`};
+              var opts        = {method:'put',headers,body};
+              
+              var err;
+              try{
+              
+                    var res         = await fetch(url,opts);
+                    
+              }
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }
+              if(err){
+                    log.red(err.message);
+                    return;
+              }
+              if(!res.ok){
+                    var txt         = await res.text();
+                    log.red(txt);
+                    return  false;
+              }
+                                                                                debug('saved');
+              return true;
+              
         }//save
-  
+        
+
+        async function backup(token,owner,repo,branch,path){
+                                                                                debug('backup',path);
+              var api   = true;
+              var txt   = load.text(api,token,owner,repo,branch,path);
+              
+              var fn;
+              var i   = path.lastIndexOf('/');
+              
+              if(i==-1){
+                    fn      = path;
+                    path    = '';
+              }else{
+                    fn      = path.slice(i+1);
+                    path    = path.slice(0,i);
+              }
+              if(path && path.at(-1)!='/')path   += '/';
+              
+              var err;
+              try{
+              
+                    var url     = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
+                    var res     = await fetch(url)
+                    
+              }
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }
+              if(err){
+                    log.error(err);
+                    return;
+              }
+              
+              if(!res.ok){
+                    var txt   = await res.text();
+                    log.red(txt);
+                    return;
+              }
+              
+              var json    = await res.json();
+              
+              var max     = 0;
+              json.tree.forEach(async item=>{
+              
+                    if(item.path.startsWith(`${path}backup/${fn}`)){
+                          var i   = item.path.lastIndexOf('-');
+                          var s   = item.path.slice(i+1);
+                          var v   = Number(s);
+                          if(!isNaN(v)){
+                                if(v>max){
+                                      max   = v;
+                                }
+                          }
+                    }
+                    
+              });
+              max++;
+              
+              path    = `${path}backup/${fn}-${max}`;
+                                                                    debug(path);
+              save(token,owner,repo,branch,path,txt);
+              
+        }//backup
+        
+        
+        backup.clear=async function(token,owner,repo,branch,path,all){
+        
+              var fn;
+              var i   = path.lastIndexOf('/');
+              
+              if(i==-1){
+                    fn      = path;
+                    path    = '';
+              }else{
+                    fn      = path.slice(i+1);
+                    path    = path.slice(0,i);
+              }
+              
+              var err;
+              try{
+              
+                    var url     = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
+                    var res     = await fetch(url)
+                    
+              }
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }
+              if(err){
+                    log.error(err);
+                    return;
+              }
+              
+              if(!res.ok){
+                    var txt   = await res.text();
+                    log.red(txt);
+                    return;
+              }
+              
+              var json    = await res.json();
+
+              var max     = 0;
+              json.forEach(item=>{
+              
+                    if(item.path.startsWith(`backup/${fn}`)){
+                          var i   = item.path.lastIndexOf('-');
+                          var s   = item.path.slice(i+1);
+                          var v   = Number(s);
+                          if(!isNaN(v)){
+                                if(v>max){
+                                      max   = v;
+                                }
+                          }
+                    }
+                    
+              });
+
+              var ct    = 0;
+              var n     = json.length;
+              for(var i=0;i<n;i++){
+              
+                    var item    = json[i];
+                    
+                    var f       = true;
+                    if(item.path.startsWith(`backup/${fn}`)){
+                          if(!all){
+                                if(item.path==`backup/${fn}-${max}`){
+                                      f   = false;
+                                }
+                          }
+                    }
+                    if(f){
+                          ct++;
+                          await del(item.path,item.sha);
+                    }
+                    
+              }//for
+              
+              log.green(`delete ${ct} files`);
+              
+              
+              async function del(path,sha){
+              
+                    var err;
+                    try{
+
+                          var json      = {messsage:'delete file',sha};
+                          var body      = JSON.stringify(json);                                
+                          var url       = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+                          var headers   = {};
+                          if(token){
+                                headers.authorization   = `bearer ${token}`;
+                          }
+                          var res     = await fetch(url,{method:'delete',headers,body});
+                          
+                    }
+                    catch(err2){
+                    
+                          err   = err2;
+                          
+                    }
+                    if(err){
+                          log.error(err);
+                          return;
+                    }
+                    
+                    if(!res.ok){
+                          var txt   = await res.text();
+                          log.red(txt);
+                          return;
+                    }
+              
+              }//del
+              
+        }//clear
+
+
+
+  //:  
   
         function debug(){
         
