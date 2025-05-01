@@ -194,6 +194,7 @@ mod.httpsfile   = function(){
               icon                                              = $(shadow,'.icon');
               icon.onclick                                      = menumod.click(node,'both',true,callback);
 
+
               ui.root.server                                    = $(node,'#server-root');
               
               $(ui.root.server,'[value=quit]').onclick          = btn.quit;
@@ -202,9 +203,11 @@ mod.httpsfile   = function(){
               $(node,'.copy').onclick                           = btn.copy;
               $(node,'.paste').onclick                          = btn.paste;
               ui.url                                            = $(node,'#url');
+
               
               ui.auth                                           = $(node,'#auth');
               ui['auth-chk']                                    = $(node,'#auth-chk');
+              
               
               $(node,'#parent-dir').onclick                     = btn.parent;
               $(node,'[value=load]').onclick                    = btn.load;
@@ -262,16 +265,16 @@ mod.httpsfile   = function(){
   
         btn.copy    = async function(){
           
-              var txt         = await navigator.clipboard.readText();
-              ui.url.value    = txt;
+              var txt   = ui.url.value;
+              await navigator.clipboard.writeText(txt);
               
         }//copy
         
         
         btn.paste   = async function(){
           
-              var txt   = ui.url.value;
-              await navigator.clipboard.writeText(txt);
+              var txt         = await navigator.clipboard.readText();
+              ui.url.value    = txt;
               
         }//paste
   
