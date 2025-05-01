@@ -101,7 +101,7 @@
   //:        
 
 
-        async function load({token,owner,repo,branch,path}){
+        function load({token,owner,repo,branch,path}){
         
               var result;
               if(token){
@@ -114,7 +114,7 @@
         }//load
         
         
-        load.raw    = function(owner,repo,branch,path){
+        load.raw    = async function(owner,repo,branch,path){
         
               var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
                                                                                 debug('load.raw',url);
@@ -144,7 +144,7 @@
         }//raw
         
         
-        load.api    = function(token,owner,repo,branch,path){
+        load.api    = async function(token,owner,repo,branch,path){
 
               var url       = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;                                
               var headers   = {authorization:`Bearer ${token}`};
