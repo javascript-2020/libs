@@ -6,6 +6,8 @@
 
         var github      = {};
         
+        github.df       = true;
+        
         github.parse    = parse;  
         github.load     = load;
         github.save     = save;
@@ -57,6 +59,7 @@
               return {owner,repo,branch,path};
               
         }//github.io
+
         
         //  https://github.com/javascript-2020/libs
         parse.repo=function(url){
@@ -69,6 +72,7 @@
               return {owner,repo,branch,path};
               
         }//repo
+
         
         //  https://github.com/javascript-2020/libs/blob/main/docker/nodejs-min.dockerfile
         parse.file=function(url){
@@ -83,6 +87,7 @@
               return {owner,repo,branch,path};
         
         }//file
+
         
         //  https://github.com/javascript-2020/libs/tree/main/docker
         parse.dir=function(url){
@@ -420,6 +425,10 @@
   
         function debug(){
         
+              if(!github.df){
+                    return;
+              }
+              
               var str   = [...arguments].join(' ');
               console.log('[ github ]',str);
               
