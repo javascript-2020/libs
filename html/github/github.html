@@ -226,7 +226,7 @@ mod.github    = function(){
       }//init
       
       
-      function load_libs(){
+      async function load_libs(){
         
             [github]    = await ext.load.libs('github/github.js');
             console.log('github.loadlibs',github);
