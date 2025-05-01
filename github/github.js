@@ -93,6 +93,7 @@
         parse.dir=function(url){
                                                                                 debug('dir');
               var parts     = url.pathname.split('/');
+              parts.shift();
               var owner     = parts.shift();
               var repo      = parts.shift();
               parts.shift();
