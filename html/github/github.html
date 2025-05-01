@@ -181,7 +181,7 @@
       <script>
 
       
-mod.github=function(){
+mod.github    = function(){
                                                                                 true && console.log('github',2);
   var obj   = {};
 
@@ -204,6 +204,8 @@ mod.github=function(){
                             
   //vars:-                    
         
+      var github;
+      
       var root;
       var shadow;
         
@@ -226,7 +228,8 @@ mod.github=function(){
       
       function load_libs(){
         
-            console.log('github.ext',ext);
+            [github]    = await ext.load.libs('github/github.js');
+            console.log('github.loadlibs',github);
             
       }//load
         
