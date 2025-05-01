@@ -221,7 +221,7 @@ mod.github    = function(){
     
       obj.init    = function(){
         
-            load_libs();
+            load_libs   = load_libs();
             
       }//init
       
@@ -229,7 +229,6 @@ mod.github    = function(){
       async function load_libs(){
         
             [github]    = await ext.load.libs('github/github.js.api');
-            console.log('github.loadlibs',github);
             
       }//load
         
@@ -398,8 +397,16 @@ mod.github    = function(){
         
         btn.parse   = function(e={}){
         
+              if(!github){
+                    alert('library not ready');
+                    return;
+              }
+              
               var url   = $(shadow,'#url').value;
-              parse(url);
+              
+              var {owner,repo,branch,path}    = github.parse(url);
+              
+              write(owner,repo,branch,path);
               
               if(e.ctrlKey){
                     btn.load(e);
@@ -424,6 +431,7 @@ mod.github    = function(){
               }
               
               var {token,owner,repo,branch,path}    = read();
+              
               var i           = path.lastIndexOf('/');
               var filename    = path.slice(i+1);
               
