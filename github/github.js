@@ -437,7 +437,7 @@
               return promise;
               
               
-              function fn(){
+              async function fn(){
               
                     if(path.slice(-1)!='/'){
                           path   += '/';
