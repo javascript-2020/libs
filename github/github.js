@@ -463,7 +463,7 @@
                     var ct      = 0;
                     var total   = 1;
                     if(typeof update=='function'){
-                          update();
+                          update(ct,total);
                     }
                                   
                     await Promise.all(json.tree.map(async item=>{
@@ -472,7 +472,7 @@
                           
                           total++;
                           if(typeof update=='function'){
-                                update();
+                                update(ct,total);
                           }
                           
                           var fn    = item.path.slice(path.length);
@@ -486,14 +486,14 @@
                           
                           ct++;
                           if(typeof update=='function'){
-                                update();
+                                update(ct,total);
                           }
                           
                     }));
                     
                     ct++;
                     if(typeof update=='function'){
-                          update();
+                          update(ct,total);
                     }
                     
                     var blob    = await zip.generateAsync({type:'blob'});
