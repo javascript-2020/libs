@@ -39,21 +39,26 @@
               if(!url.startsWith('http')){
                     url   = 'https://'+url;
               }
+
               
               var err;
+              
               try{
               
                     url   = new URL(url);
                     
-              }
+              }//try
+              
               catch(err2){
               
                     err   = err2;
                   
-              }
+              }//catch
+              
               if(err){
                     return {error:err};
               }
+
               
               var result;
               
@@ -75,8 +80,7 @@
               
         }//parse
 
-        
-        //  https://javascript-2020.github.io/html-components/log/log.html
+                                                                                //  https://javascript-2020.github.io/html-components/log/log.html
         parse['github.io']=function(url){
                                                                                 debug('github.io');
               var i         = url.hostname.indexOf('.');
@@ -87,9 +91,8 @@
               return {owner,repo,branch,path};
               
         }//github.io
-
         
-        //  https://github.com/javascript-2020/libs
+                                                                                //  https://github.com/javascript-2020/libs
         parse.repo=function(url){
                                                                                 debug('repo');
               var parts     = url.pathname.split('/');
@@ -101,8 +104,7 @@
               
         }//repo
 
-        
-        //  https://github.com/javascript-2020/libs/blob/main/docker/nodejs-min.dockerfile
+                                                                                //  https://github.com/javascript-2020/libs/blob/main/docker/nodejs-min.dockerfile
         parse.file=function(url){
                                                                                 debug('file');
               var parts     = url.pathname.split('/');
@@ -115,9 +117,8 @@
               return {owner,repo,branch,path};
         
         }//file
-
         
-        //  https://github.com/javascript-2020/libs/tree/main/docker
+                                                                                //  https://github.com/javascript-2020/libs/tree/main/docker
         parse.dir=function(url){
                                                                                 debug('dir');
               var parts     = url.pathname.split('/');
@@ -152,20 +153,25 @@
         
               var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
                                                                                 debug('load.raw',url);
+                                                                                
               var err;
+              
               try{
               
                     var res   = await fetch(url);
                     
-              }
+              }//try
+              
               catch(err2){
               
                     err   = err2;
                     
-              }
+              }//catch
+              
               if(err){
                     return {error:err};
               }
+
               
               var txt   = await res.text();
               
@@ -183,20 +189,25 @@
               var url       = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;                                
               var headers   = {authorization:`Bearer ${token}`};
                                                                                 debug('load',url);
+                                                                                
               var err;
+              
               try{
               
                     var res   = await fetch(url,{headers});
                     
-              }
+              }//try
+              
               catch(err2){
               
                     err   = err2;
                     
-              }
+              }//catch
+              
               if(err){
                     return {error:err};
               }
+
               
               var json    = await res.json();
               var txt     = window.atob(json.content);
@@ -217,21 +228,26 @@
         
               var headers     = {authorization:`Bearer ${token}`};
               var url         = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+
               
               var err;
+              
               try{
               
                     var json        = await fetch(url,headers).then(res=>res.json());
                     
-              }
+              }//try
+              
               catch(err2){
               
                     err   = err2;
                     
-              }
+              }//catch
+              
               if(err){
                     return {error:err};
               }
+
               
               var sha         = json.sha;
               
@@ -241,21 +257,27 @@
               body            = JSON.stringify(body);
               var headers     = {authorization:`Bearer ${token}`};
               var opts        = {method:'put',headers,body};
+
               
               var err;
+              
               try{
               
                     var res         = await fetch(url,opts);
                     
-              }
+              }//try
+              
               catch(err2){
               
                     err   = err2;
                     
-              }
+              }//catch
+              
               if(err){
                     return {error:err};
               }
+              
+              
               if(!res.ok){
                     var txt         = await res.text();
                     return {error:txt};
@@ -284,23 +306,28 @@
               if(path && path.at(-1)!='/'){
                     path   += '/';
               }
+
               
               var err;
+              
               try{
               
                     var url     = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
                     var res     = await fetch(url)
                     
-              }
+              }//try
+              
               catch(err2){
               
                     err   = err2;
                     
-              }
+              }//catch
+              
               if(err){
                     var str   = err.toString();
                     return {error:str};
               }
+
               
               if(!res.ok){
                     var txt   = await res.text();
@@ -347,23 +374,28 @@
                     fn      = path.slice(i+1);
                     path    = path.slice(0,i);
               }
+
               
               var err;
+              
               try{
               
                     var url     = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
                     var res     = await fetch(url)
                     
-              }
+              }//try
+              
               catch(err2){
               
                     err   = err2;
                     
-              }
+              }//catch
+              
               if(err){
                     var str   = err.toString();
                     return {error:str};
               }
+
               
               if(!res.ok){
                     var txt   = await res.text();
@@ -421,6 +453,7 @@
               async function del(path,sha){
               
                     var err;
+                    
                     try{
 
                           var json      = {messsage:'delete file',sha};
@@ -432,16 +465,19 @@
                           }
                           var res     = await fetch(url,{method:'delete',headers,body});
                           
-                    }
+                    }//try
+                    
                     catch(err2){
                     
                           err   = err2;
                           
-                    }
+                    }//catch
+                    
                     if(err){
                           var str   = err.toString();
                           return {error:str};
                     }
+
 
                     var txt   = await res.text();
                     
@@ -506,8 +542,10 @@
                     if(typeof update=='function'){
                           update(ct,total);
                     }
+
                      
                     var err;             
+                    
                     try{
                     
                           await Promise.all(json.tree.map(async item=>{
@@ -535,14 +573,19 @@
                                 
                           }));
                           
-                    }
+                    }//try
+                    
                     catch(err2){
+                    
                           err   = err2;
-                    }
+                          
+                    }//catch
+                    
                     if(err){
                           error(err);
                           return;
                     }
+
                     
                     ct++;
                     if(typeof update=='function'){
