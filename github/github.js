@@ -482,7 +482,7 @@
                                 path   += '/';
                           }
                     }
-                    
+                                                                                debug('path',path);
                     var ct      = 0;
                     var total   = 1;
                     if(typeof update=='function'){
