@@ -439,7 +439,7 @@
   
   
         download.dir    = function(owner,repo,branch,path,update,complete){
-                                                                                debug('download',owner,repo,branch,path);
+                                                                                debug('download',owner,repo,branch,path);              
               var resolve,promise=new Promise(res=>resolve=res);
               
               setTimeout(fn,50);
@@ -459,6 +459,29 @@
                     
                     var url     = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
                     var json    = await fetch(url).then(res=>res.json()).catch(error);
+
+                    var item    = json.tree.find(o=>o.path===path);
+                    if(item){
+                          if(item.type=='blob'){
+                                var i   = path.lastIndexOf('/');
+                                if(i==-1){
+                                      path    = '';
+                                }else{
+                                      path    = path.slice(0,i);
+                                }
+                          }
+                    }else{
+                          if(path){
+                                error('not found : '+path);
+                                return;
+                          }
+                    }
+                    
+                    if(path){
+                          if(path.slice(-1)!='/'){
+                                path   += '/';
+                          }
+                    }
                     
                     var ct      = 0;
                     var total   = 1;
