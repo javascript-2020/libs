@@ -458,38 +458,50 @@
                     var zip     = new JSZip();
                     
                     var url     = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
-                    var json    = await fetch(url).then(res=>res.json());
+                    var json    = await fetch(url).then(res=>res.json()).catch(error);
                     
                     var ct      = 0;
                     var total   = 1;
                     if(typeof update=='function'){
                           update(ct,total);
                     }
-                                  
-                    await Promise.all(json.tree.map(async item=>{
+                     
+                    var err;             
+                    try{
                     
-                          if(!item.path.startsWith(path))return;
+                          await Promise.all(json.tree.map(async item=>{
                           
-                          total++;
-                          if(typeof update=='function'){
-                                update(ct,total);
-                          }
+                                if(!item.path.startsWith(path))return;
+                                
+                                total++;
+                                if(typeof update=='function'){
+                                      update(ct,total);
+                                }
+                                
+                                var fn    = item.path.slice(path.length);
+                                if(item.type=='tree'){
+                                      zip.folder(fn);
+                                }else{
+                                      var res     = await fetch(item.url);
+                                      var blob    = await res.blob();
+                                      zip.file(fn,blob);
+                                }
+                                
+                                ct++;
+                                if(typeof update=='function'){
+                                      update(ct,total);
+                                }
+                                
+                          }));
                           
-                          var fn    = item.path.slice(path.length);
-                          if(item.type=='tree'){
-                                zip.folder(fn);
-                          }else{
-                                var res     = await fetch(item.url);
-                                var blob    = await res.blob();
-                                zip.file(fn,blob);
-                          }
-                          
-                          ct++;
-                          if(typeof update=='function'){
-                                update(ct,total);
-                          }
-                          
-                    }));
+                    }
+                    catch(err2){
+                          err   = err2;
+                    }
+                    if(err){
+                          error(err);
+                          return;
+                    }
                     
                     ct++;
                     if(typeof update=='function'){
@@ -498,10 +510,6 @@
                     
                     var blob    = await zip.generateAsync({type:'blob'});
                     
-                    if(typeof complete=='function'){
-                          complete(file,blob);
-                    }
-              
                     if(complete==='download'){
                           var url         = window.URL.createObjectURL(blob);
                           var a           = document.createElement('a');
@@ -509,10 +517,28 @@
                           a.download      = file;
                           a.click();
                     }
-                    
-                    resolve(file,blob);
+                   
+                    done({file,blob});
                     
               }//fn
+              
+              
+              function error(err){
+              
+                    done({error:err});
+                    
+              }//error
+              
+              
+              function done(result){
+              
+                    if(typeof complete=='function'){
+                          complete(result);
+                    }
+                    
+                    resolve(result);
+              
+              }//done
         
         }//dir
 
