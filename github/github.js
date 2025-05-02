@@ -230,8 +230,7 @@
                     
               }
               if(err){
-                    log.red(err.message);
-                    return;
+                    return {error:err};
               }
               
               var sha         = json.sha;
@@ -255,16 +254,14 @@
                     
               }
               if(err){
-                    log.red(err.message);
-                    return;
+                    return {error:err};
               }
               if(!res.ok){
                     var txt         = await res.text();
-                    log.red(txt);
-                    return  false;
+                    return {error:txt};
               }
                                                                                 debug('saved');
-              return true;
+              return {ok:txt};
               
         }//save
         
@@ -284,7 +281,9 @@
                     fn      = path.slice(i+1);
                     path    = path.slice(0,i);
               }
-              if(path && path.at(-1)!='/')path   += '/';
+              if(path && path.at(-1)!='/'){
+                    path   += '/';
+              }
               
               var err;
               try{
@@ -299,14 +298,13 @@
                     
               }
               if(err){
-                    log.error(err);
-                    return;
+                    var str   = err.toString();
+                    return {error:str};
               }
               
               if(!res.ok){
                     var txt   = await res.text();
-                    log.red(txt);
-                    return;
+                    return {error:txt};
               }
               
               var json    = await res.json();
@@ -329,8 +327,10 @@
               max++;
               
               path    = `${path}backup/${fn}-${max}`;
-                                                                    debug(path);
+                                                                                debug(path);
               save(token,owner,repo,branch,path,txt);
+              
+              return {ok:true};
               
         }//backup
         
@@ -361,14 +361,13 @@
                     
               }
               if(err){
-                    log.error(err);
-                    return;
+                    var str   = err.toString();
+                    return {error:str};
               }
               
               if(!res.ok){
                     var txt   = await res.text();
-                    log.red(txt);
-                    return;
+                    return {error:txt};
               }
               
               var json    = await res.json();
@@ -404,13 +403,19 @@
                           }
                     }
                     if(f){
-                          ct++;
-                          await del(item.path,item.sha);
+                          var result    = await del(item.path,item.sha);
+                          if(result.error){
+                                                                                console.log('[ github ]','error');
+                                                                                console.log(result.error);
+                          }else{
+                                ct++;
+                          }
                     }
                     
               }//for
               
-              log.green(`delete ${ct} files`);
+              var str   = `delete ${ct} files`;
+              return {ok:str};
               
               
               async function del(path,sha){
@@ -434,15 +439,17 @@
                           
                     }
                     if(err){
-                          log.error(err);
-                          return;
+                          var str   = err.toString();
+                          return {error:str};
                     }
+
+                    var txt   = await res.text();
                     
                     if(!res.ok){
-                          var txt   = await res.text();
-                          log.red(txt);
-                          return;
+                          return {error:txt};
                     }
+                    
+                    return {ok:txt};
               
               }//del
               
