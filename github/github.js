@@ -4,14 +4,19 @@
 (()=>{
 
 
-        var github      = {};
+        var github            = {};
         
-        github.df       = true;
+        github.df             = true;
         
-        github.parse    = parse;  
-        github.load     = load;
-        github.save     = save;
-        github.backup   = backup;
+        github.parse          = parse;  
+        github.load           = load;
+        github.save           = save;
+        github.backup         = backup;
+        github.download       = download.dir;
+
+        
+        var download          = {};
+        var upload            = {};
 
         
   //:
@@ -420,9 +425,90 @@
               
         }//clear
 
+  //:
+  
+  
+        download.dir    = function(owner,repo,branch,path,update,complete){
+                                                                                debug('download',owner,repo,branch,path);
+              var resolve,promise=new Promise(res=>resolve=res);
+              
+              setTimeout(fn,50);
+              
+              return promise;
+              
+              
+              function fn(){
+              
+                    if(path.slice(-1)!='/'){
+                          path   += '/';
+                    }
+                    
+                    var file    = `${path.split('/').filter(Boolean).at(-1)||repo}.zip`;
+                    
+                    var zip     = new JSZip();
+                    
+                    var url     = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
+                    var json    = await fetch(url).then(res=>res.json());
+                    
+                    var ct      = 0;
+                    var total   = 1;
+                    if(typeof update=='function'){
+                          update();
+                    }
+                                  
+                    await Promise.all(json.tree.map(async item=>{
+                    
+                          if(!item.path.startsWith(path))return;
+                          
+                          total++;
+                          if(typeof update=='function'){
+                                update();
+                          }
+                          
+                          var fn    = item.path.slice(path.length);
+                          if(item.type=='tree'){
+                                zip.folder(fn);
+                          }else{
+                                var res     = await fetch(item.url);
+                                var blob    = await res.blob();
+                                zip.file(fn,blob);
+                          }
+                          
+                          ct++;
+                          if(typeof update=='function'){
+                                update();
+                          }
+                          
+                    }));
+                    
+                    ct++;
+                    if(typeof update=='function'){
+                          update();
+                    }
+                    
+                    var blob    = await zip.generateAsync({type:'blob'});
+                    
+                    if(typeof complete=='function'){
+                          complete(blob);
+                    }
+              
+                    if(complete==='download'){
+                          var url         = window.URL.createObjectURL(blob);
+                          var a           = document.createElement('a');
+                          a.href          = url;
+                          a.download      = file;
+                          a.click();
+                    }
+                    
+                    resolve(blob);
+                    
+              }//fn
+        
+        }//dir
 
 
   //:  
+
   
         function debug(){
         
