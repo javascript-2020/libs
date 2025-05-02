@@ -462,8 +462,6 @@
               
               async function fn(){
               
-                    var file    = `${path.split('/').filter(Boolean).at(-1)||repo}.zip`;
-                    
                     var zip     = new JSZip();
                     
                     var url     = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
@@ -492,6 +490,9 @@
                           }
                     }
                                                                                 debug('path',path);
+                    var file    = `${path.split('/').filter(Boolean).at(-1)||repo}.zip`;
+                                                                                debug('file',file);
+                                                                                
                     var ct      = 0;
                     var total   = 1;
                     if(typeof update=='function'){
