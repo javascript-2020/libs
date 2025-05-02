@@ -5,13 +5,6 @@
 
 
         var github            = {};
-        
-        github.df             = true;
-        
-        github.parse          = parse;  
-        github.load           = load;
-        github.save           = save;
-        github.backup         = backup;
 
         
         var download          = {};
@@ -24,7 +17,14 @@
         
         function init(){
         
+              github.df             = true;
+              
+              github.parse          = parse;  
+              github.load           = load;
+              github.save           = save;
+              github.backup         = backup;
               github.download       = download.dir;
+
               
         }//init
   
