@@ -28,6 +28,11 @@
                           path    = path.slice(0,i);
                     }
               }
+        }else{
+              if(path){
+                    console.log('not found '+path);
+                    return;
+              }
         }
         
         if(path){
