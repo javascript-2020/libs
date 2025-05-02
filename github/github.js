@@ -489,7 +489,7 @@
                     var blob    = await zip.generateAsync({type:'blob'});
                     
                     if(typeof complete=='function'){
-                          complete(blob);
+                          complete(file,blob);
                     }
               
                     if(complete==='download'){
@@ -500,7 +500,7 @@
                           a.click();
                     }
                     
-                    resolve(blob);
+                    resolve(file,blob);
                     
               }//fn
         
