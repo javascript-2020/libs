@@ -12,12 +12,22 @@
         github.load           = load;
         github.save           = save;
         github.backup         = backup;
-        github.download       = download.dir;
 
         
         var download          = {};
         var upload            = {};
 
+
+  //:
+  
+        setTimeout(init,50);
+        
+        function init(){
+        
+              github.download       = download.dir;
+              
+        }//init
+  
         
   //:
   
