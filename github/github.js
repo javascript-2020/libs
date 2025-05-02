@@ -547,7 +547,7 @@
               
               
               function error(err){
-              
+                                                                                debug('error',err);
                     done({error:err});
                     
               }//error
