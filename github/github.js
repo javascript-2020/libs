@@ -449,10 +449,6 @@
               
               async function fn(){
               
-                    if(path.slice(-1)!='/'){
-                          path   += '/';
-                    }
-                    
                     var file    = `${path.split('/').filter(Boolean).at(-1)||repo}.zip`;
                     
                     var zip     = new JSZip();
