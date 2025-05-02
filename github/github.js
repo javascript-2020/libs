@@ -40,7 +40,20 @@
                     url   = 'https://'+url;
               }
               
-              url   = new URL(url);
+              var err;
+              try{
+              
+                    url   = new URL(url);
+                    
+              }
+              catch(err2){
+              
+                    err   = err2;
+                  
+              }
+              if(err){
+                    return {error:err};
+              }
               
               var result;
               
