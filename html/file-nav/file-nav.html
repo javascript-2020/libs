@@ -219,7 +219,6 @@ mod.filenav   = function(){
                     ns    = 1;
               }
               var t     = ns*ih;
-              var st    = ui[name].list.scrollTop;
 
               
               var evt   = {};
@@ -235,6 +234,8 @@ mod.filenav   = function(){
               }
               display.scroll[name].style.top   = t+'px';
 
+
+              var st    = ui[name].list.scrollTop;
 
               if(n==0){
                     var nempty    = ui.empty.cloneNode(true);
