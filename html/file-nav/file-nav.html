@@ -11,6 +11,10 @@
         #root
               {position:relative;display:flex;gap:10px;width:100%;height:100%}
 
+
+        #path
+              {}
+
               
         #dir-root
               {flex:1;display:flex;flex-direction:column;border:1px solid lightgray}
@@ -41,7 +45,9 @@
 
             <div id=root>
 
-            
+                  <div id=path>
+                  </div path>
+                  
                   <div id=dir-root>
                   
                         <div id=dir-hdr>
@@ -133,17 +139,19 @@ mod.filenav   = function(){
   
         obj.initdom   = function(rootnode){
                                                                                 debug('initdom');
-              root            = $.$(rootnode,'file-nav');
-              shadow          = root.shadowRoot;
+              root                = $.$(rootnode,'file-nav');
+              shadow              = root.shadowRoot;
               
-              ui.dir.root     = $(shadow,'#dir-root');
-              ui.dir.list     = $(ui.dir.root,'#dir-list');
-              ui.dir.item     = $(ui.dir.list,'.dir');
+              ui.path             = $(shadow,'#path');
+              
+              ui.dir.root         = $(shadow,'#dir-root');
+              ui.dir.list         = $(ui.dir.root,'#dir-list');
+              ui.dir.item         = $(ui.dir.list,'.dir');
               ui.dir.item.remove();
               
-              ui.file.root    = $(shadow,'#file-root');
-              ui.file.list    = $(ui.file.root,'#file-list');
-              ui.file.item    = $(ui.file.list,'.file');
+              ui.file.root        = $(shadow,'#file-root');
+              ui.file.list        = $(ui.file.root,'#file-list');
+              ui.file.item        = $(ui.file.list,'.file');
               ui.file.item.remove();
               
               
@@ -156,13 +164,14 @@ mod.filenav   = function(){
   
         display.clear   = function(){
 
+              ui.path.replaceChildren();
+              
               ui.dir.root.replaceChildren();
               ui.file.root.replaceChildren();
               
               display.node.dir    = {};
               display.node.file   = {};
-              
-              
+                            
         }//clear
         
         
@@ -175,6 +184,8 @@ mod.filenav   = function(){
         obj.display   = function(path,dirs,files){
                                                                                 //console.json(dirs);
                                                                                 //console.json(files);
+              $(ui.path).textContent    = path;
+              
               display(path,'dir',dirs);
               display(path,'file',files);
               
