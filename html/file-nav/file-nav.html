@@ -80,16 +80,22 @@
       </template>
 
       <script>
-                                                                                console.log('mod.filenav');    
+                                                                                //console.log('mod.filenav');    
 mod.filenav   = function(){
-                                                                                console.log('filenav');  
+                                                                                debug('mod');  
   var obj   = {};
+  
+        var df=true
+        ;
+
+        
+  //modvars:-
   
         var click,dblclick
         ;
         
         obj.initmod   = function(params){
-                                                                                console.log('filenav.initmod');
+                                                                                debug('initmod');
               click       = params.click;
               dblclick    = params.dblclick;
               
@@ -97,8 +103,7 @@ mod.filenav   = function(){
         
         
   //vars:-
-  
-  
+    
         var root;
         
         var ui              = {};
@@ -118,7 +123,7 @@ mod.filenav   = function(){
   
   
         obj.init    = function(){
-                                                                                console.log('filenav.init');
+                                                                                debug('init');
         }//init
         
         
@@ -126,7 +131,7 @@ mod.filenav   = function(){
   
   
         obj.initdom   = function(rootnode){
-                                                                                console.log('filenav.initdom');
+                                                                                debug('initdom');
               root            = $.$(rootnode,'file-nav');
               shadow          = root.shadowRoot;
               
@@ -176,7 +181,7 @@ mod.filenav   = function(){
 
         
         function display(path,name,list){
-                                                                                console.log('filemav.display');
+                                                                                debug('display');
               var ih    = 25;
               var pad   = 5;
               
@@ -238,13 +243,13 @@ mod.filenav   = function(){
                     
               }//for
                                                                                 var n   = Object.keys(display.node[name]).length;
-                                                                                console.log(name,n);
+                                                                                debug(name,n);
               evt.click   = function(filename){
                 
                     if(name==='dirs'){
                           filename   += '/';
                     }
-                                                                                console.log('click',name,filename);
+                                                                                debug('click',name,filename);
                     if(typeof click=='function'){
                           click(path,name,filename);
                     }
@@ -257,14 +262,14 @@ mod.filenav   = function(){
                     if(name==='dirs'){
                           filename   += '/';
                     }
-                                                                                console.log('dblclick',name,filename);
+                                                                                debug('dblclick',name,filename);
                     dblclick(path,name,filename);
                     
               }//dblclick
               
               
               function onscroll(e){
-                                                                                console.log(name,'onscroll');
+                                                                                debug(name,'onscroll');
                     display(name,list);
                     
               }//onscroll
@@ -272,6 +277,24 @@ mod.filenav   = function(){
         }//display
 
 
+
+
+  //:
+  
+  
+        function debug(){
+          
+              if(!df){
+                    return;
+              }
+              
+              var str   = [...arguments].join(' ');
+              console.log('[ file-nav ]',str);
+              
+        }//debug
+
+
+        
         
   return obj;
   
