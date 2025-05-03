@@ -13,7 +13,7 @@
 
 
         #path
-              {}
+              {padding:3px}
         #view
               {display:flex;gap:10px}
 
@@ -61,6 +61,9 @@
                               <div id=dir-list>
                                     <div class=dir>
                                           <div class=name>
+                                          </div>
+                                          <div id=empty>
+                                                empty
                                           </div>
                                     </div>
                               </div>
@@ -155,6 +158,9 @@ mod.filenav   = function(){
               ui.dir.item         = $(ui.dir.list,'.dir');
               ui.dir.item.remove();
               
+              ui.empty            = $(ui.dir.list,'#emtpy');
+              ui.empty.remove();
+              
               ui.file.root        = $(shadow,'#file-root');
               ui.file.list        = $(ui.file.root,'#file-list');
               ui.file.item        = $(ui.file.list,'.file');
@@ -204,7 +210,13 @@ mod.filenav   = function(){
               var pad   = 5;
               
               var n     = list.length;
-              var t     = n*ih;
+              var ns    = n;
+              if(ns==0){
+                    ns    = 1;
+              }
+              var t     = ns*ih;
+              var st    = ui[name].list.scrollTop;
+
               
               var evt   = {};
               
@@ -218,8 +230,14 @@ mod.filenav   = function(){
                     ui[name].list.append(display.scroll[name]);
               }
               display.scroll[name].style.top   = t+'px';
+
+
+              if(n==0){
+                    var nempty    = ui.empty.cloneNode(true);
+                    ui[name].list.append(nempty);
+              }
+
               
-              var st    = ui[name].list.scrollTop;
               var i1    = Math.floor(st/ih)-3;
               if(i1<0){
                     i1    = 0;
@@ -232,6 +250,7 @@ mod.filenav   = function(){
               if(i2>list.length){
                     i2    = list.length;
               }
+
         
               for(var key in display.node[name]){
                 
@@ -242,6 +261,7 @@ mod.filenav   = function(){
                     
               }//for
                           
+
               for(let i=i1;i<i2;i++){
                 
                     if(!display.node[name][i]){
@@ -260,8 +280,8 @@ mod.filenav   = function(){
                     }
                     
               }//for
-                                                                                var n   = Object.keys(display.node[name]).length;
-                                                                                debug(name,n);
+                                                                                var nn    = Object.keys(display.node[name]).length;
+                                                                                debug(name,nn);
               evt.click   = function(filename){
                 
                     if(name==='dirs'){
