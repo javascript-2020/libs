@@ -66,16 +66,16 @@
       </template>
 
       <script>
-      
+                                                                                console.log('mod.filenav');    
 mod.filenav   = function(){
-  
+                                                                                console.log('filenav');  
   var obj   = {};
   
         var click,dblclick
         ;
         
         obj.initmod   = function(params){
-          
+                                                                                console.log('filenav.initmod');
               click       = params.click;
               dblclick    = params.dblclick;
               
@@ -104,6 +104,7 @@ mod.filenav   = function(){
   
   
         obj.init    = function(){
+                                                                                console.log('filenav.init');
         }//init
         
         
@@ -111,7 +112,7 @@ mod.filenav   = function(){
   
   
         obj.initdom   = function(rootnode){
-          
+                                                                                console.log('filenav.initdom');
               root        = $.$(rootnode,'file-nav');
               shadow      = root.shadowRoot;
               
