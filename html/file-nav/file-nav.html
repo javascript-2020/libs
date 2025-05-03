@@ -230,7 +230,7 @@ mod.filenav   = function(){
                     if(name==='dirs'){
                           filename   += '/';
                     }
-                    
+                                                                                console.log('click',name,filename);
                     if(typeof click=='function'){
                           click(name,filename);
                     }
@@ -243,7 +243,7 @@ mod.filenav   = function(){
                     if(name==='dirs'){
                           filename   += '/';
                     }
-                    
+                                                                                console.log('dblclick',name,filename);
                     dblclick(name,filename);
                     
               }//dblclick
