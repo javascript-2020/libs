@@ -148,15 +148,15 @@ mod.filenav   = function(){
         
         display.scroll        = {};
         display.nodes         = {};
-        display.nodes.dirs    = {};
-        display.nodes.files   = {};
+        display.nodes.dir     = {};
+        display.nodes.file    = {};
 
         
         obj.display   = function(path,dirs,files){
-                                                                                console.json(dirs);
-                                                                                console.json(files);
-              display(path,'dirs',dirs);
-              display(path,'files',files);
+                                                                                //console.json(dirs);
+                                                                                //console.json(files);
+              display(path,'dir',dirs);
+              display(path,'file',files);
               
         }//display
 
