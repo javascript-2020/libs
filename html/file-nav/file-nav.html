@@ -218,8 +218,8 @@ mod.filenav   = function(){
                           
                           nitem.onmouseenter              = e=>nitem.style.background   = 'lightyellow';
                           nitem.onmouseleave              = e=>nitem.style.background   = '';
-                          nitem.onclick                   = e=>click(filename);
-                          nitem.ondblclick                = e=>dblclick(filename);
+                          nitem.onclick                   = e=>evt.click(filename);
+                          nitem.ondblclick                = e=>evt.dblclick(filename);
                     }
                     
               }//for
