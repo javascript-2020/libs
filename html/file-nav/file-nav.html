@@ -3,10 +3,229 @@
 
 <file-nav>
 
+      <template shadowrootmode=open>
+
+            <style>
+            </style>
+            
+            <div id=root>
+                  <div id=dirs>
+                        <div id=dirs-hdr>
+                              dirs
+                        </div>
+                        <div id=dirs-list>
+                              <div class=dir>
+                                    <div class=name>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+                  <div id=files>
+                        <div id=files-hdr>
+                              files
+                        </div>
+                        <div id=files-list>
+                              <div class=file>
+                                    <div class=name>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      
+      </template>
+
+      <script>
+      
+mod.filenav   = function(){
+  
+  var obj   = {};
+  
+        var click,dblclick
+        ;
+        
+        obj.initmod   = function(params){
+          
+              click       = params.click;
+              dblclick    = params.dblclick;
+              
+        }//initmod
+        
+        
+  //vars:-
+  
+  
+        var root;
+        
+        var ui              = {};
+        
+        ui.dirs             = {};
+        ui.dirs.root        = null;
+        ui.dirs.list        = null;
+        ui.dirs.item        = null;
+        
+        ui.files            = {};
+        ui.files.root       = null;
+        ui.files.list       = null;
+        ui.files.item       = null;
+        
+        
+  //
+  
+  
+        obj.init    = function(){
+        }//init
+        
+        
+  //:
+  
+  
+        obj.initdom   = function(rootnode){
+          
+              root        = $.$(rootnode,'file-nav');
+              shadow      = root.shadowRoot;
+              
+              ui.dirs.root    = $(shadow,'#dirs');
+              ui.dirs.list    = $(ui.dirs.root,'#dirs-list');
+              ui.dirs.item    = $(ui.dirs.list,'#dir');
+              ui.dirs.item.remove();
+              
+              ui.files.root   = $(shadow,'#files');
+              ui.files.list   = $(ui.files.root,'#files-list');
+              ui.files.item   = $(ui.files.list,'#file');
+              ui.files.item.remove();
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+  
+        display.clear   = function(){
+          
+              ui.dirs.root.replaceChildren();
+              ui.files.root.replaceChildren();
+              
+              display.nodes.dirs    = {};
+              display.nodes.files   = {};
+              
+              
+        }//clear
+        
+        
+        display.scroll        = {};
+        display.nodes         = {};
+        display.nodes.dirs    = {};
+        display.nodes.files   = {};
+        
+        
+        function display(name,list){
+
+              var ih    = 25;
+              var pad   = 5;
+              
+              var n     = list.length;
+              var t     = n*ih;
+              
+              var url   = ui.url.value;
+              
+              ui[name].root.onscroll    = onscroll;
 
 
+              var evt   = {};              
+              
+              
+              if(!display.scroll[name]){
+                    display.scroll[name]                  = document.createElement('div');
+                    display.scroll[name].style.cssText    = 'height:5px;background:lightblue;position:absolute;left:0;right:0';
+                    ui[name].root.append(display.div[name]);
+              }
+              display.scroll[name].style.top   = t+'px';
+              
+              var st    = ui[name].root.scrollTop;
+              var i1    = Math.floor(st/ih)-3;
+              if(i1<0){
+                    i1    = 0;
+              }
+              
+              var h     = ui[name].root.offsetHeight;
+              var nh    = Math.floor(h/ih)+3;
+              
+              var i2    = i1+nh;
+              if(i2>list.length){
+                    i2    = list.length;
+              }
+        
+              for(var key in display.nodes[name]){
+                
+                    if(key<i1 || key>=i2){
+                          display.nodes[name][key].remove();
+                          delete display.nodes[name][key];
+                    }
+                    
+              }//for
+                          
+              for(let i=i1;i<i2;i++){
+                
+                    if(!display.nodes[name][i]){
+                          let nitem                       = ui[name].item.cloneNode(true);
+                          let filename                    = list[i];
+                          $(nitem,'.name').textContent    = filename;
+                          nitem.style.cssText             = 'position:absolute;left:0;right:0';
+                          nitem.style.top                 = i*ih+'px';
+                          ui[name].root.append(nitem);
+                          display.nodes[name][i]          = nitem;
+                          
+                          nitem.onmouseenter              = e=>nitem.style.background   = 'lightyellow';
+                          nitem.onmouseleave              = e=>nitem.style.background   = '';
+                          nitem.onclick                   = e=>click(filename);
+                          nitem.ondblclick                = e=>dblclick(filename);
+                    }
+                    
+              }//for
+                                                                                var n   = Object.keys(display.nodes[name]).length;
+                                                                                console.log(name,n);
+              evt.click   = function(filename){
+                
+                    if(name==='dirs'){
+                          filename   += '/';
+                    }
+                    
+                    if(typeof click=='function'){
+                          click(name,filename);
+                    }
+                    
+              }//click
+              
+              
+              evt.dblclick    = function(filename){
+
+                    if(name==='dirs'){
+                          filename   += '/';
+                    }
+                    
+                    dblclick(name,filename);
+                    
+              }//dblclick
+              
+              
+              function onscroll(e){
+                                                                                console.log(name,'onscroll');
+                    display(name,list);
+                    
+              }//onscroll
+              
+        }//display
 
 
+        
+  return obj;
+  
+}//filenav
+
+      </script>
 
 </file-nav>
 
