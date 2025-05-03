@@ -173,23 +173,23 @@ mod.filenav   = function(){
               
               
               
-              ui[name].root.onscroll    = onscroll;
+              ui[name].list.onscroll    = onscroll;
 
 
               if(!display.scroll[name]){
                     display.scroll[name]                  = document.createElement('div');
                     display.scroll[name].style.cssText    = 'height:5px;background:lightblue;position:absolute;left:0;right:0';
-                    ui[name].root.append(display.scroll[name]);
+                    ui[name].list.append(display.scroll[name]);
               }
               display.scroll[name].style.top   = t+'px';
               
-              var st    = ui[name].root.scrollTop;
+              var st    = ui[name].list.scrollTop;
               var i1    = Math.floor(st/ih)-3;
               if(i1<0){
                     i1    = 0;
               }
               
-              var h     = ui[name].root.offsetHeight;
+              var h     = ui[name].list.offsetHeight;
               var nh    = Math.floor(h/ih)+3;
               
               var i2    = i1+nh;
@@ -214,7 +214,7 @@ mod.filenav   = function(){
                           $(nitem,'.name').textContent    = filename;
                           nitem.style.cssText             = 'position:absolute;left:0;right:0';
                           nitem.style.top                 = i*ih+'px';
-                          ui[name].root.append(nitem);
+                          ui[name].list.append(nitem);
                           display.nodes[name][i]          = nitem;
                           
                           nitem.onmouseenter              = e=>nitem.style.background   = 'lightyellow';
