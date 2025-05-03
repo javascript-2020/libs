@@ -1,0 +1,134 @@
+        
+        
+        
+      <script init>      
+                                                                                console.clear();
+                                                                                console.log('https-file test');
+                                                                                console.log();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+        var mod   = {};
+
+        var ext
+        ;
+        var $,datatype
+        ;
+
+
+        var filenav;
+        
+        
+        var fs    = {
+          
+          'tmp/'    : {
+                            dirs    : [],
+                            files   : []
+                      },
+        };
+        
+        
+        function init(){
+                                                                                console.log('init');
+              
+              filenav   = mod.filenav();
+              
+              
+              filenav.initmod({$});
+              
+        
+              filenav.init();
+              
+              
+              initdom();
+  
+              
+        }//init
+  
+  
+        init.stack            = [];
+        init.stack.ct         = 0;
+        init.stack.total      = 1;
+        init.stack.mode       = '';
+        init.stack.complete   = false;
+        Object.defineProperty(init.stack,'add',{get:()=>{console.log('add');
+              init.stack.total++;
+              init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
+        }});
+        Object.defineProperty(init.stack,'complete',{get:()=>{console.log('complete');
+              init.stack.ct++;
+              init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
+              init.stack.ct>=init.stack.total && init();
+        }});
+        
+        //  (typeof init!='undefined' && init?.stack && init.stack.add)
+        //  (typeof init!='undefined' && init?.stack && init.stack.complete)
+  
+        
+        init.complete   = function(){
+          
+              init.complete.stack.forEach(fn=>fn());
+              
+        }//complete
+        
+        init.complete.stack   = [];
+        init.complete.add     = fn=>init.complete.stack.push(fn);
+      
+      
+      </script init>
+
+                    
+      <script libs>
+
+        init.stack.add;
+        
+        fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
+          .then(res=>res.text().then(async txt=>{
+          
+              ext   = eval(txt);
+              
+              var promise   = ext.load.libs(
+                    'js/dom/$.js','js/core/datatype.js'
+              );
+              [$,datatype]    = await promise;
+  
+              
+              init.stack.complete;
+              
+          }));
+    
+      </script libs>        
+      
+      
+      <div>
+            file-nav test
+      </div>
+
+        
+      <file-nav>
+            <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+      </file-nav>
+                    
+
+      <script>
+      
+        function initdom(){
+
+          
+              filenav.initdom(document.body);
+              
+                      
+        }//initdom
+        
+        
+        function ready(){
+          
+              var dirs    = fs['tmp/'].dirs;
+              var files   = fs['tmp/'].files;
+              
+              filenav.display(dirs,files);
+              
+        }//ready
+        
+      </script>
+
+
+
