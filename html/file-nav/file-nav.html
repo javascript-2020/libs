@@ -118,12 +118,12 @@ mod.filenav   = function(){
               
               ui.dirs.root    = $(shadow,'#dirs');
               ui.dirs.list    = $(ui.dirs.root,'#dirs-list');
-              ui.dirs.item    = $(ui.dirs.list,'#dir');
+              ui.dirs.item    = $(ui.dirs.list,'.dir');
               ui.dirs.item.remove();
               
               ui.files.root   = $(shadow,'#files');
               ui.files.list   = $(ui.files.root,'#files-list');
-              ui.files.item   = $(ui.files.list,'#file');
+              ui.files.item   = $(ui.files.list,'.file');
               ui.files.item.remove();
               
               
