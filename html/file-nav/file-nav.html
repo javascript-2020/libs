@@ -155,13 +155,13 @@ mod.filenav   = function(){
         obj.display   = function(path,dirs,files){
                                                                                 console.json(dirs);
                                                                                 console.json(files);
-              display('dirs',dirs);
-              display('files',files);
+              display(path,'dirs',dirs);
+              display(path,'files',files);
               
         }//display
 
         
-        function display(name,list){
+        function display(path,name,list){
                                                                                 console.log('filemav.display');
               var ih    = 25;
               var pad   = 5;
@@ -232,7 +232,7 @@ mod.filenav   = function(){
                     }
                                                                                 console.log('click',name,filename);
                     if(typeof click=='function'){
-                          click(name,filename);
+                          click(path,name,filename);
                     }
                     
               }//click
@@ -244,7 +244,7 @@ mod.filenav   = function(){
                           filename   += '/';
                     }
                                                                                 console.log('dblclick',name,filename);
-                    dblclick(name,filename);
+                    dblclick(path,name,filename);
                     
               }//dblclick
               
