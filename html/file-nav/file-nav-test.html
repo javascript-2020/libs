@@ -47,13 +47,13 @@
         init.stack            = [];
         init.stack.ct         = 0;
         init.stack.total      = 1;
-        init.stack.mode       = '';
+        init.stack.mode       = 'log';
         init.stack.complete   = false;
-        Object.defineProperty(init.stack,'add',{get:()=>{console.log('add');
+        Object.defineProperty(init.stack,'add',{get:()=>{
               init.stack.total++;
               init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
         }});
-        Object.defineProperty(init.stack,'complete',{get:()=>{console.log('complete');
+        Object.defineProperty(init.stack,'complete',{get:()=>{
               init.stack.ct++;
               init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
               init.stack.ct>=init.stack.total && init();
@@ -103,9 +103,9 @@
       </div>
 
         
-      <file-nav>
+      <file-nav-api>
             <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-      </file-nav>
+      </file-nav-api>
                     
 
       <script>
@@ -127,6 +127,10 @@
               filenav.display(dirs,files);
               
         }//ready
+
+        
+        init.stack.complete;
+
         
       </script>
 
