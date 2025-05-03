@@ -10,7 +10,7 @@
         var owner     = 'javascript-2020';
         var repo      = 'tmp';
         var branch    = 'main';
-        var path      = 'dir/myfilea.js';
+        var path      = 'myfile.js';
 
         
         var url       = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
