@@ -12,21 +12,21 @@
               {position:relative;display:flex;gap:10px;width:100%;height:100%}
 
               
-        #dirs
+        #dir-root
               {flex:1;display:flex;flex-direction:column;border:1px solid lightgray}
-        #dirs-hdr
+        #dir-hdr
               {font-size:12px;}
-        #dirs-list
+        #dir-list
               {flex:1;overflow:auto;position:relative}
         .dir
               {padding:5px 10px;cursor:pointer;user-select:none}
 
               
-        #files
+        #file-root
               {flex:1;display:flex;flex-direction:column;border:1px solid lightgray}
-        #files-hdr
+        #file-hdr
               {font-size:12px}
-        #files-list
+        #file-list
               {flex:1;position:relative;overflow:auto}
         .file
               {padding:5px 10px;cursor:pointer;user-select:none}
@@ -38,30 +38,44 @@
             
             </style>
             
+
             <div id=root>
-                  <div id=dirs>
-                        <div id=dirs-hdr>
+
+            
+                  <div id=dir-root>
+                  
+                        <div id=dir-hdr>
                               dirs
                         </div>
-                        <div id=dirs-list>
+                        
+                        <div id=dir-list>
                               <div class=dir>
                                     <div class=name>
                                     </div>
                               </div>
                         </div>
-                  </div>
-                  <div id=files>
-                        <div id=files-hdr>
+                        
+                  </div dir-root>
+
+                  
+                  <div id=file-root>
+                  
+                        <div id=file-hdr>
                               files
                         </div>
-                        <div id=files-list>
+                        
+                        <div id=file-list>
                               <div class=file>
                                     <div class=name>
                                     </div>
                               </div>
                         </div>
-                  </div>
-            </div>
+                        
+                  </div file-root>
+
+                  
+            </div root>
+
       
       </template>
 
@@ -116,14 +130,14 @@ mod.filenav   = function(){
               root            = $.$(rootnode,'file-nav');
               shadow          = root.shadowRoot;
               
-              ui.dir.root     = $(shadow,'#dirs');
-              ui.dir.list     = $(ui.dirs.root,'#dirs-list');
-              ui.dir.item     = $(ui.dirs.list,'.dir');
+              ui.dir.root     = $(shadow,'#dir-root');
+              ui.dir.list     = $(ui.dir.root,'#dir-list');
+              ui.dir.item     = $(ui.dir.list,'.dir');
               ui.dir.item.remove();
               
-              ui.file.root    = $(shadow,'#files');
-              ui.file.list    = $(ui.files.root,'#files-list');
-              ui.file.item    = $(ui.files.list,'.file');
+              ui.file.root    = $(shadow,'#file-root');
+              ui.file.list    = $(ui.file.root,'#file-list');
+              ui.file.item    = $(ui.file.list,'.file');
               ui.file.item.remove();
               
               
@@ -136,20 +150,20 @@ mod.filenav   = function(){
   
         display.clear   = function(){
 
-              ui.dirs.root.replaceChildren();
-              ui.files.root.replaceChildren();
+              ui.dir.root.replaceChildren();
+              ui.file.root.replaceChildren();
               
-              display.nodes.dirs    = {};
-              display.nodes.files   = {};
+              display.node.dir    = {};
+              display.node.file   = {};
               
               
         }//clear
         
         
         display.scroll        = {};
-        display.nodes         = {};
-        display.nodes.dir     = {};
-        display.nodes.file    = {};
+        display.node          = {};
+        display.node.dir      = {};
+        display.node.file     = {};
 
         
         obj.display   = function(path,dirs,files){
@@ -199,22 +213,22 @@ mod.filenav   = function(){
               for(var key in display.nodes[name]){
                 
                     if(key<i1 || key>=i2){
-                          display.nodes[name][key].remove();
-                          delete display.nodes[name][key];
+                          display.node[name][key].remove();
+                          delete display.node[name][key];
                     }
                     
               }//for
                           
               for(let i=i1;i<i2;i++){
                 
-                    if(!display.nodes[name][i]){
+                    if(!display.node[name][i]){
                           let nitem                       = ui[name].item.cloneNode(true);
                           let filename                    = list[i];
                           $(nitem,'.name').textContent    = filename;
                           nitem.style.cssText             = 'position:absolute;left:0;right:0';
                           nitem.style.top                 = i*ih+'px';
                           ui[name].list.append(nitem);
-                          display.nodes[name][i]          = nitem;
+                          display.node[name][i]           = nitem;
                           
                           nitem.onmouseenter              = e=>nitem.style.background   = 'lightyellow';
                           nitem.onmouseleave              = e=>nitem.style.background   = '';
@@ -223,7 +237,7 @@ mod.filenav   = function(){
                     }
                     
               }//for
-                                                                                var n   = Object.keys(display.nodes[name]).length;
+                                                                                var n   = Object.keys(display.node[name]).length;
                                                                                 console.log(name,n);
               evt.click   = function(filename){
                 
