@@ -17,7 +17,9 @@
         #view
               {flex:1;display:flex;border-top:1px solid lightgray}
 
-        
+        .scroll
+              {height:5px;background:lightblue;position:absolute;left:0;right:0}
+              
         #empty
               {color:lightgray;font-weight:bold;opacity:0.65;text-align:center;cursor:default}
 
@@ -227,12 +229,14 @@ mod.filenav   = function(){
               ui[name].list.onscroll    = onscroll;
 
 
-              if(!display.scroll[name]){
-                    display.scroll[name]                  = document.createElement('div');
-                    display.scroll[name].style.cssText    = 'height:5px;background:lightblue;position:absolute;left:0;right:0';
-                    ui[name].list.append(display.scroll[name]);
+              var node    = display.scroll[name];
+              if(!node){
+                    node                    = document.createElement('div');
+                    node.className          = 'scroll';
+                    display.scroll[name]    = node;
+                    ui[name].list.append(node);
               }
-              display.scroll[name].style.top   = t+'px';
+              node.style.top   = t+'px';
 
 
               var st    = ui[name].list.scrollTop;
