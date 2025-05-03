@@ -3,10 +3,10 @@
       <style>
       
             #dir-listing
-                  {height:200px}
+                  {height:200px;width:300px;border:1px solid lightgray}
             
             file-nav
-                  {}
+                  {width:100%;height:100%;display:block}
                   
       </style>
       
@@ -42,7 +42,7 @@
               filenav   = mod.filenav();
               
               
-              filenav.initmod({$});
+              filenav.initmod({$,datatype,click,dblclick});
               
         
               filenav.init();
@@ -144,6 +144,22 @@
               filenav.display('tmp/',dirs,files);
               
         }//ready
+
+        
+
+        function click(type,filename){
+          
+              console.log('click',type,filename);
+              
+        }//click
+        
+        
+        function dblclick(type,filename){
+          
+              console.log('dblclick',type,filename);
+              
+        }//dblclick
+        
 
         
         init.stack.complete;
