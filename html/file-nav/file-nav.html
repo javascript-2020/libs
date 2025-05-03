@@ -89,15 +89,15 @@ mod.filenav   = function(){
         
         var ui              = {};
         
-        ui.dirs             = {};
-        ui.dirs.root        = null;
-        ui.dirs.list        = null;
-        ui.dirs.item        = null;
+        ui.dir              = {};
+        ui.dir.root         = null;
+        ui.dir.list         = null;
+        ui.dir.item         = null;
         
-        ui.files            = {};
-        ui.files.root       = null;
-        ui.files.list       = null;
-        ui.files.item       = null;
+        ui.file             = {};
+        ui.file.root        = null;
+        ui.file.list        = null;
+        ui.file.item        = null;
         
         
   //
@@ -113,18 +113,18 @@ mod.filenav   = function(){
   
         obj.initdom   = function(rootnode){
                                                                                 console.log('filenav.initdom');
-              root        = $.$(rootnode,'file-nav');
-              shadow      = root.shadowRoot;
+              root            = $.$(rootnode,'file-nav');
+              shadow          = root.shadowRoot;
               
-              ui.dirs.root    = $(shadow,'#dirs');
-              ui.dirs.list    = $(ui.dirs.root,'#dirs-list');
-              ui.dirs.item    = $(ui.dirs.list,'.dir');
-              ui.dirs.item.remove();
+              ui.dir.root     = $(shadow,'#dirs');
+              ui.dir.list     = $(ui.dirs.root,'#dirs-list');
+              ui.dir.item     = $(ui.dirs.list,'.dir');
+              ui.dir.item.remove();
               
-              ui.files.root   = $(shadow,'#files');
-              ui.files.list   = $(ui.files.root,'#files-list');
-              ui.files.item   = $(ui.files.list,'.file');
-              ui.files.item.remove();
+              ui.file.root    = $(shadow,'#files');
+              ui.file.list    = $(ui.files.root,'#files-list');
+              ui.file.item    = $(ui.files.list,'.file');
+              ui.file.item.remove();
               
               
         }//initdom
