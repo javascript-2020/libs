@@ -162,14 +162,13 @@ mod.filenav   = function(){
               var n     = list.length;
               var t     = n*ih;
               
-              var url   = ui.url.value;
+              var evt   = {};
+              
+              
               
               ui[name].root.onscroll    = onscroll;
 
 
-              var evt   = {};              
-              
-              
               if(!display.scroll[name]){
                     display.scroll[name]                  = document.createElement('div');
                     display.scroll[name].style.cssText    = 'height:5px;background:lightblue;position:absolute;left:0;right:0';
