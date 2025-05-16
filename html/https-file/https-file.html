@@ -427,7 +427,7 @@ mod.httpsfile   = function(){
         
 
   //:
-  
+
   
         obj.load    = function(file){return load(file)}   //d
         
@@ -466,6 +466,16 @@ mod.httpsfile   = function(){
         
         obj.clear   = function(){
         }//clear
+        
+        
+        obj.export    = function(cur){
+
+              var file        = {};
+              file.type       = 'https-file';
+              file.path       = cur.url;
+              return file;
+              
+        }//export
         
         
   //:
