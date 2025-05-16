@@ -184,10 +184,12 @@
                         switch(cur.type){
                           
                           case 'github'       : github.clear();           break;
-                          case 'local'        : local.clear();            break;
+                          case 'local'        : localfile.clear();        break;
                           case 'https-file'   : httpsfile.clear();        break;
                           
                         }//switch
+                        
+                        cur   = null;
                         
                   }//clear
                   
