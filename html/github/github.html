@@ -566,6 +566,16 @@ mod.github    = function(){
         }//write
 
 
+        obj.clear   = function(){
+          
+              $(shadow,'#owner').value    = '';
+              $(shadow,'#repo').value     = '';
+              $(shadow,'#branch').value   = '';
+              $(shadow,'#path').value     = '';
+                            
+        }//clear
+        
+        
   //:
 
         
@@ -773,7 +783,7 @@ mod.github    = function(){
         }//backup
         
         
-        backup.clear=async function(token,owner,repo,branch,path,all){
+        backup.clear    = async function(token,owner,repo,branch,path,all){
         
               var fn;
               var i   = path.lastIndexOf('/');
@@ -898,7 +908,7 @@ mod.github    = function(){
   //:
 
 
-        obj.icon=function(){
+        obj.icon    = function(){
         
               return icon.src;
               
