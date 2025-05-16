@@ -162,6 +162,7 @@ mod.httpsfile   = function(){
         
   //vars:-
 
+        var typename    = 'https-file';
         var root;
         var shadow;
         var icon;
@@ -346,7 +347,7 @@ mod.httpsfile   = function(){
               var filename    = url.slice(i+1);
                                                                                 console.log(filename);
               var file        = {};
-              file.type       = 'https-file';
+              file.type       = typename;
               file.filename   = filename;
               file.path       = url;
               file.title      = url;
