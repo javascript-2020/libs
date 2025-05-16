@@ -117,10 +117,10 @@
               
                   obj.initdom   = function(rootnode){
                   
-                        root                          = $.$(rootnode,'filemod-root');
-                        shadow                        = root.shadowRoot;
+                        root                              = $.$(rootnode,'filemod-root');
+                        shadow                            = root.shadowRoot;
 
-                        var style                     = $(shadow,'style'); 
+                        var style                         = $(shadow,'style'); 
                         menumod.add.style(shadow);
                         $.stylesheet.insert(style,'button');
 
@@ -175,7 +175,23 @@
                   }//menu
                     
 
-
+                  obj.clear   = function(){
+                    
+                        if(!cur){
+                              return 'no file';
+                        }
+                        
+                        switch(cur.type){
+                          
+                          case 'github'       : github.clear();           break;
+                          case 'local'        : local.clear();            break;
+                          case 'https-file'   : httpsfile.clear();        break;
+                          
+                        }//switch
+                        
+                  }//clear
+                  
+                  
                   obj.export    = function(){
                   
                         if(!cur){
