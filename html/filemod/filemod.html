@@ -203,8 +203,9 @@
                         var file;
                         switch(cur.type){
                           
-                          case 'github'   : file    = github.export(cur);       break;
-                          case 'local'    : return 'local';
+                          case 'github'       : file    = github.export(cur);           break;
+                          case 'local'        : return 'local';
+                          case 'https-file'   : file    = httpsfile.export(cur);        break;
                           
                         }//switch
                         file.type   = cur.type;
