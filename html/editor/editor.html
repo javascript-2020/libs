@@ -404,8 +404,19 @@
                         filename.save(false);
                         
                   }//hide
+
+
+                  obj.filename.clear    = function(){
+                    
+                        filename();
+                        filename.save.hide();
+                    
+                  }//filename
                   
-          
+
+  //:
+  
+  
                   function update(){
                   
                         var pos                       = editor.getCursorPosition();
@@ -485,16 +496,6 @@
                         editor.setValue('',-1);
 
                   }//clear
-                  
-                  
-                  obj.clear.filename    = function(){return clear.filename()}
-                  
-                  clear.filename    = function(){
-                    
-                        filename();
-                        filename.save.hide();
-                    
-                  }//filename
                   
                   
   //:
