@@ -6,41 +6,60 @@
       
             <style>
 
-                  #root {display:flex;flex-direction:column;height:100%;font-family:arial}
+                  #root
+                        {display:flex;flex-direction:column;height:100%;font-family:arial}
                   
-                  #hdr {display:flex;position:relative;align-items:center;height:26px;}
+                  #hdr
+                        {display:flex;position:relative;align-items:center;height:26px;}
                   
-                  #menu-icon {width:15px;height:26px;border:1px solid gray;padding:2px;background:buttonface;margin-right:10px;box-sizing:border-box;cursor:pointer;border-radius:3px;
-                              content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAt1BMVEVHcEwbmPYcgfMchvQbsfkay/wbtvkbnfccefMayfwbmfYch/QchvQbtfkbmfYa1P0ddfIcivQcl/Ycj/Ubp/gcmfYdbPEbrvkazPwcmfYbqfgayfwayPwbv/sbvvobsvkazPwbqvga0fwbvPobtvocjvUbofcbpvccfPMcgPMcgvMdafAdbfEckfUbtvka0PwcfPIaxvsbwfsbvPodb/EcnPYclvYckfUbpvccjPQdd/IbofcbrPiPy8D0AAAAMHRSTlMAA/79/v7+5ycVZ3Y3h0xhu9jp8kFeF9OkVfQOrZi+Mh1z/iUJQ+/dx4fOYq7hybzs5xU1AAABIklEQVQ4y+2Ux3aDMBBFpTR6M92AwYB7S6EG/v+7MsJJnBBKVsnGdwHozT1HQgxC6MrfEkiSM+Y4khSgUxhazLDHWGF4QveAO2gyLnGQ9QS4wcDaXGJYiPGegVnU50UzUvdgTsd7AfrMaEaqXvO+sfAAHP0uzz+SmhCfR7FwB5gdpm+SyoeHEJ5P67o2tbanmRBP5/iSgFkUxaplaisIv3kAu6yqihK/RiIF0ZJtT6NTaZpS9iWwm0D/uXB7kmXZ5LOgN0O7ayvEQ57nKtssCbMqDA5i9+YulLIsVQ5MzKnwqCz6Phev3AIcxhy5K3x/A/DbG2CzIdctP9RS9PrxnTU92KOYll8bZHqs7Wk5AcY9hIx9kuyN3/xuxm5nXA+df+cNJSAgjMbiFSoAAAAASUVORK5CYII=)
-                              }
-                  .menu {position:absolute;left:0;top:35px}
+                  #menu-icon
+                        {width:15px;height:26px;border:1px solid gray;padding:2px;background:buttonface;margin-right:10px;box-sizing:border-box;cursor:pointer;border-radius:3px;
+                          content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAt1BMVEVHcEwbmPYcgfMchvQbsfkay/wbtvkbnfccefMayfwbmfYch/QchvQbtfkbmfYa1P0ddfIcivQcl/Ycj/Ubp/gcmfYdbPEbrvkazPwcmfYbqfgayfwayPwbv/sbvvobsvkazPwbqvga0fwbvPobtvocjvUbofcbpvccfPMcgPMcgvMdafAdbfEckfUbtvka0PwcfPIaxvsbwfsbvPodb/EcnPYclvYckfUbpvccjPQdd/IbofcbrPiPy8D0AAAAMHRSTlMAA/79/v7+5ycVZ3Y3h0xhu9jp8kFeF9OkVfQOrZi+Mh1z/iUJQ+/dx4fOYq7hybzs5xU1AAABIklEQVQ4y+2Ux3aDMBBFpTR6M92AwYB7S6EG/v+7MsJJnBBKVsnGdwHozT1HQgxC6MrfEkiSM+Y4khSgUxhazLDHWGF4QveAO2gyLnGQ9QS4wcDaXGJYiPGegVnU50UzUvdgTsd7AfrMaEaqXvO+sfAAHP0uzz+SmhCfR7FwB5gdpm+SyoeHEJ5P67o2tbanmRBP5/iSgFkUxaplaisIv3kAu6yqihK/RiIF0ZJtT6NTaZpS9iWwm0D/uXB7kmXZ5LOgN0O7ayvEQ57nKtssCbMqDA5i9+YulLIsVQ5MzKnwqCz6Phev3AIcxhy5K3x/A/DbG2CzIdctP9RS9PrxnTU92KOYll8bZHqs7Wk5AcY9hIx9kuyN3/xuxm5nXA+df+cNJSAgjMbiFSoAAAAASUVORK5CYII=)
+                        }
+                  .menu
+                        {position:absolute;left:0;top:35px}
                   
-                  #filename-root {/*display:flex;align-items:center*/ margin-right:20px}
-                  #filename-icon {width:20px;height:20px;margin-right:5px;box-sizing:border-box;vertical-align:middle;
-                                  }
-                  #filename-save {width:20px;height:20px;margin-right:5px;box-sizing:border-box;vertical-align:middle;
-                                  content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAKlBMVEX/pQD/////qhH/pAD/rhr/zHH/yGT/wlP//vz/8dn/tjD/+u//6MD/2ZUL9bZAAAAA30lEQVQoz2OQvuWihARUMgUFBRlamRkYlqXBQLoy10Sg4CUGBisgDQLSu3dLXGBeAxRczMBg3ggR3LZqaeMhBquDggzOCMFdxuZAQWYfQQYHuKDELgOQINA0JEFBqCDzSiwqGdiwqGRgYlDAVIksSIpKYyyC28E+ggoi/L5D8AJMkGFZKAyEKcAFjRGAAS6IBsCCzMbGKGpBgkwqLshAASzoOxMFHDEACjJXCKKANmyCYkNI0IEGgs7YBBdjCpowXGBejSq43YCVYSszV1ooEkgrMMhmkL6lhAIUlJZuBAAfSYTf2T2EkwAAAABJRU5ErkJggg==)
-                                }
-                  #filename {margin:5px 0;flex:1}
+                  #filename-root
+                        {/*display:flex;align-items:center*/ margin-right:20px}
+                  #filename-icon
+                        {width:20px;height:20px;margin-right:5px;box-sizing:border-box;vertical-align:middle;
+                        }
+                  #filename-save
+                        {width:20px;height:20px;margin-right:5px;box-sizing:border-box;vertical-align:middle;
+                          content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAKlBMVEX/pQD/////qhH/pAD/rhr/zHH/yGT/wlP//vz/8dn/tjD/+u//6MD/2ZUL9bZAAAAA30lEQVQoz2OQvuWihARUMgUFBRlamRkYlqXBQLoy10Sg4CUGBisgDQLSu3dLXGBeAxRczMBg3ggR3LZqaeMhBquDggzOCMFdxuZAQWYfQQYHuKDELgOQINA0JEFBqCDzSiwqGdiwqGRgYlDAVIksSIpKYyyC28E+ggoi/L5D8AJMkGFZKAyEKcAFjRGAAS6IBsCCzMbGKGpBgkwqLshAASzoOxMFHDEACjJXCKKANmyCYkNI0IEGgs7YBBdjCpowXGBejSq43YCVYSszV1ooEkgrMMhmkL6lhAIUlJZuBAAfSYTf2T2EkwAAAABJRU5ErkJggg==)
+                        }
+                  #filename
+                        {margin:5px 0;flex:1}
 
-                  #spc {flex:1}
+                  #spc
+                        {flex:1}
                   
-                  button {height:26px;padding:0 5px;margin-right:5px;font-size:16px;cursor:pointer}
-                  #paste {margin-right:10px}
+                  button
+                        {height:26px;padding:0 5px;margin-right:5px;font-size:16px;cursor:pointer}
+                  #paste
+                        {margin-right:10px}
                   
-                  #info {display:flex;align-items:center;margin-right:20px}
-                  #sep {margin:0 10px}
+                  #info
+                        {display:flex;align-items:center;margin-right:20px}
+                  #sep
+                        {margin:0 10px}
                   
-                  #row,#col {width:40px;height:26px;text-align:center;box-sizing:border-box;font-size:16px}
-                  #row {margin-right:5px}
-                  #col {margin-right:10px}
+                  #row,#col
+                        {width:40px;height:26px;text-align:center;box-sizing:border-box;font-size:16px}
+                  #row
+                        {margin-right:5px}
+                  #col
+                        {margin-right:10px}
                   
-                  #top,#bottom {width:20px;height:20px;border:1px solid dimgray;padding:2px;border-radius:3px;cursor:pointer;}
-                  #top {margin-right:5px;
-                          content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAsCAMAAAAgsQpJAAAAP1BMVEVHcExEpvVCpvZLpu5Mpexare1EpfNBpvRFpvNGpvNSp+xuq9xHpvFiq+RHpvFMpu5CpvRTp+mrtLlQp+xBpvbrVekHAAAAFHRSTlMA9P1dHz2e3sy7KgR3CoxQ6xUBM2Gq4CQAAAEASURBVDjL7dVJEoMgEAVQBILM8/3PmsQWFQewKskuf+PmFWh3gwj9JCY9GkmmOMr80IgXEly0uR3MFGwsOjDzMEHFelDMbyk5boY/ytcERxpx9NOqqhDMneITxrnQ3e0ow1AR13FLTb2755oy0qpHnlxBuevllZSHnnsSew5fS8nnSZmefq7ScJCLS9MsjdKeywQOc4kAUlOkVkeXX65AdCaLmw5HgUiBxKus3AqR0kMlaXEwMSuMBmQeoJsOb90GLmtmFldYXAWLtHBixNbVEOSY5uHSTAd0Dl8bWpuW+drWdA8v84ffge+LGo+hD917DKzqw0gEt+HebyfED67XJz8tJngV1cZbAAAAAElFTkSuQmCC)
-                      }
-                  #bottom {content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAsBAMAAADlQedIAAAAMFBMVEVHcExDpvVLpu5CpvZNpexYrO1EpfNmq+JBpvRFpvNGpvNSp+xHpvGrtLlHpvFBpvabmoDrAAAAD3RSTlMA81r9HDqeBt7Muyp3AYxdzYCkAAABLElEQVQoz2NgwAvYfTHFeLXmOWAIMsn/f44hyPf/cwuGINv//4Nc8DoWQZZjR5AFmd4FAEmv/78cEILsB/+3Ainl//+XIARr5P//gwiClEIEgQr/f7vAwOD5H6wULMgLVPhfCKiSdT5Q6QaIIEih4XGQfTuBSldDBOvs/3+WKWCAKv25ASTI/vj//4/HIS4FKv08GyQIVPgfopCB4TZIadj//90ghbowT4FMnfn/vxhQodAFmCD3eqDo/89AMUNdhP93/YcChEKYUqBCBeTk4QVViBLEV8BKfyigBrwXpkKg0mSgWxXQ46goc9YRzLR4xZ2BEHBSQgEqYIdPNkYBlqDYLPuPBpYDBavQBacABe+hiX1OB6WQREEUILUBZFNpKAoIh4bRXSRwAZfLAT6sAtz4b+DtAAAAAElFTkSuQmCC)
-                      }
+                  #top,#bottom
+                        {width:20px;height:20px;border:1px solid dimgray;padding:2px;border-radius:3px;cursor:pointer;}
+                  #top 
+                        {margin-right:5px;
+                         content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAsCAMAAAAgsQpJAAAAP1BMVEVHcExEpvVCpvZLpu5Mpexare1EpfNBpvRFpvNGpvNSp+xuq9xHpvFiq+RHpvFMpu5CpvRTp+mrtLlQp+xBpvbrVekHAAAAFHRSTlMA9P1dHz2e3sy7KgR3CoxQ6xUBM2Gq4CQAAAEASURBVDjL7dVJEoMgEAVQBILM8/3PmsQWFQewKskuf+PmFWh3gwj9JCY9GkmmOMr80IgXEly0uR3MFGwsOjDzMEHFelDMbyk5boY/ytcERxpx9NOqqhDMneITxrnQ3e0ow1AR13FLTb2755oy0qpHnlxBuevllZSHnnsSew5fS8nnSZmefq7ScJCLS9MsjdKeywQOc4kAUlOkVkeXX65AdCaLmw5HgUiBxKus3AqR0kMlaXEwMSuMBmQeoJsOb90GLmtmFldYXAWLtHBixNbVEOSY5uHSTAd0Dl8bWpuW+drWdA8v84ffge+LGo+hD917DKzqw0gEt+HebyfED67XJz8tJngV1cZbAAAAAElFTkSuQmCC)
+                        }
+                  #bottom
+                        {content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAsBAMAAADlQedIAAAAMFBMVEVHcExDpvVLpu5CpvZNpexYrO1EpfNmq+JBpvRFpvNGpvNSp+xHpvGrtLlHpvFBpvabmoDrAAAAD3RSTlMA81r9HDqeBt7Muyp3AYxdzYCkAAABLElEQVQoz2NgwAvYfTHFeLXmOWAIMsn/f44hyPf/cwuGINv//4Nc8DoWQZZjR5AFmd4FAEmv/78cEILsB/+3Ainl//+XIARr5P//gwiClEIEgQr/f7vAwOD5H6wULMgLVPhfCKiSdT5Q6QaIIEih4XGQfTuBSldDBOvs/3+WKWCAKv25ASTI/vj//4/HIS4FKv08GyQIVPgfopCB4TZIadj//90ghbowT4FMnfn/vxhQodAFmCD3eqDo/89AMUNdhP93/YcChEKYUqBCBeTk4QVViBLEV8BKfyigBrwXpkKg0mSgWxXQ46goc9YRzLR4xZ2BEHBSQgEqYIdPNkYBlqDYLPuPBpYDBavQBacABe+hiX1OB6WQREEUILUBZFNpKAoIh4bRXSRwAZfLAT6sAtz4b+DtAAAAAElFTkSuQmCC)
+                        }
             
                   #editor {flex:1}
                   
@@ -96,7 +115,7 @@
               var obj   = {};
 
 
-                  obj.initmod=function(params){
+                  obj.initmod   = function(params){
                   }//initmod
                   
                   
@@ -118,7 +137,7 @@
 
               //:
               
-                  obj.init=function(){
+                  obj.init    = function(){
                   }//init
 
               //:
@@ -137,7 +156,7 @@
                   }//load
                   
                   
-                  obj.initdom=async function(rootnode,mode='javascript'){
+                  obj.initdom   = async function(rootnode,mode='javascript'){
                   
                         root                              = $.$(rootnode,'editor-root');
                         shadow                            = root.shadowRoot;
@@ -254,7 +273,7 @@
                   }//style
                   
                   
-                  kd.row=function(e){
+                  kd.row    = function(e){
                         
                         if(e.key=='Enter'){
                               e.preventDefault();
@@ -268,7 +287,7 @@
                   }//row
           
                   
-                  kd.col=function(e){
+                  kd.col    = function(e){
                         
                         if(e.key=='Enter'){
                               e.preventDefault();
@@ -282,14 +301,14 @@
                   }//col
 
 
-                  btn.clear=function(e){
+                  btn.clear   = function(e){
             
                         clear();
             
                   }//clear
             
             
-                  btn.copy=function(){
+                  btn.copy    = function(){
             
                         var txt       = editor.getValue();
                         navigator.clipboard.writeText(txt)
@@ -298,7 +317,7 @@
                   }//copy
             
             
-                  btn.paste=function(){
+                  btn.paste   = function(){
             
                         navigator.clipboard.readText()
                           .then(txt=>editor.setValue(txt,-1))
@@ -307,7 +326,7 @@
                   }//paste
 
 
-                  btn.top=function(){
+                  btn.top   = function(){
                   
                         editor.gotoLine(0,0);
                         editor.focus();
@@ -316,7 +335,7 @@
                   }//top
           
                   
-                  btn.bottom=function(){
+                  btn.bottom    = function(){
                   
                         editor.gotoLine(999999,0);
                         editor.focus();
@@ -349,7 +368,7 @@
                   }//filename
           
           
-                  filename.getname=function(path){
+                  filename.getname    = function(path){
                   
                         var name;
                         var i   = path.lastIndexOf('/');
@@ -389,24 +408,24 @@
           
                   function update(){
                   
-                        var pos     = editor.getCursorPosition();
-                        row.value   = pos.row+1;
-                        col.value   = pos.column;
+                        var pos                       = editor.getCursorPosition();
+                        row.value                     = pos.row+1;
+                        col.value                     = pos.column;
                         
-                        var n       = editor.getValue().split('\n').length;
+                        var n                         = editor.getValue().split('\n').length;
                         $(hdr,'#lines').textContent   = n;
                         
-                        var n       = editor.getValue().length;
+                        var n                         = editor.getValue().length;
                         $(hdr,'#chars').textCottent   = n;
                         
                   }//update
 
 
   //:
+
   
-                  obj.setValue=function(txt){return set(txt)}
-                  
-                  obj.set=function(txt){return set(txt)}
+                  obj.setValue    = function(txt){return set(txt)}
+                  obj.set         = function(txt){return set(txt)}
                   
                   function set(txt){
                   
@@ -415,9 +434,8 @@
                   }//set
                   
               
-                  obj.getValue=function(){return get()}
-                  
-                  obj.get=function(){return get()}
+                  obj.getValue    = function(){return get()}
+                  obj.get         = function(){return get()}
                   
                   function get(){
                   
@@ -427,21 +445,21 @@
                   }//get
                   
 
-                  obj.focus=function(){
+                  obj.focus   = function(){
                   
                         editor && editor.focus();
                         
                   }//focus
 
 
-                  obj.resize=function(){
+                  obj.resize    = function(){
                   
                         editor.resize();
                         
                   }//resize
                   
                   
-                  obj.horiz=function(){
+                  obj.horiz   = function(){
                   
                         editor.container.style.width    = '100%';
                         editor.container.style.height   = '50%';
@@ -449,26 +467,38 @@
                   }//horiz
 
                   
-                  obj.vert=function(){
+                  obj.vert    = function(){
                   
                         editor.container.style.width    = '50%';
                         editor.container.style.height   = '100%';
                   
                   }//vert
 
+
   //:
+
   
-                  obj.clear=function(){return clear()}
+                  obj.clear   = function(){return clear()}
                   
                   function clear(){
 
                         editor.setValue('',-1);
-                        filename();
-                        filename.save.hide();
 
                   }//clear
                   
+                  
+                  obj.clear.filename    = function(){return clear.filename()}
+                  
+                  clear.filename    = function(){
+                    
+                        filename();
+                        filename.save.hide();
+                    
+                  }//filename
+                  
+                  
   //:
+
   
                   function menu(type,opt){
                   
@@ -479,7 +509,7 @@
                   }//menu
 
                   
-                  menu.trim=function(){
+                  menu.trim   = function(){
                   
                         var pos     = editor.getCursorPostion();
                         var txt     = editor.getValue();
