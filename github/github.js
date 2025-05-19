@@ -187,14 +187,14 @@
                     return {error:err};
               }
 
-              
-              var txt   = await res.text();
-              
               if(!res.ok){
+                    var txt   = await res.text();
                     return {error:txt};
               }
               
-              return {ok:txt};
+              var blob    = await res.blob();
+              
+              return {ok:blob};
               
         }//raw
         
@@ -223,15 +223,15 @@
                     return {error:err};
               }
 
-              
-              var json    = await res.json();
-              var txt     = window.atob(json.content);
-              
               if(!res.ok){
-                    return {error:txt};
+                    var error   = await res.text();
+                    return {error};
               }
               
-              return {ok:txt};
+              var json    = await res.json();
+              var blob    = await b64_blob(json.content);
+              
+              return {ok:blob};
               
         }//api
 
@@ -239,8 +239,16 @@
   //:
   
   
-        async function save(token,owner,repo,branch,path,txt){
+        async function save(token,owner,repo,branch,path,blob){
         
+              var b64;
+              if(datatype(blob)=='string'){
+                    b64       = window.btoa(blob);
+              }else{
+                    b64       = blob_b64(blob);
+              }
+              
+              
               var headers     = {authorization:`Bearer ${token}`};
               var url         = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
 
@@ -266,8 +274,8 @@
               
               var sha         = json.sha;
               
-              var content     = window.btoa(txt);
-              var message     = 'save text';
+              var content     = b64;
+              var message     = 'save file';
               var body        = {content,sha,message};
               body            = JSON.stringify(body);
               var headers     = {authorization:`Bearer ${token}`};
@@ -641,6 +649,41 @@
         
         }//dir
 
+
+  //:
+  
+
+      function datatype(v){
+      
+            var str   = Object.prototype.toString.call(v);
+            str       = str.slice(8,-1);
+            str       = str.toLowerCase();
+            return str;
+            
+      }//datatype
+
+        
+      async function blob_b64(blob){
+      
+            var buf     = await blob.arrayBuffer();
+            var bytes   = new Uint8Array(buf);
+            var bin     = bytes.reduce((acc,byte)=>acc+=String.fromCharCode(byte),'');
+            var b64     = btoa(bin);
+            return b64;
+      
+      }//blob_b64
+
+
+      function b64_blob(b64,type='text/plain'){
+      
+            var bin     = atob(b64);
+            var bytes   = [...bin].map(c=>c.charCodeAt(0));
+            var buf     = new Uint8Array(bytes);
+            var blob    = new Blob([buf],{type});
+            return blob;
+            
+      }//b64_blob
+        
 
   //:  
 
