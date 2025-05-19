@@ -29,8 +29,10 @@
     #dir-hdr
           {font-size:12px}
     #parent
-          {cursor:pointer;border:1px solid lightgray;width:20px;height:20px;
+          {cursor:pointer;border:1px solid lightgray;width:20px;height:20px;}
+/*
             content:url('data:image/png;base64,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');
+*/
     #dir-list
           {flex:1;overflow:auto;position:relative}
     .dir
@@ -68,7 +70,6 @@
                                     <span id=dir-num>
                                           0
                                     </span>
-                                    
                               </div>
                               
                               <div id=dir-list>
