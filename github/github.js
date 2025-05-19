@@ -3,16 +3,15 @@
 
 (()=>{
 
-
         var github            = {};
+        github.version        = 'v1.0.0';
 
-        
         var download          = {};
         var upload            = {};
-
-
+        
   //:
-  
+
+        
         setTimeout(init,50);
         
         function init(){
