@@ -1,6 +1,22 @@
 
 
 
+/*
+
+//libs/github/github.js:d
+
+19-05-25
+
+
+`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`
+
+`https://api.github.com/repos/${owner}/${repo}/contents/${path}`
+{authorization:`Bearer ${token}`}
+
+
+*/
+
+
 (()=>{
 
         var github            = {};
