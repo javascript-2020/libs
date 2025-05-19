@@ -257,7 +257,7 @@
               var chkbox      = $(node,'[type=checkbox]');
               node.onclick    = click;
               
-              var chk   = {read,set,id:node.id};
+              var chk   = {read,set,id:node.id,checked:chkbox.checked};
               return chk;
               
               
