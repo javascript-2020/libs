@@ -707,7 +707,7 @@
               if(typeof node2=='string'){
                     node2         = $(params.root,node2);
               }
-
+                                                                                console.log(node1,slider_node,node2);
               $.track(slider_node,slider);
 
 
