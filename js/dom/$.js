@@ -746,7 +746,7 @@
 
                     var w1    = node1.offsetWidth;
                     var w2    = node2.offsetWidth;
-
+                                                                                console.log(ox,w1,w2);
                     if(w1+ox<25)return;
                     if(w2-ox<25)return;
 
