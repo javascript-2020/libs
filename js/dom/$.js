@@ -713,10 +713,10 @@
 
               function slider(ox,oy){
 
-                    if(params.mode=='vert'){
-                          slider.vert(ox);
-                    }else{
+                    if(params.mode=='horiz'){
                           slider.horiz(oy);
+                    }else{
+                          slider.vert(ox);
                     }
 
               }//slider
