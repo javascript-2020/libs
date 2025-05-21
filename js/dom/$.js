@@ -784,7 +784,7 @@
                     }
               }
               
-              var node    = $.slider('editor-root','#page-slider','output-root',slider,ui);
+              var node    = $.slider('editor-root','#page-slider','output-root',callback,params);
               return node;
               
         }//glass
