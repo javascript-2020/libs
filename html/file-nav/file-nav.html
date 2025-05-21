@@ -128,11 +128,12 @@ mod.filenav   = function(){
         
   //modvars:-
   
-        var click,dblclick
+        var $,click,dblclick
         ;
         
         obj.initmod   = function(params){
                                                                                 debug('initmod');
+              $           = params.$;
               click       = params.click;
               dblclick    = params.dblclick;
               
