@@ -699,13 +699,13 @@
         $.slider=function(node1,slider_node,node2,callback,params={}){
 
               if(typeof node1=='string'){
-                    node1         = $(view,node1);
+                    node1         = $(params.root,node1);
               }
               if(typeof slider_node=='string'){
-                    slider_node   = $(view,slider_node);
+                    slider_node   = $(params.root,slider_node);
               }
               if(typeof node2=='string'){
-                    node2         = $(view,node2);
+                    node2         = $(params.root,node2);
               }
 
               $.track(slider_node,slider);
