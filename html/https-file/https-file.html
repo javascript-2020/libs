@@ -814,7 +814,7 @@ mod.httpsfile   = function(){
   //:
   
 
-        build.path    = function(path,filename){
+        build.path    = function(path,type,filename){
           
               var parts   = new URL(ui.url.value);
               var url     = parts.protocol+'//'+parts.host+path;
