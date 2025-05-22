@@ -367,33 +367,9 @@ mod.httpsfile   = function(){
         btn.load    = function(){
                                                                                 console.log('btn.load');
               var url         = ui.url.value;
-              btn.load.ui(url);
+              load.ui(url);
               
         }//load
-        
-        
-        btn.load.ui   = async function(url){
-                                                                                console.log('btn.load.ui',url);
-              var i           = url.lastIndexOf('/');
-              var filename    = url.slice(i+1);
-                                                                                console.log(filename);
-              var file        = {};
-              file.type       = typename;
-              file.filename   = filename;
-              file.path       = url;
-              file.title      = url;
-              file.icon       = icon.src;
-                            
-              var result      = await load(file);
-              if(result===false){
-                     return;
-              }
-              var txt   = result;
-              
-              obj.load.complete(file,txt);
-              
-          
-        }//ui
         
         
         btn.save    = async function(){
@@ -481,14 +457,37 @@ mod.httpsfile   = function(){
                     return;
               }
               
-              loadfile(url);
+              load.ui(url);
               
         }//dblclick
         
 
   //:
 
-  
+
+        load.ui   = async function(url){
+                                                                                console.log('load.ui',url);
+              var i           = url.lastIndexOf('/');
+              var filename    = url.slice(i+1);
+                                                                                console.log(filename);
+              var file        = {};
+              file.type       = typename;
+              file.filename   = filename;
+              file.path       = url;
+              file.title      = url;
+              file.icon       = icon.src;
+                            
+              var result      = await load(file);
+              if(result===false){
+                     return;
+              }
+              var txt   = result;
+              
+              obj.load.complete(file,txt);
+                        
+        }//ui
+        
+        
         obj.load    = function(file){return load(file)}   //d
         
         async function load(file){
@@ -541,10 +540,6 @@ mod.httpsfile   = function(){
   //:
   
   
-        loadfile.path   = function(path,filename){
-        }//path
-        
-        
         async function loadfile(url){
           
               var headers     = {mode:'load'};
