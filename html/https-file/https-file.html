@@ -416,6 +416,7 @@ mod.httpsfile   = function(){
         btn.dir   = function(){
           
               var url       = ui.url.value;
+              console.log(url);
               readdir(url);              
               
         }//dir
@@ -562,7 +563,7 @@ mod.httpsfile   = function(){
               var body      = txt;
               var res       = await fetch(url,{method:'post',headers,body});
               var txt       = await res.text();
-              if(!res.ok){
+              if(!res.ok){r
                     alert('savefile : '+url+'\n'+txt);
                     return false;
               }
@@ -588,9 +589,7 @@ mod.httpsfile   = function(){
               }
               var json    = JSON.parse(txt);
               
-              display.clear();
-              display('dirs',json.dirs);
-              display('files',json.files,url);
+              filenav.display('/',json.dirs,json.files);
           
         }//readdir
         
