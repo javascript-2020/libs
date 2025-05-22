@@ -597,7 +597,7 @@ mod.httpsfile   = function(){
               var json    = JSON.parse(txt);
               
               var parts   = new URL(url);
-              var path    = parts.path;
+              var path    = parts.pathname;
               console.log('readdir','path',path);
               filenav.display(path,json.dirs,json.files);
           
