@@ -47,7 +47,7 @@
               filenav   = mod.filenav();
               
               
-              filenav.initmod({$,datatype,click,dblclick});
+              filenav.initmod({$,datatype,click,dblclick,parent});
               
         
               filenav.init();
@@ -160,7 +160,16 @@
         }//ready
 
         
-
+  //:
+  
+  
+        function parent(path){
+          
+              console.log('parent',path);
+              
+        }//parent
+        
+        
         function click(path,type,filename){
           
               console.log('click',path,type,filename);
@@ -180,6 +189,9 @@
         }//dblclick
         
 
+  //:
+  
+  
         async function readdir(path){
 
               var auth        = 'matt-123';
