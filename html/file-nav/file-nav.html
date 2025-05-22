@@ -354,7 +354,7 @@ mod.filenav   = function(){
                     if(name==='dirs'){
                           filename   += '/';
                     }
-                                                                                debug('click',name,filename);
+                                                                                debug('click',path,name,filename);
                     if(typeof click=='function'){
                           callback('click',path,name,filename);
                     }
@@ -367,7 +367,7 @@ mod.filenav   = function(){
                     if(name==='dirs'){
                           filename   += '/';
                     }
-                                                                                debug('dblclick',name,filename);
+                                                                                debug('dblclick',path,name,filename);
                     callback('dblclick',path,name,filename);
                     
               }//dblclick
