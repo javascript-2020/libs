@@ -471,7 +471,7 @@ mod.httpsfile   = function(){
         }//click
         
         
-        function dblclick(path,type,filename){
+        function dblclick(path,type,filename){console.log(arguments);
                                                                                 console.log('dblclick',type,path);
               if(type=='dir'){
                     var parts   = new URL(ui.url.value);
