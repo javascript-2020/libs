@@ -188,32 +188,18 @@
               var headers     = {mode:'dir'};
               headers.auth    = auth;
 
+              var full        = url+path;
               
-/*              
-              if(ui['auth-chk'].checked){
-                    var auth        = ui.auth.value;
-                    headers.auth    = auth;
-              }
-*/              
-              var full      = url+path;
-              
-              var res       = await fetch(full,{headers});
-              var txt       = await res.text();
+              var res         = await fetch(full,{headers});
+              var txt         = await res.text();
               if(!res.ok){
                     alert('readdir :'+url+'\n'+txt);
                     return false;
               }
               var json    = JSON.parse(txt);
-              
-              //filenav.display.clear();
+
               
               filenav.display(path,json.dirs,json.files);
-              
-              //filenav.display('files',json.files,url);
-
-
-              
-              //var res   = await fetch(url+path,headers);
               
               
         }//readdir
