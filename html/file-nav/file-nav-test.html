@@ -1,6 +1,9 @@
+
+<html>
+
+      <head>
         
-        
-      <style>
+            <style>
       
     #dir-listing
           {height:400px;width:500px;border:1px solid lightgray}
@@ -8,9 +11,28 @@
     file-nav
           {width:100%;height:100%;display:block}
                   
-      </style>
+            </style>
+            
+      </head>
       
+      <body>
       
+            <div>
+                  file-nav test
+            </div>
+
+      
+            <div id=dir-listing>
+            
+                  <file-nav-api>
+                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                  </file-nav-api>
+                  
+            </div>
+
+      </body>                    
+
+        
       <script init>      
                                                                                 console.clear();
                                                                                 console.log('https-file test');
@@ -111,20 +133,6 @@
       </script libs>        
       
       
-      <div>
-            file-nav test
-      </div>
-
-
-      <div id=dir-listing>
-      
-            <file-nav-api>
-                  <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-            </file-nav-api>
-            
-      </div>
-                    
-
       <script>
       
         function initdom(){
