@@ -213,7 +213,7 @@ mod.filenav   = function(){
         btn.parent    = function(){
           
               var path    = $(ui.path).textContent.trim();
-              path        = path.slice(-1);
+              path        = path.slice(0,-1);
                                                           console.log(path);
               var i       = path.lastIndexOf('/');
               if(i==-1){
