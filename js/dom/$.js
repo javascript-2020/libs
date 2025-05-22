@@ -750,9 +750,7 @@
                     if(w1+ox<25)return;
                     if(w2-ox<25)return;
 
-                    node1.style.flex    = 'auto';
                     node1.style.width   = w1+ox+'px';
-                    node2.style.flex    = 'auto';
                     node2.style.width   = w2-ox+'px';
 
               }//vert
@@ -766,9 +764,7 @@
                     if(h1+oy<40)return;
                     if(h2-oy<40)return;
 
-                    node1.style.flex      = 'auto';
                     node1.style.height    = h1+oy+'px'
-                    node2.style.flex      = 'auto';
                     node2.style.height    = h2-oy+'px';
 
               }//horiz
