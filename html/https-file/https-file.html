@@ -475,7 +475,7 @@ mod.httpsfile   = function(){
                                                                                 console.log('dblclick',type,path);
               if(type=='dir'){
                     var parts   = new URL(ui.url.value);
-                                                                                console.json(parts);
+                                                                                console.log(parts.hostname);
                     var url     = parts.protocol+parts.host+path+'/'+filename;
                                                                                 console.log('readdir',url);
                     return;
