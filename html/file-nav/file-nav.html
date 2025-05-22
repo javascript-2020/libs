@@ -279,8 +279,10 @@ mod.filenav   = function(){
               
               var evt   = {};
               
-              
+              obj.onscoll                 = onscroll;
               ui[name].list.onscroll      = onscroll;
+
+              
               ui[name].num.textContent    = n;
               
 
