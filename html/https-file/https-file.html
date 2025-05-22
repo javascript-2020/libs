@@ -459,7 +459,8 @@ mod.httpsfile   = function(){
         
         function parent(path){
                                                                                 console.log('parent',path);
-              readdir.path(path);
+              var url   = build.path(path);
+              readdir(url);
               
         }//parent
         
@@ -473,10 +474,14 @@ mod.httpsfile   = function(){
         
         function dblclick(path,type,filename){
                                                                                 console.log('dblclick',type,path);
+              var url   = build.path(path,filename);
+              
               if(type=='dir'){
-                    readdir.path(path,filename);
+                    readdir(url);
                     return;
               }
+              
+              loadfile(url);
               
         }//dblclick
         
@@ -536,6 +541,10 @@ mod.httpsfile   = function(){
   //:
   
   
+        loadfile.path   = function(path,filename){
+        }//path
+        
+        
         async function loadfile(url){
           
               var headers     = {mode:'load'};
@@ -575,18 +584,6 @@ mod.httpsfile   = function(){
               return txt;
               
         }//save
-        
-        
-        readdir.path    = function(path,filename){
-          
-              var parts   = new URL(ui.url.value);
-              var url     = parts.protocol+'//'+parts.host+path;
-              if(filename){
-                    url  += filename+'/';
-              }
-              readdir(url);
-              
-        }//path
         
         
         async function readdir(url){
@@ -821,6 +818,18 @@ mod.httpsfile   = function(){
 
   //:
   
+
+        build.path    = function(path,filename){
+          
+              var parts   = new URL(ui.url.value);
+              var url     = parts.protocol+'//'+parts.host+path;
+              if(filename){
+                    url  += filename+'/';
+              }
+              return url;
+              
+        }//path
+        
         
         function build(url,cwd){
           
