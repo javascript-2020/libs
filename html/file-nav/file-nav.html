@@ -354,7 +354,7 @@ mod.filenav   = function(){
                     }
                                                                                 debug('click',name,filename);
                     if(typeof click=='function'){
-                          click(path,name,filename);
+                          callback('click',path,name,filename);
                     }
                     
               }//click
@@ -366,7 +366,7 @@ mod.filenav   = function(){
                           filename   += '/';
                     }
                                                                                 debug('dblclick',name,filename);
-                    dblclick(path,name,filename);
+                    callback('dblclick',path,name,filename);
                     
               }//dblclick
               
@@ -376,20 +376,6 @@ mod.filenav   = function(){
                     display(path,name,list);
                     
               }//onscroll
-              
-
-              function click(){
-                
-                    callback('click',path,name,filename);
-                    
-              }//click
-
-              
-              function dblclick(){
-                
-                    callback('dblclick',path,name,filename);
-                    
-              }//dblclick
               
         }//display
 
