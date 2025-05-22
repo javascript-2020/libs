@@ -132,7 +132,7 @@ mod.filenav   = function(){
         
   //modvars:-
   
-        var $,click,dblclick
+        var $,click,dblclick,parent
         ;
         
         obj.initmod   = function(params){
@@ -140,6 +140,7 @@ mod.filenav   = function(){
               $           = params.$;
               click       = params.click;
               dblclick    = params.dblclick;
+              parent      = params.parent;
               
         }//initmod
         
@@ -161,6 +162,9 @@ mod.filenav   = function(){
         ui.file.item        = null;
         
         
+        var btn             = {};
+        
+        
   //
   
   
@@ -174,32 +178,51 @@ mod.filenav   = function(){
   
         obj.initdom   = function(rootnode){
                                                                                 debug('initdom');
-              root                = $.$(rootnode,'file-nav');
-              shadow              = root.shadowRoot;
+              root                                  = $.$(rootnode,'file-nav');
+              shadow                                = root.shadowRoot;
               
-              ui.path             = $(shadow,'#path');
+              ui.path                               = $(shadow,'#path');
               
-              var view            = $(shadow,'#view');
+              var view                              = $(shadow,'#view');
               
-              ui.dir.root         = $(shadow,'#dir-root');
-              ui.dir.num          = $(ui.dir.root,'#dir-num');
-              ui.dir.list         = $(ui.dir.root,'#dir-list');
-              ui.dir.item         = $(ui.dir.list,'.dir');
+              ui.dir.root                           = $(shadow,'#dir-root');
+              ui.dir.num                            = $(ui.dir.root,'#dir-num');
+              $(ui.dir.root,'#parent').onclick      = btn.parent;
+              ui.dir.list                           = $(ui.dir.root,'#dir-list');
+              ui.dir.item                           = $(ui.dir.list,'.dir');
               ui.dir.item.remove();
               
-              ui.empty            = $(ui.dir.list,'#empty');
+              ui.empty                              = $(ui.dir.list,'#empty');
               ui.empty.remove();
               
-              ui.file.root        = $(shadow,'#file-root');
-              ui.file.num         = $(ui.file.root,'#file-num');
-              ui.file.list        = $(ui.file.root,'#file-list');
-              ui.file.item        = $(ui.file.list,'.file');
+              ui.file.root                          = $(shadow,'#file-root');
+              ui.file.num                           = $(ui.file.root,'#file-num');
+              ui.file.list                          = $(ui.file.root,'#file-list');
+              ui.file.item                          = $(ui.file.list,'.file');
               ui.file.item.remove();
               
               $.slider(ui.dir.root,'#slider',ui.file.root,null,{root:view});
               
               
         }//initdom
+        
+
+  //:
+  
+  
+        btn.parent    = function(){
+          
+              var path    = $(ui.path).textContent.trim();
+              path        = path.slice(-1);
+                                                          console.log(path);
+              var i       = path.lastIndexOf('/');
+              if(i==-1){
+                    return;
+              }
+              
+              parent(path);
+              
+        }//parent
         
         
   //:
