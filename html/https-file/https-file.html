@@ -109,6 +109,11 @@
                         <input value=del type=button>
                   </div>
                   
+                  <file-nav-api>
+                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                  </file-nav-api>
+
+<!--                  
                   <div id=dir-list-root>
                         <div id=dirs>
                               <div id=dirs-hdr>
@@ -133,7 +138,8 @@
                               </div>
                         </div>
                   </div>
-                  
+-->
+
             </div>
             
       </template>
@@ -156,12 +162,15 @@ mod.httpsfile   = function(){
               menumod       = params.menumod;
               editor        = params.editor;
               $             = params.$;
+              datatype      = params.datatype;
               
         }//initmod
 
         
   //vars:-
 
+        var filenav;
+        
         var typename    = 'https-file';
         
         var root;
@@ -179,6 +188,19 @@ mod.httpsfile   = function(){
   //
   
         obj.init    = function(){
+
+          
+              filenav                   = mod.filenav();
+              
+              filenav.initmod({$,datatype});
+              
+              filenav.click             = click;
+              filenav.dblclick          = dblclick;
+              filenav.parent            = parent;
+              
+              filenav.init();
+              
+              
         }//init
 
         
@@ -425,6 +447,27 @@ mod.httpsfile   = function(){
               
         }//callback
         
+        
+        function parent(path){
+          
+              console.log('parent',path);
+              
+        }//parent
+        
+        
+        function click(path,type,filename){
+          
+              console.log('click',type,path);
+              
+        }//click
+        
+        
+        function dblclick(path,type,filename){
+          
+              console.log('dblclick',type,path);
+              
+        }//dblclick
+        
 
   //:
 
@@ -632,6 +675,11 @@ mod.httpsfile   = function(){
         
   //:
 
+
+
+
+
+/*
   
         display.clear   = function(){
           
@@ -740,6 +788,9 @@ mod.httpsfile   = function(){
               }//ondblclick
               
         }//display
+
+*/
+
 
 
   //:
