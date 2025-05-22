@@ -164,27 +164,24 @@
   
   
         function parent(path){
-          
-              console.log('parent',path);
+                                                                                console.log('parent',path);
               readdir(path);
               
         }//parent
         
         
         function click(path,type,filename){
-          
-              console.log('click',path,type,filename);
+                                                                                console.log('click',path,type,filename);
               
         }//click
         
         
         function dblclick(path,type,filename){
-          
-              console.log('dblclick',path,type,filename);
-              
+                                                                                console.log('dblclick',path,type,filename);
               if(type=='dir'){
                     path   += filename+'/';
                     readdir(path);
+                    return;
               }
               
         }//dblclick
