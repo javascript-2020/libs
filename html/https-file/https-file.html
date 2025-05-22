@@ -596,7 +596,10 @@ mod.httpsfile   = function(){
               }
               var json    = JSON.parse(txt);
               
-              filenav.display('/',json.dirs,json.files);
+              var parts   = new URL(url);
+              var path    = parts.path;
+              
+              filenav.display(path,json.dirs,json.files);
           
         }//readdir
         
