@@ -15,7 +15,7 @@
     #path
           {padding:3px 5px}
     #view
-          {border-top:1px solid lightgray}
+          {display:flex;border-top:1px solid lightgray}
     
     .scroll
           {height:5px;background:transparent;position:absolute;left:0;right:0}
@@ -25,7 +25,9 @@
     
           
     #dir-root
-          {width:calc(50% - 5px);padding:5px;display:inline-flex;flex-direction:column;border-right:1px solid lightgray}
+          {/*width:calc(50% - 5px)*/flex:1;padding:5px;display:flex;flex-direction:column;border-right:1px solid lightgray
+            box-sizing:border-box;
+          }
     #dir-hdr
           {font-size:14px;display:flex;height:18px}
     #parent
@@ -41,7 +43,7 @@
           {background:lightblue;width:10px;cursor:ew-resize}
           
     #file-root
-          {width:calc(50% - 5px);padding:5px;display:inline-flex;flex-direction:column}
+          {/*width:calc(50% - 5px)*/flex:1;padding:5px;display:inline-flex;flex-direction:column;box-sizing:border-box}
     #file-hdr
           {font-size:14px;height:18px}
     #file-list
