@@ -442,14 +442,12 @@ mod.httpsfile   = function(){
         
         
         function click(path,type,filename){
-          
-              console.log('click',type,path);
-              
+                                                                                console.log('click',type,path);
         }//click
         
         
         function dblclick(path,type,filename){
-                                                                                console.log('dblclick',type,path);
+                                                                                console.log('dblclick',type,path,filename);
               var url   = build.path(path,type,filename);
               
               if(type=='dir'){
