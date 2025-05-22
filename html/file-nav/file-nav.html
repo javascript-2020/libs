@@ -191,6 +191,9 @@ mod.filenav   = function(){
               ui.dir.list                           = $(ui.dir.root,'#dir-list');
               ui.dir.item                           = $(ui.dir.list,'.dir');
               ui.dir.item.remove();
+              var empty                             = $(ui.dir.list,'#empty');
+              empty.remove();
+              ui.dir.empty                          = empty.cloneNode(true);
               
               ui.empty                              = $(ui.dir.list,'#empty');
               ui.empty.remove();
@@ -200,6 +203,7 @@ mod.filenav   = function(){
               ui.file.list                          = $(ui.file.root,'#file-list');
               ui.file.item                          = $(ui.file.list,'.file');
               ui.file.item.remove();
+              ui.file.empty                         = empty.cloneNode(true);
               
               $.slider(ui.dir.root,'#slider',ui.file.root,null,{root:view});
               
@@ -298,8 +302,9 @@ mod.filenav   = function(){
               var st    = ui[name].list.scrollTop;
 
               if(n==0){
-                    var nempty    = ui.empty.cloneNode(true);
-                    ui[name].list.append(nempty);
+                    ui[name].list.append(ui[name].empty);
+              }else{
+                    ui[name].empty.remove();
               }
 
               
