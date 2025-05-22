@@ -471,14 +471,11 @@ mod.httpsfile   = function(){
         }//click
         
         
-        function dblclick(path,type,filename){console.log(arguments);
+        function dblclick(path,type,filename){
                                                                                 console.log('dblclick',type,path);
               if(type=='dir'){
                     var parts   = new URL(ui.url.value);
-                                                                                console.log(parts.hostname);
                     var url     = parts.protocol+parts.host+path+filename+'/';
-                                                                                console.log('readdir',url);
-                    return;
                     readdir(url);
                     return;
               }
