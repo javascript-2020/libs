@@ -472,8 +472,15 @@ mod.httpsfile   = function(){
         
         
         function dblclick(path,type,filename){
-          
-              console.log('dblclick',type,path);
+                                                                                console.log('dblclick',type,path);
+              if(type=='dir'){
+                    var parts   = new URL(ui.url.value);
+                    var url     = parts.protocol+parts.host+path;
+                                                                                console.log('readdir',url);
+                    return;
+                    readdir(url);
+                    return;
+              }
               
         }//dblclick
         
