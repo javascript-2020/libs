@@ -435,7 +435,7 @@ mod.httpsfile   = function(){
         
         function parent(path){
                                                                                 console.log('parent',path);
-              var url   = build.path(path);
+              var url   = build.path(path,'dir');
               readdir(url);
               
         }//parent
@@ -450,7 +450,7 @@ mod.httpsfile   = function(){
         
         function dblclick(path,type,filename){
                                                                                 console.log('dblclick',type,path);
-              var url   = build.path(path,filename);
+              var url   = build.path(path,type,filename);
               
               if(type=='dir'){
                     readdir(url);
@@ -819,7 +819,10 @@ mod.httpsfile   = function(){
               var parts   = new URL(ui.url.value);
               var url     = parts.protocol+'//'+parts.host+path;
               if(filename){
-                    url  += filename+'/';
+                    if(type=='dir'){
+                          filename   += '/';
+                    }
+                    url  += filename;
               }
               return url;
               
