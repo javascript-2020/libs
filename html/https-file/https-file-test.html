@@ -16,8 +16,11 @@
         
         var menu;
         var httpsfile;
+
         
-                          
+        var complete    = {};
+
+        
         function init(){
                                                                                 console.log('init');
               menumod         = menumod();
@@ -27,6 +30,8 @@
               
               httpsfile.initmod({menumod,$,datatype});
               
+              httpsfile.complete.load   = complete.load;
+              httpsfile.complete.save   = complete.save;
         
               httpsfile.init();
               
@@ -118,6 +123,23 @@
         }//initdom
 
 
+        function complete(){
+        }//complete
+        
+        
+        complete.load   = function(file,txt){
+          
+              alert('load '+file.filename);
+              
+        }//load
+        
+        
+        complete.save   = funtion(file,confirm=true){
+          
+              alert('save '+file.filename);
+              
+        }//save
+        
 
         init.stack.complete;
         
