@@ -215,14 +215,14 @@ mod.filenav   = function(){
           
               var path    = $(ui.path).textContent.trim();
               path        = path.slice(0,-1);
-                                                          console.log(path);
+                                                                                //console.log(path);
               var i       = path.lastIndexOf('/');
               if(i==-1){
                     return;
               }
               path        = path.slice(0,i+1);
-                                                          console.log(path);
-              parent(path);
+                                                                                //console.log(path);
+              callback('parent',path);
               
         }//parent
         
@@ -379,11 +379,36 @@ mod.filenav   = function(){
                     
               }//onscroll
               
+
+              function click(){
+                
+                    callback('click',path,type,filename);
+                    
+              }//click
+
+              
+              function dblclick(){
+                
+                    callback('dblclick',path,type,filename);
+                    
+              }//dblclick
+              
         }//display
 
 
-
-
+        function calllback(name,arg0){
+          
+              var args    = [...arguments].slice(1);
+              
+              if(typeof(obj[name])=='function'){
+                    obj[name].apply(null,args);
+              }
+              if(datatype(obj[name])=='array'){
+                    obj[name].forEach(fn=>fn.apply(null,args));
+              }
+                    
+        }//callback
+  
   //:
   
   
