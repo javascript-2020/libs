@@ -773,7 +773,7 @@
                 
         }//slider
         
-        $.slider.glass=function(node1,slider_node,node2,callback,params={},mod){debugger;
+        $.slider.glass=function(node1,slider_node,node2,callback,params={},mod){
         
               if(typeof mod.glass=='function'){
                     if(!callback.md){
