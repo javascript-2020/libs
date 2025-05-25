@@ -91,7 +91,13 @@
                           result    = parse.repo(url);
                     }
               }
-              return result;
+              if(url.hostname=='api.github.com'){
+                    
+              if(result){
+                    return result;
+              }
+              
+              return {error:'unrecognised url format'};
               
         }//parse
 
@@ -518,7 +524,7 @@
   //:
   
   
-        download.dir    = function(owner,repo,branch,path,update,complete){
+        download.dir    = function(owner,repo,branch,path,update,complete,token,api){
                                                                                 debug('download',owner,repo,branch,path);              
               var resolve,promise=new Promise(res=>resolve=res);
               
@@ -538,8 +544,13 @@
                     
                     var zip     = new JSZip();
                     
-                    var url     = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
-                    var json    = await fetch(url).then(res=>res.json()).catch(error);
+                    var url       = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
+                    var headers   = {};
+                    if(token){
+                          headers.authorization   = `bearer: ${token}`;
+                    }
+                    
+                    var json    = await fetch(url,{headers}).then(res=>res.json()).catch(error);
 
                     var item    = json.tree.find(o=>o.path===path);
                     if(item){
@@ -581,7 +592,6 @@
                           await Promise.all(json.tree.map(async item=>{
                           
                                 if(!item.path.startsWith(path))return;
-                                debugger;
                                 
                                 total++;
                                 if(typeof update=='function'){
@@ -592,10 +602,12 @@
                                 if(item.type=='tree'){
                                       zip.folder(fn);
                                 }else{
-                                      var res     = await fetch(item.url);
-                                      var json    = await res.json();
-                                      var b64     = json.content;
-                                      var blob    = b64_blob();
+                                      var blob;
+                                      if(token || api){
+                                            blob    = await get.api(item);
+                                      }else{
+                                            blob    = await get.raw();
+                                      }
                                       zip.file(fn,blob);
                                 }
                                 
@@ -656,6 +668,33 @@
                     resolve(result);
               
               }//done
+              
+              
+              var get   = {};
+              
+              get.raw   = async function(){
+              
+                    var url     = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${item.path}`;
+                    var blob    = await fetch(url).then(res=>res.blob());
+                    return blob;
+                    
+              }//raw
+              
+              
+              get.api   = async function(item){
+              
+                    var headers   = {};
+                    if(token){
+                          headers.authorization   = `bearer: ${token}`;
+                    }
+                    var res     = await fetch(item.url,{headers});
+                    var json    = await res.json();
+                    var b64     = json.content;
+                    var blob    = b64_blob();
+                    return blob;
+              
+              }//api
+              
         
         }//dir
 
