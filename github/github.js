@@ -524,7 +524,7 @@
   
   
         download.dir    = function(owner,repo,branch,path,update,complete,token,api){
-                                                                                debug('download',owner,repo,branch,path);              
+                                                                                debug('download',owner,repo,branch,path,token,api);              
               var resolve,promise=new Promise(res=>resolve=res);
               
               setTimeout(fn,50);
@@ -603,7 +603,7 @@
                                       if(token || api){
                                             blob    = await get.api(item);
                                       }else{
-                                            blob    = await get.raw();
+                                            blob    = await get.raw(item.path);
                                       }
                                       zip.file(fn,blob);
                                 }
@@ -669,9 +669,9 @@
               
               var get   = {};
               
-              get.raw   = async function(){
+              get.raw   = async function(path){
               
-                    var url     = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${item.path}`;
+                    var url     = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
                     var blob    = await fetch(url).then(res=>res.blob());
                     return blob;
                     
