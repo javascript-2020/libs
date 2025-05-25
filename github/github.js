@@ -529,6 +529,13 @@
               
               async function fn(){
               
+                    if(path.startsWith('/')){
+                          path    = path.slice(1);
+                    }
+                    if(path.endsWith('/')){
+                          path    = path.slice(0,-1);
+                    }
+                    
                     var zip     = new JSZip();
                     
                     var url     = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
