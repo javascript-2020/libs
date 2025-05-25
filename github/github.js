@@ -670,7 +670,7 @@
               var get   = {};
               
               get.raw   = async function(path){
-              
+                                                                                console.log('raw',owner,repo,branch,path);
                     var url     = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
                     var blob    = await fetch(url).then(res=>res.blob());
                     return blob;
@@ -679,7 +679,7 @@
               
               
               get.api   = async function(item){
-              
+                                                                                console.log('api',item.url,token);
                     var headers   = {};
                     if(token){
                           headers.authorization   = `bearer: ${token}`;
