@@ -687,7 +687,7 @@
                     var res     = await fetch(item.url,{headers});
                     var json    = await res.json();
                     var b64     = json.content;
-                    var blob    = b64_blob();
+                    var blob    = b64_blob(b64);
                     return blob;
               
               }//api
