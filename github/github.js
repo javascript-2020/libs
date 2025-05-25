@@ -91,7 +91,6 @@
                           result    = parse.repo(url);
                     }
               }
-              if(url.hostname=='api.github.com'){
                     
               if(result){
                     return result;
