@@ -581,6 +581,7 @@
                           await Promise.all(json.tree.map(async item=>{
                           
                                 if(!item.path.startsWith(path))return;
+                                debugger;
                                 
                                 total++;
                                 if(typeof update=='function'){
