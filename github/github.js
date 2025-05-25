@@ -592,7 +592,9 @@
                                       zip.folder(fn);
                                 }else{
                                       var res     = await fetch(item.url);
-                                      var blob    = await res.blob();
+                                      var json    = await res.json();
+                                      var b64     = json.content;
+                                      var blob    = b64_blob();
                                       zip.file(fn,blob);
                                 }
                                 
