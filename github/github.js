@@ -529,8 +529,6 @@
               
               setTimeout(fn,50);
               
-              return promise;
-              
               
               async function fn(){
               
@@ -693,7 +691,9 @@
                     return blob;
               
               }//api
+
               
+              return promise;
         
         }//dir
 
