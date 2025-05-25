@@ -38,7 +38,7 @@
               github.load           = load;
               github.save           = save;
               github.backup         = backup;
-              github.download       = download.dir;
+              github.download       = download;
 
               
         }//init
