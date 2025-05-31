@@ -42,7 +42,8 @@
         
         
         
-        var dir   = {};
+        var file    = {};
+        var dir     = {};
         
 
   //:
@@ -56,10 +57,14 @@
               
               filenav.initmod({$,datatype,click,dblclick,parent});
               
-              filenav.click         = click;
-              filenav.dblclick      = dblclick;
-              filenav.parent        = parent;
-              filenav['dir-add']    = dir.add;
+              filenav.file.click        = file.click;
+              filenav.file.dblclick     = file.dblclick;
+              
+              filenav.dir.click         = dir.click;
+              filenav.dir.dblclick      = dir.dblclick;
+              filenav.dir.parent        = dir.parent;
+              filenav.dir.add           = dir.add;
+              
               filenav.init();
 
               
@@ -171,42 +176,56 @@
 
         
   //:
+
   
+        file.click    = function(path,filename){
+                                                                                console.log('click',path,type,filename);
+              
+        }//click
+
   
-        function parent(path){
+        file.dblclick   = function(path,filename){
+        }//dblclick
+        
+
+        dir.parent    = function(path){
                                                                                 console.log('parent',path);
               readdir(path);
               
         }//parent
         
         
-        function click(path,type,filename){
+        dir.click   = function(path,filename){
                                                                                 console.log('click',path,type,filename);
               
         }//click
         
         
-        function dblclick(path,type,filename){
+        dir.dblclick    = function(path,filename){
                                                                                 console.log('dblclick',path,type,filename);
-              if(type=='dir'){
-                    path   += filename+'/';
-                    readdir(path);
-                    return;
-              }
+              path   += filename+'/';
+              readdir(path);
+              return;
               
         }//dblclick
         
         
         dir.add   = function(path,name){
           
-              console.log('path',path);
-              console.log('name',name);
-              
-              //alert(path+'\n'+name);
+              console.log('dir.add',`[${path}]`,`[${name}]`);
               
         }//add
         
         
+        dir.rem   = function(path,name){
+          
+              console.log('dir.rem',`[${path}]`,`[${name}]`);
+              
+        }//rem
+        
+        
+        dir.parent    = function(path){
+        }//parent
         
 
   //:
