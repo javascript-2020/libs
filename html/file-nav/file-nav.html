@@ -332,11 +332,11 @@ mod.filenav   = function(){
 
               for(let i=i1;i<i2;i++){
                 
-                    let filename    = list[i];
                     let nitem       = display.node[name][i];
+                    let filename    = list[i];
                     
                     if(!nitem){
-                          let nitem                       = ui[name].item.cloneNode(true);
+                          nitem                           = ui[name].item.cloneNode(true);
                           nitem.style.cssText             = 'position:absolute;left:0;right:0';
                           nitem.style.top                 = i*ih+'px';
                           ui[name].list.append(nitem);
