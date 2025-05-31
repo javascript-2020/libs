@@ -250,7 +250,9 @@ mod.filenav   = function(){
               if(!name){
                     return;
               }
-              callback('dir-add',name);
+              var path    = $(ui.path).textContent.trim();
+              path        = path.slice(0,-1);
+              callback('dir-add',path,name);
               
         }//add
 
