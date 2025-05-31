@@ -41,6 +41,13 @@
         };
         
         
+        
+        var dir   = {};
+        
+
+  //:
+  
+  
         function init(){
                                                                                 console.log('init');
               
@@ -52,7 +59,7 @@
               filenav.click         = click;
               filenav.dblclick      = dblclick;
               filenav.parent        = parent;
-              
+              filenav['dir-add']    = dir.add;
               filenav.init();
 
               
@@ -188,6 +195,15 @@
               }
               
         }//dblclick
+        
+        
+        dir.add   = function(path,name){
+          
+              alert(path+'\n'+name);
+              
+        }//add
+        
+        
         
 
   //:
