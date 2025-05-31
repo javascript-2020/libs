@@ -332,10 +332,11 @@ mod.filenav   = function(){
 
               for(let i=i1;i<i2;i++){
                 
-                    if(!display.node[name][i]){
+                    let filename    = list[i];
+                    let nitem       = display.node[name][i];
+                    
+                    if(!nitem){
                           let nitem                       = ui[name].item.cloneNode(true);
-                          let filename                    = list[i];
-                          $(nitem,'.name').textContent    = filename;
                           nitem.style.cssText             = 'position:absolute;left:0;right:0';
                           nitem.style.top                 = i*ih+'px';
                           ui[name].list.append(nitem);
@@ -343,9 +344,11 @@ mod.filenav   = function(){
                           
                           nitem.onmouseenter              = e=>nitem.style.background   = 'lightyellow';
                           nitem.onmouseleave              = e=>nitem.style.background   = '';
-                          nitem.onclick                   = e=>evt.click(filename);
-                          nitem.ondblclick                = e=>evt.dblclick(filename);
                     }
+                    
+                    $(nitem,'.name').textContent    = filename;
+                    nitem.onclick                   = e=>evt.click(filename);
+                    nitem.ondblclick                = e=>evt.dblclick(filename);
                     
               }//for
                                                                                 //var nn    = Object.keys(display.node[name]).length;
