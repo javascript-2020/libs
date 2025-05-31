@@ -59,9 +59,9 @@ https-file-server:d
                                                                                 console.log(mode,fn);
               switch(mode){
               
-                case 'dir'    : dir(req,res,fn);        break;
-                case 'load'   : load(req,res,fn);       break;
-                case 'save'   : save(req,res,fn);       break;
+                case 'readdir'    : readdir(req,res,fn);        break;
+                case 'load'       : load(req,res,fn);           break;
+                case 'save'       : save(req,res,fn);           break;
                 
               }//switch
               
@@ -102,7 +102,7 @@ https-file-server:d
   //:
   
         
-        function dir(req,res,fn){
+        function readdir(req,res,fn){
         
               var dirs    = [];
               var files   = [];
