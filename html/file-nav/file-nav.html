@@ -387,11 +387,13 @@ mod.filenav   = function(){
                                                                                 //debug(name,nn);
               evt.click   = function(item,filename){
                 
-                    if(cur){
-                          cur.style.background    = '';
+                    if(cur!==item){
+                          if(cur){
+                                cur.style.background    = '';
+                          }
+                          cur                     = item;
+                          cur.style.background    = 'lightyellow';
                     }
-                    cur                     = item;
-                    cur.style.background    = 'lightyellow';
                     
                     
                     if(name==='dirs'){
