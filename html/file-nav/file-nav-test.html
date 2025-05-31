@@ -179,7 +179,7 @@
 
   
         file.click    = function(path,filename){
-                                                                                console.log('click',path,type,filename);
+                                                                                console.log('click',path,filename);
               
         }//click
 
@@ -196,13 +196,13 @@
         
         
         dir.click   = function(path,filename){
-                                                                                console.log('click',path,type,filename);
+                                                                                console.log('click',path,filename);
               
         }//click
         
         
         dir.dblclick    = function(path,filename){
-                                                                                console.log('dblclick',path,type,filename);
+                                                                                console.log('dblclick',path,filename);
               path   += filename+'/';
               readdir(path);
               return;
