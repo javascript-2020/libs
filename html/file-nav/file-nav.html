@@ -158,6 +158,8 @@ mod.filenav   = function(){
         var root;
         var shadow;
         
+        var cur;
+        
         var ui              = {};
         
         ui.dir              = {};
@@ -172,6 +174,9 @@ mod.filenav   = function(){
         
         
         var btn             = {};
+        btn.dir             = {};
+        btn.file            = {};
+        
         
         
   //
@@ -196,7 +201,9 @@ mod.filenav   = function(){
               
               ui.dir.root                           = $(shadow,'#dir-root');
               ui.dir.num                            = $(ui.dir.root,'#dir-num');
-              $(ui.dir.root,'#parent').onclick      = btn.parent;
+              $(ui.dir.root,'#dir-add').onclick     = btn.dir.add;
+              $(ui.dir.root,'#dir-rem').onclick     = btn.dir.rem;
+              $(ui.dir.root,'#parent').onclick      = btn.dir.parent;
               ui.dir.list                           = $(ui.dir.root,'#dir-list');
               ui.dir.item                           = $(ui.dir.list,'.dir');
               ui.dir.item.remove();
@@ -220,7 +227,22 @@ mod.filenav   = function(){
   //:
   
   
-        btn.parent    = function(){
+        btn.dir.add   = function(){
+          
+              var name    = window.prompt('enter dir name');
+              if(!name){
+                    return;
+              }
+              callback('dir-add',name);
+              
+        }//add
+
+        
+        btn.dir.rem   = function(){
+        }//rem
+        
+        
+        btn.dir.parent    = function(){
           
               var path    = $(ui.path).textContent.trim();
               path        = path.slice(0,-1);
@@ -352,19 +374,26 @@ mod.filenav   = function(){
                           ui[name].list.append(nitem);
                           display.node[name][i]           = nitem;
                           
-                          nitem.onmouseenter              = e=>nitem.style.background   = 'lightyellow';
-                          nitem.onmouseleave              = e=>nitem.style.background   = '';
+                          nitem.onmouseenter              = e=>evt.mouseenter(nitem);
+                          nitem.onmouseleave              = e=>evt.mouseleave(nitem);
                     }
                     
                     $(nitem,'.name').textContent    = filename;
-                    nitem.onclick                   = e=>evt.click(filename);
-                    nitem.ondblclick                = e=>evt.dblclick(filename);
+                    nitem.onclick                   = e=>evt.click(nitem,filename);
+                    nitem.ondblclick                = e=>evt.dblclick(nitem,filename);
                     
               }//for
                                                                                 //var nn    = Object.keys(display.node[name]).length;
                                                                                 //debug(name,nn);
-              evt.click   = function(filename){
+              evt.click   = function(item,filename){
                 
+                    if(cur){
+                          cur.style.background    = '';
+                    }
+                    cur                     = item;
+                    cur.style.background    = 'lightyellow';
+                    
+                    
                     if(name==='dirs'){
                           filename   += '/';
                     }
@@ -376,7 +405,7 @@ mod.filenav   = function(){
               }//click
               
               
-              evt.dblclick    = function(filename){
+              evt.dblclick    = function(item,filename){
 
                     if(name==='dirs'){
                           filename   += '/';
@@ -385,6 +414,26 @@ mod.filenav   = function(){
                     callback('dblclick',path,name,filename);
                     
               }//dblclick
+              
+
+              evt.mouseenter    = function(item){
+                
+                    if(cur){
+                          return;
+                    }
+                    nitem.style.background   = 'lightyellow';
+                    
+              }//mouseenter
+              
+              
+              evt.mouseleave    = function(item){
+                
+                    if(cur){
+                          return;
+                    }
+                    nitem.style.background   = '';
+                    
+              }//mouseleave
               
               
               function onscroll(e){
