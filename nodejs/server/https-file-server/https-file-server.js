@@ -107,7 +107,7 @@ https-file-server:d
               var dirs    = [];
               var files   = [];
               
-              var list    = fs.readDirSync(fn,{withFileTypes:true});
+              var list    = fs.readdirSync(fn,{withFileTypes:true});
               list.forEach(file=>{
               
                     if(file.name=='.' || file.name=='..'){
