@@ -75,7 +75,7 @@ https-file-server:d
               }
               
               res.setHeader('access-control-allow-origin','*');
-              res.setHeader('access-control-allow-headers','auth mode');
+              res.setHeader('access-control-allow-headers','auth, mode');
               res.end();
               
               return true;
