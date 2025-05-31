@@ -158,7 +158,24 @@ mod.filenav   = function(){
         var root;
         var shadow;
         
-        var cur;
+        var cur             = {};
+        cur.item            = null;
+        cur.file            = null;
+        cur.type            = null;
+        cur.set             = (item,file,type)=>{
+          
+                                    cur.item    = item;
+                                    cur.file    = file;
+                                    cur.type    = type;
+                                    
+                              }//set
+        cur.rem             = ()=>{
+                              
+                                    cur.item    = null;
+                                    cur.file    = null;
+                                    cur.type    = null;
+                                    
+                              }//rem
         
         var ui              = {};
         
