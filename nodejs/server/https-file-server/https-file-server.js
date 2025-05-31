@@ -101,7 +101,35 @@ https-file-server:d
         
   //:
   
-  
+        
+        function dir(req,res,fn){
+        
+              var dirs        = [];
+              var filenames   = [];
+              
+              var files   = fs.readDirSync(fn,{withFileTypes:true});
+              files.forEach(file=>{
+              
+                    if(file.name=='.' || file.name=='..'){
+                          return;
+                    }
+                    
+                    if(file.isDirectory()){
+                          dirs.push(file.name);
+                    }
+                    if(file.isFile()){
+                          files.push(file.name);
+                    }
+                    
+              });
+
+              res.setHeader('access-control-allow-origin','*');              
+              res.writeHead(200);
+              res.end(JSON.stringify({filenames,dir});
+              
+        }//dir
+        
+        
         function load(req,res,fn){
         
               var mime      = getmime(fn);
