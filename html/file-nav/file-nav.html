@@ -252,7 +252,7 @@ mod.filenav   = function(){
               }
               var path    = $(ui.path).textContent.trim();
               path        = path.slice(0,-1);
-              callback('dir-add',path,name);
+              callback('dir','add',path,name);
               
         }//add
 
@@ -272,7 +272,7 @@ mod.filenav   = function(){
               }
               path        = path.slice(0,i+1);
                                                                                 //console.log(path);
-              callback('parent',path);
+              callback('dir','parent',path);
               
         }//parent
         
@@ -406,6 +406,8 @@ mod.filenav   = function(){
                                                                                 //debug(name,nn);
               evt.click   = function(item,filename){
                 
+                    var type    = 'file';
+                    
                     if(cur.item!==item){
                           if(cur.item){
                                 cur.item.style.background    = '';
@@ -419,23 +421,24 @@ mod.filenav   = function(){
                     
                     
                     if(name==='dirs'){
+                          type        = 'dir';
                           filename   += '/';
                     }
                                                                                 debug('click',path,name,filename);
-                    if(typeof click=='function'){
-                          callback('click',path,name,filename);
-                    }
+                    callback(type,'click',path,filename);
                     
               }//click
               
               
               evt.dblclick    = function(item,filename){
 
+                    var type    = 'file';
                     if(name==='dirs'){
+                          type        = 'dir';
                           filename   += '/';
                     }
                                                                                 debug('dblclick',path,name,filename);
-                    callback('dblclick',path,name,filename);
+                    callback(type,'dblclick',path,filename);
                     
               }//dblclick
               
@@ -469,15 +472,15 @@ mod.filenav   = function(){
         }//display
 
 
-        function callback(name,arg0){
+        function callback(type,name,arg0){
           
-              var args    = [...arguments].slice(1);
+              var args    = [...arguments].slice(2);
               
-              if(typeof(obj[name])=='function'){
-                    obj[name].apply(null,args);
+              if(typeof(obj[type][name])=='function'){
+                    obj[type][name].apply(null,args);
               }
-              if(datatype(obj[name])=='array'){
-                    obj[name].forEach(fn=>fn.apply(null,args));
+              if(datatype(obj[type][name])=='array'){
+                    obj[type][name].forEach(fn=>fn.apply(null,args));
               }
                     
         }//callback
