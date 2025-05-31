@@ -123,9 +123,11 @@ https-file-server:d
                     
               });
 
+              var str   = JSON.stringify({filenames,dir});
+              
               res.setHeader('access-control-allow-origin','*');              
               res.writeHead(200);
-              res.end(JSON.stringify({filenames,dir});
+              res.end(str);
               
         }//dir
         
