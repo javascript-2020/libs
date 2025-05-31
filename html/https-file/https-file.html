@@ -581,7 +581,7 @@ mod.httpsfile   = function(){
         
         async function readdir(url){
                                                                                 console.log('readdir',url);
-              var headers   = {mode:'dir'};
+              var headers   = {mode:'readdir'};
               
               if(ui['auth-chk'].checked){
                     var auth        = ui.auth.value;
