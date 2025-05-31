@@ -13,6 +13,7 @@ https-file-server:d
                                                                                 console.log('https-file-server');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
+        var auth          = argv('auth')||'matt-123';
         var dir           = argv('d','dir')||'';
         var port          = argv('p','port')||3000;
         
@@ -30,16 +31,21 @@ https-file-server:d
         }
         
         require('https').createServer({key,cert},request).listen(port);
+                                                                                console.log(`listening https://localhost:${port}/`);
         
-        console.log(`listening https://localhost:${port}/`);
-        
-
   //:
   
   
         function request(req,res){
                                                                                 console.log(req.method,req.url);
               if(cors(req,res))return;
+              
+              if(auth){
+                    if(req.headers.auth!==auth){
+                          unauthorised(req,res);
+                          return;
+                    }
+              }
               
               var url   = req.url.slice(1);
               var fn    = path.resolve(abs,url);
@@ -53,8 +59,9 @@ https-file-server:d
                                                                                 console.log(mode,fn);
               switch(mode){
               
-                case 'load'   : load(req,res,fn);        break;
-                case 'save'   : save(req,res,fn);        break;
+                case 'dir'    : dir(req,res,fn);        break;
+                case 'load'   : load(req,res,fn);       break;
+                case 'save'   : save(req,res,fn);       break;
                 
               }//switch
               
@@ -68,7 +75,7 @@ https-file-server:d
               }
               
               res.setHeader('access-control-allow-origin','*');
-              res.setHeader('access-control-allow-headers','mode');
+              res.setHeader('access-control-allow-headers','auth mode');
               res.end();
               
               return true;
@@ -82,6 +89,14 @@ https-file-server:d
               res.end(req.url+' not found');
               
         }//notfound
+        
+        
+        function unauthorised(req,res){
+        
+              res.writeHead(401);
+              res.end('unauthorised');
+              
+        }//unauthorised
   
         
   //:
@@ -90,7 +105,6 @@ https-file-server:d
         function load(req,res,fn){
         
               var mime      = getmime(fn);
-              console.log('load',fn);
               var stream    = fs.createReadStream(fn);
 
               res.setHeader('access-control-allow-origin','*');
@@ -100,7 +114,7 @@ https-file-server:d
         }//load
         
         
-        async function save(req,res,fn){
+        function save(req,res,fn){
 
               var stream    = fs.createWriteStream(fn);
               req.pipe(stream);
