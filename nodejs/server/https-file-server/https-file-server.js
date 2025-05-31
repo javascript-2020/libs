@@ -104,11 +104,11 @@ https-file-server:d
         
         function dir(req,res,fn){
         
-              var dirs        = [];
-              var filenames   = [];
+              var dirs    = [];
+              var files   = [];
               
-              var files   = fs.readDirSync(fn,{withFileTypes:true});
-              files.forEach(file=>{
+              var list    = fs.readDirSync(fn,{withFileTypes:true});
+              list.forEach(file=>{
               
                     if(file.name=='.' || file.name=='..'){
                           return;
@@ -123,7 +123,7 @@ https-file-server:d
                     
               });
 
-              var str   = JSON.stringify({filenames,dir});
+              var str   = JSON.stringify({files,dir});
               
               res.setHeader('access-control-allow-origin','*');              
               res.writeHead(200);
