@@ -404,15 +404,15 @@ mod.filenav   = function(){
                                                                                 //debug(name,nn);
               evt.click   = function(item,filename){
                 
-                    if(cur!==item){
-                          if(cur){
-                                cur.style.background    = '';
+                    if(cur.item!==item){
+                          if(cur.item){
+                                cur.item.style.background    = '';
                           }
-                          cur                     = item;
-                          cur.style.background    = 'lightyellow';
+                          item.style.background   = 'lightyellow';
+                          cur.set(item,filename,type);
                     }else{
                           item.style.background   = '';
-                          cur   = null;
+                          cur.rem();
                     }
                     
                     
@@ -440,7 +440,7 @@ mod.filenav   = function(){
 
               evt.mouseenter    = function(item){
                 
-                    if(cur){
+                    if(cur.item){
                           return;
                     }
                     item.style.background   = 'lightyellow';
@@ -450,7 +450,7 @@ mod.filenav   = function(){
               
               evt.mouseleave    = function(item){
                 
-                    if(cur){
+                    if(cur.item){
                           return;
                     }
                     item.style.background   = '';
