@@ -266,17 +266,37 @@
   //:
   
         
-        async function rmfile(path){
+        async function mkfile(path){
           
-              var headers   = {mode:'rmfile',auth};
+              var headers   = {mode:'mkfile',auth};
               var full      = url+path;
               
               var res       = await fetch(full,{headers});
               var txt       = await res.text();
+              
+              if(!res.ok){
+                    alert(`mkfile : ${path}\n${txt}`);
+                    return;
+              }
+              
+              return true;
+              
+        }//mkfile
+        
+        
+        async function rmfile(path){
+          
+              var headers   = {mode:'rmdir',auth};
+              var full      = url+path;
+              
+              var res       = await fetch(full,{headers});
+              var txt       = await res.text();
+              
               if(!res.ok){
                     alert(`rmfile : ${path}\n${txt}`);
                     return;
               }
+              
               return true;
               
         }//rmfile
@@ -289,10 +309,12 @@
               
               var res         = await fetch(full,{headers});
               var txt         = await res.text();
+              
               if(!res.ok){
                     alert(`rmdir : ${path}\n${txt}`);
                     return;
               }
+              
               return true;
               
         }//rmdir
@@ -307,10 +329,12 @@
               
               var res         = await fetch(full,{headers});
               var txt         = await res.text();
+              
               if(!res.ok){
                     alert(`mkdir : ${path}\n${txt}`);
                     return false;
               }
+              
               return true;
               
         }//mkdir
@@ -325,10 +349,12 @@
               
               var res         = await fetch(full,{headers});
               var txt         = await res.text();
+              
               if(!res.ok){
                     alert('readdir :'+url+'\n'+txt);
                     return false;
               }
+              
               var json    = JSON.parse(txt);
                                                                                 //debugger;
                                                                                 //console.trace('readdir');
