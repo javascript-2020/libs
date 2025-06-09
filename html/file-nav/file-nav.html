@@ -33,7 +33,7 @@
           }
           
     #dir-root
-          {width:calc(50% - 5px)/*flex:1*/;padding:5px;display:flex;flex-direction:column;/*border-right:1px solid lightgray;*/
+          {width:calc(50% - 5px);padding:5px;display:flex;flex-direction:column;
             box-sizing:border-box;overflow:hidden;
           }
     #dir-hdr
@@ -164,7 +164,11 @@ mod.filenav   = function(){
     
         obj.file            = {};
         obj.dir             = {};
-
+        var file            = {};
+        var dir             = {};
+        var server          = {};
+        obj.server          = server;
+        
         
         var root;
         var shadow;
@@ -266,8 +270,12 @@ mod.filenav   = function(){
               if(!name){
                     return;
               }
-              var path    = ui.rd.path();
-              callback('file','add',path,name);
+              var path      = ui.rd.path();
+              var result    = callback('file','add',path,name);
+              if(result===false){
+                    return;
+              }
+              file.add(path,name);
               
         }//add
         
@@ -281,9 +289,13 @@ mod.filenav   = function(){
                     return;
               }
               
-              var path        = ui.rd.path();
-              var filename    = cur.file;
-              callback('file','rem',path,filename);
+              var path      = ui.rd.path();
+              var name      = cur.file;
+              var result    = callback('file','rem',path,name);
+              if(result===false){
+                    return;
+              }
+              file.rem(path,name);
               
         }//rem
         
@@ -294,8 +306,12 @@ mod.filenav   = function(){
               if(!name){
                     return;
               }
-              var path    = $(ui.path).textContent.trim();
-              callback('dir','add',path,name);
+              var path      = $(ui.path).textContent.trim();
+              var result    = callback('dir','add',path,name);
+              if(result===false){
+                    return;
+              }
+              dir.add(path,name);
               
         }//add
 
@@ -309,16 +325,20 @@ mod.filenav   = function(){
                     return;
               }
               
-              var path        = ui.rd.path();
-              var filename    = cur.file;
-              callback('dir','rem',path,filename);
+              var path      = ui.rd.path();
+              var name      = cur.file;
+              var result    = callback('dir','rem',path,name);
+              if(result===false){
+                    return;
+              }
+              dir.rem(path,name);
               
         }//rem
         
         
         btn.dir.parent    = function(){
           
-              var path    = $(ui.path).textContent.trim();
+              var path    = ui.rd.path();
               path        = path.slice(0,-1);
                                                                                 //console.log(path);
               var i       = path.lastIndexOf('/');
@@ -327,7 +347,11 @@ mod.filenav   = function(){
               }
               path        = path.slice(0,i+1);
                                                                                 console.log('btn.dir.parent',path);
-              callback('dir','parent',path);
+              var result    = callback('dir','parent',path);
+              if(result===false){
+                    return;
+              }
+              dir.parent(path);
               
         }//parent
         
@@ -532,15 +556,171 @@ mod.filenav   = function(){
                                                                                 console.json(arguments);
               var args    = [...arguments].slice(2);
               
+              var result;
               if(typeof(obj[type][name])=='function'){
-                    obj[type][name].apply(null,args);
+                    result    = obj[type][name].apply(null,args);
               }
-              if(datatype(obj[type][name])=='array'){
-                    obj[type][name].forEach(fn=>fn.apply(null,args));
-              }
-                    
+              return result;
+              
         }//callback
 
+
+  //:
+  
+
+        file.add    = async function(path,filename){
+          
+              var file      = path+filename;
+              var result    = await mkfile(file);
+              if(!result){
+                    return;
+              }
+              readdir(path);
+              
+        }//add
+        
+        
+        file.rem    = async function(path,filename){
+          
+              var file      = path+filename;
+              var result    = await rmdir(file);
+              if(!result){
+                    return;
+              }
+              readdir(path);
+              
+        }//rem
+        
+        
+        dir.parent    = function(path){
+                                                                                console.log('dir.parent',path);
+              readdir(path);
+              
+        }//parent
+        
+
+        dir.add   = async function(path,name){
+                                                                                console.log('dir.add',path,name);
+              var dir       = path+name;
+              var result    = await mkdir(dir);
+              if(!result){
+                    return;
+              }
+              readdir(path);
+              
+        }//add
+        
+        
+        dir.rem   = async function(path,name){
+                                                                                console.log('dir.rem',path,name);          
+              var dir       = path+name;
+              var result    = await rmdir(dir);
+              if(!result){
+                    return;
+              }
+              readdir(path);
+              
+        }//rem
+        
+  //:
+  
+  
+        server.mkfile   = async function(path){
+
+              var headers   = {mode:'mkfile',auth};
+              var full      = url+path;
+              
+              var res       = await fetch(full,{headers});
+              var txt       = await res.text();
+              
+              if(!res.ok){
+                    alert(`mkfile : ${path}\n${txt}`);
+                    return;
+              }
+              
+              return true;
+              
+        }//mkfile
+        
+        
+        server.rmfile   = async function(path){
+          
+              var headers   = {mode:'rmdir',auth};
+              var full      = url+path;
+              
+              var res       = await fetch(full,{headers});
+              var txt       = await res.text();
+              
+              if(!res.ok){
+                    alert(`rmfile : ${path}\n${txt}`);
+                    return;
+              }
+              
+              return true;
+              
+        }//rmfile
+        
+        
+        server.rmdir    = async function(path){
+          
+              var headers     = {mode:'rmdir',auth};              
+              var full        = url+path;
+              
+              var res         = await fetch(full,{headers});
+              var txt         = await res.text();
+              
+              if(!res.ok){
+                    alert(`rmdir : ${path}\n${txt}`);
+                    return;
+              }
+              
+              return true;
+              
+        }//rmdir
+        
+        
+        server.mkdir    = async function(path){
+
+              var headers     = {mode:'mkdir'};
+              headers.auth    = auth;
+              
+              var full        = url+path;
+              
+              var res         = await fetch(full,{headers});
+              var txt         = await res.text();
+              
+              if(!res.ok){
+                    alert(`mkdir : ${path}\n${txt}`);
+                    return false;
+              }
+              
+              return true;
+              
+        }//mkdir
+
+        
+        server.readdir    = async function(path){
+
+              var headers     = {mode:'readdir'};
+              headers.auth    = auth;
+
+              var full        = url+path;
+              
+              var res         = await fetch(full,{headers});
+              var txt         = await res.text();
+              
+              if(!res.ok){
+                    alert('readdir :'+url+'\n'+txt);
+                    return false;
+              }
+              
+              var json    = JSON.parse(txt);
+                                                                                //debugger;
+                                                                                //console.trace('readdir');
+              filenav.display(path,json.dirs,json.files);
+              return true;
+              
+        }//readdir
   
   //:
   
