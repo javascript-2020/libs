@@ -19,6 +19,8 @@
                   <div id=load class=menu-opt>load</div>
                   <div id=save class=menu-opt>save</div>
                   <div class=spc></div>
+                  <div id=download class=menu-opt>download</div>
+                  <div class=spc></div>
                   <div id=clear class=menu-opt>clear filename</div>
             </div>
       
@@ -31,7 +33,7 @@ mod.localfile   = function(){
                                                                                 true && console.log('localfile');
   var obj   = {};
 
-      var menumod,editor,$
+      var menumod,editor,$,filemod
       ;
       
       obj.initmod   = function(params){
@@ -39,6 +41,7 @@ mod.localfile   = function(){
             menumod   = params.menumod;
             editor    = params.editor;
             $         = params.$;
+            filemod   = params.filemod;
             
       }//initmod
 
@@ -122,6 +125,19 @@ mod.localfile   = function(){
               obj.save.complete(file,false);
   
         }//save
+        
+        
+        menu.download   = async function(){
+          
+              var filename    = 'tmp.txt';
+              var file        = filemod?.cur;
+              if(file){
+                    filename    = file.filename;
+              }
+              var txt         = editor.getValue();
+              savefile(filename,txt);
+              
+        }//download
         
 
         menu.clear    = function(){
