@@ -21,6 +21,7 @@ https-file-server:d
         var fs            = require('fs');
         
         var getmime       = require('getmime.js');
+        var keys          = require('keys.js');
         
         var key           = fs.readFileSync('key.pem');
         var cert          = fs.readFileSync('cert.pem');
