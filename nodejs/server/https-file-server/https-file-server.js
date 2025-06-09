@@ -55,6 +55,7 @@ https-file-server:d
                                                                                 console.log(mode,fn);
               switch(mode){
               
+                case 'rmdir'      : rmdir(req,res,fn);          break;
                 case 'mkdir'      : mkdir(req,res,fn);          break;
                 case 'readdir'    : readdir(req,res,fn);        break;
                 case 'load'       : load(req,res,fn);           break;
@@ -71,7 +72,7 @@ https-file-server:d
                     return;
               }
 
-              cors.header(res);              
+              cors.headers(res);              
               res.end();
               
               return true;
@@ -79,7 +80,7 @@ https-file-server:d
         }//cors
         
         
-        cors.header   = function(res){
+        cors.headers   = function(res){
         
               res.setHeader('access-control-allow-origin','*');
               res.setHeader('access-control-allow-headers','auth, mode');
@@ -89,6 +90,7 @@ https-file-server:d
         
         function notfound(req,res){
         
+              cors.headers(res);
               res.writeHead(404);
               res.end(req.url+' not found');
               
@@ -97,6 +99,7 @@ https-file-server:d
         
         function unauthorised(req,res){
         
+              cors.headers(res);
               res.writeHead(401);
               res.end('unauthorised');
               
@@ -105,6 +108,30 @@ https-file-server:d
         
   //:
   
+        
+        function rmdir(req,res,fn){
+        
+              var err;
+              try{
+              
+                    fs.rm(fn,{recursive:true,force:true});
+                    
+              }
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }
+              if(err){
+                    cors.headers(res);
+                    res.writeHead(400);
+                    res.end(err.toString());
+                    return;
+              }
+              res.end('ok');
+              
+        }//rmdir
+        
         
         function mkdir(req,res,fn){
         
@@ -120,14 +147,15 @@ https-file-server:d
                     
               }
               if(err){
+                    cors.headers(res);
                     res.writeHead(400);
                     res.end(err.toString());
                     return;
               }
               
-              cors.header(res);
+              cors.headers(res);
               res.writeHead(200);
-              res.end();
+              res.end('ok');
                   
         }//mkdir
 
@@ -160,7 +188,7 @@ https-file-server:d
 
               var str   = JSON.stringify({files,dirs});
               
-              cors.header(res);
+              cors.headers(res);
               res.writeHead(200);
               res.end(str);
               
@@ -177,7 +205,7 @@ https-file-server:d
               var mime      = getmime(fn);
               var stream    = fs.createReadStream(fn);
 
-              cors.header(res);
+              cors.headers(res);
               res.writeHead(200,{'content-type':mime});
               stream.pipe(res);
               
@@ -195,7 +223,7 @@ https-file-server:d
               req.pipe(stream);
               req.on('end',()=>{
               
-                    cors.header(res);
+                    cors.headers(res);
                     res.writeHead(200);
                     res.end();
                     
