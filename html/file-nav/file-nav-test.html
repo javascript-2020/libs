@@ -190,20 +190,20 @@
         
 
         dir.parent    = function(path){
-                                                                                console.log('parent',path);
+                                                                                console.log('dir.parent',path);
               readdir(path);
               
         }//parent
         
         
         dir.click   = function(path,filename){
-                                                                                console.log('click',path,filename);
+                                                                                console.log('dir.click',path,filename);
               
         }//click
         
         
         dir.dblclick    = function(path,filename){
-                                                                                console.log('dblclick',path,filename);
+                                                                                console.log('dir.dblclick',path,filename);
               path   += filename+'/';
               readdir(path);
               return;
