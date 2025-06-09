@@ -53,6 +53,7 @@ https-file-server:d
 
               var mode    = req.headers.mode;
                                                                                 console.log(mode,fn);
+              var unknown   = false;
               switch(mode){
               
                 case 'mkfile'     : mkfile(req,res,fn);         break;
@@ -62,7 +63,13 @@ https-file-server:d
                 case 'load'       : load(req,res,fn);           break;
                 case 'save'       : save(req,res,fn);           break;
                 
+                default           : unknown   = true;
+                
               }//switch
+              
+              if(!unknown){
+                    return;
+              }
               
               cors.headers(res);
               res.writeHead(400);
