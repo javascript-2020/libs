@@ -55,6 +55,7 @@ https-file-server:d
                                                                                 console.log(mode,fn);
               switch(mode){
               
+                case 'mkfile'     : mkfile(req,res,fn);         break;
                 case 'rmdir'      : rmdir(req,res,fn);          break;
                 case 'mkdir'      : mkdir(req,res,fn);          break;
                 case 'readdir'    : readdir(req,res,fn);        break;
@@ -62,6 +63,10 @@ https-file-server:d
                 case 'save'       : save(req,res,fn);           break;
                 
               }//switch
+              
+              cors.headers(res);
+              res.writeHead(400);
+              res.end(`unknown mode : ${mode}`);
               
         }//request
         
@@ -108,6 +113,33 @@ https-file-server:d
         
   //:
   
+        
+        function mkfile(req,res,fn){
+        
+              var err;
+              try{
+              
+                    fs.openSync(fn,'O_CREAT');
+                    
+              }
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }
+              if(err){
+                    cors.headers(res);
+                    res.writeHead(400);
+                    res.end(err.toString());
+                    return;
+              }
+              
+              fs.closeSync(fn);
+              cors.headers(res);
+              res.end('ok');
+              
+        }//mkdir
+        
         
         function rmdir(req,res,fn){
         
