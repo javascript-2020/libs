@@ -216,7 +216,7 @@
         
         
         dir.add   = async function(path,name){
-          
+                                                                                console.log('dir.add',path,name);
               var dir       = path+name;
               var result    = await mkdir(dir);
               if(!result){
@@ -228,10 +228,8 @@
         
         
         dir.rem   = async function(path,name){
-          
-              console.log('dir.rem',`[${path}]`,`[${name}]`);
-              return;
-              var dir   = path+name;
+                                                                                console.log('dir.rem',path,name);          
+              var dir       = path+name;
               var result    = await rmdir(dir);
               if(!result){
                     return;
@@ -243,6 +241,23 @@
         
   //:
   
+        
+        async function rmdir(path){
+          
+              var headers     = {mode:'rmdir',auth};
+              
+              var full        = url+path;
+              
+              var res         = await fetch(full,{headers});
+              var txt         = await res.text();
+              if(!res.ok){
+                    alert(`rmdir : ${path}\n${txt}`);
+                    return;
+              }
+              return true;
+              
+        }//rmdir
+        
         
         async function mkdir(path){
 
