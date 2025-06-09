@@ -271,10 +271,9 @@ mod.filenav   = function(){
               if(cur.type!='dir'){
                     return;
               }
-              var path        = ui.rd.path();
-              console.json(cur.file);
-              var filename    = cur.file.filename;
               
+              var path        = ui.rd.path();
+              var filename    = cur.file;
               callback('dir','rem',path,filename);
               
         }//rem
