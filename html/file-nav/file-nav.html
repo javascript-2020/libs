@@ -282,7 +282,8 @@ mod.filenav   = function(){
               if(result===false){
                     return;
               }
-              file.add(path,name);
+              var {url,auth}    = result;
+              file.add(url,auth,path,name);
               
         }//add
         
@@ -302,7 +303,8 @@ mod.filenav   = function(){
               if(result===false){
                     return;
               }
-              file.rem(path,name);
+              var {url,auth}    = result;
+              file.rem(url,auth,path,name);
               
         }//rem
         
@@ -318,7 +320,8 @@ mod.filenav   = function(){
               if(result===false){
                     return;
               }
-              dir.add(path,name);
+              var {url,auth}    = result;
+              dir.add(url,auth,path,name);
               
         }//add
 
@@ -338,7 +341,8 @@ mod.filenav   = function(){
               if(result===false){
                     return;
               }
-              dir.rem(path,name);
+              var {url,auth}    = result;
+              dir.rem(url,auth,path,name);
               
         }//rem
         
@@ -358,7 +362,8 @@ mod.filenav   = function(){
               if(result===false){
                     return;
               }
-              dir.parent(path);
+              var {url,auth}    = result;
+              dir.parent(url,auth,path);
               
         }//parent
         
@@ -575,7 +580,7 @@ mod.filenav   = function(){
   //:
   
 
-        file.add    = async function(path,filename){
+        file.add    = async function(url,auth,path,filename){
           
               var file      = path+filename;
               var result    = await server.mkfile(url,auth,file);
@@ -587,7 +592,7 @@ mod.filenav   = function(){
         }//add
         
         
-        file.rem    = async function(path,filename){
+        file.rem    = async function(url,auth,path,filename){
           
               var file      = path+filename;
               var result    = await server.rmdir(url,auth,file);
@@ -599,14 +604,14 @@ mod.filenav   = function(){
         }//rem
         
         
-        dir.parent    = function(path){
+        dir.parent    = function(url,auth,path){
                                                                                 console.log('dir.parent',path);
               server.readdir(url,auth,path);
               
         }//parent
         
 
-        dir.add   = async function(path,name){
+        dir.add   = async function(url,auth,path,name){
                                                                                 console.log('dir.add',path,name);
               var dir       = path+name;
               var result    = await server.mkdir(url,auth,dir);
@@ -618,7 +623,7 @@ mod.filenav   = function(){
         }//add
         
         
-        dir.rem   = async function(path,name){
+        dir.rem   = async function(url,auth,path,name){
                                                                                 console.log('dir.rem',path,name);          
               var dir       = path+name;
               var result    = await server.rmdir(url,auth,dir);
