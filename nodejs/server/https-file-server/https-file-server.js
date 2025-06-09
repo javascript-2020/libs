@@ -114,7 +114,7 @@ https-file-server:d
               var err;
               try{
               
-                    fs.rm(fn,{recursive:true,force:true});
+                    fs.rmSync(fn,{recursive:true,force:true});
                     
               }
               catch(err2){
@@ -128,6 +128,8 @@ https-file-server:d
                     res.end(err.toString());
                     return;
               }
+              
+              cors.headers(res);
               res.end('ok');
               
         }//rmdir
