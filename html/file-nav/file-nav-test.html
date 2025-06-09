@@ -209,16 +209,15 @@
                                                                                 console.log('dir.dblclick',path,filename);
               path   += filename;
               readdir(path);
-              return;
               
         }//dblclick
         
         
-        dir.add   = function(path,name){
+        dir.add   = async function(path,name){
           
               console.log('dir.add',`[${path}]`,`[${name}]`);
               var dir       = path+name;
-              var result    = mkdir(dir);
+              var result    = await mkdir(dir);
               if(!result){
                     return;
               }
