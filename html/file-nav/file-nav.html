@@ -162,6 +162,8 @@ mod.filenav   = function(){
         
   //vars:-
     
+        var filenav         = obj;
+        
         obj.file            = {};
         obj.dir             = {};
         var file            = {};
@@ -717,7 +719,7 @@ mod.filenav   = function(){
               var json    = JSON.parse(txt);
                                                                                 //debugger;
                                                                                 //console.trace('readdir');
-              display(path,json.dirs,json.files);
+              filenav.display(path,json.dirs,json.files);
               return true;
               
         }//readdir
