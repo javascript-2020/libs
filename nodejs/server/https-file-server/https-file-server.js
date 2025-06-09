@@ -70,14 +70,21 @@ https-file-server:d
               if(req.method!=='OPTIONS'){
                     return;
               }
-              
-              res.setHeader('access-control-allow-origin','*');
-              res.setHeader('access-control-allow-headers','auth, mode');
+
+              cors.header();              
               res.end();
               
               return true;
               
         }//cors
+        
+        
+        cors.header   = function(res){
+        
+              res.setHeader('access-control-allow-origin','*');
+              res.setHeader('access-control-allow-headers','auth, mode');
+        
+        }//header
         
         
         function notfound(req,res){
@@ -118,6 +125,7 @@ https-file-server:d
                     return;
               }
               
+              cors.header(res);
               res.writeHead(200);
               res.end();
                   
@@ -152,11 +160,11 @@ https-file-server:d
 
               var str   = JSON.stringify({files,dirs});
               
-              res.setHeader('access-control-allow-origin','*');              
+              cors.header(res);
               res.writeHead(200);
               res.end(str);
               
-        }//dir
+        }//readdir
         
         
         function load(req,res,fn){
@@ -169,7 +177,7 @@ https-file-server:d
               var mime      = getmime(fn);
               var stream    = fs.createReadStream(fn);
 
-              res.setHeader('access-control-allow-origin','*');
+              cors.header(res);
               res.writeHead(200,{'content-type':mime});
               stream.pipe(res);
               
@@ -187,7 +195,7 @@ https-file-server:d
               req.pipe(stream);
               req.on('end',()=>{
               
-                    res.setHeader('access-control-allow-origin','*');
+                    cors.header(res);
                     res.writeHead(200);
                     res.end();
                     
