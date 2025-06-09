@@ -32,6 +32,9 @@
         var filenav;
         
         
+        var auth        = 'matt-123';
+        var url         = 'https://localhost:3000';
+
         var fs    = {
           
           'tmp/'    : {
@@ -214,6 +217,12 @@
         dir.add   = function(path,name){
           
               console.log('dir.add',`[${path}]`,`[${name}]`);
+              var dir       = path+name;
+              var result    = mkdir(dir);
+              if(!result){
+                    return;
+              }
+              readdir(path);
               
         }//add
         
@@ -227,11 +236,27 @@
         
   //:
   
-  
+        
+        async function mkdir(path){
+
+              var headers     = {mode:'mkdir'};
+              headers.auth    = auth;
+              
+              var full        = url+path;
+              
+              var res         = await fetch(full,{headers});
+              var txt         = await res.text();
+              if(!res.ok){
+                    alert(`mkdir : ${path}\n${txt}`);
+                    return false;
+              }
+              return true;
+              
+        }//mkdir
+
+        
         async function readdir(path){
 
-              var auth        = 'matt-123';
-              var url         = 'https://localhost:3000';
               var headers     = {mode:'readdir'};
               headers.auth    = auth;
 
@@ -247,6 +272,7 @@
                                                                                 //debugger;
                                                                                 //console.trace('readdir');
               filenav.display(path,json.dirs,json.files);
+              return true;
               
         }//readdir
         
