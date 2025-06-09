@@ -11,8 +11,6 @@
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var mod   = {};
 
-        var $,datatype,menumod;
-
 
         var localfile;
         
@@ -93,6 +91,13 @@
           }));
     
             </script>
+
+            <style>
+
+    .icon 
+          {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
+
+            </style>
             
       </head>
       
@@ -107,13 +112,15 @@
             <script>
 
         function initdom(){
-          
+                                                                                console.log('initdom');
               localfile.initdom(document.body);
               
               
         }//initdom
         
         
+        
+        init.stack.complete;
         
             </script>
             
