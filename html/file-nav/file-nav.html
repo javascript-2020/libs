@@ -272,6 +272,7 @@ mod.filenav   = function(){
                     return;
               }
               var path        = ui.rd.path();
+              console.json(cur.file);
               var filename    = cur.file.filename;
               
               callback('dir','rem',path,filename);
