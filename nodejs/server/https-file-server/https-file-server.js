@@ -127,7 +127,7 @@ https-file-server:d
               var err;
               try{
               
-                    fs.openSync(fn,O_CREAT);
+                    var file    = fs.openSync(fn,O_CREAT);
                     
               }
               catch(err2){
@@ -142,7 +142,8 @@ https-file-server:d
                     return;
               }
               
-              fs.closeSync(fn);
+              fs.closeSync(file);
+              
               cors.headers(res);
               res.end('ok');
               
