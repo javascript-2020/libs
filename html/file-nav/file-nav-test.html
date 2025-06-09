@@ -194,6 +194,30 @@
         }//dblclick
         
 
+        file.add    = async function(path,filename){
+          
+              var file      = path+filename;
+              var result    = await mkfile(file);
+              if(!result){
+                    return;
+              }
+              readdir(path);
+              
+        }//add
+        
+        
+        file.rem    = async function(path,filename){
+          
+              var file      = path+filename;
+              var result    = await rmdir(file);
+              if(!result){
+                    return;
+              }
+              readdir(path);
+              
+        }//rem
+        
+        
         dir.parent    = function(path){
                                                                                 console.log('dir.parent',path);
               readdir(path);
@@ -242,10 +266,25 @@
   //:
   
         
+        async function rmfile(path){
+          
+              var headers   = {mode:'rmfile',auth};
+              var full      = url+path;
+              
+              var res       = await fetch(full,{headers});
+              var txt       = await res.text();
+              if(!res.ok){
+                    alert(`rmfile : ${path}\n${txt}`);
+                    return;
+              }
+              return true;
+              
+        }//rmfile
+        
+        
         async function rmdir(path){
           
-              var headers     = {mode:'rmdir',auth};
-              
+              var headers     = {mode:'rmdir',auth};              
               var full        = url+path;
               
               var res         = await fetch(full,{headers});
