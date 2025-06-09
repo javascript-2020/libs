@@ -271,14 +271,14 @@ mod.filenav   = function(){
   //:
   
   
-        btn.file.add    = function(){
+        btn.file.add    = async function(){
           
               var name    = window.prompt('enter file name');
               if(!name){
                     return;
               }
               var path      = ui.rd.path();
-              var result    = callback('file','add',path,name);
+              var result    = await callback('file','add',path,name);
               if(result===false){
                     return;
               }
@@ -288,7 +288,7 @@ mod.filenav   = function(){
         }//add
         
         
-        btn.file.rem    = function(){
+        btn.file.rem    = async function(){
           
               if(!cur.type){
                     return;
@@ -299,7 +299,7 @@ mod.filenav   = function(){
               
               var path      = ui.rd.path();
               var name      = cur.file;
-              var result    = callback('file','rem',path,name);
+              var result    = await callback('file','rem',path,name);
               if(result===false){
                     return;
               }
@@ -309,14 +309,14 @@ mod.filenav   = function(){
         }//rem
         
   
-        btn.dir.add   = function(){
+        btn.dir.add   = async function(){
           
               var name    = window.prompt('enter dir name');
               if(!name){
                     return;
               }
               var path      = $(ui.path).textContent.trim();
-              var result    = callback('dir','add',path,name);
+              var result    = await callback('dir','add',path,name);
               if(result===false){
                     return;
               }
@@ -326,7 +326,7 @@ mod.filenav   = function(){
         }//add
 
         
-        btn.dir.rem   = function(){
+        btn.dir.rem   = async function(){
           
               if(!cur.type){
                     return;
@@ -337,7 +337,7 @@ mod.filenav   = function(){
               
               var path      = ui.rd.path();
               var name      = cur.file;
-              var result    = callback('dir','rem',path,name);
+              var result    = await callback('dir','rem',path,name);
               if(result===false){
                     return;
               }
@@ -347,7 +347,7 @@ mod.filenav   = function(){
         }//rem
         
         
-        btn.dir.parent    = function(){
+        btn.dir.parent    = async function(){
           
               var path    = ui.rd.path();
               path        = path.slice(0,-1);
@@ -358,7 +358,7 @@ mod.filenav   = function(){
               }
               path        = path.slice(0,i+1);
                                                                                 console.log('btn.dir.parent',path);
-              var result    = callback('dir','parent',path);
+              var result    = await callback('dir','parent',path);
               if(result===false){
                     return;
               }
