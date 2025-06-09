@@ -571,11 +571,11 @@ mod.filenav   = function(){
         file.add    = async function(path,filename){
           
               var file      = path+filename;
-              var result    = await mkfile(file);
+              var result    = await server.mkfile(file);
               if(!result){
                     return;
               }
-              readdir(path);
+              server.readdir(path);
               
         }//add
         
@@ -583,18 +583,18 @@ mod.filenav   = function(){
         file.rem    = async function(path,filename){
           
               var file      = path+filename;
-              var result    = await rmdir(file);
+              var result    = await server.rmdir(file);
               if(!result){
                     return;
               }
-              readdir(path);
+              server.readdir(path);
               
         }//rem
         
         
         dir.parent    = function(path){
                                                                                 console.log('dir.parent',path);
-              readdir(path);
+              server.readdir(path);
               
         }//parent
         
@@ -602,7 +602,7 @@ mod.filenav   = function(){
         dir.add   = async function(path,name){
                                                                                 console.log('dir.add',path,name);
               var dir       = path+name;
-              var result    = await mkdir(dir);
+              var result    = await server.mkdir(dir);
               if(!result){
                     return;
               }
@@ -614,7 +614,7 @@ mod.filenav   = function(){
         dir.rem   = async function(path,name){
                                                                                 console.log('dir.rem',path,name);          
               var dir       = path+name;
-              var result    = await rmdir(dir);
+              var result    = await server.rmdir(dir);
               if(!result){
                     return;
               }
