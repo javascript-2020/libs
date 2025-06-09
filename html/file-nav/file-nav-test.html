@@ -175,7 +175,7 @@
               filenav.display('tmp/',dirs,files);
 */
 
-              filenav.server.readdir('/');
+              filenav.server.readdir(url,auth,'/');
               
         }//ready
 
@@ -192,9 +192,11 @@
         file.dblclick   = function(path,filename){
                                                                                 console.log('file.dblclick',path,filename);
         }//dblclick
+
         
-/*
         file.add    = async function(path,filename){
+              
+              return {url,auth};
           
               var file      = path+filename;
               var result    = await mkfile(file);
@@ -208,6 +210,8 @@
         
         file.rem    = async function(path,filename){
           
+              return {url,auth};
+              
               var file      = path+filename;
               var result    = await rmdir(file);
               if(!result){
@@ -220,10 +224,13 @@
         
         dir.parent    = function(path){
                                                                                 console.log('dir.parent',path);
+              return {url,auth};
+              
               readdir(path);
               
         }//parent
-*/        
+
+        
         
         dir.click   = function(path,filename){
                                                                                 console.log('dir.click',path,filename);
@@ -233,14 +240,20 @@
         
         dir.dblclick    = function(path,filename){
                                                                                 console.log('dir.dblclick',path,filename);
+              return {url,auth};
+
+              
               path   += filename;
               readdir(path);
               
         }//dblclick
         
-/*        
+        
         dir.add   = async function(path,name){
                                                                                 console.log('dir.add',path,name);
+              return {url,auth};
+
+              
               var dir       = path+name;
               var result    = await mkdir(dir);
               if(!result){
@@ -253,6 +266,9 @@
         
         dir.rem   = async function(path,name){
                                                                                 console.log('dir.rem',path,name);          
+              return {url,auth};
+
+              
               var dir       = path+name;
               var result    = await rmdir(dir);
               if(!result){
@@ -261,7 +277,6 @@
               readdir(path);
               
         }//rem
-*/        
 
         
   //:
