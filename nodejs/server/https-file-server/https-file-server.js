@@ -47,18 +47,14 @@ https-file-server:d
                     }
               }
               
-              var url   = req.url.slice(1);
-              var fn    = path.resolve(abs,url);
+              var url     = req.url.slice(1);
+              var fn      = path.resolve(abs,url);
 
-              if(!fs.existsSync(fn)){
-                    notfound(req,res);
-                    return;
-              }
-              
               var mode    = req.headers.mode;
                                                                                 console.log(mode,fn);
               switch(mode){
               
+                case 'mkdir'      : mkdir(req,res,fn);          break;
                 case 'readdir'    : readdir(req,res,fn);        break;
                 case 'load'       : load(req,res,fn);           break;
                 case 'save'       : save(req,res,fn);           break;
@@ -102,8 +98,38 @@ https-file-server:d
   //:
   
         
+        function mkdir(req,res,fn){
+        
+              var err;
+              try{
+              
+                    fs.mkdirSync(fn,{recursive:true});
+                    
+              }
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }
+              if(err){
+                    res.writeHead(400);
+                    res.end(err.toString());
+                    return;
+              }
+              
+              res.writeHead(200);
+              res.end();
+                  
+        }//mkdir
+
+        
         function readdir(req,res,fn){
         
+              if(!fs.existsSync(fn)){
+                    notfound(req,res);
+                    return;
+              }
+              
               var dirs    = [];
               var files   = [];
               
@@ -133,7 +159,12 @@ https-file-server:d
         
         
         function load(req,res,fn){
-        
+
+              if(!fs.existsSync(fn)){
+                    notfound(req,res);
+                    return;
+              }
+              
               var mime      = getmime(fn);
               var stream    = fs.createReadStream(fn);
 
@@ -146,6 +177,11 @@ https-file-server:d
         
         function save(req,res,fn){
 
+              if(!fs.existsSync(fn)){
+                    notfound(req,res);
+                    return;
+              }
+              
               var stream    = fs.createWriteStream(fn);
               req.pipe(stream);
               req.on('end',()=>{
