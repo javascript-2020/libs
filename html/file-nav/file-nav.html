@@ -161,7 +161,12 @@ mod.filenav   = function(){
         
         
   //vars:-
+
     
+        var url     = 'https://localhost:3000/';
+        var uath    = 'matt-123';
+
+        
         var filenav         = obj;
         
         obj.file            = {};
@@ -573,11 +578,11 @@ mod.filenav   = function(){
         file.add    = async function(path,filename){
           
               var file      = path+filename;
-              var result    = await server.mkfile(file);
+              var result    = await server.mkfile(url,auth,file);
               if(!result){
                     return;
               }
-              server.readdir(path);
+              server.readdir(url,auth,path);
               
         }//add
         
@@ -585,18 +590,18 @@ mod.filenav   = function(){
         file.rem    = async function(path,filename){
           
               var file      = path+filename;
-              var result    = await server.rmdir(file);
+              var result    = await server.rmdir(url,auth,file);
               if(!result){
                     return;
               }
-              server.readdir(path);
+              server.readdir(url,auth,path);
               
         }//rem
         
         
         dir.parent    = function(path){
                                                                                 console.log('dir.parent',path);
-              server.readdir(path);
+              server.readdir(url,auth,path);
               
         }//parent
         
@@ -604,11 +609,11 @@ mod.filenav   = function(){
         dir.add   = async function(path,name){
                                                                                 console.log('dir.add',path,name);
               var dir       = path+name;
-              var result    = await server.mkdir(dir);
+              var result    = await server.mkdir(url,auth,dir);
               if(!result){
                     return;
               }
-              server.readdir(path);
+              server.readdir(url,auth,path);
               
         }//add
         
@@ -616,18 +621,18 @@ mod.filenav   = function(){
         dir.rem   = async function(path,name){
                                                                                 console.log('dir.rem',path,name);          
               var dir       = path+name;
-              var result    = await server.rmdir(dir);
+              var result    = await server.rmdir(url,auth,dir);
               if(!result){
                     return;
               }
-              server.readdir(path);
+              server.readdir(url,auth,path);
               
         }//rem
         
   //:
   
   
-        server.mkfile   = async function(path){
+        server.mkfile   = async function(url,auth,path){
 
               var headers   = {mode:'mkfile',auth};
               var full      = url+path;
@@ -639,13 +644,12 @@ mod.filenav   = function(){
                     alert(`mkfile : ${path}\n${txt}`);
                     return;
               }
-              
               return true;
               
         }//mkfile
         
         
-        server.rmfile   = async function(path){
+        server.rmfile   = async function(url,auth,path){
           
               var headers   = {mode:'rmdir',auth};
               var full      = url+path;
@@ -663,7 +667,7 @@ mod.filenav   = function(){
         }//rmfile
         
         
-        server.rmdir    = async function(path){
+        server.rmdir    = async function(url,auth,path){
           
               var headers     = {mode:'rmdir',auth};              
               var full        = url+path;
@@ -681,7 +685,7 @@ mod.filenav   = function(){
         }//rmdir
         
         
-        server.mkdir    = async function(path){
+        server.mkdir    = async function(url,auth,path){
 
               var headers     = {mode:'mkdir'};
               headers.auth    = auth;
@@ -701,7 +705,7 @@ mod.filenav   = function(){
         }//mkdir
 
         
-        server.readdir    = async function(path){
+        server.readdir    = async function(url,auth,path){
 
               var headers     = {mode:'readdir'};
               headers.auth    = auth;
