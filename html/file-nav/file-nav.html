@@ -183,6 +183,9 @@ mod.filenav   = function(){
         
         var ui              = {};
         
+        ui.rd               = {};
+        ui.rd.path          = ()=>$(ui.path).textContent.trim();
+        
         ui.dir              = {};
         ui.dir.root         = null;
         ui.dir.list         = null;
@@ -261,6 +264,18 @@ mod.filenav   = function(){
 
         
         btn.dir.rem   = function(){
+          
+              if(!cur.type){
+                    return;
+              }
+              if(cur.type!='dir'){
+                    return;
+              }
+              var path        = ui.rd.path();
+              var filename    = cur.file.filename;
+              
+              callback('dir','rem',path,filename);
+              
         }//rem
         
         
