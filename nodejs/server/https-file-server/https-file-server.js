@@ -71,7 +71,7 @@ https-file-server:d
                     return;
               }
 
-              cors.header();              
+              cors.header(res);              
               res.end();
               
               return true;
