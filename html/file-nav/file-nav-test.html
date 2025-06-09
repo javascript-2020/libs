@@ -215,7 +215,6 @@
         
         dir.add   = async function(path,name){
           
-              console.log('dir.add',`[${path}]`,`[${name}]`);
               var dir       = path+name;
               var result    = await mkdir(dir);
               if(!result){
@@ -226,9 +225,16 @@
         }//add
         
         
-        dir.rem   = function(path,name){
+        dir.rem   = async function(path,name){
           
               console.log('dir.rem',`[${path}]`,`[${name}]`);
+              return;
+              var dir   = path+name;
+              var result    = await rmdir(dir);
+              if(!result){
+                    return;
+              }
+              readdir(path);
               
         }//rem
         
