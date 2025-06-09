@@ -477,7 +477,8 @@ mod.filenav   = function(){
 
 
         function callback(type,name,arg0){
-          
+                                                                                console.log('callback');
+                                                                                console.json(arguments);
               var args    = [...arguments].slice(2);
               
               if(typeof(obj[type][name])=='function'){
