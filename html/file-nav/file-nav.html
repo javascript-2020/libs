@@ -409,7 +409,7 @@ mod.filenav   = function(){
                                                                                 //var nn    = Object.keys(display.node[name]).length;
                                                                                 //debug(name,nn);
               evt.click   = function(item,filename){
-                                                                                console.log('click',name);
+                                                                                console.log('click',name,path);
                     var type    = 'file';
                     
                     if(cur.item!==item){
@@ -424,7 +424,7 @@ mod.filenav   = function(){
                     }
                     
                     
-                    if(name==='dirs'){
+                    if(name==='dir'){
                           type        = 'dir';
                           filename   += '/';
                     }
@@ -437,7 +437,7 @@ mod.filenav   = function(){
               evt.dblclick    = function(item,filename){
 
                     var type    = 'file';
-                    if(name==='dirs'){
+                    if(name==='dir'){
                           type        = 'dir';
                           filename   += '/';
                     }
