@@ -633,6 +633,7 @@ mod.filenav   = function(){
               server.readdir(url,auth,path);
               
         }//rem
+
         
   //:
   
@@ -641,8 +642,24 @@ mod.filenav   = function(){
 
               var headers   = {mode:'mkfile',auth};
               var full      = url+path;
+
+              var err;
+              try{
+                
+                    var res       = await fetch(full,{headers});
+                    
+              }
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }
+              if(err){
+                    var str   = err.toString();
+                    alert(`fetch error\n${str}`);
+                    return;
+              }
               
-              var res       = await fetch(full,{headers});
               var txt       = await res.text();
               
               if(!res.ok){
@@ -659,7 +676,23 @@ mod.filenav   = function(){
               var headers   = {mode:'rmdir',auth};
               var full      = url+path;
               
-              var res       = await fetch(full,{headers});
+              var err;
+              try{
+                
+                    var res       = await fetch(full,{headers});
+                    
+              }
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }
+              if(err){
+                    var str   = err.toString();
+                    alert(`fetch error\n${str}`);
+                    return;
+              }
+              
               var txt       = await res.text();
               
               if(!res.ok){
@@ -677,7 +710,23 @@ mod.filenav   = function(){
               var headers     = {mode:'rmdir',auth};              
               var full        = url+path;
               
-              var res         = await fetch(full,{headers});
+              var err;
+              try{
+                
+                    var res         = await fetch(full,{headers});
+                    
+              }
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }
+              if(err){
+                    var str   = err.toString();
+                    alert(`fetch error\n${str}`);
+                    return;
+              }
+              
               var txt         = await res.text();
               
               if(!res.ok){
@@ -692,12 +741,26 @@ mod.filenav   = function(){
         
         server.mkdir    = async function(url,auth,path){
 
-              var headers     = {mode:'mkdir'};
-              headers.auth    = auth;
-              
+              var headers     = {mode:'mkdir',auth};
               var full        = url+path;
               
-              var res         = await fetch(full,{headers});
+              var err;
+              try{
+                
+                    var res         = await fetch(full,{headers});
+                    
+              }
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }
+              if(err){
+                    var str   = err.toString();
+                    alert(`fetch error\n${str}`);
+                    return;
+              }
+              
               var txt         = await res.text();
               
               if(!res.ok){
@@ -712,12 +775,26 @@ mod.filenav   = function(){
         
         server.readdir    = async function(url,auth,path){
 
-              var headers     = {mode:'readdir'};
-              headers.auth    = auth;
-
+              var headers     = {mode:'readdir',auth};
               var full        = url+path;
+
+              var err;
+              try{
               
-              var res         = await fetch(full,{headers});
+                    var res         = await fetch(full,{headers});
+                    
+              }
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }
+              if(err){
+                    var str   = err.toString();
+                    alert(`fetch error\n${str}`);
+                    return;
+              }
+              
               var txt         = await res.text();
               
               if(!res.ok){
