@@ -32,8 +32,8 @@
         var filenav;
         
         
-        var auth        = 'matt-123';
         var url         = 'https://localhost:3000';
+        var auth        = 'matt-123';
 
         var fs    = {
           
@@ -44,7 +44,7 @@
         };
         
         
-        
+        var rd      = {};
         var file    = {};
         var dir     = {};
         
@@ -59,11 +59,12 @@
               
               
               filenav.initmod({$,datatype});
+              filenav.rd.params   = rd.params;
               
-              Object.assign(filenav.file,file);
+              //Object.assign(filenav.file,file);
               //filenav.file.click        = file.click;
               //filenav.file.dblclick     = file.dblclick;
-              Object.assign(filenav.dir,dir);
+              //Object.assign(filenav.dir,dir);
               //filenav.dir.click         = dir.click;
               //filenav.dir.dblclick      = dir.dblclick;
               //filenav.dir.parent        = dir.parent;
@@ -182,6 +183,16 @@
         
   //:
 
+
+        rd.params   = function(){
+          
+              return {url,auth};
+              
+        }//params
+        
+
+  //:
+  
   
         file.click    = function(path,filename){
                                                                                 console.log('file.click',path,filename);
