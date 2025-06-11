@@ -359,10 +359,11 @@ mod.filenav   = function(){
               path        = path.slice(0,i+1);
                                                                                 console.log('btn.dir.parent',path);
               var result    = await callback('dir','parent',path);
-              if(result===false){
+              if(!result){
                     return;
               }
-              var {url,auth}    = result;
+              var {url,auth}    = result;              
+              
               dir.parent(url,auth,path);
               
         }//parent
@@ -572,7 +573,24 @@ mod.filenav   = function(){
               if(typeof(obj[type][name])=='function'){
                     result    = obj[type][name].apply(null,args);
               }
-              return result;
+              
+              var url;
+              var auth;
+              
+              if(result){
+                    ({url,auth}   = result);
+              }
+              if(!url){
+                    if(typeof obj.rd.params=='function'){
+                          ({url,auth}   = obj.rd.params());
+                    }
+              }
+              if(!url){
+                    alert('url not given');
+                    return;
+              }
+              
+              return {url,auth};
               
         }//callback
 
