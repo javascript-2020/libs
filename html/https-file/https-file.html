@@ -188,6 +188,8 @@ mod.httpsfile   = function(){
 
         var rd          = {};
         var btn         = {};
+        var file        = {};
+        var dir         = {};
 
   
   //
@@ -200,8 +202,8 @@ mod.httpsfile   = function(){
               
               filenav.initmod({$,datatype});
               filenav.rd.params         = rd.params;
-              filenav.click             = click;
-              filenav.dblclick          = dblclick;
+              filenav.file.click        = file.click;
+              filenav.file.dblclick     = file.dblclick;
               
               filenav.init();
               
@@ -456,12 +458,12 @@ mod.httpsfile   = function(){
 */        
         
         
-        function click(path,type,filename){
+        file.click    = function(path,type,filename){
                                                                                 console.log('click',type,path);
         }//click
         
         
-        function dblclick(path,type,filename){
+        file.dblclick   = function(path,type,filename){
                                                                                 console.log('dblclick',type,path,filename);
               var url   = build.path(path,type,filename);
               
