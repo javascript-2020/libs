@@ -187,9 +187,11 @@ mod.httpsfile   = function(){
 
 
         var btn         = {};
-        
+        var rd          = {};
+
   
   //
+
   
         obj.init    = function(){
 
@@ -197,10 +199,9 @@ mod.httpsfile   = function(){
               filenav                   = mod.filenav();
               
               filenav.initmod({$,datatype});
-              
+              filenav.rd.params         = rd.params;
               filenav.click             = click;
               filenav.dblclick          = dblclick;
-              filenav.parent            = parent;
               
               filenav.init();
               
@@ -306,6 +307,18 @@ mod.httpsfile   = function(){
 
           
         }//initdom
+        
+        
+  //:
+  
+  
+        rd.params   = function(){
+          
+              var url     = ui.url.value;
+              var auth    = ui.auth.value;
+              return {url,auth};
+              
+        }//params
 
         
   //:    
