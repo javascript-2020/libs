@@ -353,10 +353,10 @@ mod.httpsfile   = function(){
         
         
         btn.dir   = function(){
-          
+                                                                                console.log('btn.dir');
               var url       = ui.url.value;
-              console.log(url);
-              readdir(url);              
+              var auth      = ui.auth.value;
+              filenav.server.readdir(url,auth);
               
         }//dir
         
@@ -506,87 +506,6 @@ mod.httpsfile   = function(){
         }//save
         
         
-        async function readdir(url){
-                                                                                console.log('readdir',url);
-              var headers   = {mode:'readdir'};
-              
-              if(ui['auth-chk'].checked){
-                    var auth        = ui.auth.value;
-                    headers.auth    = auth;
-              }
-              
-              var res       = await fetch(url,{headers});
-              var txt       = await res.text();
-              if(!res.ok){
-                    alert('readdir :'+url+'\n'+txt);
-                    return false;
-              }
-              var json    = JSON.parse(txt);
-              
-              var parts   = new URL(url);
-              var path    = parts.pathname;
-              console.log('readdir','path',path);
-              filenav.display(path,json.dirs,json.files);
-          
-        }//readdir
-        
-        
-        async function mkdir(url){
-          
-              var headers   = {mode:'mkdir'};
-              
-              if(ui['auth-chk'].checked){
-                    var auth        = ui.auth.value;
-                    headers.auth    = auth;
-              }
-              
-              var res       = await fetch(url,{headers});
-              var txt       = await res.text();
-              if(!res.ok){
-                    alert('mkdir :'+url+'\n'+txt);
-                    return false;
-              }
-
-              var json    = JSON.parse(txt);
-              
-              var url         = build(url,json.cwd);
-              ui.url.value    = url
-              
-              display.clear();
-              display('dirs',json.dirs);
-              display('files',json.files,url);
-          
-        }//mkdir
-        
-        
-        async function del(url){
-          
-              var headers   = {mode:'del'};
-
-              if(ui['auth-chk'].checked){
-                    var auth        = ui.auth.value;
-                    headers.auth    = auth;
-              }
-              
-              var res       = await fetch(url,{headers});
-              var txt       = await res.text();
-              if(!res.ok){
-                    alert('del :'+url+'\n'+txt);
-                    return false;
-              }
-
-              var json    = JSON.parse(txt);
-
-              var url         = build(url,json.cwd);
-              ui.url.value    = url
-              
-              display.clear();
-              display('dirs',json.dirs);
-              display('files',json.files,url);
-              
-        }//del
-
-
   //:
   
 
