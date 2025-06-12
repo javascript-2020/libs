@@ -24,7 +24,7 @@
 
     #new-file-root
           {position:absolute;top:5px;left:0;right:0;height:0;overflow:hidden;transition:0.5s;display:flex;flex-direction:column;
-            box-sizing:border-box;background:white;border-bottom:1px solid lightgray;z-index:1}
+            box-sizing:border-box;background:white;border-bottom:1px solid lightgray;z-index:1;display:none}
     #new-file-label
           {font-size:14px}
     #new-file-hldr
@@ -1032,7 +1032,8 @@ function newfilemod(){
           
               var promise   = new Promise(res=>resolve=res);
               
-              root.style.height   = h+'px';
+              root.style.display    = 'block';
+              root.style.height     = h+'px';
               filename.focus();
               
               return promise;
@@ -1044,7 +1045,9 @@ function newfilemod(){
         
         function hide(){
           
-              root.style.height   = 0;
+              root.style.display    = '';
+              root.style.height     = 0;
+              
               filename.value      = '';
               filename.blur();
               resolve();
