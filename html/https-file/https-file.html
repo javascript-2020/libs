@@ -247,29 +247,13 @@ mod.httpsfile   = function(){
               }
               
               
-              //$(node,'#parent-dir').onclick                     = btn.parent;
               $(node,'[value=load]').onclick                    = btn.load;
               $(node,'[value=save]').onclick                    = btn.save;
               $(node,'[value=dir]').onclick                     = btn.dir;
-              //$(node,'[value=mkdir').onclick                    = btn.mkdir;
-              //$(node,'[value=del').onclick                      = btn.del;
 
 
               filenav.initdom(shadow);
               
-/*
-              ui.root.dir                                       = $(node,'#dir-list-root');
-              
-              ui.root.dirs                                      = $(ui.root.dir,'#dirs-list');
-              ui.item.dirs                                      = $(ui.root.dirs,'.dir');
-              ui.item.dirs.remove();
-              
-              ui.root.files                                     = $(ui.root.dir,'#files-list');
-              ui.item.files                                     = $(ui.root.files,'.file');
-              ui.item.files.remove();
-*/              
-
-          
         }//initdom
         
         
@@ -376,22 +360,6 @@ mod.httpsfile   = function(){
               
         }//dir
         
-/*
-        btn.mkdir   = function(){
-          
-              var url   = ui.url.value;
-              mkdir(url);
-              
-        }//mkdir
-        
-        
-        btn.del   = function(){
-          
-              var url   = ui.url.value;
-              del(url);
-              
-        }//del
-*/        
         
   //:
   
@@ -403,23 +371,14 @@ mod.httpsfile   = function(){
         }//callback
         
 
-/*        
-        function parent(path){
-                                                                                console.log('parent',path);
-              var url   = build.path(path,'dir');
-              readdir(url);
-              
-        }//parent
-*/        
-        
-        
-        file.click    = function(path,type,filename){
-                                                                                console.log('click',type,path);
+        file.click    = function(path,filename){
+                                                                                console.log('file.click',path,filename);
         }//click
         
         
-        file.dblclick   = function(path,type,filename){
-                                                                                console.log('dblclick',type,path,filename);
+        file.dblclick   = function(path,filename){
+                                                                                console.log('file.dblclick',path,filename);
+                                                                                
               var url   = build.path(path,type,filename);
               
               if(type=='dir'){
