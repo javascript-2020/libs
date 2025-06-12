@@ -426,7 +426,13 @@ mod.httpsfile   = function(){
         
         async function load(file){
 
-              var url       = file.path;          
+              console.log('load');
+              console.json(file);
+              
+              var url       = file.path;
+              
+              
+              return;
                                                                                 console.log('load',url);
               var result    = await loadfile(url);
               if(result===false){
