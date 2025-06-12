@@ -171,6 +171,9 @@ mod.filenav   = function(){
     
         var filenav         = obj;
         
+        var def             = {};
+        def.path            = '/';
+        
         obj.rd              = {};
         obj.file            = {};
         obj.dir             = {};
@@ -185,14 +188,14 @@ mod.filenav   = function(){
         var shadow;
         
         var cur             = {};
+        cur.type            = null;
         cur.item            = null;
         cur.file            = null;
-        cur.type            = null;
         cur.set             = (item,file,type)=>{
           
+                                    cur.type    = type;
                                     cur.item    = item;
                                     cur.file    = file;
-                                    cur.type    = type;
                                     
                               }//set
         cur.rem             = ()=>{
@@ -243,6 +246,7 @@ mod.filenav   = function(){
               
               $(shadow,'#update').onclick               = btn.update;
               ui.path                                   = $(shadow,'#path');
+              ui.path.textContent                       = def.path;
               
               var view                                  = $(shadow,'#view');
               
