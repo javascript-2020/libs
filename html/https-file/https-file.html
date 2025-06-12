@@ -285,12 +285,12 @@ mod.httpsfile   = function(){
               ui['auth-chk']                                    = $(node,'#auth-chk');
               
               
-              $(node,'#parent-dir').onclick                     = btn.parent;
+              //$(node,'#parent-dir').onclick                     = btn.parent;
               $(node,'[value=load]').onclick                    = btn.load;
               $(node,'[value=save]').onclick                    = btn.save;
               $(node,'[value=dir]').onclick                     = btn.dir;
-              $(node,'[value=mkdir').onclick                    = btn.mkdir;
-              $(node,'[value=del').onclick                      = btn.del;
+              //$(node,'[value=mkdir').onclick                    = btn.mkdir;
+              //$(node,'[value=del').onclick                      = btn.del;
 
 
               filenav.initdom(shadow);
@@ -414,17 +414,10 @@ mod.httpsfile   = function(){
               
         }//dir
         
-
+/*
         btn.mkdir   = function(){
           
               var url   = ui.url.value;
-              /*
-              if(!url.endsWith('/')){
-                    alert('url does not appear to be a directory ( endsWith / )');
-                    return;
-              }
-              */
-              
               mkdir(url);
               
         }//mkdir
@@ -436,7 +429,7 @@ mod.httpsfile   = function(){
               del(url);
               
         }//del
-        
+*/        
         
   //:
   
