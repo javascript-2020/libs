@@ -179,7 +179,7 @@ mod.filenav   = function(){
         var server          = {};
         obj.server          = server;
         
-        Object.defineProperty(obj,'path',{set(v){ui.path.textContent    = v},get(){ui.path.textContent.trim()}});
+        Object.defineProperty(obj,'path',{set(v){ui.path.textContent    = v},get(){return ui.path.textContent.trim()}});
         
         var root;
         var shadow;
