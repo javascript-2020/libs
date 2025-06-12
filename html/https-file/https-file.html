@@ -356,7 +356,9 @@ mod.httpsfile   = function(){
                                                                                 console.log('btn.dir');
               var url       = ui.url.value;
               var auth      = ui.auth.value;
-              filenav.server.readdir(url,auth);
+              var path      = filenav.path;
+                                                                                console.log(url,auth,path);
+              filenav.server.readdir(url,auth,path);
               
         }//dir
         
