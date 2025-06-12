@@ -179,6 +179,7 @@ mod.filenav   = function(){
         var server          = {};
         obj.server          = server;
         
+        Object.defineProperty(obj,'path',{set(v){ui.path.textContent    = v},get(){ui.path.textContent.trim()});
         
         var root;
         var shadow;
@@ -278,11 +279,13 @@ mod.filenav   = function(){
         btn.update    = async function(){
           
               var path    = ui.rd.path();
+              
               var result    = await callback('dir','read',path);
               if(result===false){
                     return;
               }
               var {url,auth}    = result;
+              
               dir.read(url,auth,path);
               
         }//update
@@ -296,11 +299,13 @@ mod.filenav   = function(){
               }
               
               var path      = ui.rd.path();
+              
               var result    = await callback('file','add',path,name);
               if(result===false){
                     return;
               }
               var {url,auth}    = result;
+              
               file.add(url,auth,path,name);
               
         }//add
@@ -317,11 +322,13 @@ mod.filenav   = function(){
               
               var path      = ui.rd.path();
               var name      = cur.file;
+              
               var result    = await callback('file','rem',path,name);
               if(result===false){
                     return;
               }
               var {url,auth}    = result;
+              
               file.rem(url,auth,path,name);
               
         }//rem
@@ -335,11 +342,13 @@ mod.filenav   = function(){
               }
               
               var path      = ui.rd.path();
+              
               var result    = await callback('dir','add',path,name);
               if(result===false){
                     return;
               }
               var {url,auth}    = result;
+              
               dir.add(url,auth,path,name);
               
         }//add
@@ -356,11 +365,13 @@ mod.filenav   = function(){
               
               var path      = ui.rd.path();
               var name      = cur.file;
+              
               var result    = await callback('dir','rem',path,name);
               if(result===false){
                     return;
               }
               var {url,auth}    = result;
+              
               dir.rem(url,auth,path,name);
               
         }//rem
