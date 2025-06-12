@@ -240,7 +240,7 @@ mod.filenav   = function(){
               root                                      = $.$(rootnode,'file-nav');
               shadow                                    = root.shadowRoot;
               
-              $('#update').onclick                      = btn.update;
+              $(shadow,'#update').onclick               = btn.update;
               ui.path                                   = $(shadow,'#path');
               
               var view                                  = $(shadow,'#view');
