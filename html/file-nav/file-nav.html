@@ -932,6 +932,8 @@ function newfilemod(){
   
         var resolve;
         
+        var h   = 42;
+        
         var root;
         var filename;
 
@@ -981,7 +983,7 @@ function newfilemod(){
           
               var promise   = new Promise(res=>resolve=res);
               
-              root.style.height   = '32px';
+              root.style.height   = h+'px';
               filename.focus();
               
               return promise;
