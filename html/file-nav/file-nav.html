@@ -240,6 +240,7 @@ mod.filenav   = function(){
               root                                      = $.$(rootnode,'file-nav');
               shadow                                    = root.shadowRoot;
               
+              $('#update').onclick                      = btn.update;
               ui.path                                   = $(shadow,'#path');
               
               var view                                  = $(shadow,'#view');
@@ -274,12 +275,26 @@ mod.filenav   = function(){
   //:
   
   
+        btn.update    = function(){
+          
+              var path    = ui.rd.path();
+              var result    = await callback('dir','read',path);
+              if(result===false){
+                    return;
+              }
+              var {url,auth}    = result;
+              dir.read(url,auth,path);
+              
+        }//update
+        
+        
         btn.file.add    = async function(){
           
               var name    = window.prompt('enter file name');
               if(!name){
                     return;
               }
+              
               var path      = ui.rd.path();
               var result    = await callback('file','add',path,name);
               if(result===false){
@@ -318,7 +333,8 @@ mod.filenav   = function(){
               if(!name){
                     return;
               }
-              var path      = $(ui.path).textContent.trim();
+              
+              var path      = ui.rd.path();
               var result    = await callback('dir','add',path,name);
               if(result===false){
                     return;
@@ -623,6 +639,13 @@ mod.filenav   = function(){
               server.readdir(url,auth,path);
               
         }//rem
+        
+        
+        dir.read    = function(url,auth,path){
+                                                                                console.log('dir.read',path);
+              server.readdir(url,auth,path);
+              
+        }//read
         
         
         dir.parent    = function(url,auth,path){
