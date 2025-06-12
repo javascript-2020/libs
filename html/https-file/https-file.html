@@ -321,9 +321,14 @@ mod.httpsfile   = function(){
   
         btn.load    = function(){
                                                                                 console.log('btn.load');
-              var path        = filenav.path;
-              var filename    = '';
+              if(!filenav.cur.filename){
+                    alert('no file selected');
+                    return;
+              }
               
+              var path        = filenav.cur.path;
+              var filename    = filenav.cur.filename;
+                                                                                console.log(path,filename);
               var url   = build.path('file',path,filename);
               load.ui(url);
               
@@ -332,11 +337,16 @@ mod.httpsfile   = function(){
         
         btn.save    = async function(){
 
+              if(!filenav.cur.filename){
+                    alert('no file selected');
+                    return;
+              }
+              
               var txt         = editor.getValue();
               
               var url         = ui.url.value;
-              var path        = filenav.path;
-              var filename    = '';
+              var path        = filenav.cur.path;
+              var filename    = filenav.cur.filename;
               var title       = `${url}\n${path}\n${filename}`;
               
               var file        = {};
