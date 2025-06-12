@@ -390,8 +390,8 @@ mod.httpsfile   = function(){
         
         file.dblclick   = function(path,filename){
                                                                                 console.log('file.dblclick',path,filename);
-              var url   = build.path('file',path,filename);
-              load.ui(url);
+              var url   = ui.url.value;
+              load.ui(url,path,filename);
               
         }//dblclick
         
@@ -399,16 +399,16 @@ mod.httpsfile   = function(){
   //:
 
 
-        load.ui   = async function(url){
-                                                                                console.log('load.ui',url);
-              var i           = url.lastIndexOf('/');
-              var filename    = url.slice(i+1);
-                                                                                console.log(filename);
+        load.ui   = async function(url,path,filename){
+                                                                                console.log('load.ui',url,path,filename);
+              var full        = url+path+filename;
+                                                                                console.log(full);
               var file        = {};
               file.type       = typename;
+              file.url        = url;
+              file.path       = path;
               file.filename   = filename;
-              file.path       = url;
-              file.title      = url;
+              file.title      = full;
               file.icon       = icon.src;
                             
               var result      = await load(file);
@@ -425,16 +425,14 @@ mod.httpsfile   = function(){
         obj.load    = function(file){return load(file)}   //d
         
         async function load(file){
-
-              console.log('load');
-              console.json(file);
-              
-              var url       = file.path;
-              
-              
-              return;
-                                                                                console.log('load',url);
-              var result    = await loadfile(url);
+                                                                                console.log('load');
+                                                                                console.json(file);
+              var url         = file.url;
+              var path        = file.path;
+              var filename    = file.filename;
+              var full        = url+path+filename;
+                                                                                console.log('load',full);
+              var result    = await loadfile(full);
               if(result===false){
                     return false;
               }
