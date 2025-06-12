@@ -525,7 +525,9 @@ mod.httpsfile   = function(){
               
               if(filename){
                     if(type=='dir'){
-                          filename   += '/';
+                          if(!filename.endsWith('/')){
+                                filename   += '/';
+                          }
                     }
                     url  += filename;
               }
