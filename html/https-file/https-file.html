@@ -380,10 +380,7 @@ mod.httpsfile   = function(){
         
         file.dblclick   = function(path,filename){
                                                                                 console.log('file.dblclick',path,filename);
-              return;
-              
               var url   = build.path('file',path,filename);
-              
               load.ui(url);
               
         }//dblclick
