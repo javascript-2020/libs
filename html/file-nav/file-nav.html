@@ -549,7 +549,16 @@ mod.filenav   = function(){
                           filename   += '/';
                     }
                                                                                 debug('dblclick',path,name,filename);
-                    callback(type,'dblclick',path,filename);
+                    var result    = callback(type,'dblclick',path,filename);
+                    if(!result){
+                          return;
+                    }
+                    
+                    if(type=='dir'){
+                          var {url,auth}    = result;
+                          var path2         = path+filename;
+                          dir.read(url,auth,path2);
+                    }
                     
               }//dblclick
               
