@@ -191,7 +191,7 @@ mod.filenav   = function(){
         cur.type            = null;
         cur.item            = null;
         cur.file            = null;
-        cur.set             = (item,file,type)=>{
+        cur.set             = (type,item,file)=>{
           
                                     cur.type    = type;
                                     cur.item    = item;
@@ -539,7 +539,7 @@ mod.filenav   = function(){
                                 cur.item.style.background    = '';
                           }
                           item.style.background   = 'lightyellow';
-                          cur.set(item,filename,name);
+                          cur.set(name,item,filename);
                     }else{
                           item.style.background   = '';
                           cur.rem();
