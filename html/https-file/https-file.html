@@ -321,7 +321,7 @@ mod.httpsfile   = function(){
   
         btn.load    = function(){
                                                                                 console.log('btn.load');
-              if(!filenav.cur.filename){
+              if(filenav.cur.type!=='file'){
                     alert('no file selected');
                     return;
               }
@@ -337,7 +337,7 @@ mod.httpsfile   = function(){
         
         btn.save    = async function(){
 
-              if(!filenav.cur.filename){
+              if(filenav.cur.type!=='file'){
                     alert('no file selected');
                     return;
               }
