@@ -188,21 +188,25 @@ mod.filenav   = function(){
         var shadow;
         
         var cur             = {};
+        obj.cur             = cur;
         cur.type            = null;
         cur.item            = null;
+        cur.path            = null;
         cur.file            = null;
-        cur.set             = (type,item,file)=>{
+        cur.set             = (type,item,path,file)=>{
           
                                     cur.type    = type;
                                     cur.item    = item;
+                                    cur.path    = path;
                                     cur.file    = file;
                                     
                               }//set
         cur.rem             = ()=>{
                               
-                                    cur.item    = null;
-                                    cur.file    = null;
                                     cur.type    = null;
+                                    cur.item    = null;
+                                    cur.path    = null;
+                                    cur.file    = null;
                                     
                               }//rem
         
@@ -539,7 +543,9 @@ mod.filenav   = function(){
                                 cur.item.style.background    = '';
                           }
                           item.style.background   = 'lightyellow';
-                          cur.set(name,item,filename);
+                          
+                          var path    = ui.rd.path();
+                          cur.set(name,item,path,filename);
                     }else{
                           item.style.background   = '';
                           cur.rem();
