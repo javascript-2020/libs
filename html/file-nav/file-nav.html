@@ -206,7 +206,7 @@ mod.filenav   = function(){
                                     cur.type        = null;
                                     cur.item        = null;
                                     cur.path        = null;
-                                    cur.file        = null;
+                                    cur.filename    = null;
                                     
                               }//rem
         
@@ -329,7 +329,7 @@ mod.filenav   = function(){
               }
               
               var path      = ui.rd.path();
-              var name      = cur.file;
+              var name      = cur.filename;
               
               var result    = await callback('file','rem',path,name);
               if(result===false){
@@ -372,7 +372,7 @@ mod.filenav   = function(){
               }
               
               var path      = ui.rd.path();
-              var name      = cur.file;
+              var name      = cur.filename;
               
               var result    = await callback('dir','rem',path,name);
               if(result===false){
