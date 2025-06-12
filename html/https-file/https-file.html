@@ -227,6 +227,8 @@ mod.httpsfile   = function(){
               });
 
 
+
+
               ui.root.server                                    = $(node,'#server-root');
               
               $(ui.root.server,'[value=quit]').onclick          = btn.quit;
@@ -317,17 +319,12 @@ mod.httpsfile   = function(){
         }//paste
   
   
-        btn.parent    = function(){
-          
-              var url   = ui.url.value;
-              parent(url);
-              
-        }//parent
-        
-        
         btn.load    = function(){
                                                                                 console.log('btn.load');
-              var url         = ui.url.value;
+              var path        = filenav.path;
+              var filename    = '';
+              
+              var url   = build.path('file',path,filename);
               load.ui(url);
               
         }//load
@@ -336,14 +333,17 @@ mod.httpsfile   = function(){
         btn.save    = async function(){
 
               var txt         = editor.getValue();
+              
               var url         = ui.url.value;
-              var i           = url.lastIndexOf('/');
-              var filename    = url.slice(i+1);
-
+              var path        = filenav.path;
+              var filename    = '';
+              var title       = `${url}\n${path}\n${filename}`;
+              
               var file        = {};
               file.type       = 'https-file';
+              file.url        = url;
+              file.path       = path;
               file.filename   = filename;
-              file.path       = url;
               file.title      = url;
               file.icon       = icon.src;
               
