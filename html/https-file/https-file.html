@@ -447,9 +447,12 @@ mod.httpsfile   = function(){
         
         async function save(file,txt){
         
-              var url       = file.path;
+              var url         = file.url;
+              var path        = file.path;
+              var filename    = file.filename;
+              var full        = url+path+filename;
                                                                                 console.log('save',url);
-              var result    = await savefile(url,txt);
+              var result    = await savefile(full,txt);
               if(result===false){
                     return false;
               }
