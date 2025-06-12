@@ -1,6 +1,18 @@
 
 
 
+/*
+
+//getmime:d
+
+12-06-25
+
+
+*/
+
+        module.exports    = getmime;
+
+
 function getmime(file){
 
         var mime;
