@@ -72,7 +72,7 @@
                         </label>
                         <img class=copy>
                         <img class=paste>
-                        <input id=url spellcheck=false autocomplete=off value='https://localhost:3000/'>
+                        <input id=url spellcheck=false autocomplete=off value='https://localhost:3000'>
                   </div>
                   
                   <div id=auth-root>
@@ -129,6 +129,9 @@ mod.httpsfile   = function(){
         var filenav;
         
         var typename    = 'https-file';
+        
+        var url         = 'https://localhost:3000';
+        var auth        = 'matt-123';
         
         var root;
         var shadow;
@@ -232,10 +235,16 @@ mod.httpsfile   = function(){
               $(node,'.copy').onclick                           = btn.copy;
               $(node,'.paste').onclick                          = btn.paste;
               ui.url                                            = $(node,'#url');
+              if(url){
+                    ui.url.value                                = url;
+              }
 
               
-              ui.auth                                           = $(node,'#auth');
               ui['auth-chk']                                    = $(node,'#auth-chk');
+              ui.auth                                           = $(node,'#auth');
+              if(auth){
+                    ui.auth.value                               = auth;
+              }
               
               
               //$(node,'#parent-dir').onclick                     = btn.parent;
