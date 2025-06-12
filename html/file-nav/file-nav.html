@@ -23,8 +23,8 @@
           {flex:1;display:flex;border-top:1px solid lightgray;position:relative}
 
     #new-file-root
-          {position:absolute;top:0;left:0;right:0;height:0;overflow:hidden;transition:0.5s;display:flex;flex-direction:column;
-            box-sizing:border-box;background:white}
+          {position:absolute;top:5px;left:0;right:0;height:0;overflow:hidden;transition:0.5s;display:flex;flex-direction:column;
+            box-sizing:border-box;background:white;border-bottom:1px solid lightgray;z-index:1}
     #new-file-label
           {font-size:14px}
     #new-file-hldr
@@ -942,7 +942,7 @@ function newfilemod(){
   
         var resolve;
         
-        var h   = 42;
+        var h   = 60;
         
         var root;
         var filename;
