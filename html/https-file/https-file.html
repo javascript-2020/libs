@@ -378,8 +378,9 @@ mod.httpsfile   = function(){
         
         file.dblclick   = function(path,filename){
                                                                                 console.log('file.dblclick',path,filename);
-                                                                                
-              var url   = build.path(path,type,filename);
+              return;
+              
+              var url   = build.path(path,'file',filename);
               
               if(type=='dir'){
                     readdir(url);
