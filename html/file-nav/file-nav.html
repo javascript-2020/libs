@@ -275,7 +275,7 @@ mod.filenav   = function(){
   //:
   
   
-        btn.update    = function(){
+        btn.update    = async function(){
           
               var path    = ui.rd.path();
               var result    = await callback('dir','read',path);
