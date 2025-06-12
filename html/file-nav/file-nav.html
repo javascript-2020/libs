@@ -188,6 +188,8 @@ mod.filenav   = function(){
 
     
         var filenav         = obj;
+    
+        var newfile         = newfilemod();
         
         var def             = {};
         def.path            = '/';
@@ -255,6 +257,10 @@ mod.filenav   = function(){
   
         obj.init    = function(){
                                                                                 debug('init');
+              //newfile.initmod();
+              newfile.init();
+              
+              
         }//init
         
         
@@ -269,6 +275,8 @@ mod.filenav   = function(){
               $(shadow,'#update').onclick               = btn.update;
               ui.path                                   = $(shadow,'#path');
               ui.path.textContent                       = def.path;
+              
+              newfile.initdom(shadow);
               
               var view                                  = $(shadow,'#view');
               
@@ -319,7 +327,7 @@ mod.filenav   = function(){
         
         btn.file.add    = async function(){
           
-              var name    = window.prompt('enter file name');
+              var name    = await newfile.show();
               if(!name){
                     return;
               }
@@ -361,8 +369,8 @@ mod.filenav   = function(){
         
   
         btn.dir.add   = async function(){
-          
-              var name    = window.prompt('enter dir name');
+
+              var name    = await newfile.show();          
               if(!name){
                     return;
               }
@@ -901,7 +909,102 @@ mod.filenav   = function(){
               return true;
               
         }//readdir
+
   
+  //:
+
+
+function newfilemod(){  
+  
+  var obj   = {};
+  
+  
+        obj.init    = function(){
+        }//init
+        
+  
+  //:
+  
+  
+        var resolve;
+        
+        var root;
+        var filename;
+
+  
+        var btn   = {};
+        
+        
+  //:
+  
+  
+        obj.initdom   = function(rootnode){
+          
+              root                                  = $(rootnode,'#new-file-root');
+              
+              filename                              = $(root,'#new-file');
+              
+              $(root,'.new-file-add').onclick       = btn.ok;
+              $(root,'.new-file-cancel').onclick    = btn.cancel;
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+        btn.ok    = function(){
+          
+              var fn    = filename.value;
+              resolve(fn);
+              hide();
+              
+        }//ok
+        
+        
+        btn.cancel    = function(){
+          
+              hide();
+              
+        }//cancel
+        
+        
+  //:
+  
+  
+        obj.show    = function(){
+          
+              var promise   = new Promise(res=>resolve=res);
+              
+              root.style.height   = '32px';
+              filename.focus();
+              
+              return promise;
+              
+        }//show
+        
+        
+        obj.hide    = function(){return hide()}
+        
+        function hide(){
+          
+              root.style.height   = 0;
+              filename.value      = '';
+              resolve();
+              
+        }//hide
+        
+
+  //:
+  
+  
+  return obj;
+  
+//newfilemod
+}
+
+
   //:
   
   
