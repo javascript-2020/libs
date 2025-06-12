@@ -980,6 +980,23 @@ function newfilemod(){
   
         btn.ok    = function(){
           
+              ok();
+              
+        }//ok
+        
+        
+        btn.cancel    = function(){
+          
+              cancel();
+              
+        }//cancel
+        
+        
+  //:
+  
+  
+        function ok(){
+          
               var fn    = filename.value;
               resolve(fn);
               hide();
@@ -987,10 +1004,10 @@ function newfilemod(){
         }//ok
         
         
-        btn.cancel    = function(){
+        function cancel(){
           
               hide();
-              
+          
         }//cancel
         
         
