@@ -380,12 +380,7 @@ mod.httpsfile   = function(){
                                                                                 console.log('file.dblclick',path,filename);
               return;
               
-              var url   = build.path(path,'file',filename);
-              
-              if(type=='dir'){
-                    readdir(url);
-                    return;
-              }
+              var url   = build.path('file',path,filename);
               
               load.ui(url);
               
@@ -590,170 +585,23 @@ mod.httpsfile   = function(){
               display('files',json.files,url);
               
         }//del
-        
-/*        
-        async function parent(url){
-
-              var headers   = {mode:'parent'};
-
-              if(ui['auth-chk'].checked){
-                    var auth        = ui.auth.value;
-                    headers.auth    = auth;
-              }
-              
-              var res       = await fetch(url,{headers});
-              var txt       = await res.text();
-              if(!res.ok){
-                    alert('parent :'+url+'\n'+txt);
-                    return false;
-              }
-
-              var json    = JSON.parse(txt);
-
-              var url         = build(url,json.cwd);
-              ui.url.value    = url
-              
-              display.clear();
-              display('dirs',json.dirs);
-              display('files',json.files,url);
-
-        }//parent
-*/        
-
-        
-  //:
-
-
-
-
-
-/*
-  
-        display.clear   = function(){
-          
-              ui.root.dirs.replaceChildren();
-              ui.root.files.replaceChildren();
-              
-              display.nodes.dirs    = {};
-              display.nodes.files   = {};
-              
-              
-        }//clear
-        
-        
-        display.div           = {};
-        display.nodes         = {};
-        display.nodes.dirs    = {};
-        display.nodes.files   = {};
-        
-        
-        function display(name,list){
-
-              var url   = ui.url.value;
-              ui.root[name].onscroll    = e=>display(name,list);
-              
-              
-              var ih    = 25;
-              var pad   = 5;
-              
-              var n     = list.length;
-              var t     = n*ih;
-              
-              if(!display.div[name]){
-                    display.div[name]                  = document.createElement('div');
-                    display.div[name].style.cssText    = 'height:5px;background:lightblue;position:absolute;left:0;right:0';
-                    ui.root[name].append(display.div[name]);
-              }
-              display.div[name].style.top   = t+'px';
-              
-              var st    = ui.root[name].scrollTop;
-              var i1    = Math.floor(st/ih)-3;
-              if(i1<0){
-                    i1    = 0;
-              }
-              
-              var h     = ui.root[name].offsetHeight;
-              var nh    = Math.floor(h/ih)+3;
-              
-              var i2    = i1+nh;
-              if(i2>list.length){
-                    i2    = list.length;
-              }
-        
-              for(var key in display.nodes[name]){
-                
-                    if(key<i1 || key>=i2){
-                          display.nodes[name][key].remove();
-                          delete display.nodes[name][key];
-                    }
-                    
-              }//for
-                          
-              for(let i=i1;i<i2;i++){
-                
-                    if(!display.nodes[name][i]){
-                          let nitem                       = ui.item[name].cloneNode(true);
-                          let filename                    = list[i];
-                          $(nitem,'.name').textContent    = filename;
-                          nitem.style.cssText             = 'position:absolute;left:0;right:0';
-                          nitem.style.top                 = i*ih+'px';
-                          ui.root[name].append(nitem);
-                          display.nodes[name][i]          = nitem;
-                          
-                          nitem.onmouseenter              = e=>nitem.style.background   = 'lightyellow';
-                          nitem.onmouseleave              = e=>nitem.style.background   = '';
-                          nitem.onclick                   = e=>click(filename);
-                          nitem.ondblclick                = e=>dblclick(filename);
-                    }
-                    
-              }//for
-                                                                                var n   = Object.keys(display.nodes[name]).length;
-                                                                                console.log(name,n);
-              function click(filename){
-                
-                    var fn    = url+filename;
-                    if(name==='dirs'){
-                          fn   += '/';
-                    }
-                    ui.url.value    = fn
-                    
-              }//click
-              
-              
-              function dblclick(filename){
-                            
-                    var url   = ui.url.value;
-                    if(name=='dirs'){
-                                                                                console.log('dir',url,filename);
-                          readdir(url);
-                          
-                          
-                    }else{
-                                                                                console.log('file',url,filename);
-                          btn.load.ui(url);
-                    }
-                    
-              }//ondblclick
-              
-        }//display
-
-*/
-
 
 
   //:
   
 
-        build.path    = function(path,type,filename){
+        build.path    = function(type,path,filename){
           
               var parts   = new URL(ui.url.value);
               var url     = parts.protocol+'//'+parts.host+path;
+              
               if(filename){
                     if(type=='dir'){
                           filename   += '/';
                     }
                     url  += filename;
               }
+              
               return url;
               
         }//path
