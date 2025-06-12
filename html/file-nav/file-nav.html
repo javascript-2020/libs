@@ -944,7 +944,7 @@ function newfilemod(){
   
         var resolve;
         
-        var h   = 60;
+        var top_visible   = '5px';
         
         var root;
         var filename;
@@ -1034,7 +1034,7 @@ function newfilemod(){
           
               var promise   = new Promise(res=>resolve=res);
               
-              root.style.height     = h+'px';
+              root.style.top      = top_visible;
               filename.focus();
               
               return promise;
@@ -1046,7 +1046,7 @@ function newfilemod(){
         
         function hide(){
           
-              root.style.height     = 0;
+              root.style.top      = '';
               
               filename.value      = '';
               filename.blur();
