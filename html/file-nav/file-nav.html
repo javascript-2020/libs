@@ -23,7 +23,7 @@
           {flex:1;display:flex;border-top:1px solid lightgray;position:relative}
 
     #new-file-root
-          {position:absolute;top:0;left:0;right:0;height:0;overflow:hidden;transition:0.5s;display:flex;flex-direction:column;padding:5px;
+          {position:absolute;top:0;left:0;right:0;height:0;overflow:hidden;transition:0.5s;display:flex;flex-direction:column;
             box-sizing:border-box;background:white}
     #new-file-label
           {font-size:14px}
@@ -105,13 +105,15 @@
                   <div id=view>
                   
                         <div id=new-file-root>
-                              <div id=new-file-label>
-                                    new file
-                              </div>
-                              <div id=new-file-hldr>
-                                    <input id=new-file>
-                                    <img class='new-file-add icon'>
-                                    <img class='new-file-cancel icon'>
+                              <div style='padding:5px'>
+                                    <div id=new-file-label>
+                                          new file
+                                    </div>
+                                    <div id=new-file-hldr>
+                                          <input id=new-file>
+                                          <img class='new-file-add icon'>
+                                          <img class='new-file-cancel icon'>
+                                    </div>
                               </div>
                         </div>
                   
