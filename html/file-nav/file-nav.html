@@ -945,6 +945,7 @@ function newfilemod(){
               root                                  = $(rootnode,'#new-file-root');
               
               filename                              = $(root,'#new-file');
+              filename.onkeydown                    = keydown;
               
               $(root,'.new-file-add').onclick       = btn.ok;
               $(root,'.new-file-cancel').onclick    = btn.cancel;
@@ -955,6 +956,26 @@ function newfilemod(){
         
   //:
   
+  
+        function onkeydown(e){
+          
+              var handled   = true;
+              switch(e.key){
+                
+                case 'Enter'    : ok();           break;
+                case 'Escape'   : cancel();       break;
+                
+                default         : handled   = false;
+                
+              }//switch
+              
+              if(handled){
+                    e.preventDefault();
+                    return;
+              }
+              
+        }//onkeydown
+        
   
         btn.ok    = function(){
           
