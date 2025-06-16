@@ -6,17 +6,32 @@
 //cloud-run-function.html-loader:d
 
 10-02-25
-
+39-04-25    version 2
 
 */
 
 
 				exports['html-loader']    = request;
 
+				
+				var df          = true;
 
+        var fs;
+        
+        var mode        = 'api';
+        var url         = {};
+        url.raw         = 'https://raw.githubusercontent.com/javascript-2020/libs/main/html/html-loader.js';
+        url.api         = 'https://api.github.com/repos/javascript-2020/libs/contents/html/html-loader.js';
+
+        
+        var platform    = 'cloud';
+        if(platform==='local'){
+              fs    = require('fs');
+        }
+
+        
 				async function request(req,res){
 
-              var mode    = 'raw';
               var nodename;
               
 							var url     = req.url.slice(1);
@@ -30,11 +45,12 @@
 							if(i!=-1){
 										nodename		=	url.slice(i+1);
 										nodename    = decodeURI(nodename);
+										                                                            df && console.log('url ?',nodename);
 							}
 
 					    
-					    var txt   = await load[mode](res);
-					    if(!txt)return;
+					    var txt   = await load(res);
+					    if(txt===false)return;
 					    
 							if(nodename){
 										var i		=	txt.indexOf('/* params */');
@@ -52,15 +68,27 @@
 				}//request
 
 
-        var load    = {};
+        async function load(res){
+        
+              var txt;
+              
+              if(platform=='local'){
+                                                                                df && console.log('local','html-loader.js');
+                    txt   = fs.readFileSync('html-loader.js');
+              }else{
+                    txt   = await load[mode](res);
+              }
+              
+              return txt;
+              
+        }//load
+        
         
         load.raw=async function(res){
         
-							var url   =	'https://raw.githubusercontent.com/javascript-2020/libs/main/html/html-loader.js';
-							
 							var err;
 							try{
-										var res2		=	await fetch(url);
+										var res2		=	await fetch(url.raw);
 										var txt			=	await res2.text();
 							}
 							catch(err2){
@@ -79,13 +107,12 @@
         load.api=async function(res){
         
               var token   = '';
-              var url     = 'https://api.github.com/repos/javascript-2020/libs/contents/html/html-loader.js';
               
               var err;
               try{
                     var opts    = {headers:{authorization:`bearer ${token}`}};
-                    var res2    = await fetch(url,opts);
-                    var json    = await res.json();
+                    var res2    = await fetch(url.api,opts);
+                    var json    = await res2.json();
                     var b64     = json.content;
                     var txt     = atob(b64);
               }
@@ -94,7 +121,7 @@
               }
               if(err){
                     error(res,err);
-                    return;
+                    return false;
               }
               
               return txt;
