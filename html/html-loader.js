@@ -6,10 +6,11 @@
 //github:libs/html/html-loader.js:d
 
 10-02-25
-30-04-25        version 2
+30-04-25    version 2
+16-06-25    version 3
 
 */
-                                                                        console.log('html-loader-v2.0');
+                                                                        console.log('html-loader-v3.0');
                                                                         console.log();
 (async()=>{
 //debugger;
@@ -105,12 +106,12 @@
           
         }//switch
                                                                                 df && console.log(path);
-
+        var url;
         var txt;
         if(mode=='api'){
-              txt   = await api();
+              ({url,txt}    = await api());
         }else{
-              txt   = await raw();
+              ({url,txt}    = await raw());
         }
                                                                                 //console.log(txt);
 
@@ -125,6 +126,7 @@
         var node              = div.firstElementChild;
         if(!node)debugger;
         
+        node.setAttribute('data-url',url);
         slots.forEach(slot=>node.append(slot));
         
         root.parentNode.replaceChild(node,root);
@@ -229,7 +231,7 @@
               var url               = `https://raw.githubusercontent.com/${user}/${repo}/main/${path}`;
               var res               = await fetch(url);
               var txt               = await res.text();
-              return txt;
+              return {url,txt};
               
         }//raw
 
@@ -259,7 +261,7 @@
                     throw err;
               }
               
-              return txt;
+              return {url,txt};
         
         }//api
 
