@@ -131,6 +131,7 @@
         slots.forEach(slot=>node.append(slot));
         
         root.parentNode.replaceChild(node,root);
+                                                                                console.log(node);
                                                                                 df && console.log('added');
                                                                                 //debugger;
         
@@ -229,7 +230,7 @@
         
         async function raw(){
                                                                                 console.log('html-loader.raw');
-                                                                                console.log(repo,path,node);
+                                                                                console.log(repo,path);
               var url               = `https://raw.githubusercontent.com/${user}/${repo}/main/${path}`;
                                                                                 console.log(url);
               var res               = await fetch(url);
@@ -241,7 +242,7 @@
 
         async function api(){
                                                                                 console.log('html-loader.api');
-                                                                                console.log(repo,path,node);
+                                                                                console.log(repo,path);
               var headers   = {accept:'application/vnd.github+json'};
               var token     = localStorage.getItem('github-token');
               if(token){
