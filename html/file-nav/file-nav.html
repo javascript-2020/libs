@@ -29,6 +29,8 @@
           {padding:5px;border-bottom:1px solid lightgray}
     #new-file-label
           {font-size:14px}
+    #label-type
+          {margin:auto 10px}
     #new-file-hldr
           {display:flex;gap:10px;align-items:center}
     #new-file
@@ -109,7 +111,10 @@
                         <div id=new-file-root>
                               <div id=new-file-container>
                                     <div id=new-file-label>
-                                          new file
+                                          new
+                                          <span id=label-type>
+                                                file
+                                          </span>
                                     </div>
                                     <div id=new-file-hldr>
                                           <input id=new-file>
@@ -343,7 +348,7 @@ mod.filenav   = function(){
         
         btn.file.add    = async function(){
           
-              var name    = await newfile.show();
+              var name    = await newfile.show('file');
               if(!name){
                     return;
               }
@@ -386,7 +391,7 @@ mod.filenav   = function(){
   
         btn.dir.add   = async function(){
 
-              var name    = await newfile.show();          
+              var name    = await newfile.show('dir');          
               if(!name){
                     return;
               }
@@ -1030,7 +1035,7 @@ function newfilemod(){
   //:
   
   
-        obj.show    = function(){
+        obj.show    = function(type){
           
               var promise   = new Promise(res=>resolve=res);
               
