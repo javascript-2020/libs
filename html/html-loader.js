@@ -196,10 +196,10 @@
         
         
         function get_params_grp(){
-                                                                                console.log('get_params_grp',nn);
+                                                                                df && console.log('get_params_grp',nn);
               repo    = 'javascript-2020.github.io';
               path    = window.location.pathname;
-                                                                                console.log(path);
+                                                                                df && console.log(path);
               var base    = document.querySelector('base');
               if(base){
                     var href    = base.href;
@@ -214,7 +214,7 @@
               path    = slashes(path,2);
               path   += `html/${nn}/${nn}.html`;
               
-                                                                                console.log(path);              
+                                                                                df && console.log(path);              
         }//get_params_grp
         
         
@@ -229,8 +229,9 @@
         
         async function raw(){
                                                                                 console.log('html-loader.raw');
+                                                                                console.log(repo,path,node);
               var url               = `https://raw.githubusercontent.com/${user}/${repo}/main/${path}`;
-                                                                                console.log(repo,path,url);
+                                                                                console.log(url);
               var res               = await fetch(url);
               var txt               = await res.text();
               return {url,txt};
@@ -240,13 +241,14 @@
 
         async function api(){
                                                                                 console.log('html-loader.api');
+                                                                                console.log(repo,path,node);
               var headers   = {accept:'application/vnd.github+json'};
               var token     = localStorage.getItem('github-token');
               if(token){
                     headers.authorization   = 'Bearer '+token;
               }
               var url       = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
-                                                                                console.log(repo,path,url);
+                                                                                console.log(url);
               var res       = await fetch(url,{headers});
               var json      = await res.json();
               var b64       = json.content;
