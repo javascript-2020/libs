@@ -55,7 +55,11 @@
         var type      = 'libs';
         var mode      = 'raw';
 
-
+        
+        if(root.hasAttribute('data-type')){
+              type    = root.getAttribute('data-type');
+        }
+        
         if(root.hasAttribute('github')){
               type    = 'github';
               path    = root.getAttribute('github');
@@ -96,6 +100,8 @@
 
         
         var path      = `html/${nn}/${nn}.html`;
+        var url;
+        var txt;
                                                                                 df && console.log(nn,type);
         switch(type){
           
@@ -103,16 +109,18 @@
           case 'grp'      : get_params_grp();           break;
           case 'github'   : get_params_github();        break;
           case 'utils'    : get_params_utils();         break;
+          case 'parent'   : get_params_parent();        break;
           
         }//switch
                                                                                 df && console.log(path);
-        var url;
-        var txt;
-        if(mode=='api'){
-              ({url,txt}    = await api());
-        }else{
-              ({url,txt}    = await raw());
-        }
+        
+        switch(mode){
+          
+          case 'api'    : ({url,txt}    = await api());           break;
+          case 'raw'    : ({url,txt}    = await raw());           break;
+          case 'url'    : ({url,txt}    = await get_url()};       break;
+          
+        }//switch
                                                                                 //console.log(txt);
 
         var loader_script   = root.querySelector('script');
@@ -227,7 +235,23 @@
         }//get_params_utils
         
 
+        function get_params_parent(){
         
+              var parent    = root.getAttribute('data-parent');
+              var par       = $_parent(root,parent);
+              var url       = par.getAttribute('data-url');
+              var i         = url.lastIndexOf('/');
+              var src       = root.getAttribute('data-src');
+              url          += src;
+              
+              parse_url(url);
+              
+        }//get_params_parent
+        
+        
+  //:
+  
+  
         async function raw(){
                                                                                 console.log('html-loader.raw');
                                                                                 console.log(repo,path);
@@ -270,6 +294,13 @@
         
         }//api
 
+
+        async function get_url(){
+        }//get_url
+        
+
+  //:
+  
 
         function slashes(path,num){
         
@@ -333,12 +364,51 @@
                     }
                     
               }//while
+              
               if(!all){
                     return null;
               }
+              
               return result;
               
         }//$
+        
+        
+        function $_parent(root,parent){
+        
+        
+        }//$_parent
+        
+        
+        function parse_url(url){
+        
+              var parts   = new URL(url);
+              var str;
+              var i;
+              
+              if(parts.hostname=='api.github.com'){
+                    str     = parts.pathname.split('/');
+                    i       = parts.pathname.indexOf('/contents/');
+                    i      += 10;
+                    user    = str[2];
+                    repo    = str[3];
+                    path    = parts.pathname.slice(i);
+              }
+              
+              if(parts.hostname=='rawgithubusercontent.com'){
+                    str     = parts.pathname.split('/');
+                    i       = parts.pathname.indexOf('/main/');
+                    i      += 6;
+                    user    = str[1];
+                    repo    = str[2];
+                    path    = parts.pathname.slice(i);
+              }
+              
+        }//parse_url
+
+
+
+
 
         
 })();
