@@ -1037,6 +1037,8 @@ function newfilemod(){
   
         obj.show    = function(type){
           
+              $(root,'#label-type').textContent   = type;
+              
               var promise   = new Promise(res=>resolve=res);
               
               root.style.top      = top_visible;
