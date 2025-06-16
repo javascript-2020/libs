@@ -129,7 +129,7 @@
                                     </span>
                                     <span class=spc></span>
                                     <img id=dir-add class='icon-add icon'>
-                                    <img id=dir-rem class='icon-rem icon'>
+                                    <img id=dir-rem class='icon-rem icon' title='dblclick'>
                                     <img id=parent>
                               </div>
                               
@@ -156,7 +156,7 @@
                                     </span>
                                     <span class=spc></span>
                                     <img id=file-add class='icon-add icon'>
-                                    <img id=file-rem class='icon-rem icon'>
+                                    <img id=file-rem class='icon-rem icon' title='dblclick'>
                               </div>
                               
                               <div id=file-list>
@@ -299,7 +299,7 @@ mod.filenav   = function(){
               ui.dir.root                               = $(shadow,'#dir-root');
               ui.dir.num                                = $(ui.dir.root,'#dir-num');
               $(ui.dir.root,'#dir-add').onclick         = btn.dir.add;
-              $(ui.dir.root,'#dir-rem').onclick         = btn.dir.rem;
+              $(ui.dir.root,'#dir-rem').ondblclick      = btn.dir.rem;
               $(ui.dir.root,'#parent').onclick          = btn.dir.parent;
               ui.dir.list                               = $(ui.dir.root,'#dir-list');
               ui.dir.item                               = $(ui.dir.list,'.dir');
@@ -311,7 +311,7 @@ mod.filenav   = function(){
               ui.file.root                              = $(shadow,'#file-root');
               ui.file.num                               = $(ui.file.root,'#file-num');
               $(ui.file.root,'#file-add').onclick       = btn.file.add;
-              $(ui.file.root,'#file-rem').onclick       = btn.file.rem;
+              $(ui.file.root,'#file-rem').ondblclick    = btn.file.rem;
               ui.file.list                              = $(ui.file.root,'#file-list');
               ui.file.item                              = $(ui.file.list,'.file');
               ui.file.item.remove();
