@@ -187,7 +187,7 @@
                           path        = window.parent.location.pathname;
                     }
               }
-              
+              path    = path.slice(1);
               var i   = path.lastIndexOf('/');
               path    = path.slice(0,i+1);
               path   += `html/${nn}/${nn}.html`;
@@ -210,6 +210,7 @@
                           path    = window.location.pathname;
                     }
               }
+              path    = path.slice(1);
               path    = slashes(path,2);
               path   += `html/${nn}/${nn}.html`;
               
