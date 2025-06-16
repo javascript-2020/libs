@@ -127,6 +127,7 @@
         if(!node)debugger;
         
         node.setAttribute('data-url',url);
+        
         slots.forEach(slot=>node.append(slot));
         
         root.parentNode.replaceChild(node,root);
