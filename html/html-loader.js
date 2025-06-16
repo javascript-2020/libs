@@ -228,8 +228,8 @@
         
         async function raw(){
                                                                                 console.log('html-loader.raw');
-                                                                                console.log(repo,path);
               var url               = `https://raw.githubusercontent.com/${user}/${repo}/main/${path}`;
+                                                                                console.log(repo,path,url);
               var res               = await fetch(url);
               var txt               = await res.text();
               return {url,txt};
@@ -239,13 +239,13 @@
 
         async function api(){
                                                                                 console.log('html-loader.api');
-                                                                                console.log(repo,path);
               var headers   = {accept:'application/vnd.github+json'};
               var token     = localStorage.getItem('github-token');
               if(token){
                     headers.authorization   = 'Bearer '+token;
               }
               var url       = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
+                                                                                console.log(repo,path,url);
               var res       = await fetch(url,{headers});
               var json      = await res.json();
               var b64       = json.content;
