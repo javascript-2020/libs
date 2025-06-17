@@ -59,6 +59,12 @@
         if(root.hasAttribute('data-type')){
               type    = root.getAttribute('data-type');
         }
+        if(root.hasAttribute('data-api')){
+              mode    = 'api';
+        }
+        if(root.hasAttribute('api')){
+              mode    = 'api';
+        }
         
         if(root.hasAttribute('github')){
               type    = 'github';
@@ -275,7 +281,22 @@
               }
               var url       = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
                                                                                 console.log(url);
-              var res       = await fetch(url,{headers});
+              var err;
+              try{
+              
+                    var res       = await fetch(url,{headers});
+                    
+              }
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }
+              if(err || !res.ok){
+                    var result    = raw();
+                    return result;
+              }
+              
               var json      = await res.json();
               var b64       = json.content;
               
