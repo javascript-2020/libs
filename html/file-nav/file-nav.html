@@ -22,6 +22,7 @@
     #view
           {flex:1;display:flex;border-top:1px solid lightgray;position:relative}
 
+/*
     #new-file-root
           {position:absolute;top:-65px;left:0;right:0;height:60px;overflow:hidden;transition:0.5s ease-out;display:flex;flex-direction:column;
             box-sizing:border-box;background:white;z-index:1}
@@ -41,6 +42,7 @@
     .new-file-cancel
           {content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAByFBMVEVHcEyXHBSKNCuGFhB2HBidGxKeFAubGA+oIRebGhGhFgyZFQ2hFgyqFw2aFg2OFQ6yIBSWFAynHBGQFg8QEx/BIhOHFA6iFgyKFQ6lGhHFQDbBMCSQFQ2WEgrebmXELCDJPTDRNiqnGQ+tGg+JFQ6vGw+mGxCLFA2XFg2qGg+XFw6wGw/BHxOgFgy0GxDDJhmsHhOxHBC4JhuvGw6PFQ60HxKxJhtoDgilGxHCIBKWFAy4JBiCFQ+YEwunHhSPEw3PPTGPEwzJKBjLNymQEgvEJxitJBmyIRTSSDuRFA2ZFg6tGw/AJRe0KR2vHBGoIBWyHhKwHRGPEwy8IhR3HRrQRjq6HhDILR+KEgzLLyHbRTrAJBfZQDO7IhXHMCPNOy2xGA3NIhe4Fw2pFwzUKR6kFQutGAytFAu9GQ6wFQzBGxDHHRO+HRLaY1nOJxypEwuiEgrnhHyzFgzKQjbjeG+zGgziOC7FNimfFAvVWE7sU0rqi4PQTULNRzvcLiPdamHecmnfPjSXEwvxX1fZRDnupqG3GQ7WXFK5HRLFLyPTMSbZOC3oQTfAJBfDKBrrTELsoZryurXvrKfol5DpWE7hST7qWU/wtLDc0MhrAAAAYHRSTlMADgISBhz4Vwsj17bc+I9WIr2HRAFUO+YtNfnyUfr+2v74qbpGnWQnbeFf5f/v94ksrODKc0DDB5Pw1rcX9KGK8si21u6SvXP3ap6/pdvuFtpjob8D5c+xpL33qPljotE7/DO+AAACE0lEQVQoz22SZXfiQBiFh7IEdygtUqCydRfqpd51Y90ISRYLBGiBAMWlriv9ux1y2i2S+yXnPc+ZyX3vHcDd/rmzs77Z3gIaJdCuzYEfHddXN5e596OKesjRrlnPJ4Hl8uq6XC7/DqxrHbUnP38rGVQ8sJVIpVLhcDiVs49y7qBj+uOXP6UZtQYA4bI+Gw7v7XXksrvPeQxVbNr/Fe2qRWawGbf0AYgDBwnLAjQg+G7+W0ya+f9/xeHP6APZQGI/ffROMfbVmiyWFtpqbXL7XqQPEvu78bMP5nwyaZ3lNizZu2xIQ3wezF9cGLZtTSHYBibilvhx7DQ/wdcAFrW/PjqJnZ6cjTvYqEA1h8dix2R05A0LfdUzhGcy+GE0Gh2cbqK88aEgngn265xQk7wGKuwiURwPDnarJb+geuqtK56RKIoHX8oBaBVBLH1cd3NXxY+i6EhfdWB4/1hNtZ0VH8SHskfM2CrBMKxTcE8dKqfH5/eT4vsku3UY9nA9X+qCmJQ8tCAfJgiR8M60yAuxTzpQY2YKIYhZJrwWGRZxeTzOp7W72GQ0Maxmkta5Iy5XRdJbtylXTNPiqjsZ4fZGKtiThpza5mmED7+iKvYqG/sH8iVaCZ8mQlBuLyJvKsGxUjDB40iIclNKTnOFi6sFMQfMhygKMbI9APXGkhFMmUL0Wxsb1qwUxID7yaQUAlbxVjduAaXrgRqvSBD6AAAAAElFTkSuQmCC)
           }
+*/
     
     .scroll
           {height:5px;background:transparent;position:absolute;left:0;right:0}
@@ -107,7 +109,11 @@
                   </div>
                   
                   <div id=view>
-                  
+
+                        <new-file data-type=parent data-parent=file-nav data-src='html/new-file/new-file.html'>
+                              <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                        </new-file>
+<!--                  
                         <div id=new-file-root>
                               <div id=new-file-container>
                                     <div id=new-file-label>
@@ -123,7 +129,7 @@
                                     </div>
                               </div>
                         </div>
-                  
+-->                  
                   
                         <div id=dir-root>
                         
@@ -934,7 +940,7 @@ mod.filenav   = function(){
   
   //:
 
-
+/*
 function newfilemod(){  
   
   var obj   = {};
@@ -1070,6 +1076,7 @@ function newfilemod(){
 //newfilemod
 }
 
+*/
 
   //:
   
