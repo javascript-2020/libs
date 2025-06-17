@@ -63,6 +63,7 @@ mod.newfile   = function(){
         var top_visible   = '5px';
         
         var root;
+        var shadow;
         var filename;
 
   
@@ -76,6 +77,7 @@ mod.newfile   = function(){
         obj.initdom   = function(rootnode){
           
               root                                  = $.$(rootnode,'#new-file-root');
+              shadow                                = root.shadowRoot;
               
               filename                              = $(root,'#new-file');
               filename.onkeydown                    = on.keydown;
