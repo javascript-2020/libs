@@ -79,7 +79,7 @@ mod.newfile   = function(){
               root                                  = $.$(rootnode,'#new-file-root');
               shadow                                = root.shadowRoot;
               
-              filename                              = $(root,'#new-file');
+              filename                              = $(shadow,'#new-file');
               filename.onkeydown                    = on.keydown;
               
               $(root,'.new-file-add').onclick       = btn.ok;
