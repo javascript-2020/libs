@@ -84,7 +84,7 @@
         }//load
         
         
-        load.raw=async function(res){
+        load.raw    = async function(res){
         
 							var err;
 							try{
@@ -104,7 +104,7 @@
         }//raw
 
         
-        load.api=async function(res){
+        load.api    = async function(res){
         
               var token   = '';
               
