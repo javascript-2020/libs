@@ -380,7 +380,7 @@
               
               while(ec){
               
-                    if(node.matches(parent)){
+                    if(node?.matches(parent)){
                           return node;
                     }
                     
