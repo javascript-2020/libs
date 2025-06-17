@@ -45,8 +45,7 @@
       </template>
       
       <script>
-console.log('mod.newfile');
-
+                                                                                //console.log('mod.newfile');
 mod.newfile   = function(){  
   
   var obj   = {};
@@ -76,7 +75,7 @@ mod.newfile   = function(){
   
         obj.initdom   = function(rootnode){
           
-              root                                  = $(rootnode,'#new-file-root');
+              root                                  = $.$(rootnode,'#new-file-root');
               
               filename                              = $(root,'#new-file');
               filename.onkeydown                    = on.keydown;
