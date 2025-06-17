@@ -235,7 +235,7 @@
         }//get_params_utils
         
 
-        function get_params_parent(){
+        function get_params_parent(){debugger;
         
               var parent    = root.getAttribute('data-parent');
               var par       = $_parent(root,parent);
