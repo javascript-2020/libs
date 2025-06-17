@@ -264,7 +264,22 @@
                                                                                 console.log(repo,path);
               var url               = `https://raw.githubusercontent.com/${user}/${repo}/main/${path}`;
                                                                                 console.log(url);
-              var res               = await fetch(url);
+              var err;
+              try{
+              
+                    var res               = await fetch(url);
+                    
+              }
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }
+              if(err){
+                    alert('fetch error\n'+err.toString());
+                    return;
+              }
+              
               var txt               = await res.text();
               return {url,txt};
               
