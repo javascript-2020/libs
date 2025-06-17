@@ -118,7 +118,7 @@
           
           case 'api'    : ({url,txt}    = await api());           break;
           case 'raw'    : ({url,txt}    = await raw());           break;
-          case 'url'    : ({url,txt}    = await get_url()};       break;
+          case 'url'    : ({url,txt}    = await get_url());       break;
           
         }//switch
                                                                                 //console.log(txt);
@@ -374,8 +374,30 @@
         }//$
         
         
-        function $_parent(root,parent){
+        function $_parent(node,parent){
         
+              var ec    = true;
+              
+              while(ec){
+              
+                    if(node.matches(parent)){
+                          return node;
+                    }
+                    
+                    var par   = node.parentNode;
+                    if(!par){
+                          if(node.host){
+                                par   = node.host;
+                          }
+                    }
+                    node    = par;
+                    if(!ec){
+                          ec    = false;
+                    }
+                    
+              }//while
+              
+              return null;
         
         }//$_parent
         
