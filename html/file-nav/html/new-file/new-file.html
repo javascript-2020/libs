@@ -1,0 +1,186 @@
+<new-file>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+    #new-file-root
+          {position:absolute;top:-65px;left:0;right:0;height:60px;overflow:hidden;transition:0.5s ease-out;display:flex;flex-direction:column;
+            box-sizing:border-box;background:white;z-index:1}
+    #new-file-container
+          {padding:5px;border-bottom:1px solid lightgray}
+    #new-file-label
+          {font-size:14px}
+    #label-type
+          {margin:auto 5px}
+    #new-file-hldr
+          {display:flex;gap:10px;align-items:center}
+    #new-file
+          {flex:1;padding:5px 10px;font-size:16px}
+    .new-file-add
+          {content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAdCAMAAACKeiw+AAAAY1BMVEVHcEwG2A1Ky0trxWoH2A0O1BMjzicjzyZayloZ0BwW0Rqdx5o6yzwbzx4G2A0R1BYI2A4Z0h0c0CA0yzcezyEK1hExzTMZ0h4T0hgO0xMU0hkO0xIT0xgA2woC2goA3AoE2QvnMtB+AAAAHXRSTlMA+A0F9M5IVAh4gwIXc/2175JhIGznMbGdv67gwn+a0CMAAADzSURBVCjPnZPdsoMgDISN/IiCioq2tU3k/Z+yVKbH0xZ6UWa84ZvNxmQpip+PKnUeltXpJnNQLycgXuXququnbijT1AzwhU6r98ibDF1unoi3LE2lIPJZWs1ECHWa6nHGQBt2/L48hsOcJQo9qz86gHVPzlqOwfh89GzE0SWrIVTG3vxzazsMXirSDcmL5WVCAiPXoTIizW97GCFcdk3pHr4E7n1zF9pwg94GLfqz+hgE4POQmD4X39OOwmdTAaj4znHzTSo+KsqTpaN8xzBmshPll0wACvlwz4kLrVYKziabammpa/OhZ/V1NV9eDJtSfd0B50kTuCtFsl4AAAAASUVORK5CYII=)
+          }
+    .new-file-cancel
+          {content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAByFBMVEVHcEyXHBSKNCuGFhB2HBidGxKeFAubGA+oIRebGhGhFgyZFQ2hFgyqFw2aFg2OFQ6yIBSWFAynHBGQFg8QEx/BIhOHFA6iFgyKFQ6lGhHFQDbBMCSQFQ2WEgrebmXELCDJPTDRNiqnGQ+tGg+JFQ6vGw+mGxCLFA2XFg2qGg+XFw6wGw/BHxOgFgy0GxDDJhmsHhOxHBC4JhuvGw6PFQ60HxKxJhtoDgilGxHCIBKWFAy4JBiCFQ+YEwunHhSPEw3PPTGPEwzJKBjLNymQEgvEJxitJBmyIRTSSDuRFA2ZFg6tGw/AJRe0KR2vHBGoIBWyHhKwHRGPEwy8IhR3HRrQRjq6HhDILR+KEgzLLyHbRTrAJBfZQDO7IhXHMCPNOy2xGA3NIhe4Fw2pFwzUKR6kFQutGAytFAu9GQ6wFQzBGxDHHRO+HRLaY1nOJxypEwuiEgrnhHyzFgzKQjbjeG+zGgziOC7FNimfFAvVWE7sU0rqi4PQTULNRzvcLiPdamHecmnfPjSXEwvxX1fZRDnupqG3GQ7WXFK5HRLFLyPTMSbZOC3oQTfAJBfDKBrrTELsoZryurXvrKfol5DpWE7hST7qWU/wtLDc0MhrAAAAYHRSTlMADgISBhz4Vwsj17bc+I9WIr2HRAFUO+YtNfnyUfr+2v74qbpGnWQnbeFf5f/v94ksrODKc0DDB5Pw1rcX9KGK8si21u6SvXP3ap6/pdvuFtpjob8D5c+xpL33qPljotE7/DO+AAACE0lEQVQoz22SZXfiQBiFh7IEdygtUqCydRfqpd51Y90ISRYLBGiBAMWlriv9ux1y2i2S+yXnPc+ZyX3vHcDd/rmzs77Z3gIaJdCuzYEfHddXN5e596OKesjRrlnPJ4Hl8uq6XC7/DqxrHbUnP38rGVQ8sJVIpVLhcDiVs49y7qBj+uOXP6UZtQYA4bI+Gw7v7XXksrvPeQxVbNr/Fe2qRWawGbf0AYgDBwnLAjQg+G7+W0ya+f9/xeHP6APZQGI/ffROMfbVmiyWFtpqbXL7XqQPEvu78bMP5nwyaZ3lNizZu2xIQ3wezF9cGLZtTSHYBibilvhx7DQ/wdcAFrW/PjqJnZ6cjTvYqEA1h8dix2R05A0LfdUzhGcy+GE0Gh2cbqK88aEgngn265xQk7wGKuwiURwPDnarJb+geuqtK56RKIoHX8oBaBVBLH1cd3NXxY+i6EhfdWB4/1hNtZ0VH8SHskfM2CrBMKxTcE8dKqfH5/eT4vsku3UY9nA9X+qCmJQ8tCAfJgiR8M60yAuxTzpQY2YKIYhZJrwWGRZxeTzOp7W72GQ0Maxmkta5Iy5XRdJbtylXTNPiqjsZ4fZGKtiThpza5mmED7+iKvYqG/sH8iVaCZ8mQlBuLyJvKsGxUjDB40iIclNKTnOFi6sFMQfMhygKMbI9APXGkhFMmUL0Wxsb1qwUxID7yaQUAlbxVjduAaXrgRqvSBD6AAAAAElFTkSuQmCC)
+          }
+          
+            </style>
+
+            <div id=new-file-root>
+                  <div id=new-file-container>
+                        <div id=new-file-label>
+                              new
+                              <span id=label-type>
+                                    file
+                              </span>
+                        </div>
+                        <div id=new-file-hldr>
+                              <input id=new-file>
+                              <img class='new-file-add icon'>
+                              <img class='new-file-cancel icon'>
+                        </div>
+                  </div>
+            </div>
+            
+      </template>
+      
+      <script>
+
+function newfilemod(){  
+  
+  var obj   = {};
+  
+  
+        obj.init    = function(){
+        }//init
+        
+  
+  //:
+  
+  
+        var resolve;
+        
+        var top_visible   = '5px';
+        
+        var root;
+        var filename;
+
+  
+        var on    = {};
+        var btn   = {};
+        
+        
+  //:
+  
+  
+        obj.initdom   = function(rootnode){
+          
+              root                                  = $(rootnode,'#new-file-root');
+              
+              filename                              = $(root,'#new-file');
+              filename.onkeydown                    = on.keydown;
+              
+              $(root,'.new-file-add').onclick       = btn.ok;
+              $(root,'.new-file-cancel').onclick    = btn.cancel;
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+        on.keydown    = function(e){
+          
+              var handled   = true;
+              switch(e.key){
+                
+                case 'Enter'    : ok();           break;
+                case 'Escape'   : cancel();       break;
+                
+                default         : handled   = false;
+                
+              }//switch
+              
+              if(handled){
+                    e.preventDefault();
+                    return;
+              }
+              
+        }//onkeydown
+        
+  
+        btn.ok    = function(){
+          
+              ok();
+              
+        }//ok
+        
+        
+        btn.cancel    = function(){
+          
+              cancel();
+              
+        }//cancel
+        
+        
+  //:
+  
+  
+        function ok(){
+          
+              var fn    = filename.value;
+              resolve(fn);
+              hide();
+              
+        }//ok
+        
+        
+        function cancel(){
+          
+              hide();
+          
+        }//cancel
+        
+        
+  //:
+  
+  
+        obj.show    = function(type){
+          
+              $(root,'#label-type').textContent   = type;
+              
+              var promise   = new Promise(res=>resolve=res);
+              
+              root.style.top      = top_visible;
+              filename.focus();
+              
+              return promise;
+              
+        }//show
+        
+        
+        obj.hide    = function(){return hide()}
+        
+        function hide(){
+          
+              root.style.top      = '';
+              
+              filename.value      = '';
+              filename.blur();
+              resolve();
+              
+        }//hide
+        
+
+  //:
+  
+  
+  return obj;
+  
+//newfilemod
+}
+      
+      </script>
+
+</new-file>
