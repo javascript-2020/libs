@@ -241,7 +241,7 @@
               var par       = $_parent(root,parent);
               var url       = par.getAttribute('data-url');
               var i         = url.lastIndexOf('/');
-              url           = url.slice(i+1);
+              url           = url.slice(0,i+1);
               var src       = root.getAttribute('data-src');
               url          += src;
               
