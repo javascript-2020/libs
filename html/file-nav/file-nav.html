@@ -216,7 +216,7 @@ mod.filenav   = function(){
     
         var filenav         = obj;
     
-        var newfile         = newfilemod();
+        var newfile;
         
         var def             = {};
         def.path            = '/';
@@ -284,6 +284,7 @@ mod.filenav   = function(){
   
         obj.init    = function(){
                                                                                 debug('init');
+              newfile   = mod.filemod();
               //newfile.initmod();
               newfile.init();
               
