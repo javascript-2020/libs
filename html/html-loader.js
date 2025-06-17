@@ -380,8 +380,10 @@
               
               while(ec){
               
-                    if(node?.matches(parent)){
-                          return node;
+                    if(node.matches){
+                          if(node.matches(parent)){
+                                return node;
+                          }
                     }
                     
                     var par   = node.parentNode;
