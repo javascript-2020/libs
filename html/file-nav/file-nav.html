@@ -931,12 +931,54 @@ mod.filenav   = function(){
               }
               
               var json    = JSON.parse(txt);
+              
+              var {dirs,file}   = process(json);
                                                                                 //debugger;
                                                                                 //console.trace('readdir');
               filenav.display(path,json.dirs,json.files);
               return true;
               
         }//readdir
+
+
+        function process(json){
+          
+              var {dirs,files}    = json;
+              
+              if(json.version){
+                    switch(json.version){
+                      case 'c-v1'   : ({dirs,files}    = process.c.v1(json));       break;
+                    }//switch
+              }
+              
+              return {dirs,files};
+              
+        }//process
+
+        
+        process.c   = {};
+        
+        process.c.v1    = function(json){
+          
+              var dirs    = [];
+              var files   = [];
+              
+              var n   = json.list.length;
+              for(var i=0;i<n;i+=2){
+                
+                    var fn      = json.list[i];
+                    var type    = json.list[i+1];
+                    if(type=='file'){
+                          files.push(fn);
+                    }else{
+                          dirs.push(fn);
+                    }
+                    
+              }//for
+              
+              return {dirs,files};
+              
+        }//v1
 
   
   //:
