@@ -287,11 +287,11 @@ mod.httpsfile   = function(){
         btn.download    = async function(e){
           
               if(e.shiftKey){
-                    window.open('https://github.com/javascript-2020/libs/blob/main/nodejs/server/https-file-server/https-file-server.js','_blank');
+                    window.open('https://github.com/javascript-2020/code/blob/main/nodejs/server/https-file-server/https-file-server.js,'_blank');
                     return;
               }
           
-              var res       = await fetch('https:/raw.githubusercontent/javascript-2020/libs/main/nodejs/server/https-file-server/https-file-server.js');
+              var res       = await fetch('https:/raw.githubusercontent/javascript-2020/code/main/nodejs/server/https-file-server/https-file-server.js');
               var blob      = await res.blob();
               var url       = window.URL.createObjectURL(blob);
               
