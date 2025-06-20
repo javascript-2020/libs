@@ -450,9 +450,9 @@ mod.github    = function(){
               if(result===false){
                     return;
               }
-              var txt   = result;
+              var blob    = result;
               
-              obj.load.complete(file,txt);
+              obj.load.complete(file,blob);
                             
         }//load
         
@@ -466,8 +466,6 @@ mod.github    = function(){
         
         btn.save    = async function(){
         
-              var txt   = editor.getValue();
-              
               var {token,owner,repo,branch,path}    = read();
               var i           = path.lastIndexOf('/');
               var filename    = path.slice(i+1);
@@ -483,7 +481,10 @@ mod.github    = function(){
               file.branch     = branch;
               file.path       = path;
               
-              var result      = await save(file,txt);
+              var txt         = editor.getValue();
+              var blob        = new Blob([txt]);
+              
+              var result      = await save(file,blob);
               if(result===false){
                     return;
               }
@@ -592,14 +593,14 @@ mod.github    = function(){
         }//load
 
 
-        obj.save    = function(file,txt){return save(file,txt)}   //d
+        obj.save    = function(file,blob){return save(file,blob)}   //d
         
-        async function save(file,txt){
+        async function save(file,blob){
         
               var token                       = read.token();
               var {owner,repo,branch,path}    = file;
               
-              var result    = await savefile(token,owner,repo,branch,path,txt);
+              var result    = await savefile(token,owner,repo,branch,path,blob);
               if(result===false){
                     return;
               }
@@ -643,26 +644,35 @@ mod.github    = function(){
                     log.red(err.message);
                     return;
               }
-              var txt;
-              if(api){
-                    var json    = await res.json();
-                    txt         = window.atob(json.content);
-              }else{
-                    txt   = await res.text();
-              }
               
               if(!res.ok){
+                    var txt   = await res.text();
                     log.red(txt);
                     return false;
               }
               
-              return txt;
+              if(api){
+                    var json    = await res.json();
+                    txt         = window.atob(json.content);
+              }else{
+                    txt         = await res.text();
+              }
+              
+              var blob    = new Blob([txt]);
+              return blob;
               
         }//load.txt
 
 
-        async function savefile(token,owner,repo,branch,path,txt){
+        async function savefile(token,owner,repo,branch,path,blob){
         
+              var txt;
+              if(typeof blob=='string'){
+                    txt   = blob;
+              }else{
+                    txt   = await blob.text();
+              }
+              
               var headers     = {authorization:`Bearer ${token}`};
               var url         = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
               
@@ -719,8 +729,8 @@ mod.github    = function(){
 
         async function backup(token,owner,repo,branch,path){
                                                                                 debug('backup',path);
-              var api   = true;
-              var txt   = load.text(api,token,owner,repo,branch,path);
+              var api     = true;
+              var blob    = load.text(api,token,owner,repo,branch,path);
               
               var fn;
               var i   = path.lastIndexOf('/');
@@ -778,7 +788,7 @@ mod.github    = function(){
               
               path    = `${path}backup/${fn}-${max}`;
                                                                     debug(path);
-              save(token,owner,repo,branch,path,txt);
+              save(token,owner,repo,branch,path,blob);
               
         }//backup
         
