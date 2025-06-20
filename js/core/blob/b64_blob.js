@@ -9,6 +9,6 @@
             var blob    = new Blob([buf],{type});
             return blob;
             
-      }
+      }//b64_blob
 
       
