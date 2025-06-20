@@ -407,9 +407,9 @@ mod.httpsfile   = function(){
               if(result===false){
                      return;
               }
-              var txt   = result;
+              var blob    = result;
               
-              obj.load.complete(file,txt);
+              obj.load.complete(file,blob);
                         
         }//ui
         
@@ -428,9 +428,9 @@ mod.httpsfile   = function(){
               if(result===false){
                     return false;
               }
-              var txt   = result;
+              var blob   = result;
               
-              return txt;
+              return blob;
               
         }//load
         
@@ -457,16 +457,16 @@ mod.httpsfile   = function(){
         }//ui
         
         
-        obj.save    = function(file,txt){return save(file,txt)}   //d
+        obj.save    = function(file,blob){return save(file,blob)}   //d
         
-        async function save(file,txt){
+        async function save(file,blob){
         
               var url         = file.url;
               var path        = file.path;
               var filename    = file.filename;
               var full        = url+path+filename;
                                                                                 //console.log('save',full);
-              var result    = await savefile(full,txt);
+              var result    = await savefile(full,blob);
               if(result===false){
                     return false;
               }
@@ -503,19 +503,36 @@ mod.httpsfile   = function(){
                     var auth        = ui.auth.value;
                     headers.auth    = auth;
               }
+
+              var err;
+              try{
+                
+                    var res         = await fetch(url,{headers});
+                    
+              }
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }
+              if(err){
+                    alert('https-file.loadfile error\n'+err.toString());
+                    return;
+              }
               
-              var res         = await fetch(url,{headers});
-              var txt         = await res.text();
               if(!res.ok){
+                    var txt         = await res.text();
                     alert('loadfile : '+url+'\n'+txt);
                     return false;
               }
-              return txt;
+              
+              var blob    = await res.blob();
+              return blob;
               
         }//loadfile
         
         
-        async function savefile(url,txt){
+        async function savefile(url,blob){
           
               var headers   = {mode:'save'};
               
@@ -524,14 +541,32 @@ mod.httpsfile   = function(){
                     headers.auth    = auth;
               }
               
-              var body      = txt;
-              var res       = await fetch(url,{method:'post',headers,body});
-              var txt       = await res.text();
+              var body      = blob;
+              
+              var err;
+              try{
+                
+                    var res       = await fetch(url,{method:'post',headers,body});
+                    
+              }
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }
+              if(err){
+                    alert('https-file.savefile error\n'+err.toString());
+                    return;
+              }
+              
               if(!res.ok){r
+                    var txt       = await res.text();
                     alert('savefile : '+url+'\n'+txt);
                     return false;
               }
-              return txt;
+              
+              var blob    = await res.blob();
+              return blob;
               
         }//save
         
