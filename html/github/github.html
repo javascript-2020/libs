@@ -651,14 +651,14 @@ mod.github    = function(){
                     return false;
               }
               
+              var blob;
               if(api){
                     var json    = await res.json();
-                    txt         = window.atob(json.content);
+                    blob        = b64_blob(json.content);
               }else{
-                    txt         = await res.text();
+                    blob        = await res.blob();
               }
               
-              var blob    = new Blob([txt]);
               return blob;
               
         }//load.txt
