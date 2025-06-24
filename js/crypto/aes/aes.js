@@ -423,7 +423,7 @@ function aesmod(){
   */
   
   
-        Aes.Ctr.encrypt=function(plaintext,password,nBits){
+        Aes.Ctr.encrypt=function(plaintext,password,nBits=256){
         
         
                                                           // standard allows 128/192/256 bit keys
@@ -610,7 +610,7 @@ function aesmod(){
         
   */
   
-        Aes.Ctr.decrypt=function(ciphertext,password,nBits){
+        Aes.Ctr.decrypt=function(ciphertext,password,nBits=256){
         
         
                                                             // standard allows 128/192/256 bit keys
