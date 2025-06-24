@@ -38,6 +38,20 @@ function aesmod(){
         var Aes = {};
         
         
+        Aes.encrypt   = function(text,password){
+        
+              var cipher    = Aes.ctr.encrypt(text,password);
+              return cipher;
+              
+        }//encrypt
+        
+        
+        Aes.decrypt   = function(cipher,password){
+        
+              var text    = Aes.ctr.decrypt(cipher,password);
+              return text;
+              
+        }//decrypt
         
         
   /*
