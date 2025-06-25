@@ -50,12 +50,9 @@ function encrypt(){
         }//decrypt
 
         
-  //:
-  
-  
-
         
   //:
+
   
         encrypt.crypto    = {};        
         
