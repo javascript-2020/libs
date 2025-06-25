@@ -19,10 +19,14 @@ function encrypt(){
   
 
 
+        var cryptokey       = {};
+        cryptkey.derive     = {};
+        encrypt.crypto      = {};        
+        decrypt.crypto      = {};
 
 
-
-
+  //:
+  
 
         obj.encrypt   = encrypt;
         
@@ -49,29 +53,20 @@ function encrypt(){
               
         }//decrypt
 
-        
-        
+
   //:
-
   
-        encrypt.crypto    = {};        
+  
+        cryptokey.derive    = function(password,salt){
         
-        encrypt.crypto['aes-ctr']   = async function(blob,password){
-                                                                                console.log('encrypt :');
-              var buf           = await blob.arrayBuffer();
-                                                                                output_str('text',buf);              
-              password          = encoder.encode(password);
-
-              
               var alg           = {name:'PBKDF2'};
               var usage         = ['deriveBits','deriveKey'];
               var imported      = await window.crypto.subtle.importKey('raw',password,alg,false,usage);
               
-              var salt          = window.crypto.getRandomValues(new Uint8Array(16));
-                                                                                output('salt',salt);
-              var iv            = window.crypto.getRandomValues(new Uint8Array(12));
-                                                                                output('iv',iv);
-              var iterations    = 100000;
+              if(!salt){
+                    salt          = window.crypto.getRandomValues(new Uint8Array(16));
+              }
+              var iterations    = 100_000;
               
               var alg           = {name:'PBKDF2',salt,iterations,hash:'SHA-256'};
               var derived       = {name:'AES-GCM',length:256};
@@ -79,42 +74,56 @@ function encrypt(){
               var key           = await window.crypto.subtle.deriveKey(alg,imported,derived,true,usage);
               console.log(key);
               
+              return {key,salt};
+        
+        }//derive
+
+        
+  //:
+
+          
+        encrypt.crypto['aes-ctr']   = async function(buf,password){
+        
+              password          = str_buf(password);
+              var {key,salt}    = cryptokey.derive(password);
+              
+              var iv            = window.crypto.getRandomValues(new Uint8Array(12));
               var cipher        = await window.crypto.subtle.encrypt({name:'AES-GCM',iv},key,buf);
               cipher            = new Uint8Array(cipher);
-                                                                                output('cipher',cipher);
               
-              var len           = salt.length+iv.length+cipher.length;
-              var full          = new Uint8Array(len);
-              full.set(salt,0);
-              full.set(iv,salt.length);
-              full.set(cipher,salt.length+iv.length);
-                                                                                output('full',full);              
-              var blob2         = new Blob([full]);
-              return blob2;
+              var full          = buf_gen(salt,iv,cipher);
+                                                                                output('encrypt :');
+                                                                                output.str('text',buf);              
+                                                                                output.b64('salt',salt);              
+                                                                                output.b64('iv',iv);
+                                                                                output.b64('cipher',cipher);
+                                                                                output.b64('full',full);              
+              return full;
 
         }//aes-ctr
         
         
-        decrypt.crypto    = {};
         
-        decrypt.crypto['aes-ctr']   = async function(blob,password){
-                                                                                console.log('decrypt :');
-              buf               = await blob.arrayBuffer();
-              buf               = new Uint8Array(buf);
-              
-              password          = encoder.encode(password);
-              
+        decrypt.crypto['aes-ctr']   = async function(buf,password){
+
+              password                = str_buf(password);              
+              var [salt,iv,cipher]    = buf_slice(buf,16,12);
+/*              
               var salt          = new Uint8Array(16);
               salt.set(buf.slice(0,16));
-                                                                                output('salt',salt);
               var iv            = new Uint8Array(12);
               iv.set(buf.slice(16,28));
-                                                                                output('iv',iv);
               var cipher        = new Uint8Array(buf.length-28);
               cipher.set(buf.slice(28));
-                                                                                output('cipher',cipher);
               cipher            = cipher.buffer;
+*/              
               
+              
+              var {key}               = cryptokey.derive(password,salt);
+              
+              
+              
+/*              
               var alg           = {name:'PBKDF2'};
               var usage         = ['deriveBits','deriveKey'];
               var imported      = await window.crypto.subtle.importKey('raw',password,alg,false,usage);
@@ -125,13 +134,17 @@ function encrypt(){
               var derived       = {name:'AES-GCM',length:256};
               var usage         = ['encrypt','decrypt'];
               var key           = await window.crypto.subtle.deriveKey(alg,imported,derived,true,usage);
+*/              
               
               
-              var decrypted     = await window.crypto.subtle.decrypt({name:'AES-GCM',iv},key,cipher);
-                                                                                output_str('text',decrypted);
-              var blob          = buf_blob(decrypted);
-              return blob;
-              
+              var decrypted           = await window.crypto.subtle.decrypt({name:'AES-GCM',iv},key,cipher);
+                                                                                output('decrypt :');
+                                                                                output.b64('salt',salt);
+                                                                                output.b64('iv',iv);
+                                                                                output.b64('cipher',cipher);
+                                                                                output.str('text',decrypted);
+              return decrypted;              
+
           
         }//aes-ctr
         
@@ -158,6 +171,53 @@ function encrypt(){
   //:
 
 
+        function buf_gen(){
+        
+              var len   = 0;
+              [...arguments].forEach(buf=>len+=buf.byteLenth||buf.length);
+              
+              var full    = new Uint8Array(len);
+              
+              var offset    = 0;
+              [...arguments].forEach(buf=>{
+              
+                    full.set(buf,offset);
+                    offset   += buf.byteLength||buf.length;
+                    
+              });
+              
+              return full;
+              
+        }//buf_gen
+        
+        
+        function buf_slice(buf){
+        
+              buf           = new Uint8Array(buf);
+        
+              var list      = [];
+              var offset    = 0;
+              var buf2;
+              var len;
+              
+              var n         = arguments.length-1;
+              for(var i=1;i<n;i++){
+              
+                    len       = arguments[i];
+                    buf2      = buf.slice(offset,len);
+                    offset   += len;
+                    list.push(buf2);
+                    
+              }//for
+              
+              buf2    = buf.slice(offset);
+              list.push(buf2);
+              
+              return list;
+              
+        }//buf_slice
+        
+                
         async function to_blob(){
           
               var type    = datatype(text);
@@ -172,31 +232,7 @@ function encrypt(){
               
         }//to_blob
         
-        
-  
-        function output(name,buf){
-        
-              var b64   = buf_b64(buf);
-              var pad   = name.padStart(10);
-              console.log(pad,':',b64);
-              
-        }//output
-        
-        
-        function output_str(name,buf){
-
-              var str;        
-              if(typeof buf=='string'){
-                    str   = buf;
-              }else{
-                    str   = buf_str(buf);
-              }
-              var pad   = name.padStart(10);
-              console.log(pad,':',str);
-              
-        }//output_str
-
-
+          
         function buf_str(buf){
         
               var txt   = decoder.decode(buf);
@@ -272,7 +308,43 @@ function encrypt(){
         function str_blob(str){
         }//str_blob
         
+
+
+  //:
+  
+  
+        function output(str){
         
+              console.log(str);
+              
+        }//output
+        
+        
+        output.b64   = function(name,buf){
+        
+              var b64   = buf_b64(buf);
+              var pad   = name.padStart(10);
+              console.log(pad,':',b64);
+              
+        }//b64
+        
+        
+        output.str    = function(name,buf){
+
+              var str;        
+              if(typeof buf=='string'){
+                    str   = buf;
+              }else{
+                    str   = buf_str(buf);
+              }
+              var pad   = name.padStart(10);
+              console.log(pad,':',str);
+              
+        }//str
+
+  
+  //:
+  
 
         function datatype(v){
         
