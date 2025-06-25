@@ -108,36 +108,11 @@ function encrypt(){
 
               password                = str_buf(password);              
               var [salt,iv,cipher]    = buf_slice(buf,16,12);
-/*              
-              var salt          = new Uint8Array(16);
-              salt.set(buf.slice(0,16));
-              var iv            = new Uint8Array(12);
-              iv.set(buf.slice(16,28));
-              var cipher        = new Uint8Array(buf.length-28);
-              cipher.set(buf.slice(28));
-              cipher            = cipher.buffer;
-*/              
-              
               
               var {key}               = cryptokey.derive(password,salt);
               
-              
-              
-/*              
-              var alg           = {name:'PBKDF2'};
-              var usage         = ['deriveBits','deriveKey'];
-              var imported      = await window.crypto.subtle.importKey('raw',password,alg,false,usage);
-              
-              var iterations    = 100000;
-              
-              var alg           = {name:'PBKDF2',salt,iterations,hash:'SHA-256'};
-              var derived       = {name:'AES-GCM',length:256};
-              var usage         = ['encrypt','decrypt'];
-              var key           = await window.crypto.subtle.deriveKey(alg,imported,derived,true,usage);
-*/              
-              
-              
               var decrypted           = await window.crypto.subtle.decrypt({name:'AES-GCM',iv},key,cipher);
+              
                                                                                 output('decrypt :');
                                                                                 output.b64('salt',salt);
                                                                                 output.b64('iv',iv);
@@ -171,6 +146,8 @@ function encrypt(){
   //:
 
 
+        obj.buf_gen   = buf_gen;
+        
         function buf_gen(){
         
               var len   = 0;
@@ -190,6 +167,8 @@ function encrypt(){
               
         }//buf_gen
         
+        
+        obj.buf_slice   = buf_slice;
         
         function buf_slice(buf){
         
@@ -217,7 +196,9 @@ function encrypt(){
               
         }//buf_slice
         
-                
+        
+        obj.to_blob   = to_blob;
+        
         async function to_blob(){
           
               var type    = datatype(text);
@@ -232,7 +213,9 @@ function encrypt(){
               
         }//to_blob
         
-          
+        
+        obj.buf_str   = buf_str;
+        
         function buf_str(buf){
         
               var txt   = decoder.decode(buf);
@@ -240,6 +223,8 @@ function encrypt(){
               
         }//buf_str
         
+        
+        obj.buf_b64   = buf_b64;
         
         function buf_b64(buf){
         
@@ -251,6 +236,8 @@ function encrypt(){
         }//blob_b64
             
   
+        obj.b64_buf   = b64_buf;
+        
         function b64_buf(b64,type='text/plain'){
         
               var bin     = atob(b64);
@@ -262,6 +249,8 @@ function encrypt(){
         }//b64_blob
 
 
+        obj.buf_blob    = buf_blob;
+        
         function buf_blob(buf){
           
               var uint8   = new Uint8Array(buf);
@@ -271,6 +260,8 @@ function encrypt(){
         }//buf_blob
         
         
+        obj.blob_buf    = blob_buf;
+        
         async function blob_buf(blob){
           
               var buf   = await blob.arrayBuffer();
@@ -279,6 +270,8 @@ function encrypt(){
         }//blob_buf
         
       
+        obj.b64_blob    = b64_blob;
+        
         function b64_blob(b64,type='text/plain'){
         
               var bin       = atob(b64);
@@ -290,6 +283,8 @@ function encrypt(){
         }//b64_blob
   
   
+        obj.blob_b64    = blob_b64;
+        
         async function blob_b64(blob){
         
               var buf       = await blob.arrayBuffer();
@@ -301,9 +296,13 @@ function encrypt(){
         }//blob_b64
 
   
+        obj.blob_str    = blob_str;
+        
         function blob_str(blob){
         }//blob_str
         
+        
+        obj.str_blob    = str_blob;
         
         function str_blob(str){
         }//str_blob
@@ -346,6 +345,8 @@ function encrypt(){
   //:
   
 
+        obj.datatype    = datatype;
+        
         function datatype(v){
         
               var str   = Object.prototype.toString.call(v);
