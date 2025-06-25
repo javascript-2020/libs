@@ -16,11 +16,7 @@ aesmod:d
 */
 
 
-        return aesmod();
-        
-
-function aesmod(){
-
+(()=>{
 
   //aes:
   
@@ -1088,7 +1084,7 @@ function aesmod(){
   return Aes;
   
 //aesmod:d-
-}
+})();
 
 
 
