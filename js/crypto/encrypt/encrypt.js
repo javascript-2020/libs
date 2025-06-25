@@ -224,6 +224,19 @@ function encrypt(){
         }//buf_str
         
         
+        obj.str_buf   = str_buf;
+        
+        function str_buf(str){
+        
+              var len     = str.length;
+              var uint8   = new Uint8Array(len);
+              [...str].forEach((c,i)=>uint8[i]    = str.charCodeAt(i));
+              var buf     = uint8.arrayBuffer;
+              return buf
+              
+        }//str_buf
+        
+        
         obj.buf_b64   = buf_b64;
         
         function buf_b64(buf){
