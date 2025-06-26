@@ -478,7 +478,7 @@ mod.filenav   = function(){
               if(!cur.type){
                     return;
               }
-              if(cur.type!='dir'){
+              if(cur.type!=='dir'){
                     return;
               }
               
@@ -497,6 +497,17 @@ mod.filenav   = function(){
         
 
         btn.dir.clear   = function(e){
+
+              var path      = ui.rd.path();
+              
+              var result    = await callback('dir','clear',path);
+              if(result===false){
+                    return;
+              }
+              var {url,auth}    = result;
+              
+              dir.clear(url,auth,path);
+              
         }//clear
         
         
@@ -831,6 +842,17 @@ mod.filenav   = function(){
               
         }//rem
 
+
+        dir.clear   = async function(url,auth,path){
+          
+              var result    = await server.dirclear(url,auth,path);
+              if(!result){
+                    return;
+              }
+              server.readdir(url,auth,path);
+              
+        }//clear
+        
         
   //:
   
@@ -1102,7 +1124,7 @@ mod.filenav   = function(){
               if(err){
                     var str   = err.toString();
                     alert(`fetch error\n${str}`);
-                    return;
+                    return false;
               }
               
               if(!res.ok){
@@ -1116,6 +1138,39 @@ mod.filenav   = function(){
           
         }//download
         
+        
+        server.dirclear   = async function(url,auth,path){
+          
+              var headers     = {mode:'dirclear',auth};
+              var full        = url+path;
+
+              var err;
+              try{
+              
+                    var res         = await fetch(full,{headers});
+                    
+              }
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }
+              if(err){
+                    var str   = err.toString();
+                    alert(`fetch error\n${str}`);
+                    return;
+              }
+              
+              if(!res.ok){
+                    var txt   = await res.text();
+                    alert('readdir :'+url+'\n'+txt);
+                    return false;
+              }
+
+              return true;
+              
+        }//dirclear
+
 
   //:
   
