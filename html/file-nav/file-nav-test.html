@@ -107,6 +107,11 @@
       
       <body>
       
+            <div>
+                  <input id=url>
+                  <input id=auth>
+            </div>
+            
             <div id=hdr>
                   file-nav test
             </div>
@@ -149,7 +154,11 @@
       
         function initdom(){
 
-          
+
+              $('#url').value     = url;
+              $('#auth').value    = auth;
+
+              
               filenav.initdom(document.body);
               
                       
@@ -175,6 +184,9 @@
 
         rd.params   = function(){
           
+              var url     = $('#url').value;
+              var auth    = $('#auth').value;
+              
               return {url,auth};
               
         }//params
