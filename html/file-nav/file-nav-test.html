@@ -6,11 +6,19 @@
             <style>
       
   body
-    {display:flex;gap:10px}
+    {display:flex;gap:10px;flex-direction:column;font-family:arial}
     
   #hdr
-    {margin-bottom:20px}
-        
+    {display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+  #title
+    {color:blue}
+    
+  label
+    {display:inline-block;width:75px;margin-right:20px;text-align:right}
+  #open-tab
+    {vertical-align:middle;width:20px;height:20px;border:1px solid lightgray;padding:3px;box-sizing:border-box;margin-right:10px;
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAM1BMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADbQS4qAAAAEHRSTlMA3P2oVwMOwJclPPMnx4V+55yUQwAAAI9JREFUKM/l0WEOxBAQhuHPYHTRdu5/2i1dpZXpBfb9w+SJSABvZiwCYNumgI1kiCqv1wwjxg7lg/1ediudbP0QSmXNQRpj7hOEDGlcdHEaV2WNT4XCP1W4KVxKM18KjnHirrUH57s+eb/rk9l29czT3dzPxhC0Ny85/Usq018zXnl1SsvBVkhNEqIRtbR9AYRhC8cMGp8KAAAAAElFTkSuQmCC);
+    }
   #dir-listing
     {height:400px;width:500px;border:1px solid lightgray}
   
@@ -52,6 +60,7 @@
         };
         
         
+        var btn     = {};
         var rd      = {};
         var file    = {};
         var dir     = {};
@@ -115,10 +124,16 @@
       
       <body>
       
-            <div>
+            <div id=hdr>
+                  <h3 id=title>
+                        file-nav test
+                  </h3>
                   <div>
                         <label>
-                              url
+                              <img id=open-tab>
+                              <span>
+                                    url
+                              </span>
                         </label>
                         <input id=url>
                   </div>
@@ -128,10 +143,6 @@
                         </label>
                         <input id=auth>
                   </div>
-            </div>
-            
-            <div id=hdr>
-                  file-nav test
             </div>
 
       
@@ -172,9 +183,9 @@
       
         function initdom(){
 
-
-              $('#url').value     = url;
-              $('#auth').value    = auth;
+              $('#open-tab').onclick      = btn.open;
+              $('#url').value             = url;
+              $('#auth').value            = auth;
 
               
               filenav.initdom(document.body);
@@ -183,15 +194,22 @@
         }//initdom
         
         
+        btn.open    = function(){
+          
+              var url   = $('#url').value;
+              window.open(url);
+              
+        }//open
+        
+        
+  //:
+  
+  
         function ready(){
           
-/*          
-              var dirs    = fs['tmp/'].dirs;
-              var files   = fs['tmp/'].files;
+              var url     = $('#url').value;
+              var auth    = $('#auth').value;
               
-              filenav.display('tmp/',dirs,files);
-*/
-
               filenav.server.readdir(url,auth,'/');
               
         }//ready
