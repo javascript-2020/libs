@@ -380,7 +380,7 @@ mod.filenav   = function(){
         }//rem
         
         
-        btn.file.upload   = async function(){
+        btn.file.upload   = function(){
           
               var input         = document.createElement('input');
               input.type        = 'file';
@@ -389,7 +389,7 @@ mod.filenav   = function(){
               input.click();
               
               
-              function onchange(){
+              async function onchange(){
 
                     var path      = ui.rd.path();
                     
