@@ -43,10 +43,15 @@
           }
     #dir-hdr
           {font-size:14px;display:flex;gap:10px;height:18px}
-    #dir-add
-          {}
-    #dir-rem
-          {}
+  #dir-add
+    {}
+  #dir-rem
+    {}
+  #dir-clear
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAfCAMAAADHso01AAAA3lBMVEVHcEz/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQf/wQZ0dHXv7/Hy8vT+wAb/wgi1tbX1uwz/xRnU1NS8vLzy58dcXFyHh4eRhGDc3NxUVFT/xBL313X224j035+oqKjq6ejWqiWBe2lkWDezsKihgyfz4rL50lurq6vd3d3Kpjd5d3Hksh2IcjFUT0Fvbmrz5r3x5sPGxsa8nDyMgmHFmx6tiiCKgGL7zD9VVVV4aeK3AAAAGnRSTlMADUez6fn1nb4ah/ETBjqUeWxRp80uWF/dJMgoiHIAAAFcSURBVCjPhZPrcoIwEIUDglLxfmsbIYhoi0WtWtTW1lvvff8XagibBBgdz/CDyTeb3ZzdRUhKaaudjtouoRMqV4qGZup6XmtVVSVLK00Tc5F8Tk1BpabhlMxiIkWpQODYcRz4y12J2AIPcqlIlhchknw/US1duKBQZlQ1IXK+2y6X292X67ID/ZpdbbBqN76/2P/4/ud+4fsfLEMrur6hRxe/LboJvc5Zgjq1o4nPYkNBtzexFfOwJxRu4vK1Cmrk4zqDg2Xb8A37YF8d1bghK+slnL0PZj3POgLGVVTleGoP/rz77uju0T4E3BokHKP4AfCKY0NEp7AwXuTGE4mnjsjNKydJjEXl8G5MxhJPANN3x66dxtS12HOK19boOXp36Flj6HlddCzCQoBZx6Df5Hcm8JrIfvNpccbHIdNxEiSnRcxa0I+VnUU5qVKSXprzzJbg7JZc3LEzG/oPCutRWllQwREAAAAASUVORK5CYII=);
+    }
+    
     #parent
           {cursor:pointer;width:18px;height:18px;
             content:url(data:image/png;base64,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);
@@ -65,6 +70,19 @@
           {flex:1;padding:5px;display:flex;flex-direction:column;box-sizing:border-box;overflow:hidden;border-left:1px solid lightgray}
     #file-hdr
           {font-size:14px;height:18px;display:flex;gap:10px}
+  #file-upload
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAVFBMVEVHcEwFNjsLMDgVLjYFNjwHMjgKMTgRMTYFNjsJMjkOLTYZKDIOLzYGNDo5HywENz0hLDYJMTgFNzwMMDYGNjsHNDoGNTsFNTsHNDoLMDkIMzoCOD3e0XtoAAAAG3RSTlMAzUQM8oRgEuZ5JwcatQH8BGv3MsCc2N+pU5QWG3esAAABG0lEQVQoz62T2ZKEIAxFm4ABZJNFXPj//xzHBZfypas6b3BiknuDn88Pg8YJoVXvsJsSc86JEewLVZKJGbExjPnuUVVzJYOJaxokhrfvMGVimNH7WZuhvWAMLIsiYr2IojmpJmLirfTnQLbPuh4grLnXcT2D2nkO8FQxOXkM3QTDj55HyXbYxXVN6Osl6XfHLJBNHLCeHnXGEqrgmPMijl4kSlfKUNXhf/so+mNiEGWJVL0ZjFpEyaq+rNHsftNE+NJ6x6rfaGHTBbdi3LIpej+UYtDvJqxEjafVdCl/ei0drsLqovgVgyB6tcUloA9stRdia0IlYwlvmM/ZkWMPFmYi73hM8lzox3J1L07py1u8jfY1VoAYf/hT/QG5RQ/ClL2P7gAAAABJRU5ErkJggg==);
+    }
+  #file-download
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAV1BMVEVHcEwcKDIUKzMOLzYENjwNMDcENzwQLzYFNjsHMjkJMTgIMzoKMTgOLzcJMjgGNToFNzwJMDgGNDoFNTwJMjkLMDcFNjwNLjYGNTsGMzoINDsGNDsCOD6kGNpIAAAAHHRSTlMABAsZ7zP8FNeQbKdZH3m+90i13YY85SfQlqDJPrs2SgAAAR9JREFUKM+tk1sSgyAMRYEGVN4vUSv7X2dRqdqO9qv5Ch5Jcu8EhP4ZDXW9wjfwoUewNnlJriid2dzpzoN9Pr4QwYi2wJslpZMVzce9zvhpBFmPWFt9pm0GyPn4hJ9hOB1YHKgWp4Y98D1XwS+jnsdtWrHLk4x/iyAmqDdNidYyzvX10pRrLwmjqz9GxsaqSAm2ihvCvA/Z5dy+5yMdW5R01qErjJq5iFOtIdcYaSYRhQndYGdj0f8TV0uuMC92YAH9B24OZ1KR5MBs/vRSmpwTl9syYM1isQhHZlaruM1b+KWAitasfUgE8BIjIjYaisP9MzBf3cJOBFEKDuNC153gyfBjX7Bac5dyXhsioq6WUbOt8U0Q0dJfr0DRf76pF+D3EMC0HzinAAAAAElFTkSuQmCC);
+    }
+  #file-add
+    {}
+  #file-rem
+    {}
+    
     #file-list
           {flex:1;position:relative;overflow:auto}
     .file
@@ -105,6 +123,7 @@
                                     <span class=spc></span>
                                     <img id=dir-add class='icon-add icon'>
                                     <img id=dir-rem class='icon-rem icon' title='dblclick'>
+                                    <img id=dir-clear class='icon-add icon' title='dblclick'>
                               </div>
                               
                               <div id=dir-list>
@@ -129,6 +148,8 @@
                                           0
                                     </span>
                                     <span class=spc></span>
+                                    <img id=file-upload class='icon-add icon'>
+                                    <img id=file-download class='icon-add icon'>
                                     <img id=file-add class='icon-add icon'>
                                     <img id=file-rem class='icon-rem icon' title='dblclick'>
                               </div>
@@ -260,37 +281,40 @@ mod.filenav   = function(){
   
         obj.initdom   = function(rootnode){
                                                                                 debug('initdom');
-              root                                      = $.$(rootnode,'file-nav');
-              shadow                                    = root.shadowRoot;
+              root                                            = $.$(rootnode,'file-nav');
+              shadow                                          = root.shadowRoot;
               
-              $(shadow,'#update').onclick               = btn.update;
-              ui.path                                   = $(shadow,'#path');
-              ui.path.textContent                       = def.path;
+              $(shadow,'#update').onclick                     = btn.update;
+              ui.path                                         = $(shadow,'#path');
+              ui.path.textContent                             = def.path;
               
               newfile.initdom(shadow);
               
-              var view                                  = $(shadow,'#view');
+              var view                                        = $(shadow,'#view');
               
-              ui.dir.root                               = $(shadow,'#dir-root');
-              ui.dir.num                                = $(ui.dir.root,'#dir-num');
-              $(ui.dir.root,'#dir-add').onclick         = btn.dir.add;
-              $(ui.dir.root,'#dir-rem').ondblclick      = btn.dir.rem;
-              $(ui.dir.root,'#parent').onclick          = btn.dir.parent;
-              ui.dir.list                               = $(ui.dir.root,'#dir-list');
-              ui.dir.item                               = $(ui.dir.list,'.dir');
+              ui.dir.root                                     = $(shadow,'#dir-root');
+              $(ui.dir.root,'#parent').onclick                = btn.dir.parent;
+              ui.dir.num                                      = $(ui.dir.root,'#dir-num');
+              $(ui.dir.root,'#dir-add').onclick               = btn.dir.add;
+              $(ui.dir.root,'#dir-rem').ondblclick            = btn.dir.rem;
+              $(ui.dir.root,'#dir-clear').ondblclick          = btn.dir.clear;
+              ui.dir.list                                     = $(ui.dir.root,'#dir-list');
+              ui.dir.item                                     = $(ui.dir.list,'.dir');
               ui.dir.item.remove();
-              var empty                                 = $(ui.dir.list,'#empty');
+              var empty                                       = $(ui.dir.list,'#empty');
               empty.remove();
-              ui.dir.empty                              = empty.cloneNode(true);
+              ui.dir.empty                                    = empty.cloneNode(true);
               
-              ui.file.root                              = $(shadow,'#file-root');
-              ui.file.num                               = $(ui.file.root,'#file-num');
-              $(ui.file.root,'#file-add').onclick       = btn.file.add;
-              $(ui.file.root,'#file-rem').ondblclick    = btn.file.rem;
-              ui.file.list                              = $(ui.file.root,'#file-list');
-              ui.file.item                              = $(ui.file.list,'.file');
+              ui.file.root                                    = $(shadow,'#file-root');
+              ui.file.num                                     = $(ui.file.root,'#file-num');
+              $(ui.file.root,'#file-upload').onclick          = btn.file.upload;
+              $(ui.file.root,'#file-download').onclick        = btn.file.download;
+              $(ui.file.root,'#file-add').onclick             = btn.file.add;
+              $(ui.file.root,'#file-rem').ondblclick          = btn.file.rem;
+              ui.file.list                                    = $(ui.file.root,'#file-list');
+              ui.file.item                                    = $(ui.file.list,'.file');
               ui.file.item.remove();
-              ui.file.empty                             = empty.cloneNode(true);
+              ui.file.empty                                   = empty.cloneNode(true);
               
               $.slider(ui.dir.root,'#slider',ui.file.root,null,{root:view});
               
@@ -338,10 +362,7 @@ mod.filenav   = function(){
         
         btn.file.rem    = async function(){
           
-              if(!cur.type){
-                    return;
-              }
-              if(cur.type!='file'){
+              if(cur.type!=='file'){
                     return;
               }
               
@@ -358,7 +379,80 @@ mod.filenav   = function(){
               
         }//rem
         
+        
+        btn.file.upload   = async function(){
+          
+              var input         = document.createElement('input');
+              input.type        = 'file';
+              input.multiple    = 'multiple';
+              input.onchange    = onchange;
+              input.click();
+              
+              
+              function onchange(){
+
+                    var path      = ui.rd.path();
+                    
+                    var result    = await callback('dir','add',path,name);
+                    if(result===false){
+                          return;
+                    }
+                    var {url,auth}    = result;
+                
+                    var n   = input.files.length;
+                    for(var i=0;i<n;i++){
+                      
+                          await file.upload(url,auth,path,file);
+                          
+                    }//for
+                    
+              }//onchange
+              
+        }//upload
+        
+        
+        btn.file.download   = async function(){
+          
+              if(cur.type!=='file'){
+                    return;
+              }
+              
+              var path      = ui.rd.path();
+              var name      = cur.filename;
+              
+              var result    = await callback('dir','add',path,name);
+              if(result===false){
+                    return;
+              }
+              var {url,auth}    = result;
+
+              await file.download(url,auth,path,name);
+              
+        }//download
+        
   
+        btn.dir.parent    = async function(){
+          
+              var path    = ui.rd.path();
+              path        = path.slice(0,-1);
+                                                                                //console.log(path);
+              var i       = path.lastIndexOf('/');
+              if(i==-1){
+                    return;
+              }
+              path        = path.slice(0,i+1);
+                                                                                console.log('btn.dir.parent',path);
+              var result    = await callback('dir','parent',path);
+              if(!result){
+                    return;
+              }
+              var {url,auth}    = result;              
+              
+              dir.parent(url,auth,path);
+              
+        }//parent
+        
+        
         btn.dir.add   = async function(){
 
               var name    = await newfile.show('dir');          
@@ -401,27 +495,9 @@ mod.filenav   = function(){
               
         }//rem
         
-        
-        btn.dir.parent    = async function(){
-          
-              var path    = ui.rd.path();
-              path        = path.slice(0,-1);
-                                                                                //console.log(path);
-              var i       = path.lastIndexOf('/');
-              if(i==-1){
-                    return;
-              }
-              path        = path.slice(0,i+1);
-                                                                                console.log('btn.dir.parent',path);
-              var result    = await callback('dir','parent',path);
-              if(!result){
-                    return;
-              }
-              var {url,auth}    = result;              
-              
-              dir.parent(url,auth,path);
-              
-        }//parent
+
+        btn.dir.clear   = function(e){
+        }//clear
         
         
   //:
@@ -688,6 +764,36 @@ mod.filenav   = function(){
         }//rem
         
         
+        file.upload   = async function(url,auth,path,file){
+          
+              var filename    = path+file.name;
+              var result      = await server.upload(url,auth,filename,file);
+              if(!result){
+                    return;
+              }
+              server.readdir(url,auth,path);
+              
+        }//upload
+        
+        
+        file.download   = async function(url,auth,path){
+          
+              var result    = await server.download(url,auth,path);
+              if(!result){
+                    return;
+              }
+              
+              var blob      = result;
+              var url       = window.URL.createObjectURL(blob);
+              
+              var a         = document.createElement('a');
+              a.href        = url;
+              a.download    = filename;
+              a.click();
+              
+        }//download
+        
+        
         dir.read    = function(url,auth,path){
                                                                                 console.log('dir.read',path);
               server.readdir(url,auth,path);
@@ -943,6 +1049,73 @@ mod.filenav   = function(){
               
         }//v1
 
+
+        server.upload   = async function(url,auth,path,file){
+
+              var headers     = {mode:'upload',auth};
+              var body        = file;
+              var full        = url+path;
+
+              var err;
+              try{
+              
+                    var res         = await fetch(full,{method:'post',headers,body});
+                    
+              }
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }
+              if(err){
+                    var str   = err.toString();
+                    alert(`fetch error\n${str}`);
+                    return;
+              }
+              
+              var txt         = await res.text();
+              
+              if(!res.ok){
+                    alert('readdir :'+url+'\n'+txt);
+                    return false;
+              }
+          
+        }//upload
+        
+        
+        server.download   = async function(url,auth,path){
+          
+              var headers     = {mode:'download',auth};
+              var full        = url+path;
+
+              var err;
+              try{
+              
+                    var res         = await fetch(full,{headers});
+                    
+              }
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }
+              if(err){
+                    var str   = err.toString();
+                    alert(`fetch error\n${str}`);
+                    return;
+              }
+              
+              if(!res.ok){
+                    var txt   = await res.text();
+                    alert('readdir :'+url+'\n'+txt);
+                    return false;
+              }
+              
+              var blob         = await res.blob();
+              return blob;
+          
+        }//download
+        
 
   //:
   
