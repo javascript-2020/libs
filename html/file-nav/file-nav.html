@@ -396,9 +396,9 @@ mod.filenav   = function(){
                     var n   = input.files.length;
                     for(var i=0;i<n;i++){
                     
-                          var file    = input.files[i];
-                          var fn      = path+file.name;
-                          await file.upload(url,auth,fn,file);
+                          var blob    = input.files[i];
+                          var fn      = path+blob.name;
+                          await file.upload(url,auth,fn,blob);
                           
                     }//for
                     
