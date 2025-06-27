@@ -329,13 +329,7 @@ mod.filenav   = function(){
           
               var path    = ui.rd.path();
               
-              var result    = await callback('dir','read',path);
-              if(result===false){
-                    return;
-              }
-              var {url,auth}    = result;
-              
-              dir.read(url,auth,path);
+              update(path);
               
         }//update
         
@@ -748,6 +742,26 @@ mod.filenav   = function(){
         }//callback
 
 
+  //:
+
+  
+        obj.update    = update;
+        
+        async function update(path){
+          
+              path    ||= ui.rd.path();
+              
+              var result    = await callback('dir','read',path);
+              if(result===false){
+                    return;
+              }
+              var {url,auth}    = result;
+              
+              dir.read(url,auth,path);
+              
+        }//update
+        
+        
   //:
   
 
