@@ -51,13 +51,6 @@
         var url         = 'https://localhost:3000';
         var auth        = 'matt-123';
 
-        var fs    = {
-          
-          'tmp/'    : {
-                            dirs    : [],   //'abc','def'
-                            files   : ['a.txt','b.txt']
-                      },
-        };
         
         
         var btn     = {};
@@ -69,7 +62,34 @@
   //:
   
   
-        function init(){
+        var fs    = {
+          
+          'tmp/'    : {
+                            dirs    : [],   //'abc','def'
+                            files   : ['a.txt','b.txt']
+                      },
+        };
+
+
+  //:
+  
+  
+        async function ready(){
+          
+              var url     = $('#url').value;
+              var auth    = $('#auth').value;
+              
+              await filenav.server.readdir(url,auth,'/');
+              
+              await filenav.server.mkdir(url,auth,'/tmp/test-1');
+              
+        }//ready
+
+        
+  //:
+  
+  
+        async function init(){
                                                                                 console.log('init');
               
               filenav   = mod.filenav();
@@ -83,7 +103,7 @@
               initdom();
   
   
-              ready();
+              await ready();
               
                 
         }//init
@@ -201,19 +221,6 @@
               
         }//open
         
-        
-  //:
-  
-  
-        function ready(){
-          
-              var url     = $('#url').value;
-              var auth    = $('#auth').value;
-              
-              filenav.server.readdir(url,auth,'/');
-              
-        }//ready
-
         
   //:
 
