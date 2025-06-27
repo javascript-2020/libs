@@ -402,6 +402,11 @@ mod.filenav   = function(){
                           
                     }//for
                     
+                    var path2   = ui.rd.path();
+                    if(path===path2){
+                          await update(path);
+                    }
+                    
               }//onchange
               
         }//upload
