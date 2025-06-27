@@ -421,7 +421,7 @@ mod.filenav   = function(){
               var path      = ui.rd.path();
               var name      = cur.filename;
               
-              var result    = await callback('dir','add',path,name);
+              var result    = await callback('file','download',path,name);
               if(result===false){
                     return;
               }
@@ -796,10 +796,9 @@ mod.filenav   = function(){
         }//rem
         
         
-        file.upload   = async function(url,auth,path,file){
+        file.upload   = async function(url,auth,path,blob){
           
-              var filename    = path+file.name;
-              var result      = await server.upload(url,auth,filename,file);
+              var result      = await server.upload(url,auth,path,blob);
               if(!result){
                     return;
               }
@@ -1093,10 +1092,10 @@ mod.filenav   = function(){
         }//v1
 
 
-        server.upload   = async function(url,auth,path,file){
+        server.upload   = async function(url,auth,path,blob){
 
               var headers     = {mode:'upload',auth};
-              var body        = file;
+              var body        = blob;
               var full        = url+path;
 
               var err;
