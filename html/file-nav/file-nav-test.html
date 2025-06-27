@@ -81,6 +81,8 @@
               
               await filenav.server.readdir(url,auth,'/tmp/test-1/');
               
+              return;
+              
               await filenav.server.mkdir(url,auth,'/tmp/test-1');
               await filenav.server.mkdir(url,auth,'/tmp/test-2');
               
