@@ -420,14 +420,15 @@ mod.filenav   = function(){
               
               var path      = ui.rd.path();
               var name      = cur.filename;
+              path         += name;
               
-              var result    = await callback('file','download',path,name);
+              var result    = await callback('file','download',path);
               if(result===false){
                     return;
               }
               var {url,auth}    = result;
 
-              await file.download(url,auth,path,name);
+              await file.download(url,auth,path);
               
         }//download
         
