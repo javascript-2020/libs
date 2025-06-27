@@ -428,7 +428,7 @@ mod.filenav   = function(){
               }
               var {url,auth}    = result;
 
-              await file.download(url,auth,path);
+              await file.download(url,auth,path,name);
               
         }//download
         
@@ -808,7 +808,7 @@ mod.filenav   = function(){
         }//upload
         
         
-        file.download   = async function(url,auth,path){
+        file.download   = async function(url,auth,path,filename){
           
               var result    = await server.download(url,auth,path);
               if(!result){
