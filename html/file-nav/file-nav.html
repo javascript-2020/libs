@@ -206,10 +206,10 @@ mod.filenav   = function(){
         def.path            = '/';
         
         obj.rd              = {};
-        obj.file            = {};
-        obj.dir             = {};
         var file            = {};
+        obj.file            = file;
         var dir             = {};
+        obj.dir             = dir;
         var server          = {};
         obj.server          = server;
         
@@ -519,209 +519,6 @@ mod.filenav   = function(){
   //:
   
   
-  
-        display.clear   = function(){
-
-              ui.path.replaceChildren();
-              
-              ui.dir.list.replaceChildren();
-              ui.file.list.replaceChildren();
-              
-              display.node.dir    = {};
-              display.node.file   = {};
-                            
-        }//clear
-        
-        
-        display.scroll        = {};
-        display.node          = {};
-        display.node.dir      = {};
-        display.node.file     = {};
-
-        
-        obj.display   = function(path,dirs,files){
-                                                                                debug('display',path);
-                                                                                //console.json(dirs);
-                                                                                //console.json(files);
-              //display.clear();
-
-              
-              $(ui.path).textContent    = path;
-              
-              
-              display(path,'dir',dirs);
-              display(path,'file',files);
-              
-        }//display
-
-        
-        function display(path,name,list){
-                                                                                //debug('display');
-              var ih    = 25;
-              var pad   = 5;
-              
-              var n     = list.length;
-              var ns    = n;
-              if(ns==0){
-                    ns    = 1;
-              }
-              var t     = ns*ih;
-
-              
-              var evt   = {};
-              
-              obj.onscoll                 = onscroll;
-              ui[name].list.onscroll      = onscroll;
-
-              
-              ui[name].num.textContent    = n;
-              
-
-              var node    = display.scroll[name];
-              if(!node){
-                    node                    = document.createElement('div');
-                    node.className          = 'scroll';
-                    display.scroll[name]    = node;
-                    ui[name].list.append(node);
-              }
-              node.style.top   = t+'px';
-
-
-              var st    = ui[name].list.scrollTop;
-
-              if(n==0){
-                    ui[name].list.append(ui[name].empty);
-              }else{
-                    ui[name].empty.remove();
-              }
-
-              
-              var i1    = Math.floor(st/ih)-3;
-              if(i1<0){
-                    i1    = 0;
-              }
-              
-              var h     = ui[name].list.offsetHeight;
-              var nh    = Math.floor(h/ih)+3;
-              
-              var i2    = i1+nh;
-              if(i2>list.length){
-                    i2    = list.length;
-              }
-
-        
-              for(var key in display.node[name]){
-                
-                    if(key<i1 || key>=i2){
-                          display.node[name][key].remove();
-                          delete display.node[name][key];
-                    }
-                    
-              }//for
-                          
-
-              for(let i=i1;i<i2;i++){
-                
-                    let nitem       = display.node[name][i];
-                    let filename    = list[i];
-                    
-                    if(!nitem){
-                          nitem                           = ui[name].item.cloneNode(true);
-                          nitem.style.cssText             = 'position:absolute;left:0;right:0';
-                          nitem.style.top                 = i*ih+'px';
-                          ui[name].list.append(nitem);
-                          display.node[name][i]           = nitem;
-                          
-                          nitem.onmouseenter              = e=>evt.mouseenter(nitem);
-                          nitem.onmouseleave              = e=>evt.mouseleave(nitem);
-                    }
-                    
-                    $(nitem,'.name').textContent    = filename;
-                    nitem.onclick                   = e=>evt.click(nitem,filename);
-                    nitem.ondblclick                = e=>evt.dblclick(nitem,filename);
-                    
-              }//for
-                                                                                //var nn    = Object.keys(display.node[name]).length;
-                                                                                //debug(name,nn);
-              evt.click   = function(item,filename){
-                                                                                console.log('click',name,path);
-                    var type    = 'file';
-                    
-                    if(cur.item!==item){
-                          if(cur.item){
-                                cur.item.style.background    = '';
-                          }
-                          item.style.background   = 'lightyellow';
-                          
-                          var path    = ui.rd.path();
-                          cur.set(name,item,path,filename);
-                    }else{
-                          item.style.background   = '';
-                          cur.rem();
-                    }
-                    
-                    
-                    if(name==='dir'){
-                          type        = 'dir';
-                          filename   += '/';
-                    }
-                                                                                debug('click',path,name,filename);
-                    callback(type,'click',path,filename);
-                    
-              }//click
-              
-              
-              evt.dblclick    = function(item,filename){
-
-                    var type    = 'file';
-                    if(name==='dir'){
-                          type        = 'dir';
-                          filename   += '/';
-                    }
-                                                                                debug('dblclick',path,name,filename);
-                    var result    = callback(type,'dblclick',path,filename);
-                    if(!result){
-                          return;
-                    }
-                    
-                    if(type=='dir'){
-                          var {url,auth}    = result;
-                          var path2         = path+filename;
-                          dir.read(url,auth,path2);
-                    }
-                    
-              }//dblclick
-              
-
-              evt.mouseenter    = function(item){
-                
-                    if(cur.item){
-                          return;
-                    }
-                    item.style.background   = 'lightyellow';
-                    
-              }//mouseenter
-              
-              
-              evt.mouseleave    = function(item){
-                
-                    if(cur.item){
-                          return;
-                    }
-                    item.style.background   = '';
-                    
-              }//mouseleave
-              
-              
-              function onscroll(e){
-                                                                                debug(name,'onscroll');
-                    display(path,name,list);
-                    
-              }//onscroll
-              
-        }//display
-
-
         function callback(type,name,arg0){
                                                                                 callback.df && console.log('callback');
                                                                                 callback.df && console.json(arguments);
@@ -1194,6 +991,211 @@ mod.filenav   = function(){
               return true;
               
         }//dirclear
+
+
+  //:
+  
+  
+        display.clear   = function(){
+
+              ui.path.replaceChildren();
+              
+              ui.dir.list.replaceChildren();
+              ui.file.list.replaceChildren();
+              
+              display.node.dir    = {};
+              display.node.file   = {};
+                            
+        }//clear
+        
+        
+        display.scroll        = {};
+        display.node          = {};
+        display.node.dir      = {};
+        display.node.file     = {};
+
+        
+        obj.display   = function(path,dirs,files){
+                                                                                debug('display',path);
+                                                                                //console.json(dirs);
+                                                                                //console.json(files);
+              //display.clear();
+
+              
+              $(ui.path).textContent    = path;
+              
+              
+              display(path,'dir',dirs);
+              display(path,'file',files);
+              
+        }//display
+
+        
+        function display(path,name,list){
+                                                                                //debug('display');
+              var ih    = 25;
+              var pad   = 5;
+              
+              var n     = list.length;
+              var ns    = n;
+              if(ns==0){
+                    ns    = 1;
+              }
+              var t     = ns*ih;
+
+              
+              var evt   = {};
+              
+              obj.onscoll                 = onscroll;
+              ui[name].list.onscroll      = onscroll;
+
+              
+              ui[name].num.textContent    = n;
+              
+
+              var node    = display.scroll[name];
+              if(!node){
+                    node                    = document.createElement('div');
+                    node.className          = 'scroll';
+                    display.scroll[name]    = node;
+                    ui[name].list.append(node);
+              }
+              node.style.top   = t+'px';
+
+
+              var st    = ui[name].list.scrollTop;
+
+              if(n==0){
+                    ui[name].list.append(ui[name].empty);
+              }else{
+                    ui[name].empty.remove();
+              }
+
+              
+              var i1    = Math.floor(st/ih)-3;
+              if(i1<0){
+                    i1    = 0;
+              }
+              
+              var h     = ui[name].list.offsetHeight;
+              var nh    = Math.floor(h/ih)+3;
+              
+              var i2    = i1+nh;
+              if(i2>list.length){
+                    i2    = list.length;
+              }
+
+        
+              for(var key in display.node[name]){
+                
+                    if(key<i1 || key>=i2){
+                          display.node[name][key].remove();
+                          delete display.node[name][key];
+                    }
+                    
+              }//for
+                          
+
+              for(let i=i1;i<i2;i++){
+                
+                    let nitem       = display.node[name][i];
+                    let filename    = list[i];
+                    
+                    if(!nitem){
+                          nitem                           = ui[name].item.cloneNode(true);
+                          nitem.style.cssText             = 'position:absolute;left:0;right:0';
+                          nitem.style.top                 = i*ih+'px';
+                          ui[name].list.append(nitem);
+                          display.node[name][i]           = nitem;
+                          
+                          nitem.onmouseenter              = e=>evt.mouseenter(nitem);
+                          nitem.onmouseleave              = e=>evt.mouseleave(nitem);
+                    }
+                    
+                    $(nitem,'.name').textContent    = filename;
+                    nitem.onclick                   = e=>evt.click(nitem,filename);
+                    nitem.ondblclick                = e=>evt.dblclick(nitem,filename);
+                    
+              }//for
+                                                                                //var nn    = Object.keys(display.node[name]).length;
+                                                                                //debug(name,nn);
+              evt.click   = function(item,filename){
+                                                                                console.log('click',name,path);
+                    var type    = 'file';
+                    
+                    if(cur.item!==item){
+                          if(cur.item){
+                                cur.item.style.background    = '';
+                          }
+                          item.style.background   = 'lightyellow';
+                          
+                          var path    = ui.rd.path();
+                          cur.set(name,item,path,filename);
+                    }else{
+                          item.style.background   = '';
+                          cur.rem();
+                    }
+                    
+                    
+                    if(name==='dir'){
+                          type        = 'dir';
+                          filename   += '/';
+                    }
+                                                                                debug('click',path,name,filename);
+                    callback(type,'click',path,filename);
+                    
+              }//click
+              
+              
+              evt.dblclick    = function(item,filename){
+
+                    var type    = 'file';
+                    if(name==='dir'){
+                          type        = 'dir';
+                          filename   += '/';
+                    }
+                                                                                debug('dblclick',path,name,filename);
+                    var result    = callback(type,'dblclick',path,filename);
+                    if(!result){
+                          return;
+                    }
+                    
+                    if(type=='dir'){
+                          var {url,auth}    = result;
+                          var path2         = path+filename;
+                          dir.read(url,auth,path2);
+                    }
+                    
+              }//dblclick
+              
+
+              evt.mouseenter    = function(item){
+                
+                    if(cur.item){
+                          return;
+                    }
+                    item.style.background   = 'lightyellow';
+                    
+              }//mouseenter
+              
+              
+              evt.mouseleave    = function(item){
+                
+                    if(cur.item){
+                          return;
+                    }
+                    item.style.background   = '';
+                    
+              }//mouseleave
+              
+              
+              function onscroll(e){
+                                                                                debug(name,'onscroll');
+                    display(path,name,list);
+                    
+              }//onscroll
+              
+        }//display
 
 
   //:
