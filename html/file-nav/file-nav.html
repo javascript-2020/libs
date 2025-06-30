@@ -588,7 +588,7 @@ mod.filenav   = function(){
         file.rem    = async function(url,auth,path,filename){
           
               var file      = path+filename;
-              var result    = await server.rmdir(url,auth,file);
+              var result    = await server.rmfile(url,auth,file);
               if(!result){
                     return;
               }
