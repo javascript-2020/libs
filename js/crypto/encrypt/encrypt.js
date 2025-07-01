@@ -267,7 +267,7 @@ function encrypt(){
               var len     = str.length;
               var uint8   = new Uint8Array(len);
               [...str].forEach((c,i)=>uint8[i]    = str.charCodeAt(i));
-              var buf     = uint8.arrayBuffer;
+              var buf     = uint8.buffer;
               return buf
               
         }//str_buf
