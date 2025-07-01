@@ -145,7 +145,7 @@ function encrypt(){
               password                = str_buf(password);              
               var [salt,iv,cipher]    = buf_slice(buf,16,12);
               
-              var {key}               = cryptokey.derive(password,salt);
+              var {key}               = await cryptokey.derive(password,salt);
               
               var decrypted           = await window.crypto.subtle.decrypt({name:'AES-GCM',iv},key,cipher);
               
