@@ -53,7 +53,7 @@ function encrypt(){
         
         async function load_libs(){
         
-              var promise   = ext.load.libs('crypto/aes/aes.js');
+              var promise   = ext.load.libs('js/crypto/aes/aes.js');
               [aes]         = await promise;
 
               console.log('aes',aes);
