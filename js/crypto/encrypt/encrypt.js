@@ -93,7 +93,7 @@ function encrypt(){
   //:
   
   
-        cryptokey.derive    = function(password,salt){
+        cryptokey.derive    = async function(password,salt){
         
               var alg           = {name:'PBKDF2'};
               var usage         = ['deriveBits','deriveKey'];
