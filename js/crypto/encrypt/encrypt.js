@@ -121,7 +121,7 @@ function encrypt(){
         encrypt.crypto['aes-ctr']   = async function(buf,password){
         
               password          = str_buf(password);
-              var {key,salt}    = cryptokey.derive(password);
+              var {key,salt}    = await cryptokey.derive(password);
               
               var iv            = window.crypto.getRandomValues(new Uint8Array(12));
               var cipher        = await window.crypto.subtle.encrypt({name:'AES-GCM',iv},key,buf);
