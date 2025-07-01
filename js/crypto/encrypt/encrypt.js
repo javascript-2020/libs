@@ -33,12 +33,12 @@ function encrypt(){
         var aes;
   
   
-        var mode            = ['crypto','aes-ctr'];
+        var mode              = ['crypto','aes-ctr'];
 
-        var cryptokey       = {};
-        cryptkey.derive     = {};
-        encrypt.crypto      = {};        
-        decrypt.crypto      = {};
+        var cryptokey         = {};
+        cryptokey.derive      = {};
+        encrypt.crypto        = {};        
+        decrypt.crypto        = {};
 
 
   //:
