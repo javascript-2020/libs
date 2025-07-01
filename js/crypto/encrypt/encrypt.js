@@ -17,7 +17,23 @@ function encrypt(){
   var obj   = {};
   
   
+        var ext
+        ;
+        
+        obj.initmod   = function(params){
+        
+              ext   = params.ext;
+              
+        }//initmod
+        
+        
+  //:
 
+  
+        var aes;
+  
+  
+        var mode            = ['crypto','aes-ctr'];
 
         var cryptokey       = {};
         cryptkey.derive     = {};
@@ -25,6 +41,26 @@ function encrypt(){
         decrypt.crypto      = {};
 
 
+  //:
+  
+  
+        obj.init    = function(){
+        
+              load_libs();
+              
+        }//init
+        
+        
+        async function load_libs(){
+        
+              var promise   = ext.load.libs('crypto/aes/aes.js');
+              [aes]         = await promise;
+
+              console.log(aes);
+              
+        }//load_libs
+        
+        
   //:
   
 
