@@ -219,7 +219,7 @@ function encrypt(){
               for(var i=1;i<n;i++){
               
                     len       = arguments[i];
-                    buf2      = buf.slice(offset,len);
+                    buf2      = buf.slice(offset,offset+len);
                     offset   += len;
                     list.push(buf2);
                     
