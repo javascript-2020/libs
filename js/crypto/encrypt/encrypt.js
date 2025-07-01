@@ -215,7 +215,7 @@ function encrypt(){
               var buf2;
               var len;
               
-              var n         = arguments.length-1;
+              var n         = arguments.length;
               for(var i=1;i<n;i++){
               
                     len       = arguments[i];
