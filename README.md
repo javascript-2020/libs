@@ -141,16 +141,17 @@ various types of loaders
 
         async function load(){
 
-              //var nodeForge   = await import('https://cdn.jsdelivr.net/npm/node-forge/+esm');              
-              var txt         = localStorage['node-forge'];
+              var url   = 'https://cdn.jsdelivr.net/npm/node-forge/+esm';
+              
+              var txt   = localStorage['node-forge'];
                             
               if(!txt){
-                    var url   = 'https://cdn.jsdelivr.net/npm/node-forge/+esm';
                                                                                 console.log(url);
                     var res   = await fetch(url);
                     txt       = await res.text();
-                    localStorage['node-forge']    = txt;
               }
+              
+              localStorage['node-forge']    = txt;
               
               var blob        = new Blob([txt],{type:'text/javascript'});
               var url         = window.URL.createObjectURL(blob);
