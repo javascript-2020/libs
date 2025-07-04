@@ -81,6 +81,7 @@ mod['db-files']   = function(){
 
               
               list          = await window.indexedDB.databases();
+              list          = list.map(db=>db.name);
               console.log(list);
               list          = list.filter(fn=>fn.startsWith(prefix));
 
