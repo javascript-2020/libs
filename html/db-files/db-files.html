@@ -141,7 +141,7 @@ mod['db-files']   = function(){
                     if(!abs.startsWith(prefix+dir))return;
                     
                     var i   = abs.indexOf('/',len);
-                    console.log(abs,i);
+                                                                                //console.log(abs,i);
                     var fn;
                     if(i==-1){
                           fn    = abs.slice(len);
@@ -181,7 +181,7 @@ mod['db-files']   = function(){
         }//save
   
         
-        function delete(filename){
+        async function delete(filename){
           
               if(!exists(filename)){
                     return false;
