@@ -95,7 +95,7 @@ mod['db-files']   = function(){
   
         obj.initdom   = function(rootnode){
           
-              root                    = $.$(rootnode,'db-files');
+              root                                              = $.$(rootnode,'db-files');
               shadow                                            = root.shadowRoot;
               
               menumod.add.style(shadow);
@@ -105,7 +105,7 @@ mod['db-files']   = function(){
               
               var node                                          = $(shadow,'.menu');
               icon                                              = $(shadow,'.icon');
-              icon.onclick                                      = menumod.click(node,'both',true,callback);
+              icon.onclick                                      = menumod.click(node,'both',true,menu);
               
               
               
@@ -115,7 +115,10 @@ mod['db-files']   = function(){
   //:
   
   
-  
+        function menu(){
+        }//menu
+        
+        
         function read(){
         }//read
         
