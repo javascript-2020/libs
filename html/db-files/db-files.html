@@ -53,7 +53,9 @@ mod['db-files']   = function(){
   
         var filenav;
         
-        var fs;
+        var prefix    = 'fs/';
+        var list;
+        
 
         var root;
         var shadow;
@@ -75,14 +77,13 @@ mod['db-files']   = function(){
 
 
               await libs();
+
+
               
-              fs    = dbmod('files');
-            
-            
-              await fs.list();
+              list          = await window.indexedDB.databases();
+              list          = list.filter(fn=>fn.startsWith(prefix));
 
-
-            
+              
         }//init
         
         
@@ -127,11 +128,80 @@ mod['db-files']   = function(){
         }//menu
         
         
-        function read(){
+        function read(dir='tmp/'){
+          
+              var len       = prefix.length+dir.length;
+              
+              var files     = [];
+              var dirs      = [];
+
+              
+              list.forEach(abs=>{
+
+                    if(!abs.startsWith(prefix+dir))return;
+                    
+                    var i   = abs.indexOf('/',len);
+                    console.log(abs,i);
+                    var fn;
+                    if(i==-1){
+                          fn    = abs.slice(len);
+                          files.push(fn);
+                    }else{
+                          fn    = abs.slice(len,i);
+                          dirs.push(fn);
+                    }
+                    
+              });
+
+              return {dirs,files};
+          
         }//read
         
   
+        async function load(filename){
+          
+              if(!exists(filename)){
+                    return false;
+              }
+              
+              var db      = await dbmod(filename);
+              var buf     = await db.get();
+              var blob    = new Blob([buf]);
+              return blob;
+              
+        }//load
+        
+        
+        async function save(filename,blob){
+          
+              var buf   = await blob.arrayBuffer();
+              var db    = await dbmod(filename);
+              await db.put(buf);
+              
+        }//save
   
+        
+        function delete(filename){
+          
+              if(!exists(filename)){
+                    return false;
+              }
+              var db    = await dbmod(filename);
+              await db.delete();
+              
+        }//delete
+        
+        
+        function mkdir(filename){
+        }//mkdir
+        
+        
+        function mkfile(){
+        }//mkfile
+        
+
+
+        
   return obj;
   
 }//db-files
