@@ -47,9 +47,9 @@
                                       }//onerror
                                       
               var file      = {};
-              file.read     = ()=>read(db);
-              file.write    = data=>write(db,data);
-              file.delete   = ()=>del(db,path);
+              file.read     = ()=>read(path,db);
+              file.write    = data=>write(path,db,data);
+              file.delete   = ()=>del(path,db);
               file.close    = ()=>close(db);
               
               return promise;
@@ -57,12 +57,12 @@
         }//open
         
         
-        function read(db){
+        function read(path,db){
         
               var resolve,promise   = new Promise(res=>resolve=res);
               
-              var store       = db.transaction(name,'readwrite').objectStore(name);
-              var req         = store.get(name);
+              var store       = db.transaction(path,'readwrite').objectStore(path);
+              var req         = store.get(path);
               req.onsuccess   = e=>resolve(req.result.data);
               req.onerror     = e=>console.log('db.get error');
               
@@ -71,12 +71,12 @@
         }//read
         
   
-        function write(db,data){
+        function write(path,db,data){
         
               var resolve,promise   = new Promise(res=>resolve=res);
               
-              var store       = db.transaction(name,'readwrite').objectStore(name);
-              var req         = store.put({key:name,data});
+              var store       = db.transaction(path,'readwrite').objectStore(path);
+              var req         = store.put({key:path,data});
               req.onerror     = e=>console.log('put error');
               req.onsuccess   = e=>resolve();
               
@@ -95,13 +95,13 @@
         }//close
 
         
-        function del(db,name){
+        function del(path,db){
         
               close(db);
               
               var resolve,pomise    = new Promise(res=>resolve=res);
               
-              var req               = window.indexedDB.deleteDatabase(name);
+              var req               = window.indexedDB.deleteDatabase(path);
               req.onsuccess         = e=>resolve();
               req.onerror           = e=>console.log('delete.error');
               
