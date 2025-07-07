@@ -72,7 +72,7 @@
                     list.forEach((db,i)=>{
                     
                           var f   = true;
-                          if(prefix and !db.name.startsWith(prefix)){
+                          if(prefix && !db.name.startsWith(prefix)){
                                 f   = false;
                           }
                           if(f){
