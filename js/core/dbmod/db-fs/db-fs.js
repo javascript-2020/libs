@@ -41,7 +41,7 @@
                                       }//onupgradeneeded
                                       
               req.onerror           = e=>{
-                                                                                            console.log('db.open.onerror',,path);
+                                                                                            console.log('db.open.onerror',path);
                                                                                             console.error(e);
                                       }//onerror
                                       
