@@ -67,6 +67,9 @@ mod['db-files']   = function(){
         var icon;
         
         
+        var file    = {};
+        var dir     = {};
+        
   //:
   
   
@@ -76,7 +79,8 @@ mod['db-files']   = function(){
               filenav                   = mod.filenav();
 
               filenav.initmod({$,datatype});
-
+              filenav.file    = file;
+              filenav.dir     = dir;
               filenav.init();
 
 
@@ -134,8 +138,45 @@ mod['db-files']   = function(){
         }//menu
         
         
+        file.add    = function(){
+        }//add
+        
+        
+        file.rem    = function(){
+        }//rem
+        
+        
+        file.upload   = function(){
+        }//upload
+        
+        
+        file.download   = function(){
+        }//download
+        
+        
+        dir.parent    = function(){
+        }//parent
+        
+        
+        dir.add   = function(){
+        }//add
+        
+        
+        dir.rem   = function(){
+        }//rem
+        
+        
+        dir.clear   = function(){
+        }//clear
+        
+        
+  //:        
+        
+        
+        dir.read    = read;
+        
         function read(dir='tmp/'){
-          
+                                                                                console.log('db-files.dir.read',dir);
               var len       = prefix.length+dir.length;
               
               var files     = [];
