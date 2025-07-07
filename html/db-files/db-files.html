@@ -230,7 +230,7 @@ mod['db-files']   = function(){
               var dirs      = [];
               var files     = [];
 
-              var list      = await db.list(prefix+path);
+              var list      = await db.list(prefix+path,true);
               list.forEach(abs=>{
 
                     var i   = abs.indexOf('/',len);
