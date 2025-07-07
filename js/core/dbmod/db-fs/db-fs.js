@@ -125,15 +125,15 @@
         }//delete
 
 
-        obj.list    = function(prefix){return list(prefix)}
+        obj.list    = list;
         
-        async function list(prefix){
+        async function list(prefix,df){
         
               var names   = [];
               var list    = await window.indexedDB.databases();
               
               if(list.length==0){
-                                                                                //console.log('no databases');
+                                                                                df && console.log('no databases');
               }
               
               list.forEach((db,i)=>{
@@ -145,7 +145,7 @@
                     if(f){
                           names.push(db.name);
                     }
-                                                                                //console.log(i,db.name,db.version);
+                                                                                df && console.log(i,db.name,db.version);
                     
               });
               
