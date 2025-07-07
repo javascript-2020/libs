@@ -87,6 +87,7 @@ mod['db-files']   = function(){
 
               await libs();
 
+              db.list('',true);
 
               
         }//init
@@ -98,7 +99,7 @@ mod['db-files']   = function(){
                     'js/core/dbmod/db-fs/db-fs.js.api'
               );
               [db]   = await promise;
-              debugger;
+              
               
         }//libs
         
