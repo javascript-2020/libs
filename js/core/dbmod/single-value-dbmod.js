@@ -121,7 +121,30 @@ function dbmod(){
         }//delete
 
 
-
+        
+        obj.list    = async function(prefix){
+        
+              var names   = [];
+              var list    = await window.indexedDB.databases();
+              if(list.length==0){
+                    console.log('no databases');
+              }
+              list.forEach((db,i)=>{
+              
+                    var f   = true;
+                    if(prefix && !db.name.startsWith(prefix)){
+                          f   = false;
+                    }
+                    if(f){
+                          names.push(db.name);
+                    }
+                    console.log(i,db.name,db.version)
+                    
+              });
+              return names;
+              
+        }//list
+                
 
   
       
@@ -130,29 +153,6 @@ function dbmod(){
 }//dbmod
 
 
-dbmod.list    = async function(prefix){
-
-      var names   = [];
-      var list    = await window.indexedDB.databases();
-      if(list.length==0){
-            console.log('no databases');
-      }
-      list.forEach((db,i)=>{
-      
-            var f   = true;
-            if(prefix && !db.name.startsWith(prefix)){
-                  f   = false;
-            }
-            if(f){
-                  names.push(db.name);
-            }
-            console.log(i,db.name,db.version)
-            
-      });
-      return names;
-      
-}//list
-        
         
 
 
