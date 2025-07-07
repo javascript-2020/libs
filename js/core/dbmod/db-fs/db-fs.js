@@ -128,7 +128,7 @@
         obj.list    = list;
         
         async function list(prefix,df){
-        
+                                                                                df && console.log('===  list databases  ===');
               prefix    ||= '';
               var names   = [];
               var list    = await window.indexedDB.databases();
