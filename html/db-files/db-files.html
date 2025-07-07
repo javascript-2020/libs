@@ -87,6 +87,7 @@ mod['db-files']   = function(){
 
               await libs();
 
+              db.df   = true;
               db.list('',true);
 
               
@@ -98,8 +99,7 @@ mod['db-files']   = function(){
               var promise   = ext.load.libs(
                     'js/core/dbmod/db-fs/db-fs.js.api'
               );
-              [db]   = await promise;
-              
+              [db]    = await promise;
               
         }//libs
         
