@@ -26,14 +26,14 @@
               var req               = window.indexedDB.open(path,1);
               
               req.onsuccess         = e=>{
-                                                                                            df && console.log('db.open.onsuccess',path);
+                                                                                            obj.df && console.log('db.open.onsuccess',path);
                                             db   = req.result;
                                             resolve(file);
                                             
                                       }//onsuccess
                                       
               req.onupgradeneeded   = e=>{
-                                                                                            df && console.log('db.open.onupgradeneeded',path);
+                                                                                            obj.df && console.log('db.open.onupgradeneeded',path);
                                             db          = req.result;
                                             var store   = db.createObjectStore(path,{keyPath:'key'});
                                             resolve(file);
@@ -128,8 +128,10 @@
 
         obj.list    = list;
         
-        async function list(prefix,df){
+        async function list(prefix,disp){
         
+              var df      = obj.df||disp;
+              
               prefix    ||= '';
               var names   = [];
               var list    = await window.indexedDB.databases();
