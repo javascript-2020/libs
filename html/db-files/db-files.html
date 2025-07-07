@@ -94,7 +94,7 @@ mod['db-files']   = function(){
         async function libs(){
           
               var promise   = ext.load.libs(
-                'js/core/dbmod/single-value-dbmod.js.api'
+                    'js/core/dbmod/single-value-dbmod.js.api'
               );
               [dbmod]   = await promise;
               
@@ -120,7 +120,7 @@ mod['db-files']   = function(){
 
               
               filenav.initdom(shadow);
-              filenav.display('/test/',['test-dir'],['hello.txt']);
+              filenav.update('/');
               
         }//initdom
         
