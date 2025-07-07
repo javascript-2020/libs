@@ -527,6 +527,9 @@ mod.filenav   = function(){
               var result;
               if(typeof(obj[type][name])=='function'){
                     result    = await obj[type][name].apply(null,args);
+                    if(result===false){
+                          return false;
+                    }
               }
               
               var url;
