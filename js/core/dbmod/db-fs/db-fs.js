@@ -170,7 +170,7 @@
   return obj;
 
 //dbmod
-}();
+})();
 
 
         
