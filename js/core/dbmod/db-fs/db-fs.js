@@ -26,14 +26,14 @@ function db_fs_mod(df=false){
               var req               = window.indexedDB.open(name,1);
               
               req.onsuccess         = e=>{
-                                                                                            df && console.log('db.open.onsuccess');
+                                                                                            df && console.log('db.open.onsuccess',path);
                                             db   = req.result;
                                             resolve(file);
                                             
                                       }//onsuccess
                                       
               req.onupgradeneeded   = e=>{
-                                                                                            df && console.log('db.open.onupgradeneeded');
+                                                                                            df && console.log('db.open.onupgradeneeded',path);
                                             db          = req.result;
                                             var store   = db.createObjectStore(name,{keyPath:'key'});
                                             resolve(file);
@@ -41,7 +41,8 @@ function db_fs_mod(df=false){
                                       }//onupgradeneeded
                                       
               req.onerror           = e=>{
-                                                                                            console.log('db.open.onerror',e);
+                                                                                            console.log('db.open.onerror',,path);
+                                                                                            console.error(e);
                                       }//onerror
                                       
               var file      = {};
