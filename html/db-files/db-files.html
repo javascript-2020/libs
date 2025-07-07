@@ -266,13 +266,13 @@ mod['db-files']   = function(){
         
         async function load(filename){
           
-              if(!exists(filename)){
+              if(!await db.exists(filename)){
                     return false;
               }
               
-              var db      = await dbmod(filename);
-              var buf     = await db.get();
-              var blob    = new Blob([buf]);
+              var file    = await db.open(filename);
+              var blob    = await file.read();
+              file.close();
               return blob;
               
         }//load
