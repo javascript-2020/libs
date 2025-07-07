@@ -15,6 +15,7 @@
           
               var db;
               var store;
+
               
               obj.create    = create();
               
@@ -48,7 +49,7 @@
               }//create
               
               
-              obj.delete=function(){
+              obj.delete    = function(){
               
                     var resolve,pomise    = new Promise(res=>resolve=res);
                     
@@ -61,18 +62,31 @@
               }//delete
               
               
-              obj.list=async function(){
+              obj.list    = async function(prefix){
               
+                    var names   = [];
                     var list    = await window.indexedDB.databases();
                     if(list.length==0){
                           console.log('no databases');
                     }
-                    list.forEach((db,i)=>console.log(i,db.name,db.version));
+                    list.forEach((db,i)=>{
+                    
+                          var f   = true;
+                          if(prefix and !db.name.startsWith(prefix)){
+                                f   = false;
+                          }
+                          if(f){
+                                names.push(db.name);
+                          }
+                          console.log(i,db.name,db.version)
+                          
+                    });
+                    return names;
                     
               }//list
               
               
-              obj.put=function(data){
+              obj.put   = function(data){
               
                     var resolve,promise   = new Promise(res=>resolve=res);
                     
@@ -86,7 +100,7 @@
               }//put
               
               
-              obj.get=function(){
+              obj.get   = function(){
               
                     var resolve,promise   = new Promise(res=>resolve=res);
                     
@@ -98,6 +112,16 @@
                     return promise;
                     
               }//get
+              
+
+              obj.close   = function(){
+              
+                    if(!db){
+                          return;
+                    }
+                    db.close();
+                    
+              }//close
               
               
           return obj;
