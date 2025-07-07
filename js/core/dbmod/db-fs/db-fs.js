@@ -43,6 +43,7 @@
               req.onerror           = e=>{
                                                                                             console.log('db.open.onerror',path);
                                                                                             console.error(e);
+                                                                                            console.error(req.error);
                                       }//onerror
                                       
               var file      = {};
