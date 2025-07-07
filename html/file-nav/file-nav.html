@@ -265,7 +265,7 @@ mod.filenav   = function(){
         callback.df         = false;
 
         
-  //
+  //:
   
   
         obj.init    = function(){
@@ -348,6 +348,7 @@ mod.filenav   = function(){
               
               var result    = await callback('file','add',path,name);
               if(result===false){
+                    update(path);
                     return;
               }
               var {url,auth}    = result;
@@ -368,6 +369,7 @@ mod.filenav   = function(){
               
               var result    = await callback('file','rem',path,name);
               if(result===false){
+                    update(path);
                     return;
               }
               var {url,auth}    = result;
@@ -389,19 +391,18 @@ mod.filenav   = function(){
               async function onchange(){
 
                     var path      = ui.rd.path();
-                    
-                    var result    = await callback('file','upload',path,name);
-                    if(result===false){
-                          return;
-                    }
-                    var {url,auth}    = result;
-                
+
                     var n   = input.files.length;
                     for(var i=0;i<n;i++){
                     
-                          var blob    = input.files[i];
-                          var fn      = path+blob.name;
-                          await file.upload(url,auth,fn,blob);
+                          var blob      = input.files[i];
+                          var name      = blob.name;
+                          var result    = await callback('file','upload',path,name,blob);
+                          if(result!==false){
+                                var {url,auth}    = result;
+                                var fn            = path+blob.name;
+                                await file.upload(url,auth,fn,blob);
+                          }
                           
                     }//for
                     
@@ -423,10 +424,11 @@ mod.filenav   = function(){
               
               var path      = ui.rd.path();
               var name      = cur.filename;
-              path         += name;
+              var abs       = path+name;
               
               var result    = await callback('file','download',path);
               if(result===false){
+                    update(path);
                     return;
               }
               var {url,auth}    = result;
@@ -449,6 +451,7 @@ mod.filenav   = function(){
                                                                                 console.log('btn.dir.parent',path);
               var result    = await callback('dir','parent',path);
               if(!result){
+                    update(path);
                     return;
               }
               var {url,auth}    = result;              
@@ -469,6 +472,7 @@ mod.filenav   = function(){
               
               var result    = await callback('dir','add',path,name);
               if(result===false){
+                    update(path);
                     return;
               }
               var {url,auth}    = result;
@@ -492,6 +496,7 @@ mod.filenav   = function(){
               
               var result    = await callback('dir','rem',path,name);
               if(result===false){
+                    update(path);
                     return;
               }
               var {url,auth}    = result;
@@ -507,6 +512,7 @@ mod.filenav   = function(){
               
               var result    = await callback('dir','clear',path);
               if(result===false){
+                    update(path);
                     return;
               }
               var {url,auth}    = result;
@@ -583,7 +589,7 @@ mod.filenav   = function(){
               if(!result){
                     return;
               }
-              server.readdir(url,auth,path);
+              update(path);
               
         }//add
         
@@ -595,7 +601,7 @@ mod.filenav   = function(){
               if(!result){
                     return;
               }
-              server.readdir(url,auth,path);
+              update(path);
               
         }//rem
         
@@ -606,7 +612,7 @@ mod.filenav   = function(){
               if(!result){
                     return;
               }
-              server.readdir(url,auth,path);
+              update(path);
               
         }//upload
         
@@ -631,14 +637,14 @@ mod.filenav   = function(){
         
         dir.read    = function(url,auth,path){
                                                                                 console.log('dir.read',path);
-              server.readdir(url,auth,path);
+              update(path);
               
         }//read
         
         
         dir.parent    = function(url,auth,path){
                                                                                 console.log('dir.parent',path);
-              server.readdir(url,auth,path);
+              update(path);
               
         }//parent
         
@@ -650,7 +656,7 @@ mod.filenav   = function(){
               if(!result){
                     return;
               }
-              server.readdir(url,auth,path);
+              update(path);
               
         }//add
         
@@ -662,7 +668,7 @@ mod.filenav   = function(){
               if(!result){
                     return;
               }
-              server.readdir(url,auth,path);
+              update(path);
               
         }//rem
 
@@ -673,7 +679,7 @@ mod.filenav   = function(){
               if(!result){
                     return;
               }
-              server.readdir(url,auth,path);
+              update(path);
               
         }//clear
         
