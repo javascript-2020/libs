@@ -24,7 +24,7 @@
   //:
   
   
-        function init(){
+        async function init(){
                                                                                 console.log('init');
               menumod         = menumod();
               
@@ -34,7 +34,7 @@
               dbfiles.initmod({menumod,$,datatype});
               
         
-              dbfiles.init();
+              await dbfiles.init();
               
               
               initdom();
