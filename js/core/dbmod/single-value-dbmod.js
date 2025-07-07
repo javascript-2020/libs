@@ -10,26 +10,24 @@
 */
 
 
-function dbmod(name='data',df=false){
+function dbmod(){
 
   var obj   = {};
   
-        var db;
-        var store;
-  
+        var df=obj.df=false;
+
         
-        obj.create    = create();
-        
-        function create(){
+        obj.create    = function(name='data',mode){
         
               var resolve,promise   = new Promise(res=>resolve=res);
               
+              var db;
               var req               = window.indexedDB.open(name,1);
               
               req.onsuccess         = e=>{
                                                                                             df && console.log('db.open.onsuccess');
                                             db   = req.result;
-                                            resolve();
+                                            resolve(file);
                                             
                                       }//onsuccess
                                       
@@ -37,7 +35,7 @@ function dbmod(name='data',df=false){
                                                                                             df && console.log('db.open.onupgradeneeded');
                                             db          = req.result;
                                             var store   = db.createObjectStore(name,{keyPath:'key'});
-                                            resolve();
+                                            resolve(file);
                                             
                                       }//onupgradeneeded
                                       
@@ -45,12 +43,56 @@ function dbmod(name='data',df=false){
                                                                                             console.log('db.open.onerror',e);
                                       }//onerror
                                       
-              return promise;
+              var file      = {};
+              file.read     = ()=>read(db);
+              file.write    = data=>write(db,data);
+              file.delete   = ()=>del(name);
+              file.close    = ()=>close(db);
               
+              return promise;
+
         }//create
         
         
-        obj.delete    = function(){
+        function read(db){
+        
+              var resolve,promise   = new Promise(res=>resolve=res);
+              
+              var store       = db.transaction(name,'readwrite').objectStore(name);
+              var req         = store.get(name);
+              req.onsuccess   = e=>resolve(req.result.data);
+              req.onerror     = e=>console.log('db.get error');
+              
+              return promise;
+              
+        }//read
+        
+  
+        function write(db,data){
+        
+              var resolve,promise   = new Promise(res=>resolve=res);
+              
+              var store       = db.transaction(name,'readwrite').objectStore(name);
+              var req         = store.put({key:name,data});
+              req.onerror     = e=>console.log('put error');
+              req.onsuccess   = e=>resolve();
+              
+              return promise;
+              
+        }//write
+        
+        
+        function close(db){
+        
+              if(!db){
+                    return;
+              }
+              db.close();
+              
+        }//close
+
+        
+        function del(name){
         
               var resolve,pomise    = new Promise(res=>resolve=res);
               
@@ -62,44 +104,26 @@ function dbmod(name='data',df=false){
               
         }//delete
         
-        
-        obj.put   = function(data){
-        
-              var resolve,promise   = new Promise(res=>resolve=res);
-              
-              var store       = db.transaction(name,'readwrite').objectStore(name);
-              var req         = store.put({key:name,data});
-              req.onerror     = e=>console.log('put error');
-              req.onsuccess   = e=>resolve();
-              
-              return promise;
-              
-        }//put
-        
-        
-        obj.get   = function(){
-        
-              var resolve,promise   = new Promise(res=>resolve=res);
-              
-              var store       = db.transaction(name,'readwrite').objectStore(name);
-              var req         = store.get(name);
-              req.onsuccess   = e=>resolve(req.result.data);
-              req.onerror     = e=>console.log('db.get error');
-              
-              return promise;
-              
-        }//get
-        
+
+  //:
   
-        obj.close   = function(){
+
+        obj.del   = function del(name){
         
-              if(!db){
-                    return;
-              }
-              db.close();
+              var resolve,pomise    = new Promise(res=>resolve=res);
               
-        }//close
-        
+              var req               = window.indexedDB.deleteDatabase(name);
+              req.onsuccess         = e=>resolve();
+              req.onerror           = e=>console.log('delete.error');
+              
+              return promise;
+              
+        }//delete
+
+
+
+
+  
       
   return obj;
   
