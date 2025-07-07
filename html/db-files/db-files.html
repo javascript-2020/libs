@@ -138,7 +138,11 @@ mod['db-files']   = function(){
         }//menu
         
         
-        file.add    = function(){
+        file.add    = function(path,name){
+          
+              var abs   = prefix+path+name;
+              console.log('db-files.file.add',abs);
+              
         }//add
         
         
@@ -168,9 +172,6 @@ mod['db-files']   = function(){
         
         dir.clear   = function(){
         }//clear
-        
-        
-  //:        
         
         
         dir.read    = read;
