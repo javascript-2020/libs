@@ -133,8 +133,9 @@ mod['db-files']   = function(){
         
         
         file.add    = async function(path,name){
-          
+                                                                                console.log('db-files.file.add',path+name);
               var abs     = prefix+path+name;
+                                                                                console.log(abs);
               var file    = await dbmod(abs);
               file.close();
               return false;
