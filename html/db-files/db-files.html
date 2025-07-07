@@ -88,13 +88,6 @@ mod['db-files']   = function(){
 
 
               
-              list          = await window.indexedDB.databases();
-              list          = list.map(db=>db.name);
-                                                                                console.log(list);
-              var str       = prefix+'/';
-              list          = list.filter(fn=>fn.startsWith(str));
-
-              
         }//init
         
         
@@ -164,6 +157,7 @@ mod['db-files']   = function(){
               var abs     = prefix+path+name;
               var file    = dbmod(abs);
               await file.put(blob);
+              file.close();
               return false;
               
         }//upload
@@ -174,6 +168,7 @@ mod['db-files']   = function(){
               var abs     = prefix+path;
               var file    = dbmod(abs);
               var blob    = await file.get();
+              file.close();
               return {result:false,blob};
               
         }//download
@@ -183,27 +178,52 @@ mod['db-files']   = function(){
         }//parent
         
         
-        dir.add   = function(){
+        dir.add   = function(path,name){
+          
+              var abs     = prefix+path+name;
+              var file    = dbmod(abs);
+              file.close();
+              return false;
+              
         }//add
         
         
-        dir.rem   = function(){
+        dir.rem   = async function(path,name){
+          
+              var abs     = prefix+path+name;
+              await read.list();
+              
+              var n   = list.length;
+              for(var i=0;i<n;i++){
+                
+                    var fn    = list[i];
+                    if(fn.startsWith(abs)){
+                          var file    = dbmod(fn);
+                          await file.delete();
+                    }
+                    
+              }//for
+              return false;
+              
         }//rem
         
         
-        dir.clear   = function(){
+        dir.clear   = function(path){
+          
+              
         }//clear
         
         
         dir.read    = read;
         
-        function read(dir='tmp/'){
+        async function read(dir='tmp/'){
                                                                                 console.log('db-files.dir.read',dir);
               var len       = prefix.length+dir.length;
               
               var files     = [];
               var dirs      = [];
 
+              await read.list();
               
               list.forEach(abs=>{
 
@@ -225,6 +245,17 @@ mod['db-files']   = function(){
               return {dirs,files};
           
         }//read
+        
+        
+        read.list   = async function(){
+          
+              list      = await window.indexedDB.databases();
+              list      = list.map(db=>db.name);
+                                                                                console.log(list);
+              var str   = prefix+'/';
+              list      = list.filter(fn=>fn.startsWith(str));
+              
+        }//list
         
   
         async function load(filename){
