@@ -223,8 +223,7 @@ mod['db-files']   = function(){
         
         
         dir.clear   = function(path){
-          
-              console.log('db-files.dir.clear',path);
+                                                                                console.log('db-files.dir.clear',path);
               
               return false;
               
@@ -266,11 +265,11 @@ mod['db-files']   = function(){
         
         async function load(filename){
           
-              if(!await db.exists(filename)){
+              if(!await db.exists(prefix+filename)){
                     return false;
               }
               
-              var file    = await db.open(filename);
+              var file    = await db.open(prefix+filename);
               var blob    = await file.read();
               file.close();
               return blob;
@@ -282,7 +281,7 @@ mod['db-files']   = function(){
         
         async function save(filename,blob){
 
-              var file    = await db.open(filename);
+              var file    = await db.open(prefix+filename);
               await file.write(blob);
               
         }//save
