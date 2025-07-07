@@ -180,7 +180,7 @@ mod['db-files']   = function(){
         }//parent
         
         
-        dir.add   = function(path,name){
+        dir.add   = async function(path,name){
                                                                                 console.log('db-files.dir.add',path,name);
               var abs     = prefix+path+name;
                                                                                 console.log(abs);
