@@ -135,7 +135,7 @@ mod['db-files']   = function(){
         file.add    = function(path,name){
           
               var abs     = prefix+path+name;
-              var file    = dbmod(abs);
+              var file    = await dbmod(abs);
               file.close();
               return false;
               
