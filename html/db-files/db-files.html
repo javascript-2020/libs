@@ -178,6 +178,18 @@ mod['db-files']   = function(){
         }//download
         
         
+        file.dblclick   = function(path,filename){
+          
+              var file    = await db.open(abs);
+              var blob    = await file.read();
+              file.close();
+              
+              var txt     = await blob.text();
+              alert(txt);
+              
+        }//dblclick
+        
+        
         dir.parent    = function(){
         }//parent
         
