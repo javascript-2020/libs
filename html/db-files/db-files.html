@@ -143,8 +143,9 @@ mod['db-files']   = function(){
         
         
         file.rem    = async function(path,name){
-          
+                                                                                console.log('db-files.file.rem',path,name);
               var abs     = prefix+path+name;
+                                                                                console.log(abs);
               var file    = dbmod(abs);
               await file.delete();
               return false;
