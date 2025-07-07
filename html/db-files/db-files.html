@@ -132,7 +132,7 @@ mod['db-files']   = function(){
         }//menu
         
         
-        file.add    = function(path,name){
+        file.add    = async function(path,name){
           
               var abs     = prefix+path+name;
               var file    = await dbmod(abs);
@@ -146,7 +146,7 @@ mod['db-files']   = function(){
                                                                                 console.log('db-files.file.rem',path,name);
               var abs     = prefix+path+name;
                                                                                 console.log(abs);
-              var file    = dbmod(abs);
+              var file    = await dbmod(abs);
               await file.delete();
               return false;
               
@@ -156,7 +156,7 @@ mod['db-files']   = function(){
         file.upload   = async function(path,name,blob){
           
               var abs     = prefix+path+name;
-              var file    = dbmod(abs);
+              var file    = await dbmod(abs);
               await file.put(blob);
               file.close();
               return false;
@@ -167,7 +167,7 @@ mod['db-files']   = function(){
         file.download   = async function(path){
           
               var abs     = prefix+path;
-              var file    = dbmod(abs);
+              var file    = await dbmod(abs);
               var blob    = await file.get();
               file.close();
               return {result:false,blob};
