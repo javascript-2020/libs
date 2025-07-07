@@ -10,7 +10,7 @@
 */
 
 
-function db_fs_mod(df=false){
+(function db_fs_mod(df=false){
 
   var obj   = {};
   
@@ -48,7 +48,7 @@ function db_fs_mod(df=false){
               var file      = {};
               file.read     = ()=>read(db);
               file.write    = data=>write(db,data);
-              file.delete   = ()=>del(name);
+              file.delete   = ()=>del(db,name);
               file.close    = ()=>close(db);
               
               return promise;
@@ -94,8 +94,10 @@ function db_fs_mod(df=false){
         }//close
 
         
-        function del(name){
+        function del(db,name){
         
+              close(db);
+              
               var resolve,pomise    = new Promise(res=>resolve=res);
               
               var req               = window.indexedDB.deleteDatabase(name);
@@ -166,8 +168,9 @@ function db_fs_mod(df=false){
 
       
   return obj;
-  
-}//dbmod
+
+//dbmod
+}();
 
 
         
