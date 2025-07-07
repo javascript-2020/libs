@@ -367,6 +367,7 @@ mod.filenav   = function(){
               
               var result    = await callback('file','rem',path,name);
               if(result===false){
+                    cur.rem();
                     update(path);
                     return;
               }
@@ -505,6 +506,7 @@ mod.filenav   = function(){
               
               var result    = await callback('dir','rem',path,name);
               if(result===false){
+                    cur.rem();
                     update(path);
                     return;
               }
@@ -610,6 +612,7 @@ mod.filenav   = function(){
               if(!result){
                     return;
               }
+              cur.rem();
               update(path);
               
         }//rem
@@ -672,6 +675,7 @@ mod.filenav   = function(){
               if(!result){
                     return;
               }
+              cur.rem();
               update(path);
               
         }//rem
