@@ -18,7 +18,7 @@
                   
                   <img class=icon>
 
-                  <div class=menu style='display:none'>
+                  <div class=menu>
                   
                         <div class=menu-title>
                               browser fs - indexed db
@@ -57,7 +57,7 @@ mod['db-files']   = function(){
   
         var filenav;
         
-        var prefix    = 'fs/';
+        var prefix    = 'fs';
         var list;
         
 
@@ -90,8 +90,9 @@ mod['db-files']   = function(){
               
               list          = await window.indexedDB.databases();
               list          = list.map(db=>db.name);
-              console.log(list);
-              list          = list.filter(fn=>fn.startsWith(prefix));
+                                                                                console.log(list);
+              var str       = prefix+'/';
+              list          = list.filter(fn=>fn.startsWith(str));
 
               
         }//init
