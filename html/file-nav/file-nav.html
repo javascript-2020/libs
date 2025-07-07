@@ -519,14 +519,14 @@ mod.filenav   = function(){
   //:
   
   
-        function callback(type,name,arg0){
+        async function callback(type,name,arg0){
                                                                                 callback.df && console.log('callback');
                                                                                 callback.df && console.json(arguments);
               var args    = [...arguments].slice(2);
               
               var result;
               if(typeof(obj[type][name])=='function'){
-                    result    = obj[type][name].apply(null,args);
+                    result    = await obj[type][name].apply(null,args);
               }
               
               var url;
@@ -537,7 +537,7 @@ mod.filenav   = function(){
               }
               if(!url){
                     if(typeof obj.rd.params=='function'){
-                          ({url,auth}   = obj.rd.params());
+                          ({url,auth}   = await obj.rd.params());
                     }
               }
               if(!url){
