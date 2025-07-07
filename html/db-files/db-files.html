@@ -196,15 +196,13 @@ mod['db-files']   = function(){
         dir.rem   = async function(path,name){
           
               var abs     = prefix+path+name;
-              await read.list();
+              var list    = await db.list(abs);
               
               var n   = list.length;
               for(var i=0;i<n;i++){
                 
-                    var fn    = list[i];
-                    if(fn.startsWith(abs)){
-                          var result    = await db.delete(fn);
-                    }
+                    var fn        = list[i];
+                    var result    = await db.delete(fn);
                     
               }//for
               return false;
