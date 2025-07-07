@@ -129,6 +129,7 @@
         
         async function list(prefix,df){
         
+              prefix    ||= '';
               var names   = [];
               var list    = await window.indexedDB.databases();
               
