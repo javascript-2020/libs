@@ -113,7 +113,7 @@
   //:
   
 
-        obj.del   = function del(name){
+        obj.delete    = function del(name){
         
               var resolve,pomise    = new Promise(res=>resolve=res);
               
