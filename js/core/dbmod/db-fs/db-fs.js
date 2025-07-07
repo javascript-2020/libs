@@ -10,7 +10,7 @@
 */
 
 
-function dbmod(df=false){
+function db_fs_mod(df=false){
 
   var obj   = {};
   
