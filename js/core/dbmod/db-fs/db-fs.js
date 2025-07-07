@@ -21,9 +21,9 @@
         obj.open    = function(path,flags='r'){
         
               var resolve,promise   = new Promise(res=>resolve=res);
-              
+
               var db;
-              var req               = window.indexedDB.open(name,1);
+              var req               = window.indexedDB.open(path,1);
               
               req.onsuccess         = e=>{
                                                                                             df && console.log('db.open.onsuccess',path);
@@ -35,7 +35,7 @@
               req.onupgradeneeded   = e=>{
                                                                                             df && console.log('db.open.onupgradeneeded',path);
                                             db          = req.result;
-                                            var store   = db.createObjectStore(name,{keyPath:'key'});
+                                            var store   = db.createObjectStore(path,{keyPath:'key'});
                                             resolve(file);
                                             
                                       }//onupgradeneeded
@@ -48,7 +48,7 @@
               var file      = {};
               file.read     = ()=>read(db);
               file.write    = data=>write(db,data);
-              file.delete   = ()=>del(db,name);
+              file.delete   = ()=>del(db,path);
               file.close    = ()=>close(db);
               
               return promise;
