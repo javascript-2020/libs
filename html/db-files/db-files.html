@@ -220,18 +220,18 @@ mod['db-files']   = function(){
         
         dir.read    = read;
         
-        async function read(dir='tmp/'){
-                                                                                console.log('db-files.dir.read',dir);
-              var len       = prefix.length+dir.length;
+        async function read(path='tmp/'){
+                                                                                console.log('db-files.dir.read',path);
+              var len       = prefix.length+path.length;
               
-              var files     = [];
               var dirs      = [];
+              var files     = [];
 
               await read.list();
               
               list.forEach(abs=>{
 
-                    if(!abs.startsWith(prefix+dir))return;
+                    if(!abs.startsWith(prefix+path))return;
                     
                     var i   = abs.indexOf('/',len);
                                                                                 //console.log(abs,i);
@@ -246,7 +246,8 @@ mod['db-files']   = function(){
                     
               });
 
-              return {dirs,files};
+              filenav.display(path,dirs,files);
+              return false;
           
         }//read
         
