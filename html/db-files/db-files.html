@@ -152,7 +152,7 @@ mod['db-files']   = function(){
         }//rem
         
         
-        file.upload   = function(path,name,blob){
+        file.upload   = async function(path,name,blob){
           
               var abs     = prefix+path+name;
               var file    = dbmod(abs);
@@ -163,7 +163,7 @@ mod['db-files']   = function(){
         }//upload
         
         
-        file.download   = function(path){
+        file.download   = async function(path){
           
               var abs     = prefix+path;
               var file    = dbmod(abs);
