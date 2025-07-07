@@ -422,18 +422,29 @@ mod.filenav   = function(){
                     return;
               }
               
+              var blob;
               var path      = ui.rd.path();
               var name      = cur.filename;
               var abs       = path+name;
               
               var result    = await callback('file','download',path);
               if(result===false){
-                    update(path);
                     return;
               }
-              var {url,auth}    = result;
+              if(result?.result===false){
+                    blob    = result.blob;
+              }
+              if(!blob){
+                    var {url,auth}    = result;
+                    var blob          = await file.download(url,auth,path,name);
+              }
+              
+              var url       = window.URL.createObjectURL(blob);
+              var a         = document.createElement('a');
+              a.href        = url;
+              a.download    = filename;
+              a.click();
 
-              await file.download(url,auth,path,name);
               
         }//download
         
@@ -625,12 +636,7 @@ mod.filenav   = function(){
               }
               
               var blob      = result;
-              var url       = window.URL.createObjectURL(blob);
-              
-              var a         = document.createElement('a');
-              a.href        = url;
-              a.download    = filename;
-              a.click();
+              return blob;
               
         }//download
         
