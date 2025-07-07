@@ -36,7 +36,7 @@
                                                                                             obj.df && console.log('db.open.onupgradeneeded',path);
                                             db          = req.result;
                                             var store   = db.createObjectStore(path,{keyPath:'key'});
-                                            resolve(file);
+                                            //resolve(file);
                                             
                                       }//onupgradeneeded
                                       
