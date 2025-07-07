@@ -281,10 +281,9 @@ mod['db-files']   = function(){
         obj.save    = save;
         
         async function save(filename,blob){
-          
-              var buf   = await blob.arrayBuffer();
-              var db    = await dbmod(filename);
-              await db.put(buf);
+
+              var file    = await db.open(filename);
+              await file.write(blob);
               
         }//save
   
