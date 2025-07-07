@@ -9,124 +9,124 @@
 
 */
 
-        function dbmod(name='data',df=false){
+function dbmod(name='data',df=false){
+
+  var obj   = {};
+  
+        var db;
+        var store;
+  
         
-          var obj   = {};
-          
-              var db;
-              var store;
-
+        obj.create    = create();
+        
+        function create(){
+        
+              var resolve,promise   = new Promise(res=>resolve=res);
               
-              obj.create    = create();
+              var req               = window.indexedDB.open(name,1);
               
-              function create(){
-              
-                    var resolve,promise   = new Promise(res=>resolve=res);
-                    
-                    var req               = window.indexedDB.open(name,1);
-                    
-                    req.onsuccess         = e=>{
-                                                                                                  df && console.log('db.open.onsuccess');
-                                                  db   = req.result;
-                                                  resolve();
-                                                  
-                                            }//onsuccess
+              req.onsuccess         = e=>{
+                                                                                            df && console.log('db.open.onsuccess');
+                                            db   = req.result;
+                                            resolve();
                                             
-                    req.onupgradeneeded   = e=>{
-                                                                                                  df && console.log('db.open.onupgradeneeded');
-                                                  db          = req.result;
-                                                  var store   = db.createObjectStore(name,{keyPath:'key'});
-                                                  resolve();
-                                                  
-                                            }//onupgradeneeded
+                                      }//onsuccess
+                                      
+              req.onupgradeneeded   = e=>{
+                                                                                            df && console.log('db.open.onupgradeneeded');
+                                            db          = req.result;
+                                            var store   = db.createObjectStore(name,{keyPath:'key'});
+                                            resolve();
                                             
-                    req.onerror           = e=>{
-                                                                                                  console.log('db.open.onerror',e);
-                                            }//onerror
-                                            
-                    return promise;
-                    
-              }//create
+                                      }//onupgradeneeded
+                                      
+              req.onerror           = e=>{
+                                                                                            console.log('db.open.onerror',e);
+                                      }//onerror
+                                      
+              return promise;
               
+        }//create
+        
+        
+        obj.delete    = function(){
+        
+              var resolve,pomise    = new Promise(res=>resolve=res);
               
-              obj.delete    = function(){
+              var req               = window.indexedDB.deleteDatabase(name);
+              req.onsuccess         = e=>resolve();
+              req.onerror           = e=>console.log('delete.error');
               
-                    var resolve,pomise    = new Promise(res=>resolve=res);
-                    
-                    var req               = window.indexedDB.deleteDatabase(name);
-                    req.onsuccess         = e=>resolve();
-                    req.onerror           = e=>console.log('delete.error');
-                    
-                    return promise;
-                    
-              }//delete
+              return promise;
               
+        }//delete
+        
+        
+        obj.list    = async function(prefix){
+        
+              var names   = [];
+              var list    = await window.indexedDB.databases();
+              if(list.length==0){
+                    console.log('no databases');
+              }
+              list.forEach((db,i)=>{
               
-              obj.list    = async function(prefix){
-              
-                    var names   = [];
-                    var list    = await window.indexedDB.databases();
-                    if(list.length==0){
-                          console.log('no databases');
+                    var f   = true;
+                    if(prefix && !db.name.startsWith(prefix)){
+                          f   = false;
                     }
-                    list.forEach((db,i)=>{
-                    
-                          var f   = true;
-                          if(prefix && !db.name.startsWith(prefix)){
-                                f   = false;
-                          }
-                          if(f){
-                                names.push(db.name);
-                          }
-                          console.log(i,db.name,db.version)
-                          
-                    });
-                    return names;
-                    
-              }//list
-              
-              
-              obj.put   = function(data){
-              
-                    var resolve,promise   = new Promise(res=>resolve=res);
-                    
-                    var store       = db.transaction(name,'readwrite').objectStore(name);
-                    var req         = store.put({key:name,data});
-                    req.onerror     = e=>console.log('put error');
-                    req.onsuccess   = e=>resolve();
-                    
-                    return promise;
-                    
-              }//put
-              
-              
-              obj.get   = function(){
-              
-                    var resolve,promise   = new Promise(res=>resolve=res);
-                    
-                    var store       = db.transaction(name,'readwrite').objectStore(name);
-                    var req         = store.get(name);
-                    req.onsuccess   = e=>resolve(req.result.data);
-                    req.onerror     = e=>console.log('db.get error');
-                    
-                    return promise;
-                    
-              }//get
-              
-
-              obj.close   = function(){
-              
-                    if(!db){
-                          return;
+                    if(f){
+                          names.push(db.name);
                     }
-                    db.close();
+                    console.log(i,db.name,db.version)
                     
-              }//close
+              });
+              return names;
               
+        }//list
+        
+        
+        obj.put   = function(data){
+        
+              var resolve,promise   = new Promise(res=>resolve=res);
               
-          return obj;
-          
-        }//dbmod
+              var store       = db.transaction(name,'readwrite').objectStore(name);
+              var req         = store.put({key:name,data});
+              req.onerror     = e=>console.log('put error');
+              req.onsuccess   = e=>resolve();
+              
+              return promise;
+              
+        }//put
+        
+        
+        obj.get   = function(){
+        
+              var resolve,promise   = new Promise(res=>resolve=res);
+              
+              var store       = db.transaction(name,'readwrite').objectStore(name);
+              var req         = store.get(name);
+              req.onsuccess   = e=>resolve(req.result.data);
+              req.onerror     = e=>console.log('db.get error');
+              
+              return promise;
+              
+        }//get
+        
+  
+        obj.close   = function(){
+        
+              if(!db){
+                    return;
+              }
+              db.close();
+              
+        }//close
+        
+      
+  return obj;
+  
+}//dbmod
 
 
 
