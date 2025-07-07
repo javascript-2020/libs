@@ -178,7 +178,7 @@ mod['db-files']   = function(){
         }//download
         
         
-        file.dblclick   = function(path,filename){
+        file.dblclick   = async function(path,filename){
           
               var file    = await db.open(abs);
               var blob    = await file.read();
