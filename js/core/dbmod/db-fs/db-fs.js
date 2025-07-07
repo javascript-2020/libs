@@ -18,7 +18,7 @@ function db_fs_mod(df=false){
 
 
         
-        obj.create    = function(name='data',mode){
+        obj.open    = function(path,flags='r'){
         
               var resolve,promise   = new Promise(res=>resolve=res);
               
@@ -52,7 +52,7 @@ function db_fs_mod(df=false){
               
               return promise;
 
-        }//create
+        }//open
         
         
         function read(db){
