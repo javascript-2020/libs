@@ -262,6 +262,8 @@ mod['db-files']   = function(){
         }//read
         
         
+        onj.load    = load;
+        
         async function load(filename){
           
               if(!exists(filename)){
@@ -276,6 +278,8 @@ mod['db-files']   = function(){
         }//load
         
         
+        obj.save    = save;
+        
         async function save(filename,blob){
           
               var buf   = await blob.arrayBuffer();
@@ -285,6 +289,7 @@ mod['db-files']   = function(){
         }//save
   
         
+/*        
         async function del(filename){
           
               if(!exists(filename)){
@@ -294,17 +299,9 @@ mod['db-files']   = function(){
               await db.delete();
               
         }//delete
-        
-        
-        function mkdir(filename){
-        }//mkdir
-        
-        
-        function mkfile(){
-        }//mkfile
-        
+*/
 
-
+        
         
   return obj;
   
