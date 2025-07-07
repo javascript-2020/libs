@@ -149,7 +149,13 @@ mod['db-files']   = function(){
         }//add
         
         
-        file.rem    = function(){
+        file.rem    = function(path,name){
+          
+              var abs     = prefix+path+name;
+              var file    = dbmod(abs);
+              await file.delete();
+              return false;
+              
         }//rem
         
         
