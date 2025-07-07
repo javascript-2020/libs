@@ -217,6 +217,7 @@ mod['db-files']   = function(){
                     var result    = await db.delete(fn);
                     
               }//for
+              
               return false;
               
         }//rem
@@ -224,6 +225,18 @@ mod['db-files']   = function(){
         
         dir.clear   = function(path){
                                                                                 console.log('db-files.dir.clear',path);
+              var abs     = prefix+path;
+              var list    = await db.list(abs);
+              
+              var n   = list.length;
+              for(var i=0;i<n;i++){
+                
+                    var fn    = list[i];
+                    if(fn.length>abs.length){
+                          var result    = await db.delete(fn);
+                    }
+                    
+              }//for
               
               return false;
               
