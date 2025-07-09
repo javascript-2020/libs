@@ -261,7 +261,7 @@
         }//get_params_utils
         
 
-        function get_params_parent(){
+        function get_params_parent(){debugger;
         
               var nn        = root.nodeName.toLowerCase();
               
