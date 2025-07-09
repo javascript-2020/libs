@@ -223,7 +223,7 @@ mod['db-files']   = function(){
         }//rem
         
         
-        dir.clear   = function(path){
+        dir.clear   = async function(path){
                                                                                 console.log('db-files.dir.clear',path);
               var abs     = prefix+path;
               var list    = await db.list(abs);
