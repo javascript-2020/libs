@@ -79,6 +79,7 @@ function filemod(){
         var localfile;
         var github;
         var httpsfile;
+        var dbfiles;
         
         var cur;
         Object.defineProperty(obj,'cur',{get:()=>cur,set:v=>cur=v});
@@ -103,21 +104,29 @@ function filemod(){
             obj.github                = github;
             httpsfile                 = mod.httpsfile();
             obj.httpsfile             = httpsfile;
+            dbfiles                   = mod['db-files']();
+            obj.dbfiles               = dbfiles;
 
             localfile.initmod({menumod,editor,$,ext,filemod});
             github.initmod({menumod,editor,$,ext});
             httpsfile.initmod({menumod,editor,$,ext});
+            dbfiles.initmod({$,datatype,menumod,ext});
             
             localfile.init();
             github.init();
             httpsfile.init();
+            dbfiles.init();
             
-            localfile.load.complete   = complete.load;
-            localfile.save.complete   = complete.save;
-            github.load.complete      = complete.load;
-            github.save.complete      = complete.save;
-            httpsfile.load.complete   = complete.load;
-            httpsfile.save.complete   = complete.save;
+            localfile.load.complete       = complete.load;
+            localfile.save.complete       = complete.save;
+            github.load.complete          = complete.load;
+            github.save.complete          = complete.save;
+            httpsfile.load.complete       = complete.load;
+            httpsfile.save.complete       = complete.save;
+            dbfiles.load.complete         = complete.load;
+            dbfiles.save.complete         = complete.save;
+
+
             
         }//init
 
@@ -134,9 +143,12 @@ function filemod(){
               menumod.add.style(shadow);
               $.stylesheet.insert(style,'button');
 
+
               localfile.initdom(shadow);
               github.initdom(shadow);
               httpsfile.initdom(shadow);
+              dbfiles.initdom(shadow);
+
 
               $(shadow,'#save').onclick         = btn.save;
 
@@ -177,6 +189,9 @@ function filemod(){
               if(cur.type=='https-file'){
                     await httpsfile.save(cur,txt);
               }
+              if(cur.type=='db-files'){
+                    await dbfiles.save(cur,txt);
+              }
         
         }//save
                   
@@ -196,6 +211,7 @@ function filemod(){
                 case 'github'       : github.clear();           break;
                 case 'local'        : localfile.clear();        break;
                 case 'https-file'   : httpsfile.clear();        break;
+                case 'db-files'     : dbfiles.clear();          break;
                 
               }//switch
               
