@@ -45,17 +45,40 @@
         var nn    = root.nodeName.toLowerCase();
                                                                                 df && console.log(root,nn);
 
-        if(root.hasAttribute('data-debug')){
+        function rd(name,def){
+        
+                          if(!root.hasAttribute('data-attr')){
+                                return def;
+                          }
+                          var attr    = root.getAttribute('data-attr');
+                          var i1      = attr.indexOf('type=');
+                          if(i1==-1){
+                                return def;
+                          }
+                          i1         += name.length;
+                          var i2      = attr.indexOf(' ',i1);
+                          var value   = attr.slice(i1,12);
+                          return value;
+              };
+                    
+        }//rd
+
+
+        if(rd('debug') || root.hasAttribute('data-debug')){
               debugger;
         }
 
-        
+
         var user      = 'javascript-2020';
         var repo      = 'libs';
         var type      = 'libs';
         var mode      = 'raw';
 
         
+        type          = rd('type',type);
+        
+                    
+                    
         if(root.hasAttribute('data-type')){
               type    = root.getAttribute('data-type');
         }
@@ -97,8 +120,6 @@
               nn      = nn.slice(0,-6);
               type    = 'page';
         }
-        
-        
         if(nn.endsWith('-utils')){
               nn      = nn.slice(0,-6);
               type    = 'utils';
@@ -244,8 +265,13 @@
         function get_params_parent(){
         
               var parent    = root.getAttribute('data-parent');
+              parent        = rd('parent',parent);
+              
               var par       = $_parent(root,parent);
+              
               var url       = par.getAttribute('data-url');
+              url           = rd('url',url);
+              
               var i         = url.lastIndexOf('/');
               url           = url.slice(0,i+1);
               var src       = root.getAttribute('data-src');
