@@ -79,7 +79,7 @@
               var url     = $('#url').value;
               var auth    = $('#auth').value;
               
-              await filenav.server.readdir(url,auth,'/tmp/test-1/');
+              await filenav.server.readdir(url,auth,'/');
               
               return;
               
@@ -146,6 +146,23 @@
         init.complete.add     = fn=>init.complete.stack.push(fn);
       
       
+        init.stack.add;
+        
+        fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
+          .then(res=>res.text().then(async txt=>{
+          
+              ext   = eval(txt);
+              
+              var promise   = ext.load.libs(
+                    'js/dom/$.js.api','js/core/datatype.js'
+              );
+              [$,datatype]    = await promise;
+  
+              
+              init.stack.complete;
+              
+          }));
+    
             </script init>
             
       </head>
@@ -185,28 +202,6 @@
       </body>                    
 
         
-      <script libs>
-
-        init.stack.add;
-        
-        fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
-          .then(res=>res.text().then(async txt=>{
-          
-              ext   = eval(txt);
-              
-              var promise   = ext.load.libs(
-                    'js/dom/$.js.api','js/core/datatype.js'
-              );
-              [$,datatype]    = await promise;
-  
-              
-              init.stack.complete;
-              
-          }));
-    
-      </script libs>        
-      
-      
       <script>
       
         function initdom(){
