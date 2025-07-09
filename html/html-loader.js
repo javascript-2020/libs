@@ -51,7 +51,7 @@
                     return def;
               }
               var attr    = root.getAttribute('data-attr');
-              var i1      = attr.indexOf('type=');
+              var i1      = attr.indexOf(name+'=');
               if(i1==-1){
                     return def;
               }
