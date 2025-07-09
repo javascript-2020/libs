@@ -4,8 +4,8 @@
 
         function menumod(){
                                                                                           //console.log('menumod',1);
-          var obj   = {};
-          
+          var obj       = {};
+          obj.menumod   = menumod;
   
               var df                  = false;
 
