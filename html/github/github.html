@@ -679,7 +679,7 @@ mod.github    = function(){
               var err;
               try{
               
-                    var json        = await fetch(url,headers).then(res=>res.json());
+                    var json        = await fetch(url,{headers}).then(res=>res.json());
                     
               }
               catch(err2){
