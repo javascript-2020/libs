@@ -183,24 +183,27 @@
 
       
 mod.github    = function(){
-                                                                                true && console.log('github',2);
-  var obj   = {};
-
-      var df=obj.df=false
-      ;
+  
+  var obj   = {
+      version   : 'v1.0'
+  };
+                                                                                true && console.log('github',obj.version);
+        var df=obj.df=false
+        ;
+  
+          
+        var menumod,editor,$,par_init,ext
+        ;
         
-      var menumod,editor,$,par_init,ext
-      ;
-      
-      obj.initmod   = function(params){
-        
-            menumod       = params.menumod;
-            editor        = params.editor;
-            $             = params.$;
-            par_init      = params.init;
-            ext           = params.ext;
-            
-      }//initmod
+        obj.initmod   = function(params){
+          
+              menumod       = params.menumod;
+              editor        = params.editor;
+              $             = params.$;
+              par_init      = params.init;
+              ext           = params.ext;
+              
+        }//initmod
 
                             
   //vars:-                    
