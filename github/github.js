@@ -310,9 +310,9 @@
                     var txt         = await res.text();
                     return {error:txt};
               }
-              var blob    = await res.blob();
                                                                                 debug('saved');
-              return {ok:blob};
+              var ok   = await res.text();
+              return {ok};
               
         }//save
         
