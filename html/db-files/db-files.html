@@ -328,6 +328,11 @@ mod['db-files']   = function(){
         
         async function load(filename){
           
+              if(!filename.startsWith('/')){
+                    alert('invalid filename, must start with root');
+                    return;
+              }
+              
               if(!await db.exists(prefix+filename)){
                     return false;
               }
@@ -344,6 +349,11 @@ mod['db-files']   = function(){
         
         async function save(filename,blob){
 
+              if(!filename.startsWith('/')){
+                    alert('invalid filename, must start with root');
+                    return;
+              }
+              
               var file    = await db.open(prefix+filename);
               await file.write(blob);
               
