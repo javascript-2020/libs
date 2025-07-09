@@ -47,19 +47,18 @@
 
         function rd(name,def){
         
-                          if(!root.hasAttribute('data-attr')){
-                                return def;
-                          }
-                          var attr    = root.getAttribute('data-attr');
-                          var i1      = attr.indexOf('type=');
-                          if(i1==-1){
-                                return def;
-                          }
-                          i1         += name.length;
-                          var i2      = attr.indexOf(' ',i1);
-                          var value   = attr.slice(i1,12);
-                          return value;
-              };
+              if(!root.hasAttribute('data-attr')){
+                    return def;
+              }
+              var attr    = root.getAttribute('data-attr');
+              var i1      = attr.indexOf('type=');
+              if(i1==-1){
+                    return def;
+              }
+              i1         += name.length;
+              var i2      = attr.indexOf(' ',i1);
+              var value   = attr.slice(i1,12);
+              return value;            
                     
         }//rd
 
