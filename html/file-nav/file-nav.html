@@ -1225,10 +1225,7 @@ mod.filenav   = function(){
   
         function debug(){
           
-              if(!df){
-                    return;
-              }
-              
+              if(!df)return;
               var str   = [...arguments].join(' ');
               console.log('[ file-nav ]',str);
               
