@@ -448,10 +448,10 @@ mod.github    = function(){
               file.path       = path;
               
               var result      = await load(file,api);
-              if(result===false){
+              if(result.error){
                     return;
               }
-              var blob    = result;
+              var blob    = result.ok;
               
               obj.load.complete(file,blob);
                             
@@ -486,12 +486,10 @@ mod.github    = function(){
               var blob        = new Blob([txt]);
               
               var result      = await save(file,blob);
-              if(result===false){
+              if(result.error){
                     return;
               }
               
-              obj.complete.save(file);
-            
         }//save
         
         
@@ -604,12 +602,9 @@ mod.github    = function(){
               
               //var result    = await savefile(token,owner,repo,branch,path,blob);
               var result    = await github.save(token,owner,repo,branch,path,blob);
-              if(result===false){
-                    return;
-              }
-              
-              obj.save.complete(file);
-              
+              if(result.ok){
+                    obj.save.complete(file);
+              }                            
               return result;
         
         }//save
