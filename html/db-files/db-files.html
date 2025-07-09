@@ -98,10 +98,12 @@ mod['db-files']   = function(){
   
         obj.init    = async function(){
           
-          
+              var resolve;
+              obj.init    = new Promise(res=>resolve=res);
+              
               menu                      = menumod.menumod();
               
-              await libs();
+              await libs();              
 
               db.df                     = true;
               
@@ -155,6 +157,7 @@ mod['db-files']   = function(){
               icon                                              = $(shadow,'.icon');
               icon.onclick                                      = menumod.click(node,'both',true);
 
+              await obj.init;
               await libs;
               
               dblist.initdom(shadow);
