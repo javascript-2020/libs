@@ -149,9 +149,9 @@ debugger;
               icon.onclick                                      = menumod.click(node,'both',true);
 
               var card                                          = $(shadow,'#db-list-menu');
-              $(shadow,'#menu-icon').onclick                    = menu.click(card,false,false,submenu);
+              $(shadow,'#db-list').onclick                      = menu.click(card,false,false,submenu);
 
-              $(shadow,'#db-list').onclick                      = btn.dblist;
+              //$(shadow,'#db-list').onclick                      = btn.dblist;
               
               filenav.initdom(shadow);
               filenav.update('/');
