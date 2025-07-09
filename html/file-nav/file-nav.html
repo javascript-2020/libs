@@ -172,9 +172,11 @@
       <script>
                                                                                 //console.log('mod.filenav');    
 mod.filenav   = function(){
-                                                                                debug('mod');  
-  var obj   = {};
   
+  var obj   = {
+        version   : 'v1.0'
+  };
+                                                                                debug(obj.version);
         var df=true
         ;
         Object.defineProperty(obj,'df',{set(v){df=v}});
@@ -458,7 +460,7 @@ mod.filenav   = function(){
                     return;
               }
               path        = path.slice(0,i+1);
-                                                                                console.log('btn.dir.parent',path);
+                                                                                //console.log('btn.dir.parent',path);
               var result    = await callback('dir','parent',path);
               if(!result){
                     update(path);
@@ -643,7 +645,7 @@ mod.filenav   = function(){
         
         
         dir.read    = async function(url,auth,path){
-                                                                                console.log('dir.read',path);
+                                                                                debug('dir.read',path);
               var result    = await server.readdir(url,auth,path);
               if(!result){
                     return;
@@ -653,14 +655,14 @@ mod.filenav   = function(){
         
         
         dir.parent    = function(url,auth,path){
-                                                                                console.log('dir.parent',path);
+                                                                                debug('dir.parent',path);
               update(path);
               
         }//parent
         
 
         dir.add   = async function(url,auth,path,name){
-                                                                                console.log('dir.add',path,name);
+                                                                                debug('dir.add',path,name);
               var dir       = path+name;
               var result    = await server.mkdir(url,auth,dir);
               if(!result){
@@ -672,7 +674,7 @@ mod.filenav   = function(){
         
         
         dir.rem   = async function(url,auth,path,name){
-                                                                                console.log('dir.rem',path,name);          
+                                                                                debug('dir.rem',path,name);          
               var dir       = path+name;
               var result    = await server.rmdir(url,auth,dir);
               if(!result){
@@ -1140,7 +1142,7 @@ mod.filenav   = function(){
                                                                                 //var nn    = Object.keys(display.node[name]).length;
                                                                                 //debug(name,nn);
               evt.click   = async function(item,filename){
-                                                                                console.log('click',name,path);
+                                                                                debug('click',name,path);
                     var type    = 'file';
                     
                     if(cur.item!==item){
