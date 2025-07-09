@@ -141,7 +141,7 @@ mod['db-files']   = function(){
   //:
   
   
-        obj.initdom   = function(rootnode){
+        obj.initdom   = async function(rootnode){
           
               root                                              = $.$(rootnode,'db-files');
               shadow                                            = root.shadowRoot;
