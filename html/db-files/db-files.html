@@ -17,10 +17,6 @@
     {display:flex;justify-content:space-between;align-items:center}
   #menu-ext
     {position:relative}
-  #db-list-icon
-    { width:16px;height:16px;cursor:pointer;left:-100px;position:absolute;height:auto;
-      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAASFBMVEVHcEwQJTcZLDoQJTcUKDkTJzgXKjkeLzwSJjgZKzo4Q0kQJTcQJTcTJzkRJTcRJTcbLDsRJTcWKTkQJDcVJzgSJjcTJjcVKDn+MVnaAAAAGHRSTlMA6xraao4zDJ0iA+XPe8apE7cr802FYUJstPSpAAABEUlEQVQoz32S27KDIAxFAwESLnJV+/9/etDToU6VrifHxYTsBAAAl+UD2cGJ4YAPhPQ6LXrWDzCKtVdmb44L3qUu2BAJcmAA2ktR9O0XX0Gi7h8txrZ9F1DCnDpjImJvs1oGKg9t/XacrTX4QahDU8F1DTE7aQfSDQ0mtIYvmNwNINfVwlxDzjDXWSOynGmnG7Pgd253ctES++Q2YSWngZYf7Y/JiWpLHBT7Kc5iWXwhoAuX1mwSotR5MKqVfuQmY35oW1orZpo7iUXNW7MjWBhcgvWxONi8lZoHl7G4rSVu/PyY+kDzhqjvK+lP0SU8Nk33heYS+8+XCItSu7pR2n6cWqMXD/i4/zdD1TxQj+v+AFoGEU8Y6sUpAAAAAElFTkSuQmCC);
-    }
       
                   </style>
                   
@@ -37,8 +33,6 @@
                               
                               <span id=menu-ext>
                               
-                                    <img id=db-list-icon>
-                                    
                                     <db-list data-attr='type=parent parent=db-files' api>
                                     </db-list>
                                     
@@ -77,6 +71,7 @@ mod['db-files']   = function(){
   //vars:-
   
         var db;
+        var dblist;
         var filenav;
         
         var prefix    = 'fs';
@@ -100,18 +95,29 @@ mod['db-files']   = function(){
         obj.init    = async function(){
           
           
+              menu                      = menumod.menumod();
+              
+              await libs();
+
+              db.df                     = true;
+              
+              dblist                    = mod.dblist();
               filenav                   = mod.filenav();
 
+
+              dblist.initmod({$,datatype,menu,db});
+              
               filenav.initmod({$,datatype});
               filenav.file    = file;
               filenav.dir     = dir;
+              
+              
+              dblist.init();
               filenav.init();
-debugger;
-              menu    = menumod.menumod();
 
-              await libs();
 
-              db.df   = true;
+
+
               db.list();
 
               
@@ -145,10 +151,7 @@ debugger;
               icon                                              = $(shadow,'.icon');
               icon.onclick                                      = menumod.click(node,'both',true);
 
-              var card                                          = $(shadow,'#db-list-menu');
-              $(shadow,'#db-list').onclick                      = menu.click(card,false,false,submenu);
-
-              //$(shadow,'#db-list').onclick                      = btn.dblist;
+              dblist.initdom(shadow);
               
               filenav.initdom(shadow);
               filenav.update('/');
