@@ -49,184 +49,199 @@
       
       <script>
       
-            function filemod(){
-                                                                                console.log('filemod');
-              var obj       = {};
-              var filemod   = obj;
-            
-                  var menumod,complete,editor,par_init,ext
-                  ;
-                  
-                  obj.initmod   = function(params){
-                    
-                        menumod         = params.menumod;
-                        editor          = params.editor;
-                        ext             = params.ext;
-                        complete        = params.complete;
-                        
-                  }//initmod
+function filemod(){
+  
+  var obj       = {
+        version   : 'v1.0'
+  };
+                                                                                debug(obj.version);
+        var menumod,complete,editor,par_init,ext
+        ;
+          
+        obj.initmod   = function(params){
+          
+              menumod         = params.menumod;
+              editor          = params.editor;
+              ext             = params.ext;
+              complete        = params.complete;
+              
+        }//initmod
 
 
-              //vars:-
+  //vars:-
+        
+        var filemod   = obj;
 
-                  var localfile;
-                  var github;
-                  var httpsfile;
-                  
-                  var cur;
-                  Object.defineProperty(obj,'cur',{get:()=>cur,set:v=>cur=v});
+        var localfile;
+        var github;
+        var httpsfile;
+        
+        var cur;
+        Object.defineProperty(obj,'cur',{get:()=>cur,set:v=>cur=v});
 
-                  var autosave;
+        var autosave;
 
-                  var root;
-                  var shadow;
+        var root;
+        var shadow;
 
-                  
-                  var btn   = {};
+        
+        var btn   = {};
 
-                    
-              //:
+          
+  //:
 
               
-                  obj.init    = function(){
-                  
-                      localfile                 = mod.localfile();
-                      obj.localfile             = localfile;
-                      github                    = mod.github();
-                      obj.github                = github;
-                      httpsfile                 = mod.httpsfile();
-                      obj.httpsfile             = httpsfile;
+        obj.init    = function(){
+        
+            localfile                 = mod.localfile();
+            obj.localfile             = localfile;
+            github                    = mod.github();
+            obj.github                = github;
+            httpsfile                 = mod.httpsfile();
+            obj.httpsfile             = httpsfile;
 
-                      localfile.initmod({menumod,editor,$,ext,filemod});
-                      github.initmod({menumod,editor,$,ext});
-                      httpsfile.initmod({menumod,editor,$,ext});
-                      
-                      localfile.init();
-                      github.init();
-                      httpsfile.init();
-                      
-                      localfile.load.complete   = complete.load;
-                      localfile.save.complete   = complete.save;
-                      github.load.complete      = complete.load;
-                      github.save.complete      = complete.save;
-                      httpsfile.load.complete   = complete.load;
-                      httpsfile.save.complete   = complete.save;
-                      
-                  }//init
+            localfile.initmod({menumod,editor,$,ext,filemod});
+            github.initmod({menumod,editor,$,ext});
+            httpsfile.initmod({menumod,editor,$,ext});
+            
+            localfile.init();
+            github.init();
+            httpsfile.init();
+            
+            localfile.load.complete   = complete.load;
+            localfile.save.complete   = complete.save;
+            github.load.complete      = complete.load;
+            github.save.complete      = complete.save;
+            httpsfile.load.complete   = complete.load;
+            httpsfile.save.complete   = complete.save;
+            
+        }//init
 
                                       
-              //:
+  //:
 
               
-                  obj.initdom   = function(rootnode){
-                  
-                        root                              = $.$(rootnode,'filemod-root');
-                        shadow                            = root.shadowRoot;
+        obj.initdom   = function(rootnode){
+        
+              root                              = $.$(rootnode,'filemod-root');
+              shadow                            = root.shadowRoot;
 
-                        var style                         = $(shadow,'style'); 
-                        menumod.add.style(shadow);
-                        $.stylesheet.insert(style,'button');
+              var style                         = $(shadow,'style'); 
+              menumod.add.style(shadow);
+              $.stylesheet.insert(style,'button');
 
-                        localfile.initdom(shadow);
-                        github.initdom(shadow);
-                        httpsfile.initdom(shadow);
+              localfile.initdom(shadow);
+              github.initdom(shadow);
+              httpsfile.initdom(shadow);
 
-                        $(shadow,'#save').onclick         = btn.save;
+              $(shadow,'#save').onclick         = btn.save;
 
-                        var card                          = $(shadow,'.menu');
-                        $(shadow,'.menu-icon').onclick    = menumod.click(card,false,false,menu);
+              var card                          = $(shadow,'.menu');
+              $(shadow,'.menu-icon').onclick    = menumod.click(card,false,false,menu);
 
-                        autosave                          = $(shadow,'#autosave');
-                        autosave.checked                  = false;
-                        autosave.onchange                 = e=>obj.autosave   = autosave.checked;
-                        obj.autosave                      = autosave.checked;
-
-
-                        $(shadow,'#root').style.visibility    = '';
-                        
-                  }//initdom
-                    
-
-                  btn.save    = function(e){save()}
-                    
-                    
-                  obj.save    = function(){return save()}
-                    
-                  async function save(){
-                  
-                        if(!cur){
-                              log.orange('no file');
-                              return;
-                        }
-                        
-                        var txt   = editor.getValue();
-                        
-                        if(cur.type=='github'){
-                              await github.save(cur,txt);
-                        }
-                        if(cur.type=='localfile'){
-                              await localfile.save(cur,txt);
-                        }
-                        if(cur.type=='https-file'){
-                              await httpsfile.save(cur,txt);
-                        }
-                  
-                  }//save
-                  
-                  
-                  function menu(type,opt){
-                  }//menu
-                    
-
-                  obj.clear   = function(){
-                    
-                        if(!cur){
-                              return 'no file';
-                        }
-                        
-                        switch(cur.type){
-                          
-                          case 'github'       : github.clear();           break;
-                          case 'local'        : localfile.clear();        break;
-                          case 'https-file'   : httpsfile.clear();        break;
-                          
-                        }//switch
-                        
-                        cur   = null;
-                        
-                  }//clear
-                  
-                  
-                  obj.export    = function(){
-                  
-                        if(!cur){
-                              return 'no file';
-                        }
-                        
-                        var file;
-                        switch(cur.type){
-                          
-                          case 'github'       : file    = github.export(cur);           break;
-                          case 'https-file'   : file    = httpsfile.export(cur);        break;
-                          case 'local'        : return 'local';
-                          
-                        }//switch
-                        file.type   = cur.type;
-                        
-                        return file;
-                        
-                  }//export
-                  
-                  
-                  obj.import    = function(file){
-                    
-                  }//import
+              autosave                          = $(shadow,'#autosave');
+              autosave.checked                  = false;
+              autosave.onchange                 = e=>obj.autosave   = autosave.checked;
+              obj.autosave                      = autosave.checked;
 
 
-                    
-              return obj;
+              $(shadow,'#root').style.visibility    = '';
               
-            }//filemod
+        }//initdom
+                    
+
+        btn.save    = function(e){save()}
+          
+          
+        obj.save    = function(){return save()}
+          
+        async function save(){
+        
+              if(!cur){
+                    log.orange('no file');
+                    return;
+              }
+              
+              var txt   = editor.getValue();
+              
+              if(cur.type=='github'){
+                    await github.save(cur,txt);
+              }
+              if(cur.type=='localfile'){
+                    await localfile.save(cur,txt);
+              }
+              if(cur.type=='https-file'){
+                    await httpsfile.save(cur,txt);
+              }
+        
+        }//save
+                  
+                  
+        function menu(type,opt){
+        }//menu
+                    
+
+        obj.clear   = function(){
+          
+              if(!cur){
+                    return 'no file';
+              }
+              
+              switch(cur.type){
+                
+                case 'github'       : github.clear();           break;
+                case 'local'        : localfile.clear();        break;
+                case 'https-file'   : httpsfile.clear();        break;
+                
+              }//switch
+              
+              cur   = null;
+              
+        }//clear
+                  
+                  
+        obj.export    = function(){
+        
+              if(!cur){
+                    return 'no file';
+              }
+              
+              var file;
+              switch(cur.type){
+                
+                case 'github'       : file    = github.export(cur);           break;
+                case 'https-file'   : file    = httpsfile.export(cur);        break;
+                case 'local'        : return 'local';
+                
+              }//switch
+              file.type   = cur.type;
+              
+              return file;
+              
+        }//export
+                  
+                  
+        obj.import    = function(file){
+          
+        }//import
+
+
+  //:
+  
+  
+        function debug(){
+        
+              if(!df)return;  
+              var str   = [...arguments].join(' ');
+              console.log('[ filemod ]',str);
+              
+        }//debug
+        
+        
+  return obj;
+  
+}//filemod
+
             
       </script>
 
