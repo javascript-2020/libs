@@ -101,7 +101,7 @@
         }//parse
 
                                                                                 //  https://javascript-2020.github.io/html-components/log/log.html
-        parse['github.io']=function(url){
+        parse['github.io']    = function(url){
                                                                                 debug('github.io');
               var i         = url.hostname.indexOf('.');
               var owner     = url.hostname.slice(0,i);
@@ -113,7 +113,7 @@
         }//github.io
         
                                                                                 //  https://github.com/javascript-2020/libs
-        parse.repo=function(url){
+        parse.repo    = function(url){
                                                                                 debug('repo');
               var parts     = url.pathname.split('/');
               var owner     = parts.shift();
@@ -125,7 +125,7 @@
         }//repo
 
                                                                                 //  https://github.com/javascript-2020/libs/blob/main/docker/nodejs-min.dockerfile
-        parse.file=function(url){
+        parse.file    = function(url){
                                                                                 debug('file');
               var parts     = url.pathname.split('/');
               parts.shift();
@@ -139,7 +139,7 @@
         }//file
         
                                                                                 //  https://github.com/javascript-2020/libs/tree/main/docker
-        parse.dir=function(url){
+        parse.dir   = function(url){
                                                                                 debug('dir');
               var parts     = url.pathname.split('/');
               parts.shift();
@@ -390,7 +390,7 @@
         }//backup
         
         
-        backup.clear=async function(token,owner,repo,branch,path,all){
+        backup.clear    = async function(token,owner,repo,branch,path,all){
         
               var fn;
               var i   = path.lastIndexOf('/');
