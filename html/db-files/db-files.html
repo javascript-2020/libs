@@ -130,10 +130,10 @@ mod['db-files']   = function(){
         
         async function libs(){
           
-              var promise   = ext.load.libs(
+              libs   = ext.load.libs(
                     'js/core/dbmod/db-fs/db-fs.js.api'
               );
-              [db]    = await promise;
+              [db]    = await libs;
               
         }//libs
         
@@ -155,6 +155,8 @@ mod['db-files']   = function(){
               icon                                              = $(shadow,'.icon');
               icon.onclick                                      = menumod.click(node,'both',true);
 
+              await libs;
+              
               dblist.initdom(shadow);
               
               filenav.initdom(shadow);
