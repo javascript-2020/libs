@@ -76,6 +76,7 @@ mod['db-files']   = function(){
         var icon;
         
         
+        var btn     = {};
         var file    = {};
         var dir     = {};
         
@@ -129,11 +130,22 @@ mod['db-files']   = function(){
               icon                                              = $(shadow,'.icon');
               icon.onclick                                      = menumod.click(node,'both',true,menu);
 
+              $('#db-list').onclick                             = btn.dblist;
               
               filenav.initdom(shadow);
               filenav.update('/');
               
         }//initdom
+        
+        
+  //:
+  
+  
+        btn.dblist    = function(){
+          
+              db.list();
+              
+        }//dblist
         
         
   //:
