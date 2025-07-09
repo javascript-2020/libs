@@ -100,7 +100,7 @@ function filemod(){
   //:
 
               
-        obj.init    = function(){
+        obj.init    = async function(){
         
             localfile                 = mod.localfile();
             obj.localfile             = localfile;
@@ -119,7 +119,7 @@ function filemod(){
             localfile.init();
             github.init();
             httpsfile.init();
-            dbfiles.init();
+            await dbfiles.init();
             
             localfile.load.complete       = complete.load;
             localfile.save.complete       = complete.save;
