@@ -5,17 +5,29 @@
       <template shadowrootmode=open>
       
             <style>
+
+  #icon
+    { width:16px;height:16px;cursor:pointer;left:-100px;position:absolute;height:auto;
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAASFBMVEVHcEwQJTcZLDoQJTcUKDkTJzgXKjkeLzwSJjgZKzo4Q0kQJTcQJTcTJzkRJTcRJTcbLDsRJTcWKTkQJDcVJzgSJjcTJjcVKDn+MVnaAAAAGHRSTlMA6xraao4zDJ0iA+XPe8apE7cr802FYUJstPSpAAABEUlEQVQoz32S27KDIAxFAwESLnJV+/9/etDToU6VrifHxYTsBAAAl+UD2cGJ4YAPhPQ6LXrWDzCKtVdmb44L3qUu2BAJcmAA2ktR9O0XX0Gi7h8txrZ9F1DCnDpjImJvs1oGKg9t/XacrTX4QahDU8F1DTE7aQfSDQ0mtIYvmNwNINfVwlxDzjDXWSOynGmnG7Pgd253ctES++Q2YSWngZYf7Y/JiWpLHBT7Kc5iWXwhoAuX1mwSotR5MKqVfuQmY35oW1orZpo7iUXNW7MjWBhcgvWxONi8lZoHl7G4rSVu/PyY+kDzhqjvK+lP0SU8Nk33heYS+8+XCItSu7pR2n6cWqMXD/i4/zdD1TxQj+v+AFoGEU8Y6sUpAAAAAElFTkSuQmCC);
+    }
             
             </style>
+
+            <img id=icon>
             
-            <div id=db-list-menu class=menu style='display:none'>
+            <div class=menu style='display:none'>
+            
                   <div class=menu-title>
                         dblist
                   </div>
-                  <div class=db-list-item>
-                        <img class=db-list-item-del>
-                        <span class=db-list-item-name></span>
+                  
+                  <div id=list>
+                        <div class=item>
+                              <img class=del>
+                              <span class=name></span>
+                        </div>
                   </div>
+                  
             </div>
 
       </template>
@@ -26,14 +38,28 @@ mod.dblist    = function(){
   
   var obj   = {};
   
-  
+        var $,grp,db
+        ;
+        
         obj.initmod   = function(params){
+          
+              $             = params.$;
+              grp           = params.menu;
+              db            = params.db;
+              
         }//initmod
         
         
   //vars:-
   
   
+        var root;
+        var shadow;
+        
+        var list;
+        var item;
+
+        
   //:
   
   
@@ -43,6 +69,69 @@ mod.dblist    = function(){
         
   //:
   
+  
+        obj.initdom   = function(rootnode){
+          
+              root                                  = $.$(rootnode,'db-list');
+              shadow                                = root.shadowRoot;
+
+              grp.add.style(shadow);
+              
+              var card                              = $(shadow,'.menu');
+              $(shadow,'#icon').onclick             = grp.click(card,false,false,menu);
+
+              list                                  = $(card,'#list');
+              item                                  = $(list,'.item');
+              item.remove();
+              
+        }//initdom
+
+
+
+  //:
+  
+  
+        function menu(type,opt){
+          
+              switch(type){
+                
+                case 'show'   : show();       break;
+                
+              }//switch
+              
+        }//menu
+        
+        
+  //:
+  
+  
+        async function show(){
+          
+              list.replaceChildren();
+              
+              var names   = await db.list();
+              names.forEach(name=>{
+                
+                    var nitem                       = item.cloneNode(true);
+                    $(nitem,'.del').onclick         = del;
+                    $(nitem,'.name').textContent    = name;
+                    
+                    
+                    function del(){
+                      
+                          await db.delete(name);
+                          show();
+                          
+                    }//del
+                                        
+              });
+                            
+        }//show
+        
+        
+        
+        
+        
   
   return obj;
   
