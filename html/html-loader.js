@@ -263,6 +263,8 @@
 
         function get_params_parent(){
         
+              var nn        = root.nodeName.toLowerCase();
+              
               var parent    = root.getAttribute('data-parent');
               parent        = rd('parent',parent);
               
@@ -273,7 +275,11 @@
               
               var i         = url.lastIndexOf('/');
               url           = url.slice(0,i+1);
+              
               var src       = root.getAttribute('data-src');
+              src           = rd('src',src);
+              src         ||= `html/${nn}/${nn}.html`;
+              
               url          += src;
               
               parse_url(url);
