@@ -81,7 +81,10 @@
               
               await filenav.server.readdir(url,auth,'/');
               
+              
               return;
+
+
               
               await filenav.server.mkdir(url,auth,'/tmp/test-1');
               await filenav.server.mkdir(url,auth,'/tmp/test-2');
@@ -90,6 +93,7 @@
               await filenav.server.upload(url,auth,'/tmp/test-1/b.txt','123');
               
               await filenav.update();
+
               
         }//ready
 
