@@ -13,8 +13,10 @@
     }
   .menu
     {height:300px;font-family:arial}
-  .menu-title
+  #main-title
     {display:flex;justify-content:space-between;align-items:center}
+  #menu-ext
+    {position:relative}
   #db-list
     { width:16px;height:16px;cursor:pointer;
       content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAASFBMVEVHcEwQJTcZLDoQJTcUKDkTJzgXKjkeLzwSJjgZKzo4Q0kQJTcQJTcTJzkRJTcRJTcbLDsRJTcWKTkQJDcVJzgSJjcTJjcVKDn+MVnaAAAAGHRSTlMA6xraao4zDJ0iA+XPe8apE7cr802FYUJstPSpAAABEUlEQVQoz32S27KDIAxFAwESLnJV+/9/etDToU6VrifHxYTsBAAAl+UD2cGJ4YAPhPQ6LXrWDzCKtVdmb44L3qUu2BAJcmAA2ktR9O0XX0Gi7h8txrZ9F1DCnDpjImJvs1oGKg9t/XacrTX4QahDU8F1DTE7aQfSDQ0mtIYvmNwNINfVwlxDzjDXWSOynGmnG7Pgd253ctES++Q2YSWngZYf7Y/JiWpLHBT7Kc5iWXwhoAuX1mwSotR5MKqVfuQmY35oW1orZpo7iUXNW7MjWBhcgvWxONi8lZoHl7G4rSVu/PyY+kDzhqjvK+lP0SU8Nk33heYS+8+XCItSu7pR2n6cWqMXD/i4/zdD1TxQj+v+AFoGEU8Y6sUpAAAAAElFTkSuQmCC);
@@ -26,14 +28,23 @@
 
                   <div class=menu>
                   
-                        <div class=menu-title>
+                        <div id=main-title class=menu-title>
                               <span>
                               </span>
                               <span>
                                     browser fs - indexed db
                               </span>
-                              <span>
+                              
+                              <span id=menu-ext>
+                              
                                     <img id=db-list>
+                                    <div id=db-list-menu class=menu style='display:none'>
+                                          <div class=menu-title>
+                                                dblist
+                                          </div>
+                                          <div class=menu-opt>test</div>
+                                    </div>
+                                    
                               </span>
                         </div>
                         
@@ -80,6 +91,7 @@ mod['db-files']   = function(){
         
         var icon;
         
+        var menu;
         
         var btn     = {};
         var file    = {};
@@ -98,6 +110,7 @@ mod['db-files']   = function(){
               filenav.dir     = dir;
               filenav.init();
 
+              menu    = menumod.menumod();
 
               await libs();
 
@@ -133,7 +146,10 @@ mod['db-files']   = function(){
               
               var node                                          = $(shadow,'.menu');
               icon                                              = $(shadow,'.icon');
-              icon.onclick                                      = menumod.click(node,'both',true,menu);
+              icon.onclick                                      = menumod.click(node,'both',true);
+
+              var card                                          = $(shadow,'#db-list-menu');
+              $(shadow,'#menu-icon').onclick                    = menu.click(card,false,false,submenu);
 
               $(shadow,'#db-list').onclick                      = btn.dblist;
               
@@ -159,7 +175,14 @@ mod['db-files']   = function(){
         function menu(){
         }//menu
         
+
+        function submenu(){
+        }//submenu
         
+        
+  //:
+  
+  
         file.add    = async function(path,name){
                                                                                 console.log('db-files.file.add',path+name);
               var abs     = prefix+path+name;
