@@ -56,7 +56,7 @@
                     return def;
               }
               i1         += name.length+1;
-              var i2      = attr.indexOf(' ',i1);
+              var i2      = attr.indexOf(' ',i1);debugger;
               var value   = attr.slice(i1,12);
                                                                                 console.log('***',name,'['+value+']');
               return value;            
