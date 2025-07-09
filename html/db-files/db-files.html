@@ -52,16 +52,19 @@
 
 mod['db-files']   = function(){
   
-  var obj   = {};
-  
+  var obj   = {
+        version   : 'v1.0'
+  };
+                                                                                debug(obj.version);
         var df=obj.df=true;
         
-        var menumod,editor,$,datatype
+        var ext,menumod,editor,$,datatype
         ;
 
 
         obj.initmod   = function(params){
           
+              ext         = params.ext;
               $           = params.$;
               datatype    = params.datatype;
               menumod     = params.menumod;
@@ -372,6 +375,17 @@ mod['db-files']   = function(){
         }//delete
 */
 
+        
+  //:
+  
+  
+        function debug(){
+          
+              if(!df)return;
+              var str   = [...arguments].join(' ');
+              console.log('[ db-files']',str);
+              
+        }//debug
         
         
   return obj;
