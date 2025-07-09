@@ -51,14 +51,19 @@
                     return def;
               }
               var attr    = root.getAttribute('data-attr');
+              
               var i1      = attr.indexOf(name+'=');
               if(i1==-1){
                     return def;
               }
               i1         += name.length+1;
-              var i2      = attr.indexOf(' ',i1);debugger;
+              var i2      = attr.indexOf(' ',i1);
+              if(i2==-1){
+                    i2    = attr.length;
+              }
+              
               var value   = attr.slice(i1,i2);
-                                                                                console.log('***',name,'['+value+']');
+                                                                                //console.log('***',name,'['+value+']');
               return value;            
                     
         }//rd
