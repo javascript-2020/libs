@@ -39,16 +39,17 @@
               
               initdom();
   
-/*  
+  
               var txt     = 'helloworld';
               var blob    = new Blob([txt]);
-              await dbfiles.save('test.txt',blob);
-*/              
+              await dbfiles.save('/test.txt',blob);
               
               
-              var blob    = await dbfiles.load('test.txt');
+              
+              var blob    = await dbfiles.load('/test.txt');
               var txt     = await blob.text();
               alert(txt);
+              
               
               
         }//init
