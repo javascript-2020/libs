@@ -117,7 +117,8 @@ mod.dblist    = function(){
                     var nitem                       = item.cloneNode(true);
                     $(nitem,'.del').onclick         = del;
                     $(nitem,'.name').textContent    = name;
-                    
+                    list.append(nitem);
+
                     
                     async function del(){
                       
