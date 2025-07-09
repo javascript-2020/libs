@@ -130,7 +130,7 @@ mod['db-files']   = function(){
               icon                                              = $(shadow,'.icon');
               icon.onclick                                      = menumod.click(node,'both',true,menu);
 
-              $('#db-list').onclick                             = btn.dblist;
+              $(shadow,'#db-list').onclick                      = btn.dblist;
               
               filenav.initdom(shadow);
               filenav.update('/');
