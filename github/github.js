@@ -262,7 +262,7 @@
               
               try{
               
-                    var json        = await fetch(url,headers).then(res=>res.json());
+                    var json        = await fetch(url,{headers}).then(res=>res.json());
                     
               }//try
               
