@@ -117,7 +117,7 @@ mod.dblist    = function(){
                     $(nitem,'.name').textContent    = name;
                     
                     
-                    function del(){
+                    async function del(){
                       
                           await db.delete(name);
                           show();
