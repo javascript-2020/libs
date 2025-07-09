@@ -1139,7 +1139,7 @@ mod.filenav   = function(){
               }//for
                                                                                 //var nn    = Object.keys(display.node[name]).length;
                                                                                 //debug(name,nn);
-              evt.click   = function(item,filename){
+              evt.click   = async function(item,filename){
                                                                                 console.log('click',name,path);
                     var type    = 'file';
                     
@@ -1162,12 +1162,12 @@ mod.filenav   = function(){
                           filename   += '/';
                     }
                                                                                 debug('click',path,name,filename);
-                    callback(type,'click',path,filename);
+                    await callback(type,'click',path,filename);
                     
               }//click
               
               
-              evt.dblclick    = function(item,filename){
+              evt.dblclick    = async function(item,filename){
 
                     var type    = 'file';
                     if(name==='dir'){
@@ -1175,7 +1175,7 @@ mod.filenav   = function(){
                           filename   += '/';
                     }
                                                                                 debug('dblclick',path,name,filename);
-                    var result    = callback(type,'dblclick',path,filename);
+                    var result    = await callback(type,'dblclick',path,filename);
                     if(!result){
                           return;
                     }
