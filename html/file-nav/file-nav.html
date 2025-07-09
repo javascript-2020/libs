@@ -644,7 +644,10 @@ mod.filenav   = function(){
         
         dir.read    = function(url,auth,path){
                                                                                 console.log('dir.read',path);
-              update(path);
+              var result    = await server.readdir(url,auth,path);
+              if(!result){
+                    return;
+              }              
               
         }//read
         
