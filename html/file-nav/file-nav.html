@@ -642,7 +642,7 @@ mod.filenav   = function(){
         }//download
         
         
-        dir.read    = async function(url,auth,path){
+        dir.read    = async function(url,auth,path){debugger;
                                                                                 console.log('dir.read',path);
               var result    = await server.readdir(url,auth,path);
               if(!result){
