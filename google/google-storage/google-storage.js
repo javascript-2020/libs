@@ -11,7 +11,7 @@
 */
 
 
-function mod(){
+(function(){
 
   var obj   = {
         version   : 'v1.0'
@@ -230,6 +230,6 @@ curl -X POST --data-binary @OBJECT_LOCATION \
   
   return obj;
   
-}//mod
+})();
 
 
