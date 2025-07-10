@@ -63,7 +63,7 @@
               
               var store       = db.transaction(path,'readwrite').objectStore(path);
               var req         = store.get(path);
-              req.onsuccess   = e=>resolve(req.result.data);
+              req.onsuccess   = e=>resolve(req.result?.data);
               req.onerror     = e=>console.log('db.get error');
               
               return promise;
