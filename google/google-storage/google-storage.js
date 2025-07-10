@@ -96,6 +96,7 @@
                     if(ct==n){
                           return index;
                     }
+                    index++;
                     
               }//while
               
