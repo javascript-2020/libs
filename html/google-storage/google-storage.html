@@ -1,0 +1,85 @@
+
+
+<google-storage>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+            </style>
+            
+            
+      
+      </template>
+      
+      
+      <script>
+      
+mod['google-storage']   = function(){
+  
+  var obj   = {
+        version   : 'v1.0'
+  };
+  
+        var df    = true;
+                                                                                debug(obj.version);
+        var $
+        ;
+  
+        obj.initmod   = function(params){
+          
+              $       = params.$;
+              
+        }//initmod
+        
+        
+  //vars:-
+  
+  
+        var root;
+        var shadow;
+        
+        
+  //:
+
+  
+        obj.init    = function(){
+        }//init
+        
+        
+  //:
+  
+  
+        obj.initdom   = function(rootnode){
+          
+              root                      = $.$(rootnode,'google-storage');
+              shadow                    = root.shadowRoot;
+              
+              
+        }//initdom
+        
+
+
+  //:
+  
+  
+        function debug(){
+          
+              if(!df)return;
+              var str   = [...arguments].join(' ');
+              console.log('[ google-storage ]',str);
+              
+        }//debug
+
+
+  //:
+  
+  
+  return obj;
+  
+}//google-storage
+      
+      </script>
+      
+</google-storage>  
+    
