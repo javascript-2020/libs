@@ -240,10 +240,13 @@ mod['db-files']   = function(){
         file.dblclick   = async function(path,name){
           
               var abs     = prefix+path+name;
-              var file    = await db.open(abs);
-              var blob    = await file.read();
-              if(
-              file.close();
+              
+              var fs      = await db.open(abs);
+              var blob    = await fs.read();
+              if(!blob){
+                    blob    = new Blob(['']);
+              }
+              fs.close();
               
               var file        = {};
               file.type       = 'db-files';
