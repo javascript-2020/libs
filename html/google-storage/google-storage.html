@@ -191,8 +191,8 @@ mod['google-storage']   = function(){
   
         obj.initdom   = function(rootnode){
           
-              root                      = $.$(rootnode,'google-storage');
-              shadow                    = root.shadowRoot;
+              root                            = $.$(rootnode,'google-storage');
+              shadow                          = root.shadowRoot;
               
               menumod.add.style(shadow);
               
@@ -306,14 +306,33 @@ mod['google-storage']   = function(){
   
   
         btn.parse   = function(){
+          
+              var url                     = $(shadow,'#url').value;
+              var {bucket,path}           = gs.parse(url);
+              $(shadow,'#bucket').value   = bucket;
+              $(shadow,'#path').value     = path;
+              
         }//parse
         
         
         btn.parse.load    = function(){
+          
+              btn.parse();
+              btn.load();
+              
         }//load
 
 
         btn.load    = function(){
+          
+              var token     = $(shadow,'#token').value;
+              var bucket    = $(shadow,'#bucket').value;
+              var path      = $(shadow,'#path').value;
+              var abs       = bucket+path;
+              var blob      = await gs.load(token,abs);
+              var txt       = await blob.text();
+              console.log(txt);
+              
         }//load
         
         
@@ -330,6 +349,14 @@ mod['google-storage']   = function(){
         }//callback
 
 
+  //:
+  
+  
+        function load(){
+        }//load
+        
+        
+        
   //:
   
   
