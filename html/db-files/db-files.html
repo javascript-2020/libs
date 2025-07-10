@@ -238,8 +238,9 @@ mod['db-files']   = function(){
         }//download
         
         
-        file.dblclick   = async function(path,filename){
+        file.dblclick   = async function(path,name){
           
+              var abs     = prefix+path+name;
               var file    = await db.open(abs);
               var blob    = await file.read();
               file.close();
@@ -255,9 +256,9 @@ mod['db-files']   = function(){
         
         
         dir.add   = async function(path,name){
-                                                                                console.log('db-files.dir.add',path,name);
+                                                                                debug('dir.add',path,name);
               var abs     = prefix+path+name+'/';
-                                                                                console.log(abs);
+                                                                                debug(abs);
               var file    = await db.open(abs);
               file.close();
               return false;
@@ -284,7 +285,7 @@ mod['db-files']   = function(){
         
         
         dir.clear   = async function(path){
-                                                                                console.log('db-files.dir.clear',path);
+                                                                                debug('dir.clear',path);
               var abs     = prefix+path;
               var list    = await db.list(abs);
               
@@ -306,7 +307,7 @@ mod['db-files']   = function(){
         dir.read    = read;
         
         async function read(path='tmp/'){
-                                                                                console.log('db-files.dir.read',path);
+                                                                                debug('dir.read',path);
               var len       = prefix.length+path.length;
               
               var dirs      = [];
