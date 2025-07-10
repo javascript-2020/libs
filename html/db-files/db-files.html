@@ -343,7 +343,9 @@ mod['db-files']   = function(){
                     var fn;
                     if(i==-1){
                           fn    = abs.slice(len);
-                          files.push(fn);
+                          if(fn){
+                                files.push(fn);
+                          }
                     }else{
                           fn    = abs.slice(len,i);
                           if(dirs.indexOf(fn)==-1){
