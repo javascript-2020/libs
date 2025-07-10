@@ -273,22 +273,21 @@ mod['google-storage']   = function(){
                                                       var input     = $(icon.parentNode,'input:not([type])');
                                                       
                                                       if(e.shiftKey){
-                                                            var token   = input.value;
+                                                            var token   = localStorage.getItem(localstorage_name);
                                                             if(!token){
-                                                                  $.mousetext('no token');
+                                                                  $.mousetext(`no stored token, localStorage['${localstorage_name}']`);
                                                                   return;
                                                             }
-                                                            localStorage.setItem(localstorage_name,token);
-                                                            $.mousetext(e,`localStorage['${localstorage_name}'] saved`);
+                                                            input.value   = token;
                                                             return;
                                                       }
-                                                      
-                                                      var token   = localStorage.getItem(localstorage_name);
+                                                      var token   = input.value;
                                                       if(!token){
-                                                            $.mousetext(`no stored token, localStorage['${localstorage_name}']`);
+                                                            $.mousetext('no token');
                                                             return;
                                                       }
-                                                      input.value   = token;
+                                                      localStorage.setItem(localstorage_name,token);
+                                                      $.mousetext(e,`localStorage['${localstorage_name}'] saved`);
                                                       
                                                 }//storage.onclick
             
