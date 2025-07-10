@@ -12,6 +12,8 @@
 
               
               obj.on                  = {};
+              obj.input               = {};
+              var kd                  = {};
               
               
               var list                = [];
@@ -64,26 +66,30 @@
               
               
               var get           = {};
+
               
   //:
+
   
-              obj.import=function(str){
+              obj.import    = function(str){
               
                     state   = JSON.parse(str);
                     
               }//import
               
               
-              obj.export=function(){
+              obj.export    = function(){
               
                     var str   = JSON.stringify(state);
                     return str;
                     
               }//export
+
               
   //:
+
   
-              obj.click=function(node,drag=true,center=true,callback_fns){
+              obj.click   = function(node,drag=true,center=true,callback_fns){
               
                     add(node,drag,center,callback_fns);
                     
@@ -97,10 +103,12 @@
                     }//click
                     
               }//click
+
               
   //:
+
   
-              obj.add=function(node,drag='both',center=true,callback){return add(node,drag,center,callback)}
+              obj.add   = function(node,drag='both',center=true,callback){return add(node,drag,center,callback)}
               
               function add(node,drag='both',center=true,callback){
                                                                                 //console.log('add');
@@ -110,9 +118,9 @@
               }//add
               
               
-              obj.add.stack=function(node,drag='both',center=true,callback){return add.stack(node,drag,center,callback)}
+              obj.add.stack   = function(node,drag='both',center=true,callback){return add.stack(node,drag,center,callback)}
               
-              add.stack=function(node,drag,center,callback){
+              add.stack   = function(node,drag,center,callback){
               
                     var cur                   = get.cur('node');
                     state.prev_opt[cur.id]    = state.opt;
@@ -125,7 +133,7 @@
               }//add.stack
               
               
-              add.node=function(node,drag,center){
+              add.node    = function(node,drag,center){
               
                     node.style.zIndex   = defz;
                     node.tabIndex       = -1;
@@ -224,10 +232,12 @@
                     });
                     
               }//add.node
+
               
   //:
+
   
-              obj.open=function(node){return open(node)}
+              obj.open    = function(node){return open(node)}
               
               function open(node){
                                                                                 debug('open',node);
@@ -263,7 +273,7 @@
               }//open
               
               
-              obj.close=function(){return close()};
+              obj.close   = function(){return close()};
               
               function close(){
                                                                                       debug('close',state.cur);
@@ -297,7 +307,7 @@
               }//close
               
               
-              obj.prev=function(){return prev()}
+              obj.prev    = function(){return prev()}
               
               function prev(){
               
@@ -318,7 +328,7 @@
               }//prev
               
               
-              obj.next=function(){return next()}
+              obj.next    = function(){return next()}
               
               function next(){
               
@@ -377,7 +387,7 @@
               }//hide
               
               
-              hide.stack=function(){
+              hide.stack    = function(){
               
                     var node    = stack.pop().node;
                     hide(node);
@@ -387,17 +397,19 @@
               }//hide.stack
               
               
-              hide.stack.all=function(){
+              hide.stack.all    = function(){
               
                     while(stack.length){
+                    
                           hide.stack();
-                    }
+                          
+                    }//while
                     
               }//hide.stack.all
+
               
   //:
   
-              var kd={};
               
               function menu_kd(e){
                                                                                 //console.log('menu.kd',e.key);
@@ -428,7 +440,7 @@
               }//kd
               
               
-              kd.arrowdown=function(e,node,opts){
+              kd.arrowdown    = function(e,node,opts){
               
                     if(opts.length==0)return;
                     
@@ -449,7 +461,7 @@
               }//arrowdown
               
               
-              kd.arrowup=function(e,node,opts){
+              kd.arrowup    = function(e,node,opts){
               
                     if(opts.length==0)return;
                     
@@ -470,21 +482,21 @@
               }//arrowup
               
               
-              kd.arrowleft=function(e,node,opts){
+              kd.arrowleft    = function(e,node,opts){
               
                     prev();
                     
               }//arrowleft
               
               
-              kd.arrowright=function(e,node,opts){
+              kd.arrowright   = function(e,node,opts){
                                                                                 
                     next();
                     
               }//arrowright
               
               
-              kd.enter=function(e,node,opts){
+              kd.enter    = function(e,node,opts){
               
                     if(typeof state.opt!='number'){
                           return;
@@ -498,7 +510,7 @@
               }//enter
               
 
-              kd.escape=function(e,node,opts){
+              kd.escape   = function(e,node,opts){
               
                     if(stack.length){
                           hide.stack();
@@ -509,7 +521,7 @@
               }//escape
               
               
-              kd.tab=function(e,node,opts){
+              kd.tab    = function(e,node,opts){
                                                                                 //console.clear();console.log('tab');
                     if(stack.length){
                           return;
@@ -569,8 +581,10 @@
                     }//chk
                     
               }//onfocusout
+
               
   //:
+
   
               function callback(type,arg0){
               
@@ -581,10 +595,12 @@
                     callback.apply(null,arguments);
                     
               }//callback
+
               
   //:
+
   
-              get.cur=function(rtype){
+              get.cur   = function(rtype){
               
                     var cur   = list.find(state.cur,rtype);
                     if(stack.length){
@@ -595,7 +611,7 @@
               }//cur
               
               
-              get.opts=function(node){
+              get.opts    = function(node){
               
                     var list    = $.all(node,'.menu-opt');
                     list        = list.filter(opt=>{
@@ -611,83 +627,92 @@
                     
               }//opts
 
-                
+
+  //:
+  
+  
         var css    = `
         
-        /*
-          //menu:
-        */
+/*
+  //menu:
+*/
         
-                .menu-root {
-                      display               : inline;
-                      position              : relative;
-                }
-                
-                .menu-icon {
-                      padding               : 3px;
-                      width                 : 20px;
-                      background            : buttonface;
-                      border                : 1px solid gray;
-                      border-radius         : 3px;
-                      box-sizing            : border-box;
-                      width                 : 20px;
-                      height                : 30px;
-                      cursor                : pointer;
-                      content               : url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAt1BMVEVHcEwbmPYcgfMchvQbsfkay/wbtvkbnfccefMayfwbmfYch/QchvQbtfkbmfYa1P0ddfIcivQcl/Ycj/Ubp/gcmfYdbPEbrvkazPwcmfYbqfgayfwayPwbv/sbvvobsvkazPwbqvga0fwbvPobtvocjvUbofcbpvccfPMcgPMcgvMdafAdbfEckfUbtvka0PwcfPIaxvsbwfsbvPodb/EcnPYclvYckfUbpvccjPQdd/IbofcbrPiPy8D0AAAAMHRSTlMAA/79/v7+5ycVZ3Y3h0xhu9jp8kFeF9OkVfQOrZi+Mh1z/iUJQ+/dx4fOYq7hybzs5xU1AAABIklEQVQ4y+2Ux3aDMBBFpTR6M92AwYB7S6EG/v+7MsJJnBBKVsnGdwHozT1HQgxC6MrfEkiSM+Y4khSgUxhazLDHWGF4QveAO2gyLnGQ9QS4wcDaXGJYiPGegVnU50UzUvdgTsd7AfrMaEaqXvO+sfAAHP0uzz+SmhCfR7FwB5gdpm+SyoeHEJ5P67o2tbanmRBP5/iSgFkUxaplaisIv3kAu6yqihK/RiIF0ZJtT6NTaZpS9iWwm0D/uXB7kmXZ5LOgN0O7ayvEQ57nKtssCbMqDA5i9+YulLIsVQ5MzKnwqCz6Phev3AIcxhy5K3x/A/DbG2CzIdctP9RS9PrxnTU92KOYll8bZHqs7Wk5AcY9hIx9kuyN3/xuxm5nXA+df+cNJSAgjMbiFSoAAAAASUVORK5CYII=);
-                }
-                
-                .menu-hdr {
-                      white-space           : nowrap;
-                      align-items           : center;
-                      border                : 1px solid lightgray;
-                      box-sizing            : border-box;
-                      border-radius         : 5px;
-                      position              : relative;
-                      cursor                : pointer;
-                      display               : inline-flex;
-                      margin-right          : 10px;
-                      padding               : 0px 10px;
-                      height                : 30px;
-                }
-                
-                .menu {
-                      border                : 3px solid cyan;
-                      border-radius         : 7px;
-                      box-shadow            : rgba(0, 0, 250, 0.5) 0px 13px 45px -10px;
-                      background            : whitesmoke;
-                      box-sizing            : border-box;
-                      padding               : 10px;
-                      outline               : none;
-                }
-                
-                .menu-title {
-                      text-align            : center;
-                      background            : rgb(13,152,186);
-                      margin-bottom         : 10px;
-                      padding               : 3px;
-                      color                 : white;
-                      font-weight           : bold;
-                }
-                
-                .menu-opt {
-                      white-space           : nowrap;
-                      cursor                : pointer;
-                      margin-bottom         : 10px;
-                      display               : flex;
-                      justify-content       : space-between;
-                      align-items           : center;
-                      padding               : 5px 10px;
-                }
-                
-                .menu-sep {
-                      margin                : 10px 0;
-                      border-top            : 1px solid lightgray;
-                }
+  .menu-root
+    {
+          display             : inline;
+          position            : relative
+    }
+  
+  .menu-icon {
+          padding               : 3px;
+          width                 : 20px;
+          background            : buttonface;
+          border                : 1px solid gray;
+          border-radius         : 3px;
+          box-sizing            : border-box;
+          width                 : 20px;
+          height                : 30px;
+          cursor                : pointer;
+          content               : url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAt1BMVEVHcEwbmPYcgfMchvQbsfkay/wbtvkbnfccefMayfwbmfYch/QchvQbtfkbmfYa1P0ddfIcivQcl/Ycj/Ubp/gcmfYdbPEbrvkazPwcmfYbqfgayfwayPwbv/sbvvobsvkazPwbqvga0fwbvPobtvocjvUbofcbpvccfPMcgPMcgvMdafAdbfEckfUbtvka0PwcfPIaxvsbwfsbvPodb/EcnPYclvYckfUbpvccjPQdd/IbofcbrPiPy8D0AAAAMHRSTlMAA/79/v7+5ycVZ3Y3h0xhu9jp8kFeF9OkVfQOrZi+Mh1z/iUJQ+/dx4fOYq7hybzs5xU1AAABIklEQVQ4y+2Ux3aDMBBFpTR6M92AwYB7S6EG/v+7MsJJnBBKVsnGdwHozT1HQgxC6MrfEkiSM+Y4khSgUxhazLDHWGF4QveAO2gyLnGQ9QS4wcDaXGJYiPGegVnU50UzUvdgTsd7AfrMaEaqXvO+sfAAHP0uzz+SmhCfR7FwB5gdpm+SyoeHEJ5P67o2tbanmRBP5/iSgFkUxaplaisIv3kAu6yqihK/RiIF0ZJtT6NTaZpS9iWwm0D/uXB7kmXZ5LOgN0O7ayvEQ57nKtssCbMqDA5i9+YulLIsVQ5MzKnwqCz6Phev3AIcxhy5K3x/A/DbG2CzIdctP9RS9PrxnTU92KOYll8bZHqs7Wk5AcY9hIx9kuyN3/xuxm5nXA+df+cNJSAgjMbiFSoAAAAASUVORK5CYII=);
+  }
+  
+  .menu-hdr {
+          white-space           : nowrap;
+          align-items           : center;
+          border                : 1px solid lightgray;
+          box-sizing            : border-box;
+          border-radius         : 5px;
+          position              : relative;
+          cursor                : pointer;
+          display               : inline-flex;
+          margin-right          : 10px;
+          padding               : 0px 10px;
+          height                : 30px;
+  }
+  
+  .menu {
+          border                : 3px solid cyan;
+          border-radius         : 7px;
+          box-shadow            : rgba(0, 0, 250, 0.5) 0px 13px 45px -10px;
+          background            : whitesmoke;
+          box-sizing            : border-box;
+          padding               : 10px;
+          outline               : none;
+  }
+  
+  .menu-title {
+          text-align            : center;
+          background            : rgb(13,152,186);
+          margin-bottom         : 10px;
+          padding               : 3px;
+          color                 : white;
+          font-weight           : bold;
+  }
+  
+  .menu-opt {
+          white-space           : nowrap;
+          cursor                : pointer;
+          margin-bottom         : 10px;
+          display               : flex;
+          justify-content       : space-between;
+          align-items           : center;
+          padding               : 5px 10px;
+  }
+  
+  .menu-sep {
+          margin                : 10px 0;
+          border-top            : 1px solid lightgray;
+  }
                                 
           `;
-          obj.css     = css;
           
-          obj.add.style=function(par){    //d
+          obj.css     = css;
+
+
+  //:
+  
+  
+          obj.add.style   = function(par){    //d
 
                 par                 = par||document.head;
                 var style           = document.createElement('style');
@@ -764,3 +789,8 @@
           return obj;
           
 }//menumodmod
+
+
+
+
+
