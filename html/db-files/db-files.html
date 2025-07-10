@@ -250,7 +250,7 @@ mod['db-files']   = function(){
               file.icon       = icon.src;
               
               file.abs        = abs;
-              debugger;
+              
               obj.load.complete(file,blob);
               
         }//dblclick
@@ -346,9 +346,9 @@ mod['db-files']   = function(){
                     return false;
               }
               
-              var file    = await db.open(file.abs);
-              var blob    = await file.read();
-              file.close();
+              var fs      = await db.open(file.abs);
+              var blob    = await fs.read();
+              fs.close();
               return blob;
               
         }//load
@@ -358,8 +358,8 @@ mod['db-files']   = function(){
         
         async function save(file,blob){
 
-              var file    = await db.open(file.abs);
-              await file.write(blob);
+              var fs    = await db.open(file.abs);
+              await fs.write(blob);
               
               obj.save.complete(file);
               
