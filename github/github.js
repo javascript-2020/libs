@@ -250,7 +250,7 @@
               if(datatype(blob)=='string'){
                     b64       = window.btoa(blob);
               }else{
-                    b64       = blob_b64(blob);
+                    b64       = await blob_b64(blob);
               }
               
               
