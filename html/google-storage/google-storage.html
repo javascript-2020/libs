@@ -344,7 +344,13 @@ mod['google-storage']   = function(){
               var path      = $(shadow,'#path').value;
               var abs       = bucket+path;
               
-              var blob      = await gs.load(token,abs);
+              var result    = await gs.load(token,abs);
+              if(result.error){
+                    log.error(result.error);
+                    return;
+              }
+              var blob    = result.ok;
+              
               var txt       = await blob.text();
               console.log(txt);
               
