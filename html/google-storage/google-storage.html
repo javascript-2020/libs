@@ -5,16 +5,135 @@
       <template shadowrootmode=open>
       
             <style>
-            
+
+  :host 
+    {font-family:arial}
+  
+  #icon
+    {}
+  .menu
+    {}
+
+  section
+    {margin-bottom:10px}          
+
+  .hldr
+    {display:flex}
+  
+  .paste
+    {margin-right:5px;padding:2px;
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAVlJREFUSEvtlj1ug0AQhcdIW6RLeiQy6XKElLRIlOlp6LmBlRsgtzTUOQAtcZMzpMpInAGlQSjRWl7LxrM/dlhZUbwtu/PNvH07zAIutBYX4oIzGBG/95MkIuezXHFOh6MoegqC4F0GEELAMAybWL+BG8GI+AwArypjRFTAgyLOSeAIHIbhjRDii5NHgcdxhK7rWHu4JnEEnt6ljK6AUxIRcfAPInq0mVYL/lwSrNa3UL7d2WKA3CvXw8vuKqzeMYKtxMmGK9ik2FVq+XQ2rVE5VSeXMpLNgLp3fZbUrlCVFAc/GaygbdvaioU4jrU9/W+CVUVc6U3TQJIkfio2geVV/C+pi6KAsiz9SN33PaRpyrrbu9R1XbPgLMv83bHJXHmeQ1VVp0tt6w6zN5DtqHMwynJJeAGbqkVEOefc2xTZ/+7Uq10CcgOh7pzz38kFPMce6zQ4B4SL8QNf7+YfCGbtNAAAAABJRU5ErkJggg==);
+    }
+
+
+  #btns
+    {display:flex;justify-content:center;gap:25px}
+  [value=save]
+    {margin-right:20px}
+  
+  input
+    {font-size:16px;padding:5px 10px;box-sizing:border-box;}
+  input:not([type])
+    {flex:1}
+  input[type=button]
+    {cursor:pointer}
+  
+  #url
+    {margin-right:10px}
+                  
+   
+    
             </style>
             
-            
+            <img id=icon src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAcCAMAAABBJv+bAAAAnFBMVEVHcExLhu1Iiv1Gg+tFh/dLiPBGhvVOie9HhfFHifpRjvZFhvVWju9Jh/JBe91EhvZHhfJGh/ZGftxGguZLivlDfuBklutJiPJCe9tFhPBEhvhDh/xAe+BEhvpDhvpEhfVAe91Gg+xFhfNCfuVol+hBhPf///89eeB8q/mNsu96pOz1+P7t8v3l7fxonPVOjPX9/v9Kg+O0zPSmwvFMf2AYAAAAGXRSTlMAV3f52CzEHZFsEe0JQfH1r6NXeDa0A2HJgki6rgAAARlJREFUKM9t09lygjAUgOFQA4QtLCrIVopAbctW7fu/W8lKRP4rPN8MTjIHAFi69aZk6eApD+ZPQU9V28g3GbbCSbnl0lrVhO/bSmhKRuVrORJ6crKdnBNTN9zTrAxcypq/y5mvsUPxn52MD+jhrIo+V/OXbOaj5XA6rGjdNPzSxscwdWwGdRBWgnvJbXNlwxD4nKv5R3YvmpTOfOBcefO37F4sTmYOQFzTqf+kjX9De+OOgGkIHnra+BgJEyf3nqSsuZUtLydeJ+ROA+5pc+MVrDO5lthzpBdqmG1MjFLpH0oo5msIBdeKY7mOR6GqH4XGtlHLhF/WZQLaYes4UjbVDVauC8JnV1103TisNRhfNp+JqSlFkfjjfwPaSL8f/MANAAAAAElFTkSuQmCC'>
       
+            <div class=menu style='display:none'>
+            
+                  <div class=menu-title>
+                        google cloud storage
+                  </div>
+                  
+                  <section id=token-root>
+                  
+                        <div>
+                              token
+                        </div>
+                        
+                        <div class=hldr>
+                            <img class='paste icon'>
+                            <img class='storage icon'>
+                            <input id=token autocomplete=off spellcheck=false>
+                            <img class='copy icon'>
+                        </div>
+                        
+                  </section>
+  
+                  <div class=menu-sep></div>
+                  
+                  <section id=url-root>
+                  
+                      <div>
+                            parse url
+                      </div>
+                      
+                      <div class=hldr>
+                          <img class='paste icon'>
+                          <input id=url autocomplete=off spellcheck=false>
+                          <input type=button value=parse>
+                          <input type=button value='+'>
+                      </div>
+                      
+                  </section>
+                  
+                  <div class=menu-sep></div>
+  
+                  
+                  <section id=bucket-root>
+                  
+                        <div>
+                              bucket name
+                        </div>
+                        
+                        <div class=hldr>
+                            <img class='paste icon'>
+                            <input id=bucket autocomplete=off spellcheck=false>
+                        </div>
+                        
+                  </section>
+  
+  
+                  <section id=path-root>
+                  
+                        <div>
+                              path
+                        </div>
+                        
+                        <div class=hldr>
+                            <img class='icon paste'>
+                            <input id=path autocomplete=off spellcheck=false>
+                        </div>
+                        
+                  </section>
+                  
+                  
+                  <div id=btns>
+                        <input value=load type=button>
+                        <input value=save type=button>
+                        <input value=backup type=button>
+                  </div>
+                
+                  
+            </div>
+            
       </template>
       
       
       <script>
       
+
+
+
+
 mod['google-storage']   = function(){
   
   var obj   = {
@@ -23,21 +142,31 @@ mod['google-storage']   = function(){
   
         var df    = true;
                                                                                 debug(obj.version);
-        var $
+        var ext,$
         ;
   
         obj.initmod   = function(params){
           
-              $       = params.$;
+              ext           = params.ext;
+              $             = params.$;
               
         }//initmod
         
         
   //vars:-
   
+        var gs;
+        var localstorage_name   = 'google-storage';
+
   
         var root;
         var shadow;
+        var ui                  = {};
+        
+        
+
+
+        var btn   = {};
         
         
   //:
@@ -45,8 +174,15 @@ mod['google-storage']   = function(){
   
         obj.init    = function(){
         }//init
+
         
+        async function libs(){
+          
+              [gs]    = await ext.load.libs('google/google-storage/google-storage.js.api');
+              
+        }//libs
         
+
   //:
   
   
@@ -55,9 +191,134 @@ mod['google-storage']   = function(){
               root                      = $.$(rootnode,'google-storage');
               shadow                    = root.shadowRoot;
               
+              menumod.add.style(shadow);
+              menumod.input.norm();
+
+
+
+              $.all(shadow,'.paste').forEach(icon=>{
+              
+                    icon.onclick    = async e=>{
+                                            
+                                            var txt       = await navigator.clipboard.readText();
+                                            var par       = icon.parentNode;
+                                            var input     = $(par,'input:not([type])');
+                                            input.value   = txt;
+                                            input.focus();
+                                            
+                                      }//paste.icon.onclick
+                                      
+              });
+
+
+            //token
+
+              var root2   = $(shadow,'#token-root');
+              
+              /*
+              $(root2,'.paste').onclick   = async e=>{
+                                            
+                                                  var txt       = await navigator.clipboard.readText();
+                                                  var par       = icon.parentNode;
+                                                  var input     = $(par,'input:not([type])');
+                                                  input.value   = txt;
+                                                  
+                                                  if(e.ctrlKey){
+                                                        btn.parse();
+                                                        btn.load(e);
+                                                  }
+                                                  
+                                            };
+              */
+                                          
+              var token                   = window.localStorage[localstorage_name];
+              $(shadow,'#token').value    = token||'';
+              
+              $(root2,'.copy').onclick   = async e=>{
+              
+                                                  var icon    = e.target;
+                                                  var input   = $(icon.parentNode,'input:not([type])');
+                                                  var txt     = input.value;
+                                                  await navigator.clipboard.writeText(txt);
+                                                  $.mousetext(e,'copied');
+                                                  
+                                            }//copy.onclick
+                                          
+              $(root2,'.storage').onclick    = async e=>{
+                                                    
+                                                      var icon      = e.target;
+                                                      var input     = $(icon.parentNode,'input:not([type])');
+                                                      
+                                                      if(e.shiftKey){
+                                                            var token   = input.value;
+                                                            if(!token){
+                                                                  $.mousetext('no token');
+                                                                  return;
+                                                            }
+                                                            localStorage.setItem(localstorage_name,token);
+                                                            $.mousetext(e,`localStorage['${localstorage_name}'] saved`);
+                                                            return;
+                                                      }
+                                                      
+                                                      var token   = localStorage.getItem(localstorage_name);
+                                                      if(!token){
+                                                            $.mousetext(`no stored token, localStorage['${localstorage_name}']`);
+                                                            return;
+                                                      }
+                                                      input.value   = token;
+                                                      
+                                                }//storage.onclick
+            
+              
+            //url
+            
+              $(shadow,'[value=parse]').onclick   = btn.parse;
+              $(shadow,'[value="+"]').onclick     = btn.parse.load;
+              
+            
+            //bucket
+            
+            
+            //path
+            
+            
+              
+            //btns
+            
+              $(shadow,'[value=load]').onclick        = btn.load;
+              $(shadow,'[value=save]').onclick        = btn.save;
+              $(shadow,'[value=backup]').onclick      = btn.backup;
+              
               
         }//initdom
         
+
+  //:
+  
+  
+        btn.parse   = function(){
+        }//parse
+        
+        
+        btn.parse.load    = function(){
+        }//load
+
+
+        btn.load    = function(){
+        }//load
+        
+        
+        btn.save    = function(){
+        }//save
+        
+        
+        btn.backup    = function(){
+        }//backup
+
+
+
+  
+
 
 
   //:
