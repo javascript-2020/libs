@@ -36,7 +36,7 @@ function mod(){
               }
               
               if(url.indexOf('storage.googleapis.com')!=-1){
-                    ({bucket,path}    = parse.googleapis(url);
+                    ({bucket,path}    = parse.googleapis(url));
               }
               
               return {bucket,path};
