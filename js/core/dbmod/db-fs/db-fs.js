@@ -26,14 +26,14 @@
               var req               = window.indexedDB.open(path,1);
               
               req.onsuccess         = e=>{
-                                                                                            obj.df && console.log('db.open.onsuccess',path);
+                                                                                            debug('db.open.onsuccess',path);
                                             db   = req.result;
                                             resolve(fs);
                                             
                                       }//onsuccess
                                       
               req.onupgradeneeded   = e=>{
-                                                                                            obj.df && console.log('db.open.onupgradeneeded',path);
+                                                                                            debug('db.open.onupgradeneeded',path);
                                             db          = req.result;
                                             var store   = db.createObjectStore(path,{keyPath:'key'});
                                             
@@ -146,9 +146,9 @@
               prefix    ||= '';
               var names   = [];
               var list    = await window.indexedDB.databases();
-                                                                                df && console.log('===  list databases  ===');
+                                                                                df && debug('===  list databases  ===');
               if(list.length==0){
-                                                                                df && console.log('no databases');
+                                                                                df && debug('no databases');
               }
               
               list.forEach((db,i)=>{
@@ -160,7 +160,7 @@
                     if(f){
                           names.push(db.name);
                     }
-                                                                                df && console.log(i,db.name,db.version);
+                                                                                df && debug(i,db.name,db.version);
                     
               });
               
@@ -180,6 +180,16 @@
         }//exists
   
 
+  //:
+  
+  
+        function debug(){
+        
+              if(!obj.df)return;
+              var str   = [...arguments].join(' ');
+              console.log('[ db-fs ]',str);
+              
+        }//debug
 
       
   return obj;
