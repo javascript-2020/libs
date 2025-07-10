@@ -30,7 +30,7 @@
               
               googlestorage   = mod['google-storage']();
               
-              googlestorage.initmod({ext,$,menumod});
+              googlestorage.initmod({ext,$,menumod,source});
               googlestorage.load.complete   = complete.load;
               googlestorage.save.complete   = complete.save;
               googlestorage.init();
@@ -157,6 +157,15 @@
               alert(file.filename+' saved');
               
         }//save
+
+
+
+        function source(){
+          
+              var blob    = new Blob(['helloworld']);
+              return blob;
+              
+        }//source
 
 
 
