@@ -311,7 +311,7 @@ mod['google-storage']   = function(){
   //:
   
   
-        btn.parse   = function(){debugger;
+        btn.parse   = function(){
           
               var url                     = $(shadow,'#url').value;
               var {bucket,path}           = gs.parse(url);
@@ -329,12 +329,14 @@ mod['google-storage']   = function(){
         }//load
 
 
-        btn.load    = async function(){
+        btn.load    = async function(){debugger;
           
               var token     = $(shadow,'#token').value;
+              
               var bucket    = $(shadow,'#bucket').value;
               var path      = $(shadow,'#path').value;
               var abs       = bucket+path;
+              
               var blob      = await gs.load(token,abs);
               var txt       = await blob.text();
               console.log(txt);
