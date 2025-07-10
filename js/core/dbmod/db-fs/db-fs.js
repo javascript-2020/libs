@@ -45,12 +45,15 @@
                                                                                             console.error(e);
                                                                                             console.error(req.error);
                                       }//onerror
+
                                       
-              var file      = {};
-              file.read     = ()=>read(path,db);
-              file.write    = data=>write(path,db,data);
-              file.delete   = ()=>del(path,db);
-              file.close    = ()=>close(db);
+              var fs            = {};
+              fs.read           = ()=>read(path,db);
+              fs.write          = data=>write(path,db,data);
+              fs.write.str      = str=>write.str(path,db,str);
+              fs.delete         = ()=>del(path,db);
+              fs.close          = ()=>close(db);
+
               
               return promise;
 
