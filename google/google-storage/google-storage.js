@@ -126,7 +126,7 @@ curl -X GET \
               var i             = path.indexOf('/');
               var bucket        = path.slice(0,i);
               
-              path              = path.slice(i+1);
+              path              = path.slice(i);
               
               var i             = path.lastIndexOf('/');
               var filename      = path.slice(i+1);
