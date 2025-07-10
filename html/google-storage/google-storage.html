@@ -150,7 +150,7 @@ mod['google-storage']   = function(){
   
         var df    = true;
                                                                                 debug(obj.version);
-        var ext,$,menumod
+        var ext,$,menumod,source
         ;
   
         obj.initmod   = function(params){
@@ -158,6 +158,7 @@ mod['google-storage']   = function(){
               ext           = params.ext;
               $             = params.$;
               menumod       = params.menumod;
+              source        = params.source;
               
         }//initmod
         
@@ -362,7 +363,7 @@ mod['google-storage']   = function(){
         }//load
         
         
-        btn.save    = function(){
+        btn.save    = async function(){
 
               var token       = $(shadow,'#token').value;
               
@@ -384,7 +385,7 @@ mod['google-storage']   = function(){
               file.abs        = abs;
 
 
-              var blob;
+              var blob        = await source(file);
               save(file,blob);
               
         }//save
