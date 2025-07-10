@@ -697,7 +697,57 @@
           }//style
           
           
+          obj.input.norm    = function(root){
+          
+                var list    = $.all(root,'input:not([type])');
+                list.forEach((input,i)=>{
+                
+                      input.addEventListener('keydown',keydown);
+                      input.onfocus   = e=>input.select();
+                      
+                      function keydown(e){
+                      
+                            if(e.key=='ArrowDown'){
+                                  e.stopPropagation();
+                                  i++;
+                                  if(i==list.length){
+                                        i   = 0;
+                                  }
+                                  var input2    = list[i];
+                                  input2.focus();
+                            }
+                            if(e.key=='ArrowUp'){
+                                  e.stopPropagation();
+                                  i--;
+                                  if(i<0){
+                                        i   = list.length-1;
+                                  }
+                                  var input2    = list[i];
+                                  input2.focus();
+                            }
+                            if(e.key=='ArrowLeft'){
+                                  if(e.ctrlKey){
+                                        //debugger;
+                                        e.stopPropagation();
+                                        prev();
+                                  }
+                            }
+                            if(e.key=='ArrowRight'){
+                                  if(e.ctrlKey){
+                                        e.stopPropagation();
+                                        next();
+                                  }
+                            }
+                            
+                      }//keydown
+                      
+                });
+              
+          }//norm
+          
+          
   //:          
+
           
           function debug(){
           
