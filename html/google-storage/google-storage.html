@@ -162,6 +162,7 @@ mod['google-storage']   = function(){
   
         var root;
         var shadow;
+        var icon;
         var ui                  = {};
         var menu                = {};
         
@@ -194,9 +195,10 @@ mod['google-storage']   = function(){
               shadow                    = root.shadowRoot;
               
               menumod.add.style(shadow);
-              menumod.input.norm();
               
               menu.root                       = $(shadow,'.menu');
+              menumod.input.norm(menu.root);
+              
               icon                            = $(shadow,'#icon');
               icon.onclick                    = menumod.click(menu.root,'both',true,menu.callback);
               
