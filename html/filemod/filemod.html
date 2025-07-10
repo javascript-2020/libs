@@ -185,19 +185,20 @@ function filemod(){
                     return;
               }
               
-              var txt   = editor.getValue();
+              var txt     = editor.getValue();
+              var blob    = new Blob([txt]);
               
               if(cur.type=='github'){
-                    await github.save(cur,txt);
+                    await github.save(cur,blob);
               }
               if(cur.type=='localfile'){
-                    await localfile.save(cur,txt);
+                    await localfile.save(cur,blob);
               }
               if(cur.type=='https-file'){
-                    await httpsfile.save(cur,txt);
+                    await httpsfile.save(cur,blob);
               }
               if(cur.type=='db-files'){
-                    await dbfiles.save(cur,txt);
+                    await dbfiles.save(cur,blob);
               }
         
         }//save
