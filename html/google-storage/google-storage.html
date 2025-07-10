@@ -45,7 +45,7 @@
     
             </style>
             
-            <img id=icon src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAcCAMAAABBJv+bAAAAnFBMVEVHcExLhu1Iiv1Gg+tFh/dLiPBGhvVOie9HhfFHifpRjvZFhvVWju9Jh/JBe91EhvZHhfJGh/ZGftxGguZLivlDfuBklutJiPJCe9tFhPBEhvhDh/xAe+BEhvpDhvpEhfVAe91Gg+xFhfNCfuVol+hBhPf///89eeB8q/mNsu96pOz1+P7t8v3l7fxonPVOjPX9/v9Kg+O0zPSmwvFMf2AYAAAAGXRSTlMAV3f52CzEHZFsEe0JQfH1r6NXeDa0A2HJgki6rgAAARlJREFUKM9t09lygjAUgOFQA4QtLCrIVopAbctW7fu/W8lKRP4rPN8MTjIHAFi69aZk6eApD+ZPQU9V28g3GbbCSbnl0lrVhO/bSmhKRuVrORJ6crKdnBNTN9zTrAxcypq/y5mvsUPxn52MD+jhrIo+V/OXbOaj5XA6rGjdNPzSxscwdWwGdRBWgnvJbXNlwxD4nKv5R3YvmpTOfOBcefO37F4sTmYOQFzTqf+kjX9De+OOgGkIHnra+BgJEyf3nqSsuZUtLydeJ+ROA+5pc+MVrDO5lthzpBdqmG1MjFLpH0oo5msIBdeKY7mOR6GqH4XGtlHLhF/WZQLaYes4UjbVDVauC8JnV1103TisNRhfNp+JqSlFkfjjfwPaSL8f/MANAAAAAElFTkSuQmCC'>
+            <img class=icon src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAcCAMAAABBJv+bAAAAnFBMVEVHcExLhu1Iiv1Gg+tFh/dLiPBGhvVOie9HhfFHifpRjvZFhvVWju9Jh/JBe91EhvZHhfJGh/ZGftxGguZLivlDfuBklutJiPJCe9tFhPBEhvhDh/xAe+BEhvpDhvpEhfVAe91Gg+xFhfNCfuVol+hBhPf///89eeB8q/mNsu96pOz1+P7t8v3l7fxonPVOjPX9/v9Kg+O0zPSmwvFMf2AYAAAAGXRSTlMAV3f52CzEHZFsEe0JQfH1r6NXeDa0A2HJgki6rgAAARlJREFUKM9t09lygjAUgOFQA4QtLCrIVopAbctW7fu/W8lKRP4rPN8MTjIHAFi69aZk6eApD+ZPQU9V28g3GbbCSbnl0lrVhO/bSmhKRuVrORJ6crKdnBNTN9zTrAxcypq/y5mvsUPxn52MD+jhrIo+V/OXbOaj5XA6rGjdNPzSxscwdWwGdRBWgnvJbXNlwxD4nKv5R3YvmpTOfOBcefO37F4sTmYOQFzTqf+kjX9De+OOgGkIHnra+BgJEyf3nqSsuZUtLydeJ+ROA+5pc+MVrDO5lthzpBdqmG1MjFLpH0oo5msIBdeKY7mOR6GqH4XGtlHLhF/WZQLaYes4UjbVDVauC8JnV1103TisNRhfNp+JqSlFkfjjfwPaSL8f/MANAAAAAElFTkSuQmCC'>
       
             <div class=menu style='display:none'>
             
@@ -206,7 +206,7 @@ mod['google-storage']   = function(){
               menu.root                       = $(shadow,'.menu');
               menumod.input.norm(menu.root);
               
-              icon                            = $(shadow,'#icon');
+              icon                            = $(shadow,'.icon');
               icon.onclick                    = menumod.click(menu.root,'both',true,menu.callback);
               
 
