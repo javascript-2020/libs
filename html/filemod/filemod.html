@@ -66,7 +66,7 @@ function filemod(){
   ;
                                                                                 debug(obj.version);
                                                                                 
-        var menumod,complete,editor,par_init,ext
+        var menumod,complete,editor,ext,source
         ;
           
         obj.initmod   = function(params){
@@ -75,6 +75,7 @@ function filemod(){
               editor          = params.editor;
               ext             = params.ext;
               complete        = params.complete;
+              source          = params.source;
               
         }//initmod
 
@@ -176,13 +177,16 @@ function filemod(){
         btn.save    = function(e){save()}
           
           
-        obj.save    = function(){return save()}
+        obj.save    = function(file){return save(file)}
           
-        async function save(){
+        async function save(file){
         
-              if(!cur){
-                    log.orange('no file');
-                    return;
+              if(!file){
+                    if(!cur){
+                          log.orange('no file');
+                          return;
+                    }
+                    file    = cur;
               }
               
               var txt     = editor.getValue();
