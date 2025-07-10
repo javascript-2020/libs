@@ -88,10 +88,10 @@
               for(var i=0;i<n;i++){
               
                     index   = url.indexOf('/',index);
+                    ct++;
                     if(ct==n){
                           return index;
                     }
-                    ct++;
                     
               }//for
               
