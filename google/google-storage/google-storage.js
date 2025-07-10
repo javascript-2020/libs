@@ -46,8 +46,8 @@
         
         parse.console   = function(url){
         
-              var bucket    = parse.slash(url,5);
-              var i1        = parse.slash.index(url,6);
+              var bucket    = parse.slash(url,6);
+              var i1        = parse.slash.index(url,7);
               var i2        = url.indexOf(';');
               var path      = url.slice(i1,i2);
               return {bucket,path};
@@ -68,6 +68,7 @@
         parse.slash   = function(url,start,num=1){
         
               var i1    = parse.slash.index(url,start);
+              i1       += 1;
               var i2    = parse.slash.index(url,start+num);
               if(i2==-1){
                     i2    = url.length;
