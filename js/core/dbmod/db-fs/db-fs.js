@@ -28,7 +28,7 @@
               req.onsuccess         = e=>{
                                                                                             obj.df && console.log('db.open.onsuccess',path);
                                             db   = req.result;
-                                            resolve(file);
+                                            resolve(fs);
                                             
                                       }//onsuccess
                                       
@@ -36,7 +36,6 @@
                                                                                             obj.df && console.log('db.open.onupgradeneeded',path);
                                             db          = req.result;
                                             var store   = db.createObjectStore(path,{keyPath:'key'});
-                                            //resolve(file);
                                             
                                       }//onupgradeneeded
                                       
