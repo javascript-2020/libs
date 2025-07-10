@@ -31,7 +31,8 @@
               googlestorage   = mod['google-storage']();
               
               googlestorage.initmod({ext,$,menumod});
-              
+              googlestorage.load.complete   = complete.load;
+              googlestorage.save.complete   = complete.save;
               googlestorage.init();
               
 
@@ -136,6 +137,30 @@
         }//initdom
         
         
+
+        
+        function complete(){
+          
+        }//complete
+        
+        
+        complete.load   = async function(file,blob){
+          
+              var txt   = await blob.text();
+              alert(txt);
+              
+        }//load
+        
+        
+        complete.save   = function(file){
+          
+              alert(file.filename+' saved');
+              
+        }//save
+
+
+
+
         
         init.stack.complete;
         
