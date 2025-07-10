@@ -197,8 +197,9 @@ mod['db-files']   = function(){
                                                                                 console.log('db-files.file.add',path+name);
               var abs     = prefix+path+name;
                                                                                 console.log(abs);
-              var file    = await db.open(abs);
-              file.close();
+              var fs      = await db.open(abs);
+              fs.write.str('');
+              fs.close();
               return false;
               
         }//add
@@ -241,6 +242,7 @@ mod['db-files']   = function(){
               var abs     = prefix+path+name;
               var file    = await db.open(abs);
               var blob    = await file.read();
+              if(
               file.close();
               
               var file        = {};
