@@ -85,6 +85,15 @@
         }//write
         
         
+        write.str   = function(path,db,str){
+        
+              var blob      = new Blob([str]);
+              var result    = write(path,db,blob);
+              return result;
+              
+        }//str
+        
+        
         function close(db){
         
               if(!db){
