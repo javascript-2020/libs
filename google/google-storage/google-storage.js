@@ -131,7 +131,7 @@ curl -X GET \
               var i             = path.lastIndexOf('/');
               var filename      = path.slice(i+1);
               
-              var url           = `https://storage.googleapis.com/storage/v1/b/${bucket}/o/${path}?alt=media`;
+              var url           = `https://storage.googleapis.com/storage/v1/b/${bucket}/o${path}?alt=media`;
               var headers       = {authorization:`Bearer ${token}`};
               
               var err;
