@@ -315,7 +315,19 @@ mod['db-files']   = function(){
         
         
         dir.read    = read;
+
         
+        dir.dblclick    = function(path,name){
+                                                                                debug('dir.dblclick',path,name);
+              read(path+name);
+              return false;
+              
+        }//dblclick
+        
+
+  //:
+  
+  
         async function read(path='tmp/'){
                                                                                 debug('dir.read',path);
               var len       = prefix.length+path.length;
@@ -334,7 +346,9 @@ mod['db-files']   = function(){
                           files.push(fn);
                     }else{
                           fn    = abs.slice(len,i);
-                          dirs.push(fn);
+                          if(dirs.indexOf(fn)==-1){
+                                dirs.push(fn);
+                          }
                     }
                     
               });
@@ -344,15 +358,7 @@ mod['db-files']   = function(){
           
         }//read
 
-
-        dir.dblclick    = function(path,name){
-                                                                                debug('dir.dblclick',path,name);
-              read(path+name);
-              return false;
-              
-        }//dblclick
-        
-        
+  
   //:
   
         
