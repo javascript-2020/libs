@@ -405,7 +405,7 @@ mod['google-storage']   = function(){
   
         obj.load    = load;
         
-        function load(file){
+        async function load(file){
           
               var token       = $(shadow,'#token').value;
 
@@ -426,7 +426,7 @@ mod['google-storage']   = function(){
         
         obj.save    = save;
         
-        function save(file,blob){
+        async function save(file,blob){
 
               var token       = $(shadow,'#token').value;
               
