@@ -83,19 +83,21 @@
 
               var index   = 0;
               var ct      = 0;
-              var i1;
+              var ec      = 0;
               
-              for(var i=0;i<n;i++){
+              while(ec==0){
               
                     index   = url.indexOf('/',index);
+                    if(index==-1){
+                          return -1;
+                    }
+                    
                     ct++;
                     if(ct==n){
                           return index;
                     }
                     
-              }//for
-              
-              return -1;
+              }//while
               
         }//index
         
