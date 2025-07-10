@@ -338,7 +338,18 @@ mod['db-files']   = function(){
               return false;
           
         }//read
+
+
+        dir.dblclick    = function(path,name){
+          
+              read(path+name);
+              return false;
+              
+        }//dblclick
         
+        
+  //:
+  
         
         obj.load    = async function(file){
           
