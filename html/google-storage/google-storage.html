@@ -10,7 +10,7 @@
     {font-family:arial}
   
   #icon
-    {}
+    {cursor:pointer}
   .menu
     {}
 
@@ -195,6 +195,9 @@ mod['google-storage']   = function(){
               shadow                          = root.shadowRoot;
               
               menumod.add.style(shadow);
+              
+              var style                       = $(shadow,'style');
+              $.stylesheet.insert(style,'.icon');
               
               menu.root                       = $(shadow,'.menu');
               menumod.input.norm(menu.root);
