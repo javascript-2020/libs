@@ -112,7 +112,7 @@ mod.httpsfile   = function(){
         version   : 'v1.0'
   };
       
-        var df=obj.df=true
+        var df=true
         ;
                                                                                 debug(obj.version);
         var menumod,editor,$,datatype
@@ -151,8 +151,11 @@ mod.httpsfile   = function(){
         var file        = {};
         var dir         = {};
 
-  
-  //
+
+        Object.defineProperty(obj,'df',{get:()=>df,set:value=>df=value});
+        
+        
+  //:
 
   
         obj.init    = function(){
