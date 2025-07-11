@@ -20,8 +20,8 @@
   google-storage
     {}
     
-  #save
-    {}
+  #save-root
+    {margin-left:5px}
   
   .menu
     {position:absolute;left:0;top:30px}
@@ -50,12 +50,13 @@
                         <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
                   </google-storage>
                   
-                  <button id=save>save</button>
-                  
-                  <div class=menu-root>
-                        <img class=menu-icon>
-                        <div class=menu style='display:none'>
-                              <checkbox-one id=autosave></checkbox-one>
+                  <div id=save-root>
+                        <button id=save>save</button>
+                        <div class=menu-root>
+                              <img class=menu-icon>
+                              <div class=menu style='display:none'>
+                                    <checkbox-one id=autosave></checkbox-one>
+                              </div>
                         </div>
                   </div>
                   
