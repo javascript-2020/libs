@@ -216,6 +216,25 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         
         }//save
         
+
+
+        obj.refresh   = refresh;
+        
+        async function refresh(client_id,client_secret,refresh_token){
+        
+              var headers   = {'content-type':'application/x-www-form-urlencoded'};
+              var body      = new URLSearchParams({client_id,client_secret,refresh_token,grant_type:'refresh_token'});
+              var url       = 'https://oauth2.googleapis.com/token'
+              var res       = await fetch(url,{method:'post',headers,body});
+              var json      = await res.json();            
+                                                                                console.json(json);
+              var token     = json.access_token;
+              return token;
+              
+        }//refresh
+
+
+
         
   //:
   
