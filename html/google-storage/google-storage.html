@@ -269,7 +269,7 @@ mod['google-storage']   = function(){
 
               $.all(shadow,'.copy').forEach(icon=>{
                 
-                    var root        = icon.parentNode;
+                    var root        = icon.parentNode.parentNode;
                     var input       = $(root,'input:not([type])');
                     icon.onclick    = async e=>{
                       
@@ -284,7 +284,7 @@ mod['google-storage']   = function(){
 
               $.all(shadow,'.storage').forEach(icon=>{
                 
-                    var root    = icon.parentNode;
+                    var root    = icon.parentNode.parentNode;
                     var key     = root.id.slice(0,-5);
                     var input   = $(root,'input:not([type])');
                     var name    = localstorage+key;
