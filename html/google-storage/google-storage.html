@@ -254,15 +254,15 @@ mod['google-storage']   = function(){
 
               $.all(shadow,'.paste').forEach(icon=>{
               
-                    var par         = icon.parentNode;
-                    var input       = $(par,'input:not([type])');
+                    var root        = icon.parentNode.parentNode
+                    var input       = $(root,'input:not([type])');
                     icon.onclick    = async e=>{
                                             
                                             var txt       = await navigator.clipboard.readText();
                                             input.value   = txt;
                                             input.focus();
                                             
-                                      }//paste.icon.onclick
+                                      }//icon.onclick
                                       
               });//foreach
 
