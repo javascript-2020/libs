@@ -198,7 +198,7 @@ mod['google-storage']   = function(){
   //vars:-
   
         var gs;
-        var localstorage_name   = 'google-storage';
+        var localstorage    = 'google-storage-';
 
   
         var root;
@@ -254,24 +254,89 @@ mod['google-storage']   = function(){
 
               $.all(shadow,'.paste').forEach(icon=>{
               
+                    var par         = icon.parentNode;
+                    var input       = $(par,'input:not([type])');
                     icon.onclick    = async e=>{
                                             
                                             var txt       = await navigator.clipboard.readText();
-                                            var par       = icon.parentNode;
-                                            var input     = $(par,'input:not([type])');
                                             input.value   = txt;
                                             input.focus();
                                             
                                       }//paste.icon.onclick
                                       
-              });
+              });//foreach
+
+
+              $.all(shadow,'.copy').forEach(icon=>{
+                
+                    var root        = icon.parentNode;
+                    var input       = $(root,'input:not([type])');
+                    icon.onclick    = async e=>{
+                      
+                                            var txt   = input.value;
+                                            await navigator.clipboard.writeText(txt);
+                                            input.focus();
+                                            
+                                      }//icon.onclick
+                                      
+              });//foreach              
+
+
+              $.all(shadow,'.storage').forEach(icon=>{
+                
+                    var root    = icon.parentNode;
+                    var key     = root.id.slice(0,-5);
+                    var input   = $(root,'input:not([type])');
+                    var name    = localstorage+key;
+                    var token;
+                    
+                    if(e.shiftKey){
+                          token   = localStorage[name];
+                          if(!token){
+                                $.mousetext(`no stored ${key}, localStorage[${name}]`);
+                                return;
+                          }
+                          input.value   = token;
+                          return;
+                    }
+                          
+                    token   = input.value;
+                    if(!token){
+                          $.mousetext(`${key} empty`);
+                          return;
+                    }
+                    localStorage[name]    = token;
+                    $.mousetext(`localStorage[${name}] saved`);
+                    
+              });//foreach
+                      
+
 
 
             //token
 
-              var root2   = $(shadow,'#token-root');
+              var token                           = window.localStorage[localstorage+'token'];
+              $(shadow,'#token').value            = token||'';
+
+
+            //client_id
+            
+              var clientid                        = window.localStorage[localstorage+'client-id'];
+              $(shadow,'#client-id').value        = clientid||'';
+
+
+            //client_secret
+            
+              var clientsecret                    = window.localStorage[localstorage+'client-secret'];
+              $(shadow,'#client-secret').value    = clientsecret||'';
+
+
               
-              /*
+
+
+              
+/*
+
               $(root2,'.paste').onclick   = async e=>{
                                             
                                                   var txt       = await navigator.clipboard.readText();
@@ -285,11 +350,10 @@ mod['google-storage']   = function(){
                                                   }
                                                   
                                             };
-              */
-                                          
-              var token                   = window.localStorage[localstorage_name];
-              $(shadow,'#token').value    = token||'';
-              
+                                            
+*/
+/*
+
               $(root2,'.copy').onclick   = async e=>{
               
                                                   var icon    = e.target;
@@ -299,16 +363,19 @@ mod['google-storage']   = function(){
                                                   $.mousetext(e,'copied');
                                                   
                                             }//copy.onclick
-                                          
-              $(root2,'.storage').onclick    = async e=>{
+                                            
+*/
+/*
+
+              $(root2,'.storage').onclick    = e=>{
                                                     
                                                       var icon      = e.target;
                                                       var input     = $(icon.parentNode,'input:not([type])');
                                                       
                                                       if(e.shiftKey){
-                                                            var token   = localStorage.getItem(localstorage_name);
+                                                            var token   = localStorage.getItem(localstorage+'token');
                                                             if(!token){
-                                                                  $.mousetext(`no stored token, localStorage['${localstorage_name}']`);
+                                                                  $.mousetext(`no stored token, localStorage['${localstorage+'token'}']`);
                                                                   return;
                                                             }
                                                             input.value   = token;
@@ -319,10 +386,21 @@ mod['google-storage']   = function(){
                                                             $.mousetext('no token');
                                                             return;
                                                       }
-                                                      localStorage.setItem(localstorage_name,token);
-                                                      $.mousetext(e,`localStorage['${localstorage_name}'] saved`);
+                                                      localStorage.setItem(localstorage+'token',token);
+                                                      $.mousetext(e,`localStorage['${localstorage+'token'}'] saved`);
                                                       
                                                 }//storage.onclick
+
+*/
+
+
+
+
+
+
+
+
+
             
               
             //url
