@@ -290,23 +290,27 @@ mod['google-storage']   = function(){
                     var name    = localstorage+key;
                     var token;
                     
-                    if(e.shiftKey){
-                          token   = localStorage[name];
-                          if(!token){
-                                $.mousetext(`no stored ${key}, localStorage[${name}]`);
-                                return;
-                          }
-                          input.value   = token;
-                          return;
-                    }
-                          
-                    token   = input.value;
-                    if(!token){
-                          $.mousetext(`${key} empty`);
-                          return;
-                    }
-                    localStorage[name]    = token;
-                    $.mousetext(`localStorage[${name}] saved`);
+                    icon.onclick    = e=>{
+                      
+                                            if(e.shiftKey){
+                                                  token   = localStorage[name];
+                                                  if(!token){
+                                                        $.mousetext(`no stored ${key}, localStorage[${name}]`);
+                                                        return;
+                                                  }
+                                                  input.value   = token;
+                                                  return;
+                                            }
+                                                  
+                                            token   = input.value;
+                                            if(!token){
+                                                  $.mousetext(`${key} empty`);
+                                                  return;
+                                            }
+                                            localStorage[name]    = token;
+                                            $.mousetext(`localStorage[${name}] saved`);
+                                            
+                                      }//icon.onclick
                     
               });//foreach
                       
