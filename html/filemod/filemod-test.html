@@ -40,7 +40,7 @@
               menumod                   = menumod();
               menumod.on.close          = ()=>{};
               
-              filemod.initmod({ext,$,menumod});
+              filemod.initmod({ext,$,menumod,complete});
               
 
               filemod.init();
@@ -151,7 +151,15 @@
   
         function complete(){
         }//complete
+
         
+        complete.load   = function(file,blob){
+        }//complete.load
+        
+        
+        complete.save   = function(file){
+        }//save
+
         
         function source(){
           
