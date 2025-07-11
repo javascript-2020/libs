@@ -1,21 +1,40 @@
 
 
       <style>
-            html{height:100%}
-            body {height:calc(100% - 16px);font-family:arial}
+      
+  html
+    {height:100%}
+  body
+    {height:calc(100% - 16px);font-family:arial}
+  
+  .icon
+    {width:30px;height:30px;border:1px solid gray;border-radius:3px;box-sizing:border-box;cursor:pointer;}
+  button
+    {padding:5px 10px;cursor:pointer;height:30px;font-size:16px}            
             
-            .icon {width:30px;height:30px;border:1px solid gray;border-radius:3px;box-sizing:border-box;cursor:pointer;}
-            button {padding:5px 10px;cursor:pointer;height:30px;font-size:16px}            
       </style>
       
       <script init>
-                                                                          console.clear();
-                                                                          console.json=v=>console.log(JSON.stringify(v,null,4));
+                                                                                console.clear();
+                                                                                console.log('filemod-test');
+                                                                                console.log();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+        var mod   = {};
+        
         var filemod;
+
+
+        var ext,$,datatype,menumod,keydown
+        ;
         
         
         async function init(){
-                                                                      console.log('init');
+                                                                                console.log('init');
+
+
+              filemod   = mod.filemod();
+              
+              
               keydown.add(kd);
               
               menumod                   = menumod();
@@ -45,10 +64,8 @@
         }});
         
         
+
         init.stack.add;
-        
-        var ext;
-        var $,datatype,menumod,keydown;
         
         fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
           .then(res=>res.text().then(async txt=>{
