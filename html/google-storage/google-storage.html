@@ -360,6 +360,7 @@ mod['google-storage']   = function(){
 
             //token
 
+              var root2                           = $(shadow,'#token-root');
               var token                           = window.localStorage[localstorage+'token'];
               $(shadow,'#token').value            = token||'';
               $(root2,'.refresh').onclick         = btn.token.refresh;
