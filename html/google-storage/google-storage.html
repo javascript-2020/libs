@@ -474,8 +474,10 @@ mod['google-storage']   = function(){
               
               var token     = await gs.refresh(id,secret,refresh);
               
-              console.log(token);
-              console.log(token===localStorage[localstorage+'token']);
+              localStorage[localstorage+'token']    = token;
+              $(shadow,'#token').value              = token;
+
+              $.mousetext('token refreshed');
               
         }//refresh
         
