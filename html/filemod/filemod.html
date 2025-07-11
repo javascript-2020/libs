@@ -188,11 +188,17 @@ function filemod(){
                     }
                     file    = cur;
               }
+
               
-              //var blob    = await source();
+              var blob;
               
-              var txt     = editor.getValue();
-              var blob    = new Blob([txt]);
+              if(source){
+                    blob      = await source();
+              }else{
+                    var txt   = editor.getValue();
+                    blob      = new Blob([txt]);
+              }
+
               
               if(cur.type=='github'){
                     await github.save(cur,blob);
