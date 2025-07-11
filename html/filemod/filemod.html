@@ -66,7 +66,7 @@ function filemod(){
   ;
                                                                                 debug(obj.version);
                                                                                 
-        var menumod,complete,editor,ext,source
+        var menumod,complete,editor,ext,source,focus
         ;
           
         obj.initmod   = function(params){
@@ -76,6 +76,7 @@ function filemod(){
               ext             = params.ext;
               complete        = params.complete;
               source          = params.source;
+              focus           = params.focus;
               
         }//initmod
 
@@ -115,10 +116,10 @@ function filemod(){
             dbfiles                   = mod['db-files']();
             obj.dbfiles               = dbfiles;
 
-            localfile.initmod({menumod,editor,$,ext,filemod});
-            github.initmod({menumod,editor,$,ext});
-            httpsfile.initmod({menumod,editor,$,ext});
-            dbfiles.initmod({$,datatype,menumod,ext});
+            localfile.initmod({ext,$,menumod,filemod,source,focus,editor});
+            github.initmod({ext,$,menumod,filemod,source,focus,editor});
+            httpsfile.initmod({ext,$,menumod,filemod,source,focus,editor});
+            dbfiles.initmod({ext,$,datatype,menumod,filemod,source,focus});
             
             localfile.init();
             github.init();
