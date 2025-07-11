@@ -107,12 +107,14 @@
 
       
 mod.httpsfile   = function(){
-                                                                                true && console.log('httpsfile');
-  var obj   = {};
+  
+  var obj   = {
+        version   : 'v1.0'
+  };
       
         var df=obj.df=true
         ;
-        
+                                                                                debug(obj.version);
         var menumod,editor,$,datatype
         ;
         
@@ -606,7 +608,16 @@ mod.httpsfile   = function(){
         }//build
         
 
-
+  //:
+  
+  
+        function debug(){
+          
+              if(!df)return;
+              var str   = [...arguments].join(' ');
+              console.log('[ https-file ]',str);
+              
+        }//debug
 
         
   return obj;
