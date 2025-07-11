@@ -110,30 +110,52 @@
       <script>
 
       
-            function initdom(){
-            
-                  filemod.root    = $('filemod-root');
-                  
-                  filemod.initdom(filemod.root);
-                  
-                  
-                  $('#test').onclick    = e=>alert(filemod.autosave);
-                  
-                  
-                  
-            }//initdom
+        function initdom(){
+        
+              filemod.root    = $('filemod-root');
+              
+              filemod.initdom(filemod.root);
+              
+              
+              $('#test').onclick    = e=>alert(filemod.autosave);
+              
+              
+              
+        }//initdom
 
+        
+  //:
+  
+  
+        function kd(e){
+        
+              if(e.key==' ' && e.ctrlKey){
+                    menumod.open();
+              }
+              
+        }//kd
+        
 
-            function kd(e){
-    
-                  if(e.key==' ' && e.ctrlKey){
-                        menumod.open();
-                  }
-                  
-            }//kd
-            
-
-            init.stack.complete
+        function focus(){
+        }//focus
+        
+        
+  //:
+  
+  
+        function complete(){
+        }//complete
+        
+        
+        function source(){
+          
+          
+        }//source
+        
+        
+        
+        
+        init.stack.complete
             
             
       </script>
