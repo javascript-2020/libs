@@ -112,9 +112,10 @@
       
         function initdom(){
         
-              filemod.root    = $('filemod-root');
               
-              filemod.initdom(filemod.root);
+              filemod.initdom(document.body);
+
+
               
               
               $('#test').onclick    = e=>alert(filemod.autosave);
