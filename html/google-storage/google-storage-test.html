@@ -20,20 +20,27 @@
         ;
         
         var googlestorage;
+        var log;
         
         
         function init(){
         
         
-              menumod         = menumod();
+              menumod                       = menumod();
               
               
-              googlestorage   = mod['google-storage']();
+              googlestorage                 = mod['google-storage']();
+              log                           = log();
+
               
               googlestorage.initmod({ext,$,menumod,source});
               googlestorage.load.complete   = complete.load;
               googlestorage.save.complete   = complete.save;
+              log.initmod({ext,$});
+              
+              
               googlestorage.init();
+              log.init();
               
 
           
@@ -120,6 +127,11 @@
             </google-storage>
       
       
+            <log api>
+                  <script src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+            </log>
+      
+      
       </body>
       
 
@@ -132,6 +144,7 @@
               
               
               googlestorage.initdom(root);
+              log.initdom();
               
               
         }//initdom
