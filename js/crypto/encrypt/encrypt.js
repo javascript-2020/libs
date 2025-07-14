@@ -102,16 +102,6 @@ function encrypt(){
         }//encrypt
         
         
-        encrypt.password    = function(text,password){
-        
-              
-        }//password
-        
-        
-        encrypt.public    = function(text,public){
-        }//public
-        
-
 
         
         obj.decrypt   = decrypt;
@@ -126,14 +116,6 @@ function encrypt(){
               
         }//decrypt
         
-        
-        decrypt.password    = function(text,password){
-        }//password
-        
-        
-        decrypt.private   = function(text,private){
-        }//private
-
 
   //:
   
