@@ -3,7 +3,7 @@
 
 /*
 
-//encrypt:d
+//encrypt.js:d
 
 
 25-06-25
@@ -16,6 +16,8 @@ function encrypt(){
 
   var obj   = {};
   
+        var df    = true;
+        
   
         var ext
         ;
@@ -41,10 +43,10 @@ function encrypt(){
         decrypt.crypto        = {};
 
 
-        var encoder       = new TextEncoder();
-        obj.encoder       = encoder;
-        var decoder       = new TextDecoder();
-        obj.decoder       = decoder;
+        var encoder           = new TextEncoder();
+        obj.encoder           = encoder;
+        var decoder           = new TextDecoder();
+        obj.decoder           = decoder;
 
 
   //:
@@ -430,14 +432,21 @@ function encrypt(){
         }//datatype
 
 
+  //:
+  
 
-
+        function debug(){
         
+              if(!df)return;
+              var str   = [...arguments].join(' ');
+              console.log('[ encrypt.js ]',str);
+              
+        }//debug
 
         
   return obj;
   
-//encrypt:d-
+//encrypt.js:d-
 }
 
 
