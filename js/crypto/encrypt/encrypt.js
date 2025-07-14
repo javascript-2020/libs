@@ -41,6 +41,12 @@ function encrypt(){
         decrypt.crypto        = {};
 
 
+        var encoder       = new TextEncoder();
+        obj.encoder       = encoder;
+        var decoder       = new TextDecoder();
+        obj.decoder       = decoder;
+
+
   //:
   
   
@@ -77,6 +83,16 @@ function encrypt(){
         }//encrypt
         
         
+        encrypt.password    = function(text,password){
+        }//password
+        
+        
+        encrypt.public    = function(text,public){
+        }//public
+        
+
+
+        
         obj.decrypt   = decrypt;
         
         async function decrypt(cipher,password){
@@ -88,6 +104,14 @@ function encrypt(){
               return text;
               
         }//decrypt
+        
+        
+        decrypt.password    = function(text,password){
+        }//password
+        
+        
+        decrypt.private   = function(text,private){
+        }//private
 
 
   //:
