@@ -71,7 +71,7 @@ function encrypt(){
   //:
   
 
-        function alg(type){
+        function alg(fn,type){
         
               var mode              = ['crypto','aes-gcm'];
               
@@ -81,11 +81,26 @@ function encrypt(){
                 
               }//switch
               
-              var fn        = encrypt;
               mode.forEach(name=>fn=fn[name]);
+              return fn;
+              
+        }//alg
+        
+        
+        alg.encrypt   = function(type){
+        
+              var fn    = alg(encrypt,type);
               return fn;
         
         }//alg
+        
+        
+        alg.decrypt   = function(type){
+        
+              var fn    = alg(decrypt,type);
+              return fn;
+              
+        }//decrypt
         
         
   //:
@@ -93,28 +108,43 @@ function encrypt(){
   
         obj.encrypt   = encrypt;
         
-        async function encrypt(text,password,type){
+        async function encrypt(key,buf,type){
           
               var fn        = alg(type);
-              var cipher    = await fn(text,password);
+              var cipher    = await fn(key,buf);
               return cipher;
               
         }//encrypt
         
         
+        encrypt.password    = function(password,buf){
+        
+              var fn        = alg(type);
+              var cipher    = await fn.password(password,buf);
+              return cipher;
+              
+        }//password
+
 
         
         obj.decrypt   = decrypt;
         
-        async function decrypt(cipher,password){
+        async function decrypt(key,buf){
           
-              var fn    = decrypt;
-              mode.forEach(name=>fn   = fn[name]);
-              
-              var text    = await fn(cipher,password);
+              var fn      = alg.decrypt(type);
+              var text    = await fn(key,buf);
               return text;
               
         }//decrypt
+        
+        
+        decrypt.password    = async function(password,buf){
+        
+              var fn    = alg.decrypt(type);
+              var txt   = await fn.password(password,buf);
+              return txt;
+              
+        }//password
         
 
   //:
