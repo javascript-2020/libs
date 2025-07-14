@@ -25,6 +25,7 @@ function encrypt(){
         obj.initmod   = function(params){
         
               ext   = params.ext;
+
               
         }//initmod
         
@@ -54,19 +55,17 @@ function encrypt(){
   
         obj.init    = function(){
         
-              load_libs();
+              libs();
               
         }//init
         
         
-        async function load_libs(){
+        async function libs(){
         
               var promise   = ext.load.libs('js/crypto/aes/aes.js');
               [aes]         = await promise;
 
-              console.log('aes',aes);
-              
-        }//load_libs
+        }//libs
         
         
   //:
@@ -168,8 +167,15 @@ function encrypt(){
         
         decrypt.crypto['aes-ctr']   = async function(buf,password){
 
+
+
               password                = str_buf(password);              
+
+
+              
               var [salt,iv,cipher]    = buf_slice(buf,16,12);
+              
+              
               
               var {key}               = await cryptokey.derive(password,salt);
               
@@ -203,8 +209,6 @@ function encrypt(){
         }//simple
 
         
-  
-  
   //:
 
 
