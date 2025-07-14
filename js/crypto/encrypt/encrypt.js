@@ -71,13 +71,31 @@ function encrypt(){
   //:
   
 
-        obj.encrypt   = encrypt;
+        function alg(type){
         
-        async function encrypt(text,password){
-          
+              var mode              = ['crypto','aes-gcm'];
+              
+              switch(type){
+              
+                case 'simple'   : break;
+                
+              }//switch
+              
               var fn        = encrypt;
               mode.forEach(name=>fn=fn[name]);
-              
+              return fn;
+        
+        }//alg
+        
+        
+  //:
+  
+  
+        obj.encrypt   = encrypt;
+        
+        async function encrypt(text,password,type){
+          
+              var fn        = alg(type);
               var cipher    = await fn(text,password);
               return cipher;
               
@@ -85,6 +103,8 @@ function encrypt(){
         
         
         encrypt.password    = function(text,password){
+        
+              
         }//password
         
         
@@ -143,16 +163,14 @@ function encrypt(){
   //:
 
           
-        encrypt.crypto['aes-ctr']   = async function(buf,password){
+        encrypt.crypto['aes-gcm']   = async function(key,buf){
         
-              password          = str_buf(password);
-              var {key,salt}    = await cryptokey.derive(password);
               
               var iv            = window.crypto.getRandomValues(new Uint8Array(12));
               var cipher        = await window.crypto.subtle.encrypt({name:'AES-GCM',iv},key,buf);
               cipher            = new Uint8Array(cipher);
               
-              var full          = buf_gen(salt,iv,cipher);
+              var full          = buf_gen(iv,cipher);
                                                                                 output('encrypt :');
                                                                                 output.str('text',buf);              
                                                                                 output.b64('salt',salt);              
@@ -161,25 +179,29 @@ function encrypt(){
                                                                                 output.b64('full',full);              
               return full;
 
-        }//aes-ctr
+        }//aes-gcm
+        
+        
+        encrypt.crypto['aes-gcm'].password    = async function(password,buf){
+        
+              password          = str_buf(password);
+              var {key,salt}    = await cryptokey.derive(password);
+              
+              var buf           = await encrypt.crypto['aes-gcm'](key,buf);
+              
+              buf               = salt_buf(salt,buf);
+              return buf;
+              
+        }//password
         
         
         
-        decrypt.crypto['aes-ctr']   = async function(buf,password){
+        decrypt.crypto['aes-gcm']   = async function(key,buf){
 
 
-
-              password                = str_buf(password);              
-
-
+              var [iv,cipher]   = buf_slice(buf,12);
               
-              var [salt,iv,cipher]    = buf_slice(buf,16,12);
-              
-              
-              
-              var {key}               = await cryptokey.derive(password,salt);
-              
-              var decrypted           = await window.crypto.subtle.decrypt({name:'AES-GCM',iv},key,cipher);
+              var decrypted     = await window.crypto.subtle.decrypt({name:'AES-GCM',iv},key,cipher);
               
                                                                                 output('decrypt :');
                                                                                 output.b64('salt',salt);
@@ -189,7 +211,20 @@ function encrypt(){
               return decrypted;              
 
           
-        }//aes-ctr
+        }//aes-gcm
+        
+        
+        decrypt.crypto['aes-gcm'].password    = async function(password,buf){
+        
+              password          = str_buf(password);
+              var [salt,buf]    = buf_slice(buf,16);
+              
+              var {key}         = await cryptokey.derive(paswsord,salt);
+              
+              var buf           = await decrypt.crypto['aes-gcm'](key,buf);
+              return buf;
+              
+        }//password
         
 
   //:
@@ -212,6 +247,26 @@ function encrypt(){
   //:
 
 
+        function salt_buf(salt,buf){
+        
+              var full    = buf_gen(salt,buf);
+              return full;
+
+
+/*
+
+  //nb: Salted__
+  
+              var len     = salt.length+buf.length;
+              var full    = new Uint8Array(len);
+              full.set(0,salt);
+              full.set(salt.length,buf);
+              return full;
+*/              
+        
+        }//salt_buf
+        
+        
         obj.buf_gen   = buf_gen;
         
         function buf_gen(){
