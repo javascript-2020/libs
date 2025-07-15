@@ -188,6 +188,8 @@
                         <input value=load type=button>
                         <input value=save type=button>
                         <input value=backup type=button>
+                        <input value=upload type=button>
+                        <input value=download type=button>
                   </div>
                 
                   
@@ -467,7 +469,8 @@ mod['google-storage']   = function(){
               $(shadow,'[value=load]').onclick        = btn.load;
               $(shadow,'[value=save]').onclick        = btn.save;
               $(shadow,'[value=backup]').onclick      = btn.backup;
-              
+              $(shadow,'[value=upload]').onclick      = btn.upload;
+              $(shadow,'[value=download]').onclick    = btn.download;
               
         }//initdom
         
@@ -567,7 +570,73 @@ mod['google-storage']   = function(){
         }//backup
 
 
+        btn.upload    = function(){
+          
+              var token       = $(shadow,'#token').value;
+              
+              var bucket      = $(shadow,'#bucket').value;
+              var path        = $(shadow,'#path').value;
 
+              var filename    = path;
+              var i   = path.lastIndexOf('/');
+              if(i!=-1){
+                    filename    = path.slice(i+1);
+              }
+              
+              var input       = document.createElement('input');
+              input.type      = 'file';
+              input.onchange    = onchange;
+              input.click();
+              
+              
+              function onchange(){
+                
+                    var file        = input.files[0];
+                    
+                    var abs         = bucket+path+file.name;
+
+                    var result      = await gs.save(token,abs,blob);
+                    if(result.error){
+                          log.error(result.error);
+                          return;
+                    }
+                    log.ok(filename+' uploaded');
+
+              }//onchange
+              
+        }//upload
+        
+        
+        btn.download    = function(){
+
+              var token       = $(shadow,'#token').value;
+              
+              var bucket      = $(shadow,'#bucket').value;
+              var path        = $(shadow,'#path').value;
+              
+              var abs         = bucket+path;
+              var filename    = path;
+              var i   = path.lastIndexOf('/');
+              if(i!=-1){
+                    filename    = path.slice(i+1);
+              }
+          
+              var result      = await gs.load(token,abs);
+              if(result.error){
+                    log.error(result.error);
+                    return;
+              }
+              var blob        = result.ok;
+
+              var url         = window.URL.createObjectURL(blob);
+              var a           = document.createElement('a');
+              a.href          = url;
+              a.download      = filename;
+              a.click();
+              
+        }//download
+        
+        
         menu.callback   = function(type,opt){
         }//callback
 
