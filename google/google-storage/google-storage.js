@@ -126,14 +126,14 @@ curl -X GET \
               var i             = path.indexOf('/');
               var bucket        = path.slice(0,i);
               
-              path              = path.slice(i);
+              path              = path.slice(i+1);
               
               var i             = path.lastIndexOf('/');
               var filename      = path.slice(i+1);
               
               path              = encodeURIComponent(path);
               
-              var url           = `https://storage.googleapis.com/storage/v1/b/${bucket}/o${path}?alt=media`;
+              var url           = `https://storage.googleapis.com/storage/v1/b/${bucket}/o/${path}?alt=media`;
               var headers       = {authorization:`Bearer ${token}`};
               
               var err;
@@ -184,7 +184,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var i             = path.lastIndexOf('/');
               var filename      = path.slice(i+1);
 
-              path              = encodeURIComponent(path);
+              //path              = encodeURIComponent(path);
               
               var url           = `https://storage.googleapis.com/upload/storage/v1/b/${bucket}/o?uploadType=media&name=${path}`;
               var method        = 'post';
