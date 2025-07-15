@@ -577,12 +577,6 @@ mod['google-storage']   = function(){
               var bucket      = $(shadow,'#bucket').value;
               var path        = $(shadow,'#path').value;
 
-              var filename    = path;
-              var i   = path.lastIndexOf('/');
-              if(i!=-1){
-                    filename    = path.slice(i+1);
-              }
-              
               var input         = document.createElement('input');
               input.type        = 'file';
               input.onchange    = onchange;
