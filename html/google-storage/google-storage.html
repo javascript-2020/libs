@@ -583,13 +583,13 @@ mod['google-storage']   = function(){
                     filename    = path.slice(i+1);
               }
               
-              var input       = document.createElement('input');
-              input.type      = 'file';
+              var input         = document.createElement('input');
+              input.type        = 'file';
               input.onchange    = onchange;
               input.click();
               
               
-              function onchange(){
+              async function onchange(){
                 
                     var file        = input.files[0];
                     
@@ -607,7 +607,7 @@ mod['google-storage']   = function(){
         }//upload
         
         
-        btn.download    = function(){
+        btn.download    = async function(){
 
               var token       = $(shadow,'#token').value;
               
