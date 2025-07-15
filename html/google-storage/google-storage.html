@@ -595,7 +595,7 @@ mod['google-storage']   = function(){
                     
                     var abs         = bucket+path+file.name;
 
-                    var result      = await gs.save(token,abs,blob);
+                    var result      = await gs.save(token,abs,file);
                     if(result.error){
                           log.error(result.error);
                           return;
