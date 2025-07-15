@@ -6,11 +6,16 @@
       
             <style>
             
-                    #log-root {position:absolute;left:10px;bottom:3px;right:10px;z-index:99999}
-                    #log {display:flex;background:white;border:2px solid transparent;padding:10px;border-radius:5px;cursor:pointer;
-                          margin-bottom:10px}
-                    #log-text {flex:1;white-space:pre-wrap}
-                    #log-close {width:15px;height:15px}
+  #log-root
+    {position:absolute;left:10px;bottom:3px;right:10px;z-index:99999}
+  #log
+    {display:flex;background:white;border:2px solid transparent;padding:10px;border-radius:5px;cursor:pointer;
+      margin-bottom:10px
+    }
+  #log-text
+    {flex:1;white-space:pre-wrap}
+  #log-close
+    {width:15px;height:15px}
                     
             </style>
             
@@ -26,110 +31,138 @@
       
       <script>
 
-            function log(){
-              
-              var obj   = {};
-              
-                  obj.initmod=function(params){
-                  }//initmod
-                  
-              //vars:-
-              
-                  var def               = {};
-                  def.time              = 4000;
-                  def.console           = true;
-                  
-                  log.config            = def;
+function log(){
+  
+  var obj   = {};
 
-              //:
+  
+        obj.initmod=function(params){
+        }//initmod
+
+      
+  //vars:-
+  
+        var def               = {};
+        def.time              = 4000;
+        def.console           = true;
+        
+        log.config            = def;
+
+
+  //:
+
+  
+        obj.init=function(){
+        }//init
+
+      
+  //:
+
+  
+        obj.initdom=function(rootnode){
+          
+              var root                = $.$(rootnode,'log-root');
+              var shadow              = root.shadowRoot;
               
-                  obj.init=function(){
-                  }//init
-                  
-              //:
+              log.root                = $(shadow,'#log-root');
+              log.item                = $.rem(log.root,'#log');
               
-                  obj.initdom=function(rootnode){
+              log.root.style.display  = '';
+  
+              
+        }//initdom
+        
+  
+  //:
+  
+  
+        function log(){
+        
+              var str         = [...arguments].join(' ');
+              var nlog        = log.item.cloneNode(true);
+              nlog.onclick    = rem;
+              $(nlog,'#log-text').textContent   = str;
+              log.root.append(nlog);
+              
+              if(log.config.console){
+                    console.log.apply(console,arguments);
+              }
+              
+              if(log.config.time){
+                    setTimeout(rem,log.config.time);
+              }
+              
+              log.config    = def;
+              
+              return nlog;
+              
+              
+              function rem(){
+              
+                    nlog.remove();
                     
-                        var root                = $.$(rootnode,'log-root');
-                        var shadow              = root.shadowRoot;
-                        
-                        log.root                = $(shadow,'#log-root');
-                        log.item                = $.rem(log.root,'#log');
-                        
-                        log.root.style.display  = '';
-
-                        
-                  }//initdom
-                  
-
-                  function log(){
-                  
-                        var str         = [...arguments].join(' ');
-                        var nlog        = log.item.cloneNode(true);
-                        nlog.onclick    = rem;
-                        $(nlog,'#log-text').textContent   = str;
-                        log.root.append(nlog);
-                        
-                        if(log.config.console){
-                              console.log.apply(console,arguments);
-                        }
-                        
-                        if(log.config.time){
-                              setTimeout(rem,log.config.time);
-                        }
-                        
-                        log.config    = def;
-                        
-                        return nlog;
-                        
-                        
-                        function rem(){
-                        
-                              nlog.remove();
-                              
-                        }//rem
-                        
-                  }//log
-                              
-                              
-                  obj.red=function(){
-                  
-                        var nlog    = log.apply(null,arguments);
-                        nlog.style.borderColor    = 'red';
-                        nlog.style.color          = 'red';
-                        
-                  }//red
-                  
-                  
-                  obj.green=function(){
-          
-                        var nlog    = log.apply(null,arguments);
-                        nlog.style.borderColor    = 'green';
-                        nlog.style.color          = 'green';
-          
-                  }//green
-                      
-                      
-                  obj.orange=function(){
-                  
-                        var nlog    = log.apply(null,arguments);
-                        nlog.style.borderColor    = 'orange';
-                        nlog.style.color          = 'orange';
-                        
-                  }//orange
-                  
-                  
-                  obj.error=function(err){
-                  
-                        log.red(err.message);
-                        
-                  }//error
-                              
-                              
-                  
-              return obj;
+              }//rem
               
-            }//log
+        }//log
+                    
+                    
+        obj.red   = function(){return red.apply(null,arguments)}
+        
+        function red(){
+        
+              var nlog    = log.apply(null,arguments);
+              nlog.style.borderColor    = 'red';
+              nlog.style.color          = 'red';
+              
+        }//red
+        
+        
+        obj.green   = function(){return green.apply(null,arguments)}
+        
+        function green(){
+  
+              var nlog    = log.apply(null,arguments);
+              nlog.style.borderColor    = 'green';
+              nlog.style.color          = 'green';
+  
+        }//green
+            
+            
+        obj.orange    = function(){
+        
+              var nlog    = log.apply(null,arguments);
+              nlog.style.borderColor    = 'orange';
+              nlog.style.color          = 'orange';
+              
+        }//orange
+        
+
+  //:
+  
+  
+        obj.error   = function(err){
+        
+              var str   = err;
+              if(err?.message){
+                    str   = err.message;
+              }
+              red(str);
+              
+        }//error
+        
+        
+        obj.ok    = function(){
+          
+              var str   = arguments.join(' ');
+              green(str);
+              
+        }//ok
+                    
+                  
+      
+  return obj;
+  
+}//log
             
       </script>
 
