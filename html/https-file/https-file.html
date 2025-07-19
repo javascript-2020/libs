@@ -454,7 +454,9 @@ mod.httpsfile   = function(){
               file.title      = title;
               file.icon       = icon.src;
               
-              var result    = await save(file,txt);
+              var blob        = await source();
+              
+              var result      = await save(file,blob);
               if(result===false){
                     return;
               }
