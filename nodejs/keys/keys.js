@@ -36,6 +36,13 @@ function keysmod(){
         
         function keypressed(key){
         
+              if(typeof obj.keypressed=='function'){
+                    var result    = obj.keypressed(key);
+                    if(result===false){
+                          return;
+                    }
+              }
+              
               if(key==='r'){
                     if(typeof obj.reload!=='function'){
                           console.log('reload not enabled');
