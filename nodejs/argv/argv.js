@@ -14,20 +14,33 @@
         module.exports    = argv;
         
         
-        function argv(id,def){
+        function argv(id0,def){
         
-              var n   = process.argv.length;
-              for(var i=0;i<n;i++){
+              var args    = [...arguments];
+              var ids     = [...arguments].slice(0,-1);
+              def         = args.at(-1);
               
-                    switch(process.argv[i]){
+              var nj    = ids.length;
+              for(var j=0;j<nj;j++){
+              
+                    var id    = ids[j];
                     
-                      case id         :
-                      case '-'+id     :
-                      case '--'+id    : return process.argv[i+1];
-                      
-                    }//switch
+                    var nk    = process.argv.length;
+                    for(var k=0;k<nk;k++){
                     
-              }///for
+                          switch(process.argv[k]){
+                          
+                            case id         :
+                            case '-'+id     :
+                            case '--'+id    : 
+                                              var v   = process.argv[k+1];
+                                              return v;
+                            
+                          }//switch
+                          
+                    }///for
+                    
+              }//for
               return def;
               
         }//argv
