@@ -20,12 +20,6 @@
   google-storage
     {}
     
-  #save-root
-    {margin-left:5px;display:flex}
-  
-  .menu
-    {position:absolute;left:0;top:30px}
-                  
             </style>
             
             <div id=root style='visibility:hidden'>
@@ -49,16 +43,6 @@
                   <google-storage api>
                         <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
                   </google-storage>
-                  
-                  <div id=save-root>
-                        <button id=save>save</button>
-                        <div class=menu-root>
-                              <img class=menu-icon>
-                              <div class=menu style='display:none'>
-                                    <checkbox-one id=autosave></checkbox-one>
-                              </div>
-                        </div>
-                  </div>
                   
             </div>
             
@@ -108,7 +92,6 @@ function filemod(){
         var cur;
         Object.defineProperty(obj,'cur',{get:()=>cur,set:v=>cur=v});
 
-        var autosave;
 
         var root;
         var shadow;
@@ -180,24 +163,13 @@ function filemod(){
               googlestorage.initdom(shadow);
 
 
-              $(shadow,'#save').onclick         = btn.save;
-
-              var card                          = $(shadow,'.menu');
-              $(shadow,'.menu-icon').onclick    = menumod.click(card,false,false,menu);
-
-              autosave                          = $(shadow,'#autosave');
-              autosave.checked                  = false;
-              autosave.onchange                 = e=>obj.autosave   = autosave.checked;
-              obj.autosave                      = autosave.checked;
-
-
               $(shadow,'#root').style.visibility    = '';
               
         }//initdom
                     
 
-        btn.save    = function(e){save()}
-          
+  //:
+  
           
         obj.save    = function(file){return save(file)}
           
@@ -234,10 +206,6 @@ function filemod(){
         }//save
                   
                   
-        function menu(type,opt){
-        }//menu
-                    
-
         obj.clear   = function(){
           
               if(!cur){
