@@ -386,12 +386,12 @@
                     if(item.path.startsWith(`${path}backup/${fn}`)){
                           var i2    = item.path.lastIndexOf('-');
                           var i3    = i1;
-                          if(i1==-1){
+                          if(i3==-1 || i3<i2){
                                 i3    = item.path.length;
                           }
                           var s     = item.path.slice(i2+1,i3);
                           var v     = Number(s);
-                                                                                console.log(i,v);
+                                                                                console.log(i,`[${s}]`,v);
                           if(!isNaN(v)){
                                 if(v>max){
                                       max   = v;
