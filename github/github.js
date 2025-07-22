@@ -391,7 +391,7 @@
                           }
                           var s     = item.path.slice(i2+1,i3);
                           var v     = Number(s);
-                                                                                console.log(i,`[${s}]`,v);
+                                                                                console.log(i,i2,i3,`[${s}]`,v);
                           if(!isNaN(v)){
                                 if(v>max){
                                       max   = v;
