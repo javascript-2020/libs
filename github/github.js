@@ -385,7 +385,7 @@
                                                                                 console.log(i,item.path);
                     if(item.path.startsWith(`${path}backup/${fn}`)){
                           var i2    = item.path.lastIndexOf('-');
-                          var i3    = i1;
+                          var i3    = item.path.lastIndexOf('.');
                           if(i3==-1 || i3<i2){
                                 i3    = item.path.length;
                           }
