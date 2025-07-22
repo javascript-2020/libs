@@ -19,11 +19,14 @@
 
 (()=>{
 
+
         var github            = {};
         github.version        = 'v1.0.0';
 
         var download          = {};
         var upload            = {};
+        var get               = {};
+        
         
   //:
 
@@ -319,8 +322,12 @@
 
         async function backup(token,owner,repo,branch,path){
                                                                                 debug('backup',path);
-              var api   = true;
-              var txt   = load.text(api,token,owner,repo,branch,path);
+              var result    = await load.api(token,owner,repo,branch,path);
+              if(result.error){
+                    return result;
+              }
+              var blob    = result.ok;
+              var txt     = await blob.text();
               
               var fn;
               var i   = path.lastIndexOf('/');
@@ -334,6 +341,13 @@
               }
               if(path && path.at(-1)!='/'){
                     path   += '/';
+              }
+              
+              var ext;
+              var i1    = fn.lastIndexOf('.');
+              if(i1!=-1){
+                    ext   = fn.slice(i1);
+                    fn    = fn.slice(0,i1);
               }
 
               
@@ -369,9 +383,13 @@
               json.tree.forEach(async item=>{
               
                     if(item.path.startsWith(`${path}backup/${fn}`)){
-                          var i   = item.path.lastIndexOf('-');
-                          var s   = item.path.slice(i+1);
-                          var v   = Number(s);
+                          var i2    = item.path.lastIndexOf('-');
+                          var i3    = i1;
+                          if(i1==-1){
+                                i3    = item.path.length;
+                          }
+                          var s     = item.path.slice(i2+1,i3);
+                          var v     = Number(s);
                           if(!isNaN(v)){
                                 if(v>max){
                                       max   = v;
@@ -383,6 +401,9 @@
               max++;
               
               path    = `${path}backup/${fn}-${max}`;
+              if(ext){
+                    path   += ext;
+              }
                                                                                 debug(path);
               save(token,owner,repo,branch,path,txt);
               
@@ -667,8 +688,6 @@
               
               }//done
               
-              
-              var get   = {};
               
               get.raw   = async function(path){
                                                                                 console.log('raw',owner,repo,branch,path);
