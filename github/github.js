@@ -349,9 +349,9 @@
                     ext   = fn.slice(i1);
                     fn    = fn.slice(0,i1);
               }
-                                                                                console.log(path);
-                                                                                console.log(fn);
-                                                                                console.log(ext);
+                                                                                //console.log(path);
+                                                                                //console.log(fn);
+                                                                                //console.log(ext);
               var err;
               
               try{
@@ -382,7 +382,7 @@
               
               var max     = 0;
               json.tree.forEach(async(item,i)=>{
-                                                                                console.log(i,item.path);
+                                                                                //console.log(i,item.path);
                     if(item.path.startsWith(`${path}backup/${fn}`)){
                           var i2    = item.path.lastIndexOf('-');
                           var i3    = item.path.lastIndexOf('.');
@@ -391,7 +391,7 @@
                           }
                           var s     = item.path.slice(i2+1,i3);
                           var v     = Number(s);
-                                                                                console.log(i,i2,i3,`[${s}]`,v);
+                                                                                //console.log(i,i2,i3,`[${s}]`,v);
                           if(!isNaN(v)){
                                 if(v>max){
                                       max   = v;
