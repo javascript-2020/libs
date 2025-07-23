@@ -225,12 +225,12 @@ mod.github    = function(){
     
         obj.init    = function(){
           
-              load_libs   = load_libs();
+              libs   = libs();
               
         }//init
         
         
-        async function load_libs(){
+        async function libs(){
           
               [github]    = await ext.load.libs('github/github.js.api');
               
