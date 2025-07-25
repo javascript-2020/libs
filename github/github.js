@@ -43,6 +43,7 @@
               github.save           = save;
               github.backup         = backup;
               github.download       = download;
+              github.build          = build;
 
               
         }//init
