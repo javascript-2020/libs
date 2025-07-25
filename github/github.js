@@ -26,6 +26,7 @@
         var download          = {};
         var upload            = {};
         var get               = {};
+        parse.is              = {};
         
         
   //:
@@ -156,8 +157,54 @@
         }//dir
 
         
+        parse.is.api    = function(url){
+        
+              if(url.includes('api.github.com')){
+                    return true;
+              }
+              return false;
+              
+        }//api
+        
+        
+        parse.is.raw    = function(url){
+        
+              if(url.includes('raw.githubusercontent.com')){
+                    return true;
+              }
+              return false;
+
+        }//raw
+        
+        
   //:        
 
+
+        function build(api,token,owner,repo,branch,path){
+
+              if(arguments.length==1){
+                    var o   = arguments[0];
+                    var {api,token,owner,repo,branch,path}    = o;
+              }
+              
+              var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
+              var headers;
+              if(api){
+                    if(!token){
+                          token     = localStorage.getItem('github-token');
+                    }
+                    if(token){
+                          headers   = {authorization:`Bearer ${token}`};
+                    }
+                    url             = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;                                
+              }                          
+              return url;
+
+        }//build
+        
+        
+  //:
+  
 
         function load({token,owner,repo,branch,path}){
         
