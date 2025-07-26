@@ -309,6 +309,7 @@ mod.filenav   = function(){
               ui.path                                         = $(shadow,'#path');
               ui.path.textContent                             = def.path;
               
+              if(!newfile)debugger;
               newfile.initdom(shadow);
               
               var view                                        = $(shadow,'#view');
