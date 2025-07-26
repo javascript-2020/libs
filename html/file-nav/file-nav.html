@@ -184,11 +184,12 @@ mod.filenav   = function(){
         
   //modvars:-
   
-        var $,datatype
+        var ext,$,datatype
         ;
         
         obj.initmod   = function(params){
                                                                                 debug('initmod');
+              ext         = params.ext;
               $           = params.$;
               datatype    = params.datatype;
               
@@ -274,8 +275,20 @@ mod.filenav   = function(){
               //newfile.initmod();
               newfile.init();
               
+              libs();
               
         }//init
+        
+        
+        async function libs(){
+          
+              var promise     = ext.load.libs('html/file-nav/js/server.js');
+              
+              var [server]    = await promise;
+              
+              console.log(server);
+              
+        }//libs
         
         
   //:
