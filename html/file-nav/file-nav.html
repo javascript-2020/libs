@@ -269,28 +269,24 @@ mod.filenav   = function(){
   //:
   
   
-        obj.init    = function(){
+        obj.init    = async function(){
                                                                                 debug('init');
               newfile   = mod.newfile();
               //newfile.initmod();
               newfile.init();
 
               
-              libs();
+              await libs;
+
               
         }//init
         
         
         async function libs(){
           
-              var promise     = ext.load.libs('html/file-nav/js/server.js');
+              libs        = ext.load.libs('html/file-nav/js/server.js');
               
-              var [server]    = await promise;
-
-              
-              console.log('*******');
-              console.log(server);
-
+              [server]    = await promise;
 
               
         }//libs
@@ -719,7 +715,7 @@ mod.filenav   = function(){
         
   //:
   
-  
+/*  
         server.mkfile   = async function(url,auth,path){
 
               var headers   = {mode:'mkfile',auth};
@@ -1033,7 +1029,9 @@ mod.filenav   = function(){
               return true;
               
         }//dirclear
-
+        
+        
+*/
 
   //:
   
