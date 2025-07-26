@@ -524,7 +524,8 @@ mod.filenav   = function(){
               var name      = cur.filename;
               
               var result    = await callback('dir','rem',path,name);
-              if(result===false){
+              //if(result===false){
+              if(!result){
                     cur.rem();
                     update(path);
                     return;
