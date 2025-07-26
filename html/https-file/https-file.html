@@ -629,7 +629,15 @@ mod.httpsfile   = function(){
               
               console.log.apply(console,arguments);
               
+              if(debug.log.trace){
+                    console.trace();
+              }
+              delete debug.log.trace;
+              
         }//log
+
+
+
 
         
   return obj;
