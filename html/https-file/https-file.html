@@ -364,8 +364,7 @@ mod.httpsfile   = function(){
               var url       = ui.url.value;
               var auth      = ui.auth.value;
               var path      = filenav.path;
-                                                                                console.log(url,auth,path);
-              debugger;                                                                                
+                                                                                console.log(url,auth,path);              
               filenav.server.readdir(url,auth,path);
               
         }//dir
@@ -423,13 +422,13 @@ mod.httpsfile   = function(){
         obj.load    = function(file){return load(file)}   //d
         
         async function load(file){
-                                                                                console.log('load');
-                                                                                console.json(file);
+                                                                                debug('load');
+                                                                                debug(file);
               var url         = file.url;
               var path        = file.path;
               var filename    = file.filename;
               var full        = url+path+filename;
-                                                                                console.log('load',full);
+                                                                                debug('load',full);
               var result    = await loadfile(full);
               if(result===false){
                     return false;
@@ -622,6 +621,15 @@ mod.httpsfile   = function(){
               console.log('[ https-file ]',str);
               
         }//debug
+        
+        
+        debug.log   = function(){
+          
+              if(!df)return;
+              
+              console.log.apply(console,arguments);
+              
+        }//log
 
         
   return obj;
