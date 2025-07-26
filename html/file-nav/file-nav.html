@@ -869,7 +869,7 @@ mod.filenav   = function(){
               var {dirs,files}   = process(json);
                                                                                 //debugger;
                                                                                 //console.trace('readdir');
-              filenav.display(path,dirs,files);
+              display(path,dirs,files);
               return true;
               
         }//readdir
@@ -1037,7 +1037,9 @@ mod.filenav   = function(){
         display.node.file     = {};
 
         
-        obj.display   = function(path,dirs,files){
+        obj.display   = function(path,dirs,files){return display.apply(null,arguments)}
+        
+        function display(path,dirs,files){
                                                                                 debug('display',path);
                                                                                 //console.json(dirs);
                                                                                 //console.json(files);
@@ -1047,13 +1049,42 @@ mod.filenav   = function(){
               $(ui.path).textContent    = path;
               
               
-              display(path,'dir',dirs);
-              display(path,'file',files);
+              disp(path,'dir',dirs);
+              disp(path,'file',files);
               
         }//display
+        
+        
+        obj.display.flat    = function(path,list){
+
+              var files   = [];
+              var dirs    = [];
+              
+              list.forEach(abs=>{
+
+                    var i   = abs.indexOf('/',len);
+                                                                                //console.log(abs,i);
+                    var fn;
+                    if(i==-1){
+                          fn    = abs.slice(len);
+                          if(fn){
+                                files.push(fn);
+                          }
+                    }else{
+                          fn    = abs.slice(len,i);
+                          if(dirs.indexOf(fn)==-1){
+                                dirs.push(fn);
+                          }
+                    }
+                    
+              });
+          
+              display(path,files,dirs);
+              
+        }//flat
 
         
-        function display(path,name,list){
+        function disp(path,name,list){
                                                                                 //debug('display');
               var ih    = 25;
               var pad   = 5;
@@ -1213,11 +1244,11 @@ mod.filenav   = function(){
               
               function onscroll(e){
                                                                                 debug(name,'onscroll');
-                    display(path,name,list);
+                    disp(path,name,list);
                     
               }//onscroll
               
-        }//display
+        }//disp
 
 
   //:
