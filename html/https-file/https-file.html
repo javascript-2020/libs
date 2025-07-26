@@ -327,7 +327,7 @@ mod.httpsfile   = function(){
   
   
         btn.load    = function(){
-                                                                                console.log('btn.load');
+                                                                                debug('btn.load');
               if(filenav.cur.type!=='file'){
                     alert('no file selected');
                     return;
@@ -336,7 +336,7 @@ mod.httpsfile   = function(){
               var url         = ui.url.value;
               var path        = filenav.cur.path;
               var filename    = filenav.cur.filename;
-                                                                                console.log(url,path,filename);
+                                                                                debug(url,path,filename);
               load.ui(url,path,filename);
               
         }//load
@@ -360,11 +360,11 @@ mod.httpsfile   = function(){
         
         
         btn.dir   = function(){
-                                                                                console.log('btn.dir');
+          
               var url       = ui.url.value;
               var auth      = ui.auth.value;
               var path      = filenav.path;
-                                                                                console.log(url,auth,path);              
+                                                                                debug('btn.dir',url,auth,path);              
               filenav.server.readdir(url,auth,path);
               
         }//dir
@@ -381,12 +381,12 @@ mod.httpsfile   = function(){
         
 
         file.click    = function(path,filename){
-                                                                                console.log('file.click',path,filename);
+                                                                                debug('file.click',path,filename);
         }//click
         
         
         file.dblclick   = function(path,filename){
-                                                                                console.log('file.dblclick',path,filename);
+                                                                                debug('file.dblclick',path,filename);
               var url   = ui.url.value;
               load.ui(url,path,filename);
               
@@ -397,7 +397,7 @@ mod.httpsfile   = function(){
 
 
         load.ui   = async function(url,path,filename){
-                                                                                console.log('load.ui',url,path,filename);
+                                                                                debug('load.ui',url,path,filename);
               var title       = `${url}\n${path}\n${filename}`;
               
               var file        = {};
@@ -629,12 +629,20 @@ mod.httpsfile   = function(){
               
               console.log.apply(console,arguments);
               
-              if(debug.log.trace){
+              if(debug.trace){
                     console.trace();
               }
-              delete debug.log.trace;
+              delete debug.trace;
               
         }//log
+        
+        
+        debug.log.trace   = function(){
+          
+              debug.trace   = true;
+              debug.log.apply(null,arguments);
+              
+        }//trace
 
 
 
