@@ -1083,6 +1083,9 @@ mod.filenav   = function(){
               
               list.forEach(abs=>{
 
+                    if(!abs.startsWith(path)){
+                          return;
+                    }
                     var i   = abs.indexOf('/',len);
                                                                                 //console.log(abs,i);
                     var fn;
