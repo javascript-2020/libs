@@ -448,9 +448,7 @@ mod.filenav   = function(){
               if(result===false){
                     return;
               }
-              if(result?.result===false){
-                    blob    = result.blob;
-              }
+              blob    = result?.blob;
               if(!blob){
                     var {url,auth}    = result;
                     var blob          = await file.download(url,auth,path,name);
