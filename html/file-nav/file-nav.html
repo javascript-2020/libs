@@ -283,12 +283,12 @@ mod.filenav   = function(){
         
         async function libs(){
           
-              libs        = ext.load.libs('html/file-nav/js/server.js');
+              libs          = ext.load.libs('html/file-nav/js/server.js');
               
-              [server]    = await promise;
+              [server]      = await libs;
               
               
-              obj.server          = server;
+              obj.server    = server;
 
               
         }//libs
