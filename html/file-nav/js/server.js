@@ -3,15 +3,25 @@
 
 (()=>{
 
-
-
-        var server      = {
-              version   : 'v1.0.0'
-        };
+  var obj   = {
+        version   : 'v1.0.0'
+  };
+        
+  
+        var display
+        ;
+        
+        obj.initmod   = function(params){
+        
+              display   = params.display;
+              
+        }//initmod
         
         
+  //:
+  
         
-        server.mkfile   = async function(url,auth,path){
+        obj.mkfile   = async function(url,auth,path){
 
               var headers   = {mode:'mkfile',auth};
               var full      = url+path;
@@ -44,7 +54,7 @@
         }//mkfile
         
         
-        server.rmfile   = async function(url,auth,path){
+        obj.rmfile   = async function(url,auth,path){
           
               var headers   = {mode:'rmfile',auth};
               var full      = url+path;
@@ -78,7 +88,7 @@
         }//rmfile
         
         
-        server.rmdir    = async function(url,auth,path){
+        obj.rmdir    = async function(url,auth,path){
           
               var headers     = {mode:'rmdir',auth};              
               var full        = url+path;
@@ -112,7 +122,7 @@
         }//rmdir
         
         
-        server.mkdir    = async function(url,auth,path){
+        obj.mkdir    = async function(url,auth,path){
 
               var headers     = {mode:'mkdir',auth};
               var full        = url+path;
@@ -146,7 +156,7 @@
         }//mkdir
 
         
-        server.readdir    = async function(url,auth,path){
+        obj.readdir    = async function(url,auth,path){
 
               var headers     = {mode:'readdir',auth};
               var full        = url+path;
@@ -156,12 +166,12 @@
               
                     var res         = await fetch(full,{headers});
                     
-              }
+              }//try
               catch(err2){
                 
                     err   = err2;
                     
-              }
+              }//catch
               if(err){
                     var str   = err.toString();
                     alert(`fetch error\n${str}`);
@@ -175,9 +185,8 @@
                     return false;
               }
               
-              var json    = JSON.parse(txt);
-              
-              var {dirs,files}   = process(json);
+              var json            = JSON.parse(txt);
+              var {dirs,files}    = process(json);
                                                                                 //debugger;
                                                                                 //console.trace('readdir');
               display(path,dirs,files);
@@ -192,7 +201,9 @@
               
               if(json.version){
                     switch(json.version){
+                    
                       case 'c-v1'   : ({dirs,files}    = process.c.v1(json));       break;
+                      
                     }//switch
               }
               
@@ -208,11 +219,13 @@
               var dirs    = [];
               var files   = [];
               
-              var n   = json.list.length;
+              var n       = json.list.length;
+              
               for(var i=0;i<n;i+=2){
                 
                     var fn      = json.list[i];
                     var type    = json.list[i+1];
+                    
                     if(type=='file'){
                           files.push(fn);
                     }else{
@@ -226,7 +239,7 @@
         }//v1
 
 
-        server.upload   = async function(url,auth,path,blob){
+        obj.upload   = async function(url,auth,path,blob){
 
               var headers     = {mode:'upload',auth};
               var body        = blob;
@@ -235,7 +248,7 @@
               var err;
               try{
               
-                    var res         = await fetch(full,{method:'post',headers,body});
+                    var res   = await fetch(full,{method:'post',headers,body});
                     
               }
               catch(err2){
@@ -259,7 +272,7 @@
         }//upload
         
         
-        server.download   = async function(url,auth,path){
+        obj.download   = async function(url,auth,path){
           
               var headers     = {mode:'download',auth};
               var full        = url+path;
@@ -287,13 +300,13 @@
                     return false;
               }
               
-              var blob         = await res.blob();console.log(blob);
+              var blob         = await res.blob();
               return blob;
           
         }//download
         
         
-        server.dirclear   = async function(url,auth,path){
+        obj.dirclear   = async function(url,auth,path){
           
               var headers     = {mode:'dir-clear',auth};
               var full        = url+path;
@@ -301,14 +314,14 @@
               var err;
               try{
               
-                    var res         = await fetch(full,{headers});
+                    var res   = await fetch(full,{headers});
                     
-              }
+              }//try
               catch(err2){
                 
                     err   = err2;
                     
-              }
+              }//catch
               if(err){
                     var str   = err.toString();
                     alert(`fetch error\n${str}`);
@@ -329,7 +342,7 @@
 
         
         
-        return server;
+  return obj;
         
 })();
 
