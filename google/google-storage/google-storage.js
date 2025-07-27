@@ -243,6 +243,10 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         
         async function list(token,path){
         
+              if(path.startsWith('/')){
+                    path    = path.slice(1);
+              }
+              
               var url       = 'https://storage.googleapis.com/storage/v1/b/ext-code-test_cloudbuild/o?delimiter=/';
               
               if(path){
