@@ -1,5 +1,7 @@
 
 
+        
+        mod.menumod   = menumod;
 
 
         function menumod(){
