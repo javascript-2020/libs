@@ -290,6 +290,8 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                     
               });
         
+              return {dirs,files};
+              
         }//list
         
         
