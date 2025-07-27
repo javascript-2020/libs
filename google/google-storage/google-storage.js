@@ -250,7 +250,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var url       = 'https://storage.googleapis.com/storage/v1/b/ext-code-test_cloudbuild/o?delimiter=/';
               
               if(path){
-                    url    += '&path='+path;
+                    url    += '&prefix='+path;
               }
               
               var headers   = {authorization:`Bearer ${token}`};
