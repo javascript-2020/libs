@@ -142,10 +142,18 @@ function editor(){
               
               var script      = document.createElement('script');
               script.src      = 'https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/ace.js';
-              script.onload   = resolve;
+              script.onload   = onload;
               document.head.append(script);
               
               return load;
+              
+              
+              function onload(){
+                
+                    obj.ace   = ace;
+                    resolve();
+                    
+              }//onload
               
         }//load
 
