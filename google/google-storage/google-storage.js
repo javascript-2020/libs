@@ -121,12 +121,13 @@ curl -X GET \
 
         obj.load    = load;
   
-        async function load(token,path){
+        async function load(token,bucket,path){
   
-              var i             = path.indexOf('/');
-              var bucket        = path.slice(0,i);
-              
-              path              = path.slice(i+1);
+              if(arguments.length==2){
+                    var i             = bucket.indexOf('/');
+                    path              = bucket.slice(i+1);
+                    bucket            = bucket.slice(0,i);
+              }
               
               var i             = path.lastIndexOf('/');
               var filename      = path.slice(i+1);
