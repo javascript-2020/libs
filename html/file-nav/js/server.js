@@ -156,7 +156,7 @@
         }//mkdir
 
         
-        obj.readdir    = async function(url,auth,path){
+        obj.readdir    = async function(url,auth,path){debugger;
 
               var headers     = {mode:'readdir',auth};
               var full        = url+path;
