@@ -1176,6 +1176,10 @@ mod.filenav   = function(){
                 
                     let nitem       = display.node[name][i];
                     let filename    = list[i];
+                    if(typeof filename=='object'){
+                          var item    = filename;
+                          filename    = item.name;
+                    }
                     
                     if(!nitem){
                           nitem                           = ui[name].item.cloneNode(true);
