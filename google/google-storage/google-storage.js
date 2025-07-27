@@ -128,6 +128,9 @@ curl -X GET \
                     path              = bucket.slice(i+1);
                     bucket            = bucket.slice(0,i);
               }
+              if(path.startsWith('/')){
+                    path              = path.slice(1);
+              }
               
               var i             = path.lastIndexOf('/');
               var filename      = path.slice(i+1);
