@@ -273,8 +273,17 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               
               var json    = await res.json();
               
-              var dirs    = structuredClone(json.prefixes);
+              var dirs    = [];
               var files   = [];
+              
+              json.prefixes.forEach(dir=>{
+              
+                    if(dir.endsWith('/')){
+                          dir   = dir.slice(0,-1);
+                    }
+                    dirs.push(dir);
+                    
+              });
               
               json.items.forEach(item=>{
               
