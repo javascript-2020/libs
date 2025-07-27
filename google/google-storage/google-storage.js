@@ -241,7 +241,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
 
         obj.list    = list;
         
-        async function list(token,path,full=false){
+        async function list(token,path){
         
               var url       = 'https://storage.googleapis.com/storage/v1/b/ext-code-test_cloudbuild/o?delimiter=/';
               
