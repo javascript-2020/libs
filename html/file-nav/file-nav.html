@@ -171,7 +171,7 @@
 
       <script>
                                                                                 //console.log('mod.filenav');    
-mod.filenav   = function(){
+mod.filenav   = function(df2){
   
   var obj   = {
         version   : 'v1.0'
@@ -717,7 +717,7 @@ mod.filenav   = function(){
   
         obj.display   = function(path,dirs,files){return display.apply(null,arguments)}
         
-        function display(path,dirs,files){
+        function display(path,dirs,files){if(df2)debugger;
                                                                                 debug('display',path);
                                                                                 console.dir(dirs);
                                                                                 console.dir(files);
