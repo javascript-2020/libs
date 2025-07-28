@@ -7,17 +7,8 @@
         version   : 'v1.0.0'
   };
         
+
   
-        var display
-        ;
-        
-        obj.initmod   = function(params){
-        
-              display   = params.display;
-              
-        }//initmod
-        
-        
   //:
   
         
