@@ -284,12 +284,9 @@ mod.filenav   = function(){
         async function libs(){
           
               
-              server    = await ext.text.libs('html/file-nav/js/server.js.api');
-              console.log(server);
+              [server]      = await ext.text.libs('html/file-nav/js/server.js.api');
               
-              server      = eval(server);
-              
-              //server.initmod({display});
+              server        = eval(server);
               obj.server    = server;
               
               
