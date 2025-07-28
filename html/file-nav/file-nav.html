@@ -1036,31 +1036,12 @@ mod.filenav   = function(){
   //:
   
   
-        display.clear   = function(){
-
-              ui.path.replaceChildren();
-              
-              ui.dir.list.replaceChildren();
-              ui.file.list.replaceChildren();
-              
-              display.node.dir    = {};
-              display.node.file   = {};
-                            
-        }//clear
-        
-        
-        display.scroll        = {};
-        display.node          = {};
-        display.node.dir      = {};
-        display.node.file     = {};
-
-        
         obj.display   = function(path,dirs,files){return display.apply(null,arguments)}
         
         function display(path,dirs,files){
                                                                                 debug('display',path);
-                                                                                //console.json(dirs);
-                                                                                //console.json(files);
+                                                                                console.dir(dirs);
+                                                                                console.dir(files);
               //display.clear();
 
               
@@ -1105,6 +1086,28 @@ mod.filenav   = function(){
               display(path,dirs,files);
               
         }//flat
+
+
+  //:
+  
+  
+        display.clear   = function(){
+
+              ui.path.replaceChildren();
+              
+              ui.dir.list.replaceChildren();
+              ui.file.list.replaceChildren();
+              
+              display.node.dir    = {};
+              display.node.file   = {};
+                            
+        }//clear
+        
+        
+        display.scroll        = {};
+        display.node          = {};
+        display.node.dir      = {};
+        display.node.file     = {};
 
         
         function disp(path,name,list){
