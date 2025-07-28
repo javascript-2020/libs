@@ -377,73 +377,12 @@ mod['google-storage']   = function(){
               $(root2,'.refresh').onclick         = btn.token.refresh;
 
 
+            //bucket
 
-
+              var root2                           = $(shadow,'#bucket-root');
+              var value                           = window.localStorage[localstorage+'bucket'];
+              $(shadow,'#token').value            = value||'';
               
-
-
-              
-/*
-
-              $(root2,'.paste').onclick   = async e=>{
-                                            
-                                                  var txt       = await navigator.clipboard.readText();
-                                                  var par       = icon.parentNode;
-                                                  var input     = $(par,'input:not([type])');
-                                                  input.value   = txt;
-                                                  
-                                                  if(e.ctrlKey){
-                                                        btn.parse();
-                                                        btn.load(e);
-                                                  }
-                                                  
-                                            };
-                                            
-*/
-/*
-
-              $(root2,'.copy').onclick   = async e=>{
-              
-                                                  var icon    = e.target;
-                                                  var input   = $(icon.parentNode,'input:not([type])');
-                                                  var txt     = input.value;
-                                                  await navigator.clipboard.writeText(txt);
-                                                  $.mousetext(e,'copied');
-                                                  
-                                            }//copy.onclick
-                                            
-*/
-/*
-
-              $(root2,'.storage').onclick    = e=>{
-                                                    
-                                                      var icon      = e.target;
-                                                      var input     = $(icon.parentNode,'input:not([type])');
-                                                      
-                                                      if(e.shiftKey){
-                                                            var token   = localStorage.getItem(localstorage+'token');
-                                                            if(!token){
-                                                                  $.mousetext(`no stored token, localStorage['${localstorage+'token'}']`);
-                                                                  return;
-                                                            }
-                                                            input.value   = token;
-                                                            return;
-                                                      }
-                                                      var token   = input.value;
-                                                      if(!token){
-                                                            $.mousetext('no token');
-                                                            return;
-                                                      }
-                                                      localStorage.setItem(localstorage+'token',token);
-                                                      $.mousetext(e,`localStorage['${localstorage+'token'}'] saved`);
-                                                      
-                                                }//storage.onclick
-
-*/
-
-
-
-
 
 
 
@@ -471,6 +410,8 @@ mod['google-storage']   = function(){
               $(shadow,'[value=backup]').onclick      = btn.backup;
               $(shadow,'[value=upload]').onclick      = btn.upload;
               $(shadow,'[value=download]').onclick    = btn.download;
+
+
               
         }//initdom
         
