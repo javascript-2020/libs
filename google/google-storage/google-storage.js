@@ -376,9 +376,9 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//list
         
         
-        list.full   = async function(token,path){
+        list.full   = async function(token,bucket,path){
         
-              var url       = 'https://storage.googleapis.com/storage/v1/b/ext-code-test_cloudbuild/o?';
+              var url       = `https://storage.googleapis.com/storage/v1/b/${bucket}/o?`;
 
               if(path){
                     url    += '&path='+path;
@@ -411,7 +411,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var files   = {};
               
               json.items.forEach(item=>{
-              
+                                                                                console.log(item);
                     var file    = {};
                     file.name   = item.name;
                     
