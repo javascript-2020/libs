@@ -295,8 +295,11 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               
               json.items.forEach(item=>{
                                                     console.log(item);
+                    var i         = item.name.lastIndexOf('/');
+                    var name      = item.name.slice(i+1);
+                    
                     var file      = {};
-                    file.name     = item.name;
+                    file.name     = name;
                     file.size     = item.size;
                     file.md5      = item.md5Hash;
                     file.link     = item.mediaLink;
