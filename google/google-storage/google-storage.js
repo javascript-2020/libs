@@ -424,7 +424,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                     json.items.forEach(item=>{
                           
                           if(item.name.startsWith(path)){
-                                                                                      console.log(item);
+                                                                                      //console.log(item);
                                 var name    = item.name.slice(path.length);
                                 if(name.startsWith('/')){
                                       name    = name.slice(1);
