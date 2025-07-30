@@ -416,8 +416,13 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               
               json.items.forEach(item=>{
                                                                                 console.log(item);
+                    var name    = item.name.slice(path.length);
+                    if(name.startsWith('/')){
+                          name    = name.slice(1);
+                    }
+                    
                     var file    = {};
-                    file.name   = item.name;
+                    file.name   = name;
                     
                     files.push(file);
                     
