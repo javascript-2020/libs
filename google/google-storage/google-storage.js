@@ -385,11 +385,13 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                     path    = path.slice(1);
               }
               
-              var url       = `https://storage.googleapis.com/storage/v1/b/${bucket}/o?`;
+              var url       = `https://storage.googleapis.com/storage/v1/b/${bucket}/o`;
 
+/*
               if(path){
                     url    += 'prefix='+path;
               }
+*/              
               
               var headers   = {authorization:`Bearer ${token}`};
               var err;
@@ -418,16 +420,19 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var files   = [];
               
               json.items.forEach(item=>{
+                    
+                    if(item.name.startsWith(path)){
                                                                                 console.log(item);
-                    var name    = item.name.slice(path.length);
-                    if(name.startsWith('/')){
-                          name    = name.slice(1);
+                          var name    = item.name.slice(path.length);
+                          if(name.startsWith('/')){
+                                name    = name.slice(1);
+                          }
+                          
+                          var file    = {};
+                          file.name   = name;
+                          
+                          files.push(file);
                     }
-                    
-                    var file    = {};
-                    file.name   = name;
-                    
-                    files.push(file);
                     
               });
         
