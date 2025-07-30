@@ -289,6 +289,9 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                     if(dir.endsWith('/')){
                           dir   = dir.slice(0,-1);
                     }
+                    var i   = dir.lastIndexOf('/');
+                    dir     = dir.slice(i+1);
+                    
                     dirs.push(dir);
                     
               });
