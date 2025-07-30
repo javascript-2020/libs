@@ -722,6 +722,9 @@
         
         $.slider    = function(node1,slider_node,node2,callback,params={}){
 
+              var minw    = params.minw||40;
+              var minh    = params.minh||40;
+              
               if(typeof node1=='string'){
                     node1         = $(params.root,node1);
               }
@@ -771,8 +774,8 @@
                     var w1    = node1.offsetWidth;
                     var w2    = node2.offsetWidth;
                                                                                 //console.log(ox,w1,w2);
-                    if(w1+ox<25)return;
-                    if(w2-ox<25)return;
+                    if(w1+ox<minw)return;
+                    if(w2-ox<minw)return;
 
                     node1.style.width   = w1+ox+'px';
                     node2.style.width   = w2-ox+'px';
@@ -785,8 +788,8 @@
                     var h1    = node1.offsetHeight;
                     var h2    = node2.offsetHeight;
 
-                    if(h1+oy<40)return;
-                    if(h2-oy<40)return;
+                    if(h1+oy<minh)return;
+                    if(h2-oy<minh)return;
 
                     node1.style.height    = h1+oy+'px'
                     node2.style.height    = h2-oy+'px';
