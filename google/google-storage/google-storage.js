@@ -284,34 +284,38 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var dirs    = [];
               var files   = [];
               
-              json.prefixes.forEach(dir=>{
+              if(json.prefixes){
+                    json.prefixes.forEach(dir=>{
+                    
+                          if(dir.endsWith('/')){
+                                dir   = dir.slice(0,-1);
+                          }
+                          var i   = dir.lastIndexOf('/');
+                          dir     = dir.slice(i+1);
+                          
+                          dirs.push(dir);
+                          
+                    });
+              }
               
-                    if(dir.endsWith('/')){
-                          dir   = dir.slice(0,-1);
-                    }
-                    var i   = dir.lastIndexOf('/');
-                    dir     = dir.slice(i+1);
-                    
-                    dirs.push(dir);
-                    
-              });
-              
-              json.items.forEach(item=>{
-                                                    console.log(item);
-                    var i         = item.name.lastIndexOf('/');
-                    var name      = item.name.slice(i+1);
-                    
-                    var file      = {};
-                    file.name     = name;
-                    file.size     = item.size;
-                    file.md5      = item.md5Hash;
-                    file.link     = item.mediaLink;
-                    file.ctime    = item.timeCreated;
-                    file.mtime    = item.updated;
-                    
-                    files.push(file);
-                    
-              });
+              if(json.items){
+                    json.items.forEach(item=>{
+                                                          console.log(item);
+                          var i         = item.name.lastIndexOf('/');
+                          var name      = item.name.slice(i+1);
+                          
+                          var file      = {};
+                          file.name     = name;
+                          file.size     = item.size;
+                          file.md5      = item.md5Hash;
+                          file.link     = item.mediaLink;
+                          file.ctime    = item.timeCreated;
+                          file.mtime    = item.updated;
+                          
+                          files.push(file);
+                          
+                    });
+              }
         
               return {dirs,files};
               
