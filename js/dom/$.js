@@ -68,7 +68,7 @@
         }//full
 
         
-        $.$=function(rootnode,nodename){
+        $.$   = function(rootnode,nodename){
         
               if(rootnode){
                     var node    = $(rootnode,nodename);
@@ -85,7 +85,7 @@
         $.center  = {};
         
         
-        $.all=function(root,sel){
+        $.all   = function(root,sel){
         
               if(!sel){
                     if(datatype.is.node(root)){
@@ -100,7 +100,7 @@
         }//all
         
         
-        $.show=function(root,sel){
+        $.show    = function(root,sel){
         
               var node    = $(root,sel);
               if(!node){
@@ -111,7 +111,7 @@
         }//show
         
         
-        $.hide=function(root,sel){
+        $.hide    = function(root,sel){
         
               var node    = $(root,sel);
               if(!node){
@@ -122,7 +122,7 @@
         }//hide
         
         
-        $.rem=function(root,sel){
+        $.rem   = function(root,sel){
         
               var node    = $(root,sel);
               if(!node){
@@ -134,14 +134,14 @@
         }//remove
 
 
-        $.clear=function(root){
+        $.clear   = function(root){
         
               root.replaceChildren();
               
         }//clear
         
         
-        $.nodename=function(root,sel){
+        $.nodename    = function(root,sel){
         
               var node    = $(root,sel);
               if(!node)return;
@@ -153,7 +153,8 @@
         
 
         //$.computed:b
-        $.computed=new Proxy({},{get:(target,prop)=>(node,numeric)=>{
+        
+        $.computed    = new Proxy({},{get:(target,prop)=>(node,numeric)=>{
         
               var doc       = node.ownerDocument;
               var win       = doc.defaultView;
@@ -168,9 +169,11 @@
               return value;
               
         }});
+
         
         //$.style:b
-        $.style=new Proxy({},{get:(target,prop)=>(node,numeric=true)=>{
+        
+        $.style   = new Proxy({},{get:(target,prop)=>(node,numeric=true)=>{
         
               var value     = node.style[prop];
               if(numeric!==false){
@@ -179,9 +182,11 @@
               return value;
               
         }});
+
         
         //$.create:b
-        $.create=new Proxy({},{get (target,prop){
+        
+        $.create    = new Proxy({},{get (target,prop){
         
               var node    = document.createElement(prop);
               
@@ -197,8 +202,9 @@
                     return node;
                     
               }//set
+
               
-              set.object=function(attr){
+              set.object    = function(attr){
               
                     var keys    = Object.keys(attr);
                     keys.forEach(name=>{
@@ -229,8 +235,9 @@
                     })//for
                     
               }//object
+
               
-              set.string=function(str){
+              set.string    = function(str){
               
                     var tn    = document.createTextNode(str);
                     node.append(tn);
@@ -245,7 +252,7 @@
   //:
 
         
-        $.chkbox=function(root,sel,callback){
+        $.chkbox    = function(root,sel,callback){
         
               if(callback===undefined){
                     callback    = sel;
@@ -281,7 +288,7 @@
         }//chkbox
         
         
-        $.chkbox.group=function(root,sel0){
+        $.chkbox.group    = function(root,sel0){
         
               var list    = [];
               var n       = arguments.length;
@@ -307,9 +314,16 @@
                     }//for
                     
               }//read
+
               
-              function set(id){list.forEach(chk=>chk.id==id ? chk.set() : chk.set(false))}
-              set.index=function(index){set(list[index].id)}
+              function set(id){
+              
+                    list.forEach(chk=>chk.id==id ? chk.set() : chk.set(false));
+                    
+              }//set
+
+              
+              set.index   = function(index){set(list[index].id)}
               
               
               var group   = {read,set};
@@ -318,7 +332,7 @@
         }//group
         
         
-        $.input.paste=function(root,name,def=''){
+        $.input.paste   = function(root,name,def=''){
         
               $(root,`#${name}-paste`).onclick    = async e=>{
                                                         var txt                   = await navigator.clipboard.readText();
@@ -329,7 +343,7 @@
         }//input.paste
 
 
-        $.is.parent=function(par,node){
+        $.is.parent   = function(par,node){
         
               while(node){
               
@@ -342,7 +356,7 @@
         }//is.parent
 
 
-        $.center.width=function(node){
+        $.center.width    = function(node){
         
               var w             = $.computed.width(node)||$.style.width(node);
               if(!w){
@@ -353,8 +367,9 @@
               node.style.left   = l+'px';
               
         }//width
+
         
-        $.center.height=function(node){
+        $.center.height   = function(node){
         
               var h               = $.computed.height(node)||$.style.height(node);
               if(!h){
@@ -367,7 +382,7 @@
         }//height
         
         
-        $.drag=function(el,callback,type,params){
+        $.drag    = function(el,callback,type,params){
         
               params    = params||{};
               type      = type||'both';
@@ -451,6 +466,7 @@
                     e.preventDefault();
                     
               }//contextmenu
+
               
               function mu(e){
               
@@ -547,8 +563,7 @@
         }//drag
 
 
-
-        $.select=function(root,sel){
+        $.select    = function(root,sel){
         
               var node    = $(root,sel);
               if(!node){
@@ -573,7 +588,7 @@
         }//select
 
         
-        $.buildnode2=function(node,params){
+        $.buildnode2    = function(node,params){
         
               for(var key in params){
               
@@ -586,7 +601,7 @@
         }//buildnode2
         
         
-        $.scrollbottom=function(node){
+        $.scrollbottom    = function(node){
         
               var h             = node.scrollHeight;
               node.scrollTop    = h;
@@ -594,7 +609,7 @@
         }//scrollbottom
         
         
-        $.track=function(node,callback){
+        $.track   = function(node,callback){
         
               node.addEventListener('mousedown',md);
               
@@ -649,14 +664,14 @@
         }//track
 
 
-        
-        $.caret=function(node,timeout=50){
+        $.caret   = function(node,timeout=50){
         
               if(timeout){
                     setTimeout(caret,timeout);
                     return;
               }
               caret();
+
               
               function caret(){
               
@@ -680,11 +695,20 @@
         }//caret
         
         
-        $.mousetext=function(e,text){
+        $.mousetext   = function(e,text){
         
               var left            = e.pageX+'px';
               var top             = e.pageY+'px';
-              var style           = {position:'absolute',left,top,padding:'10px',border:'1px solid dimgray',borderRadius:'3px',zIndex:999999,background:'white'};
+              var style           = {
+                                          position        : 'absolute',
+                                          left            : left,
+                                          top             : top,
+                                          padding         : '10px',
+                                          border          : '1px solid dimgray',
+                                          borderRadius    : '3px',
+                                          zIndex          : 999999,
+                                          background      : 'white'
+                                    };
               var append          = document.body;
               var div             = $.create.div({style,text,append});
               var rem             = ()=>div.remove();
@@ -696,7 +720,7 @@
         }//mousetext
         
         
-        $.slider=function(node1,slider_node,node2,callback,params={}){
+        $.slider    = function(node1,slider_node,node2,callback,params={}){
 
               if(typeof node1=='string'){
                     node1         = $(params.root,node1);
@@ -722,7 +746,7 @@
               }//slider
 
 
-              slider.md=function(){
+              slider.md   = function(){
 
                     document.body.style.userSelect    = 'none';
                     if(typeof callback?.md=='function'){
@@ -732,7 +756,7 @@
               }//slider.md
 
 
-              slider.mu=function(){
+              slider.mu   = function(){
 
                     document.body.style.userSelect    = '';
                     if(typeof callback?.mu=='function'){
@@ -742,7 +766,7 @@
               }//slider.mu
 
 
-              slider.vert=function(ox){
+              slider.vert   = function(ox){
 
                     var w1    = node1.offsetWidth;
                     var w2    = node2.offsetWidth;
@@ -756,7 +780,7 @@
               }//vert
 
 
-              slider.horiz=function(oy){
+              slider.horiz    = function(oy){
 
                     var h1    = node1.offsetHeight;
                     var h2    = node2.offsetHeight;
@@ -772,8 +796,9 @@
               return slider_node;
                 
         }//slider
+
         
-        $.slider.glass=function(node1,slider_node,node2,callback,params={},mod){
+        $.slider.glass    = function(node1,slider_node,node2,callback,params={},mod){
         
               if(typeof mod.glass=='function'){
                     if(!callback.md){
@@ -835,7 +860,7 @@
         }//find.css
         
         
-        $.stylesheet.copyrule=function(style,selector,style2){
+        $.stylesheet.copyrule   = function(style,selector,style2){
 
               if(typeof style=='string'){
                     style     = $(style);
@@ -863,7 +888,7 @@
         }//copyrule
 
         
-        $.stylesheet.insert=function(style){
+        $.stylesheet.insert   = function(style){
         
               var doc   = document;
               var n     = arguments.length;
@@ -885,6 +910,9 @@
         
         
         
-return $;
+  return $;
 
 })();
+
+
+
