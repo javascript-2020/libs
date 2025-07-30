@@ -217,7 +217,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               }
               
               var txt   = await res.text();
-              console.log(txt);
+                                                                                console.log(txt);
               
               var ok    = 'ok';
               return {ok};
