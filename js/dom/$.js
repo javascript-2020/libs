@@ -734,7 +734,7 @@
               if(typeof node2=='string'){
                     node2         = $(params.root,node2);
               }
-                                                                                //console.log(node1,slider_node,node2);
+                                                                                params.df && console.log(node1,slider_node,node2);
               $.track(slider_node,slider);
 
 
@@ -773,7 +773,7 @@
 
                     var w1    = node1.offsetWidth;
                     var w2    = node2.offsetWidth;
-                                                                                //console.log(ox,w1,w2);
+                                                                                params.df && console.log(ox,w1,w2);
                     if(w1+ox<minw)return;
                     if(w2-ox<minw)return;
 
@@ -787,7 +787,7 @@
               
                     var h1    = node1.offsetHeight;
                     var h2    = node2.offsetHeight;
-                                                                                console.log(oy,h1,h2);
+                                                                                params.df && console.log(oy,h1,h2);
                     if(h1+oy<minh)return;
                     if(h2-oy<minh)return;
 
