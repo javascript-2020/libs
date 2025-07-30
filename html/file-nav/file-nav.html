@@ -414,7 +414,7 @@ mod.filenav   = function(df2){
                           var blob      = input.files[i];
                           var name      = blob.name;
                           var result    = await callback('file','upload',path,name,blob);
-                          if(result!==false){
+                          if(result){
                                 var {url,auth}    = result;
                                 var fn            = path+blob.name;
                                 await file.upload(url,auth,fn,blob);
@@ -539,7 +539,8 @@ mod.filenav   = function(df2){
               var path      = ui.rd.path();
               
               var result    = await callback('dir','clear',path);
-              if(result===false){
+              //if(result===false){
+              if(!result){
                     update(path);
                     return;
               }
