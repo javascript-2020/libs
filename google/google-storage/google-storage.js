@@ -162,7 +162,7 @@ curl -X GET \
               }
               
               var blob    = await res.blob();
-              return {ok:blob};
+              return {ok:blob,blob};
               
         }//load
         
