@@ -438,7 +438,6 @@ mod.filenav   = function(df2){
                     return;
               }
               
-              var blob;
               var path      = ui.rd.path();
               var name      = cur.filename;
               var abs       = path+name;
@@ -447,7 +446,8 @@ mod.filenav   = function(df2){
               if(result===false){
                     return;
               }
-              blob    = result?.blob;
+              
+              var blob    = result?.blob;
               if(!blob){
                     var {url,auth}    = result;
                     var blob          = await file.download(url,auth,path,name);
