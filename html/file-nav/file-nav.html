@@ -718,7 +718,7 @@ mod.filenav   = function(df2){
         obj.display   = function(path,dirs,files){return display.apply(null,arguments)}
         
         function display(path,dirs,files){
-                                                                                df2 && debugger;
+                                                                                if(df2)debugger;
                                                                                 debug('display',path);
                                                                                 df2 && console.dir(dirs);
                                                                                 df2 && console.dir(files);
