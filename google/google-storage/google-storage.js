@@ -408,7 +408,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               
               var json    = await res.json();
               
-              var files   = {};
+              var files   = [];
               
               json.items.forEach(item=>{
                                                                                 console.log(item);
