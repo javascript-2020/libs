@@ -178,12 +178,27 @@ curl -X POST --data-binary @OBJECT_LOCATION \
 
         obj.save    = save;
         
-        async function save(token,path,blob){
-        
+        async function save(token,bucket,path,blob){
+
+              if(arguments.length==3){
+                    var i             = bucket.indexOf('/');
+                    path              = bucket.slice(i+1);
+                    bucket            = bucket.slice(0,i);
+              }
+              if(path.startsWith('/')){
+                    path              = path.slice(1);
+              }
+
+              blob    = [...arguments].at(-1);              
+
+/*        
               var i             = path.indexOf('/');
               var bucket        = path.slice(0,i);
               
               path              = path.slice(i+1);
+*/
+
+
               
               var i             = path.lastIndexOf('/');
               var filename      = path.slice(i+1);
