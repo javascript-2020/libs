@@ -416,25 +416,27 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               }
               
               var json    = await res.json();
-              
+                                                                                      console.log(json);
               var files   = [];
               
-              json.items.forEach(item=>{
-                    
-                    if(item.name.startsWith(path)){
-                                                                                console.log(item);
-                          var name    = item.name.slice(path.length);
-                          if(name.startsWith('/')){
-                                name    = name.slice(1);
+              if(json.items){
+                    json.items.forEach(item=>{
+                          
+                          if(item.name.startsWith(path)){
+                                                                                      console.log(item);
+                                var name    = item.name.slice(path.length);
+                                if(name.startsWith('/')){
+                                      name    = name.slice(1);
+                                }
+                                
+                                var file    = {};
+                                file.name   = name;
+                                
+                                files.push(file);
                           }
                           
-                          var file    = {};
-                          file.name   = name;
-                          
-                          files.push(file);
-                    }
-                    
-              });
+                    });
+              }
         
               return {files};
               
