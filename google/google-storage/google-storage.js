@@ -242,6 +242,9 @@ curl -X POST --data-binary @OBJECT_LOCATION \
 
         obj.delete    = async function(token,bucket,path){
 
+              if(path.startsWith('/')){
+                    path    = path.slice(1);
+              }
               path          = encodeURIComponent(path);
               
               var url       = `https://storage.googleapis.com/storage/v1/b/${bucket}/o/${path}`;
