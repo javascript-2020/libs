@@ -240,7 +240,43 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//save
         
 
+        obj.delete    = function(token,bucket,path){
 
+              path          = encodeURIComponent(path);
+              
+              var url       = `https://storage.googleapis.com/storage/v1/b/${bucket}/o/${path}`;
+              var method    = 'delete';
+              var headers   = {
+                    authorization     : `Bearer ${token}`,
+                    'content-type'    : 'application/json'
+              };
+              
+              var err;
+              try{
+              
+                    var res   = await fetch(url,{method,headers});
+                    
+              }
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    return {error:err};
+              }
+              
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
+              }
+                                                                                // Should be empty if successful
+              var ok   = await res.text(); 
+              return {ok};
+        
+        }//delete
+
+    
         obj.refresh   = refresh;
         
         async function refresh(client_id,client_secret,refresh_token){
