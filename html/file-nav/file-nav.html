@@ -443,7 +443,7 @@ mod.filenav   = function(df2){
               var name      = cur.filename;
               var abs       = path+name;
               
-              var result    = await callback('file','download',path);
+              var result    = await callback('file','download',path,name);
               if(result===false){
                     return;
               }
