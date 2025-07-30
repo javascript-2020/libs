@@ -240,7 +240,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//save
         
 
-        obj.delete    = function(token,bucket,path){
+        obj.delete    = async function(token,bucket,path){
 
               path          = encodeURIComponent(path);
               
