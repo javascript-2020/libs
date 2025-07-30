@@ -300,7 +300,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               
               if(json.items){
                     json.items.forEach(item=>{
-                                                          console.log(item);
+                                                                                //console.log(item);
                           var i         = item.name.lastIndexOf('/');
                           var name      = item.name.slice(i+1);
                           if(!name){
