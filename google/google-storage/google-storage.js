@@ -303,6 +303,9 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                                           console.log(item);
                           var i         = item.name.lastIndexOf('/');
                           var name      = item.name.slice(i+1);
+                          if(!name){
+                                return;
+                          }
                           
                           var file      = {};
                           file.name     = name;
