@@ -784,10 +784,10 @@
 
 
               slider.horiz    = function(oy){
-
+              
                     var h1    = node1.offsetHeight;
                     var h2    = node2.offsetHeight;
-
+                                                                                console.log(oy,h1,h2);
                     if(h1+oy<minh)return;
                     if(h2-oy<minh)return;
 
