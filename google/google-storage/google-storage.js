@@ -508,11 +508,11 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var res       = await fetch(url,{method,headers,body});
               var result    = await res.json();
         
-              var id        = result.metadata.build.id;
+              var build     = result.metadata.build.id;
               var logurl    = result.metadata.build.logUrl;
 
               
-              return {result,monitor,id,logurl};
+              return {result,monitor,build,logurl};
 
               
               async function monitor(callback){
