@@ -3,12 +3,17 @@
 
 debug;
 
+//var debug_id='';
 
         function debug(){
           
               if(!df)return;
               var str   = [...arguments].join(' ');
-              console.log('[ https-file ]',str);
+              var id='not set';
+              if(typeof debug_id!='undefined'){
+                    id    = debug_id;
+              }
+              console.log(`[ ${id} ]`,str);
               
         }//debug
         
