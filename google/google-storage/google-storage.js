@@ -560,7 +560,56 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//deploy
         
      
+        obj.logs    = function({token,project,service}){
         
+              var page    = null;
+              var done    = false;
+              var ct      = 0;
+              var max     = 10;
+              
+              while(!done){
+              
+                    ct++;
+                    if(ct==max){
+                          done    = true;
+                    }
+                  
+                    try{
+                    
+                          var method    = 'post';
+                          var headers   = {
+                                authorization     : `Bearer ${token}`,
+                                'content-type'    : 'application/json'
+                          };
+                          var body    = JSON.stringify({
+                                resourceNames   : [`projects/${project}`],
+                                filter          : `resource.type="cloud_run_revision" AND resource.labels.service_name="${service}"`,
+                                pageSize        : 50,
+                                pageToken       : page
+                          });
+                          var url     = 'https://logging.googleapis.com/v2/entries:list';
+                          var res     = await fetch(url,{method,headers,body});
+                          var data    = await res.json();
+                          
+                          console.log(data.entries);
+                          
+                          page    = data.nextPageToken;
+                          if(!page){
+                                done    = true;
+                          }
+                          
+                    }//try
+                    catch(err){
+                    
+                          done    = true;
+                          
+                    }//catch
+                    
+              }//while
+        
+        }//logs
+
+
         
   //:
   
