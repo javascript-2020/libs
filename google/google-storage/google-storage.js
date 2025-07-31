@@ -536,6 +536,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                           
                           var res       = await fetch(url,{headers});
                           var json      = await res.json();
+                                                                                console.log(json);
                                                                                 console.log(ct,json.status);
                           var status    = json.status.toLowerCase();
                           
