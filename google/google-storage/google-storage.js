@@ -469,7 +469,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                           {
                                 name    : 'gcr.io/cloud-builders/gcloud',
                                 args    : [
-                                                'run','deploy',func,
+                                                'run','deploy',service,
                                                 '--image',`gcr.io/${project}/${service}:latest`,
                                                 '--region',region,
                                                 '--platform','managed',
