@@ -447,7 +447,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
   //:
   
   
-        obj.deploy    = async function({token,email,bucket,zip,project,service}){
+        obj.deploy    = async function({token,email,bucket,zip,project,service,region}){
         
               var timeout   = '900s';
               var config    = {
