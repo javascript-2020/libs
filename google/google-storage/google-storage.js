@@ -560,7 +560,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//deploy
         
      
-        obj.logs    = function({token,project,service}){
+        obj.logs    = async function({token,project,service}){
         
               var page    = null;
               var done    = false;
