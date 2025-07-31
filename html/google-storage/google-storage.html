@@ -590,9 +590,10 @@ mod['google-storage']   = function(){
           
               var token       = $(shadow,'#token').value;
 
-              var abs         = file.abs;
+              var bucket      = file.bucket;
+              var path        = file.path;
               
-              var result      = await gs.load(token,abs);
+              var result      = await gs.load(token,bucket,path);
               if(result.error){
                     log.error(result.error);
                     return;
@@ -611,9 +612,10 @@ mod['google-storage']   = function(){
 
               var token       = $(shadow,'#token').value;
               
-              var abs         = file.abs;
+              var bucket      = file.bucket;
+              var path        = file.path;
               
-              var result      = await gs.save(token,abs,blob);
+              var result      = await gs.save(token,bucket,path,blob);
               if(result.error){
                     log.error(result.error);
                     return;
