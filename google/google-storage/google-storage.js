@@ -479,7 +479,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                           {
                                 name    : 'gcr.io/cloud-builders/gcloud',
                                 args    : [
-                                                'run','services','add-iam-policy-binding',func,
+                                                'run','services','add-iam-policy-binding',service,
                                                 '--region',region,
                                                 '--member=allUsers',
                                                 '--role=roles/run.invoker'
