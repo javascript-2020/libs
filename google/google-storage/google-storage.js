@@ -510,6 +510,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         
               var id        = result.metadata.build.id;
               var logurl    = result.metadata.build.logUrl;
+
               
               return {result,monitor,id,logurl};
 
