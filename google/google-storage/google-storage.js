@@ -508,9 +508,58 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var res       = await fetch(url,{method,headers,body});
               var result    = await res.json();
         
-              return result;
+              var id        = result.metadata.build.id;
+              var logurl    = result.metadata.build.logUrl;
+              
+              return {result,monitor,id,logurl};
+
+              
+              async function monitor(callback){
+              
+                    var url       = `https://cloudbuild.googleapis.com/v1/projects/${project}/builds/${id}`;
+                    var headers   = {
+                          authorization   : `Bearer ${token}`
+                    };
+                    
+                    var done    = false;
+                    var ct      = 0;
+                    var max     = 25;
+                    
+                    while(!done){
+                    
+                          ct++;
+                          if(ct==max){
+                                callback(ct,'max');
+                                return;
+                          }
+                          
+                          var res       = await fetch(url,{headers});
+                          var json      = await res.json();
+                                                                                console.log(ct,json.status);
+                          var status    = json.status.toLowerCase();
+                          
+                          callback(ct,status);
+                          
+                          switch(status){
+                          
+                            case 'success'          :
+                            case 'failure'          :
+                            case 'internal_error'   :
+                            case 'timeout'          :
+                            case 'cancelled'        :
+                                                      done    = true;
+                                                      
+                          }//switch
+                          
+                          await new Promise(res=>setTimeout(res,10_000));
+                          
+                    }//while
+              
+              }//monitor
               
         }//deploy
+        
+     
         
         
   //:
