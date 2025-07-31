@@ -443,6 +443,75 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               
         }//full
         
+  
+  //:
+  
+  
+        obj.deploy    = async function({email,zip,project,service,token}){
+        
+              var timeout   = '900s';
+              var config    = {
+              
+                    serviceAccount    : `projects/${project}/serviceAccounts/${email}`,
+      
+                    source: {
+                          storageSource: {bucket,object:zip}
+                    },
+                    steps: [
+                          {
+                                name    : 'gcr.io/cloud-builders/docker',
+                                args    : ['build','-t',`gcr.io/${project}/${service}:latest`,'.']
+                          },
+                          {
+                                name    : 'gcr.io/cloud-builders/docker',
+                                args    : ['push',`gcr.io/${project}/${service}:latest`]
+                          },
+                          {
+                                name    : 'gcr.io/cloud-builders/gcloud',
+                                args    : [
+                                                'run','deploy',func,
+                                                '--image',`gcr.io/${project}/${service}:latest`,
+                                                '--region',region,
+                                                '--platform','managed',
+                                                '--allow-unauthenticated'
+                                          ]
+                          },
+                          {
+                                name    : 'gcr.io/cloud-builders/gcloud',
+                                args    : [
+                                                'run','services','add-iam-policy-binding',func,
+                                                '--region',region,
+                                                '--member=allUsers',
+                                                '--role=roles/run.invoker'
+                                          ]
+                          }
+      
+                          
+                    ],
+                    timeout,
+                    options   : {
+                          logging   : 'CLOUD_LOGGING_ONLY'
+                    }
+                    
+              };
+      
+      
+              var url       = `https://cloudbuild.googleapis.com/v1/projects/${project}/builds`;
+              var headers   = {
+                    authorization     : `Bearer ${token}`,
+                    'content-type'    : 'application/json'
+              };
+              var method    = 'post';
+              var body      = JSON.stringify(config);
+      
+              
+              var res       = await fetch(url,{method,headers,body});
+              var result    = await res.json();
+        
+              return result;
+              
+        }//deploy
+        
         
   //:
   
