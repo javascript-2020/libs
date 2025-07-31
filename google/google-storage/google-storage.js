@@ -517,7 +517,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               
               async function monitor(callback){
               
-                    var url       = `https://cloudbuild.googleapis.com/v1/projects/${project}/builds/${id}`;
+                    var url       = `https://cloudbuild.googleapis.com/v1/projects/${project}/builds/${build}`;
                     var headers   = {
                           authorization   : `Bearer ${token}`
                     };
