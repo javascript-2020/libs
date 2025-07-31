@@ -472,6 +472,8 @@ mod['google-storage']   = function(){
               file.icon       = icon.src;
               
               file.abs        = abs;
+              file.bucket     = bucket;
+              file.path       = path;
 
 
               load(file);
@@ -499,6 +501,8 @@ mod['google-storage']   = function(){
               file.icon       = icon.src;
               
               file.abs        = abs;
+              file.bucket     = bucket;
+              file.path       = file.path;
 
 
               var blob        = await source(file);
