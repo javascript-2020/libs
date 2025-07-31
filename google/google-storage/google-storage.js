@@ -524,7 +524,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                     
                     var done    = false;
                     var ct      = 0;
-                    var max     = 25;
+                    var max     = 50;
                     
                     while(!done){
                     
