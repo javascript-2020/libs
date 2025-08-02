@@ -1,0 +1,89 @@
+
+
+
+<filename-ui>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+            </style>
+            
+            <img id=icon>
+            
+            <div id=filename></div>
+            
+      </template>
+      
+      
+      <script>
+
+
+mod['filename-ui']    = function(){
+ 
+  var obj   = {};
+  
+  
+        obj.initmod   = function(params){
+          
+              ext   = params.ext;
+              $     = params.$;
+
+              
+        }//initmod
+        
+        
+  //:
+  
+        var root;
+        var icon;
+        var filename;
+  //:
+  
+  
+        obj.init    = function(){
+        }//init
+        
+        
+  //:
+  
+  
+        obj.initdom   = function(rootnode){
+          
+              var host                  =  $(rootnode,'filename-ui');
+              root                      = host.shadowRoot;
+              
+              
+              icon                      = $(root,'#icon');
+              
+              
+              filename                  = $(root,'#filename');
+              
+              
+              
+        }//initdom
+
+
+  //:
+  
+  
+        obj.show    = function(file){
+          
+              icon.src    = file.icon;
+              
+              filename.textContent    = file.filename;
+              
+        }//show
+        
+        
+        
+  return obj;
+  
+//filename-ui 
+}
+      
+      </script>
+
+</filename-ui>
+
+
