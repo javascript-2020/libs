@@ -192,6 +192,11 @@ function filemod(){
                     var txt   = editor.getValue();
                     blob      = new Blob([txt]);
               }
+              
+              if(!blob){
+                    log.orange('no source');
+                    return;
+              }
 
               switch(cur.type){
                 
