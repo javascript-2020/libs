@@ -177,6 +177,20 @@
 
         }//raw
         
+
+  //:
+  
+  
+        parse.to.raw    = function(url){
+        
+              var {owner,repo,branch,path}    = parse(url);
+              
+              var url     = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
+              
+              return url;
+              
+        }//raw
+        
         
   //:        
 
