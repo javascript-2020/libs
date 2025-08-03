@@ -33,23 +33,16 @@
   //:
 
         
-        setTimeout(init,50);
+        github.df             = true;
         
-        function init(){
-        
-              github.df             = true;
-              
-              github.parse          = parse;  
-              github.load           = load;
-              github.save           = save;
-              github.backup         = backup;
-              github.download       = download;
-              github.build          = build;
+        github.parse          = parse;  
+        github.load           = load;
+        github.save           = save;
+        github.backup         = backup;
+        github.download       = download;
+        github.build          = build;
 
               
-        }//init
-  
-        
   //:
   
   
