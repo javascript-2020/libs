@@ -235,33 +235,46 @@ function editor(){
     
         obj.initdom   = async function(rootnode,mode='javascript'){
         
-              root                              = $.$(rootnode,'editor-root');
-              shadow                            = root.shadowRoot;
+              root                                        = $.$(rootnode,'editor-root');
+              shadow                                      = root.shadowRoot;
   
               menumod.add.style(shadow);
-              var style                         = $(shadow,'style');
+              var style                                   = $(shadow,'style');
   
   
-              hdr                               = $(shadow,'#hdr');
+              hdr                                         = $(shadow,'#hdr');
               
-              card                              = $(shadow,'.menu');
-              $(shadow,'#menu-icon').onclick    = menumod.click(card,'both',false,menu);
+              card                                        = $(shadow,'.menu');
+              $(shadow,'#menu-icon').onclick              = menumod.click(card,'both',false,menu);
               
-              deficon                           = $(hdr,'#filename-icon').src;
+              var sha256_root                             = $(card,'#sha256-root');
+              $(sha256_root,'.copy').onclick              = async e=>{
+                                                        
+                                                                  var txt   = $(card,'#sha256-root #value').textContent;
+                                                                  await navigator.clipboard.writeText(txt);
+                                                              
+                                                            }//copy
+              $(sha256_root,'.clear').onclick             = async e=>{
+                
+                                                                  $(card,'#sha256-root #value').textContent   = '';
+                                                              
+                                                            }//clear
               
-              $(shadow,'#clear').onclick        = btn.clear;
-              $(shadow,'#copy').onclick         = btn.copy;
-              $(shadow,'#paste').onclick        = btn.paste;
+              deficon                                     = $(hdr,'#filename-icon').src;
               
-              row                               = $(hdr,'#row');
-              row.onkeydown                     = kd.row;
-              row.onmousedown                   = e=>e.target.select();
-              col                               = $(hdr,'#col');
-              col.onkeydown                     = kd.col;
-              col.onmousedown                   = e=>e.target.select();
+              $(shadow,'#clear').onclick                  = btn.clear;
+              $(shadow,'#copy').onclick                   = btn.copy;
+              $(shadow,'#paste').onclick                  = btn.paste;
               
-              $(hdr,'#top').onclick             = btn.top;
-              $(hdr,'#bottom').onclick          = btn.bottom;
+              row                                         = $(hdr,'#row');
+              row.onkeydown                               = kd.row;
+              row.onmousedown                             = e=>e.target.select();
+              col                                         = $(hdr,'#col');
+              col.onkeydown                               = kd.col;
+              col.onmousedown                             = e=>e.target.select();
+              
+              $(hdr,'#top').onclick                       = btn.top;
+              $(hdr,'#bottom').onclick                    = btn.bottom;
   
   
               await setup(shadow,mode);
