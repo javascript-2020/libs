@@ -594,6 +594,28 @@ function editor(){
               editor.gotoLine(pos.row+1,pos.col);
               
         }//trim
+        
+        
+        menu.sha256   = function(){
+          
+              var txt   = editor.getValue();
+              sha256(txt);
+              
+        }//sha256
+
+
+
+        async function sha256(txt){
+          
+            const msg   = new TextEncoder().encode(txt);
+            const buf   = await crypto.subtle.digest('SHA-256',msg);
+        
+            var uint8   = new Uint8Array(hashBuffer);
+            var hex     = uint8.reduce((a,byte)=>a   += b.toString(16).padStart(2,'0'),'')
+            console.log(hex);
+            
+        }//sha256
+
 
 
   //:
