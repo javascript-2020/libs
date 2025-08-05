@@ -208,6 +208,8 @@ function editor(){
         var root;
         var shadow;
         
+        var card;
+        
         var hdr;
         var row;
         var col;
@@ -242,7 +244,7 @@ function editor(){
   
               hdr                               = $(shadow,'#hdr');
               
-              var card                          = $(shadow,'.menu');
+              card                              = $(shadow,'.menu');
               $(shadow,'#menu-icon').onclick    = menumod.click(card,'both',false,menu);
               
               deficon                           = $(hdr,'#filename-icon').src;
@@ -616,7 +618,7 @@ function editor(){
             var uint8   = new Uint8Array(buf);
             var hex     = uint8.reduce((a,byte)=>a   += byte.toString(16).padStart(2,'0'),'')
             
-            //$(
+            $(card,'#sha256-root #value').textContent   = hex;
             console.log(hex);
             
         }//sha256
