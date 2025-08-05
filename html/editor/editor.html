@@ -610,7 +610,7 @@ function editor(){
             const msg   = new TextEncoder().encode(txt);
             const buf   = await crypto.subtle.digest('SHA-256',msg);
         
-            var uint8   = new Uint8Array(hashBuffer);
+            var uint8   = new Uint8Array(buf);
             var hex     = uint8.reduce((a,byte)=>a   += b.toString(16).padStart(2,'0'),'')
             console.log(hex);
             
