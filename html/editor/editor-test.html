@@ -16,6 +16,8 @@
         var mod                   = {};
 
         
+        var menu;
+        
         var editor;
         
         
@@ -29,23 +31,24 @@
         async function init(){
                                                                                 console.log('init');
   
+  
+  
+              menu                      = menumod();
+
               
               editor                    = mod.editor();
               
-              editor.initmod({ext,$,menumod});
+              editor.initmod({ext,$,menumod:menu});
               
               editor.init();
               
               
               
               
-              window.onfocus            = ()=>editor && editor.focus();
+              window.onfocus            = focus;
               
               keydown.add(kd);
               
-              menumod                   = menumod();
-              menumod.on.close          = ()=>editor.focus();
-
 
               
               initdom(document.body);
@@ -123,6 +126,16 @@
             }//initdom
 
 
+  //:
+  
+  
+            function focus(){
+              
+                  editor.focus();              
+                  
+            }//focus
+            
+            
   //:
   
   
