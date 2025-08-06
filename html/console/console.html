@@ -7,15 +7,20 @@
       
             <style>
             
-            
+  #console
+    {border:1px solid lightgray;height:200px}
+    
+    
             </style>
 
 
             
-            <div>
+            <div id=console>
             
             
             </div>
+
+
       
       </template>
       
@@ -69,6 +74,33 @@ mod.console   = function(){
               
         }//libs
 
+        
+  //:
+  
+  
+        obj.initdom   = function(rootnode){
+
+
+          
+              if(rootnode.nodeName==='CONSOLE'){
+                    root    = rootnode;
+              }else{
+                    root    = $.$(rootnode,'console');
+              }
+
+
+
+              
+              var node    = $(root,'#cons');
+              
+              console     = console.create(node);
+              
+              
+              
+              
+        }//initdom
+        
+        
         
   //:
   
