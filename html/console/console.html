@@ -35,7 +35,7 @@ mod.console   = function(){
   var obj   = {};
   
   
-        var ext,$,ace
+        var ext,$,ace,store
         ;
         
         obj.initmod   = function(params){
@@ -43,6 +43,7 @@ mod.console   = function(){
               ext       = params.ext;
               $         = params.$;
               ace       = params.ace;
+              store     = params.store;
               
         }//initmod
         
@@ -72,6 +73,7 @@ mod.console   = function(){
               var url         = 'javascript-2020:external:/TarVK/chromeConsole/console.js';
               var [console]   = await ext.text.github(url);
               console         = eval(console);
+              console.initmod({store});
               
               
         }//libs
