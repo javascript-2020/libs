@@ -74,7 +74,8 @@ mod.console   = function(){
               
         }//init
         
-        
+var style;
+
         async function libs(){
           
               var url         = 'javascript-2020:external:/TarVK/chromeConsole/console.js';
@@ -82,6 +83,10 @@ mod.console   = function(){
               console         = eval(console);
               console.initmod({store});
               
+              var url       = 'javascript-2020:external:main:TarVK/chromeConsole/console.css';
+              var css       = await ext.text.github[url];
+              style         = document.createElement('style');
+              style.textContent   = css;
               
         }//libs
 
@@ -100,7 +105,7 @@ mod.console   = function(){
                     host    = $.$(rootnode,'console-root');
               }
               root    = host.shadowRoot;
-
+root.append(style);
 
               import_style(root);
               
