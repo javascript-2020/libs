@@ -179,6 +179,10 @@
                   <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
             </log>
       
+            <div>
+                  <input value=test type=button>
+            </div>
+            
       <script>
       
 
@@ -196,12 +200,24 @@
               
               
               
+              $(root,'[value=test]').onclick    = btn.test;
+              
+              
+              
               
         }//initdom
         
         
   //:
   
+  
+  
+        btn.test    = function(){
+          
+              console.test();
+              
+              
+        }//test
   
   
   init.stack.complete;
