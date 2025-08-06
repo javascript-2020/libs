@@ -69,7 +69,7 @@ mod.console   = function(){
           
               var url         = 'javascript-2020:external:/TarVK/chromeConsole/console.js';
               var [console]   = await ext.text.github(url);
-              console         = eval(js);
+              console         = eval(console);
               
               
         }//libs
