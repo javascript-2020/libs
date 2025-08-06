@@ -92,17 +92,15 @@ mod.console   = function(){
         obj.initdom   = function(rootnode){
 
 
-              debugger;
-          
+              var host;
               if(rootnode.nodeName==='CONSOLE'){
-                    root    = rootnode;
+                    host    = rootnode;
               }else{
-                    root    = $.$(rootnode,'console-root');
+                    host    = $.$(rootnode,'console-root');
               }
+              root    = host.shadowRoot;
 
 
-
-              debugger;
 
               
               var node    = $(root,'#console');
