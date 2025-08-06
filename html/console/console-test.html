@@ -42,13 +42,17 @@
               
         async function init(){
 
+
+
+              await scripts();
+
               
               console                   = mod.console();
               log                       = mod.log();
 
 
               
-              console.initmod({ext,$});
+              console.initmod({ext,$,ace});
               log.initmod({ext,$});
               
               
@@ -130,6 +134,28 @@
         }//ext_fn
 
 })();
+
+
+        function scripts(){
+  
+              var resolve,load    = new Promise(res=>resolve=res);
+              
+              var script      = document.createElement('script');
+              script.src      = 'https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/ace.js';
+              script.onload   = onload;
+              document.head.append(script);
+              
+              return load;
+              
+              
+              function onload(){
+                
+                    resolve();
+                    
+              }//onload
+              
+        }//scripts
+
 
 
             </script init>
