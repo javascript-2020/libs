@@ -619,13 +619,14 @@ function editor(){
         
         menu.wordwrap   = function(){
           
-              var wrap    = editor.getOption('wrap');
-              if(wrap=='off'){
+              var wrap1   = editor.getOption('wrap');
+              if(wrap1=='off'){
                     editor.setOption('wrap',true);
               }else{
                     editor.setOption('wrap',false);
               }
-              
+              var wrap2   = editor.getOption('wrap');
+                                                                                console.log('wrap',wrap1,'->',wrap2);
         }//wordwrap
         
         
