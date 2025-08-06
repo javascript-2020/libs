@@ -55,6 +55,13 @@ mod.console   = function(){
   
         var console;
         
+        
+        
+        var root;
+        
+        
+        
+        
   
   //:
   
@@ -85,6 +92,7 @@ mod.console   = function(){
         obj.initdom   = function(rootnode){
 
 
+              debugger;
           
               if(rootnode.nodeName==='CONSOLE'){
                     root    = rootnode;
@@ -94,9 +102,10 @@ mod.console   = function(){
 
 
 
+              debugger;
+
               
               var node    = $(root,'#console');
-              debugger;
               console     = console.create(node);
               
               
