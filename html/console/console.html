@@ -43,9 +43,10 @@ mod.console   = function(){
         
   //:
 
+        var store       = {};
+        store.console   = window.console;
   
-  
-        var Console;
+        var console;
         
   
   //:
@@ -61,8 +62,9 @@ mod.console   = function(){
         
         async function libs(){
           
-              var js    = await ext.text.github();
-              Console   = eval(js);
+              var url         = 'javascript-2020:external:/TarVK/chromeConsole/console.js';
+              var [console]   = await ext.text.github(url);
+              console         = eval(js);
               
               
         }//libs
@@ -73,7 +75,18 @@ mod.console   = function(){
   
   
   
+        obj.create    = function(root){
+          
+              var cons    = console.create(root);
+              return cons;
+              
+              
+        }//create
   
+  
+
+
+
   
   
   return obj;
