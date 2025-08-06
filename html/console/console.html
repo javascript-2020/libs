@@ -74,6 +74,7 @@ mod.console   = function(){
               var [console]   = await ext.text.github(url);
               console         = eval(console);
               console.initmod({store});
+              
               store.console.log(console);
               
               
@@ -97,7 +98,7 @@ mod.console   = function(){
 
               
               var node    = $(root,'#cons');
-              
+              debugger;
               console     = console.create(node);
               
               
