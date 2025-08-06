@@ -185,6 +185,7 @@
       
             <div>
                   <input value=test type=button>
+                  <input value=log type=button>
             </div>
             
       <script>
@@ -210,6 +211,7 @@
               
               
               $(root,'[value=test]').onclick    = btn.test;
+              $(root,'[value=log]').onclick     = btn.log;
               
               
               
@@ -228,6 +230,28 @@
               
         }//test
   
+  
+        btn.log   = function(){
+
+          
+              console.log('helloworld');
+              
+              
+              
+              var test    = {
+                    hello:'world',
+                    key:'value',
+                    test:123,
+                    debug:true
+              };
+              
+              console.log(test);
+              
+          
+        }//log
+        
+        
+        
   
   init.stack.complete;
   
