@@ -105,7 +105,10 @@
                         <img id=menu-icon>
             
                         <div class=menu style='display:none'>
+                        
                               <div id=trim class=menu-opt>trim</div>
+                              <div id=wordwrap class=menu-opt>word wrap</div>
+                              
                               <div id=sha256-root>
                                     <div id=sha256 class=menu-opt>
                                           sha256
@@ -612,6 +615,10 @@ function editor(){
               editor.gotoLine(pos.row+1,pos.col);
               
         }//trim
+        
+        
+        menu.wordwrap   = function(){
+        }//wordwrap
         
         
         menu.sha256   = function(){
