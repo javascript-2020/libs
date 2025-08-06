@@ -113,7 +113,7 @@ var style;
               var node    = $(root,'#console');
               cons        = console.create(node);
               
-              var keys    = Object.keys(cons);
+              var keys    = Object.keys(cons.__proto__);
               store.console.log(keys);
               
               
