@@ -11,6 +11,23 @@
     {border:1px solid lightgray;height:200px}
     
     
+  #ftr
+    {display:flex;gap:10px}
+    
+  #ftr>div
+    {display:flex;}
+    
+  .icon
+    {width:20px;height:20px;border:1px solid lightgray;border-radius:3px;box-sizing:border-box}
+  #clear
+    {}
+  #log-icon
+    {}
+  #warn-icon
+    {}
+  #error-icon
+    {}
+    
             </style>
 
 
@@ -20,6 +37,27 @@
             
             </div>
 
+
+            <div id=ftr>
+            
+                  <img id=clear>
+                  
+                  <div id=log-root>
+                        <img id=log-icon>
+                        <div id=log></div>
+                  </div>
+                  
+                  <div id=warn-root>
+                        <img id=warn-icon>
+                        <div id=warn></div>
+                  </div>
+                  
+                  <div id=error-root>
+                        <img id=error-icon>
+                        <div id=error></div>
+                  </div>
+                  
+            </div>
 
       
       </template>
@@ -50,11 +88,14 @@ mod.console   = function(){
         
   //:
 
+
         var store       = {};
         store.console   = window.console;
+
   
         var console;
         var cons;
+        var style;
         
         
         var root;
@@ -74,7 +115,6 @@ mod.console   = function(){
               
         }//init
         
-var style;
 
         async function libs(){
           
