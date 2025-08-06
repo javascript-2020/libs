@@ -1,0 +1,88 @@
+
+
+
+<console>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+            
+            </style>
+
+
+            
+            <div>
+            
+            
+            </div>
+      
+      </template>
+      
+      
+      
+      
+      <script>
+      
+
+mod.console   = function(){
+  
+  var obj   = {};
+  
+  
+        var ext,$
+        ;
+        
+        obj.initmod   = function(params){
+          
+              ext   = params.ext;
+              $     = params.$;
+              
+        }//initmod
+        
+        
+  //:
+
+  
+  
+        var Console;
+        
+  
+  //:
+  
+  
+        obj.init    = async function(){
+          
+          
+              await libs();
+              
+        }//init
+        
+        
+        async function libs(){
+          
+              var js    = await ext.text.github();
+              Console   = eval(js);
+              
+              
+        }//libs
+
+        
+  //:
+  
+  
+  
+  
+  
+  
+  
+  return obj;
+  
+  
+}//console
+
+
+      </script>
+      
+      
+</console>
