@@ -35,13 +35,14 @@ mod.console   = function(){
   var obj   = {};
   
   
-        var ext,$
+        var ext,$,ace
         ;
         
         obj.initmod   = function(params){
           
-              ext   = params.ext;
-              $     = params.$;
+              ext       = params.ext;
+              $         = params.$;
+              ace       = params.ace;
               
         }//initmod
         
@@ -61,6 +62,7 @@ mod.console   = function(){
           
           
               await libs();
+
               
         }//init
         
@@ -74,7 +76,7 @@ mod.console   = function(){
               
         }//libs
 
-        
+
   //:
   
   
