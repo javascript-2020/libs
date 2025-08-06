@@ -54,7 +54,7 @@ mod.console   = function(){
         store.console   = window.console;
   
         var console;
-        
+        var cons;
         
         
         var root;
@@ -104,7 +104,7 @@ mod.console   = function(){
 
               
               var node    = $(root,'#console');
-              console     = console.create(node);
+              cons        = console.create(node);
               
               
               
@@ -117,16 +117,31 @@ mod.console   = function(){
   
   
   
-  
+/*
+
+
         obj.create    = function(root){
           
-              var cons    = console.create(root);
+              cons    = console.create(root);
               return cons;
               
               
         }//create
   
   
+*/
+
+
+
+  
+        obj.test    = function(){
+          
+
+              cons.log('helloworld');
+              
+              
+              
+        }//test
 
 
 
