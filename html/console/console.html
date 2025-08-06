@@ -71,11 +71,9 @@ mod.console   = function(){
         async function libs(){
           
               var url         = 'javascript-2020:external:/TarVK/chromeConsole/console.js';
-              var [console]   = await ext.text.github(url);
+              [console]       = await ext.text.github(url);
               console         = eval(console);
               console.initmod({store});
-              
-              store.console.log(console);
               
               
         }//libs
