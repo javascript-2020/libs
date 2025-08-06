@@ -92,7 +92,7 @@ mod.console   = function(){
         obj.initdom   = function(rootnode){
 
 
-debugger;
+
               var host;
               if(rootnode.nodeName==='CONSOLE'){
                     host    = rootnode;
@@ -136,7 +136,7 @@ debugger;
                     var id      = ids[i];
                     var style   = $('#'+id);
                     if(!style){
-                          setTimeout(import_style,500);
+                          setTimeout(import_style,500,shadow);
                           return;
                     }
                     
