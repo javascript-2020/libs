@@ -379,6 +379,7 @@ function encrypt(){
         function buf_str(buf){
         
               var type    = datatype(buf);
+                                                                                debug('buf_str',type);
               switch(type){
               
                 case 'string'   : return buf;
@@ -396,6 +397,7 @@ function encrypt(){
         function str_buf(str){
         
               var type    = datatype(str);
+                                                                                debug('str_buf',type);
               switch(type){
               
                 case 'uint8array'     : return str;
