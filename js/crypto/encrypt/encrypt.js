@@ -216,7 +216,6 @@ function encrypt(){
               var decrypted     = await window.crypto.subtle.decrypt({name:'AES-GCM',iv},key,cipher);
               
                                                                                 output('decrypt :');
-                                                                                output.b64('salt',salt);
                                                                                 output.b64('iv',iv);
                                                                                 output.b64('cipher',cipher);
                                                                                 output.str('text',decrypted);
