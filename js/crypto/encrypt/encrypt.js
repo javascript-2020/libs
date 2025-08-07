@@ -233,7 +233,7 @@ function encrypt(){
               }
               var [salt,buf]    = buf_slice(buf,16);
               
-              var {key}         = await cryptokey.derive(paswsord,salt);
+              var {key}         = await cryptokey.derive(password,salt);
               
               var buf           = await decrypt.crypto['aes-gcm'](key,buf);
               return buf;
