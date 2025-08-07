@@ -48,7 +48,8 @@ function encrypt(){
         obj.encoder           = encoder;
         var decoder           = new TextDecoder();
         obj.decoder           = decoder;
-
+        obj.to                = {};
+        
 
   //:
   
@@ -331,6 +332,11 @@ function encrypt(){
               
         }//buf_slice
         
+
+  //:
+  
+        
+        obj.to.blob   = to_blob;
         
         obj.to_blob   = to_blob;
         
@@ -348,11 +354,37 @@ function encrypt(){
               
         }//to_blob
         
+
+        obj.to.str    = function(v){
         
+              var result    = buf_str(v);
+              return result;
+              
+        }//str
+        
+        
+        obj.to.buf    = function(v){
+        
+              var result    = str_buf(v);
+              return result;
+              
+        }//buf
+        
+        
+  //:
+  
+  
         obj.buf_str   = buf_str;
         
         function buf_str(buf){
         
+              var type    = datatype(buf);
+              switch(type){
+              
+                case 'string'   : return buf;
+                
+              }//switch
+              
               var txt   = decoder.decode(buf);
               return txt;
               
@@ -363,6 +395,14 @@ function encrypt(){
         
         function str_buf(str){
         
+              var type    = datatype(str);
+              switch(type){
+              
+                case 'uint8array'     : return str;
+                case 'arraybuffer'    : return str;
+
+              }//switch                
+              
               var len     = str.length;
               var uint8   = new Uint8Array(len);
               [...str].forEach((c,i)=>uint8[i]    = str.charCodeAt(i));
