@@ -117,7 +117,7 @@ function encrypt(){
         }//encrypt
         
         
-        encrypt.password    = function(password,buf){
+        encrypt.password    = async function(password,buf){
         
               var fn        = alg(type);
               var cipher    = await fn.password(password,buf);
