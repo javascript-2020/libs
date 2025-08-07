@@ -228,7 +228,9 @@ function encrypt(){
         
         decrypt.crypto['aes-gcm'].password    = async function(password,buf){
         
-              password          = str_buf(password);
+              if(typeof password=='string'){
+                    password          = str_buf(password);
+              }
               var [salt,buf]    = buf_slice(buf,16);
               
               var {key}         = await cryptokey.derive(paswsord,salt);
