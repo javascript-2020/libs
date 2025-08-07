@@ -73,7 +73,7 @@ mod.console   = function(){
   var obj   = {};
   
   
-        var ext,$,ace,store
+        var ext,$,ace
         ;
         
         obj.initmod   = function(params){
@@ -81,7 +81,6 @@ mod.console   = function(){
               ext       = params.ext;
               $         = params.$;
               ace       = params.ace;
-              store     = params.store;
               
         }//initmod
         
@@ -152,6 +151,9 @@ mod.console   = function(){
               
               var node    = $(root,'#console');
               cons        = console.create(node);
+
+
+
               
               var keys    = Object.keys(cons.__proto__);
               store.console.log(keys);
