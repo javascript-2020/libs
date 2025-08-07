@@ -144,9 +144,8 @@ mod.console   = function(){
                     host    = $.$(rootnode,'console-root');
               }
               root    = host.shadowRoot;
-              root.append(style);
 
-              import_style(root);
+              import_style(root,()=>root.append(style));
               
               
               var node    = $(root,'#console');
@@ -167,7 +166,7 @@ mod.console   = function(){
 
 
 
-        function import_style(shadow){
+        function import_style(shadow,complete){
 
               if(!import_style.ct){
                     import_style.ct   = 0;
@@ -175,6 +174,7 @@ mod.console   = function(){
               import_style.ct++;
               if(import_style.ct>10){
                                                                       console.log('import_style timeout');
+                    complete();
                     return;
               }
 
@@ -201,6 +201,7 @@ mod.console   = function(){
               
               }//for
               
+              complete();
               
         }//style
         
