@@ -95,7 +95,7 @@ mod['snippet-console']    = function(){
   //:
   
   
-        obj.initdom   = function(rootnode){
+        obj.initdom   = function(rootnode){console.log(rootnode);
           
               var host;
               if(rootnode.nodeName==='SNIPPET-CONSOLE'){
@@ -149,72 +149,6 @@ mod['snippet-console']    = function(){
         
   //:
   
-  
-
-
-        obj.create    = function(node,ctx){
-          
-              var top         = $.closest(root,'snippet-console');
-              var html        = top.__html;
-              
-              var div         = document.createElement('div');
-              div.setHTMLUnsafe(html);
-              div             = div.firstElementChild;
-
-              node.after(div);
-              
-              
-              
-        var list              = $('script',div,true);
-        [...list].forEach(script=>{
-        
-              var nscript                 = document.createElement('script');
-              if(script.src){
-                                                                                df && console.log('script.src',script.src);
-                    var src   = script.src;
-                    if(script.hasAttribute('html-loader')){
-                          var id    = gen();
-                          nscript.setAttribute('html-loader',id);
-                          src  += `?[html-loader=${id}]`;
-                    }
-                    nscript.src           = src;
-                    nscript.onload        = complete;
-                    add();
-              }else{
-                                                                                df && console.log('script.id',script.id);
-                                                                                //debugger;
-                    nscript.textContent   = script.textContent;
-              }
-              script.parentNode.replaceChild(nscript,script);
-              
-        });
-
-
-              
-              
-              var snippet     = mod['snippet-console']();
-              snippet.initmod({ext,$,source,ctx});
-              snippet.init();
-              snippet.initdom(div);
-              
-              var editor      = $.editor(node,{maxLines:true});
-
-              
-              function source(){
-                
-                    var txt   = editor.getValue();
-                    return txt;
-                    
-              }//source
-
-              
-        }//create
-        
-        
-        
-        
-        
-        
   
   return obj;
   
