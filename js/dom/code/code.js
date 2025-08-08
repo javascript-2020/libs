@@ -110,6 +110,13 @@
                     return txt;
                     
               }//source
+              
+              
+              source.focus    = ()=>{
+              
+                    editor.focus();
+                    
+              }//focus
 
 
               function kd(e){
