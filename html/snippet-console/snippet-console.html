@@ -116,7 +116,23 @@ mod['snippet-console']    = function(){
         btn.run   = function(){
 
               var js    = source();
-              sandbox.run(js);
+              
+                    
+              var console     = {};
+              console.log     = function(){
+                              
+                                      dconsole.log.apply(null,arguments);
+                                      window.console.log.apply(window.console,arguments);
+                                    
+                                }//log
+              console.clear   = function(){
+                  
+                                      dconsole.clear();
+                                      window.console.clear();
+                                      
+                                }//clear
+              
+              sandbox.run(js,{console});
           
         }//run
         
