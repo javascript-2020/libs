@@ -6,7 +6,7 @@
   var obj   = {};
   
   
-        obj.snippet_console   = snippet.console;
+        obj.snippet_console   = snippet_console;
 
 
   
