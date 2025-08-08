@@ -19,6 +19,7 @@
               
                     (()=>{
                     
+                          ({${Object.keys(ctx).join(',')}}    = ctx);
                           
                           if(clear){
                                 console.clear();
