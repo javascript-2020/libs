@@ -161,8 +161,7 @@ mod['snippet-console']    = function(){
               div.setHTMLUnsafe(html);
               div             = div.firstElementChild;
 
-              var template    = $(div,'template');
-              node.parentNode.insertAfter(template.content,node);
+              node.parentNode.insertAfter(div,node);
               
               var snippet     = mod['snippet-console']();
               snippet.initmod({ext,$,source,ctx});
