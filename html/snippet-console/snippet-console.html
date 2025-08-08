@@ -153,8 +153,12 @@ mod['snippet-console']    = function(){
 
 
         obj.create    = function(node,ctx){
-          debugger;
+          
               var top         = $.closest(root,'snippet-console');
+              var template    = top.__template;
+              console.log(template);
+              return;
+              
               var template    = $(top,'template');
               template        = template.cloneNode(true);
               node.parentNode.insertAfter(template.content,node);
