@@ -934,7 +934,7 @@
   //:
   
   
-        $.editor    = function(node,{mode,maxLines,kd}={}){
+        $.editor    = function(node,{mode,kd}={}){
         
               mode    ||= 'javascript';
               
@@ -952,17 +952,26 @@
               editor.setFontSize(16);
               editor.session.setOptions({tabSize:2,useSoftTabs:true});
               //editor.setGhostText('\n\nctrl-enter - run & autosave\nctrl-s - save\nctrl-del - delete');
-              editor.session.setMode('ace/mode/'+mode)                        
-              editor.session.on('change',onchange);
-              maxLines && editor.setOption('maxLines',Infinity);
-
+              editor.session.setMode('ace/mode/'+mode);
+              
 
               editor.focus();
               
               
               return editor;
   
+        }//editor
+        
+        
+        $.editor.max    = function(node,{mode,kd}={}){
+
+              var editor    = $.editor.apply(null,arguments);
+              editor.session.on('change',onchange);
+              maxLines && editor.setOption('maxLines',Infinity);
               
+              return editor;
+              
+                      
               function onchange(e){
                                                                                 //console.log('onchange');                
                     var lh      = editor.renderer.lineHeight;
@@ -974,7 +983,7 @@
 
               }//onchange
         
-        }//editor
+        }//max
         
 
 
