@@ -5,10 +5,26 @@
 
   var obj   = {};
   
+        
+        var ext
+        ;
+        
+        obj.initmod   = function(params){
+        
+              ext   = params.ext;
+              
+        }//initmod
+
+
+  //:
   
+        var token   = localStorage['github-token']||'';
+
+        
         obj.snippet_console   = snippet_console;
 
 
+  //:
   
   
         async function load(rootnode,css){
@@ -52,6 +68,9 @@
               
         }//load
 
+  
+  //:
+  
   
         snippet_console.all   = async function(rootnode){
 
