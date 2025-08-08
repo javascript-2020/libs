@@ -156,11 +156,12 @@ mod['snippet-console']    = function(){
           
               var top         = $.closest(root,'snippet-console');
               var template    = top.__template;
-              console.log(template);
-              return;
               
-              var template    = $(top,'template');
-              template        = template.cloneNode(true);
+              var div         = document.createElement('div');
+              div.setHTMLUnsafe(txt);
+              div             = div.firstElementChild;
+
+              var template    = $(div,'template');
               node.parentNode.insertAfter(template.content,node);
               
               var snippet     = mod['snippet-console']();
