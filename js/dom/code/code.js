@@ -74,14 +74,21 @@
 
               await load(root,'snippet-console');
           
-              var list    = $.all(rootnode,'code[snippet-console]');
-              list.forEach(code=>snippet_console(code));
+              var nodes   = $.all(rootnode,'code[snippet-console]');
+              var list    = new Array(nodes.length);
+              
+              nodes       = nodes.map(async(code,i)=>list[i]    = await snippet_console(code));
+              await Promise.all(list);
+              
+              return list;
               
         }//all
 
         
         function snippet_console(code){
       
+              var resolve,promise=new Promise(res=>resolve=res);
+              
               init.stack.add;
               init.stack.push(complete);
 
@@ -98,6 +105,8 @@
               script.onload   = onload;              
               
               node.append(script);
+              
+              return promise;
               
               
               function onload(){
@@ -117,6 +126,8 @@
                     
                     var node    = code.nextElementSibling;
                     snippet.initdom(node);
+                    
+                    resolve({editor,snippet,code,node});
                     
               }//onload
               
