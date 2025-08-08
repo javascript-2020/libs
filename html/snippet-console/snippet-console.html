@@ -78,7 +78,7 @@ mod['snippet-console']    = function(){
         
         async function libs(){
           
-              [sandbox]   = ext.load.libs('js/sandbox/sandbox.js');
+              [sandbox]   = await ext.load.libs('js/sandbox/sandbox.js');
               console.log(sandbox);
               
         }//libs
