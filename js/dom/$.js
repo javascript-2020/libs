@@ -820,6 +820,22 @@
               
         }//glass
 
+
+        $.closest   = function(node,css){
+
+              while(node){
+              
+                    var f   = node.closest(css);
+                    if(f){
+                          return f;
+                    }
+                    node    = node.getRootNode()?.host;
+                    
+              }//while
+              return null;
+        
+        }//closest
+        
         
         $.stylesheet        = {};
         $.stylesheet.find   = {};
