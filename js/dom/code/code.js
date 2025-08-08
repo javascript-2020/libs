@@ -69,7 +69,7 @@
               init.stack.push(complete);
 
               var editor      = $.editor.max(code,{kd});
-
+              var snippet;
 
               var node        = document.createElement('snippet-console');
               node.setAttribute('api','');
@@ -92,7 +92,7 @@
               
               async function complete(){
                 
-                    var snippet   = mod['snippet-console']();
+                    snippet   = mod['snippet-console']();
               
                     snippet.initmod({ext,$,source});
                     
