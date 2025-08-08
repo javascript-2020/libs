@@ -166,7 +166,7 @@
         var node              = div.firstElementChild;
         if(!node)debugger;
         
-        node.__template   = txt;
+        node.__html   = txt;
         node.setAttribute('data-url',url);
         
         slots.forEach(slot=>node.append(slot));
