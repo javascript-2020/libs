@@ -248,6 +248,7 @@
               return set;
               
         }});
+
         
   //:
 
@@ -335,9 +336,11 @@
         $.input.paste   = function(root,name,def=''){
         
               $(root,`#${name}-paste`).onclick    = async e=>{
-                                                        var txt                   = await navigator.clipboard.readText();
-                                                        $(root,`#${name}`).value    = txt;
-                                                  };
+              
+                                                          var txt                     = await navigator.clipboard.readText();
+                                                          $(root,`#${name}`).value    = txt;
+                                                          
+                                                    };
               $(root,`#${name}`).value            = def;
               
         }//input.paste
