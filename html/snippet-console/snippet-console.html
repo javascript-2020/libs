@@ -129,13 +129,13 @@ mod['snippet-console']    = function(){
                     var console     = {};
                     console.log     = function(){
                                     
-                                            cons.log.apply(null,arguments);
+                                            dconsole.log.apply(null,arguments);
                                             window.console.log.apply(window.console,arguments);
                                           
                                       }//log
                     console.clear   = function(){
                         
-                                            cons.clear();
+                                            dconsole.clear();
                                             window.console.clear();
                                             
                                       }//clear
@@ -144,7 +144,7 @@ mod['snippet-console']    = function(){
                     var result    = eval(js);
                     
                     if(disp_result){
-                          cons.log('result :',result);
+                          dconsole.log('result :',result);
                     }
                     
               })();
