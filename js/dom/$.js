@@ -823,6 +823,8 @@
 
         $.closest   = function(node,css){
 
+              node    = node.host||node;
+              
               while(node){
               
                     var f   = node.closest(css);
