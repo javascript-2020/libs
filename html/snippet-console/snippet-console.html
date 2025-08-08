@@ -163,6 +163,35 @@ mod['snippet-console']    = function(){
 
               node.after(div);
               
+              
+              
+        var list              = $('script',div,true);
+        [...list].forEach(script=>{
+        
+              var nscript                 = document.createElement('script');
+              if(script.src){
+                                                                                df && console.log('script.src',script.src);
+                    var src   = script.src;
+                    if(script.hasAttribute('html-loader')){
+                          var id    = gen();
+                          nscript.setAttribute('html-loader',id);
+                          src  += `?[html-loader=${id}]`;
+                    }
+                    nscript.src           = src;
+                    nscript.onload        = complete;
+                    add();
+              }else{
+                                                                                df && console.log('script.id',script.id);
+                                                                                //debugger;
+                    nscript.textContent   = script.textContent;
+              }
+              script.parentNode.replaceChild(nscript,script);
+              
+        });
+
+
+              
+              
               var snippet     = mod['snippet-console']();
               snippet.initmod({ext,$,source,ctx});
               snippet.init();
