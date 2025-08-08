@@ -155,10 +155,10 @@ mod['snippet-console']    = function(){
         obj.create    = function(node,ctx){
           
               var top         = $.closest(root,'snippet-console');
-              var template    = top.__template;
+              var html        = top.__html;
               
               var div         = document.createElement('div');
-              div.setHTMLUnsafe(txt);
+              div.setHTMLUnsafe(html);
               div             = div.firstElementChild;
 
               var template    = $(div,'template');
