@@ -6,10 +6,10 @@
   var obj   = {};
   
   
-        obj.sandbox   = sandbox;
+        obj.run   = run;
         
         
-        function sandbox(js,{clear,disp_result}={}){
+        function run(js,{clear,disp_result}={}){
           
               (()=>{
 
