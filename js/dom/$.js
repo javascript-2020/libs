@@ -929,8 +929,52 @@
         }//insert
         
         
+  //:
+  
+  
+        $.editor    = function(node,{mode,maxLines}={}){
         
+              mode    ||= 'javascript';
+              
+              var editor    =  ace.edit(node);
+              editor.setShowInvisibles(false);
+              editor.setShowPrintMargin(false);
+              editor.setPrintMarginColumn(false);
+              editor.setBehavioursEnabled(false);
+              editor.setDisplayIndentGuides(false);
+              editor.setScrollSpeed(2);
+              editor.setFontSize(16);
+              editor.session.setOptions({tabSize:2,useSoftTabs:true});
+              //editor.setGhostText('\n\nctrl-enter - run & autosave\nctrl-s - save\nctrl-del - delete');
+              editor.session.setMode('ace/mode/'+mode)                        
+              editor.session.on('change',onchange);
+              maxLines && editor.setOption('maxLines',Infinity);
+
+
+              editor.focus();
+              
+              
+              return editor;
+  
+              
+              function onchange(e){
+                                                                                //console.log('onchange');                
+                    var lh      = editor.renderer.lineHeight;
+                    var lines   = editor.session.getLength();
+                    var h       = lh*lines;
+                    
+                    editor.container.style.height = h+'px';
+                    editor.resize();
+
+              }//onchange
         
+        }//editor
+        
+
+
+
+
+
         
   return $;
 
