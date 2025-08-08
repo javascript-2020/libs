@@ -30,6 +30,7 @@
                   <console api>
                         <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
                   </console>
+
       
             </div>
       
@@ -57,6 +58,7 @@ mod['snippet-console']    = function(){
         
         
   //:
+
   
         var dconsole;
         var sandbox;
@@ -88,6 +90,7 @@ mod['snippet-console']    = function(){
               [sandbox]   = await ext.load.libs('js/sandbox/sandbox.js.api');
               
         }//libs
+
         
   //:
   
@@ -95,7 +98,7 @@ mod['snippet-console']    = function(){
         obj.initdom   = function(rootnode){
           
               var host;
-              if(rootnode.nodeName==='CONSOLE-SNIPPET'){
+              if(rootnode.nodeName==='SNIPPET-CONSOLE'){
                     host    = rootnode;
               }else{
                     host    = $.$(rootnode,'snippet-console');
@@ -122,7 +125,7 @@ mod['snippet-console']    = function(){
   
         btn.run   = function(){
 
-              var js    = source();
+              var js          = source();
               
                     
               var console     = {};
@@ -147,6 +150,31 @@ mod['snippet-console']    = function(){
   //:
   
   
+
+
+        obj.create    = function(node,ctx){
+          
+              var top         = $.closest(root,'snippet-console');
+              var template    = $(top,'template');
+              template        = template.cloneNode(true);
+              var snippet     = mod['snippet-console']();
+              snippet.initmod({ext,$,source,ctx});
+              
+              var editor      = $.editor(node,{maxLines:true});
+
+              
+              function source(){
+                
+                    var txt   = editor.getValue();
+                    return txt;
+                    
+              }//source
+
+              
+        }//create
+        
+        
+        
         
         
         
