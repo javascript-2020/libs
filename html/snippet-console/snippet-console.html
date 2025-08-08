@@ -79,7 +79,6 @@ mod['snippet-console']    = function(){
         async function libs(){
           
               [sandbox]   = await ext.load.libs('js/sandbox/sandbox.js');
-              console.log(sandbox);
               
         }//libs
         
@@ -117,53 +116,13 @@ mod['snippet-console']    = function(){
         btn.run   = function(){
 
               var js    = source();
-              sandbox(js);
+              sandbox.run(js);
           
         }//run
         
         
   //:
   
-  
-/*
-
-        function sandbox(js,{clear,disp_result}={}){
-          
-              (()=>{
-
-                    if(clear){
-                          cons.clear();
-                    }
-
-                    
-                    var console     = {};
-                    console.log     = function(){
-                                    
-                                            dconsole.log.apply(null,arguments);
-                                            window.console.log.apply(window.console,arguments);
-                                          
-                                      }//log
-                    console.clear   = function(){
-                        
-                                            dconsole.clear();
-                                            window.console.clear();
-                                            
-                                      }//clear
-
-                                    
-                    var result    = eval(js);
-                    
-                    if(disp_result){
-                          dconsole.log('result :',result);
-                    }
-                    
-              })();
-              
-        }//sandbox
-
-*/
-
-
   
         
         
