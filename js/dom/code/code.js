@@ -17,10 +17,8 @@
 
 
   //:
-  
-        var token   = localStorage['github-token']||'';
 
-        
+  
         obj.snippet_console   = snippet_console;
 
 
