@@ -52,6 +52,7 @@ mod['snippet-console']    = function(){
   //:
   
         var dconsole;
+        var sandbox;
         
         
         var root;
@@ -70,9 +71,17 @@ mod['snippet-console']    = function(){
               
               await dconsole.init();
 
+              await libs();
           
         }//init
         
+        
+        async function libs(){
+          
+              [sandbox]   = ext.load.libs('js/sandbox/sandbox.js');
+              console.log(sandbox);
+              
+        }//libs
         
   //:
   
@@ -116,7 +125,8 @@ mod['snippet-console']    = function(){
   //:
   
   
-  
+/*
+
         function sandbox(js,{clear,disp_result}={}){
           
               (()=>{
@@ -151,7 +161,7 @@ mod['snippet-console']    = function(){
               
         }//sandbox
 
-
+*/
 
 
   
