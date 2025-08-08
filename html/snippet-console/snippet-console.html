@@ -154,11 +154,15 @@ mod['snippet-console']    = function(){
 
         obj.create    = function(node,ctx){
           
-              var top         = $.closest(root,'snippet-console');
+              var top         = $.closest(node,'snippet-console');
               var template    = $(top,'template');
               template        = template.cloneNode(true);
+              node.parentNode.insertAfter(template.content,node);
+              
               var snippet     = mod['snippet-console']();
               snippet.initmod({ext,$,source,ctx});
+              snippet.init();
+              snippet.initdom(node);
               
               var editor      = $.editor(node,{maxLines:true});
 
