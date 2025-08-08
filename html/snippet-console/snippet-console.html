@@ -1,0 +1,168 @@
+
+
+
+<snippet-console>
+
+      <template shadowrootmode=open>
+      
+      
+            <style>
+            
+            
+            </style>
+            
+            
+            <div id=root>
+      
+                  <div>
+                        <input value=run type=button>
+                  </div>
+      
+      
+                  
+                  <console api>
+                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                  </console>
+      
+            </div>
+      
+      </template>
+      
+      
+      <script>
+      
+mod['snippet-console']    = function(){
+  
+  var obj   = {};
+  
+        
+        var ext,$
+        ;
+        
+        obj.initmod   = function(params){
+          
+              ext       = params.ext;
+              $         = params.$;
+              source    = params.source;
+              
+              
+        }//initmod
+        
+        
+  //:
+  
+        var dconsole;
+        
+        
+        var root;
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+
+          
+              dconsole    = mod.console();
+              
+              dconsole.initmod({ext,$,ace});
+              
+              
+              await dconsole.init();
+
+          
+        }//init
+        
+        
+  //:
+  
+  
+        obj.initdom   = function(rootnode){
+          
+              var host;
+              if(rootnode.nodeName==='CONSOLE-SNIPPET'){
+                    host    = rootnode;
+              }else{
+                    host    = $.$(rootnode,'console-snippet');
+              }
+              
+              root    = host.shadowRoot;
+
+
+              $(root,'[value=run]').onclick   = btn.run;
+              
+              
+              
+              dconsole.initdom(root);
+              
+              
+        }//initdom
+        
+
+  //:
+  
+  
+        btn.run   = function(){
+
+              var js    = source();
+              sandbox(js);
+          
+        }//run
+        
+        
+  //:
+  
+  
+  
+        function sandbox(js,{clear,disp_result}={}){
+          
+              (()=>{
+
+                    if(clear){
+                          cons.clear();
+                    }
+
+                    
+                    var console     = {};
+                    console.log     = function(){
+                                    
+                                            cons.log.apply(null,arguments);
+                                            window.console.log.apply(window.console,arguments);
+                                          
+                                      }//log
+                    console.clear   = function(){
+                        
+                                            cons.clear();
+                                            window.console.clear();
+                                            
+                                      }//clear
+
+                                    
+                    var result    = eval(js);
+                    
+                    if(disp_result){
+                          cons.log('result :',result);
+                    }
+                    
+              })();
+              
+        }//sandbox
+
+
+
+
+  
+        
+        
+        
+  
+  return obj;
+  
+}//snippet-console
+
+
+
+      </script>
+      
+      
+</snippet-console>
