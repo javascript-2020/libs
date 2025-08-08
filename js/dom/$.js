@@ -934,9 +934,13 @@
   //:
   
   
-        $.editor    = function(node,{mode,maxLines}={}){
+        $.editor    = function(node,{mode,maxLines,kd}={}){
         
               mode    ||= 'javascript';
+              
+              if(kd){
+                    node.onkeydown    = kd;
+              }
               
               var editor    =  ace.edit(node);
               editor.setShowInvisibles(false);
