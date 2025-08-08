@@ -967,7 +967,7 @@
 
               var editor    = $.editor.apply(null,arguments);
               editor.session.on('change',onchange);
-              maxLines && editor.setOption('maxLines',Infinity);
+              editor.setOption('maxLines',Infinity);
               
               return editor;
               
