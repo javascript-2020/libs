@@ -85,7 +85,7 @@
               comp.toggleAttribute('api',true);
               root.parentNode.replaceChild(comp,root);
 
-              var script    = create.script();
+              var script    = create.script(onload);
               comp.append(script);
               return comp;
                     
