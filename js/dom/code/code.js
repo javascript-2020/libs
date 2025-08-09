@@ -35,12 +35,8 @@
         }//all
         
         
-        async function load(code,css){
+        async function load(fn,code){
           
-              var fn    = code.getAttribute(css);
-              if(!fn)return;
-              
-              var fn          = fn+'.js';
               var err;
               try{
                 
@@ -82,7 +78,7 @@
               var nodes   = $.all(rootnode,'code[snippet-console]');
               var list    = new Array(nodes.length);
               
-              nodes       = nodes.map(async(code,i)=>list[i]    = await snippet_console(code,css));
+              nodes       = nodes.map(async(code,i)=>list[i]    = await snippet_console(code));
               await Promise.all(list);
               
               return list;
@@ -90,7 +86,7 @@
         }//all
 
         
-        function snippet_console(code,css){
+        function snippet_console(code){
         
               var editor;
               var snippet;
@@ -108,7 +104,11 @@
                     }
                     
                     var css     = 'snippet-console';
-                    await load(code,css);
+                    var fn      = code.getAttribute(css);
+                    if(fn){
+                          fn    = fn+'.js';
+                          await load(fn,code);
+                    }
                     
                     init.stack.add;
                     init.stack.push(complete);
