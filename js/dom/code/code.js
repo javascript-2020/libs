@@ -91,6 +91,9 @@
               var editor;
               var snippet;
               var node;
+
+              init.stack.add;
+              init.stack.push(complete);
               
               var resolve,promise=new Promise(res=>resolve=res);
               setTimeout(fn,50);
@@ -98,6 +101,7 @@
               
               async function fn(){
               
+
                     if($.nodename(code)!='code'){
                           code    = $(code,'code');
                     }
@@ -108,12 +112,11 @@
                           fn    = fn+'.js';
                           await load(fn,code);
                     }
-                    
-                    init.stack.add;
-                    init.stack.push(complete);
+
       
                     editor          = $.editor.max(code,{kd});
                     snippet;
+      
       
                     node            = document.createElement('snippet-console');
                     node.setAttribute('api','');
@@ -153,7 +156,7 @@
                     
                     resolve({editor,snippet,code,node});
                     
-              }//onload
+              }//complete
               
                             
               function source(){
@@ -188,6 +191,60 @@
   //:
   
   
+  
+        obj.codeblock   = function(node){
+        
+
+              var codeblock;
+
+
+              
+              init.stack.add;
+              init.stack.push(complete);
+
+
+              var div   = document.createElement('div');
+              node.before(div);
+              
+
+              var script      = document.createElement('script');
+              var n           = String(Math.random()).slice(2);
+              var id          = 'x'+n;
+              script.setAttribute('html-loader',id);
+              var src         = 'https://html-loader-1024713184986.us-central1.run.app/'
+              src            += `?[html-loader=${id}]`;
+              script.src      = src;
+              script.onload   = onload;              
+              
+              node.append(script);
+        
+
+        
+              function onload(){
+              
+                    init.stack.complete;
+                    
+              }//onload
+
+
+              async function complete(){
+                
+                    codeblock   = mod['code-block']();
+              
+                    codeblock.initmod({ext,$});
+                    
+                    await codeblock.init();
+                    
+                    var root    = div.nextElementSibling;
+                    codeblock.initdom(root);
+                    
+                    resolve({codeblock});
+                    
+              }//onload
+
+
+        
+        }//codeblock
   
   
   
