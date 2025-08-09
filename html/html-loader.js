@@ -169,6 +169,8 @@
         node.__html   = txt;
         node.__root   = root;
         
+        root.__component    = node;
+        
         node.setAttribute('data-url',url);
         
         slots.forEach(slot=>node.append(slot));
