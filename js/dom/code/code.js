@@ -6,12 +6,14 @@
   var obj   = {};
   
         
-        var ext
+        var ext,$,datatype
         ;
         
         obj.initmod   = function(params){
         
-              ext   = params.ext;
+              ext             = params.ext;
+              $               = params.$;
+              datatype        = params.datatype;
               
         }//initmod
 
@@ -21,6 +23,13 @@
   
         obj.snippet_console       = snippet_console;
         obj.load                  = load;
+
+
+
+
+
+        var create    = {};
+        
         
 
   //:
@@ -65,8 +74,34 @@
               return true;
               
         }//load
+
               
+  //:
   
+
+        create.script   = function(){
+        
+              var script      = document.createElement('script');
+              var n           = String(Math.random()).slice(2);
+              var id          = 'x'+n;
+              script.setAttribute('html-loader',id);
+              var src         = 'https://html-loader-1024713184986.us-central1.run.app/'
+              src            += `?[html-loader=${id}]`;
+              script.src      = src;
+              script.onload   = onload;              
+              
+              return script;
+
+
+              function onload(){
+              
+                    init.stack.complete;
+                    
+              }//onload
+        
+        }//script
+        
+        
   //:
   
   
@@ -113,34 +148,18 @@
                           await load(fn,code);
                     }
 
-      
-                    editor          = $.editor.max(code,{kd});
-                    snippet;
+                    ({editor}   = obj.editor.max(code,{kd,source,menu}));
+                    //editor          = $.editor.max(code,{kd});
       
       
                     node            = document.createElement('snippet-console');
                     node.toggleAttribute('api',true);
                     code.after(node);
                                   
-                    var script      = document.createElement('script');
-                    var n           = String(Math.random()).slice(2);
-                    var id          = 'x'+n;
-                    script.setAttribute('html-loader',id);
-                    var src         = 'https://html-loader-1024713184986.us-central1.run.app/'
-                    src            += `?[html-loader=${id}]`;
-                    script.src      = src;
-                    script.onload   = onload;              
-                    
+                    var script      = create.script();
                     node.append(script);
                     
               }//fn
-              
-              
-              function onload(){
-              
-                    init.stack.complete;
-                    
-              }//onload
               
               
               async function complete(){
@@ -192,7 +211,7 @@
   
   
   
-        obj.codeblock   = function(node){
+        obj.codeblock   = function(node,{menu}){
         
         
               var resolve,promise=new Promise(res=>resolve=res);
@@ -210,33 +229,17 @@
               node.before(div);
               
 
-              var script      = document.createElement('script');
-              var n           = String(Math.random()).slice(2);
-              var id          = 'x'+n;
-              script.setAttribute('html-loader',id);
-              var src         = 'https://html-loader-1024713184986.us-central1.run.app/'
-              src            += `?[html-loader=${id}]`;
-              script.src      = src;
-              script.onload   = onload;              
-              
+              var script      = create.script();
               node.append(script);
         
               return promise;
 
               
-        
-              function onload(){
-              
-                    init.stack.complete;
-                    
-              }//onload
-
-
               async function complete(){
                 
                     codeblock   = mod['code-block']();
               
-                    codeblock.initmod({ext,$,code:obj});
+                    codeblock.initmod({ext,$,code:obj,menu});
                     
                     await codeblock.init();
                     
@@ -247,14 +250,63 @@
                     
                     resolve({codeblock});
                     
-              }//onload
+              }//complete
 
-
-        
         }//codeblock
   
   
+  //:
   
+        
+        obj.editor    = {};
+        
+        obj.editor.code    = function(code,{kd,source,menu}){
+
+              var editor;
+              
+              init.stack.add;
+              init.stack.push(complete);
+
+              var resolve,promise=new Promise(res=>resolve=res);
+              setTimeout(fn,50);
+              return promise;
+              
+              
+              function fn(){
+              
+                    var txt     = code.textContent;
+                    
+                    var comp    = document.createElement('editor');
+                    comp.toggleAttribute('api',true);
+                    
+                    code.parentNode.replace(comp,code);
+      
+                    
+                    var script    = create.script();
+                    comp.append(script);
+                    
+              }//fn
+              
+              
+              async function complete(){
+              
+                    editor    = mod.editor();
+                    
+                    editor.initmod({ext,$,datatype,menumod:menu,source});
+                    
+                    await editor.init();
+                    
+                    await editor.initdom(code,{fullsize:true});
+                    
+                    editor.set(txt);
+                    
+                    resolve({editor});
+                    
+              }//complete
+              
+        }//editor
+        
+        
   return obj;
   
 })();
