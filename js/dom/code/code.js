@@ -142,8 +142,7 @@
               setTimeout(fn,50);
               
               
-              async function fn(){
-              
+              async function fn(){              
 
                     if($.nodename(code)!='code'){
                           code    = $(code,'code');
@@ -156,11 +155,11 @@
                           await load(fn,code);
                     }
 
-                    var promise;
-                    ({root,promise}    = obj.editor.code(code,{menu}));
-                    promise.then(result=>({editor}=result));
+                    //var promise;
+                    //({root,promise}    = obj.editor.code(code,{menu}));
+                    //promise.then(result=>({editor}=result));
                     
-                    //editor          = $.editor.max(code,{kd});
+                    editor          = $.editor.max(code,{kd});
       
       
                     node            = document.createElement('snippet-console');
@@ -275,14 +274,15 @@
         obj.editor.code    = function(code,{menu,kd}){
 
               var editor;
-              var txt     = code.textContent;
-              var root    = create.component(code,'editor',()=>init.stack.complete);
+              
+              var resolve,promise=new Promise(res=>resolve=res);
               
               init.stack.add;
               init.stack.push(complete);
-
-              var resolve,promise=new Promise(res=>resolve=res);
               
+              var txt     = code.textContent;
+              var root    = create.component(code,'editor',()=>init.stack.complete);
+                            
               return {promise,root};
               
               
