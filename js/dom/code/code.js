@@ -186,11 +186,6 @@
                     
                     await snippet.init();
 
-
-                    
-                    debugger;
-                    //var node    = editor.root;      //code.nextElementSibling;
-                    //root;
                     snippet.initdom(node.__component);
                     
                     //snippet.initdom(node.__component);
@@ -304,12 +299,12 @@
               
                     editor    = mod.editor();
                     
-                    editor.initmod({ext,$,datatype,menumod:menu});
+                    editor.initmod({ext,$,datatype,menumod:menu,fullsize:true});
                     
                     await editor.init();
-                    await editor.initdom(root.__component,{fullsize:true});
+                    await editor.initdom(root.__component,{txt});
                     
-                    editor.set(txt);
+                    //editor.set(txt);
                     
                     resolve({editor,root});
                     
