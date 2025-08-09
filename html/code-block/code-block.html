@@ -31,7 +31,7 @@ mod['code-block']   = function(){
   var obj   = {};
   
   
-        var ext,$,code
+        var ext,$,code,menu
         ;
         
         obj.initmod   = function(params){
@@ -39,6 +39,7 @@ mod['code-block']   = function(){
               ext       = params.ext;
               $         = params.$;
               code      = params.code;
+              menu      = params.menu;
               
         }//initmod
         
@@ -70,6 +71,7 @@ mod['code-block']   = function(){
 
 
               var node                  = $(root,'code');
+              code.editor.max(node);
 
               
               if(host.__root.hasAttribute('snippet-console')){
