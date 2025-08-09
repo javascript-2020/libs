@@ -189,9 +189,9 @@
 
                     
                     debugger;
-                    var node    = editor.root;      //code.nextElementSibling;
-                    root;
-                    snippet.initdom(root);
+                    //var node    = editor.root;      //code.nextElementSibling;
+                    //root;
+                    snippet.initdom(node);
                     
                     //snippet.initdom(node.__component);
                     
