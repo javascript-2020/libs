@@ -194,6 +194,9 @@
   
         obj.codeblock   = function(node){
         
+        
+              var resolve,promise=new Promise(res=>resolve=res);
+              
 
               var codeblock;
 
@@ -218,7 +221,9 @@
               
               node.append(script);
         
+              return promise;
 
+              
         
               function onload(){
               
