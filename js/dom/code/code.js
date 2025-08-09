@@ -182,7 +182,9 @@
                     
                     debugger;
                     //var node    = editor.root;      //code.nextElementSibling;
-                    snippet.initdom(root);
+                    //snippet.initdom(root);
+                    
+                    snippet.initdom(node);
                     
                     resolve({editor,snippet,code,node});
                     
