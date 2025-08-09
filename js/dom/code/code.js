@@ -120,9 +120,11 @@
                     code.after(node);
                                   
                     var script      = document.createElement('script');
-                    script.toggleAttribute('html-loader',true);
                     var id          = String(Math.random()).slice(2);
-                    script.src      = 'https://html-loader-1024713184986.us-central1.run.app/?'+id;
+                    script.toggleAttribute('html-loader',id);
+                    var src         = 'https://html-loader-1024713184986.us-central1.run.app/'
+                    src            += `?[html-loader=${id}]`;
+                    script.src      = src;
                     script.onload   = onload;              
                     
                     node.append(script);
