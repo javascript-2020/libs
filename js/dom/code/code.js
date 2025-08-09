@@ -65,7 +65,9 @@
               
               var txt             = await res.text();
               code.textContent    = txt;
-                    
+              
+              return true;
+              
         }//load
               
   
