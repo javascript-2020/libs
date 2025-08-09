@@ -241,6 +241,8 @@
                     await codeblock.init();
                     
                     var root    = div.nextElementSibling;
+                    div.remove();
+                    
                     codeblock.initdom(root);
                     
                     resolve({codeblock});
