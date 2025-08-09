@@ -148,7 +148,7 @@
                           await load(fn,code);
                     }
 
-                    ({editor}   = obj.editor.code(code,{kd,source,menu}));
+                    ({editor}   = obj.editor.code(code,{menu}));
                     //editor          = $.editor.max(code,{kd});
       
       
@@ -260,7 +260,7 @@
         
         obj.editor    = {};
         
-        obj.editor.code    = function(code,{menu}){
+        obj.editor.code    = function(code,{menu,kd}){
 
               var editor;
               
@@ -292,7 +292,7 @@
               
                     editor    = mod.editor();
                     
-                    editor.initmod({ext,$,datatype,menumod:menu,source});
+                    editor.initmod({ext,$,datatype,menumod:menu});
                     
                     await editor.init();
                     
