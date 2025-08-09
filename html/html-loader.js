@@ -170,6 +170,7 @@
         node.__root   = root;
         
         root.__component    = node;
+        root.__root         = node;
         
         node.setAttribute('data-url',url);
         
