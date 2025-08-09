@@ -191,7 +191,7 @@
                     debugger;
                     //var node    = editor.root;      //code.nextElementSibling;
                     //root;
-                    snippet.initdom(node);
+                    snippet.initdom(node.__component);
                     
                     //snippet.initdom(node.__component);
                     
