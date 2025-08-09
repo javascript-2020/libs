@@ -64,7 +64,7 @@ mod['code-block']   = function(){
 debugger;
               
               if(host.__root.hasAttribute('snippet-console')){
-                    var attr    = node.getAttribute('snippet-console');
+                    var attr    = host.__root.getAttribute('snippet-console');
                     node.setAttribute('snippet-console',attr);      
                     code.snippet_console(root);
               }
