@@ -61,7 +61,11 @@ mod['code-block']   = function(){
   
         obj.initdom   = function(rootnode){
           
-              host                      = $.$(rootnode,'code-block');
+              if($.nodename(rootnode)=='code-block'){
+                    host                = rootnode;
+              }else{
+                    host                = $.$(rootnode,'code-block');
+              }
               root                      = host.shadowRoot;
 
 
