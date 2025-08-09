@@ -121,7 +121,7 @@
         }//all
 
         
-        function snippet_console(code){
+        function snippet_console(code,{menu}){
         
               var editor;
               var snippet;
@@ -260,7 +260,7 @@
         
         obj.editor    = {};
         
-        obj.editor.code    = function(code,{kd,source,menu}){
+        obj.editor.code    = function(code,{menu}){
 
               var editor;
               
@@ -305,6 +305,13 @@
               }//complete
               
         }//editor
+
+
+
+
+
+
+
         
         
   return obj;
