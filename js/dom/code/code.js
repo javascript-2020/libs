@@ -91,31 +91,36 @@
         async function snippet_console(code,css){
       
               var resolve,promise=new Promise(res=>resolve=res);
-      
-              if($.nodename(code)!='code'){
-                    code    = $(code,'code');
-              }
-              
-              await load(code,css);
-              
-              init.stack.add;
-              init.stack.push(complete);
-
-              var editor      = $.editor.max(code,{kd});
-              var snippet;
-
-              var node        = document.createElement('snippet-console');
-              node.setAttribute('api','');
-              code.after(node);
-                            
-              var script      = document.createElement('script');
-              script.toggleAttribute('html-loader',true);
-              script.src      = 'https://html-loader-1024713184986.us-central1.run.app/';
-              script.onload   = onload;              
-              
-              node.append(script);
-              
+              setTimeout(fn,50);
               return promise;
+              
+              
+              function fn(){
+              
+                    if($.nodename(code)!='code'){
+                          code    = $(code,'code');
+                    }
+                    
+                    await load(code,css);
+                    
+                    init.stack.add;
+                    init.stack.push(complete);
+      
+                    var editor      = $.editor.max(code,{kd});
+                    var snippet;
+      
+                    var node        = document.createElement('snippet-console');
+                    node.setAttribute('api','');
+                    code.after(node);
+                                  
+                    var script      = document.createElement('script');
+                    script.toggleAttribute('html-loader',true);
+                    script.src      = 'https://html-loader-1024713184986.us-central1.run.app/';
+                    script.onload   = onload;              
+                    
+                    node.append(script);
+                    
+              }//fn
               
               
               function onload(){
