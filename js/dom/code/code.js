@@ -78,7 +78,7 @@
 
               //await load.all(root,'snippet-console');
           
-              var css     = '[snippet-console]';
+              var css     = 'snippet-console';
               var nodes   = $.all(rootnode,'code[snippet-console]');
               var list    = new Array(nodes.length);
               
