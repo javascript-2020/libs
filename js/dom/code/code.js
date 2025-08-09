@@ -186,7 +186,7 @@
                     
                     debugger;
                     var node    = editor.root;      //code.nextElementSibling;
-                    var root;
+                    root;
                     snippet.initdom(root);
                     
                     //snippet.initdom(node.__component);
