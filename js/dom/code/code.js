@@ -79,7 +79,7 @@
   //:
   
 
-        create.component    = function(root,name){
+        create.component    = function(root,name,onload){
         
               var comp    = document.createElement(name);
               comp.toggleAttribute('api',true);
@@ -92,7 +92,7 @@
         }//component
         
         
-        create.script   = function(){
+        create.script   = function(onload){
         
               var script      = document.createElement('script');
               var n           = String(Math.random()).slice(2);
@@ -105,13 +105,6 @@
               
               return script;
 
-
-              function onload(){
-              
-                    init.stack.complete;
-                    
-              }//onload
-        
         }//script
         
         
@@ -173,7 +166,7 @@
                     node.toggleAttribute('api',true);
                     code.after(node);
                                   
-                    var script      = create.script();
+                    var script      = create.script(()=>init.stack.complete);
                     node.append(script);
                     
               }//fn
@@ -247,7 +240,7 @@
               node.before(div);
               
 
-              var script      = create.script();
+              var script      = create.script(()=>init.stack.complete);
               node.append(script);
         
               return promise;
@@ -282,9 +275,9 @@
 
               var editor;
               var txt     = code.textContent;
-              var root    = create.component(code,'editor');
+              var root    = create.component(code,'editor',()=>init.stack.complete);
               
-              //init.stack.add;
+              init.stack.add;
               init.stack.push(complete);
 
               var resolve,promise=new Promise(res=>resolve=res);
