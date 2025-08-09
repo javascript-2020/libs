@@ -88,6 +88,10 @@
         function snippet_console(code){
       
               var resolve,promise=new Promise(res=>resolve=res);
+      
+              if($.nodename(code)!='code'){
+                    code    = $(code,'code');
+              }
               
               init.stack.add;
               init.stack.push(complete);
