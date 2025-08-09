@@ -6,7 +6,11 @@
       <template shadowrootmode=open>
       
             <style>
-            
+
+  code
+    {display:block}
+    
+    
             </style>
             
             
@@ -59,6 +63,7 @@ mod['code-block']   = function(){
           
               host                      = $.$(rootnode,'code-block');
               root                      = host.shadowRoot;
+
 
               var node                  = $(root,'code');
 
