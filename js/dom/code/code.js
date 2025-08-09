@@ -19,53 +19,55 @@
   //:
 
   
-        obj.snippet_console   = snippet_console;
-
+        obj.snippet_console       = snippet_console;
+        obj.load                  = load;
+        
 
   //:
   
   
-        async function load(rootnode,css){
+        load.all    = async function(rootnode,css){
           
               var list    = $.all(rootnode,`code[${css}]`);
               list        = list.map(load);
               await Promise.all(list);
               
-              async function load(code){
-                
-                    var fn    = code.getAttribute(css);
-                    if(!fn)return;
-                    
-                    var fn              = fn+'.js';
-                    var err;
-                    try{
-                      
-                          var res             = await fetch(fn);
-                          
-                    }
-                    catch(err2){
-                      
-                          err   = err2;
-                    
-                    }
-                    if(err){
-                            console.error(err);
-                            return;
-                    }
-                    
-                    if(!res.ok){
-                            var txt   = await res.text();
-                            console.log(txt);
-                            return;
-                    }
-                    
-                    var txt             = await res.text();
-                    code.textContent    = txt;
-                          
-              }//load
+        }//all
+        
+        
+        async function load(code,css){
+          
+              var fn    = code.getAttribute(css);
+              if(!fn)return;
               
+              var fn          = fn+'.js';
+              var err;
+              try{
+                
+                    var res   = await fetch(fn);
+                    
+              }
+              catch(err2){
+                
+                    err       = err2;
+              
+              }
+              if(err){
+                      console.error(err);
+                      return;
+              }
+              
+              if(!res.ok){
+                      var txt   = await res.text();
+                      console.log(txt);
+                      return;
+              }
+              
+              var txt             = await res.text();
+              code.textContent    = txt;
+                    
         }//load
-
+              
   
   //:
   
