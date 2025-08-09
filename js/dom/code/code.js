@@ -119,7 +119,7 @@
       
       
                     node            = document.createElement('snippet-console');
-                    node.setAttribute('api','');
+                    node.toggleAttribute('api',true);
                     code.after(node);
                                   
                     var script      = document.createElement('script');
