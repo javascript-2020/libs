@@ -107,15 +107,16 @@
                           code    = $(code,'code');
                     }
                     
+                    var css     = 'snippet-console';
                     await load(code,css);
                     
                     init.stack.add;
                     init.stack.push(complete);
       
-                    editor      = $.editor.max(code,{kd});
+                    editor          = $.editor.max(code,{kd});
                     snippet;
       
-                    node        = document.createElement('snippet-console');
+                    node            = document.createElement('snippet-console');
                     node.setAttribute('api','');
                     code.after(node);
                                   
