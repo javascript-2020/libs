@@ -245,9 +245,13 @@ function editor(){
     //:
 
     
-        obj.initdom   = async function(rootnode,mode='javascript'){
+        obj.initdom   = async function(rootnode,{mode,txt}={}){
         
+              mode    ||= 'javascript';
+              txt     ||= '';
+              
               root                                        = $.full('editor-root',rootnode);
+              obj.root                                    = root;
               shadow                                      = root.shadowRoot;
   
               menumod.add.style(shadow);
@@ -292,6 +296,7 @@ function editor(){
               
               if(fullsize){
                     var node    = $(root,'#editor');
+                    node.textContent    = txt;
                     $.editor.max(node,{menu,kd:kd2});
               }else{
                     setup(shadow,mode);
