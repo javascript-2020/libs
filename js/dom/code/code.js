@@ -166,11 +166,11 @@
       
                     node            = document.createElement('snippet-console');
                     node.toggleAttribute('api',true);
-                    code.after(node);
+                    root.after(node);
                                   
                     var script      = create.script(()=>{
                     console.log('*** snippet-console');
-                          init.stack.complete
+                          init.stack.complete;
                           
                     });
                     node.append(script);
