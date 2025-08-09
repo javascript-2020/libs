@@ -247,7 +247,7 @@ function editor(){
     
         obj.initdom   = async function(rootnode,mode='javascript'){
         
-              root                                        = $.$(rootnode,'editor-root');
+              root                                        = $.full(rootnode,'editor-root');
               shadow                                      = root.shadowRoot;
   
               menumod.add.style(shadow);
