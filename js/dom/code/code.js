@@ -291,7 +291,12 @@
               init.stack.push(complete);
               
               var txt     = code.textContent;
-              var root    = create.component(code,'editor',()=>init.stack.complete);
+              var root    = create.component(code,'editor',()=>{
+              
+              console.log(123);
+                    init.stack.complete;
+                    
+              });
                             
               return {promise,root};
               
