@@ -59,9 +59,15 @@ mod['code-block']   = function(){
               host                      = $.$(rootnode,'code-block');
               root                      = host.shadowRoot;
 
+              var node                  = $(root,'code');
+
+              
               if(host.__root.hasAttribute('snippet-console')){
+                    var attr    = node.getAttrbiute('snippet-console');
+                    node.setAttribute('snippet-console',attr);      
                     code.snippet_console(root);
               }
+
           
         }//initdom
         
