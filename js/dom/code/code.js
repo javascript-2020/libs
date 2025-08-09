@@ -231,7 +231,7 @@
                 
                     codeblock   = mod['code-block']();
               
-                    codeblock.initmod({ext,$});
+                    codeblock.initmod({ext,$,code:obj});
                     
                     await codeblock.init();
                     
