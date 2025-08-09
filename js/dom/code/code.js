@@ -122,7 +122,7 @@
                     var script      = document.createElement('script');
                     var n           = String(Math.random()).slice(2);
                     var id          = 'x'+n;
-                    script.toggleAttribute('html-loader',id);
+                    script.setAttribute('html-loader',id);
                     var src         = 'https://html-loader-1024713184986.us-central1.run.app/'
                     src            += `?[html-loader=${id}]`;
                     script.src      = src;
