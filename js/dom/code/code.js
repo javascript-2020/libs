@@ -161,7 +161,7 @@
                           await load(fn,code);
                     }
 
-                    ({editor}   = obj.editor.code(code,{menu}));
+                    ({editor}   = await obj.editor.code(code,{menu}));
                     //editor          = $.editor.max(code,{kd});
       
       
