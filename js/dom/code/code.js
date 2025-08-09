@@ -302,6 +302,7 @@
                     editor.initmod({ext,$,datatype,menumod:menu,fullsize:true});
                     
                     await editor.init();
+                    debugger;
                     await editor.initdom(root.__component,{txt});
                     
                     //editor.set(txt);
