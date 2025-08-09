@@ -168,7 +168,11 @@
                     node.toggleAttribute('api',true);
                     code.after(node);
                                   
-                    var script      = create.script(()=>init.stack.complete);
+                    var script      = create.script(()=>{
+                    console.log('*** snippet-console');
+                          init.stack.complete
+                          
+                    });
                     node.append(script);
                     
               }//fn
@@ -291,12 +295,7 @@
               init.stack.push(complete);
               
               var txt     = code.textContent;
-              var root    = create.component(code,'editor',()=>{
-              
-              console.log(123);
-                    init.stack.complete;
-                    
-              });
+              var root    = create.component(code,'editor',()=>init.stack.complete);
                             
               return {promise,root};
               
