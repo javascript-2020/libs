@@ -79,6 +79,19 @@
   //:
   
 
+        create.component    = function(root,name){
+        
+              var comp    = document.createElement(name);
+              comp.toggleAttribute('api',true);
+              root.parentNode.replaceChild(comp,root);
+
+              var script    = create.script();
+              comp.append(script);
+              return comp;
+                    
+        }//component
+        
+        
         create.script   = function(){
         
               var script      = document.createElement('script');
@@ -263,6 +276,8 @@
         obj.editor.code    = function(code,{menu,kd}){
 
               var editor;
+              var txt;
+              var root;
               
               init.stack.add;
               init.stack.push(complete);
@@ -274,16 +289,8 @@
               
               function fn(){
               
-                    var txt     = code.textContent;
-                    
-                    var comp    = document.createElement('editor');
-                    comp.toggleAttribute('api',true);
-                    
-                    code.parentNode.replaceChild(comp,code);
-      
-                    
-                    var script    = create.script();
-                    comp.append(script);
+                    txt     = code.textContent;
+                    root    = create.component(code,'editor');
                     
               }//fn
               
@@ -295,8 +302,8 @@
                     editor.initmod({ext,$,datatype,menumod:menu});
                     
                     await editor.init();
-                    
-                    await editor.initdom(code,{fullsize:true});
+                    debugger;
+                    await editor.initdom(root,{fullsize:true});
                     
                     editor.set(txt);
                     
