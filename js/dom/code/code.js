@@ -303,7 +303,7 @@
                     
                     await editor.init();
                     debugger;
-                    await editor.initdom(root,{fullsize:true});
+                    await editor.initdom(root.__component,{fullsize:true});
                     
                     editor.set(txt);
                     
