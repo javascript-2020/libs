@@ -87,6 +87,7 @@
 
               var script    = create.script(onload);
               comp.append(script);
+              
               return comp;
                     
         }//component
