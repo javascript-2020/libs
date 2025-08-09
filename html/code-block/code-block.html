@@ -1,0 +1,80 @@
+
+
+
+<code-block>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+            </style>
+            
+            
+            <div id=root>
+            
+                  <code></code>
+            
+            </div>
+            
+      </template>
+
+      
+      <script>
+
+      
+mod['code-block']   = function(){
+  
+  var obj   = {};
+  
+  
+        var ext,$
+        ;
+        
+        obj.initmod   = function(params){
+          
+              ext   = params.ext;
+              $     = params.$;
+              
+        }//initmod
+        
+        
+  //:
+  
+        var host;
+        var root;
+        
+  
+  //:
+  
+  
+        obj.init    = async function(){
+        }//init
+        
+        
+  //:
+  
+  
+        obj.initdom   = function(rootnode){
+          
+              host                      = $.$(rootnode,'code-block');
+              root                      = host.shadowRoot;
+
+              if(host.__root.hasAttribute('snippet-console')){
+                    code.snippet_console(root);
+              }
+          
+        }//initdom
+        
+        
+  //:
+  
+  
+        
+  return obj;
+  
+}//code-block
+
+
+      </script>
+      
+</code-block>
