@@ -982,8 +982,7 @@
 
               
               if($.in.shadow(node)){
-                    var root      = node.getRootNode();
-                    var shadow    = root.shadowRoot;
+                    var shadow    = node.getRootNode();
                     import_style();
               }
                     
