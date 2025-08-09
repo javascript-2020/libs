@@ -88,14 +88,14 @@
         }//all
 
         
-        async function snippet_console(code,css){
+        function snippet_console(code,css){
       
               var resolve,promise=new Promise(res=>resolve=res);
               setTimeout(fn,50);
               return promise;
               
               
-              function fn(){
+              async function fn(){
               
                     if($.nodename(code)!='code'){
                           code    = $(code,'code');
