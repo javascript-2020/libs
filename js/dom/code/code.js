@@ -87,7 +87,7 @@
         }//all
 
         
-        function snippet_console(code,css){
+        async function snippet_console(code,css){
       
               var resolve,promise=new Promise(res=>resolve=res);
       
