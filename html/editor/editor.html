@@ -294,19 +294,19 @@ function editor(){
   
               await load;
               
+              var node    = $(shadow,'#editor');
               if(fullsize){
-                    var node    = $(root,'#editor');
                     node.textContent    = txt;
                     $.editor.max(node,{menu,kd:kd2});
               }else{
-                    setup(shadow,mode);
+                    setup(node,mode);
               }
   
   
         }//initdom
   
   
-        function setup(root,mode='javascript'){
+        function setup(node,mode='javascript'){
   
               import_style();
   
@@ -317,7 +317,6 @@ function editor(){
               }//switch
               
               
-              var node    = $(root,'#editor');
               node.addEventListener('mousedown',update);
               node.addEventListener('keyup',update);
               
