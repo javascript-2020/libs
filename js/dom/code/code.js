@@ -279,7 +279,7 @@
                     var comp    = document.createElement('editor');
                     comp.toggleAttribute('api',true);
                     
-                    code.parentNode.replaceNode(comp,code);
+                    code.parentNode.replaceChild(comp,code);
       
                     
                     var script    = create.script();
