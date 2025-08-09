@@ -157,7 +157,7 @@
 
                     var promise;
                     ({root,promise}    = obj.editor.code(code,{menu}));
-                    promise.then(result=>{editor}=result);
+                    promise.then(result=>({editor}=result));
                     
                     //editor          = $.editor.max(code,{kd});
       
