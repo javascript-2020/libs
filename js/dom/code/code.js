@@ -162,7 +162,10 @@
                           await load(fn,code);
                     }
 
-                    root    = obj.editor.code(code,{menu});
+                    var promise;
+                    ({root,promise}    = obj.editor.code(code,{menu}));
+                    promise.then(result=>{editor}=result);
+                    
                     //editor          = $.editor.max(code,{kd});
       
       
@@ -281,10 +284,12 @@
               var txt     = code.textContent;
               var root    = create.component(code,'editor');
               
-              init.stack.add;
+              //init.stack.add;
               init.stack.push(complete);
 
-              return root;
+              var resolve,promise=new Promise(res=>resolve=res);
+              
+              return {promise,root};
               
               
               async function complete(){
