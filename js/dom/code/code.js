@@ -94,7 +94,6 @@
               
               var resolve,promise=new Promise(res=>resolve=res);
               setTimeout(fn,50);
-              return promise;
               
               
               async function fn(){
@@ -179,6 +178,8 @@
                     }
                     
               }//kd
+              
+              return promise;
         
         }//snippet_console
         
