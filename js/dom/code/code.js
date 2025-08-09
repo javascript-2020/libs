@@ -121,7 +121,8 @@
                                   
                     var script      = document.createElement('script');
                     script.toggleAttribute('html-loader',true);
-                    script.src      = 'https://html-loader-1024713184986.us-central1.run.app/';
+                    var id          = Math.random().slice(2);
+                    script.src      = 'https://html-loader-1024713184986.us-central1.run.app/?'+id;
                     script.onload   = onload;              
                     
                     node.append(script);
@@ -177,7 +178,12 @@
         
         }//snippet_console
         
-        
+
+
+  //:
+  
+  
+  
   
   
   return obj;
