@@ -167,15 +167,17 @@ function editor(){
         ;
                                                                       debug(obj.version);
 
-        var ext,$,menumod,ace
+        var ext,$,menumod,ace,fullsize,kd2
         ;
         
         obj.initmod   = function(params){
           
-              ext       = params.ext;
-              $         = params.$;
-              menumod   = params.menumod;
-              ace       = params.ace;
+              ext         = params.ext;
+              $           = params.$;
+              menumod     = params.menumod;
+              ace         = params.ace;
+              fullsize    = params.fullsize;
+              kd2         = params.kd;
               
         }//initmod
         
@@ -286,16 +288,20 @@ function editor(){
               $(hdr,'#top').onclick                       = btn.top;
               $(hdr,'#bottom').onclick                    = btn.bottom;
   
-  
-              await setup(shadow,mode);
+              await load;
+              
+              if(fullsize){
+                    var node    = $(root,'#editor');
+                    $.editor.max(node,{menu,kd:kd2});
+              }else{
+                    setup(shadow,mode);
+              }
   
   
         }//initdom
   
   
-        async function setup(root,mode='javascript'){
-  
-              await load;
+        function setup(root,mode='javascript'){
   
               import_style();
   
