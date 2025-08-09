@@ -89,7 +89,11 @@
 
         
         function snippet_console(code,css){
-      
+        
+              var editor;
+              var snippet;
+              var node;
+              
               var resolve,promise=new Promise(res=>resolve=res);
               setTimeout(fn,50);
               return promise;
@@ -106,10 +110,10 @@
                     init.stack.add;
                     init.stack.push(complete);
       
-                    var editor      = $.editor.max(code,{kd});
-                    var snippet;
+                    editor      = $.editor.max(code,{kd});
+                    snippet;
       
-                    var node        = document.createElement('snippet-console');
+                    node        = document.createElement('snippet-console');
                     node.setAttribute('api','');
                     code.after(node);
                                   
