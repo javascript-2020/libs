@@ -1,5 +1,11 @@
 (()=>{
 
+
+
+        $.in    = {};
+        
+        
+        
         function $(root,sel){
         
               if(arguments.length==2){
