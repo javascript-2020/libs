@@ -121,7 +121,7 @@
                                   
                     var script      = document.createElement('script');
                     script.toggleAttribute('html-loader',true);
-                    var id          = Math.random().slice(2);
+                    var id          = String(Math.random()).slice(2);
                     script.src      = 'https://html-loader-1024713184986.us-central1.run.app/?'+id;
                     script.onload   = onload;              
                     
