@@ -139,7 +139,8 @@
               var editor;
               var snippet;
               var node;
-
+              var root;
+              
               init.stack.add;
               init.stack.push(complete);
               
@@ -161,7 +162,7 @@
                           await load(fn,code);
                     }
 
-                    ({editor}   = await obj.editor.code(code,{menu}));
+                    root    = obj.editor.code(code,{menu}));
                     //editor          = $.editor.max(code,{kd});
       
       
@@ -184,8 +185,8 @@
                     await snippet.init();
                     
                     debugger;
-                    var node    = editor.root;      //code.nextElementSibling;
-                    snippet.initdom(node);
+                    //var node    = editor.root;      //code.nextElementSibling;
+                    snippet.initdom(root);
                     
                     resolve({editor,snippet,code,node});
                     
@@ -277,23 +278,13 @@
         obj.editor.code    = function(code,{menu,kd}){
 
               var editor;
-              var txt;
-              var root;
+              var txt     = code.textContent;
+              var root    = create.component(code,'editor');
               
               init.stack.add;
               init.stack.push(complete);
 
-              var resolve,promise=new Promise(res=>resolve=res);
-              setTimeout(fn,50);
-              return promise;
-              
-              
-              function fn(){
-              
-                    txt     = code.textContent;
-                    root    = create.component(code,'editor');
-                    
-              }//fn
+              return root;
               
               
               async function complete(){
@@ -303,7 +294,6 @@
                     editor.initmod({ext,$,datatype,menumod:menu});
                     
                     await editor.init();
-                    debugger;
                     await editor.initdom(root.__component,{fullsize:true});
                     
                     editor.set(txt);
