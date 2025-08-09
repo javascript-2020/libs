@@ -183,7 +183,8 @@
                     
                     await snippet.init();
                     
-                    var node    = code.nextElementSibling;
+                    debugger;
+                    var node    = editor.root;      //code.nextElementSibling;
                     snippet.initdom(node);
                     
                     resolve({editor,snippet,code,node});
@@ -307,7 +308,7 @@
                     
                     editor.set(txt);
                     
-                    resolve({editor});
+                    resolve({editor,root});
                     
               }//complete
               
