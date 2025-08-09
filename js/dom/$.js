@@ -931,6 +931,24 @@
         }//insert
         
         
+        $.loc   = function(node){
+        
+              
+        }//loc
+        
+        
+        $.in.shadow   = function(node){
+        
+              var root    = node.getRootNode();
+              var type    = datatype(root);
+              if(type==='shadowroot'){
+                    return true;
+              }
+              return false;
+              
+        }//shadow
+        
+        
   //:
   
   
@@ -954,11 +972,53 @@
               //editor.setGhostText('\n\nctrl-enter - run & autosave\nctrl-s - save\nctrl-del - delete');
               editor.session.setMode('ace/mode/'+mode);
               
-
               editor.focus();
+
               
+              if($.in.shadow(node)){
+                    var root      = node.getRootNode();
+                    var shadow    = root.shadowRoot;
+                    import_style();
+              }
+                    
               
               return editor;
+
+
+              import_style.ct   = 0;
+              
+              function import_style(){
+              
+                    import_style.ct++;
+                    if(import_style.ct>=10){
+                                                                            console.log('import_style timeout');
+                          return;
+                    }
+                    
+                    var ids   = ['ace-tm','ace_editor\\.css','ace_scrollbar\\.css','error_marker\\.css',];
+                    var n     = ids.length;
+                    for(var i=0;i<n;i++){
+                    
+                          var id      = ids[i];
+                          var style   = $('#'+id);
+                          if(!style){
+                                setTimeout(import_style,500);
+                                return;
+                          }
+                          
+                    }//for
+                    
+                    for(var i=0;i<n;i++){
+                    
+                          var id      = ids[i];
+                          var style   = $('#'+id);
+                          var copy    = style.cloneNode(true);
+                          shadow.append(copy);
+                    
+                    }//for
+                    
+                    
+              }//style
   
         }//editor
         
