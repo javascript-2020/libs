@@ -184,7 +184,7 @@
                     //var node    = editor.root;      //code.nextElementSibling;
                     //snippet.initdom(root);
                     
-                    snippet.initdom(node.__root);
+                    snippet.initdom(node.__component);
                     
                     resolve({editor,snippet,code,node});
                     
