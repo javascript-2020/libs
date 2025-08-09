@@ -74,7 +74,7 @@
   
         snippet_console.all   = async function(rootnode){
 
-              await load(root,'snippet-console');
+              //await load.all(root,'snippet-console');
           
               var nodes   = $.all(rootnode,'code[snippet-console]');
               var list    = new Array(nodes.length);
@@ -87,13 +87,15 @@
         }//all
 
         
-        function snippet_console(code){
+        function snippet_console(code,css){
       
               var resolve,promise=new Promise(res=>resolve=res);
       
               if($.nodename(code)!='code'){
                     code    = $(code,'code');
               }
+              
+              await load(code,css);
               
               init.stack.add;
               init.stack.push(complete);
