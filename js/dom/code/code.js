@@ -155,11 +155,13 @@
                           await load(fn,code);
                     }
 
-                    //var promise;
-                    //({root,promise}    = obj.editor.code(code,{menu}));
-                    //promise.then(result=>({editor}=result));
+
+
+                    var promise;
+                    ({root,promise}    = obj.editor.code(code,{menu}));
+                    promise.then(result=>({editor}=result));
                     
-                    editor          = $.editor.max(code,{kd});
+                    //editor          = $.editor.max(code,{kd});
       
       
                     node            = document.createElement('snippet-console');
@@ -179,12 +181,17 @@
                     snippet.initmod({ext,$,source});
                     
                     await snippet.init();
+
+
                     
                     debugger;
-                    //var node    = editor.root;      //code.nextElementSibling;
-                    //snippet.initdom(root);
+                    var node    = editor.root;      //code.nextElementSibling;
+                    snippet.initdom(node);
                     
-                    snippet.initdom(node.__component);
+                    //snippet.initdom(node.__component);
+                    
+                    
+                    
                     
                     resolve({editor,snippet,code,node});
                     
