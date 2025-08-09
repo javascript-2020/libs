@@ -104,7 +104,7 @@ mod['snippet-console']    = function(){
               if(rootnode.nodeName==='SNIPPET-CONSOLE'){
                     host    = rootnode;
               }else{
-                    host    = $.$(rootnode,'snippet-console');
+                    host    = $.full('snippet-console',rootnode);
               }
               
               root    = host.shadowRoot;
