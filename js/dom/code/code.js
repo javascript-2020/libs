@@ -22,8 +22,10 @@
   //:
 
   
-        obj.snippet_console       = snippet_console;
         obj.load                  = load;
+        
+        obj.snippet_console       = snippet_console;
+        obj.code_block            = code_block;
 
 
 
@@ -225,13 +227,13 @@
 
 
   //:
-  
-  
-        obj.codeblock.all   = function(menu){
-        }//all
 
   
-        obj.codeblock   = function(node,{menu}){
+        code_block.all   = function(menu){
+        }//all
+
+      
+        function code_block(node,{menu}){
         
         
               var resolve,promise=new Promise(res=>resolve=res);
@@ -302,10 +304,7 @@
                     editor.initmod({ext,$,datatype,menumod,menu,fullsize:true});
                     
                     await editor.init();
-                    debugger;
                     await editor.initdom(root.__component,{txt});
-                    
-                    //editor.set(txt);
                     
                     resolve({editor,root});
                     
