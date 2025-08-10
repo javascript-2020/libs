@@ -1045,9 +1045,12 @@
                     var lines   = editor.session.getLength();
                     var h       = lh*lines;
                     
+                    var w       = aceEditor.renderer.scrollBar.getWidth()
+                    h+=w;
+                    
                     editor.container.style.height = h+'px';
                     editor.resize();
-
+                    
               }//onchange
         
         }//max
