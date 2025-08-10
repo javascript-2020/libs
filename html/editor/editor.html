@@ -305,6 +305,7 @@ function editor(){
                     node.style.flex='none';
                     editor    = $.editor.max(node,{menu,kd:kd2});
                     //root.style.height   = editor.container.style.height;
+                    $(shadow,'#root').style.height='auto';
               }else{
                     setup(node,mode);
               }
