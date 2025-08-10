@@ -1034,6 +1034,8 @@
               editor.session.on('change',onchange);
               editor.setOption('maxLines',Infinity);
               
+              onchange();
+              
               return editor;
               
                       
