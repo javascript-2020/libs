@@ -24,13 +24,10 @@
                   <div>
                         <input value=run type=button>
                   </div>
-      
-      
-                  
+                              
                   <console api>
                         <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
                   </console>
-
       
             </div>
       
@@ -100,16 +97,6 @@ mod['snippet-console']    = function(){
   
         obj.initdom   = function(rootnode){
 
-/*
-              var host;
-              if($.nodename(rootnode)==='snippet-console'){
-                    host    = rootnode;
-              }else{
-                    host    = $.full('snippet-console',rootnode);
-              }
-*/              
-              
-              
               host    = $.full('snippet-console',rootnode);
               root    = host.shadowRoot;
 
