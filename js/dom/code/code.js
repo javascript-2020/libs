@@ -6,7 +6,7 @@
   var obj   = {};
   
         
-        var ext,$,datatype
+        var ext,$,datatype,menumod
         ;
         
         obj.initmod   = function(params){
@@ -14,6 +14,7 @@
               ext             = params.ext;
               $               = params.$;
               datatype        = params.datatype;
+              menumod         = params.menumod;
               
         }//initmod
 
@@ -128,7 +129,7 @@
         }//all
 
         
-        function snippet_console(code,{menu}){
+        function snippet_console(code,{menu}={}){
         
               var editor;
               var snippet;
@@ -168,11 +169,7 @@
                     node.toggleAttribute('api',true);
                     root.after(node);
                                   
-                    var script      = create.script(()=>{
-                    console.log('*** snippet-console');
-                          init.stack.complete;
-                          
-                    });
+                    var script      = create.script(()=>init.stack.complete);
                     node.append(script);
                     
               }//fn
@@ -230,6 +227,9 @@
   //:
   
   
+        obj.codeblock.all   = function(menu){
+        }//all
+
   
         obj.codeblock   = function(node,{menu}){
         
@@ -299,7 +299,7 @@
               
                     editor    = mod.editor();
                     
-                    editor.initmod({ext,$,datatype,menumod:menu,fullsize:true});
+                    editor.initmod({ext,$,datatype,menumod,menu,fullsize:true});
                     
                     await editor.init();
                     debugger;
