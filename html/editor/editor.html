@@ -297,7 +297,8 @@ function editor(){
               var node    = $(shadow,'#editor');
               if(fullsize){
                     node.textContent    = txt;
-                    $.editor.max(node,{menu,kd:kd2});
+                    var h   = $.editor.max(node,{menu,kd:kd2});
+                    root.style.height   = h+'px';
               }else{
                     setup(node,mode);
               }
