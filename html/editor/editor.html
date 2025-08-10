@@ -167,7 +167,7 @@ function editor(){
         ;
                                                                       debug(obj.version);
 
-        var ext,$,menumod,ace,fullsize,kd2
+        var ext,$,menu,menumod,ace,fullsize,kd2
         ;
         
         obj.initmod   = function(params){
@@ -175,6 +175,7 @@ function editor(){
               ext         = params.ext;
               $           = params.$;
               menumod     = params.menumod;
+              menu        = params.menu;
               ace         = params.ace;
               fullsize    = params.fullsize;
               kd2         = params.kd;
@@ -237,7 +238,9 @@ function editor(){
     
         obj.init    = function(){
           
-              console.log(menumod);
+              if(!menu){
+                    menu    = menumod();
+              }
               
         }//init
 
@@ -254,14 +257,14 @@ function editor(){
               obj.root                                    = root;
               shadow                                      = root.shadowRoot;
   
-              menumod.add.style(shadow);
+              menu.add.style(shadow);
               var style                                   = $(shadow,'style');
   
   
               hdr                                         = $(shadow,'#hdr');
               
               card                                        = $(shadow,'.menu');
-              $(shadow,'#menu-icon').onclick              = menumod.click(card,'both',false,menu);
+              $(shadow,'#menu-icon').onclick              = menu.click(card,'both',false,click);
               
               var sha256_root                             = $(card,'#sha256-root');
               $(sha256_root,'.copy').onclick              = async e=>{
@@ -614,7 +617,7 @@ function editor(){
   //:
   
   
-        function menu(type,opt){
+        function click(type,opt){
         
               if(type=='opt'){
                     menu[opt.id]();
@@ -623,7 +626,7 @@ function editor(){
         }//menu
   
         
-        menu.trim   = function(){
+        click.trim   = function(){
         
               var pos     = editor.getCursorPostion();
               var txt     = editor.getValue();
@@ -636,7 +639,7 @@ function editor(){
         }//trim
         
         
-        menu.wordwrap   = function(){
+        click.wordwrap   = function(){
           
               var wrap1   = editor.getOption('wrap');
               if(wrap1=='off'){
@@ -649,7 +652,7 @@ function editor(){
         }//wordwrap
         
         
-        menu.sha256   = function(){
+        click.sha256   = function(){
           
               var txt   = editor.getValue();
               sha256(txt);
