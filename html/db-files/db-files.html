@@ -5,6 +5,7 @@
       
             <template shadowrootmode=open>
             
+
                   <style>
                   
   .icon
@@ -17,6 +18,7 @@
     {position:relative}
       
                   </style>
+
                   
                   <img class=icon src='data:image/webp;base64,UklGRhwEAABXRUJQVlA4TA8EAAAvHUAHEE2ISVPMfI3of0zzFC0UM5IE9WsvgvWnWpJNo6Bt2zb6/1pOSdqJTNom/l2t12T1P7ZeL6UpFTegz/xCCIcPEiNJUiTJq3uPmfmU+lv1n5mPcaYeenfMTgK4tW2rVub6CkQuPbjG1AAdUANNMF6fRKRkX67cSJIcSfKouXvIIQ7rL8/Kk5Jo2zrm6BSSim3bto1R23aPraFt27Y1im3bTjNa9ac0ARCB5/li+q8NS9iRbWABI8gggoCJrF8YYUMYgzDd2fSSJEGRrKLEineVZUW/mjQcASCLbPSzlJ1mnrpfXdr6Ksz8PJt+a00xnl6u2DujhQuynIcZUYtiEAQAgMHoO/rwGO7Ebf4Et8fTL98J4+lliVtLpG/ACKJIAaYlwBMss5bujaffji3mGsQsN2ZEBjA0xEoIF8a8WyO1Z30+97BhzI4oITsYUxBhZHgozh3ZflbVt06w2B1ufp4VNcP6eTzmSzILVRQRIgwCgCwy9KKbxYO4n1Hf0X1VB7Y5cyqLVsZhsY7Qqc80X1dAUVK1kIpjcSYFnYI0SgxS6pxRdR55n39dDXRV3ydvoWoOnQv240wLGoSyJ1QQfMqUXdX4b5M8lFHGGAbQhgizmDLu/2wm1lGuyCwUnpojSdCHpgWghi4yMhcwgQHqCeunUUxADiCDEbPKzpG5wEGZmIctoARtaEAW96GOGBUhwsgOwABtO+TbV/qvn5SfD8RvKmha1IPOTMCtuA8VZsRMRx1RoBREQIX/7JE3n+k/vhGbgV5qb73MxGN2z7g9SWI3I7338DjDU+gcWTDADGw4CgAAgAGo/T3FT7NOvsp4q8j/vYtbt0dbCcrMQ1R29kw/I8qQIYsQFQAAmMYwVRb7eK6y71kaRLQgDXac153MnarCAxRz2MItywnWzBgykN1s2ASNUl9Y90MNfo74saJCG5GE5S0AMRJj7y76WHWmKtOCoeB/SF6kAn2PJCPLzhi2gXcQahRmzwWZkEAzAQCI4QIA1JBjBgKU0EAKHehCF2ID9RIz9w9xAAOgjQkIYLAd5t6PtW/UYxgU+N9CK65iO3SHgDhAOT+e/po1cxvVLbgiB8uwGXGwGIC/9kptrcJbeLRgiYu4jG0wQjjC4QUbGEMHUgAlBExgBO2oQgV+iyGuwrEFDVxxCY34gTy0YRJABhmkEEEJAQLUMIQ7Eg3ZuAVvaFoAaogQgJ1Q4jeGMYxx/IcAoA0jWMIWtrAwT6scDZFADdpQgeF2mLuLlc9RL2EPqFpoR/UwA6NrzD8j/6Ga0NjCCLbiBSaGAAP2pvv/PqiN6G4BNGId5uAE4uAOM8ggakGOf+hGMb6qlagEkyEgD/tgAFs4wR6WMIIMIgiYwC8Mog9DmASYAc8RAA=='>
 
@@ -43,8 +45,10 @@
                         </file-nav>
                         
                   </div>
+
                   
             </template>
+
             
             <script>
 
@@ -54,11 +58,11 @@ mod['db-files']   = function(){
         version   : 'v1.0'
   };
                                                                                 debug(obj.version);
-        var df=obj.df=true;
-        
-        var ext,menumod,editor,$,datatype
+        var df=obj.df=true
         ;
-
+        
+        var ext,$,datatype,menumod
+        ;
 
         obj.initmod   = function(params){
           
@@ -66,6 +70,8 @@ mod['db-files']   = function(){
               $           = params.$;
               datatype    = params.datatype;
               menumod     = params.menumod;
+              
+              menu.root   = params.menu;
               
         }//initmod
 
@@ -86,7 +92,7 @@ mod['db-files']   = function(){
         
         var icon;
         
-        var menu;
+        var menu    = {};
         
         var btn     = {};
         var file    = {};
@@ -100,7 +106,7 @@ mod['db-files']   = function(){
               var resolve;
               obj.init    = new Promise(res=>resolve=res);
               
-              menu                      = menumod.menumod();
+              menu.dbfiles              = menumod();
               
               await libs();              
 
@@ -110,7 +116,7 @@ mod['db-files']   = function(){
               filenav                   = mod.filenav();
 
 
-              dblist.initmod({ext,$,datatype,menu,db});
+              dblist.initmod({ext,$,datatype,menu:menu.dbfiles,db});
               
               filenav.initmod({ext,$,datatype});
               filenav.file    = file;
@@ -149,14 +155,14 @@ mod['db-files']   = function(){
               root                                              = $.$(rootnode,'db-files');
               shadow                                            = root.shadowRoot;
               
-              menumod.add.style(shadow);
+              menu.root.add.style(shadow);
               
               var style                                         = $(shadow,'style');
               $.stylesheet.insert(style,'.icon');
               
               var node                                          = $(shadow,'.menu');
               icon                                              = $(shadow,'.icon');
-              icon.onclick                                      = menumod.click(node,'both',true);
+              icon.onclick                                      = menu.root.click(node,'both',true);
 
               await obj.init;
               await libs;
@@ -181,15 +187,6 @@ mod['db-files']   = function(){
         
   //:
   
-/*  
-        function menu(){
-        }//menu
-*/        
-        
-
-        function submenu(){
-        }//submenu
-        
         
   //:
   
