@@ -6,9 +6,11 @@
       <template shadowrootmode=open>
       
             <style>
-
+  :host
+    {--bcol:lightblue}
+    
   #root
-    {height:100%;border-top:1px solid lightgray;padding-top:10px;border-bottom:1px solid lightgray;padding-bottom:10px}
+    {height:100%;border-top:1px solid var(--bcol);padding-top:10px;border-bottom:1px solid var(--bcol);padding-bottom:10px}
     
   code
     {display:block}
