@@ -711,89 +711,89 @@ function menumod(){
           border-top            : 1px solid lightgray;
   }
                                 
-          `;
+        `;
           
-          obj.css     = css;
+        obj.css     = css;
 
 
   //:
   
   
-          obj.add.style   = function(par){    //d
+        obj.add.style   = function(par){    //d
 
-                par                 = par||document.head;
-                var style           = document.createElement('style');
-                style.textContent   = css;
-                par.append(style);
-                
-          }//style
-          
-          
-          obj.input.norm    = function(root){
-          
-                var list    = $.all(root,'input:not([type])');
-                list.forEach((input,i)=>{
-                
-                      input.addEventListener('keydown',keydown);
-                      input.onfocus   = e=>input.select();
-                      
-                      function keydown(e){
-                      
-                            if(e.key=='ArrowDown'){
-                                  e.stopPropagation();
-                                  i++;
-                                  if(i==list.length){
-                                        i   = 0;
-                                  }
-                                  var input2    = list[i];
-                                  input2.focus();
-                            }
-                            if(e.key=='ArrowUp'){
-                                  e.stopPropagation();
-                                  i--;
-                                  if(i<0){
-                                        i   = list.length-1;
-                                  }
-                                  var input2    = list[i];
-                                  input2.focus();
-                            }
-                            if(e.key=='ArrowLeft'){
-                                  if(e.ctrlKey){
-                                        //debugger;
-                                        e.stopPropagation();
-                                        prev();
-                                  }
-                            }
-                            if(e.key=='ArrowRight'){
-                                  if(e.ctrlKey){
-                                        e.stopPropagation();
-                                        next();
-                                  }
-                            }
-                            
-                      }//keydown
-                      
-                });
+              par                 = par||document.head;
+              var style           = document.createElement('style');
+              style.textContent   = css;
+              par.append(style);
               
-          }//norm
+        }//style
+        
+        
+        obj.input.norm    = function(root){
+        
+              var list    = $.all(root,'input:not([type])');
+              list.forEach((input,i)=>{
+              
+                    input.addEventListener('keydown',keydown);
+                    input.onfocus   = e=>input.select();
+                    
+                    function keydown(e){
+                    
+                          if(e.key=='ArrowDown'){
+                                e.stopPropagation();
+                                i++;
+                                if(i==list.length){
+                                      i   = 0;
+                                }
+                                var input2    = list[i];
+                                input2.focus();
+                          }
+                          if(e.key=='ArrowUp'){
+                                e.stopPropagation();
+                                i--;
+                                if(i<0){
+                                      i   = list.length-1;
+                                }
+                                var input2    = list[i];
+                                input2.focus();
+                          }
+                          if(e.key=='ArrowLeft'){
+                                if(e.ctrlKey){
+                                      //debugger;
+                                      e.stopPropagation();
+                                      prev();
+                                }
+                          }
+                          if(e.key=='ArrowRight'){
+                                if(e.ctrlKey){
+                                      e.stopPropagation();
+                                      next();
+                                }
+                          }
+                          
+                    }//keydown
+                    
+              });
+            
+        }//norm
           
           
   //:          
 
           
-          function debug(){
-          
-                if(!df)return;
+        function debug(){
+        
+              if(!df)return;
 
-                var str   = [...arguments].join(' ');
-                console.log(str);
-                
-          }//debug
-          
-          
-          
-                
-          return obj;
+              var str   = [...arguments].join(' ');
+              console.log(str);
+              
+        }//debug
+        
+        
+        
+              
+  return obj;
           
 }//menumodmod
 
