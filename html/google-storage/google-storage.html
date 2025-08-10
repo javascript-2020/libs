@@ -55,6 +55,7 @@
    
     
             </style>
+
             
             <img class=icon src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAcCAMAAABBJv+bAAAAnFBMVEVHcExLhu1Iiv1Gg+tFh/dLiPBGhvVOie9HhfFHifpRjvZFhvVWju9Jh/JBe91EhvZHhfJGh/ZGftxGguZLivlDfuBklutJiPJCe9tFhPBEhvhDh/xAe+BEhvpDhvpEhfVAe91Gg+xFhfNCfuVol+hBhPf///89eeB8q/mNsu96pOz1+P7t8v3l7fxonPVOjPX9/v9Kg+O0zPSmwvFMf2AYAAAAGXRSTlMAV3f52CzEHZFsEe0JQfH1r6NXeDa0A2HJgki6rgAAARlJREFUKM9t09lygjAUgOFQA4QtLCrIVopAbctW7fu/W8lKRP4rPN8MTjIHAFi69aZk6eApD+ZPQU9V28g3GbbCSbnl0lrVhO/bSmhKRuVrORJ6crKdnBNTN9zTrAxcypq/y5mvsUPxn52MD+jhrIo+V/OXbOaj5XA6rGjdNPzSxscwdWwGdRBWgnvJbXNlwxD4nKv5R3YvmpTOfOBcefO37F4sTmYOQFzTqf+kjX9De+OOgGkIHnra+BgJEyf3nqSsuZUtLydeJ+ROA+5pc+MVrDO5lthzpBdqmG1MjFLpH0oo5msIBdeKY7mOR6GqH4XGtlHLhF/WZQLaYes4UjbVDVauC8JnV1103TisNRhfNp+JqSlFkfjjfwPaSL8f/MANAAAAAElFTkSuQmCC'>
       
@@ -210,9 +211,11 @@ mod['google-storage']   = function(){
         version   : 'v1.0'
   };
   
-        var df    = true;
+  
+        var df    = true
+        ;
                                                                                 debug(obj.version);
-        var ext,$,menumod,source
+        var ext,$,menumod,menu,source
         ;
   
         obj.initmod   = function(params){
@@ -220,6 +223,8 @@ mod['google-storage']   = function(){
               ext           = params.ext;
               $             = params.$;
               menumod       = params.menumod;
+              
+              menu          = params.menu;
               source        = params.source;
               
         }//initmod
@@ -235,7 +240,6 @@ mod['google-storage']   = function(){
         var shadow;
         var icon;
         var ui                  = {};
-        var menu                = {};
         
         
 
@@ -269,16 +273,16 @@ mod['google-storage']   = function(){
               root                            = $.$(rootnode,'google-storage');
               shadow                          = root.shadowRoot;
               
-              menumod.add.style(shadow);
+              menu.add.style(shadow);
               
               var style                       = $(shadow,'style');
               $.stylesheet.insert(style,'.icon');
               
-              menu.root                       = $(shadow,'.menu');
-              menumod.input.norm(menu.root);
+              var mroot                       = $(shadow,'.menu');
+              menumod.input.norm(mroot);
               
               icon                            = $(shadow,'.icon');
-              icon.onclick                    = menumod.click(menu.root,'both',true,menu.callback);
+              icon.onclick                    = menu.click(mroot,'both',true,click);
               
 
 
@@ -577,8 +581,7 @@ mod['google-storage']   = function(){
         }//download
         
         
-        menu.callback   = function(type,opt){
-        }//callback
+        function click(type,opt){}
 
 
   //:
