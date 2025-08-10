@@ -115,15 +115,16 @@ mod.httpsfile   = function(){
         var df=true
         ;
                                                                                 debug(obj.version);
-        var menumod,editor,$,datatype,source
+        var editor,$,datatype,menu,source
         ;
         
         obj.initmod   = function(params){
           
-              menumod       = params.menumod;
               editor        = params.editor;
               $             = params.$;
               datatype      = params.datatype;
+
+              menu          = params.menu;
               source        = params.source;
               
         }//initmod
@@ -174,20 +175,23 @@ mod.httpsfile   = function(){
               
         }//init
 
-        
+
+  //:
+  
+  
         obj.initdom   = function(rootnode){
           
               root                                              = $.$(rootnode,'https-file');
               shadow                                            = root.shadowRoot;
               
-              menumod.add.style(shadow);
+              menu.add.style(shadow);
               
               var style                                         = $(shadow,'style');
               $.stylesheet.insert(style,'.icon');
               
               var node                                          = $(shadow,'.menu');
               icon                                              = $(shadow,'.icon');
-              icon.onclick                                      = menumod.click(node,'both',true,callback);
+              icon.onclick                                      = menu.click(node,'both',true,callback);
 
 
               var list    = $.all(node,'input:not([type])');
