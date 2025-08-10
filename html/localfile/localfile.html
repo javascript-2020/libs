@@ -36,14 +36,16 @@ mod.localfile   = function(){
                                                                                 true && console.log('localfile');
   var obj   = {};
 
-      var menumod,editor,$,filemod
+      var $,menu,editor,filemod
       ;
       
       obj.initmod   = function(params){
         
-            menumod   = params.menumod;
-            editor    = params.editor;
             $         = params.$;
+            
+            menu      = params.menu;
+            
+            editor    = params.editor;
             filemod   = params.filemod;
             
       }//initmod
@@ -78,7 +80,7 @@ mod.localfile   = function(){
               var root          = $.$(rootnode,'localfile-root');
               shadow            = root.shadowRoot;
               
-              menumod.add.style(shadow);
+              menu.add.style(shadow);
               
               var style         = $(shadow,'style');
               $.stylesheet.insert(style,'.icon');
@@ -87,7 +89,7 @@ mod.localfile   = function(){
               var card          = $(shadow,'.menu');
               
               icon              = $(shadow,'.icon');
-              icon.onclick      = menumod.click(card,false,false,menu);
+              icon.onclick      = menu.click(card,false,false,click);
 
 
         }//initdom
@@ -96,7 +98,7 @@ mod.localfile   = function(){
   //:
   
   
-        function menu(type,opt){
+        function click(type,opt){
         
               if(type=='opt'){
                     menu[opt.id]();
@@ -105,7 +107,7 @@ mod.localfile   = function(){
         }//menu
 
 
-        menu.load   = async function(){
+        click.load   = async function(){
     
               var {file,txt}    = await loadfile();
               cur               = file.filename;
@@ -114,7 +116,7 @@ mod.localfile   = function(){
         }//load
 
   
-        menu.save   = async function(){
+        click.save   = async function(){
   
               var filename    = '';
               if(cur){
@@ -130,7 +132,7 @@ mod.localfile   = function(){
         }//save
         
         
-        menu.download   = async function(){
+        click.download   = async function(){
           
               var filename    = 'tmp.txt';
               var file        = filemod?.cur;
@@ -143,7 +145,7 @@ mod.localfile   = function(){
         }//download
         
 
-        menu.clear    = function(){
+        click.clear    = function(){
           
               cur   = 'file.txt';
               menumod.close();
