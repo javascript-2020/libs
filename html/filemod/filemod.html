@@ -21,6 +21,7 @@
     {}
     
             </style>
+
             
             <div id=root style='visibility:hidden'>
             
@@ -45,6 +46,7 @@
                   </google-storage>
                   
             </div>
+
             
       </template>
       
@@ -62,7 +64,7 @@ function filemod(){
   ;
                                                                                 debug(obj.version);
                                                                                 
-        var ext,$,menumod,complete,source,focus,editor
+        var ext,$,menumod,menu,complete,source,focus,editor
         ;
           
         obj.initmod   = function(params){
@@ -70,6 +72,8 @@ function filemod(){
               ext             = params.ext;
               $               = params.$;
               menumod         = params.menumod;
+              
+              menu            = params.menu;
               complete        = params.complete;
               source          = params.source;
               focus           = params.focus;
@@ -115,11 +119,11 @@ function filemod(){
             obj.dbfiles               = dbfiles;
             googlestorage             = mod['google-storage']();
 
-            localfile.initmod({ext,$,menumod,filemod,source,focus,editor});
-            github.initmod({ext,$,menumod,filemod,source,focus,editor});
-            httpsfile.initmod({ext,$,menumod,filemod,source,focus,editor});
-            dbfiles.initmod({ext,$,datatype,menumod,filemod,source,focus});
-            googlestorage.initmod({ext,$,menumod,filemod,source,focus});
+            localfile.initmod({ext,$,menu,filemod,source,focus,editor});
+            github.initmod({ext,$,menu,filemod,source,focus,editor});
+            httpsfile.initmod({ext,$,menu,filemod,source,focus,editor});
+            dbfiles.initmod({ext,$,datatype,menumod,menu,filemod,source,focus});
+            googlestorage.initmod({ext,$,menumod,menu,filemod,source,focus});
             
             localfile.init();
             github.init();
