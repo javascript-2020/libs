@@ -429,6 +429,9 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                 if(name.startsWith('/')){
                                       name    = name.slice(1);
                                 }
+                                if(!name){
+                                      return;
+                                }
                                 
                                 var file    = {};
                                 file.name   = name;
