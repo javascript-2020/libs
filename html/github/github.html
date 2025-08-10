@@ -187,21 +187,32 @@ mod.github    = function(){
   var obj   = {
       version   : 'v1.0'
   };
-                                                                                true && debug(obj.version);
+  
+  
         var df=obj.df=false
         ;
+                                                                                true && debug(obj.version);
   
           
-        var menumod,editor,$,par_init,ext
+        var ext,$,
+        ;
+        var editor
+        ;
+        var menu
+        ;
+        var par_init
         ;
         
         obj.initmod   = function(params){
           
-              menumod       = params.menumod;
-              editor        = params.editor;
-              $             = params.$;
-              par_init      = params.init;
               ext           = params.ext;
+              $             = params.$;
+              
+              editor        = params.editor;
+              
+              menu          = params.menu;
+
+              par_init      = params.init;
               
         }//initmod
 
@@ -245,14 +256,14 @@ mod.github    = function(){
               root                            = $.$(rootnode,'github-root');
               shadow                          = root.shadowRoot;
   
-              menumod.add.style(shadow);
+              menu.add.style(shadow);
               
               var style                       = $(shadow,'style');
               $.stylesheet.insert(style,'.icon');
               
               var node                        = $(shadow,'.menu');
               icon                            = $(shadow,'#icon');
-              icon.onclick                    = menumod.click(node,'both',true,callback);
+              icon.onclick                    = menu.click(node,'both',true,callback);
   
               
               var list    = $.all(node,'input:not([type])');
