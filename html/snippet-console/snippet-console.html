@@ -100,18 +100,17 @@ mod['snippet-console']    = function(){
   
         obj.initdom   = function(rootnode){
 
-              console.log(rootnode);
-              debugger;
-          
+/*
               var host;
               if($.nodename(rootnode)==='snippet-console'){
                     host    = rootnode;
               }else{
                     host    = $.full('snippet-console',rootnode);
               }
+*/              
               
-              console.log(host);
               
+              host    = $.full('snippet-console',rootnode);
               root    = host.shadowRoot;
 
 
