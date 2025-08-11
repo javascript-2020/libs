@@ -258,7 +258,7 @@
               
               var blob    = await res.blob();
               
-              return {ok:blob};
+              return {ok:blob,blob};
               
         }//raw
         
@@ -295,7 +295,7 @@
               var json    = await res.json();
               var blob    = await b64_blob(json.content);
               
-              return {ok:blob};
+              return {ok:blob,blob};
               
         }//api
 
