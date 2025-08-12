@@ -682,10 +682,11 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         obj.tokenmod    = tokenmod;
 
         
-function tokenmod(keyfile,scopes,{fsp,crypto}){
+function tokenmod(file,scopes,{fsp,crypto,platform}){
   
   var obj   = {};
           
+        platform        ||= 'nodejs';
   
         var email;
         var key;
@@ -704,20 +705,45 @@ function tokenmod(keyfile,scopes,{fsp,crypto}){
         Object.defineProperty(obj,'rd',{get:gettoken});
         
         
+        
+        if(platform=='nodejs'){
+              keyfile.read(file);
+        }else{
+              keyfile.blob(file);
+        }
+        
+        
   //:
   
         
-        async function readkeyfile(){
-            
-              var txt     = await fsp.readFile(keyfile,'utf8');
-              var json    = JSON.parse(txt);
-              
+        keyfile.parse   = function(json){
+          
               email       = json.client_email;
               key         = json.private_key;
                                                                                 // Keyfiles often escape newlines as \n — normalize to PEM format
               key         = key.replaceAll('\\n','\n');
+              
+        }//parse
+        
+        
+        keyfile.read    = async function(file){
+            
+              var txt     = await fsp.readFile(file,'utf8');
+              var json    = JSON.parse(txt);
+              
+              keyfile.parse(json);
                   
-        }//readkeyfile
+        }//read
+
+        
+        keyfile.blob    = async function(blob){
+          
+              var txt     = await blob.text();
+              var json    = JSON.parse(txt);
+          
+              keyfile.parse(json);
+              
+        }//blob
         
         
         function b64url(buf){
@@ -736,7 +762,7 @@ function tokenmod(keyfile,scopes,{fsp,crypto}){
         }//b64url
   
         
-        function signRS256(input,privateKeyPem){
+        sign.nodejs   = function(input,privateKeyPem){
           
               var signer    = crypto.createSign('RSA-SHA256');
               signer.update(input);
@@ -746,6 +772,20 @@ function tokenmod(keyfile,scopes,{fsp,crypto}){
               return b64;
               
         }//signRS256
+        
+        
+        sign.browser    = async function(privateKey, dataToSign) {
+        
+              const dataBytes = encoder.encode(dataToSign);
+              const sig = await crypto.subtle.sign(
+                { name: 'RSASSA-PKCS1-v1_5' },
+                privateKey,
+                dataBytes
+              );
+              return new Uint8Array(sig);
+              
+        }
+        
   
         
         function build(){
@@ -765,7 +805,7 @@ function tokenmod(keyfile,scopes,{fsp,crypto}){
               payload               = b64url(JSON.stringify(payload));
               
               var toSign            = `${header}.${payload}`;
-              var signature         = signRS256(toSign,key);
+              var signature         = sign[platform](toSign,key);
               
               var str               = `${toSign}.${signature}`;
               return str;
