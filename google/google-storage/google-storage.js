@@ -796,7 +796,9 @@ function tokenmod(keyfile,scopes,{fsp,crypto}){
               
               token       = json.access_token;
               expire      = json.expires_in;
-                                                                                var now   = Math.floor(Date.now()/1000);
+              var now     = Math.floor(Date.now()/1000);              
+              expire     += now;
+                                                                                
                                                                                 console.log(expire,expire-now);
           
         }//exchange
