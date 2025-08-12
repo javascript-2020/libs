@@ -701,6 +701,7 @@ function tokenmod(keyfile,scopes){
         
         async function readkeyfile(){
             
+              var fsp     = await import('node:fs/promises');
               var txt     = await fsp.readFile(keyfile,'utf8');
               var json    = JSON.parse(txt);
               
