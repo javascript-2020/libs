@@ -286,8 +286,26 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         
               var headers   = {'content-type':'application/x-www-form-urlencoded'};
               var body      = new URLSearchParams({client_id,client_secret,refresh_token,grant_type:'refresh_token'});
-              var url       = 'https://oauth2.googleapis.com/token'
-              var res       = await fetch(url,{method:'post',headers,body});
+              var url       = 'https://oauth2.googleapis.com/token';
+              
+              var err;
+              try{
+                
+                    var res       = await fetch(url,{method:'post',headers,body});
+                    
+              }
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+              }
+              
+              if(!res.ok){
+              }
+              
+              
               var json      = await res.json();            
                                                                                 console.json(json);
               var token     = json.access_token;
@@ -446,6 +464,40 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               
         }//full
         
+        
+  //:
+  
+
+        obj.buckets   = async function(project){
+          
+              project         = encodeURIComponent(project);
+              var url         = `https://storage.googleapis.com/storage/v1/b?project=${project}`
+              var headers     = {authorization:`Bearer ${token}`};
+              
+              var err;
+              try{
+                
+                    var res   = await fetch(url,{headers});
+                    
+              }//try
+              catch(err2){
+                
+                    err       = err2;
+                    
+              }//catch
+              if(err){
+                    throw 'fetch error';
+              }
+              
+              if(!res.ok){
+                    throw new Error(`GCS list buckets failed: ${res.status} ${res.statusText}`);
+              }
+              
+              var buckets   = await res.json();
+              return buckets;
+              
+        }//buckets
+  
   
   //:
   
