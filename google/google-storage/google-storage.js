@@ -21,7 +21,7 @@
                                                                                 debug(obj.version);  
 
 
-        obj.list    = {};
+        obj.bucket    = {};
         
         
         
