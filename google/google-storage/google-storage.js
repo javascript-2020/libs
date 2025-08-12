@@ -686,8 +686,9 @@ function tokenmod(keyfile,scopes,{fsp,crypto}){
         var expire;
         var token;
   
-        var uri       = 'https://oauth2.googleapis.com/token';
-        var skew      = 60;
+        var uri           = 'https://oauth2.googleapis.com/token';
+        var skew          = 60;
+        var max_expires   = 3600;
         
 
   //:
@@ -748,7 +749,7 @@ function tokenmod(keyfile,scopes,{fsp,crypto}){
               var aud               = uri;
               var iat               = now;
                                                                                 // 1 hour max for service account JWT flow
-              var exp               = now+3600; 
+              var exp               = now+max_expires; 
               var scope             = scopes.join(',');
             
               var header            = {alg:'RS256',typ:'JWT'};
@@ -795,6 +796,8 @@ function tokenmod(keyfile,scopes,{fsp,crypto}){
               
               token       = json.access_token;
               expire      = json.expires_in;
+                                                                                var now   = Math.floor(Date.now()/1000);
+                                                                                console.log(expire-now);
           
         }//exchange
   
