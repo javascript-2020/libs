@@ -675,7 +675,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         obj.tokenmod    = tokenmod;
 
         
-function tokenmod(keyfile,scopes,{fsp}){
+function tokenmod(keyfile,scopes,{fsp,crypto}){
   
   var obj   = {};
           
