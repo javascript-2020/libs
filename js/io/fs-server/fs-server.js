@@ -13,14 +13,39 @@
 
 (()=>{
   
-  var obj   = {};
+  var obj   = {
+        version     : 'v1.0.0'
+  };
   
   
   //:
   
+
   
+        obj.file                = {};
+        obj.file.load           = loadfile;
+        obj.file.save           = savefile;
+        obj.file.create         = mkfile;
+        obj.file.delete         = rmfile;
+        obj.file.del            = rmfile;
+        obj.file.upload         = upload;
+        obj.file.download       = download;
+        
+        
+        obj.dir                 = {};
+        obj.dir.read            = readdir;
+        obj.dir.create          = mkdir;
+        obj.dir.delete          = rmdir;
+        obj.dir.del             = rmdir;
+        obj.dir.clear           = dirclear;
   
-        obj.load    = async function(url,hdrs,path){
+
+
+        
+  //:  
+  
+
+        async function loadfile(url,hdrs,path){
           
               var headers   = {mode:'load'};
               Object.assign(headers,hdrs);
@@ -54,7 +79,7 @@
         }//loadfile
         
         
-        obj.save    = async function(url,hdrs,path,blob){
+        async function savefile(url,hdrs,path,blob){
           
               var headers   = {mode:'save'};
               Object.assign(headers,hdrs);
@@ -93,7 +118,7 @@
 
   
         
-        obj.mkfile   = async function(url,hdrs,path){
+        async function mkfile(url,hdrs,path){
 
               var headers   = {mode:'mkfile'};
               Object.assign(headers,hdrs);
@@ -127,7 +152,7 @@
         }//mkfile
         
         
-        obj.rmfile   = async function(url,hdrs,path){
+        async function rmfile(url,hdrs,path){
           
               var headers   = {mode:'rmfile'};
               Object.assign(headers,hdrs);
@@ -161,8 +186,11 @@
               
         }//rmfile
         
+
+  //:
+  
         
-        obj.rmdir    = async function(url,hdrs,path){
+        async function rmdir(url,hdrs,path){
           
               var headers     = {mode:'rmdir'};
               Object.assign(headers,hdrs);
@@ -197,7 +225,7 @@
         }//rmdir
         
         
-        obj.mkdir    = async function(url,hdrs,path){
+        async function mkdir(url,hdrs,path){
 
               var headers     = {mode:'mkdir'};
               Object.assign(headers,hdrs);
@@ -232,7 +260,7 @@
         }//mkdir
 
         
-        obj.readdir    = async function(url,hdrs,path){
+        async function readdir(url,hdrs,path){
 
               var headers     = {mode:'readdir'};
               Object.assign(headers,hdrs);
@@ -316,7 +344,7 @@
         }//v1
 
 
-        obj.upload   = async function(url,hdrs,path,blob){
+        async function upload(url,hdrs,path,blob){
 
               var headers     = {mode:'upload'};
               Object.assign(headers,hdrs);
@@ -350,7 +378,7 @@
         }//upload
         
         
-        obj.download   = async function(url,hdrs,path){
+        async function download(url,hdrs,path){
           
               var headers     = {mode:'download'};
               Object.assign(headers,hdrs);
@@ -385,7 +413,7 @@
         }//download
         
         
-        obj.dirclear   = async function(url,hdrs,path){
+        async function dirclear(url,hdrs,path){
           
               var headers     = {mode:'dir-clear'};
               Object.assign(headers,hdrs);
