@@ -804,9 +804,10 @@ function tokenmod(keyfile,scopes,{fsp,crypto}){
               var now   = Math.floor(Date.now()/1000);
               
               if(token && now<expire-skew){
+                                                                                console.log('cache');
                     return token;
               }
-          
+                                                                          
               await readkeyfile();
               var assertion   = build();
               await exchange(assertion);
