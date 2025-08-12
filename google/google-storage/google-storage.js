@@ -688,7 +688,7 @@ function tokenmod(keyfile,scopes,{fsp,crypto}){
   
         var uri           = 'https://oauth2.googleapis.com/token';
         var skew          = 60;
-        var max_expires   = 7200;
+        var max_expires   = 3600;
         
 
   //:
