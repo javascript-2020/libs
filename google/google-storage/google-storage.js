@@ -675,7 +675,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         obj.tokenmod    = tokenmod;
 
         
-function tokenmod(keyfile,scopes){
+function tokenmod(keyfile,scopes,{fsp}){
   
   var obj   = {};
           
@@ -701,7 +701,6 @@ function tokenmod(keyfile,scopes){
         
         async function readkeyfile(){
             
-              var fsp     = await import('node:fs/promises');
               var txt     = await fsp.readFile(keyfile,'utf8');
               var json    = JSON.parse(txt);
               
