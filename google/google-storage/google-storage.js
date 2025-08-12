@@ -19,6 +19,13 @@
   
         var df    = true;
                                                                                 debug(obj.version);  
+
+
+        obj.list    = {};
+        
+        
+        
+        
   //:
 
 
@@ -468,7 +475,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
   //:
   
 
-        obj.buckets   = async function(token,project){
+        obj.bucket.list   = async function(token,project){
           
               project         = encodeURIComponent(project);
               var url         = `https://storage.googleapis.com/storage/v1/b?project=${project}`
@@ -496,7 +503,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var buckets   = await res.json();
               return buckets;
               
-        }//buckets
+        }//list
   
   
   //:
