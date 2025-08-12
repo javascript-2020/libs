@@ -281,6 +281,7 @@
                     return {error};
               }
               
+              var txt             = await res.text();
               var json            = JSON.parse(txt);
               var {dirs,files}    = process(json);
                                                                                 //debugger;
