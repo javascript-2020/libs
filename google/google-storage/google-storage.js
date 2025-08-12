@@ -692,8 +692,8 @@ function tokenmod(keyfile,scopes){
 
   //:
   
-  
-        obj.get   = gettoken;
+        
+        Object.defineProperty(obj,'rd',{get:gettoken});
         
         
   //:
