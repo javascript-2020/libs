@@ -468,7 +468,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
   //:
   
 
-        obj.buckets   = async function(project){
+        obj.buckets   = async function(token,project){
           
               project         = encodeURIComponent(project);
               var url         = `https://storage.googleapis.com/storage/v1/b?project=${project}`
@@ -667,6 +667,159 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//logs
 
 
+
+  //:
+  
+  
+  
+        obj.tokenmod    = tokenmod;
+
+        
+function tokenmod(keyfile,scopes){
+  
+  var obj   = {};
+          
+  
+        var email;
+        var key;
+  
+        var expire;
+        var token;
+  
+        var uri       = 'https://oauth2.googleapis.com/token';
+        var skew      = 60;
+        
+
+  //:
+  
+  
+        obj.get   = gettoken;
+        
+        
+  //:
+  
+        
+        async function readkeyfile(){
+            
+              var txt     = await fsp.readFile(keyfile,'utf8');
+              var json    = JSON.parse(txt);
+              
+              email       = json.client_email;
+              key         = json.private_key;
+                                                                                // Keyfiles often escape newlines as \n — normalize to PEM format
+              key         = key.replaceAll('\\n','\n');
+                  
+        }//readkeyfile
+        
+        
+        function b64url(buf){
+          
+              if(typeof buf=='string'){
+                    buf   = Buffer.from(buf);
+              }
+              
+              var b64   = buf.toString('base64');
+              b64       = b64.replaceAll('+','-');
+              b64       = b64.replaceAll('/','_');
+              b64       = b64.replaceAll('=','');
+              return b64;
+              
+              
+        }//b64url
+  
+        
+        function signRS256(input,privateKeyPem){
+          
+              var signer    = crypto.createSign('RSA-SHA256');
+              signer.update(input);
+              signer.end();
+              var buf   = signer.sign(privateKeyPem);
+              var b64   = b64url(buf);
+              return b64;
+              
+        }//signRS256
+  
+        
+        function build(){
+          
+              var now               = Math.floor(Date.now()/1000);
+              
+              var iss               = email;
+              var aud               = uri;
+              var iat               = now;
+                                                                                // 1 hour max for service account JWT flow
+              var exp               = now+3600; 
+              var scope             = scopes.join(',');
+            
+              var header            = {alg:'RS256',typ:'JWT'};
+              header                = b64url(JSON.stringify(header));
+              var payload           = {iss,scope,aud,iat,exp};
+              payload               = b64url(JSON.stringify(payload));
+              
+              var toSign            = `${header}.${payload}`;
+              var signature         = signRS256(toSign,key);
+              
+              var str               = `${toSign}.${signature}`;
+              return str;
+          
+        }//build
+  
+        
+        async function exchange(assertion){
+          
+              var headers       = {'content-type':'application/x-www-form-urlencoded'};
+              var grant_type    = 'urn:ietf:params:oauth:grant-type:jwt-bearer';
+              var body          = new URLSearchParams({grant_type,assertion});
+  
+              var err;
+              try{
+                
+                    var res   = await fetch(uri,{method:'post',headers,body});
+                    
+              }//try
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+              }
+            
+              if(!res.ok){
+                    const text = await res.text().catch(() => '');
+                    throw new Error(`Token exchange failed: ${res.status} ${res.statusText} ${text}`);
+              }
+            
+                                                                                // {access_token,token_type,expires_in}
+              var json    = await res.json();
+              
+              token       = json.access_token;
+              expire      = json.expires_in;
+          
+        }//exchange
+  
+  
+        async function gettoken(){
+            
+              var now   = Math.floor(Date.now()/1000);
+              
+              if(token && now<expire-skew){
+                    return token;
+              }
+          
+              await readkeyfile();
+              var assertion   = build();
+              await exchange(assertion);
+              return token;  
+              
+        }//gettoken
+          
+      
+  return obj;
+
+}//tokenmod
+
+  
         
   //:
   
