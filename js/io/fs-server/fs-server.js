@@ -63,18 +63,17 @@
                     
               }
               if(err){
-                    alert('https-file.loadfile error\n'+err.toString());
-                    return;
+                    var error   = err.toString();
+                    return {error};
               }
               
               if(!res.ok){
-                    var txt         = await res.text();
-                    alert('loadfile : '+url+'\n'+txt);
-                    return false;
+                    var error   = await res.text();
+                    return {error};
               }
               
               var blob    = await res.blob();
-              return blob;
+              return {blob};
               
         }//loadfile
         
@@ -98,18 +97,17 @@
                     
               }
               if(err){
-                    alert('https-file.savefile error\n'+err.toString());
-                    return;
+                    var error   = err.toString();
+                    return  {error};
               }
               
               if(!res.ok){
-                    var txt       = await res.text();
-                    alert('savefile : '+url+'\n'+txt);
-                    return false;
+                    var error   = await res.text();
+                    return {error};
               }
               
               var blob    = await res.blob();
-              return blob;
+              return {blob};
               
         }//save
         
@@ -136,18 +134,17 @@
                     
               }
               if(err){
-                    var str   = err.toString();
-                    alert(`fetch error\n${str}`);
-                    return;
+                    var error   = err.toString();
+                    return {error};
               }
-              
-              var txt       = await res.text();
               
               if(!res.ok){
-                    alert(`mkfile : ${path}\n${txt}`);
-                    return;
+                    var error   = await res.text();
+                    return {error};
               }
-              return true;
+              
+              var ok    = await res.text();
+              return {ok};
               
         }//mkfile
         
@@ -170,19 +167,16 @@
                     
               }
               if(err){
-                    var str   = err.toString();
-                    alert(`fetch error\n${str}`);
-                    return;
+                    var error   = err.toString();
+                    return {error};
               }
-              
-              var txt       = await res.text();
               
               if(!res.ok){
-                    alert(`rmfile : ${path}\n${txt}`);
-                    return;
+                    var error   = await res.text();
+                    return {error};
               }
-              
-              return true;
+              var ok    = await res.text();
+              return {ok};
               
         }//rmfile
         
@@ -208,19 +202,19 @@
                     
               }
               if(err){
-                    var str   = err.toString();
-                    alert(`fetch error\n${str}`);
-                    return;
+                    var error   = err.toString();
+                    return {error};
               }
               
-              var txt         = await res.text();
+              
               
               if(!res.ok){
-                    alert(`rmdir : ${path}\n${txt}`);
-                    return;
+                    var error   = await res.text();
+                    return {error};
               }
               
-              return true;
+              var ok    = await res.text();
+              return {ok};
               
         }//rmdir
         
@@ -243,19 +237,19 @@
                     
               }
               if(err){
-                    var str   = err.toString();
-                    alert(`fetch error\n${str}`);
-                    return;
+                    var error   = err.toString();
+                    return {error};
               }
               
-              var txt         = await res.text();
+              
               
               if(!res.ok){
-                    alert(`mkdir : ${path}\n${txt}`);
-                    return false;
+                    var error   = await res.text();
+                    return {error};
               }
               
-              return true;
+              var ok    = await res.text();
+              return {ok};
               
         }//mkdir
 
@@ -278,24 +272,20 @@
                     
               }//catch
               if(err){
-                    var str   = err.toString();
-                    alert(`fetch error\n${str}`);
-                    return;
+                    var error   = err.toString();
+                    return {error};
               }
               
-              var txt         = await res.text();
-              
               if(!res.ok){
-                    alert('readdir :'+url+'\n'+txt);
-                    return false;
+                    var error   = await res.text();
+                    return {error};
               }
               
               var json            = JSON.parse(txt);
               var {dirs,files}    = process(json);
                                                                                 //debugger;
                                                                                 //console.trace('readdir');
-              display(path,dirs,files);
-              return true;
+              return {dirs,files};
               
         }//readdir
 
@@ -363,18 +353,19 @@
                     
               }
               if(err){
-                    var str   = err.toString();
-                    alert(`fetch error\n${str}`);
-                    return;
+                    var error   = err.toString();
+                    return {error};
               }
               
-              var txt         = await res.text();
               
               if(!res.ok){
-                    alert('readdir :'+url+'\n'+txt);
-                    return false;
+                    var error   = await res.text();
+                    return {error};
               }
           
+              var ok    = await res.text();
+              return {ok};
+              
         }//upload
         
         
@@ -396,19 +387,17 @@
                     
               }
               if(err){
-                    var str   = err.toString();
-                    alert(`fetch error\n${str}`);
-                    return false;
+                    var error   = err.toString();
+                    return {error};
               }
               
               if(!res.ok){
-                    var txt   = await res.text();
-                    alert('readdir :'+url+'\n'+txt);
-                    return false;
+                    var error   = await res.text();
+                    return {error};
               }
               
               var blob         = await res.blob();
-              return blob;
+              return {blob};
           
         }//download
         
@@ -431,18 +420,17 @@
                     
               }//catch
               if(err){
-                    var str   = err.toString();
-                    alert(`fetch error\n${str}`);
-                    return;
+                    var error   = err.toString();
+                    return {error};
               }
               
               if(!res.ok){
-                    var txt   = await res.text();
-                    alert('readdir :'+url+'\n'+txt);
-                    return false;
+                    var error   = await res.text();
+                    return {error};
               }
 
-              return true;
+              var ok    = await res.text();
+              return {ok};
               
         }//dirclear
 
