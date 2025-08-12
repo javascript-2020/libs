@@ -682,11 +682,19 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         obj.tokenmod    = tokenmod;
 
         
-function tokenmod(file,scopes,{fsp,crypto,platform}){
+function tokenmod(file,scopes,params){
   
   var obj   = {};
+        
+        params    ||= 'browser';
+        switch(typeof params){
           
+          case 'string'   : platform                = params;       break;
+          case 'object'   : {fsp,crypto,platform}   = params;       break;
+          
+        }//switch
         platform        ||= 'nodejs';
+
   
         var email;
         var key;
