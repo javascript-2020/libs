@@ -324,13 +324,13 @@ curl -X POST --data-binary @OBJECT_LOCATION \
 
         obj.list    = list;
         
-        async function list(token,path){
+        async function list(token,bucket,path){
         
               if(path.startsWith('/')){
                     path    = path.slice(1);
               }
               
-              var url       = 'https://storage.googleapis.com/storage/v1/b/ext-code-test_cloudbuild/o?delimiter=/';
+              var url       = 'https://storage.googleapis.com/storage/v1/b/${bucket}/o?delimiter=/';
               
               if(path){
                     url    += '&prefix='+path;
@@ -726,41 +726,39 @@ function tokenmod(file,scopes,params){
         
         
         if(platform=='nodejs'){
-              keyfile.read(file);
+              keyfile.load(file);
         }else{
-              keyfile.blob(file);
+              keyfile.read(file);
         }
         
         
   //:
   
         
-        keyfile.parse   = function(json){
+        keyfile.load    = async function(file){
+            
+              var txt     = await fsp.readFile(file,'utf8');
+              keyfile.read(txt);
+                  
+        }//load
+
+        
+        keyfile.read    = async function(v){
+          
+              var txt;
+              var type    = datatype(v);
+              switch(type){
+                
+                case 'blob'   : txt   = await blob.text();        break;
+                  
+              }//switch
+              
+              var json    = JSON.parse(txt);
           
               email       = json.client_email;
               key         = json.private_key;
                                                                                 // Keyfiles often escape newlines as \n — normalize to PEM format
               key         = key.replaceAll('\\n','\n');
-              
-        }//parse
-        
-        
-        keyfile.read    = async function(file){
-            
-              var txt     = await fsp.readFile(file,'utf8');
-              var json    = JSON.parse(txt);
-              
-              keyfile.parse(json);
-                  
-        }//read
-
-        
-        keyfile.blob    = async function(blob){
-          
-              var txt     = await blob.text();
-              var json    = JSON.parse(txt);
-          
-              keyfile.parse(json);
               
         }//blob
         
@@ -892,6 +890,18 @@ function tokenmod(file,scopes,params){
 }//tokenmod
 
   
+  
+  //:
+  
+  
+        function datatype(v){
+        
+              var str   = Object.prototype.toString.call(v);
+              str       = str.slice(8,-1);
+              str       = str.toLowerCase();
+              return str;
+              
+        }//datatype  
         
   //:
   
