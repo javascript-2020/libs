@@ -825,7 +825,7 @@ function tokenmod(file,scopes,params){
               console.log('type',type);
               switch(type){
                 
-                case 'uint8array'   : bytes   = input;
+                case 'uint8array'   : bytes   = input;                        break;
                 case 'string'       : bytes   = encoder.encode(input);        break;
                 
               }//switch
