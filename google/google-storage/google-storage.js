@@ -787,7 +787,7 @@ function tokenmod(file,scopes,params){
         async function load(file){
             
               var txt     = await fsp.readFile(file,'utf8');
-              keyfile.read(txt);
+              read(txt);
                   
         }//load
 
