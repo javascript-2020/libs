@@ -689,8 +689,8 @@ function tokenmod(file,scopes,params){
         params    ||= 'browser';
         switch(typeof params){
           
-          case 'string'   : platform                = params;       break;
-          case 'object'   : {fsp,crypto,platform}   = params;       break;
+          case 'string'   : platform                  = params;         break;
+          case 'object'   : ({fsp,crypto,platform}    = params);        break;
           
         }//switch
         platform        ||= 'nodejs';
