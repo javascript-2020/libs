@@ -965,9 +965,7 @@ function tokenmod(file,scopes,params){
               expire      = json.expires_in;
               var now     = Math.floor(Date.now()/1000);              
               expire     += now;
-                                                                                
-                                                                                console.log(expire,expire-now);
-          
+                                                                                //console.log(expire,expire-now);
         }//exchange
   
   
@@ -976,7 +974,7 @@ function tokenmod(file,scopes,params){
               var now   = Math.floor(Date.now()/1000);
               
               if(token && now<expire-skew){
-                                                                                console.log('cache');
+                                                                                //console.log('cache');
                     return token;
               }
                                                                           
