@@ -716,6 +716,11 @@ function tokenmod(file,scopes,params){
   //:
   
   
+        var sign    = {};
+        
+        
+  //:
+  
         switch(scopes){
           
           case 'read'         : scopes    = ['https://www.googleapis.com/auth/devstorage.read_only'];           break;
