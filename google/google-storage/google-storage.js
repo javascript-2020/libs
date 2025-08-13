@@ -768,6 +768,7 @@ function tokenmod(file,scopes,params){
               key         = json.private_key;
                                                                                 // Keyfiles often escape newlines as \n — normalize to PEM format
               key         = key.replaceAll('\\n','\n');
+              console.log(key);
               
         }//read
         
