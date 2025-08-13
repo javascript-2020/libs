@@ -846,7 +846,7 @@
                                   var fn    = item.path.slice(path.length);
                                   return fn;
                           
-                            }));
+                            });
                     
               return {list};
               
