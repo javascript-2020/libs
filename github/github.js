@@ -49,7 +49,8 @@
 
         
         github.dir                  = {};
-        
+        github.dir.download         = dirdownload;
+        github.dir.list             = dirlist;
         
         github.build                = build;
 
@@ -616,7 +617,7 @@
   //:
   
   
-        download.dir    = function(owner,repo,branch,path,update,complete,token,api){
+        function dirdownload(owner,repo,branch,path,update,complete,token,api){
                                                                                 debug('download.dir',owner,repo,branch,path,token,api);              
               var resolve,promise=new Promise(res=>resolve=res);
               
@@ -789,6 +790,64 @@
         }//dir
 
 
+        async function dirlist({token,owner,repo,branch,path}){
+          
+              branch  ||= 'main';
+              
+              if(path.startsWith('/')){
+                    path    = path.slice(1);
+              }
+              if(path.endsWith('/')){
+                    path    = path.slice(0,-1);
+              }
+              
+              var url       = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
+              var headers   = {};
+              if(token){
+                    headers.authorization   = `bearer: ${token}`;
+              }
+              
+              var json    = await fetch(url,{headers}).then(res=>res.json()).catch(error);
+      
+              var item    = json.tree.find(o=>o.path===path);
+              if(item){
+                    if(item.type=='blob'){
+                          var i   = path.lastIndexOf('/');
+                          if(i==-1){
+                                path    = '';
+                          }else{
+                                path    = path.slice(0,i);
+                          }
+                    }
+              }else{
+                    if(path){
+                          error   = 'not found : '+path;
+                          return {error};
+                    }
+              }
+              
+              if(path){
+                    if(path.slice(-1)!='/'){
+                          path   += '/';
+                    }
+              }
+                                                                          debug('path',path);
+              var list    = [];
+              var list    = json.tree.filter(async item=>{
+                    
+                                  if(item.type=='tree')return;
+                                  if(!item.path.startsWith(path))return;
+                          
+                                  var fn    = item.path.slice(path.length);
+                                  return fn;
+                          
+                            }));
+                    
+              return {list};
+              
+        }//dirlist
+        
+        
   //:
   
 
