@@ -448,6 +448,12 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         
         list.full   = async function(token,bucket,path){
         
+        
+              if(arguments.length==1){
+                    var params              = arguments[0];
+                    ({token,bucket,path}    = params);
+              }
+              
               if(path.startsWith('/')){
                     path    = path.slice(1);
               }
