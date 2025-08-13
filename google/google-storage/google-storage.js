@@ -869,7 +869,7 @@ function tokenmod(file,scopes,params){
         
   
         
-        function build(){
+        async function build(){
           
               var now               = Math.floor(Date.now()/1000);
               
@@ -941,7 +941,7 @@ function tokenmod(file,scopes,params){
                     return token;
               }
                                                                           
-              var assertion   = build();
+              var assertion   = await build();
               await exchange(assertion);
               return token;  
               
