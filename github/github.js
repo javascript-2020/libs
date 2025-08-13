@@ -794,10 +794,13 @@
         async function dirlist({token,owner,repo,branch,path}){}
 
         
-        async function dirlistfull({token,owner,repo,branch,path}){
+        async function dirlistfull({token,owner,repo,branch,path},params){
           
-              branch  ||= 'main';
-              path    ||= '';
+              branch          ||= 'main';
+              path            ||= '';
+              params          ||= {};
+              var files_only    = params.files_only;
+
               
               if(path.startsWith('/')){
                     path    = path.slice(1);
@@ -842,18 +845,21 @@
               var list    = [];
               var list    = json.tree.filter(item=>{//console.log(item);
                     
-                                  if(item.type!='blob')return;
                                   if(!item.path.startsWith(path))return;
+                                  if(files_only){
+                                        if(item.type!='blob')return;
+                                  }
                                   return true;      
                           
                             });
               list        = list.map(item=>{
                 
                                   var path    = item.path.slice(len);
+                                  var type    = item.type=='blob' ? 'file' : 'dir';
                                   var i       = path.lastIndexOf('/');
                                   var name    = path.slice(i+1);
                                   var size    = item.size;
-                                  return {path,name,size};
+                                  return {path,name,size,type};
                 
                             });
               
