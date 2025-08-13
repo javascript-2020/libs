@@ -829,17 +829,14 @@ function tokenmod(file,scopes,params){
         }//signRS256
         
         
-        sign.browser    = async function(privateKey, dataToSign) {
+        sign.browser    = async function(key,data){
         
-              const dataBytes = encoder.encode(dataToSign);
-              const sig = await crypto.subtle.sign(
-                { name: 'RSASSA-PKCS1-v1_5' },
-                privateKey,
-                dataBytes
-              );
-              return new Uint8Array(sig);
+              var bytes   = encoder.encode(data);
+              var sig     = await crypto.subtle.sign({name:'RSASSA-PKCS1-v1_5'},key,bytes);
+              var buf     = new Uint8Array(sig);
+              return buf;
               
-        }
+        }//browser
         
   
         
