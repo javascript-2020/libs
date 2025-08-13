@@ -21,10 +21,56 @@
                                                                                 debug(obj.version);  
 
 
-        obj.bucket    = {};
+//:
+
+
+
+        obj.parse           = parse;
+
+
+
+        obj.file            = {};
+        obj.file.load       = load;
+        obj.load            = load;
+        obj.file.save       = save;
+        obj.file.delete     = del;
+        obj.delete          = del;
+        obj.save            = save;
+        obj.file.save       = save;
+
+
+        
+        obj.dir             = {};
+        obj.list            = list;
+        obj.dir.list        = list;
+
+
+
+        obj.token           = {};
+        
+        obj.refresh         = refresh;
+
+        obj.tokenmod        = tokenmod;
+        obj.token.mod       = tokenmod;
+
+
         
         
+        obj.bucket          = {};
+        obj.bucket.list     = bucketlist;
         
+
+
+
+
+        obj.run             = {};
+        obj.run.deploy      = deploy;
+        obj.deploy          = deploy;
+        obj.run.logs        = logs;
+        obj.logs            = logs;
+
+
+
         
   //:
 
@@ -32,7 +78,6 @@
 //  https://console.cloud.google.com/storage/browser/_details/ext-code-test_cloudbuild/test.txt;tab=live_object?inv=1&invt=Ab2X8w&project=ext-code-test
 //  https://storage.googleapis.com/ext-code-test_cloudbuild/test.txt
 
-        obj.parse   = parse;
         
         function parse(url){
         
@@ -126,7 +171,7 @@ curl -X GET \
   
 */
 
-        obj.load    = load;
+
   
         async function load(token,bucket,path){
   
@@ -183,7 +228,6 @@ curl -X POST --data-binary @OBJECT_LOCATION \
     
 */
 
-        obj.save    = save;
         
         async function save(token,bucket,path,blob){
 
@@ -247,7 +291,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//save
         
 
-        obj.delete    = async function(token,bucket,path){
+        async function del(token,bucket,path){
 
               if(path.startsWith('/')){
                     path    = path.slice(1);
@@ -287,7 +331,6 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//delete
 
     
-        obj.refresh   = refresh;
         
         async function refresh(client_id,client_secret,refresh_token){
         
@@ -322,7 +365,6 @@ curl -X POST --data-binary @OBJECT_LOCATION \
 
 
 
-        obj.list    = list;
         
         async function list(token,bucket,path){
         
@@ -475,7 +517,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
   //:
   
 
-        obj.bucket.list   = async function(token,project){
+        async function bucketlist(token,project){
           
               project         = encodeURIComponent(project);
               var url         = `https://storage.googleapis.com/storage/v1/b?project=${project}`
@@ -509,7 +551,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
   //:
   
   
-        obj.deploy    = async function({token,email,bucket,zip,project,service,region}){
+        async function deploy({token,email,bucket,zip,project,service,region}){
         
               var timeout   = '900s';
               var config    = {
@@ -624,7 +666,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//deploy
         
      
-        obj.logs    = async function({token,project,service}){
+        async function logs({token,project,service}){
         
               var page    = null;
               var done    = false;
@@ -679,7 +721,6 @@ curl -X POST --data-binary @OBJECT_LOCATION \
   
   
   
-        obj.tokenmod    = tokenmod;
 
         
 function tokenmod(file,scopes,params){
