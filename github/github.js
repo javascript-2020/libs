@@ -617,7 +617,7 @@
   
   
         download.dir    = function(owner,repo,branch,path,update,complete,token,api){
-                                                                                debug('download',owner,repo,branch,path,token,api);              
+                                                                                debug('download.dir',owner,repo,branch,path,token,api);              
               var resolve,promise=new Promise(res=>resolve=res);
               
               setTimeout(fn,50);
