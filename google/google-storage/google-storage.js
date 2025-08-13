@@ -847,12 +847,12 @@ function tokenmod(file,scopes,params){
         }//base64url
   
         
-        sign.nodejs   = function(input,privateKeyPem){
+        sign.nodejs   = function(key,data){
           
               var signer    = crypto.createSign('RSA-SHA256');
-              signer.update(input);
+              signer.update(data);
               signer.end();
-              var buf   = signer.sign(privateKeyPem);
+              var buf   = signer.sign(key);
               var b64   = b64url(buf);
               return b64;
               
@@ -888,7 +888,7 @@ function tokenmod(file,scopes,params){
               payload               = b64url(JSON.stringify(payload));
               
               var toSign            = `${header}.${payload}`;
-              var signature         = await sign[platform](toSign,key);
+              var signature         = await sign[platform](key,toSign);
               
               var str               = `${toSign}.${signature}`;
               return str;
