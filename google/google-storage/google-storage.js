@@ -786,6 +786,7 @@ function tokenmod(file,scopes,params){
         function pem_buf(pem){
         
               const b64   = pem.replace(/-----BEGIN [^-]+-----/g,'').replace(/-----END [^-]+-----/g,'').replace(/\s+/g,'');
+              console.log(b64);
               const raw   = atob(b64);
               const buf   = new Uint8Array(raw.length);
               return buf;
