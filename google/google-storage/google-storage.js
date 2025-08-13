@@ -493,7 +493,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var list   = [];
               
               if(json.items){
-                    json.items.forEach(item=>{console.log(item);
+                    json.items.forEach(item=>{
                           
                           if(item.name.startsWith(path)){
                                                                                       //console.log(item);
