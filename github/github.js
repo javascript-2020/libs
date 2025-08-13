@@ -33,14 +33,27 @@
   //:
 
         
-        github.df             = true;
+        github.df                   = true;
         
-        github.parse          = parse;  
-        github.load           = load;
-        github.save           = save;
-        github.backup         = backup;
-        github.download       = download;
-        github.build          = build;
+        github.parse                = parse;  
+        
+        github.file                 = {};
+        github.file.load            = load;
+        github.load                 = load;
+        github.file.save            = save;
+        github.save                 = save;
+        github.file.backup          = backup;
+        github.backup               = backup;
+        github.file.download        = download;
+        github.download             = download;
+
+        
+        github.dir                  = {};
+        
+        
+        github.build                = build;
+
+
 
               
   //:
