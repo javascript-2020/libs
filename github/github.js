@@ -797,6 +797,7 @@
         async function dirlistfull({token,owner,repo,branch,path}){
           
               branch  ||= 'main';
+              path    ||= '';
               
               if(path.startsWith('/')){
                     path    = path.slice(1);
