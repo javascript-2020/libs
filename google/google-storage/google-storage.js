@@ -772,7 +772,7 @@ function tokenmod(file,scopes,params){
         }//read
         
         
-        async function imporkey(pem){
+        async function importkey(pem){
         
               var buf       = pem_buf(pem);
               var params    = {name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'};
