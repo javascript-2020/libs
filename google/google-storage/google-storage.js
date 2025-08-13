@@ -706,7 +706,10 @@ function tokenmod(file,scopes,params){
         var skew          = 60;
         var max_expires   = 3600;
         
-
+        
+        var encoder       = new TextEncoder();
+        
+        
   //:
 
 
@@ -768,7 +771,8 @@ function tokenmod(file,scopes,params){
               
         }//blob
         
-        
+
+/*        
         function b64url(buf){
           
               if(typeof buf=='string'){
@@ -776,6 +780,7 @@ function tokenmod(file,scopes,params){
               }
               
               var b64   = buf.toString('base64');
+              
               b64       = b64.replaceAll('+','-');
               b64       = b64.replaceAll('/','_');
               b64       = b64.replaceAll('=','');
@@ -783,6 +788,33 @@ function tokenmod(file,scopes,params){
               
               
         }//b64url
+*/
+
+        function b64url(input){
+        
+              var bytes;
+              var type    = datatype(input);
+              switch(type){
+                
+                case 'uint8array'   : bytes   = input;
+                case 'string'       : bytes   = encoder.encode(input);        break;
+                
+              }//switch
+              
+              //var buf     = await blob.arrayBuffer();
+              //var bytes   = new Uint8Array(buf);
+              
+              
+              var bin     = bytes.reduce((acc,byte)=>acc+=String.fromCharCode(byte),'');
+              var b64     = btoa(bin);
+              
+              b64         = b64.replaceAll('+','-');
+              b64         = b64.replaceAll('/','_');
+              b64         = b64.replaceAll('=','');
+              
+              return b64;
+            
+        }//base64url
   
         
         sign.nodejs   = function(input,privateKeyPem){
