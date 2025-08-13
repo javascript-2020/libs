@@ -789,8 +789,6 @@ function tokenmod(file,scopes,params){
               console.log(b64);
               const raw   = atob(b64);
               const buf   = new Uint8Array(raw.length);
-              return buf;
-              
               for(let i=0;i<raw.length;i++){
                 
                     buf[i]    = raw.charCodeAt(i);
