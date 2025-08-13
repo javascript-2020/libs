@@ -836,19 +836,20 @@
                           path   += '/';
                     }
               }
+              
+              var len     = path.length;
                                                                           debug('path',path);
               var list    = [];
               var list    = json.tree.filter(async item=>{
                     
-                                  if(item.type=='tree')return;
+                                  if(item.type!='blob')return;
                                   if(!item.path.startsWith(path))return;
                                   return true;      
                           
                             });
-
               list        = list.map(item=>{
                 
-                                  var path    = item.path.slice(path.length);
+                                  var path    = item.path.slice(len);
                                   var i       = path.lastIndexOf('/');
                                   var name    = path.slice(i+1);
                                   var size    = item.size;
