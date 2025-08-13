@@ -509,6 +509,10 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                       type    = 'dir';
                                 }
                                 
+                                if(type=='dir' && files_only){
+                                      return;
+                                }
+                                
                                 var file    = {};
                                 file.name   = name;
                                 file.type   = type;
