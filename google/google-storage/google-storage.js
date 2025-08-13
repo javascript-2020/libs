@@ -492,7 +492,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var json    = await res.json();
                                                                                       //console.log(json);
                                                                                       //console.log(path);
-              var files   = [];
+              var list   = [];
               
               if(json.items){
                     json.items.forEach(item=>{
@@ -510,13 +510,13 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                 var file    = {};
                                 file.name   = name;
                                 
-                                files.push(file);
+                                list.push(file);
                           }
                           
                     });
               }
         
-              return {files};
+              return {list};
               
         }//full
         
