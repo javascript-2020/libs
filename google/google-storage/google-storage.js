@@ -822,6 +822,7 @@ function tokenmod(file,scopes,params){
         
               var bytes;
               var type    = datatype(input);
+              console.log(type);
               switch(type){
                 
                 case 'uint8array'   : bytes   = input;
