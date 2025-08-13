@@ -883,7 +883,6 @@ function tokenmod(file,scopes,params){
                     return token;
               }
                                                                           
-              await readkeyfile();
               var assertion   = build();
               await exchange(assertion);
               return token;  
