@@ -726,16 +726,16 @@ function tokenmod(file,scopes,params){
         
         
         if(platform=='nodejs'){
-              keyfile.load(file);
+              load(file);
         }else{
-              keyfile.read(file);
+              read(file);
         }
         
         
   //:
   
         
-        keyfile.load    = async function(file){
+        async function load(file){
             
               var txt     = await fsp.readFile(file,'utf8');
               keyfile.read(txt);
@@ -743,7 +743,7 @@ function tokenmod(file,scopes,params){
         }//load
 
         
-        keyfile.read    = async function(v){
+        async function read(v){
           
               var txt;
               var type    = datatype(v);
