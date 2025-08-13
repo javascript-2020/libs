@@ -447,13 +447,11 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//list
         
         
-        async function dirlistfull(token,bucket,path){
+        async function dirlistfull({token,bucket,path},params){
         
-        
-              if(arguments.length==1){
-                    var params              = arguments[0];
-                    ({token,bucket,path}    = params);
-              }
+              params          ||= {};
+              var files_only    = params.files_only;                    
+
               
               if(path.startsWith('/')){
                     path    = path.slice(1);
