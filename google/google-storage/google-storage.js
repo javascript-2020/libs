@@ -769,7 +769,35 @@ function tokenmod(file,scopes,params){
                                                                                 // Keyfiles often escape newlines as \n — normalize to PEM format
               key         = key.replaceAll('\\n','\n');
               
-        }//blob
+        }//read
+        
+        
+        async function imporkey(pem){
+        
+              var buf       = pem_buf(pem);
+              var params    = {name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'};
+              var key       = await crypto.subtle.importKey('pkcs8',buf,params,false,['sign']);
+              return key;
+              
+        }//importkey
+
+        
+        function pem_buf(pem){
+        
+              const b64   = pem.replace(/-----BEGIN [^-]+-----/g,'').replace(/-----END [^-]+-----/g,'').replace(/\s+/g,'');
+              const raw   = atob(b64);
+              const buf   = new Uint8Array(raw.length);
+              return buf;
+              
+              for(let i=0;i<raw.length;i++){
+                
+                    buf[i]    = raw.charCodeAt(i);
+                    
+              }//for
+              return buf.buffer;
+              
+        }//pem_buf
+        
         
 
 /*        
@@ -831,6 +859,7 @@ function tokenmod(file,scopes,params){
         
         sign.browser    = async function(key,data){
         
+              key         = await importkey(key);
               var bytes   = encoder.encode(data);
               var sig     = await crypto.subtle.sign({name:'RSASSA-PKCS1-v1_5'},key,bytes);
               var buf     = new Uint8Array(sig);
@@ -857,7 +886,7 @@ function tokenmod(file,scopes,params){
               payload               = b64url(JSON.stringify(payload));
               
               var toSign            = `${header}.${payload}`;
-              var signature         = sign[platform](toSign,key);
+              var signature         = await sign[platform](toSign,key);
               
               var str               = `${toSign}.${signature}`;
               return str;
