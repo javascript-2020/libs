@@ -504,9 +504,15 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                 if(!name){
                                       return;
                                 }
+                                var type    = 'file';
+                                if(name.endsWith('/')){
+                                      type    = 'dir';
+                                }
                                 
                                 var file    = {};
                                 file.name   = name;
+                                file.type   = type;
+                                file.size   = item.size;
                                 
                                 list.push(file);
                           }
