@@ -51,6 +51,7 @@
         github.dir                  = {};
         github.dir.download         = dirdownload;
         github.dir.list             = dirlist;
+        github.dir.list.full        = dirlistfull;
         
         github.build                = build;
 
@@ -790,7 +791,10 @@
         }//dir
 
 
-        async function dirlist({token,owner,repo,branch,path}){
+        async function dirlist({token,owner,repo,branch,path}){}
+
+        
+        async function dirlistfull({token,owner,repo,branch,path}){
           
               branch  ||= 'main';
               
@@ -845,7 +849,7 @@
                     
               return {list};
               
-        }//dirlist
+        }//dirlistfull
         
         
   //:
