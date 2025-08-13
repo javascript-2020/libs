@@ -864,7 +864,7 @@ function tokenmod(file,scopes,params){
               var sig     = await crypto.subtle.sign({name:'RSASSA-PKCS1-v1_5'},key,bytes);
               var buf     = new Uint8Array(sig);
               var b64     = b64url(buf);
-              return buf;
+              return b64;
               
         }//browser
         
