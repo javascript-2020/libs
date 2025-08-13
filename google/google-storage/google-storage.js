@@ -41,8 +41,9 @@
 
         
         obj.dir             = {};
-        obj.list            = list;
-        obj.dir.list        = list;
+        obj.list            = dirlist;
+        obj.dir.list        = dirlist;
+        obj.dir.list.full   = dirlistfull;
 
 
 
@@ -366,7 +367,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
 
 
         
-        async function list(token,bucket,path){
+        async function dirlist(token,bucket,path){
         
               if(path.startsWith('/')){
                     path    = path.slice(1);
@@ -446,7 +447,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//list
         
         
-        list.full   = async function(token,bucket,path){
+        async function dirlistfull(token,bucket,path){
         
         
               if(arguments.length==1){
