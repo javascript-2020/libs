@@ -750,7 +750,8 @@ function tokenmod(file,scopes,params){
               switch(type){
                 
                 case 'blob'   : txt   = await blob.text();        break;
-                  
+                default       : txt   = v;
+                
               }//switch
               
               var json    = JSON.parse(txt);
