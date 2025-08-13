@@ -842,12 +842,20 @@
                     
                                   if(item.type=='tree')return;
                                   if(!item.path.startsWith(path))return;
-                          
-                                  var fn    = item.path.slice(path.length);
-                                  return fn;
+                                  return true;      
                           
                             });
-                    
+
+              list        = list.map(item=>{
+                
+                                  var path    = item.path.slice(path.length);
+                                  var i       = path.lastIndexOf('/');
+                                  var name    = path.slice(i+1);
+                                  var size    = item.size;
+                                  return {path,name,size};
+                
+                            });
+              
               return {list};
               
         }//dirlistfull
