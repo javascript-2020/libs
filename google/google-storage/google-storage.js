@@ -768,7 +768,7 @@ function tokenmod(file,scopes,params){
               key         = json.private_key;
                                                                                 // Keyfiles often escape newlines as \n — normalize to PEM format
               key         = key.replaceAll('\\n','\n');
-              console.log(key);
+                                                                                //console.log(key);
               
         }//read
         
@@ -822,17 +822,13 @@ function tokenmod(file,scopes,params){
         
               var bytes;
               var type    = datatype(input);
-              console.log('type',type);
+                                                                                //console.log('type',type);
               switch(type){
                 
                 case 'uint8array'   : bytes   = input;                        break;
                 case 'string'       : bytes   = encoder.encode(input);        break;
                 
               }//switch
-              
-              //var buf     = await blob.arrayBuffer();
-              //var bytes   = new Uint8Array(buf);
-              
               
               var bin     = bytes.reduce((acc,byte)=>acc+=String.fromCharCode(byte),'');
               var b64     = btoa(bin);
