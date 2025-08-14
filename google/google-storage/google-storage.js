@@ -501,6 +501,9 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                           
                           if(item.name.startsWith(path)){
                                                                                       //console.log(item);
+                                if(item.name===path){
+                                      return;
+                                }
                                 var type    = 'file';
                                 if(item.name.endsWith('/')){
                                       type    = 'dir';
