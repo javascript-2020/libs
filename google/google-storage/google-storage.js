@@ -909,7 +909,7 @@ function tokenmod(file,scopes,{fsp,crypto,platform}){
   
         
         sign.nodejs   = function(key,data){
-          console.log(crypto);
+          
               var signer    = crypto.createSign('RSA-SHA256');
               signer.update(data);
               signer.end();
