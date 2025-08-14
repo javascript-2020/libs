@@ -456,6 +456,9 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               if(path.startsWith('/')){
                     path    = path.slice(1);
               }
+              if(!path.endsWith('/')){
+                    path   += '/';
+              }
               
               var url       = `https://storage.googleapis.com/storage/v1/b/${bucket}/o`;
 
@@ -463,6 +466,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               if(path){
                     url    += 'prefix='+path;
               }
+              
 */              
               
               var headers   = {authorization:`Bearer ${token}`};
