@@ -280,9 +280,13 @@
         
         load.api    = async function(token,owner,repo,branch,path){
 
+              if(path.startsWith('/')){
+                    path    = path.slice(1);
+              }
+              
               var url       = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;                                
               var headers   = {authorization:`Bearer ${token}`};
-                                                                                debug('load',url);
+                                                                                debug('load.api',url);
                                                                                 
               var err;
               
