@@ -854,10 +854,11 @@
                             });
               list        = list.map(item=>{
                 
-                                  var path    = item.path.slice(len);
+                                  var name    = path.slice(i+1);
+                                  var i       = -name.length;
+                                  var path    = item.path.slice(len,i);
                                   var type    = item.type=='blob' ? 'file' : 'dir';
                                   var i       = path.lastIndexOf('/');
-                                  var name    = path.slice(i+1);
                                   var size    = item.size;
                                   return {path,name,size,type};
                 
