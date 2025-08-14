@@ -465,8 +465,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
 /*
               if(path){
                     url    += 'prefix='+path;
-              }
-              
+              }              
 */              
               
               var headers   = {authorization:`Bearer ${token}`};
