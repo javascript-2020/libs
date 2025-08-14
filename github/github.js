@@ -857,11 +857,11 @@
                                   var i       = path.lastIndexOf('/');
                                   var name    = path.slice(i+1);
                                   var i       = -name.length;
-                                  var path    = item.path.slice(len,i);
+                                  var path2   = item.path.slice(len,i);
                                   var abs     = item.path;
                                   var type    = item.type=='blob' ? 'file' : 'dir';
                                   var size    = item.size;
-                                  return {path,name,size,type};
+                                  return {path:path2,name,size,type};
                 
                             });
               
