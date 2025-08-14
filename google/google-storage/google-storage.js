@@ -503,7 +503,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                       type    = 'dir';
                                 }
                                 
-                                var abs     = item.name;
+                                var abs     = '/'+item.name;
                                 var path2;
                                 var name;
                                 
