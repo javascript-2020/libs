@@ -844,7 +844,7 @@
                                                                           debug('path',path);
               var list    = [];
               var list    = json.tree.filter(item=>{
-                                                                          //console.log(item);
+
                                   if(!item.path.startsWith(path))return;
                                   if(files_only){
                                         if(item.type!='blob')return;
@@ -853,7 +853,7 @@
                           
                             });
               list        = list.map(item=>{
-                
+                                                                          //console.log(item);
                                   var i       = path.lastIndexOf('/');
                                   var name    = path.slice(i+1);
                                   var i       = -name.length;
