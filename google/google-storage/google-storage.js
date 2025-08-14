@@ -914,7 +914,7 @@ function tokenmod(file,scopes,params){
   
         
         sign.nodejs   = function(key,data){
-          
+          console.log(crypto);
               var signer    = crypto.createSign('RSA-SHA256');
               signer.update(data);
               signer.end();
