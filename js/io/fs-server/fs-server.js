@@ -106,8 +106,8 @@
                     return {error};
               }
               
-              var blob    = await res.blob();
-              return {blob};
+              var ok    = await res.text();
+              return {ok};
               
         }//save
         
