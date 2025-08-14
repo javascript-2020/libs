@@ -490,14 +490,15 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var json    = await res.json();
                                                                                       //console.log(json);
                                                                                       //console.log(path);
-              var list   = [];
+              var list    = [];
+              var len     = path.length;
               
               if(json.items){
                     json.items.forEach(item=>{
                           
                           if(item.name.startsWith(path)){
                                                                                       console.log(item);
-                                var name    = item.name.slice(path.length);
+                                var name    = item.name.slice(len);
                                 if(name.startsWith('/')){
                                       name    = name.slice(1);
                                 }
@@ -513,9 +514,12 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                       return;
                                 }
                                 
+                                var i       = -name.length;
+                                var path2   = item.name.slice(len,i);
+                                
                                 var file    = {};
-                                file.abs    = 
-                                file.path   = 
+                                file.abs    = item.name;
+                                file.path   = path2;
                                 file.name   = name;
                                 file.type   = type;
                                 file.size   = item.size;
