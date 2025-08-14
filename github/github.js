@@ -853,7 +853,7 @@
                           
                             });
               list        = list.map(item=>{
-                                                                          console.log(item);
+                                                                          //console.log(item);
                                   var i       = item.path.lastIndexOf('/');
                                   var name    = item.path.slice(i+1);
                                   var i       = -name.length;
