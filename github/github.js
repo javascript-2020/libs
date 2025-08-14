@@ -843,8 +843,8 @@
               var len     = path.length;
                                                                           debug('path',path);
               var list    = [];
-              var list    = json.tree.filter(item=>{//console.log(item);
-                    
+              var list    = json.tree.filter(item=>{
+                                                                          //console.log(item);
                                   if(!item.path.startsWith(path))return;
                                   if(files_only){
                                         if(item.type!='blob')return;
