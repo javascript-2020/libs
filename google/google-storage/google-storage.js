@@ -757,7 +757,7 @@ function tokenmod(file,scopes,params){
   
   var obj   = {};
         
-        var fsp,crypto;
+        var fsp,crypto,platform;
         
         params    ||= 'browser';
         switch(typeof params){
