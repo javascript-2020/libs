@@ -179,6 +179,74 @@
               return {ok};
               
         }//rmfile
+
+
+        async function upload(url,hdrs,path,blob){
+
+              var headers     = {mode:'upload'};
+              Object.assign(headers,hdrs);
+              var body        = blob;
+              var full        = url+path;
+
+              var err;
+              try{
+              
+                    var res   = await fetch(full,{method:'post',headers,body});
+                    
+              }
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }
+              if(err){
+                    var error   = err.toString();
+                    return {error};
+              }
+              
+              
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
+              }
+          
+              var ok    = await res.text();
+              return {ok};
+              
+        }//upload
+        
+        
+        async function download(url,hdrs,path){
+          
+              var headers     = {mode:'download'};
+              Object.assign(headers,hdrs);
+              var full        = url+path;
+
+              var err;
+              try{
+              
+                    var res         = await fetch(full,{headers});
+                    
+              }
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }
+              if(err){
+                    var error   = err.toString();
+                    return {error};
+              }
+              
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
+              }
+              
+              var blob         = await res.blob();
+              return {blob};
+          
+        }//download
         
 
   //:
@@ -335,74 +403,6 @@
         }//v1
 
 
-        async function upload(url,hdrs,path,blob){
-
-              var headers     = {mode:'upload'};
-              Object.assign(headers,hdrs);
-              var body        = blob;
-              var full        = url+path;
-
-              var err;
-              try{
-              
-                    var res   = await fetch(full,{method:'post',headers,body});
-                    
-              }
-              catch(err2){
-                
-                    err   = err2;
-                    
-              }
-              if(err){
-                    var error   = err.toString();
-                    return {error};
-              }
-              
-              
-              if(!res.ok){
-                    var error   = await res.text();
-                    return {error};
-              }
-          
-              var ok    = await res.text();
-              return {ok};
-              
-        }//upload
-        
-        
-        async function download(url,hdrs,path){
-          
-              var headers     = {mode:'download'};
-              Object.assign(headers,hdrs);
-              var full        = url+path;
-
-              var err;
-              try{
-              
-                    var res         = await fetch(full,{headers});
-                    
-              }
-              catch(err2){
-                
-                    err   = err2;
-                    
-              }
-              if(err){
-                    var error   = err.toString();
-                    return {error};
-              }
-              
-              if(!res.ok){
-                    var error   = await res.text();
-                    return {error};
-              }
-              
-              var blob         = await res.blob();
-              return {blob};
-          
-        }//download
-        
-        
         async function dirclear(url,hdrs,path){
           
               var headers     = {mode:'dir-clear'};
