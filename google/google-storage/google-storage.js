@@ -500,7 +500,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                     json.items.forEach(item=>{
                           
                           if(item.name.startsWith(path)){
-                                                                                      console.log(item);
+                                                                                      //console.log(item);
                                 var type    = 'file';
                                 if(item.name.endsWith('/')){
                                       type    = 'dir';
