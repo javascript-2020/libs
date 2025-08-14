@@ -503,7 +503,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                       type    = 'dir';
                                 }
                                 
-                                var abs     = '/'+item.name;
+                                var abs     = item.name;
                                 var path2;
                                 var name;
                                 
@@ -521,7 +521,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                 }
                                 
                                 var file    = {};
-                                file.abs    = item.name;
+                                file.abs    = '/'+item.name;
                                 file.path   = path2;
                                 file.name   = name;
                                 file.type   = type;
