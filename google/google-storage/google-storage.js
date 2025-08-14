@@ -767,7 +767,7 @@ function tokenmod(file,scopes,params){
           
         }//switch
         platform        ||= 'nodejs';
-                                                                                console.log(platform);
+                                                                                //console.log(platform);
   
         var email;
         var key;
