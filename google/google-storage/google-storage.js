@@ -498,24 +498,27 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                           
                           if(item.name.startsWith(path)){
                                                                                       console.log(item);
-                                var name    = item.name.slice(len);
-                                if(name.startsWith('/')){
-                                      name    = name.slice(1);
-                                }
-                                if(!name){
-                                      return;
-                                }
                                 var type    = 'file';
-                                if(name.endsWith('/')){
+                                if(item.name.endsWith('/')){
                                       type    = 'dir';
                                 }
+                                
+                                var abs     = item.name;
+                                var path2;
+                                var name;
+                                
+                                var t   = abs;
+                                if(type=='dir'){
+                                      t   = t.slice(0,-1);
+                                }
+                                var i   = t.lastIndexOf('/');
+                                name    = t.slice(i+1);
+                                var i   = -name.length;
+                                path2   = t.slice(len,i);
                                 
                                 if(type=='dir' && files_only){
                                       return;
                                 }
-                                
-                                var i       = -name.length;
-                                var path2   = item.name.slice(len,i);
                                 
                                 var file    = {};
                                 file.abs    = item.name;
