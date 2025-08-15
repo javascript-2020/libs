@@ -235,7 +235,11 @@ curl -X POST --data-binary @OBJECT_LOCATION \
 */
 
         
-        async function save(token,bucket,path,blob){
+        async function save({token,bucket,path,blob}){
+          
+              if(arguments.length!=1){
+                    [token,bucket,path,blob]    = arguments;
+              }
 
               if(arguments.length==3){
                     var i             = bucket.indexOf('/');
@@ -297,7 +301,11 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//save
         
 
-        async function del(token,bucket,path){
+        async function del({token,bucket,path}){
+          
+              if(arguments.length!=1){
+                    [token,bucket,path]   = arguments;
+              }
 
               if(path.startsWith('/')){
                     path    = path.slice(1);
@@ -338,7 +346,11 @@ curl -X POST --data-binary @OBJECT_LOCATION \
 
     
         
-        async function refresh(client_id,client_secret,refresh_token){
+        async function refresh({client_id,client_secret,refresh_token}){
+          
+              if(arguments.length!=1){
+                    [client_id,client_secret,refresh_token]   = arguments;
+              }
         
               var headers   = {'content-type':'application/x-www-form-urlencoded'};
               var body      = new URLSearchParams({client_id,client_secret,refresh_token,grant_type:'refresh_token'});
@@ -452,7 +464,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//list
         
         
-        async function dirlistfull({token,bucket,path},params){
+        async function dirlistfull({token,bucket,path,params}){
         
               params          ||= {};
               var files_only    = params.files_only;                    
@@ -552,8 +564,12 @@ curl -X POST --data-binary @OBJECT_LOCATION \
   //:
   
 
-        async function bucketlist(token,project){
+        async function bucketlist({token,project}){
           
+              if(arguments.length!=1){
+                    [token,project]   = arguments;
+              }
+              
               project         = encodeURIComponent(project);
               var url         = `https://storage.googleapis.com/storage/v1/b?project=${project}`
               var headers     = {authorization:`Bearer ${token}`};
