@@ -368,7 +368,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
 
 
         
-        async function dirlist(token,bucket,path){
+        async function dirlist({token,bucket,path,params}){
         
               if(path.startsWith('/')){
                     path    = path.slice(1);
