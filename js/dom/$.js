@@ -867,7 +867,7 @@
                     var err;
                     try{
                       
-                          var rules         = stylesheet.cssRules;
+                          var rules   = stylesheet.cssRules;
                           
                     }//try
                     catch(err2){
