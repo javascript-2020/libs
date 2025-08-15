@@ -175,8 +175,12 @@ curl -X GET \
 
 
   
-        async function load(token,bucket,path){
+        async function load({token,bucket,path}){
   
+              if(arguments.length!=1){
+                    [token,bucket,path]   = arguments;
+              }
+              
               if(arguments.length==2){
                     var i             = bucket.indexOf('/');
                     path              = bucket.slice(i+1);
