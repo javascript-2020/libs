@@ -18,6 +18,7 @@
   };
   
         var df    = true;
+        Object.defineProperty(obj,'df',{set:v=>df=v});
                                                                                 debug(obj.version);  
 
 
