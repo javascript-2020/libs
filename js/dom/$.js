@@ -876,7 +876,7 @@
                     
                     }//catch
                     if(err){
-                      
+                          console.error(err);
                     }else{
                     
                           var nj             = rules.length;
