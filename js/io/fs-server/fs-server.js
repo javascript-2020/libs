@@ -17,7 +17,11 @@
         version     : 'v1.0.0'
   };
   
-  
+
+        var df    = false;
+        Object.defineProperty(obj,'df',{set:v=>df=v});
+        
+        
   //:
   
 
@@ -45,8 +49,12 @@
   //:  
   
 
-        async function loadfile(url,hdrs,path){
+        async function loadfile({url,hdrs,path}){
           
+              if(arguments.length!=1){
+                    [url,hdrs,path]   = arguments;
+              }
+              
               var headers   = {mode:'load'};
               Object.assign(headers,hdrs);
               var full      = url+path;
@@ -78,8 +86,12 @@
         }//loadfile
         
         
-        async function savefile(url,hdrs,path,blob){
+        async function savefile({url,hdrs,path,blob}){
           
+              if(arguments.length!=1){
+                    [url,hdrs,path,blob]    = arguments;
+              }
+              
               var headers   = {mode:'save'};
               Object.assign(headers,hdrs);
               var body      = blob;
@@ -116,8 +128,12 @@
 
   
         
-        async function mkfile(url,hdrs,path){
+        async function mkfile({url,hdrs,path}){
 
+              if(arguments.length!=1){
+                    [url,hdrs,path]   = arguments;
+              }
+              
               var headers   = {mode:'mkfile'};
               Object.assign(headers,hdrs);
               var full      = url+path;
@@ -149,8 +165,12 @@
         }//mkfile
         
         
-        async function rmfile(url,hdrs,path){
+        async function rmfile({url,hdrs,path}){
           
+              if(arguments.length!=1){
+                    [url,hdrs,path]   = arguments;
+              }
+              
               var headers   = {mode:'rmfile'};
               Object.assign(headers,hdrs);
               var full      = url+path;
@@ -181,8 +201,12 @@
         }//rmfile
 
 
-        async function upload(url,hdrs,path,blob){
+        async function upload({url,hdrs,path,blob}){
 
+              if(arguments.length!=1){
+                    [url,hdrs,path,blob]    = arguments;
+              }
+              
               var headers     = {mode:'upload'};
               Object.assign(headers,hdrs);
               var body        = blob;
@@ -216,8 +240,12 @@
         }//upload
         
         
-        async function download(url,hdrs,path){
+        async function download({url,hdrs,path}){
           
+              if(arguments.length!=1){
+                    [url,hdrs,path]   = arguments;
+              }
+              
               var headers     = {mode:'download'};
               Object.assign(headers,hdrs);
               var full        = url+path;
@@ -252,8 +280,12 @@
   //:
   
         
-        async function rmdir(url,hdrs,path){
+        async function rmdir({url,hdrs,path}){
           
+              if(arguments.length!=1){
+                    [url,hdrs,path]   = arguments;
+              }
+              
               var headers     = {mode:'rmdir'};
               Object.assign(headers,hdrs);
               var full        = url+path;
@@ -287,8 +319,12 @@
         }//rmdir
         
         
-        async function mkdir(url,hdrs,path){
+        async function mkdir({url,hdrs,path}){
 
+              if(arguments.length!=1){
+                    [url,hdrs,path]   = arguments;
+              }
+              
               var headers     = {mode:'mkdir'};
               Object.assign(headers,hdrs);
               var full        = url+path;
@@ -322,8 +358,12 @@
         }//mkdir
 
         
-        async function readdir(url,hdrs,path){
+        async function readdir({url,hdrs,path}){
 
+              if(arguments.length!=1){
+                    [url,hdrs,path]   = arguments;
+              }
+              
               var headers     = {mode:'readdir'};
               Object.assign(headers,hdrs);
               var full        = url+path;
@@ -403,8 +443,12 @@
         }//v1
 
 
-        async function dirclear(url,hdrs,path){
+        async function dirclear({url,hdrs,path}){
           
+              if(arguments.length!=1){
+                    [url,hdrs,path]   = arguments;
+              }
+              
               var headers     = {mode:'dir-clear'};
               Object.assign(headers,hdrs);
               var full        = url+path;
