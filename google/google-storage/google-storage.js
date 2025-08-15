@@ -374,7 +374,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                     path    = path.slice(1);
               }
               
-              var url       = 'https://storage.googleapis.com/storage/v1/b/${bucket}/o?delimiter=/';
+              var url       = `https://storage.googleapis.com/storage/v1/b/${bucket}/o?delimiter=/`;
               
               if(path){
                     url    += '&prefix='+path;
