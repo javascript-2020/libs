@@ -864,25 +864,41 @@
                     var stylesheet    = list[i];
                                                                       //stylesheet.ownerNode &&
                                                                       //console.log(stylesheet.ownerNode.id);
-                    var rules         = stylesheet.cssRules;
-                    var nj             = rules.length;
-                    for(var j=0;j<nj;j++){
-                    
-                          var rule    = rules[j];
-                          if(rule.selectorText===selector){
-                                switch(rtype){
-                                
-                                  case 'cssText'    :
-                                  case 'csstext'    : return rule.cssText;
-                                  case 'style'      : return rule.parentStyleSheet;
-                                  case 'selector'   :
-                                  case 'sel'        : return rule.selectorText;
-                                  
-                                }//switch
-                                return rule.cssText;
-                          }
+                    var err;
+                    try{
+                      
+                          var rules         = stylesheet.cssRules;
                           
-                    }//for
+                    }//try
+                    catch(err2){
+                      
+                          err   = err2;
+                    
+                    }//catch
+                    if(err){
+                      
+                    }else{
+                    
+                          var nj             = rules.length;
+                          for(var j=0;j<nj;j++){
+                          
+                                var rule    = rules[j];
+                                if(rule.selectorText===selector){
+                                      switch(rtype){
+                                      
+                                        case 'cssText'    :
+                                        case 'csstext'    : return rule.cssText;
+                                        case 'style'      : return rule.parentStyleSheet;
+                                        case 'selector'   :
+                                        case 'sel'        : return rule.selectorText;
+                                        
+                                      }//switch
+                                      return rule.cssText;
+                                }
+                                
+                          }//for
+                          
+                    }
                     
               }//for
               return null;
