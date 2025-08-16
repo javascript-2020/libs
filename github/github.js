@@ -878,21 +878,24 @@
                             });
               list        = list.map(item=>{
                                                                           //console.log(item);
-                                  var i       = item.path.lastIndexOf('/');
-                                  var name    = item.path.slice(i+1);
-                                  var i       = -name.length;
-                                  var path2   = item.path.slice(len,i);
-                                  var abs     = '/'+item.path;
-                                  var type    = item.type=='blob' ? 'file' : 'dir';
-                                  var size    = item.size;
+                                  var i           = item.path.lastIndexOf('/');
+                                  var name        = item.path.slice(i+1);
+                                  var i           = -name.length;
+                                  var path2       = item.path.slice(len,i);
+                                  var abs         = '/'+item.path;
+                                  var type        = item.type=='blob' ? 'file' : 'dir';
+                                  var size        = item.size;
+
                                   
-                                  var file    = {};
-                                  file.ft     = 'github';
-                                  file.type   = type;
-                                  file.abs    = abs;
-                                  file.path   = path2;
-                                  file.name   = name;
-                                  file.size   = size;
+                                  var file        = {};
+                                  
+                                  file.ft         = 'github';
+                                  file.type       = type;
+                                  file.abs        = abs;
+                                  file.path       = path2;
+                                  file.rel        = path2;
+                                  file.name       = name;
+                                  file.size       = size;
                                   
                                   return file;
                 
