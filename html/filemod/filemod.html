@@ -247,7 +247,7 @@ function filemod(){
         
         function newfile({
         
-              abs,path,name,
+              abs,path,name,rel,
               filetype,ft,
               
               kind,
@@ -260,23 +260,25 @@ function filemod(){
         
               var file    = {};
               
-              file.filetype   = filetype||ft;
-              file.ft         = filetype||ft;
+              file.filetype     = filetype||ft;
+              file.ft           = filetype||ft;
+              file.type         = filetype||ft;
               
               
-              file.abs        = abs
-              file.name       = name;
-              
-              file.path       = path;
-              
-              file.kind       = kind;
-              file.size       = item.size;
-              file.ctime      = ctime;
-              file.mtime      = mtime;
-              file.atime      = atime;
+              file.abs          = abs
+              file.path         = path;
+              file.name         = name;
 
-              file.title      = title;
-              file.icon       = icon;
+              file.rel          = rel;              
+              
+              file.kind         = kind;
+              file.size         = item.size;
+              file.ctime        = ctime;
+              file.mtime        = mtime;
+              file.atime        = atime;
+
+              file.title        = title;
+              file.icon         = icon;
               
               return file;
               
