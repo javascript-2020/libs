@@ -237,7 +237,52 @@ function filemod(){
               
         }//clear
                   
-                  
+
+  //:
+  
+  
+        obj.new       = newfile;
+        obj.newfile   = newfile;
+
+        
+        function newfile({
+        
+              abs,path,name,
+              filetype,ft,
+              
+              kind,
+              size,
+              ctime,mtime,
+              
+              title,icon
+              
+        }){
+        
+              var file    = {};
+              
+              file.filetype   = filetype||ft;
+              file.ft         = filetype||ft;
+              
+              
+              file.abs        = abs
+              file.name       = name;
+              
+              file.path       = path;
+              
+              file.kind       = kind;
+              file.size       = item.size;
+              file.ctime      = ctime;
+              file.mtime      = mtime;
+              file.atime      = atime;
+
+              file.title      = title;
+              file.icon       = icon;
+              
+              return file;
+              
+        }//new
+        
+        
         obj.export    = function(){
         
               if(!cur){
@@ -245,7 +290,9 @@ function filemod(){
               }
               
               var file;
-              switch(cur.type){
+              var type    = cur.filetype||cur.type;
+              
+              switch(type){
                 
                 case 'github'           : file    = github.export(cur);               break;
                 case 'local'            : return 'local';
@@ -255,7 +302,8 @@ function filemod(){
                 
               }//switch
               
-              file.type   = cur.type;
+              file.filetype   = type;
+              file.type       = type;
               
               return file;
               
