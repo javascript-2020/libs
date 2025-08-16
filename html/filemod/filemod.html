@@ -87,8 +87,6 @@ function filemod(){
 
   //vars:-
         
-        var filemod   = obj;
-
         var localfile;
         var github;
         var httpsfile;
@@ -121,11 +119,11 @@ function filemod(){
             obj.dbfiles               = dbfiles;
             googlestorage             = mod['google-storage']();
 
-            localfile.initmod({ext,$,menu,filemod,source,focus,editor});
-            github.initmod({ext,$,menu,filemod,source,focus,editor});
-            httpsfile.initmod({ext,$,menu,filemod,source,focus,editor});
-            dbfiles.initmod({ext,$,datatype,menumod,menu,filemod,source,focus});
-            googlestorage.initmod({ext,$,menumod,menu,filemod,source,focus});
+            localfile.initmod({ext,$,menu,filemod:obj,source,focus,editor});
+            github.initmod({ext,$,menu,filemod:obj,source,focus,editor});
+            httpsfile.initmod({ext,$,menu,filemod:obj,source,focus,editor});
+            dbfiles.initmod({ext,$,datatype,menumod,menu,filemod:obj,source,focus});
+            googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source,focus});
             
             localfile.init();
             github.init();
