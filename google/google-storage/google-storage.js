@@ -544,6 +544,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                 }
                                 
                                 var file    = {};
+                                file.ft     = 'gs';
                                 file.abs    = '/'+item.name;
                                 file.path   = path2;
                                 file.name   = name;
