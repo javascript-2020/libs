@@ -112,9 +112,10 @@ mod.httpsfile   = function(){
         version   : 'v1.0'
   };
       
-        var df=true
-        ;
+        var df=true;
+        Object.defineProperty(obj,'df',{get:()=>df,set:value=>df=value});
                                                                                 debug(obj.version);
+
         var editor,$,datatype,menu,source
         ;
         
@@ -154,7 +155,6 @@ mod.httpsfile   = function(){
         var dir         = {};
 
 
-        Object.defineProperty(obj,'df',{get:()=>df,set:value=>df=value});
         
         
   //:
@@ -405,12 +405,36 @@ mod.httpsfile   = function(){
         load.ui   = async function(url,path,filename){
                                                                                 debug('load.ui',url,path,filename);
               var title       = `${url}\n${path}\n${filename}`;
+
+/*              
+              var file            = filemod.new({
+              
+                    filetype    : filetype,
+                    abs         : path,
+                    path        : path,
+                    name        : filename,
+                    
+                    kind        : 'file',
+                    size        : null,
+                    ctime       : null,
+                    mtime       : null,
+                    atime       : null,
+                    
+                    title       : title,
+                    icon        : icon.src
+                    
+              });
+              
+              file.url    = url;
+              
+*/              
               
               var file        = {};
               file.type       = typename;
               file.url        = url;
               file.path       = path;
               file.filename   = filename;
+              file.name       = filename;
               file.title      = title;
               file.icon       = icon.src;
                             
@@ -449,14 +473,40 @@ mod.httpsfile   = function(){
         save.ui   = async function(url,path,filename){
           
               var title       = `${url}\n${path}\n${filename}`;
+
+/*              
+              var file            = filemod.new({
               
-              var file        = {};
-              file.type       = 'https-file';
-              file.url        = url;
-              file.path       = path;
-              file.filename   = filename;
-              file.title      = title;
-              file.icon       = icon.src;
+                    filetype    : filetype,
+                    abs         : path,
+                    path        : path,
+                    name        : filename,
+                    
+                    kind        : 'file',
+                    size        : null,
+                    ctime       : null,
+                    mtime       : null,
+                    atime       : null,
+                    
+                    title       : title,
+                    icon        : icon.src
+                    
+              });
+              
+              file.url    = url;
+              
+*/              
+              
+              var file            = {};
+              
+              file.type           = 'https-file';
+              file.url            = url;
+              file.path           = path;
+              file.filename       = filename;
+              file.name           = filename;
+              file.title          = title;
+              file.icon           = icon.src;
+
               
               var blob        = await source();
               
@@ -476,7 +526,7 @@ mod.httpsfile   = function(){
         
               var url         = file.url;
               var path        = file.path;
-              var filename    = file.filename;
+              var filename    = file.name;
               var full        = url+path+filename;
                                                                                 //console.log('save',full);
               var result    = await savefile(full,blob);
