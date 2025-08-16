@@ -887,6 +887,7 @@
                                   var size    = item.size;
                                   
                                   var file    = {};
+                                  file.ft     = 'github';
                                   file.type   = type;
                                   file.abs    = abs;
                                   file.path   = path2;
