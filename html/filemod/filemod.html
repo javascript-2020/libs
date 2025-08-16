@@ -245,8 +245,11 @@ function filemod(){
         
         function newfile({
         
-              abs,path,name,rel,
               filetype,ft,
+              
+              abs,path,
+              name,filename,
+              rel,
               
               kind,
               size,
@@ -265,7 +268,8 @@ function filemod(){
               
               file.abs          = abs
               file.path         = path;
-              file.name         = name;
+              file.name         = name||filename;
+              file.filename     = name||filename;
 
               file.rel          = rel;              
               
