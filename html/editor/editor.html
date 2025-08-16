@@ -301,11 +301,10 @@ function editor(){
               
               var node    = $(shadow,'#editor');
               if(fullsize){
-                    node.textContent    = txt;
-                    node.style.flex='none';
-                    editor    = $.editor.max(node,{menu,kd:kd2});
-                    //root.style.height   = editor.container.style.height;
-                    $(shadow,'#root').style.height='auto';
+                    node.textContent                  = txt;
+                    node.style.flex                   = 'none';
+                    editor                            = $.editor.max(node,{menu,kd:kd2});
+                    $(shadow,'#root').style.height    = 'auto';
               }else{
                     setup(node,mode);
               }
@@ -328,7 +327,7 @@ function editor(){
               node.addEventListener('mousedown',update);
               node.addEventListener('keyup',update);
               
-              editor      = ace.edit(node);
+              editor    = ace.edit(node);
               editor.setShowInvisibles(false);
               editor.setShowPrintMargin(false);
               editor.setPrintMarginColumn(false);
@@ -473,15 +472,15 @@ function editor(){
               
               if(file){
                     src         = file.icon;
-                    filename    = file.filename;
+                    filename    = file.name||file.filename;
                     title       = file.title;
               }
               
-              $(shadow,'#filename-icon').src    = src;
+              $(shadow,'#filename-icon').src      = src;
   
-              document.title                       = filename;
-              $(shadow,'#filename').textContent    = filename;
-              $(shadow,'#filename').title          = title;
+              document.title                      = filename;
+              $(shadow,'#filename').textContent   = filename;
+              $(shadow,'#filename').title         = title;
   
         }//filename
   
