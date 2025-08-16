@@ -215,11 +215,38 @@ mod.localfile   = function(){
                     
                     var filename    = file.name;                    
                     var path        = 'localfile : '+file.name;
+                    var title       = path;
+
+/*              
+              var file            = filemod.new({
+              
+                    filetype    : 'localfile',
+                    abs         : path,
+                    path        : path,
+                    name        : filename,
+                    
+                    kind        : 'file',
+                    size        : null,
+                    ctime       : null,
+                    mtime       : null,
+                    atime       : null,
+                    
+                    title       : title,
+                    icon        : icon.src
+                    
+              });
+              
+              file.url    = url;
+              
+*/              
                     
                     var file        = {};
                     file.type       = 'localfile';
+                    
                     file.filename   = filename;
+                    file.name       = filename;
                     file.path       = path;
+                    
                     file.title      = path;
                     file.icon       = icon.src;
                 
@@ -242,10 +269,37 @@ mod.localfile   = function(){
               a.href        = url;
               a.download    = filename;
               a.click();
+
+
+/*              
+              var title           = file.path;
+              
+              var file            = filemod.new({
+              
+                    filetype    : 'localfile',
+                    abs         : path,
+                    path        : path,
+                    name        : filename,
+                    
+                    kind        : 'file',
+                    size        : null,
+                    ctime       : null,
+                    mtime       : null,
+                    atime       : null,
+                    
+                    title       : title,
+                    icon        : icon.src
+                    
+              });
+              
+              file.url    = url;
+              
+*/              
           
               var file        = {};
               file.type       = 'localfile';
               file.filename   = filename;
+              file.name       = filename;
               file.path       = 'localfile : '+filename;
               file.title      = file.path;
               file.icon       = icon.src;
