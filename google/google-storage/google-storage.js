@@ -551,6 +551,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                 file.rel    = path2;
                                 file.name   = name;
                                 file.type   = type;
+                                file.kind   = type;
                                 file.size   = item.size;
                                 
                                 list.push(file);
