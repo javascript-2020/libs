@@ -469,9 +469,37 @@ mod['google-storage']   = function(){
               var abs         = bucket+path;
 
               
+/*              
+              var file            = filemod.new({
+              
+                    filetype    : 'google-storage',
+                    abs         : path,
+                    path        : path,
+                    name        : filename,
+                    
+                    kind        : 'file',
+                    size        : null,
+                    ctime       : null,
+                    mtime       : null,
+                    atime       : null,
+                    
+                    title       : repo+' : '+path,
+                    icon        : icon.src
+                    
+              });
+              
+              file.abs      = abs;
+              file.bucket   = bucket;
+              
+*/              
+
+              
               var file        = {};
+              file.filetype   = 'google-storage';
               file.type       = 'google-storage';
+              
               file.filename   = filename;
+              file.name       = filename;
               file.title      = bucket+' : '+path;
               file.icon       = icon.src;
               
@@ -501,6 +529,7 @@ mod['google-storage']   = function(){
               var file        = {};
               file.type       = 'google-storage';
               file.filename   = filename;
+              file.name       = filename;
               file.title      = bucket+' : '+path;
               file.icon       = icon.src;
               
