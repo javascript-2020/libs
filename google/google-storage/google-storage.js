@@ -416,7 +416,8 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               file.filetype       = filetype;
               
               file.abs            = abs;
-              file.path           = path2;
+              file.path           = abs;
+              
               file.rel            = path2;
               file.name           = name;
               
