@@ -563,7 +563,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                 
                                 var file    = parse.item(path,item);
                                 
-                                if(file.kind!='dir' && files_only){
+                                if(file.kind!='file' && files_only){
                                       return;
                                 }
 
