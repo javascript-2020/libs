@@ -239,7 +239,7 @@
               var resolve,promise=new Promise(res=>resolve=res);
               
 
-              var codeblock;
+              var code_block;
 
 
               
@@ -259,18 +259,18 @@
               
               async function complete(){
                 
-                    codeblock   = mod['code-block']();
+                    code_block   = mod['code-block']();
               
-                    codeblock.initmod({ext,$,code:obj,menu});
+                    code_block.initmod({ext,$,code:obj,menu});
                     
-                    await codeblock.init();
+                    await code_block.init();
                     
                     var root    = div.nextElementSibling;
                     div.remove();
                     
-                    await codeblock.initdom(root);
+                    await code_block.initdom(root);
                     
-                    resolve({codeblock});
+                    resolve({code_block});
                     
               }//complete
 
