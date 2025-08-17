@@ -54,6 +54,8 @@ mod['code-block']   = function(){
         
   //:
   
+        var snippet_console;
+        
         var host;
         var root;
         
@@ -68,7 +70,7 @@ mod['code-block']   = function(){
   //:
   
   
-        obj.initdom   = function(rootnode){
+        obj.initdom   = async function(rootnode){
           
               if($.nodename(rootnode)=='code-block'){
                     host                = rootnode;
@@ -85,7 +87,8 @@ mod['code-block']   = function(){
               if(host.__root.hasAttribute('snippet-console')){
                     var attr    = host.__root.getAttribute('snippet-console');
                     node.setAttribute('snippet-console',attr);      
-                    code.snippet_console(root,{menu});
+                    snippet_console       = await code.snippet_console(root,{menu});
+                    obj.snippet_console   = snippet_console;
               }
 
           
