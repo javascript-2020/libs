@@ -204,11 +204,10 @@
   //:        
 
 
-        function build(api,token,owner,repo,branch,path){
+        function build({api,token,owner,repo,branch,path}){
 
-              if(arguments.length==1){
-                    var o   = arguments[0];
-                    var {api,token,owner,repo,branch,path}    = o;
+              if(arguments.length!=1){
+                    [api,token,owner,repo,branch,path]    = arguments;
               }
               
               var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
@@ -232,6 +231,10 @@
 
         function load({token,owner,repo,branch,path}){
         
+              if(arguments.length!=1){
+                    [token,owner,repo,branch,path]    = arguments;
+              }
+              
               var result;
               if(token){
                     result    = load.api(token,owner,repo,branch,path);
@@ -243,8 +246,12 @@
         }//load
         
         
-        load.raw    = async function(owner,repo,branch,path){
+        load.raw    = async function({owner,repo,branch,path}){
         
+              if(arguments.length!=1){
+                    [owner,repo,branch,path]    = arguments;
+              }
+              
               var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
                                                                                 debug('load.raw',url);
                                                                                 
@@ -278,8 +285,12 @@
         }//raw
         
         
-        load.api    = async function(token,owner,repo,branch,path){
+        load.api    = async function({token,owner,repo,branch,path}){
 
+              if(arguments.length!=1){
+                    [token,owner,repo,branch,path]    = arguments;
+              }
+              
               if(path.startsWith('/')){
                     path    = path.slice(1);
               }
@@ -322,8 +333,12 @@
   //:
   
   
-        async function save(token,owner,repo,branch,path,blob){
+        async function save({token,owner,repo,branch,path,blob}){
         
+              if(arguments.length!=1){
+                    [token,owner,repo,branch,path,blob]   = arguments;
+              }
+              
               var b64;
               if(datatype(blob)=='string'){
                     b64       = window.btoa(blob);
@@ -395,7 +410,11 @@
         }//save
         
 
-        async function backup(token,owner,repo,branch,path){
+        async function backup({token,owner,repo,branch,path}){
+          
+              if(arguments.length!=1){
+                    [token,owner,repo,branch,path]    = arguments;
+              }
                                                                                 debug('backup',path);
               var result    = await load.api(token,owner,repo,branch,path);
               if(result.error){
@@ -489,7 +508,11 @@
         }//backup
         
         
-        backup.clear    = async function(token,owner,repo,branch,path,all){
+        backup.clear    = async function({token,owner,repo,branch,path,all}){
+          
+              if(arguments.length!=1){
+                    [token,owner,repo,branch,path,all]    = arguments;
+              }
         
               var fn;
               var i   = path.lastIndexOf('/');
@@ -622,7 +645,11 @@
   //:
   
   
-        function dirdownload(owner,repo,branch,path,update,complete,token,api){
+        function dirdownload({owner,repo,branch,path,update,complete,token,api}){
+          
+              if(arguments.length!=1){
+                    [owner,repo,branch,path,update,complete,token,api]    = arguments;
+              }
                                                                                 debug('download.dir',owner,repo,branch,path,token,api);              
               var resolve,promise=new Promise(res=>resolve=res);
               
@@ -795,15 +822,20 @@
         }//dir
 
 
-        async function dirlist({token,owner,repo,branch,path}){}
+        async function dirlist({token,owner,repo,branch,path}){
+          
+          
+        }//dirlist
 
         
-        async function dirlistfull({token,owner,repo,branch,path},params){
+        async function dirlistfull({token,owner,repo,branch,path,files_only}){
           
+              if(arguments.length!=1){
+                    [token,owner,repo,branch,path,files_only]   = arguments;
+              }
+              
               branch          ||= 'main';
               path            ||= '';
-              params          ||= {};
-              var files_only    = params.files_only;
 
               
               if(path.startsWith('/')){
