@@ -387,32 +387,32 @@ curl -X POST --data-binary @OBJECT_LOCATION \
 
         parse.item    = function(item){
 
-              var kind    = 'file';
+              var kind            = 'file';
               if(item.name.endsWith('/')){
-                    kind    = 'dir';
+                    kind          = 'dir';
               }
               
-              var abs     = item.name;
               var path2;
               var name;
               
-              var t   = abs;
+              var t               = item.name;
               if(type=='dir'){
-                    t   = t.slice(0,-1);
+                    t             = t.slice(0,-1);
               }
-              var i   = t.lastIndexOf('/');
-              name    = t.slice(i+1);
-              var i   = -name.length;
-              path2   = t.slice(len,i);
+              var i               = t.lastIndexOf('/');
+              name                = t.slice(i+1);
+              var i               = -name.length;
+              path2               = t.slice(len,i);
               
-      
+              var abs             = '/'+item.name;
+
       
               var file            = {};
               
               file.ft             = filetype;
               file.filetype       = filetype;
               
-              file.abs            = '/'+item.name;
+              file.abs            = abs;
               file.path           = path2;
               file.rel            = path2;
               file.name           = name;
