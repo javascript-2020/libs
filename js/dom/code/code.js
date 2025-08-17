@@ -185,7 +185,7 @@
                     
                     await snippet.init();
 
-                    snippet.initdom(node.__component);
+                    await snippet.initdom(node.__component);
                     
                     //snippet.initdom(node.__component);
                     
@@ -268,7 +268,7 @@
                     var root    = div.nextElementSibling;
                     div.remove();
                     
-                    codeblock.initdom(root);
+                    await codeblock.initdom(root);
                     
                     resolve({codeblock});
                     
