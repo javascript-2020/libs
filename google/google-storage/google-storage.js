@@ -385,7 +385,8 @@ curl -X POST --data-binary @OBJECT_LOCATION \
 
 
 
-        parse.item    = function(item){
+        parse.item    = function(path,item){
+
 
               var kind            = 'file';
               if(item.name.endsWith('/')){
@@ -403,6 +404,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var i               = t.lastIndexOf('/');
               name                = t.slice(i+1);
               var i               = -name.length;
+              var len             = path.length;
               path2               = t.slice(len,i);
               
               var abs             = '/'+item.name;
@@ -493,7 +495,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                 return;
                           }
                           
-                          var file    = parse.item(item);
+                          var file    = parse.item(path,item);
                           
                           files.push(file);
                           
@@ -548,7 +550,6 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                                                                       //console.log(json);
                                                                                       //console.log(path);
               var list    = [];
-              var len     = path.length;
               
               if(json.items){
                     json.items.forEach(item=>{
@@ -559,7 +560,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                       return;
                                 }
                                 
-                                var file    = parse.item(item);
+                                var file    = parse.item(path,item);
                                 
                                 if(file.kind!='dir' && files_only){
                                       return;
