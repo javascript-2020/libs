@@ -396,9 +396,10 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var name;
               
               var t               = item.name;
-              if(type=='dir'){
+              if(kind=='dir'){
                     t             = t.slice(0,-1);
               }
+              
               var i               = t.lastIndexOf('/');
               name                = t.slice(i+1);
               var i               = -name.length;
