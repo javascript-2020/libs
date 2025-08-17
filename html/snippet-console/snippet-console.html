@@ -58,6 +58,7 @@ mod['snippet-console']    = function(){
 
   
         var dconsole;
+        obj.dconsole    = null;
         var sandbox;
         
         
@@ -73,7 +74,8 @@ mod['snippet-console']    = function(){
         obj.init    = async function(){
 
           
-              dconsole    = mod.console();
+              dconsole        = mod.console();
+              obj.dconsole    = dconsole;
               
               dconsole.initmod({ext,$,ace});
               
