@@ -25,6 +25,8 @@
 //:
 
 
+        var filetype        = 'google-storage';
+        
 
         obj.parse           = parse;
 
@@ -383,6 +385,52 @@ curl -X POST --data-binary @OBJECT_LOCATION \
 
 
 
+        parse.item    = function(item){
+
+              var kind    = 'file';
+              if(item.name.endsWith('/')){
+                    kind    = 'dir';
+              }
+              
+              var abs     = item.name;
+              var path2;
+              var name;
+              
+              var t   = abs;
+              if(type=='dir'){
+                    t   = t.slice(0,-1);
+              }
+              var i   = t.lastIndexOf('/');
+              name    = t.slice(i+1);
+              var i   = -name.length;
+              path2   = t.slice(len,i);
+              
+      
+      
+              var file            = {};
+              
+              file.ft             = filetype;
+              file.filetype       = filetype;
+              
+              file.abs            = '/'+item.name;
+              file.path           = path2;
+              file.rel            = path2;
+              file.name           = name;
+              
+              file.kind           = kind;
+              file.type           = kind;
+              file.size           = item.size;
+      
+              file.size           = item.size;
+              file.md5            = item.md5Hash;
+              file.link           = item.mediaLink;
+              file.ctime          = item.timeCreated;
+              file.mtime          = item.updated;
+          
+              return file;
+              
+        }//item
+        
         
         async function dirlist({token,bucket,path,params}){
         
@@ -440,19 +488,11 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               if(json.items){
                     json.items.forEach(item=>{
                                                                                 //console.log(item);
-                          var i         = item.name.lastIndexOf('/');
-                          var name      = item.name.slice(i+1);
-                          if(!name){
+                          if(item.name===path){
                                 return;
                           }
                           
-                          var file      = {};
-                          file.name     = name;
-                          file.size     = item.size;
-                          file.md5      = item.md5Hash;
-                          file.link     = item.mediaLink;
-                          file.ctime    = item.timeCreated;
-                          file.mtime    = item.updated;
+                          var file    = parse.item(item);
                           
                           files.push(file);
                           
@@ -517,40 +557,15 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                 if(item.name===path){
                                       return;
                                 }
-                                var type    = 'file';
-                                if(item.name.endsWith('/')){
-                                      type    = 'dir';
-                                }
                                 
-                                var abs     = item.name;
-                                var path2;
-                                var name;
+                                var file    = parse.item(item);
                                 
-                                var t   = abs;
-                                if(type=='dir'){
-                                      t   = t.slice(0,-1);
-                                }
-                                var i   = t.lastIndexOf('/');
-                                name    = t.slice(i+1);
-                                var i   = -name.length;
-                                path2   = t.slice(len,i);
-                                
-                                if(type=='dir' && files_only){
+                                if(file.kind!='dir' && files_only){
                                       return;
                                 }
-                                
-                                var file    = {};
-                                
-                                file.ft     = 'gs';
-                                file.abs    = '/'+item.name;
-                                file.path   = path2;
-                                file.rel    = path2;
-                                file.name   = name;
-                                file.type   = type;
-                                file.kind   = type;
-                                file.size   = item.size;
-                                
+
                                 list.push(file);
+                                
                           }
                           
                     });
