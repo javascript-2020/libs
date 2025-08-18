@@ -98,7 +98,7 @@
               var webcontainer;
               var console;
               
-              async function init(params){
+              window.init   = async function(params){
               
                     ({console}            = params);
                     
@@ -107,7 +107,7 @@
                     
               }//init
       
-              async function run(js){
+              window.run    = async function(js){
               
                     await webcontainer.fs.writeFile('main.js',js);
               
