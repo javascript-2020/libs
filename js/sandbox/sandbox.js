@@ -72,7 +72,7 @@
                     script.textContent    = srcdoc.nodejs;
                     doc.head.append(script);
                     
-                    await win.init(console);
+                    await win.init({console});
                     
                     var code    = await win.run(js);
                     resolve({code});
@@ -89,7 +89,7 @@
         var srcdoc    = {};
         
         srcdoc.nodejs   = `
-              alert(1);
+              
               var webcontainer;
               var console;
               
