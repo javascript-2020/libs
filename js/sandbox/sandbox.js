@@ -6,9 +6,18 @@
   var obj   = {};
   
   
+  
+  //:
+  
+  
         obj.run   = run;
         
-        
+  
+  
+  //:
+  
+  
+  
         function run(js,{clear,disp_result,console,ctx}={}){
 
 
@@ -38,7 +47,79 @@
               
         }//sandbox
 
+
+  //:
   
+  
+        run.nodejs    = async function(js,{clear,disp_result,console,ctx}={}){
+          
+              var resolve,promise=new Promise(res=>resolve=res);
+              
+              var iframe              = document.createElement('iframe');
+              iframe.style.cssText    = '';
+              iframe.onload           = onload;
+              document.body.append(iframe);
+              
+              return promise;
+              
+              
+              async function onload(){
+                
+                    var doc               = iframe.contentDocument;
+                    var win               = iframe.contentWindow;
+                    
+                    var script            = doc.createElement('script');
+                    script.textContent    = srcdoc.nodejs;
+                    doc.head.append(script);
+                    
+                    await win.init(console);
+                    
+                    var code    = await win.run(js);
+                    resolve({code});
+                    
+              }//onload
+              
+        }//nodejs
+        
+
+
+
+  //:
+  
+  
+        srcdoc.nodejs   = `
+              
+              var webcontainer;
+              var console;
+              
+              async function init(params){
+              
+                    ({console}            = params);
+                    
+                    var {WebContainer}    = await import('https://cdn.jsdelivr.net/npm/@webcontainer/api/+esm');
+                    webcontainer          = await WebContainer.boot();
+                    
+              }//init
+      
+              function run(js){
+              
+                    await webcontainer.fs.writeFile('main.js',js);
+              
+                    var process   = await webcontainer.spawn('node',['main.js']);
+                    var stream    = new WritableStream({write(data){console.log(data)}});
+                    process.output.pipeTo(stream);
+            
+                    var code      = await process.exit;
+                    if(code!=0){
+                          console.log('an error occurred');
+                    }
+                    return code;
+                    
+              }//run
+              
+        `;
+        
+
   
   return obj;
 
