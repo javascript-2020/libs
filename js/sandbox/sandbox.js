@@ -59,7 +59,7 @@
               iframe.setAttribute('crossorigin','anonymous');
               iframe.style.cssText    = '';
               iframe.onload           = onload;
-              iframe.srcdoc           = '<html><head></head><body></body></html>';
+              iframe.srcdoc           = '';//<html><head></head><body></body></html>';
               document.body.append(iframe);
               
               return promise;
