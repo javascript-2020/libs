@@ -10,8 +10,8 @@
   //:
   
   
-        obj.run   = run;
-        
+        obj.run           = run;
+        obj.nodejs        = nodejs;
   
   
   //:
@@ -51,7 +51,7 @@
   //:
   
   
-        run.nodejs    = async function(js,{clear,disp_result,console,ctx}={}){
+        async function nodejs(js,{clear,disp_result,console,ctx}={}){
           
               var resolve,promise=new Promise(res=>resolve=res);
               
