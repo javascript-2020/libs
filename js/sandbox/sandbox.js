@@ -56,6 +56,7 @@
               var resolve,promise=new Promise(res=>resolve=res);
               
               var iframe              = document.createElement('iframe');
+              iframe.setAttribute('crossorigin','anonymous');
               iframe.style.cssText    = '';
               iframe.onload           = onload;
               document.body.append(iframe);
