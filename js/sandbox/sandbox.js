@@ -89,7 +89,7 @@
         var srcdoc    = {};
         
         srcdoc.nodejs   = `
-              
+              alert(1);
               var webcontainer;
               var console;
               
