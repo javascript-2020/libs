@@ -834,6 +834,7 @@ function tokenmod(file,scopes,{fsp,crypto,platform}){
           case 'read'         : scopes    = ['https://www.googleapis.com/auth/devstorage.read_only'];           break;
           case 'read/write'   : scopes    = ['https://www.googleapis.com/auth/devstorage.read_write'];          break;
           case 'full'         : scopes    = ['https://www.googleapis.com/auth/devstorage.full_control'];        break;
+          case 'auth'         : scopes    = ['https://www.googleapis.com/auth/cloud-platform'];                 break;
           
         }//switch
         
