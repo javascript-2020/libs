@@ -69,6 +69,7 @@
                     var win               = iframe.contentWindow;
                     
                     var script            = doc.createElement('script');
+                    script.setAttribute('crossorigin','anonymous');
                     script.textContent    = srcdoc.nodejs;
                     doc.head.append(script);
                     
