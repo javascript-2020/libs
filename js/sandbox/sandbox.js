@@ -108,17 +108,22 @@
               }//init
       
               window.run    = async function(js){
-              
+              window.console.log(1);
                     await webcontainer.fs.writeFile('main.js',js);
+              window.console.log(2);
               
                     var process   = await webcontainer.spawn('node',['main.js']);
+              window.console.log(3);
                     var stream    = new WritableStream({write(data){console.log(data)}});
+              window.console.log(4);
                     process.output.pipeTo(stream);
+              window.console.log(5);
             
                     var code      = await process.exit;
                     if(code!=0){
                           console.log('an error occurred');
                     }
+              window.console.log(6);
                     return code;
                     
               }//run
