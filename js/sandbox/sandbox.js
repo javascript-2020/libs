@@ -86,7 +86,8 @@
 
   //:
   
-  
+        var srcdoc    = {};
+        
         srcdoc.nodejs   = `
               
               var webcontainer;
