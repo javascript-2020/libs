@@ -99,11 +99,14 @@
               var console;
               
               window.init   = async function(params){
+              window.console.log(1);
               
                     ({console}            = params);
                     
                     var {WebContainer}    = await import('https://cdn.jsdelivr.net/npm/@webcontainer/api/+esm');
+              window.console.log(2);
                     webcontainer          = await WebContainer.boot();
+              window.console.log(3);
                     
               }//init
       
