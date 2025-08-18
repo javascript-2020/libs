@@ -102,7 +102,7 @@
                     
               }//init
       
-              function run(js){
+              async function run(js){
               
                     await webcontainer.fs.writeFile('main.js',js);
               
