@@ -89,6 +89,11 @@
         var srcdoc    = {};
         
         srcdoc.nodejs   = `
+
+(()=>{
+
+              window.console.log(123);
+              window.console.log(window.crossOriginIsolated);
               
               var webcontainer;
               var console;
@@ -117,7 +122,9 @@
                     return code;
                     
               }//run
-              
+
+})();
+
         `;
         
 
