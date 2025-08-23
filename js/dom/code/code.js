@@ -72,9 +72,8 @@
               }
               
               var txt             = await res.text();
-              code.textContent    = txt;
               
-              return true;
+              return txt;
               
         }//load
 
@@ -151,13 +150,17 @@
                           code    = $(code,'code');
                     }
                     
+                    var txt;
                     var css     = 'snippet-console';
                     var fn      = code.getAttribute(css);
                     if(fn){
                           fn    = fn+'.js';
-                          await load(fn,code);
+                          txt   = await load(fn,code);
                     }
-
+                    
+                    if(txt){
+                          code.textContent    = txt;
+                    }
 
 
                     var promise;
