@@ -975,6 +975,29 @@
   //:
   
   
+        $.editor.ace    = function(){
+          
+              var src         = 'https://ajaxorg.github.io/ace-builds/src-noconflict/ace.js';
+              
+              var resolve,promise=new Promise(res=>resolve=res);
+              
+              var script      = document.createElement('script');
+              script.src      = src;
+              script.onload   = onload;
+              document.head.append(script);
+              
+              return promise;
+              
+              
+              function onload(){
+                
+                    resolve();
+                    
+              }//onload
+              
+        }//ace
+        
+        
         $.editor    = function(node,{mode,kd}={}){
         
               mode    ||= 'javascript';
