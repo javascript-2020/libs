@@ -54,8 +54,11 @@ mod['code-block']   = function(){
         
         
   //:
+
   
         var snippet_console;
+        obj.snippet_console   = null;
+
         
         var host;
         var root;
@@ -79,15 +82,21 @@ mod['code-block']   = function(){
                     host                = $.$(rootnode,'code-block');
               }
               root                      = host.shadowRoot;
+              
+              var dom                   = host.__root;
 
 
               var node                  = $(root,'code');
+              node.textContent          = dom.textContent;
               //code.editor.code(node,{menu});
 
               
-              if(host.__root.hasAttribute('snippet-console')){
-                    var attr    = host.__root.getAttribute('snippet-console');
-                    node.setAttribute('snippet-console',attr);      
+              if(dom.hasAttribute('snippet-console')){
+                    var src   = dom.getAttribute('snippet-console');
+                    if(src){
+                          node.setAttribute('src',attr);
+                    }
+                    
                     snippet_console       = await code.snippet_console(root,{menu,ace});
                     obj.snippet_console   = snippet_console;
               }
