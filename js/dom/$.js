@@ -975,6 +975,10 @@
   //:
   
   
+        //  https://github.com/ajaxorg/ace
+        //  https://github.com/ajaxorg/ace-builds
+        
+        
         $.editor.ace    = function(){
           
               var src         = 'https://ajaxorg.github.io/ace-builds/src-noconflict/ace.js';
