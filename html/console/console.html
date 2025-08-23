@@ -117,7 +117,8 @@ mod.console   = function(){
               var url         = 'javascript-2020:external:/TarVK/chromeConsole/console.js';
               [console]       = await ext.text.github(url);
               console         = eval(console);
-              console.initmod({store});
+              console.initmod({store,ace});
+              console.init();
               
               var url       = 'javascript-2020:external:main:TarVK/chromeConsole/console.css';
               var css       = await ext.text.github[url];
