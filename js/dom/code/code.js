@@ -47,7 +47,7 @@
         }//all
         
         
-        async function load(fn,code){
+        async function load(fn){
           
               var err;
               try{
@@ -61,7 +61,7 @@
               
               }
               if(err){
-                      console.error(err);
+                                                                                console.error(err);
                       return;
               }
               
@@ -71,8 +71,7 @@
                       return;
               }
               
-              var txt             = await res.text();
-              
+              var txt   = await res.text();
               return txt;
               
         }//load
@@ -151,10 +150,12 @@
                     }
                     
                     var txt;
-                    var css     = 'snippet-console';
-                    var fn      = code.getAttribute(css);
+                    var fn      = code.getAttribute('src');
                     if(fn){
-                          fn    = fn+'.js';
+                          var i   = fn.lastIndexOf('.');
+                          if(i==-1){
+                                fn   += '.js';
+                          }
                           txt   = await load(fn,code);
                     }
                     
