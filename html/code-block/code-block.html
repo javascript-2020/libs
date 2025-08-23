@@ -39,7 +39,7 @@ mod['code-block']   = function(){
   var obj   = {};
   
   
-        var ext,$,code,menu
+        var ext,$,code,menu,ace
         ;
         
         obj.initmod   = function(params){
@@ -48,6 +48,7 @@ mod['code-block']   = function(){
               $         = params.$;
               code      = params.code;
               menu      = params.menu;
+              ace       = params.ace;
               
         }//initmod
         
@@ -87,7 +88,7 @@ mod['code-block']   = function(){
               if(host.__root.hasAttribute('snippet-console')){
                     var attr    = host.__root.getAttribute('snippet-console');
                     node.setAttribute('snippet-console',attr);      
-                    snippet_console       = await code.snippet_console(root,{menu});
+                    snippet_console       = await code.snippet_console(root,{menu,ace});
                     obj.snippet_console   = snippet_console;
               }
 
