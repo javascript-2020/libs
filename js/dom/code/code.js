@@ -285,7 +285,7 @@
         
         obj.editor    = {};
         
-        obj.editor.code    = function(code,{menu,kd}){
+        obj.editor.code    = function(code,{menu,kd,ace}){
 
               var editor;
               
@@ -304,7 +304,7 @@
               
                     editor    = mod.editor();
                     
-                    editor.initmod({ext,$,datatype,menumod,menu,fullsize:true});
+                    editor.initmod({ext,$,datatype,menumod,menu,fullsize:true,ace});
                     
                     await editor.init();
                     await editor.initdom(root.__component,{txt});
