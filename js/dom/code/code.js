@@ -248,6 +248,7 @@
               
 
               var code_block;
+              var txt   = node.textContent;
 
 
               
@@ -274,6 +275,7 @@
                     await code_block.init();
                     
                     var root    = div.nextElementSibling;
+                    console.log('root***',root);
                     div.remove();
                     
                     await code_block.initdom(root);
