@@ -184,7 +184,7 @@
                 
                     snippet   = mod['snippet-console']();
               
-                    snippet.initmod({ext,$,source,menumod});
+                    snippet.initmod({ext,$,source,menumod,ace});
                     
                     await snippet.init();
 
