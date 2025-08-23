@@ -121,7 +121,7 @@
               var nodes   = $.all(rootnode,'code[snippet-console]');
               var list    = new Array(nodes.length);
               
-              nodes       = nodes.map(async(code,i)=>list[i]    = await snippet_console(code));
+              nodes       = nodes.map(async(code,i)=>list[i]    = await snippet_console(code,{menu,ace}));
               await Promise.all(list);
               
               return list;
