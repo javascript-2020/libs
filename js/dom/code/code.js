@@ -113,7 +113,7 @@
   //:
   
   
-        snippet_console.all   = async function(rootnode){
+        snippet_console.all   = async function(rootnode,{menu,ace}={}){
 
               //await load.all(root,'snippet-console');
           
