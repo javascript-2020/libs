@@ -67,7 +67,7 @@
               
               if(!res.ok){
                       var txt   = await res.text();
-                      console.log(txt);
+                                                                                //console.log(txt);
                       return;
               }
               
@@ -131,7 +131,7 @@
         }//all
 
         
-        function snippet_console(code,{menu}={}){
+        function snippet_console(code,{menu,ace}={}){
         
               var editor;
               var snippet;
@@ -161,7 +161,7 @@
 
 
                     var promise;
-                    ({root,promise}    = obj.editor.code(code,{menu}));
+                    ({root,promise}    = obj.editor.code(code,{menu,ace}));
                     promise.then(result=>({editor}=result));
                     
                     //editor          = $.editor.max(code,{kd});
@@ -233,7 +233,7 @@
         }//all
 
       
-        function code_block(node,{menu}){
+        function code_block(node,{menu,ace}){
         
         
               var resolve,promise=new Promise(res=>resolve=res);
@@ -261,7 +261,7 @@
                 
                     code_block   = mod['code-block']();
               
-                    code_block.initmod({ext,$,code:obj,menu});
+                    code_block.initmod({ext,$,code:obj,menu,ace});
                     
                     await code_block.init();
                     
