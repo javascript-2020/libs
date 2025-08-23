@@ -998,6 +998,48 @@
         }//ace
         
         
+        $.editor.ace.import_style   = function(root){
+          
+              var ids   = ['ace-tm','ace_editor\\.css','ace_scrollbar\\.css','error_marker\\.css',];
+              var ct    = 0;
+              import_style();
+        
+              function import_style(){
+              
+                    import_style.ct++;
+                    if(import_style.ct>=10){
+                                                                            console.log('import_style timeout');
+                          return;
+                    }
+                    
+                    
+                    var n     = ids.length;
+                    for(var i=0;i<n;i++){
+                    
+                          var id      = ids[i];
+                          var style   = $('#'+id);
+                          if(!style){
+                                setTimeout(import_style,500);
+                                return;
+                          }
+                          
+                    }//for
+                    
+                    for(var i=0;i<n;i++){
+                    
+                          var id      = ids[i];
+                          var style   = $('#'+id);
+                          var copy    = style.cloneNode(true);
+                          root.append(copy);
+                    
+                    }//for
+                                        
+              }//import_style
+              
+        }//import_style
+        
+        
+        
         $.editor    = function(node,{mode,kd}={}){
         
               mode    ||= 'javascript';
