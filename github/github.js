@@ -190,6 +190,15 @@
   //:
   
   
+        parse.to.api    = function(url){
+          
+              var {owner,repo,branch,path}    = parse(url);
+              var url   = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+              return url;
+              
+        }//api
+        
+        
         parse.to.raw    = function(url){
         
               var {owner,repo,branch,path}    = parse(url);
