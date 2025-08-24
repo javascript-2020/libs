@@ -56,10 +56,9 @@
               var resolve,promise=new Promise(res=>resolve=res);
               
               var iframe              = document.createElement('iframe');
-              iframe.setAttribute('crossorigin','anonymous');
               iframe.style.cssText    = '';
               iframe.onload           = onload;
-              iframe.srcdoc           = '';//<html><head></head><body></body></html>';
+              iframe.srcdoc           = '';
               document.body.append(iframe);
               
               return promise;
@@ -71,7 +70,6 @@
                     var win               = iframe.contentWindow;
                     
                     var script            = doc.createElement('script');
-                    script.setAttribute('crossorigin','anonymous');
                     script.textContent    = srcdoc.nodejs;
                     doc.head.append(script);
                     
