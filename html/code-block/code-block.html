@@ -85,7 +85,7 @@ mod['code-block']   = function(){
               
               var dom                   = host.__root;
 console.log('host',host);
-host.childNodes.forEach(node=>console.log(node.nodeName));
+host.childNodes.forEach(node=>console.log(node.nodeName,node,node.textContent));
 //console.log(host.innerText);
 
               var node                  = $(root,'code');
