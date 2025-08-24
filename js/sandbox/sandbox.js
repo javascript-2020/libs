@@ -95,11 +95,12 @@
 
 (()=>{
 
-              window.console.log(123);
-              window.console.log(window.crossOriginIsolated);
+                                                                                window.console.log(123);
+                                                                                window.console.log(window.crossOriginIsolated);
               
               var webcontainer;
               var console;
+
               
               window.init   = async function(params){
                                                                                 window.console.log(1);
@@ -112,6 +113,7 @@
                                                                                 window.console.log(3);
                     
               }//init
+
       
               window.run    = async function(js){
                                                                                 window.console.log(1);
