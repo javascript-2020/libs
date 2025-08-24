@@ -93,7 +93,7 @@
 
 (()=>{
 
-                                                                                window.console.log(123);
+                                                                                window.console.log('sandbox.nodejs');
                                                                                 window.console.log(window.crossOriginIsolated);
               
               var webcontainer;
