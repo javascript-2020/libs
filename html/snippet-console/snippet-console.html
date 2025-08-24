@@ -41,7 +41,7 @@ mod['snippet-console']    = function(){
   var obj   = {};
   
         
-        var ext,$,source,ace
+        var ext,$,source,ace,mode
         ;
         
         obj.initmod   = function(params){
@@ -50,7 +50,7 @@ mod['snippet-console']    = function(){
               $         = params.$;
               source    = params.source;
               ace       = params.ace;
-              
+              mode      = params.mode;
               
         }//initmod
         
@@ -74,6 +74,7 @@ mod['snippet-console']    = function(){
   
         obj.init    = async function(){
 
+              
           
               dconsole        = mod.console();
               obj.dconsole    = dconsole;
@@ -139,8 +140,11 @@ mod['snippet-console']    = function(){
                                       
                                 }//clear
 
-              
-              sandbox.run(js,{console});
+              if(!mode){
+                    sandbox.run(js,{console});
+              }else{
+                    sandbox[mode](js,{console});
+              }
 
           
               source.focus();
