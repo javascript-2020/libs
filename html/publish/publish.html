@@ -6,26 +6,39 @@
       
             <style>
             
-                  #root           {display:inline-flex;margin-right:5px}
+  #root
+    {display:inline-flex;margin-right:5px}
+  
+  .menu
+    { position:absolute;left:0;top:30px;width:400px;
+      display:flex;flex-direction:column;gap:10px
+    }
+  .sub
+    {border:1px solid lightgray;padding:20px;border-radius:5px}
+  
+  .hdr
+    {}
+  .delete
+    {}
+  
+  .opts
+    {}
+  #autorun
+    {margin-right:10px}
+  
+  .txt
+    { display:flex;align-items:center}
+  .txt-publish
+    {}
+        
+  .file
+    {border:1px solid lightgray;padding:20px;border-radius:5px}
+  .file-publish
+    {}
                   
-                  .menu           { position:absolute;left:0;top:30px;width:400px;
-                                    display:flex;flex-direction:column;gap:10px
-                                  }
-                  .sub            {border:1px solid lightgray;padding:20px;border-radius:5px}
-                  
-                  .hdr            {}
-                  .delete         {}
-                  
-                  .opts           {}
-                  #autorun        {margin-right:10px}
-                  
-                  .txt            { display:flex;align-items:center}
-                  .txt-publish    {}
-                        
-                  .file           {border:1px solid lightgray;padding:20px;border-radius:5px}
-                  .file-publish   {}
                   
             </style>
+
             
             <div id=root style='visibility:hidden'>
             
