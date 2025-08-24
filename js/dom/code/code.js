@@ -133,7 +133,7 @@
         }//all
 
         
-        function snippet_console(code,{menu,ace}={}){
+        function snippet_console(code,{menu,ace,mode}={}){
         
               var editor;
               var snippet;
@@ -189,7 +189,7 @@
                 
                     snippet   = mod['snippet-console']();
               
-                    snippet.initmod({ext,$,source,menumod,ace});
+                    snippet.initmod({ext,$,source,menumod,ace,mode});
                     
                     await snippet.init();
 
