@@ -273,7 +273,9 @@ function menumod(){
                     index   = list.find(node,'index');
               }
               
-              keydown.add(menu_kd);
+              if(keydown){
+                    keydown.add(menu_kd);
+              }
               
               state.cur   = index;
               show(node);
