@@ -275,8 +275,6 @@
                     await code_block.init();
                     
                     var root    = div.nextElementSibling;
-                    
-                    console.log('root***',root,root.textContent);
                     div.remove();
                     
                     await code_block.initdom(root);
