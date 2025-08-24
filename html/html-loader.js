@@ -174,7 +174,12 @@
         
         node.setAttribute('data-url',url);
         
-        slots.forEach(slot=>node.append(slot));
+        slots.forEach(slot=>{
+         
+              var nslot   = slot.cloneNode(true); 
+              node.append(nslot)
+              
+        });
         
         root.parentNode.replaceChild(node,root);
                                                                                 console.log(node);
