@@ -19,6 +19,12 @@ function menumod(){
         var df                  = false;
   
   
+        obj.initmod   = function(params){
+        }//initmod
+        
+        
+  //:
+  
         
         obj.on                  = {};
         obj.input               = {};
