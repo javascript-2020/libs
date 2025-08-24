@@ -45,7 +45,7 @@
               `);
 
               
-        }//sandbox
+        }//run
 
 
   //:
@@ -102,34 +102,34 @@
               var console;
               
               window.init   = async function(params){
-              window.console.log(1);
+                                                                                window.console.log(1);
               
                     ({console}            = params);
                     
                     var {WebContainer}    = await import('https://cdn.jsdelivr.net/npm/@webcontainer/api/+esm');
-              window.console.log(2);
+                                                                                window.console.log(2);
                     webcontainer          = await WebContainer.boot();
-              window.console.log(3);
+                                                                                window.console.log(3);
                     
               }//init
       
               window.run    = async function(js){
-              window.console.log(1);
+                                                                                window.console.log(1);
                     await webcontainer.fs.writeFile('main.js',js);
-              window.console.log(2);
+                                                                                window.console.log(2);
               
                     var process   = await webcontainer.spawn('node',['main.js']);
-              window.console.log(3);
+                                                                                window.console.log(3);
                     var stream    = new WritableStream({write(data){console.log(data)}});
-              window.console.log(4);
+                                                                                window.console.log(4);
                     process.output.pipeTo(stream);
-              window.console.log(5);
+                                                                                window.console.log(5);
             
                     var code      = await process.exit;
                     if(code!=0){
                           console.log('an error occurred');
                     }
-              window.console.log(6);
+                                                                                window.console.log(6);
                     return code;
                     
               }//run
