@@ -256,6 +256,17 @@
         }});
 
         
+        $.define    = function(html){
+          
+              html                  = html.trim();
+              var template          = document.createElement('template');
+              template.innerHTML    = html;
+              var node              = template.content.firstChild;
+              return node;
+              
+        }//define
+        
+        
   //:
 
         
