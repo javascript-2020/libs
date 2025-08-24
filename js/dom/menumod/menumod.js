@@ -300,7 +300,9 @@ function menumod(){
         
         function close(){
                                                                                 debug('close',state.cur);
-              keydown.rem(menu_kd);
+              if(keydown){
+                    keydown.rem(menu_kd);
+              }
               
               if(state.cur===null){
                     return;
