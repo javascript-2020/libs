@@ -63,6 +63,7 @@ mod['code-block']   = function(){
         var host;
         var root;
         
+        
   
   //:
   
@@ -100,7 +101,15 @@ mod['code-block']   = function(){
                           node.setAttribute('src',src);
                     }
                     
-                    snippet_console       = await code.snippet_console(root,{menu,ace});
+                    var mode;
+                    var has   = dom.hasAttribute.bind(dom);
+                    switch(true){
+                    
+                      case has('nodejs')    : mode    = 'nodejs';       break;
+                      
+                    }//switch
+                    
+                    snippet_console       = await code.snippet_console(root,{menu,ace,mode});
                     obj.snippet_console   = snippet_console;
               }
 
