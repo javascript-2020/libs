@@ -56,7 +56,7 @@
               var resolve,promise=new Promise(res=>resolve=res);
               
               var iframe              = document.createElement('iframe');
-              iframe.style.cssText    = '';
+              iframe.style.cssText    = 'display:none;';
               iframe.onload           = onload;
               iframe.srcdoc           = '';
               document.body.append(iframe);
@@ -76,6 +76,9 @@
                     await win.init({console});
                     
                     var code    = await win.run(js);
+                    
+                    iframe.remove();
+                    
                     resolve({code});
                     
               }//onload
