@@ -86,7 +86,11 @@ mod['code-block']   = function(){
               var dom                   = host.__root;
 
               var node                  = $(root,'code');
-              node.textContent          = dom.textContent;
+              var txt                   = dom.textContent;
+              var i1                    = txt.indexOf('\n');
+              var i2                    = txt.lastIndexOf('\n');
+              txt                       = txt.slice(i1+1,i2);
+              node.textContent          = txt;
               //code.editor.code(node,{menu});
 
               
