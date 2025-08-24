@@ -19,7 +19,13 @@ function menumod(){
         var df                  = false;
   
   
+        var keydown;
+        
+        
         obj.initmod   = function(params){
+          
+              keydown   = params.keydown;
+              
         }//initmod
         
         
