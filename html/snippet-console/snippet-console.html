@@ -139,7 +139,7 @@ mod['snippet-console']    = function(){
                                             args.forEach((v,i)=>{
                                             
                                                   if(typeof v=='string'){
-                                                        var html    = ansi_up.ansi_to_html(txt);
+                                                        var html    = ansi.ansi_to_html(txt);
                                                         var node    = $.define(html);
                                                         args.splice(i,1,node);
                                                   }
