@@ -1,195 +1,204 @@
 
 
 
-<snippet-console>
+<html>
 
-      <template shadowrootmode=open>
+      <head>
       
+            <script init>
+                                                                                console.clear();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+        var version       = 'v1.0';
+            
+        var df            = true;
+
+
+        var ext;
+        var $;
+        var datatype;
+        var menumod;
+        var keydown;
+        var debug;
+        
+
+        var mod           = {};
+
+
+        var ace;
+        var snippet_console;        
+        
+
+        
+
+  //:
+
+              
+        async function init(){
+                                                                                debug('init',version);
+
+              //editor                    = mod.editor();
+              snippet_console           = mod['snippet-console']();
+              
+              
+              //editor.initmod({ext,$,menu:menu.root});
+              snippet_console.initmod({ext,$,ace,source});
+              
+              //await editor.init();
+              await snippet_console.init();
+              
+              
+  //:
+
+          
+              await initdom(document.body);
+
+
+        }//init
+
+
+  //:
+  
+  
+        init.stack            = [];
+        init.stack.ct         = 0;
+        init.stack.total      = 1;
+        init.stack.mode       = '';
+        init.stack.complete   = false;
+        Object.defineProperty(init.stack,'add',{get:()=>{
+              init.stack.total++;
+              init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
+        }});
+        Object.defineProperty(init.stack,'complete',{get:()=>{
+              init.stack.ct++;
+              init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
+              init.stack.ct>=init.stack.total && init();
+        }});
+        
+
+(async()=>{
+  
+        init.stack.add;
+        
+        
+        var url;
+        var headers;
+        var token       = localStorage['github-token'];
+        if(token){
+              url       = 'https://api.github.com/repos/javascript-2020/ext-code/contents/ext-loader.js';
+              headers   = {accept:'application/vnd.github.raw',authorization:`bearer ${token}`};
+        }else{
+              url       = 'https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js';
+        }
+        
+        var res   = await fetch(url,{headers});
+        var txt   = await res.text();
+
+        if(res.headers.get('content-type').includes('json')){
+                                                                                console.log('*** ext : json');
+              var json    = JSON.parse(txt);
+              var b64     = json.content;
+              txt         = atob(b64);
+        }else{
+                                                                                console.log('*** ext : text');
+        }
+        
+        ext   = eval(txt);
+        
+              
+        var promise   = ext.load.libs(
+              'js/dom/$.js.api',
+              'js/core/datatype.js',
+              'js/dom/menumod/menumod.js',
+              'js/dom/keydown/keydown.js',
+              'js/debug/debug.js',
+        );
+        [$,datatype,menumod,keydown,debug]   = await promise;
+
+        ace   = await $.editor.ace();
+        
+        init.stack.complete;
+
+})();
+
+
+            </script init>
       
             <style>
-            
-  #root
-    {display:flex;flex-direction:column;gap:10px}
-    
-  input
-    {font-size:16px;padding:5px 10px}
-  input[type=button]
-    {cursor:pointer}
-    
             </style>
             
+      </head>
+      
+      
+      <body>
+      
+            <code>
             
-            <div id=root>
+            
+        fn();
+
+        
+        function fn(){
+        
+              console.log('myFn');
+              
+        }//fn
+        
+            </code>
+
+            
+            <snippet-console>
+                  <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+            </snippet-console>
+
       
-                  <div>
-                        <input value=run type=button>
-                  </div>
-                              
-                  <console api>
-                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-                  </console>
-      
-            </div>
-      
-      </template>
+      </body>
       
       
       <script>
+
       
-mod['snippet-console']    = function(){
-  
-  var obj   = {};
-  
-        
-        var ext,$,source,ace,mode
-        ;
-        
-        obj.initmod   = function(params){
-          
-              ext       = params.ext;
-              $         = params.$;
-              source    = params.source;
-              ace       = params.ace;
-              mode      = params.mode;
-              
-        }//initmod
-        
-        
-  //:
-
-
-        var ansi;
-  
-        var dconsole;
-        obj.dconsole    = null;
-        var sandbox;
-        
-        
         var root;
+        var code;
         
+
+        function initdom(rootnode){
         
-        var btn   = {};
-        
-        
-  //:
-  
-  
-        obj.init    = async function(){
+              root    = rootnode;
+              
+              
+              code    = $('code');
+              
+              //editor.initdom(root);
+              
+              snippet_console.initdom(root);
+              
 
-              
-          
-              dconsole        = mod.console();
-              obj.dconsole    = dconsole;
-              
-              dconsole.initmod({ext,$,ace});
-              
-              
-              await dconsole.init();
-
-              await libs();
-          
-        }//init
-        
-        
-        async function libs(){
-          
-              [sandbox]       = await ext.load.libs('js/sandbox/sandbox.js.api');
-
-              var {AnsiUp}    = await import('https://cdn.jsdelivr.net/npm/ansi_up/+esm');
-              ansi            = new AnsiUp();
-              
-        }//libs
-
-        
-  //:
-  
-  
-        obj.initdom   = function(rootnode){
-
-              host                                = $.full('snippet-console',rootnode);
-              root                                = host.shadowRoot;
-
-
-              $(root,'[value=run]').onclick       = btn.run;
-              
-              
-              
-              dconsole.initdom(root);
-
-              dconsole.clear();
-              dconsole.log('ready');
-              
               
         }//initdom
-        
+      
 
   //:
   
+  
+        function source(){
         
-        btn.run   = function(){
-
-              var js          = source();
+              var js    = code.textContent;
+              return js;
               
-                    
-              var console     = {};
-              console.log     = function(){
-                              
-                                      window.console.log.apply(window.console,arguments);
-                                      
-                                      var args    = [...arguments];
-                                      if(mode=='nodejs'){
-                                            args.forEach((v,i)=>{
-                                            
-                                                  if(typeof v=='string'){
-                                                        var html    = ansi.ansi_to_html(v);
-                                                        var node    = $.define(html);
-                                                        var log     = document.createElement('log-nodejs');
-                                                        log.append(node);
-                                                        args.splice(i,1,log);
-                                                  }
-                                                  
-                                            });
-                                      }
-                                      dconsole.log.apply(null,args);
-                                    
-                                }//log
-              console.clear   = function(){
-                  
-                                      dconsole.clear();
-                                      window.console.clear();
-                                      
-                                }//clear
-
-              if(!mode){
-                    sandbox.run(js,{console});
-              }else{
-                    sandbox[mode](js,{console});
-              }
-
-          
-              source.focus();
-              
-        }//run
+        }//source
         
+        
+        source.focus    = function(){}
+
         
   //:
-
-
-        obj.run   = btn.run;
-
-
-  //:  
   
-
-
-
-  return obj;
   
-}//snippet-console
-
-
-
+  init.stack.complete;
+  
       </script>
       
       
-</snippet-console>
+</html>
+
+
