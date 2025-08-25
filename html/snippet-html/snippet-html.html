@@ -11,7 +11,17 @@
             
             </style>
             
+            <div id=root>
             
+                  <div>
+                        <input value=run type=button>
+                  </div>
+                              
+                  <div id=hldr>
+                        <iframe></iframe>
+                  </div>
+                  
+            </div>
       
       </template>
       
@@ -29,15 +39,24 @@ mod.snippet_html    = function(){
         
         obj.initmod   = function(params){
         
-              ext   = params.ext;
-              $     = params.$;
+              ext       = params.ext;
+              $         = params.$;
+              source    = params.source;
               
         }//initmod
         
         
   //:
   
-  
+        
+        
+        var host;
+        var root;
+        
+        
+        var btn     = {};
+        
+        
   //:
   
   
@@ -49,10 +68,40 @@ mod.snippet_html    = function(){
   
   
         obj.initdom   = function(rootnode){
+
+              host                                = $.full('snippet-html',rootnode);
+              root                                = host.shadowRoot;
+
+
+              $(root,'[value=run]').onclick       = btn.run;
+
+
+              hldr                                = $(root,'#hldr');
+              iframe                              = $(hldr,'iframe');
+              iframe.remove();
+
+        
         }//initdom
         
         
   //:
+  
+  
+        btn.run   = function(){
+        
+              hldr.replaceChildren();
+              
+              var html          = source();
+              
+              var niframe       = iframe.cloneNode(true);
+              niframe.srcdoc    = html;
+              hldr.append(niframe);
+              
+        }//run
+        
+  
+  //:
+  
   
   
   return obj;
