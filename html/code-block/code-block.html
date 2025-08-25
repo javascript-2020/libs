@@ -111,14 +111,14 @@ mod['code-block']   = function(){
   //:
   
   
-        setup.code    = async function(dom,node){
+        setup.code    = async function(dom,node,mode){
         
               var src   = dom.getAttribute('src');
               if(src){
                     var {txt,error}     = await load(src);
                     node.textContent    = txt;
               }
-              code.editor.code(node,{menu,ace});
+              code.editor.code(node,{mode,menu,ace});
               
         }//code
 
