@@ -34,14 +34,10 @@
         async function init(){
                                                                                 debug('init',version);
 
-              //editor                    = mod.editor();
               snippet_console           = mod['snippet-console']();
               
-              
-              //editor.initmod({ext,$,menu:menu.root});
               snippet_console.initmod({ext,$,ace,source});
               
-              //await editor.init();
               await snippet_console.init();
               
               
@@ -168,8 +164,7 @@
               
               
               code    = $('code');
-              
-              //editor.initdom(root);
+
               
               snippet_console.initdom(root);
               
