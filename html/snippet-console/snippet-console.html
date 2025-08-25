@@ -134,6 +134,8 @@ mod['snippet-console']    = function(){
               var console     = {};
               console.log     = function(){
                               
+                                      window.console.log.apply(window.console,arguments);
+                                      
                                       var args    = [...arguments];
                                       if(mode=='nodejs'){
                                             args.forEach((v,i)=>{
@@ -147,7 +149,6 @@ mod['snippet-console']    = function(){
                                             });
                                       }
                                       dconsole.log.apply(null,args);
-                                      window.console.log.apply(window.console,arguments);
                                     
                                 }//log
               console.clear   = function(){
