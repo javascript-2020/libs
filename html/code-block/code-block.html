@@ -78,7 +78,7 @@ mod['code-block']   = function(){
   //:
   
   
-        obj.initdom   = async function(rootnode){
+        obj.initdom   = async function(rootnode,{mode}){
           
               if($.nodename(rootnode)=='code-block'){
                     host                = rootnode;
@@ -101,7 +101,7 @@ mod['code-block']   = function(){
               switch(true){
               
                 case has('snippet-console')   : setup.snippet_console(dom,node);        break;
-                default                       : setup.code(dom,node);                   break;
+                default                       : setup.code(dom,node,mode);              break;
               }//switch
 
           
