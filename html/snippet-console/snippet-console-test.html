@@ -16,8 +16,6 @@
         var ext;
         var $;
         var datatype;
-        var menumod;
-        var keydown;
         var debug;
         
 
@@ -108,11 +106,9 @@
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
-              'js/dom/menumod/menumod.js',
-              'js/dom/keydown/keydown.js',
               'js/debug/debug.js',
         );
-        [$,datatype,menumod,keydown,debug]   = await promise;
+        [$,datatype,debug]   = await promise;
 
         ace   = await $.editor.ace();
         
@@ -124,6 +120,12 @@
             </script init>
       
             <style>
+  body
+    {display:flex;flex-direction:column;gap:10px}
+    
+  code
+    {border:1px solid lightgray;padding:10px;font-family:monospace;white-space:pre}
+    
             </style>
             
       </head>
@@ -132,8 +134,7 @@
       <body>
       
             <code>
-            
-            
+                        
         fn();
 
         
