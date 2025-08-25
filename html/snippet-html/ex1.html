@@ -4,12 +4,37 @@
 <html>
 
       <head>
-      
+
+<style>
+  .newsletter { font-family: sans-serif; padding: 1em; border: 1px solid #ccc; border-radius: 8px; max-width: 600px; }
+  .newsletter input[type="email"] { width: 100%; padding: 0.5em; margin: 0.5em 0; }
+  .newsletter button { padding: 0.5em 1em; }
+  .newsletter footer { margin-top: 1em; font-size: 0.9em; color: #666; }
+</style>
+
       </head>
       
       <body>
       
             <div>test</div>
+
+<article class="newsletter">
+  <header>
+    <h1>Newsletter Signup</h1>
+    <p>Stay updated with our latest tools and insights.</p>
+  </header>
+
+  <form onsubmit="event.preventDefault(); alert('Thanks for signing up!');">
+    <label for="email">Email address:</label><br>
+    <input type="email" id="email" name="email" required><br>
+    <button type="submit">Subscribe</button>
+  </form>
+
+  <footer>
+    <p>We respect your privacy. No spam, ever.</p>
+  </footer>
+</article>
+
             
       </body>
       
