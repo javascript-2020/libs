@@ -6,7 +6,7 @@
       <head>
       
             <title>snippet-console test</title>
-
+            
 
             
             <script init>
@@ -15,7 +15,7 @@
         var version       = 'v1.0';
             
         var df            = true;
-        var debug_id      = 'snippet-console test';
+        var debug_id      = 'snippet-html test';
 
 
         var ext;
@@ -110,20 +110,15 @@
         );
         [$,datatype,debug]   = await promise;
 
+
+        html    = await ext.text.libs('html/snippet-html/ex1.html');
+
+
         init.stack.complete;
 
 })();
 
 
-(async()=>{
-
-      init.stack.add;
-      
-      html    = await fetch('ex1.html').then(res=>res.text());
-      
-      init.stack.complete;
-      
-})();
             </script init>
       
             <style>
@@ -148,7 +143,7 @@
             </code>
 
             
-            <snippet-html>
+            <snippet-html api>
                   <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
             </snippet-html>
 
