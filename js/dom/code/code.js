@@ -246,22 +246,18 @@
         
               var resolve,promise=new Promise(res=>resolve=res);
               
-
-              var code_block;
-              var txt   = node.textContent;
-
-
-              
               init.stack.add;
               init.stack.push(complete);
 
 
+              var code_block;
+
               var div   = document.createElement('div');
               node.before(div);
-              
 
-              var script      = create.script(()=>init.stack.complete);
+              var script    = create.script(()=>init.stack.complete);
               node.append(script);
+
         
               return promise;
 
