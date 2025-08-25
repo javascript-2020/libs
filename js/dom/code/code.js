@@ -243,7 +243,7 @@
         }//all
 
       
-        function code_block(node,{menu,ace}){
+        function code_block(node,{mode,menu,ace}){
         
         
               var resolve,promise=new Promise(res=>resolve=res);
@@ -275,7 +275,7 @@
                     var root    = div.nextElementSibling;
                     div.remove();
                     
-                    await code_block.initdom(root);
+                    await code_block.initdom(root,{mode});
                     
                     resolve({code_block});
                     
@@ -289,7 +289,7 @@
         
         obj.editor    = {};
         
-        obj.editor.code    = function(code,{menu,kd,ace}){
+        obj.editor.code    = function(code,{mode,menu,kd,ace}){
 
               var editor;
               
@@ -311,7 +311,7 @@
                     editor.initmod({ext,$,datatype,menumod,menu,fullsize:true,ace});
                     
                     await editor.init();
-                    await editor.initdom(root.__component,{txt});
+                    await editor.initdom(root.__component,{mode,txt});
                     
                     resolve({editor,root});
                     
