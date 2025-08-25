@@ -135,16 +135,17 @@
         
         function snippet_console(code,{menu,ace,mode}={}){
         
+              var resolve,promise=new Promise(res=>resolve=res);
+              setTimeout(fn,50);
+              
+              init.stack.add;
+              init.stack.push(complete);
+
+              
               var editor;
               var snippet;
               var node;
               var root;
-              
-              init.stack.add;
-              init.stack.push(complete);
-              
-              var resolve,promise=new Promise(res=>resolve=res);
-              setTimeout(fn,50);
               
               
               async function fn(){              
@@ -227,6 +228,7 @@
                     }
                     
               }//kd
+
               
               return promise;
         
