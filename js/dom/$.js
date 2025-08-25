@@ -1063,7 +1063,7 @@
         
         $.editor.ace    = function(){
           
-              var src         = 'https://ajaxorg.github.io/ace-builds/src-noconflict/ace.js';
+              var src   = 'https://ajaxorg.github.io/ace-builds/src-noconflict/ace.js';
               
               var resolve,promise=new Promise(res=>resolve=res);
               
