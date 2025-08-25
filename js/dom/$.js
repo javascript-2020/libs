@@ -1077,7 +1077,7 @@
               
               function onload(){
                 
-                    resolve();
+                    resolve(window.ace);
                     
               }//onload
               
