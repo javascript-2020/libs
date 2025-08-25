@@ -132,7 +132,7 @@ mod['snippet-console']    = function(){
               
                     
               var console     = {};
-              console.log     = function(){debugger;
+              console.log     = function(){
                               
                                       window.console.log.apply(window.console,arguments);
                                       
@@ -143,7 +143,9 @@ mod['snippet-console']    = function(){
                                                   if(typeof v=='string'){
                                                         var html    = ansi.ansi_to_html(v);
                                                         var node    = $.define(html);
-                                                        args.splice(i,1,node);
+                                                        var log     = document.createElement('log-nodejs');
+                                                        log.append(node);
+                                                        args.splice(i,1,log);
                                                   }
                                                   
                                             });
