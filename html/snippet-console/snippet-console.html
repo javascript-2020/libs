@@ -106,11 +106,11 @@ mod['snippet-console']    = function(){
   
         obj.initdom   = function(rootnode){
 
-              host    = $.full('snippet-console',rootnode);
-              root    = host.shadowRoot;
+              host                                = $.full('snippet-console',rootnode);
+              root                                = host.shadowRoot;
 
 
-              $(root,'[value=run]').onclick   = btn.run;
+              $(root,'[value=run]').onclick       = btn.run;
               
               
               
@@ -132,7 +132,7 @@ mod['snippet-console']    = function(){
               
                     
               var console     = {};
-              console.log     = function(){
+              console.log     = function(){debugger;
                               
                                       window.console.log.apply(window.console,arguments);
                                       
