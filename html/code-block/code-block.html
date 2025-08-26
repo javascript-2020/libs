@@ -103,8 +103,8 @@ mod['code-block']   = function(){
               var has   = dom.hasAttribute.bind(dom);
               switch(true){
               
-                case has('snippet-console')   : setup.snippet_console(root,dom,node);        break;
-                default                       : setup.code(root,dom,node,mode);              break;
+                case has('snippet-console')   : await setup.snippet_console(root,dom,node);        break;
+                default                       : await setup.code(root,dom,node,mode);              break;
                 
               }//switch
 
