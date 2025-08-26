@@ -47,7 +47,7 @@ mod.snippet_html    = function(){
   var obj   = {};
   
 
-        var ext,$
+        var ext,$,source
         ;
         
         obj.initmod   = function(params){
@@ -114,7 +114,7 @@ mod.snippet_html    = function(){
               function onload(){
               
                     var h   = niframe.contentDocument.documentElement.scrollHeight;
-                    niframe.style.height   = h+'px';
+                    hldr.style.height   = h+'px';
                     
               }//onload
               
