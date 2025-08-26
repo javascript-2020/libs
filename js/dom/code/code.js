@@ -249,7 +249,7 @@
               var root;
 
               
-              function fn(){
+              async function fn(){
                 
                     if($.nodename(code)!='code'){
                           code    = $(code,'code');
