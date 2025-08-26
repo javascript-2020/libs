@@ -288,7 +288,7 @@
 
               async function complete(){
                 
-                    snippet   = mod['snippet-html']();
+                    snippet   = mod.snippet_html();
               
                     snippet.initmod({ext,$,source,menumod,ace,mode});
                     
