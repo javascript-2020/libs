@@ -25,6 +25,8 @@
         obj.load                  = load;
         
         obj.snippet_console       = snippet_console;
+        obj.snippet_html          = snippet_html;
+        
         obj.code_block            = code_block;
 
 
