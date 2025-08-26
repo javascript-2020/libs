@@ -290,7 +290,7 @@
                 
                     snippet   = mod.snippet_html();
               
-                    snippet.initmod({ext,$,source,menumod,ace,mode});
+                    snippet.initmod({ext,$,source});
                     
                     await snippet.init();
 
