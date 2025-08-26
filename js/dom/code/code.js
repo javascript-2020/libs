@@ -273,7 +273,7 @@
 
 
                     var promise;
-                    ({root,promise}    = obj.editor.code(code,{menu,ace}));
+                    ({root,promise}    = obj.editor.code(code,{mode:'html',menu,ace}));
                     promise.then(result=>({editor}=result));
 
                     node            = document.createElement('snippet-html');
