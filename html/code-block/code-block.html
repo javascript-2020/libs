@@ -144,7 +144,10 @@ mod['code-block']   = function(){
               }//switch
               
               snippet_console       = await code.snippet_console(root,{menu,ace,mode});
+              console.log(snippet_console);
+              
               obj.snippet_console   = snippet_console;
+
               
         }//snippet_console
   
@@ -157,6 +160,8 @@ mod['code-block']   = function(){
               }
               
               snippet_html          = await code.snippet_html(root,{});
+              console.log(snippet_html);
+              
               obj.snippet_html      = snippet_html;
               
         }//html
