@@ -237,7 +237,7 @@
         }//snippet_console
         
 
-        function snippet_html(){
+        function snippet_html(code,{}){
           
               var resolve,promise=new Promise(res=>resolve=res);
               setTimeout(fn,50);
