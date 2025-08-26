@@ -103,8 +103,9 @@ mod['code-block']   = function(){
               var has   = dom.hasAttribute.bind(dom);
               switch(true){
               
-                case has('snippet-console')   : await setup.snippet_console(root,dom,node);        break;
-                default                       : await setup.code(root,dom,node,mode);              break;
+                case has('snippet-console')   : await setup.snippet_console(root,dom,node);       break;
+                case has('snippet-html')      : await setup.snippet_html(root,dom,node);          break;
+                default                       : await setup.code(root,dom,node,mode);             break;
                 
               }//switch
 
@@ -148,7 +149,7 @@ mod['code-block']   = function(){
         }//snippet_console
   
   
-        setup.html    = async function(dom,node){
+        setup.snippet_html    = async function(dom,node){
         
               var src   = dom.getAttribute('src');
               if(src){
