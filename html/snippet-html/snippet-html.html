@@ -107,7 +107,16 @@ mod.snippet_html    = function(){
               
               var niframe       = iframe.cloneNode(true);
               niframe.srcdoc    = html;
+              niframe.onload    = onload;
               hldr.append(niframe);
+              
+              
+              function onload(){
+              
+                    var h   = iframe.contentDocument.documentElement.scrollHeight;
+                    iframe.style.height   = h+'px';
+                    
+              }//onload
               
         }//run
         
