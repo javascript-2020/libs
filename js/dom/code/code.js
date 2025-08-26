@@ -235,7 +235,99 @@
         }//snippet_console
         
 
+        function snippet_html(){
+          
+              var resolve,promise=new Promise(res=>resolve=res);
+              setTimeout(fn,50);
 
+              init.stack.add;
+              init.stack.push(complete);
+
+              var editor;
+              var snippet;
+              var node;
+              var root;
+
+              
+              function fn(){
+                
+                    if($.nodename(code)!='code'){
+                          code    = $(code,'code');
+                    }
+                    
+                    var txt;
+                    var fn      = code.getAttribute('src');
+                    if(fn){
+                          var i   = fn.lastIndexOf('.');
+                          if(i==-1){
+                                fn   += '.js';
+                          }
+                          txt   = await load(fn,code);
+                    }
+                    
+                    if(txt){
+                          code.textContent    = txt;
+                    }
+
+
+                    var promise;
+                    ({root,promise}    = obj.editor.code(code,{menu,ace}));
+                    promise.then(result=>({editor}=result));
+
+                    node            = document.createElement('snippet-html');
+                    node.toggleAttribute('api',true);
+                    root.after(node);
+                                  
+                    var script      = create.script(()=>init.stack.complete);
+                    node.append(script);
+                
+              }//fn
+
+
+              async function complete(){
+                
+                    snippet   = mod['snippet-html']();
+              
+                    snippet.initmod({ext,$,source,menumod,ace,mode});
+                    
+                    await snippet.init();
+
+                    await snippet.initdom(node.__component);
+                    
+                    resolve({editor,snippet,code,node});
+                    
+              }//complete
+
+
+              function source(){
+                
+                    var txt   = editor.getValue();
+                    return txt;
+                    
+              }//source
+              
+              
+              source.focus    = ()=>{
+              
+                    editor.focus();
+                    
+              }//focus
+
+
+              function kd(e){
+                
+                    if(e.key==='Enter' && e.ctrlKey){
+                          snippet.run();
+                    }
+                    
+              }//kd
+
+              
+              return promise;
+              
+        }//snippet_html
+        
+        
   //:
 
   
