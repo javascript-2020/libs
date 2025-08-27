@@ -30,7 +30,7 @@
         store.console     = window.console;
         
         
-        var console;
+        var cons;
         
 
 
@@ -47,16 +47,16 @@
               await scripts();
 
               
-              console                   = mod.console();
+              cons                      = mod.console();
               log                       = mod.log();
 
 
               
-              console.initmod({ext,$,ace,store});
+              cons.initmod({ext,$,ace,store});
               log.initmod({ext,$});
               
               
-              await console.init();
+              await cons.init();
               log.init();
 
 
@@ -216,8 +216,8 @@
               root                                = rootnode;
 
               
-              console.initdom(root);
-              
+              cons.initdom(root);
+              cons.height('200px');
               
               
               $(root,'[value=test]').onclick    = btn.test;
@@ -235,7 +235,12 @@
   
         btn.test    = function(){
           
-              console.test();
+              
+              var span=document.createElement('span');
+              span.textContent    = 'hello';
+              //debugger;
+              cons.log(span);
+              
               
               
         }//test
@@ -244,7 +249,7 @@
         btn.log   = function(){
 
           
-              console.log('helloworld');
+              cons.log('helloworld');
               
               
               
@@ -255,7 +260,7 @@
                     debug:true
               };
               
-              console.log(test);
+              cons.log(test);
               
           
         }//log
