@@ -86,9 +86,8 @@
         }//nodejs
         
 
-
-
   //:
+
   
         var srcdoc    = {};
         
@@ -141,6 +140,18 @@
 
         `;
         
+
+
+  //:
+  
+  
+        obj.html    = function(){
+        }//html
+        
+        
+  //:
+  
+
 
   
   return obj;
