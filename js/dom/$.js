@@ -336,7 +336,7 @@
               
               function set(id){
               
-                    list.forEach(chk=>chk.id==id ? chk.set() : chk.set(false));
+                    list.forEach(chk=>chk.id!=id && chk.set(false));
                     
               }//set
 
