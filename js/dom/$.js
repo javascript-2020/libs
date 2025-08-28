@@ -335,7 +335,7 @@
 
               
               function set(id){
-              
+              debugger;
                     list.forEach(chk=>chk.id!=id && chk.set(false));
                     
               }//set
