@@ -277,7 +277,8 @@ function publish(){
                 
               }//switch
               if(txt){
-                    editor.setValue(txt,-1);
+                    var blob    = new Blob([txt]);
+                    complete.load(null,blob);
               }
               
               ui.autorun.checked   = json.autorun;
