@@ -1,6 +1,11 @@
-function jsonblob(){
+
+
 //  https://jsonblob.com/api
+
+function jsonblob(){
+  
   var obj   = {};
+
   
         var url           = 'https://jsonblob.com/api/jsonBlob/';
         var id;
@@ -11,7 +16,12 @@ function jsonblob(){
         var util          = {};
         util.query        = {};
         obj.util          = {};
+        
+        
+        
   //:
+
+  
         obj.util.query=async function(){
         
               var tst     = window.location.search.slice(1);
@@ -22,8 +32,10 @@ function jsonblob(){
               return json;
               
         }//query
+
         
         obj.util.query.set=function(){return util.query.set()}
+        
         util.query.set=function(){
         
               var url       = window.location.toString();
@@ -37,8 +49,10 @@ function jsonblob(){
               window.history.replaceState(null,'',url);
               
         }//set
+
         
         obj.util.save=function(json,set=true){return util.save(json,set=true)}
+        
         util.save=async function(json,set=true){
         
               if(id){
@@ -51,6 +65,7 @@ function jsonblob(){
               }
               
         }//save
+
         
         obj.util.save.debounce=function(fn){
         
@@ -59,6 +74,7 @@ function jsonblob(){
               timer       = setTimeout(util.save,time,json);
               
         }//debounce
+
         
         obj.util.delete=async function(set=true){
         
@@ -72,10 +88,13 @@ function jsonblob(){
               util.query.set();
               
         }//delete
+
         
   //:
+
   
         obj.create=function(json){return create(json)}
+        
         async function create(json){
         
               var body    = JSON.stringify(json);
