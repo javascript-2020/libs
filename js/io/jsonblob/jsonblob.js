@@ -22,7 +22,7 @@ function jsonblob(){
   //:
 
   
-        obj.util.query=async function(){
+        obj.util.query    = async function(){
         
               var tst     = window.location.search.slice(1);
               if(!tst)return;
@@ -34,9 +34,9 @@ function jsonblob(){
         }//query
 
         
-        obj.util.query.set=function(){return util.query.set()}
+        obj.util.query.set    = function(){return util.query.set()}
         
-        util.query.set=function(){
+        util.query.set    = function(){
         
               var url       = window.location.toString();
               var search    = window.location.search;
@@ -51,9 +51,9 @@ function jsonblob(){
         }//set
 
         
-        obj.util.save=function(json,set=true){return util.save(json,set=true)}
+        obj.util.save   = function(json,set=true){return util.save(json,set=true)}
         
-        util.save=async function(json,set=true){
+        util.save   = async function(json,set=true){
         
               if(id){
                     await update(id,json);
@@ -67,7 +67,7 @@ function jsonblob(){
         }//save
 
         
-        obj.util.save.debounce=function(fn){
+        obj.util.save.debounce    = function(fn){
         
               clearTimeout(timer);
               var json    = fn();
@@ -76,7 +76,7 @@ function jsonblob(){
         }//debounce
 
         
-        obj.util.delete=async function(set=true){
+        obj.util.delete   = async function(set=true){
         
               if(id){
                     var result    = await del(id);
@@ -93,7 +93,7 @@ function jsonblob(){
   //:
 
   
-        obj.create=function(json){return create(json)}
+        obj.create    = function(json){return create(json)}
         
         async function create(json){
         
@@ -106,8 +106,10 @@ function jsonblob(){
               return id;
               
         }//create
+
         
-        obj.read=function(id){return read(id)}
+        obj.read    = function(id){return read(id)}
+        
         async function read(id){
         
               var res     = await fetch(url+id);
@@ -116,8 +118,10 @@ function jsonblob(){
               return json;
               
         }//read
+
         
-        obj.update=async function(id,json){return update(id,json)}
+        obj.update    = async function(id,json){return update(id,json)}
+        
         async function update(id,json){
         
               var body    = JSON.stringify(json);
@@ -125,15 +129,22 @@ function jsonblob(){
               return res.ok;
               
         }//update
+
         
-        obj.delete=function(id){return del(id)}
+        obj.delete    = function(id){return del(id)}
+        
         async function del(id){
         
               var res   = await fetch(url+id,{method:'delete'});
               return res.ok;
               
         }//delete
-        
+
+
+
+  //:
+  
+  
   return obj;
   
 }//jsonblob
