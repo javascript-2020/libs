@@ -358,7 +358,7 @@
                     
               }
               if(err || !res.ok){
-                    var result    = raw();
+                    var result    = await raw();
                     return result;
               }
               
