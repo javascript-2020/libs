@@ -156,6 +156,7 @@
         
         if(error){
               console.error(error);
+              complete();
               return;
         }
                                                                                 //console.log(txt);
