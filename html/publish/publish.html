@@ -253,16 +253,18 @@ function publish(){
         }//query
         
 
-        obj.delete    = function(){return del()}
+        obj.delete    = async function(){return del()}
         
         function del(){
 
               switch(mode){
                 
-                case 'jsonblob'   : jsonblob.util.delete();       break;
+                case 'jsonblob'   : await jsonblob.util.delete();       break;
                 
               }//switch
           
+              log.green('publish deleted');
+              
         }//delete
         
         
