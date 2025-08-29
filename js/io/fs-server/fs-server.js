@@ -28,6 +28,7 @@
   
         obj.file                = {};
         obj.file.load           = loadfile;
+        obj.file.load.txt       = loadfiletxt;
         obj.file.save           = savefile;
         obj.file.create         = mkfile;
         obj.file.delete         = rmfile;
@@ -84,6 +85,18 @@
               return {blob};
               
         }//loadfile
+        
+        
+        async function loadfiletxt(){
+          
+              var {blob,error}    = await loadfile.apply(null,arguments);
+              if(error){
+                    return {error};
+              }
+              var txt   = await blob.text();
+              return {txt};
+              
+        }//loadfiletxt
         
         
         async function savefile({url,hdrs,path,blob}){
