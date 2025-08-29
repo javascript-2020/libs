@@ -517,7 +517,7 @@
                     path    = parts.pathname.slice(i);
               }
               
-              if(parts.hostname=='rawgithubusercontent.com'){
+              if(parts.hostname=='raw.githubusercontent.com'){
                     str     = parts.pathname.split('/');
                     i       = parts.pathname.indexOf('/main/');
                     i      += 6;
