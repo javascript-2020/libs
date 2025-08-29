@@ -176,10 +176,15 @@ function publish(){
 
 
               $(shadow,'#root').style.visibility    = '';                          
+
+
               
         }//initdom
         
 
+  //:
+  
+  
         btn.publish   = function(e){
           
               save();
@@ -262,7 +267,7 @@ function publish(){
         }//delete
         
         
-        async function load(json){
+        async function load(json){debugger;
 
               if(!json){
                                                                     console.log('[ publish ]','query.complete','no json');
