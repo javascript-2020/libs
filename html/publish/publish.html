@@ -237,7 +237,7 @@ function publish(){
 
         obj.query   = function(){return query()}
         
-        async function query(){
+        async function query(){debugger;
                                                                     console.log('[ publish ]','query loading ...');
               await load.complete;
                                                                     console.log('[ publish ]','query load complete');
@@ -267,7 +267,7 @@ function publish(){
         }//delete
         
         
-        async function load(json){debugger;
+        async function load(json){
 
               if(!json){
                                                                     console.log('[ publish ]','query.complete','no json');
