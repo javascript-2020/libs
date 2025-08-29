@@ -155,6 +155,8 @@
         }//switch
         
         if(error){
+              console.error(error);
+              return;
         }
                                                                                 //console.log(txt);
 
