@@ -148,11 +148,14 @@
         
         switch(mode){
           
-          case 'api'    : ({url,txt}    = await api());           break;
-          case 'raw'    : ({url,txt}    = await raw());           break;
-          case 'url'    : ({url,txt}    = await get_url());       break;
+          case 'api'    : ({url,txt,error}    = await api());           break;
+          case 'raw'    : ({url,txt,error}    = await raw());           break;
+          case 'url'    : ({url,txt,error}    = await get_url());       break;
           
         }//switch
+        
+        if(error){
+        }
                                                                                 //console.log(txt);
 
         var loader_script   = root.querySelector('script');
@@ -326,8 +329,13 @@
                     
               }
               if(err){
-                    alert('fetch error\n'+err.toString());
-                    return;
+                    var error   = err.toString();
+                    return {error};
+              }
+              
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
               }
               
               var txt               = await res.text();
