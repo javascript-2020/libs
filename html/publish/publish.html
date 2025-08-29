@@ -77,13 +77,14 @@ function publish(){
   var obj   = {};
   
 
-        var run,menu
+        var run,menu,source
         ;
         
         obj.initmod   = function(params){
           
               run       = params.run;
               menu      = params.menu;
+              source    = params.source;
               
         }//initmod
 
@@ -324,9 +325,10 @@ function publish(){
         }//save
 
 
-        save.text   = function(){
+        save.text   = async function(){
           
-              var txt       = editor.getvalue();
+              var blob      = source();
+              var txt       = await blob.text();
               var json      = {type:'text',txt};
               save.complete(json);
               
@@ -346,6 +348,7 @@ function publish(){
                     alert('local file cannot be published');
                     return;
               }
+              
 
               var json      = {type:'github',file};
               save.complete(json);
