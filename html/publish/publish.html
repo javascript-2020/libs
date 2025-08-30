@@ -263,12 +263,19 @@ function publish(){
                                                                     console.log('[ publish ]','query load complete');
               
               var json;
+              var error;
+              
               switch(mode){
                 
-                case 'jsonblob'   : json    = await jsonblob.util.query();        break;
+                case 'jsonblob'   : {json,error}    = await jsonblob.util.query();        break;
                 
               }//switch
-                
+              
+              if(error){
+                    log.red(error);
+                    return;
+              }
+              
               load(json);
               
         }//query
@@ -293,7 +300,7 @@ function publish(){
 
               if(!json){
                                                                     console.log('[ publish ]','query.complete','no json');
-                    log.red('publish error : not found');
+                    log.red('publish error : no json');
                     return;
               }
                                                                     console.log('[ publish ]','query.complete');
