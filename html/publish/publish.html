@@ -267,7 +267,7 @@ function publish(){
               
               switch(mode){
                 
-                case 'jsonblob'   : {json,error}    = await jsonblob.util.query();        break;
+                case 'jsonblob'   : ({json,error}    = await jsonblob.util.query());        break;
                 
               }//switch
               
