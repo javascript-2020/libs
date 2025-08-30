@@ -162,7 +162,22 @@ function jsonblob(){
                     return {error};
               }
               
-              var json    = await res.json();
+              var err;
+              try{
+                
+                    var json    = await res.json();
+                    
+              }//try
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                    return {error};
+              }
+              
               return {json};
               
         }//read
