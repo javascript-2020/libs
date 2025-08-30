@@ -276,6 +276,10 @@ function publish(){
                     return;
               }
               
+              if(!json){
+                    return;
+              }
+              
               load(json);
               
         }//query
@@ -298,11 +302,6 @@ function publish(){
         
         async function load(json){
 
-              if(!json){
-                                                                    console.log('[ publish ]','query.complete','no json');
-                    log.red('publish error : no json');
-                    return;
-              }
                                                                     console.log('[ publish ]','query.complete');
                                                                     console.json(json);
               var txt;
