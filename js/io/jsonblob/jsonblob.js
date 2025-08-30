@@ -25,9 +25,15 @@ function jsonblob(){
         obj.util.query    = async function(){
         
               var tst     = window.location.search.slice(1);
-              if(!tst)return;
+              if(!tst){
+                    return;
+              }
+              
               var json    = await read(tst);
-              if(!json)return;
+              if(!json){
+                    return;
+              }
+              
               id          = tst;
               return json;
               
@@ -60,6 +66,7 @@ function jsonblob(){
               }else{
                     await create(json);
               }
+              
               if(set){
                     util.query.set();
               }
@@ -79,11 +86,12 @@ function jsonblob(){
         obj.util.delete   = async function(set=true){
         
               if(id){
-                    var result    = await del(id);
-                    if(result){
+                    var {ok,error}    = await del(id);
+                    if(ok){
                           id    = null;
                     }
               }
+              
               if(!set)return;
               util.query.set();
               
@@ -98,12 +106,33 @@ function jsonblob(){
         async function create(json){
         
               var body    = JSON.stringify(json);
-              var res     = await fetch(url,{method:'post',headers,body});
-              if(!res.ok)return;
+              
+              var err;
+              try{
+                
+                    var res     = await fetch(url,{method:'post',headers,body});
+                    
+              }//try
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                    return {error};
+              }
+              
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
+              }
+              
               var loc     = res.headers.get('location');
               var i       = loc.lastIndexOf('/');
               id          = loc.slice(i+1);
-              return id;
+              
+              return {id};
               
         }//create
 
@@ -112,10 +141,29 @@ function jsonblob(){
         
         async function read(id){
         
-              var res     = await fetch(url+id);
-              if(!res.ok)return;
+              var err;
+              try{
+                
+                    var res     = await fetch(url+id);
+                    
+              }//try
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                    return {error};
+              }
+              
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
+              }
+              
               var json    = await res.json();
-              return json;
+              return {json};
               
         }//read
 
@@ -125,8 +173,30 @@ function jsonblob(){
         async function update(id,json){
         
               var body    = JSON.stringify(json);
-              var res     = await fetch(url+id,{method:'put',headers,body});
-              return res.ok;
+              
+              var err;
+              try{
+                
+                    var res     = await fetch(url+id,{method:'put',headers,body});
+                    
+              }//try
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                    return {error};
+              }
+              
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
+              }
+              
+              var ok    = res.ok;
+              return {ok};
               
         }//update
 
@@ -135,8 +205,24 @@ function jsonblob(){
         
         async function del(id){
         
-              var res   = await fetch(url+id,{method:'delete'});
-              return res.ok;
+              var err;
+              try{
+                
+                    var res   = await fetch(url+id,{method:'delete'});
+                    
+              }//try
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                    return {error};
+              }
+              
+              var ok    = res.ok;
+              return {ok};
               
         }//delete
 
