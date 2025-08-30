@@ -26,16 +26,16 @@ function jsonblob(){
         
               var tst     = window.location.search.slice(1);
               if(!tst){
-                    return;
+                    {};
               }
               
-              var json    = await read(tst);
-              if(!json){
-                    return;
+              var {json,error}    = await read(tst);
+              if(error){
+                    return {error};
               }
               
               id          = tst;
-              return json;
+              return {json};
               
         }//query
 
