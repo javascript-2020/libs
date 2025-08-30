@@ -45,21 +45,33 @@
                   <button id=publish>publish</button>
                   
                   <div class=menu-root>
+                  
                         <img class=menu-icon>
+                        
                         <div class=menu style='display:none'>
+                        
                               <div class='hdr sub'>
                                     <button class=delete>delete</button>
                               </div>
+                              
+                              
+                              <!--
                               <div class='opts sub'>
                                     <checkbox-one id=autorun></checkbox-one>
                               </div>
+                              -->
+                              
+                              
                               <div class='txt sub'>
-                                    <button class=txt-publish>publish txt only</button>
+                                    <button class=txt-publish>publish txt</button>
                               </div>
+                              
                               <div class='file sub'>
                                     <button class=file-publish>publish file</button>
                               </div>
+                              
                         </div>
+                        
                   </div>
                   
             </div>
@@ -96,15 +108,21 @@ function publish(){
   
         var mode    = 'jsonblob';
         var jsonblob;
+        
+        
         var cur     = {};
         cur.type    = 'text';
+
+
 
         var ui      = {};
         
         var root;
         var shadow;
 
-        var autorun;
+        //var autorun;
+
+
 
         
         var btn     = {};
@@ -155,9 +173,10 @@ function publish(){
 
               $(card,'.delete').onclick             = btn.delete;
               
-              
+              /*
               ui.autorun                            = $(shadow,'#autorun');
               ui.autorun.checked                    = false;
+              */
               /*
               ui.autorun.onchange                   = e=>obj.autorun   = autorun.checked;
               obj.autorun                           = autorun.checked;
@@ -200,6 +219,7 @@ function publish(){
         
         btn.txt   = function(){
         
+              cur   = {type:'text'};
               save.text();
               
         }//txt
@@ -207,6 +227,7 @@ function publish(){
         
         btn.file    = function(){
           
+              cur   = {type:'file'};
               save.file();
               
         }//file
