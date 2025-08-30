@@ -26,7 +26,7 @@ function jsonblob(){
         
               var tst     = window.location.search.slice(1);
               if(!tst){
-                    {};
+                    return {};
               }
               
               var {json,error}    = await read(tst);
