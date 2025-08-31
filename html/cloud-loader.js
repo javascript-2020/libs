@@ -41,16 +41,20 @@
 					          mode    = 'api';
 					    }
 
-							var i	=	url.indexOf('?');
-							if(i!=-1){
+						  var i	=	url.indexOf('?');
+						  if(i!=-1){
 										nodename		=	url.slice(i+1);
 										nodename    = decodeURI(nodename);
 										                                                            df && console.log('url ?',nodename);
-							}
+						  }
 
 					    
 					    var txt   = await load(res);
-					    if(txt===false)return;
+					    if(txt===false){
+					          res.writeHead(500);
+					          res.end();
+					          return;
+					    }
 					    
 							if(nodename){
 										var i		=	txt.indexOf('/* params */');
