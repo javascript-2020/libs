@@ -7,8 +7,62 @@
             
             <script src='/libs/js/dom/init-hdr/init-hdr.js'></script>
             
+            <script init>
+                                                                                console.clear();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+        var version           = 'v1.0';
+        
+        var df                = true;
+        var debug_id          = '[ code-block-test.html ]';
+        
+        var ext;
+        var $;
+        var datatype;
+        var debug;
+                  
+
+  //:
+
+
+        stack.add   = init;
+        
+        async function init(){
+                                                                                debug('init',version);
+              codeblock   = mod.codeblock();
+              
+              codeblock.initmod({ext,$});
+              
+              await codeblock.init();
+              
+              
+              initdom(document.body);
+              
+        }//init
+        
+        init.stack    = stack;
+        
+        
+            </script init>
+
+            <script src='/libs/js/ext-loader/ext-loaders.js'></script>
+
             <script>
-            
+
+(async()=>{
+
+        stack.add;
+        
+        var promise   = ext.load.libs(
+              'js/dom/$.js.api',
+              'js/core/datatype.js',
+              'js/debug/debug.js',
+        );
+        [$,datatype,debug]   = await promise;
+
+        stack.complete;
+        
+})();
+
             </script>
             
             <style>
@@ -19,11 +73,40 @@
       
       <body>
       
+            <h3>code-block test</h3>
+            
+            <code-block api>
+        
+        let a=42;
+        
+            </code-block>
+      
       </body>
       
       <script>
+
       
-      
+            var codeblock;
+
+
+  //:
+  
+  
+            function initdom(rootnode){
+            
+                  root                  = rootnode;
+                  
+                  codeblock.initdom(root);
+                  
+                  
+            }//initdom
+
+
+  //:
+
+  
+  stack.complete;
+  
       </script>
       
 </html>
