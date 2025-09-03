@@ -416,6 +416,18 @@
 
 
 
+        obj.style   = function(par=document.head){
+          
+              var style   = document.createElement('style');
+              style.textContent   = `
+
+  code
+    {font-family:monospace;white-space:pre;border:1px solid lightgray;padding:10px;overflow:auto}
+    
+              `;
+              par.append(style);
+              
+        }//style
 
 
 
