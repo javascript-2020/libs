@@ -29,11 +29,17 @@
         async function init(){
                                                                                 debug('init',version);
               codeblock   = mod.codeblock();
+
+              
+              code.initmod({ext,$,datatype});
               
               codeblock.initmod({ext,$});
+
               
               await codeblock.init();
+
               
+              code.style();
               
               initdom(document.body);
               
