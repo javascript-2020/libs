@@ -255,6 +255,19 @@
         }//load
         
         
+        load.text   = async function({token,owner,repo,branch,path}){
+          
+              var {blob,error}    = await load.apply(null,arguments);
+              if(error){
+                    return error;
+              }
+              
+              var txt   = await blob.text();
+              return {txt};
+              
+        }//text
+        
+        
         load.raw    = async function({owner,repo,branch,path}){
         
               if(arguments.length!=1){
