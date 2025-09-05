@@ -92,13 +92,20 @@ mod['code-block']   = function(){
               
               if(!code){
                     promise   = ext.load.libs('js/dom/code/code.js')
-                    promise.then(v=>code=v);
+                    promise.then(v=>{
+                    console.log(v);
+                          code=v
+                    });
                     list.push(promise);
               }
               
               if(!ace){
                     promise   = $.editor.ace()
-                    promise.then(v=>ace=v);
+                    promise.then(v=>{
+                    console.log(v);
+                          ace=v
+                          
+                    });
                     list.push(promise);
               }
               
