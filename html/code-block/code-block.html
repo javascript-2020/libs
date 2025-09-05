@@ -41,16 +41,17 @@ mod['code-block']   = function(){
   var obj   = {};
   
   
-        var ext,$,code,menu,ace
+        var ext,$,datatype,code,menu,ace
         ;
         
         obj.initmod   = function(params){
           
-              ext       = params.ext;
-              $         = params.$;
-              code      = params.code;
-              menu      = params.menu;
-              ace       = params.ace;
+              ext         = params.ext;
+              $           = params.$;
+              datatype    = params.datatype;
+              code        = params.code;
+              menu        = params.menu;
+              ace         = params.ace;
               
         }//initmod
         
@@ -93,19 +94,17 @@ mod['code-block']   = function(){
               if(!code){
                     promise   = ext.load.libs('js/dom/code/code.js')
                     promise.then(v=>{
-                    console.log(v);
-                          [code]=v
+                    
+                          [code]    = v;
+                          code.initmod({ext,$,datatype});
+                          
                     });
                     list.push(promise);
               }
               
               if(!ace){
                     promise   = $.editor.ace()
-                    promise.then(v=>{
-                    console.log(v);
-                          ace=v
-                          
-                    });
+                    promise.then(v=>ace=v);
                     list.push(promise);
               }
               
