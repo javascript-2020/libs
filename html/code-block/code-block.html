@@ -77,7 +77,32 @@ mod['code-block']   = function(){
   
   
         obj.init    = async function(){
+        
+              var list      = libs();
+              var promise   = Promise.All(list);
+              return promise;
+              
         }//init
+        
+        
+        function libs(){
+        
+              var promise;
+              var list    = [];
+              
+              if(!code){
+                    promise   = ext.load.libs('js/dom/code/code.js').then(v=>code=v);
+                    list.push(promise);
+              }
+              
+              if(!ace){
+                    promise   = $.editor.ace().then(v=>ace=v);
+                    list.push(promise);
+              }
+              
+              return list;
+              
+        }//libs
         
         
   //:
