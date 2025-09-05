@@ -183,7 +183,7 @@
               if(attr.value){
                     node.setAttribute(attr.name,attr.value);
               }else{
-                    ndoe.toggleAttribute(attr.name,true);
+                    node.toggleAttribute(attr.name,true);
               }
               
         }//for
