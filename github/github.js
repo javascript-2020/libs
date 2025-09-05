@@ -259,7 +259,7 @@
           
               var {blob,error}    = await load.apply(null,arguments);
               if(error){
-                    return error;
+                    return {error};
               }
               
               var txt   = await blob.text();
