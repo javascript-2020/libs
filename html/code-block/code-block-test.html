@@ -5,7 +5,7 @@
 
       <head>
             
-            <script src='/libs/js/dom/init-hdr/init-hdr.js'></script>
+            <script src='https://libs.ext-code.com/js/dom/init-hdr/init-hdr.js'></script>
             
             <script init>
                                                                                 console.clear();
@@ -19,24 +19,33 @@
         var $;
         var datatype;
         var debug;
+        var menumod;
                   
 
   //:
 
-
+        stack.df=true;
         stack.add   = init;
         
         async function init(){
                                                                                 debug('init',version);
-              codeblock   = mod.codeblock();
+
+              menu        = menumod();
+              
+              codeblock1    = mod['code-block']();
+              codeblock2    = mod['code-block']();
+              codeblock3    = mod['code-block']();
+              
+              //code.initmod({ext,$,datatype});
+              
+              codeblock1.initmod({ext,$,datatype,menu});
+              codeblock2.initmod({ext,$,datatype,menu});
+              codeblock3.initmod({ext,$,datatype,menu});
 
               
-              code.initmod({ext,$,datatype});
-              
-              codeblock.initmod({ext,$});
-
-              
-              await codeblock.init();
+              await codeblock1.init();
+              await codeblock2.init();
+              await codeblock3.init();
 
               
               initdom(document.body);
@@ -49,7 +58,7 @@
         
             </script init>
 
-            <script src='/libs/js/ext-loader/ext-loader.js'></script>
+            <script src='https://libs.ext-code.com/js/core/ext-loader/ext-loader.js'></script>
 
             <script>
 
@@ -61,8 +70,10 @@
               'js/dom/$.js.api',
               'js/core/datatype.js',
               'js/debug/debug.js',
+              
+              'js/dom/menumod/menumod.js',
         );
-        [$,datatype,debug]   = await promise;
+        [$,datatype,debug,menumod]   = await promise;
 
         stack.complete;
         
@@ -80,19 +91,56 @@
       
             <h3>code-block test</h3>
             
-            <code-block api>
-        
+            
+            <div>
+                  simple
+            </div>
+            
+            <code-block id=c1 api>
+                  <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
         let a=42;
         
             </code-block>
-      
+
+
+            <div>
+                  console
+            </div>
+            
+            <code-block id=c2 snippet-console api>
+                  <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+        let a=42;
+        console.log(a);
+        
+            </code-block>
+
+
+            <div>
+                  html
+            </div>
+
+            <code-block id=c3 snippet-html api>
+                  <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                  
+                  <div>
+                        hello
+                  </div>
+                  
+            </code-block>
+            
       </body>
       
       <script>
 
-      
-            var codeblock;
 
+
+            var menu;
+            
+            
+            var codeblock1;
+            var codeblock2;
+            var codeblock3;
+            
 
   //:
   
@@ -101,7 +149,14 @@
             
                   root                  = rootnode;
                   
-                  codeblock.initdom(root);
+                  var c1    = $('#c1');
+                  codeblock1.initdom(c1);
+
+                  var c2    = $('#c2');
+                  codeblock2.initdom(c2);
+                  
+                  var c3    = $('#c3');
+                  codeblock3.initdom(c3);
                   
                   
             }//initdom
