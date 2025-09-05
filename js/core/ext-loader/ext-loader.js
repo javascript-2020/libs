@@ -92,10 +92,11 @@ eval(require('fs').readFileSync(require('base').root+'projects/ext-code/loader.j
 
 //var loader    =
 
+var ext;
 
 (()=>{
 
-  var ext                   = {};
+  ext                       = {};
   ext[Symbol.toStringTag]   = 'ext-code';
                                                                                 //console.clear();
                                                                                 console.log('ext-code.loader-v1.1');
