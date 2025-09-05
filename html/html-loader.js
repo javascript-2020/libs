@@ -178,6 +178,16 @@
         root.__component    = node;
         root.__root         = node;
         
+        for(var attr of root.attributes){
+          
+              if(attr.value){
+                    node.setAttribute(attr.name,attr.value);
+              }else{
+                    ndoe.toggleAttribute(attr.name,true);
+              }
+              
+        }//for
+        
         node.setAttribute('data-url',url);
         
         slots.forEach(slot=>{
