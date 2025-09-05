@@ -79,7 +79,7 @@ mod['code-block']   = function(){
         obj.init    = async function(){
         
               var list      = libs();
-              var promise   = Promise.All(list);
+              var promise   = Promise.all(list);
               return promise;
               
         }//init
