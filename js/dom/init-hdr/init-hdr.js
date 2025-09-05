@@ -38,7 +38,11 @@
                     return;
               }
               
-              stack.forEach(fn=>fn());
+              stack.ct        = 0;
+              stack.total     = 0;
+              var list        = [...stack];
+              stack.length    = 0;
+              list.forEach(fn=>fn());
               
         }});
 
