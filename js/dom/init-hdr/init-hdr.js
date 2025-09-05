@@ -8,7 +8,7 @@
         var stack         = [];
         stack.name        = '';
         stack.ct          = 0;
-        stack.total       = 1;
+        stack.total       = 0;
         stack.df          = false;
 
         
