@@ -91,12 +91,14 @@ mod['code-block']   = function(){
               var list    = [];
               
               if(!code){
-                    promise   = ext.load.libs('js/dom/code/code.js').then(v=>code=v);
+                    promise   = ext.load.libs('js/dom/code/code.js')
+                    promise.then(v=>code=v);
                     list.push(promise);
               }
               
               if(!ace){
-                    promise   = $.editor.ace().then(v=>ace=v);
+                    promise   = $.editor.ace()
+                    promise.then(v=>ace=v);
                     list.push(promise);
               }
               
