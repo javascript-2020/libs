@@ -34,8 +34,11 @@
                                                                                 if(stack.df){
                                                                                       console.log('complete',stack.ct,stack.total);
                                                                                 }
-              if(stack.ct>=stack.total){
+              if(stack.ct<stack.total){
+                    return;
               }
+              
+              stack.forEach(fn=>fn());
               
         }});
 
