@@ -336,15 +336,23 @@
               }//catch
               
               if(err){
+                                                                                debug('error',err);
                     return {error:err};
               }
 
               if(!res.ok){
                     var error   = await res.text();
+                                                                                debug('http error',error);                    
+                    return {error};
+              }
+                                                                                debug('ok');              
+              var json    = await res.json();
+              
+              if(datatype(json)=='array'){
+                    var error   = 'notfound';
                     return {error};
               }
               
-              var json    = await res.json();
               var blob    = await b64_blob(json.content);
               
               return {ok:blob,blob};
