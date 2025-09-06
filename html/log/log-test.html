@@ -38,11 +38,11 @@
 
               ({ext}    = await import('https://libs.ext-code.com/js/core/ext-loader/ext-loader.m.js'));
         
-              var promise   = ext.load.libs(
+              var result   = await ext.load.libs(
                     'js/dom/$.js',
                     'js/core/datatype.js',
               );
-              [$,datatype]   = await promise;
+              [$,datatype]   = result;
               
         }//libs
 
