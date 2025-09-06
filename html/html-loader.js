@@ -232,14 +232,22 @@
         
 
 
-        function gen(){
-        
-              var n     = Math.random().toPrecision(17);
-              var s     = (n+'').slice(2);
-              s         = s.padStart(17,'0');
-              var id    = 'x'+s;
-              return id;
+        function gen(n=17){
+          
+              var str     = '';
+              var c       = '0123456789';
+              var index   = ()=>Math.floor(Math.random()*10);
               
+              for(var j=0;j<n;j++){
+                
+                    var i   = index();
+                    str    += c[i];
+                    
+              }//for
+              
+              str   = 'x'+str;
+              return str;
+          
         }//gen
         
         
