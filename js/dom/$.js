@@ -332,7 +332,7 @@
                     
                           var chk   = list[i];
                           if(chk.read()){
-                                return chk;
+                                return chk.id;
                           }
                           
                     }//for
