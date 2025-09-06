@@ -209,8 +209,8 @@ mod.localfile   = function(){
                 
                     var blob        = input.files[0];
                     
-                    var filename    = file.name;                    
-                    var path        = 'localfile : '+file.name;
+                    var filename    = blob.name;                    
+                    var path        = 'localfile : '+filename;
                     var title       = path;
 
 /*              
@@ -246,6 +246,7 @@ mod.localfile   = function(){
                     file.title      = path;
                     file.icon       = icon.src;
                 
+                    
                     resolve({file,blob});
                     
               }//onchange
