@@ -109,10 +109,10 @@ mod.localfile   = function(){
 
         click.load   = async function(){
     
-              var {file,txt}    = await loadfile();
+              var {file,blob}   = await loadfile();
               cur               = file.filename;
               
-              obj.load.complete(file,txt);
+              obj.load.complete(file,blob);
   
         }//load
 
