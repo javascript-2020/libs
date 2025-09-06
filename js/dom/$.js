@@ -5,6 +5,8 @@
 (()=>{
 
 
+        $.initmod=function(){}
+        
 
         $.in    = {};
         
