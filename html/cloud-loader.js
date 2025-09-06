@@ -154,7 +154,7 @@
 
         function validate(str){
           
-              if(str.length!=32)return;
+              if(str.length!=31)return;
               if(!str.startsWith('[html-loader=x'))return;
               if(!str.endsWith(']'))return;
               for(var i=14;i<31;i++){
