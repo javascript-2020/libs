@@ -6,8 +6,13 @@
 
 
 
-  
-        //var debug_id='';
+        if(typeof df=='undefined'){
+              window.df   = false;
+        }
+        
+        if(typeof debug_id=='undefined'){
+              window.debug_id   = 'html';
+        }
 
 
 
