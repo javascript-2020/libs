@@ -111,6 +111,7 @@ mod.localfile   = function(){
     
               var {file,txt}    = await loadfile();
               cur               = file.filename;
+              
               obj.load.complete(file,txt);
   
         }//load
@@ -160,13 +161,9 @@ mod.localfile   = function(){
         
         async function load(file){
           
-              var result      = await loadfile();
-              if(result===false){
-                    return;
-              }
-              var txt   = result;
+              var {blob}   = await loadfile();
               
-              obj.load.complete(file,txt);
+              obj.load.complete(file,blob);
               
               return txt;
               
@@ -175,7 +172,7 @@ mod.localfile   = function(){
                 
         obj.save    = function(file,txt){return save(file,txt)}
         
-        async function save(file,txt){
+        async function save(file,txt){debugger;
           
               var filename    = file.filename;
               var result      = await savefile(filename,txt);
@@ -210,8 +207,7 @@ mod.localfile   = function(){
               
               async function onchange(){
                 
-                    var file        = input.files[0];
-                    var txt         = await file.text();
+                    var blob        = input.files[0];
                     
                     var filename    = file.name;                    
                     var path        = 'localfile : '+file.name;
@@ -250,7 +246,7 @@ mod.localfile   = function(){
                     file.title      = path;
                     file.icon       = icon.src;
                 
-                    resolve({file,txt});
+                    resolve({file,blob});
                     
               }//onchange
               
