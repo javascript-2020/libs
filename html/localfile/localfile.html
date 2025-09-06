@@ -161,7 +161,7 @@ mod.localfile   = function(){
         
         async function load(file){
           
-              var {blob}   = await loadfile();
+              var {file,blob}   = await loadfile();
               
               obj.load.complete(file,blob);
               
