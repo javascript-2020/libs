@@ -288,7 +288,7 @@
               var chkbox      = $(node,'[type=checkbox]');
               node.onclick    = click;
               
-              var chk   = {read,set,id:node.id,checked:chkbox.checked};
+              var chk   = {read,set,id:node.id,checked:chkbox.checked,root:node,chkbox};
               return chk;
               
               
@@ -332,7 +332,7 @@
                     
                           var chk   = list[i];
                           if(chk.read()){
-                                return chk.id;
+                                return chk;
                           }
                           
                     }//for
