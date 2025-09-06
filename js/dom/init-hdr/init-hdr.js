@@ -6,10 +6,13 @@
 
               var mod         = {};
               mod.create      = create;
-              mod.stack       = [];
+              
+              var stack       = [];
+              mod.stack       = stack;
               
               var ct          = 0;
               var total       = 0;
+
       
               
               Object.defineProperty(stack,'add',{
