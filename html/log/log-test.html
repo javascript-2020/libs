@@ -1,0 +1,84 @@
+
+      <script src='https://libs.ext-code.com/js/dom/init-hdr/init-hdr.js'></script>
+      
+
+      <script init> 
+                                                                                console.clear();
+        var ext;        
+        var $;
+        var datatype;
+        
+        var log;
+
+
+  //:        
+
+
+        stack.add     = init;
+
+        async function init(){
+        
+              await libs();
+              
+              log   = mod.log();
+              
+              $.initmod({ext,datatype});
+              log.initmod({ext,$});
+              
+              await log.init();
+              
+              initdom(document.body);
+              
+        }//init
+
+        init.stack    = stack;
+        
+        
+        async function libs(){
+
+              ({ext}    = await import('https://libs.ext-code.com/js/core/ext-loader/ext-loader.m.js'));
+        
+              var promise   = ext.load.libs(
+                    'js/dom/$.js',
+                    'js/core/datatype.js',
+              );
+              [$,datatype]   = await promise;
+              
+        }//libs
+
+        
+      </script init>
+      
+      
+      <style>
+
+  [type=button]
+    {padding:5px 10px;font-size:16px;cursor:pointer}
+    
+      </style>
+    
+      <input value='click me' type=button>
+      
+      <log>
+            <script html-loader src='https://libs.ext-code-test.com:8443/html/cloud-loader.js'></script>
+      </log>
+
+
+      <script>
+      
+      
+        function initdom(rootnode){
+      
+              $('[value="click me"]').onclick   = e=>log.green('ok');
+              
+              log.initdom(rootnode);
+              
+        }//initdom
+
+
+        stack.complete;
+        
+      </script>
+      
+      
+
