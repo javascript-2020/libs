@@ -45,6 +45,11 @@
 						  if(i!=-1){
 										nodename		=	url.slice(i+1);
 										nodename    = decodeURI(nodename);
+										if(!validate(nodename)){
+										      res.writeHead(400);
+										      res.end();
+										      return;
+										}
 										                                                            df && console.log('url ?',nodename);
 						  }
 
@@ -147,6 +152,19 @@
         }//error
 
 
+        function validate(str){
+          
+              if(str.length!=17)return;
+              if(str[0]!='x')return;
+              for(var i=1;i<17;i++){
+                
+                    var c   = str[i];
+                    if(c<'0' || c>'9')return;
+                    
+              }//for
+              return true;
+              
+        }//validate
 
 
 
