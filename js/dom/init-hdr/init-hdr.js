@@ -45,6 +45,9 @@
                     list.forEach(fn=>fn());
                     
               }});
+
+              
+              return mod;
       
         }//create
         
