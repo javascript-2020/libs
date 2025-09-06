@@ -7,6 +7,7 @@
               var mod         = {};
               mod.create      = create;
               mod.stack       = [];
+              
               var ct          = 0;
               var total       = 0;
       
