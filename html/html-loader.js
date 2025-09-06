@@ -234,7 +234,7 @@
 
         function gen(){
         
-              var n     = Math.random();
+              var n     = Math.random().toPrecision(17);
               var s     = (n+'').slice(2);
               s         = s.padStart(17,'0');
               var id    = 'x'+s;
