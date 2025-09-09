@@ -37,6 +37,7 @@
         
         
         github.token                = null;
+        github.owner                = null;
         
         
         
