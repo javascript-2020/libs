@@ -225,6 +225,10 @@
                     [api,token,owner,repo,branch,path]    = arguments;
               }
               
+              if(path.startsWith('/')){
+                    path    = path.slice(1);
+              }
+              
               var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
               
               if(api){
@@ -246,7 +250,10 @@
                     [token,owner,repo,branch,path]    = arguments;
               }
               
-              token     = token||github.token||localStorage.getItem('github-token');                    
+              token     = token||github.token;
+              if(!token && typeof localStorage!='undefined'){
+                    token   = localStorage['github-token'];
+              }
               owner     = owner||github.owner;
               branch    = branch||'main';
               
@@ -280,13 +287,18 @@
                     [owner,repo,branch,path]    = arguments;
               }
               
-              token     = token||github.token||localStorage.getItem('github-token');                    
+              token     = token||github.token;
+              if(!token && typeof localStorage!='undefined'){
+                    token   = localStorage['github-token'];
+              }              
               owner     = owner||github.owner;
               branch    = branch||'main';
+              if(path.startsWith('/')){
+                    path    = path.slice(1);
+              }
               
               var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
-                                                                                debug('load.raw',url);
-                                                                                
+                                                                                debug('load.raw',url);                                                                                
               var err;              
               try{
               
@@ -319,7 +331,10 @@
                     [token,owner,repo,branch,path]    = arguments;
               }
               
-              token     = token||github.token||localStorage['github-token'];
+              token     = token||github.token;
+              if(!token && typeof localStorage!='undefined'){
+                    token   = localStorage['github-token'];
+              }
               owner     = owner||github.owner;
               branch    = branch||'main';
               
@@ -376,10 +391,17 @@
                     [token,owner,repo,branch,path,blob]   = arguments;
               }
               
-              token     = token||github.token||localStorage['github-token'];
+              token     = token||github.token;
+              if(!token && typeof localStorage!='undefined'){
+                    token   = localStorage['github-token'];
+              }
               owner     = owner||github.owner;
               branch    = branch||'main';
 
+              if(path.startsWith('/')){
+                    path    = path.slice(1);
+              }
+              
               var b64;
               if(datatype(blob)=='string'){
                     b64       = window.btoa(blob);
@@ -450,9 +472,16 @@
                     [token,owner,repo,branch,path]    = arguments;
               }
                                                                                 debug('backup',path);
-              token     = token||github.token||localStorage['github-token'];
+              token     = token||github.token;
+              if(!token && typeof localStorage!='undefined'){
+                    token   = localStorage['github-token'];
+              }
               owner     = owner||github.owner;
               branch    = branch||'main';
+              
+              if(path.startsWith('/')){
+                    path    = path.slice(1);
+              }
               
               var result    = await load.api(token,owner,repo,branch,path);
               if(result.error){
@@ -548,9 +577,16 @@
                     [token,owner,repo,branch,path,all]    = arguments;
               }
         
-              token     = token||github.token||localStorage['github-token'];
+              token     = token||github.token;
+              if(!token && typeof localStorage!='undefined'){
+                    token   = localStorage['github-token'];
+              }
               owner     = owner||github.owner;
               branch    = branch||'main';
+              
+              if(path.startsWith('/')){
+                    path    = path.slice(1);
+              }
               
               var fn;
               var i   = path.lastIndexOf('/');
@@ -680,9 +716,16 @@
                     [owner,repo,branch,path,update,complete,token,api]    = arguments;
               }
               
-              token     = token||github.token||localStorage['github-token'];
+              token     = token||github.token;
+              if(!token && typeof localStorage!='undefined'){
+                    token   = localStorage['github-token'];
+              }
               owner     = owner||github.owner;
               branch    = branch||'main';
+              
+              if(path.startsWith('/')){
+                    path    = path.slice(1);
+              }
                                                                                 debug('download.dir',owner,repo,branch,path,token,api);              
               var resolve,promise=new Promise(res=>resolve=res);
               
@@ -691,9 +734,6 @@
               
               async function fn(){
               
-                    if(path.startsWith('/')){
-                          path    = path.slice(1);
-                    }
                     if(path.endsWith('/')){
                           path    = path.slice(0,-1);
                     }
@@ -863,11 +903,13 @@
                     [token,owner,repo,branch,path,files_only]   = arguments;
               }
               
-              token     = token||github.token||localStorage['github-token'];
+              token     = token||github.token;
+              if(!token && typeof localStorage!='undefined'){
+                    token   = localStorage['github-token'];
+              }
               owner     = owner||github.owner;
               branch          ||= 'main';
               path            ||= '';
-
               
               if(path.startsWith('/')){
                     path    = path.slice(1);
