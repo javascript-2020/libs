@@ -23,7 +23,11 @@
         
         
   //:
-  
+        
+        
+        obj.url                 = null;
+        obj.auth                = null;
+        
 
   
         obj.file                = {};
@@ -55,6 +59,9 @@
               if(arguments.length!=1){
                     [url,hdrs,path]   = arguments;
               }
+              
+              url     = url||obj.url;
+              hdrs    = hdrs||obj.hdrs||{auth:obj.auth};
               
               var headers   = {mode:'load'};
               Object.assign(headers,hdrs);
@@ -105,6 +112,9 @@
                     [url,hdrs,path,blob]    = arguments;
               }
               
+              url     = url||obj.url;
+              hdrs    = hdrs||obj.hdrs||{auth:obj.auth};
+              
               var headers   = {mode:'save'};
               Object.assign(headers,hdrs);
               var body      = blob;
@@ -147,6 +157,9 @@
                     [url,hdrs,path]   = arguments;
               }
               
+              url     = url||obj.url;
+              hdrs    = hdrs||obj.hdrs||{auth:obj.auth};
+              
               var headers   = {mode:'mkfile'};
               Object.assign(headers,hdrs);
               var full      = url+path;
@@ -184,6 +197,9 @@
                     [url,hdrs,path]   = arguments;
               }
               
+              url     = url||obj.url;
+              hdrs    = hdrs||obj.hdrs||{auth:obj.auth};
+              
               var headers   = {mode:'rmfile'};
               Object.assign(headers,hdrs);
               var full      = url+path;
@@ -219,6 +235,9 @@
               if(arguments.length!=1){
                     [url,hdrs,path,blob]    = arguments;
               }
+              
+              url     = url||obj.url;
+              hdrs    = hdrs||obj.hdrs||{auth:obj.auth};
               
               var headers     = {mode:'upload'};
               Object.assign(headers,hdrs);
@@ -258,6 +277,9 @@
               if(arguments.length!=1){
                     [url,hdrs,path]   = arguments;
               }
+              
+              url     = url||obj.url;
+              hdrs    = hdrs||obj.hdrs||{auth:obj.auth};
               
               var headers     = {mode:'download'};
               Object.assign(headers,hdrs);
@@ -299,6 +321,9 @@
                     [url,hdrs,path]   = arguments;
               }
               
+              url     = url||obj.url;
+              hdrs    = hdrs||obj.hdrs||{auth:obj.auth};
+              
               var headers     = {mode:'rmdir'};
               Object.assign(headers,hdrs);
               var full        = url+path;
@@ -318,9 +343,7 @@
                     var error   = err.toString();
                     return {error};
               }
-              
-              
-              
+                                          
               if(!res.ok){
                     var error   = await res.text();
                     return {error};
@@ -338,6 +361,9 @@
                     [url,hdrs,path]   = arguments;
               }
               
+              url     = url||obj.url;
+              hdrs    = hdrs||obj.hdrs||{auth:obj.auth};
+              
               var headers     = {mode:'mkdir'};
               Object.assign(headers,hdrs);
               var full        = url+path;
@@ -347,18 +373,16 @@
                 
                     var res         = await fetch(full,{headers});
                     
-              }
+              }//try
               catch(err2){
                 
                     err   = err2;
                     
-              }
+              }//catch
               if(err){
                     var error   = err.toString();
                     return {error};
               }
-              
-              
               
               if(!res.ok){
                     var error   = await res.text();
@@ -376,6 +400,9 @@
               if(arguments.length!=1){
                     [url,hdrs,path]   = arguments;
               }
+              
+              url     = url||obj.url;
+              hdrs    = hdrs||obj.hdrs||{auth:obj.auth};
               
               var headers     = {mode:'readdir'};
               Object.assign(headers,hdrs);
@@ -462,6 +489,9 @@
                     [url,hdrs,path]   = arguments;
               }
               
+              url     = url||obj.url;
+              hdrs    = hdrs||obj.hdrs||{auth:obj.auth};
+              
               var headers     = {mode:'dir-clear'};
               Object.assign(headers,hdrs);
               var full        = url+path;
@@ -503,3 +533,4 @@
   return obj;
   
 })();
+
