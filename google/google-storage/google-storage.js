@@ -27,6 +27,9 @@
 
         var filetype        = 'google-storage';
         
+        
+        obj.bucket          = null;
+        
 
         obj.parse           = parse;
 
@@ -183,11 +186,17 @@ curl -X GET \
                     [token,bucket,path]   = arguments;
               }
               
+              bucket    ||= obj.bucket;
+              
+/*              
               if(arguments.length==2){
                     var i             = bucket.indexOf('/');
                     path              = bucket.slice(i+1);
                     bucket            = bucket.slice(0,i);
-              }
+            }
+*/            
+              
+              
               if(path.startsWith('/')){
                     path              = path.slice(1);
               }
@@ -205,12 +214,12 @@ curl -X GET \
               
                     var res   = await fetch(url,{headers});
                     
-              }
+              }//try
               catch(err2){
               
                     err   = err2;
                     
-              }
+              }//catch
               if(err){
                     var error   = err.toString();
                     return {error};
@@ -243,11 +252,15 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                     [token,bucket,path,blob]    = arguments;
               }
 
+              bucket    ||= obj.bucket;
+              
+/*
               if(arguments.length==3){
                     var i             = bucket.indexOf('/');
                     path              = bucket.slice(i+1);
                     bucket            = bucket.slice(0,i);
               }
+*/              
               if(path.startsWith('/')){
                     path              = path.slice(1);
               }
@@ -370,9 +383,13 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                     
               }//catch
               if(err){
+                    var error   = err.toString();
+                    return {error};
               }
               
               if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
               }
               
               
@@ -386,7 +403,6 @@ curl -X POST --data-binary @OBJECT_LOCATION \
 
 
         parse.item    = function(path,item){
-
 
               var kind            = 'file';
               if(item.name.endsWith('/')){
@@ -437,7 +453,8 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         
         
         async function dirlist({token,bucket,path,params}){
-        
+
+              bucket  ||= obj.bucket;        
               if(path.startsWith('/')){
                     path    = path.slice(1);
               }
@@ -449,6 +466,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               }
               
               var headers   = {authorization:`Bearer ${token}`};
+              
               var err;
               try{
               
@@ -510,6 +528,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         
         async function dirlistfull({token,bucket,path,files_only}){
         
+              bucket  ||= obj.bucket;
               if(path.startsWith('/')){
                     path    = path.slice(1);
               }
@@ -604,11 +623,13 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                     
               }//catch
               if(err){
-                    throw 'fetch error';
+                    var error   = err.toString();
+                    return {error};
               }
               
               if(!res.ok){
-                    throw new Error(`GCS list buckets failed: ${res.status} ${res.statusText}`);
+                    var error   = await res.text();
+                    return {error};
               }
               
               var buckets   = await res.json();
@@ -621,7 +642,9 @@ curl -X POST --data-binary @OBJECT_LOCATION \
   
   
         async function deploy({token,email,bucket,zip,project,service,region}){
-        
+
+              bucket  ||= obj.bucket;
+              
               var timeout   = '900s';
               var config    = {
               
@@ -677,8 +700,26 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var method    = 'post';
               var body      = JSON.stringify(config);
       
+              var err;
+              try{
+                
+                    var res       = await fetch(url,{method,headers,body});
+                    
+              }//try
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                    return {error};
+              }
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
+              }
               
-              var res       = await fetch(url,{method,headers,body});
               var result    = await res.json();
         
               var build     = result.metadata.build.id;
@@ -691,9 +732,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               async function monitor(callback){
               
                     var url       = `https://cloudbuild.googleapis.com/v1/projects/${project}/builds/${build}`;
-                    var headers   = {
-                          authorization   : `Bearer ${token}`
-                    };
+                    var headers   = {authorization:`Bearer ${token}`};
                     
                     var done    = false;
                     var ct      = 0;
@@ -707,7 +746,26 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                 return;
                           }
                           
-                          var res       = await fetch(url,{headers});
+                          var err;
+                          try{
+                            
+                                var res       = await fetch(url,{headers});
+                                
+                          }//try
+                          catch(err2){
+                            
+                                err   = err2;
+                                
+                          }//catch
+                          if(err){
+                                var error   = err.toString();
+                                return {error};
+                          }
+                          if(!res.ok){
+                                var error   = await res.text();
+                                return {error};
+                          }
+                                
                           var json      = await res.json();
                                                                                 console.log(json);
                                                                                 console.log(ct,json.status);
@@ -749,37 +807,47 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                           done    = true;
                     }
                   
-                    try{
+                    var method    = 'post';
+                    var headers   = {
+                          authorization     : `Bearer ${token}`,
+                          'content-type'    : 'application/json'
+                    };
+                    var body    = JSON.stringify({
+                          resourceNames   : [`projects/${project}`],
+                          filter          : `resource.type="cloud_run_revision" AND resource.labels.service_name="${service}"`,
+                          pageSize        : 50,
+                          pageToken       : page
+                    });
+                    var url     = 'https://logging.googleapis.com/v2/entries:list';
                     
-                          var method    = 'post';
-                          var headers   = {
-                                authorization     : `Bearer ${token}`,
-                                'content-type'    : 'application/json'
-                          };
-                          var body    = JSON.stringify({
-                                resourceNames   : [`projects/${project}`],
-                                filter          : `resource.type="cloud_run_revision" AND resource.labels.service_name="${service}"`,
-                                pageSize        : 50,
-                                pageToken       : page
-                          });
-                          var url     = 'https://logging.googleapis.com/v2/entries:list';
+                    var err;
+                    try{
+                      
                           var res     = await fetch(url,{method,headers,body});
-                          var data    = await res.json();
-                          
-                          console.log(data.entries);
-                          
-                          page    = data.nextPageToken;
-                          if(!page){
-                                done    = true;
-                          }
                           
                     }//try
-                    catch(err){
-                    
-                          done    = true;
+                    catch(err2){
+                      
+                          err   = err2;
                           
                     }//catch
+                    if(err){
+                          var error   = err.toString();
+                          return {error};
+                    }
                     
+                    if(!res.ok){
+                          var error   = await res.text();
+                          return {error};
+                    }
+                    
+                    var data    = await res.json();
+                                                                                console.log(data.entries);
+                    page    = data.nextPageToken;
+                    if(!page){
+                          done    = true;
+                    }
+                                              
               }//while
         
         }//logs
@@ -1036,8 +1104,7 @@ function tokenmod(file,scopes,{fsp,crypto,platform}){
   
         async function gettoken(){
             
-              var now   = Math.floor(Date.now()/1000);
-              
+              var now   = Math.floor(Date.now()/1000);              
               if(token && now<expire-skew){
                                                                                 //console.log('cache');
                     return token;
