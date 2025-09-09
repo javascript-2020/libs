@@ -26,6 +26,7 @@
         
         
         obj.url                 = null;
+        obj.hdrs                = null;
         obj.auth                = null;
         
 
