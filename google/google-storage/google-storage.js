@@ -84,6 +84,7 @@
 
 //  https://console.cloud.google.com/storage/browser/_details/ext-code-test_cloudbuild/test.txt;tab=live_object?inv=1&invt=Ab2X8w&project=ext-code-test
 //  https://storage.googleapis.com/ext-code-test_cloudbuild/test.txt
+//  https://console.cloud.google.com/storage/browser/_details/ext-code-test_cloudbuild/ext-code-test/download.js?pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&project=ext-code-test
 
         
         function parse(url){
@@ -108,7 +109,11 @@
               var bucket    = parse.slash(url,6);
               var i1        = parse.slash.index(url,7);
               var i2        = url.indexOf(';');
+              if(i2==-1){
+                    i2    = url.indexOf('?');
+              }
               var path      = url.slice(i1,i2);
+                  
               return {bucket,path};
               
         }//console
