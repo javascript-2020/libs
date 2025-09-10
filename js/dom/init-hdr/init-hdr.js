@@ -151,8 +151,8 @@
         
                     root.parentNode.replaceChild(node,root);
                     
-                    var list              = $('script',node,true);
-                    [...list].forEach(script=>{
+                    var list              = node.querySelectorAll('script');
+                    list.forEach(script=>{
                     
                           var nscript                 = document.createElement('script');
                           if(script.src){
