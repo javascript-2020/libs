@@ -91,6 +91,9 @@
                     }//while
                     
                     await Promise.all(nodes);
+                    
+                    mod.stack.complete;
+                    
                     return nodes;
                     
               }//build
