@@ -98,9 +98,7 @@
         
         create.script   = function(onload){
         
-              var script      = document.createElement('script');
-              var n           = String(Math.random()).slice(2);
-              var id          = 'x'+n;
+              var id          = gen();
               script.setAttribute('html-loader',id);
               var src         = 'https://html-loader-1024713184986.us-central1.run.app/'
               src            += `?[html-loader=${id}]`;
@@ -110,6 +108,25 @@
               return script;
 
         }//script
+        
+        
+        function gen(n=17){
+          
+              var str     = '';
+              var c       = '0123456789';
+              var index   = ()=>Math.floor(Math.random()*10);
+              
+              for(var j=0;j<n;j++){
+                
+                    var i   = index();
+                    str    += c[i];
+                    
+              }//for
+              
+              str   = 'x'+str;
+              return str;
+          
+        }//gen
         
         
   //:
