@@ -92,7 +92,7 @@
                     
                     await Promise.all(nodes);
                     
-                    mod.stack.complete;
+                    mod2.stack.complete;
                     
                     return nodes;
                     
