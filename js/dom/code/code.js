@@ -99,6 +99,7 @@
         create.script   = function(onload){
         
               var id          = gen();
+              var script      = document.createElement('script');
               script.setAttribute('html-loader',id);
               var src         = 'https://html-loader-1024713184986.us-central1.run.app/'
               src            += `?[html-loader=${id}]`;
