@@ -111,7 +111,7 @@
                                                                                 mod.df && console.log(root,nn);
                     switch(type){
                       
-                      case 'libs'   : ({html}   = await loader.libs(nn));       break;
+                      case 'libs'   : ({html}   = await loader.libs({nn}));       break;
                       
                     }//switch
 
@@ -164,7 +164,9 @@
               loader.libs   = async function({nn}){
                 
                     var url             = `https://libs.ext-code.com/html/${nn}/${nn}.html`;
-                    var {html,error}    = await loader.fetch(url);                
+                    var {html,error}    = await loader.fetch(url);    
+                    return {html,error};
+                    
               }//libs
               
               
