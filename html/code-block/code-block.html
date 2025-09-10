@@ -92,7 +92,7 @@ mod['code-block']   = function(){
               var list    = [];
               
               if(!code){
-                    promise   = ext.load.libs('js/dom/code/code.js')
+                    promise   = ext.load.libs('js/dom/code/code.js.api');
                     promise.then(v=>{
                     
                           [code]    = v;
