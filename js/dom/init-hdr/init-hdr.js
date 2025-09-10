@@ -144,6 +144,32 @@
                     });
         
                     root.parentNode.replaceChild(node,root);
+                    
+                    build({root:node,mod:mod2});
+
+                    var list              = $('script',node,true);
+                    [...list].forEach(script=>{
+                    
+                          var nscript                 = document.createElement('script');
+                          if(script.src){
+                                                                                mod.df && console.log('script.src',script.src);
+                                var src   = script.src;
+                                if(script.hasAttribute('html-loader')){
+                                      var id    = gen();
+                                      nscript.setAttribute('html-loader',id);
+                                      src  += `?[html-loader=${id}]`;
+                                }
+                                nscript.src           = src;
+                                nscript.onload        = ()=>mod.stack.complete;
+                                mod.stack.add;
+                          }else{
+                                                                                mod.df && console.log('script.id',script.id);
+                                                                                //debugger;
+                                nscript.textContent   = script.textContent;
+                          }
+                          script.parentNode.replaceChild(nscript,script);
+                          
+                    });
 
                     return {node};
                     
