@@ -85,8 +85,14 @@
                                                                                 
                           if(node.hasAttribute){
                                 if(node.hasAttribute('html-loader-2')){
-                                      let index     = nodes.length;
-                                      var promise   = loader({root:node,mod:mod2}).then(({node:custom})=>nodes.splice(index,1,{root:node,node:custom}));
+                                      let index       = nodes.length;
+                                      let complete    = ({node:custom})=>{
+                                        
+                                                              nodes.splice(index,1,{node,custom});
+                                                              build({node:custom,mod:mod2});
+                                                              
+                                                        }//complete
+                                      var promise     = loader({root:node,mod:mod2}).then(complete);
                                       nodes.push(promise);
                                 }
                           }
@@ -145,8 +151,6 @@
         
                     root.parentNode.replaceChild(node,root);
                     
-                    build({root:node,mod:mod2});
-
                     var list              = $('script',node,true);
                     [...list].forEach(script=>{
                     
