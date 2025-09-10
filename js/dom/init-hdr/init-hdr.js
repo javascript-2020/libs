@@ -5,6 +5,7 @@
         function create(name){
 
               var mod         = {};
+              mod.df          = false;
               mod.create      = create;
               mod.build       = build;
               
@@ -20,7 +21,7 @@
                     get:()=>{
                 
                           total++;
-                                                                                      if(mod.stack.df){
+                                                                                      if(mod.df){
                                                                                             console.log('add',ct,total);
                                                                                       }
                     },//get
@@ -35,7 +36,7 @@
               Object.defineProperty(stack,'complete',{get:()=>{
                 
                     ct++;
-                                                                                      if(mod.stack.df){
+                                                                                      if(mod.df){
                                                                                             console.log('complete',ct,total);
                                                                                       }
                     if(ct!=total){
@@ -81,8 +82,7 @@
                                 list.push(child);
                                 
                           });
-                          
-                                                                                if(!node.hasAttribute)debugger;
+                                                                                
                           if(node.hasAttribute){
                                 if(node.hasAttribute('html-loader-2')){
                                       let index     = nodes.length;
@@ -108,7 +108,7 @@
                     var type    = loader.rd(root,'type','libs');
                     var slots   = [...root.childNodes];
                     
-                                                                                df && console.log(root,nn);
+                                                                                mod.df && console.log(root,nn);
                     switch(type){
                       
                       case 'libs'   : ({html}   = await loader.libs(nn));       break;
