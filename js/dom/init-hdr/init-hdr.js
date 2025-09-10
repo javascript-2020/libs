@@ -118,7 +118,7 @@
                     html            = html.trim();
                     
                     var div         = document.createElement('div');
-                    div.setHTMLUnsafe(txt);
+                    div.setHTMLUnsafe(html);
                     var node        = div.firstElementChild;
                                                                                 if(!node)debugger;
                     node.__html     = html;
