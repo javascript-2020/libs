@@ -85,6 +85,7 @@
                                                                                 
                           if(node.hasAttribute){
                                 if(node.hasAttribute('html-loader-2')){
+                                      node.removeAttribute('html-loader-2');
                                       let index       = nodes.length;
                                       let complete    = ({node:custom})=>{
                                         
