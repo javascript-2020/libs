@@ -82,6 +82,7 @@
                                 
                           });
                           
+                                                                                if(!node.hasAttribute)debugger;
                           if(node.hasAttribute('html-loader-2')){
                                 let index     = nodes.length;
                                 var promise   = loader({root:node,mod:mod2}).then(({node:custom})=>nodes.splice(index,1,{root:node,node:custom}));
