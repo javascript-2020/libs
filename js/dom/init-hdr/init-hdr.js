@@ -117,14 +117,15 @@
               
               async function loader({root,mod}){
 
-                    var nn      = root.nodeName.toLowerCase();
-                    var type    = loader.rd(root,'type','libs');
-                    var slots   = [...root.childNodes];
+                    var nn        = root.nodeName.toLowerCase();
+                    var type      = loader.rd(root,'type','libs');
+                    var version   = loader.rd(root,'v');
+                    var slots     = [...root.childNodes];
                     
                                                                                 mod.df && console.log(root,nn);
                     switch(type){
                       
-                      case 'libs'   : ({html}   = await loader.libs({nn}));       break;
+                      case 'libs'   : ({html}   = await loader.libs({nn,version}));       break;
                       
                     }//switch
 
@@ -200,9 +201,14 @@
               }//rd
 
               
-              loader.libs   = async function({nn}){
+              loader.libs   = async function({nn,version}){
                 
-                    var url             = `https://libs.ext-code.com/html/${nn}/${nn}.html`;
+                    var url;
+                    if(!version){
+                          url           = `https://libs.ext-code.com/html/${nn}/${nn}.html`;
+                    }else{
+                          url           = `https://libs.ext-code.com/html/${nn}/v${version}/${nn}-v${version}.html`;
+                    }
                     var {html,error}    = await loader.fetch(url);    
                     return {html,error};
                     
