@@ -26,7 +26,9 @@
                                                                                       }
                     },//get
                     set:v=>{
-              
+                                                                                      if(mod.df){
+                                                                                            console.log('add',ct,total);
+                                                                                      }
                           total++;
                           stack.push(v);
                           
