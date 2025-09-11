@@ -23,6 +23,7 @@
                           total++;
                                                                                       if(mod.df){
                                                                                             console.log('add',ct,total);
+                                                                                            //console.trace();
                                                                                       }
                     },//get
                     set:v=>{
@@ -31,6 +32,7 @@
                           stack.push(v);
                                                                                       if(mod.df){
                                                                                             console.log('add',ct,total);
+                                                                                            //console.trace();
                                                                                       }
                     }//set
               });
@@ -40,6 +42,7 @@
                     ct++;
                                                                                       if(mod.df){
                                                                                             console.log('complete',ct,total);
+                                                                                            console.trace();
                                                                                       }
                     if(ct!=total){
                           return;
