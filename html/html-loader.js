@@ -162,7 +162,7 @@
                                                                                 //console.log(txt);
 
         var loader_script   = root.querySelector('script');
-        slots               = [...root.childNodes];
+        var slots           = [...root.childNodes];
         var i               = slots.indexOf(loader_script);
         slots.splice(i,1);
         
