@@ -95,6 +95,7 @@
                                       let complete    = ({node:custom})=>{
                                         
                                                               nodes.splice(index,1,{node,custom});
+                                                              mod2.stack.add;
                                                               build({node:custom,mod:mod2});
                                                               
                                                         }//complete
