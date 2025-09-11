@@ -26,12 +26,12 @@
                                                                                       }
                     },//get
                     set:v=>{
+                      
+                          total++;
+                          stack.push(v);
                                                                                       if(mod.df){
                                                                                             console.log('add',ct,total);
                                                                                       }
-                          total++;
-                          stack.push(v);
-                          
                     }//set
               });
               
