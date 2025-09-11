@@ -162,10 +162,10 @@
                     var list              = node.querySelectorAll('script');
                     list.forEach(script=>{
                     
-                          var nscript                 = document.createElement('script');
                           if(script.src){
                                                                                 mod.df && console.log('script.src',script.src);
-                                var src   = script.src;
+                                var nscript   = document.createElement('script');
+                                var src       = script.src;
                                 if(script.hasAttribute('html-loader')){
                                       var id    = gen();
                                       nscript.setAttribute('html-loader',id);
@@ -174,14 +174,13 @@
                                 nscript.src           = src;
                                 nscript.onload        = ()=>mod.stack.complete;
                                 mod.stack.add;
+                                script.parentNode.replaceChild(nscript,script);
                           }else{
                                                                                 mod.df && console.log('script.id',script.id);
                                                                                 //debugger;
                                 var js    = script.textContent;
                                 eval(js);
-                                //nscript.textContent   = script.textContent;
                           }
-                          script.parentNode.replaceChild(nscript,script);
                           
                     });
 
