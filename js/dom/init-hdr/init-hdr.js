@@ -170,7 +170,9 @@
                           }else{
                                                                                 mod.df && console.log('script.id',script.id);
                                                                                 //debugger;
-                                nscript.textContent   = script.textContent;
+                                var js    = script.textContent;
+                                eval(js);
+                                //nscript.textContent   = script.textContent;
                           }
                           script.parentNode.replaceChild(nscript,script);
                           
