@@ -1022,7 +1022,7 @@
   //:
   
   
-      function repolist({owner}){
+      async function repolist({owner}){
         
             var user                    = 'javascript-2020'
             var url                     = `https://api.github.com/users/${user}/repos`;
