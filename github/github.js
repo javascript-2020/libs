@@ -1022,40 +1022,48 @@
   //:
   
   
-      async function repolist({owner}){
-        
-            var user                    = 'javascript-2020'
-            var url                     = `https://api.github.com/users/${user}/repos`;
-            
-            var headers                 = {};
-            headers.authorization       = `bearer ${token}`;
-            headers.accept              = '';
-    
-            var err;
-            try{
+        async function repolist({owner,token}){
+          
+              token     = token||github.token;
+              if(!token && typeof localStorage!='undefined'){
+                    token   = localStorage['github-token'];
+              }
+          
+              var user                    = 'javascript-2020'
+              var url                     = `https://api.github.com/users/${user}/repos`;
               
-                  var res                     = await fetch(url,{headers});
-                  
-            }//try
-            catch(err2){
+              var headers                 = {};
+              if(token){
+                    headers.authorization   = `bearer ${token}`;
+              }
+              headers.accept              = '';
+      
+              var err;
+              try{
+                
+                    var res   = await fetch(url,{headers});
+                    
+              }//try
+              catch(err2){
+                
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                    return {error};
+              }
               
-                  err   = err2;
-                  
-            }//catch
-            if(err){
-                  var error   = err.toString();
-                  return {error};
-            }
-            if(!res.ok){
-                  var error   = await res.text();
-                  return {error};
-            }
-            
-            var json    = await res.json();
-            var list    = json.map(item=>item.name);
-            return {list};
-            
-      }//repolist
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
+              }
+              
+              var json    = await res.json();
+              var list    = json.map(item=>item.name);
+              return {list};
+              
+        }//repolist
       
       
   //:
