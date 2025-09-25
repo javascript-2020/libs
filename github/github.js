@@ -65,6 +65,9 @@
         github.user                 = {};
         github.user.repolist        = repolist;
 
+
+        github.repo                 = {};
+        github.repo.default         = repodefault;
         
 
 
@@ -913,7 +916,7 @@
               if(!token && typeof localStorage!='undefined'){
                     token   = localStorage['github-token'];
               }
-              owner     = owner||github.owner;
+              owner             = owner||github.owner;
               branch          ||= 'main';
               path            ||= '';
               
@@ -1024,20 +1027,102 @@
   
         async function repolist({owner,token}){
           
+              owner             = get.owner(owner);
+              token             = get.token(token);
+
+              var headers       = get.headers({token});
+              
+              var url           = `https://api.github.com/users/${owner}/repos`;
+              
+              var {res,error}   = await gfetch(url,{headers});
+              if(error){
+                    return {error};
+              }
+              
+              var json          = await res.json();
+              var list          = json.map(item=>item.name);
+              return {list};
+              
+        }//repolist
+      
+
+  //:
+  
+  
+        async function repodefault({owner,repo,token}){
+          
+              owner               = get.owner(owner);
+              token               = get.token(token);
+              var headers         = get.headers({token});
+              var url             = `https://api.github.com/repos/${owner}/${repo}`;
+              
+              var {res,error}     = await gfetch(url,{headers});
+              if(error){
+                    return {error};
+              }
+              
+              var branch   = await res.text();
+              return {branch};
+              
+        }//repodefault
+        
+        
+        async function repotree({owner,repo,branch,token}){
+
+              owner             = get.owner(owner);
+              token             = get.token(token);
+              headers           = get.headers({token});
+              
+              var url           = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
+              
+              var {res,error}   = await gfetch(url,{headers});
+              if(error){
+                    return {error};
+              }
+              
+              var json    = await res.json();
+              return {json};
+              
+        }//repotree
+        
+        
+  //:
+  
+  
+        get.owner   = function(owner){
+
+              owner   ||= github.owner;
+              return owner;
+          
+        }//owner
+        
+        
+        get.headers   = function({token,accept}){
+          
+              var headers   = {};
+              if(token){
+                    headers.authorization   = `bearer ${token}`;
+              }
+              if(accept){
+                    headers.accept    = '';
+              }
+              return headers;
+          
+        }//headers
+  
+        get.token   = function(token){
+          
               token     = token||github.token;
               if(!token && typeof localStorage!='undefined'){
                     token   = localStorage['github-token'];
               }
-          
-              var user                    = 'javascript-2020'
-              var url                     = `https://api.github.com/users/${user}/repos`;
+              return token;
               
-              var headers                 = {};
-              if(token){
-                    headers.authorization   = `bearer ${token}`;
-              }
-              headers.accept              = '';
-      
+        }//token
+        
+        
+        async function gfetch({url,headers}){
+          
               var err;
               try{
                 
@@ -1059,46 +1144,41 @@
                     return {error};
               }
               
-              var json    = await res.json();
-              var list    = json.map(item=>item.name);
-              return {list};
+              return {res};
               
-        }//repolist
-      
-      
-  //:
+        }//gfetch
+        
   
-
-      function datatype(v){
-      
-            var str   = Object.prototype.toString.call(v);
-            str       = str.slice(8,-1);
-            str       = str.toLowerCase();
-            return str;
-            
-      }//datatype
+        function datatype(v){
+        
+              var str   = Object.prototype.toString.call(v);
+              str       = str.slice(8,-1);
+              str       = str.toLowerCase();
+              return str;
+              
+        }//datatype
 
         
-      async function blob_b64(blob){
-      
-            var buf     = await blob.arrayBuffer();
-            var bytes   = new Uint8Array(buf);
-            var bin     = bytes.reduce((acc,byte)=>acc+=String.fromCharCode(byte),'');
-            var b64     = btoa(bin);
-            return b64;
-      
-      }//blob_b64
-
-
-      function b64_blob(b64,type='text/plain'){
-      
-            var bin     = atob(b64);
-            var bytes   = [...bin].map(c=>c.charCodeAt(0));
-            var buf     = new Uint8Array(bytes);
-            var blob    = new Blob([buf],{type});
-            return blob;
-            
-      }//b64_blob
+        async function blob_b64(blob){
+        
+              var buf     = await blob.arrayBuffer();
+              var bytes   = new Uint8Array(buf);
+              var bin     = bytes.reduce((acc,byte)=>acc+=String.fromCharCode(byte),'');
+              var b64     = btoa(bin);
+              return b64;
+        
+        }//blob_b64
+  
+  
+        function b64_blob(b64,type='text/plain'){
+        
+              var bin     = atob(b64);
+              var bytes   = [...bin].map(c=>c.charCodeAt(0));
+              var buf     = new Uint8Array(bytes);
+              var blob    = new Blob([buf],{type});
+              return blob;
+              
+        }//b64_blob
         
 
   //:  
