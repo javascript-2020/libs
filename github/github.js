@@ -68,6 +68,7 @@
 
         github.repo                 = {};
         github.repo.default         = repodefault;
+        github.repo.tree            = repotree;
         
 
 
