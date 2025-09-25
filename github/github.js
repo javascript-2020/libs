@@ -42,6 +42,8 @@
         
         
         github.parse                = parse;  
+        github.build                = build;
+
         
         github.file                 = {};
         github.file.load            = load;
@@ -58,8 +60,12 @@
         github.dir.download         = dirdownload;
         github.dir.list             = dirlist;
         github.dir.list.full        = dirlistfull;
+
+
+        github.user                 = {};
+        github.user.repolist        = repolist;
+
         
-        github.build                = build;
 
 
 
@@ -1011,7 +1017,47 @@
               
         }//dirlistfull
         
+
+
+  //:
+  
+  
+      function repolist({owner}){
         
+            var user                    = 'javascript-2020'
+            var url                     = `https://api.github.com/users/${user}/repos`;
+            
+            var headers                 = {};
+            headers.authorization       = `bearer ${token}`;
+            headers.accept              = '';
+    
+            var err;
+            try{
+              
+                  var res                     = await fetch(url,{headers});
+                  
+            }//try
+            catch(err2){
+              
+                  err   = err2;
+                  
+            }//catch
+            if(err){
+                  var error   = err.toString();
+                  return {error};
+            }
+            if(!res.ok){
+                  var error   = await res.text();
+                  return {error};
+            }
+            
+            var json    = await res.json();
+            var list    = json.map(item=>item.name);
+            return {list};
+            
+      }//repolist
+      
+      
   //:
   
 
