@@ -1061,7 +1061,7 @@
                     return {error};
               }
               
-              var branch   = await res.text();
+              var branch          = await res.text();
               return {branch};
               
         }//repodefault
@@ -1071,7 +1071,7 @@
 
               owner             = get.owner(owner);
               token             = get.token(token);
-              headers           = get.headers({token});
+              var headers       = get.headers({token});
               
               var url           = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
               
@@ -1080,8 +1080,8 @@
                     return {error};
               }
               
-              var json    = await res.json();
-              return {json};
+              var tree          = await res.json();
+              return {tree};
               
         }//repotree
         
@@ -1104,11 +1104,12 @@
                     headers.authorization   = `bearer ${token}`;
               }
               if(accept){
-                    headers.accept    = '';
+                    headers.accept    = accept;
               }
               return headers;
           
         }//headers
+  
   
         get.token   = function(token){
           
