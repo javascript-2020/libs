@@ -724,8 +724,8 @@
         
         $.mousetext   = function(e,text){
         
-              var left            = e.pageX+'px';
-              var top             = e.pageY+'px';
+              var left            = e.screenX+'px';
+              var top             = e.screenY+'px';
               var style           = {
                                           position        : 'absolute',
                                           left            : left,
