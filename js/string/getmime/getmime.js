@@ -10,7 +10,6 @@
 
 */
 
-        module.exports    = getmime;
 
 
 function getmime(file){
