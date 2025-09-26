@@ -1082,7 +1082,8 @@
                     return {error};
               }
               
-              var tree          = await res.json();
+              var json          = await res.json();
+              var tree          = json.tree;
               return {tree};
               
         }//repotree
