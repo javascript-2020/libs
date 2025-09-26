@@ -1062,7 +1062,8 @@
                     return {error};
               }
               
-              var branch          = await res.text();
+              var json            = await res.json();
+              var branch          = json.default_branch;
               return {branch};
               
         }//repodefault
