@@ -862,6 +862,40 @@
         }//closest
         
         
+        $.icon.copy    = function(icon){
+          
+              icon.onclick    = click;
+              var par         = icon.parentNode;
+              var input       = par.querySelector('input:not([type])');
+
+
+              async function click(){
+                
+                    var txt   = input.value;
+                    await navigator.clipboard.writeText(txt);
+                    
+              }//click
+              
+        }//copy
+        
+        
+        $.icon.paste    = function(icon){
+          
+              icon.onclick    = click;
+              var par         = icon.parentNode;
+              var input       = par.querySelector('input:not([type])');
+              
+              
+              async function click(){
+                
+                    var txt       = await navigator.clipboard.readText();
+                    ipnut.value   = txt;
+                    
+              }//click
+              
+        }//paste
+        
+        
         $.stylesheet        = {};
         $.stylesheet.find   = {};
         
