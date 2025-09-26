@@ -43,6 +43,7 @@
         
         github.parse                = parse;  
         github.build                = build;
+        github.build.website        = build_website;
 
         
         github.file                 = {};
@@ -226,6 +227,7 @@
         }//raw
         
         
+        
   //:        
 
 
@@ -249,6 +251,28 @@
               return url;
 
         }//build
+        
+        
+        
+        function build_website({owner,repo,branch,path,type}){
+          
+              type      = type||'blob';
+              
+              var url   = `https://github.com/${owner}/${repo}/${type}/${branch}`;
+              if(path){
+                    url  += `/${path}`;
+              }
+              
+              return url;
+              
+        }//website
+
+        
+        function build_to_raw({}){
+        }//raw
+        
+        function build_to_api({}){
+        }//api
         
         
   //:
