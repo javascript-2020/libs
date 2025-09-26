@@ -864,6 +864,12 @@
         
         $.icon.copy    = function(icon){
           
+              if(typeof icon=='string'){
+                    var css     = icon;
+                    var root    = arguments[1];
+                    icon        = $(root,css);
+              }
+              
               icon.onclick    = click;
               var par         = icon.parentNode;
               var input       = par.querySelector('input:not([type])');
@@ -881,6 +887,12 @@
         
         $.icon.paste    = function(icon){
           
+              if(typeof icon=='string'){
+                    var css     = icon;
+                    var root    = arguments[1];
+                    icon        = $(root,css);
+              }
+              
               icon.onclick    = click;
               var par         = icon.parentNode;
               var input       = par.querySelector('input:not([type])');
