@@ -871,19 +871,27 @@
                     icon        = $(root,css);
               }
               
-              icon.onclick    = click;
               var par         = icon.parentNode;
               var input       = par.querySelector('input:not([type])');
+              
+              $.icon.copy2(icon,input);
 
+        }//copy
+        
+        
+        $.icon.copy2    = function(icon,input){
+          
+              icon.onclick    = click;
 
-              async function click(){
+              async function click(e){
                 
                     var txt   = input.value;
                     await navigator.clipboard.writeText(txt);
+                    $.mousetext(e,'copied');
                     
               }//click
               
-        }//copy
+        }//copy2
         
         
         $.icon.paste    = function(icon){
@@ -894,10 +902,18 @@
                     icon        = $(root,css);
               }
               
-              icon.onclick    = click;
               var par         = icon.parentNode;
               var input       = par.querySelector('input:not([type])');
+
+              $.icon.paste2(icon,input);              
               
+        }//paste
+        
+        
+        $.icon.paste2   = function(icon,input){
+          
+              icon.onclick    = click;
+
               
               async function click(){
                 
@@ -906,7 +922,7 @@
                     
               }//click
               
-        }//paste
+        }//paste2
         
         
         $.stylesheet        = {};
