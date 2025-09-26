@@ -8,7 +8,8 @@
         $.initmod=function(){}
         
 
-        $.in    = {};
+        $.in      = {};
+        $.icon    = {};
         
         
         
