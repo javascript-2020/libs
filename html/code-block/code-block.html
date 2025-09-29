@@ -152,7 +152,7 @@ mod['code-block']   = function(){
   
   
         setup.code    = async function(root,dom,node,mode){
-        
+        var editor,root;
               var src   = dom.getAttribute('src');
               if(src){
                     var {txt,error}     = await load(src);
