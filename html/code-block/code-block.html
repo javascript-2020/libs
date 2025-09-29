@@ -158,8 +158,8 @@ mod['code-block']   = function(){
                     var {txt,error}     = await load(src);
                     node.textContent    = txt;
               }
-              ({editor,root}            = await code.editor.code(node,{mode,menu,ace}));
-              obj.editor=editor;
+              ({promise,root}            = await code.editor.code(node,{mode,menu,ace}));
+              promise.then({editor,root}=>obj.editor=editor);
               
         }//code
 
