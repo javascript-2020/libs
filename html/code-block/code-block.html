@@ -159,7 +159,7 @@ mod['code-block']   = function(){
                     node.textContent    = txt;
               }
               ({promise,root}            = await code.editor.code(node,{mode,menu,ace}));
-              promise.then({editor,root}=>obj.editor=editor);
+              promise.then(({editor,root})=>obj.editor=editor);
               
         }//code
 
