@@ -110,6 +110,7 @@
                         
                               <div id=trim class=menu-opt>trim</div>
                               <div id=wordwrap class=menu-opt>word wrap</div>
+                              <div id=wordwrap class=menu-opt>prettier</div>
                               
                               <div id=sha256-root>
                                     <div id=sha256 class=menu-opt>
@@ -171,6 +172,8 @@ function editor(){
 
         var ext,$,menu,menumod,ace,fullsize,kd2
         ;
+        var prettier
+        ;
         
         obj.initmod   = function(params){
           
@@ -182,6 +185,7 @@ function editor(){
               fullsize    = params.fullsize;
               kd2         = params.kd;
               
+              
         }//initmod
         
 
@@ -190,6 +194,7 @@ function editor(){
         function load(){
           
               var resolve,load    = new Promise(res=>resolve=res);
+
               
               if(ace){
                     resolve();
@@ -200,6 +205,8 @@ function editor(){
               script.src      = 'https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/ace.js';
               script.onload   = onload;
               document.head.append(script);
+              
+              
               
               return load;
               
@@ -553,6 +560,7 @@ function editor(){
   
   
         obj.setValue    = function(txt){return set(txt)}
+        obj.setvalue    = function(txt){return set(txt)}
         obj.set         = function(txt){return set(txt)}
         
         function set(txt){
@@ -563,6 +571,7 @@ function editor(){
         
     
         obj.getValue    = function(){return get()}
+        obj.getvalue    = function(){return get()}
         obj.get         = function(){return get()}
         
         
