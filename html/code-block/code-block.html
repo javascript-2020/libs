@@ -254,6 +254,19 @@ mod['code-block']   = function(){
   //:
   
   
+        obj.focus   = function(){
+        
+              switch(type){
+              
+                case 'code'               : editor.focus();        break;
+                case 'snippet-console'    :
+                case 'snippet-html'       :
+                
+              }//switch
+              
+        }//focus
+        
+        
         obj.getvalue    = function(){
         
               var txt;
