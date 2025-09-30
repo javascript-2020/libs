@@ -59,6 +59,9 @@ mod['code-block']   = function(){
   //:
 
   
+        var type;
+        var editor;
+        
         var snippet_console;
         obj.snippet_console   = null;
 
@@ -152,20 +155,31 @@ mod['code-block']   = function(){
   
   
         setup.code    = async function(root,dom,node,mode){
-        var editor,root,promise;
+        
+              type    = 'code';
+              
+              var root,promise;
+        
               var src   = dom.getAttribute('src');
               if(src){
                     var {txt,error}     = await load(src);
                     node.textContent    = txt;
               }
               ({promise,root}            = await code.editor.code(node,{mode,menu,ace}));
-              promise.then(({editor,root})=>obj.editor=editor);
+              promise.then(({editor:ed2,root:r2})=>{
+              
+                    console.log('code-block.setup.code',root===r2);
+                    editor    = ed2;
+                    
+              });
               
         }//code
 
   
         setup.snippet_console   = async function(root,dom,node){
         
+              type    = 'snippet-console';
+              
               var src   = dom.getAttribute('src');
               if(src){
                     node.setAttribute('src',src);
@@ -190,6 +204,8 @@ mod['code-block']   = function(){
   
         setup.snippet_html    = async function(root,dom,node){
         
+              type    = 'snippet-html';
+              
               var src   = dom.getAttribute('src');
               if(src){
                     node.setAttribute('src',src);
@@ -233,6 +249,26 @@ mod['code-block']   = function(){
               return {txt};
               
         }//load
+        
+        
+  //:
+  
+  
+        obj.getvalue    = function(){
+        
+              var txt;
+              
+              switch(type){
+              
+                case 'code'               : txt   = editor.getValue();        break;
+                case 'snippet-console'    :
+                case 'snippet-html'       :
+                
+              }//switch
+              
+              return txt;
+              
+        }//getvalue
         
         
         
