@@ -6,18 +6,21 @@
       
             <style>
   .hr
-    {border-top:1px solid lightgray;margin:10px}
+    {border-top:1px solid lightgray;margin:10px;margin-top:0}
     
   .menu
     {position:absolute;outline:none;font-family:arial;display:flex;flex-direction:column}
 
 
   .category
+    {}
+  .field
     {display:flex;align-items:center;gap:5px}
+  .value
+    {flex:1}
+    
   label
     {width:70px;text-align:right;margin-right:10px}
-  .field
-    {flex:1}
     
     
   #server-root
@@ -92,27 +95,27 @@
                   
                   <div class=hr></div>
                   
-                  <div id=proxy>
+                  <div id=proxy class=category>
                   
                         <div>
                               proxy
                         </div>
                         
-                        <div id=url-root class=category>
+                        <div id=url-root class=field>
                               <label>
                                     url
                               </label>
                               <img class=copy>
                               <img class=paste>
-                              <input id=url value='https://localhost:3000' class=field spellcheck=false autocomplete=off>
+                              <input id=url value='https://localhost:3000' class=value spellcheck=false autocomplete=off>
                         </div>
                         
-                        <div id=auth-root class=category>
+                        <div id=auth-root class=field>
                               <label>
                                     auth
                               </label>
                               <input id=auth-chk type=checkbox checked>
-                              <input id=auth value='matt-123' class=field spellcheck=false autocomplete=off >
+                              <input id=auth value='matt-123' class=value spellcheck=false autocomplete=off >
                         </div>
                         
                   </div>
