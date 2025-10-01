@@ -16,7 +16,7 @@ ftp-server:d
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var auth          = argv('auth')||'matt-123';
         var dir           = argv('d','dir')||'';
-        var port          = argv('p','port')||3000;
+        var port          = argv('p','port')||3001;
         
         var path          = require('path');
         var fs            = require('fs');
@@ -40,7 +40,7 @@ ftp-server:d
                     password    : 'hello@example.com',
                     secure      : false
               })
-              //console.log(await client.list('Internal shared storage'))
+              console.log(await client.list('Internal shared storage'))
               //await client.upload(fs.createReadStream("README.md"), "README.md")
         }
         catch(err){
