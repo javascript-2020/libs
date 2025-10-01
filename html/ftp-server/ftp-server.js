@@ -43,6 +43,7 @@ ftp-server:d
                     password    : 'hello@example.com',
                     secure      : false
               })
+                                                                                console.log('connected');
               //console.log(await client.list('Internal shared storage'))
               //await client.upload(fs.createReadStream("README.md"), "README.md")
         }
@@ -542,7 +543,7 @@ ftp-server:d
               cors.headers(res);
               res.writeHead(200,{'content-type':mime});
               stream.pipe(res);
-              fs.unlinkSync(tmpfile);
+              stream.on('end',()=>fs.unlinkSync(tmpfile));
               
         }//load
         
