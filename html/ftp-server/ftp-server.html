@@ -116,12 +116,11 @@ mod.ftp_server   = function(){
         Object.defineProperty(obj,'df',{get:()=>df,set:value=>df=value});
                                                                                 debug(obj.version);
 
-        var editor,$,datatype,menu,source
+        var $,datatype,menu,source
         ;
         
         obj.initmod   = function(params){
           
-              editor        = params.editor;
               $             = params.$;
               datatype      = params.datatype;
 
@@ -300,16 +299,16 @@ mod.ftp_server   = function(){
         btn.download    = async function(e){
           
               if(e.shiftKey){
-                    window.open('https://github.com/javascript-2020/code/blob/main/nodejs/server/https-file-server/https-file-server.js','_blank');
+                    window.open('https://github.com/javascript-2020/libs/blob/main/html/ftp-server/ftp-server.js','_blank');
                     return;
               }
           
-              var res       = await fetch('https://raw.githubusercontent.com/javascript-2020/code/main/nodejs/server/https-file-server/https-file-server.js');
+              var res       = await fetch('https://raw.githubusercontent.com/javascript-2020/libs/main/html/ftp-server/ftp-server.js');
               var blob      = await res.blob();
               var url       = window.URL.createObjectURL(blob);
               
               var a         = document.createElement('a');
-              a.download    = 'https-file-server.js';
+              a.download    = 'ftp-server.js';
               a.href        = url;
               a.click();
               
@@ -499,7 +498,7 @@ mod.ftp_server   = function(){
               
               var file            = {};
               
-              file.type           = 'https-file';
+              file.type           = typename;
               file.url            = url;
               file.path           = path;
               file.filename       = filename;
@@ -548,7 +547,7 @@ mod.ftp_server   = function(){
         obj.export    = function(cur){
 
               var file        = {};
-              file.type       = 'https-file';
+              file.type       = typename;
               file.path       = cur.url;
               return file;
               
@@ -579,7 +578,7 @@ mod.ftp_server   = function(){
                     
               }
               if(err){
-                    alert('https-file.loadfile error\n'+err.toString());
+                    alert('ftp-server.loadfile error\n'+err.toString());
                     return;
               }
               
@@ -618,7 +617,7 @@ mod.ftp_server   = function(){
                     
               }
               if(err){
-                    alert('https-file.savefile error\n'+err.toString());
+                    alert('ftp-server.savefile error\n'+err.toString());
                     return;
               }
               
