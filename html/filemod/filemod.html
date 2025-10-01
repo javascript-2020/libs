@@ -92,6 +92,7 @@ function filemod(){
         var httpsfile;
         var dbfiles;
         var googlestorage;
+        var ftpserver;
         
         var cur;
         Object.defineProperty(obj,'cur',{get:()=>cur,set:v=>cur=v});
@@ -118,18 +119,21 @@ function filemod(){
             dbfiles                   = mod['db-files']();
             obj.dbfiles               = dbfiles;
             googlestorage             = mod['google-storage']();
+            ftpserver                 = mod.ftp_server();
 
             localfile.initmod({ext,$,menu,filemod:obj,source,focus,editor});
             github.initmod({ext,$,menu,filemod:obj,source,focus,editor});
             httpsfile.initmod({ext,$,menu,filemod:obj,source,focus,editor});
             dbfiles.initmod({ext,$,datatype,menumod,menu,filemod:obj,source,focus});
             googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source,focus});
+            ftpserver.initmod({ext,$,datatype,menu,source});
             
             localfile.init();
             github.init();
             httpsfile.init();
             await dbfiles.init();
             googlestorage.init();
+            ftpserver.init();
             
             localfile.load.complete           = complete.load;
             localfile.save.complete           = complete.save;
@@ -141,6 +145,8 @@ function filemod(){
             dbfiles.save.complete             = complete.save;
             googlestorage.load.complete       = complete.load;
             googlestorage.save.complete       = complete.save;
+            ftpserver.load.complete           = complete.load;
+            ftpserver.save.complete           = complete.save;
 
 
             
@@ -165,6 +171,7 @@ function filemod(){
               httpsfile.initdom(shadow);
               dbfiles.initdom(shadow);
               googlestorage.initdom(shadow);
+              ftpserver.initdom(shadow);
 
 
               $(shadow,'#root').style.visibility    = '';
@@ -209,6 +216,7 @@ function filemod(){
                 case 'https-file'           : await httpsfile.save(cur,blob);           break;
                 case 'db-files'             : await dbfiles.save(cur,blob);             break;
                 case 'google-storage'       : await googlestorage.save(cur,blob);       break;
+                case 'ftp-server'           : await ftpserver.save(cur,blob);           break;
                 
               }//switch
         
@@ -228,6 +236,7 @@ function filemod(){
                 case 'https-file'       : httpsfile.clear();            break;
                 case 'db-files'         : dbfiles.clear();              break;
                 case 'google-storage'   : googlestorage.clear();        break;
+                case 'ftp-server'       : ftpserver.clear();            break;
                 
               }//switch
               
@@ -303,6 +312,7 @@ function filemod(){
                 case 'https-file'       : file    = httpsfile.export(cur);            break;
                 case 'db-files'         : file    = dbfiles.export(cur);              break;
                 case 'google-storage'   : file    = googlestorage.export(cur);        break;
+                case 'ftp-server'       : file    = ftpserver.export(cur);            break;
                 
               }//switch
               
