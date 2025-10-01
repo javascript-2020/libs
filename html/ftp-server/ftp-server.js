@@ -30,10 +30,11 @@ ftp-server:d
                                                                                   process.exit();
                                                                                 }
         var ftp               = require('basic-ftp');
+        var client;
 
 (async()=>{
-  console.log('connecting');
-        var client            = new ftp.Client()
+                                                                                console.log('connecting');
+        client            = new ftp.Client()
         client.ftp.verbose    = false;
         try{
               await client.access({
@@ -42,7 +43,7 @@ ftp-server:d
                     password    : 'hello@example.com',
                     secure      : false
               })
-              console.log(await client.list('Internal shared storage'))
+              //console.log(await client.list('Internal shared storage'))
               //await client.upload(fs.createReadStream("README.md"), "README.md")
         }
         catch(err){
@@ -65,7 +66,11 @@ ftp-server:d
         }
 
         
-        resolve.df    = false;
+        resolve.df    = true;
+        
+        
+        var remote    = {};
+        remote.dir    = '/Internal shared storage/';
 
         
   //:
@@ -186,31 +191,49 @@ ftp-server:d
         }//req
         
         
-        function resolve(url,docroot=dir){
+        function resolve(url,docroot=remote.dir){
                                                                                 resolve.df && console.log('=== resolve ===');
                                                                                 resolve.df && console.log('url :',url);
                                                                                 resolve.df && console.log('docroot :',docroot);
               url         = decodeURI(url);
                                                                                 resolve.df && console.log('url :',url);
               var p2      = path.resolve(docroot);
+              p2          = normalise(p2);
                                                                                 resolve.df && console.log('p2 :',p2);
               var file    = path.resolve(docroot,url);
+              file        = normalise(file);
                                                                                 resolve.df && console.log('file :',file);
               var s       = file.substring(0,p2.length);
+              s           = normalise(s);
                                                                                 resolve.df && console.log('s :',s);
-              var p1      = path.resolve(s);
+              var p1      = path.resolve(docroot,s);
+              p1          = normalise(p1);
                                                                                 resolve.df && console.log('p1 :',p1);
               if(p1!==p2){
                                                                                 resolve.df && console.log('fail');
                     return false;
               }
               
+              
               if(url.endsWith('/')){
                     file   += '/';
               }
+              
+              file    = normalise(file);
                                                                                 resolve.df && console.log('ok',file);
               return file;
 
+
+              function normalise(path){
+                
+                    if(path[1]==':'){
+                          path    = path.slice(2);
+                    }
+                    path    = path.replaceAll('\\','/');
+                    return path;
+                    
+              }//normalise
+              
         }//resolve
         
         
@@ -275,12 +298,13 @@ ftp-server:d
   //:
   
         
-        function mkfile(req,res,fn){
+        async function mkfile(req,res,fn){
         
               var err;
               try{
-              
-                    var file    = fs.openSync(fn,O_CREAT);
+                    fs.writeFileSync(fn,'');
+                    await client.uploadFrom(fn,fn);
+                    fs.unlink(fn);
                     
               }
               catch(err2){
@@ -295,20 +319,18 @@ ftp-server:d
                     return;
               }
               
-              fs.closeSync(file);
-              
               cors.headers(res);
               res.end('ok');
               
         }//mkdir
         
         
-        function rmfile(req,res,fn){
+        async function rmfile(req,res,fn){
         
               var err;
               try{
               
-                    fs.rmSync(fn,{recursive:true,force:true});
+                    await client.remove(fn);
                     
               }
               catch(err2){
@@ -329,19 +351,19 @@ ftp-server:d
         }//rmfile
         
         
-        function rmdir(req,res,fn){
+        async function rmdir(req,res,fn){
         
               var err;
               try{
               
-                    fs.rmSync(fn,{recursive:true,force:true});
+                    await del(fn);
                     
-              }
+              }//try
               catch(err2){
               
                     err   = err2;
                     
-              }
+              }//catch
               if(err){
                     cors.headers(res);
                     res.writeHead(400);
@@ -352,17 +374,43 @@ ftp-server:d
               cors.headers(res);
               res.end('ok');
               
+              
+              async function del(path){
+                
+                    try {
+                      
+                        var list    = await client.list(path);
+                        for(var item of list){
+                          
+                            var fullPath    = `${path}/${item.name}`;
+                            if(item.isDirectory){
+                                  await del(fullPath);
+                            }else{
+                                  await client.remove(fullPath); // Delete file
+                            }
+                            
+                        }//for
+                        
+                        await client.removeDir(path); // Remove empty directory
+                        console.log(`Deleted: ${path}`);
+                        
+                    } catch (err) {
+                        console.error(`Failed to delete ${path}:`, err);
+                    }
+                    
+              }//del
+              
         }//rmdir
         
         
-        function mkdir(req,res,fn){
+        async function mkdir(req,res,fn){
         
               var err;
               try{
               
-                    fs.mkdirSync(fn,{recursive:true});
+                    await client.ensureDir(fn);
                     
-              }
+              }//try
               catch(err2){
                 
                     err   = err2;
@@ -382,27 +430,28 @@ ftp-server:d
         }//mkdir
 
         
-        function readdir(req,res,fn){
+        async function readdir(req,res,fn){console.log('readdir',fn);
         
-              if(!fs.existsSync(fn)){
+              if(!await remote.exists(fn)){
                     notfound(req,res);
                     return;
               }
+              console.log('ok');
               
               var dirs    = [];
               var files   = [];
               
-              var list    = fs.readdirSync(fn,{withFileTypes:true});
+              var list    = await client.list(fn);
               list.forEach(file=>{
               
                     if(file.name=='.' || file.name=='..'){
                           return;
                     }
                     
-                    if(file.isDirectory()){
+                    if(file.isDirectory){
                           dirs.push(file.name);
                     }
-                    if(file.isFile()){
+                    if(file.isFile){
                           files.push(file.name);
                     }
                     
@@ -477,24 +526,27 @@ ftp-server:d
         }//dirclear
         
         
-        function load(req,res,fn){
+        async function load(req,res,fn){
 
-              if(!fs.existsSync(fn)){
+              if(!await remote.exists(fn)){
                     notfound(req,res);
                     return;
               }
               
               var mime      = getmime(fn);
-              var stream    = fs.createReadStream(fn);
+              
+              await client.downloadTo('tmp',fn);
+              var stream    = fs.createReadStream('tmp');
 
               cors.headers(res);
               res.writeHead(200,{'content-type':mime});
               stream.pipe(res);
+              fs.unlink('tmp');
               
         }//load
         
         
-        function save(req,res,fn){
+        async function save(req,res,fn){
 
               /*
               if(!fs.existsSync(fn)){
@@ -506,7 +558,7 @@ ftp-server:d
               var err;
               try{
               
-                    var stream    = fs.createWriteStream(fn);
+                    var stream    = fs.createWriteStream('tmp');
                     
               }//try
               catch(err2){
@@ -521,8 +573,11 @@ ftp-server:d
               }
               
               req.pipe(stream);
-              req.on('end',()=>{
+              req.on('end',async ()=>{
               
+                    await client.uploadFrom('tmp',fn);
+                    fs.unlink('tmp');
+                    
                     cors.headers(res);
                     res.writeHead(200);
                     res.end();
@@ -532,7 +587,7 @@ ftp-server:d
         }//save
         
         
-        function upload(req,res,fn){
+        async function upload(req,res,fn){
               
               var stream    = fs.createWriteStream(fn);
               req.pipe(stream);
@@ -547,9 +602,9 @@ ftp-server:d
         }//upload
         
         
-        function download(req,res,fn){
+        async function download(req,res,fn){
 
-              if(!fs.existsSync(fn)){
+              if(!await remote.exists(fn)){
                     notfound(req,res);
                     return;
               }
@@ -569,7 +624,28 @@ ftp-server:d
         }//download
         
         
-        
+  //:
+  
+  
+        remote.exists   = async function(path){console.log('remote.exists');
+          
+              if(path.endsWith('/')){
+                    path    = path.slice(0,-1);
+              }
+              
+              var i         = path.lastIndexOf('/');
+              var dir       = path.slice(0,i+1);
+              var fn        = path.slice(i+1);
+              console.log(dir);
+              console.log(fn);
+              var list      = await client.list(dir);
+              var exists    = list.some(item=>item.name===fn);
+              console.log(exists);
+              return exists;
+              
+        }//exists
+
+
         
   //:
   
