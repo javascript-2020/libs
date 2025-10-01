@@ -68,22 +68,81 @@
                         <input value='quit' type=button>
                         <input value=download type=button>
                   </div>
-                  <div id=url-root>
-                        <label>
-                              url
-                        </label>
-                        <img class=copy>
-                        <img class=paste>
-                        <input id=url spellcheck=false autocomplete=off value='https://localhost:3000'>
-                  </div>
                   
-                  <div id=auth-root>
-                        <label>
-                              auth
-                        </label>
-                        <input id=auth-chk type=checkbox checked>
-                        <input id=auth spellcheck=false autocomplete=off value='matt-123'>
+                  <div id=proxy>
+                  
+                        <div id=url-root>
+                              <label>
+                                    url
+                              </label>
+                              <img class=copy>
+                              <img class=paste>
+                              <input id=url value='https://localhost:3000' spellcheck=false autocomplete=off>
+                        </div>
+                        
+                        <div id=auth-root>
+                              <label>
+                                    auth
+                              </label>
+                              <input id=auth-chk type=checkbox checked>
+                              <input id=auth value='matt-123' spellcheck=false autocomplete=off >
+                        </div>
+                        
                   </div>
+
+<!--
+                    host        : '192.168.8.126',
+                    port        :'2222',
+                    password    : 'hello@example.com',
+                    secure      : false
+
+-->
+                  <div id=ftp>
+                  
+                        <div id=host-root>
+                              <label>
+                                    host
+                              </label>
+                              <img class=copy>
+                              <img class=paste>
+                              <input id=host value='http://192.168.8.126' spellcheck=false autocomplete=off>
+                        </div>
+                        
+                        <div id=port-root>
+                              <label>
+                                    port
+                              </label>
+                              <img class=copy>
+                              <img class=paste>
+                              <input id=port value=2222 spellcheck=false autocomplete=off>
+                        </div>
+                        
+                        <div id=user-root>
+                              <label>
+                                    user
+                              </label>
+                              <img class=copy>
+                              <img class=paste>
+                              <input id=user value='hello@example.com' spellcheck=false autocomplete=off>
+                        </div>
+                        
+                        <div id=password-root>
+                              <label>
+                                    password
+                              </label>
+                              <img class=copy>
+                              <img class=paste>
+                              <input id=password value='hello@example.com' spellcheck=false autocomplete=off>
+                        </div>
+                        
+                        <div id=secure-root>
+                              <label>
+                                    secure
+                              </label>
+                              <input id=secure type=checkbox>
+                        </div>
+                        
+                  </div ftp>
                   
                   <div id=btns>
                         <img id=parent-dir>
