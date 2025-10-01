@@ -116,11 +116,12 @@ mod.ftp_server   = function(){
         Object.defineProperty(obj,'df',{get:()=>df,set:value=>df=value});
                                                                                 debug(obj.version);
 
-        var $,datatype,menu,source
+        var ext,$,datatype,menu,source
         ;
         
         obj.initmod   = function(params){
           
+              ext           = params.ext;
               $             = params.$;
               datatype      = params.datatype;
 
