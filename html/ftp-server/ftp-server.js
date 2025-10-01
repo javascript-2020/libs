@@ -32,7 +32,7 @@ ftp-server:d
         var ftp               = require('basic-ftp');
 
 (async()=>{
-  
+  console.log('connecting');
         var client            = new ftp.Client()
         client.ftp.verbose    = false;
         try{
