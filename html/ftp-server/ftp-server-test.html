@@ -16,7 +16,7 @@
         var mod   = {};
         
         var menu;
-        var httpsfile;
+        var ftpserver;
 
         
         var complete    = {};
@@ -24,17 +24,17 @@
         
         function init(){
                                                                                 console.log('init');
-              menu         = menumod();
+              menu            = menumod();
               
-              httpsfile       = mod.httpsfile();
+              ftpserver       = mod.ftp_server();
               
               
-              httpsfile.initmod({menumod,$,datatype});
+              ftpserver.initmod({menumod,$,datatype});
               
-              httpsfile.load.complete   = complete.load;
-              httpsfile.save.complete   = complete.save;
+              ftpserver.load.complete   = complete.load;
+              ftpserver.save.complete   = complete.save;
         
-              httpsfile.init();
+              ftpserver.init();
               
               
               initdom();
@@ -75,12 +75,9 @@
 
 
 
-      <https-file-api>
-            <!--
-            <script html-loader src='https://localhost:3000/cloud-html-loader.js'></script>
-            -->
+      <ftp-server api>
             <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-      </https-file-api>
+      </ftp-server>
 
 
 
@@ -118,7 +115,7 @@
         function initdom(){
 
         
-              httpsfile.initdom();
+              ftpserver.initdom();
 
               
         }//initdom
