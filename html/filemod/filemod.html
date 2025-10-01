@@ -132,12 +132,12 @@ function filemod(){
             googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source,focus});
             ftpserver.initmod({ext,$,datatype,menu,source});
             
-            localfile.init();
-            github.init();
-            httpsfile.init();
+            await localfile.init();
+            await github.init();
+            await httpsfile.init();
             await dbfiles.init();
-            googlestorage.init();
-            ftpserver.init();
+            await googlestorage.init();
+            await ftpserver.init();
             
             localfile.load.complete           = complete.load;
             localfile.save.complete           = complete.save;
