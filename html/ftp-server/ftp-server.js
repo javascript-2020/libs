@@ -31,6 +31,8 @@ ftp-server:d
                                                                                 }
         var ftp               = require('basic-ftp');
 
+(async()=>{
+  
         var client            = new ftp.Client()
         client.ftp.verbose    = false;
         try{
@@ -48,7 +50,9 @@ ftp-server:d
               process.exit();
         }
         
-        
+})();
+
+
         var getmime       = require('getmime.js');
         var keys          = require('keys.js');
         
