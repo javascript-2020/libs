@@ -1,0 +1,152 @@
+
+
+      <style>
+
+    .icon 
+          {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
+
+      </style>
+
+
+      <script>
+                                                                                console.clear();
+                                                                                console.log('https-file test');
+                                                                                console.log();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+        var mod   = {};
+        
+        var menu;
+        var httpsfile;
+
+        
+        var complete    = {};
+
+        
+        function init(){
+                                                                                console.log('init');
+              menu         = menumod();
+              
+              httpsfile       = mod.httpsfile();
+              
+              
+              httpsfile.initmod({menumod,$,datatype});
+              
+              httpsfile.load.complete   = complete.load;
+              httpsfile.save.complete   = complete.save;
+        
+              httpsfile.init();
+              
+              
+              initdom();
+  
+              
+        }//init
+  
+  
+        init.stack            = [];
+        init.stack.ct         = 0;
+        init.stack.total      = 1;
+        init.stack.mode       = '';
+        init.stack.complete   = false;
+        Object.defineProperty(init.stack,'add',{get:()=>{console.log('add');
+              init.stack.total++;
+              init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
+        }});
+        Object.defineProperty(init.stack,'complete',{get:()=>{console.log('complete');
+              init.stack.ct++;
+              init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
+              init.stack.ct>=init.stack.total && init();
+        }});
+        
+        //  (typeof init!='undefined' && init?.stack && init.stack.add)
+        //  (typeof init!='undefined' && init?.stack && init.stack.complete)
+  
+        
+        init.complete   = function(){
+          
+              init.complete.stack.forEach(fn=>fn());
+              
+        }//complete
+        
+        init.complete.stack   = [];
+        init.complete.add     = fn=>init.complete.stack.push(fn);
+      
+      </script>
+
+
+
+      <https-file-api>
+            <!--
+            <script html-loader src='https://localhost:3000/cloud-html-loader.js'></script>
+            -->
+            <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+      </https-file-api>
+
+
+
+      <script>
+
+        var ext
+        ;
+        var $,datatype,jsonblob,menumod,keydown
+        ;
+
+        init.stack.add;
+        
+        fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
+          .then(res=>res.text().then(async txt=>{
+          
+              ext   = eval(txt);
+              
+              var promise   = ext.load.libs(
+                    'js/dom/$.js.api','js/core/datatype.js','js/io/jsonblob/jsonblob.js','js/dom/menumod/menumod.js',
+                    'js/dom/keydown/keydown.js'
+              );
+              [$,datatype,jsonblob,menumod,keydown]   = await promise;
+  
+              
+              window.$          = $;
+              window.datatype   = datatype;
+
+              
+              init.stack.complete;
+              
+          }));
+    
+
+
+        function initdom(){
+
+        
+              httpsfile.initdom();
+
+              
+        }//initdom
+
+
+        function complete(){
+        }//complete
+        
+        
+        complete.load   = function(file,txt){
+        
+              console.log('https-file-test : load');
+              console.json(file);
+              console.log(txt);
+              
+        }//load
+        
+        
+        complete.save   = function(file,confirm=true){
+          
+              alert('save '+file.filename);
+              
+        }//save
+        
+
+        init.stack.complete;
+        
+      </script>
+
+
+
