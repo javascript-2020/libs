@@ -66,8 +66,9 @@ ftp-server:d
         }
 
         
-        resolve.df    = true;
+        resolve.df    = false;
         
+        var tmpfile   = 'file.tmp';
         
         var remote    = {};
         remote.dir    = '/Internal shared storage/';
@@ -302,16 +303,16 @@ ftp-server:d
         
               var err;
               try{
-                    fs.writeFileSync(fn,'');
-                    await client.uploadFrom(fn,fn);
-                    fs.unlink(fn);
+                    fs.writeFileSync(tmpfile,'');
+                    await client.uploadFrom(tmpfile,fn);
+                    fs.unlinkSync(tmpfile);
                     
-              }
+              }//try
               catch(err2){
               
                     err   = err2;
                     
-              }
+              }//catch
               if(err){
                     cors.headers(res);
                     res.writeHead(400);
@@ -535,13 +536,13 @@ ftp-server:d
               
               var mime      = getmime(fn);
               
-              await client.downloadTo('tmp',fn);
-              var stream    = fs.createReadStream('tmp');
+              await client.downloadTo(tmpfile,fn);
+              var stream    = fs.createReadStream(tmpfile);
 
               cors.headers(res);
               res.writeHead(200,{'content-type':mime});
               stream.pipe(res);
-              fs.unlink('tmp');
+              fs.unlinkSync(tmpfile);
               
         }//load
         
@@ -558,7 +559,7 @@ ftp-server:d
               var err;
               try{
               
-                    var stream    = fs.createWriteStream('tmp');
+                    var stream    = fs.createWriteStream(tmpfile);
                     
               }//try
               catch(err2){
@@ -575,8 +576,8 @@ ftp-server:d
               req.pipe(stream);
               req.on('end',async ()=>{
               
-                    await client.uploadFrom('tmp',fn);
-                    fs.unlink('tmp');
+                    await client.uploadFrom(tmpfile,fn);
+                    fs.unlinkSync(tmpfile);
                     
                     cors.headers(res);
                     res.writeHead(200);
