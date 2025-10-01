@@ -5,15 +5,38 @@
       <template shadowrootmode=open>
       
             <style>
-            
+  .hr
+    {border-top:1px solid lightgray;margin:10px}
+    
   .menu
     {position:absolute;outline:none;font-family:arial;display:flex;flex-direction:column}
+
+
+  .category
+    {display:flex;align:items:center;gap:5px}
     
   #server-root
     {display:flex;gap:5px;align-items:center;margin-bottom:15px}
-          
+
+
   #url-root
     {display:flex;gap:5px;align-items:center;margin-bottom:10px}
+  #url
+    {flex:1}
+
+         
+  #auth-root
+    {display:flex;align-items:center;margin-bottom:10px;gap:5px}
+  #auth
+    {flex:1}
+  #auth-chk
+    {margin:0;width:15px;height:15px;box-sizing:border-box;cursor:pointer}
+
+
+
+
+
+
   .copy
     {padding:2px;width:24px;height:24px;border:1px solid gray;cursor:pointer;border-radius:3px;
       content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAABSlBMVEVHcEwnz/4C8P4g1P4L6P43wf5Mr/4a2v4Y3P4/uv5PrP4+vf5Auv4ozv5KsP4vyv45wP5Jsf5Auf49vP5Mrv4zxf44wf5Lr/46wP4h1P5Lr/46vv5Jsv4R5P5Hs/5Etv44wf5Hs/41w/4uyv47vv49vP5Ftf5GtP4c2f4rzP4tyv4m0f5Etv5Nrv4xxv4xxv4xx/4W3/5KsP5Mr/4/u/4uyv5Isv4K6f4l0f4qzv4W3/4V3/5Nrv5Mrv5Mrv5Mr/4W3v4e2P5BuP5Hsv4N5v4K6f4O5v42w/5Dt/4E7/4uyf4C8P4nz/4M5/4K6v4oz/4P5f4k0v4b2v5Gs/4E7v4I6/5Nrf4e1/4H7P4E7v5Auv5Dtv4sy/5Isv5GtP4wx/49vP4zxf47vv44wP42w/5LsP5Jsf4i1P4n0P4N5v4k0v4a2v4S4v4X3v6OfcqkAAAAVnRSTlMACo7CjQWN/VczjgIJMfIXJzHtjj5iVekR71Hvtz7CjelXjre2wiJj2PCFIWbR7+fEnXaodz3544/USfOC22Tm7CXOnqfUZ+/3VTV9bsTzqGDahpb2tyRB6bIAAAIDSURBVDjLrZVpV9pAFIYntdFiQkZsLCQECtJSlqAsFRBU3Kuta1sncYGuJEDt///aISkkkyHo6enzLTlP5s5758wNAC526pd3d1++/fzx/evNze1tp210wxURUMTWBz2v2EWtLc7jBTPmoJfNrqy8i0ajixgB00VISJIeW9JMKbcWDAYDNiFMQN1EqAAJcUfSBif0fsQWQjLxpjGnXUJa5CoIbTiP8KJ0OqfNMLQIZhGad/Ke3t///vWwGKv1+yPxfW55+TnmJWZW5ggxcqX3m6WSVTpSdPcxHCLExmf97AI8e1j8cK1f8X9Fq/Sotrf0k2v9KRiJ08L8mwhf2CQx8oK/yJyPw3Q67ULaV4Tr7tRCwFfkllLF4ushccwGPyUMzwzhMQz/X1Kz+QVMmh2LcjgsTxDZ3OpqIpFYfDu+KGwoxE5JvTtpF9NX9BEB792jn0gD4eNEsVAQHyXOO7fQFmNNLZOnPV5BqEyI+Yxm1qkluS0BCWRp8FEze6mTJQtVVd8MUfcEhBSGFOGMOWmaoc0AmRoXP5cmiHEReEXANOopzCsLRYlXjWolGXE2jK/r/ujEWAdOFIxWGrjO8ljXazG6MeynthEn2gAP9P7B4XCE2thzdG2v2jbK5LfHZ3hINbclSco6o/kIh1Einq4e1qxp5m2PkqZ/CPvbXvFot+xe7w/EpaiUrJ24NAAAAABJRU5ErkJggg==);
@@ -22,15 +45,7 @@
     {padding:2px;width:24px;height:24px;border:1px solid gray;cursor:pointer;border-radius:3px;
       content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAVlJREFUSEvtlj1ug0AQhcdIW6RLeiQy6XKElLRIlOlp6LmBlRsgtzTUOQAtcZMzpMpInAGlQSjRWl7LxrM/dlhZUbwtu/PNvH07zAIutBYX4oIzGBG/95MkIuezXHFOh6MoegqC4F0GEELAMAybWL+BG8GI+AwArypjRFTAgyLOSeAIHIbhjRDii5NHgcdxhK7rWHu4JnEEnt6ljK6AUxIRcfAPInq0mVYL/lwSrNa3UL7d2WKA3CvXw8vuKqzeMYKtxMmGK9ik2FVq+XQ2rVE5VSeXMpLNgLp3fZbUrlCVFAc/GaygbdvaioU4jrU9/W+CVUVc6U3TQJIkfio2geVV/C+pi6KAsiz9SN33PaRpyrrbu9R1XbPgLMv83bHJXHmeQ1VVp0tt6w6zN5DtqHMwynJJeAGbqkVEOefc2xTZ/+7Uq10CcgOh7pzz38kFPMce6zQ4B4SL8QNf7+YfCGbtNAAAAABJRU5ErkJggg==);
     }
-  #url
-    {flex:1}
-         
-  #auth-root
-    {display:flex;align-items:center;margin-bottom:10px;gap:5px}
-  #auth
-    {flex:1}
-  #auth-chk
-    {margin:0;width:15px;height:15px;box-sizing:border-box;cursor:pointer}
+
           
   #btns
     {display:flex;gap:5px;margin-bottom:10px}
@@ -54,13 +69,13 @@
             
             <img class=icon src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAABYlBMVEVHcEwAAAAYFg0QDw8AAAEAAADSvV4DAgMBAQELEBAFAwQAAALMuFsBAQEICAfDsFfWwV8pJBTHtFm9q1UBAQEBAAAXHh3dyGMlND0LFREcOSanl0sjHxIJCAkEBAMaFw0CAwNHQCIPDQ4XMCGJfD8AAAMEBwUJBggBAAJZUCoBAAECAgIAAADm0GcxLBcAAADon48AAAB2TkvGhnpwZjR5bTirdGqyoVGCdjz/5nD/jbH/6nIODAf/7HPDsFf/53A+OB313WxHQCH54G7/6HH/j7QuGyBeViru12n842/8i7C2pFD+5W+QT2PHboqARlpULjr0h6r3321yPlCZikV2psAcERWgWG5iNUPqgaNGJzBcwoJ4/6tDPR9fhpqW0/Sd3f8/WWfn0We7Z4JJm2dBiFooWztcw4MoPkZbOzowRU+Szu00SFNSc4Q7ISl8r8nifZ1NbX42cEt09qRu6pzkzmVNb2+NAAAAV3RSTlMAZv4FXbT9I3HmM2D9h/L8/v7+/VVP/P7+8/7+/hTK8vf8DP78PuraRPynwJX+/qX9q/79+/3+/fz///////////////////////////////////////514g4cAAABsklEQVQoz3XTh1LCQBAG4HhICAgYunQEEXtvlxgDeIRQFEREml2wd31/L6BOCv4puzPfXMrOHEH8JDoToXAJ6iMWHaGJzhLreIcJwuV+Mhq0TLlb7WvjFOEcOxrApsnrdvvjPRT9h42xzmc3NvsPE6Y5342XMlGzYy/eZafWXb6W0WCyXhydnT4mgurF1Iyv5bXMRd7Ozx/uJy2uqEITTcF3A5rlcu307ELAhZLzyPPBlbsrvDL5Y/etsM8wJb18NkPNfP64fpVhsNf3M0xmT86GxdohTgkv60fBhtBJVkpawAu17Fy45CFOKl0axCPJSo/5bL3RaBzk8VHSB2Wc6jGqAkEQNlZXlu5q1hClUzHctRcKhS+Rlmo1HJczQohHHMexCEknmzsZkvEuTZKX8yRJzldo0pPDT0r/8nAyhcwBm21iKwACE3apK/IKZkfBpkcU/cCfcgDHuk3U8LQfsnZg5hygmpXepuK1QhH1eDs57eChmkkO9hmYIVJ/GjnuQRDR4zRrljoV8zkR/wyU7v1OxbA/N/7nUnKFxXNSJvfH8XB1RxN/eOpvf1m3NbH2duI3WLB5YemTat8AAAAASUVORK5CYII='>
 
-            <div id=httpsfile class=menu style='display:none;left:-225px;top:100px;width:450px;height:500px'>
+            <div id=ftp-server class=menu style='display:none;left:-225px;top:100px;width:450px;height:500px'>
             
                   <div class=menu-title>
                         ftp server
                   </div>
             
-                  <div id=server-root>
+                  <div id=server-root class=category>
                         <label>
                               server
                         </label>
@@ -69,9 +84,11 @@
                         <input value=download type=button>
                   </div>
                   
+                  <div class=hr></div>
+                  
                   <div id=proxy>
                   
-                        <div id=url-root>
+                        <div id=url-root class=category>
                               <label>
                                     url
                               </label>
@@ -80,7 +97,7 @@
                               <input id=url value='https://localhost:3000' spellcheck=false autocomplete=off>
                         </div>
                         
-                        <div id=auth-root>
+                        <div id=auth-root class=category>
                               <label>
                                     auth
                               </label>
@@ -99,7 +116,7 @@
 -->
                   <div id=ftp>
                   
-                        <div id=host-root>
+                        <div id=host-root class=category>
                               <label>
                                     host
                               </label>
@@ -108,7 +125,7 @@
                               <input id=host value='http://192.168.8.126' spellcheck=false autocomplete=off>
                         </div>
                         
-                        <div id=port-root>
+                        <div id=port-root class=category>
                               <label>
                                     port
                               </label>
@@ -117,7 +134,7 @@
                               <input id=port value=2222 spellcheck=false autocomplete=off>
                         </div>
                         
-                        <div id=user-root>
+                        <div id=user-root class=category>
                               <label>
                                     user
                               </label>
@@ -126,7 +143,7 @@
                               <input id=user value='hello@example.com' spellcheck=false autocomplete=off>
                         </div>
                         
-                        <div id=password-root>
+                        <div id=password-root class=category>
                               <label>
                                     password
                               </label>
@@ -135,7 +152,7 @@
                               <input id=password value='hello@example.com' spellcheck=false autocomplete=off>
                         </div>
                         
-                        <div id=secure-root>
+                        <div id=secure-root class=category>
                               <label>
                                     secure
                               </label>
@@ -143,6 +160,7 @@
                         </div>
                         
                   </div ftp>
+
                   
                   <div id=btns>
                         <img id=parent-dir>
