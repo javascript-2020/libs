@@ -16,6 +16,8 @@
     {display:flex;align-items:center;gap:5px}
   label
     {display:block;width:70px;text-align:right}
+  .field
+    {flex:1}
     
     
   #server-root
@@ -101,7 +103,7 @@
                               </label>
                               <img class=copy>
                               <img class=paste>
-                              <input id=url value='https://localhost:3000' spellcheck=false autocomplete=off>
+                              <input id=url value='https://localhost:3000' class=field spellcheck=false autocomplete=off>
                         </div>
                         
                         <div id=auth-root class=category>
@@ -109,7 +111,7 @@
                                     auth
                               </label>
                               <input id=auth-chk type=checkbox checked>
-                              <input id=auth value='matt-123' spellcheck=false autocomplete=off >
+                              <input id=auth value='matt-123' class=field spellcheck=false autocomplete=off >
                         </div>
                         
                   </div>
@@ -133,7 +135,7 @@
                               </label>
                               <img class=copy>
                               <img class=paste>
-                              <input id=host value='http://192.168.8.126' spellcheck=false autocomplete=off>
+                              <input id=host value='http://192.168.8.126' class=field spellcheck=false autocomplete=off>
                         </div>
                         
                         <div id=port-root class=category>
@@ -142,7 +144,7 @@
                               </label>
                               <img class=copy>
                               <img class=paste>
-                              <input id=port value=2222 spellcheck=false autocomplete=off>
+                              <input id=port value=2222 class=field spellcheck=false autocomplete=off>
                         </div>
                         
                         <div id=user-root class=category>
@@ -151,7 +153,7 @@
                               </label>
                               <img class=copy>
                               <img class=paste>
-                              <input id=user value='hello@example.com' spellcheck=false autocomplete=off>
+                              <input id=user value='hello@example.com' class=field spellcheck=false autocomplete=off>
                         </div>
                         
                         <div id=password-root class=category>
@@ -160,14 +162,16 @@
                               </label>
                               <img class=copy>
                               <img class=paste>
-                              <input id=password value='hello@example.com' spellcheck=false autocomplete=off>
+                              <input id=password value='hello@example.com' class=field spellcheck=false autocomplete=off>
                         </div>
                         
                         <div id=secure-root class=category>
                               <label>
                                     secure
                               </label>
-                              <input id=secure type=checkbox>
+                              <div class=field>
+                                    <input id=secure type=checkbox>
+                              </div>
                         </div>
                         
                   </div ftp>
