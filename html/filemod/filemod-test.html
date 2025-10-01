@@ -21,6 +21,8 @@
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var mod   = {};
         
+        var menu;
+        
         var filemod;
 
 
@@ -37,10 +39,10 @@
               
               keydown.add(kd);
               
-              menumod                   = menumod();
-              menumod.on.close          = ()=>{};
+              menu                   = menumod();
+              menu.on.close          = ()=>{};
               
-              filemod.initmod({ext,$,menumod,complete});
+              filemod.initmod({ext,$,menumod,menu,complete});
               
 
               filemod.init();
