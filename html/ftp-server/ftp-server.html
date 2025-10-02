@@ -668,12 +668,12 @@ mod.ftp_server   = function(){
                 
                     var res         = await fetch(url,{headers});
                     
-              }
+              }//try
               catch(err2){
                 
                     err   = err2;
                     
-              }
+              }//catch
               if(err){
                     alert('ftp-server.loadfile error\n'+err.toString());
                     return;
