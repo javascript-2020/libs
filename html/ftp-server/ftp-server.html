@@ -352,6 +352,7 @@ mod.ftp_server   = function(){
                             
               $(node,'.copy').onclick                           = btn.copy;
               $(node,'.paste').onclick                          = btn.paste;
+              
               ui.url                                            = $(node,'#url');
               if(url){
                     ui.url.value                                = url;
@@ -507,8 +508,12 @@ mod.ftp_server   = function(){
                                                                                 console.log(host,port,user,password,secure);
               var json        = {host,port,user,password,secure};
               var body        = JSON.stringify(json);
-              var headers     = {auth:'matt-123',mode:'connect'};
-              var res         = await fetch('https://localhost:3001',{headers,method:'post',body});
+
+              var url         = ui.url.value;
+              var auth        = ui.auth.value;
+              
+              var headers     = {auth,mode:'connect'};
+              var res         = await fetch(url,{headers,method:'post',body});
               var txt         = await res.text();
               console.log(txt);
               
@@ -517,8 +522,11 @@ mod.ftp_server   = function(){
         
         btn.ftp.disconnect    = async function(){
         
-              var headers     = {auth:'matt-123',mode:'disconnect'};
-              var res         = await fetch('https://localhost:3001',{headers});
+              var url         = ui.url.value;
+              var auth        = ui.auth.value;
+              
+              var headers     = {auth,mode:'disconnect'};
+              var res         = await fetch(url,{headers});
               var txt         = await res.text();
               console.log(txt);
               
@@ -527,8 +535,11 @@ mod.ftp_server   = function(){
         
         btn.ftp.status    = async function(){
         
-              var headers     = {auth:'matt-123',mode:'status'};
-              var res         = await fetch('https://localhost:3001',{headers});
+              var url         = ui.url.value;
+              var auth        = ui.auth.value;
+              
+              var headers     = {auth,mode:'status'};
+              var res         = await fetch(url,{headers});
               var txt         = await res.text();
               console.log(txt);
               
