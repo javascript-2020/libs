@@ -526,7 +526,7 @@ mod.ftp_server   = function(){
         btn.ftp.status    = async function(){
         
               var headers     = {auth:'auth-123',mode:'status'};
-              var res         = await fetch('https://localhost:3001',{headers,body});
+              var res         = await fetch('https://localhost:3001',{headers});
               var txt         = await res.text();
               log(txt);
               
