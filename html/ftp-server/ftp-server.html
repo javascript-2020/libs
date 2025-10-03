@@ -515,9 +515,26 @@ mod.ftp_server   = function(){
               var auth        = ui.auth.value;
               
               var headers     = {auth,mode:'connect'};
-              var res         = await fetch(url,{headers,method:'post',body});
+              var err;
+              try{
+              
+                    var res         = await fetch(url,{headers,method:'post',body});
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                    log.red(error);
+                    return;
+              }
+              
               var txt         = await res.text();
-                                                                                log(txt);
+              log(txt);
+              
         }//connect
         
         
@@ -527,9 +544,26 @@ mod.ftp_server   = function(){
               var auth        = ui.auth.value;
               
               var headers     = {auth,mode:'disconnect'};
-              var res         = await fetch(url,{headers});
+              
+              var err;
+              try{
+              
+                    var res         = await fetch(url,{headers});
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                    log.red(error);
+                    return;
+              }
+              
               var txt         = await res.text();
-                                                                                log(txt);
+              log(txt);
               
         }//desconnect
         
@@ -540,9 +574,26 @@ mod.ftp_server   = function(){
               var auth        = ui.auth.value;
               
               var headers     = {auth,mode:'status'};
-              var res         = await fetch(url,{headers});
+              
+              var err;
+              try{
+              
+                    var res         = await fetch(url,{headers});
+                    
+              }//try
+              catch(err2){
+              
+                    err   - err2l
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                    log.red(error);
+                    return;
+              }
+              
               var txt         = await res.text();
-                                                                                log(txt);
+              log(txt);
               
         }//status
         
