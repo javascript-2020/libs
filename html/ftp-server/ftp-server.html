@@ -213,7 +213,7 @@ mod.ftp_server   = function(){
         Object.defineProperty(obj,'df',{get:()=>df,set:value=>df=value});
                                                                                 debug(obj.version);
 
-        var ext,$,datatype,menu,source
+        var ext,$,datatype,menu,source,log
         ;
         
         obj.initmod   = function(params){
@@ -224,6 +224,8 @@ mod.ftp_server   = function(){
 
               menu          = params.menu;
               source        = params.source;
+              
+              log           = params.log;
               
         }//initmod
 
@@ -515,7 +517,7 @@ mod.ftp_server   = function(){
               var headers     = {auth,mode:'connect'};
               var res         = await fetch(url,{headers,method:'post',body});
               var txt         = await res.text();
-                                                                                console.log(txt);
+                                                                                log(txt);
         }//connect
         
         
@@ -527,7 +529,7 @@ mod.ftp_server   = function(){
               var headers     = {auth,mode:'disconnect'};
               var res         = await fetch(url,{headers});
               var txt         = await res.text();
-                                                                                console.log(txt);
+                                                                                log(txt);
               
         }//desconnect
         
@@ -540,7 +542,7 @@ mod.ftp_server   = function(){
               var headers     = {auth,mode:'status'};
               var res         = await fetch(url,{headers});
               var txt         = await res.text();
-                                                                                console.log(txt);
+                                                                                log(txt);
               
         }//status
         
