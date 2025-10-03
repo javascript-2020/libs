@@ -520,7 +520,7 @@ mod.ftp_server   = function(){
               var headers     = {auth:'matt-123',mode:'disconnect'};
               var res         = await fetch('https://localhost:3001',{headers});
               var txt         = await res.text();
-              log(txt);
+              console.log(txt);
               
         }//desconnect
         
