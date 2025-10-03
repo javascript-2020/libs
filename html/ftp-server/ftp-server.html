@@ -504,7 +504,7 @@ mod.ftp_server   = function(){
               var user        = ui.ftp.user.value;
               var password    = ui.ftp.password.value;
               var secure      = ui.ftp.secure.checked;
-              
+                                                                                console.log(host,port,user,password,secure);
               var json        = {host,port,user,password,secure};
               var body        = JSON.stringify(json);
               var headers     = {auth:'matt-123',mode:'connect'};
