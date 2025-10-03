@@ -244,10 +244,12 @@ mod.ftp_server   = function(){
         ui.root         = {};
         ui.item         = {};
         ui.rd           = {};
-
+        ui.proxy        = {};
+        ui.ftp          = {};
 
         var rd          = {};
         var btn         = {};
+        btn.ftp         = {};
         var file        = {};
         var dir         = {};
 
@@ -288,6 +290,9 @@ mod.ftp_server   = function(){
               var node                                          = $(shadow,'.menu');
               icon                                              = $(shadow,'.icon');
               icon.onclick                                      = menu.click(node,'both',true,callback);
+
+
+
 
 
               var list    = $.all(node,'input:not([type])');
@@ -342,6 +347,9 @@ mod.ftp_server   = function(){
               $(ui.root.server,'[value=quit]').onclick          = btn.quit;
               $(ui.root.server,'[value=download]').onclick      = btn.download;
               
+              
+              ui.proxy.root                                     = $(node,'#proxy');
+                            
               $(node,'.copy').onclick                           = btn.copy;
               $(node,'.paste').onclick                          = btn.paste;
               ui.url                                            = $(node,'#url');
@@ -349,12 +357,26 @@ mod.ftp_server   = function(){
                     ui.url.value                                = url;
               }
 
-              
               ui['auth-chk']                                    = $(node,'#auth-chk');
               ui.auth                                           = $(node,'#auth');
               if(auth){
                     ui.auth.value                               = auth;
               }
+              
+              
+              
+              ui.ftp.root                                       = $(node,'#ftp');
+              
+              ui.ftp.host                                       = $(ui.ftp.root,'#host');
+              ui.ftp.port                                       = $(ui.ftp.root,'#port');
+              ui.ftp.user                                       = $(ui.ftp.root,'#user');
+              ui.ftp.password                                   = $(ui.ftp.root,'#password');
+              ui.ftp.secure                                     = $(ui.ftp.root,'#secure');
+              
+              $(ui.ftp.root,'[value=connect]').onclick          = btn.ftp.connect;
+              $(ui.ftp.root,'[value=disconnect]').onclick       = btn.ftp.disconnect;
+              $(ui.ftp.root,'[value=status]').onclick           = btn.ftp.status;
+              
               
               
               $(node,'[value=load]').onclick                    = btn.load;
@@ -470,6 +492,45 @@ mod.ftp_server   = function(){
               filenav.server.readdir(url,auth,path);
               
         }//dir
+        
+        
+        
+        btn.ftp.connect   = async function(){
+        
+              var host        = ui.ftp.host.value;
+              var port        = ui.ftp.port.value;
+              var user        = ui.ftp.user.value;
+              var password    = ui.ftp.password.value;
+              var secure      = ui.ftp.secure.checked;
+              
+              var json        = {host,port,user,password,secure};
+              var body        = JSON.stringify(json);
+              var headers     = {auth:'auth-123',mode:'connect'};
+              var res         = await fetch('https://localhost:3001',{headers,body});
+              var txt         = await res.text();
+              log(txt);
+              
+        }//connect
+        
+        
+        btn.ftp.disconnect    = async function(){
+        
+              var headers     = {auth:'auth-123',mode:'disconnect'};
+              var res         = await fetch('https://localhost:3001',{headers,body});
+              var txt         = await res.text();
+              log(txt);
+              
+        }//desconnect
+        
+        
+        btn.ftp.status    = async function(){
+        
+              var headers     = {auth:'auth-123',mode:'status'};
+              var res         = await fetch('https://localhost:3001',{headers,body});
+              var txt         = await res.text();
+              log(txt);
+              
+        }//status
         
         
   //:
