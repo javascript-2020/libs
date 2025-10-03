@@ -508,7 +508,7 @@ mod.ftp_server   = function(){
               var json        = {host,port,user,password,secure};
               var body        = JSON.stringify(json);
               var headers     = {auth:'matt-123',mode:'connect'};
-              var res         = await fetch('https://localhost:3001',{headers,body});
+              var res         = await fetch('https://localhost:3001',{headers,method:'post',body});
               var txt         = await res.text();
               log(txt);
               
