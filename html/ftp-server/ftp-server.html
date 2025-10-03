@@ -533,7 +533,7 @@ mod.ftp_server   = function(){
               }
               
               var txt         = await res.text();
-              log(txt);
+              log.green(txt);
               
         }//connect
         
@@ -563,7 +563,7 @@ mod.ftp_server   = function(){
               }
               
               var txt         = await res.text();
-              log(txt);
+              log.green(txt);
               
         }//desconnect
         
@@ -593,8 +593,7 @@ mod.ftp_server   = function(){
               }
               
               var txt         = await res.text();
-              debugger;
-              log(txt);
+              log.green(txt);
               
         }//status
         
