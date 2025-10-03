@@ -532,8 +532,12 @@ mod.ftp_server   = function(){
                     return;
               }
               
-              var txt         = await res.text();
-              log.green(txt);
+              var json    = await res.json();
+              if(json.error){
+                    log.red(json.error);
+              }else{
+                    log.green(json.ok);
+              }
               
         }//connect
         
@@ -562,8 +566,12 @@ mod.ftp_server   = function(){
                     return;
               }
               
-              var txt         = await res.text();
-              log.green(txt);
+              var json    = await res.json();
+              if(json.error){
+                    log.red(json.error);
+              }else{
+                    log.green(json.ok);
+              }
               
         }//desconnect
         
@@ -592,8 +600,12 @@ mod.ftp_server   = function(){
                     return;
               }
               
-              var txt         = await res.text();
-              log.green(txt);
+              var json    = await res.json();
+              if(json.error){
+                    log.red(json.error);
+              }else{
+                    log.green(json.ok);
+              }
               
         }//status
         
