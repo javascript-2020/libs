@@ -70,7 +70,7 @@ function filemod(){
   ;
                                                                                 debug(obj.version);
                                                                                 
-        var ext,$,menumod,menu,complete,source,focus,editor
+        var ext,$,menumod,menu,complete,source,focus,editor,log
         ;
           
         obj.initmod   = function(params){
@@ -83,6 +83,7 @@ function filemod(){
               complete        = params.complete;
               source          = params.source;
               focus           = params.focus;
+              log             = params.log;
               
               editor          = params.editor;
               
@@ -130,7 +131,7 @@ function filemod(){
             httpsfile.initmod({ext,$,menu,filemod:obj,source,focus,editor});
             dbfiles.initmod({ext,$,datatype,menumod,menu,filemod:obj,source,focus});
             googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source,focus});
-            ftpserver.initmod({ext,$,datatype,menu,source});
+            ftpserver.initmod({ext,$,datatype,menu,source,log});
             
             await localfile.init();
             await github.init();
