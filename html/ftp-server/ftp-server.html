@@ -507,7 +507,7 @@ mod.ftp_server   = function(){
               
               var json        = {host,port,user,password,secure};
               var body        = JSON.stringify(json);
-              var headers     = {auth:'auth-123',mode:'connect'};
+              var headers     = {auth:'matt-123',mode:'connect'};
               var res         = await fetch('https://localhost:3001',{headers,body});
               var txt         = await res.text();
               log(txt);
@@ -517,7 +517,7 @@ mod.ftp_server   = function(){
         
         btn.ftp.disconnect    = async function(){
         
-              var headers     = {auth:'auth-123',mode:'disconnect'};
+              var headers     = {auth:'matt-123',mode:'disconnect'};
               var res         = await fetch('https://localhost:3001',{headers,body});
               var txt         = await res.text();
               log(txt);
@@ -527,7 +527,7 @@ mod.ftp_server   = function(){
         
         btn.ftp.status    = async function(){
         
-              var headers     = {auth:'auth-123',mode:'status'};
+              var headers     = {auth:'matt-123',mode:'status'};
               var res         = await fetch('https://localhost:3001',{headers});
               var txt         = await res.text();
               console.log(txt);
