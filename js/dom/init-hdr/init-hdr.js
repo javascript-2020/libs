@@ -89,8 +89,8 @@
                           });
                                                                                 
                           if(node.hasAttribute){
-                                if(node.hasAttribute('html-loader-2')){
-                                      node.removeAttribute('html-loader-2');
+                                if(node.hasAttribute('component')){
+                                      node.removeAttribute('component');
                                       let index       = nodes.length;
                                       let complete    = ({node:custom})=>{
                                         
@@ -120,8 +120,7 @@
                     var nn        = root.nodeName.toLowerCase();
                     var type      = loader.rd(root,'type','libs');
                     var version   = loader.rd(root,'v');
-                    var slots     = [...root.childNodes];
-                    
+                    var slots     = [...root.childNodes];                    
                                                                                 mod.df && console.log(root,nn);
                     switch(type){
                       
@@ -193,7 +192,7 @@
               
                     var v   = def;
                     if(node.hasAttribute(name)){
-                          v   = node.getAttribute(name)||v;
+                          v   ||= node.getAttribute(name);
                     }
                     return v;
                     
