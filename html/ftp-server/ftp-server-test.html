@@ -17,6 +17,7 @@
         
         var menu;
         var ftpserver;
+        var log;
 
         
         var complete    = {};
@@ -27,14 +28,17 @@
               menu            = menumod();
               
               ftpserver       = mod.ftp_server();
+              log             = mod.log();
               
               
-              ftpserver.initmod({ext,$,datatype,menu});
+              ftpserver.initmod({ext,$,datatype,menu,log});
+              log.initmod({ext,$});
               
               ftpserver.load.complete   = complete.load;
               ftpserver.save.complete   = complete.save;
         
               ftpserver.init();
+              log.init();
               
               
               initdom();
@@ -79,6 +83,9 @@
             <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
       </ftp-server>
 
+      <log>
+            <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+      </log>
 
 
       <script>
@@ -116,6 +123,8 @@
 
         
               ftpserver.initdom();
+              
+              log.initdom();
 
               
         }//initdom
