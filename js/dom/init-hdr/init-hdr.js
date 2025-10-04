@@ -163,6 +163,7 @@
                     
                           if(script.src){
                                                                                 mod.df && console.log('script.src',script.src);
+                                mod.stack.add;
                                 var nscript   = document.createElement('script');
                                 var src       = script.src;
                                 if(script.hasAttribute('html-loader')){
@@ -172,7 +173,6 @@
                                 }
                                 nscript.src           = src;
                                 nscript.onload        = ()=>mod.stack.complete;
-                                mod.stack.add;
                                 script.parentNode.replaceChild(nscript,script);
                           }else{
                                                                                 mod.df && console.log('script.id',script.id);
