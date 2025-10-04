@@ -167,6 +167,10 @@
                                 var nscript   = document.createElement('script');
                                 var src       = script.src;
                                 if(script.hasAttribute('html-loader')){
+                                      var attr    = script.getAttribute('html-loader');
+                                      if(attr){
+                                            return;
+                                      }
                                       var id    = gen();
                                       nscript.setAttribute('html-loader',id);
                                       src  += `?[html-loader=${id}]`;
