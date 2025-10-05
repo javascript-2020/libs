@@ -307,7 +307,7 @@
                                 
                                 node.childNodes.forEach(child=>{
                                   
-                                      if(child.assignedSlot)return;
+                                      //if(child.assignedSlot)return;
                                       list.push(child);
                                       
                                 });
