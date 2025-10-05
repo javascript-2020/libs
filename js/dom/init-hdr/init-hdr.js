@@ -126,7 +126,7 @@
                                                                     nodes.splice(index,1,{node,custom});
                                                                     mod2.stack.add;
                                                                     var mod3    = mod2.create({mod:mod2});
-                                                                    build({node:custom,mod:mod3});
+                                                                    build({root:custom,mod:mod3});
                                                                     
                                                               }//complete
                                             var promise     = loader({root:node,mod:mod2}).then(complete);
