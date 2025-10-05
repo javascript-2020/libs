@@ -315,7 +315,7 @@
                       
                           let node    = list.shift();
                           
-                          if(!node.assignedSlot)
+                          if(!node.assignedSlot){
                                 if(node.shadowRoot){
                                       list.push(node.shadowRoot);
                                 }
@@ -334,7 +334,7 @@
                                 if(node.matches && node.matches(css)){
                                       nodes.push(node);
                                 }
-                    }
+                          }
                           
                     }//while
                     return nodes;
