@@ -219,9 +219,9 @@
               
               
               loader.grp    = async function({nn,version}){
-                
+                                                                                console.log('loader.grp',nn,version);
                     var path    = window.location.pathname;
-                                                                                df && console.log(path);
+                                                                                console.log(path);
                     var base    = document.querySelector('base');
                     if(base){
                           var href    = base.href;
@@ -239,8 +239,8 @@
                     }else{
                           path   += `html/${nn}/v${version}/${nn}-v${version}.html`;
                     }
-                                                                                df && console.log(path);
-                    var {html,error}    = await loader.fetch(url);    
+                                                                                console.log(path);
+                    var {html,error}    = await loader.fetch(path);    
                     return {html,error};
                     
               }//grp
