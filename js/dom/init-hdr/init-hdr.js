@@ -243,9 +243,10 @@
                           //})();
                     `;
                     
-                    var fn    = eval(js);
-                    var {name,obj}    = fn({mod:mod2,root:node});
-                    mod[name]=obj;
+                    var fn      = eval(js);
+                    var obj     = fn({mod:mod2,root:node});
+                    var name    = node.nodeName.toLowerCase();
+                    mod[name]   = obj;
 
               }//define
 
