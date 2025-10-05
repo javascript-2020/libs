@@ -96,38 +96,38 @@
                       
                           let node    = list.shift();
                           
-                          if(node.assignedSlot){
-                                return;
-                          }
-
-                          if(node.shadowRoot){
-                                list.push(node.shadowRoot);
-                          }
-                          
-                          if(node.nodeName=='SLOT'){
-                                list    = list.concat(node.assignedNodes());
-                          }
-                          
-                          node.childNodes.forEach(child=>{
-                            
-                                if(child.assignedSlot)return;
-                                list.push(child);
-                                
-                          });
-                                                                                
-                          if(node.hasAttribute){
-                                if(node.hasAttribute('component')){debugger;
-                                      let index       = nodes.length;
-                                      let complete    = ({node:custom})=>{
-                                        
-                                                              nodes.splice(index,1,{node,custom});
-                                                              mod2.stack.add;
-                                                              build({node:custom,mod:mod2});
-                                                              
-                                                        }//complete
-                                      var promise     = loader({root:node,mod:mod2}).then(complete);
-                                      nodes.push(promise);
+                          if(!node.assignedSlot){
+      
+                                if(node.shadowRoot){
+                                      list.push(node.shadowRoot);
                                 }
+                                
+                                if(node.nodeName=='SLOT'){
+                                      list    = list.concat(node.assignedNodes());
+                                }
+                                
+                                node.childNodes.forEach(child=>{
+                                  
+                                      if(child.assignedSlot)return;
+                                      list.push(child);
+                                      
+                                });
+                                                                                      
+                                if(node.hasAttribute){
+                                      if(node.hasAttribute('component')){debugger;
+                                            let index       = nodes.length;
+                                            let complete    = ({node:custom})=>{
+                                              
+                                                                    nodes.splice(index,1,{node,custom});
+                                                                    mod2.stack.add;
+                                                                    build({node:custom,mod:mod2});
+                                                                    
+                                                              }//complete
+                                            var promise     = loader({root:node,mod:mod2}).then(complete);
+                                            nodes.push(promise);
+                                      }
+                                }
+                                
                           }
                     
                     }//while
