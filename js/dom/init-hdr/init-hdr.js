@@ -2,7 +2,7 @@
         var ct_xyz    = 0;
         var mod_list    = [];
         
-        var mod   = create();
+        var mod   = create({name:'root');
 
         function create({mod:par,name}={}){
 
@@ -28,7 +28,7 @@
                 
                           total++;
                                                                                       if(mod.df){
-                                                                                            console.log('add',ct,total);
+                                                                                            console.log('add',name,ct,total);
                                                                                             //console.trace();
                                                                                       }
                     },//get
@@ -37,7 +37,7 @@
                           total++;
                           stack.push(v);
                                                                                       if(mod.df){
-                                                                                            console.log('add',ct,total);
+                                                                                            console.log('add',name,ct,total);
                                                                                             //console.trace();
                                                                                       }
                     }//set
@@ -47,7 +47,7 @@
                 
                     ct++;
                                                                                       if(mod.df){
-                                                                                            console.log('complete',ct,total);
+                                                                                            console.log('complete',name,ct,total);
                                                                                             //console.trace();
                                                                                       }
                     if(ct!=total){
