@@ -244,7 +244,8 @@
                     `;
                     
                     var fn    = eval(js);
-                    fn({mod:mod2,root:node});
+                    var {name,obj}    = fn({mod:mod2,root:node});
+                    mod[name]=obj;
 
               }//define
 
