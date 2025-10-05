@@ -1,5 +1,5 @@
 
-debugger;
+
         var mod   = create();
 
         function create({mod:par,name}={}){
