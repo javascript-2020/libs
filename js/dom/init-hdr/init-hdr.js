@@ -64,6 +64,7 @@
                     mod2      ||= mod;
                     
                     var list    = $(root,'[component]');
+                    console.log(list);
                     list        = list.map((node,i)=>{
                       
                                         let complete    = ({node:custom})=>{
