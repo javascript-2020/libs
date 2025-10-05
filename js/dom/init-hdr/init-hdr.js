@@ -158,8 +158,9 @@
                     });
         
                     root.parentNode.replaceChild(node,root);
-                    
-                    var list              = node.querySelectorAll('script');
+                    var list    = $(node);
+                    list        = list.filter(node=>node.matches('script'));
+                    //var list              = node.querySelectorAll('script');
                     list.forEach(script=>{
                     
                           if(script.src){
@@ -261,6 +262,39 @@
   //:
 
   
+              function $(root){
+                
+                    var list    = [root];
+                    var nodes   = [];
+                    while(list.length){
+                      
+                          let node    = list.shift();
+                          
+                          if(node.assignedSlot){
+                                return;
+                          }
+
+                          if(node.shadowRoot){
+                                list.push(node.shadowRoot);
+                          }
+                          
+                          if(node.nodeName=='SLOT'){
+                                list    = list.concat(node.assignedNodes());
+                          }
+                          
+                          node.childNodes.forEach(child=>{
+                            
+                                if(child.assignedSlot)return;
+                                list.push(child);
+                                
+                          });
+                                                                                
+                    }//while
+                    return list;
+                    
+              }//$
+              
+              
               function slashes(path,num){
               
                     var index   = path.length;
