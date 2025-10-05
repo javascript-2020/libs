@@ -235,6 +235,7 @@
                     `;
                     
                     var fn    = eval(js);
+                    debugger;
                     fn({mod,root:node});
 
               }//define
