@@ -227,11 +227,11 @@
               function define({js,mod,node}){
                 
                     js    = `
-                          (()=>{return
+                          //(()=>{return
                           
                                 ${js}
                                 
-                          })();
+                          //})();
                     `;
                     
                     var fn    = eval(js);
