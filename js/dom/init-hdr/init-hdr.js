@@ -197,7 +197,7 @@
               
                     var v   = def;
                     if(node.hasAttribute(name)){
-                          v   ||= node.getAttribute(name);
+                          v   = node.getAttribute(name)||v;
                     }
                     return v;
                     
