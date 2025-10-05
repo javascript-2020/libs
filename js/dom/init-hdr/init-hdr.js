@@ -63,6 +63,27 @@
                     root      ||= document.body;
                     mod2      ||= mod;
                     
+                    var list    = $(root,'[component]');
+                    list        = list.map((node,i)=>{
+                      
+                                        let complete    = ({node:custom})=>{
+                                          
+                                                                nodes.splice(i,1,{node,custom});
+                                                                mod2.stack.add;
+                                                                build({node:custom,mod:mod2});
+                                                                
+                                                          }//complete
+                                        var promise     = loader({root:node,mod:mod2}).then(complete);
+                                        return promise;
+                                        
+                                  });
+                    await Promise.all(list);
+                    mod2.stack.complete;
+                    return list;
+                    
+                    
+                    /*
+                    list        = list.filter(node=>node.matches('[component]'));
                     var list    = [root];
                     var nodes   = [];
                     while(list.length){
@@ -104,12 +125,13 @@
                           }
                     
                     }//while
-                    
                     await Promise.all(nodes);
+                    
                     
                     mod2.stack.complete;
                     
                     return nodes;
+                    */
                     
               }//build
               
@@ -158,9 +180,11 @@
                     });
         
                     root.parentNode.replaceChild(node,root);
-                    var list    = $(node);
-                    list        = list.filter(node=>node.matches('script'));
+                    
+                    var list    = $(node,'script');
+                    //list        = list.filter(node=>node.matches('script'));
                     //var list              = node.querySelectorAll('script');
+                    
                     list.forEach(script=>{
                     
                           if(script.src){
@@ -262,10 +286,9 @@
   //:
 
   
-              function $(root){
+              function $(root,css){
                 
                     var list    = [root];
-                    var nodes   = [];
                     while(list.length){
                       
                           let node    = list.shift();
@@ -290,6 +313,7 @@
                           });
                                                                                 
                     }//while
+                    list    = list.filter(node=>node.matches && node.matches(css));
                     return list;
                     
               }//$
