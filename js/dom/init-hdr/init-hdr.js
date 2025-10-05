@@ -123,17 +123,17 @@
                                 if(node.hasAttribute){
                                       if(node.hasAttribute('component')){
                                             debugger;
+                                            let name    = node.nodeName.toLowerCase();
+                                            let mod3    = mod2.create({mod:mod2,name});
                                             let index       = nodes.length;
                                             let complete    = ({node:custom})=>{
                                               
                                                                     nodes.splice(index,1,{node,custom});
                                                                     mod2.stack.add;
-                                                                    var name    = node.nodeName.toLowerCase();
-                                                                    var mod3    = mod2.create({mod:mod2,name});
                                                                     build({root:custom,mod:mod3});
                                                                     
                                                               }//complete
-                                            var promise     = loader({root:node,mod:mod2}).then(complete);
+                                            var promise     = loader({root:node,mod:mod2,mod2:mod3}).then(complete);
                                             nodes.push(promise);
                                       }
                                 }
@@ -152,7 +152,7 @@
               }//build
               
               
-              async function loader({root,mod}){
+              async function loader({root,mod,mod2}){
 
                     var nn        = root.nodeName.toLowerCase();
                     var type      = rd(root,'component','libs');
@@ -222,7 +222,7 @@
                                                                                 mod.df && console.log('script.id',script.id);
                                                                                 //debugger;
                                 var js    = script.textContent;
-                                define({js,mod});
+                                define({js,mod:mod2});
                           }
                           
                     });
