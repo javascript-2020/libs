@@ -290,6 +290,7 @@
               function $(root,css){
                 
                     var list    = [root];
+                    var nodes   = [];
                     while(list.length){
                       
                           let node    = list.shift();
@@ -312,10 +313,12 @@
                                 list.push(child);
                                 
                           });
-                                                                                
+                          
+                          if(node.matches && node.matches(css)){
+                                nodes.push(node);
+                          }
                     }//while
-                    list    = list.filter(node=>node.matches && node.matches(css));
-                    return list;
+                    return nodes;
                     
               }//$
               
