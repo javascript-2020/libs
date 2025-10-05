@@ -9,7 +9,7 @@
               mod.create      = create;
               mod.build       = build;
               
-              var stack       = [()=>par.stack.complete];
+              var stack       = [()=>par && par.stack.complete];
               mod.stack       = stack;
               
               var ct          = 0;
