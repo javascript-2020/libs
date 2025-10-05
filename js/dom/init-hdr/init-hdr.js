@@ -121,6 +121,7 @@
                                                                                       
                                 if(node.hasAttribute){
                                       if(node.hasAttribute('component')){
+                                            debugger;
                                             let index       = nodes.length;
                                             let complete    = ({node:custom})=>{
                                               
