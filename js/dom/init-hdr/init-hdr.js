@@ -58,7 +58,7 @@
               }});
 
               
-              async function build({root,mod:mod2}){
+              async function build({root,mod:mod2}={}){
                 
                     root      ||= document.body;
                     mod2      ||= mod;
