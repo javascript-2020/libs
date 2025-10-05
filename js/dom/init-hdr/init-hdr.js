@@ -333,7 +333,9 @@
                                 });
                                       
                                 if(node.matches && node.matches(css)){
-                                      nodes.push(node);
+                                      if(!nodes.includes(node)){
+                                            nodes.push(node);
+                                      }
                                 }
                           //}
                           
