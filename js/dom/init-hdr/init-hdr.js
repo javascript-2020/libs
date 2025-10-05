@@ -181,7 +181,7 @@
                     });
         
                     root.parentNode.replaceChild(node,root);
-                    
+                    debugger;
                     var list    = $(node,'script');
                     console.log('script',list);
                     //list        = list.filter(node=>node.matches('script'));
