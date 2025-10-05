@@ -220,6 +220,7 @@
               
               loader.grp    = async function({nn,version}){
                                                                                 console.log('loader.grp',nn,version);
+                    /*                                                                                
                     var path    = window.location.pathname;
                                                                                 console.log(path);
                     var base    = document.querySelector('base');
@@ -234,10 +235,12 @@
                     }
                     path    = path.slice(1);
                     path    = slashes(path,2);
+                    */
+                    var path;
                     if(!version){
-                          path   += `html/${nn}/${nn}.html`;
+                          path   = `../html/${nn}/${nn}.html`;
                     }else{
-                          path   += `html/${nn}/v${version}/${nn}-v${version}.html`;
+                          path   = `../html/${nn}/v${version}/${nn}-v${version}.html`;
                     }
                                                                                 console.log(path);
                     var {html,error}    = await loader.fetch(path);    
