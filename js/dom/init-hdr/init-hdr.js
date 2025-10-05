@@ -222,7 +222,7 @@
                                                                                 mod.df && console.log('script.id',script.id);
                                                                                 //debugger;
                                 var js    = script.textContent;
-                                define({js,mod:mod2});
+                                define({js,mod,mod2,node});
                           }
                           
                     });
@@ -233,7 +233,7 @@
 
 
               
-              function define({js,mod,node}){
+              function define({js,mod,mod2,node}){
                 
                     js    = `
                           //(()=>{return
@@ -244,7 +244,7 @@
                     `;
                     
                     var fn    = eval(js);
-                    fn({mod,root:node});
+                    fn({mod:mod2,root:node});
 
               }//define
 
