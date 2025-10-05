@@ -2,7 +2,7 @@
         var ct_xyz    = 0;
         var mod_list    = [];
         
-        var mod   = create({name:'root');
+        var mod   = create({name:'root'});
 
         function create({mod:par,name}={}){
 
