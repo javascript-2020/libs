@@ -163,7 +163,7 @@
                     list.forEach(script=>{
                     
                           if(script.src){
-                                                                                mod.df && console.log('script.src',script.src);
+                                                                                mod.df && console.log('script.src',script.src,script.parentNode.nodeName);
                                 mod.stack.add;
                                 var nscript   = document.createElement('script');
                                 var src       = script.src;
