@@ -146,9 +146,9 @@
               async function loader({root,mod}){
 
                     var nn        = root.nodeName.toLowerCase();
-                    var type      = loader.rd(root,'component','libs');
+                    var type      = rd(root,'component','libs');
                     root.removeAttribute('component');
-                    var version   = loader.rd(root,'v');
+                    var version   = rd(root,'v');
                     var slots     = [...root.childNodes];                    
                                                                                 mod.df && console.log(root,nn);
                     switch(type){
