@@ -2,7 +2,7 @@
 debugger;
         var mod   = create();
 
-        function create({mod:par,name}){
+        function create({mod:par,name}={}){
 
               var mod         = {};
               mod.df          = true;
