@@ -11,6 +11,7 @@
               mod.df          = true;
               mod.create      = create;
               mod.build       = build;
+              mod.list        = mod_list;
               
               var stack       = [()=>par && par.stack.complete];
               mod.stack       = stack;
