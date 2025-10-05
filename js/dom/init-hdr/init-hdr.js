@@ -313,24 +313,26 @@
                       
                           let node    = list.shift();
                           
-                          if(node.shadowRoot){
-                                list.push(node.shadowRoot);
-                          }
-                                
-                          if(node.nodeName=='SLOT'){
-                                list    = list.concat(node.assignedNodes());
-                          }
-                                
-                          node.childNodes.forEach(child=>{
-                            
-                                //if(child.assignedSlot)return;
-                                list.push(child);
-                                
-                          });
-                                
-                          if(node.matches && node.matches(css)){
-                                nodes.push(node);
-                          }
+                          if(!node.assignedSlot)
+                                if(node.shadowRoot){
+                                      list.push(node.shadowRoot);
+                                }
+                                      
+                                if(node.nodeName=='SLOT'){
+                                      list    = list.concat(node.assignedNodes());
+                                }
+                                      
+                                node.childNodes.forEach(child=>{
+                                  
+                                      if(child.assignedSlot)return;
+                                      list.push(child);
+                                      
+                                });
+                                      
+                                if(node.matches && node.matches(css)){
+                                      nodes.push(node);
+                                }
+                    }
                           
                     }//while
                     return nodes;
