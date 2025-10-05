@@ -129,7 +129,7 @@
                                             let complete    = ({node:custom})=>{
                                                                     if(name=='hdr')debugger;
                                                                     nodes.splice(index,1,{node,custom});
-                                                                    mod2.stack.add;
+                                                                    //mod2.stack.add;
                                                                     build({root:custom,mod:mod3});
                                                                     
                                                               }//complete
