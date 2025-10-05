@@ -125,6 +125,7 @@
                     switch(type){
                       
                       case 'libs'   : ({html}   = await loader.libs({nn,version}));       break;
+                      case 'grp'    : ({html}   = await loader.grp({nn,version}));        break;
                       
                     }//switch
 
@@ -217,6 +218,34 @@
               }//libs
               
               
+              loader.grp    = async function({nn,version}){
+                
+                    var path    = window.location.pathname;
+                                                                                df && console.log(path);
+                    var base    = document.querySelector('base');
+                    if(base){
+                          var href    = base.href;
+                          var url     = new URL(href);
+                          path        = url.pathname;
+                    }else{
+                          if(path==='srcdoc'){
+                                path    = window.location.pathname;
+                          }
+                    }
+                    path    = path.slice(1);
+                    path    = slashes(path,2);
+                    if(!version){
+                          path   += `html/${nn}/${nn}.html`;
+                    }else{
+                          path   += `html/${nn}/v${version}/${nn}-v${version}.html`;
+                    }
+                                                                                df && console.log(path);
+                    var {html,error}    = await loader.fetch(url);    
+                    return {html,error};
+                    
+              }//grp
+
+              
               loader.fetch    = async function(url){
                 
                     var res     = await fetch(url);
@@ -225,7 +254,26 @@
                 
               }//fetch
               
+
+  //:
+
+  
+              function slashes(path,num){
               
+                    var index   = path.length;
+                    for(var i=0;i<num;i++){
+                    
+                          index   = path.lastIndexOf('/',index);
+                          if(i<num-1){
+                                index--;
+                          }
+                          
+                    }//for
+                    path    = path.slice(0,index+1);
+                    return path;
+                    
+              }//getslash
+  
               
               return mod;
       
