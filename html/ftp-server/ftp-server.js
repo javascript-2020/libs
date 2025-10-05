@@ -47,7 +47,7 @@ ftp-server:d
         if(auto){
               (async()=>{
                                                                                 console.log('connecting',params.host,params.port);
-                    client.ftp.verbose    = verbose;
+                    client.ftp.verbose    = params.verbose;
                     try{
                       
                           await client.access(params);
