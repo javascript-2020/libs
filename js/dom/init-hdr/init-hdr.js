@@ -63,6 +63,8 @@
                     root      ||= document.body;
                     mod2      ||= mod;
                     
+                    
+                    /*
                     var list    = $(root,'[component]');
                     console.log(list);
                     list        = list.map((node,i)=>{
@@ -83,8 +85,11 @@
                     return list;
                     
                     
-                    /*
-                    list        = list.filter(node=>node.matches('[component]'));
+                    */
+                    //list        = list.filter(node=>node.matches('[component]'));
+                    
+                    
+                    
                     var list    = [root];
                     var nodes   = [];
                     while(list.length){
@@ -132,7 +137,7 @@
                     mod2.stack.complete;
                     
                     return nodes;
-                    */
+                    
                     
               }//build
               
@@ -296,25 +301,23 @@
                       
                           let node    = list.shift();
                           
-                          if(!node.assignedSlot){
-                                if(node.shadowRoot){
-                                      list.push(node.shadowRoot);
-                                }
+                          if(node.shadowRoot){
+                                list.push(node.shadowRoot);
+                          }
                                 
-                                if(node.nodeName=='SLOT'){
-                                      list    = list.concat(node.assignedNodes());
-                                }
+                          if(node.nodeName=='SLOT'){
+                                list    = list.concat(node.assignedNodes());
+                          }
                                 
-                                node.childNodes.forEach(child=>{
-                                  
-                                      //if(child.assignedSlot)return;
-                                      list.push(child);
-                                      
-                                });
+                          node.childNodes.forEach(child=>{
+                            
+                                //if(child.assignedSlot)return;
+                                list.push(child);
                                 
-                                if(node.matches && node.matches(css)){
-                                      nodes.push(node);
-                                }
+                          });
+                                
+                          if(node.matches && node.matches(css)){
+                                nodes.push(node);
                           }
                           
                     }//while
