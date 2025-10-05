@@ -1,5 +1,7 @@
 
         var ct_xyz    = 0;
+        var mod_list    = [];
+        
         var mod   = create();
 
         function create({mod:par,name}={}){
@@ -16,6 +18,7 @@
               var ct          = 0;
               var total       = 0;
 
+              mod_list.push(mod);
       
               
               Object.defineProperty(stack,'add',{
