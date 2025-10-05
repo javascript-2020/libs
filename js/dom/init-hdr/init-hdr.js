@@ -8,6 +8,7 @@
 
               var mod         = {};
               mod.ct          = ct_xyz++;
+              mod.name        = name;
               mod.df          = true;
               mod.create      = create;
               mod.build       = build;
@@ -125,7 +126,8 @@
                                               
                                                                     nodes.splice(index,1,{node,custom});
                                                                     mod2.stack.add;
-                                                                    var mod3    = mod2.create({mod:mod2});
+                                                                    var name    = node.nodeName.toLowerCase();
+                                                                    var mod3    = mod2.create({mod:mod2,name});
                                                                     build({root:custom,mod:mod3});
                                                                     
                                                               }//complete
