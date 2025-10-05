@@ -69,7 +69,7 @@
                       
                                         let complete    = ({node:custom})=>{
                                           
-                                                                nodes.splice(i,1,{node,custom});
+                                                                list.splice(i,1,{node,custom});
                                                                 mod2.stack.add;
                                                                 build({node:custom,mod:mod2});
                                                                 
