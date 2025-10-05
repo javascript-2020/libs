@@ -2,14 +2,14 @@
 
         var mod   = create();
 
-        function create(name){
+        function create({mod:par,name}){
 
               var mod         = {};
               mod.df          = true;
               mod.create      = create;
               mod.build       = build;
               
-              var stack       = [];
+              var stack       = [()=>par.stack.complete];
               mod.stack       = stack;
               
               var ct          = 0;
@@ -120,7 +120,8 @@
                                               
                                                                     nodes.splice(index,1,{node,custom});
                                                                     mod2.stack.add;
-                                                                    build({node:custom,mod:mod2});
+                                                                    var mod3    = mod2.create(mod2);
+                                                                    build({node:custom,mod:mod3});
                                                                     
                                                               }//complete
                                             var promise     = loader({root:node,mod:mod2}).then(complete);
@@ -220,7 +221,27 @@
                     return {node};
                     
               }//loader
+
+
               
+              function define({js,mod,node}){
+                
+                    js    = `
+                          (()=>{return
+                          
+                                ${js}
+                                
+                          })();
+                    `;
+                    
+                    var fn    = eval(js);
+                    fn({mod,root:node});
+
+              }//define
+
+
+
+
 
               loader.libs   = async function({nn,version}){
                 
@@ -359,11 +380,6 @@
               }//rd
 
               
-              function define({js,mod}){
-                
-                    eval(js);
-                
-              }//define
 
               
               return mod;
