@@ -212,7 +212,7 @@
                                                                                 mod.df && console.log('script.id',script.id);
                                                                                 //debugger;
                                 var js    = script.textContent;
-                                eval(js);
+                                define({js,mod});
                           }
                           
                     });
@@ -222,17 +222,6 @@
               }//loader
               
 
-              loader.rd   = function(node,name,def){
-              
-                    var v   = def;
-                    if(node.hasAttribute(name)){
-                          v   = node.getAttribute(name)||v;
-                    }
-                    return v;
-                    
-              }//rd
-
-              
               loader.libs   = async function({nn,version}){
                 
                     var url;
@@ -357,6 +346,24 @@
                     return str;
                 
               }//gen
+
+              
+              function rd(node,name,def){
+              
+                    var v   = def;
+                    if(node.hasAttribute(name)){
+                          v   = node.getAttribute(name)||v;
+                    }
+                    return v;
+                    
+              }//rd
+
+              
+              function define({js,mod}){
+                
+                    eval(js);
+                
+              }//define
 
               
               return mod;
