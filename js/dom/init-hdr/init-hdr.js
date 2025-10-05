@@ -183,6 +183,7 @@
                     root.parentNode.replaceChild(node,root);
                     
                     var list    = $(node,'script');
+                    console.log('script',list);
                     //list        = list.filter(node=>node.matches('script'));
                     //var list              = node.querySelectorAll('script');
                     
