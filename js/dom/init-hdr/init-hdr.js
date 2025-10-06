@@ -127,9 +127,8 @@
                                             let mod3    = mod2.create({mod:mod2,name});
                                             let index       = nodes.length;
                                             let complete    = ({node:custom})=>{
-                                                                    if(name=='hdr')debugger;
+                                                                    if(name=='hdr')
                                                                     nodes.splice(index,1,{node,custom});
-                                                                    //mod2.stack.add;
                                                                     build({root:custom,mod:mod3});
                                                                     
                                                               }//complete
