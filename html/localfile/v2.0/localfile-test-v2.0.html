@@ -11,17 +11,27 @@
                                                                                 console.log('https-file test');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
-        var ext,$,datatype,jsonblob,menumod,keydown
+        var ext,$,datatype,menumod,keydown
+        ;
+        
+        var menu
         ;
         
         var localfile;
-        
+
+
+  //:
+  
+  
+        mod.stack.add   = init;
         
         async function init(){
                                                                                 console.log('init');
+              menu        = mod.menumod();
+              
               localfile   = mod.localfile;
               
-              localfile.initmod({menumod,editor,$,ext});
+              localfile.initmod({menu,editor,$,ext});
               
               await localfile.init();
               
@@ -44,7 +54,6 @@
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
-              'js/io/jsonblob/jsonblob.js',
               'js/dom/menumod/menumod.js',
               'js/dom/keydown/keydown.js'
         );
