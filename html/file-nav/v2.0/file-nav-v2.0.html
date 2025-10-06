@@ -270,6 +270,8 @@ mod.filenav   = function({mod,root,node}){
                                                                                 debug('init');
               newfile   = mod['new-file'];
               
+              if(!newfile)debugger;
+              
               newfile.initmod({$});
               
               newfile.init();
