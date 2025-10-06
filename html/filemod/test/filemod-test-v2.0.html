@@ -31,20 +31,19 @@
                                                                                 console.log('init');
 
 
-              filemod   = mod.filemod;
-              
-              
               keydown.add(kd);
               
               menu                   = menumod();
               
-              filemod.initmod({ext,$,menumod,menu,complete});
               
+              filemod   = mod.filemod;
+              
+              filemod.initmod({ext,$,menumod,menu,complete});
 
               await filemod.init();
               
               
-              initdom();
+              initdom(document.body);
 
 
         
