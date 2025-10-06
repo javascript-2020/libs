@@ -137,7 +137,7 @@
                                             let name        = node.nodeName.toLowerCase();
                                             let mod3        = mod2.create({mod:mod2,name});
                                             let index       = nodes.length;
-                                            let complete    = ({node:custom})=>{
+                                            let complete    = async({node:custom})=>{
                                               
                                                                     nodes.splice(index,1,{node,custom});
                                                                     mod3.stack.add;
