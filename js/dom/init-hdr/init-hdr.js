@@ -18,7 +18,7 @@
               //mod.list        = mod_list;
               
               var stack       = []
-              //mod.stack       = stack;
+              mod.stack       = stack;
               
               var ct          = 0;
               var total       = 0;
