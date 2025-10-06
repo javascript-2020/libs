@@ -192,9 +192,7 @@
                         <input value=del type=button>
                   </div>
                   
-                  <file-nav api>
-                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-                  </file-nav>
+                  <file-nav component v2.0></file-nav>
 
             </div>
             
@@ -203,10 +201,10 @@
       <script>
 
       
-mod.ftp_server   = function(){
+mod.ftp_server   = function({mod,root,node}){
   
   var obj   = {
-        version   : 'v1.0'
+        version   : 'v2.0'
   };
       
         var df=true;
@@ -263,7 +261,7 @@ mod.ftp_server   = function(){
   
         obj.init    = async function(){
           
-              filenav                   = mod.filenav();
+              filenav                   = mod.filenav;
               
               filenav.initmod({ext,$,datatype});
               filenav.rd.params         = rd.params;
