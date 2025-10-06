@@ -200,8 +200,6 @@ mod.github    = function({mod,root,node}){
         ;
         var menu,focus
         ;
-        var par_init
-        ;
         
         obj.initmod   = function(params){
           
@@ -211,8 +209,6 @@ mod.github    = function({mod,root,node}){
               menu          = params.menu;
               focus         = params.focus;
 
-              par_init      = params.init;
-              
         }//initmod
 
                             
@@ -549,7 +545,9 @@ mod.github    = function({mod,root,node}){
               //  only needs to return undefined to stop keydown stack from running
               
               if(e.key=='Escape'){
-                    focus();
+                    if(typeof focus=='function'){
+                          focus();
+                    }
                     return false;
               }
               
