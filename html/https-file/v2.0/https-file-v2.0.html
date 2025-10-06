@@ -95,7 +95,7 @@
                         <input value=del type=button>
                   </div>
                   
-                  <file-nav component></file-nav-api>
+                  <file-nav component v2.0></file-nav>
 
             </div>
             
@@ -114,18 +114,17 @@ mod.httpsfile   = function({mod,root,node}){
         Object.defineProperty(obj,'df',{get:()=>df,set:value=>df=value});
                                                                                 debug(obj.version);
 
-        var editor,$,datatype,menu,source
+        var $,datatype,menu,source
         ;
         
         obj.initmod   = function(params){
-          
-              editor        = params.editor;
+
               $             = params.$;
               datatype      = params.datatype;
 
               menu          = params.menu;
               source        = params.source;
-              
+
         }//initmod
 
         
@@ -161,7 +160,7 @@ mod.httpsfile   = function({mod,root,node}){
         obj.init    = async function(){
 
           
-              filenav                   = mod.filenav;
+              filenav                   = mod['file-nav'];
               
               filenav.initmod({ext,$,datatype});
               filenav.rd.params         = rd.params;
