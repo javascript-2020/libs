@@ -229,7 +229,7 @@
                                                                                 mod.df && console.log('script.id',script.id);
                                                                                 //debugger;
                                 var js    = script.textContent;
-                                define({js,mod,mod2,node});
+                                define({js,mod,mod2,node,root});
                           }
                           
                     });
@@ -240,7 +240,7 @@
 
 
               
-              function define({js,mod,mod2,node}){
+              function define({js,mod,mod2,node,root}){
                 
                     js    = `
                           //(()=>{return
@@ -252,7 +252,7 @@
                     
                     var fn      = eval(js);
                     var obj     = fn({mod:mod2,root:node});
-                    var name    = node.nodeName.toLowerCase();
+                    var name    = root.nodeName.toLowerCase();
                     mod[name]   = obj;
 
               }//define
