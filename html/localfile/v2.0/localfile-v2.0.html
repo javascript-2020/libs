@@ -124,7 +124,7 @@ mod.localfile   = function({mod,root,node}){
                     filename    = cur;
               }
               
-              var txt     = editor.getValue();
+              var blob    = source();
               
               var file    = await savefile(filename,txt);
               
@@ -170,12 +170,12 @@ mod.localfile   = function({mod,root,node}){
         }//load
         
                 
-        obj.save    = function(file,txt){return save(file,txt)}
+        obj.save    = function(file,blob){return save(file,blob)}
         
-        async function save(file,txt){debugger;
+        async function save(file,blob){
           
               var filename    = file.filename;
-              var result      = await savefile(filename,txt);
+              var result      = await savefile(filename,blob);
               if(result===false){
                     return;
               }
@@ -258,9 +258,8 @@ mod.localfile   = function({mod,root,node}){
         }//loadfile
         
         
-        function savefile(filename,txt){
+        function savefile(filename,blob){
           
-              var blob      = new Blob([txt]);
               var url       = window.URL.createObjectURL(blob);
               var a         = document.createElement('a');
               a.href        = url;
