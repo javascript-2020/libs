@@ -27,7 +27,7 @@
               
               if(par){
                     par.stack.add;
-                    mod.stack.push(par.stack.complete);
+                    mod.stack.push(()=>par.stack.complete);
               }
 
               
