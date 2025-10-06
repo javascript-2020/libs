@@ -1,10 +1,14 @@
 
+        var mod;
+        
+(()=>{
+  
         //var ct_xyz    = 0;
         //var mod_list    = [];
         
-        var mod   = create({name:'root'});
+        mod   = create({name:'root'});
         
-        window.onload   = mod.build;
+        window.addEventListener('load',mod.build);
 
 
         function create({mod:par,name}={}){
@@ -411,7 +415,7 @@
 
 
 
-
+})();
 
 
 
