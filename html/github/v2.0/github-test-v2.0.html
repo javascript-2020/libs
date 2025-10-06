@@ -37,7 +37,7 @@
               
               github          = mod.github;
               
-              github.initmod({menumod});
+              github.initmod({ext,$,menu});
               
               github.load.complete    = complete.load;
               github.save.complete    = complete.save;
@@ -94,6 +94,8 @@
 
               var root    = rootnode;
         
+              menu.add.style();
+              
               github.initdom(root);
 
               
