@@ -122,12 +122,11 @@
                                                                                       
                                 if(node.hasAttribute){
                                       if(node.hasAttribute('component')){
-                                            debugger;
                                             let name    = node.nodeName.toLowerCase();
                                             let mod3    = mod2.create({mod:mod2,name});
                                             let index       = nodes.length;
                                             let complete    = ({node:custom})=>{
-                                                                    if(name=='hdr')
+                                              
                                                                     nodes.splice(index,1,{node,custom});
                                                                     build({root:custom,mod:mod3});
                                                                     
