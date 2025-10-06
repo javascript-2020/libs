@@ -168,7 +168,7 @@
                     var nn        = root.nodeName.toLowerCase();
                     var type      = rd(root,'component','libs');
                     root.removeAttribute('component');
-                    var version   = rd(root,'v');
+                    var version   = rd.version(root);
                     var slots     = [...root.childNodes];                    
                                                                                 mod.df && console.log(root,nn);
                     var html;
@@ -411,6 +411,24 @@
                     return v;
                     
               }//rd
+              
+              
+              rd.version    = function(node){
+                
+                    for(var attr of root.attributes){
+                    
+                          var name    = attr.name;
+                          if(name[0]=='v'){
+                                var n1    = name[1];
+                                if(n1>='0' && n1<='9'){
+                                      return name;
+                                }
+                                
+                          }
+                          
+                    }//for
+                    
+              }//version
 
               
 
