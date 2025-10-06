@@ -18,7 +18,7 @@
               //mod.list        = mod_list;
               
               var stack       = []
-              mod.stack       = stack;
+              //mod.stack       = stack;
               
               var ct          = 0;
               var total       = 0;
@@ -77,6 +77,7 @@
                 
                     root      ||= document.body;
                     mod2      ||= mod;
+
                     
                     /*
                     var list    = $(root,'[component]');
@@ -137,7 +138,6 @@
                                                                     nodes.splice(index,1,{node,custom});
                                                                     mod3.stack.add;
                                                                     build({root:custom,mod:mod3});
-                                                                    //mod2.stack.complete;
                                                                     
                                                               }//complete
                                             var promise     = loader({root:node,mod:mod2,mod2:mod3}).then(complete);
@@ -150,7 +150,7 @@
                     }//while
                     await Promise.all(nodes);
                     
-                    console.log('build.complete',root.nodeName);
+                                                                                //console.log('build.complete',root.nodeName);
                     mod2.stack.complete;
                     
                     return nodes;
@@ -205,7 +205,7 @@
                     root.parentNode.replaceChild(node,root);
                     
                     var list    = $(node,'script');
-                                                                                console.log('script',list);
+                                                                                //console.log('script',list);
                     list.forEach(script=>{
                     
                           if(script.src){
