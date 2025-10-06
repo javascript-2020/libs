@@ -259,7 +259,7 @@
                     if(!version){
                           url           = `https://libs.ext-code.com/html/${nn}/${nn}.html`;
                     }else{
-                          url           = `https://libs.ext-code.com/html/${nn}/v${version}/${nn}-v${version}.html`;
+                          url           = `https://libs.ext-code.com/html/${nn}/${version}/${nn}-${version}.html`;
                     }
                     var {html,error}    = await loader.fetch(url);    
                     return {html,url,error};
@@ -289,7 +289,7 @@
                     if(!version){
                           url   = `../html/${nn}/${nn}.html`;
                     }else{
-                          url   = `../html/${nn}/v${version}/${nn}-v${version}.html`;
+                          url   = `../html/${nn}/${version}/${nn}-${version}.html`;
                     }
                                                                                 console.log(url);
                     var {html,error}    = await loader.fetch(url);    
