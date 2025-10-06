@@ -1,6 +1,6 @@
 
-        var ct_xyz    = 0;
-        var mod_list    = [];
+        //var ct_xyz    = 0;
+        //var mod_list    = [];
         
         var mod   = create({name:'root'});
         
@@ -10,12 +10,12 @@
         function create({mod:par,name}={}){
 
               var mod         = {};
-              mod.ct          = ct_xyz++;
+              //mod.ct          = ct_xyz++;
               mod.name        = name;
-              mod.df          = true;
+              mod.df          = false;
               mod.create      = create;
               mod.build       = build;
-              mod.list        = mod_list;
+              //mod.list        = mod_list;
               
               var stack       = []
               mod.stack       = stack;
@@ -23,7 +23,7 @@
               var ct          = 0;
               var total       = 0;
 
-              mod_list.push(mod);
+              //mod_list.push(mod);
               
               /*
               if(par){
