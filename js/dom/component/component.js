@@ -171,23 +171,32 @@
                     var version   = rd(root,'v');
                     var slots     = [...root.childNodes];                    
                                                                                 mod.df && console.log(root,nn);
+                    var html;
+                    var url;
+                    var error;
+                    
                     switch(type){
                       
-                      case 'libs'   : ({html}   = await loader.libs({nn,version}));       break;
-                      case 'grp'    : ({html}   = await loader.grp({nn,version}));        break;
+                      case 'libs'   : ({html,url,error}   = await loader.libs({nn,version}));       break;
+                      case 'grp'    : ({html,url,error}   = await loader.grp({nn,version}));        break;
                       
                     }//switch
 
+                    if(error){
+                    }
+                    
                     html            = html.trim();
                     
                     var div         = document.createElement('div');
                     div.setHTMLUnsafe(html);
                     var node        = div.firstElementChild;
                                                                                 if(!node)debugger;
+                    root.__root     = node;
+                    
                     node.__html     = html;
                     node.__root     = root;
                     
-                    root.__root     = node;
+                    node.setAttribute('url',url);
 
                     for(var attr of root.attributes){
                       
@@ -207,6 +216,7 @@
                     });
         
                     root.parentNode.replaceChild(node,root);
+                    
                     
                     var list    = $(node,'script');
                                                                                 //console.log('script',list);
@@ -242,29 +252,7 @@
                     
               }//loader
 
-
               
-              function define({js,mod,mod2,node,root}){
-                
-                    js    = `
-                          //(()=>{return
-                          
-                                ${js}
-                                
-                          //})();
-                    `;
-                    
-                    var fn      = eval(js);
-                    var obj     = fn({mod:mod2,root:node});
-                    var name    = root.nodeName.toLowerCase();
-                    mod[name]   = obj;
-
-              }//define
-
-
-
-
-
               loader.libs   = async function({nn,version}){
                 
                     var url;
@@ -274,7 +262,7 @@
                           url           = `https://libs.ext-code.com/html/${nn}/v${version}/${nn}-v${version}.html`;
                     }
                     var {html,error}    = await loader.fetch(url);    
-                    return {html,error};
+                    return {html,url,error};
                     
               }//libs
               
@@ -297,15 +285,15 @@
                     path    = path.slice(1);
                     path    = slashes(path,2);
                     */
-                    var path;
+                    var url;
                     if(!version){
-                          path   = `../html/${nn}/${nn}.html`;
+                          url   = `../html/${nn}/${nn}.html`;
                     }else{
-                          path   = `../html/${nn}/v${version}/${nn}-v${version}.html`;
+                          url   = `../html/${nn}/v${version}/${nn}-v${version}.html`;
                     }
-                                                                                console.log(path);
-                    var {html,error}    = await loader.fetch(path);    
-                    return {html,error};
+                                                                                console.log(url);
+                    var {html,error}    = await loader.fetch(url);    
+                    return {html,url,error};
                     
               }//grp
 
@@ -320,6 +308,25 @@
               
 
   //:
+
+
+              function define({js,mod,mod2,node,root}){
+                
+                    js    = `
+                          //(()=>{return
+                          
+                                ${js}
+                                
+                          //})();
+                    `;
+                    
+                    var fn      = eval(js);
+                    var obj     = fn({mod:mod2,root:node});
+                    var name    = root.nodeName.toLowerCase();
+                    mod[name]   = obj;
+
+              }//define
+
 
   
               function $(root,css){
