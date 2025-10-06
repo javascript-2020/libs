@@ -25,29 +25,12 @@
             
             <div id=root style='visibility:hidden'>
             
-                  <localfile api>
-                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-                  </localfile>
-      
-                  <https-file api>
-                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-                  </https-file>
-
-                  <github api>
-                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-                  </github>
-                  
-                  <db-files api>
-                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-                  </db-files>
-                  
-                  <google-storage>
-                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-                  </google-storage>
-
-                  <ftp-server api>
-                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-                  </ftp-server>
+                  <localfile component v2.0></localfile>
+                  <https-file component v2.0></https-file>
+                  <github component v2.0></github>
+                  <db-files component v2.0></db-files>
+                  <google-storage component v2.0></google-storage>
+                  <ftp-server component v2.0></ftp-server>
                   
             </div>
 
@@ -58,9 +41,7 @@
 
 
       
-mod.filemod   = filemod;
-
-function filemod(){
+mod.filemod   = function({mod,root,node}){
   
   var obj       = {
         version   : 'v1.0'
@@ -115,22 +96,22 @@ function filemod(){
               
         obj.init    = async function(){
         
-            localfile                 = mod.localfile();
+            localfile                 = mod.localfile;
             obj.localfile             = localfile;
-            github                    = mod.github();
+            github                    = mod.github;
             obj.github                = github;
-            httpsfile                 = mod.httpsfile();
+            httpsfile                 = mod.httpsfile;
             obj.httpsfile             = httpsfile;
-            dbfiles                   = mod['db-files']();
+            dbfiles                   = mod['db-files'];
             obj.dbfiles               = dbfiles;
-            googlestorage             = mod['google-storage']();
-            ftpserver                 = mod.ftp_server();
+            googlestorage             = mod['google-storage'];
+            ftpserver                 = mod.ftp_server;
 
-            localfile.initmod({ext,$,menu,filemod:obj,source,focus,editor});
-            github.initmod({ext,$,menu,filemod:obj,source,focus,editor});
-            httpsfile.initmod({ext,$,menu,filemod:obj,source,focus,editor});
-            dbfiles.initmod({ext,$,datatype,menumod,menu,filemod:obj,source,focus});
-            googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source,focus});
+            localfile.initmod({ext,$,menu,filemod:obj,source});
+            github.initmod({ext,$,menu,filemod:obj,source});
+            httpsfile.initmod({ext,$,menu,filemod:obj,source});
+            dbfiles.initmod({ext,$,datatype,menumod,menu,filemod:obj,source});
+            googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source});
             ftpserver.initmod({ext,$,datatype,menu,source,log});
             
             await localfile.init();
