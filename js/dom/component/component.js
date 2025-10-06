@@ -78,7 +78,7 @@
 
               
               async function build({root,mod:mod2}={}){
-                
+                                                                                console.log(mod.name,'build');
                     root      ||= document.body;
                     mod2      ||= mod;
 
