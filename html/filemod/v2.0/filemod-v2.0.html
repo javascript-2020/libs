@@ -110,30 +110,30 @@ mod.filemod   = function({mod,root,node}){
             
             googlestorage             = mod['google-storage'];
             
-            ftpserver                 = mod.ftp_server;
+            ftpserver                 = mod['ftp-server']
 
 
             localfile.initmod({ext,$,menu,filemod:obj,source});
-            github.initmod({ext,$,menu,filemod:obj,source});
             httpsfile.initmod({ext,$,menu,filemod:obj,source});
+            github.initmod({ext,$,menu,filemod:obj,source});
             dbfiles.initmod({ext,$,datatype,menumod,menu,filemod:obj,source});
             googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source});
             ftpserver.initmod({ext,$,datatype,menu,source,log});
 
             
             await localfile.init();
-            await github.init();
             await httpsfile.init();
+            await github.init();
             await dbfiles.init();
             await googlestorage.init();
             await ftpserver.init();
             
             localfile.load.complete           = complete.load;
             localfile.save.complete           = complete.save;
-            github.load.complete              = complete.load;
-            github.save.complete              = complete.save;
             httpsfile.load.complete           = complete.load;
             httpsfile.save.complete           = complete.save;
+            github.load.complete              = complete.load;
+            github.save.complete              = complete.save;
             dbfiles.load.complete             = complete.load;
             dbfiles.save.complete             = complete.save;
             googlestorage.load.complete       = complete.load;
