@@ -17,13 +17,18 @@
               mod.build       = build;
               mod.list        = mod_list;
               
-              var stack       = [()=>par && par.stack.complete];
+              var stack       = []
               mod.stack       = stack;
               
               var ct          = 0;
               var total       = 0;
 
               mod_list.push(mod);
+              
+              par.stack.add;
+              par && mod.stack.push(par.stack.complete);
+
+
       
               
               Object.defineProperty(stack,'add',{
