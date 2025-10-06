@@ -3,23 +3,27 @@
 <html>
 
       <head>
-      
-            <script>
+
+            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
+
+            <script init>
                                                                                 console.clear();
                                                                                 console.log('https-file test');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
-        var mod   = {};
-
-
+        var ext,$,datatype,jsonblob,menumod,keydown
+        ;
+        
         var localfile;
         
         
         function init(){
           
-              localfile   = mod.localfile();          
+              localfile   = mod.localfile
+              ;
               localfile.initmod({menumod,editor,$,ext});
-              localfile.init();
+              
+              await localfile.init();
               
               localfile.load.complete   = complete.load;
               localfile.save.complete   = complete.save;
@@ -27,68 +31,30 @@
               
               initdom();
               
-              
         }//init
 
 
-        init.stack            = [];
-        init.stack.ct         = 0;
-        init.stack.total      = 1;
-        init.stack.mode       = '';
-        init.stack.complete   = false;
-        Object.defineProperty(init.stack,'add',{get:()=>{console.log('add');
-              init.stack.total++;
-              init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
-        }});
-        Object.defineProperty(init.stack,'complete',{get:()=>{console.log('complete');
-              init.stack.ct++;
-              init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
-              init.stack.ct>=init.stack.total && init();
-        }});
-        
-        //  (typeof init!='undefined' && init?.stack && init.stack.add)
-        //  (typeof init!='undefined' && init?.stack && init.stack.complete)
-  
-        
-        init.complete   = function(){
-          
-              init.complete.stack.forEach(fn=>fn());
-              
-        }//complete
-        
-        init.complete.stack   = [];
-        init.complete.add     = fn=>init.complete.stack.push(fn);
-      
-            </script>
-            
-            <script ext>
 
-        var ext
-        ;
-        var $,datatype,jsonblob,menumod,keydown
-        ;
+(async()=>{
 
-        init.stack.add;
+        mod.stack.add;
         
-        fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
-          .then(res=>res.text().then(async txt=>{
+        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
           
-              ext   = eval(txt);
-              
-              var promise   = ext.load.libs(
-                    'js/dom/$.js.api','js/core/datatype.js','js/io/jsonblob/jsonblob.js','js/dom/menumod/menumod.js',
-                    'js/dom/keydown/keydown.js'
-              );
-              [$,datatype,menumod]   = await promise;
+        var promise   = ext.load.libs(
+              'js/dom/$.js.api','js/core/datatype.js','js/io/jsonblob/jsonblob.js','js/dom/menumod/menumod.js',
+              'js/dom/keydown/keydown.js'
+        );
+        [$,datatype,menumod]   = await promise;
   
               
-              window.$          = $;
-              window.datatype   = datatype;
+        window.$          = $;
+        window.datatype   = datatype;
 
               
-              init.stack.complete;
+        mod.stack.complete;
               
-          }));
+})();
     
             </script>
 
@@ -104,12 +70,11 @@
       
       <body>
 
-            <localfile-api>
-                  <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-            </localfile-api>
+            <localfile component v2.0></localfile>
 
       
             <script>
+
 
         function initdom(){
                                                                                 console.log('initdom');
@@ -119,8 +84,6 @@
         }//initdom
         
         
-        
-        init.stack.complete;
         
             </script>
             
