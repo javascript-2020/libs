@@ -154,7 +154,7 @@
                     }//while
                     await Promise.all(nodes);
                     
-                                                                                //console.log('build.complete',root.nodeName);
+                                                                                console.log('build.complete',mod2.name,root.nodeName);
                     mod2.stack.complete;
                     
                     return nodes;
