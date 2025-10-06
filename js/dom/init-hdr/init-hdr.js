@@ -130,13 +130,14 @@
                                                                                       
                                 if(node.hasAttribute){
                                       if(node.hasAttribute('component')){
-                                            let name    = node.nodeName.toLowerCase();
-                                            let mod3    = mod2.create({mod:mod2,name});
+                                            let name        = node.nodeName.toLowerCase();
+                                            let mod3        = mod2.create({mod:mod2,name});
                                             let index       = nodes.length;
                                             let complete    = ({node:custom})=>{
                                               
                                                                     nodes.splice(index,1,{node,custom});
                                                                     build({root:custom,mod:mod3});
+                                                                    mod2.stack.complete;
                                                                     
                                                               }//complete
                                             var promise     = loader({root:node,mod:mod2,mod2:mod3}).then(complete);
