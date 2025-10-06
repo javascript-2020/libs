@@ -108,8 +108,8 @@ mod['db-files']   = function({mod,root,node}){
 
               db.df                     = true;
               
-              dblist                    = mod.dblist();
-              filenav                   = mod.filenav;
+              dblist                    = mod['db-list'];
+              filenav                   = mod['file-nav'];
 
 
               dblist.initmod({ext,$,datatype,menu:menu.dbfiles,db});
