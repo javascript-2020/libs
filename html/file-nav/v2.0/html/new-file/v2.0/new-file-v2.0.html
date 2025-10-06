@@ -57,11 +57,16 @@ mod.newfile   = function({mod,root,node}){
   
   var obj   = {};
   
-  
-        obj.init    = function(){
-        }//init
+        var $
+        ;
         
-  
+        obj.initmod   = function(params){
+        
+              $ = params.$;
+              
+        }//initmod
+
+        
   //:
   
   
@@ -77,7 +82,14 @@ mod.newfile   = function({mod,root,node}){
         var on    = {};
         var btn   = {};
         
-        
+
+  //:
+  
+  
+        obj.init    = function(){
+        }//init
+
+
   //:
   
   
