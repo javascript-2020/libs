@@ -205,10 +205,10 @@
 
 
 
-mod['google-storage']   = function(){
+mod['google-storage']   = function({mod,root,node}){
   
   var obj   = {
-        version   : 'v1.0'
+        version   : 'v2.0'
   };
   
   
@@ -251,7 +251,7 @@ mod['google-storage']   = function(){
   //:
 
   
-        obj.init    = function(){
+        obj.init    = async function(){
           
               libs();
               
