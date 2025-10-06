@@ -26,11 +26,11 @@
 
         mod.stack.add    = init;
   
-        async function init(){
+        async function init(){debugger;
                                                                                 console.log('init');
               menumod         = mod.menumod();
               
-              httpsfile       = mod.httpsfile;
+              httpsfile       = mod['https-file'];
               
               
               httpsfile.initmod({menumod,$,datatype});
