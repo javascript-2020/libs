@@ -78,8 +78,6 @@
                     root      ||= document.body;
                     mod2      ||= mod;
                     
-                    mod2.stack.add;
-                    
                     /*
                     var list    = $(root,'[component]');
                     console.log(list);
@@ -137,6 +135,7 @@
                                             let complete    = ({node:custom})=>{
                                               
                                                                     nodes.splice(index,1,{node,custom});
+                                                                    mod2.stack.add;
                                                                     build({root:custom,mod:mod3});
                                                                     //mod2.stack.complete;
                                                                     
