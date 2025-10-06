@@ -39,6 +39,9 @@
               
               github.initmod({menumod});
               
+              github.load.complete    = complete.load;
+              github.save.complete    = complete.save;
+              
               await github.init();
               
               
@@ -81,6 +84,12 @@
       <script>
 
 
+        var complete    = {};
+        
+
+  //:
+  
+  
         function initdom(rootnode){
 
               var root    = rootnode;
@@ -94,7 +103,17 @@
   //:
   
   
-</script>
+        complete.load   = function(file,blob){
+        }//load
+        
+        
+        complete.save   = function(file){
+        }//save
+        
+        
+      </script>
+      
+</html>
 
 
 
