@@ -18,8 +18,6 @@
 
         async function init(){
         
-              await libs();
-              
               log   = mod.log();
               
               $.initmod({ext,datatype});
@@ -31,11 +29,11 @@
               
         }//init
 
-        init.stack    = mod.stack;
         
-        
-        async function libs(){
+        (async()=>{
 
+              mod.stack.add;
+              
               ({ext}    = await import('https://libs.ext-code.com/js/core/ext-loader/ext-loader.m.js'));
         
               var result   = await ext.load.libs(
@@ -44,7 +42,9 @@
               );
               [$,datatype]   = result;
               
-        }//libs
+              mod.stack.complete;
+              
+        })();
 
         
       </script init>
