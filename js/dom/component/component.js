@@ -303,10 +303,16 @@
                 
                     var parent    = rd(root,'parent');
                     var par       = $.parent(root,parent);
+                    var pversion    = rd.version(par);
                     var url       = rd(par,'url');
 
-                    var i         = url.lastIndexOf('/');
-                    url           = url.slice(0,i+1);
+                    var num       = 1;
+                    if(pversion){
+                          num   = 2;
+                    }
+                    url           = slashes(url,num);
+                    //var i         = url.lastIndexOf('/');
+                    //url           = url.slice(0,i+1);
                     
                     var src;
                     if(version){
