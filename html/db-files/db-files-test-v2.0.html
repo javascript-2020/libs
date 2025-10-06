@@ -1,0 +1,166 @@
+
+
+<html>
+
+      <head>
+      
+            <script>
+                                                                                console.clear();
+                                                                                console.log('https-file test');
+                                                                                console.log();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+        var mod   = {};
+        
+        var ext,$,datatype,menumod,keydown
+        ;
+        
+        var dbfiles;
+        var menu;
+
+        
+        var complete    = {};
+
+
+  //:
+  
+  
+        async function init(){
+                                                                                console.log('init');
+              menumod         = menumod();
+              
+              dbfiles         = mod['db-files']();
+              
+              
+              dbfiles.initmod({menumod,$,datatype});
+              
+        
+              await dbfiles.init();
+              
+              
+              initdom();
+  
+  
+              var txt     = 'helloworld';
+              var blob    = new Blob([txt]);
+              await dbfiles.save('/test.txt',blob);
+              
+              
+              
+              var blob    = await dbfiles.load('/test.txt');
+              var txt     = await blob.text();
+              console.log(txt);
+              //alert(txt);
+              
+              
+              
+        }//init
+  
+  
+        init.stack            = [];
+        init.stack.ct         = 0;
+        init.stack.total      = 1;
+        init.stack.mode       = '';
+        init.stack.complete   = false;
+        Object.defineProperty(init.stack,'add',{get:()=>{console.log('add');
+              init.stack.total++;
+              init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
+        }});
+        Object.defineProperty(init.stack,'complete',{get:()=>{console.log('complete');
+              init.stack.ct++;
+              init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
+              init.stack.ct>=init.stack.total && init();
+        }});
+        
+        //  (typeof init!='undefined' && init?.stack && init.stack.add)
+        //  (typeof init!='undefined' && init?.stack && init.stack.complete)
+  
+        
+        init.complete   = function(){
+          
+              init.complete.stack.forEach(fn=>fn());
+              
+        }//complete
+        
+        init.complete.stack   = [];
+        init.complete.add     = fn=>init.complete.stack.push(fn);
+      
+            </script>
+
+
+            <script ext>
+
+(async()=>{
+  
+        init.stack.add;
+        
+        var token   = localStorage['github-token'];
+        var url;
+        var headers;
+        if(token){
+              url       = 'https://api.github.com/repos/javascript-2020/ext-code/contents/ext-loader.js';
+              headers   = {accept:'application/vnd.github.raw',authorization:`bearer ${token}`};
+        }else{
+              url       = 'https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js';
+        }
+        
+        await fetch(url,{headers}).then(res=>res.text()).then(complete);
+
+            
+        async function complete(txt){
+
+              ext           = eval(txt);
+              var promise   = ext.load.libs(
+                    'js/dom/$.js.api',
+                    'js/core/datatype.js',
+                    'js/dom/menumod/menumod.js',
+                    'js/dom/keydown/keydown.js',
+              );
+              [$,datatype,menumod,keydown,encrypt]   = await promise;
+
+              init.stack.complete;
+
+        }//ext_fn
+
+})();
+            </script ext>
+            
+      
+            <style>
+            
+  .icon
+    {width:30px;height:30px;border:1px solid gray;cursor:pointer;border-radius:3px;box-sizing:border-box;}
+    
+            </style>
+            
+      </head>
+      
+      
+      <body>
+      
+      
+            <db-files api>
+                  <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+            </db-files>
+      
+      
+      </body>
+      
+      <script>
+      
+        function initdom(){
+          
+              var root    = document.body;
+              
+              dbfiles.initdom(root);
+              
+              
+              
+        }//initdom
+        
+        init.stack.complete;
+        
+      </script>
+      
+</html>
+
+
