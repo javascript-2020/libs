@@ -31,14 +31,14 @@
                     mod.stack.push(()=>par.stack.complete);
               }
               */
-              
+                            
               Object.defineProperty(stack,'add',{
                     get:()=>{
                 
                           total++;
                                                                                       if(mod.df){
                                                                                             console.log('add',name,ct,total);
-                                                                                            //console.trace();
+                                                                                            console.trace();
                                                                                       }
                     },//get
                     set:v=>{
@@ -47,7 +47,7 @@
                           stack.push(v);
                                                                                       if(mod.df){
                                                                                             console.log('add',name,ct,total);
-                                                                                            //console.trace();
+                                                                                            console.trace();
                                                                                       }
                     }//set
               });
@@ -57,7 +57,7 @@
                     ct++;
                                                                                       if(mod.df){
                                                                                             console.log('complete',name,ct,total);
-                                                                                            //console.trace();
+                                                                                            console.trace();
                                                                                       }
                     if(ct!=total){
                           return;
