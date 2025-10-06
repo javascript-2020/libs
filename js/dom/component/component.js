@@ -42,7 +42,9 @@
                           total++;
                                                                                       if(mod.df){
                                                                                             console.log('add',name,ct,total);
+                                                                                            console.groupCollapsed('Trace Info');
                                                                                             console.trace();
+                                                                                            console.groupEnd();
                                                                                       }
                     },//get
                     set:v=>{
@@ -51,7 +53,9 @@
                           stack.push(v);
                                                                                       if(mod.df){
                                                                                             console.log('add',name,ct,total);
+                                                                                            console.groupCollapsed('Trace Info');
                                                                                             console.trace();
+                                                                                            console.groupEnd();
                                                                                       }
                     }//set
               });
@@ -61,7 +65,9 @@
                     ct++;
                                                                                       if(mod.df){
                                                                                             console.log('complete',name,ct,total);
+                                                                                            console.groupCollapsed('Trace Info');
                                                                                             console.trace();
+                                                                                            console.groupEnd();
                                                                                       }
                     if(ct!=total){
                           return;
