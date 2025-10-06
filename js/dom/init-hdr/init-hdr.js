@@ -25,11 +25,12 @@
 
               mod_list.push(mod);
               
+              /*
               if(par){
                     par.stack.add;
                     mod.stack.push(()=>par.stack.complete);
               }
-
+              */
               
               Object.defineProperty(stack,'add',{
                     get:()=>{
@@ -137,7 +138,7 @@
                                               
                                                                     nodes.splice(index,1,{node,custom});
                                                                     build({root:custom,mod:mod3});
-                                                                    mod2.stack.complete;
+                                                                    //mod2.stack.complete;
                                                                     
                                                               }//complete
                                             var promise     = loader({root:node,mod:mod2,mod2:mod3}).then(complete);
