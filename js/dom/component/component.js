@@ -141,10 +141,12 @@
                                               
                                                                     nodes.splice(index,1,{node,custom});
                                                                     mod3.stack.add;
-                                                                    build({root:custom,mod:mod3});
+                                                                    await build({root:custom,mod:mod3});
+                                                                    resolve();
                                                                     
                                                               }//complete
-                                            var promise     = loader({root:node,mod:mod2,mod2:mod3}).then(complete);
+                                            loader({root:node,mod:mod2,mod2:mod3}).then(complete);
+                                            var resolve,promise=new Promise(res=>resolve=res);
                                             nodes.push(promise);
                                       }
                                 }
