@@ -415,7 +415,7 @@
               
               rd.version    = function(node){
                 
-                    for(var attr of root.attributes){
+                    for(var attr of node.attributes){
                     
                           var name    = attr.name;
                           if(name[0]=='v'){
