@@ -177,8 +177,9 @@
                     
                     switch(type){
                       
-                      case 'libs'   : ({html,url,error}   = await loader.libs({nn,version}));       break;
-                      case 'grp'    : ({html,url,error}   = await loader.grp({nn,version}));        break;
+                      case 'libs'       : ({html,url,error}   = await loader.libs({root,nn,version}));         break;
+                      case 'grp'        : ({html,url,error}   = await loader.grp({root,nn,version}));          break;
+                      case 'parent'     : ({html,url,error}   = await loader.parent({root,nn,version}));       break;
                       
                     }//switch
 
@@ -253,7 +254,7 @@
               }//loader
 
               
-              loader.libs   = async function({nn,version}){
+              loader.libs   = async function({root,nn,version}){
                 
                     var url;
                     if(!version){
@@ -267,7 +268,7 @@
               }//libs
               
               
-              loader.grp    = async function({nn,version}){
+              loader.grp    = async function({root,nn,version}){
                                                                                 console.log('loader.grp',nn,version);
                     /*                                                                                
                     var path    = window.location.pathname;
@@ -297,6 +298,29 @@
                     
               }//grp
 
+
+              loader.parent   = async function({root,nn,version}){
+                
+                    var parent    = rd(root,'parent');
+                    var par       = $.parent(root,parent);
+                    var url       = rd(par,'url');
+
+                    var i         = url.lastIndexOf('/');
+                    url           = url.slice(0,i+1);
+                    
+                    var src;
+                    if(version){
+                          src     = `html/${nn}/${version}/${nn}-${version}.html`;
+                    }else{
+                          src     = `html/${nn}/${nn}.html`;
+                    
+                    url          += src;
+                    
+                    var {html,error}    = await loader.fetch(url);
+                    return {html,url,error};
+                
+              }//parent
+              
               
               loader.fetch    = async function(url){
                 
@@ -364,6 +388,36 @@
                     return nodes;
                     
               }//$
+
+
+              $.parent    = function(node,parent){
+              
+                    var ec    = true;
+                    
+                    while(ec){
+                    
+                          if(node.matches){
+                                if(node.matches(parent)){
+                                      return node;
+                                }
+                          }
+                          
+                          var par   = node.parentNode;
+                          if(!par){
+                                if(node.host){
+                                      par   = node.host;
+                                }
+                          }
+                          node    = par;
+                          if(!node){
+                                ec    = false;
+                          }
+                          
+                    }//while
+                    
+                    return null;
+              
+              }//$_parent
               
               
               function slashes(path,num){
