@@ -3,6 +3,9 @@
         var mod_list    = [];
         
         var mod   = create({name:'root'});
+        
+        window.onload   = mod.build;
+
 
         function create({mod:par,name}={}){
 
