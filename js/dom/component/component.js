@@ -8,7 +8,7 @@
         
         mod   = create({name:'root'});
         
-        window.addEventListener('load',mod.build);
+        window.addEventListener('load',()=>mod.build());
 
 
         function create({mod:par,name}={}){
@@ -78,10 +78,10 @@
 
               
               async function build({root,mod:mod2}={}){
-                                                                                console.log(mod.name,'build');
+                
                     root      ||= document.body;
                     mod2      ||= mod;
-
+                                                                                console.log(mod2.name,'build');
                     
                     /*
                     var list    = $(root,'[component]');
