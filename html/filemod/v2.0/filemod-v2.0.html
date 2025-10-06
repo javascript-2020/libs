@@ -98,14 +98,20 @@ mod.filemod   = function({mod,root,node}){
         
             localfile                 = mod.localfile;
             obj.localfile             = localfile;
+            
+            httpsfile                 = mod['https-file'];
+            obj.httpsfile             = httpsfile;
+            
             github                    = mod.github;
             obj.github                = github;
-            httpsfile                 = mod.httpsfile;
-            obj.httpsfile             = httpsfile;
+            
             dbfiles                   = mod['db-files'];
             obj.dbfiles               = dbfiles;
+            
             googlestorage             = mod['google-storage'];
+            
             ftpserver                 = mod.ftp_server;
+
 
             localfile.initmod({ext,$,menu,filemod:obj,source});
             github.initmod({ext,$,menu,filemod:obj,source});
@@ -113,6 +119,7 @@ mod.filemod   = function({mod,root,node}){
             dbfiles.initmod({ext,$,datatype,menumod,menu,filemod:obj,source});
             googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source});
             ftpserver.initmod({ext,$,datatype,menu,source,log});
+
             
             await localfile.init();
             await github.init();
