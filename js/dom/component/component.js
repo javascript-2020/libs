@@ -29,12 +29,12 @@
 
               //mod_list.push(mod);
               
-              /*
+              
               if(par){
                     par.stack.add;
                     mod.stack.push(()=>par.stack.complete);
               }
-              */
+              
                             
               Object.defineProperty(stack,'add',{
                     get:()=>{
