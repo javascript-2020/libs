@@ -1,0 +1,427 @@
+
+
+
+      <db-files>
+      
+            <template shadowrootmode=open>
+            
+
+                  <style>
+                  
+  .icon
+    {padding:1px}
+  .menu
+    {height:300px;font-family:arial;position:absolute}
+  #main-title
+    {display:flex;justify-content:space-between;align-items:center}
+  #menu-ext
+    {position:relative}
+      
+                  </style>
+
+                  
+                  <img class=icon src='data:image/webp;base64,UklGRhwEAABXRUJQVlA4TA8EAAAvHUAHEE2ISVPMfI3of0zzFC0UM5IE9WsvgvWnWpJNo6Bt2zb6/1pOSdqJTNom/l2t12T1P7ZeL6UpFTegz/xCCIcPEiNJUiTJq3uPmfmU+lv1n5mPcaYeenfMTgK4tW2rVub6CkQuPbjG1AAdUANNMF6fRKRkX67cSJIcSfKouXvIIQ7rL8/Kk5Jo2zrm6BSSim3bto1R23aPraFt27Y1im3bTjNa9ac0ARCB5/li+q8NS9iRbWABI8gggoCJrF8YYUMYgzDd2fSSJEGRrKLEineVZUW/mjQcASCLbPSzlJ1mnrpfXdr6Ksz8PJt+a00xnl6u2DujhQuynIcZUYtiEAQAgMHoO/rwGO7Ebf4Et8fTL98J4+lliVtLpG/ACKJIAaYlwBMss5bujaffji3mGsQsN2ZEBjA0xEoIF8a8WyO1Z30+97BhzI4oITsYUxBhZHgozh3ZflbVt06w2B1ufp4VNcP6eTzmSzILVRQRIgwCgCwy9KKbxYO4n1Hf0X1VB7Y5cyqLVsZhsY7Qqc80X1dAUVK1kIpjcSYFnYI0SgxS6pxRdR55n39dDXRV3ydvoWoOnQv240wLGoSyJ1QQfMqUXdX4b5M8lFHGGAbQhgizmDLu/2wm1lGuyCwUnpojSdCHpgWghi4yMhcwgQHqCeunUUxADiCDEbPKzpG5wEGZmIctoARtaEAW96GOGBUhwsgOwABtO+TbV/qvn5SfD8RvKmha1IPOTMCtuA8VZsRMRx1RoBREQIX/7JE3n+k/vhGbgV5qb73MxGN2z7g9SWI3I7338DjDU+gcWTDADGw4CgAAgAGo/T3FT7NOvsp4q8j/vYtbt0dbCcrMQ1R29kw/I8qQIYsQFQAAmMYwVRb7eK6y71kaRLQgDXac153MnarCAxRz2MItywnWzBgykN1s2ASNUl9Y90MNfo74saJCG5GE5S0AMRJj7y76WHWmKtOCoeB/SF6kAn2PJCPLzhi2gXcQahRmzwWZkEAzAQCI4QIA1JBjBgKU0EAKHehCF2ID9RIz9w9xAAOgjQkIYLAd5t6PtW/UYxgU+N9CK65iO3SHgDhAOT+e/po1cxvVLbgiB8uwGXGwGIC/9kptrcJbeLRgiYu4jG0wQjjC4QUbGEMHUgAlBExgBO2oQgV+iyGuwrEFDVxxCY34gTy0YRJABhmkEEEJAQLUMIQ7Eg3ZuAVvaFoAaogQgJ1Q4jeGMYxx/IcAoA0jWMIWtrAwT6scDZFADdpQgeF2mLuLlc9RL2EPqFpoR/UwA6NrzD8j/6Ga0NjCCLbiBSaGAAP2pvv/PqiN6G4BNGId5uAE4uAOM8ggakGOf+hGMb6qlagEkyEgD/tgAFs4wR6WMIIMIgiYwC8Mog9DmASYAc8RAA=='>
+
+                  <div class=menu style='display:none'>
+                  
+                        <div id=main-title class=menu-title>
+                              <span>
+                              </span>
+                              <span>
+                                    browser fs - indexed db
+                              </span>
+                              
+                              <span id=menu-ext>
+                              
+                                    <db-list data-attr='type=parent parent=db-files' api>
+                                          <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                                    </db-list>
+                                    
+                              </span>
+                        </div>
+                        
+                        <file-nav api>
+                              <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                        </file-nav>
+                        
+                  </div>
+
+                  
+            </template>
+
+            
+            <script>
+
+mod['db-files']   = function(){
+  
+  var obj   = {
+        version   : 'v1.0'
+  };
+                                                                                debug(obj.version);
+        var df=obj.df=true
+        ;
+        
+        var ext,$,datatype,menumod
+        ;
+
+        obj.initmod   = function(params){
+          
+              ext         = params.ext;
+              $           = params.$;
+              datatype    = params.datatype;
+              menumod     = params.menumod;
+              
+              menu.root   = params.menu;
+              
+        }//initmod
+
+  
+  //vars:-
+
+  
+        var db;
+        var dblist;
+        var filenav;
+        
+        var prefix    = 'fs';
+        var list;
+        
+
+        var root;
+        var shadow;
+        
+        var icon;
+        
+        var menu    = {};
+        
+        var btn     = {};
+        var file    = {};
+        var dir     = {};
+        
+  //:
+  
+  
+        obj.init    = async function(){
+          
+              var resolve;
+              obj.init    = new Promise(res=>resolve=res);
+              
+              menu.dbfiles              = menumod();
+              
+              await libs();              
+
+              db.df                     = true;
+              
+              dblist                    = mod.dblist();
+              filenav                   = mod.filenav();
+
+
+              dblist.initmod({ext,$,datatype,menu:menu.dbfiles,db});
+              
+              filenav.initmod({ext,$,datatype});
+              filenav.file    = file;
+              filenav.dir     = dir;
+              
+              
+              dblist.init();
+              filenav.init();
+
+
+
+
+              db.list();
+
+
+              resolve();
+              
+        }//init
+        
+        
+        async function libs(){
+          
+              libs   = ext.load.libs(
+                    'js/core/dbmod/db-fs/db-fs.js.api'
+              );
+              [db]    = await libs;
+              
+        }//libs
+        
+        
+  //:
+  
+  
+        obj.initdom   = async function(rootnode){
+          
+              root                                              = $.$(rootnode,'db-files');
+              shadow                                            = root.shadowRoot;
+              
+              menu.root.add.style(shadow);
+              
+              var style                                         = $(shadow,'style');
+              $.stylesheet.insert(style,'.icon');
+              
+              var node                                          = $(shadow,'.menu');
+              icon                                              = $(shadow,'.icon');
+              icon.onclick                                      = menu.root.click(node,'both',true);
+
+              await obj.init;
+              await libs;
+              
+              dblist.initdom(shadow);
+              
+              filenav.initdom(shadow);
+              filenav.update('/');
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+        btn.dblist    = function(){
+          
+              db.list();
+              
+        }//dblist
+        
+        
+  //:
+  
+        
+  //:
+  
+  
+        file.add    = async function(path,name){
+                                                                                console.log('db-files.file.add',path+name);
+              var abs     = prefix+path+name;
+                                                                                console.log(abs);
+              var fs      = await db.open(abs);
+              fs.write.str('');
+              fs.close();
+              return false;
+              
+        }//add
+        
+        
+        file.rem    = async function(path,name){
+                                                                                console.log('db-files.file.rem',path,name);
+              var abs       = prefix+path+name;
+                                                                                console.log(abs);
+              var result    = await db.del(abs);
+              return false;
+              
+        }//rem
+        
+        
+        file.upload   = async function(path,name,blob){
+          
+              var abs     = prefix+path+name;
+              var file    = await db.open(abs);
+              await file.write(blob);
+              file.close();
+              return false;
+              
+        }//upload
+        
+        
+        file.download   = async function(path){
+          
+              var abs     = prefix+path;
+              var file    = await db.open(abs);
+              var blob    = await file.read();
+              file.close();
+              return {result:false,blob};
+              
+        }//download
+        
+        
+        file.dblclick   = async function(path,name){
+          
+              var abs     = prefix+path+name;
+              
+              var fs      = await db.open(abs);
+              var blob    = await fs.read();
+              if(!blob){
+                    blob    = new Blob(['']);
+              }
+              fs.close();
+              
+              var file        = {};
+              file.type       = 'db-files';
+              file.filename   = name;
+              file.title      = abs;
+              file.icon       = icon.src;
+              
+              file.abs        = abs;
+              
+              obj.load.complete(file,blob);
+              
+        }//dblclick
+        
+        
+        dir.parent    = function(){
+        }//parent
+        
+        
+        dir.add   = async function(path,name){
+                                                                                debug('dir.add',path,name);
+              var abs     = prefix+path+name+'/';
+                                                                                debug(abs);
+              var file    = await db.open(abs);
+              file.close();
+              return false;
+              
+        }//add
+        
+        
+        dir.rem   = async function(path,name){
+          
+              var abs     = prefix+path+name;
+              var list    = await db.list(abs);
+              
+              var n   = list.length;
+              for(var i=0;i<n;i++){
+                
+                    var fn        = list[i];
+                    var result    = await db.delete(fn);
+                    
+              }//for
+              
+              return false;
+              
+        }//rem
+        
+        
+        dir.clear   = async function(path){
+                                                                                debug('dir.clear',path);
+              var abs     = prefix+path;
+              var list    = await db.list(abs);
+              
+              var n   = list.length;
+              for(var i=0;i<n;i++){
+                
+                    var fn    = list[i];
+                    if(fn.length>abs.length){
+                          var result    = await db.delete(fn);
+                    }
+                    
+              }//for
+              
+              return false;
+              
+        }//clear
+        
+        
+        dir.read    = read;
+
+        
+        dir.dblclick    = function(path,name){
+                                                                                debug('dir.dblclick',path,name);
+              read(path+name);
+              return false;
+              
+        }//dblclick
+        
+
+  //:
+  
+  
+        async function read(path='tmp/'){
+                                                                                debug('dir.read',path);
+              var len       = prefix.length+path.length;
+              
+              var dirs      = [];
+              var files     = [];
+
+              var list      = await db.list(prefix+path,true);
+              list.forEach(abs=>{
+
+                    var i   = abs.indexOf('/',len);
+                                                                                //console.log(abs,i);
+                    var fn;
+                    if(i==-1){
+                          fn    = abs.slice(len);
+                          if(fn){
+                                files.push(fn);
+                          }
+                    }else{
+                          fn    = abs.slice(len,i);
+                          if(dirs.indexOf(fn)==-1){
+                                dirs.push(fn);
+                          }
+                    }
+                    
+              });
+                                                                                //console.log(dirs);
+                                                                                //console.log(files);
+              filenav.display(path,dirs,files);
+              return false;
+          
+        }//read
+
+  
+  //:
+  
+        
+        obj.load    = async function(file){
+          
+              if(!await db.exists(file.abs)){
+                    return false;
+              }
+              
+              var fs      = await db.open(file.abs);
+              var blob    = await fs.read();
+              fs.close();
+              return blob;
+              
+        }//load
+        
+        
+        obj.save    = save;
+        
+        async function save(file,blob){
+
+              var fs    = await db.open(file.abs);
+              await fs.write(blob);
+              
+              obj.save.complete(file);
+              
+        }//save
+  
+        
+/*        
+        async function del(filename){
+          
+              if(!exists(filename)){
+                    return false;
+              }
+              var db    = await dbmod(filename);
+              await db.delete();
+              
+        }//delete
+*/
+
+        
+  //:
+  
+  
+        function debug(){
+          
+              if(!df)return;
+              var str   = [...arguments].join(' ');
+              console.log('[ db-files ]',str);
+              
+        }//debug
+        
+        
+  return obj;
+  
+}//db-files
+
+            </script>
+      
+      </db-files>
+      
+      
+      
+      
