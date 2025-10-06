@@ -1,34 +1,31 @@
 
 
-      <style>
+
+<html>
+
+      <head>
+
+
       
-  html
-    {height:100%}
-  body
-    {height:calc(100% - 16px);font-family:arial}
-  
-  .icon
-    {width:30px;height:30px;border:1px solid gray;border-radius:3px;box-sizing:border-box;cursor:pointer;}
-  button
-    {padding:5px 10px;cursor:pointer;height:30px;font-size:16px}            
-            
-      </style>
-      
-      <script init>
+            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
+
+            <script init>
                                                                                 console.clear();
                                                                                 console.log('filemod-test');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
-        var mod   = {};
+        var ext,$,datatype,menumod,keydown
+        ;
         
         var menu;
         
         var filemod;
 
 
-        var ext,$,datatype,menumod,keydown
-        ;
-        
+  //:
+  
+  
+        mod.stack.add   = init;
         
         async function init(){
                                                                                 console.log('init');
@@ -40,7 +37,6 @@
               keydown.add(kd);
               
               menu                   = menumod();
-              menu.on.close          = ()=>{};
               
               filemod.initmod({ext,$,menumod,menu,complete});
               
@@ -54,73 +50,80 @@
         
         }//init
         
-        
-        init.stack            = [];
-        init.stack.ct         = 0;
-        init.stack.total      = 1;
-        init.stack.mode       = 'log';
-        init.stack.complete   = false;
-        Object.defineProperty(init.stack,'add',{get:()=>{
-              init.stack.total++;
-              init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
-        }});
-        Object.defineProperty(init.stack,'complete',{get:()=>{
-              init.stack.ct++;
-              init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
-              init.stack.ct>=init.stack.total && init();
-        }});
-        
-        
 
-        init.stack.add;
+(async()=>{
+
+        mod.stack.add;
         
-        fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
-          .then(res=>res.text().then(async txt=>{
-        
-              ext   = eval(txt);
-        
-              var promise   = ext.load.libs(
-                    'js/dom/$.js',
-                    'js/core/datatype.js',
-                    'js/dom/menumod/menumod.js.api',
-                    'js/dom/keydown/keydown.js'
-              );
+        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
+          
+        var promise   = ext.load.libs(
+              'js/dom/$.js',
+              'js/core/datatype.js',
+              'js/dom/menumod/menumod.js',
+              'js/dom/keydown/keydown.js'
+        );
+        [$,datatype,menumod,keydown]   = await promise;
+  
+        mod.stack.complete;
               
-              [$,datatype,menumod,keydown]   = await promise;
+})();
+    
         
-              init.stack.complete;
-        
-          }));
-
-      </script>
+            </script>
       
-
-      <div>
-            <filemod api>
-                  <script src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-            </filemod>
-      </div>
+            <style>
       
-      <div>
-            <button id=test>test</button>
-      </div>
+  html
+    {height:100%}
+  body
+    {height:calc(100% - 16px);font-family:arial}
+  
+  .icon
+    {width:30px;height:30px;border:1px solid gray;border-radius:3px;box-sizing:border-box;cursor:pointer;}
+  button
+    {padding:5px 10px;cursor:pointer;height:30px;font-size:16px}            
+            
+            </style>
 
-
-
-      <checkbox-one-template>
-            <script src='https://html-loader-dblv8aserliq.runkit.sh/?checkbox-one-template'></script>
-      </checkbox-one-template>
-
-
+      <head>
 
       
+      <body>
+      
+            <div>
+                  <filemod component v2.0></filemod>
+            </div>
+            
+            <div>
+                  <button id=test>test</button>
+            </div>
+      
+      
+<!--      
+            <checkbox-one-template>
+                  <script src='https://html-loader-dblv8aserliq.runkit.sh/?checkbox-one-template'></script>
+            </checkbox-one-template>
+-->            
+
+      </body>
+
       <script>
 
-      
-        function initdom(){
+
+        var complete    = {};
+        
+        
+  //:
+  
+  
+        function initdom(rootnode){
         
               
-              filemod.initdom(document.body);
+              var root    = rootnode;
+              
+              
+              filemod.initdom(root);
 
 
               
@@ -151,10 +154,6 @@
   //:
   
   
-        function complete(){
-        }//complete
-
-        
         complete.load   = function(file,blob){
         }//complete.load
         
@@ -171,9 +170,6 @@
         
         
         
-        init.stack.complete
-            
-            
       </script>
       
 
