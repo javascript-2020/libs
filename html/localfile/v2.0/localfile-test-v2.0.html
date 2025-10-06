@@ -52,12 +52,12 @@
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
           
         var promise   = ext.load.libs(
-              'js/dom/$.js.api',
+              'js/dom/$.js',
               'js/core/datatype.js',
               'js/dom/menumod/menumod.js',
               'js/dom/keydown/keydown.js'
         );
-        [$,datatype,menumod]   = await promise;
+        [$,datatype,menumod,keydown]   = await promise;
   
               
         window.$          = $;
