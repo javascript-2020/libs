@@ -1,34 +1,39 @@
 
 
-      <style>
 
-    .icon 
-          {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
+<html>
 
-      </style>
+      <head>
 
 
-      <script>
+
+            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
+
+            <script init>
                                                                                 console.clear();
                                                                                 console.log('https-file test');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
-        var mod   = {};
+        var ext,$,datatype,menumod,keydown
+        ;
         
         var menu;
+        
         var ftpserver;
         var log;
 
         
-        var complete    = {};
-
+  //:
+  
+  
+        mod.stack.add   = init;
         
-        function init(){
+        async function init(){
                                                                                 console.log('init');
               menu            = menumod();
               
-              ftpserver       = mod.ftp_server();
-              log             = mod.log();
+              ftpserver       = mod['ftp-server'];
+              log             = mod.log;
               
               
               ftpserver.initmod({ext,$,datatype,menu,log});
@@ -37,103 +42,80 @@
               ftpserver.load.complete   = complete.load;
               ftpserver.save.complete   = complete.save;
         
-              ftpserver.init();
-              log.init();
+              await ftpserver.init();
+              await log.init();
               
               
-              initdom();
+              initdom(document.body);
   
               
         }//init
   
   
-        init.stack            = [];
-        init.stack.ct         = 0;
-        init.stack.total      = 1;
-        init.stack.mode       = '';
-        init.stack.complete   = false;
-        Object.defineProperty(init.stack,'add',{get:()=>{console.log('add');
-              init.stack.total++;
-              init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
-        }});
-        Object.defineProperty(init.stack,'complete',{get:()=>{console.log('complete');
-              init.stack.ct++;
-              init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
-              init.stack.ct>=init.stack.total && init();
-        }});
+(async()=>{
+
+        mod.stack.add;
         
-        //  (typeof init!='undefined' && init?.stack && init.stack.add)
-        //  (typeof init!='undefined' && init?.stack && init.stack.complete)
-  
-        
-        init.complete   = function(){
+        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
           
-              init.complete.stack.forEach(fn=>fn());
+        var promise   = ext.load.libs(
+              'js/dom/$.js.api',
+              'js/core/datatype.js',
+              'js/dom/menumod/menumod.js',
+              'js/dom/keydown/keydown.js'
+        );
+        [$,datatype,menumod,keydown]   = await promise;
+  
+        mod.stack.complete;
               
-        }//complete
-        
-        init.complete.stack   = [];
-        init.complete.add     = fn=>init.complete.stack.push(fn);
+})();
+
       
-      </script>
+            </script init>
 
+            <style>
 
+  .icon 
+    {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
 
-      <ftp-server api>
-            <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-      </ftp-server>
+            </style>
 
-      <log>
-            <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-      </log>
+      </head>
+      
+      
+      <body>
 
+            <ftp-server component v2.0></ftp-server>
+      
+            <log component v2.0></log>
+
+      </body>
 
       <script>
 
-        var ext
-        ;
-        var $,datatype,jsonblob,menumod,keydown
-        ;
 
-        init.stack.add;
+        var complete    = {};
+
         
-        fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
-          .then(res=>res.text().then(async txt=>{
-          
-              ext   = eval(txt);
-              
-              var promise   = ext.load.libs(
-                    'js/dom/$.js.api','js/core/datatype.js','js/io/jsonblob/jsonblob.js','js/dom/menumod/menumod.js',
-                    'js/dom/keydown/keydown.js'
-              );
-              [$,datatype,jsonblob,menumod,keydown]   = await promise;
+  //:
   
-              
-              window.$          = $;
-              window.datatype   = datatype;
+  
+        function initdom(rootnode){
 
-              
-              init.stack.complete;
-              
-          }));
-    
-
-
-        function initdom(){
+              var root    = rootnode;
 
         
-              ftpserver.initdom();
+              ftpserver.initdom(root);
               
-              log.initdom();
+              log.initdom(root);
 
               
         }//initdom
 
 
-        function complete(){
-        }//complete
-        
-        
+  //:
+  
+  
         complete.load   = function(file,txt){
         
               console.log('https-file-test : load');
