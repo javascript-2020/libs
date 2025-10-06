@@ -33,16 +33,12 @@
                               
                               <span id=menu-ext>
                               
-                                    <db-list data-attr='type=parent parent=db-files' api>
-                                          <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-                                    </db-list>
+                                    <db-list component=parent parent=db-files v2.0></db-list>
                                     
                               </span>
                         </div>
                         
-                        <file-nav api>
-                              <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-                        </file-nav>
+                        <file-nav component v2.0></file-nav>
                         
                   </div>
 
@@ -52,7 +48,7 @@
             
             <script>
 
-mod['db-files']   = function(){
+mod['db-files']   = function({mod,root,node}){
   
   var obj   = {
         version   : 'v1.0'
@@ -113,7 +109,7 @@ mod['db-files']   = function(){
               db.df                     = true;
               
               dblist                    = mod.dblist();
-              filenav                   = mod.filenav();
+              filenav                   = mod.filenav;
 
 
               dblist.initmod({ext,$,datatype,menu:menu.dbfiles,db});
