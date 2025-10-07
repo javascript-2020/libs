@@ -29,7 +29,7 @@
         
         mod.stack.add   = init;
         
-        async function init(){debugger;
+        async function init(){
                                                                                 console.log('init');
               menu                      = menumod();
 
@@ -38,7 +38,7 @@
               
               editor.initmod({ext,$,menumod,menu});
               
-              editor.init();
+              await editor.init();
               
               
               
