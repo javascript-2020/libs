@@ -87,11 +87,13 @@
   var obj   = {};
   
 
-        var run,menu,source,complete,log
+        var ext,$,run,menu,source,complete,log
         ;
         
         obj.initmod   = function(params){
           
+              ext           = params.ext;
+              $             = params.$;
               run           = params.run;
               menu          = params.menu;
               source        = params.source;
@@ -130,7 +132,7 @@
     //:
 
     
-        obj.init    = function(){
+        obj.init    = async function(){
 
               var resolve;
               load.complete   = new Promise(res=>resolve    = res);
