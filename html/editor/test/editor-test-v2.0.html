@@ -29,14 +29,14 @@
         
         mod.stack.add   = init;
         
-        async function init(){
+        async function init(){debugger;
                                                                                 console.log('init');
               menu                      = menumod();
 
               
               editor                    = mod.editor;
               
-              editor.initmod({ext,$,menumod:menu});
+              editor.initmod({ext,$,menumod,menu});
               
               editor.init();
               
