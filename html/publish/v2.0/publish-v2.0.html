@@ -134,22 +134,27 @@
     
         obj.init    = async function(){
 
+              libs();
+              
+        }//init
+
+
+        function libs(){
+        
               var resolve;
-              load.complete   = new Promise(res=>resolve    = res);
+              libs.complete   = new Promise(res=>resolve    = res);
               
               ext.load.libs('js/io/jsonblob/jsonblob.js')
                 .then(result=>{
                                   
                       [jsonblob]    = result;
-                      
                       jsonblob      = jsonblob();
-                      
                       resolve();
                       
                 });
-              
-        }//init
-
+        
+        }//libs
+        
         
     //:
 
@@ -259,7 +264,7 @@
         
         async function query(){
                                                                     console.log('[ publish ]','query loading ...');
-              await load.complete;
+              await libs.complete;
                                                                     console.log('[ publish ]','query load complete');
               
               var json;
