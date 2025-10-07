@@ -242,11 +242,14 @@
     //:
 
     
-        obj.init    = function(){
+        obj.init    = async function(){
           
               if(!menu){
                     menu    = menumod();
               }
+              
+              await load;
+              
               
         }//init
 
