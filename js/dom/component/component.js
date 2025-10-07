@@ -179,18 +179,18 @@
                     var version   = rd.version(root);
                     var slots     = [...root.childNodes];                    
                                                                                 mod.df && console.log(root,nn);
-                    var html;
                     var url;
-                    var error;
                     
                     switch(type){
                       
-                      case 'libs'       : ({html,url,error}   = await loader.libs({root,nn,version}));         break;
-                      case 'grp'        : ({html,url,error}   = await loader.grp({root,nn,version}));          break;
-                      case 'parent'     : ({html,url,error}   = await loader.parent({root,nn,version}));       break;
+                      case 'libs'       : ({url}   = await loader.libs({root,nn,version}));          break;
+                      case 'grp'        : ({url}   = await loader.grp({root,nn,version}));           break;
+                      case 'parent'     : ({url}   = await loader.parent({root,nn,version}));        break;
+                      case 'page'       : ({url}   = await loader.page({root,nn,version}));          break;
                       
                     }//switch
 
+                    var {html,error}    = await loader.fetch(url);
                     if(error){
                     }
                     
@@ -270,6 +270,8 @@
                     }else{
                           url           = `https://libs.ext-code.com/html/${nn}/${version}/${nn}-${version}.html`;
                     }
+                    return {url};
+                    
                     var {html,error}    = await loader.fetch(url);    
                     return {html,url,error};
                     
@@ -301,6 +303,8 @@
                           url   = `../html/${nn}/${version}/${nn}-${version}.html`;
                     }
                                                                                 console.log(url);
+                    return {url};
+                    
                     var {html,error}    = await loader.fetch(url);    
                     return {html,url,error};
                     
@@ -331,10 +335,44 @@
                     
                     url          += src;
                     
+                    return {url};
+                    
                     var {html,error}    = await loader.fetch(url);
                     return {html,url,error};
                 
               }//parent
+              
+              
+              loader.page   = async function({root,nn,version}){
+
+/*                
+                    var path    = window.location.pathname;
+                      
+                    var base    = document.querySelector('base');
+                    if(base){
+                          var href    = base.href;
+                          var url     = new URL(href);
+                          path        = url.pathname;
+                    }else{
+                          if(path==='srcdoc'){
+                                path        = window.parent.location.pathname;
+                          }
+                    }
+                    
+                    path    = path.slice(1);
+                    var i   = path.lastIndexOf('/');
+                    path    = path.slice(0,i+1);
+*/
+
+                    var url;
+                    if(version){
+                          url   = `html/${nn}/${version}/${nn}-${version}.html`;
+                    }else{
+                          url   = `html/${nn}/${nn}.html`;
+                    }
+                    return {url};
+                    
+              }//page
               
               
               loader.fetch    = async function(url){
