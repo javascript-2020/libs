@@ -178,7 +178,7 @@
               
               menu        = params.menu;
               
-              ace         = params.ace;
+              params.ace && ace=params.ace;
               
               fullsize    = params.fullsize;
               kd2         = params.kd;
@@ -186,7 +186,7 @@
         }//initmod
         
 
-        //load    = load();
+        load    = load();
         
         function load(){
           
@@ -249,7 +249,7 @@
                     menu    = menumod();
               }
               
-              await load();
+              await load;
               console.log('init.ace',ace);
               
               
