@@ -1,0 +1,161 @@
+
+
+      <style>
+            html{height:100%}
+            body {height:calc(100% - 16px)}
+      </style>
+      
+      <script init>
+                                                                                console.clear();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+  
+        var df                    = true;
+        var debug_id              = 'editor.html';
+        
+        
+        var mod                   = {};
+
+        
+        var menu;
+        
+        var editor;
+        
+        
+        var ext;
+        var $;
+        var datatype;
+        var menumod;
+        var keydown;
+      
+        
+        async function init(){
+                                                                                console.log('init');
+  
+  
+  
+              menu                      = menumod();
+
+              
+              editor                    = mod.editor();
+              
+              editor.initmod({ext,$,menumod:menu});
+              
+              editor.init();
+              
+              
+              
+              
+              window.onfocus            = focus;
+              
+              keydown.add(kd);
+              
+
+              
+              initdom(document.body);
+
+
+  
+        }//init
+  
+        init.stack            = [];
+        init.stack.ct         = 0;
+        init.stack.total      = 1;
+        init.stack.mode       = 'log';
+        init.stack.complete   = false;
+        Object.defineProperty(init.stack,'add',{get:()=>{
+              init.stack.total++;
+              init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
+        }});
+        Object.defineProperty(init.stack,'complete',{get:()=>{
+              init.stack.ct++;
+              init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
+              init.stack.ct>=init.stack.total && init();
+        }});
+
+
+
+        init.stack.add;
+        
+        fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
+          .then(res=>res.text().then(async txt=>{
+  
+              ext   = eval(txt);
+  
+              var promise   = ext.load.libs(
+                    'js/dom/$.js',
+                    'js/core/datatype.js',
+                    'js/dom/menumod/menumod.js',
+                    'js/dom/keydown/keydown.js'
+              );
+              
+              [$,datatype,menumod,keydown]   = await promise;
+  
+              window.$            = $;
+              window.datatype     = datatype;
+  
+              init.stack.complete;
+  
+          }));
+
+
+      </script>
+
+
+      <editor api>
+            <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+      </editor>
+
+
+      
+      <script initdom>
+
+
+  //:
+  
+  
+            function initdom(rootnode){
+              
+                  var root                    = rootnode;
+
+                  
+                  editor.initdom(root);
+
+
+
+                  
+            }//initdom
+
+
+  //:
+  
+  
+            function focus(){
+              
+                  editor.focus();              
+                  
+            }//focus
+            
+            
+  //:
+  
+  
+            function kd(e){
+    
+                  if(e.key==' ' && e.ctrlKey){
+                        menumod.open();
+                  }
+                  
+            }//kd
+
+
+  //:
+  
+  
+  init.stack.complete
+  
+      </script>
+      
+
+
+      
+      
