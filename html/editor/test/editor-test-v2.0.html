@@ -1,42 +1,38 @@
 
 
-      <style>
-            html{height:100%}
-            body {height:calc(100% - 16px)}
-      </style>
+
+<html>
+
+      <head>
+
       
       <script init>
                                                                                 console.clear();
-                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
-  
+                                                                                console.log('editor-test-v2.0.html');
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));  
         var df                    = true;
         var debug_id              = 'editor.html';
         
         
-        var mod                   = {};
-
+        var ext,$,datatype,menumod,keydown
+        ;
         
         var menu;
         
         var editor;
         
         
-        var ext;
-        var $;
-        var datatype;
-        var menumod;
-        var keydown;
-      
+  //:
+  
+        
+        mod.stack.add   = init;
         
         async function init(){
                                                                                 console.log('init');
-  
-  
-  
               menu                      = menumod();
 
               
-              editor                    = mod.editor();
+              editor                    = mod.editor;
               
               editor.initmod({ext,$,menumod:menu});
               
@@ -98,13 +94,26 @@
           }));
 
 
-      </script>
+            </script init>
 
+            <style>
+            
+  html
+    {height:100%}
+    
+  body
+    {height:calc(100% - 16px)}
+    
+            </style>
 
-      <editor api>
-            <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-      </editor>
+      </head>
 
+      
+      <body>
+      
+            <editor component v2.0></editor>
+
+      </body>
 
       
       <script initdom>
