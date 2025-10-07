@@ -157,12 +157,10 @@
       
       <script>
       
-mod.editor    = editor;
-
-function editor(){
+(function editor(){
 
   var obj   = {
-        version   : 'v1.0'
+        version   : 'v2.0'
   };
 
         var df=true
@@ -171,19 +169,19 @@ function editor(){
 
         var ext,$,menu,menumod,ace,fullsize,kd2
         ;
-        var prettier
-        ;
         
         obj.initmod   = function(params){
           
               ext         = params.ext;
               $           = params.$;
               menumod     = params.menumod;
+              
               menu        = params.menu;
+              
               ace         = params.ace;
+              
               fullsize    = params.fullsize;
               kd2         = params.kd;
-              
               
         }//initmod
         
@@ -700,7 +698,7 @@ function editor(){
       
   return obj;
   
-}//editor
+})//editor
             
       </script>
 
