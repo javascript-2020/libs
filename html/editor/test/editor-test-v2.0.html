@@ -55,45 +55,24 @@
   
         }//init
   
-        init.stack            = [];
-        init.stack.ct         = 0;
-        init.stack.total      = 1;
-        init.stack.mode       = 'log';
-        init.stack.complete   = false;
-        Object.defineProperty(init.stack,'add',{get:()=>{
-              init.stack.total++;
-              init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
-        }});
-        Object.defineProperty(init.stack,'complete',{get:()=>{
-              init.stack.ct++;
-              init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
-              init.stack.ct>=init.stack.total && init();
-        }});
 
+(async()=>{
 
-
-        init.stack.add;
+        mod.stack.add;
         
-        fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
-          .then(res=>res.text().then(async txt=>{
+        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
+          
+        var promise   = ext.load.libs(
+              'js/dom/$.js',
+              'js/core/datatype.js',
+              'js/dom/menumod/menumod.js',
+              'js/dom/keydown/keydown.js'
+        );
+        [$,datatype,menumod,keydown]   = await promise;
   
-              ext   = eval(txt);
-  
-              var promise   = ext.load.libs(
-                    'js/dom/$.js',
-                    'js/core/datatype.js',
-                    'js/dom/menumod/menumod.js',
-                    'js/dom/keydown/keydown.js'
-              );
+        mod.stack.complete;
               
-              [$,datatype,menumod,keydown]   = await promise;
-  
-              window.$            = $;
-              window.datatype     = datatype;
-  
-              init.stack.complete;
-  
-          }));
+})();
 
 
             </script init>
