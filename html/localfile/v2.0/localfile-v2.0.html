@@ -33,22 +33,27 @@
 
       
 mod.localfile   = function({mod,root,node}){
-                                                                                true && console.log('localfile');
-  var obj   = {};
 
-      var $,menu,editor,filemod
-      ;
-      
-      obj.initmod   = function(params){
+  var obj   = {
+        version   : 'v2.0'
+  };
+
+        var df=false,did='localfile'
+        ;
+                                                                                debug(obj.version);
+        var $,menu,editor,filemod
+        ;
         
-            $         = params.$;
-            
-            menu      = params.menu;
-            
-            editor    = params.editor;
-            filemod   = params.filemod;
-            
-      }//initmod
+        obj.initmod   = function(params){
+          
+              $         = params.$;
+              
+              menu      = params.menu;
+              
+              editor    = params.editor;
+              filemod   = params.filemod;
+              
+        }//initmod
 
       
   //vars:-
@@ -306,6 +311,20 @@ mod.localfile   = function({mod,root,node}){
 
               
         }//savefile
+        
+
+  //:
+  
+  
+        function debug(){
+        
+              if(!df && !obj.df)return;
+              
+              var str   = [...arguments.join(' ')];
+              console.log(`'[ ${did} ]`,str);
+              
+        }//debug
+        
         
         
         
