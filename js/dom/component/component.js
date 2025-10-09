@@ -160,6 +160,7 @@
               async function loader({root,mod,mod2}){
 
                     var nn        = root.nodeName.toLowerCase();
+                    var inst      = rd.inst(root);
                     var type      = rd(root,'component','libs');
                     root.removeAttribute('component');
                     var version   = rd.version(root);
@@ -242,7 +243,7 @@
                                                                                 //console.log('script.id',script.id);
                                                                                 //debugger;
                                 var js    = script.textContent;
-                                define({js,mod,mod2,node,root});
+                                define({js,mod,mod2,node,root,inst});
                           }
                           
                     });
@@ -251,6 +252,15 @@
                     
               }//loader
 
+
+              loader.inst   = function({root}){
+                
+                    var nn    = root.nodeName.toLowerCase();
+                    var i     = nn.lastIndexOf('-');
+                    if(i==-1){
+                      
+              }//nodename
+              
               
               loader.libs   = async function({root,nn,version}){
                 
@@ -386,7 +396,7 @@
   //:
 
 
-              function define({js,mod,mod2,node,root}){
+              function define({js,mod,mod2,node,root,inst}){
                 
                     js    = `
                           //(()=>{return
@@ -396,10 +406,13 @@
                           //})();
                     `;
                     
-                    var fn      = eval(js);
-                    var obj     = fn({mod:mod2,root,node});
-                    var name    = root.nodeName.toLowerCase();
-                    mod[name]   = obj;
+                    var fn        = eval(js);
+                    var obj       = fn({mod:mod2,root,node});
+                    var name      = root.nodeName.toLowerCase();
+                    if(inst){
+                          name   += inst;
+                    }
+                    mod[name]     = obj;
 
               }//define
 
@@ -535,6 +548,35 @@
                     }//for
                     
               }//version
+              
+              
+              rd.inst   = function(node){
+                
+                    for(var attr of node.attributes){
+                    
+                          var name    = attr.name;
+                          if(name.startsWith('['){
+                                if(name.endsWith(']')){
+                                  
+                                      var inst    = name.slice(1,-1);
+                                      var n       = inst.length;
+                                      for(var i=0;i<n;i++){
+                                        
+                                            if(!((inst[i]>='0') && (inst[i]<='9'))){
+                                                  break;
+                                            }
+                                            
+                                      }//for
+                                      if(i==n){
+                                            return name;
+                                      }
+                                }
+                          }
+                          
+                    }//for
+                    return null;
+                    
+              }//inst
 
               
   //:
