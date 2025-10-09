@@ -329,7 +329,8 @@
               node.addEventListener('mousedown',update);
               node.addEventListener('keyup',update);
               
-              editor    = ace.edit(node);
+              editor        = ace.edit(node);
+              obj.editor    = editor;
               editor.setShowInvisibles(false);
               editor.setShowPrintMargin(false);
               editor.setPrintMarginColumn(false);
