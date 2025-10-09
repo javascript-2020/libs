@@ -160,7 +160,7 @@
               async function loader({root,mod,mod2}){
 
                     var nn        = root.nodeName.toLowerCase();
-                    var inst      = rd(root,'inst');
+                    var inst      = rd.inst(root);
                     var type      = rd(root,'component','libs');
                     root.removeAttribute('component');
                     var version   = rd.version(root);
@@ -539,6 +539,23 @@
                     }//for
                     
               }//version
+              
+              
+              rd.inst   = function(root){
+                
+                    var inst;
+                    var nn    = root.nodeName.toLowerCase();
+                    if(nn.endsWith(']')){
+                          var i   = nn.lastIndexOf('[',nn.length);
+                          if(i!=-1){
+                                inst    = nn.slice(i+1,-1);
+                                return inst;
+                          }
+                    }
+                    inst    = rd(root,'inst');
+                    return inst;
+                    
+              }//inst
               
               
   //:
