@@ -335,7 +335,6 @@
               
               loader.page   = async function({root,nn,version}){
 
-/*                
                     var path    = window.location.pathname;
                       
                     var base    = document.querySelector('base');
@@ -349,17 +348,30 @@
                           }
                     }
                     
-                    path    = path.slice(1);
-                    var i   = path.lastIndexOf('/');
-                    path    = path.slice(0,i+1);
-*/
-
+                    var par     = '';
+                    
+                    path        = path.slice(1);
+                    var i       = path.lastIndexOf('/');
+                    path        = path.slice(0,i+1);
+                    
+                    var dirs    = path.split('/');
+                    var last    = dirs.at(-1);
+                    if(last[0]=='v'){
+                          var l   = last[1];
+                          if(l>='0' && l<='9'){
+                                par   = '../';
+                          }
+                    }
+                            
                     var url;
                     if(version){
                           url   = `html/${nn}/${version}/${nn}-${version}.html`;
                     }else{
                           url   = `html/${nn}/${nn}.html`;
                     }
+                    
+                    url   = par+url;
+                    
                     return {url};
                     
               }//page
