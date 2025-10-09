@@ -473,7 +473,7 @@
                     path    = path.slice(0,index+1);
                     return path;
                     
-              }//getslash
+              }//slashes
 
   
               function gen(n=17){
