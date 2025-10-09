@@ -555,7 +555,7 @@
                     for(var attr of node.attributes){
                     
                           var name    = attr.name;
-                          if(name.startsWith('['){
+                          if(name.startsWith('[')){
                                 if(name.endsWith(']')){
                                   
                                       var inst    = name.slice(1,-1);
