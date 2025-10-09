@@ -366,7 +366,7 @@
                                                                                 df && console.log(path,base);                    
                     path        = path.slice(1);
                     var i       = path.lastIndexOf('/');
-                    path        = path.slice(0,i+1);
+                    path        = path.slice(0,i);
                     
                     var dirs    = path.split('/');
                                                                                 df && console.log('dirs',dirs);
