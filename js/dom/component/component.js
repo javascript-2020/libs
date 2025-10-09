@@ -322,7 +322,7 @@
                     var df;
                     if(nn=='output')df=true;
                     var par   = loader.fn.par(df);
-                    
+                                                                                df && console.log('par',par);
                     var url;
                     if(version){
                           url   = `html/${nn}/${version}/${nn}-${version}.html`;
