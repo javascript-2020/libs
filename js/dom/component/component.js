@@ -270,7 +270,9 @@
               
               loader.grp    = async function({root,nn,version}){
                                                                                 //console.log('loader.grp',nn,version);
-                    var par   = loader.fn.par();
+                    var df;
+                    if(nn=='filemod')df=true;
+                    var par   = loader.fn.par(df);
                                                                                 console.log('loader.grp',nn,version,par);
                     var url;
                     if(!version){
