@@ -186,40 +186,6 @@
         }//initmod
         
 
-        load    = load();
-        
-        function load(){
-          
-              var resolve,load    = new Promise(res=>resolve=res);
-
-              
-              if(ace){
-                    resolve();
-                    return;
-              }
-              
-              var script      = document.createElement('script');
-              script.src      = 'https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/ace.js';
-              script.onload   = onload;
-              document.head.append(script);
-              
-              
-              
-              return load;
-              
-              
-              function onload(){
-                
-                    ace       = window.ace;
-                    console.log('ace',ace);
-                    obj.ace   = ace;
-                    resolve();
-                    
-              }//onload
-              
-        }//load
-
-
   //:
   
         
@@ -249,11 +215,38 @@
                     menu    = menumod();
               }
               
-              await load;
-              console.log('init.ace',ace);
+              libs();
               
               
         }//init
+
+
+        function libs(){
+          
+              var resolve;
+              libs    = new Promise(res=>resolve=res);
+
+              
+              if(ace){
+                    resolve();
+                    return;
+              }
+              
+              var script      = document.createElement('script');
+              script.src      = 'https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/ace.js';
+              script.onload   = onload;
+              document.head.append(script);
+                            
+              
+              function onload(){
+                
+                    ace       = window.ace;
+                    obj.ace   = ace;
+                    resolve();
+                    
+              }//onload
+              
+        }//libs
 
   
     //:
@@ -324,6 +317,8 @@
   
         function setup(node,mode='javascript'){
   
+              await libs;
+              
               import_style();
   
               switch(mode){
