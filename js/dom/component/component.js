@@ -398,7 +398,7 @@
                     `;
                     
                     var fn      = eval(js);
-                    var obj     = fn({mod:mod2,root:node});
+                    var obj     = fn({mod:mod2,root,node});
                     var name    = root.nodeName.toLowerCase();
                     mod[name]   = obj;
 
