@@ -40,35 +40,20 @@
                     get:()=>{
                 
                           total++;
-                                                                                      if(mod.df){
-                                                                                            console.log('add',name,ct,total);
-                                                                                            console.groupCollapsed('Trace Info');
-                                                                                            console.trace();
-                                                                                            console.groupEnd();
-                                                                                      }
+                                                                                      debug.trace('add',name,ct,total);
                     },//get
                     set:v=>{
                       
                           total++;
                           stack.push(v);
-                                                                                      if(mod.df){
-                                                                                            console.log('add',name,ct,total);
-                                                                                            console.groupCollapsed('Trace Info');
-                                                                                            console.trace();
-                                                                                            console.groupEnd();
-                                                                                      }
+                                                                                      debug.trace('add',name,ct,total);
                     }//set
               });
               
               Object.defineProperty(stack,'complete',{get:()=>{
                 
                     ct++;
-                                                                                      if(mod.df){
-                                                                                            console.log('complete',name,ct,total);
-                                                                                            console.groupCollapsed('Trace Info');
-                                                                                            console.trace();
-                                                                                            console.groupEnd();
-                                                                                      }
+                                                                                      debug.trace('complete',name,ct,total);
                     if(ct!=total){
                           return;
                     }
@@ -87,7 +72,7 @@
                 
                     root      ||= document.body;
                     mod2      ||= mod;
-                                                                                console.log(mod2.name,'build');
+                                                                                debug(mod2.name,'build');
                     
                     /*
                     var list    = $(root,'[component]');
@@ -162,7 +147,7 @@
                     }//while
                     await Promise.all(nodes);
                     
-                                                                                console.log('build.complete',mod2.name,root.nodeName);
+                                                                                debug('build.complete',mod2.name,root.nodeName);
                     mod2.stack.complete;
                     
                     return nodes;
@@ -178,7 +163,7 @@
                     root.removeAttribute('component');
                     var version   = rd.version(root);
                     var slots     = [...root.childNodes];                    
-                                                                                mod.df && console.log(root,nn);
+                                                                                //mod.df && console.log(root,nn);
                     var url;
                     
                     switch(type){
@@ -232,7 +217,7 @@
                     list.forEach(script=>{
                     
                           if(script.src){
-                                                                                mod.df && console.log('script.src',script.src,script.parentNode.nodeName);
+                                                                                //mod.df && console.log('script.src',script.src,script.parentNode.nodeName);
                                 mod.stack.add;
                                 var nscript   = document.createElement('script');
                                 var src       = script.src;
@@ -249,7 +234,7 @@
                                 nscript.onload        = ()=>mod.stack.complete;
                                 script.parentNode.replaceChild(nscript,script);
                           }else{
-                                                                                mod.df && console.log('script.id',script.id);
+                                                                                //console.log('script.id',script.id);
                                                                                 //debugger;
                                 var js    = script.textContent;
                                 define({js,mod,mod2,node,root});
@@ -279,7 +264,7 @@
               
               
               loader.grp    = async function({root,nn,version}){
-                                                                                console.log('loader.grp',nn,version);
+                                                                                //console.log('loader.grp',nn,version);
                     /*                                                                                
                     var path    = window.location.pathname;
                                                                                 console.log(path);
@@ -302,7 +287,7 @@
                     }else{
                           url   = `../html/${nn}/${version}/${nn}-${version}.html`;
                     }
-                                                                                console.log(url);
+                                                                                //console.log(url);
                     return {url};
                     
                     var {html,error}    = await loader.fetch(url);    
@@ -538,15 +523,36 @@
               }//version
 
               
-
+  //:
+  
+  
+              function debug(){
+                
+                    if(!mod.df)return;
+                    var str   = [...arguments].join(' ');
+                    console.log('[ component ]',str);
+                    
+              }//debug
               
-              return mod;
+              
+              debug.trace   = function(){
+                
+                    if(!mod.df)return;
+                    debug.apply(null,arguments);
+                    
+                    console.groupCollapsed('[ component ]');
+                    console.trace();
+                    console.groupEnd();
+                    
+              }//trace
+  
+              
+          return mod;
       
         }//create
         
-
-
-
+        
+        
 })();
 
 
