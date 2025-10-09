@@ -159,8 +159,8 @@
               
               async function loader({root,mod,mod2}){
 
-                    var nn        = root.nodeName.toLowerCase();
-                    var inst      = rd.inst(root);
+                    var {nn,inst}   =  rd.root(root);
+                    
                     var type      = rd(root,'component','libs');
                     root.removeAttribute('component');
                     var version   = rd.version(root);
@@ -541,7 +541,7 @@
               }//version
               
               
-              rd.inst   = function(root){
+              rd.root   = function(root){
                 
                     var inst;
                     var nn    = root.nodeName.toLowerCase();
@@ -549,6 +549,7 @@
                           var i   = nn.lastIndexOf('[',nn.length);
                           if(i!=-1){
                                 inst    = nn.slice(i+1,-1);
+                                nn      = nn.slice(0,i);
                                 return {nn,inst};
                           }
                     }
