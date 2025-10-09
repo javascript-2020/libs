@@ -541,35 +541,6 @@
               }//version
               
               
-              rd.inst   = function(node){
-                
-                    for(var attr of node.attributes){
-                    
-                          var name    = attr.name;
-                          if(name.startsWith('[')){
-                                if(name.endsWith(']')){
-                                  
-                                      var inst    = name.slice(1,-1);
-                                      var n       = inst.length;
-                                      for(var i=0;i<n;i++){
-                                        
-                                            if(!((inst[i]>='0') && (inst[i]<='9'))){
-                                                  break;
-                                            }
-                                            
-                                      }//for
-                                      if(i==n){
-                                            return name;
-                                      }
-                                }
-                          }
-                          
-                    }//for
-                    return null;
-                    
-              }//inst
-
-              
   //:
   
   
