@@ -164,7 +164,7 @@
                     root.removeAttribute('component');
                     var version   = rd.version(root);
                     var slots     = [...root.childNodes];                    
-                                                                                //mod.df && console.log(root,nn);
+                                                                                mod.df && console.log(root,nn);
                     var url;
                     
                     switch(type){
