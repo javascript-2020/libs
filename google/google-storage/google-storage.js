@@ -17,7 +17,7 @@
         version   : 'v1.0'
   };
   
-        var df    = true;
+        var df    = false;
         Object.defineProperty(obj,'df',{set:v=>df=v});
                                                                                 debug(obj.version);  
 
