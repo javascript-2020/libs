@@ -401,7 +401,7 @@
                     var obj       = fn({mod:mod2,root,node});
                     var name      = root.nodeName.toLowerCase();
                     if(inst){
-                          name   += inst;
+                          name   += `[${inst}]`;
                     }
                     mod[name]     = obj;
 
