@@ -214,7 +214,7 @@
         
                     root.parentNode.replaceChild(node,root);
                                                                                 mod.df && console.log(nn,version,root,node);
-                    if(nn=='filemod')debugger;
+                                                                                //if(nn=='filemod')debugger;
                     
                     
                     var list    = $(node,'script');
