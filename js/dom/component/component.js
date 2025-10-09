@@ -253,15 +253,6 @@
               }//loader
 
 
-              loader.inst   = function({root}){
-                
-                    var nn    = root.nodeName.toLowerCase();
-                    var i     = nn.lastIndexOf('-');
-                    if(i==-1){
-                      
-              }//nodename
-              
-              
               loader.libs   = async function({root,nn,version}){
                 
                     var url;
