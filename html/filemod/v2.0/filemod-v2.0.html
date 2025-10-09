@@ -188,20 +188,8 @@ mod.filemod   = function({mod,root,node}){
               }
 
               
-              var blob;
+              var blob    = await source();
               
-              if(source){
-                    blob      = await source();
-              }else{
-                    var txt   = editor.getValue();
-                    blob      = new Blob([txt]);
-              }
-              
-              if(!blob){
-                    log.orange('no source');
-                    return;
-              }
-
               switch(cur.type){
                 
                 case 'github'               : await github.save(cur,blob);              break;
