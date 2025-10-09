@@ -370,6 +370,7 @@
                     
                     var dirs    = path.split('/');
                     var last    = dirs.at(-1);
+                                                                                df && console.log('last',last);
                     if(last[0]=='v'){
                           var l   = last[1];
                           if(l>='0' && l<='9'){
