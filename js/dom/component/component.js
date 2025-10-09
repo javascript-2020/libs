@@ -369,6 +369,7 @@
                     path        = path.slice(0,i+1);
                     
                     var dirs    = path.split('/');
+                                                                                df && console.log('dirs',dirs);
                     var last    = dirs.at(-1);
                                                                                 df && console.log('last',last);
                     if(last[0]=='v'){
