@@ -164,7 +164,7 @@
                     root.removeAttribute('component');
                     var version   = rd.version(root);
                     var slots     = [...root.childNodes];                    
-                                                                                mod.df && console.log(root,nn);
+                    
                     var url;
                     
                     switch(type){
@@ -213,6 +213,7 @@
                     });
         
                     root.parentNode.replaceChild(node,root);
+                                                                                mod.df && console.log(nn,version,root,node);
                     
                     
                     var list    = $(node,'script');
