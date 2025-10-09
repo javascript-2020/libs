@@ -270,33 +270,18 @@
               
               loader.grp    = async function({root,nn,version}){
                                                                                 //console.log('loader.grp',nn,version);
-                    /*                                                                                
-                    var path    = window.location.pathname;
-                                                                                console.log(path);
-                    var base    = document.querySelector('base');
-                    if(base){
-                          var href    = base.href;
-                          var url     = new URL(href);
-                          path        = url.pathname;
-                    }else{
-                          if(path==='srcdoc'){
-                                path    = window.location.pathname;
-                          }
-                    }
-                    path    = path.slice(1);
-                    path    = slashes(path,2);
-                    */
+                    var par   = loader.fn.par();
+                    
                     var url;
                     if(!version){
                           url   = `../html/${nn}/${nn}.html`;
                     }else{
                           url   = `../html/${nn}/${version}/${nn}-${version}.html`;
                     }
+                    
+                    url   = par+url;
                                                                                 //console.log(url);
                     return {url};
-                    
-                    var {html,error}    = await loader.fetch(url);    
-                    return {html,url,error};
                     
               }//grp
 
@@ -313,8 +298,7 @@
                           num   = 2;
                     }
                     url           = slashes(url,num);
-                    //var i         = url.lastIndexOf('/');
-                    //url           = url.slice(0,i+1);
+                    
                     
                     var src;
                     if(version){
@@ -335,34 +319,7 @@
               
               loader.page   = async function({root,nn,version}){
 
-                    var path    = window.location.pathname;
-                      
-                    var base    = document.querySelector('base');
-                    if(base){
-                          var href    = base.href;
-                          var url     = new URL(href);
-                          path        = url.pathname;
-                    }else{
-                          if(path==='srcdoc'){
-                                path        = window.parent.location.pathname;
-                          }
-                    }
-                    
-                    var par     = '';
-                    
-                    path        = path.slice(1);
-                    var i       = path.lastIndexOf('/');
-                    path        = path.slice(0,i+1);
-                    
-                    var dirs    = path.split('/');
-                    var last    = dirs.at(-1);
-                    if(last[0]=='v'){
-                          var l   = last[1];
-                          if(l>='0' && l<='9'){
-                                par   = '../';
-                          }
-                    }
-                            
+                    var par   = loader.fn.par();
                     var url;
                     if(version){
                           url   = `html/${nn}/${version}/${nn}-${version}.html`;
@@ -384,6 +341,40 @@
                     return {html};
                 
               }//fetch
+              
+              
+              loader.fn   = {};
+              
+              loader.fn.par   = function(){
+                
+                    var path    = window.location.pathname;
+                    var base    = document.querySelector('base');
+                    if(base){
+                          var href    = base.href;
+                          var url     = new URL(href);
+                          path        = url.pathname;
+                    }else{
+                          if(path==='srcdoc'){
+                                path        = window.parent.location.pathname;
+                          }
+                    }
+                    
+                    var par     = '';
+                    path        = path.slice(1);
+                    var i       = path.lastIndexOf('/');
+                    path        = path.slice(0,i+1);
+                    
+                    var dirs    = path.split('/');
+                    var last    = dirs.at(-1);
+                    if(last[0]=='v'){
+                          var l   = last[1];
+                          if(l>='0' && l<='9'){
+                                par   = '../';
+                          }
+                    }
+                    return par;
+                    
+              }//par
               
 
   //:
