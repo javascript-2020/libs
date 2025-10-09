@@ -178,6 +178,8 @@
 
                     var {html,error}    = await loader.fetch(url);
                     if(error){
+                          console.error(error);
+                          return;
                     }
                     
                     html            = html.trim();
