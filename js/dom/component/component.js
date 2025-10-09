@@ -345,7 +345,7 @@
               
               loader.fn   = {};
               
-              loader.fn.par   = function(){
+              loader.fn.par   = function(df){
                 
                     var par     = '';
                     
@@ -360,7 +360,7 @@
                                 path        = window.parent.location.pathname;
                           }
                     }
-                    
+                                                                                df && console.log(path,base);                    
                     path        = path.slice(1);
                     var i       = path.lastIndexOf('/');
                     path        = path.slice(0,i+1);
