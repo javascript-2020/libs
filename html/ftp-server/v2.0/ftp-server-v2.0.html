@@ -207,8 +207,7 @@ mod.ftp_server   = function({mod,root,node}){
         version   : 'v2.0'
   };
       
-        var df=false;
-        Object.defineProperty(obj,'df',{get:()=>df,set:value=>df=value});
+        var df=false,did='[ ftp-server ]';
                                                                                 debug(obj.version);
 
         var ext,$,datatype,menu,source,log
@@ -902,31 +901,22 @@ mod.ftp_server   = function({mod,root,node}){
   
         function debug(){
           
-              if(!df)return;
+              if(!df && !obj.df)return;
               var str   = [...arguments].join(' ');
-              console.log('[ ftp-server ]',str);
+              console.log(did,str);
               
         }//debug
         
         
-        debug.log   = function(){
-          
-              if(!df)return;
+        debug.trace   = function(){
+
+              if(!df && !obj.df)return;
               
-              console.log.apply(console,arguments);
+              debug.apply(null,arguments);
               
-              if(debug.trace){
-                    console.trace();
-              }
-              delete debug.trace;
-              
-        }//log
-        
-        
-        debug.log.trace   = function(){
-          
-              debug.trace   = true;
-              debug.log.apply(null,arguments);
+              console.groupCollapsed(did);
+              console.trace();
+              console.groupEnd();
               
         }//trace
 
