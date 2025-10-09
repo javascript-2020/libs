@@ -271,7 +271,7 @@
               loader.grp    = async function({root,nn,version}){
                                                                                 //console.log('loader.grp',nn,version);
                     var par   = loader.fn.par();
-                    
+                                                                                console.log('loader.grp',nn,version,par);
                     var url;
                     if(!version){
                           url   = `../html/${nn}/${nn}.html`;
@@ -347,6 +347,8 @@
               
               loader.fn.par   = function(){
                 
+                    var par     = '';
+                    
                     var path    = window.location.pathname;
                     var base    = document.querySelector('base');
                     if(base){
@@ -359,7 +361,6 @@
                           }
                     }
                     
-                    var par     = '';
                     path        = path.slice(1);
                     var i       = path.lastIndexOf('/');
                     path        = path.slice(0,i+1);
