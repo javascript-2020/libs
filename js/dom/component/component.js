@@ -549,11 +549,11 @@
                           var i   = nn.lastIndexOf('[',nn.length);
                           if(i!=-1){
                                 inst    = nn.slice(i+1,-1);
-                                return inst;
+                                return {nn,inst};
                           }
                     }
                     inst    = rd(root,'inst');
-                    return inst;
+                    return {nn,inst};
                     
               }//inst
               
