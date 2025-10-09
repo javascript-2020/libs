@@ -110,8 +110,7 @@ mod.httpsfile   = function({mod,root,node}){
         version   : 'v1.0'
   };
       
-        var df=true;
-        Object.defineProperty(obj,'df',{get:()=>df,set:value=>df=value});
+        var df=false;
                                                                                 debug(obj.version);
 
         var ext,$,datatype,menu,source
@@ -678,28 +677,6 @@ mod.httpsfile   = function({mod,root,node}){
         }//debug
         
         
-        debug.log   = function(){
-          
-              if(!df)return;
-              
-              console.log.apply(console,arguments);
-              
-              if(debug.trace){
-                    console.trace();
-              }
-              delete debug.trace;
-              
-        }//log
-        
-        
-        debug.log.trace   = function(){
-          
-              debug.trace   = true;
-              debug.log.apply(null,arguments);
-              
-        }//trace
-
-
 
 
         
