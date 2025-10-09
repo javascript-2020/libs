@@ -160,7 +160,7 @@
               async function loader({root,mod,mod2}){
 
                     var nn        = root.nodeName.toLowerCase();
-                    var inst      = rd.inst(root);
+                    var inst      = rd(root,'inst');
                     var type      = rd(root,'component','libs');
                     root.removeAttribute('component');
                     var version   = rd.version(root);
