@@ -369,13 +369,8 @@
               var code_block    = {};
               code_block.mod    = mod2;
               code_block.obj    = null;
-              code_block.root   = document.createElement('code-block');
-              code_block.root.toggleAttribute('component');
-              code_block.root.toggleAttribute('v2.0');
+              code_block.root   = node;
               
-              node.parentNode.replaceChild(code_block.root,node);
-              code_block.root.append(node);
-
 
 
               
