@@ -265,7 +265,7 @@
 
 
 
-        function snippet_html(code,{ace}){
+        function snippet_html(mod,code,{ace}){
           
               var resolve,promise=new Promise(res=>resolve=res);
               setTimeout(fn,50);
