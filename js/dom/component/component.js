@@ -133,7 +133,7 @@
                                               
                                                                     nodes.splice(index,1,{node,custom});
                                                                     mod3.stack.add;
-                                                                    build({root:custom,mod:mod3});
+                                                                    await build({root:custom,mod:mod3});
                                                                     resolve();
                                                                     
                                                               }//complete
