@@ -5,51 +5,39 @@
   var obj    =  debug;
 
 
-
-        if(typeof df=='undefined'){
-              window.df   = false;
-        }
-        
-        if(typeof debug_id=='undefined'){
-              window.debug_id   = 'html';
-        }
-
-
-
   //:
 
   
         function debug(){
           
               if(!df)return;
-              var str   = [...arguments].join(' ');
-              var id='not set';
+              
+              var id    = 'html';
               if(typeof debug_id!='undefined'){
                     id    = debug_id;
               }
+              if(typeof did!='undefined'){
+                    id    = did;
+              }
+              
+              var str   = [...arguments].join(' ');
               console.log(`[ ${id} ]`,str);
+              
+              if(debug._trace){
+                    console.trace();
+              }
+              delete debug._trace;
               
         }//debug
         
         
-        debug.log   = function(){
-          
-              if(!df)return;
-              
-              console.log.apply(console,arguments);
-              
-              if(debug.trace){
-                    console.trace();
-              }
-              delete debug.trace;
-              
-        }//log
+        debug.log   = function(){debug.apply(null,arguments)}
+
         
-        
-        debug.log.trace   = function(){
+        debug.trace   = function(){
           
-              debug.trace   = true;
-              debug.log.apply(null,arguments);
+              debug._trace   = true;
+              debug.apply(null,arguments);
               
         }//trace
 
