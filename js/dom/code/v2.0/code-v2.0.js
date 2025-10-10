@@ -205,12 +205,12 @@
                     //var script      = create.script(()=>init.stack.complete);
                     //node.append(script);
                     
-                    mod2.stack.add;
+                    //mod2.stack.add;
                     
                     var result    = await mod.build({mod:mod2,root:node});
                     console.log(result);
                     
-                    mod2.stack.complete;
+                    //mod2.stack.complete;
                     
               }//fn
               
