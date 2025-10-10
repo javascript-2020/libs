@@ -1,0 +1,298 @@
+
+
+
+<code-block>
+
+      <template shadowrootmode=open>
+      
+            <style>
+  :host
+    {--bcol:lightblue}
+    
+  #root
+    {border-top:1px solid var(--bcol);padding-top:10px;border-bottom:1px solid var(--bcol);}
+  #root
+    {height:auto}
+    
+  code
+    {display:block}
+    
+  editor-root
+    {display:block;margin-bottom:5px;}
+    
+    
+            </style>
+            
+            
+            <div id=root>
+            
+                  <code></code>
+            
+            </div>
+            
+      </template>
+
+      
+      <script>
+
+      
+mod['code-block']   = function(){
+  
+  var obj   = {};
+  
+  
+        var ext,$,datatype,code,menu,ace
+        ;
+        
+        obj.initmod   = function(params){
+          
+              ext         = params.ext;
+              $           = params.$;
+              datatype    = params.datatype;
+              code        = params.code;
+              menu        = params.menu;
+              ace         = params.ace;
+              
+        }//initmod
+        
+        
+  //:
+
+  
+        var type;
+        var editor;
+        
+        var snippet_console;
+        obj.snippet_console   = null;
+
+        var snippet_html;
+        obj.snippet_html      = null;
+        
+        
+        var host;
+        var root;
+        
+        
+        
+        var setup   = {};
+        
+  
+  //:
+  
+  
+        obj.init    = async function(){
+        
+              var list      = libs();
+              var promise   = Promise.all(list);
+              return promise;
+              
+        }//init
+        
+        
+        function libs(){
+        
+              var promise;
+              var list    = [];
+              
+              if(!code){
+                    promise   = ext.load.libs('js/dom/code/code.js.api');
+                    promise.then(v=>{
+                    
+                          [code]    = v;
+                          code.initmod({ext,$,datatype});
+                          
+                    });
+                    list.push(promise);
+              }
+              
+              if(!ace){
+                    promise   = $.editor.ace()
+                    promise.then(v=>ace=v);
+                    list.push(promise);
+              }
+              
+              return list;
+              
+        }//libs
+        
+        
+  //:
+  
+  
+        obj.initdom   = async function(rootnode,{mode}={}){
+          
+              if($.nodename(rootnode)=='code-block'){
+                    host                = rootnode;
+              }else{
+                    host                = $.$(rootnode,'code-block');
+              }
+              root                      = host.shadowRoot;
+              
+              var dom                   = host.__root;
+              var txt                   = dom.textContent;
+              var i1                    = txt.indexOf('\n');
+              var i2                    = txt.lastIndexOf('\n');
+              txt                       = txt.slice(i1+1,i2);
+
+              var node                  = $(root,'code');
+              node.textContent          = txt;
+              
+
+              var has   = dom.hasAttribute.bind(dom);
+              switch(true){
+              
+                case has('snippet-console')   : await setup.snippet_console(root,dom,node);       break;
+                case has('snippet-html')      : await setup.snippet_html(root,dom,node);          break;
+                default                       : await setup.code(root,dom,node,mode);             break;
+                
+              }//switch
+
+          
+        }//initdom
+        
+        
+  //:
+  
+  
+        setup.code    = async function(root,dom,node,mode){
+        
+              type    = 'code';
+              
+              var root,promise;
+        
+              var src   = dom.getAttribute('src');
+              if(src){
+                    var {txt,error}     = await load(src);
+                    node.textContent    = txt;
+              }
+              ({promise,root}            = await code.editor.code(node,{mode,menu,ace}));
+              promise.then(({editor:ed2,root:r2})=>{
+              
+                    console.log('code-block.setup.code',root===r2);
+                    editor    = ed2;
+                    
+              });
+              
+        }//code
+
+  
+        setup.snippet_console   = async function(root,dom,node){
+        
+              type    = 'snippet-console';
+              
+              var src   = dom.getAttribute('src');
+              if(src){
+                    node.setAttribute('src',src);
+              }
+              
+              var mode;
+              var has   = dom.hasAttribute.bind(dom);
+              switch(true){
+              
+                case has('nodejs')    : mode    = 'nodejs';       break;
+                
+              }//switch
+              
+              snippet_console       = await code.snippet_console(root,{menu,ace,mode});
+              console.log(snippet_console);
+              
+              obj.snippet_console   = snippet_console;
+
+              
+        }//snippet_console
+  
+  
+        setup.snippet_html    = async function(root,dom,node){
+        
+              type    = 'snippet-html';
+              
+              var src   = dom.getAttribute('src');
+              if(src){
+                    node.setAttribute('src',src);
+              }
+              
+              snippet_html          = await code.snippet_html(root,{});
+              console.log(snippet_html);
+              
+              obj.snippet_html      = snippet_html;
+              
+        }//html
+        
+        
+  //:
+  
+  
+        async function load(url){
+        
+              var err;
+              try{
+              
+                    var res   = await fetch(url);
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                    return {error};
+              }
+              
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
+              }
+              
+              var txt   = await res.text();
+              return {txt};
+              
+        }//load
+        
+        
+  //:
+  
+  
+        obj.focus   = function(){
+        
+              return;
+              
+              switch(type){
+              
+                case 'code'               : editor.focus();        break;
+                case 'snippet-console'    :
+                case 'snippet-html'       :
+                
+              }//switch
+              
+        }//focus
+        
+        
+        obj.getvalue    = function(){
+        
+              var txt;
+              
+              switch(type){
+              
+                case 'code'               : txt   = editor.getValue();        break;
+                case 'snippet-console'    :
+                case 'snippet-html'       :
+                
+              }//switch
+              
+              return txt;
+              
+        }//getvalue
+        
+        
+        
+        
+  return obj;
+  
+}//code-block
+
+
+      </script>
+      
+</code-block>
