@@ -200,7 +200,7 @@
                     node            = document.createElement('snippet-console');
                     node.toggleAttribute('component');
                     node.toggleAttribute('v2.0');
-                    
+                    console.log(root);
                     root.after(node);
                                   
                     //var script      = create.script(()=>init.stack.complete);
