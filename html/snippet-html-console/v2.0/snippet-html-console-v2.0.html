@@ -150,9 +150,12 @@
               }//onload
               
               
-              function log(s){
+              function log(){
                 
-                    window.console.log('iframe.log',s);
+                    var args    = [...arguments];
+                    args.unshift('[ snippet-html-console ]');
+                    window.console.log.apply(window.console,args);
+                    console.log.apply(console,arguments);
                     
               }//log
               
