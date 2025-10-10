@@ -127,7 +127,7 @@
               root                      = host.shadowRoot;
               
               var dom                   = host.__root;
-              var txt                   = dom.textContent;
+              var txt                   = dom.innerHTML;//textContent;
               var i1                    = txt.indexOf('\n');
               var i2                    = txt.lastIndexOf('\n');
               txt                       = txt.slice(i1+1,i2);
