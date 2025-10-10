@@ -215,7 +215,7 @@
               async function complete(){
                 debugger;
                 
-                    snippet   = mod['snippet-console'];
+                    snippet   = mod2['snippet-console'];
               
                     snippet.initmod({ext,$,source,menumod,ace,mode});
                     
