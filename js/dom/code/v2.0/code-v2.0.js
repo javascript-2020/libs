@@ -159,9 +159,7 @@
               setTimeout(fn,50);
               
               var mod2    = mod.create({mod,name:mod.name+'-snippet-console'});
-              
               mod2.stack.push(complete);
-
               
               var editor;
               var snippet;
@@ -198,8 +196,8 @@
       
       
                     node            = document.createElement('snippet-console');
-                    node.toggleAttribute('component');
-                    node.toggleAttribute('v2.0');
+                    node.toggleAttribute('component',true);
+                    node.toggleAttribute('v2.0',true);
                     root.__node.after(node);
                                   
                     //var script      = create.script(()=>init.stack.complete);
@@ -270,8 +268,8 @@
               var resolve,promise=new Promise(res=>resolve=res);
               setTimeout(fn,50);
 
-              init.stack.add;
-              init.stack.push(complete);
+              var mod2    = mod.create({mod,name:mod.name+'-snippet-html'});
+              mod2.stack.push(complete);
 
               var editor;
               var snippet;
@@ -305,24 +303,25 @@
                     promise.then(result=>({editor}=result));
 
                     node            = document.createElement('snippet-html');
-                    node.toggleAttribute('api',true);
-                    root.after(node);
+                    node.toggleAttribute('component',true);
+                    node.toggleAttribute('v2.0',true);
+                    root.__node.after(node);
                                   
-                    var script      = create.script(()=>init.stack.complete);
-                    node.append(script);
+                    var result    = await mod.build({mod:mod2,root:node});
+                    console.log(result);
                 
               }//fn
 
 
               async function complete(){
                 
-                    snippet   = mod.snippet_html();
+                    snippet   = mod2['snippet_html'];
               
                     snippet.initmod({ext,$,source});
                     
                     await snippet.init();
 
-                    await snippet.initdom(node.__component);
+                    await snippet.initdom(node.__root);
                     
                     resolve({editor,snippet,code,node});
                     
