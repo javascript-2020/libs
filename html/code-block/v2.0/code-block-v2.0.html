@@ -93,7 +93,7 @@
               var list    = [];
               
               if(!code){
-                    promise   = ext.load.libs('js/dom/code/code.js.api');
+                    promise   = ext.load.libs('js/dom/code/v2.0/code-v2.0.js.api');
                     promise.then(v=>{
                     
                           [code]    = v;
@@ -191,7 +191,7 @@
                 
               }//switch
               
-              snippet_console       = await code.snippet_console(root,{menu,ace,mode});
+              snippet_console       = await code.snippet_console(mod,root,{menu,ace,mode});
               console.log(snippet_console);
               
               obj.snippet_console   = snippet_console;
@@ -209,7 +209,7 @@
                     node.setAttribute('src',src);
               }
               
-              snippet_html          = await code.snippet_html(root,{});
+              snippet_html          = await code.snippet_html(mod,root,{});
               console.log(snippet_html);
               
               obj.snippet_html      = snippet_html;
