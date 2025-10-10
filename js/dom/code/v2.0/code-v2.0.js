@@ -385,8 +385,9 @@
 
               
               async function complete(){
+                debugger;
                 
-                    code_block   = mod['code-block']();
+                    code_block   = mod['code-block'];
               
                     code_block.initmod({ext,$,code:obj,menu,ace});
                     
