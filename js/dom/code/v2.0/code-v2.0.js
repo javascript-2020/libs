@@ -206,7 +206,7 @@
                     //mod2.stack.add;
                     
                     var result    = await mod.build({mod:mod2,root:node});
-                    //console.log(result);
+                                                                                //console.log(result);
                     
                     //mod2.stack.complete;
                     
@@ -310,7 +310,7 @@
                     root.__node.after(node);
                                   
                     var result    = await mod.build({mod:mod2,root:node});
-                    console.log(result);
+                                                                                //console.log(result);
                 
               }//fn
 
@@ -439,7 +439,7 @@
               code.parentNode.replaceChild(root,code);
               
               var result    = await mod.build({root,mod:mod2});
-              console.log(result);
+                                                                                //console.log(result);
               
               //var root    = create.component(code,'editor',()=>init.stack.complete);
                             
