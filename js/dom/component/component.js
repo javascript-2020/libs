@@ -190,6 +190,7 @@
                     var node        = div.firstElementChild;
                                                                                 if(!node)debugger;
                     root.__root     = node;
+                    root.__node     = node;
                     
                     node.__html     = html;
                     node.__root     = root;
