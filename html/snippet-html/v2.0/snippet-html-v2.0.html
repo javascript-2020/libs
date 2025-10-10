@@ -44,9 +44,11 @@
       <script>
 
       
-mod.snippet_html    = function(){
+(function snippet_html({mod,root,node}){
 
-  var obj   = {};
+  var obj   = {
+        version   : 'v2.0',
+  };
   
 
         var ext,$,source
@@ -135,7 +137,7 @@ mod.snippet_html    = function(){
   
   return obj;
   
-}//snippet_html
+})//snippet_html
 
 
       </script>
