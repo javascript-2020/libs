@@ -145,7 +145,7 @@
               }
               root    = host.shadowRoot;
 
-              $.editor.ace.import_style(root);
+              $.editor.ace.import_style(root,()=>root.append(style));
               
               
               var node    = $(root,'#console');
