@@ -244,7 +244,7 @@
                                 nscript.onload        = ()=>mod.stack.complete;
                                 script.parentNode.replaceChild(nscript,script);
                           }else{
-                                                                                //console.log('script.id',script.id);
+                                                                                console.log('script.id',script.id);
                                                                                 //debugger;
                                 var js    = script.textContent;
                                 define({js,mod,mod2,node,root,inst});
