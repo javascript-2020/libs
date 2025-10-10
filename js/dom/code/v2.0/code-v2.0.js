@@ -301,7 +301,7 @@
 
 
                     var promise;
-                    ({root,promise}    = obj.editor.code(mod,code,{mode:'html',menu,ace}));
+                    ({root,promise}    = await obj.editor.code(mod,code,{mode:'html',menu,ace}));
                     promise.then(result=>({editor}=result));
 
                     node            = document.createElement('snippet-html');
