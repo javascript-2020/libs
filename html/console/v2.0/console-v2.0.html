@@ -129,6 +129,10 @@
               style         = document.createElement('style');
               style.textContent   = css;
               
+              if(!ace){
+                    ace   = await $.editor.ace();
+              }
+              
         }//libs
 
 
