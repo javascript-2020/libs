@@ -544,6 +544,7 @@
               
               rd.root   = function(root){
                 
+                    var nn    = root.nodeName.toLowerCase();
                     var inst;
                     
                     inst    = rd(root,'inst');
@@ -556,7 +557,6 @@
                           return {nn,inst:id};
                     }
                       
-                    var nn    = root.nodeName.toLowerCase();
                     if(nn.endsWith(']')){
                           var i   = nn.lastIndexOf('[',nn.length);
                           if(i!=-1){
