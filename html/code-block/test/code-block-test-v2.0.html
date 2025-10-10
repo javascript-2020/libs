@@ -1,0 +1,173 @@
+
+
+
+<html>
+
+      <head>
+            
+            <script src='https://libs.ext-code.com/js/dom/init-hdr/init-hdr.js'></script>
+            
+            <script init>
+                                                                                console.clear();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+        var version                     = 'v1.0';
+        
+        var df                          = true;
+        var debug_id                    = '[ code-block-test.html ]';
+        
+        var ext;
+        var $;
+        var datatype;
+        var debug;
+        var menumod;
+                  
+
+  //:
+
+        mod.stack.df=true;
+        mod.stack.add   = init;
+        
+        async function init(){
+                                                                                debug('init',version);
+
+              menu        = menumod();
+              
+              codeblock1    = mod['code-block']();
+              codeblock2    = mod['code-block']();
+              codeblock3    = mod['code-block']();
+              
+              //code.initmod({ext,$,datatype});
+              
+              codeblock1.initmod({ext,$,datatype,menu});
+              codeblock2.initmod({ext,$,datatype,menu});
+              codeblock3.initmod({ext,$,datatype,menu});
+
+              
+              await codeblock1.init();
+              await codeblock2.init();
+              await codeblock3.init();
+
+              
+              initdom(document.body);
+
+              
+        }//init
+        
+        init.stack    = mod.stack;
+        
+        
+            </script init>
+
+            <script src='https://libs.ext-code.com/js/core/ext-loader/ext-loader.js'></script>
+
+            <script>
+
+(async()=>{
+
+        mod.stack.add;
+        
+        var promise   = ext.load.libs(
+              'js/dom/$.js.api',
+              'js/core/datatype.js',
+              'js/debug/debug.js',
+              
+              'js/dom/menumod/menumod.js',
+        );
+        [$,datatype,debug,menumod]   = await promise;
+
+        mod.stack.complete;
+        
+})();
+
+            </script>
+            
+            <style>
+            </style>
+            
+      </head>
+
+      
+      <body>
+      
+            <h3>code-block test</h3>
+            
+            
+            <div>
+                  simple
+            </div>
+            
+            <code-block id=c1 api>
+                  <script html-loader src='https://libs.ext-code.com/html/cloud-loader.mjs'></script>
+        let a=42;
+        
+            </code-block>
+
+
+            <div>
+                  console
+            </div>
+            
+            <code-block id=c2 snippet-console api>
+                  <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+        let a=42;
+        console.log(a);
+        
+            </code-block>
+
+
+            <div>
+                  html
+            </div>
+
+            <code-block id=c3 snippet-html api>
+                  <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                  
+                  <div>
+                        hello
+                  </div>
+                  
+            </code-block>
+            
+      </body>
+      
+      <script>
+
+
+
+            var menu;
+            
+            
+            var codeblock1;
+            var codeblock2;
+            var codeblock3;
+            
+
+  //:
+  
+  
+            function initdom(rootnode){
+            
+                  root                  = rootnode;
+                  
+                  var c1    = $('#c1');
+                  codeblock1.initdom(c1);
+
+                  var c2    = $('#c2');
+                  codeblock2.initdom(c2);
+                  
+                  var c3    = $('#c3');
+                  codeblock3.initdom(c3);
+                  
+                  
+            }//initdom
+
+
+  //:
+
+  
+  mod.stack.complete;
+  
+      </script>
+      
+</html>
+      
