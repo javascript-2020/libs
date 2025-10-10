@@ -133,7 +133,7 @@
   //:
   
   
-        snippet_console.all   = async function(rootnode,{menu,ace}={}){
+        snippet_console.all   = async function(mod,rootnode,{menu,ace}={}){
 
               //await load.all(root,'snippet-console');
           
@@ -143,7 +143,7 @@
               
               nodes       = nodes.map(async(code,i)=>{
                 
-                    list[i]    = await snippet_console(code,{menu,ace});
+                    list[i]    = await snippet_console(mod,code,{menu,ace});
                     
               });
               await Promise.all(list);
