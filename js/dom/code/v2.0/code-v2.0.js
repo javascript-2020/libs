@@ -355,25 +355,28 @@
         }//all
 
       
-        function code_block(node,{mode,menu,ace}){
+        function code_block(mod,node,{mode,menu,ace}){
         
-        
-              var resolve,promise=new Promise(res=>resolve=res);
+              var mod2    = mod.create({mod,name:'code-block'});
               
-              init.stack.add;
-              init.stack.push(complete);
+              mod2.stack.push(complete);
 
 
-              var code_block;
+              var code_block    = {};
+              code_block.mod    = mod2;
+              code_block.obj    = null;
+              code_block.root   = document.createElement('code_block');
+              code_block.root.toggleAttribute('component');
+              code_block.root.toggleAttribute('v2.0');
+              
 
               var div   = document.createElement('div');
               node.before(div);
 
-              var script    = create.script(()=>init.stack.complete);
-              node.append(script);
 
-        
-              return promise;
+              
+              var result    = await mod.build(code_block);
+              console.log(result);
 
               
               async function complete(){
