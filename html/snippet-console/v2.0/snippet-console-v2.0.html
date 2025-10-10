@@ -25,9 +25,7 @@
                         <input value=run type=button>
                   </div>
                               
-                  <console api>
-                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-                  </console>
+                  <console component v2.0></console>
       
             </div>
       
@@ -36,9 +34,11 @@
       
       <script>
       
-mod['snippet-console']    = function(){
+(function snippet_console({mod,root,node}){
   
-  var obj   = {};
+  var obj   = {
+        version   : 'v2.0',
+  };
   
         
         var ext,$,source,ace,mode
@@ -78,7 +78,7 @@ mod['snippet-console']    = function(){
 
               
           
-              dconsole        = mod.console();
+              dconsole        = mod.console;
               obj.dconsole    = dconsole;
               
               dconsole.initmod({ext,$,ace});
@@ -185,7 +185,7 @@ mod['snippet-console']    = function(){
 
   return obj;
   
-}//snippet-console
+})//snippet_console
 
 
 
@@ -193,3 +193,7 @@ mod['snippet-console']    = function(){
       
       
 </snippet-console>
+
+
+
+
