@@ -317,7 +317,7 @@
 
               async function complete(){
                 
-                    snippet   = mod2['snippet_html'];
+                    snippet   = mod2['snippet-html'];
               
                     snippet.initmod({ext,$,source});
                     
