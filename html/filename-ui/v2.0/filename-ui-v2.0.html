@@ -1,0 +1,101 @@
+
+
+
+<filename-ui>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+  #root
+    {display:flex;gap:10px;align-items:center}
+    
+  #icon
+    {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:20px;height:20px}
+    
+  #filename
+    {}
+    
+            </style>
+       
+            <div id=root>
+            
+                  <img id=icon>
+                  
+                  <div id=filename>---</div>
+                  
+            </div>
+            
+      </template>
+      
+      
+      <script>
+
+
+(function filename_ui({mod,root,node}){
+ 
+  var obj   = {};
+  
+  
+        obj.initmod   = function(params){
+          
+              $     = params.$;
+
+              
+        }//initmod
+        
+        
+  //:
+  
+        var root;
+        var icon;
+        var filename;
+  //:
+  
+  
+        obj.init    = function(){
+        }//init
+        
+        
+  //:
+  
+  
+        obj.initdom   = function(rootnode){
+          
+              var host                  =  $(rootnode,'filename-ui');
+              root                      = host.shadowRoot;
+              
+              
+              icon                      = $(root,'#icon');
+              
+              
+              filename                  = $(root,'#filename');
+              
+              
+              
+        }//initdom
+
+
+  //:
+  
+  
+        obj.show    = function(file){
+          
+              icon.src                = file.icon;
+              
+              filename.textContent    = file.filename;
+              
+        }//show
+        
+        
+        
+  return obj;
+  
+//filename-ui 
+});
+      
+      </script>
+
+</filename-ui>
+
+
