@@ -365,7 +365,7 @@
               var code_block    = {};
               code_block.mod    = mod2;
               code_block.obj    = null;
-              code_block.root   = document.createElement('code_block');
+              code_block.root   = document.createElement('code-block');
               code_block.root.toggleAttribute('component');
               code_block.root.toggleAttribute('v2.0');
               
