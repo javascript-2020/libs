@@ -355,7 +355,7 @@
         }//all
 
       
-        function code_block(mod,node,{mode,menu,ace}){
+        async function code_block(mod,node,{mode,menu,ace}){
         
               var mod2    = mod.create({mod,name:'code-block'});
               
