@@ -62,7 +62,6 @@
               ext       = params.ext;
               $         = params.$;
               source    = params.source;
-              debug     = params.debug;
               
         }//initmod
         
@@ -138,7 +137,16 @@
   
   //:
   
-  
+        
+        function debug(){
+          
+              if(!df && !obj.df)return;
+              var str   = [...arguments].join(' ');
+              console.log(`[ ${did} ]`,str);
+              
+        }//debug
+
+
   
   return obj;
   
