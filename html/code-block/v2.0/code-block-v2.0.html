@@ -36,7 +36,7 @@
       <script>
 
       
-mod['code-block']   = function(){
+(function code_block({mod,root,node}){
   
   var obj   = {};
   
@@ -82,14 +82,12 @@ mod['code-block']   = function(){
   
         obj.init    = async function(){
         
-              var list      = libs();
-              var promise   = Promise.all(list);
-              return promise;
+              await libs();
               
         }//init
         
         
-        function libs(){
+        async function libs(){
         
               var promise;
               var list    = [];
@@ -111,7 +109,7 @@ mod['code-block']   = function(){
                     list.push(promise);
               }
               
-              return list;
+              await Promise.all(list);
               
         }//libs
         
@@ -165,7 +163,7 @@ mod['code-block']   = function(){
                     var {txt,error}     = await load(src);
                     node.textContent    = txt;
               }
-              ({promise,root}            = await code.editor.code(node,{mode,menu,ace}));
+              ({promise,root}            = await code.editor.code(mod,node,{mode,menu,ace}));
               promise.then(({editor:ed2,root:r2})=>{
               
                     console.log('code-block.setup.code',root===r2);
@@ -290,7 +288,7 @@ mod['code-block']   = function(){
         
   return obj;
   
-}//code-block
+})//code_block
 
 
       </script>
