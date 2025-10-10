@@ -36,6 +36,7 @@
                         <iframe></iframe>
                   </div>
                   
+                  <console component v2.0></console>
             </div>
       
       </template>
@@ -44,7 +45,7 @@
       <script>
 
       
-(function snippet_html({mod,root,node}){
+(function snippet_html_console({mod,root,node}){
 
   var obj   = {
         version   : 'v2.0',
@@ -69,12 +70,15 @@
   //:
   
         
+        var console;
+
         
         var host;
         var root;
         
         var hldr;
         var iframe;
+        
         
         
         var btn     = {};
@@ -85,6 +89,13 @@
   
         obj.init    = function(){
                                                                                 debug('init',obj.version);
+              console   = mod.console;
+              
+              console.initmod({});
+              
+              await console.init();
+              
+              
         }//init
         
 
@@ -102,6 +113,9 @@
 
               hldr                                = $(root,'#hldr');
               iframe                              = $(hldr,'iframe');
+
+
+              console.initdom(root);
 
         
         }//initdom
@@ -150,7 +164,7 @@
   
   return obj;
   
-})//snippet_html
+})//snippet_html_console
 
 
       </script>
