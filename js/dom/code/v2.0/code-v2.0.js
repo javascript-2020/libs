@@ -428,7 +428,7 @@
               root.toggleAttribute('v2.0');
               root.textContent    = txt;
               
-              code.parentNode.repalceChild(root,code);
+              code.parentNode.replaceChild(root,code);
               
               //var root    = create.component(code,'editor',()=>init.stack.complete);
                             
