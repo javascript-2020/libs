@@ -72,7 +72,7 @@
         [$,datatype,menumod,keydown,debug]   = await promise;
 
   
-        html    = await ext.text.libs('html/snippet-html/ex/ex1.html');
+        html    = await ext.text.libs('html/snippet-html-console/ex/ex1.html');
 
 
         mod.stack.complete;
@@ -109,6 +109,8 @@
             </h3>
             
             <code>
+            
+      
             </code>
 
             
@@ -134,7 +136,7 @@
               
               
               code                = $('code');
-              code.textContent    = html;
+              //code.textContent    = html;
 
               
               snippet.initdom(root);
