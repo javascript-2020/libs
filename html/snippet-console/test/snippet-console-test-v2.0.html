@@ -1,0 +1,206 @@
+
+
+
+<html>
+
+      <head>
+      
+            <title>snippet-console test</title>
+
+
+            
+            <script init>
+                                                                                console.clear();
+                                                                                console.log('snippet-console-test.html');
+                                                                                console.log();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+        var df=true;
+
+
+        var ext;
+        var $;
+        var datatype;
+        var debug;
+        
+
+
+        var ace;
+        var snippet_console;        
+        
+
+        
+
+  //:
+
+              
+        async function init(){
+                                                                                debug('init',version);
+
+              snippet_console           = mod['snippet-console']();
+              
+              snippet_console.initmod({ext,$,ace,source});
+              
+              await snippet_console.init();
+              
+              
+  //:
+
+          
+              await initdom(document.body);
+
+
+        }//init
+
+
+  //:
+  
+  
+        init.stack            = [];
+        init.stack.ct         = 0;
+        init.stack.total      = 1;
+        init.stack.mode       = '';
+        init.stack.complete   = false;
+        Object.defineProperty(init.stack,'add',{get:()=>{
+              init.stack.total++;
+              init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
+        }});
+        Object.defineProperty(init.stack,'complete',{get:()=>{
+              init.stack.ct++;
+              init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
+              init.stack.ct>=init.stack.total && init();
+        }});
+        
+
+(async()=>{
+  
+        init.stack.add;
+        
+        
+        var url;
+        var headers;
+        var token       = localStorage['github-token'];
+        if(token){
+              url       = 'https://api.github.com/repos/javascript-2020/ext-code/contents/ext-loader.js';
+              headers   = {accept:'application/vnd.github.raw',authorization:`bearer ${token}`};
+        }else{
+              url       = 'https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js';
+        }
+        
+        var res   = await fetch(url,{headers});
+        var txt   = await res.text();
+
+        if(res.headers.get('content-type').includes('json')){
+                                                                                console.log('*** ext : json');
+              var json    = JSON.parse(txt);
+              var b64     = json.content;
+              txt         = atob(b64);
+        }else{
+                                                                                console.log('*** ext : text');
+        }
+        
+        ext   = eval(txt);
+        
+              
+        var promise   = ext.load.libs(
+              'js/dom/$.js.api',
+              'js/core/datatype.js',
+              'js/debug/debug.js',
+        );
+        [$,datatype,debug]   = await promise;
+
+        ace   = await $.editor.ace();
+        
+        init.stack.complete;
+
+})();
+
+
+            </script init>
+      
+            <style>
+  body
+    {display:flex;flex-direction:column;gap:10px}
+    
+  code
+    {border:1px solid lightgray;padding:10px;font-family:monospace;white-space:pre}
+    
+            </style>
+            
+      </head>
+      
+      
+      <body>
+      
+            <h3>
+                  snippet-console test
+            </h3>
+            
+            <code>
+                        
+        fn();
+
+        
+        function fn(){
+        
+              console.log('myFn');
+              
+        }//fn
+        
+            </code>
+
+            
+            <snippet-console>
+                  <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+            </snippet-console>
+
+      
+      </body>
+      
+      
+      <script>
+
+      
+        var root;
+        var code;
+        
+
+        function initdom(rootnode){
+        
+              root    = rootnode;
+              
+              
+              code    = $('code');
+
+              
+              snippet_console.initdom(root);
+              
+
+              
+        }//initdom
+      
+
+  //:
+  
+  
+        function source(){
+        
+              var js    = code.textContent;
+              return js;
+              
+        }//source
+        
+        
+        source.focus    = function(){}
+
+        
+  //:
+  
+  
+  init.stack.complete;
+  
+      </script>
+      
+      
+</html>
+
+
