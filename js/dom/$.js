@@ -1156,7 +1156,7 @@
         }//ace
         
         
-        $.editor.ace.import_style   = function(root){
+        $.editor.ace.import_style   = function(root,complete){
           
               var ids   = ['ace-tm','ace_editor\\.css','ace_scrollbar\\.css','error_marker\\.css',];
               var ct    = 0;
@@ -1192,6 +1192,10 @@
                     
                     }//for
                                         
+                    if(typeof complete=='function'){
+                          complete();
+                    }
+                    
               }//import_style
               
         }//import_style
