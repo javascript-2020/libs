@@ -410,7 +410,7 @@
         
         obj.editor    = {};
         
-        obj.editor.code    = function(mod,code,{mode,menu,kd,ace}){
+        obj.editor.code    = async function(mod,code,{mode,menu,kd,ace}){
 
               var editor;
               
