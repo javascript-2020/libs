@@ -65,9 +65,11 @@
       <script>
       
 
-mod.console   = function(){
+(function console({mod,root,node}){
   
-  var obj   = {};
+  var obj   = {
+        version   : 'v2.0',
+  };
   
   
         var ext,$,ace
@@ -143,7 +145,7 @@ mod.console   = function(){
               }
               root    = host.shadowRoot;
 
-              import_style(root,()=>root.append(style));
+              $.editor.ace.import_style(root);
               
               
               var node    = $(root,'#console');
@@ -162,7 +164,7 @@ mod.console   = function(){
 
 
 
-
+/*
 
         function import_style(shadow,complete){
 
@@ -205,7 +207,7 @@ mod.console   = function(){
               
         }//style
         
-        
+*/        
         
   //:
   
@@ -282,7 +284,7 @@ mod.console   = function(){
   return obj;
   
   
-}//console
+})//console
 
 
       </script>
