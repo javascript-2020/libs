@@ -40,6 +40,9 @@
         version   : 'v2.0',
   };
   
+        var df=true,did='snippet-console'
+        ;
+
         
         var ext,$,source,ace,mode
         ;
@@ -181,6 +184,14 @@
   //:  
   
 
+        function debug(){
+          
+              if(!df && !obj.df)return;
+              var str   = [...arguments].join(' ');
+              console.log(`[ ${did} ]`,str);
+              
+        }//debug
+        
 
 
   return obj;
