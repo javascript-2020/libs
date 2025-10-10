@@ -200,14 +200,17 @@
                     node            = document.createElement('snippet-console');
                     node.toggleAttribute('component');
                     node.toggleAttribute('v2.0');
-                    console.log(root);
                     root.__node.after(node);
                                   
                     //var script      = create.script(()=>init.stack.complete);
                     //node.append(script);
                     
+                    mod2.stack.add;
+                    
                     var result    = await mod.build({mod:mod2,root:node});
                     console.log(result);
+                    
+                    mod2.stack.complete;
                     
               }//fn
               
