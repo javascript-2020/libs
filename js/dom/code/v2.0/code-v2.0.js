@@ -206,7 +206,7 @@
                     //mod2.stack.add;
                     
                     var result    = await mod.build({mod:mod2,root:node});
-                    console.log(result);
+                    //console.log(result);
                     
                     //mod2.stack.complete;
                     
