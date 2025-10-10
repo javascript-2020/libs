@@ -4,16 +4,18 @@
 <html>
 
       <head>
+
+
             
-            <script src='https://libs.ext-code.com/js/dom/init-hdr/init-hdr.js'></script>
+            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
             
             <script init>
                                                                                 console.clear();
+                                                                                console.log('code-block-test-v2.0.html');
+                                                                                console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
-        var version                     = 'v1.0';
-        
-        var df                          = true;
-        var debug_id                    = '[ code-block-test.html ]';
+        var df=true
+        ;
         
         var ext;
         var $;
@@ -24,7 +26,7 @@
 
   //:
 
-        mod.stack.df=true;
+        mod.stack.df    = true;
         mod.stack.add   = init;
         
         async function init(){
@@ -32,20 +34,20 @@
 
               menu        = menumod();
               
-              codeblock1    = mod['code-block']();
-              codeblock2    = mod['code-block']();
-              codeblock3    = mod['code-block']();
+              codeblock1    = mod['code-block'];
+              //codeblock2    = mod['code-block']();
+              //codeblock3    = mod['code-block']();
               
               //code.initmod({ext,$,datatype});
               
               codeblock1.initmod({ext,$,datatype,menu});
-              codeblock2.initmod({ext,$,datatype,menu});
-              codeblock3.initmod({ext,$,datatype,menu});
+              //codeblock2.initmod({ext,$,datatype,menu});
+              //codeblock3.initmod({ext,$,datatype,menu});
 
               
               await codeblock1.init();
-              await codeblock2.init();
-              await codeblock3.init();
+              //await codeblock2.init();
+              //await codeblock3.init();
 
               
               initdom(document.body);
@@ -53,14 +55,8 @@
               
         }//init
         
-        init.stack    = mod.stack;
         
         
-            </script init>
-
-            <script src='https://libs.ext-code.com/js/core/ext-loader/ext-loader.js'></script>
-
-            <script>
 
 (async()=>{
 
@@ -70,7 +66,6 @@
               'js/dom/$.js.api',
               'js/core/datatype.js',
               'js/debug/debug.js',
-              
               'js/dom/menumod/menumod.js',
         );
         [$,datatype,debug,menumod]   = await promise;
@@ -96,13 +91,12 @@
                   simple
             </div>
             
-            <code-block id=c1 api>
-                  <script html-loader src='https://libs.ext-code.com/html/cloud-loader.mjs'></script>
+            <code-block id=c1 component v2.0>
         let a=42;
-        
             </code-block>
 
 
+<!--
             <div>
                   console
             </div>
@@ -127,7 +121,9 @@
                   </div>
                   
             </code-block>
-            
+-->
+
+
       </body>
       
       <script>
@@ -152,20 +148,20 @@
                   var c1    = $('#c1');
                   codeblock1.initdom(c1);
 
+
+/*
                   var c2    = $('#c2');
                   codeblock2.initdom(c2);
                   
                   var c3    = $('#c3');
                   codeblock3.initdom(c3);
+*/                  
                   
                   
             }//initdom
 
 
-  //:
 
-  
-  mod.stack.complete;
   
       </script>
       
