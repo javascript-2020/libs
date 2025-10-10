@@ -31,7 +31,9 @@
 
   //:
 
-              
+        
+        mod.stack.add   = init;
+        
         async function init(){
                                                                                 debug('init');
 
@@ -66,8 +68,10 @@
         );
         [$,datatype,menumod,keydown,debug]   = await promise;
   
+        ace   = await $.editor.ace();
+
         mod.stack.complete;
-              
+                      
 })();
         
 
