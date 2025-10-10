@@ -393,8 +393,8 @@
                     
                     await code_block.obj.init();
                     
-                    var root    = div.nextElementSibling;
-                    div.remove();
+                    //var root    = div.nextElementSibling;
+                    //div.remove();
                     
                     await code_block.obj.initdom(root,{mode});
                     
