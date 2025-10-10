@@ -213,7 +213,7 @@
                           node.append(nslot)
                           
                     });
-        
+                                                                                if(!root.parentNode)debugger;
                     root.parentNode.replaceChild(node,root);
                                                                                 mod.df && console.log(nn,version,root,node);
                                                                                 //if(nn=='filemod')debugger;
