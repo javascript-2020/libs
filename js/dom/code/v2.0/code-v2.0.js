@@ -153,13 +153,14 @@
         }//all
 
         
-        function snippet_console(code,{menu,ace,mode}={}){
+        function snippet_console(mod,code,{menu,ace,mode}={}){
         
               var resolve,promise=new Promise(res=>resolve=res);
               setTimeout(fn,50);
               
-              init.stack.add;
-              init.stack.push(complete);
+              var mod2    = mod.create({mod,name:mod.name+'-snippet-console'});
+              
+              mod2.stack.push(complete);
 
               
               var editor;
@@ -190,31 +191,37 @@
 
 
                     var promise;
-                    ({root,promise}    = obj.editor.code(code,{menu,ace}));
+                    ({root,promise}    = obj.editor.code(mod,code,{menu,ace}));
                     promise.then(result=>({editor}=result));
                     
                     //editor          = $.editor.max(code,{kd});
       
       
                     node            = document.createElement('snippet-console');
-                    node.toggleAttribute('api',true);
+                    node.toggleAttribute('component');
+                    node.toggleAttribute('v2.0');
+                    
                     root.after(node);
                                   
-                    var script      = create.script(()=>init.stack.complete);
-                    node.append(script);
+                    //var script      = create.script(()=>init.stack.complete);
+                    //node.append(script);
+                    
+                    var result    = await mod.build({mod:mod2,root:node});
+                    console.log(result);
                     
               }//fn
               
               
               async function complete(){
+                debugger;
                 
-                    snippet   = mod['snippet-console']();
+                    snippet   = mod['snippet-console'];
               
                     snippet.initmod({ext,$,source,menumod,ace,mode});
                     
                     await snippet.init();
 
-                    await snippet.initdom(node.__component);
+                    await snippet.initdom(node.__root);
                     
                     //snippet.initdom(node.__component);
                     
