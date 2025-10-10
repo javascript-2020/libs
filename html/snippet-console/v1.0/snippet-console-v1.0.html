@@ -1,0 +1,195 @@
+
+
+
+<snippet-console>
+
+      <template shadowrootmode=open>
+      
+      
+            <style>
+            
+  #root
+    {display:flex;flex-direction:column;gap:10px}
+    
+  input
+    {font-size:16px;padding:5px 10px}
+  input[type=button]
+    {cursor:pointer}
+    
+            </style>
+            
+            
+            <div id=root>
+      
+                  <div>
+                        <input value=run type=button>
+                  </div>
+                              
+                  <console api>
+                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                  </console>
+      
+            </div>
+      
+      </template>
+      
+      
+      <script>
+      
+mod['snippet-console']    = function(){
+  
+  var obj   = {};
+  
+        
+        var ext,$,source,ace,mode
+        ;
+        
+        obj.initmod   = function(params){
+          
+              ext       = params.ext;
+              $         = params.$;
+              source    = params.source;
+              ace       = params.ace;
+              mode      = params.mode;
+              
+        }//initmod
+        
+        
+  //:
+
+
+        var ansi;
+  
+        var dconsole;
+        obj.dconsole    = null;
+        var sandbox;
+        
+        
+        var root;
+        
+        
+        var btn   = {};
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+
+              
+          
+              dconsole        = mod.console();
+              obj.dconsole    = dconsole;
+              
+              dconsole.initmod({ext,$,ace});
+              
+              
+              await dconsole.init();
+
+              await libs();
+          
+        }//init
+        
+        
+        async function libs(){
+          
+              [sandbox]       = await ext.load.libs('js/sandbox/sandbox.js.api');
+
+              var {AnsiUp}    = await import('https://cdn.jsdelivr.net/npm/ansi_up/+esm');
+              ansi            = new AnsiUp();
+              
+        }//libs
+
+        
+  //:
+  
+  
+        obj.initdom   = function(rootnode){
+
+              host                                = $.full('snippet-console',rootnode);
+              root                                = host.shadowRoot;
+
+
+              $(root,'[value=run]').onclick       = btn.run;
+              
+              
+              
+              dconsole.initdom(root);
+
+              dconsole.clear();
+              dconsole.log('ready');
+              
+              
+        }//initdom
+        
+
+  //:
+  
+        
+        btn.run   = function(){
+
+              var js          = source();
+              
+                    
+              var console     = {};
+              console.log     = function(){
+                              
+                                      window.console.log.apply(window.console,arguments);
+                                      
+                                      var args    = [...arguments];
+                                      if(mode=='nodejs'){
+                                            args.forEach((v,i)=>{
+                                            
+                                                  if(typeof v=='string'){
+                                                        var html    = ansi.ansi_to_html(v);
+                                                        var node    = $.define(html);
+                                                        var log     = document.createElement('log-nodejs');
+                                                        log.append(node);
+                                                        args.splice(i,1,log);
+                                                  }
+                                                  
+                                            });
+                                      }
+                                      dconsole.log.apply(null,args);
+                                    
+                                }//log
+              console.clear   = function(){
+                  
+                                      dconsole.clear();
+                                      window.console.clear();
+                                      
+                                }//clear
+
+              if(!mode){
+                    sandbox.run(js,{console});
+              }else{
+                    sandbox[mode](js,{console});
+              }
+
+          
+              source.focus();
+              
+        }//run
+        
+        
+  //:
+
+
+        obj.run   = btn.run;
+
+
+  //:  
+  
+
+
+
+  return obj;
+  
+}//snippet-console
+
+
+
+      </script>
+      
+      
+</snippet-console>
