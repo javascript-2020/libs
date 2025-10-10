@@ -216,7 +216,7 @@
               
               
               async function complete(){
-                debugger;
+                
                 
                     snippet   = mod2['snippet-console'];
               
@@ -446,7 +446,7 @@
               
               
               async function complete(){
-              debugger;
+              
               
                     editor    = mod2.editor;
                     
