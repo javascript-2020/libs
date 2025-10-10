@@ -263,6 +263,8 @@
         }//snippet_console
         
 
+
+
         function snippet_html(code,{ace}){
           
               var resolve,promise=new Promise(res=>resolve=res);
