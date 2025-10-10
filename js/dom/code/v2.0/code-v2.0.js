@@ -430,7 +430,7 @@
               
               code.parentNode.replaceChild(root,code);
               
-              mod2.build({root,mod:mod2});
+              mod.build({root,mod:mod2});
               
               //var root    = create.component(code,'editor',()=>init.stack.complete);
                             
