@@ -387,18 +387,18 @@
               async function complete(){
                 debugger;
                 
-                    code_block   = mod['code-block'];
+                    code_block.obj   = mod2['code-block'];
               
-                    code_block.initmod({ext,$,code:obj,menu,ace});
+                    code_block.obj.initmod({ext,$,code:obj,menu,ace});
                     
-                    await code_block.init();
+                    await code_block.obj.init();
                     
                     var root    = div.nextElementSibling;
                     div.remove();
                     
-                    await code_block.initdom(root,{mode});
+                    await code_block.obj.initdom(root,{mode});
                     
-                    resolve({code_block});
+                    //resolve({code_block});
                     
               }//complete
 
