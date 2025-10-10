@@ -5,17 +5,19 @@
 
       <head>
       
-            <title>snippet-console test</title>
+            <title>snippet-html test v2.0</title>
             
 
             
+            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
+
             <script init>
                                                                                 console.clear();
+                                                                                console.log('snippet-html-test-v2.0.html');
+                                                                                console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
-        var version       = 'v1.0';
-            
-        var df            = true;
-        var debug_id      = 'snippet-html test';
+        var df=true
+        ;
 
 
         var ext;
@@ -23,9 +25,6 @@
         var datatype;
         var debug;
         
-
-        var mod           = {};
-
         var html;
         var snippet_html;
         
@@ -36,9 +35,9 @@
 
               
         async function init(){
-                                                                                debug('init',version);
+                                                                                debug('init');
 
-              snippet_html           = mod.snippet_html();
+              snippet_html           = mod.snippet_html;
               
               snippet_html.initmod({ext,$,source});
               
@@ -54,67 +53,26 @@
         }//init
 
 
-  //:
-  
-  
-        init.stack            = [];
-        init.stack.ct         = 0;
-        init.stack.total      = 1;
-        init.stack.mode       = '';
-        init.stack.complete   = false;
-        Object.defineProperty(init.stack,'add',{get:()=>{
-              init.stack.total++;
-              init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
-        }});
-        Object.defineProperty(init.stack,'complete',{get:()=>{
-              init.stack.ct++;
-              init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
-              init.stack.ct>=init.stack.total && init();
-        }});
-        
-
 (async()=>{
-  
-        init.stack.add;
-        
-        
-        var url;
-        var headers;
-        var token       = localStorage['github-token'];
-        if(token){
-              url       = 'https://api.github.com/repos/javascript-2020/ext-code/contents/ext-loader.js';
-              headers   = {accept:'application/vnd.github.raw',authorization:`bearer ${token}`};
-        }else{
-              url       = 'https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js';
-        }
-        
-        var res   = await fetch(url,{headers});
-        var txt   = await res.text();
 
-        if(res.headers.get('content-type').includes('json')){
-                                                                                console.log('*** ext : json');
-              var json    = JSON.parse(txt);
-              var b64     = json.content;
-              txt         = atob(b64);
-        }else{
-                                                                                console.log('*** ext : text');
-        }
+        mod.stack.add;
         
-        ext   = eval(txt);
-        
-              
+        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
+          
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
+              'js/dom/menumod/menumod.js',
+              'js/dom/keydown/keydown.js',
               'js/debug/debug.js',
         );
-        [$,datatype,debug]   = await promise;
+        [$,datatype,menumod,keydown,debug]   = await promise;
+
+  
+        html    = await ext.text.libs('html/snippet-html/ex/ex1.html');
 
 
-        html    = await ext.text.libs('html/snippet-html/ex1.html');
-
-
-        init.stack.complete;
+        mod.stack.complete;
 
 })();
 
@@ -151,9 +109,7 @@
             </code>
 
             
-            <snippet-html api>
-                  <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
-            </snippet-html>
+            <snippet-html component v2.0></snippet-html>
 
       
       </body>
@@ -166,6 +122,9 @@
         var code;
         
 
+  //:
+  
+  
         function initdom(rootnode){
         
               root                = rootnode;
@@ -198,8 +157,6 @@
         
   //:
   
-  
-  init.stack.complete;
   
       </script>
       
