@@ -166,7 +166,7 @@
               ({promise,root}            = await code.editor.code(mod,node,{mode,menu,ace}));
               promise.then(({editor:ed2,root:r2})=>{
               
-                    console.log('code-block.setup.code',root===r2);
+                                                                                //console.log('code-block.setup.code',root===r2);
                     editor    = ed2;
                     
               });
@@ -192,7 +192,7 @@
               }//switch
               
               snippet_console       = await code.snippet_console(mod,node,{menu,ace,mode});
-              console.log(snippet_console);
+                                                                                //console.log(snippet_console);
               
               obj.snippet_console   = snippet_console;
 
@@ -210,7 +210,7 @@
               }
               
               snippet_html          = await code.snippet_html(mod,node,{});
-              console.log(snippet_html);
+                                                                                console.log(snippet_html);
               
               obj.snippet_html      = snippet_html;
               
