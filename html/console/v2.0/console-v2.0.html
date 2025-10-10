@@ -118,6 +118,10 @@
 
         async function libs(){
           
+              if(!ace){
+                    ace   = await $.editor.ace();
+              }
+              
               var url         = 'javascript-2020:external:/TarVK/chromeConsole/console.js';
               [console]       = await ext.text.github(url);
               console         = eval(console);
@@ -128,10 +132,6 @@
               var css       = await ext.text.github[url];
               style         = document.createElement('style');
               style.textContent   = css;
-              
-              if(!ace){
-                    ace   = await $.editor.ace();
-              }
               
         }//libs
 
