@@ -362,6 +362,10 @@
               mod2.stack.push(complete);
 
 
+              var div   = document.createElement('div');
+              node.before(div);
+
+              
               var code_block    = {};
               code_block.mod    = mod2;
               code_block.obj    = null;
@@ -369,14 +373,15 @@
               code_block.root.toggleAttribute('component');
               code_block.root.toggleAttribute('v2.0');
               
+              node.parentNode.replaceChild(code_block.root,node);
+              code_block.root.append(node);
 
-              var div   = document.createElement('div');
-              node.before(div);
 
 
               
               var result    = await mod.build(code_block);
               console.log(result);
+
 
               
               async function complete(){
