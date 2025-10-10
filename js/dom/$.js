@@ -1132,12 +1132,15 @@
         
         $.editor.ace    = function(){
           
-              var src   = 'https://ajaxorg.github.io/ace-builds/src-noconflict/ace.js';
+              var src   = [
+                    'https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/ace.js',
+                    'https://ajaxorg.github.io/ace-builds/src-noconflict/ace.js',
+              ];
               
               var resolve,promise=new Promise(res=>resolve=res);
               
               var script      = document.createElement('script');
-              script.src      = src;
+              script.src      = src[1];
               script.onload   = onload;
               document.head.append(script);
               
