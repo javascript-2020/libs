@@ -365,6 +365,8 @@
               var div   = document.createElement('div');
               node.before(div);
 
+              node.toggleAttribute('component');
+              node.toggleAttribute('v2.0');
               
               var code_block    = {};
               code_block.mod    = mod2;
