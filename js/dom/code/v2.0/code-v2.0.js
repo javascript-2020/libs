@@ -430,7 +430,8 @@
               
               code.parentNode.replaceChild(root,code);
               
-              mod.build({root,mod:mod2});
+              var result    = await mod.build({root,mod:mod2});
+              console.log(result);
               
               //var root    = create.component(code,'editor',()=>init.stack.complete);
                             
@@ -445,7 +446,7 @@
                     editor.initmod({ext,$,datatype,menumod,menu,fullsize:true,ace});
                     
                     await editor.init();
-                    await editor.initdom(root.__component,{mode,txt});
+                    await editor.initdom(root.__node,{mode,txt});
                     
                     resolve({editor,root});
                     
