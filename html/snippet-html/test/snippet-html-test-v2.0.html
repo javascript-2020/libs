@@ -33,11 +33,13 @@
 
   //:
 
+
+        mod.stack.add   = init;
               
         async function init(){
                                                                                 debug('init');
 
-              snippet_html           = mod.snippet_html;
+              snippet_html           = mod['snippet-html'];
               
               snippet_html.initmod({ext,$,source});
               
