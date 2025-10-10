@@ -357,7 +357,7 @@
       
         async function code_block(mod,node,{mode,menu,ace}){
         
-              var mod2    = mod.create({mod,name:'code-block'});
+              var mod2    = mod.create({mod,name:mod.name+'-code-block'});
               
               mod2.stack.push(complete);
 
@@ -410,24 +410,35 @@
         
         obj.editor    = {};
         
-        obj.editor.code    = function(code,{mode,menu,kd,ace}){
+        obj.editor.code    = function(mod,code,{mode,menu,kd,ace}){
 
               var editor;
               
               var resolve,promise=new Promise(res=>resolve=res);
+              var mod2    = mod.create({mod,name:mod.name+'-editor'});
               
-              init.stack.add;
-              init.stack.push(complete);
+              //mod2.stack.add;
+              mod2.stack.push(complete);
+
               
               var txt     = code.textContent;
-              var root    = create.component(code,'editor',()=>init.stack.complete);
+              
+              var root    = document.createElement('editor');
+              root.toggleAttribute('component');
+              root.toggleAttribute('v2.0');
+              root.textContent    = txt;
+              
+              code.parentNode.repalceChild(root,code);
+              
+              //var root    = create.component(code,'editor',()=>init.stack.complete);
                             
               return {promise,root};
               
               
               async function complete(){
+              debugger;
               
-                    editor    = mod.editor();
+                    editor    = mod2.editor;
                     
                     editor.initmod({ext,$,datatype,menumod,menu,fullsize:true,ace});
                     
