@@ -133,8 +133,10 @@
               hldr.replaceChildren();
               
               var html          = source();
+              html              = sandbox+html;
               
               var niframe       = iframe.cloneNode(true);
+              niframe.log       = log;
               niframe.srcdoc    = html;
               niframe.onload    = onload;
               hldr.append(niframe);
@@ -147,8 +149,29 @@
                     
               }//onload
               
+              
+              function log(s){
+                
+                    window.console.log('iframe.log',s);
+                    
+              }//log
+              
         }//run
         
+        
+        var sandbox   = `
+        
+              <script>
+              
+                    var source    = window.console;
+                    
+                    window.console.log    = window.frameElement.log;
+                    
+                    console.log(123);
+                    
+              </scr`+`ipt>
+              
+        `;
   
   //:
   
