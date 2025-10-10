@@ -3,7 +3,7 @@
         
 (()=>{
   
-        //var mod_list    = [];
+        var mod_list    = [];
         
         mod   = create({name:'root'});
         
@@ -14,11 +14,11 @@
 
               var mod         = {};
               
-              //mod_list.push(mod);
+              mod_list.push(mod);
               
               mod.name        = name;
               mod.df          = false;
-              //mod.list        = mod_list;
+              mod.list        = mod_list;
               
               mod.create      = create;
               mod.build       = build;
