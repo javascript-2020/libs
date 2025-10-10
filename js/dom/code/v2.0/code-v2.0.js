@@ -192,7 +192,7 @@
 
                     var promise;
                     ({root,promise}    = await obj.editor.code(mod,code,{menu,ace}));
-                    promise.then(result=>({editor}=result));
+                    promise.then(result=>({editor,root}=result));
                     
                     //editor          = $.editor.max(code,{kd});
       
@@ -201,7 +201,7 @@
                     node.toggleAttribute('component');
                     node.toggleAttribute('v2.0');
                     console.log(root);
-                    root.after(node);
+                    root.__node.after(node);
                                   
                     //var script      = create.script(()=>init.stack.complete);
                     //node.append(script);
