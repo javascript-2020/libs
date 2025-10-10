@@ -1,0 +1,159 @@
+
+
+
+<snippet-html-console>
+
+
+      <template shadowrootmode=open>
+      
+            <style>
+    
+  #root
+    {display:flex;flex-direction:column;gap:10px;
+      /*height:100%*/
+    }
+    
+  #hldr
+    {border:1px solid lightgray;}
+    
+  iframe
+    {width:100%;height:100%;border:none}
+    
+  input
+    {font-size:16px;padding:5px 10px}
+  input[type=button]
+    {cursor:pointer}
+    
+            </style>
+            
+            <div id=root>
+            
+                  <div>
+                        <input value=run type=button>
+                  </div>
+                              
+                  <div id=hldr>
+                        <iframe></iframe>
+                  </div>
+                  
+            </div>
+      
+      </template>
+      
+      
+      <script>
+
+      
+(function snippet_html({mod,root,node}){
+
+  var obj   = {
+        version   : 'v2.0',
+  };
+  
+        var df=true,did='snippet-html'
+        ;
+        
+        
+        var ext,$,source
+        ;
+        
+        obj.initmod   = function(params){
+        
+              ext       = params.ext;
+              $         = params.$;
+              source    = params.source;
+              
+        }//initmod
+        
+        
+  //:
+  
+        
+        
+        var host;
+        var root;
+        
+        var hldr;
+        var iframe;
+        
+        
+        var btn     = {};
+        
+        
+  //:
+  
+  
+        obj.init    = function(){
+                                                                                debug('init',obj.version);
+        }//init
+        
+
+  //:
+  
+  
+        obj.initdom   = function(rootnode){
+
+              host                                = $.full('snippet-html',rootnode);
+              root                                = host.shadowRoot;
+
+
+              $(root,'[value=run]').onclick       = btn.run;
+
+
+              hldr                                = $(root,'#hldr');
+              iframe                              = $(hldr,'iframe');
+
+        
+        }//initdom
+        
+        
+  //:
+
+  
+        btn.run   = run;
+        obj.run   = run;
+        
+        function run(){
+        
+              hldr.replaceChildren();
+              
+              var html          = source();
+              
+              var niframe       = iframe.cloneNode(true);
+              niframe.srcdoc    = html;
+              niframe.onload    = onload;
+              hldr.append(niframe);
+              
+              
+              function onload(){
+              
+                    var h   = niframe.contentDocument.documentElement.scrollHeight;
+                    hldr.style.height   = h+'px';
+                    
+              }//onload
+              
+        }//run
+        
+  
+  //:
+  
+        
+        function debug(){
+          
+              if(!df && !obj.df)return;
+              var str   = [...arguments].join(' ');
+              console.log(`[ ${did} ]`,str);
+              
+        }//debug
+
+
+  
+  return obj;
+  
+})//snippet_html
+
+
+      </script>
+
+      
+</snippet-html-console>
