@@ -71,7 +71,9 @@
         version   : 'v2.0',
   };
   
-  
+        var df,did='console'
+        ;
+        
         var ext,$,ace
         ;
         
@@ -106,7 +108,7 @@
   
   
         obj.init    = async function(){
-          
+                                                                                debug('init',obj.version);
           
               await libs();
 
@@ -279,8 +281,20 @@
               cons.element.style.height   = h;
               
         }//height
+
         
+  //:
   
+
+        function debug(){
+          
+              if(!df && !obj.df)return;
+              var str   = [...arguments].join(' ');
+              console.log(`[ ${did} ]`,str);
+              
+        }//debug
+        
+        
   return obj;
   
   
