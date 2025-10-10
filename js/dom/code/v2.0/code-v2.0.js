@@ -379,7 +379,7 @@
 
 
               
-              var result    = await mod2.build(code_block);
+              var result    = await mod.build(code_block);
               console.log(result);
 
 
@@ -430,7 +430,7 @@
               
               code.parentNode.replaceChild(root,code);
               
-              mod.build(
+              mod2.build({root,mod:mod2});
               
               //var root    = create.component(code,'editor',()=>init.stack.complete);
                             
