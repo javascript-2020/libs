@@ -5,7 +5,7 @@
 
       <head>
       
-            <title>snippet-html test v2.0</title>
+            <title>snippet-html-console test v2.0</title>
             
 
             
@@ -13,7 +13,7 @@
 
             <script init>
                                                                                 console.clear();
-                                                                                console.log('snippet-html-test-v2.0.html');
+                                                                                console.log('snippet-html-console-test-v2.0.html');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var df=true
@@ -25,8 +25,9 @@
         var datatype;
         var debug;
         
+        var snippet;
+        
         var html;
-        var snippet_html;
         
 
         
@@ -39,11 +40,11 @@
         async function init(){
                                                                                 debug('init');
 
-              snippet_html           = mod['snippet-html'];
+              snippet           = mod['snippet-html-console'];
               
-              snippet_html.initmod({ext,$,source,debug});
+              snippet.initmod({ext,$,source});
               
-              await snippet_html.init();
+              await snippet.init();
               
               
   //:
@@ -111,7 +112,7 @@
             </code>
 
             
-            <snippet-html component v2.0></snippet-html>
+            <snippet-html-console component v2.0></snippet-html-console>
 
       
       </body>
@@ -136,7 +137,7 @@
               code.textContent    = html;
 
               
-              snippet_html.initdom(root);
+              snippet.initdom(root);
               
 
               
