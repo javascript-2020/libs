@@ -22,6 +22,13 @@
         var datatype;
         var debug;
         var menumod;
+
+        var menu;
+        
+        var codeblock1;
+        var codeblock2;
+        var codeblock3;
+        
                   
 
   //:
@@ -34,19 +41,19 @@
 
               menu        = menumod();
               
-              codeblock1    = mod['code-block'];
-              //codeblock2    = mod['code-block']();
+              codeblock1    = mod['code-block[c1]'];
+              codeblock2    = mod['code-block[c2]'];
               //codeblock3    = mod['code-block']();
               
               //code.initmod({ext,$,datatype});
               
               codeblock1.initmod({ext,$,datatype,menu});
-              //codeblock2.initmod({ext,$,datatype,menu});
+              codeblock2.initmod({ext,$,datatype,menu});
               //codeblock3.initmod({ext,$,datatype,menu});
 
               
               await codeblock1.init();
-              //await codeblock2.init();
+              await codeblock2.init();
               //await codeblock3.init();
 
               
@@ -79,6 +86,10 @@
             </script>
             
             <style>
+            
+  html
+    {font-family:arial}
+  
             </style>
             
       </head>
@@ -94,23 +105,26 @@
             </div>
             
             <code-block id=c1 component v2.0>
+            
         let a=42;
+        
             </code-block>
 
 
-<!--
+
             <div>
                   console
             </div>
             
-            <code-block id=c2 snippet-console api>
-                  <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+            <code-block id=c2 snippet-console component v2.0>
+            
         let a=42;
         console.log(a);
         
             </code-block>
 
 
+<!--
             <div>
                   html
             </div>
@@ -132,13 +146,6 @@
 
 
 
-            var menu;
-            
-            
-            var codeblock1;
-            var codeblock2;
-            var codeblock3;
-            
 
   //:
   
@@ -151,9 +158,10 @@
                   codeblock1.initdom(c1);
 
 
-/*
                   var c2    = $('#c2');
                   codeblock2.initdom(c2);
+
+/*
                   
                   var c3    = $('#c3');
                   codeblock3.initdom(c3);
