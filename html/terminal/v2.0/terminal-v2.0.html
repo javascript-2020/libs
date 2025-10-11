@@ -76,7 +76,10 @@
               
               libs    = Promise.all(list).then(()=>{
                 
-                    term        = new Terminal({theme:theme.light});
+                    term        = new Terminal({
+                          theme           : theme.light,
+                          rendererType    : 'dom'
+                    });
                     fitAddon    = new FitAddon();
                     term.loadAddon(fitAddon);
                 
