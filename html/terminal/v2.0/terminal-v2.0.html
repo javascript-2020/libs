@@ -38,13 +38,16 @@
         var df=true
         ;
         
-        var $
+        var ext,$
         ;
         
         obj.initmod   = function(params){
           
-              ext       = params.ext;
-              $         = params.$;
+              ext             = params.ext;
+              $               = params.$;
+              
+              Terminal        = params.Terminal;
+              FitAddon        = params.FitAddon;
               
         }//initmod
         
@@ -54,8 +57,10 @@
         
         var Terminal;
         var FitAddon;
+        
         var term;
         var fitAddon;
+
         
         var terminal;
         
@@ -71,12 +76,18 @@
         
         async function libs(){
           
-              var list      = [];
-              var promise   = import('https://cdn.jsdelivr.net/npm/@xterm/xterm/+esm').then(result=>({Terminal}=result));
-              list.push(promise);
+              var promise,list=[]
+              ;
               
-              var promise   = import('https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm').then(result=>({FitAddon}=result));
-              list.push(promise);
+              if(!Terminal){
+                    promise   = import('https://cdn.jsdelivr.net/npm/@xterm/xterm/+esm').then(result=>({Terminal}=result));
+                    list.push(promise);
+              }
+              
+              if(!FitAddon){
+                    promise   = import('https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm').then(result=>({FitAddon}=result));
+                    list.push(promise);
+              }
               
               libs    = Promise.all(list).then(()=>{
                 
