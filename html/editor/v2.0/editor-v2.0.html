@@ -165,10 +165,10 @@
 
         var df=false
         ;
-                                                                      debug(obj.version);
 
         var ext,$,menu,menumod,ace,fullsize,kd2
         ;
+        
         
         obj.initmod   = function(params){
           
@@ -181,6 +181,8 @@
               params.ace && (ace=params.ace);
               
               fullsize    = params.fullsize;
+              def.fullsize    = fullsize;
+              
               kd2         = params.kd;
               
         }//initmod
@@ -205,12 +207,18 @@
         var kd    = {};
         var btn   = {};
 
+
+
+        var def   = {}
+        ;
+
+
   
     //:
 
     
         obj.init    = async function(){
-          
+                                                                      debug('init',obj.version);
               if(!menu){
                     menu    = menumod();
               }
@@ -252,10 +260,11 @@
     //:
 
     
-        obj.initdom   = async function(rootnode,{mode,txt}={}){
+        obj.initdom   = async function(rootnode,{mode,txt,fullsize}={}){
         
-              mode    ||= 'javascript';
-              txt     ||= '';
+              mode        ||= 'javascript';
+              txt         ||= '';
+              fullsize    ||= def.fullsize;
               
               root                                        = $.full('editor-root',rootnode);
               obj.root                                    = root;
