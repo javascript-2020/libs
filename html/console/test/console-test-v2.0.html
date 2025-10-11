@@ -48,17 +48,17 @@
 
 
               
-              cons                      = mod.console;
+              con                       = mod.console;
               log                       = mod.log;
 
 
               
-              cons.initmod({ext,$,ace,store});
+              con.initmod({ext,$,ace,store});
               log.initmod({ext,$});
               
               
-              await cons.init();
-              log.init();
+              await con.init();
+              await log.init();
 
 
           
@@ -154,8 +154,8 @@
               root                                = rootnode;
 
               
-              cons.initdom(root);
-              cons.height('200px');
+              con.initdom(root);
+              con.height('200px');
               
               
               $(root,'[value=test]').onclick    = btn.test;
