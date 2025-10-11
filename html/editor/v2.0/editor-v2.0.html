@@ -223,10 +223,8 @@
 
         function libs(){
           
-              var resolve;
-              libs    = new Promise(res=>resolve=res);
+              var resolve,promise=new Promise(res=>resolve=res);
 
-              
               if(ace){
                     resolve();
                     return;
@@ -237,6 +235,8 @@
               script.onload   = onload;
               document.head.append(script);
                             
+              return promise;
+              
               
               function onload(){
                 
