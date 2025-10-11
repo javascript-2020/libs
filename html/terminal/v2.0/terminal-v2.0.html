@@ -1,0 +1,151 @@
+
+
+
+<snippet-terminal>
+
+      <template shadowrootmode=open>
+
+            <link rel=stylesheet href='https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.css'>
+      
+            <style>
+            
+            
+            </style>
+            
+            
+            <div id=root>
+            
+                  <div id=btns>
+                        <input value=run type=button>
+                  </div>
+                  
+                  <div id=terminal></div>
+                  
+            </div>
+            
+      </template>
+      
+      
+      <script>
+
+      
+(function snippet_terminal({mod,root,node}){
+
+  var obj   = {
+        version   : 'v2.0',
+  };
+  
+        var df=true
+        ;
+        
+        var $
+        ;
+        
+        obj.initmod   = function(params){
+          
+              $   = params.$;
+              
+        }//initmod
+        
+        
+  //:
+  
+        
+        var Terminal;
+        var FitAddon;
+        var term;
+        var fitAddon;
+        
+        var terminal;
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+        }//init
+        
+        
+        libs();
+        
+        async function libs(){
+          
+              var list      = [];
+              var promise   = import('https://cdn.jsdelivr.net/npm/@xterm/xterm/+esm').then(result=>({Terminal}=result));
+              list.push(promise);
+              
+              var promise   = import('https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm').then(result=>({FitAddon}=result));
+              list.push(promise);
+              
+              libs    = Promise.all(list).then(()=>{
+                
+                    term        = new Terminal({theme:theme.light});
+                    fitAddon    = new FitAddon();
+                    term.loadAddon(fitAddon);
+                
+              });
+          
+        }//libs
+        
+        
+  //:
+  
+  
+        obj.initdom   = async function(rootnode){
+          
+              host                          = $.full('snippet-terminal',rootnode);
+              root                          = host.shadowRoot;
+
+              terminal                      = $(root,'#terminal');
+              
+              await libs;
+              
+              term.open(terminal);
+              fitAddon.fit();
+
+              term.writeln('ready');
+              
+        }//initdom
+        
+        
+  //:
+  
+        var theme   = {};
+        theme.light   = {
+              foreground            : '#53676d',
+              background            : '#fbf3db',
+              cursor                : '#3a4d53',
+              selectionBackground   : '#cfcebe',
+              black                 : '#e9e4d0',
+              red                   : '#d2212d',
+              green                 : '#489100',
+              yellow                : '#ad8900',
+              blue                  : '#0072d4',
+              magenta               : '#8f0075',
+              cyan                  : '#00938d',
+              white                 : '#ffffff',
+              brightBlack           : '#7d7a68',
+              brightRed             : '#d2212d',
+              brightGreen           : '#489100',
+              brightYellow          : '#ad8900',
+              brightBlue            : '#0072d4',
+              brightMagenta         : '#8f0075',
+              brightCyan            : '#00938d',
+              brightWhite           : '#ffffff'
+      };
+
+
+  //:
+  
+  return obj;
+  
+})//snippet_terminal
+
+
+      </script>
+      
+</snippet-terminal>
+
+
+
+
