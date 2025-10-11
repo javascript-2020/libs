@@ -25,6 +25,9 @@
         var $;
         var datatype;
         var debug;
+        var menumod;
+        
+        var menu;
         
         var snippet;
 
@@ -39,9 +42,11 @@
         async function init(){
                                                                                 debug('init');
 
+              menu              = menumod();
+              
               snippet           = mod['snippet-terminal'];
               
-              snippet.initmod({ext,$});
+              snippet.initmod({ext,$,menu});
               
               await snippet.init();
               
@@ -51,6 +56,8 @@
           
               await initdom(document.body);
 
+
+              snippet.editor.setvalue('helloworld');
 
         }//init
 
@@ -65,8 +72,9 @@
               'js/dom/$.js.api',
               'js/core/datatype.js',
               'js/debug/debug.js',
+              'js/dom/menumod/menumod.js',
         );
-        [$,datatype,debug]   = await promise;
+        [$,datatype,debug,menumod]   = await promise;
 
   
         //html    = await ext.text.libs('html/snippet-terminal/ex/ex1.');
@@ -104,7 +112,11 @@
             </code>
 
             
-            <snippet-terminal component v2.0></snippet-terminal>
+            <snippet-terminal component v2.0>
+            
+        console.log('my-world');
+                  
+            </snippet-terminal>
 
       
       </body>
