@@ -388,12 +388,12 @@
 
               
               var result    = await mod.build(code_block);
-              console.log(result);
+              console.log('result',result);
 
               return {code_block:code_block.obj};
               
               
-              async function complete(){
+              async function complete(){console.log('complete');
                 
                 
                     code_block.obj   = mod2['code-block'];
