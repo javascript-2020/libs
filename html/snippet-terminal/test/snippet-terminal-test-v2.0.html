@@ -39,7 +39,7 @@
         async function init(){
                                                                                 debug('init');
 
-              snippet           = mod['snippet-html-console'];
+              snippet           = mod['snippet-terminal'];
               
               snippet.initmod({ext,$,source});
               
@@ -69,7 +69,7 @@
         [$,datatype,menumod,keydown,debug]   = await promise;
 
   
-        html    = await ext.text.libs('html/snippet-html-console/ex/ex1.html');
+        //html    = await ext.text.libs('html/snippet-terminal/ex/ex1.');
 
 
         mod.stack.complete;
@@ -104,7 +104,7 @@
             </code>
 
             
-            <snippet-html-console component v2.0></snippet-html-console>
+            <snippet-terminal component v2.0></snippet-terminal>
 
       
       </body>
