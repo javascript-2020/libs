@@ -150,29 +150,17 @@
               var js    = editor.getvalue();
               
               var console     = {};
-              console.log     = function(){
+              console.write   = function(){
                               
                                       window.console.log.apply(window.console,arguments);
                                       terminal.write.apply(null,arguments);
                                       
-/*                                      
-                                      var args    = [...arguments];
-                                      if(mode=='nodejs'){
-                                            args.forEach((v,i)=>{
-                                            
-                                                  if(typeof v=='string'){
-                                                        var html    = ansi.ansi_to_html(v);
-                                                        var node    = $.define(html);
-                                                        var log     = document.createElement('log-nodejs');
-                                                        log.append(node);
-                                                        args.splice(i,1,log);
-                                                  }
-                                                  
-                                            });
-                                      }
-                                      dconsole.log.apply(null,args);
-*/                                      
-                                    
+                                }//write
+              console.log     = function(){
+                              
+                                      window.console.log.apply(window.console,arguments);
+                                      terminal.writeln.apply(null,arguments);
+                                      
                                 }//log
               console.clear   = function(){
                   
