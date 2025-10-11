@@ -6,7 +6,7 @@
       <head>
       
             <title>
-                  snippet-terminal test v2.0
+                  terminal test v2.0
             </title>
 
             
@@ -14,7 +14,7 @@
 
             <script init>
                                                                                 console.clear();
-                                                                                console.log('snippet-terminal-test-v2.0.html');
+                                                                                console.log('terminal-test-v2.0.html');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var df=true
@@ -26,10 +26,8 @@
         var datatype;
         var debug;
         
-        var snippet;
+        var terminal;
 
-        var html;
-        
 
   //:
 
@@ -39,11 +37,11 @@
         async function init(){
                                                                                 debug('init');
 
-              snippet           = mod['snippet-terminal'];
+              terminal           = mod.terminal;
               
-              snippet.initmod({ext,$,source});
+              terminal.initmod({ext,$});
               
-              await snippet.init();
+              await terminal.init();
               
               
   //:
@@ -68,10 +66,6 @@
         );
         [$,datatype,debug]   = await promise;
 
-  
-        //html    = await ext.text.libs('html/snippet-terminal/ex/ex1.');
-
-
         mod.stack.complete;
 
 })();
@@ -95,7 +89,7 @@
       <body>
       
             <h3>
-                  snippet-terminal v2.0 test
+                  terminal v2.0 test
             </h3>
             
             <code>
@@ -104,7 +98,7 @@
             </code>
 
             
-            <snippet-terminal component v2.0></snippet-terminal>
+            <terminal component v2.0></terminal>
 
       
       </body>
@@ -123,33 +117,17 @@
         function initdom(rootnode){
         
               root                = rootnode;
-              
-              
-              code                = $('code');
-              code.textContent    = html;
 
               
-              snippet.initdom(root);
-              
+              terminal.initdom(root);
+
+              terminal.writeln('helloworld');
+              terminal.writeln('ready');
 
               
         }//initdom
       
 
-  //:
-  
-  
-        function source(){
-        
-              var js    = code.textContent;
-              return js;
-              
-        }//source
-        
-        
-        source.focus    = function(){}
-
-        
   //:
   
   
