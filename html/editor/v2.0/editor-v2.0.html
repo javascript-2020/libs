@@ -215,7 +215,7 @@
                     menu    = menumod();
               }
               
-              libs();
+              await libs();
               
               
         }//init
@@ -298,9 +298,8 @@
               
               $(hdr,'#top').onclick                       = btn.top;
               $(hdr,'#bottom').onclick                    = btn.bottom;
+
   
-              await libs;
-              
               var node    = $(shadow,'#editor');
               if(fullsize){
                     node.textContent                  = txt;
