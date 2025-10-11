@@ -97,7 +97,7 @@
 
   
         var console;
-        var cons;
+        var con;
         var style;
         
         
@@ -183,7 +183,7 @@
 
 
               
-              var keys    = Object.keys(cons.__proto__);
+              var keys    = Object.keys(con.__proto__);
               //store.console.log(keys);
               
               
@@ -243,17 +243,23 @@
   
         obj.log   = function(){
           
-              cons.log.apply(cons,arguments);
+              con.log.apply(con,arguments);
               
         }//log
 
 
         obj.clear   = function(){
           
-              cons.clear.apply(cons);
+              con.clear.apply(con);
               
         }//clear
 
+
+        obj.error   = function(){
+          
+              con.error.apply(con,arguments);
+              
+        }//error
 
 
 
@@ -296,7 +302,7 @@
                     debug:true
               };
               
-              cons.log(test);
+              con.log(test);
               
               
         }//test
