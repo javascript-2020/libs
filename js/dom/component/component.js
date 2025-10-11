@@ -348,11 +348,11 @@
                 
                     var html;
                     if(cache[url]){
-                                                                                console.log('component.cache',url);
+                                                                                console.log('component.cache hit',url);
                           html    = cache[url];
                           return {html};
                     }
-                    
+                                                                                console.log('component.cache',url);
                     var res       = await fetch(url);
                     html          = await res.text();
                     
