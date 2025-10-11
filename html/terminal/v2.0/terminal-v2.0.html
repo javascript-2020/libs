@@ -92,8 +92,8 @@
               libs    = Promise.all(list).then(()=>{
                 
                     term        = new Terminal({
-                          theme           : theme.light,
-                          rendererType    : 'dom'
+                          //theme           : theme.light,
+                          rendererType    : 'dom',
                     });
                     fitAddon    = new FitAddon();
                     term.loadAddon(fitAddon);
