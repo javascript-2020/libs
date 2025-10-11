@@ -302,7 +302,13 @@
 
         Object.defineProperty(obj,'height',{
           
-              set   : v=>cons.element.style.height    = h
+              set   : v=>{
+                
+                    if(typeof v=='number'){
+                          v   = v+'px';
+                    }
+                    cons.element.style.height    = h;
+              },
               
         });
 
