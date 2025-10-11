@@ -348,16 +348,24 @@
                 
                     var html;
                     if(cache[url]){
-                                                                                console.log('component.cache [hit]',url);
-                          html    = cache[url];
-                          return {html};
-                    }
-                                                                                console.log('component.cache',url);
-                    var res       = await fetch(url);
-                    html          = await res.text();
+                          if(cache[url].html){
+                                                                                //console.log('component.cache [hit]',url);
+                                html    = cache[url];
+                          }else{
+                                html    = await cache[url].promise;
+                          }
+                    }else{
+                                                                                //console.log('component.cache',url);
+                          cache[url]            = {};
+                          cache[url].promise    = new Promise(res=>cache[url].resolve=res);
+                          
+                          var res   = await fetch(url);
+                          html      = await res.text();
                     
-                    cache[url]    = html;
-                                                                                console.log(Object.keys(cache));
+                          cache[url].html   = html;
+                          cache[url].resolve(html);
+                    }
+                                                                                //console.log(Object.keys(cache));
                     return {html};
                 
               }//fetch
