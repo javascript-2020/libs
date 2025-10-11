@@ -79,9 +79,10 @@
               editor.initmod({ext,$,menu});
               terminal.initmod({ext,$});
               
-              
-              await editor.init();
-              await terminal.init();
+              await Promise.all([
+                    editor.init(),
+                    terminal.init()
+              ]);
 
               
         }//init
