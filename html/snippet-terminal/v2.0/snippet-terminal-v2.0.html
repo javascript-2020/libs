@@ -133,7 +133,7 @@
               host                                = $.full('snippet-terminal',rootnode);
               root                                = host.shadowRoot;
 
-              editor.initdom(root,{mode:'js',txt:def});
+              editor.initdom(root,{mode:'js',txt:def,fullsize:true});
               
               $(root,'[value=run]').onclick       = btn.run;
               
