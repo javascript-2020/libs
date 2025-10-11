@@ -29,7 +29,9 @@
         
         var menu;
         
-        var snippet;
+        var snippet       = {};
+        snippet.inline    = null;
+        snippet.src       = null;
 
         var html;
         
@@ -44,11 +46,17 @@
 
               menu              = menumod();
               
-              snippet           = mod['snippet-terminal'];
+              snippet.inline        = mod['snippet-terminal[inline]'];
+              snippet.src           = mod['snippet-terminal[src]'];
               
-              snippet.initmod({ext,$,menu});
+              snippet.inline.initmod({ext,$,menu});
+              snippet.src.initmod({ext,$,menu});
+
               
-              await snippet.init();
+              await Promise.all([
+                    snippet.inline.init(),
+                    snippet.src.init(),
+              ]);
               
               
   //:
@@ -57,7 +65,7 @@
               await initdom(document.body);
 
 
-              snippet.editor.setvalue('helloworld');
+              //snippet.editor.setvalue('helloworld');
 
         }//init
 
@@ -112,10 +120,14 @@
             </code>
 
             
-            <snippet-terminal component v2.0>
+            <snippet-terminal inst=inline component v2.0>
             
         console.log('my-world');
                   
+            </snippet-terminal>
+
+
+            <snippet-terminal inst=src component v2.0 src='../ex/ex1.js'>
             </snippet-terminal>
 
       
@@ -137,7 +149,8 @@
               root                = rootnode;
               
               
-              snippet.initdom(root);
+              snippet.inline.initdom(root);
+              snippet.src.initdom(root);
               
 
               
