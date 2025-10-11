@@ -90,6 +90,7 @@
               terminal.initmod({ext,$});
               
               await Promise.all([
+                    libs(),
                     editor.init(),
                     terminal.init()
               ]);
