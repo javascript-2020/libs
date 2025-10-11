@@ -368,6 +368,8 @@
       
         async function code_block(mod,node,{mode,menu,ace}){
         
+              var resolve,promise=new Promise(res=>resolve=res);
+              
               var mod2    = mod.create({mod,name:mod.name+'-code-block'});
               
               mod2.stack.push(complete);
@@ -390,7 +392,7 @@
               var result    = await mod.build(code_block);
               console.log('result',result);
 
-              return {code_block:code_block.obj};
+              return promise;
               
               
               async function complete(){console.log('complete');
@@ -407,7 +409,7 @@
                     
                     await code_block.obj.initdom(root,{mode});
                     
-                    //resolve({code_block});
+                    resolve({code_block});
                     
               }//complete
 
