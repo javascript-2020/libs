@@ -390,7 +390,8 @@
               var result    = await mod.build(code_block);
               console.log(result);
 
-
+              return {code_block:code_block.obj};
+              
               
               async function complete(){
                 
