@@ -91,11 +91,13 @@
   //:
   
   
-        obj.initdom   = function(rootnode){
+        obj.initdom   = async function(rootnode){
           
               var root    = rootnode;
 
               terminal    = $(root,'#terminal');
+              
+              await libs;
               
               term.open(terminal);
               fitAddon.fit();
