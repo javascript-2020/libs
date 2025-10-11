@@ -28,6 +28,8 @@
             
             <div id=root>
             
+                  <editor component v2.0></editor>
+                  
                   <div>
                         <input value=run type=button>
                   </div>
@@ -54,20 +56,24 @@
         ;
         
         
-        var ext,$,source
+        var ext,$,menu,ace
         ;
         
         obj.initmod   = function(params){
         
               ext       = params.ext;
               $         = params.$;
-              source    = params.source;
+              menu      = params.menu;
+              ace       = params.ace;
               
         }//initmod
         
         
   //:
   
+        var editor;
+        
+        var txt   = root.innerHTML;
         
         
         var host;
@@ -75,6 +81,7 @@
         
         var hldr;
         var iframe;
+
         
         
         var btn     = {};
@@ -85,6 +92,14 @@
   
         obj.init    = function(){
                                                                                 debug('init',obj.version);
+        
+              editor    = mod.editor;
+              
+              editor.initmod({ext,$,menu,ace});
+              
+              await editor.init();
+              
+              
         }//init
         
 
@@ -96,7 +111,8 @@
               host                                = $.full('snippet-html',rootnode);
               root                                = host.shadowRoot;
 
-
+              editor.initdom(root,{mode:'html',fullsize:true,txt:def});
+              
               $(root,'[value=run]').onclick       = btn.run;
 
 
@@ -117,7 +133,7 @@
         
               hldr.replaceChildren();
               
-              var html          = source();
+              var html          = editor.getvalue();
               
               var niframe       = iframe.cloneNode(true);
               niframe.srcdoc    = html;
