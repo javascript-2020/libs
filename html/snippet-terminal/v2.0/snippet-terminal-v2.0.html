@@ -79,8 +79,8 @@
               
               libs    = Promise.all(list).then(()=>{
                 
-                    var term            = new Terminal();
-                    var fitAddon        = new FitAddon();
+                    term        = new Terminal();
+                    fitAddon    = new FitAddon();
                     term.loadAddon(fitAddon);
                 
               });
