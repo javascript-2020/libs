@@ -71,6 +71,7 @@
         var mode;
         var sandbox;
         
+        var def    = root.innerHTML;
         
         var btn   = {};
         
@@ -80,10 +81,7 @@
         obj.init    = async function(){
 
 
-              var html    = root.innerHTML;
               
-              //debugger;
-              $(node.shadowRoot,'editor-root').textContent    = html;
               
           
               editor            = mod.editor;
@@ -119,7 +117,7 @@
               host                                = $.full('snippet-terminal',rootnode);
               root                                = host.shadowRoot;
 
-              editor.initdom(root);
+              editor.initdom(root,{mode:'js',txt:def});
               
               $(root,'[value=run]').onclick       = btn.run;
               
