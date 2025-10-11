@@ -125,6 +125,8 @@
                     ace   = await $.editor.ace();
               }
               
+              var list      = [];
+              
               var url       = 'javascript-2020:external:/TarVK/chromeConsole/console.js';
               var promise   = ext.text.github(url).then(result=>{
                        
