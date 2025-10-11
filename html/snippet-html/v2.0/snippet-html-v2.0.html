@@ -73,7 +73,8 @@
   
         var editor;
         
-        var txt   = root.innerHTML;
+        var def   = decode(root.innerHTML);
+        
         
         
         var host;
@@ -149,7 +150,32 @@
               }//onload
               
         }//run
+
         
+  //:
+  
+  
+        function decode(str){
+          
+              var txt         = document.createElement('textarea');
+              txt.innerHTML   = str;
+              var html        = txt.value;
+              return html;
+              
+        }//decode
+
+        
+        function encode(str){
+          
+              const div         = document.createElement('div');
+              div.textContent   = str;
+              var entities      = div.innerHTML;
+              return entities;
+              
+        }//encode
+        
+        
+
   
   //:
   
