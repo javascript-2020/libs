@@ -1,7 +1,7 @@
 
 
 
-<snippet-terminal>
+<terminal-root>
 
       <template shadowrootmode=open>
 
@@ -15,10 +15,6 @@
             
             <div id=root>
             
-                  <div id=btns>
-                        <input value=run type=button>
-                  </div>
-                  
                   <div id=terminal></div>
                   
             </div>
@@ -29,7 +25,7 @@
       <script>
 
       
-(function snippet_terminal({mod,root,node}){
+(function terminal({mod,root,node}){
 
   var obj   = {
         version   : 'v2.0',
@@ -93,7 +89,7 @@
   
         obj.initdom   = async function(rootnode){
           
-              host                          = $.full('snippet-terminal',rootnode);
+              host                          = $.full('terminal-root',rootnode);
               root                          = host.shadowRoot;
 
               terminal                      = $(root,'#terminal');
@@ -139,12 +135,12 @@
   
   return obj;
   
-})//snippet_terminal
+})//terminal
 
 
       </script>
       
-</snippet-terminal>
+</terminal-root>
 
 
 
