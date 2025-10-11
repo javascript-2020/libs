@@ -26,6 +26,7 @@
         var debug;
 
         var menu;
+        
         var snippet;
         
 
@@ -39,10 +40,11 @@
         async function init(){
                                                                                 debug('init');
 
-              menu              = menumod;
+              menu              = menumod();
               
               
               snippet           = mod['snippet-console'];
+              
               
               snippet.initmod({ext,$,ace,source,menu});
               
@@ -144,8 +146,10 @@
               code    = $('code');
 
               
-              snippet_console.initdom(root);
-              snippet_console.console.height   = 200;
+              snippet.initdom(root);
+              
+              snippet.editor.height   = 200;
+              snippet.console.height  = 200;
               
 
               
