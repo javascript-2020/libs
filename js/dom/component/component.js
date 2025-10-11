@@ -348,7 +348,7 @@
                 
                     var html;
                     if(cache[url]){
-                                                                                console.log('component.cache hit',url);
+                                                                                console.log('component.cache [hit]',url);
                           html    = cache[url];
                           return {html};
                     }
