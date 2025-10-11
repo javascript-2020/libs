@@ -348,6 +348,7 @@
                 
                     var html;
                     if(cache[url]){
+                                                                                console.log('component.cache',url);
                           html    = cache[url];
                           return {html};
                     }
