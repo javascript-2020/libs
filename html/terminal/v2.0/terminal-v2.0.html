@@ -39,7 +39,8 @@
         
         obj.initmod   = function(params){
           
-              $   = params.$;
+              ext       = params.ext;
+              $         = params.$;
               
         }//initmod
         
@@ -102,6 +103,13 @@
               term.writeln('ready');
               
         }//initdom
+
+
+  //:
+  
+  
+        obj.write     = function(){term.write.apply(term,arguments)}
+        obj.writeln   = function(){term.writeln.apply(term,arguments)}
         
         
   //:
