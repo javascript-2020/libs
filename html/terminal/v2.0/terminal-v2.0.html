@@ -124,8 +124,28 @@
   //:
   
   
-        obj.write     = function(){term.write.apply(term,arguments)}
-        obj.writeln   = function(){term.writeln.apply(term,arguments)}
+        obj.write     = function(){
+          
+              var args    = [...arguments];
+              if(arguments.length==0){
+                    args    = [''];
+              }
+              term.write.apply(term,args)
+              
+        }//write
+        
+        
+        obj.writeln   = function(){
+          
+              var args    = [...arguments];
+              if(arguments.length==0){
+                    args    = [''];
+              }
+              term.writeln.apply(term,arguments)
+              
+        }//writeln
+        
+        
         obj.clear     = function(){term.clear.apply(term,arguments)}
         
         
