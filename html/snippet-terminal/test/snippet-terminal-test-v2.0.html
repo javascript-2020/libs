@@ -9,6 +9,9 @@
                   snippet-terminal test v2.0
             </title>
 
+
+            <base href='https://libs.ext-code.com/html/snippet-terminal/'>
+            
             
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
 
@@ -119,15 +122,16 @@
       
             </code>
 
-            
-            <snippet-terminal inst=inline component v2.0>
+
+            <snippet-terminal id=inline component v2.0>
             
         console.log('my-world');
                   
             </snippet-terminal>
 
 
-            <snippet-terminal inst=src component v2.0 src='../ex/ex1.js'>
+
+            <snippet-terminal id=src component v2.0 src='ex/ex1.js'>
             </snippet-terminal>
 
       
@@ -148,9 +152,11 @@
         
               root                = rootnode;
               
+              var node    = $(root,'#inline');
+              snippet.inline.initdom(node);
               
-              snippet.inline.initdom(root);
-              snippet.src.initdom(root);
+              var node    = $(root,'#src');
+              snippet.src.initdom(node);
               
 
               
