@@ -68,8 +68,10 @@
         obj.init    = async function(){
 
           
-              editor      = mod.editor;
-              terminal    = mod.terminal;
+              editor            = mod.editor;
+              obj.editor        = editor;
+              terminal          = mod.terminal;
+              obj.terminal      = terminal;
               
 
               editor.initmod({ext,$,menu});
