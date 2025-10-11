@@ -66,6 +66,9 @@
         var editor;
         var terminal;
         
+        var mode;
+        var sandbox;
+        
         
         var btn   = {};
         
@@ -93,6 +96,12 @@
         }//init
         
         
+        async function libs(){
+          
+              [sandbox]       = await ext.load.libs('js/sandbox/sandbox.js.api');
+          
+        }//libs
+        
   //:
   
   
@@ -116,6 +125,45 @@
         btn.run   = function(){
           
               var js    = editor.getvalue();
+              
+              var console     = {};
+              console.log     = function(){
+                              
+                                      window.console.log.apply(window.console,arguments);
+                                      terminal.writeln.apply(null,arguments);
+                                      
+/*                                      
+                                      var args    = [...arguments];
+                                      if(mode=='nodejs'){
+                                            args.forEach((v,i)=>{
+                                            
+                                                  if(typeof v=='string'){
+                                                        var html    = ansi.ansi_to_html(v);
+                                                        var node    = $.define(html);
+                                                        var log     = document.createElement('log-nodejs');
+                                                        log.append(node);
+                                                        args.splice(i,1,log);
+                                                  }
+                                                  
+                                            });
+                                      }
+                                      dconsole.log.apply(null,args);
+*/                                      
+                                    
+                                }//log
+              console.clear   = function(){
+                  
+                                      window.console.clear();
+                                      terminal.clear();
+                                      
+                                }//clear
+
+              if(!mode){
+                    sandbox.run(js,{console});
+              }else{
+                    sandbox[mode](js,{console});
+              }
+              
               
         }//btn.run
         
