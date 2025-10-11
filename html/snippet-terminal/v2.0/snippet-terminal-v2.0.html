@@ -15,11 +15,13 @@
             
             <div id=root>
             
+                  <editor component v2.0></editor>
+                  
                   <div id=btns>
                         <input value=run type=button>
                   </div>
                   
-                  <div id=terminal></div>
+                  <terminal component v2.0></terminal>
                   
             </div>
             
@@ -50,42 +52,31 @@
         
   //:
   
-        
-        var Terminal;
-        var FitAddon;
-        var term;
-        var fitAddon;
-        
+        var editor;
         var terminal;
         
+        
+        var btn   = {};
         
   //:
   
   
         obj.init    = async function(){
+
+          
+              editor      = mod.editor;
+              terminal    = mod.terminal;
+              
+
+              editor.initmod({ext,$});
+              terminal.initmod({ext,$});
+              
+              
+              await editor.init();
+              await terminal.init();
+
+              
         }//init
-        
-        
-        libs();
-        
-        async function libs(){
-          
-              var list      = [];
-              var promise   = import('https://cdn.jsdelivr.net/npm/@xterm/xterm/+esm').then(result=>({Terminal}=result));
-              list.push(promise);
-              
-              var promise   = import('https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm').then(result=>({FitAddon}=result));
-              list.push(promise);
-              
-              libs    = Promise.all(list).then(()=>{
-                
-                    term        = new Terminal({theme:theme.light});
-                    fitAddon    = new FitAddon();
-                    term.loadAddon(fitAddon);
-                
-              });
-          
-        }//libs
         
         
   //:
@@ -93,49 +84,27 @@
   
         obj.initdom   = async function(rootnode){
           
-              host                          = $.full('snippet-terminal',rootnode);
-              root                          = host.shadowRoot;
+              host                                = $.full('snippet-terminal',rootnode);
+              root                                = host.shadowRoot;
 
-              terminal                      = $(root,'#terminal');
+              editor.initdom(root);
               
-              await libs;
+              $(root,'[value=run]').onclick       = btn.run;
               
-              term.open(terminal);
-              fitAddon.fit();
-
-              term.writeln('ready');
-              
+              terminal.initdom(root);
+                            
         }//initdom
         
         
   //:
-  
-        var theme   = {};
-        theme.light   = {
-              foreground            : '#53676d',
-              background            : '#fbf3db',
-              cursor                : '#3a4d53',
-              selectionBackground   : '#cfcebe',
-              black                 : '#e9e4d0',
-              red                   : '#d2212d',
-              green                 : '#489100',
-              yellow                : '#ad8900',
-              blue                  : '#0072d4',
-              magenta               : '#8f0075',
-              cyan                  : '#00938d',
-              white                 : '#ffffff',
-              brightBlack           : '#7d7a68',
-              brightRed             : '#d2212d',
-              brightGreen           : '#489100',
-              brightYellow          : '#ad8900',
-              brightBlue            : '#0072d4',
-              brightMagenta         : '#8f0075',
-              brightCyan            : '#00938d',
-              brightWhite           : '#ffffff'
-      };
 
 
-  //:
+        btn.run   = function(){
+        }//btn.run
+        
+
+
+        
   
   return obj;
   
