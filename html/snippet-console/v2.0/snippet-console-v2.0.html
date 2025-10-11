@@ -163,7 +163,9 @@
               console.log     = function(){
                               
                                       window.console.log.apply(window.console,arguments);
-                                      
+                                      con.log.apply(null,arguments);
+
+/*                                      
                                       var args    = [...arguments];
                                       if(mode=='nodejs'){
                                             args.forEach((v,i)=>{
@@ -178,7 +180,7 @@
                                                   
                                             });
                                       }
-                                      con.log.apply(null,args);
+*/                                      
                                     
                                 }//log
               console.clear   = function(){
