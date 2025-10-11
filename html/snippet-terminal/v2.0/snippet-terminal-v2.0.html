@@ -93,9 +93,10 @@
   
         obj.initdom   = async function(rootnode){
           
-              var root    = rootnode;
+              host                          = $.full('snippet-html-console',rootnode);
+              root                          = host.shadowRoot;
 
-              terminal    = $(root,'#terminal');
+              terminal                      = $(root,'#terminal');
               
               await libs;
               
