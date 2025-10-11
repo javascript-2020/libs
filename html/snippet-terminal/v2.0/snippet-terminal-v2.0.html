@@ -40,13 +40,15 @@
         var df=true
         ;
         
-        var ext,$,menumod
+        var ext,$,menu,menumod
         ;
         
         obj.initmod   = function(params){
               
               ext           = params.ext;
               $             = params.$;
+              
+              menu          = params.menu;
               menumod       = params.menumod;
               
         }//initmod
@@ -70,7 +72,7 @@
               terminal    = mod.terminal;
               
 
-              editor.initmod({ext,$,menumod});
+              editor.initmod({ext,$,menu});
               terminal.initmod({ext,$});
               
               
