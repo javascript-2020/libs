@@ -52,7 +52,7 @@
         var df=true
         ;
         
-        var ext,$,menu,menumod
+        var ext,$,menu,menumod,ace
         ;
         
         obj.initmod   = function(params){
@@ -62,6 +62,8 @@
               
               menu          = params.menu;
               menumod       = params.menumod;
+              
+              ace           = params.ace;
               
         }//initmod
         
@@ -88,7 +90,7 @@
               terminal          = mod.terminal;
               obj.terminal      = terminal;              
 
-              editor.initmod({ext,$,menu});
+              editor.initmod({ext,$,menu,ace});
               terminal.initmod({ext,$});
               
               await Promise.all([
