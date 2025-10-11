@@ -301,8 +301,8 @@
 
   
               var node    = $(shadow,'#editor');
+              node.textContent                  = txt;
               if(fullsize){
-                    node.textContent                  = txt;
                     node.style.flex                   = 'none';
                     editor                            = $.editor.max(node,{mode,menu,kd:kd2});
                     $(shadow,'#root').style.height    = 'auto';
