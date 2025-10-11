@@ -357,7 +357,7 @@
                     html          = await res.text();
                     
                     cache[url]    = html;
-                                                                                console.json(cache);
+                                                                                console.log(Object.keys(cache));
                     return {html};
                 
               }//fetch
