@@ -4,6 +4,8 @@
 (()=>{
   
         var mod_list    = [];
+        var cache       = {};
+        
         
         mod   = create({name:'root'});
         
@@ -344,8 +346,17 @@
               
               loader.fetch    = async function(url){
                 
-                    var res     = await fetch(url);
-                    var html    = await res.text();
+                    var html;
+                    if(cache[url]){
+                          html    = cache[url];
+                          return {html};
+                    }
+                    
+                    var res       = await fetch(url);
+                    html          = await res.text();
+                    
+                    cache[url]    = html;
+                    
                     return {html};
                 
               }//fetch
