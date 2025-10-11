@@ -20,6 +20,8 @@
             
             
             <div id=root>
+            
+                  <editor component v2.0></editor>
       
                   <div>
                         <input value=run type=button>
@@ -44,7 +46,7 @@
         ;
 
         
-        var ext,$,source,ace,mode
+        var ext,$,source,ace,mode,menu
         ;
         
         obj.initmod   = function(params){
@@ -54,6 +56,7 @@
               source    = params.source;
               ace       = params.ace;
               mode      = params.mode;
+              menu      = params.menu;
               
         }//initmod
         
@@ -63,8 +66,14 @@
 
         var ansi;
   
-        var dconsole;
-        obj.dconsole    = null;
+        var editor;
+        obj.editor      = null;
+        var con;
+        obj.console     = null;
+        
+        var def    = root.innerHTML;
+        console.log(def);
+        
         var sandbox;
         
         
@@ -79,27 +88,39 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
+              editor        = mod.editor;
+              obj.editor    = editor;
               
-          
-              dconsole        = mod.console;
-              obj.console    = dconsole;
+              con           = mod.console;
+              obj.console   = con;
               
-              dconsole.initmod({ext,$,ace});
-              
-              
-              await dconsole.init();
+              editor.initmod({ext,$,menu,ace});
+              con.initmod({ext,$,ace});
 
-              await libs();
+
+              await Promise.all([              
+                    libs(),
+                    editor.init(),
+                    con.init(),
+              ]);
+
           
         }//init
         
         
         async function libs(){
           
-              [sandbox]       = await ext.load.libs('js/sandbox/sandbox.js.api');
+              var promise;
+              var list        = [];
+              
+              promise   = ext.load.libs('js/sandbox/sandbox.js.api').then(result=>[sandbox]=result);
+              list.push(promise);
+              
 
-              var {AnsiUp}    = await import('https://cdn.jsdelivr.net/npm/ansi_up/+esm');
-              ansi            = new AnsiUp();
+              //var {AnsiUp}    = await import('https://cdn.jsdelivr.net/npm/ansi_up/+esm');
+              //ansi            = new AnsiUp();
+              
+              await Promise.all(list);
               
         }//libs
 
@@ -113,15 +134,18 @@
               root                                = host.shadowRoot;
 
 
+              editor.initdom(root,{txt:def,fullsize:true});
+              
+              
               $(root,'[value=run]').onclick       = btn.run;
               
               
-              
-              dconsole.initdom(root);
+              con.initdom(root);
 
-              dconsole.clear();
-              dconsole.log('ready');
-              
+
+              con.clear();
+              con.log('ready');
+
               
         }//initdom
         
