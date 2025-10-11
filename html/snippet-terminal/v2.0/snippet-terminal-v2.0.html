@@ -3,19 +3,116 @@
 
 <snippet-terminal>
 
-      <template>
+      <template shadowrootmode=open>
+
+            <link rel=stylesheet href='https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.css'>
       
             <style>
             
             
             </style>
             
+            
+            <div id=root>
+            
+                  <div id=btns>
+                        <input value=run type=button>
+                  </div>
+                  
+                  <div id=terminal></div>
+                  
+            </div>
+            
       </template>
       
       
       <script>
+
       
-      
+(function snippet_terminal({mod,root,node}){
+
+  var obj   = {
+        version   : 'v2.0',
+  };
+  
+        var df=true
+        ;
+        
+        var $
+        ;
+        
+        obj.initmod   = function(params){
+          
+              $   = params.$;
+              
+        }//initmod
+        
+        
+  //:
+  
+        
+        var Terminal;
+        var FitAddon;
+        var term;
+        var fitAddon;
+        
+        var terminal;
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+        }//init
+        
+        
+        libs();
+        
+        async function libs(){
+          
+              var list      = [];
+              var promise   = import('https://cdn.jsdelivr.net/npm/@xterm/xterm/+esm').then(result=>({Terminal}=result));
+              list.push(promise);
+              
+              var promise   = import('https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm').then(result=>({FitAddon}=result));
+              list.push(promise);
+              
+              libs    = Promise.all(list).then(()=>{
+                
+                    var term            = new Terminal();
+                    var fitAddon        = new FitAddon();
+                    term.loadAddon(fitAddon);
+                
+              });
+          
+        }//libs
+        
+        
+  //:
+  
+  
+        obj.initdom   = function(rootnode){
+          
+              var root    = rootnode;
+
+              terminal    = $(root,'#terminal');
+              
+              term.open(terminal);
+              fitAddon.fit();
+
+              term.writeln('ready');
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+  return obj;
+  
+})//snippet_terminal
+
+
       </script>
       
 </snippet-terminal>
