@@ -80,20 +80,17 @@
   
         obj.init    = async function(){
 
-
-              
-              
-          
               editor            = mod.editor;
               obj.editor        = editor;
               terminal          = mod.terminal;
-              obj.terminal      = terminal;
-              
+              obj.terminal      = terminal;              
 
               editor.initmod({ext,$,menu});
               terminal.initmod({ext,$});
               
               await Promise.all([
+                
+                    src(),
                     libs(),
                     editor.init(),
                     terminal.init()
@@ -108,6 +105,18 @@
               [sandbox]       = await ext.load.libs('js/sandbox/sandbox.js.api');
           
         }//libs
+        
+        
+        async function src(){
+          
+              if(!root.hasAttribute('src'))return;
+              var src   = root.getAttribute('src');
+              var res   = await fetch(src);
+              var txt   = await res.text();
+              def       = txt;
+              
+        }//src
+        
         
   //:
   
