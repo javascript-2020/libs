@@ -18,13 +18,15 @@
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var df=true;
 
+        var ace;
+        
         var ext;
         var $;
         var datatype;
         var debug;
 
-        var ace;
-        var snippet_console;        
+        var menu;
+        var snippet;
         
 
         
@@ -37,17 +39,20 @@
         async function init(){
                                                                                 debug('init');
 
-              snippet_console           = mod['snippet-console'];
+              menu              = menumod;
               
-              snippet_console.initmod({ext,$,ace,source,menumod});
               
-              await snippet_console.init();
+              snippet           = mod['snippet-console'];
+              
+              snippet.initmod({ext,$,ace,source,menu});
+              
+              await snippet.init();
               
               
   //:
 
           
-              await initdom(document.body);
+              initdom(document.body);
 
 
         }//init
