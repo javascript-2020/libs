@@ -26,7 +26,7 @@
         var debug;
         
         var html;
-        var snippet_html;
+        var snippet;
         
 
         
@@ -38,12 +38,13 @@
               
         async function init(){
                                                                                 debug('init');
-
-              snippet_html           = mod['snippet-html'];
+              menu              = menumod();
               
-              snippet_html.initmod({ext,$,source,debug});
+              snippet           = mod['snippet-html'];
               
-              await snippet_html.init();
+              snippet.initmod({ext,$,menu});
+              
+              await snippet.init();
               
               
   //:
@@ -104,14 +105,53 @@
       <body>
       
             <h3>
-                  snippet-html test
+                  snippet-html v2.0 test
             </h3>
             
-            <code>
-            </code>
 
             
-            <snippet-html component v2.0></snippet-html>
+            <snippet-html component v2.0>
+            
+&#x3C;html&#x3E;
+
+      &#x3C;head&#x3E;
+
+&#x3C;style&#x3E;
+  .newsletter { font-family: sans-serif; padding: 1em; border: 1px solid #ccc; border-radius: 8px; max-width: 600px; }
+  .newsletter input[type=&#x22;email&#x22;] { width: 100%; padding: 0.5em; margin: 0.5em 0; }
+  .newsletter button { padding: 0.5em 1em; }
+  .newsletter footer { margin-top: 1em; font-size: 0.9em; color: #666; }
+&#x3C;/style&#x3E;
+
+      &#x3C;/head&#x3E;
+      
+      &#x3C;body&#x3E;
+      
+            &#x3C;div&#x3E;test&#x3C;/div&#x3E;
+
+&#x3C;article class=&#x22;newsletter&#x22;&#x3E;
+  &#x3C;header&#x3E;
+    &#x3C;h1&#x3E;Newsletter Signup&#x3C;/h1&#x3E;
+    &#x3C;p&#x3E;Stay updated with our latest tools and insights.&#x3C;/p&#x3E;
+  &#x3C;/header&#x3E;
+
+  &#x3C;form onsubmit=&#x22;event.preventDefault(); alert(&#x27;Thanks for signing up!&#x27;);&#x22;&#x3E;
+    &#x3C;label for=&#x22;email&#x22;&#x3E;Email address:&#x3C;/label&#x3E;&#x3C;br&#x3E;
+    &#x3C;input type=&#x22;email&#x22; id=&#x22;email&#x22; name=&#x22;email&#x22; required&#x3E;&#x3C;br&#x3E;
+    &#x3C;button type=&#x22;submit&#x22;&#x3E;Subscribe&#x3C;/button&#x3E;
+  &#x3C;/form&#x3E;
+
+  &#x3C;footer&#x3E;
+    &#x3C;p&#x3E;We respect your privacy. No spam, ever.&#x3C;/p&#x3E;
+  &#x3C;/footer&#x3E;
+&#x3C;/article&#x3E;
+
+            
+      &#x3C;/body&#x3E;
+      
+&#x3C;/html&#x3E;
+
+            </snippet-html>
 
       
       </body>
@@ -132,11 +172,8 @@
               root                = rootnode;
               
               
-              code                = $('code');
-              code.textContent    = html;
-
               
-              snippet_html.initdom(root);
+              snippet.initdom(root);
               
 
               
@@ -146,15 +183,6 @@
   //:
   
   
-        function source(){
-        
-              var js    = code.textContent;
-              return js;
-              
-        }//source
-        
-        
-        source.focus    = function(){}
 
         
   //:
