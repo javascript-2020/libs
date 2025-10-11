@@ -409,7 +409,7 @@
                     
                     await code_block.obj.initdom(root,{mode});
                     
-                    resolve({code_block});
+                    resolve({code_block:code_block.obj});
                     
               }//complete
 
