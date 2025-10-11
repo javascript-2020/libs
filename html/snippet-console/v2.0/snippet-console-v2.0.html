@@ -189,6 +189,12 @@
                                       window.console.clear();
                                       
                                 }//clear
+              console.error   = function(){
+                
+                                      con.error.apply(null,arguments);
+                                      window.console.error.apply(window.console,arguments);
+                                      
+                                }//error
 
               if(!mode){
                     sandbox.run(js,{console});
