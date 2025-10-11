@@ -34,10 +34,24 @@
                                 console.clear();
                           }
       
-                          var result    = eval(js);
+                          var err;
+                          try{
+                          
+                                var result    = eval(js);
+                                
+                          }//try
+                          catch(err2){
+                          
+                                err   = err2;
+                                
+                          }//catch
+                          if(err){
+                                console.error(err);
+                                return;
+                          }
                           
                           if(disp_result){
-                                dconsole.log('result :',result);
+                                console.log('result :',result);
                           }
                           
                     })();
