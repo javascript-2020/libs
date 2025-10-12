@@ -202,13 +202,13 @@
         
         obj.error   = function(err){
           
-              terminal.writeln(`${x.red}Error: ${err.message}${x.reset}`);
+              term.writeln(`${x.red}Error: ${err.message}${x.reset}`);
               
               var trace   = err.stack.split('\n').slice(1);
               trace.forEach(line=>{
                 
                     var str   = line.trim();
-                    terminal.writeln(`${x.red}      ${str}${x.reset}`);
+                    term.writeln(`${x.red}      ${str}${x.reset}`);
                     
               });
           
