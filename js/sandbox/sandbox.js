@@ -18,7 +18,7 @@
   
   
   
-        function run(js,{clear,disp_result,console,ctx}={}){
+        async function run(js,{clear,disp_result,console,ctx}={}){
 
 
               ctx   ||= {};
