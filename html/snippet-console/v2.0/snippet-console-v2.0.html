@@ -100,6 +100,7 @@
 
 
               await Promise.all([              
+                    src(),
                     libs(),
                     editor.init(),
                     con.init(),
@@ -124,6 +125,17 @@
               await Promise.all(list);
               
         }//libs
+
+
+        async function src(){
+          
+              if(!root.hasAttribute('src'))return;
+              var src   = root.getAttribute('src');
+              var res   = await fetch(src);
+              var txt   = await res.text();
+              def       = txt;
+              
+        }//src
 
         
   //:
