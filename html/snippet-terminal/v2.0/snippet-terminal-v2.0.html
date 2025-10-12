@@ -171,7 +171,13 @@
                                       terminal.clear();
                                       
                                 }//clear
-debugger;
+              console.error   = function(err){
+                                
+                                      window.console.error.apply(window.console,arguments);
+                                      terminal.error.apply(null,arguments);
+                                      
+                                }//error
+
               if(!mode){
                     sandbox.run(js,{console,ctx:{terminal}});
               }else{
