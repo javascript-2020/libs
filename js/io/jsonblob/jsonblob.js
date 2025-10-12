@@ -52,7 +52,7 @@ function jsonblob(){
                     params.set('publish',id);
               }
               var arr   = [...params.entries()];
-              arr       = arr.map([key,value]=>{
+              arr       = arr.map(([key,value])=>{
                 
                     if(value=='')return key;
                     value   = encodeURIComponent(value);
