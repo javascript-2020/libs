@@ -7,6 +7,7 @@
       
             <title>snippet-html test v2.0</title>
             
+            <base href='https://libs.ext-code.com/html/snippet-html/'>
 
             
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
@@ -26,7 +27,10 @@
         var debug;
         
         var html;
-        var snippet;
+        
+        var snippet       = {};
+        snippet.inline    = null;
+        snippet.src       = null;
         
 
         
@@ -39,16 +43,22 @@
         async function init(){
                                                                                 debug('init');
               menu              = menumod();
-              
-              snippet           = mod['snippet-html'];
-              
-              snippet.initmod({ext,$,menu});
-              
-              await snippet.init();
-              
-              
-  //:
 
+              
+              snippet.inline    = mod['snippet-html[inline]'];
+              snippet.src       = mod['snippet-html[src]'];
+              
+              
+              snippet.inline.initmod({ext,$,menu});
+              snippet.src.initmod({ext,$,menu});
+
+
+              await Promise.all([              
+                    snippet.inline.init(),
+                    snippet.src.init()
+              ]);
+              
+              
           
               await initdom(document.body);
 
@@ -56,6 +66,9 @@
         }//init
 
 
+  //:
+  
+  
 (async()=>{
 
         mod.stack.add;
@@ -72,7 +85,7 @@
         [$,datatype,menumod,keydown,debug]   = await promise;
 
   
-        html    = await ext.text.libs('html/snippet-html/ex/ex1.html');
+        //html    = await ext.text.libs('html/snippet-html/ex/ex1.html');
 
 
         mod.stack.complete;
@@ -110,7 +123,7 @@
             
 
             
-            <snippet-html component v2.0>
+            <snippet-html id=inline component v2.0>
             
 &#x3C;html&#x3E;
 
@@ -153,7 +166,11 @@
 
             </snippet-html>
 
-      
+            
+            <snippet-html id=src component v2.0 src='ex/ex1.html'>
+            </snippet-html>
+            
+            
       </body>
       
       
@@ -172,8 +189,12 @@
               root                = rootnode;
               
               
+              var node    = $('#inline');
+              snippet.inline.initdom(node);
+
               
-              snippet.initdom(root);
+              var node    = $('#src');
+              snippet.src.initdom(node);
               
 
               
