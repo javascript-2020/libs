@@ -136,7 +136,7 @@
               root                                = host.shadowRoot;
 
 
-              editor.initdom(root);
+              editor.initdom(root,{mode:'html',fullsize:true,txt:def});
               
               
               $(root,'[value=run]').onclick       = btn.run;
