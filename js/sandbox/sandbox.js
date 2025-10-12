@@ -23,7 +23,12 @@
 
               ctx   ||= {};
 
-          
+              js    = `(async()=>{ 
+                
+                    ${js} 
+                    
+              })()`;
+              
               await eval(`
               
                     (async()=>{
@@ -37,7 +42,7 @@
                           var err;
                           try{
                           
-                                var result    = eval(js);
+                                var result    = await eval(js);
                                 
                           }//try
                           catch(err2){
