@@ -628,6 +628,20 @@
   
         }//clear
         
+     
+        Object.defineProperty(obj,'height',{
+          
+              set   : v=>{
+                
+                    if(typeof v=='number'){
+                          v   = v+'px';
+                    }
+                    editor.container.style.height   = v;
+                    
+              },//set
+              
+        });
+        
         
   //:
   
