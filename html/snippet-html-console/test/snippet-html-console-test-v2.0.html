@@ -5,8 +5,9 @@
 
       <head>
       
-            <title>snippet-html-console test v2.0</title>
+            <title>snippet-html-console v2.0 test</title>
             
+            <base href='https://libs.ext-code.com/html/snippet-html-console/'>
 
             
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
@@ -20,12 +21,21 @@
         ;
 
 
+        var ace;
+
+        
         var ext;
         var $;
         var datatype;
         var debug;
+        var menumod;
         
-        var snippet;
+        var menu;
+        
+        var snippet           = {};
+        snippet.inline        = null;
+        snippet.src           = null;
+
         
         var html;
         
@@ -39,16 +49,24 @@
               
         async function init(){
                                                                                 debug('init');
+              
+              menu                  = menumod();
+              
+              
+              snippet.inline        = mod['snippet-html-console[inline]'];
+              snippet.src           = mod['snippet-html-console[src]'];
 
-              snippet           = mod['snippet-html-console'];
               
-              snippet.initmod({ext,$,source});
-              
-              await snippet.init();
+              snippet.inline.initmod({ext,$,menu,ace});
+              snippet.src.initmod({ext,$,menu,ace});
               
               
-  //:
-
+              await Promise.all([
+                    snippet.inline.init(),
+                    snippet.src.init(),
+              ]);
+              
+              
           
               await initdom(document.body);
 
@@ -65,14 +83,15 @@
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
-              'js/dom/menumod/menumod.js',
-              'js/dom/keydown/keydown.js',
               'js/debug/debug.js',
+              'js/dom/menumod/menumod.js',
         );
-        [$,datatype,menumod,keydown,debug]   = await promise;
+        [$,datatype,debug,menumod]   = await promise;
 
-  
-        html    = await ext.text.libs('html/snippet-html-console/ex/ex1.html');
+
+        ace   = await $.editor.ace();
+        
+        //html    = await ext.text.libs('html/snippet-html-console/ex/ex1.html');
 
 
         mod.stack.complete;
@@ -87,7 +106,7 @@
     {height:100%}
     
   body
-    {display:flex;flex-direction:column;gap:10px;font-family:arial}
+    {display:flex;flex-direction:column;gap:10px;font-family:arial;margin:20px}
     
   code
     {border:1px solid lightgray;padding:10px;font-family:monospace;white-space:pre;font-size:16px}
@@ -96,6 +115,13 @@
   snippet-html
     {height:300px}
 */    
+  
+  #inline
+    {margin:20px 0}
+    
+  #src
+    {margin:20px 0}
+    
     
             </style>
             
@@ -105,16 +131,17 @@
       <body>
       
             <h3>
-                  snippet-html-console test
+                  snippet-html-console v2.0 test
             </h3>
             
-            <code>
-            
-      
-            </code>
 
             
-            <snippet-html-console component v2.0></snippet-html-console>
+            <snippet-html-console id=inline component v2.0>
+            </snippet-html-console>
+
+            
+            <snippet-html-console id=src compoent v2.0 src='ex/ex1.html'>
+            </snippet-html-console>
 
       
       </body>
@@ -123,44 +150,27 @@
       <script>
 
       
-        var root;
-        var code;
-        
-
-  //:
-  
   
         function initdom(rootnode){
         
-              root                = rootnode;
+              var root          = rootnode;
               
               
-              code                = $('code');
-              code.textContent    = html;
 
               
-              snippet.initdom(root);
+              var node          = $('#inline');
+              snippet.inline.initdom(node);
+
+              
+              var node          = $('#src');
+              snippet.src.initdom(node);
               
 
               
         }//initdom
       
 
-  //:
   
-  
-        function source(){
-        
-              var js    = code.textContent;
-              return js;
-              
-        }//source
-        
-        
-        source.focus    = function(){}
-
-        
-  //:
   
   
       </script>
