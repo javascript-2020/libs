@@ -23,11 +23,22 @@
 
               ctx   ||= {};
 
+
               js    = `(async()=>{ 
-                
-                    ${js} 
+              
+                    try{
+                    
+                          ${js} 
+                          
+                    }//try
+                    catch(err2){
+                    
+                          err   = err2;
+                          
+                    }//catch
                     
               })()`;
+
               
               await eval(`
               
