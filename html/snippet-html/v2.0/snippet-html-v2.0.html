@@ -98,10 +98,24 @@
               
               editor.initmod({ext,$,menu,ace});
               
-              await editor.init();
+              await Promise.all([
+                    src(),
+                    editor.init(),
+              ]);
               
               
         }//init
+        
+        
+        async function src(){
+          
+              if(!root.hasAttribute('src'))return;
+              var src   = root.getAttribute('src');
+              var res   = await fetch(src);
+              var txt   = await res.text();
+              def       = txt;
+              
+        }//src
         
 
   //:
