@@ -170,9 +170,9 @@
                                 }//clear
 
               if(!mode){
-                    sandbox.run(js,{console});
+                    sandbox.run(js,{console,ctx:{terminal}});
               }else{
-                    sandbox[mode](js,{console});
+                    sandbox[mode](js,{console,ctx:{terminal}});
               }
               
               
