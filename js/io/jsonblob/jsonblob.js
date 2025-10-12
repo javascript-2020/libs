@@ -24,7 +24,9 @@ function jsonblob(){
   
         obj.util.query    = async function(){
         
-              var tst     = window.location.search.slice(1);
+              var url       = new URL(window.location.toString());
+              var params    = url.searchParams;
+              var tst       = params.get('publish');
               if(!tst){
                     return {};
               }
@@ -44,6 +46,22 @@ function jsonblob(){
         
         util.query.set    = function(){
         
+              var url       = new URL(window.location.toString());
+              var params    = url.searchParams;
+              if(id){
+                    params.set('publish',id);
+              }
+              var arr   = [...params.entries()];
+              arr       = arr.map([key,value]=>{
+                
+                    if(value=='')return key;
+                    value   = encodeURIComponent(value);
+                    return `${key}=${value}`;
+                    
+              });
+              var url   = arr.join('&');
+              
+/*              
               var url       = window.location.toString();
               var search    = window.location.search;
               if(search){
@@ -52,6 +70,7 @@ function jsonblob(){
               if(id){
                     url    += '?'+id;
               }
+*/              
               window.history.replaceState(null,'',url);
               
         }//set
