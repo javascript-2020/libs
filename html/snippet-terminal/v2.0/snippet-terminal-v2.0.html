@@ -36,6 +36,7 @@
                   
                   <div id=btns>
                         <input value=run type=button>
+                        <input value=clear type=button>
                   </div>
                   
                   <terminal component v2.0></terminal>
@@ -139,6 +140,7 @@
               editor.initdom(root,{mode:'js',txt:def,fullsize:true});
               
               $(root,'[value=run]').onclick       = btn.run;
+              $(root,'[value=clear]').onclick     = btn.clear;
               
               terminal.initdom(root);
                             
@@ -187,6 +189,13 @@
               
         }//btn.run
         
+
+        btn.clear   = function(){
+          
+              window.console.clear();
+              terminal.clear();
+              
+        }//clear
 
 
         
