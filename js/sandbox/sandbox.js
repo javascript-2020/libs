@@ -24,9 +24,9 @@
               ctx   ||= {};
 
           
-              eval(`
+              await eval(`
               
-                    (()=>{
+                    (async()=>{
                     
                           var {${Object.keys(ctx).join(',')}}    = ctx;
                           
