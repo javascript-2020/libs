@@ -103,6 +103,7 @@
     
     
         var def       = {};
+        
         def.height    = '200px';
         var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
         if(root.hasAttribute('h')){
@@ -194,6 +195,7 @@
               var node    = $(root,'#console');
               con         = jsconsole.create(node);
               console.log('console.def.height',def.height);
+              debugger;
               obj.height  = def.height;
               
 
