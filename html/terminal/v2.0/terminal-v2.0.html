@@ -116,6 +116,16 @@
           
         };
 
+        var chr   = {
+              warn          : '\u26A0',
+              cross         : '\u274C',
+              stop          : '\u1F6D1',
+              prohibited    : '\u1F6AB',
+              check         : '\u2705',
+              go            : '\u1F7E2',
+              thumb         : '\u1F44D',
+              ok            : '\u1F197',
+        };
         
         
   //:
@@ -224,6 +234,14 @@
               });
           
         }//error
+
+
+        obj.warn    = function(){
+          
+              var str   = [...arguments].join(' ');
+              term.writeln(chr.warn+'   '+x.yellow+str+x.reset);
+              
+        }//warn
 
         
   //:
