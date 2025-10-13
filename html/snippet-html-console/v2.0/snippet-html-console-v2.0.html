@@ -84,8 +84,19 @@
         
         var hldr;
         var iframe;
+
         
-        var def   = decode(root.innerHTML);
+        var def     = {};
+        def.html    = decode(root.innerHTML);
+        
+        def.console   = {};
+        if(root.hasAttribute('h')){
+              def.console.height    = root.getAttrbiute('h');
+        }
+        if(root.hasAttribute('height')){
+              def.console.height    = root.getAttrbiute('height');
+        }
+
         
         var btn     = {};
         
@@ -120,10 +131,10 @@
         async function src(){
           
               if(!root.hasAttribute('src'))return;
-              var src   = root.getAttribute('src');
-              var res   = await fetch(src);
-              var txt   = await res.text();
-              def       = txt;
+              var src     = root.getAttribute('src');
+              var res     = await fetch(src);
+              var txt     = await res.text();
+              def.html    = txt;
               
         }//src
         
@@ -137,7 +148,7 @@
               root                                = host.shadowRoot;
 
 
-              editor.initdom(root,{mode:'html',fullsize:true,txt:def});
+              editor.initdom(root,{mode:'html',fullsize:true,txt:def.html});
               
               
               $(root,'[value=run]').onclick       = btn.run;
@@ -148,6 +159,8 @@
 
 
               console.initdom(root);
+              console.height    = def.console.height;
+              
               console.log('ready');
 
         
