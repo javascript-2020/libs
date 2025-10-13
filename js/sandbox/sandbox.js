@@ -280,7 +280,7 @@
               
                     ({console,df=true}    = params);
                                                                                 debug('sandbox.nodejs');
-                                                                                debug('isolated : ',window.crossOriginIsolated);
+                                                                                debug('cross-origin-isolated : ',window.crossOriginIsolated);
                                                                                 debug();
                                                                                 debug('initialising ...');
                                                                                 
