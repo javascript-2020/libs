@@ -48,7 +48,7 @@
       <script>
 
       
-(function snippet_html_console({mod,root,node}){
+(function snippet_html_console({mod,root:root_node,node}){
 
   var obj   = {
         version   : 'v2.0',
@@ -90,11 +90,11 @@
         def.html    = decode(root.innerHTML);
         
         def.console   = {};
-        if(root.hasAttribute('h')){
-              def.console.height    = root.getAttrbiute('h');
+        if(root_node.hasAttribute('h')){
+              def.console.height    = root_node.getAttrbiute('h');
         }
-        if(root.hasAttribute('height')){
-              def.console.height    = root.getAttrbiute('height');
+        if(root_node.hasAttribute('height')){
+              def.console.height    = root_node.getAttrbiute('height');
         }
 
         
