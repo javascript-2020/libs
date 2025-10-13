@@ -187,7 +187,7 @@
                           console.error(error);
                           return;
                     }
-                    
+                                                                                if(!html.trim)debugger;
                     html            = html.trim();
                     
                     var div         = document.createElement('div');
