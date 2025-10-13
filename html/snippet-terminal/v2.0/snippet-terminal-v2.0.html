@@ -81,7 +81,8 @@
         var sandbox;
         var iframe;
         
-        var def    = root.innerHTML;
+        var def     = root.innerHTML;
+        var mode    = root.getAttribute('type');
         
         var btn   = {};
         
@@ -180,7 +181,12 @@
                                 }//error
               
               var result,error;
-              ({iframe,result,error}    = await sandbox.run.iframe(js,{console,ctx:{terminal},iframe}));
+              if(mode=='nodejs'){
+                    ({result,error}   = await sandbox.run.nodejs(js,{console});
+              }else{
+                    ({iframe,result,error}    = await sandbox.run.iframe(js,{console,ctx:{terminal},iframe}));
+              }
+                    
               
               
         }//btn.run
