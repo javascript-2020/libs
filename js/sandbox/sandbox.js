@@ -200,19 +200,19 @@
                           if(typeof err=='string')return new Error(err);
                           
                           var str;
-                          var err;
+                          var err2;
                           try{
                             
                                 str   = JSON.stringify(err);
                             
                           }//try
-                          catch(err2){
+                          catch(err3){
                             
-                                err   = err2;
+                                err2   = err3;
                                 
                           }//catch
-                          if(err){
-                                return err;
+                          if(err2){
+                                return err2;
                           }
                           return new Error(str);
                           
