@@ -107,6 +107,7 @@
                     var resolve,promise=new Promise(res=>resolve=res);
                     
                     iframe          = document.createElement('iframe');
+                    iframe.style.display    = 'none';
                     iframe.srcdoc   = '';
                     iframe.onload   = onload;
                     document.body.append(iframe);
