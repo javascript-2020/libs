@@ -92,7 +92,7 @@
         var ansi;
         
         
-
+    
   
         var jsconsole;
         var con;
@@ -100,7 +100,10 @@
         
         
         var root;
-        
+    
+    
+        var def       = {};
+        def.height    = '200px';
         
         
         
@@ -179,7 +182,7 @@
               
               var node    = $(root,'#console');
               con         = jsconsole.create(node);
-              con.element.style.height    = '200px';
+              con.element.style.height    = def.height;
               
               console.log(con.element);
 
