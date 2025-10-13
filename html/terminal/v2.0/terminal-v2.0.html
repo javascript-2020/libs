@@ -141,8 +141,14 @@
               libs    = Promise.all(list).then(()=>{
                 
                     term        = new Terminal({
+                      
+                          fontFamily      : 'monospace',
+                          fontSize        : 16,
+
+                      
                           theme           : theme.light,
                           rendererType    : 'dom',
+                          
                     });
                     fitAddon    = new FitAddon();
                     term.loadAddon(fitAddon);
