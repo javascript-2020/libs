@@ -127,7 +127,7 @@
               
               function setup(){
 
-                    js        = wrap.js();
+                    js        = wrap.js(js);
                     ctx     ||= {};
                     
                     win.onerror                       = onerror;
