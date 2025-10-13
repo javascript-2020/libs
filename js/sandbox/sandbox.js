@@ -98,9 +98,8 @@
               
               await create();
               var {result,error}    = await win.run(js,{clear,disp_result,console,ctx});
-              resolve({result,error});
               
-              return {iframe};
+              return {iframe,result,error};
               
               
               function create(){
