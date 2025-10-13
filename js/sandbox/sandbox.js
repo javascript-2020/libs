@@ -17,28 +17,39 @@
   //:
   
   
+        var wrap    = {};
+        
+        wrap.js   = function(js){
+          
+              js    = `
+              
+                    (async()=>{ 
+                    
+                          try{
+                          
+                                ${js} 
+                                
+                          }//try
+                          catch(err2){
+                          
+                                err   = err2;
+                                
+                          }//catch
+                          
+                    })()
+              
+              `;
+              return js;
+              
+        }//js
+        
+  
   
         async function run(js,{clear,disp_result,console,ctx}={}){
 
 
               ctx   ||= {};
-
-
-              js    = `(async()=>{ 
-              
-                    try{
-                    
-                          ${js} 
-                          
-                    }//try
-                    catch(err2){
-                    
-                          err   = err2;
-                          
-                    }//catch
-                    
-              })()`;
-
+              js      = wrap.js(js);
               
               await eval(`
               
@@ -61,6 +72,7 @@
                                 err   = err2;
                                 
                           }//catch
+                          
                           if(err){
                                 console.error(err);
                                 return;
@@ -81,70 +93,93 @@
         
         run.iframe    = async function(js,{clear,disp_result,console,ctx}={}){
 
-              var resolve,promise=new Promise(res=>resolve=res);
+              var iframe;
+              var win;
               
-              ctx   ||= {};
-
-
-              js    = `(async()=>{ 
+              await create();
+              var {result,error}    = await win.run(js,{clear,disp_result,console,ctx});
+              resolve({result,error});
               
-                    var {${Object.keys(ctx).join(',')}}    = ctx;
-
-                    try{
-                    
-                          ${js} 
-                          
-                    }//try
-                    catch(err2){
-                    
-                          err   = err2;
-                          
-                    }//catch
-                    
-              })()`;
-
-              
-              var iframe      = document.createElement('iframe');
-              iframe.srcdoc   = '';
-              iframe.onload   = onload;
-              document.body.append(iframe);
-              
-              return {iframe,promise};
+              return {iframe};
               
               
-              async function onload(){
+              function create(){
                 
-                    var win                           = iframe.contentWindow;
+                    var resolve,promsie=new Promise(res=>resolve=res);
+                    
+                    iframe          = document.createElement('iframe');
+                    iframe.srcdoc   = '';
+                    iframe.onload   = onload;
+                    document.body.append(iframe);
+                    
+                    return promise;
+                    
+                    async function onload(){
+                      
+                          win   = iframe.contentWindow;
+                          setup();
+                          resolve();
+      
+                    }//onload
+              }//create
+              
+              
+              
+              
+              function setup(){
+
+                    js        = wrap.js();
+                    ctx     ||= {};
+                    
                     win.onerror                       = onerror;
                     win.onunhandledpromiserejection   = onunhandledrejection;
-                    
-                    var err;
-                    try{
-                      
-                          var result    = await win.eval(js);
-                          
-                    }//try
-                    catch(err2){
-                      
-                          err   = err2;
-                          
-                    }//catch
-                    
-                    if(err){
-                          console.error(err);
-                          resolve({error:err});
-                          return;
-                    }
-                    
-                    resolve({ok:result});
+                
+                
+                    var str   = Object.keys(ctx).join(',');
+                
+                    win.eval(`
+                          async function run(js,{clear,disp_result,console,ctx}={}){ 
+                                
+                                var {${str}}    = ctx;
+                                
+                                if(clear){
+                                      console.clear();
+                                }
+            
+                                var err;
+                                try{
+                                
+                                      var result    = await eval(js);
+                                      
+                                }//try
+                                catch(err2){
+                                
+                                      err   = err2;
+                                      
+                                }//catch
+                                
+                                if(err){
+                                      console.error(err);
+                                      return {error:err};
+                                }
+                                
+                                if(disp_result){
+                                      console.log('result :',result);
+                                }
+                                
+                                return {result};
+                                
+                          }//run
+                    `);
 
-                    
+
                     function onerror(msg,src,line,col,err){
                       
                           console.error(err);
                           resolve({error:err});
                           
                     }//onerror
+
                     
                     function onunhandledrejection(event){
                       
@@ -152,8 +187,8 @@
                           resolve({error:event.reason});
                           
                     }//onunhandledpromiserejection
-
-              }//onload
+              
+              }//setup
               
         }//iframe
         
