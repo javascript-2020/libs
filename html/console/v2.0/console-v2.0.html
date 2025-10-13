@@ -92,8 +92,6 @@
         var ansi;
         
         
-        var store       = {};
-        store.console   = window.console;
 
   
         var jsconsole;
@@ -132,7 +130,7 @@
                        
                     [jsconsole]   = result;
                     jsconsole     = eval(jsconsole);
-                    jsconsole.initmod({store,ace});
+                    jsconsole.initmod({ace});
                     jsconsole.init();
                     
               });
