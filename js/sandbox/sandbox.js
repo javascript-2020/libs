@@ -105,7 +105,7 @@
               
               function create(){
                 
-                    var resolve,promsie=new Promise(res=>resolve=res);
+                    var resolve,promise=new Promise(res=>resolve=res);
                     
                     iframe          = document.createElement('iframe');
                     iframe.srcdoc   = '';
