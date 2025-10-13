@@ -179,6 +179,19 @@
                                       terminal.error.apply(null,arguments);
                                       
                                 }//error
+              console.warn    = function(){
+                
+                                      window.console.warn.apply(window.console,arguments);
+                                      terminal.warn.apply(null,arguments);
+                                      
+                                }//warn
+                                
+              console.debug   = function(){
+                
+                                      window.console.debug.apply(window.console,arguments);
+                                      terminal.debug.apply(null,arguments);
+                                      
+                                }//debug
               
               var result,error;
               if(mode=='nodejs'){
