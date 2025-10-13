@@ -296,6 +296,20 @@
                                                                                 window.console.log(2);
               
                     var process   = await webcontainer.spawn('node',['main.js']);
+                    
+                    process.on('uncaughtException',err=>{
+                    
+                                                                                console.error('Uncaught:',err);
+                                                                                
+                    });
+                    
+                    process.on('unhandledRejection',err=>{
+                    
+                                                                                console.error('Unhandled:',err);
+                          
+                    });
+                    
+                    
                                                                                 window.console.log(3);
                     var stream    = new WritableStream({write(data){console.log(data)}});
                                                                                 window.console.log(4);
@@ -304,7 +318,7 @@
             
                     var code      = await process.exit;
                     if(code!=0){
-                          console.log('an error occurred');
+                                                                                console.warn('process exited with error code : ',code);
                     }
                                                                                 window.console.log(6);
                     return code;
