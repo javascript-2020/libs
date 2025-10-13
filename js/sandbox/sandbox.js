@@ -137,7 +137,7 @@
                     var str   = Object.keys(ctx).join(',');
                 
                     win.eval(`
-                          async function run(js,{clear,disp_result,console,ctx}={}){ 
+                          async function run(js,{clear,disp_result,console,ctx}={}){debugger;
                                 
                                 var {${str}}    = ctx;
                                 
