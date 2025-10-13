@@ -205,11 +205,7 @@
                                       
                                 }//error
 
-              if(!mode){
-                    sandbox.run(js,{console});
-              }else{
-                    sandbox[mode](js,{console});
-              }
+              sandbox.run(js,{console});
 
           
               editor.focus();
