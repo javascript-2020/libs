@@ -79,7 +79,6 @@
         var editor;
         var terminal;
         
-        var mode;
         var sandbox;
         var iframe;
         
@@ -153,10 +152,6 @@
 
         btn.run   = async function(){
           
-              if(iframe){
-                    iframe.remove();
-              }
-                    
               var js    = editor.getvalue();
               
               var console     = {};
@@ -184,19 +179,10 @@
                                       terminal.error.apply(null,arguments);
                                       
                                 }//error
-
-              //if(!mode){
               
               
-              var promise;
-              ({iframe,promise}    = sandbox.run.iframe(js,{console,ctx:{terminal}}));
-              var result              = await promise;
+              ({iframe,result,error}    = await sandbox.run.iframe(js,{console,ctx:{terminal},iframe}));
                     
-/*                    
-              }else{
-                    sandbox[mode](js,{console,ctx:{terminal}});
-              }
-*/              
               
               
         }//btn.run
