@@ -173,23 +173,6 @@
                               
                                       window.console.log.apply(window.console,arguments);
                                       con.log.apply(null,arguments);
-
-/*                                      
-                                      var args    = [...arguments];
-                                      if(mode=='nodejs'){
-                                            args.forEach((v,i)=>{
-                                            
-                                                  if(typeof v=='string'){
-                                                        var html    = ansi.ansi_to_html(v);
-                                                        var node    = $.define(html);
-                                                        var log     = document.createElement('log-nodejs');
-                                                        log.append(node);
-                                                        args.splice(i,1,log);
-                                                  }
-                                                  
-                                            });
-                                      }
-*/                                      
                                     
                                 }//log
               console.clear   = function(){
