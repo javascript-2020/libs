@@ -273,36 +273,37 @@
               
               var webcontainer;
               var console;
+              var df;
 
               
               window.init   = async function(params){
               
-                    ({console}            = params);
-                                                                                console.log('sandbox.nodejs');
-                                                                                console.log('isolated : ',window.crossOriginIsolated);
-                                                                                console.log();
-                                                                                console.log('initialising ...');
+                    ({console,df=true}    = params);
+                                                                                debug('sandbox.nodejs');
+                                                                                debug('isolated : ',window.crossOriginIsolated);
+                                                                                debug();
+                                                                                debug('initialising ...');
                                                                                 
                     var {WebContainer}    = await import('https://cdn.jsdelivr.net/npm/@webcontainer/api/+esm');
-                                                                                console.log('booting ...');
+                                                                                debug('booting ...');
                     webcontainer          = await WebContainer.boot();
-                                                                                console.log('ok');
+                                                                                debug('ok');
                     
               }//init
 
       
               window.run    = async function(js){
-                                                                                console.log('write file system ...');
+                                                                                debug('write file system ...');
                     await webcontainer.fs.writeFile('main.js',js);
-                                                                                console.log('launch process ...');
+                                                                                debug('launch process ...');
               
                     var process   = await webcontainer.spawn('node',['main.js']);
-                                                                                console.log('ok');
+                                                                                debug('ok');
 
 /*                    
                     process.on('uncaughtException',err=>{
                     
-                                                                                console.error('Uncaught:',err);
+                                                                                debug('Uncaught:',err);
                                                                                 
                     });
                     
@@ -322,10 +323,19 @@
                     if(code!=0){
                                                                                 console.warn('process exited with error code : ',code);
                     }
-                                                                                console.log('done.');
+                                                                                debug('done.');
                     return code;
                     
               }//run
+              
+              
+              function debug(){
+              
+                    if(!df)return;
+                    var str   = [...arguments].join(' ');
+                    console.log('[ debug ]',str);
+                    
+              }//debug
 
 })();
 
