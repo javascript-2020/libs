@@ -202,8 +202,8 @@
               if(arguments.length==0){
                     args    = [''];
               }
-              args    = args.map(v=>v.toString());
-              term.write.apply(term,args)
+              var str   = args.join(' ');
+              term.write(str)
               
         }//write
         
@@ -214,8 +214,8 @@
               if(arguments.length==0){
                     args    = [''];
               }
-              args    = args.map(v=>v.toString());
-              term.writeln.apply(term,args)
+              var str   = args.join(' ');
+              term.writeln(str)
               
         }//writeln
         
