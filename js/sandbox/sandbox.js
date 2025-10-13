@@ -178,7 +178,8 @@
 
                     function onerror(msg,src,line,col,err){
                       
-                          console.error(err);
+                          err   = norm(err||msg);
+                                                                                console.error(err);
                           resolve({error:err});
                           
                     }//onerror
@@ -186,10 +187,67 @@
                     
                     function onunhandledrejection(event){
                       
-                          console.error('Unhandled rejection:',event.reason);
-                          resolve({error:event.reason});
+                          var err   = norm(event.reason);
+                                                                                console.error(err);
+                          resolve({error:err});
                           
                     }//onunhandledpromiserejection
+
+                    
+                    function norm(err){
+                      
+                          if(Object.prototype.toString.call(err)==='[object Error]')return err;
+                          if(typeof err=='string')return new Error(err);
+                          if(typeof err=='object' && err!==null){
+                                return new Error(err.message || JSON.stringify(err));
+                          }
+                          return new Error('Unknown error');
+                          
+                    }//norm
+
+
+
+                    function norm(err){
+                      
+                          if(Object.prototype.toString.call(err)==='[object Error]')return err;
+                          if(typeof err=='string')return new Error(err);
+                          
+                          var str;
+                          var err;
+                          try{
+                            
+                                str   = JSON.stringify(err);
+                            
+                          }//try
+                          catch(err2){
+                            
+                                err   = err2;
+                                
+                          }//catch
+                          if(err){
+                                return err;
+                          }
+                          return new Error(str);
+                          
+                    }//norm
+
+
+
+
+window.onerror = (msg, src, line, col, err) => {
+  const error = normalizeError(err || msg);
+  handleError(error);
+};
+
+window.onunhandledrejection = (event) => {
+  const error = normalizeError(event.reason);
+  handleError(error);
+};
+
+function handleError(error) {
+  console.error('Normalized error:', error);
+  // You can now safely log, display, or report this error
+}                    
               
               }//setup
               
