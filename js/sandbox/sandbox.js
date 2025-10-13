@@ -88,6 +88,8 @@
 
               js    = `(async()=>{ 
               
+                    var {${Object.keys(ctx).join(',')}}    = ctx;
+
                     try{
                     
                           ${js} 
