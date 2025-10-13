@@ -296,7 +296,8 @@
                                                                                 window.console.log(2);
               
                     var process   = await webcontainer.spawn('node',['main.js']);
-                    
+
+/*                    
                     process.on('uncaughtException',err=>{
                     
                                                                                 console.error('Uncaught:',err);
@@ -308,7 +309,7 @@
                                                                                 console.error('Unhandled:',err);
                           
                     });
-                    
+*/                    
                     
                                                                                 window.console.log(3);
                     var stream    = new WritableStream({write(data){console.log(data)}});
