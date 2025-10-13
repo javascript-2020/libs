@@ -22,9 +22,9 @@
         json.tree.forEach(async(item,i)=>{
         
               if(!item.path.startsWith(path))return;
-                                                                                console.log(item);
+                                                                                //console.log(item);
               var fn    = item.path.slice(path.length);
-                                                                                console.log(fn);
+                                                                                console.log(fn,item.size);
               if(item.type=='tree'){
                     fs.mkdirSync(file+fn);
               }else{
