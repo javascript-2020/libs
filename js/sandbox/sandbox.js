@@ -270,32 +270,33 @@
 
 (()=>{
 
-                                                                                window.console.log('sandbox.nodejs');
-                                                                                window.console.log(window.crossOriginIsolated);
+                                                                                console.log('sandbox.nodejs');
+                                                                                console.log(window.crossOriginIsolated);
               
               var webcontainer;
               var console;
 
               
               window.init   = async function(params){
-                                                                                window.console.log(1);
+                                                                                console.log('initialising ...');
               
                     ({console}            = params);
                     
                     var {WebContainer}    = await import('https://cdn.jsdelivr.net/npm/@webcontainer/api/+esm');
-                                                                                window.console.log(2);
+                                                                                console.log('booting ...');
                     webcontainer          = await WebContainer.boot();
-                                                                                window.console.log(3);
+                                                                                console.log('ok');
                     
               }//init
 
       
               window.run    = async function(js){
-                                                                                window.console.log(1);
+                                                                                console.log('write file system ...');
                     await webcontainer.fs.writeFile('main.js',js);
-                                                                                window.console.log(2);
+                                                                                console.log('launch process ...');
               
                     var process   = await webcontainer.spawn('node',['main.js']);
+                                                                                console.log('ok');
 
 /*                    
                     process.on('uncaughtException',err=>{
@@ -311,17 +312,16 @@
                     });
 */                    
                     
-                                                                                window.console.log(3);
                     var stream    = new WritableStream({write(data){console.log(data)}});
-                                                                                window.console.log(4);
+
                     process.output.pipeTo(stream);
-                                                                                window.console.log(5);
+
             
                     var code      = await process.exit;
                     if(code!=0){
                                                                                 console.warn('process exited with error code : ',code);
                     }
-                                                                                window.console.log(6);
+                                                                                console.log('done.');
                     return code;
                     
               }//run
