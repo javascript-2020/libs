@@ -7,7 +7,9 @@
         var owner   = 'javascript-2020';
         var repo    = 'stackoverflow';
         var branch  = 'main';
-        var path    = '';
+        var path    = '/auto-login/';
+        
+        //https://github.com/javascript-2020/stackoverflow/tree/main/auto-login
         
         if(path[0]=='/')path    = path.slice(1);
         if(path && path.slice(-1)!='/')path  += '/';
