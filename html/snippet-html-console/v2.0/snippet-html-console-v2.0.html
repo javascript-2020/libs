@@ -90,18 +90,24 @@
         def.html    = decode(root.innerHTML);
         
         def.console   = {};
+        var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
         if(root.hasAttribute('h')){
-              def.console.height    = root.getAttribute('h');
-              window.console.log('h',def.console.height);
+              var h   = root.getAttribute('h');
+              h       = int(h);
+              def.console.height    = h;
+              
         }
         if(root.hasAttribute('height')){
-              def.console.height    = root.getAttribute('height');
+              var h   = root.getAttribute('height');
+              h       = int(h);
+              def.console.height    = h;
         }
 
         
         var btn     = {};
         
-        
+
+
   //:
   
   
