@@ -333,7 +333,7 @@
               
                     if(!df)return;
                     var str   = [...arguments].join(' ');
-                    console.log('[ debug ]',str);
+                    console.debug('[ debug ]',str);
                     
               }//debug
 
