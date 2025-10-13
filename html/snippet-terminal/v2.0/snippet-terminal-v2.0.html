@@ -182,7 +182,7 @@
               
               var result,error;
               if(mode=='nodejs'){
-                    ({result,error}   = await sandbox.run.nodejs(js,{console}));
+                    ({result,error}   = await sandbox.nodejs(js,{console}));
               }else{
                     ({iframe,result,error}    = await sandbox.run.iframe(js,{console,ctx:{terminal},iframe}));
               }
