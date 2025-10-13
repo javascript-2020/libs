@@ -76,7 +76,85 @@
 
               
         }//run
+        
+        
+        
+        run.iframe    = async function(js,{clear,disp_result,console,ctx}={}){
 
+              var resolve,promise=new Promise(res=>resolve=res);
+              
+              ctx   ||= {};
+
+
+              js    = `(async()=>{ 
+              
+                    try{
+                    
+                          ${js} 
+                          
+                    }//try
+                    catch(err2){
+                    
+                          err   = err2;
+                          
+                    }//catch
+                    
+              })()`;
+
+              
+              var iframe      = document.createElement('iframe');
+              iframe.srcdoc   = '';
+              iframe.onload   = onload;
+              document.body.append(iframe);
+              
+              return {iframe,promise};
+              
+              
+              async function onload(){
+                
+                    var win                           = iframe.contentWindow;
+                    win.onerror                       = onerror;
+                    win.onunhandledpromiserejection   = onunhandledrejection;
+                    
+                    var err;
+                    try{
+                      
+                          var result    = await win.eval(js);
+                          
+                    }//try
+                    catch(err2){
+                      
+                          err   = err2;
+                          
+                    }//catch
+                    
+                    if(err){
+                          console.error(err);
+                          resolve({error:err});
+                          return;
+                    }
+                    
+                    resolve({ok:result});
+
+                    
+                    function onerror(msg,src,line,col,err){
+                      
+                          console.error(err);
+                          resolve({error:err});
+                          
+                    }//onerror
+                    
+                    function onunhandledrejection(event){
+                      
+                          console.error('Unhandled rejection:',event.reason);
+                          resolve({error:event.reason});
+                          
+                    }//onunhandledpromiserejection
+
+              }//onload
+              
+        }//iframe
+        
 
   //:
   
