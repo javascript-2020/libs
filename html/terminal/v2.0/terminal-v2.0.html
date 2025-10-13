@@ -114,6 +114,8 @@
               hidden: '\x1b[8m',
               strikethrough: '\x1b[9m',
           
+              gray    : '\x1b[38;5;245m',
+              
         };
 
         var chr   = {
@@ -244,6 +246,14 @@
               term.writeln(chr.warn+'   '+x.yellow+str+x.reset);
               
         }//warn
+        
+        
+        obj.debug   = function(){
+          
+              var str   = [...arguments].join(' ');
+              term.writeln(x.gray+str+x.reset);
+              
+        }//debug
 
         
   //:
