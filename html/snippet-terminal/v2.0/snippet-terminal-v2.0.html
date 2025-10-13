@@ -81,6 +81,7 @@
         
         var mode;
         var sandbox;
+        var iframe;
         
         var def    = root.innerHTML;
         
@@ -150,8 +151,12 @@
   //:
 
 
-        btn.run   = function(){
+        btn.run   = async function(){
           
+              if(iframe){
+                    iframe.remove();
+              }
+                    
               var js    = editor.getvalue();
               
               var console     = {};
@@ -180,11 +185,18 @@
                                       
                                 }//error
 
-              if(!mode){
-                    sandbox.run(js,{console,ctx:{terminal}});
+              //if(!mode){
+              
+              
+              var promise;
+              ({iframe,promise}    = sandbox.run.iframe(js,{console,ctx:{terminal}}));
+              var result              = await promise;
+                    
+/*                    
               }else{
                     sandbox[mode](js,{console,ctx:{terminal}});
               }
+*/              
               
               
         }//btn.run
