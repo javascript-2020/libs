@@ -203,7 +203,7 @@
         obj.error   = function(err){
           
               term.writeln(`${x.red}Error: ${err.message}${x.reset}`);
-              if(!err.stack)debugger;
+                                                                                if(!err.stack)debugger;
               var trace   = err.stack.split('\n').slice(1);
               trace.forEach(line=>{
                 
