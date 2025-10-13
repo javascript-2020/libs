@@ -313,7 +313,7 @@
                     });
 */                    
                     
-                    var stream    = new WritableStream({write(data){console.log(data)}});
+                    var stream    = new WritableStream({write(data){console.write(data)}});
 
                     process.output.pipeTo(stream);
 
