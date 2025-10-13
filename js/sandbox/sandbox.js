@@ -231,24 +231,6 @@
                           
                     }//norm
 
-
-
-
-window.onerror = (msg, src, line, col, err) => {
-  const error = normalizeError(err || msg);
-  handleError(error);
-};
-
-window.onunhandledrejection = (event) => {
-  const error = normalizeError(event.reason);
-  handleError(error);
-};
-
-function handleError(error) {
-  console.error('Normalized error:', error);
-  // You can now safely log, display, or report this error
-}                    
-              
               }//setup
               
         }//iframe
