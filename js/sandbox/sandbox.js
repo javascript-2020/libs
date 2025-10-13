@@ -270,18 +270,19 @@
 
 (()=>{
 
-                                                                                console.log('sandbox.nodejs');
-                                                                                console.log(window.crossOriginIsolated);
               
               var webcontainer;
               var console;
 
               
               window.init   = async function(params){
-                                                                                console.log('initialising ...');
               
                     ({console}            = params);
-                    
+                                                                                console.log('sandbox.nodejs');
+                                                                                console.log('isolated : ',window.crossOriginIsolated);
+                                                                                console.log();
+                                                                                console.log('initialising ...');
+                                                                                
                     var {WebContainer}    = await import('https://cdn.jsdelivr.net/npm/@webcontainer/api/+esm');
                                                                                 console.log('booting ...');
                     webcontainer          = await WebContainer.boot();
