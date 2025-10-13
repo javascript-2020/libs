@@ -202,6 +202,7 @@
               if(arguments.length==0){
                     args    = [''];
               }
+              args    = args.map(v=>v.toString());
               term.write.apply(term,args)
               
         }//write
@@ -211,8 +212,9 @@
           
               var args    = [...arguments];
               if(arguments.length==0){
-                    args    = ['\n'];
+                    args    = [''];
               }
+              args    = args.map(v=>v.toString());
               term.writeln.apply(term,args)
               
         }//writeln
