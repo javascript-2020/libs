@@ -96,7 +96,7 @@
         store.console   = window.console;
 
   
-        var console;
+        var jsconsole;
         var con;
         var style;
         
@@ -130,10 +130,10 @@
               var url       = 'javascript-2020:external:/TarVK/chromeConsole/console.js';
               var promise   = ext.text.github(url).then(result=>{
                        
-                    [console]    = result;
-                    console     = eval(console);
-                    console.initmod({store,ace});
-                    console.init();
+                    [jsconsole]   = result;
+                    jsconsole     = eval(jsconsole);
+                    jsconsole.initmod({store,ace});
+                    jsconsole.init();
                     
               });
               list.push(promise);
@@ -146,13 +146,15 @@
               
               });
               list.push(promise);
-              
+
+/*              
               var promise   = import('https://cdn.jsdelivr.net/npm/ansi_up/+esm').then(({AnsiUp})=>{
                 
                     ansi    = new AnsiUp();
                     
               });
               list.push(promise);
+*/              
               
               await Promise.all(list);
               
@@ -178,7 +180,7 @@
               
               
               var node    = $(root,'#console');
-              con         = console.create(node);
+              con         = jsconsole.create(node);
               con.element.style.height    = '200px';
               console.log(con.element);
 
