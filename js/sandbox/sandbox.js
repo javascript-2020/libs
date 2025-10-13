@@ -91,9 +91,12 @@
         
         
         
-        run.iframe    = async function(js,{clear,disp_result,console,ctx}={}){
+        run.iframe    = async function(js,{clear,disp_result,console,ctx,iframe}={}){
 
-              var iframe;
+              if(iframe){
+                    iframe.remove();
+              }
+              
               var win;
               
               await create();
