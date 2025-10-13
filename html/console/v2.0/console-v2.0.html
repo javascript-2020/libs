@@ -106,9 +106,11 @@
         def.height    = '200px';
         if(root.hasAttribute('h')){
               def.height    = root.getAttrbiute('h');
+              console.log('h',def.height);
         }
         if(root.hasAttribute('height')){
               def.height    = root.getAttrbiute('height');
+              console.log('height',def.height);
         }
         
         
@@ -190,8 +192,6 @@
               con         = jsconsole.create(node);
               obj.height  = def.height;
               
-              console.log(con.element);
-
 
               
               var keys    = Object.keys(con.__proto__);
