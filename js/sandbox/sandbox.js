@@ -279,7 +279,9 @@
               
               window.init   = async function(params){
               
-                    ({console,terminal,df=true}    = params);
+                    var ctx;
+                    ({console,ctx,df=true}    = params);
+                    ({terminal}    = ctx);
                                                                                 console.log('sandbox.nodejs');
                                                                                 console.log('cross-origin-isolated : ',window.crossOriginIsolated);
                                                                                 console.log();
