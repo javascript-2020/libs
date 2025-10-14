@@ -165,7 +165,7 @@
               
               var result,error;
               if(mode=='nodejs'){
-                    ({result,error}   = await sandbox.nodejs(js,{console:jsconsole,terminal}));
+                    ({result,error}   = await sandbox.nodejs(js,{console:jsconsole,ctx:{terminal}}));
               }else{
                     ({iframe,result,error}    = await sandbox.run.iframe(js,{console:jsconsole,ctx:{terminal},iframe}));
               }
