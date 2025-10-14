@@ -68,6 +68,18 @@
                     },//get
                     set:v=>{
                       
+                          /*
+                          if(!par){
+                                if(ct==1){
+                                      if(typeof v=='function'){
+                                            if(v.name=='init'){
+                                                  return;
+                                            }
+                                      }
+                                }
+                          }
+                          */
+                          
                           total++;
                           stack.push(v);
                                                                                       debug.trace('add',name,ct,total);
