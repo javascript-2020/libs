@@ -33,7 +33,7 @@
               mod_list.push(mod);
               
               mod.name        = name;
-              mod.df          = false;
+              mod.df          = true;
               mod.list        = mod_list;
               mod.child       = [];
               
