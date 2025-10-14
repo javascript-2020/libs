@@ -1,0 +1,181 @@
+
+
+
+<html>
+
+      <head>
+      
+            <title>
+                  snippet-terminal-console test v2.0
+            </title>
+
+
+            <base href='https://libs.ext-code.com/html/snippet-terminal-console/'>
+            
+            
+            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
+
+            <script init>
+                                                                                console.clear();
+                                                                                console.log('snippet-terminal-console-test-v2.0.html');
+                                                                                console.log();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+        var df=true
+        ;
+
+
+        var ext;
+        var $;
+        var datatype;
+        var debug;
+        var menumod;
+        
+        var menu;
+        
+        var snippet       = {};
+        snippet.inline    = null;
+        snippet.src       = null;
+
+        var html;
+        
+
+  //:
+
+
+        mod.stack.add   = init;
+              
+        async function init(){
+                                                                                debug('init');
+
+              menu              = menumod();
+              
+              snippet.inline        = mod['snippet-terminal[inline]'];
+              //snippet.src           = mod['snippet-terminal[src]'];
+              
+              snippet.inline.initmod({ext,$,menu});
+              //snippet.src.initmod({ext,$,menu});
+
+              
+              await Promise.all([
+                    snippet.inline.init(),
+                    //snippet.src.init(),
+              ]);
+              
+              
+  //:
+
+          
+              await initdom(document.body);
+
+
+              //snippet.editor.setvalue('helloworld');
+
+        }//init
+
+
+(async()=>{
+
+        mod.stack.add;
+        
+        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
+          
+        var promise   = ext.load.libs(
+              'js/dom/$.js.api',
+              'js/core/datatype.js',
+              'js/debug/debug.js',
+              'js/dom/menumod/menumod.js',
+        );
+        [$,datatype,debug,menumod]   = await promise;
+
+  
+        //html    = await ext.text.libs('html/snippet-terminal/ex/ex1.');
+
+
+        mod.stack.complete;
+
+})();
+
+
+            </script init>
+      
+            <style>
+  html
+    {height:100%}
+    
+  body
+    {display:flex;flex-direction:column;gap:10px;font-family:arial;padding-bottom:200px}
+
+
+  snippet-terminal
+    {display:block;margin:20px;border:1px solid lightgray;padding:10px;border-radius:5px}
+
+            </style>
+            
+      </head>
+      
+      
+      <body>
+      
+            <h3>
+                  snippet-terminal-console v2.0 test
+            </h3>
+            
+            <code>
+            
+      
+            </code>
+
+
+            <snippet-terminal id=inline component v2.0>
+            
+        console.log('my-world');
+                  
+            </snippet-terminal>
+
+
+<!--
+            <snippet-terminal id=src type=nodejs component v2.0 src='ex/nodejs-ex.js'>
+            </snippet-terminal>
+-->            
+
+      
+      </body>
+      
+      
+      <script>
+
+      
+        var root;
+        var code;
+        
+
+  //:
+  
+  
+        function initdom(rootnode){
+        
+              root                = rootnode;
+              
+              var node    = $(root,'#inline');
+              snippet.inline.initdom(node);
+              
+              //var node    = $(root,'#src');
+              //snippet.src.initdom(node);
+              
+
+              
+        }//initdom
+      
+
+  //:
+  
+  
+  
+  
+      </script>
+      
+      
+</html>
+
+
+            
