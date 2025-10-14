@@ -312,7 +312,7 @@
               }//libs
               
               
-              loader.grp    = async function({root,nn,version}){
+              loader.grp    = async function({root,type,nn,version}){
                                                                                 //console.log('loader.grp',nn,version);
                     var sub;
                     if(type.length>3){
