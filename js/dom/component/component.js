@@ -54,8 +54,8 @@
                     par.stack.add;
                     mod.stack.push(()=>par.stack.complete);
               }else{
-                                                                                console.log('auto ct');
-                    ct    = 1;
+                                                                                console.log('auto total');
+                    total    = 1;
                     
               }
               
