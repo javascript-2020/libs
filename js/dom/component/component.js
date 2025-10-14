@@ -209,11 +209,15 @@
                     switch(type){
                       
                       case 'libs'       : ({url}   = await loader.libs({root,nn,version}));          break;
-                      case 'grp'        : ({url}   = await loader.grp({root,nn,version}));           break;
+                      //case 'grp'        : ({url}   = await loader.grp({root,nn,version}));           break;
                       case 'parent'     : ({url}   = await loader.parent({root,nn,version}));        break;
                       case 'page'       : ({url}   = await loader.page({root,nn,version}));          break;
                       
                     }//switch
+                    
+                    if(type.startsWith('grp')){
+                          ({url}    = await loader.grp({root,nn,version});
+                    }
 
                     var {html,error}    = await loader.fetch(url);
                     if(error){
@@ -310,7 +314,18 @@
               
               loader.grp    = async function({root,nn,version}){
                                                                                 //console.log('loader.grp',nn,version);
-                    var par   = loader.fn.par();
+                    var sub;
+                    if(type.length>3){
+                          sub   = type.slice(3);
+                    }
+                    
+                    var int   = (str)=>(/^\d+$/.test(str));
+                    var num   = -1;
+                    if(int(sub)){
+                          num   = Number(sub);
+                    }
+                    
+                    var par   = loader.fn.par({num});
 
                     var url;
                     if(!version){
@@ -359,10 +374,8 @@
               
               loader.page   = async function({root,nn,version}){
 
-                    var df;
-                    if(nn=='output')df=true;
-                    var par   = loader.fn.par(df);
-                                                                                df && console.log('par',par);
+                    var par   = loader.fn.par();
+
                     var url;
                     if(version){
                           url   = `html/${nn}/${version}/${nn}-${version}.html`;
@@ -406,7 +419,7 @@
               
               loader.fn   = {};
               
-              loader.fn.par   = function(df){
+              loader.fn.par   = function({num=-1,df=false}={}){
                 
                     var par     = '';
                     
@@ -428,7 +441,9 @@
                     
                     var dirs    = path.split('/');
                                                                                 df && console.log('dirs',dirs);
-                    var last    = dirs.at(-1);
+
+                                                                                
+                    var last    = dirs.at(num);
                                                                                 df && console.log('last',last);
                     if(last[0]=='v'){
                           var l   = last[1];
@@ -436,6 +451,7 @@
                                 par   = '../';
                           }
                     }
+                    
                     return par;
                     
               }//par
