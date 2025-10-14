@@ -637,7 +637,7 @@
                 
                     if(!mod.df)return;
                     var str   = [...arguments].join(' ');
-                    console.log('[ component ]',str);
+                    console.log(`[ ${name} ]`,str);
                     
               }//debug
               
@@ -647,7 +647,7 @@
                     if(!mod.df)return;
                     debug.apply(null,arguments);
                     
-                    console.groupCollapsed('[ component ]');
+                    console.groupCollapsed(`[ ${name} ]`);
                     console.trace();
                     console.groupEnd();
                     
