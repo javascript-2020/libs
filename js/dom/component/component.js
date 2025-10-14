@@ -410,7 +410,11 @@
 
   //:
 
+/*
 
+  just call it the instance name
+  
+*/
               function define({js,mod,mod2,node,root,inst}){
                 
                     js    = `
