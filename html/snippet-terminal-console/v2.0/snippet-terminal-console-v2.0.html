@@ -1,0 +1,199 @@
+
+
+
+<snippet-terminal-console>
+
+      <template shadowrootmode=open>
+
+            <link rel=stylesheet href='https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.css'>
+      
+            <style>
+
+/*            
+  editor-root
+    {display:block;height:200px}
+  terminal-root::part(terminal)
+    {height:200px}
+*/    
+    
+  #root
+    {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px}
+    
+  #btns
+    {}
+
+  input
+    {font-size:16px;padding:5px 10px;box-sizing:border-box;}
+  input[type=button]
+    {cursor:pointer}
+    
+            </style>
+            
+            
+            <div id=root>
+            
+                  <editor component v2.0></editor>
+                  
+                  <div id=btns>
+                        <input value=run type=button>
+                        <input value=clear type=button>
+                  </div>
+                  
+                  <terminal component v2.0></terminal>
+                  
+                  <console component v2.0></console>
+                  
+            </div>
+            
+      </template>
+      
+      
+      <script>
+
+      
+(function snippet_terminal_console({mod,root,node}){
+
+  var obj   = {
+        version   : 'v2.0',
+  };
+  
+        var df=true
+        ;
+        
+        var ext,$,menu,ace
+        ;
+        
+        obj.initmod   = function(params){
+              
+              ext           = params.ext;
+              $             = params.$;
+              
+              menu          = params.menu;
+              
+              ace           = params.ace;
+              
+        }//initmod
+        
+        
+  //:
+  
+        var editor;
+        var terminal;
+        var jsconsole;
+        
+        var sandbox;
+        var iframe;
+        
+        var def     = root.innerHTML;
+        var mode    = root.getAttribute('type');
+        
+        var btn   = {};
+        
+  //:
+  
+  
+        obj.init    = async function(){
+
+              editor            = mod.editor;
+              obj.editor        = editor;
+              terminal          = mod.terminal;
+              obj.terminal      = terminal;              
+              jsconsole         = mod.console;
+              obj.console       = jsconsole;
+
+              editor.initmod({ext,$,menu,ace});
+              terminal.initmod({ext,$});
+              jsconsole.initmod({ext,$,menu,ace});
+              
+              
+              await Promise.all([
+                    src(),
+                    libs(),
+                    editor.init(),
+                    terminal.init(),
+                    jsconsole.init(),
+              ]);
+
+              
+        }//init
+        
+        
+        async function libs(){
+          
+              [sandbox]       = await ext.load.libs('js/sandbox/sandbox.js.api');
+          
+        }//libs
+        
+        
+        async function src(){
+          
+              if(!root.hasAttribute('src'))return;
+              var src   = root.getAttribute('src');
+              var res   = await fetch(src);
+              var txt   = await res.text();
+              def       = txt;
+              
+        }//src
+        
+        
+  //:
+  
+  
+        obj.initdom   = async function(rootnode){
+          
+              host                                = $.full('snippet-terminal',rootnode);
+              root                                = host.shadowRoot;
+
+              editor.initdom(root,{mode:'js',txt:def,fullsize:true});
+              
+              $(root,'[value=run]').onclick       = btn.run;
+              $(root,'[value=clear]').onclick     = btn.clear;
+              
+              terminal.initdom(root);
+              
+              jsconsole.initdom(root);
+                            
+        }//initdom
+        
+        
+  //:
+
+
+        btn.run   = async function(){
+          
+              var js    = editor.getvalue();
+              
+              var result,error;
+              if(mode=='nodejs'){
+                    ({result,error}   = await sandbox.nodejs(js,{console:jsconsole,ctx:{terminal}}));
+              }else{
+                    ({iframe,result,error}    = await sandbox.run.iframe(js,{console:jsconsole,ctx:{terminal},iframe}));
+              }
+                    
+              
+              
+        }//btn.run
+        
+
+        btn.clear   = function(){
+          
+              window.console.clear();
+              terminal.clear();
+              
+        }//clear
+
+
+        
+  
+  return obj;
+  
+})//snippet_terminal_console
+
+
+      </script>
+      
+</snippet-terminal-console>
+
+
+
+
