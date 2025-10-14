@@ -21,7 +21,8 @@
                     }
               }
               
-              mod.build();
+              var root    = document.body;
+              mod.build({root,mod});
               
         }//onload
 
@@ -105,8 +106,8 @@
               
               async function build({root,mod:mod2}={}){
                 
-                    root      ||= document.body;
-                    mod2      ||= mod;
+                    //root      ||= document.body;
+                    //mod2      ||= mod;
                                                                                 debug(mod2.name,'build');
                     
                     /*
