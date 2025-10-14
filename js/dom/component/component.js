@@ -320,7 +320,7 @@
                     }
                     
                     var int   = (str)=>(/^\d+$/.test(str));
-                    var num   = -1;
+                    var num   = 0;
                     if(int(sub)){
                           num   = Number(sub);
                     }
@@ -419,7 +419,7 @@
               
               loader.fn   = {};
               
-              loader.fn.par   = function({num=-1,df=false}={}){
+              loader.fn.par   = function({num=0,df=false}={}){
                 
                     var par     = '';
                     
@@ -441,14 +441,20 @@
                     
                     var dirs    = path.split('/');
                                                                                 df && console.log('dirs',dirs);
-
                                                                                 
-                    var last    = dirs.at(num);
+                    for(var i=0;i<num;i++){
+                      
+                          par  += '../';
+                          
+                    }//for
+
+                    
+                    var last    = dirs.at(-1);
                                                                                 df && console.log('last',last);
                     if(last[0]=='v'){
                           var l   = last[1];
                           if(l>='0' && l<='9'){
-                                par   = '../';
+                                par  += '../';
                           }
                     }
                     
