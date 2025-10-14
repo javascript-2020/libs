@@ -16,7 +16,8 @@
               
               if(typeof init!='undefined'){
                     if(!mod.stack.includes(init)){
-                          mod.stack.push(init);
+                                                                                console.log('init added');
+                          mod.stack.unshift(init);
                     }
               }
               
