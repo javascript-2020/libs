@@ -464,6 +464,7 @@
                           name   += `[${inst}]`;
                     }
                     mod[name]     = obj;
+                    mod[inst]     = obj;
 
               }//define
 
