@@ -283,6 +283,9 @@
                                                                                 console.log('sandbox.nodejs');
                                                                                 console.log('cross-origin-isolated : ',window.crossOriginIsolated);
                                                                                 console.log();
+                    if(!terminal){
+                          terminal    = console;
+                    }
                                                                                 console.log('initialising ...');
                                                                                 
                     var {WebContainer}    = await import('https://cdn.jsdelivr.net/npm/@webcontainer/api/+esm');
