@@ -248,9 +248,13 @@
                     script.textContent    = srcdoc.nodejs;
                     doc.head.append(script);
                     
-                    await win.init({console,ctx});
+                    var webcontainer    = await win.init({console,ctx});
+
+                    var resolve2,promise=new Promise(res=>resolve2=res);
+                    resolve({webcontainer,promise});
                     
-                    var code    = await win.run(js);
+                    
+                    var code            = await win.run(js);
                     
                     iframe.remove();
                     
@@ -295,6 +299,7 @@
                                                                                 console.log('booting ...');
                     webcontainer          = await WebContainer.boot();
                                                                                 console.log('ok');
+                    return webcontainer;
                     
               }//init
 
