@@ -9,7 +9,21 @@
         
         mod   = create({name:'root'});
         
-        window.addEventListener('load',()=>mod.build());
+        window.addEventListener('load',onload);
+
+
+        function onload(){
+
+              /*
+              if(typeof init!='undefined'){
+                    if(!mod.stack.includes(init)){
+                          mod.stack.push(init);
+                    }
+              }
+              */
+              mod.build();
+              
+        }//onload
 
 
         function create({mod:par,name}={}){
@@ -21,6 +35,7 @@
               mod.name        = name;
               mod.df          = false;
               mod.list        = mod_list;
+              mod.child       = [];
               
               mod.create      = create;
               mod.build       = build;
@@ -34,8 +49,14 @@
               
               
               if(par){
+                    mod.par   = par;
+                    par.child.push(mod);                    
                     par.stack.add;
                     mod.stack.push(()=>par.stack.complete);
+              }else{
+                    /*
+                    ct    = 1;
+                    */
               }
               
                             
