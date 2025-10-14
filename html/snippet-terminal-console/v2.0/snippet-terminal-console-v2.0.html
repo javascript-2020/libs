@@ -84,7 +84,7 @@
         var sandbox;
         var iframe;
         
-        var def     = root.innerHTML;
+        var def     = decode(root.innerHTML);
         var mode    = root.getAttribute('type');
         
         var btn   = {};
@@ -183,7 +183,28 @@
         }//clear
 
 
+  //:
+  
+  
+        function decode(str){
+          
+              var txt         = document.createElement('textarea');
+              txt.innerHTML   = str;
+              var html        = txt.value;
+              return html;
+              
+        }//decode
+
         
+        function encode(str){
+          
+              const div         = document.createElement('div');
+              div.textContent   = str;
+              var entities      = div.innerHTML;
+              return entities;
+              
+        }//encode
+  
   
   return obj;
   
