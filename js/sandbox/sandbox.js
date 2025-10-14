@@ -320,7 +320,7 @@
               
                     if(!df)return;
                     var str   = [...arguments].join(' ');
-                    console.log(str);
+                    console.debug(str);
                     
               }//debug
 
