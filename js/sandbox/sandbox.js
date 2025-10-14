@@ -248,7 +248,7 @@
                     script.textContent    = srcdoc.nodejs;
                     doc.head.append(script);
                     
-                    await win.init({console});
+                    await win.init({console,ctx});
                     
                     var code    = await win.run(js);
                     
