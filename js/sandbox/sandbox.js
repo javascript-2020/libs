@@ -272,49 +272,36 @@
 
               
               var webcontainer;
+              var terminal;
               var console;
               var df;
 
               
               window.init   = async function(params){
               
-                    ({console,df=true}    = params);
-                                                                                debug('sandbox.nodejs');
-                                                                                debug('cross-origin-isolated : ',window.crossOriginIsolated);
-                                                                                debug();
-                                                                                debug('initialising ...');
+                    ({console,terminal,df=true}    = params);
+                                                                                console.log('sandbox.nodejs');
+                                                                                console.log('cross-origin-isolated : ',window.crossOriginIsolated);
+                                                                                console.log();
+                                                                                console.log('initialising ...');
                                                                                 
                     var {WebContainer}    = await import('https://cdn.jsdelivr.net/npm/@webcontainer/api/+esm');
-                                                                                debug('booting ...');
+                                                                                console.log('booting ...');
                     webcontainer          = await WebContainer.boot();
-                                                                                debug('ok');
+                                                                                console.log('ok');
                     
               }//init
 
       
               window.run    = async function(js){
-                                                                                debug('write file system ...');
+                                                                                console.log('write file system ...');
                     await webcontainer.fs.writeFile('main.js',js);
-                                                                                debug('launch process ...');
+                                                                                console.log('launch process ...');
               
                     var process   = await webcontainer.spawn('node',['main.js']);
-                                                                                debug('ok');
-
-/*                    
-                    process.on('uncaughtException',err=>{
-                    
-                                                                                debug('Uncaught:',err);
+                                                                                console.log('ok');
                                                                                 
-                    });
-                    
-                    process.on('unhandledRejection',err=>{
-                    
-                                                                                console.error('Unhandled:',err);
-                          
-                    });
-*/                    
-                    
-                    var stream    = new WritableStream({write(data){console.write(data)}});
+                    var stream    = new WritableStream({write(data){terminal.write(data)}});
 
                     process.output.pipeTo(stream);
 
@@ -323,7 +310,7 @@
                     if(code!=0){
                                                                                 console.warn('process exited with error code : ',code);
                     }
-                                                                                debug('done.');
+                                                                                console.log('done.');
                     return code;
                     
               }//run
@@ -333,7 +320,7 @@
               
                     if(!df)return;
                     var str   = [...arguments].join(' ');
-                    console.debug('[ debug ]',str);
+                    console.log(str);
                     
               }//debug
 
