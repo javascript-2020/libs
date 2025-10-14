@@ -281,7 +281,8 @@
               
                     var ctx;
                     ({console,ctx,df=true}    = params);
-                    ({terminal}    = ctx);
+                    ctx           ||= {};
+                    ({terminal}     = ctx);
                                                                                 console.log('sandbox.nodejs');
                                                                                 console.log('cross-origin-isolated : ',window.crossOriginIsolated);
                                                                                 console.log();
