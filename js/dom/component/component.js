@@ -27,7 +27,7 @@
 
 
         function create({mod:par,name}={}){
-
+                                                                                console.log('mod.create',name);
               var mod         = {};
               
               mod_list.push(mod);
