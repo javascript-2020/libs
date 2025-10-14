@@ -226,7 +226,7 @@
   //:
   
   
-        async function nodejs(js,{clear,disp_result,console,ctx}={}){
+        async function nodejs(js,{clear,disp_result,console,ctx,on}={}){
           
               var resolve,promise=new Promise(res=>resolve=res);
               
@@ -237,7 +237,7 @@
               document.body.append(iframe);
               
               return promise;
-              
+
               
               async function onload(){
                 
@@ -248,7 +248,7 @@
                     script.textContent    = srcdoc.nodejs;
                     doc.head.append(script);
                     
-                    var webcontainer    = await win.init({console,ctx});
+                    var webcontainer    = await win.init({console,ctx,on});
 
                     var resolve2,promise=new Promise(res=>resolve2=res);
                     resolve({webcontainer,promise});
@@ -261,7 +261,7 @@
                     resolve({code});
                     
               }//onload
-              
+
         }//nodejs
         
 
@@ -284,7 +284,8 @@
               window.init   = async function(params){
               
                     var ctx;
-                    ({console,ctx,df=true}    = params);
+                    var on;
+                    ({console,ctx,on,df=true}    = params);
                     ctx           ||= {};
                     ({terminal}     = ctx);
                                                                                 console.log('sandbox.nodejs');
@@ -299,6 +300,14 @@
                                                                                 console.log('booting ...');
                     webcontainer          = await WebContainer.boot();
                                                                                 console.log('ok');
+                    webcontainer.on('server-ready',(port,url)=>{
+                                                                                console.log('server : ',url,port);
+                          if(on['server-ready']){
+                                on['server-ready'](port,url);
+                          }
+                          
+                    });
+                                                                                
                     return webcontainer;
                     
               }//init
