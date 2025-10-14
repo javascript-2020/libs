@@ -277,6 +277,15 @@
         }//error
 
 
+        obj.debug   = function(){
+          
+              var args    = [...arguments];
+              args.unshift('[ debug ]');
+              con.log.apply(con,args);
+              
+        }//debug
+        
+        
 
 /*        
 
