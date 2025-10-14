@@ -216,7 +216,7 @@
                     }//switch
                     
                     if(type.startsWith('grp')){
-                          ({url}    = await loader.grp({root,nn,version});
+                          ({url}    = await loader.grp({root,type,nn,version}));
                     }
 
                     var {html,error}    = await loader.fetch(url);
