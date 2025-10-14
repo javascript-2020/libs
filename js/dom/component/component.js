@@ -6,7 +6,6 @@
         var mod_list    = [];
         var cache       = {};
         
-        
         mod   = create({name:'root'});
         
         window.addEventListener('load',onload);
@@ -14,13 +13,13 @@
 
         function onload(){
 
-              /*
+              
               if(typeof init!='undefined'){
                     if(!mod.stack.includes(init)){
                           mod.stack.push(init);
                     }
               }
-              */
+              
               mod.build();
               
         }//onload
@@ -54,9 +53,9 @@
                     par.stack.add;
                     mod.stack.push(()=>par.stack.complete);
               }else{
-                    /*
+                    
                     ct    = 1;
-                    */
+                    
               }
               
                             
@@ -68,17 +67,16 @@
                     },//get
                     set:v=>{
                       
-                          /*
+                          
                           if(!par){
-                                if(ct==1){
-                                      if(typeof v=='function'){
-                                            if(v.name=='init'){
-                                                  return;
-                                            }
+                                if(typeof v=='function'){
+                                      if(v.name=='init'){
+                                                                                      console.log('init hit');
+                                            return;
                                       }
                                 }
                           }
-                          */
+                          
                           
                           total++;
                           stack.push(v);
