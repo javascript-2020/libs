@@ -261,8 +261,8 @@
         obj.initdom    = async function(rootnode,params){
           
               if(arguments.lengh==1){
-                    params                = rootnode;
-                    {mode,txt,fullsize}   = params||{};
+                    params                    = rootnode;
+                    var {mode,txt,fullsize}   = params||{};
               }
         
               mode        ||= 'javascript';
