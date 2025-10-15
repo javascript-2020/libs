@@ -51,7 +51,7 @@
       <script>
 
       
-(function snippet_terminal_console({mod,root,host}){
+(function snippet_terminal_console({mod,dom,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -99,6 +99,11 @@
   
         obj.init    = async function(){
 
+
+              def               = $.htmlentities.decode(dom);
+              mode              = dom.getAttribute('type');
+
+        
               editor            = mod.editor;
               obj.editor        = editor;
               terminal          = mod.terminal;
@@ -132,8 +137,8 @@
         
         async function src(){
           
-              if(!root.hasAttribute('src'))return;
-              var src   = root.getAttribute('src');
+              if(!dom.hasAttribute('src'))return;
+              var src   = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
               def       = txt;
@@ -144,21 +149,19 @@
   //:
   
         
-        obj.initdom2    = async function(){return obj.initdom(host)}
-        
-        obj.initdom   = async function(rootnode){
+        obj.initdom   = async function(){
           
-              host                                = $.full('snippet-terminal-console',rootnode);
-              root                                = host.shadowRoot;
+              //host                                = $.full('snippet-terminal-console',rootnode);
+              shadow                                = host.shadowRoot;
 
-              editor.initdom(root,{mode:'js',txt:def,fullsize:true});
+              editor.initdom({mode:'js',txt:def,fullsize:true});
               
-              $(root,'[value=run]').onclick       = btn.run;
-              $(root,'[value=clear]').onclick     = btn.clear;
+              $(shadow,'[value=run]').onclick       = btn.run;
+              $(shadow,'[value=clear]').onclick     = btn.clear;
               
-              terminal.initdom(root);
+              terminal.initdom();
               
-              jsconsole.initdom(root);
+              jsconsole.initdom(shadow);
                             
         }//initdom
         
@@ -188,27 +191,8 @@
         }//clear
 
 
-  //:
   
   
-        function decode(str){
-          
-              var txt         = document.createElement('textarea');
-              txt.innerHTML   = str;
-              var html        = txt.value;
-              return html;
-              
-        }//decode
-
-        
-        function encode(str){
-          
-              const div         = document.createElement('div');
-              div.textContent   = str;
-              var entities      = div.innerHTML;
-              return entities;
-              
-        }//encode
   
   
   return obj;
