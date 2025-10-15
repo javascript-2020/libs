@@ -136,7 +136,7 @@
             
 
             
-            <snippet-html-console id=inline component v2.0>
+            <snippet-html-console id=inline component v2.0 h=100>
             
       &#x3C;h3&#x3E;
             test
@@ -167,12 +167,12 @@
 
               
               var node          = $('#inline');
-              snippet.inline.initdom(node);
-              snippet.inline.console.height    = 200;
+              snippet.inline.initdom();
+              //snippet.inline.console.height    = 200;
 
               
               var node          = $('#src');
-              snippet.src.initdom(node);
+              snippet.src.initdom();
               snippet.src.console.height    = 200;
               
 
