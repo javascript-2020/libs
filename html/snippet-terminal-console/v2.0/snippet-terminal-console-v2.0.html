@@ -51,7 +51,7 @@
       <script>
 
       
-(function snippet_terminal_console({mod,root,node}){
+(function snippet_terminal_console({mod,root,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -143,7 +143,9 @@
         
   //:
   
-  
+        
+        obj.initdom2    = async function(){return obj.initdom(host)}
+        
         obj.initdom   = async function(rootnode){
           
               host                                = $.full('snippet-terminal-console',rootnode);
