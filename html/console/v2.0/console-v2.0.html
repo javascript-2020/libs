@@ -195,54 +195,6 @@
         }//initdom2
   
 
-
-
-
-/*
-
-        function import_style(shadow,complete){
-
-              if(!import_style.ct){
-                    import_style.ct   = 0;
-              }
-              import_style.ct++;
-              if(import_style.ct>10){
-                                                                      console.log('import_style timeout');
-                    complete();
-                    return;
-              }
-
-              
-              var ids   = ['ace-tm','ace_editor\\.css','ace_scrollbar\\.css','error_marker\\.css',];
-              var n     = ids.length;
-              for(var i=0;i<n;i++){
-              
-                    var id      = ids[i];
-                    var style   = $('#'+id);
-                    if(!style){
-                          setTimeout(import_style,500,shadow,complete);
-                          return;
-                    }
-                    
-              }//for
-              
-              for(var i=0;i<n;i++){
-              
-                    var id      = ids[i];
-                    var style   = $('#'+id);
-                    var copy    = style.cloneNode(true);
-                    shadow.append(copy);
-              
-              }//for
-              
-              if(complete){
-                    complete();
-              }
-              
-        }//style
-        
-*/        
-        
   //:
   
   
