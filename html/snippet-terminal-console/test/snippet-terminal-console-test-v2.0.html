@@ -42,23 +42,21 @@
   //:
 
 
-        mod.stack.add   = init;
-              
         async function init(){
                                                                                 debug('init');
 
               menu              = menumod();
               
-              snippet.inline        = mod['snippet-terminal-console[inline]'];
-              //snippet.src           = mod['snippet-terminal[src]'];
+              snippet.inline        = mod.inline;
+              snippet.src           = mod.src;
               
               snippet.inline.initmod({ext,$,menu});
-              //snippet.src.initmod({ext,$,menu});
+              snippet.src.initmod({ext,$,menu});
 
               
               await Promise.all([
                     snippet.inline.init(),
-                    //snippet.src.init(),
+                    snippet.src.init(),
               ]);
               
               
@@ -69,6 +67,8 @@
 
 
               //snippet.editor.setvalue('helloworld');
+
+
 
         }//init
 
@@ -133,10 +133,10 @@
             </snippet-terminal-console>
 
 
-<!--
-            <snippet-terminal id=src type=nodejs component v2.0 src='ex/nodejs-ex.js'>
-            </snippet-terminal>
--->            
+
+            <snippet-terminal-console id=src type=nodejs component v2.0 src='ex/nodejs-ex.js'>
+            </snippet-terminal-console>
+            
 
       
       </body>
@@ -155,12 +155,11 @@
         function initdom(rootnode){
         
               root                = rootnode;
+
               
-              var node    = $(root,'#inline');
-              snippet.inline.initdom(node);
+              snippet.inline.initdom();
               
-              //var node    = $(root,'#src');
-              //snippet.src.initdom(node);
+              snippet.src.initdom();
               
 
               
