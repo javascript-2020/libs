@@ -32,8 +32,6 @@
   //:
 
 
-        mod.stack.add   = init;
-              
         async function init(){
                                                                                 debug('init');
 
@@ -119,7 +117,7 @@
               root                = rootnode;
 
               
-              terminal.initdom(root);
+              terminal.initdom();
 
               terminal.writeln('helloworld');
               terminal.writeln('ready');
