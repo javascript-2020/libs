@@ -159,16 +159,14 @@
               root    = rootnode;
               
               
-              code    = $('code');
 
-              var node    = $('#inline');
-              snippet.inline.initdom(node);
+              snippet.inline.initdom();
               
               snippet.inline.editor.height   = 200;
               snippet.inline.console.height  = 200;
 
-              var node    = $('#src');
-              snippet.src.initdom(node);
+
+              snippet.src.initdom();
               snippet.src.console.height  = 200;
               
 
