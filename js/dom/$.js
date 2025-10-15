@@ -381,6 +381,17 @@
               return false;
               
         }//is.parent
+        
+        
+        $.is.node   = function(node){
+          
+              if(typeof node!='object')return false;
+              if(node===null)return false;
+              if(!node.nodeType)return false;
+              if(!node.nodeName)return false;
+              return true;
+              
+        }//node
 
 
         $.center.width    = function(node){
@@ -1231,7 +1242,39 @@
 
 
 
+        $.htmlentities    = function(v){
+          
+              var str   = v;
+              if($.is.node(node)){
+                    str   = node.innerHTML;
+              }
+              
+              const div         = document.createElement('div');
+              div.textContent   = str;
+              var entities      = div.innerHTML;
+              return entities;
+              
+        }//htmlentities
+        
+        
+        $.htmlentities.decode   = function(){
+          
+              var str   = v;
+              if($.is.node(node)){
+                    str   = node.innerHTML;
+              }
+              
+              var txt         = document.createElement('textarea');
+              txt.innerHTML   = str;
+              var html        = txt.value;
+              return html;
+              
+        }//decode
 
+
+
+        
+        
 
         
   return $;
