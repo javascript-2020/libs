@@ -399,9 +399,9 @@
                     if(cache[url]){
                           if(cache[url].html){
                                                                                 //console.log('component.cache [hit]',url);
-                                html    = cache[url].html;
+                                html      = cache[url].html;
                           }else{
-                                html    = await cache[url].promise;
+                                ({html}   = await cache[url].promise);
                           }
                     }else{
                                                                                 //console.log('component.cache',url);
@@ -412,7 +412,7 @@
                           html      = await res.text();
                     
                           cache[url].html   = html;
-                          cache[url].resolve(html);
+                          cache[url].resolve({html});
                     }
                                                                                 //console.log(Object.keys(cache));
                     return {html};
