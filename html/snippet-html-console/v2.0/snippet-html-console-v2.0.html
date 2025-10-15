@@ -153,14 +153,12 @@
   //:
   
   
-        obj.initdom   = function(rootnode){return obj.initdom2()}
-        
-        obj.initdom2    = function(){
+        obj.initdom    = function(){
 
               var shadow                          = host.shadowRoot;
 
 
-              editor.initdom(shadow,{mode:'html',fullsize:true,txt:def.html});
+              editor.initdom({mode:'html',fullsize:true,txt:def.html});
               
               
               $(root,'[value=run]').onclick       = btn.run;
@@ -170,12 +168,12 @@
               iframe                              = $(hldr,'iframe');
 
 
-              console.initdom2();
+              console.initdom();
               console.height    = def.console.height;
               
               console.log('ready');
 
-        }//initdom2          
+        }//initdom          
         
 
 
