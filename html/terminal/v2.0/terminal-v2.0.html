@@ -33,7 +33,7 @@
       <script>
 
       
-(function terminal({mod,root,host}){
+(function terminal({mod,dom,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -180,16 +180,12 @@
   //:
   
   
-        obj.initdom2   = async function(){return obj.initdom2(host)}
-        
-        obj.initdom   = async function(rootnode){
+        obj.initdom   = async function(){
           
-              host                          = $.full('terminal-root',rootnode);
-              root                          = host.shadowRoot;
+              //host                          = $.full('terminal-root',rootnode);
+              var shadow                          = host.shadowRoot;
 
-              terminal                      = $(root,'#terminal');
-              
-              await libs;
+              terminal                      = $(shadow,'#terminal');
               
               term.open(terminal);
               fitAddon.fit();
