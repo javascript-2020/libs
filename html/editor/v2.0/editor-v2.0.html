@@ -257,18 +257,16 @@
     //:
 
     
-        obj.initdom   = async function(rootnode,{mode,txt,fullsize}={}){
+        
+        obj.initdom   = async function(rootnode,params){return obj.initdom2(params)}
+          
+        obj.initdom2    = async function({mode,txt,fullsize}={}){
         
               mode        ||= 'javascript';
               txt         ||= def.txt;
               fullsize    ||= def.fullsize;
 
-/*              
-              root                                        = $.full('editor-root',rootnode);
-              obj.root                                    = root;
-              shadow                                      = root.shadowRoot;
-*/
-              root      = host;
+              //root      = host;
               shadow    = host.shadowRoot;
 
   
@@ -311,8 +309,8 @@
               $(hdr,'#bottom').onclick                    = btn.bottom;
 
   
-              var node    = $(shadow,'#editor');
-              node.textContent                  = txt;
+              var node                                    = $(shadow,'#editor');
+              node.textContent                            = txt;
               
               
               if(fullsize){
@@ -329,7 +327,7 @@
   
         async function setup(node,mode='javascript'){
   
-              import_style();
+              $.editor.ace.import_style(shadow);
   
               switch(mode){
               
@@ -368,7 +366,7 @@
               
         }//editor
   
-        
+/*        
         import_style.ct   = 0;
         
         function import_style(){
@@ -403,7 +401,7 @@
               
               
         }//style
-        
+*/        
         
         kd.row    = function(e){
               
