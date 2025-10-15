@@ -286,8 +286,10 @@
                           }else{
                                                                                 //console.log('script.id',script.id,mod,mod2);
                                                                                 //debugger;
-                                var js    = script.textContent;
-                                define({js,mod,mod2,inst,root,host:node});
+                                var js      = script.textContent;
+                                var host    = node;
+                                var dom     = root;
+                                define({js,mod,mod2,inst,dom,host});
                           }
                           
                     });
@@ -467,7 +469,7 @@
   //:
 
 
-              function define({js,mod,mod2,inst,root,host}){
+              function define({js,mod,mod2,inst,dom,host}){
                 
                     js    = `
                           //(()=>{return
@@ -478,7 +480,7 @@
                     `;
                     
                     var fn        = eval(js);
-                    var obj       = fn({mod:mod2,root,host,node:host});
+                    var obj       = fn({mod:mod2,dom,host,root:dom,node:host});
                     
                     var name      = root.nodeName.toLowerCase();
                     if(inst){
