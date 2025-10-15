@@ -65,7 +65,7 @@
       <script id=console>
       
 
-(function console_mod({mod,root,node}){
+(function console_mod({mod,root,host}){
   
   var obj   = {
         version   : 'v2.0',
@@ -176,6 +176,8 @@
 
   //:
   
+  
+        obj.initdom2    = function(){return obj.initdom(host)}
   
         obj.initdom   = function(rootnode){
 
