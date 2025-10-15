@@ -48,7 +48,7 @@
       <script>
 
       
-(function snippet_html_console({mod,root,host}){
+(function snippet_html_console({mod,dom,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -86,25 +86,15 @@
         var iframe;
 
         
-        var def     = {};
-        def.html    = decode(root.innerHTML);
+        var def               = {};
+        def.html              = null;
         
-        def.console   = {};
-        var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
-        if(root.hasAttribute('h')){
-              var h   = root.getAttribute('h');
-              h       = int(h);
-              def.console.height    = h;
-              
-        }
-        if(root.hasAttribute('height')){
-              var h   = root.getAttribute('height');
-              h       = int(h);
-              def.console.height    = h;
-        }
+        def.console           = {};
+        def.console.height    = null;
+
 
         
-        var btn     = {};
+        var btn               = {};
         
 
 
@@ -113,6 +103,20 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
+              def.html          = $.htmlentities.decode(dom);
+              
+              var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
+              if(dom.hasAttribute('h')){
+                    var h   = dom.getAttribute('h');
+                    h       = int(h);
+                    def.console.height    = h;
+                    
+              }
+              if(dom.hasAttribute('height')){
+                    var h   = dom.getAttribute('height');
+                    h       = int(h);
+                    def.console.height    = h;
+              }
 
               
               editor            = mod.editor;                                                                                
@@ -149,32 +153,32 @@
   //:
   
   
-        obj.initdom2    = function(){return obj.initdom(host)}
+        obj.initdom   = function(rootnode){return obj.initdom2()}
         
-        obj.initdom   = function(rootnode){
+        obj.initdom2    = function(){
 
-              //host                                = $.full('snippet-html-console',rootnode);
-              host    = node;
-              root                                = host.shadowRoot;
+              var shadow                          = host.shadowRoot;
 
 
-              editor.initdom(root,{mode:'html',fullsize:true,txt:def.html});
+              editor.initdom(shadow,{mode:'html',fullsize:true,txt:def.html});
               
               
               $(root,'[value=run]').onclick       = btn.run;
 
 
-              hldr                                = $(root,'#hldr');
+              hldr                                = $(shadow,'#hldr');
               iframe                              = $(hldr,'iframe');
 
 
-              console.initdom(root);
+              console.initdom2();
               console.height    = def.console.height;
               
               console.log('ready');
 
+        }//initdom2          
         
-        }//initdom
+
+
         
         
   //:
@@ -226,33 +230,11 @@
               </scr`+`ipt>
               
         `;
-  
-  //:
-  
-
-        function decode(str){
-          
-              var txt         = document.createElement('textarea');
-              txt.innerHTML   = str;
-              var html        = txt.value;
-              return html;
-              
-        }//decode
-
-        
-        function encode(str){
-          
-              const div         = document.createElement('div');
-              div.textContent   = str;
-              var entities      = div.innerHTML;
-              return entities;
-              
-        }//encode
 
   
   //:
   
-        
+
         function debug(){
           
               if(!df && !obj.df)return;
