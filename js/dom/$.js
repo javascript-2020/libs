@@ -1171,12 +1171,14 @@
           
               var ids   = ['ace-tm','ace_editor\\.css','ace_scrollbar\\.css','error_marker\\.css',];
               var ct    = 0;
+              var max   = 10;
+              
               import_style();
         
               function import_style(){
               
-                    import_style.ct++;
-                    if(import_style.ct>=10){
+                    ct++;
+                    if(ct>=max){
                                                                             console.log('import_style timeout');
                           return;
                     }
