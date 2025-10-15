@@ -73,7 +73,7 @@
   
         var editor;
         
-        var def   = decode(root.innerHTML);
+        var def;
         
         
         
@@ -93,7 +93,10 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
-        
+              
+              def       =    = $.htmlentities.decode(root);
+              
+              
               editor    = mod.editor;
               
               editor.initmod({ext,$,menu,ace});
@@ -121,23 +124,24 @@
   //:
   
   
-        obj.initdom2    = function(){return obj.initdom(host)}
+        obj.initdom   = function(rootnode){return obj.initdom2()}
         
-        obj.initdom   = function(rootnode){
+        obj.initdom2    = function(){
 
-              host                                = $.full('snippet-html',rootnode);
-              root                                = host.shadowRoot;
+              var shadow                          = host.shadowRoot;
 
-              editor.initdom(root,{mode:'html',fullsize:true,txt:def});
+              editor.initdom(shadow,{mode:'html',fullsize:true,txt:def});
               
-              $(root,'[value=run]').onclick       = btn.run;
+              $(shadow,'[value=run]').onclick       = btn.run;
 
 
-              hldr                                = $(root,'#hldr');
+              hldr                                = $(shadow,'#hldr');
               iframe                              = $(hldr,'iframe');
 
+          
+        }//initdom2
         
-        }//initdom
+
         
         
   //:
@@ -166,29 +170,6 @@
               }//onload
               
         }//run
-
-        
-  //:
-  
-  
-        function decode(str){
-          
-              var txt         = document.createElement('textarea');
-              txt.innerHTML   = str;
-              var html        = txt.value;
-              return html;
-              
-        }//decode
-
-        
-        function encode(str){
-          
-              const div         = document.createElement('div');
-              div.textContent   = str;
-              var entities      = div.innerHTML;
-              return entities;
-              
-        }//encode
         
         
 
