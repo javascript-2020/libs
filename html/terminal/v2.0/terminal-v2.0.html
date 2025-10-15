@@ -134,10 +134,14 @@
   
   
         obj.init    = async function(){
+          
+              await Promise.all([
+                    libs(),
+              ]);
+              
         }//init
         
         
-        libs();
         
         async function libs(){
           
@@ -154,24 +158,22 @@
                     list.push(promise);
               }
               
-              libs    = Promise.all(list).then(()=>{
+              await Promise.all(list);
                 
-                    term        = new Terminal({
-                      
-                          fontFamily      : 'monospace',
-                          fontSize        : 16,
-                          lineHeight      : 1.0,
+              term        = new Terminal({
+                
+                    fontFamily      : 'monospace',
+                    fontSize        : 16,
+                    lineHeight      : 1.0,
 
-                      
-                          theme           : theme.light,
-                          rendererType    : 'dom',
-                          
-                    });
-                    fitAddon    = new FitAddon();
-                    term.loadAddon(fitAddon);
                 
+                    theme           : theme.light,
+                    rendererType    : 'dom',
+                    
               });
-          
+              fitAddon    = new FitAddon();
+              term.loadAddon(fitAddon);
+                
         }//libs
         
         
