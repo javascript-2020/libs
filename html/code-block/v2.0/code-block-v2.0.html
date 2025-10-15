@@ -36,7 +36,7 @@
       <script>
 
       
-(function code_block({mod,root,node}){
+(function code_block({mod,dom,host}){
   
   var obj   = {};
   
@@ -69,7 +69,6 @@
         obj.snippet_html      = null;
         
         
-        var host;
         var root;
         
         
@@ -117,6 +116,32 @@
   //:
   
   
+        obj.initdom2    = async function({mode}={}){
+          
+              var shadow                = host.shadowRoot;
+              
+              var txt                   = $.htmlentities.decode(dom);
+              var i1                    = txt.indexOf('\n');
+              var i2                    = txt.lastIndexOf('\n');
+              txt                       = txt.slice(i1+1,i2);
+
+
+              var node                  = $(shadow,'code');
+              node.textContent          = txt;
+              
+
+              var has   = dom.hasAttribute.bind(dom);
+              switch(true){
+              
+                case has('snippet-console')   : await setup.snippet_console(shadow,dom,node);       break;
+                case has('snippet-html')      : await setup.snippet_html(shadow,dom,node);          break;
+                default                       : await setup.code(shadow,dom,node,mode);             break;
+                
+              }//switch
+
+          
+        }//initdom2
+        
         obj.initdom   = async function(rootnode,{mode}={}){
           
               if($.nodename(rootnode)=='code-block'){
@@ -152,7 +177,7 @@
   //:
   
   
-        setup.code    = async function(root,dom,node,mode){
+        setup.code    = async function(shadow,dom,node,mode){
         
               type    = 'code';
               
@@ -174,7 +199,7 @@
         }//code
 
   
-        setup.snippet_console   = async function(root,dom,node){
+        setup.snippet_console   = async function(shadow,dom,node){
         
               type    = 'snippet-console';
               
@@ -200,7 +225,7 @@
         }//snippet_console
   
   
-        setup.snippet_html    = async function(root,dom,node){
+        setup.snippet_html    = async function(shadow,dom,node){
         
               type    = 'snippet-html';
               
