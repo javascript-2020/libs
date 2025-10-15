@@ -49,7 +49,7 @@
       <script>
 
       
-(function snippet_terminal({mod,root,host}){
+(function snippet_terminal({mod,dom,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -74,6 +74,7 @@
         
         
   //:
+
   
         var editor;
         var terminal;
@@ -81,15 +82,21 @@
         var sandbox;
         var iframe;
         
-        var def     = root.innerHTML;
-        var mode    = root.getAttribute('type');
+        var def;
+        var mode;
+
         
-        var btn   = {};
+        var btn           = {};
+
         
   //:
   
   
         obj.init    = async function(){
+
+              def               = $.htmlentities.decode(dom);
+              mode              = dom.getAttribute('type');
+
 
               editor            = mod.editor;
               obj.editor        = editor;
@@ -120,8 +127,8 @@
         
         async function src(){
           
-              if(!root.hasAttribute('src'))return;
-              var src   = root.getAttribute('src');
+              if(!dom.hasAttribute('src'))return;
+              var src   = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
               def       = txt;
@@ -132,19 +139,16 @@
   //:
   
   
-        obj.initdom2    = async function(){return onj.initdom(host)}
-        
-        obj.initdom   = async function(rootnode){
+        obj.initdom   = async function(){
           
-              host                                = $.full('snippet-terminal',rootnode);
-              root                                = host.shadowRoot;
+              shadow                              = host.shadowRoot;
 
-              editor.initdom(root,{mode:'js',txt:def,fullsize:true});
+              editor.initdom({mode:'js',txt:def,fullsize:true});
               
-              $(root,'[value=run]').onclick       = btn.run;
-              $(root,'[value=clear]').onclick     = btn.clear;
+              $(shadow,'[value=run]').onclick       = btn.run;
+              $(shadow,'[value=clear]').onclick     = btn.clear;
               
-              terminal.initdom(root);
+              terminal.initdom();
                             
         }//initdom
         
