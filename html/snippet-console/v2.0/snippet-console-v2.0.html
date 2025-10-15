@@ -137,28 +137,29 @@
   //:
   
   
+        obj.initdom   = function(rootnode){return obj.initdom2()}
+        
         obj.initdom2    = function(){return obj.initdom(host)}
         
-        obj.initdom   = function(rootnode){
-
-              host                                = $.full('snippet-console',rootnode);
-              root                                = host.shadowRoot;
-
-
-              editor.initdom(root,{txt:def,fullsize:true});
+              var shadow                          = host.shadowRoot;
+              
+              editor.initdom(shadow,{txt:def,fullsize:true});
               
               
-              $(root,'[value=run]').onclick       = btn.run;
+              $(shadow,'[value=run]').onclick       = btn.run;
               
               
-              con.initdom(root);
+              con.initdom(shadow);
 
 
               con.clear();
               con.log('ready');
 
               
-        }//initdom
+        }//initdom2
+        
+        
+        
         
 
   //:
