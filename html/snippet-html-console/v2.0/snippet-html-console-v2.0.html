@@ -48,7 +48,7 @@
       <script>
 
       
-(function snippet_html_console({mod,root,node}){
+(function snippet_html_console({mod,root,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -149,6 +149,8 @@
   //:
   
   
+        obj.initdom2    = function(){return obj.initdom(host)}
+        
         obj.initdom   = function(rootnode){
 
               //host                                = $.full('snippet-html-console',rootnode);
