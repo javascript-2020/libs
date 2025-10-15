@@ -46,7 +46,7 @@
       <script>
 
       
-(function snippet_html({mod,root,host}){
+(function snippet_html({mod,dom,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -94,7 +94,7 @@
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
               
-              def            = $.htmlentities.decode(root);
+              def            = $.htmlentities.decode(dom);
               
               
               editor    = mod.editor;
