@@ -1245,8 +1245,8 @@
         $.htmlentities    = function(v){
           
               var str   = v;
-              if($.is.node(node)){
-                    str   = node.innerHTML;
+              if($.is.node(v)){
+                    str   = v.innerHTML;
               }
               
               const div         = document.createElement('div');
@@ -1260,8 +1260,8 @@
         $.htmlentities.decode   = function(v){
           
               var str   = v;
-              if($.is.node(node)){
-                    str   = node.innerHTML;
+              if($.is.node(v)){
+                    str   = v.innerHTML;
               }
               
               var txt         = document.createElement('textarea');
