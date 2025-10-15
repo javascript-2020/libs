@@ -33,7 +33,7 @@
       <script>
 
       
-(function terminal({mod,root,node}){
+(function terminal({mod,root,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -178,6 +178,8 @@
   //:
   
   
+        obj.initdom2   = async function(){return obj.initdom2(host)}
+        
         obj.initdom   = async function(rootnode){
           
               host                          = $.full('terminal-root',rootnode);
