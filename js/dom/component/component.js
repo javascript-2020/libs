@@ -289,7 +289,7 @@
                                 var js      = script.textContent;
                                 var host    = node;
                                 var dom     = root;
-                                define({js,mod,mod2,inst,dom,host});
+                                define({js,mod,mod2,inst,dom,host,nn});
                           }
                           
                     });
@@ -469,7 +469,7 @@
   //:
 
 
-              function define({js,mod,mod2,inst,dom,host}){
+              function define({js,mod,mod2,inst,dom,host,nn}){
                 
                     js    = `
                           //(()=>{return
@@ -482,7 +482,7 @@
                     var fn        = eval(js);
                     var obj       = fn({mod:mod2,dom,host,root:dom,node:host});
                     
-                    var name      = root.nodeName.toLowerCase();
+                    var name      = nn;
                     if(inst){
                           name   += `[${inst}]`;
                     }
