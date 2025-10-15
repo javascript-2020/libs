@@ -1257,7 +1257,7 @@
         }//htmlentities
         
         
-        $.htmlentities.decode   = function(){
+        $.htmlentities.decode   = function(v){
           
               var str   = v;
               if($.is.node(node)){
