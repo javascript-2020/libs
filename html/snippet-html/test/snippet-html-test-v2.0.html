@@ -94,13 +94,14 @@
 
 
             </script init>
+
       
             <style>
   html
     {height:100%}
     
   body
-    {display:flex;flex-direction:column;gap:10px;font-family:arial}
+    {display:flex;flex-direction:column;gap:10px;font-family:arial;margin:20px}
     
   code
     {border:1px solid lightgray;padding:10px;font-family:monospace;white-space:pre;font-size:16px}
@@ -109,6 +110,11 @@
   snippet-html
     {height:300px}
 */    
+
+  #inline
+    {margin:20px 0}
+  #src
+    {margin:20px 0}
     
             </style>
             
@@ -189,12 +195,10 @@
               root                = rootnode;
               
               
-              var node    = $('#inline');
-              snippet.inline.initdom(node);
+              snippet.inline.initdom2();
 
               
-              var node    = $('#src');
-              snippet.src.initdom(node);
+              snippet.src.initdom2();
               
 
               
