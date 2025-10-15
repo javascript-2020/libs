@@ -177,36 +177,24 @@
   //:
   
   
-        obj.initdom2    = function(){return obj.initdom(host)}
-  
-        obj.initdom   = function(rootnode){
+        obj.initdom   = function(rootnode){return obj.initdom2()}
+        
+        obj.initdom2    = function(){
 
+              var shadow    = host.shadowRoot;
+              
 
-
-              var host;
-              if(rootnode.nodeName==='CONSOLE'){
-                    host    = rootnode;
-              }else{
-                    host    = $.$(rootnode,'console-root');
-              }
-              root    = host.shadowRoot;
-
-              $.editor.ace.import_style(root,()=>root.append(style));
+              $.editor.ace.import_style(shadow,()=>shadow.append(style));
               
               
-              var node    = $(root,'#console');
+              var node    = $(shadow,'#console');
               con         = jsconsole.create(node);
               obj.height  = def.height;
-              
 
-              
-              var keys    = Object.keys(con.__proto__);
-              //store.console.log(keys);
-              
-              
-              
-              
-        }//initdom
+          
+        }//initdom2
+  
+
 
 
 
