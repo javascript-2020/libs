@@ -233,6 +233,7 @@
                                                                                 if(!node)debugger;
                     root.__root     = node;
                     root.__node     = node;
+                    root.__host     = node;
                     
                     node.__html     = html;
                     node.__root     = root;
@@ -286,7 +287,7 @@
                                                                                 //console.log('script.id',script.id,mod,mod2);
                                                                                 //debugger;
                                 var js    = script.textContent;
-                                define({js,mod,mod2,node,root,inst});
+                                define({js,mod,mod2,inst,root,host:node});
                           }
                           
                     });
@@ -466,7 +467,7 @@
   //:
 
 
-              function define({js,mod,mod2,node,root,inst}){
+              function define({js,mod,mod2,inst,root,host}){
                 
                     js    = `
                           //(()=>{return
@@ -477,11 +478,13 @@
                     `;
                     
                     var fn        = eval(js);
-                    var obj       = fn({mod:mod2,root,node});
+                    var obj       = fn({mod:mod2,root,host,node:host});
+                    
                     var name      = root.nodeName.toLowerCase();
                     if(inst){
                           name   += `[${inst}]`;
                     }
+                    
                     mod[name]     = obj;
                     mod[inst]     = obj;
 
