@@ -49,7 +49,7 @@
       <script>
 
       
-(function snippet_terminal({mod,root,node}){
+(function snippet_terminal({mod,root,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -132,6 +132,8 @@
   //:
   
   
+        obj.initdom2    = async function(){return onj.initdom(host)}
+        
         obj.initdom   = async function(rootnode){
           
               host                                = $.full('snippet-terminal',rootnode);
