@@ -224,38 +224,34 @@
               
               def.txt   = $.htmlentities.decode(root);
               
-              await libs();
+              await Promise.all([
+                    src(),
+                    libs(),
+              ]);
               
               
         }//init
 
 
-        function libs(){
+        async function libs(){
           
-              var resolve,promise=new Promise(res=>resolve=res);
-
-              if(ace){
-                    resolve();
-                    return;
+              if(!ace){
+                    ace       = await $.editor.ace();
+                    obj.ace   = ace;
               }
               
-              var script      = document.createElement('script');
-              script.src      = 'https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/ace.js';
-              script.onload   = onload;
-              document.head.append(script);
-                            
-              return promise;
-              
-              
-              function onload(){
-                
-                    ace       = window.ace;
-                    obj.ace   = ace;
-                    resolve();
-                    
-              }//onload
-              
         }//libs
+        
+        
+        async function src(){
+          
+              if(!root.hasAttribute('src'))return;
+              var src   = root.getAttribute('src');
+              var res   = await fetch(src);
+              var txt   = await res.text();
+              def       = txt;
+              
+        }//src
 
   
     //:
