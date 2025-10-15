@@ -157,7 +157,7 @@
       
       <script>
       
-(function editor({mod,root,node}){
+(function editor({mod,root,host}){
 
   var obj   = {
         version   : 'v2.0'
@@ -209,8 +209,8 @@
 
 
 
-        var def   = {}
-        ;
+        var def   = {};
+
 
 
   
@@ -222,6 +222,8 @@
               if(!menu){
                     menu    = menumod();
               }
+              
+              def.txt   = $.htmlentities.decide(root);
               
               await libs();
               
@@ -263,12 +265,17 @@
         obj.initdom   = async function(rootnode,{mode,txt,fullsize}={}){
         
               mode        ||= 'javascript';
-              txt         ||= '';
+              txt         ||= def.txt;
               fullsize    ||= def.fullsize;
-              
+
+/*              
               root                                        = $.full('editor-root',rootnode);
               obj.root                                    = root;
               shadow                                      = root.shadowRoot;
+*/
+              root      = host;
+              shadow    = host.shadowRoot;
+
   
               menu.add.style(shadow);
               var style                                   = $(shadow,'style');
@@ -311,6 +318,8 @@
   
               var node    = $(shadow,'#editor');
               node.textContent                  = txt;
+              
+              
               if(fullsize){
                     node.style.flex                   = 'none';
                     editor                            = $.editor.max(node,{mode,menu,kd:kd2});
