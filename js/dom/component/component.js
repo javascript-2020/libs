@@ -412,7 +412,7 @@
                           html      = await res.text();
                     
                           cache[url].html   = html;
-                          cache[url].resolve({html});
+                          cache[url].resolve(html);
                     }
                                                                                 //console.log(Object.keys(cache));
                     return {html};
