@@ -79,6 +79,9 @@
 
             <style>
 
+  body
+    {margin:20px;display:flex;flex-direction:column;gap:20px}
+    
   .icon 
     {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
 
@@ -89,7 +92,13 @@
       
       <body>
 
+            <h3>
+                  ftp-server v2.0 test
+            </h3>
+            
+            
             <ftp-server component v2.0></ftp-server>
+
       
             <log component v2.0></log>
 
@@ -117,6 +126,9 @@
               
               con.initdom();
 
+
+              con.log('ready');
+
               
         }//initdom
 
@@ -126,16 +138,16 @@
   
         complete.load   = function(file,txt){
         
-              console.log('https-file-test : load');
-              console.json(file);
-              console.log(txt);
+              con.log('https-file-test : load');
+              con.json(file);
+              con.log(txt);
               
         }//load
         
         
         complete.save   = function(file,confirm=true){
           
-              console.log('save '+file.filename);
+              con.log('save '+file.filename);
               
         }//save
         
