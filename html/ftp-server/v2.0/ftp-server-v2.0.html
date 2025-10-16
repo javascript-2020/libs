@@ -201,14 +201,14 @@
       <script>
 
       
-(function ftp_server({mod,root,node}){
+(function ftp_server({mod,dom,host}){
   
   var obj   = {
         version   : 'v2.0'
   };
       
-        var df=false,did='[ ftp-server ]';
-                                                                                debug(obj.version);
+        var df=false,did='ftp-server'
+        ;
 
         var ext,$,datatype,menu,source,log
         ;
@@ -259,10 +259,12 @@
 
   
         obj.init    = async function(){
-          
+                                                                                debug(obj.version);
+                                                                                
               filenav                   = mod['file-nav'];
               
               filenav.initmod({ext,$,datatype});
+              
               filenav.rd.params         = rd.params;
               filenav.file.click        = file.click;
               filenav.file.dblclick     = file.dblclick;
@@ -276,10 +278,10 @@
   //:
   
   
-        obj.initdom   = function(rootnode){
+        obj.initdom   = function(){
           
-              root                                              = $.$(rootnode,'ftp-server');
-              shadow                                            = root.shadowRoot;
+              //root                                              = $.$(rootnode,'ftp-server');
+              shadow                                            = host.shadowRoot;
               
               menu.add.style(shadow);
               
