@@ -202,14 +202,14 @@
       <script>
       
 
-(function google_storage({mod,root,node}){
+(function google_storage({mod,dom,host}){
   
   var obj   = {
         version   : 'v2.0'
   };
   
   
-        var df=false,did='[ google-storage ]'
+        var df=false,did='google-storage'
         ;
                                                                                 debug(obj.version);
         var ext,$,menu,source
@@ -249,7 +249,7 @@
   
         obj.init    = async function(){
           
-              libs();
+              await libs();
               
         }//init
 
@@ -264,10 +264,10 @@
   //:
   
   
-        obj.initdom   = function(rootnode){
+        obj.initdom   = function(){
           
-              root                            = $.$(rootnode,'google-storage');
-              shadow                          = root.shadowRoot;
+              //root                            = $.$(rootnode,'google-storage');
+              shadow                          = host.shadowRoot;
               
               menu.add.style(shadow);
               
