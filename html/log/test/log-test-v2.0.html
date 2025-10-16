@@ -1,7 +1,13 @@
 
-      <script src='https://libs.ext-code.com/js/dom/init-hdr/init-hdr.js'></script>
-      
 
+
+
+
+
+
+            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
+
+      
       <script init> 
                                                                                 console.clear();
         var ext;        
@@ -14,7 +20,6 @@
   //:        
 
         mod.df            = false;
-        mod.stack.add     = init;
 
         async function init(){
         
@@ -25,7 +30,7 @@
               
               await log.init();
               
-              await initdom(document.body);
+              initdom(document.body);
               
         }//init
 
@@ -69,13 +74,14 @@
       
               $('[value="click me"]').onclick   = e=>log.green('ok');
               
-              await log.initdom(rootnode);
+              log.initdom();
+      
+              log.ok();
+              
               
         }//initdom
 
-        
-        mod.build();
-
+      
         
       </script>
       
