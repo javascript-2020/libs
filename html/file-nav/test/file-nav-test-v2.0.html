@@ -1,0 +1,455 @@
+
+<html>
+
+      <head>
+        
+            <style>
+      
+  body
+    {display:flex;gap:10px;flex-direction:column;font-family:arial}
+    
+  #hdr
+    {display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+  #title
+    {color:blue}
+    
+  label
+    {display:inline-block;width:75px;margin-right:20px;text-align:right}
+  #open-tab
+    {vertical-align:middle;width:20px;height:20px;border:1px solid lightgray;padding:3px;box-sizing:border-box;margin-right:10px;
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAM1BMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADbQS4qAAAAEHRSTlMA3P2oVwMOwJclPPMnx4V+55yUQwAAAI9JREFUKM/l0WEOxBAQhuHPYHTRdu5/2i1dpZXpBfb9w+SJSABvZiwCYNumgI1kiCqv1wwjxg7lg/1ediudbP0QSmXNQRpj7hOEDGlcdHEaV2WNT4XCP1W4KVxKM18KjnHirrUH57s+eb/rk9l29czT3dzPxhC0Ny85/Usq018zXnl1SsvBVkhNEqIRtbR9AYRhC8cMGp8KAAAAAElFTkSuQmCC);
+    }
+  #dir-listing
+    {height:400px;width:500px;border:1px solid lightgray}
+  
+  file-nav
+    {width:100%;height:100%;display:block}
+                  
+  input
+    {font-size:16px;padding:5px 10px}
+  input[type=button]
+    {cursor:pointer}
+    
+            </style>
+
+
+            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
+
+            <script init>
+                                                                                console.clear();
+                                                                                console.log('file-nav-v2.0-test.html');
+                                                                                console.log();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+        var ext;
+        var $;
+        var datatype;
+
+
+        var filenav;
+        
+        
+        var url         = 'https://localhost:3000';
+        var auth        = 'matt-123';
+
+        
+        var fs    = {
+          
+          'tmp/'    : {
+                            dirs    : [],   //'abc','def'
+                            files   : ['a.txt','b.txt']
+                      },
+        };
+
+
+  //:
+  
+  
+        async function init(){
+                                                                                console.log('init');
+              
+              filenav   = mod.filenav();
+              
+              
+              filenav.initmod({$,datatype});
+              filenav.rd.params   = rd.params;
+              filenav.init();
+
+              
+              initdom();
+  
+  
+              await ready();
+              
+                
+        }//init
+  
+  
+        init.stack            = [];
+        init.stack.ct         = 0;
+        init.stack.total      = 1;
+        init.stack.mode       = 'log';
+        init.stack.complete   = false;
+        Object.defineProperty(init.stack,'add',{get:()=>{
+              init.stack.total++;
+              init.stack.mode && console[init.stack.mode]('add',init.stack.ct,init.stack.total);
+        }});
+        Object.defineProperty(init.stack,'complete',{get:()=>{
+              init.stack.ct++;
+              init.stack.mode && console[init.stack.mode]('complete',init.stack.ct,init.stack.total);
+              init.stack.ct>=init.stack.total && init();
+        }});
+        
+        //  (typeof init!='undefined' && init?.stack && init.stack.add)
+        //  (typeof init!='undefined' && init?.stack && init.stack.complete)
+  
+        
+        init.complete   = function(){
+          
+              init.complete.stack.forEach(fn=>fn());
+              
+        }//complete
+        
+        init.complete.stack   = [];
+        init.complete.add     = fn=>init.complete.stack.push(fn);
+      
+      
+        init.stack.add;
+        
+        fetch('https://raw.githubusercontent.com/javascript-2020/ext-code/main/ext-loader.js')
+          .then(res=>res.text().then(async txt=>{
+          
+              ext   = eval(txt);
+              
+              var promise   = ext.load.libs(
+                    'js/dom/$.js.api','js/core/datatype.js'
+              );
+              [$,datatype]    = await promise;
+  
+              
+              init.stack.complete;
+              
+          }));
+    
+            </script init>
+            
+      </head>
+      
+      <body>
+      
+            <div id=hdr>
+                  <h3 id=title>
+                        file-nav test
+                  </h3>
+                  <div>
+                        <label>
+                              <img id=open-tab>
+                              <span>
+                                    url
+                              </span>
+                        </label>
+                        <input id=url>
+                  </div>
+                  <div>
+                        <label>
+                              auth
+                        </label>
+                        <input id=auth>
+                  </div>
+            </div>
+
+      
+            <div id=dir-listing>
+            
+                  <file-nav-api>
+                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                  </file-nav-api>
+                  
+            </div>
+
+      </body>                    
+
+        
+      <script>
+
+
+        var btn     = {};
+        var rd      = {};
+        var file    = {};
+        var dir     = {};
+        
+
+  //:
+  
+      
+        function initdom(){
+
+              $('#open-tab').onclick      = btn.open;
+              $('#url').value             = url;
+              $('#auth').value            = auth;
+
+              
+              filenav.initdom(document.body);
+              
+                      
+        }//initdom
+        
+        
+        btn.open    = function(){
+          
+              var url   = $('#url').value;
+              window.open(url);
+              
+        }//open
+
+
+  //:
+  
+        async function ready(){
+          
+              var url     = $('#url').value;
+              var auth    = $('#auth').value;
+              
+              await filenav.server.readdir(url,auth,'/');
+              
+              
+              return;
+
+
+              
+              await filenav.server.mkdir(url,auth,'/tmp/test-1');
+              await filenav.server.mkdir(url,auth,'/tmp/test-2');
+              
+              await filenav.server.upload(url,auth,'/tmp/test-1/a.txt','abc');
+              await filenav.server.upload(url,auth,'/tmp/test-1/b.txt','123');
+              
+              await filenav.update();
+
+              
+        }//ready
+  
+        
+  //:
+
+
+        rd.params   = function(){
+          
+              var url     = $('#url').value;
+              var auth    = $('#auth').value;
+              
+              return {url,auth};
+              
+        }//params
+        
+
+  //:
+  
+  
+        file.click    = function(path,filename){
+                                                                                console.log('file.click',path,filename);
+              
+        }//click
+
+  
+        file.dblclick   = function(path,filename){
+                                                                                console.log('file.dblclick',path,filename);
+        }//dblclick
+
+        
+        file.add    = async function(path,filename){
+              
+              return {url,auth};
+          
+              var file      = path+filename;
+              var result    = await mkfile(file);
+              if(!result){
+                    return;
+              }
+              readdir(path);
+              
+        }//add
+        
+        
+        file.rem    = async function(path,filename){
+          
+              return {url,auth};
+              
+              var file      = path+filename;
+              var result    = await rmdir(file);
+              if(!result){
+                    return;
+              }
+              readdir(path);
+              
+        }//rem
+        
+        
+        dir.parent    = function(path){
+                                                                                console.log('dir.parent',path);
+              return {url,auth};
+              
+              readdir(path);
+              
+        }//parent
+
+        
+        
+        dir.click   = function(path,filename){
+                                                                                console.log('dir.click',path,filename);
+              
+        }//click
+        
+        
+        dir.dblclick    = function(path,filename){
+                                                                                console.log('dir.dblclick',path,filename);
+              return {url,auth};
+
+              
+              path   += filename;
+              readdir(path);
+              
+        }//dblclick
+        
+        
+        dir.add   = async function(path,name){
+                                                                                console.log('dir.add',path,name);
+              return {url,auth};
+
+              
+              var dir       = path+name;
+              var result    = await mkdir(dir);
+              if(!result){
+                    return;
+              }
+              readdir(path);
+              
+        }//add
+        
+        
+        dir.rem   = async function(path,name){
+                                                                                console.log('dir.rem',path,name);          
+              return {url,auth};
+
+              
+              var dir       = path+name;
+              var result    = await rmdir(dir);
+              if(!result){
+                    return;
+              }
+              readdir(path);
+              
+        }//rem
+
+        
+  //:
+
+
+/*  
+        
+        async function mkfile(path){
+          
+              var headers   = {mode:'mkfile',auth};
+              var full      = url+path;
+              
+              var res       = await fetch(full,{headers});
+              var txt       = await res.text();
+              
+              if(!res.ok){
+                    alert(`mkfile : ${path}\n${txt}`);
+                    return;
+              }
+              
+              return true;
+              
+        }//mkfile
+        
+        
+        async function rmfile(path){
+          
+              var headers   = {mode:'rmdir',auth};
+              var full      = url+path;
+              
+              var res       = await fetch(full,{headers});
+              var txt       = await res.text();
+              
+              if(!res.ok){
+                    alert(`rmfile : ${path}\n${txt}`);
+                    return;
+              }
+              
+              return true;
+              
+        }//rmfile
+        
+        
+        async function rmdir(path){
+          
+              var headers     = {mode:'rmdir',auth};              
+              var full        = url+path;
+              
+              var res         = await fetch(full,{headers});
+              var txt         = await res.text();
+              
+              if(!res.ok){
+                    alert(`rmdir : ${path}\n${txt}`);
+                    return;
+              }
+              
+              return true;
+              
+        }//rmdir
+        
+        
+        async function mkdir(path){
+
+              var headers     = {mode:'mkdir'};
+              headers.auth    = auth;
+              
+              var full        = url+path;
+              
+              var res         = await fetch(full,{headers});
+              var txt         = await res.text();
+              
+              if(!res.ok){
+                    alert(`mkdir : ${path}\n${txt}`);
+                    return false;
+              }
+              
+              return true;
+              
+        }//mkdir
+
+        
+        async function readdir(path){
+
+              var headers     = {mode:'readdir'};
+              headers.auth    = auth;
+
+              var full        = url+path;
+              
+              var res         = await fetch(full,{headers});
+              var txt         = await res.text();
+              
+              if(!res.ok){
+                    alert('readdir :'+url+'\n'+txt);
+                    return false;
+              }
+              
+              var json    = JSON.parse(txt);
+                                                                                //debugger;
+                                                                                //console.trace('readdir');
+              filenav.display(path,json.dirs,json.files);
+              return true;
+              
+        }//readdir
+*/
+
+
+
+        init.stack.complete;
+
+        
+      </script>
+
+</html>
+
+
