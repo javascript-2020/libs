@@ -46,7 +46,7 @@
       
       <script>
       
-mod.dblist    = function({mod,root,node}){
+mod.dblist    = function({mod,dom,host}){
   
   var obj   = {};
   
@@ -82,10 +82,9 @@ mod.dblist    = function({mod,root,node}){
   //:
   
   
-        obj.initdom   = function(rootnode){
+        obj.initdom   = function(){
           
-              root                                  = $.$(rootnode,'db-list');
-              shadow                                = root.shadowRoot;
+              shadow                                = host.shadowRoot;
 
               grp.add.style(shadow);
               
