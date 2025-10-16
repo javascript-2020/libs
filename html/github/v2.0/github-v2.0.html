@@ -184,7 +184,7 @@
       <script>
 
       
-mod.github    = function({mod,root,node}){
+mod.github    = function({mod,dom,host}){
   
   var obj   = {
       version   : 'v2.0'
@@ -231,7 +231,7 @@ mod.github    = function({mod,root,node}){
     
         obj.init    = async function(){
           
-              libs   = libs();
+              await libs();
               
         }//init
         
@@ -246,10 +246,10 @@ mod.github    = function({mod,root,node}){
   //:
 
     
-        obj.initdom   = function(rootnode){   //c
+        obj.initdom   = function(){   //c
   
-              root                            = $.$(rootnode,'github-root');
-              shadow                          = root.shadowRoot;
+              //root                            = $.$(rootnode,'github-root');
+              shadow                          = host.shadowRoot;
   
               menu.add.style(shadow);
               
