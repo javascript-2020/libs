@@ -104,7 +104,7 @@
       <script>
 
       
-(function httpsfile({mod,root,node}){
+(function httpsfile({mod,dom,host}){
   
   var obj   = {
         version   : 'v1.0'
@@ -177,10 +177,10 @@
   //:
   
   
-        obj.initdom   = function(rootnode){
+        obj.initdom   = function(){
           
-              root                                              = $.$(rootnode,'https-file');
-              shadow                                            = root.shadowRoot;
+              //root                                              = $.$(rootnode,'https-file');
+              shadow                                            = host.shadowRoot;
               
               menu.add.style(shadow);
               
