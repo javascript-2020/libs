@@ -41,7 +41,7 @@
 
 
       
-(function filemod({mod,root,node}){
+(function filemod({mod,dom,host}){
   
   var obj       = {
         version   : 'v1.0'
@@ -149,10 +149,10 @@
   //:
 
               
-        obj.initdom   = function(rootnode){
+        obj.initdom   = function(){
         
-              root                              = $.$(rootnode,'filemod-root');
-              shadow                            = root.shadowRoot;
+              //root                              = $.$(rootnode,'filemod-root');
+              shadow                            = host.shadowRoot;
 
               var style                         = $(shadow,'style'); 
               menu.add.style(shadow);
