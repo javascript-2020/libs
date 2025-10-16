@@ -169,7 +169,7 @@
 
       <script>
                                                                                 //console.log('mod.filenav');    
-(function({mod,root,node}){
+(function({mod,dom,host}){
   
   var obj   = {
         version   : 'v1.0'
@@ -211,7 +211,12 @@
         var dir             = {};
         var server;
         
-        Object.defineProperty(obj,'path',{set(v){ui.path.textContent    = v},get(){return ui.path.textContent.trim()}});
+        Object.defineProperty(obj,'path',{
+        
+              set(v){ui.path.textContent    = v},
+              get(){return ui.path.textContent.trim()}
+              
+        });
         
         var root;
         var shadow;
@@ -298,10 +303,10 @@
   //:
   
   
-        obj.initdom   = function(rootnode){
+        obj.initdom   = function(){
                                                                                 debug('initdom');
-              root                                            = $.$(rootnode,'file-nav');
-              shadow                                          = root.shadowRoot;
+              //root                                            = $.$(rootnode,'file-nav');
+              shadow                                          = host.shadowRoot;
               
               $(shadow,'#update').onclick                     = btn.update;
               
