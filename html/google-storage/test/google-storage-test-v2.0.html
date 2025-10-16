@@ -35,8 +35,6 @@
   //:
   
   
-        mod.stack.add   = init;
-        
         async function init(){
         
         
@@ -53,8 +51,10 @@
               log.initmod({ext,$});
               
               
-              googlestorage.init();
-              log.init();
+              await Promise.all([
+                    googlestorage.init(),
+                    log.init(),
+              ]);
               
 
           
@@ -113,7 +113,7 @@
               var root                  = rootnode;
               
               
-              googlestorage.initdom(root);
+              googlestorage.initdom();
               log.initdom();
               
               
