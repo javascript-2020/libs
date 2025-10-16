@@ -32,7 +32,7 @@
       <script>
 
       
-mod.localfile   = function({mod,root,node}){
+mod.localfile   = function({mod,dom,host}){
 
   var obj   = {
         version   : 'v2.0'
@@ -80,10 +80,10 @@ mod.localfile   = function({mod,root,node}){
   //:
 
 
-        obj.initdom   = function(rootnode){
+        obj.initdom   = function(){
 
-              var root          = $.$(rootnode,'localfile-root');
-              shadow            = root.shadowRoot;
+              //var root          = $.$(rootnode,'localfile-root');
+              shadow            = host.shadowRoot;
               
               menu.add.style(shadow);
               
