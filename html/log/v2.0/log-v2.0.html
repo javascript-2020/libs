@@ -35,7 +35,7 @@
       
       <script id=log>
 
-(function log({mod,root,node}){
+(function log({mod,dom,host}){
   
   var obj   = {};
 
@@ -63,17 +63,17 @@
   //:
 
   
-        obj.init=function(){
+        obj.init    = function(){
         }//init
 
       
   //:
 
   
-        obj.initdom=function(rootnode){
+        obj.initdom   = function(){
           
-              var root                = $.$(rootnode,'log-root');
-              var shadow              = root.shadowRoot;
+              //var root                = $.$(rootnode,'log-root');
+              var shadow              = host.shadowRoot;
               
               log.root                = $(shadow,'#log-root');
               log.item                = $.rem(log.root,'#log');
