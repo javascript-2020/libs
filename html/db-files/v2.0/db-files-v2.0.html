@@ -104,7 +104,7 @@ mod['db-files']   = function({mod,dom,host}){
               
               menu.dbfiles              = menumod();
               
-
+              await libs();
               
               dblist                    = mod['db-list'];
               filenav                   = mod['file-nav'];
@@ -117,7 +117,6 @@ mod['db-files']   = function({mod,dom,host}){
               filenav.dir     = dir;
               
               await Promise.all([              
-                    libs(),
                     dblist.init(),
                     filenav.init(),
               ]);
