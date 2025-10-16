@@ -83,6 +83,8 @@
               $         = params.$;
               ace       = params.ace;
               
+              ('echo' in params) && (echo=params.echo);
+              
         }//initmod
         
         
@@ -91,6 +93,9 @@
         
         var ansi;
         
+        
+        
+        var echo;
         
     
   
@@ -198,7 +203,10 @@
   
         obj.write   = function(){
           
-              con.log.apply(con,arguments);
+              con.write.apply(con,arguments);
+              if(echo){
+                    window.console.log.apply(window.console,arguments);
+              }
               
         }//write
         
@@ -207,6 +215,10 @@
           
               con.log.apply(con,arguments);
               
+              if(echo){
+                    window.console.log.apply(window.console,arguments);
+              }
+              
         }//log
 
 
@@ -214,12 +226,20 @@
           
               con.clear.apply(con);
               
+              if(echo){
+                    window.console.clear();
+              }
+              
         }//clear
 
 
         obj.error   = function(){
           
               con.error.apply(con,arguments);
+              
+              if(echo){
+                    window.console.error.apply(window.console,arguments);
+              }
               
         }//error
 
@@ -230,9 +250,30 @@
               args.unshift('[ debug ]');
               con.log.apply(con,args);
               
+              if(echo){
+                    window.console.debug.apply(window.console,args);
+              }
+              
         }//debug
         
         
+        obj.json    = function(){
+          
+              var args    = [...arguments];
+              args.forEach(v=>{
+                
+                    var str   = JSON.stringify(v,null,4);
+                    obj.log(str);
+                                        
+              });
+              
+        }//json
+
+
+
+
+
+
 
 /*        
 
@@ -262,9 +303,7 @@
         obj.test    = function(){
           
 
-              cons.log('helloworld');
-              
-              
+              con.log('helloworld');
               
               var test    = {
                     hello:'world',
@@ -292,15 +331,7 @@
               
         });
 
-/*        
-        obj.height    = function(h){
-        
-              cons.element.style.height   = h;
-              
-        }//height
-*/        
 
-        
   //:
   
 
