@@ -120,13 +120,14 @@
             googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source});
             ftpserver.initmod({ext,$,datatype,menu,source,log});
 
-            
-            await localfile.init();
-            await httpsfile.init();
-            await github.init();
-            await dbfiles.init();
-            await googlestorage.init();
-            await ftpserver.init();
+            await Promise.all([
+                  localfile.init(),
+                  httpsfile.init(),
+                  github.init(),
+                  dbfiles.init(),
+                  googlestorage.init(),
+                  ftpserver.init(),
+            ]);
             
             localfile.load.complete           = complete.load;
             localfile.save.complete           = complete.save;
