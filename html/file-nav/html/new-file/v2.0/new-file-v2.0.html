@@ -53,7 +53,7 @@
       
       <script>
                                                                                 //console.log('mod.newfile');
-mod.newfile   = function({mod,root,node}){  
+mod.newfile   = function({mod,dom,host}){  
   
   var obj   = {};
   
@@ -95,7 +95,7 @@ mod.newfile   = function({mod,root,node}){
   
         obj.initdom   = function(rootnode){
           
-              var host                                = $.$(rootnode,'new-file');
+              //var host                                = $.$(rootnode,'new-file');
               shadow                                  = host.shadowRoot;
               
               root                                    = $(shadow,'#new-file-root');
