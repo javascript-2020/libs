@@ -67,12 +67,12 @@
         async function init(){
                                                                                 console.log('init');
               
-              filenav   = mod.filenav();
-              
-              
+              filenav   = mod['file-nav'];
+                            
               filenav.initmod({ext,$,datatype});
               filenav.rd.params   = rd.params;
-              filenav.init();
+              
+              await filenav.init();
 
               
               initdom();
