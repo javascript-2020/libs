@@ -9,22 +9,28 @@
                                                                           console.log('publish-test-v2.0.html');
                                                                           console.log();
                                                                           console.json=v=>console.log(JSON.stringify(v,null,4));
+            var ext,$,datatype,menumod,keydown;
+            
+            var menu;
+            
             var publish;
             var log;
 
-            
+
+  //:
+  
+  
             async function init(){
                                                                           console.log('init');
                   keydown.add(kd);
                   
-                  menumod                   = menumod();
-                  menumod.on.close          = ()=>{};
+                  menu                      = menumod();
 
 
                   publish                   = mod.publish;
                   log                       = mod.log;
                   
-                  publish.initmod({menumod});
+                  publish.initmod({ext,$,menu,source,complete,log});
                   log.initmod({ext,$});
                   
                   
@@ -38,8 +44,6 @@
 
 
             }//init
-
-
   
 
   //:
@@ -109,38 +113,58 @@
 
       <script initdom>
 
-
+        
+        var complete    = {};
+        
+        
     //:
     
     
-            function initdom(rootnode){
+        function initdom(rootnode){
 
-            
-                  publish.initdom();
-                  
-                  log.initdom();
-                  
-                  
-                  $('#test').onclick    = e=>{};
-                  
-                  
-                  
-            }//initdom
+        
+              publish.initdom();
+              
+              log.initdom();
+              
+              
+              $('#test').onclick    = e=>{};
+              
+              
+              
+        }//initdom
 
 
   //:
   
   
-            function kd(e){
-    
-                  if(e.key==' ' && e.ctrlKey){
-                        menumod.open();
-                  }
-                  
-            }//kd
+        function kd(e){
+
+              if(e.key==' ' && e.ctrlKey){
+                    menumod.open();
+              }
+              
+        }//kd
             
 
-
+  //:
+  
+        
+        function source(){
+        
+              var txt     = 'helloworld';
+              var blob    = new Blob([txt]);
+              return blob;
+              
+        }//source
+        
+        
+        complete.load   = function(){
+        }//load
+        
+        
+        complete.save   = function(){
+        }//save
 
 
       </script>
