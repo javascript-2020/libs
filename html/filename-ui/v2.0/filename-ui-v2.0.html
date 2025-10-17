@@ -32,7 +32,7 @@
       <script>
 
 
-(function filename_ui({mod,root,node}){
+(function filename_ui({mod,dom,host}){
  
   var obj   = {};
   
@@ -60,9 +60,9 @@
   //:
   
   
-        obj.initdom   = function(rootnode){
+        obj.initdom   = function(){
           
-              var host                  =  $(rootnode,'filename-ui');
+              //var host                  =  $(rootnode,'filename-ui');
               root                      = host.shadowRoot;
               
               
