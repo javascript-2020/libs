@@ -98,23 +98,23 @@
               bgCyan: '\x1b[46m',
               bgWhite: '\x1b[47m',
             
-              bgBrightRed: '\x1b[101m',
-              bgBrightGreen: '\x1b[102m',
-              bgBrightYellow: '\x1b[103m',
-              bgBrightBlue: '\x1b[104m',
-              bgBrightMagenta: '\x1b[105m',
-              bgBrightCyan: '\x1b[106m',
-              bgBrightWhite: '\x1b[107m',
+              bgBrightRed       : '\x1b[101m',
+              bgBrightGreen     : '\x1b[102m',
+              bgBrightYellow    : '\x1b[103m',
+              bgBrightBlue      : '\x1b[104m',
+              bgBrightMagenta   : '\x1b[105m',
+              bgBrightCyan      : '\x1b[106m',
+              bgBrightWhite     : '\x1b[107m',
             
-              bold: '\x1b[1m',
-              dim: '\x1b[2m',
-              italic: '\x1b[3m',
-              underline: '\x1b[4m',
-              inverse: '\x1b[7m',
-              hidden: '\x1b[8m',
-              strikethrough: '\x1b[9m',
+              bold              : '\x1b[1m',
+              dim               : '\x1b[2m',
+              italic            : '\x1b[3m',
+              underline         : '\x1b[4m',
+              inverse           : '\x1b[7m',
+              hidden            : '\x1b[8m',
+              strikethrough     : '\x1b[9m',
           
-              gray    : '\x1b[38;5;245m',
+              gray              : '\x1b[38;5;245m',
               
         };
 
@@ -258,6 +258,23 @@
 
   //:
 
+
+
+        Object.defineProperty(obj,'height',{
+          
+              get   : v=>{
+                
+                    if(!v)return;
+                    if(typeof v=='number'){
+                          v   = v+'px';
+                    }
+                    terminal.style.height    = v;
+                    fitAddon.fit();
+                    
+              }
+              
+        });
+        
   
 /*
 
