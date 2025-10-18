@@ -176,7 +176,8 @@
   //:
 
 
-        btn.run   = async function(){console.log('run');
+        btn.run   = async function(){
+                                                                                console.log('run');
           
               var js    = editor.getvalue();
               
@@ -185,6 +186,9 @@
                     result   = await sandbox.nodejs(js,{console:jsconsole,ctx:{terminal},on:obj.on});
               }else{
                     ({iframe,result,error}    = await sandbox.run.iframe(js,{console:jsconsole,ctx:{terminal},iframe}));
+              }
+              if(obj.on?.run){
+                    obj.on.run(result);
               }
               
         }//btn.run
@@ -198,6 +202,8 @@
         }//clear
 
 
+  
+  //:
   
   
   
