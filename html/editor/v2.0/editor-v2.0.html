@@ -221,6 +221,7 @@
               }
               
               def.txt         = $.htmlentities.decode(root);
+              console.log('editor.init',def.txt);
               def.fullsize    = fullsize;
               
               await Promise.all([
@@ -313,6 +314,7 @@
 
   
               var node                                    = $(shadow,'#editor');
+              console.log('editor.txt',txt);
               node.textContent                            = txt;
               
               
