@@ -292,6 +292,8 @@
                                                                                 console.log('initialising ...');
                                                                                 
                     var {WebContainer}    = await import('https://cdn.jsdelivr.net/npm/@webcontainer/api/+esm');
+                                                                                console.log('ok');
+                                                                                
                                                                                 console.log('booting ...');
                     webcontainer          = await WebContainer.boot();
                                                                                 console.log('ok');
@@ -311,6 +313,8 @@
               window.run    = async function(js){
                                                                                 console.log('write file system ...');
                     await webcontainer.fs.writeFile('main.js',js);
+                                                                                console.log('ok');
+                    
                                                                                 console.log('launch process ...');
               
                     var process   = await webcontainer.spawn('node',['main.js']);
