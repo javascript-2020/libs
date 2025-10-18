@@ -153,14 +153,20 @@
           
               shadow                                = host.shadowRoot;
 
+              debugger;
               editor.initdom({mode:'js',txt:def,fullsize:true});
+
               
               $(shadow,'[value=run]').onclick       = btn.run;
               $(shadow,'[value=clear]').onclick     = btn.clear;
+
               
               terminal.initdom();
+
               
               jsconsole.initdom(shadow);
+
+
                             
         }//initdom
         
