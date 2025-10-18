@@ -248,13 +248,8 @@
                     script.textContent    = srcdoc.nodejs;
                     doc.head.append(script);
                     
-                    var webcontainer    = await win.init({console,ctx,on});
-
-                    var resolve2,promise=new Promise(res=>resolve2=res);
-                    resolve({webcontainer,promise});
-                    
-                    
-                    var code            = await win.run(js);
+                    await win.init({console,ctx,on});
+                    await win.run(js);
                     
                     iframe.remove();
                     
@@ -278,13 +273,13 @@
               var webcontainer;
               var terminal;
               var console;
+              var on;
               var df;
 
               
               window.init   = async function(params){
               
                     var ctx;
-                    var on;
                     ({console,ctx,on,df=true}    = params);
                     ctx           ||= {};
                     ({terminal}     = ctx);
@@ -300,11 +295,11 @@
                                                                                 console.log('booting ...');
                     webcontainer          = await WebContainer.boot();
                                                                                 console.log('ok');
+                    await on?.init?.({webcontainer});
+                    
                     webcontainer.on('server-ready',(port,url)=>{
                                                                                 console.log('server : ',url,port);
-                          if(on['server-ready']){
-                                on['server-ready'](port,url);
-                          }
+                          on?.['server-ready']?.({port,url});
                           
                     });
                                                                                 
@@ -320,18 +315,19 @@
               
                     var process   = await webcontainer.spawn('node',['main.js']);
                                                                                 console.log('ok');
-                                                                                
                     var stream    = new WritableStream({write(data){terminal.write(data)}});
-
                     process.output.pipeTo(stream);
 
-            
+                    await on?.run?.({process});
+                    
                     var code      = await process.exit;
                     if(code!=0){
                                                                                 console.warn('process exited with error code : ',code);
                     }
+                    
+                    await on?.complete?.({code});
                                                                                 console.log('done.');
-                    return code;
+                    return {code};
                     
               }//run
               
