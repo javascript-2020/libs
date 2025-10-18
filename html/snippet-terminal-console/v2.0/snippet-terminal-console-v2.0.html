@@ -95,6 +95,9 @@
 
 
         var btn   = {};
+        obj.btn   = btn;
+        var run   = {};
+        
         
   //:
   
@@ -177,18 +180,13 @@
 
 
         btn.run   = async function(){
-                                                                                console.log('run');
-          
+                                                                                console.log('run');          
               var js    = editor.getvalue();
               
-              var result,error;
               if(mode=='nodejs'){
-                    result   = await sandbox.nodejs(js,{console:jsconsole,ctx:{terminal},on:obj.on});
+                    run.nodejs(js);
               }else{
-                    ({iframe,result,error}    = await sandbox.run.iframe(js,{console:jsconsole,ctx:{terminal},iframe}));
-              }
-              if(obj.on?.run){
-                    obj.on.run(result);
+                    run.browser(js);
               }
               
         }//btn.run
@@ -205,6 +203,26 @@
   
   //:
   
+  
+        run.browser   = function({js}){
+          
+              var result,error;
+              result    = await sandbox.run.iframe(js,{console:jsconsole,ctx:{terminal},iframe});
+              {iframe,result,error}   = result);
+                    
+        }//browser
+        
+     
+        run.nodejs    = function({js,on}){
+
+              on    ||= obj.on;
+              await sandbox.nodejs(js,{console:jsconsole,ctx:{terminal},on}); 
+              
+        }//nodejs
+        
+        
+        
+  //:
   
   
   
