@@ -156,7 +156,7 @@
       
       <script>
       
-(function editor({mod,root,host}){
+(function editor({mod,dom,host}){
 
   var obj   = {
         version   : 'v2.0'
@@ -213,7 +213,7 @@
 
 
   
-    //:
+  //:
 
     
         obj.init    = async function(){
@@ -232,6 +232,8 @@
               
         }//init
 
+
+  //:
 
         async function libs(){
           
@@ -254,9 +256,8 @@
         }//src
 
   
-    //:
-
-    
+  //:
+  
         
         obj.initdom    = async function(rootnode,params){
           
