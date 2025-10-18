@@ -65,7 +65,7 @@
                     get:()=>{
                 
                           total++;
-                                                                                      debug.trace('add',name,ct,total);
+                                                                                debug.trace('add',name,ct,total);
                     },//get
                     set:v=>{
                       
@@ -73,7 +73,7 @@
                           if(!par){
                                 if(typeof v=='function'){
                                       if(v.name=='init'){
-                                                                                      console.log('init hit');
+                                                                                console.log('init hit');
                                             return;
                                       }
                                 }
@@ -82,14 +82,14 @@
                           
                           total++;
                           stack.push(v);
-                                                                                      debug.trace('add',name,ct,total);
+                                                                                debug.trace('add',name,ct,total);
                     }//set
               });
               
               Object.defineProperty(stack,'complete',{get:()=>{
                 
                     ct++;
-                                                                                      debug.trace('complete',name,ct,total);
+                                                                                debug.trace('complete',name,ct,total);
                     if(ct!=total){
                           return;
                     }
