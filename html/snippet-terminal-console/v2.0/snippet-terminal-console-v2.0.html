@@ -184,9 +184,9 @@
               var js    = editor.getvalue();
               
               if(mode=='nodejs'){
-                    run.nodejs(js);
+                    run.nodejs({js});
               }else{
-                    run.browser(js);
+                    run.browser({js});
               }
               
         }//btn.run
