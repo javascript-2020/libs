@@ -1071,6 +1071,12 @@
         
               mode    ||= 'javascript';
               
+              switch(mode){
+                
+                case 'js'   : mode    = 'javascript';       break;
+                
+              }//switch
+              
               if(kd){
                     node.onkeydown    = kd;
               }
