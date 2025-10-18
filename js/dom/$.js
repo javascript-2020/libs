@@ -1252,6 +1252,10 @@
 
         $.htmlentities    = function(v){
           
+              if(!v){
+                    return '';
+              }
+              
               var str   = v;
               if($.is.node(v)){
                     str   = v.innerHTML;
@@ -1267,6 +1271,10 @@
         
         $.htmlentities.decode   = function(v){
           
+              if(!v){
+                    return '';
+              }
+              
               var str   = v;
               if($.is.node(v)){
                     str   = v.innerHTML;
