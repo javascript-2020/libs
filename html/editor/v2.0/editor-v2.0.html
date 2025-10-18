@@ -180,7 +180,6 @@
               params.ace && (ace=params.ace);
               
               fullsize    = params.fullsize;
-              def.fullsize    = fullsize;
               
               kd2         = params.kd;
               
@@ -192,7 +191,6 @@
         
         var editor;
         
-        var root;
         var shadow;
         
         var card;
@@ -222,7 +220,8 @@
                     menu    = menumod();
               }
               
-              def.txt   = $.htmlentities.decode(root);
+              def.txt         = $.htmlentities.decode(root);
+              def.fullsize    = fullsize;
               
               await Promise.all([
                     src(),
