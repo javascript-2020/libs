@@ -247,8 +247,8 @@
         
         async function src(){
           
-              if(!root.hasAttribute('src'))return;
-              var src   = root.getAttribute('src');
+              if(!dom.hasAttribute('src'))return;
+              var src   = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
               def.txt   = txt;
