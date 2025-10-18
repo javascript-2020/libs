@@ -204,7 +204,7 @@
   //:
   
   
-        run.browser   = function({js}){
+        run.browser   = async function({js}){
           
               var result,error;
               result    = await sandbox.run.iframe(js,{console:jsconsole,ctx:{terminal},iframe});
@@ -213,7 +213,7 @@
         }//browser
         
      
-        run.nodejs    = function({js,on}){
+        run.nodejs    = async function({js,on}){
 
               on    ||= obj.on;
               await sandbox.nodejs(js,{console:jsconsole,ctx:{terminal},on}); 
