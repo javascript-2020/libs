@@ -16,7 +16,7 @@
               
               if(typeof init!='undefined'){
                     if(!mod.stack.includes(init)){
-                                                                                console.log('init added');
+                                                                                //console.log('init added');
                           mod.stack.unshift(init);
                     }
               }
@@ -28,7 +28,7 @@
 
 
         function create({mod:par,name}={}){
-                                                                                console.log('mod.create',name);
+                                                                                //console.log('mod.create',name);
               var mod         = {};
               
               mod_list.push(mod);
@@ -55,7 +55,7 @@
                     par.stack.add;
                     mod.stack.push(()=>par.stack.complete);
               }else{
-                                                                                console.log('auto total');
+                                                                                //console.log('auto total');
                     total    = 1;
                     
               }
@@ -73,7 +73,7 @@
                           if(!par){
                                 if(typeof v=='function'){
                                       if(v.name=='init'){
-                                                                                console.log('init hit');
+                                                                                //console.log('init hit');
                                             return;
                                       }
                                 }
