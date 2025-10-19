@@ -662,6 +662,8 @@
               
               async function auto(initmod){
                 
+                    console.log('mod.list',mod.list);
+                    
                     mod.list.forEach(name=>initmod[name]=mod[name]);
                     mod.list.forEach(name=>mod[name].initmod(initmod));
                     
