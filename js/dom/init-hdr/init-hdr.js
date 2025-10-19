@@ -30,7 +30,9 @@
               
               menu      = menumod();
 
-              mod.auto({ext,$,datatype,keydown,menu,menumod,ace});
+              await mod.auto({ext,$,datatype,keydown,menu,menumod,ace});
+              
+              start();
               
         }//init
 
@@ -52,7 +54,7 @@
               'js/dom/code/v2.0/code-v2.0.js.api',
               'js/debug/debug.js',
         );
-        [$,datatype,menumod,keydown,code]   = await promise;
+        [$,datatype,menumod,keydown,code,debug]   = await promise;
   
         code.initmod({ext,$,datatype,menumod});
         
