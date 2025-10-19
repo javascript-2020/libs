@@ -34,7 +34,7 @@
               full_list.push(mod);
               
               mod.name        = name;
-              mod.df          = (name==='root');
+              mod.df          = false;//(name==='root');
               
               mod.list        = [];
               
