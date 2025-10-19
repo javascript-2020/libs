@@ -662,7 +662,9 @@
               
               async function auto(initmod){
                 
+                    mod.list.forEach(name=>initmod[name]=mod[name]);
                     mod.list.forEach(name=>mod[name].initmod(initmod));
+                    
                     await Promise.all(mod.list.map(async name=>await mod[name].init()));
                     mod.list.forEach(name=>mod[name].initdom());
                     
