@@ -665,7 +665,10 @@
                     //mod.list.forEach(name=>initmod[name]=mod[name]);
                     mod.list.forEach(name=>mod[name].initmod(initmod));
                     
-                    await Promise.all(mod.list.map(async name=>await mod[name].init()));
+                    var list    = mod.list.map(async name=>await mod[name].init());
+                    console.log(list);
+                    
+                    await Promise.all(list);
                     mod.list.forEach(name=>mod[name].initdom());
                     
               }//auto
