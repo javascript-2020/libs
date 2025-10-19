@@ -493,7 +493,7 @@
                     
                     mod[name]     = obj;
                     mod[inst]     = obj;
-                    mod.list.push(inst);
+                    mod.list.push(inst||name);
 
               }//define
 
