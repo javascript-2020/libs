@@ -41,6 +41,7 @@
               mod.full        = full_list;
               mod.child       = [];
               
+              mod.auto        = auto;
               mod.create      = create;
               mod.build       = build;
               
