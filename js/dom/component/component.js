@@ -3,7 +3,7 @@
         
 (()=>{
   
-        var mod_list    = [];
+        var full_list   = [];
         var cache       = {};
         
         mod   = create({name:'root'});
@@ -31,11 +31,14 @@
                                                                                 //console.log('mod.create',name);
               var mod         = {};
               
-              mod_list.push(mod);
+              full_list.push(mod);
               
               mod.name        = name;
               mod.df          = false;//(name==='root');
-              mod.list        = mod_list;
+              
+              mod.list        = [];
+              
+              mod.full        = full_list;
               mod.child       = [];
               
               mod.create      = create;
@@ -489,6 +492,7 @@
                     
                     mod[name]     = obj;
                     mod[inst]     = obj;
+                    mod.list.push(inst);
 
               }//define
 
@@ -653,6 +657,15 @@
                     return {nn,inst};
                     
               }//inst
+              
+              
+              async function auto(initmod){
+                
+                    mod.list.forEach(name=>mod[name].initmod(initmod));
+                    await Promise.all(mod.list.map(async name=>await mod[name].init()));
+                    mod.list.forEach(name=>mod[name].initdom());
+                    
+              }//auto
               
               
   //:
