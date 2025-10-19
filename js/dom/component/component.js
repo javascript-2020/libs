@@ -662,7 +662,7 @@
               
               async function auto(initmod){
                 
-                    //mod.list.forEach(name=>initmod[name]=mod[name]);
+                    mod.list.forEach(name=>initmod[name]=mod[name]);
                     mod.list.forEach(name=>mod[name].initmod(initmod));
                     
                     var list    = mod.list.map(async name=>await mod[name].init());
