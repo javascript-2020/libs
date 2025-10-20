@@ -5,7 +5,7 @@
                                                                                 console.log('[ init-hdr ]');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
-        var df=true,did='init-hdr',version='v1.0'
+        var df=false,did='init-hdr',version='v1.0'
         ;
 
 
