@@ -1,6 +1,6 @@
 (()=>{
 
-                                                                                  console.log('keydown');
+                                                                                  //console.log('keydown');
                                                                                   
         keydown.initdom=function(){
         
