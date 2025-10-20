@@ -99,7 +99,7 @@ var ext;
   ext                       = {};
   ext[Symbol.toStringTag]   = 'ext-code';
                                                                                 //console.clear();
-                                                                                console.log('ext-code.loader-v1.1');
+                                                                                //console.log('ext-code.loader-v1.1');
                                                                                 //console.log();
         
         ext.load          = {};
