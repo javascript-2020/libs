@@ -131,7 +131,7 @@ mod.localfile   = function({mod,dom,host}){
               
               var blob    = source();
               
-              var file    = await savefile(filename,txt);
+              var file    = await savefile(filename,blob);
               
               obj.save.complete(file,false);
   
