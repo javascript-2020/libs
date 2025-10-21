@@ -181,6 +181,11 @@
 
 
         btn.run   = async function(){
+              
+              if(obj.btn.run){
+                    obj.btn.run();
+                    return;
+              }
                                                                                 console.log('run');          
               var js    = editor.getvalue();
               
