@@ -484,6 +484,7 @@
                     `;
                     
                     var fn        = eval(js);
+                                                                                if(typeof fn!='function')debugger;
                     var obj       = fn({mod:mod2,dom,host,root:dom,node:host});
                     
                     var name      = nn;
