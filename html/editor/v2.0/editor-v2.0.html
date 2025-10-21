@@ -272,7 +272,7 @@
               //$.htmlentities.decode(dom);
               
               var txt   = '';
-              $.childnodes(dom).forEach(node=>{
+              dom.childNodes.forEach(node=>{
                 
                       if(node.nodeType==NODE.TextNode){
                             txt  += node.value;
