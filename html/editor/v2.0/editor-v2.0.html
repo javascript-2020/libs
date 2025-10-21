@@ -165,7 +165,7 @@
         var df=false
         ;
 
-        var ext,$,menu,menumod,ace,fullsize,kd2
+        var ext,$,menu,menumod,ace,kd2
         ;
         
         
@@ -179,7 +179,7 @@
               
               params.ace && (ace=params.ace);
               
-              fullsize    = params.fullsize;
+              def.fullsize    = params.fullsize;
               
               kd2         = params.kd;
               
@@ -201,13 +201,16 @@
         
         var deficon;
         
+        var rd    = {};
         var kd    = {};
         var btn   = {};
 
 
 
-        var def   = {};
-
+        var def         = {};
+        def.txt         = '';
+        def.fullsize    = false;
+        def.mode        = 'javascript';
 
 
   
@@ -220,11 +223,12 @@
                     menu    = menumod();
               }
               
-              def.txt         = $.htmlentities.decode(dom);              
-              def.fullsize    = fullsize;
+              rd.txt();
+              rd.fullsize();
+              rd.mode();
               
               await Promise.all([
-                    src(),
+                    rd.src(),
                     libs(),
               ]);
               
@@ -244,7 +248,15 @@
         }//libs
         
         
-        async function src(){
+        rd.fullsize   = function(){
+          
+              if(!dom.hasAttrbiute('fullsize'))return;
+              def.fullsize    = true;
+              
+        }//fullsize
+        
+        
+        rd.src    = async function(){
           
               if(!dom.hasAttribute('src'))return;
               var src   = dom.getAttribute('src');
@@ -253,7 +265,31 @@
               def.txt   = txt;
               
         }//src
+        
+        
+        rd.txt    = function(){
+          
+              //$.htmlentities.decode(dom);
+              
+              var txt   = '';
+              $.childnodes(dom).forEach(node=>{
+                
+                      if(node.nodeType==NODE.TextNode){
+                            txt  += node.value;
+                      }
+                      
+              });
+              def.txt   = txt;
+              
+        }//txt
 
+
+        rd.mode   = function(){
+          
+              if(!dom.hasAttrbiute(mode))return;
+              def.mode    = dom.getAttribute('mode');
+              
+        }//mode
   
   //:
   
@@ -265,7 +301,7 @@
               }
               var {mode,txt,fullsize}   = params||{};
         
-              mode        ||= 'javascript';
+              mode        ||= def.mode;
               txt         ||= def.txt;
               fullsize    ||= def.fullsize;
 
