@@ -57,9 +57,6 @@
         );
         [$,datatype,menumod,keydown,debug]   = await promise;
   
-        code.initmod({ext,$,datatype,menumod});
-        
-        [srcdoc]    = await ext.text.github('javascript-2020:javascript-2020.github.io:main:blog/25-07-25/http-streaming-download/ex/srcdoc.html');
         
         mod.stack.complete;
               
