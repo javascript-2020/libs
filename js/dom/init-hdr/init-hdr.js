@@ -33,7 +33,9 @@
 
               await mod.auto({ext,$,datatype,keydown,menu,menumod,ace});
               
-              start();
+              if(typeof start=='function'){
+                    start();
+              }
               
         }//init
 
