@@ -182,12 +182,20 @@
 
         btn.run   = async function(){
               
+              var result;
               if(obj.btn.run){
-                    obj.btn.run();
-                    return;
+                    result    = await obj.btn.run();
+                    if(result===false){
+                          return;
+                    }
               }
-                                                                                console.log('run');          
-              var js    = editor.getvalue();
+                                                                                console.log('run');
+              var js;
+              if(typeof result=='string'){
+                    js    = result;
+              }else{
+                    js    = editor.getvalue();
+              }
                                                                                 console.log(js);
               if(mode=='nodejs'){
                     run.nodejs({js});
