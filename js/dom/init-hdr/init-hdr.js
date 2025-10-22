@@ -14,7 +14,6 @@
         var datatype;
         var menumod;
         var keydown;
-        var code;
         var debug;
 
         var ace;
@@ -54,10 +53,9 @@
               'js/core/datatype.js',
               'js/dom/menumod/menumod.js',
               'js/dom/keydown/keydown.js',
-              'js/dom/code/v2.0/code-v2.0.js.api',
               'js/debug/debug.js',
         );
-        [$,datatype,menumod,keydown,code,debug]   = await promise;
+        [$,datatype,menumod,keydown,debug]   = await promise;
   
         code.initmod({ext,$,datatype,menumod});
         
