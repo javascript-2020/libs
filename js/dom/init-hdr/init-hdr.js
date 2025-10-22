@@ -17,6 +17,7 @@
         var code;
         var debug;
 
+        var ace;
         
         var menu;
             
