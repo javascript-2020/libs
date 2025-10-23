@@ -336,7 +336,7 @@
                     var stream    = new WritableStream({write(data){terminal?.write(data)}});
                     process.output.pipeTo(stream);
 
-                    await callback('run',{process]);
+                    await callback('run',{process});
                     //await on?.run?.({process});
                     
                     var code      = await process.exit;
