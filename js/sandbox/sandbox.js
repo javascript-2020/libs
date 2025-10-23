@@ -333,7 +333,7 @@
               
                     var process   = await webcontainer.spawn('node',['main.js']);
                                                                                 console.log('ok');
-                    var stream    = new WritableStream({write(data){terminal.write(data)}});
+                    var stream    = new WritableStream({write(data){terminal?.write(data)}});
                     process.output.pipeTo(stream);
 
                     await callback('run',{process]);
