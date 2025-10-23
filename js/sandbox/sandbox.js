@@ -324,7 +324,7 @@
               }//init
 
       
-              window.run    = async function(js){
+              window.run    = async function(js){console.log(js);
                                                                                 console.log('write file system ...');
                     await webcontainer.fs.writeFile('main.js',js);
                                                                                 console.log('ok');
