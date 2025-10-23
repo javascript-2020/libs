@@ -367,6 +367,7 @@
                     for(var i=0;i<n;i++){
                       
                           var fn    = list[i];
+                          if(!fn.apply)debugger;
                           await fn.apply(null,args);
                           
                     }//for
