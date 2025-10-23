@@ -358,7 +358,7 @@
                           return;
                     }
                     
-                    if(!Array.is(on[name])){
+                    if(!Array.isArray(on[name])){
                           await on[name].apply(null,args);
                     }
                     
