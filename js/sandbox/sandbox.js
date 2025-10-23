@@ -312,7 +312,7 @@
                     callback('init',{webcontainer});
                     //await on?.init?.({webcontainer});
                     
-                    webcontainer.on('server-ready',(port,url)=>{
+                    webcontainer.on('server-ready',async(port,url)=>{
                                                                                 console.log('server : ',url,port);
                           await callback('server-ready',{port,url});
                           //on?.['server-ready']?.({port,url});
