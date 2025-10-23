@@ -245,7 +245,8 @@
                     var win               = iframe.contentWindow;
                     
                     var script            = doc.createElement('script');
-                    script.textContent    = srcdoc.nodejs;
+                    var js                = fnstr(srcdoc.nodejs);
+                    script.textContent    = js
                     doc.head.append(script);
                     
                     await win.init({console,ctx,on});
@@ -262,10 +263,21 @@
 
   //:
 
+
+        function fnstr(fn){
+          
+              var s     = fn.toString();
+              var i1    = s.indexOf('{');
+              var i2    = s.lastIndexOf('}');
+              var str   = s.slice(i1+1,i2);
+              return str;
+              
+        }//fnstr
+        
   
         var srcdoc    = {};
         
-        srcdoc.nodejs   = `
+        srcdoc.nodejs   = function(){
 
 (()=>{
 
@@ -277,7 +289,7 @@
               var df;
 
               
-              window.init   = async function(params){
+              window.init   = async function(params={}){
               
                     var ctx;
                     ({console,ctx,on,df=true}    = params);
@@ -297,11 +309,13 @@
                                                                                 console.log('booting ...');
                     webcontainer          = await WebContainer.boot();
                                                                                 console.log('ok');
-                    await on?.init?.({webcontainer});
+                    callback('init',{webcontainer});
+                    //await on?.init?.({webcontainer});
                     
                     webcontainer.on('server-ready',(port,url)=>{
                                                                                 console.log('server : ',url,port);
-                          on?.['server-ready']?.({port,url});
+                          await callback('server-ready',{port,url});
+                          //on?.['server-ready']?.({port,url});
                           
                     });
                                                                                 
@@ -322,20 +336,44 @@
                     var stream    = new WritableStream({write(data){terminal.write(data)}});
                     process.output.pipeTo(stream);
 
-                    await on?.run?.({process});
+                    await callback('run',{process]);
+                    //await on?.run?.({process});
                     
                     var code      = await process.exit;
                     if(code!=0){
                                                                                 console.warn('process exited with error code : ',code);
                     }
                     
-                    await on?.complete?.({code});
+                    await callback('complete',{code});
+                    //await on?.complete?.({code});
                                                                                 console.log('done.');
                     return {code};
                     
               }//run
               
-              
+
+              async function callback(name,...args){
+                
+                    if(!on[name]){
+                          return;
+                    }
+                    
+                    if(!Array.is(on[name])){
+                          await on[name].apply(null,args);
+                    }
+                    
+                    var list    = on[name];
+                    var n       = list.length;
+                    for(var i=0;i<n;i++){
+                      
+                          var fn    = list[i];
+                          await fn.apply(null,args);
+                          
+                    }//for
+                    
+              }//callback
+
+                            
               function debug(){
               
                     if(!df)return;
@@ -344,9 +382,11 @@
                     
               }//debug
 
+
+
 })();
 
-        `;
+        }//nodejs
         
 
 
