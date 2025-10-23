@@ -245,8 +245,8 @@
                     var win               = iframe.contentWindow;
                     
                     var script            = doc.createElement('script');
-                    var js                = fnstr(srcdoc.nodejs);
-                    script.textContent    = js
+                    var js2               = fnstr(srcdoc.nodejs);
+                    script.textContent    = js2
                     doc.head.append(script);
                     
                     await win.init({console,ctx,on});
@@ -324,7 +324,7 @@
               }//init
 
       
-              window.run    = async function(js){console.log(js);
+              window.run    = async function(js){
                                                                                 console.log('write file system ...');
                     await webcontainer.fs.writeFile('main.js',js);
                                                                                 console.log('ok');
