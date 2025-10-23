@@ -325,14 +325,14 @@
 
       
               window.run    = async function(js){
-                                                                                console.log('write file system ...');
+                                                                                console.log('write main.js ...');
                     await webcontainer.fs.writeFile('main.js',js);
                                                                                 console.log('ok');
                     
-                                                                                console.log('launch process ...');
-              
+                                                                                console.log('launch process ...');              
                     var process   = await webcontainer.spawn('node',['main.js']);
                                                                                 console.log('ok');
+                                                                                
                     var stream    = new WritableStream({write(data){terminal?.write(data)}});
                     process.output.pipeTo(stream);
 
