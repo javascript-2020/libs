@@ -145,8 +145,8 @@ mod.localfile   = function({mod,dom,host}){
               if(file){
                     filename    = file.filename;
               }
-              var txt         = editor.getValue();
-              savefile(filename,txt);
+              var blob         = source();
+              savefile(filename,blob);
               
         }//download
         
