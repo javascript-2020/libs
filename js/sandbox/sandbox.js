@@ -309,7 +309,7 @@
                                                                                 console.log('booting ...');
                     webcontainer          = await WebContainer.boot();
                                                                                 console.log('ok');
-                    callback('init',{webcontainer});
+                    await callback('init',{webcontainer});
                     //await on?.init?.({webcontainer});
                     
                     webcontainer.on('server-ready',async(port,url)=>{
