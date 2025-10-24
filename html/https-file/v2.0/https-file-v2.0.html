@@ -130,6 +130,8 @@
         
   //vars:-
 
+        var jszip;
+        
         var filenav;
         
         var typename    = 'https-file';
@@ -159,7 +161,7 @@
   
         obj.init    = async function(){
 
-          
+                        
               filenav                   = mod['file-nav'];
               
               filenav.initmod({ext,$,datatype});
@@ -168,10 +170,20 @@
               filenav.file.click        = file.click;
               filenav.file.dblclick     = file.dblclick;
               
-              await filenav.init();
-              
-              
+              await Promise.all([
+                    libs(),
+                    filenav.init(),
+              ]);
+                            
         }//init
+        
+        
+        async function libs(){
+          
+              jszip   = await import('https://cdn.jsdelivr.net/npm/jszip/+esm');
+              jszip   = jszip.default;
+              
+        }//libs
 
 
   //:
@@ -301,13 +313,28 @@
                     window.open('https://github.com/javascript-2020/code/blob/main/nodejs/server/https-file-server/https-file-server.js','_blank');
                     return;
               }
-          
+              
+              var zip       = new jszip();
+              zip.folder('https-file-server');    //  fs-server
+              zip.folder('https-file-server/node_modules');
+              
               var res       = await fetch('https://raw.githubusercontent.com/javascript-2020/code/main/nodejs/server/https-file-server/https-file-server.js');
               var blob      = await res.blob();
-              var url       = window.URL.createObjectURL(blob);
+              zip.file('https-file-server/https-file-server.js',blob);
+
+              var res       = await fetch('https://raw.githubusercontent.com/javascript-2020/libs/main/js/string/getmime/getmime.js');
+              var blob      = await res.blob();
+              zip.file('https-file-server/node_modules/getmime.js',blob);
               
+              var res       = await fetch('https://raw.githubusercontent.com/javascript-2020/libs/main/nodejs/keys/keys.js');
+              var blob      = await res.blob();
+              zip.file('https-file-server/node_modules/keys.js',blob);
+
+              var blob      = await zip.generateAsync({type:'blob'});
+              
+              var url       = window.URL.createObjectURL(blob);
               var a         = document.createElement('a');
-              a.download    = 'https-file-server.js';
+              a.download    = 'https-file-server';
               a.href        = url;
               a.click();
               
