@@ -316,24 +316,19 @@
               
               var zip       = new jszip();
               
-              var top       = '';//https-file-server
-              if(top){
-                    zip.folder('https-file-server');    //  fs-server
-              }
-              
               var res       = await fetch('https://raw.githubusercontent.com/javascript-2020/code/main/nodejs/server/https-file-server/https-file-server.js');
               var blob      = await res.blob();
-              zip.file(`${top}/https-file-server.js`,blob);
+              zip.file(`https-file-server.js`,blob);
               
-              zip.folder(`${top}/node_modules`);
+              zip.folder(`node_modules`);
 
               var res       = await fetch('https://raw.githubusercontent.com/javascript-2020/libs/main/js/string/getmime/getmime.js');
               var blob      = await res.blob();
-              zip.file(`${top}/node_modules/getmime.js`,blob);
+              zip.file(`node_modules/getmime.js`,blob);
               
               var res       = await fetch('https://raw.githubusercontent.com/javascript-2020/libs/main/nodejs/keys/keys.js');
               var blob      = await res.blob();
-              zip.file(`${top}/node_modules/keys.js`,blob);
+              zip.file(`node_modules/keys.js`,blob);
 
               var blob      = await zip.generateAsync({type:'blob'});
               
