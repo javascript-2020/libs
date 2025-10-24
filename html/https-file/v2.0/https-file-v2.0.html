@@ -313,22 +313,24 @@
                     window.open('https://github.com/javascript-2020/code/blob/main/nodejs/server/https-file-server/https-file-server.js','_blank');
                     return;
               }
+
               
               var zip       = new jszip();
+              zip.folder(`https-file-server`);
               
               var res       = await fetch('https://raw.githubusercontent.com/javascript-2020/code/main/nodejs/server/https-file-server/https-file-server.js');
               var blob      = await res.blob();
-              zip.file(`https-file-server.js`,blob);
+              zip.file(`https-file-server/https-file-server.js`,blob);
               
-              zip.folder(`node_modules`);
+              zip.folder(`https-file-server/node_modules`);
 
               var res       = await fetch('https://raw.githubusercontent.com/javascript-2020/libs/main/js/string/getmime/getmime.js');
               var blob      = await res.blob();
-              zip.file(`node_modules/getmime.js`,blob);
+              zip.file(`https-file-server/node_modules/getmime.js`,blob);
               
               var res       = await fetch('https://raw.githubusercontent.com/javascript-2020/libs/main/nodejs/keys/keys.js');
               var blob      = await res.blob();
-              zip.file(`node_modules/keys.js`,blob);
+              zip.file(`https-file-server/node_modules/keys.js`,blob);
 
               var blob      = await zip.generateAsync({type:'blob'});
               
@@ -337,6 +339,7 @@
               a.download    = 'https-file-server';
               a.href        = url;
               a.click();
+
               
         }//download
 
