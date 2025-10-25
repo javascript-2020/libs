@@ -382,6 +382,27 @@ function encrypt(){
         }//buf
         
         
+        obj.to.hex    = function(v){
+          
+              var type    = datatype(v);
+              var buf;
+              switch(type){
+                
+                case 'arraybuffer'    : break;
+                  
+                default               : return null;
+                
+              }//switch
+              
+              var uint8   = new Uint8Array(buf);
+              var arr     = Array.from(uint8);
+              var hex     = arr.map(byte=>byte.toString(16).padStart(2,'0')).join('');
+              hex         = hex.toUpperCase();
+              return hex;
+    
+        }//hex
+        
+        
   //:
   
   
