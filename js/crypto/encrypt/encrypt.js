@@ -338,7 +338,7 @@ function encrypt(){
         
         obj.to_blob   = to_blob;
         
-        async function to_blob(v){
+        function to_blob(v){
           
               var type    = datatype(v);
               var buf;
