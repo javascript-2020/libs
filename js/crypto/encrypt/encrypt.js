@@ -382,7 +382,7 @@ function encrypt(){
         }//buf
         
         
-        obj.to.hex    = function(v){
+        obj.to.hex    = async function(v){
           
               var type    = datatype(v);
               var buf;
