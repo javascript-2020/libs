@@ -72,9 +72,10 @@ function encrypt(){
   //:
   
 
-        function alg(fn,type){
+        function alg(type){
         
-              var mode              = ['crypto','aes-gcm'];
+              var fn      = encrypt;
+              var mode    = ['crypto','aes-gcm'];
               
               switch(type){
               
