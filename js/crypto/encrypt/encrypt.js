@@ -388,7 +388,9 @@ function encrypt(){
               var buf;
               switch(type){
                 
-                case 'arraybuffer'    : break;
+                case 'blob'           : buf   = await blob_buf(v);        break;
+                case 'uint8array'     : buf   = v.buffer;                 break;
+                case 'arraybuffer'    :                                   break;
                   
                 default               : return null;
                 
