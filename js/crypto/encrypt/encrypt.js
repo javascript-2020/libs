@@ -48,7 +48,8 @@ function encrypt(){
         obj.encoder           = encoder;
         var decoder           = new TextDecoder();
         obj.decoder           = decoder;
-        obj.to                = {};
+        var to                = {};
+        obj.to                = to;
         
 
   //:
@@ -120,11 +121,21 @@ function encrypt(){
         
         encrypt.password    = async function(password,buf,type){
         
+              buf           = await to.buf(buf);
               var fn        = alg.encrypt(type);
               var cipher    = await fn.password(password,buf);
               return cipher;
               
         }//password
+        
+        
+        encrypt.password.blob   = async function(password,buf,type){
+          
+              var cipher    = await encrypt.password(password,buf,type);
+              var blob      = to.blob(cipher);
+              return blob;
+              
+        }//blob
 
 
         
@@ -141,11 +152,21 @@ function encrypt(){
         
         decrypt.password    = async function(password,buf,type){
         
+              buf       = await to.buf(buf);
               var fn    = alg.decrypt(type);
-              var txt   = await fn.password(password,buf);
-              return txt;
+              var buf   = await fn.password(password,buf);
+              return buf;
               
         }//password
+        
+        
+        decrypt.password.blob   = async function(password,buf,type){
+          
+              var txt   = await decrypt.password(password,buf,type);
+              var blob    = to.blob(txt);
+              return blob;
+              
+        }//blob
         
 
   //:
@@ -338,11 +359,7 @@ function encrypt(){
   //:
   
         
-        obj.to.blob   = to_blob;
-        
-        obj.to_blob   = to_blob;
-        
-        function to_blob(v){
+        to.blob   = function(v){
           
               var type    = datatype(v);
               var buf;
@@ -363,7 +380,7 @@ function encrypt(){
         }//to_blob
         
 
-        obj.to.str    = function(v){
+        to.str    = function(v){
         
               var result    = buf_str(v);
               return result;
@@ -371,7 +388,7 @@ function encrypt(){
         }//str
         
         
-        obj.to.buf    = async function(v){
+        to.buf    = async function(v){
 
               var type    = datatype(v);
               switch(type){
@@ -387,7 +404,7 @@ function encrypt(){
         }//buf
         
         
-        obj.to.hex    = async function(v){
+        to.hex    = async function(v){
           
               var type    = datatype(v);
               var buf;
