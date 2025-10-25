@@ -16,7 +16,7 @@ function encrypt(){
 
   var obj   = {};
   
-        var df    = true;
+        var df    = false;
         
   
         var ext
