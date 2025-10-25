@@ -166,7 +166,7 @@ function encrypt(){
               var derived       = {name:'AES-GCM',length:256};
               var usage         = ['encrypt','decrypt'];
               var key           = await window.crypto.subtle.deriveKey(alg,imported,derived,true,usage);
-              console.log(key);
+                                                                                //console.log(key);
               
               return {key,salt};
         
