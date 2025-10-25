@@ -346,7 +346,7 @@ function encrypt(){
               
                 case 'string'           : buf   = encoder.encode(v);        break;
                 case 'uint8array'       : buf   = v.buffer;                 break;
-                case 'arraybuffer'      :                                   break;
+                case 'arraybuffer'      : buf   = v;                        break;
                 case 'blob'             : return v;
                 
                 default                 : return null;
@@ -391,7 +391,7 @@ function encrypt(){
                 
                 case 'blob'           : buf   = await blob_buf(v);        break;
                 case 'uint8array'     : buf   = v.buffer;                 break;
-                case 'arraybuffer'    :                                   break;
+                case 'arraybuffer'    : buf   = v;                        break;
                   
                 default               : return null;
                 
