@@ -184,11 +184,13 @@ function encrypt(){
               cipher            = new Uint8Array(cipher);
               
               var full          = buf_gen(iv,cipher);
-                                                                                output('encrypt :');
-                                                                                //output.str('text',buf);              
-                                                                                output.b64('iv',iv);
-                                                                                output.b64('cipher',cipher);
-                                                                                output.b64('full',full);              
+                                                                                if(df){
+                                                                                      output('encrypt :');
+                                                                                      //output.str('text',buf);              
+                                                                                      output.b64('iv',iv);
+                                                                                      output.b64('cipher',cipher);
+                                                                                      output.b64('full',full);              
+                                                                                }
               return full;
 
         }//aes-gcm
@@ -215,10 +217,12 @@ function encrypt(){
               
               var decrypted     = await window.crypto.subtle.decrypt({name:'AES-GCM',iv},key,cipher);
               
-                                                                                output('decrypt :');
-                                                                                output.b64('iv',iv);
-                                                                                output.b64('cipher',cipher);
-                                                                                //output.str('text',decrypted);
+                                                                                if(df){
+                                                                                      output('decrypt :');
+                                                                                      output.b64('iv',iv);
+                                                                                      output.b64('cipher',cipher);
+                                                                                      //output.str('text',decrypted);
+                                                                                }
               return decrypted;              
 
           
