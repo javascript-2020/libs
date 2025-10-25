@@ -118,7 +118,7 @@ function encrypt(){
         }//encrypt
         
         
-        encrypt.password    = async function(password,buf){
+        encrypt.password    = async function(password,buf,type){
         
               var fn        = alg(type);
               var cipher    = await fn.password(password,buf);
@@ -139,7 +139,7 @@ function encrypt(){
         }//decrypt
         
         
-        decrypt.password    = async function(password,buf){
+        decrypt.password    = async function(password,buf,type){
         
               var fn    = alg.decrypt(type);
               var txt   = await fn.password(password,buf);
