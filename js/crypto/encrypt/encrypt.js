@@ -344,8 +344,8 @@ function encrypt(){
               var buf;
               switch(type){
               
-                case 'string'       : buf   = encoder.encode(text);           break;
-                case 'uint8array'   : buf   = text.buffer;                    break;
+                case 'string'       : buf   = encoder.encode(v);           break;
+                case 'uint8array'   : buf   = v.buffer;                    break;
                 case 'blob'         : return v;
                 
                 default             : return null;
