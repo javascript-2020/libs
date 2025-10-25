@@ -54,9 +54,9 @@ function encrypt(){
   //:
   
   
-        obj.init    = function(){
+        obj.init    = async function(){
         
-              libs();
+              await libs();
               
         }//init
         
@@ -338,17 +338,22 @@ function encrypt(){
         
         obj.to_blob   = to_blob;
         
-        async function to_blob(){
+        async function to_blob(v){
           
-              var type    = datatype(text);
-              var buf     = text;
+              var type    = datatype(v);
+              var buf;
               switch(type){
               
                 case 'string'       : buf   = encoder.encode(text);           break;
                 case 'uint8array'   : buf   = text.buffer;                    break;
-                case 'blob'         : buf   = await text.arrayBuffer();       break;
+                case 'blob'         : return v;
+                
+                default             : return null;
                 
               }//switch
+              
+              var blob    = buf_blob(buf);
+              return blob;
               
         }//to_blob
         
@@ -361,10 +366,18 @@ function encrypt(){
         }//str
         
         
-        obj.to.buf    = function(v){
-        
-              var result    = str_buf(v);
-              return result;
+        obj.to.buf    = async function(v){
+
+              var type    = datatype(v);
+              switch(type){
+              
+                case 'blob'           : return await v.arrayBuffer();
+                case 'uint8array'     : return v.buffer;
+                case 'arraybuffer'    : return v;
+                case 'string'         : return str_buf(v);
+                
+              }//switch
+              return null;
               
         }//buf
         
