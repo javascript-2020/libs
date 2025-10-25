@@ -72,9 +72,8 @@ function encrypt(){
   //:
   
 
-        function alg(type){
+        function alg(fn,type){
         
-              var fn      = encrypt;
               var mode    = ['crypto','aes-gcm'];
               
               switch(type){
@@ -112,7 +111,7 @@ function encrypt(){
         
         async function encrypt(key,buf,type){
           
-              var fn        = alg(type);
+              var fn        = alg.encrypt(type);
               var cipher    = await fn(key,buf);
               return cipher;
               
@@ -121,7 +120,7 @@ function encrypt(){
         
         encrypt.password    = async function(password,buf,type){
         
-              var fn        = alg(type);
+              var fn        = alg.encrypt(type);
               var cipher    = await fn.password(password,buf);
               return cipher;
               
