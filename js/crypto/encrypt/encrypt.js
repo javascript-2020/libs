@@ -14,9 +14,13 @@
 
 function encrypt(){
 
-  var obj   = {};
+  var obj   = {
+        version                 : 'v1.0',
+        [Symbol.toStringTag]    : 'encrypt'
+  };
   
-        var df    = false;
+        var df=false
+        ;
         
   
         var ext
