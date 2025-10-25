@@ -185,7 +185,7 @@ function encrypt(){
               
               var full          = buf_gen(iv,cipher);
                                                                                 output('encrypt :');
-                                                                                output.str('text',buf);              
+                                                                                //output.str('text',buf);              
                                                                                 output.b64('iv',iv);
                                                                                 output.b64('cipher',cipher);
                                                                                 output.b64('full',full);              
@@ -218,7 +218,7 @@ function encrypt(){
                                                                                 output('decrypt :');
                                                                                 output.b64('iv',iv);
                                                                                 output.b64('cipher',cipher);
-                                                                                output.str('text',decrypted);
+                                                                                //output.str('text',decrypted);
               return decrypted;              
 
           
