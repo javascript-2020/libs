@@ -1051,7 +1051,7 @@
   //:
   
   
-        async function repolist({owner,token}){
+        async function repolist({owner,token}={}){
           
               owner             = get.owner(owner);
               token             = get.token(token);
