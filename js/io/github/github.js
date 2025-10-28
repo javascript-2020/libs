@@ -1114,7 +1114,10 @@
               
         }//repotree
         
-        
+
+
+/*
+
         async function repolist({owner}){
           
               owner             = get.owner(owner);
@@ -1133,6 +1136,8 @@
               
               
         }//repolist
+
+*/        
           
         
         
