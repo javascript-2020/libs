@@ -1144,7 +1144,9 @@
               var headers       = get.headers({token});
                                                                                 console.log(repo,token);
               var url           = `https://github.com/${owner}/${repo}/archive/refs/heads/${branch}.zip`;
-              //const zipUrl = `https://github.com/${user}/${repo}/archive/refs/heads/${branch}.zip`;
+              if(token){
+                    url         = `https://api.github.com/repos/${owner}/${repo}/zipball/${branch}`;
+              }
               
               var {res,error}   = await gfetch(url,{headers});
               if(error){
