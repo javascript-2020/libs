@@ -1126,7 +1126,7 @@
 
               var url           = 'https://api.github.com/user/repos';
               
-              var {res,error}   = gfetch(url,{headers});
+              var {res,error}   = await gfetch(url,{headers});
               if(error){
                     return {error};
               }
