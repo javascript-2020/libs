@@ -8,7 +8,7 @@
             var b64     = btoa(bin);
             return b64;
       
-      }
+      }//blob_b64
 
 
 
