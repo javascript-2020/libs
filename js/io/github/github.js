@@ -1118,9 +1118,8 @@
 
 
 
-        async function repolistall({owner,token}={}){
+        async function repolistall({token}={}){
           
-              owner             = get.owner(owner);
               token             = get.token(token);
               var headers       = get.headers({token});
 
