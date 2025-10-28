@@ -65,6 +65,7 @@
 
         github.user                 = {};
         github.user.repolist        = repolist;
+        github.user.repolist.all    = repolistall;
 
 
         github.repo                 = {};
@@ -1116,9 +1117,8 @@
         
 
 
-/*
 
-        async function repolist({owner}){
+        async function repolistall({owner}){
           
               owner             = get.owner(owner);
               token             = get.token(token);
@@ -1135,9 +1135,8 @@
               console.log(json);
               
               
-        }//repolist
+        }//repolistall
 
-*/        
           
         
         
