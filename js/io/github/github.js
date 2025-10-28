@@ -70,7 +70,6 @@
         github.repo                 = {};
         github.repo.default         = repodefault;
         github.repo.tree            = repotree;
-        github.repo.list            = repolist;
         
 
 
@@ -1067,6 +1066,7 @@
               }
               
               var json          = await res.json();
+                                                                                console.log(json);
               var list          = json.map(item=>item.name);
               return {list};
               
