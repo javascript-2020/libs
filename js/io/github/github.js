@@ -1118,7 +1118,7 @@
 
 
 
-        async function repolistall({owner}={}){
+        async function repolistall({owner,token}={}){
           
               owner             = get.owner(owner);
               token             = get.token(token);
