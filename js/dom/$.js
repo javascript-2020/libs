@@ -906,8 +906,12 @@
         }//copy
         
         
-        $.icon.copy2    = function(icon,input){
+        $.icon.copy2    = function({icon,input,callback}){
           
+              if(arguments.length!=1){
+                    [icon,input]    = arguments;
+              }
+              
               icon.onclick    = click;
 
               async function click(e){
@@ -915,6 +919,9 @@
                     var txt   = input.value;
                     await navigator.clipboard.writeText(txt);
                     $.mousetext(e,'copied');
+                    if(callback){
+                          callback(icon);
+                    }
                     
               }//click
               
@@ -953,7 +960,11 @@
         }//paste
         
         
-        $.icon.paste2   = function(icon,input){
+        $.icon.paste2   = function({icon,input,callback,remove}){
+          
+              if(arguments.length!=1){
+                    [icon,input]    = arguments;
+              }
           
               icon.onclick    = click;
 
@@ -961,7 +972,13 @@
               async function click(){
                 
                     var txt       = await navigator.clipboard.readText();
-                    ipnut.value   = txt;
+                    input.value   = txt;
+                    if(remove){
+                          await navigator.clipboard.writeText('');
+                    }
+                    if(callback){
+                          callback(icon);
+                    }
                     
               }//click
               
