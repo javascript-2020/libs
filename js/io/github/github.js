@@ -1183,6 +1183,11 @@
         get.token   = function(token){
           
               token     = token||github.token;
+              
+              if(token===false){
+                    return token;
+              }
+              
               if(!token && typeof localStorage!='undefined'){
                     token   = localStorage['github-token'];
               }
