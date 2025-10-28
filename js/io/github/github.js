@@ -1135,6 +1135,22 @@
               
         }//repolistall
 
+
+        async function repozip({owner,repo,branch,token}){
+          
+              token             = get.token(token);
+              owner             = get.owner(owner);
+              var headers       = get.headers(token);
+              var url           = `https://github.com/${owner}/${repo}/archive/refs/heads/${branch}.zip`;
+              
+              var {res,error}   = await gfetch(url,{headers});
+              if(error){
+                    return {error};
+              }
+              var blob    = await res.blob();
+              return {blob};
+              
+        }//repozip
           
         
         
