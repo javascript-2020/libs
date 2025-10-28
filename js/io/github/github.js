@@ -70,6 +70,7 @@
         github.repo                 = {};
         github.repo.default         = repodefault;
         github.repo.tree            = repotree;
+        github.repo.list            = repolist;
         
 
 
@@ -1112,6 +1113,27 @@
               return {tree};
               
         }//repotree
+        
+        
+        async function repolist({owner}){
+          
+              owner             = get.owner(owner);
+              token             = get.token(token);
+              var headers       = get.headers({token});
+
+              var url           = 'https://api.github.com/user/repos';
+              
+              var {res,error}   = gfetch(url,{headers});
+              if(error){
+                    return {error};
+              }
+              
+              var json    = await res.json();
+              console.log(json);
+              
+              
+        }//repolist
+          
         
         
   //:
