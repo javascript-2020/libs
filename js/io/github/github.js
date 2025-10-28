@@ -1141,7 +1141,7 @@
           
               token             = get.token(token);
               owner             = get.owner(owner);
-              var headers       = get.headers(token);
+              var headers       = get.headers({token});
                                                                                 console.log(repo,token);
               var url           = `https://github.com/${owner}/${repo}/archive/refs/heads/${branch}.zip`;
               //const zipUrl = `https://github.com/${user}/${repo}/archive/refs/heads/${branch}.zip`;
