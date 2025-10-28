@@ -876,12 +876,28 @@
         
         $.icon.copy    = function(icon){
           
+              var css;
+              var root;
+              
+              if(arguments.length==2){
+                    var a1    = arguments[0];
+                    var a2    = arguments[1];
+                    if(typeof a1=='string'){
+                          css     = a1;
+                          root    = a2;
+                    }else{
+                          css     = a2;
+                          root    = a1;
+                    }
+                    icon        = $(root,css);
+              }
+/*              
               if(typeof icon=='string'){
                     var css     = icon;
                     var root    = arguments[1];
                     icon        = $(root,css);
               }
-              
+*/              
               var par         = icon.parentNode;
               var input       = par.querySelector('input:not([type])');
               
@@ -906,13 +922,29 @@
         
         
         $.icon.paste    = function(icon){
-          
+
+              var css;
+              var root;
+              
+              if(arguments.length==2){
+                    var a1    = arguments[0];
+                    var a2    = arguments[1];
+                    if(typeof a1=='string'){
+                          css     = a1;
+                          root    = a2;
+                    }else{
+                          css     = a2;
+                          root    = a1;
+                    }
+                    icon        = $(root,css);
+              }
+/*          
               if(typeof icon=='string'){
                     var css     = icon;
                     var root    = arguments[1];
                     icon        = $(root,css);
               }
-              
+*/
               var par         = icon.parentNode;
               var input       = par.querySelector('input:not([type])');
 
