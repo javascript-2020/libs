@@ -71,6 +71,7 @@
         github.repo                 = {};
         github.repo.default         = repodefault;
         github.repo.tree            = repotree;
+        github.repo.zip             = repozip;
         
 
 
