@@ -156,16 +156,20 @@
   
   
         complete.load   = function(file,blob){
+                                                                                console.log(file,blob);
         }//complete.load
         
         
         complete.save   = function(file){
+                                                                                console.log(file);
         }//save
 
         
         function source(){
           
-          
+              var blob    = new Blob(['helloworld']);
+              return blob;
+              
         }//source
         
         
