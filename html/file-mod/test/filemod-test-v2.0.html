@@ -14,7 +14,10 @@
                                                                                 console.log('filemod-test-v2.0.html');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
-        var ext,$,datatype,menumod,keydown
+        var df=true,version='v2.0'
+        ;
+        
+        var ext,$,datatype,menumod,keydown,debug
         ;
         
         var menu;
@@ -26,7 +29,7 @@
   
   
         async function init(){
-                                                                                console.log('init');
+                                                                                debug('init',version);
 
 
               keydown.add(kd);
@@ -34,7 +37,7 @@
               menu                   = menumod();
               
               
-              filemod   = mod.filemod;
+              filemod   = mod['file-mod'];
               
               filemod.initmod({ext,$,menumod,menu,complete});
 
@@ -58,9 +61,10 @@
               'js/dom/$.js',
               'js/core/datatype.js',
               'js/dom/menumod/menumod.js',
-              'js/dom/keydown/keydown.js'
+              'js/dom/keydown/keydown.js',
+              'js/debug/debug.js',
         );
-        [$,datatype,menumod,keydown]   = await promise;
+        [$,datatype,menumod,keydown,debug]   = await promise;
   
         mod.stack.complete;
               
@@ -89,7 +93,7 @@
       <body>
       
             <div>
-                  <filemod component v2.0></filemod>
+                  <file-mod component></file-mod>
             </div>
             
             <div>
@@ -115,7 +119,7 @@
   
   
         function initdom(rootnode){
-        
+                                                                                debug('initdom');
               
               var root    = rootnode;
               
@@ -152,16 +156,20 @@
   
   
         complete.load   = function(file,blob){
+                                                                                console.log(file,blob);
         }//complete.load
         
         
         complete.save   = function(file){
+                                                                                console.log(file);
         }//save
 
         
         function source(){
           
-          
+              var blob    = new Blob(['helloworld']);
+              return blob;
+              
         }//source
         
         
