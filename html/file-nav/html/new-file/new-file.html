@@ -1,7 +1,7 @@
 
 
 
-<new-file>
+<new-file v2.0>
 
       <template shadowrootmode=open>
       
@@ -53,15 +53,22 @@
       
       <script>
                                                                                 //console.log('mod.newfile');
-mod.newfile   = function(){  
+(function new_file({mod,dom,host}){  
   
-  var obj   = {};
+  var obj   = {
+        version   : 'v2.0',
+  };
   
-  
-        obj.init    = function(){
-        }//init
+        var $
+        ;
         
-  
+        obj.initmod   = function(params){
+        
+              $   = params.$;
+              
+        }//initmod
+
+        
   //:
   
   
@@ -77,13 +84,20 @@ mod.newfile   = function(){
         var on    = {};
         var btn   = {};
         
-        
+
+  //:
+  
+  
+        obj.init    = function(){
+        }//init
+
+
   //:
   
   
         obj.initdom   = function(rootnode){
           
-              var host                                = $.$(rootnode,'new-file');
+              //var host                                = $.$(rootnode,'new-file');
               shadow                                  = host.shadowRoot;
               
               root                                    = $(shadow,'#new-file-root');
@@ -224,7 +238,7 @@ mod.newfile   = function(){
   
   return obj;
   
-//newfilemod
+//new_file
 }
       
       </script>
