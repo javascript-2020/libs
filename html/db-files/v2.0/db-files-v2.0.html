@@ -1,7 +1,7 @@
 
 
 
-<db-files>
+<db-files v2.0>
       
       <template shadowrootmode=open>
             
@@ -48,7 +48,7 @@
             
       <script>
 
-mod['db-files']   = function({mod,dom,host}){
+(function db_files({mod,dom,host}){
   
   var obj   = {
         version   : 'v1.0'
@@ -409,7 +409,7 @@ mod['db-files']   = function({mod,dom,host}){
         
   return obj;
   
-}//db-files
+})//db_files
 
       </script>
 

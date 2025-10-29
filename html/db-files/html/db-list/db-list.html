@@ -1,6 +1,6 @@
 
 
-<db-list>
+<db-list v2.0>
 
       <template shadowrootmode=open>
       
@@ -46,9 +46,11 @@
       
       <script>
       
-mod.dblist    = function(){
+(function db_list({mod,dom,host}){
   
-  var obj   = {};
+  var obj   = {
+        version   : 'v2.0',
+  };
   
         var $,grp,db
         ;
@@ -82,10 +84,9 @@ mod.dblist    = function(){
   //:
   
   
-        obj.initdom   = function(rootnode){
+        obj.initdom   = function(){
           
-              root                                  = $.$(rootnode,'db-list');
-              shadow                                = root.shadowRoot;
+              shadow                                = host.shadowRoot;
 
               grp.add.style(shadow);
               
@@ -148,7 +149,7 @@ mod.dblist    = function(){
   
   return obj;
   
-}//dblist
+})//dblist
       
       </script>
       
