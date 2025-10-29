@@ -1,0 +1,178 @@
+
+
+
+<html>
+
+      <head>
+
+
+      
+            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
+
+            <script init>
+                                                                                console.clear();
+                                                                                console.log('filemod-test-v2.0.html');
+                                                                                console.log();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+        var ext,$,datatype,menumod,keydown
+        ;
+        
+        var menu;
+        
+        var filemod;
+
+
+  //:
+  
+  
+        async function init(){
+                                                                                console.log('init');
+
+
+              keydown.add(kd);
+              
+              menu                   = menumod();
+              
+              
+              filemod   = mod.filemod;
+              
+              filemod.initmod({ext,$,menumod,menu,complete});
+
+              await filemod.init();
+              
+              
+              initdom(document.body);
+
+
+        
+        }//init
+        
+
+(async()=>{
+
+        mod.stack.add;
+        
+        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
+          
+        var promise   = ext.load.libs(
+              'js/dom/$.js',
+              'js/core/datatype.js',
+              'js/dom/menumod/menumod.js',
+              'js/dom/keydown/keydown.js'
+        );
+        [$,datatype,menumod,keydown]   = await promise;
+  
+        mod.stack.complete;
+              
+})();
+    
+        
+            </script>
+      
+            <style>
+      
+  html
+    {height:100%}
+  body
+    {height:calc(100% - 16px);font-family:arial}
+  
+  .icon
+    {width:30px;height:30px;border:1px solid gray;border-radius:3px;box-sizing:border-box;cursor:pointer;}
+  button
+    {padding:5px 10px;cursor:pointer;height:30px;font-size:16px}            
+            
+            </style>
+
+      <head>
+
+      
+      <body>
+      
+            <div>
+                  <filemod component v2.0></filemod>
+            </div>
+            
+            <div>
+                  <button id=test>test</button>
+            </div>
+      
+      
+<!--      
+            <checkbox-one-template>
+                  <script src='https://html-loader-dblv8aserliq.runkit.sh/?checkbox-one-template'></script>
+            </checkbox-one-template>
+-->            
+
+      </body>
+
+      <script>
+
+
+        var complete    = {};
+        
+        
+  //:
+  
+  
+        function initdom(rootnode){
+        
+              
+              var root    = rootnode;
+              
+              
+              filemod.initdom();
+
+
+              
+              
+              $('#test').onclick    = e=>alert(filemod.autosave);
+              
+              
+              
+        }//initdom
+
+        
+  //:
+  
+  
+        function kd(e){
+        
+              if(e.key==' ' && e.ctrlKey){
+                    menumod.open();
+              }
+              
+        }//kd
+        
+
+        function focus(){
+        }//focus
+        
+        
+  //:
+  
+  
+        complete.load   = function(file,blob){
+        }//complete.load
+        
+        
+        complete.save   = function(file){
+        }//save
+
+        
+        function source(){
+          
+          
+        }//source
+        
+        
+        
+        
+      </script>
+      
+
+
+
+
+
+
+      

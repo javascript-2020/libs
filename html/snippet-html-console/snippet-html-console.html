@@ -1,0 +1,254 @@
+
+
+
+<snippet-html-console v2.0>
+
+
+      <template shadowrootmode=open>
+      
+            <style>
+    
+  #root
+    {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px;
+      /*height:100%*/
+    }
+    
+  #hldr
+    {border:1px solid lightgray;}
+    
+  iframe
+    {width:100%;height:100%;border:none}
+    
+  input
+    {font-size:16px;padding:5px 10px}
+  input[type=button]
+    {cursor:pointer}
+    
+            </style>
+            
+            <div id=root>
+            
+                  <editor component v2.0></editor>
+                  
+                  <div>
+                        <input value=run type=button>
+                  </div>
+                              
+                  <div id=hldr part=hldr>
+                        <iframe></iframe>
+                  </div>
+                  
+                  <console component v2.0></console>
+                  
+            </div>
+      
+      </template>
+      
+      
+      <script>
+
+      
+(function snippet_html_console({mod,dom,host}){
+
+  var obj   = {
+        version   : 'v2.0',
+  };
+  
+        var df=true,did='snippet-html'
+        ;
+        
+        
+        var ext,$,menu,ace
+        ;
+        
+        obj.initmod   = function(params){
+        
+              ext       = params.ext;
+              $         = params.$;
+              menu      = params.menu;
+              ace       = params.ace;
+              
+        }//initmod
+        
+        
+  //:
+  
+        var editor;
+        obj.editor    = null;
+        var console;
+        obj.console   = null;
+
+        
+        var host;
+        var root;
+        
+        var hldr;
+        var iframe;
+
+        
+        var def               = {};
+        def.html              = null;
+        
+        def.console           = {};
+        def.console.height    = null;
+
+
+        
+        var btn               = {};
+        
+
+
+  //:
+  
+  
+        obj.init    = async function(){
+                                                                                debug('init',obj.version);
+              def.html          = $.htmlentities.decode(dom);
+              
+              var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
+              if(dom.hasAttribute('h')){
+                    var h   = dom.getAttribute('h');
+                    h       = int(h);
+                    def.console.height    = h;
+                    
+              }
+              if(dom.hasAttribute('height')){
+                    var h   = dom.getAttribute('height');
+                    h       = int(h);
+                    def.console.height    = h;
+              }
+
+              
+              editor            = mod.editor;                                                                                
+              obj.editor        = editor;
+              console           = mod.console;
+              obj.console       = console;
+
+              
+              editor.initmod({ext,$,menu,ace});
+              console.initmod({ext,$});
+              
+
+              await Promise.all([  
+                    src(),
+                    editor.init(),
+                    console.init(),
+              ]);
+              
+              
+        }//init
+
+
+        async function src(){
+          
+              if(!dom.hasAttribute('src'))return;
+              var src     = dom.getAttribute('src');
+              var res     = await fetch(src);
+              var txt     = await res.text();
+              def.html    = txt;
+              
+        }//src
+        
+
+  //:
+  
+  
+        obj.initdom    = function(){
+
+              var shadow                          = host.shadowRoot;
+
+
+              editor.initdom({mode:'html',fullsize:true,txt:def.html});
+              
+              
+              $(shadow,'[value=run]').onclick       = btn.run;
+
+
+              hldr                                = $(shadow,'#hldr');
+              iframe                              = $(hldr,'iframe');
+
+
+              console.initdom();
+              console.height    = def.console.height;
+              
+              console.log('ready');
+
+        }//initdom          
+        
+
+
+        
+        
+  //:
+
+  
+        btn.run   = run;
+        obj.run   = run;
+        
+        function run(){
+        
+              hldr.replaceChildren();
+              
+              var html          = editor.getvalue();
+              html              = sandbox+html;
+              
+              var niframe       = iframe.cloneNode(true);
+              niframe.log       = log;
+              niframe.srcdoc    = html;
+              niframe.onload    = onload;
+              hldr.append(niframe);
+              
+              
+              function onload(){
+              
+                    var h   = niframe.contentDocument.documentElement.scrollHeight;
+                    hldr.style.height   = h+'px';
+                    
+              }//onload
+              
+              
+              function log(){
+                
+                    var args    = [...arguments];
+                    args.unshift('[ snippet-html-console ]');
+                    window.console.log.apply(window.console,args);
+                    console.log.apply(console,arguments);
+                    
+              }//log
+              
+        }//run
+        
+        
+        var sandbox   = `
+        
+              <script>
+              
+                    window.console.log    = window.frameElement.log;
+                    
+              </scr`+`ipt>
+              
+        `;
+
+  
+  //:
+  
+
+        function debug(){
+          
+              if(!df && !obj.df)return;
+              var str   = [...arguments].join(' ');
+              window.console.log(`[ ${did} ]`,str);
+              
+        }//debug
+
+
+  
+  return obj;
+  
+})//snippet_html_console
+
+
+      </script>
+
+      
+</snippet-html-console>

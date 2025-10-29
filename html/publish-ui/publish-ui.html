@@ -1,0 +1,415 @@
+
+
+<publish-ui v2.0>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+  #root
+    {display:inline-flex;margin-right:5px}
+  
+  .menu
+    { position:absolute;left:0;top:30px;width:400px;
+      display:flex;flex-direction:column;gap:10px
+    }
+  .sub
+    {border:1px solid lightgray;padding:20px;border-radius:5px}
+  
+  .hdr
+    {}
+  .delete
+    {}
+  
+  .opts
+    {}
+  #autorun
+    {margin-right:10px}
+  
+  .txt
+    { display:flex;align-items:center}
+  .txt-publish
+    {}
+        
+  .file
+    {border:1px solid lightgray;padding:20px;border-radius:5px}
+  .file-publish
+    {}
+                  
+                  
+            </style>
+
+            
+            <div id=root style='visibility:hidden'>
+            
+                  <button id=publish>publish</button>
+                  
+                  <div class=menu-root>
+                  
+                        <img class=menu-icon>
+                        
+                        <div class=menu style='display:none'>
+                        
+                              <div class='hdr sub'>
+                                    <button class=delete>delete</button>
+                              </div>
+                              
+                              
+                              <!--
+                              <div class='opts sub'>
+                                    <checkbox-one id=autorun></checkbox-one>
+                              </div>
+                              -->
+                              
+                              
+                              <div class='txt sub'>
+                                    <button class=txt-publish>publish txt</button>
+                              </div>
+                              
+                              <div class='file sub'>
+                                    <button class=file-publish>publish file</button>
+                              </div>
+                              
+                        </div>
+                        
+                  </div>
+                  
+            </div>
+
+      </template>
+
+      
+      <script>
+
+      
+(function publish_ui({mod,root,node}){
+  
+  var obj   = {
+        version   : 'v2.0',
+  };
+  
+
+        var ext,$,run,menu,source,complete,log
+        ;
+        
+        obj.initmod   = function(params){
+          
+              ext           = params.ext;
+              $             = params.$;
+              run           = params.run;
+              menu          = params.menu;
+              source        = params.source;
+              complete      = params.complete;
+              log           = params.log;
+              
+        }//initmod
+
+
+  //:
+  
+  
+        var mode    = 'jsonblob';
+        var jsonblob;
+        
+        
+        var cur     = {};
+        cur.type    = 'text';
+
+
+
+        var ui      = {};
+        
+        var root;
+        var shadow;
+
+        //var autorun;
+
+
+
+        
+        var btn     = {};
+        var click   = {};
+
+
+    //:
+
+    
+        obj.init    = async function(){
+
+              libs();
+              
+        }//init
+
+
+        function libs(){
+        
+              var resolve;
+              libs.complete   = new Promise(res=>resolve    = res);
+              
+              ext.load.libs('js/io/jsonblob/jsonblob.js')
+                .then(result=>{
+                                  
+                      [jsonblob]    = result;
+                      jsonblob      = jsonblob();
+                      resolve();
+                      
+                });
+        
+        }//libs
+        
+        
+    //:
+
+    
+        obj.initdom   = function(rootnode){   //c
+          
+              root                                  = $.$(rootnode,'publish-root');
+              shadow                                = root.shadowRoot;
+              
+              var style                             = $(shadow,'style');
+              menu.add.style(shadow);
+              $.stylesheet.insert(style,'button');
+              
+          
+              $(shadow,'#publish').onclick          = btn.publish;
+              
+
+              var card                              = $(shadow,'.menu');
+              $(shadow,'.menu-icon').onclick        = menu.click(card,false,false,click.menu);
+
+
+              $(card,'.delete').onclick             = btn.delete;
+              
+              /*
+              ui.autorun                            = $(shadow,'#autorun');
+              ui.autorun.checked                    = false;
+              */
+              /*
+              ui.autorun.onchange                   = e=>obj.autorun   = autorun.checked;
+              obj.autorun                           = autorun.checked;
+              */
+
+            //txt:-
+              
+              $(shadow,'.txt-publish').onclick      = btn.txt;
+              
+              
+            //file:-
+            
+              $(shadow,'.file-publish').onclick     = btn.file;
+              
+
+
+              $(shadow,'#root').style.visibility    = '';                          
+
+
+              
+        }//initdom
+        
+
+  //:
+  
+  
+        btn.publish   = function(e){
+          
+              save();
+              
+        }//share
+        
+        
+        btn.delete    = function(){
+          
+              del();
+              
+        }//delete
+        
+        
+        btn.txt   = function(){
+        
+              cur   = {type:'text'};
+              save.text();
+              
+        }//txt
+
+        
+        btn.file    = function(){
+          
+              cur   = {type:'file'};
+              save.file();
+              
+        }//file
+        
+
+//:
+
+
+        click.menu    = function(type,opt){
+        }//menu
+
+        
+//:
+
+
+        obj.clear   = function(){
+          
+              var url       = window.location.toString();
+              var search    = window.location.search;
+              if(search){
+                    url     = url.slice(0,-search.length);
+              }
+              window.history.replaceState(null,'',url);
+              
+        }//clear
+        
+
+        obj.query   = function(){return query()}
+        
+        async function query(){
+                                                                    console.log('[ publish ]','query loading ...');
+              await libs.complete;
+                                                                    console.log('[ publish ]','query load complete');
+              
+              var json;
+              var error;
+              
+              switch(mode){
+                
+                case 'jsonblob'   : ({json,error}    = await jsonblob.util.query());        break;
+                
+              }//switch
+              
+              if(error){
+                    log.red(error);
+                    return;
+              }
+              
+              if(!json){
+                    return;
+              }
+              
+              load(json);
+              
+        }//query
+        
+
+        obj.delete    = async function(){return del()}
+        
+        async function del(){
+
+              switch(mode){
+                
+                case 'jsonblob'   : await jsonblob.util.delete();       break;
+                
+              }//switch
+          
+              log.green('publish deleted');
+              
+        }//delete
+        
+        
+        async function load(json){
+                                                                    console.log('[ publish ]','query.complete');
+                                                                    console.json(json);
+              var txt;
+              switch(json.type){
+                
+                case 'github'   : await load.github(json.file);       break;
+                case 'text'     : txt   = load.text(json);            break;
+                
+              }//switch
+              if(txt){
+                    var blob    = new Blob([txt]);
+                    complete.load(null,blob);
+              }
+              
+              log.green('publish loaded');
+
+          
+        }//load
+        
+        
+        load.github   = async function(json){
+          
+              var {owner,repo,branch,path}    = json;
+              filemod.github.write(owner,repo,branch,path);
+              var api   = true;
+              await filemod.github.load(api);
+              
+        }//github
+        
+        
+        load.text   = function(json){
+          
+              return json.txt;
+              
+        }//text
+        
+
+//:
+
+
+        obj.save    = save;
+        
+        function save(json){
+
+              if(!cur){
+                    alert('no current publish type');
+                    return;
+              }
+              
+              save[cur.type]();
+          
+        }//save
+
+
+        save.text   = async function(){
+          
+              var blob      = source();
+              var txt       = await blob.text();
+              var json      = {type:'text',txt};
+              save.complete(json);
+              
+        }//text
+
+        
+        save.file   = function(){
+          
+              var file    = filemod.export();
+              
+              if(file==='no file'){
+                    alert('no file');
+                    return;
+              }
+              
+              if(file==='local'){
+                    alert('local file cannot be published');
+                    return;
+              }
+              
+
+              var json      = {type:'github',file};
+              save.complete(json);
+              
+        }//file
+        
+        
+        save.complete   = function(json){
+                                                                    console.json(json);
+              jsonblob.util.save(json);
+          
+              log.green('published '+cur.type);
+              
+        }//complete
+
+
+        
+        
+  return obj;
+  
+})//publish_ui
+
+            
+      </script>
+      
+</publish-ui>
+

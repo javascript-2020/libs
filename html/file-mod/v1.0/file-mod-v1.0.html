@@ -1,0 +1,356 @@
+
+
+<file-mod v1.0>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+  #root 
+    {display:inline-flex;gap:5px;margin-right:5px}
+
+  localfile
+    {}    
+  github-root
+    {}        
+  https-file
+    {}
+  db-files
+    {}
+  google-storage
+    {}
+    
+            </style>
+
+            
+            <div id=root style='visibility:hidden'>
+            
+                  <localfile api>
+                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                  </localfile>
+      
+                  <https-file api>
+                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                  </https-file>
+
+                  <github api>
+                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                  </github>
+                  
+                  <db-files api>
+                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                  </db-files>
+                  
+                  <google-storage>
+                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                  </google-storage>
+
+                  <ftp-server api>
+                        <script html-loader src='https://html-loader-1024713184986.us-central1.run.app/'></script>
+                  </ftp-server>
+                  
+            </div>
+
+            
+      </template>
+      
+      <script>
+
+
+      
+mod.filemod   = function(){
+  
+  var obj       = {
+        version   : 'v1.0'
+  };
+  
+  var df    = true
+  ;
+                                                                                debug(obj.version);
+                                                                                
+        var ext,$,menumod,menu,complete,source,focus,editor,log
+        ;
+          
+        obj.initmod   = function(params){
+          
+              ext             = params.ext;
+              $               = params.$;
+              menumod         = params.menumod;
+              
+              menu            = params.menu;
+              complete        = params.complete;
+              source          = params.source;
+              focus           = params.focus;
+              log             = params.log;
+              
+              editor          = params.editor;
+              
+        }//initmod
+
+
+  //vars:-
+        
+        var localfile;
+        var github;
+        var httpsfile;
+        var dbfiles;
+        var googlestorage;
+        var ftpserver;
+        
+        var cur;
+        Object.defineProperty(obj,'cur',{get:()=>cur,set:v=>cur=v});
+
+
+        var root;
+        var shadow;
+
+        
+        var btn   = {};
+
+          
+  //:
+
+              
+        obj.init    = async function(){
+        
+            localfile                 = mod.localfile();
+            obj.localfile             = localfile;
+            github                    = mod.github();
+            obj.github                = github;
+            httpsfile                 = mod.httpsfile();
+            obj.httpsfile             = httpsfile;
+            dbfiles                   = mod['db-files']();
+            obj.dbfiles               = dbfiles;
+            googlestorage             = mod['google-storage']();
+            ftpserver                 = mod.ftp_server();
+
+            localfile.initmod({ext,$,menu,filemod:obj,source,focus,editor});
+            github.initmod({ext,$,menu,filemod:obj,source,focus,editor});
+            httpsfile.initmod({ext,$,menu,filemod:obj,source,focus,editor});
+            dbfiles.initmod({ext,$,datatype,menumod,menu,filemod:obj,source,focus});
+            googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source,focus});
+            ftpserver.initmod({ext,$,datatype,menu,source,log});
+            
+            await localfile.init();
+            await github.init();
+            await httpsfile.init();
+            await dbfiles.init();
+            await googlestorage.init();
+            await ftpserver.init();
+            
+            localfile.load.complete           = complete.load;
+            localfile.save.complete           = complete.save;
+            github.load.complete              = complete.load;
+            github.save.complete              = complete.save;
+            httpsfile.load.complete           = complete.load;
+            httpsfile.save.complete           = complete.save;
+            dbfiles.load.complete             = complete.load;
+            dbfiles.save.complete             = complete.save;
+            googlestorage.load.complete       = complete.load;
+            googlestorage.save.complete       = complete.save;
+            ftpserver.load.complete           = complete.load;
+            ftpserver.save.complete           = complete.save;
+
+
+            
+        }//init
+
+                                      
+  //:
+
+              
+        obj.initdom   = function(rootnode){
+        
+              root                              = $.$(rootnode,'filemod-root');
+              shadow                            = root.shadowRoot;
+
+              var style                         = $(shadow,'style'); 
+              menu.add.style(shadow);
+              $.stylesheet.insert(style,'button');
+
+
+              localfile.initdom(shadow);
+              github.initdom(shadow);
+              httpsfile.initdom(shadow);
+              dbfiles.initdom(shadow);
+              googlestorage.initdom(shadow);
+              ftpserver.initdom(shadow);
+
+
+              $(shadow,'#root').style.visibility    = '';
+              
+        }//initdom
+                    
+
+  //:
+  
+          
+        obj.save    = function(file){return save(file)}
+          
+        async function save(file){
+        
+              if(!file){
+                    if(!cur){
+                          log.orange('no file');
+                          return;
+                    }
+                    file    = cur;
+              }
+
+              
+              var blob;
+              
+              if(source){
+                    blob      = await source();
+              }else{
+                    var txt   = editor.getValue();
+                    blob      = new Blob([txt]);
+              }
+              
+              if(!blob){
+                    log.orange('no source');
+                    return;
+              }
+
+              switch(cur.type){
+                
+                case 'github'               : await github.save(cur,blob);              break;
+                case 'localfile'            : await localfile.save(cur,blob);           break;
+                case 'https-file'           : await httpsfile.save(cur,blob);           break;
+                case 'db-files'             : await dbfiles.save(cur,blob);             break;
+                case 'google-storage'       : await googlestorage.save(cur,blob);       break;
+                case 'ftp-server'           : await ftpserver.save(cur,blob);           break;
+                
+              }//switch
+        
+        }//save
+                  
+                  
+        obj.clear   = function(){
+          
+              if(!cur){
+                    return 'no file';
+              }
+              
+              switch(cur.type){
+                
+                case 'github'           : github.clear();               break;
+                case 'local'            : localfile.clear();            break;
+                case 'https-file'       : httpsfile.clear();            break;
+                case 'db-files'         : dbfiles.clear();              break;
+                case 'google-storage'   : googlestorage.clear();        break;
+                case 'ftp-server'       : ftpserver.clear();            break;
+                
+              }//switch
+              
+              cur   = null;
+              
+        }//clear
+                  
+
+  //:
+  
+  
+        obj.new       = newfile;
+        obj.newfile   = newfile;
+
+        
+        function newfile({
+        
+              filetype,ft,
+              
+              abs,path,
+              name,filename,
+              rel,
+              
+              kind,
+              size,
+              ctime,mtime,
+              
+              title,icon
+              
+        }){
+        
+              var file          = {};
+              
+              file.filetype     = filetype||ft;
+              file.ft           = filetype||ft;
+              file.type         = filetype||ft;
+              
+              
+              file.abs          = abs
+              file.path         = path;
+              file.name         = name||filename;
+              file.filename     = name||filename;
+
+              file.rel          = rel;              
+              
+              file.kind         = kind;
+              file.size         = item.size;
+              file.ctime        = ctime;
+              file.mtime        = mtime;
+              file.atime        = atime;
+
+              file.title        = title;
+              file.icon         = icon;
+              
+              return file;
+              
+        }//new
+        
+        
+        obj.export    = function(){
+        
+              if(!cur){
+                    return 'no file';
+              }
+              
+              var file;
+              var type    = cur.filetype||cur.type;
+              
+              switch(type){
+                
+                case 'github'           : file    = github.export(cur);               break;
+                case 'local'            : return 'local';
+                case 'https-file'       : file    = httpsfile.export(cur);            break;
+                case 'db-files'         : file    = dbfiles.export(cur);              break;
+                case 'google-storage'   : file    = googlestorage.export(cur);        break;
+                case 'ftp-server'       : file    = ftpserver.export(cur);            break;
+                
+              }//switch
+              
+              file.filetype   = type;
+              file.type       = type;
+              
+              return file;
+              
+        }//export
+                  
+                  
+        obj.import    = function(file){
+          
+        }//import
+
+
+  //:
+  
+  
+        function debug(){
+        
+              if(!df)return;  
+              var str   = [...arguments].join(' ');
+              console.log('[ filemod ]',str);
+              
+        }//debug
+        
+        
+  return obj;
+  
+}//filemod
+
+            
+      </script>
+
+</file-mod>
+
+

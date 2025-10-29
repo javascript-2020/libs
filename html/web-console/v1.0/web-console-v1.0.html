@@ -1,0 +1,296 @@
+
+
+
+<web-console v1.0>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+  #console
+    {border:1px solid lightgray;height:50px}
+    
+    
+  #ftr
+    {display:flex;gap:10px}
+    
+  #ftr>div
+    {display:flex;}
+    
+  .icon
+    {width:20px;height:20px;border:1px solid lightgray;border-radius:3px;box-sizing:border-box}
+  #clear
+    {}
+  #log-icon
+    {}
+  #warn-icon
+    {}
+  #error-icon
+    {}
+    
+            </style>
+
+            
+            <div id=console>
+            </div>
+
+
+            <div id=ftr>
+            
+                  <img id=clear>
+                  
+                  <div id=log-root>
+                        <img id=log-icon>
+                        <div id=log></div>
+                  </div>
+                  
+                  <div id=warn-root>
+                        <img id=warn-icon>
+                        <div id=warn></div>
+                  </div>
+                  
+                  <div id=error-root>
+                        <img id=error-icon>
+                        <div id=error></div>
+                  </div>
+                  
+            </div>
+
+      
+      </template>
+      
+      
+      
+      
+      <script>
+      
+
+mod['web-console']   = function(){
+  
+  var obj   = {};
+  
+  
+        var ext,$,ace
+        ;
+        
+        obj.initmod   = function(params){
+          
+              ext       = params.ext;
+              $         = params.$;
+              ace       = params.ace;
+              
+        }//initmod
+        
+        
+  //:
+
+
+        var store       = {};
+        store.console   = window.console;
+
+  
+        var console;
+        var cons;
+        var style;
+        
+        
+        var root;
+        
+        
+        
+        
+  
+  //:
+  
+  
+        obj.init    = async function(){
+          
+          
+              await libs();
+
+              
+        }//init
+        
+
+        async function libs(){
+          
+              var url         = 'javascript-2020:external:/TarVK/chromeConsole/console.js';
+              [console]       = await ext.text.github(url);
+              console         = eval(console);
+              console.initmod({store,ace});
+              console.init();
+              
+              var url       = 'javascript-2020:external:main:TarVK/chromeConsole/console.css';
+              var css       = await ext.text.github[url];
+              style         = document.createElement('style');
+              style.textContent   = css;
+              
+        }//libs
+
+
+  //:
+  
+  
+        obj.initdom   = function(rootnode){
+
+
+
+              var host;
+              if(rootnode.nodeName==='CONSOLE'){
+                    host    = rootnode;
+              }else{
+                    host    = $.$(rootnode,'console-root');
+              }
+              root    = host.shadowRoot;
+
+              import_style(root,()=>root.append(style));
+              
+              
+              var node    = $(root,'#console');
+              cons        = console.create(node);
+
+
+
+              
+              var keys    = Object.keys(cons.__proto__);
+              //store.console.log(keys);
+              
+              
+              
+              
+        }//initdom
+
+
+
+
+
+        function import_style(shadow,complete){
+
+              if(!import_style.ct){
+                    import_style.ct   = 0;
+              }
+              import_style.ct++;
+              if(import_style.ct>10){
+                                                                      console.log('import_style timeout');
+                    complete();
+                    return;
+              }
+
+              
+              var ids   = ['ace-tm','ace_editor\\.css','ace_scrollbar\\.css','error_marker\\.css',];
+              var n     = ids.length;
+              for(var i=0;i<n;i++){
+              
+                    var id      = ids[i];
+                    var style   = $('#'+id);
+                    if(!style){
+                          setTimeout(import_style,500,shadow,complete);
+                          return;
+                    }
+                    
+              }//for
+              
+              for(var i=0;i<n;i++){
+              
+                    var id      = ids[i];
+                    var style   = $('#'+id);
+                    var copy    = style.cloneNode(true);
+                    shadow.append(copy);
+              
+              }//for
+              
+              if(complete){
+                    complete();
+              }
+              
+        }//style
+        
+        
+        
+  //:
+  
+  
+        obj.log   = function(){
+          
+              cons.log.apply(cons,arguments);
+              
+        }//log
+
+
+        obj.clear   = function(){
+          
+              cons.clear.apply(cons);
+              
+        }//clear
+
+
+
+
+/*        
+
+5
+: 
+"error"
+6
+: 
+"warn"
+7
+: 
+"info"
+8
+: 
+"clear"
+9
+: 
+"time"
+10
+: 
+"timeEnd"
+
+*/
+
+
+  
+        obj.test    = function(){
+          
+
+              cons.log('helloworld');
+              
+              
+              
+              var test    = {
+                    hello:'world',
+                    key:'value',
+                    test:123,
+                    debug:true
+              };
+              
+              cons.log(test);
+              
+              
+        }//test
+
+
+
+        obj.height    = function(h){
+        
+              cons.element.style.height   = h;
+              
+        }//height
+        
+  
+  return obj;
+  
+  
+}//web-console
+
+
+      </script>
+      
+      
+</web-console>
+
+
+
+
+

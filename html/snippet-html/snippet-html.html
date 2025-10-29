@@ -1,7 +1,7 @@
 
 
 
-<snippet-html>
+<snippet-html v2.0>
 
 
       <template shadowrootmode=open>
@@ -9,7 +9,7 @@
             <style>
     
   #root
-    {display:flex;flex-direction:column;gap:10px;
+    {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px;
       /*height:100%*/
     }
     
@@ -28,6 +28,8 @@
             
             <div id=root>
             
+                  <editor component v2.0></editor>
+                  
                   <div>
                         <input value=run type=button>
                   </div>
@@ -44,25 +46,35 @@
       <script>
 
       
-mod.snippet_html    = function(){
+(function snippet_html({mod,dom,host}){
 
-  var obj   = {};
+  var obj   = {
+        version   : 'v2.0',
+  };
   
-
-        var ext,$,source
+        var df=true,did='snippet-html'
+        ;
+        
+        
+        var ext,$,menu,ace
         ;
         
         obj.initmod   = function(params){
         
               ext       = params.ext;
               $         = params.$;
-              source    = params.source;
+              menu      = params.menu;
+              ace       = params.ace;
               
         }//initmod
         
         
   //:
   
+        var editor;
+        
+        var def;
+        
         
         
         var host;
@@ -70,6 +82,7 @@ mod.snippet_html    = function(){
         
         var hldr;
         var iframe;
+
         
         
         var btn     = {};
@@ -78,27 +91,55 @@ mod.snippet_html    = function(){
   //:
   
   
-        obj.init    = function(){
+        obj.init    = async function(){
+                                                                                debug('init',obj.version);
+              
+              def            = $.htmlentities.decode(dom);
+              
+              
+              editor    = mod.editor;
+              
+              editor.initmod({ext,$,menu,ace});
+              
+              await Promise.all([
+                    src(),
+                    editor.init(),
+              ]);
+              
+              
         }//init
+        
+        
+        async function src(){
+          
+              if(!dom.hasAttribute('src'))return;
+              var src   = dom.getAttribute('src');
+              var res   = await fetch(src);
+              var txt   = await res.text();
+              def       = txt;
+              
+        }//src
         
 
   //:
   
   
-        obj.initdom   = function(rootnode){
+        obj.initdom    = function(){
 
-              host                                = $.full('snippet-html',rootnode);
-              root                                = host.shadowRoot;
+              var shadow                          = host.shadowRoot;
+
+              editor.initdom({mode:'html',fullsize:true,txt:def});
+              
+              $(shadow,'[value=run]').onclick       = btn.run;
 
 
-              $(root,'[value=run]').onclick       = btn.run;
-
-
-              hldr                                = $(root,'#hldr');
+              hldr                                = $(shadow,'#hldr');
               iframe                              = $(hldr,'iframe');
 
+          
+        }//initdom2
         
-        }//initdom
+
         
         
   //:
@@ -111,7 +152,7 @@ mod.snippet_html    = function(){
         
               hldr.replaceChildren();
               
-              var html          = source();
+              var html          = editor.getvalue();
               
               var niframe       = iframe.cloneNode(true);
               niframe.srcdoc    = html;
@@ -128,17 +169,31 @@ mod.snippet_html    = function(){
               
         }//run
         
+        
+
   
   //:
   
-  
+        
+        function debug(){
+          
+              if(!df && !obj.df)return;
+              var str   = [...arguments].join(' ');
+              console.log(`[ ${did} ]`,str);
+              
+        }//debug
+
+
   
   return obj;
   
-}//snippet_html
+})//snippet_html
 
 
       </script>
 
       
 </snippet-html>
+
+
+

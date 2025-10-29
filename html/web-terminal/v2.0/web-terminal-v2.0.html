@@ -1,0 +1,351 @@
+
+
+
+<web-terminal v2.0>
+
+      <template shadowrootmode=open>
+
+            <link rel=stylesheet href='https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.css'>
+      
+            <style>
+
+
+  #terminal
+    {border: 2px solid gray;border-radius:5px;overflow:hidden}
+  
+  
+  .xterm
+    {padding:10px;}
+
+            
+            </style>
+            
+            
+            <div id=root part=root>
+            
+                  <div id=terminal part=terminal></div>
+                  
+            </div>
+            
+      </template>
+      
+      
+      <script>
+
+      
+(function web_terminal({mod,dom,host}){
+
+  var obj   = {
+        version   : 'v2.0',
+  };
+  
+        var df=true
+        ;
+        
+        var ext,$,log
+        ;
+        
+        obj.initmod   = function(params){
+          
+              ext             = params.ext;
+              $               = params.$;
+              
+              Terminal        = params.Terminal;
+              FitAddon        = params.FitAddon;
+              
+              log             = params.log;
+              
+        }//initmod
+        
+        
+  //:
+  
+        
+        var Terminal;
+        var FitAddon;
+        
+        var term;
+        var fitAddon;
+
+        
+        var terminal;
+
+        
+  //:
+  
+  
+        obj.init    = async function(){
+          
+              await Promise.all([
+                    libs(),
+              ]);
+              
+              
+        }//init
+        
+        
+        
+        async function libs(){
+          
+              var promise,list=[]
+              ;
+              
+              if(!Terminal){
+                    promise   = import('https://cdn.jsdelivr.net/npm/@xterm/xterm/+esm').then(result=>({Terminal}=result));
+                    list.push(promise);
+              }
+              
+              if(!FitAddon){
+                    promise   = import('https://cdn.jsdelivr.net/npm/@xterm/addon-fit/+esm').then(result=>({FitAddon}=result));
+                    list.push(promise);
+              }
+              
+              await Promise.all(list);
+                
+              term        = new Terminal({
+                
+                    fontFamily      : 'monospace',
+                    fontSize        : 16,
+                    lineHeight      : 1.0,
+
+                
+                    theme           : theme.light,
+                    rendererType    : 'dom',
+                    
+              });
+              fitAddon    = new FitAddon();
+              term.loadAddon(fitAddon);
+                
+        }//libs
+        
+        
+  //:
+  
+  
+        obj.initdom   = async function(){
+          
+              var shadow                    = host.shadowRoot;
+
+              terminal                      = $(shadow,'#terminal');
+              
+              term.open(terminal);
+              fitAddon.fit();
+              
+              term.writeln('xterm.js ready');
+
+              //setTimeout(()=>log.ok('ok'),50);
+              
+        }//initdom
+
+
+  //:
+  
+  
+        obj.write     = function(){
+          
+              var args    = [...arguments];
+              if(arguments.length==0){
+                    args    = [''];
+              }
+              var str   = args.join(' ');
+              term.write(str)
+              
+        }//write
+        
+        
+        obj.writeln   = function(){
+          
+              var args    = [...arguments];
+              if(arguments.length==0){
+                    args    = [''];
+              }
+              var str   = args.join(' ');
+              term.writeln(str)
+              
+        }//writeln
+        
+        
+        obj.clear     = function(){term.clear.apply(term,arguments)}
+        
+        
+        obj.error   = function(err){
+          
+              term.writeln(`${x.red}Error: ${err.message}${x.reset}`);
+                                                                                if(!err.stack)debugger;
+              var trace   = err.stack.split('\n').slice(1);
+              trace.forEach(line=>{
+                
+                    var str   = line.trim();
+                    term.writeln(`${x.red}      ${str}${x.reset}`);
+                    
+              });
+          
+        }//error
+
+
+        obj.warn    = function(){
+          
+              var str   = [...arguments].join(' ');
+              term.writeln(chr.warn+'   '+x.yellow+str+x.reset);
+              
+        }//warn
+        
+        
+        obj.debug   = function(){
+          
+              var str   = [...arguments].join(' ');
+              term.writeln(x.gray+str+x.reset);
+              
+        }//debug
+
+
+        obj.log   = function(){
+          
+              obj.writeln.apply(null,arguments);
+              
+        }//log
+        
+        
+  //:
+
+
+
+        Object.defineProperty(obj,'height',{
+          
+              set   : v=>{
+                
+                    if(!v)return;
+                    if(typeof v=='number'){
+                          v   = v+'px';
+                    }
+                    terminal.style.height    = v;
+                    fitAddon.fit();
+                    
+              }
+              
+        });
+        
+  
+/*
+
+
+        function renderProgress(percent) {
+          const width = 30;
+          const filled = Math.round((percent / 100) * width);
+          const bar = '█'.repeat(filled) + '-'.repeat(width - filled);
+          process.stdout.write(`\r[${bar}] ${percent}%`);
+        }
+        
+        
+        process.stdout.write('\x1b[?25l'); // hide cursor
+        process.stdout.write('\x1b[?25h'); // show cursor
+        
+        
+*/
+
+  
+        
+  //:
+
+  
+        var theme   = {};
+        
+        theme.light   = {
+              foreground            : 'black',//'#53676d',
+              background            : 'hsl(45,86%,98%)',//'#fbf3db',
+              cursor                : '#3a4d53',
+              selectionBackground   : '#cfcebe',
+              black                 : '#e9e4d0',
+              red                   : '#d2212d',
+              green                 : '#489100',
+              yellow                : '#ad8900',
+              blue                  : '#0072d4',
+              magenta               : '#8f0075',
+              cyan                  : '#00938d',
+              white                 : '#ffffff',
+              brightBlack           : '#7d7a68',
+              brightRed             : '#d2212d',
+              brightGreen           : '#489100',
+              brightYellow          : '#ad8900',
+              brightBlue            : '#0072d4',
+              brightMagenta         : '#8f0075',
+              brightCyan            : '#00938d',
+              brightWhite           : '#ffffff'
+        };
+
+
+        var x   = {
+          
+              reset                 : '\x1b[0m',
+            
+              black                 : '\x1b[30m',
+              red                   : '\x1b[31m',
+              green                 : '\x1b[32m',
+              yellow                : '\x1b[33m',
+              blue                  : '\x1b[34m',
+              magenta               : '\x1b[35m',
+              cyan                  : '\x1b[36m',
+              white                 : '\x1b[37m',
+            
+              brightBlack           : '\x1b[90m',
+              brightRed: '\x1b[91m',
+              brightGreen: '\x1b[92m',
+              brightYellow: '\x1b[93m',
+              brightBlue: '\x1b[94m',
+              brightMagenta: '\x1b[95m',
+              brightCyan: '\x1b[96m',
+              brightWhite: '\x1b[97m',
+            
+              bgRed: '\x1b[41m',
+              bgGreen: '\x1b[42m',
+              bgYellow: '\x1b[43m',
+              bgBlue: '\x1b[44m',
+              bgMagenta: '\x1b[45m',
+              bgCyan: '\x1b[46m',
+              bgWhite: '\x1b[47m',
+            
+              bgBrightRed       : '\x1b[101m',
+              bgBrightGreen     : '\x1b[102m',
+              bgBrightYellow    : '\x1b[103m',
+              bgBrightBlue      : '\x1b[104m',
+              bgBrightMagenta   : '\x1b[105m',
+              bgBrightCyan      : '\x1b[106m',
+              bgBrightWhite     : '\x1b[107m',
+            
+              bold              : '\x1b[1m',
+              dim               : '\x1b[2m',
+              italic            : '\x1b[3m',
+              underline         : '\x1b[4m',
+              inverse           : '\x1b[7m',
+              hidden            : '\x1b[8m',
+              strikethrough     : '\x1b[9m',
+          
+              gray              : '\x1b[38;5;245m',
+              
+        };
+
+        var chr   = {
+              warn          : '\u26A0',
+              cross         : '\u274C',
+              stop          : '\u1F6D1',
+              prohibited    : '\u1F6AB',
+              check         : '\u2705',
+              go            : '\u1F7E2',
+              thumb         : '\u1F44D',
+              ok            : '\u1F197',
+        };
+
+  //:
+  
+  return obj;
+  
+})//web_terminal
+
+
+      </script>
+      
+</web-terminal>
+
+
+
+
