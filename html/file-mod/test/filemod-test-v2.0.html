@@ -14,6 +14,9 @@
                                                                                 console.log('filemod-test-v2.0.html');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
+        var df=true,version='v2.0'
+        ;
+        
         var ext,$,datatype,menumod,keydown,debug
         ;
         
@@ -26,7 +29,7 @@
   
   
         async function init(){
-                                                                                console.log('init');
+                                                                                debug('init',version);
 
 
               keydown.add(kd);
@@ -116,7 +119,7 @@
   
   
         function initdom(rootnode){
-                                                                                console.log('initdom');
+                                                                                debug('initdom');
               
               var root    = rootnode;
               
