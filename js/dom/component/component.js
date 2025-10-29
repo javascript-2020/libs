@@ -348,12 +348,12 @@
               }//grp
 
 
-              loader.parent   = async function({root,nn,version}){
+              loader.parent   = async function({root,nn,version}){debugger;
                 
-                    var parent    = rd(root,'parent');
-                    var par       = $.parent(root,parent);
+                    var parent      = rd(root,'parent');
+                    var par         = $.parent(root,parent);
                     var pversion    = rd.version(par);
-                    var url       = rd(par,'url');
+                    var url         = rd(par,'url');
 
                     var num       = 1;
                     if(pversion){
