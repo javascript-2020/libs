@@ -1,7 +1,7 @@
 
 
 
-<file-nav>
+<file-nav v2.0>
 
       <template shadowrootmode=open>
 
@@ -169,15 +169,14 @@
 
       <script>
                                                                                 //console.log('mod.filenav');    
-(function({mod,dom,host}){
+(function file_nav({mod,dom,host}){
   
   var obj   = {
-        version   : 'v1.0'
+        version   : 'v2.0'
   };
-                                                                                debug(obj.version);
+
         var df=false
         ;
-        Object.defineProperty(obj,'df',{set(v){df=v}});
 
         
   //modvars:-
@@ -186,7 +185,7 @@
         ;
         
         obj.initmod   = function(params){
-                                                                                debug('initmod');
+
               ext         = params.ext;
               $           = params.$;
               datatype    = params.datatype;
@@ -989,7 +988,7 @@
         
   return obj;
   
-})//filenav
+})//file_nav
 
       </script>
 
