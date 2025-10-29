@@ -1,7 +1,7 @@
 
 
 
-<new-file>
+<new-file v2.0>
 
       <template shadowrootmode=open>
       
@@ -53,16 +53,18 @@
       
       <script>
                                                                                 //console.log('mod.newfile');
-mod.newfile   = function({mod,dom,host}){  
+(function new_file({mod,dom,host}){  
   
-  var obj   = {};
+  var obj   = {
+        version   : 'v2.0',
+  };
   
         var $
         ;
         
         obj.initmod   = function(params){
         
-              $ = params.$;
+              $   = params.$;
               
         }//initmod
 
@@ -236,7 +238,7 @@ mod.newfile   = function({mod,dom,host}){
   
   return obj;
   
-//newfilemod
+//new_file
 }
       
       </script>
