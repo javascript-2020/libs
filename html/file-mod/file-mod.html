@@ -25,12 +25,12 @@
             
             <div id=root style='visibility:hidden'>
             
-                  <localfile component v2.0></localfile>
-                  <https-file component v2.0></https-file>
-                  <github component v2.0></github>
-                  <db-files component v2.0></db-files>
-                  <google-storage component v2.0></google-storage>
-                  <ftp-server component v2.0></ftp-server>
+                  <local-file component></local-file>
+                  <fs-server component></fs-server>
+                  <github component></github>
+                  <db-files component></db-files>
+                  <google-storage component></google-storage>
+                  <ftp-server component></ftp-server>
                   
             </div>
 
@@ -40,15 +40,15 @@
       <script>
 
 
+      
 (function filemod({mod,dom,host}){
   
   var obj       = {
         version   : 'v1.0'
   };
   
-  var df    = false
-  ;
-                                                                                debug(obj.version);
+        var df    = false
+        ;
                                                                                 
         var ext,$,menumod,menu,complete,source,focus,editor,log
         ;
@@ -74,7 +74,7 @@
         
         var localfile;
         var github;
-        var httpsfile;
+        var fsserver;
         var dbfiles;
         var googlestorage;
         var ftpserver;
@@ -94,12 +94,12 @@
 
               
         obj.init    = async function(){
-        
-            localfile                 = mod.localfile;
+                                                                                //debug(obj.version);
+            localfile                 = mod['local-file'];
             obj.localfile             = localfile;
             
-            httpsfile                 = mod['https-file'];
-            obj.httpsfile             = httpsfile;
+            fsserver                  = mod['fs-server'];
+            obj.fsserver              = fsserver;
             
             github                    = mod.github;
             obj.github                = github;
@@ -113,7 +113,7 @@
 
 
             localfile.initmod({ext,$,menu,filemod:obj,source});
-            httpsfile.initmod({ext,$,menu,filemod:obj,source});
+            fsserver.initmod({ext,$,menu,filemod:obj,source});
             github.initmod({ext,$,menu,filemod:obj,source});
             dbfiles.initmod({ext,$,datatype,menumod,menu,filemod:obj,source});
             googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source});
@@ -121,7 +121,7 @@
 
             await Promise.all([
                   localfile.init(),
-                  httpsfile.init(),
+                  fsserver.init(),
                   github.init(),
                   dbfiles.init(),
                   googlestorage.init(),
@@ -130,8 +130,8 @@
             
             localfile.load.complete           = complete.load;
             localfile.save.complete           = complete.save;
-            httpsfile.load.complete           = complete.load;
-            httpsfile.save.complete           = complete.save;
+            fsserver.load.complete           = complete.load;
+            fsserver.save.complete           = complete.save;
             github.load.complete              = complete.load;
             github.save.complete              = complete.save;
             dbfiles.load.complete             = complete.load;
@@ -161,7 +161,7 @@
 
               localfile.initdom();
               github.initdom();
-              httpsfile.initdom();
+              fsserver.initdom();
               dbfiles.initdom();
               googlestorage.initdom();
               ftpserver.initdom(shadow);
@@ -194,7 +194,7 @@
                 
                 case 'github'               : await github.save(cur,blob);              break;
                 case 'localfile'            : await localfile.save(cur,blob);           break;
-                case 'https-file'           : await httpsfile.save(cur,blob);           break;
+                case 'fs-server '           : await fsserver.save(cur,blob);            break;
                 case 'db-files'             : await dbfiles.save(cur,blob);             break;
                 case 'google-storage'       : await googlestorage.save(cur,blob);       break;
                 case 'ftp-server'           : await ftpserver.save(cur,blob);           break;
@@ -214,7 +214,7 @@
                 
                 case 'github'           : github.clear();               break;
                 case 'local'            : localfile.clear();            break;
-                case 'https-file'       : httpsfile.clear();            break;
+                case 'fs-server'        : fsserver.clear();             break;
                 case 'db-files'         : dbfiles.clear();              break;
                 case 'google-storage'   : googlestorage.clear();        break;
                 case 'ftp-server'       : ftpserver.clear();            break;
@@ -290,7 +290,7 @@
                 
                 case 'github'           : file    = github.export(cur);               break;
                 case 'local'            : return 'local';
-                case 'https-file'       : file    = httpsfile.export(cur);            break;
+                case 'fs-server '       : file    = fsserver.export(cur);             break;
                 case 'db-files'         : file    = dbfiles.export(cur);              break;
                 case 'google-storage'   : file    = googlestorage.export(cur);        break;
                 case 'ftp-server'       : file    = ftpserver.export(cur);            break;
