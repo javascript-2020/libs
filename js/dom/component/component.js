@@ -348,18 +348,28 @@
               }//grp
 
 
-              loader.parent   = async function({root,nn,version}){debugger;
+              loader.parent   = async function({root,nn,version}){//debugger;
                 
                     var parent      = rd(root,'parent');
                     var par         = $.parent(root,parent);
-                    var pversion    = rd.version(par);
+                    //var pversion    = rd.version(par);
                     var url         = rd(par,'url');
 
+                    var parts       = url.split('/');
+                    parts.pop();
+                    var last        = parts.at(-1);
+                    if(isver(last)){
+                          parts.pop();
+                    }
+                    url   = parts.join('/')+'/';
+                    
+                    /*
                     var num       = 1;
                     if(pversion){
                           num   = 2;
                     }
                     url           = slashes(url,num);
+                    */
                     
                     
                     var src;
@@ -458,18 +468,35 @@
                     
                     var last    = dirs.at(-1);
                                                                                 df && console.log('last',last);
+                    if(isver(last)){
+                          par  += '../';
+                    }
+                    
+                    /*
                     if(last[0]=='v'){
                           var l   = last[1];
                           if(l>='0' && l<='9'){
                                 par  += '../';
                           }
                     }
+                    */
                     
                     return par;
                     
               }//par
               
 
+              function isver(str){
+                
+                    if(last[0]=='v'){
+                          var l   = last[1];
+                          if(l>='0' && l<='9'){
+                                return true;
+                          }
+                    }
+                    return false;
+                    
+              }//isver
   //:
 
 
