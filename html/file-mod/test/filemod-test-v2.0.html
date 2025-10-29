@@ -14,7 +14,7 @@
                                                                                 console.log('filemod-test-v2.0.html');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
-        var ext,$,datatype,menumod,keydown
+        var ext,$,datatype,menumod,keydown,debug
         ;
         
         var menu;
@@ -34,7 +34,7 @@
               menu                   = menumod();
               
               
-              filemod   = mod.filemod;
+              filemod   = mod['file-mod'];
               
               filemod.initmod({ext,$,menumod,menu,complete});
 
@@ -58,7 +58,8 @@
               'js/dom/$.js',
               'js/core/datatype.js',
               'js/dom/menumod/menumod.js',
-              'js/dom/keydown/keydown.js'
+              'js/dom/keydown/keydown.js',
+              'js/debug/debug.js',
         );
         [$,datatype,menumod,keydown]   = await promise;
   
@@ -89,7 +90,7 @@
       <body>
       
             <div>
-                  <filemod component v2.0></filemod>
+                  <file-mod component></file-mod>
             </div>
             
             <div>
@@ -115,7 +116,7 @@
   
   
         function initdom(rootnode){
-        
+                                                                                console.log('initdom');
               
               var root    = rootnode;
               
