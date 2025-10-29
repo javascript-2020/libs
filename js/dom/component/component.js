@@ -488,9 +488,9 @@
 
               function isver(str){
                 
-                    if(last[0]=='v'){
-                          var l   = last[1];
-                          if(l>='0' && l<='9'){
+                    if(str[0]=='v'){
+                          var c   = str[1];
+                          if(c>='0' && c<='9'){
                                 return true;
                           }
                     }
