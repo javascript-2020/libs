@@ -6,7 +6,7 @@
 
             <script init>
                                                                           console.clear();
-                                                                          console.log('publish-test-v2.0.html');
+                                                                          console.log('publish-ui-v2.0-test.html');
                                                                           console.log();
                                                                           console.json=v=>console.log(JSON.stringify(v,null,4));
             var ext,$,datatype,menumod,keydown;
@@ -27,7 +27,7 @@
                   menu                      = menumod();
 
 
-                  publish                   = mod.publish;
+                  publish                   = mod['publish-ui'];
                   log                       = mod.log;
                   
                   publish.initmod({ext,$,menu,source,complete,log});
@@ -92,8 +92,9 @@
       <body>
       
             <div>
-                  <publish component v2.0>
-                  </publish>
+            
+                  <publish-ui component v2.0></publish>
+                  
             </div>
             
             <div>
@@ -102,10 +103,13 @@
 
 
             <log component v2.0></log>
+
+
             
             <checkbox-one-template>
                   <script src='https://html-loader-1024713184986.us-central1.run.app/'></script>
             </checkbox-one-template>
+
 
             
       </body>
@@ -113,9 +117,6 @@
 
       <script initdom>
 
-        
-        var complete    = {};
-        
         
     //:
     
@@ -158,12 +159,18 @@
               
         }//source
         
+
         
-        complete.load   = function(){
+        var complete    = {};
+        
+        
+        complete.load   = function(file,blob){
+                                                                                console.log(file,blob);
         }//load
         
         
-        complete.save   = function(){
+        complete.save   = function(file){
+                                                                                console.log(file);
         }//save
 
 
