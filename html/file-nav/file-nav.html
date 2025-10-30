@@ -1,0 +1,998 @@
+
+
+
+<file-nav v2.0>
+
+      <template shadowrootmode=open>
+
+            <style>
+
+            
+  #root
+    {position:relative;display:flex;flex-direction:column;width:100%;height:100%;overflow:hidden}
+    
+  #path-root
+    {display:flex;gap:10px;align-items:center;padding-left:5px;background:white;z-index:2}
+  #update
+    {content:url(data:image/png;base64,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)}
+  #path
+    {padding:3px 5px}
+          
+          
+  #view
+    {flex:1;display:flex;border-top:1px solid lightgray;position:relative}
+
+  .scroll
+    {height:5px;background:transparent;position:absolute;left:0;right:0}
+          
+  #empty
+    {color:lightgray;font-weight:bold;opacity:0.65;text-align:center;cursor:default}
+    
+  .icon
+    {cursor:pointer;width:15px;height:15px}
+  .icon-add
+    {content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAclBMVEVHcExR3EdQ3EZG1j1HyD9DszxF1zxX301W30xCvDpLy0JKvkJV3ktV3ktV3ktV3ks/sDk9vTZAzThHxD9R3EdBzThHyD9P20VM2kNL2UJY301N2kRE1jtU3kpa4FBJ2EBR3EdG1z1C1ThA1Dc+vzZEzjy4PAznAAAAF3RSTlMA8TPx8TQ08TSQIgPhlYsUFPHh4V40Xv/yAZ0AAADTSURBVDjLzdTZFoIgEIDhASoFF9yXLLXF93/FtEDweA5ypX2X43/HOABLPHDakRNwMPLCVgg9Y8h8GfrMGLqODB13I7wKB4R3Yf8QyRDtHWLUCwiv9oC5M5ypMMNqzsYN4aGPNP1Mn/ohh6C0EgCyCxGUlqCxZB/WTWWhqYFUtYWKAB0sumagENH0pJm/dfo0pdH0hGelIN1PTQptzFY/OZZhR7Bxey4qvGyED+GA8Cb8c/gUNsJchbn5NCcyTMyn2aPD62ug5mM/bl38HsXTXi18AGTaQkGdjU6xAAAAAElFTkSuQmCC);
+    }
+  .icon-rem
+    {content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAG1BMVEVHcEz/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AACeYvHRAAAACHRSTlMAshvkTlvjTdJU7DIAAAC1SURBVCjPbdMxDoMwDAVQK2rVvRMjvkOHjkhcoFNvgFg7dUcsPnaJsbFLPtNX8gKJY4iIrnc6Hn5Z+C69j5Vu3sPlKQdlWQcNo4jT0ok8DIpT3qLSDTqtUOmtQqOscf3QW4PSHYpMZKFStrhE6kvMR4zptCi9KGiCQRM8Uz8xt/CfRhW5hZkGTDRdDByEy9GH4JbQ5uExUUFg6VCR4XXAi4NXDJsBtg1sMNyKsGlxe8Mfof1lfq62539imm/1AAAAAElFTkSuQmCC);
+    }
+          
+  #dir-root
+    {width:calc(50% - 5px);padding:5px;display:flex;flex-direction:column;
+            box-sizing:border-box;overflow:hidden;
+    }
+  #dir-hdr
+    {font-size:14px;display:flex;gap:10px;height:18px}
+  #dir-add
+    {}
+  #dir-rem
+    {}
+  #dir-clear
+    {margin-right:5px;
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAB+1BMVEVHcEwtLCwpKy0sLy8rKywqKywsLjErLCwpKSsrLi8rLCwsLy4pKywrKytdKCUpKy0tLCwsLi4rLCwpKio8NS4qKiw+LCspLC5HQjNURjM8LSsnJyouLS0qKyxBQDNbNzZBLCpPTDc3NzgqKyw3NzctLS92R0VDQ0M5OC9nXjw4LCswLy01KiopLC1RLy0pKyxKSUppLi31y1310mL02GXy4WrZzGT3w1jz3Wf0xlvhoUrEJh2ooGr1z1+bekL5vVV8ckOihUfBIhr05mzz5GzUPzeQZzr0t1LJKSHhvlv+oURuZj91VjZ6XzvtkT/TMCjs3mpeRTDGu2K2trS3IRmqfECaIx2GJR/NLCPQt1v+tE/n2Wj/qknxulTltlTSnEnpoEj9uFHZoEq3gn6PjHTcs1W+i0T7sE5EOi+8ezz2okfAoVCzhEK5k0n3qEqJiYqpazednJfRiT+8sl/SxWKNXTWyr5iQilWnpp++vr3Dw8TW1tfh4eLTyGPtvljWpk/rsVFYUz7ih4J8JSHo0mR5eXnu2mjmyWDOkUSqTEfdxWCvjkjrpKC/gT7NplHNnkvglkXXpaLWZ2CvNS6sra3yx8TNi4f/lj9NMiuuJR/JNy+BVjTljT+Zl4T09PWTMymDfEedk1CHRzPq6uu8vL5ybENvbVvOzs/h02aamA/FAAAAMnRSTlMAsWQEjRcNCIEThyg+mvw1yB2RXv11y07o+9538df5/fv6zVq4SPza6v2sI+1u5aHt/A8ynFYAAAG4SURBVCjPdZPVdsJgEIRJQoAiRete6l6gKe7uUnd3d3d3d/fHbC4h/Mztd2bl7CyJBBDCLBZySZEUxStKT+cwIlAqK63z5jKaFwHDaefXF4paCAFSNLbzyKTQb5LBZn7OhsmqqIqOA1KkYN9UZ9XXxEYBMaPkwVOHm2FQXz7MKvd4rPpaiAIaOuPb4fx4va9JZIMqJ71hf8vYu+sOZEaEmT/KyWXvFDabyg/HzLLA0uL8nNLv9acC1qKNvnwuLf5+jc9mkKlhU9Pju2ZmAgsL84HRzLClUUg75W3E/MrnuavxXJSIyY5Gg9FoNFRgyq7tLGJtdt6koQKXVCqV1K/HECgF0u5ItyS4xLi0NALl5R9IduvFYpVKhEsdekw25LCpRIM2kUy2UolLF4wpMfE6W7ds8ETW0tK8qrGsaarpwSfkJOgOu4eHNc2nlo7Wdrm8QR3SG6Ulu9RDlvbWjoYeee9eW5M5KXS0bE5fT698aKStemTgeMDuJGaByxK4zGdN/RP2iX67O4EZFm44ReA0T7ufxty3Y4mAF2HQU5IFPp9v+rGPBYw4yoTppRAEkQsj/hcJoQZb/wFi3mIQGTJOGwAAAABJRU5ErkJggg==);
+    }
+    
+  #parent
+    {cursor:pointer;width:18px;height:18px;
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAC+lBMVEUAAAD75YP47pv77JT765GHhlCRTgf66IuRWyb67Zf73nTGqoaMTg774Xr83G+SXCWQZDePUxc8aSaUYCr112r71mGOXzKWakGhf1eSZT64mnflymPkwFHTqkGbZBK7iS2fZCDqzmeNWSHv13OPUhb00FyMVCDarFXlvWCMXC+LVBz/6o2QXi6RXCycdEhLcy+BflSQWyxfhEmhgV6aa0OzkWf7wRj8wh363V9Ntib8xSX76Hv7yS/553X54GX61Ut160P7zjnZ2138xij73mP60kT7xCL55G/6wyD67IL564H76n/64Wn72lz72FfZzkKXUwNy6UBq3TxSvyvX11j511HX0kxu4z770Dz8yzBVwi7zuBPQnwP74mzX1FH71EbYzD9s4T1LuCT5vxbVngb263va3GT521j72VL71lH7103Y0Ehn2jpk1jf7zDVezjP5yzP9yCv6yCudXAb86YL743P64GfY1lX70035zkH70T/XxzxYxy9QvClOuSj1uhP75G373Vtx5z/vyDll1zj1yjZcyzHksx79vxb7vxbMkBPxthIhZg3WpQzSnASZVgT56H7t53v95Xn75XD24Wra32n94Gfd42bg3lPUwTbuxDVi0jTtuzNUtjJXxi/VuizxuSZJryY8mR6ibBlAcBjlrxf4vBXXnRW6fQ6PVwWiYQTQmwP+7YLq4nHf3GnTzVrmv1TpyUjSw0ff1UXyyEDtvD9o2zpdwjjSvTbNnDV0kjLxwjDxvS9Psi/nri1Mri3rvSlihSdNtSbgtyVWgSI/nyA1jh0yiRvirhndqRbbpBaCbhMjbhCMVw/Wng6UUQ6JUA2/gQuubwu1dwmpaAbUoAXw64L76nzU3HX72m3612b22GLt1Vzr0Vfxzlbiy1F540/xyE/qzU36ykPayELhxUL4yUDlvUBu0D/6yjnGlzdXujZl0DXVwTVHqyTXoiT0uSI7lSJ1gSCodCDGix7SsBvRrhvChhrhrBfutRXSqxU/aROAZA0qYA1xeY9hAAAANnRSTlMAy8vLywj+y+/Lyw/yy8vFRfjn4dbLg2wyHhX+/v759/bs6ePj2djT0M/PvrOueW1hXFtPJiVnXdK8AAAEDklEQVQ4y43UZVRaYRzH8Udk1rq7u1sZcu+VCWOEiCCixJgITlHnGOp0uqFT5+x1dxrr7u7u7u7uOGf/B3TiWbjv4RzefM7veeCec5F9ldD/VWvOjpxeFZjK3WogdHvv3n66XTndEdTIZdHqE78pl3dCw/JFPdJ0/aztOl5r0cTxQk/P2uVdKyJGMF7INyyWWdno0TJZkvL4VsKT2FLO1b/EFwjgE5Oj0wEbJZMpk8bOioq8SBCxle3hJ0GMkM8XCA2HbE45d2z0rKiD33gEj1fu7EABP4bP5wsFz3S6UaOUyqTo6KjIYOkeIlkTa7aH6cv5MUK4uWAHnkvCc5FShcJrZbJo8h3b3+siqQ5fs8UG7CZeXgCngotKkwaP8fPyWsgRkWQj1Of02YfDWnbui5B5pidkGL91wdyXC98o0zYGB4/xgvz2X2U0lbxPXV/HlUZzrYJQ9W3gCMLw48DCnMUHD0QrFH6YKYI3bSnYPtuNRqM50hwd4Xmg3ZPAxfIm7JmgiV1xaIGfH7AxCqn02PxHk6640kDR6S0Q9OruJIKHE2kmT10xR2adk0Z+372ZICbSHbFzbYhhYUYsT6MRiaaKppIkuXgTntuYdmJ+4pQJmuTWdLqzM70ZwlU/zANGxpEkI4Xhw5kTBXOPCzMSp0xZlSxq7Ozs7OBQ3worf44TwRSHw2AwfBg++6WRz9/mHx68MjR0VRx5wwHqgGwdlXNsymeIPMx485hk2YcjoaH9IZLBAVe1Sgk899WmxOKw1RJzbu7HEdOszN//2pAhdRyquqGSnNQpmMnFxqKT6n2c68Cw8h8x6FZYeJOqbu1LYRe9OEwsDzdST/X7yLi4ydP8+2M1aFDAfYra4FbNqRRWUocb5cb4+PgzanzXlBH9rSogImCGlru+brXeqLRlWiNFaanCYk4KXFa8dnoAFBHh6/sgcGRg3WroVwUZXC1XO1ufysA/KHzt9AisBg9OTGWzg9o2L4P5ai53ZIJEHSaXy8Mpas10X2Dg5rGGsoJ2OpVBF3VCQsKGk/EUKErLXbMOXOKMGZvTWSyWKaNjGaynTmCzJXlUPKWF6cDUdb4v5s2bmc4yeZuYzPnILj176L1lM7lYBbLZQ9OHDWOxvCHmgAEDve1hHvuJ+UKJCgLEGm5DAz08PHbaw6xtpnO5bFB4avhwbyYTmAcwd/cQJ3tYlLs9D7aCgrD6haBxma8b2kOnYokelMkEynZgJmyNy1RlLzmN7KtZfGYJXAsUINjCLVVlHzXXROVrp9czS7fwge4h2aosSSf0Ww3yL9i2sAlZqvpy9lQ99Mckee54KtM9xKI6UlSlBvpbWdnAYEqVld/mn29ys8WislgKJF1RBVU6v+T8qZ4IqlA2qAD8BBx/lyAWlFoqAAAAAElFTkSuQmCC);
+    }
+  #dir-list
+    {flex:1;overflow:auto;position:relative}
+  .dir
+    {padding:5px 10px;cursor:pointer;user-select:none;white-space:nowrap}
+
+    
+  #slider
+    {width:10px;cursor:ew-resize;/*background:lightblue;*/}
+
+          
+  #file-root
+    {flex:1;padding:5px;display:flex;flex-direction:column;box-sizing:border-box;overflow:hidden;border-left:1px solid lightgray}
+  #file-hdr
+    {font-size:14px;height:18px;display:flex;gap:10px}
+  #file-upload
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAVFBMVEVHcEwFNjsLMDgVLjYFNjwHMjgKMTgRMTYFNjsJMjkOLTYZKDIOLzYGNDo5HywENz0hLDYJMTgFNzwMMDYGNjsHNDoGNTsFNTsHNDoLMDkIMzoCOD3e0XtoAAAAG3RSTlMAzUQM8oRgEuZ5JwcatQH8BGv3MsCc2N+pU5QWG3esAAABG0lEQVQoz62T2ZKEIAxFm4ABZJNFXPj//xzHBZfypas6b3BiknuDn88Pg8YJoVXvsJsSc86JEewLVZKJGbExjPnuUVVzJYOJaxokhrfvMGVimNH7WZuhvWAMLIsiYr2IojmpJmLirfTnQLbPuh4grLnXcT2D2nkO8FQxOXkM3QTDj55HyXbYxXVN6Osl6XfHLJBNHLCeHnXGEqrgmPMijl4kSlfKUNXhf/so+mNiEGWJVL0ZjFpEyaq+rNHsftNE+NJ6x6rfaGHTBbdi3LIpej+UYtDvJqxEjafVdCl/ei0drsLqovgVgyB6tcUloA9stRdia0IlYwlvmM/ZkWMPFmYi73hM8lzox3J1L07py1u8jfY1VoAYf/hT/QG5RQ/ClL2P7gAAAABJRU5ErkJggg==);
+    }
+  #file-download
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAV1BMVEVHcEwcKDIUKzMOLzYENjwNMDcENzwQLzYFNjsHMjkJMTgIMzoKMTgOLzcJMjgGNToFNzwJMDgGNDoFNTwJMjkLMDcFNjwNLjYGNTsGMzoINDsGNDsCOD6kGNpIAAAAHHRSTlMABAsZ7zP8FNeQbKdZH3m+90i13YY85SfQlqDJPrs2SgAAAR9JREFUKM+tk1sSgyAMRYEGVN4vUSv7X2dRqdqO9qv5Ch5Jcu8EhP4ZDXW9wjfwoUewNnlJriid2dzpzoN9Pr4QwYi2wJslpZMVzce9zvhpBFmPWFt9pm0GyPn4hJ9hOB1YHKgWp4Y98D1XwS+jnsdtWrHLk4x/iyAmqDdNidYyzvX10pRrLwmjqz9GxsaqSAm2ihvCvA/Z5dy+5yMdW5R01qErjJq5iFOtIdcYaSYRhQndYGdj0f8TV0uuMC92YAH9B24OZ1KR5MBs/vRSmpwTl9syYM1isQhHZlaruM1b+KWAitasfUgE8BIjIjYaisP9MzBf3cJOBFEKDuNC153gyfBjX7Bac5dyXhsioq6WUbOt8U0Q0dJfr0DRf76pF+D3EMC0HzinAAAAAElFTkSuQmCC);
+    }
+  #file-add
+    {}
+  #file-rem
+    {}
+    
+  #file-list
+    {flex:1;position:relative;overflow:auto}
+  .file
+    {padding:5px 10px;cursor:pointer;user-select:none;white-space:nowrap}
+    
+  .spc
+    {flex:1}
+            
+            </style>
+            
+
+            <div id=root>
+
+                  <div id=path-root>
+                        <div id=path>
+                        </div path>
+                  </div>
+                  
+                  <div id=view>
+
+                        <new-file component=parent parent=file-nav v2.0></new-file>
+                  
+                        <div id=dir-root>
+                        
+                              <div id=dir-hdr>
+                                    <img id=parent>
+                                    <img id=update class='icon-update icon'>
+                                    <span>
+                                          dirs
+                                    </span>
+                                    <span id=dir-num>
+                                          0
+                                    </span>
+                                    <span class=spc></span>
+                                    <img id=dir-clear class='icon-add icon' title='dblclick&#10;clear current directory'>
+                                    <img id=dir-add class='icon-add icon'>
+                                    <img id=dir-rem class='icon-rem icon' title='dblclick&#10;remove highlighted directory'>
+                              </div>
+                              
+                              <div id=dir-list>
+                                    <div class=dir>
+                                          <div class=name>
+                                          </div>
+                                    </div>
+                                    <div id=empty>
+                                          empty
+                                    </div>
+                              </div>
+                              
+                        </div dir-root>
+      
+                        <div id=slider></div>
+                        
+                        <div id=file-root>
+                        
+                              <div id=file-hdr>
+                                    files
+                                    <span id=file-num>
+                                          0
+                                    </span>
+                                    <span class=spc></span>
+                                    <img id=file-upload class='icon-add icon'>
+                                    <img id=file-download class='icon-add icon'>
+                                    <img id=file-add class='icon-add icon'>
+                                    <img id=file-rem class='icon-rem icon' title='dblclick'>
+                              </div>
+                              
+                              <div id=file-list>
+                                    <div class=file>
+                                          <div class=name>
+                                          </div>
+                                    </div>
+                              </div>
+                              
+                        </div file-root>
+                        
+                  </div view>
+
+                  
+            </div root>
+
+      
+      </template>
+
+      <script>
+                                                                                //console.log('mod.filenav');    
+(function file_nav({mod,dom,host}){
+  
+  var obj   = {
+        version   : 'v2.0'
+  };
+
+        var df=false
+        ;
+
+        
+  //modvars:-
+  
+        var ext,$,datatype
+        ;
+        
+        obj.initmod   = function(params){
+
+              ext         = params.ext;
+              $           = params.$;
+              datatype    = params.datatype;
+              
+        }//initmod
+        
+        
+  //vars:-
+
+    
+        var filenav         = obj;
+    
+        var newfile;
+        
+        var def             = {};
+        def.path            = '/';
+        
+        obj.rd              = {};
+        obj.file            = {};
+        var file            = {};
+        obj.dir             = {};
+        var dir             = {};
+        var server;
+        
+        Object.defineProperty(obj,'path',{
+        
+              set(v){ui.path.textContent    = v},
+              get(){return ui.path.textContent.trim()}
+              
+        });
+        
+        var root;
+        var shadow;
+        
+        var cur             = {};
+        obj.cur             = cur;
+        cur.type            = null;
+        cur.item            = null;
+        cur.path            = def.path;
+        cur.file            = null;
+        cur.set             = (type,item,path,file)=>{
+          
+                                    cur.type        = type;
+                                    cur.item        = item;
+                                    cur.path        = path;
+                                    cur.filename    = file;
+                                    
+                              }//set
+        cur.rem             = ()=>{
+                              
+                                    cur.type        = null;
+                                    cur.item        = null;
+                                    cur.path        = null;
+                                    cur.filename    = null;
+                                    
+                              }//rem
+        
+        var ui              = {};
+        
+        ui.rd               = {};
+        ui.rd.path          = ()=>$(ui.path).textContent.trim();
+        
+        ui.dir              = {};
+        ui.dir.root         = null;
+        ui.dir.list         = null;
+        ui.dir.item         = null;
+        
+        ui.file             = {};
+        ui.file.root        = null;
+        ui.file.list        = null;
+        ui.file.item        = null;
+        
+        
+        var btn             = {};
+        btn.file            = {};
+        btn.dir             = {};
+
+        
+        callback.df         = false;
+
+        
+  //:
+  
+        
+        obj.init    = async function(){
+                                                                                debug('init');
+              newfile   = mod['new-file'];
+              
+              if(!newfile)debugger;
+              
+              newfile.initmod({$});
+              
+              newfile.init();
+
+              
+              await libs();
+
+              
+        }//init
+        
+        
+        async function libs(){
+          
+              
+              [server]      = await ext.text.libs('html/file-nav/js/server.js.api');
+              
+              server        = eval(server);
+              obj.server    = server;
+              
+              
+        }//libs
+        
+        
+  //:
+  
+  
+        obj.initdom   = function(){
+                                                                                debug('initdom');
+              //root                                            = $.$(rootnode,'file-nav');
+              shadow                                          = host.shadowRoot;
+              
+              $(shadow,'#update').onclick                     = btn.update;
+              
+              ui.path                                         = $(shadow,'#path');
+              ui.path.textContent                             = def.path;
+              
+              newfile.initdom(shadow);
+              
+              var view                                        = $(shadow,'#view');
+              
+              ui.dir.root                                     = $(shadow,'#dir-root');
+              $(ui.dir.root,'#parent').onclick                = btn.dir.parent;
+              ui.dir.num                                      = $(ui.dir.root,'#dir-num');
+              $(ui.dir.root,'#dir-add').onclick               = btn.dir.add;
+              $(ui.dir.root,'#dir-rem').ondblclick            = btn.dir.rem;
+              $(ui.dir.root,'#dir-clear').ondblclick          = btn.dir.clear;
+              ui.dir.list                                     = $(ui.dir.root,'#dir-list');
+              ui.dir.item                                     = $(ui.dir.list,'.dir');
+              ui.dir.item.remove();
+              var empty                                       = $(ui.dir.list,'#empty');
+              empty.remove();
+              ui.dir.empty                                    = empty.cloneNode(true);
+              
+              ui.file.root                                    = $(shadow,'#file-root');
+              ui.file.num                                     = $(ui.file.root,'#file-num');
+              $(ui.file.root,'#file-upload').onclick          = btn.file.upload;
+              $(ui.file.root,'#file-download').onclick        = btn.file.download;
+              $(ui.file.root,'#file-add').onclick             = btn.file.add;
+              $(ui.file.root,'#file-rem').ondblclick          = btn.file.rem;
+              ui.file.list                                    = $(ui.file.root,'#file-list');
+              ui.file.item                                    = $(ui.file.list,'.file');
+              ui.file.item.remove();
+              ui.file.empty                                   = empty.cloneNode(true);
+              
+              $.slider(ui.dir.root,'#slider',ui.file.root,null,{root:view});
+              
+              
+        }//initdom
+        
+
+  //:
+  
+  
+        btn.update    = async function(){
+          
+              var path    = ui.rd.path();
+              
+              update(path);
+              
+        }//update
+        
+        
+        btn.file.add    = async function(){
+          
+              var name    = await newfile.show('file');
+              if(!name){
+                    return;
+              }
+              
+              var path      = ui.rd.path();
+              
+              var result    = await callback('file','add',path,name);
+              if(result===false){
+                    update(path);
+                    return;
+              }
+              var {url,auth}    = result;
+              
+              file.add(url,auth,path,name);
+              
+        }//add
+        
+        
+        btn.file.rem    = async function(){
+          
+              if(cur.type!=='file'){
+                    return;
+              }
+              
+              var path      = ui.rd.path();
+              var name      = cur.filename;
+              
+              var result    = await callback('file','rem',path,name);
+              if(result===false){
+                    cur.rem();
+                    update(path);
+                    return;
+              }
+              var {url,auth}    = result;
+              
+              file.rem(url,auth,path,name);
+              
+        }//rem
+        
+        
+        btn.file.upload   = function(){
+          
+              var input         = document.createElement('input');
+              input.type        = 'file';
+              input.multiple    = 'multiple';
+              input.onchange    = onchange;
+              input.click();
+              
+              
+              async function onchange(){
+
+                    var path      = ui.rd.path();
+
+                    var n   = input.files.length;
+                    for(var i=0;i<n;i++){
+                    
+                          var blob      = input.files[i];
+                          var name      = blob.name;
+                          var result    = await callback('file','upload',path,name,blob);
+                          if(result){
+                                var {url,auth}    = result;
+                                var fn            = path+blob.name;
+                                await file.upload(url,auth,fn,blob);
+                          }
+                          
+                    }//for
+                    
+                    var path2   = ui.rd.path();
+                    if(path===path2){
+                          await update(path);
+                    }
+                    
+              }//onchange
+              
+        }//upload
+        
+        
+        btn.file.download   = async function(){
+          
+              if(cur.type!=='file'){
+                    return;
+              }
+              
+              var path      = ui.rd.path();
+              var name      = cur.filename;
+              var abs       = path+name;
+              
+              var result    = await callback('file','download',path,name);
+              if(result===false){
+                    return;
+              }
+              
+              var blob    = result?.blob;
+              if(!blob){
+                    var {url,auth}    = result;
+                    var blob          = await file.download(url,auth,path,name);
+              }
+              
+              var url       = window.URL.createObjectURL(blob);
+              var a         = document.createElement('a');
+              a.href        = url;
+              a.download    = name;
+              a.click();
+
+              
+        }//download
+        
+  
+        btn.dir.parent    = async function(){
+          
+              var path    = ui.rd.path();
+              path        = path.slice(0,-1);
+                                                                                //console.log(path);
+              var i       = path.lastIndexOf('/');
+              if(i==-1){
+                    return;
+              }
+              path        = path.slice(0,i+1);
+                                                                                //console.log('btn.dir.parent',path);
+              var result    = await callback('dir','parent',path);
+              if(!result){
+                    update(path);
+                    return;
+              }
+              var {url,auth}    = result;              
+              
+              dir.parent(url,auth,path);
+              
+        }//parent
+        
+        
+        btn.dir.add   = async function(){
+
+              var name    = await newfile.show('dir');          
+              if(!name){
+                    return;
+              }
+              
+              var path      = ui.rd.path();
+              
+              var result    = await callback('dir','add',path,name);
+              //if(result===false){
+              if(!result){
+                    update(path);
+                    return;
+              }
+              var {url,auth}    = result;
+              
+              dir.add(url,auth,path,name);
+              
+        }//add
+
+        
+        btn.dir.rem   = async function(){
+          
+              if(!cur.type){
+                    return;
+              }
+              if(cur.type!=='dir'){
+                    return;
+              }
+              
+              var path      = ui.rd.path();
+              var name      = cur.filename;
+              
+              var result    = await callback('dir','rem',path,name);
+              //if(result===false){
+              if(!result){
+                    cur.rem();
+                    update(path);
+                    return;
+              }
+              var {url,auth}    = result;
+              
+              dir.rem(url,auth,path,name);
+              
+        }//rem
+        
+
+        btn.dir.clear   = async function(e){
+
+              var path      = ui.rd.path();
+              
+              var result    = await callback('dir','clear',path);
+              //if(result===false){
+              if(!result){
+                    update(path);
+                    return;
+              }
+              var {url,auth}    = result;
+              
+              dir.clear(url,auth,path);
+              
+        }//clear
+        
+        
+  //:
+  
+  
+        async function callback(type,name,arg0){
+                                                                                callback.df && console.log('callback');
+                                                                                callback.df && console.json(arguments);
+              var args    = [...arguments].slice(2);
+              
+              var result;
+              if(typeof(obj[type][name])=='function'){
+                    result    = await obj[type][name].apply(null,args);
+                    if(result===false){
+                          return false;
+                    }
+              }
+              
+              var url;
+              var auth;
+              
+              if(result){
+                    ({url,auth}   = result);
+              }
+              if(!url){
+                    if(typeof obj.rd.params=='function'){
+                          ({url,auth}   = await obj.rd.params());
+                    }
+              }
+              
+              if(!url){
+                    return result;
+                    //return false;
+              }
+                                                                                callback.df && console.log(url,auth);
+              return {url,auth};
+              
+        }//callback
+
+
+  //:
+
+  
+        obj.update    = update;
+        
+        async function update(path){
+          
+              path    ||= ui.rd.path();
+              
+              var result    = await callback('dir','read',path);
+              //if(result===false){
+              if(!result){
+                    return;
+              }
+              
+              var {url,auth}    = result;
+              dir.read(url,auth,path);
+              
+        }//update
+        
+        
+  //:
+  
+
+        file.add    = async function(url,auth,path,filename){
+          
+              var file      = path+filename;
+              var result    = await server.mkfile(url,auth,file);
+              if(!result){
+                    return;
+              }
+              update(path);
+              
+        }//add
+        
+        
+        file.rem    = async function(url,auth,path,filename){
+          
+              var file      = path+filename;
+              var result    = await server.rmfile(url,auth,file);
+              if(!result){
+                    return;
+              }
+              cur.rem();
+              update(path);
+              
+        }//rem
+        
+        
+        file.upload   = async function(url,auth,path,blob){
+          
+              var result      = await server.upload(url,auth,path,blob);
+              if(!result){
+                    return;
+              }
+              update(path);
+              
+        }//upload
+        
+        
+        file.download   = async function(url,auth,path,filename){
+          
+              var result    = await server.download(url,auth,path);
+              if(!result){
+                    return;
+              }
+              
+              var blob      = result;
+              return blob;
+              
+        }//download
+        
+        
+        dir.read    = async function(url,auth,path){
+                                                                                debug('dir.read',path);
+              var result    = await server.readdir(url,auth,path);
+              if(!result){
+                    return;
+              }              
+              
+        }//read
+        
+        
+        dir.parent    = function(url,auth,path){
+                                                                                debug('dir.parent',path);
+              update(path);
+              
+        }//parent
+        
+
+        dir.add   = async function(url,auth,path,name){
+                                                                                debug('dir.add',path,name);
+              var dir       = path+name;
+              var result    = await server.mkdir(url,auth,dir);
+              if(!result){
+                    return;
+              }
+              update(path);
+              
+        }//add
+        
+        
+        dir.rem   = async function(url,auth,path,name){
+                                                                                debug('dir.rem',path,name);          
+              var dir       = path+name;
+              var result    = await server.rmdir(url,auth,dir);
+              if(!result){
+                    return;
+              }
+              cur.rem();
+              update(path);
+              
+        }//rem
+
+
+        dir.clear   = async function(url,auth,path){
+          
+              var result    = await server.dirclear(url,auth,path);
+              if(!result){
+                    return;
+              }
+              update(path);
+              
+        }//clear
+  
+
+  //:
+  
+        
+        obj.display   = function(path,dirs,files){return display.apply(null,arguments)}
+        
+        function display(path,dirs,files){
+                                                                                //if(df2)debugger;
+                                                                                //debug('display',path);
+                                                                                //df2 && console.dir(dirs);
+                                                                                //df2 && console.dir(files);
+                                                                                //debugger;
+              //display.clear();
+
+              
+              $(ui.path).textContent    = path;
+              cur.path                  = path;
+              
+              
+              disp(path,'dir',dirs);
+              disp(path,'file',files);
+              
+        }//display
+        
+        
+        obj.display.flat    = function(path,list){
+
+              var files   = [];
+              var dirs    = [];
+
+              var len     = path.length;    //prefix.length+path.length;
+              
+              list.forEach(abs=>{
+
+                    if(!abs.startsWith(path)){
+                          return;
+                    }
+                    var i   = abs.indexOf('/',len);
+                                                                                //console.log(abs,i);
+                    var fn;
+                    if(i==-1){
+                          fn    = abs.slice(len);
+                          if(fn){
+                                files.push(fn);
+                          }
+                    }else{
+                          fn    = abs.slice(len,i);
+                          if(dirs.indexOf(fn)==-1){
+                                dirs.push(fn);
+                          }
+                    }
+                    
+              });
+          
+              display(path,dirs,files);
+              
+        }//flat
+
+
+  //:
+  
+  
+        display.clear   = function(){
+
+              ui.path.replaceChildren();
+              
+              ui.dir.list.replaceChildren();
+              ui.file.list.replaceChildren();
+              
+              display.node.dir    = {};
+              display.node.file   = {};
+                            
+        }//clear
+        
+        
+        display.scroll        = {};
+        display.node          = {};
+        display.node.dir      = {};
+        display.node.file     = {};
+
+        
+        function disp(path,name,list){
+                                                                                //debug('display');
+              var ih    = 25;
+              var pad   = 5;
+              
+              var n     = list.length;
+              var ns    = n;
+              if(ns==0){
+                    ns    = 1;
+              }
+              var t     = ns*ih;
+
+              
+              var evt   = {};
+              
+              obj.onscoll                 = onscroll;
+              ui[name].list.onscroll      = onscroll;
+
+              
+              ui[name].num.textContent    = n;
+              
+
+              var node    = display.scroll[name];
+              if(!node){
+                    node                    = document.createElement('div');
+                    node.className          = 'scroll';
+                    display.scroll[name]    = node;
+                    ui[name].list.append(node);
+              }
+              node.style.top   = t+'px';
+
+
+              var st    = ui[name].list.scrollTop;
+
+              if(n==0){
+                    ui[name].list.append(ui[name].empty);
+              }else{
+                    ui[name].empty.remove();
+              }
+
+              
+              var i1    = Math.floor(st/ih)-3;
+              if(i1<0){
+                    i1    = 0;
+              }
+              
+              var h     = ui[name].list.offsetHeight;
+              var nh    = Math.floor(h/ih)+3;
+              
+              var i2    = i1+nh;
+              if(i2>list.length){
+                    i2    = list.length;
+              }
+
+        
+              for(var key in display.node[name]){
+                
+                    if(key<i1 || key>=i2){
+                          display.node[name][key].remove();
+                          delete display.node[name][key];
+                    }
+                    
+              }//for
+                          
+
+              for(let i=i1;i<i2;i++){
+                
+                    let nitem       = display.node[name][i];
+                    let filename    = list[i];
+                    if(typeof filename=='object'){
+                          var item    = filename;
+                          filename    = item.name;
+                    }
+                    
+                    if(!nitem){
+                          nitem                           = ui[name].item.cloneNode(true);
+                          nitem.style.cssText             = 'position:absolute;left:0;right:0';
+                          nitem.style.top                 = i*ih+'px';
+                          ui[name].list.append(nitem);
+                          display.node[name][i]           = nitem;
+                          
+                          nitem.onmouseenter              = e=>evt.mouseenter(nitem);
+                          nitem.onmouseleave              = e=>evt.mouseleave(nitem);
+                    }
+                    
+                    $(nitem,'.name').textContent    = filename;
+                    nitem.onclick                   = e=>evt.click(nitem,filename);
+                    nitem.ondblclick                = e=>evt.dblclick(nitem,filename);
+                    
+              }//for
+                                                                                //var nn    = Object.keys(display.node[name]).length;
+                                                                                //debug(name,nn);
+              evt.click   = async function(item,filename){
+                                                                                debug('click',name,path);
+                    var type    = 'file';
+                    
+                    if(cur.item!==item){
+                          if(cur.item){
+                                cur.item.style.background    = '';
+                          }
+                          item.style.background   = 'lightyellow';
+                          
+                          var path    = ui.rd.path();
+                          cur.set(name,item,path,filename);
+                    }else{
+                          item.style.background   = '';
+                          cur.rem();
+                    }
+                    
+                    
+                    if(name==='dir'){
+                          type        = 'dir';
+                          filename   += '/';
+                    }
+                                                                                debug('click',path,name,filename);
+                    await callback(type,'click',path,filename);
+                    
+              }//click
+              
+              
+              evt.dblclick    = async function(item,filename){
+
+                    var type    = 'file';
+                    if(name==='dir'){
+                          type        = 'dir';
+                          filename   += '/';
+                    }
+                                                                                debug('dblclick',path,name,filename);
+                    var result    = await callback(type,'dblclick',path,filename);
+                    if(!result){
+                          return;
+                    }
+                    
+                    if(type=='dir'){
+                          var {url,auth}    = result;
+                          var path2         = path+filename;
+                          dir.read(url,auth,path2);
+                    }
+                    
+              }//dblclick
+              
+
+              evt.mouseenter    = function(item){
+                
+                    if(cur.item){
+                          return;
+                    }
+                    item.style.background   = 'lightyellow';
+                    
+              }//mouseenter
+              
+              
+              evt.mouseleave    = function(item){
+                
+                    if(cur.item){
+                          return;
+                    }
+                    item.style.background   = '';
+                    
+              }//mouseleave
+              
+              
+              function onscroll(e){
+                                                                                debug(name,'onscroll');
+                    disp(path,name,list);
+                    
+              }//onscroll
+              
+        }//disp
+
+
+  //:
+  
+  
+        function debug(){
+          
+              if(!df)return;
+              var str   = [...arguments].join(' ');
+              console.log('[ file-nav ]',str);
+              
+        }//debug
+
+
+        
+        
+  return obj;
+  
+})//file_nav
+
+      </script>
+
+</file-nav>
+
+
+
