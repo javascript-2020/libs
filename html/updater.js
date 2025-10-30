@@ -65,6 +65,7 @@
 
         var src                             = `${path}${mod}/v2.0/${mod}-v2.0.html`;
         var dest                            = `${path}${mod}/${mod}.html`;
+                                                                                console.log();
                                                                                 console.log('    src :',src);
                                                                                 console.log('   dest : ',dest);
         
