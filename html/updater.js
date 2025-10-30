@@ -41,7 +41,7 @@
               if(!result.file){
                                                                                 console.log('dir');
                     path              = parts.join('/');
-                    mod               = parts.at(-1);
+                    mod               = parts.at(-2);
               }else{
                     if(isver(parts.at(-2))){
                                                                                 console.log('version :',parts.at(-2));
