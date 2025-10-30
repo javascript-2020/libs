@@ -74,7 +74,7 @@
                                                                                 console.log('    src :',src);
                                                                                 console.log('   dest : ',dest);
         
-              output.node(btn('update',update);
+              output.node(btn('update',update));
 
         
               async function update(){
