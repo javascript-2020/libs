@@ -69,9 +69,8 @@
                                                                                 console.log('    src :',src);
                                                                                 console.log('   dest : ',dest);
         
-        var node    = window.parent.output.log();
-        //debugger;
-        $.create.input({value:'update',type:'button',onclick:update,append:node,style:'padding:5px 10px;font-size:16px;cursor:pointer;margin:10px'});
+        var btn   = $.create.input({value:'update',type:'button',onclick:update,append:node,style:'padding:5px 10px;font-size:16px;cursor:pointer;margin:10px;display:block'});
+        window.parent.output.node(btn);
 
         
 
