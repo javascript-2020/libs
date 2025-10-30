@@ -89,15 +89,13 @@
   };
   
 
-        var ext,$,run,menu,source,complete,log
+        var ext,$,menu,source,complete,log,publish
         ;
         
         obj.initmod   = function(params){
           
               ext           = params.ext;
               $             = params.$;
-              
-              run           = params.run;
               
               menu          = params.menu;
               source        = params.source;
@@ -243,14 +241,14 @@
         }//file
         
 
-//:
+  //:
 
 
         click.menu    = function(type,opt){
         }//menu
 
         
-//:
+  //:
 
 
         obj.clear   = function(){
@@ -316,14 +314,17 @@
               var txt;
               switch(json.type){
                 
-                case 'github'   : await load.github(json.file);       break;
+                case 'file'     : await load.file(json.file);         break;
                 case 'text'     : txt   = load.text(json);            break;
                 
               }//switch
+              
               if(txt){
                     var blob    = new Blob([txt]);
                     complete.load(null,blob);
               }
+              
+              obj.import?.(json);
               
               log.green('publish loaded');
 
@@ -331,10 +332,19 @@
         }//load
         
         
-        load.github   = async function(json){
+        load.file   = function(file){
+          
+              load.file[file.filetype](file);
+                
+        }//file
+        
+        
+        load.file.github   = async function(file){
           
               var {owner,repo,branch,path}    = json;
+              
               filemod.github.write(owner,repo,branch,path);
+              
               var api   = true;
               await filemod.github.load(api);
               
@@ -398,7 +408,9 @@
         
         save.complete   = function(json){
                                                                                 console.json(json);
-                                                                                              
+              
+              obj.export?.(json);
+              
               jsonblob.util.save(json);
           
               log.green('published '+cur.type);
