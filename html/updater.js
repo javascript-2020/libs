@@ -1,6 +1,8 @@
 
 
 
+        var output    = window.parent.output;
+        output.set();
                                                                                 console.clear();
                                                                                 console.log('---  html latest updater  ---').style.cssText='border:2px solid blue;padding:5px 10px';
                                                                                 console.log();
@@ -11,10 +13,10 @@
         [github,datatype,$]                 = await ext.load.libs('js/io/github/github.js','js/core/datatype.js','js/dom/$.js.api');
         github.owner                        = 'javascript-2020';
         
-        var output    = window.parent.output;
         
         var btn   = (value,onclick)=>$.create.input({value,type:'button',onclick,style:'padding:5px 10px;font-size:16px;cursor:pointer;margin:10px;display:block'});
         output.node(btn('run',run));
+        
         
         var div   = output.node('div');
         output.set(div);
