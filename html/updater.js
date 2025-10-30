@@ -22,14 +22,16 @@
               
               var url           = await navigator.clipboard.readText();
               
-              var parts         = url.split('/');
+              var result        = github.parse(url);
+                                                                                //console.log(result);
+              var parts         = result.path.split('/');
               var path;
               var mod;
               if(parts.at(-2).startsWith('v')){
-                    path        = parts.slice(7,-3).join('/')+'/';
+                    path        = parts.slice(0,-3).join('/')+'/';
                     mod         = parts.at(-3);
               }else{
-                    path        = parts.slice(7,-2).join('/')+'/';
+                    path        = parts.slice(0,-2).join('/')+'/';
                     mod         = parts.at(-2);
               }
         }
@@ -53,8 +55,6 @@
               return;
         }
                                                                             
-        return;
-        
         var {blob}              = await github.file.load({repo,path:src});
         var {ok,error}          = await github.file.save({repo,path:dest,blob});
         
