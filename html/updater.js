@@ -23,7 +23,10 @@
               var url                 = 'https://github.com/javascript-2020/libs/blob/main/html/file-nav/html/new-file/new-file.html';
               var url                 = 'https://github.com/javascript-2020/libs/tree/main/html/file-mod'
               
-              var url                 = await navigator.clipboard.readText();
+              if(1){
+                                                                                console.log('clipboard');
+                    var url                 = await navigator.clipboard.readText();
+              }
                                                                                 console.log('url :',url);
               var result              = github.parse(url);
                                                                                 console.log('parse :',result);
@@ -58,7 +61,7 @@
         var dest                      = `${path}${mod}/${mod}.html`;
                                                                                 console.log('src :',src);
                                                                                 console.log('dest : ',dest);
-        //return;
+        return;
         
 
         var msg   = `
