@@ -32,7 +32,7 @@
               var parts         = path.split('/');
               var path;
               var mod;
-              if(isver(parts.at(-2)){
+              if(isver(parts.at(-2))){
                                                                                 console.log('version :',parts.at(-2));
                     path        = parts.slice(0,-3).join('/')+'/';
                     mod         = parts.at(-3);
