@@ -48,24 +48,25 @@
                     mod                     = parts.at(-2);
               }else{
                     if(isver(parts.at(-2))){
-                                                                                console.log('version :',parts.at(-2));
+                                                                                console.log('[ version ',parts.at(-2),']');
                           path              = parts.slice(0,-3).join('/')+'/';
                           mod               = parts.at(-3);
                     }else{
-                                                                                console.log('latest');
+                                                                                console.log('[ latest ]');
                           path              = parts.slice(0,-2).join('/')+'/';
                           mod               = parts.at(-2);
                     }
               }
         }
+                                                                                console.log();
                                                                                 console.log('repo :',repo);
                                                                                 console.log('path :',path);
                                                                                 console.log('mod :',mod);
 
         var src                             = `${path}${mod}/v2.0/${mod}-v2.0.html`;
         var dest                            = `${path}${mod}/${mod}.html`;
-                                                                                console.log('src :',src);
-                                                                                console.log('dest : ',dest);
+                                                                                console.log('    src :',src);
+                                                                                console.log('   dest : ',dest);
         
         var node    = window.parent.output.log();
         //debugger;
