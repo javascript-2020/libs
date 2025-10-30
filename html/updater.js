@@ -15,11 +15,17 @@
         
         var btn   = (value,onclick)=>$.create.input({value,type:'button',onclick,style:'padding:5px 10px;font-size:16px;cursor:pointer;margin:10px;display:block'});
         output.node(btn('run',run));
+        
+        var div   = output.node('div');
+        output.set(div);
+        
         run();
         
         async function run(){
           
               output.iframe.contentWindow.focus();
+                                                                                console.clear();
+              
           
               var path                            = 'html/file-nav/html/';
               var mod                             = 'new-file';
