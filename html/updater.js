@@ -2,7 +2,7 @@
 
 
                                                                                 console.clear();
-                                                                                console.log('---  html latest updater  ---').style.cssText='border:2px solid blue;padding:5px';
+                                                                                console.log('---  html latest updater  ---').style.cssText='border:2px solid blue;padding:5px 10px';
                                                                                 console.log();
 
 
@@ -26,7 +26,7 @@
               var url                       = 'https://github.com/javascript-2020/libs/tree/main/html/file-mod'
               
               if(1){
-                                                                                console.log('clipboard');
+                                                                                console.log('[ clipboard ]');
                     var url                 = await navigator.clipboard.readText();
               }
                                                                                 console.log('url :',url);
