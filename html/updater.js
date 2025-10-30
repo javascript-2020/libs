@@ -22,12 +22,13 @@
               
               var url           = await navigator.clipboard.readText();
               
-              var {path,error}    = github.parse(url);
-              if(error){
-                                                                                console.error(error);
+              var result        = github.parse(url);
+                                                                                console.log(result);
+              if(result.error){
+                                                                                console.error(result.error);
                     return;
               }
-                                                                                //console.log(result);
+
               var parts         = path.split('/');
               var path;
               var mod;
