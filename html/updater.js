@@ -70,12 +70,12 @@
         var {ok,error}          = await github.file.save({repo,path:dest,blob});
         
         if(error){
-              console.error(error);
+                                                                                console.error(error);
               return;
         }
         
-        console.log('ok');
-        console.log(ok);
+                                                                                console.log('ok');
+                                                                                //console.log(ok);
         
         
   //:
