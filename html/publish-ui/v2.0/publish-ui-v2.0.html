@@ -120,7 +120,6 @@
 
         var ui      = {};
         
-        var root;
         var shadow;
 
         //var autorun;
@@ -164,8 +163,7 @@
     
         obj.initdom   = function(rootnode){   //c
           
-              root                                  = $.$(rootnode,'publish-root');
-              shadow                                = root.shadowRoot;
+              shadow                                = node.shadowRoot;
               
               var style                             = $(shadow,'style');
               menu.add.style(shadow);
