@@ -19,6 +19,8 @@
         
         async function run(){
           
+              output.iframe.contentWindow.focus();
+          
               var path                            = 'html/file-nav/html/';
               var mod                             = 'new-file';
               var url                             = '';
