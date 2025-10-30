@@ -90,19 +90,16 @@
 
               
               var err;
-              
               try{
               
                     url   = new URL(url);
                     
               }//try
-              
               catch(err2){
               
                     err   = err2;
                   
               }//catch
-              
               if(err){
                     return {error:err};
               }
