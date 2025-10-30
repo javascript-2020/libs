@@ -6,7 +6,7 @@
                                                                                 console.log();
         var test    = true;
         var test    = false;
-        
+                                                                                console.log(test ? '[ TEST ]' : '[ LIVE ]');
         
         var {ext}                           = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js');
         var [github]                        = await ext.load.libs('js/io/github/github.js');
@@ -64,12 +64,14 @@
         var dest                            = `${path}${mod}/${mod}.html`;
                                                                                 console.log('src :',src);
                                                                                 console.log('dest : ',dest);
+        window.parent.outout.log('my-test');
+        
         if(test){
                                                                                 console.log('test exit');
               return;
         }
         
-
+        
         var msg   = `
         
         url     : ${url}
