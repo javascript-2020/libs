@@ -37,6 +37,7 @@
                     path        = parts.slice(0,-3).join('/')+'/';
                     mod         = parts.at(-3);
               }else{
+                                                                                console.log('latest');
                     path        = parts.slice(0,-2).join('/')+'/';
                     mod         = parts.at(-2);
               }
