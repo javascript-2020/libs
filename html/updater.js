@@ -61,7 +61,10 @@
         var dest                            = `${path}${mod}/${mod}.html`;
                                                                                 console.log('src :',src);
                                                                                 console.log('dest : ',dest);
-        return;
+        if(0){
+                                                                                console.log('test exit');
+              return;
+        }
         
 
         var msg   = `
@@ -79,6 +82,7 @@
                                                                                 console.log('aborted');
               return;
         }
+
                                                                             
         var {blob}                          = await github.file.load({repo,path:src});
         var {ok,error}                      = await github.file.save({repo,path:dest,blob});
