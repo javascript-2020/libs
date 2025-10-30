@@ -9,7 +9,7 @@
                                                                                 console.log(test ? '[ TEST ]' : '[ LIVE ]');
         
         var {ext}                           = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js');
-        [github,datatype,$]                 = await ext.load.libs('js/io/github/github.js','js/core/datatype.js','js/dom/$.js');
+        [github,datatype,$]                 = await ext.load.libs('js/io/github/github.js','js/core/datatype.js','js/dom/$.js.api');
         github.owner                        = 'javascript-2020';
         var repo                            = 'libs';
 
@@ -66,8 +66,8 @@
                                                                                 console.log('dest : ',dest);
         
         var node    = window.parent.output.log();
-        
-        $.create.input({value:'update',onclick:e=>console.log('click'),append:node});
+        //debugger;
+        $.create.input({value:'update',type:'button',onclick:e=>{debugger;console.log('click')},append:node});
 
         
         if(test){
