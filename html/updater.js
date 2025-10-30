@@ -29,7 +29,7 @@
                     return;
               }
 
-              var parts         = path.split('/');
+              var parts         = result.path.split('/');
               var path;
               var mod;
               if(isver(parts.at(-2))){
