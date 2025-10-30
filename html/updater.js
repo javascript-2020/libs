@@ -40,7 +40,7 @@
               var mod;
               if(!result.file){
                                                                                 console.log('dir');
-                    path                    = parts.join('/');
+                    path                    = parts.slice(0,-2).join('/');
                     mod                     = parts.at(-2);
               }else{
                     if(isver(parts.at(-2))){
