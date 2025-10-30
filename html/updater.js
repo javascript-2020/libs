@@ -16,7 +16,7 @@
         var btn   = (value,onclick)=>$.create.input({value,type:'button',onclick,style:'padding:5px 10px;font-size:16px;cursor:pointer;margin:10px;display:block'});
         output.node(btn('run',run));
         
-        var div   = $.create.div();
+        var div   = output.node('div');
         output.set(div);
         
         run();
