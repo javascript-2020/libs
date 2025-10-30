@@ -98,7 +98,7 @@
                           return;
                     }
               
-                                                                                d.append('ok');
+                                                                                console.write('ok').style.color='green';
                                                                                 //console.log(ok);
               }//update
               
