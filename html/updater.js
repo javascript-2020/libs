@@ -10,83 +10,88 @@
         var {ext}                           = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js');
         [github,datatype,$]                 = await ext.load.libs('js/io/github/github.js','js/core/datatype.js','js/dom/$.js.api');
         github.owner                        = 'javascript-2020';
-        var repo                            = 'libs';
-
-
-
-        var path                            = 'html/file-nav/html/';
-        var mod                             = 'new-file';
-        var url                             = '';
-
-
-        if(1){
+        
+        var output    = window.parent.output;
+        
+        var btn   = (value,onclick)=>$.create.input({value,type:'button',onclick,style:'padding:5px 10px;font-size:16px;cursor:pointer;margin:10px;display:block'});
+        output.node(btn('run',run));
+        run();
+        
+        function run(){
           
-              var url                       = 'https://github.com/javascript-2020/libs/blob/main/html/file-nav/html/new-file/v2.0/new-file-v2.0.html';
-              var url                       = 'https://github.com/javascript-2020/libs/blob/main/html/file-nav/html/new-file/new-file.html';
-              var url                       = 'https://github.com/javascript-2020/libs/tree/main/html/file-mod'
-              
+              var path                            = 'html/file-nav/html/';
+              var mod                             = 'new-file';
+              var url                             = '';
+      
+      
               if(1){
+                
+                    var url                       = 'https://github.com/javascript-2020/libs/blob/main/html/file-nav/html/new-file/v2.0/new-file-v2.0.html';
+                    var url                       = 'https://github.com/javascript-2020/libs/blob/main/html/file-nav/html/new-file/new-file.html';
+                    var url                       = 'https://github.com/javascript-2020/libs/tree/main/html/file-mod'
+                    
+                    if(1){
                                                                                 console.log('[ clipboard ]');
-                    var url                 = await navigator.clipboard.readText();
-              }
+                          var url                 = await navigator.clipboard.readText();
+                    }
                                                                                 console.log('url :',url);
-              var result                    = github.parse(url);
+                    var result                    = github.parse(url);
                                                                                 console.log('parse :',result);
-              if(result.error){
+                    if(result.error){
                                                                                 console.error(result.error);
-                    return;
-              }
+                          return;
+                    }
 
-              var repo                      = result.repo;
-                                                                      
-              var parts                     = result.path.split('/');
-              var path;
-              var mod;
-              if(!result.file){
+                    var repo                      = result.repo;
+                                                                            
+                    var parts                     = result.path.split('/');
+                    var path;
+                    var mod;
+                    if(!result.file){
                                                                                 console.log('[ dir ]');
-                    path                    = parts.slice(0,-2).join('/')+'/';
-                    mod                     = parts.at(-2);
-              }else{
-                    if(isver(parts.at(-2))){
-                                                                                console.log('[ version ',parts.at(-2),']');
-                          path              = parts.slice(0,-3).join('/')+'/';
-                          mod               = parts.at(-3);
+                          path                    = parts.slice(0,-2).join('/')+'/';
+                          mod                     = parts.at(-2);
                     }else{
+                          if(isver(parts.at(-2))){
+                                                                                console.log('[ version ',parts.at(-2),']');
+                                path              = parts.slice(0,-3).join('/')+'/';
+                                mod               = parts.at(-3);
+                          }else{
                                                                                 console.log('[ latest ]');
-                          path              = parts.slice(0,-2).join('/')+'/';
-                          mod               = parts.at(-2);
+                                path              = parts.slice(0,-2).join('/')+'/';
+                                mod               = parts.at(-2);
+                          }
                     }
               }
-        }
                                                                                 console.log();
                                                                                 console.log('repo :',repo);
                                                                                 console.log('path :',path);
                                                                                 console.log(' mod :',mod);
 
-        var src                             = `${path}${mod}/v2.0/${mod}-v2.0.html`;
-        var dest                            = `${path}${mod}/${mod}.html`;
+              var src                             = `${path}${mod}/v2.0/${mod}-v2.0.html`;
+              var dest                            = `${path}${mod}/${mod}.html`;
                                                                                 console.log();
                                                                                 console.log('    src :',src);
                                                                                 console.log('   dest : ',dest);
         
-        var btn   = $.create.input({value:'update',type:'button',onclick:update,style:'padding:5px 10px;font-size:16px;cursor:pointer;margin:10px;display:block'});
-        window.parent.output.node(btn);
+              output.node(btn('update',update);
 
         
-
-        async function update(){
+              async function update(){
                                                                                 var d=console.log('update ... ');
-              var {blob}                    = await github.file.load({repo,path:src});
-              var {ok,error}                = await github.file.save({repo,path:dest,blob});
-              
-              if(error){
+                    var {blob}                    = await github.file.load({repo,path:src});
+                    var {ok,error}                = await github.file.save({repo,path:dest,blob});
+                    
+                    if(error){
                                                                                 console.error(error);
-                    return;
-              }
+                          return;
+                    }
               
                                                                                 d.append('ok');
                                                                                 //console.log(ok);
-        }//update        
+              }//update
+              
+        }//run
         
   //:
 
