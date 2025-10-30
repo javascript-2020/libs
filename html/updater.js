@@ -70,7 +70,7 @@
 
         
 
-        function update(){
+        async function update(){
                                                                             
               var {blob}                    = await github.file.load({repo,path:src});
               var {ok,error}                = await github.file.save({repo,path:dest,blob});
