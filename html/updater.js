@@ -2,7 +2,7 @@
 
 
                                                                                 console.clear();
-                                                                                console.log('html latest updater');
+                                                                                console.log('---  html latest updater  ---');
                                                                                 console.log();
 
 
@@ -74,7 +74,7 @@
         
 
         async function update(){
-                                                                                console.log('update ...');
+                                                                                var d=console.log('update ... ');
               var {blob}                    = await github.file.load({repo,path:src});
               var {ok,error}                = await github.file.save({repo,path:dest,blob});
               
@@ -83,7 +83,7 @@
                     return;
               }
               
-                                                                                console.log('ok');
+                                                                                d.append('ok');
                                                                                 //console.log(ok);
         }//update        
         
