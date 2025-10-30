@@ -72,8 +72,8 @@
 
         function update(){
                                                                             
-              var {blob}                          = await github.file.load({repo,path:src});
-              var {ok,error}                      = await github.file.save({repo,path:dest,blob});
+              var {blob}                    = await github.file.load({repo,path:src});
+              var {ok,error}                = await github.file.save({repo,path:dest,blob});
               
               if(error){
                                                                                       console.error(error);
