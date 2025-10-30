@@ -15,6 +15,7 @@
         var path                = 'html/file-nav/html/';
         var mod                 = 'new-file';
 
+
         if(1){
               var url           = 'https://github.com/javascript-2020/libs/blob/main/html/file-nav/html/new-file/v2.0/new-file-v2.0.html';
               var url           = 'https://github.com/javascript-2020/libs/blob/main/html/file-nav/html/new-file/new-file.html';
