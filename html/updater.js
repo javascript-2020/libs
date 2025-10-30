@@ -66,22 +66,22 @@
         
         var node    = window.parent.output.log();
         //debugger;
-        $.create.input({value:'update',type:'button',onclick:update,append:node,style:'padding:5px 10px;font-size:16px;cursor:pointer'});
+        $.create.input({value:'update',type:'button',onclick:update,append:node,style:'padding:5px 10px;font-size:16px;cursor:pointer;margin:10px'});
 
         
 
         async function update(){
-                                                                            
+                                                                                console.log('update ...');
               var {blob}                    = await github.file.load({repo,path:src});
               var {ok,error}                = await github.file.save({repo,path:dest,blob});
               
               if(error){
-                                                                                      console.error(error);
+                                                                                console.error(error);
                     return;
               }
               
-                                                                                      console.log('ok');
-                                                                                      //console.log(ok);
+                                                                                console.log('ok');
+                                                                                //console.log(ok);
         }//update        
         
   //:
