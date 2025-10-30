@@ -2,7 +2,7 @@
 
 
                                                                                 console.clear();
-                                                                                console.log('---  html latest updater  ---');
+                                                                                console.log('---  html latest updater  ---').style.cssText='border:2px solid blue;padding:5px';
                                                                                 console.log();
 
 
@@ -69,7 +69,7 @@
                                                                                 console.log('    src :',src);
                                                                                 console.log('   dest : ',dest);
         
-        var btn   = $.create.input({value:'update',type:'button',onclick:update,append:node,style:'padding:5px 10px;font-size:16px;cursor:pointer;margin:10px;display:block'});
+        var btn   = $.create.input({value:'update',type:'button',onclick:update,style:'padding:5px 10px;font-size:16px;cursor:pointer;margin:10px;display:block'});
         window.parent.output.node(btn);
 
         
