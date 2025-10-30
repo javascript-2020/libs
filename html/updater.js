@@ -21,9 +21,9 @@
               var url           = 'https://github.com/javascript-2020/libs/blob/main/html/file-nav/html/new-file/new-file.html';
               
               var url           = await navigator.clipboard.readText();
-                                                                                console.log(url);
+                                                                                console.log('url :',url);
               var result        = github.parse(url);
-                                                                                console.log(result);
+                                                                                console.log('parse :',result);
               if(result.error){
                                                                                 console.error(result.error);
                     return;
@@ -40,13 +40,13 @@
                     mod         = parts.at(-2);
               }
         }
-                                                                                console.log(path);
-                                                                                console.log(mod);
+                                                                                console.log('path :',path);
+                                                                                console.log('mod :',mod);
 
         var src                 = `${path}${mod}/v2.0/${mod}-v2.0.html`;
         var dest                = `${path}${mod}/${mod}.html`;
-                                                                                console.log(src);
-                                                                                console.log(dest);
+                                                                                console.log('src :',src);
+                                                                                console.log('dest : ',dest);
 
         var msg   = `
         path    : ${path}
