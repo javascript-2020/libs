@@ -4,9 +4,8 @@
                                                                                 console.clear();
                                                                                 console.log('libs update');
                                                                                 console.log();
-        var test    = true;
-        //var test    = false;
-                                                                                console.log(test ? '[ TEST ]' : '[ LIVE ]');
+
+
         
         var {ext}                           = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js');
         [github,datatype,$]                 = await ext.load.libs('js/io/github/github.js','js/core/datatype.js','js/dom/$.js.api');
@@ -67,43 +66,23 @@
         
         var node    = window.parent.output.log();
         //debugger;
-        $.create.input({value:'update',type:'button',onclick:e=>{debugger;console.log('click')},append:node});
+        $.create.input({value:'update',type:'button',onclick:update,append:node,style:'padding:5px 10px;font-size:16px;cursor:pointer'});
 
         
-        if(test){
-                                                                                console.log('test exit');
-              return;
-        }
-        
-        
-        var msg   = `
-        
-        url     : ${url}
-        
-        path    : ${path}
-        mod     : ${mod}
-        
-        src     : ${src}
-        dest    : ${dest}
-        
-        `;
-        if(!confirm(msg)){
-                                                                                console.log('aborted');
-              return;
-        }
 
+        function update(){
                                                                             
-        var {blob}                          = await github.file.load({repo,path:src});
-        var {ok,error}                      = await github.file.save({repo,path:dest,blob});
-        
-        if(error){
-                                                                                console.error(error);
-              return;
-        }
-        
-                                                                                console.log('ok');
-                                                                                //console.log(ok);
-        
+              var {blob}                          = await github.file.load({repo,path:src});
+              var {ok,error}                      = await github.file.save({repo,path:dest,blob});
+              
+              if(error){
+                                                                                      console.error(error);
+                    return;
+              }
+              
+                                                                                      console.log('ok');
+                                                                                      //console.log(ok);
+        }//update        
         
   //:
 
