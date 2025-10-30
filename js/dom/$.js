@@ -242,7 +242,7 @@
                                 for(var sname in attr.style)
                                       node.style[sname]    = attr.style[sname];
                           }else{
-                                if(name==='onclick')debugger;
+                                //if(name==='onclick')debugger;
                                 node[name]    = attr[name];
                           }
                           
