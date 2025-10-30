@@ -141,7 +141,8 @@
               var repo      = url.hostname;
               var branch    = 'main';
               var path      = url.pathname.slice(1);
-              return {owner,repo,branch,path};
+              var file      = path.split('/').at(-1);
+              return {owner,repo,branch,path,file};
               
         }//github.io
         
@@ -153,7 +154,8 @@
               var repo      = parts.shift();
               var branch    = 'main';
               var path      = '';
-              return {owner,repo,branch,path};
+              var file      = '';
+              return {owner,repo,branch,path,file};
               
         }//repo
 
@@ -167,7 +169,8 @@
               parts.shift();
               var branch    = parts.shift();
               var path      = parts.join('/');
-              return {owner,repo,branch,path};
+              var file      = parts.at(-1);
+              return {owner,repo,branch,path,file};
         
         }//file
         
@@ -181,7 +184,8 @@
               parts.shift();
               var branch    = parts.shift();
               var path      = parts.join('/')+'/';
-              return {owner,repo,branch,path};
+              var file      = '';
+              return {owner,repo,branch,path,file};
               
         }//dir
 
