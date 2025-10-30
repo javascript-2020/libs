@@ -22,9 +22,13 @@
               
               var url           = await navigator.clipboard.readText();
               
-              var result        = github.parse(url);
+              var {path,error}    = github.parse(url);
+              if(error){
+                                                                                console.error(error);
+                    return;
+              }
                                                                                 //console.log(result);
-              var parts         = result.path.split('/');
+              var parts         = path.split('/');
               var path;
               var mod;
               if(parts.at(-2).startsWith('v')){
