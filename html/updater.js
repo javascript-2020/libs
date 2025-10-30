@@ -21,7 +21,7 @@
               var url           = 'https://github.com/javascript-2020/libs/blob/main/html/file-nav/html/new-file/new-file.html';
               
               var url           = await navigator.clipboard.readText();
-              
+                                                                                console.log(url);
               var result        = github.parse(url);
                                                                                 console.log(result);
               if(result.error){
