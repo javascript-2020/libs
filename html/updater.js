@@ -2,7 +2,7 @@
 
 
                                                                                 console.clear();
-                                                                                console.log('libs update');
+                                                                                console.log('html latest updater');
                                                                                 console.log();
 
 
@@ -37,11 +37,13 @@
                     return;
               }
 
+              var repo                      = result.repo;
+                                                                      
               var parts                     = result.path.split('/');
               var path;
               var mod;
               if(!result.file){
-                                                                                console.log('dir');
+                                                                                console.log('[ dir ]');
                     path                    = parts.slice(0,-2).join('/')+'/';
                     mod                     = parts.at(-2);
               }else{
@@ -56,6 +58,7 @@
                     }
               }
         }
+                                                                                console.log('repo :',repo);
                                                                                 console.log('path :',path);
                                                                                 console.log('mod :',mod);
 
