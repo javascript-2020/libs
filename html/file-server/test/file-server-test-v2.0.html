@@ -1,0 +1,129 @@
+
+
+
+<html>
+
+      <head>
+      
+
+            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
+
+            <script init>
+                                                                                console.clear();
+                                                                                console.log('https-file test');
+                                                                                console.log();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+        var ext,$,datatype,menumod,keydown
+        ;
+        
+        var menu;
+        
+        var fileserver;
+
+        
+  //:
+
+
+        async function init(){
+                                                                                console.log('init');
+              menu            = mod.menumod();
+              
+              fileserver      = mod['file-server'];
+              
+              
+              fileserver.initmod({ext,$,datatype,menu});
+              
+              fileserver.load.complete   = complete.load;
+              fileserver.save.complete   = complete.save;
+        
+              await fileserver.init();
+              
+              
+              initdom();
+  
+              
+        }//init
+  
+
+  //:
+  
+  
+(async()=>{
+
+        mod.stack.add;
+        
+        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
+          
+        var promise   = ext.load.libs(
+              'js/dom/$.js.api',
+              'js/core/datatype.js',
+              'js/dom/menumod/menumod.js',
+              'js/dom/keydown/keydown.js'
+        );
+        [$,datatype,menumod,keydown]   = await promise;
+  
+        mod.stack.complete;
+              
+})();
+
+  
+            </script>
+
+            <style>
+
+  html
+    {font-family:arial}
+    
+  .icon 
+    {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
+
+            </style>
+
+
+      </head>
+      
+      <body>
+
+            <file-server component v2.0></file-server>
+            
+      </body>
+
+
+
+      <script>
+
+
+  //:
+  
+  
+        function initdom(){
+
+        
+              fileserver.initdom();
+
+              
+        }//initdom
+
+
+  //:
+  
+
+        function complete(){
+        }//complete
+        
+        
+        complete.load   = function(file,blob){
+                                                                                console.log(file,blob);
+        }//load
+        
+        
+        complete.save   = function(file,confirm=true){
+                                                                                console.log(file);
+        }//save
+        
+
+      </script>
+
+</html>
+
+
