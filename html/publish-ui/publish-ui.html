@@ -264,9 +264,9 @@
         obj.query   = function(){return query()}
         
         async function query(){
-                                                                    console.log('[ publish ]','query loading ...');
+                                                                                //console.log('[ publish ]','query loading ...');
               await libs.complete;
-                                                                    console.log('[ publish ]','query load complete');
+                                                                                //console.log('[ publish ]','query load complete');
               
               var json;
               var error;
@@ -307,8 +307,8 @@
         
         
         async function load(json){
-                                                                    console.log('[ publish ]','query.complete');
-                                                                    console.json(json);
+                                                                                //console.log('[ publish ]','query.complete');
+                                                                                //console.json(json);
               var txt;
               switch(json.type){
                 
