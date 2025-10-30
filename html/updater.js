@@ -17,10 +17,20 @@
 
         if(1){
               var url           = 'https://github.com/javascript-2020/libs/blob/main/html/file-nav/html/new-file/v2.0/new-file-v2.0.html';
+              var url           = 'https://github.com/javascript-2020/libs/blob/main/html/file-nav/html/new-file/new-file.html';
+              
               var url           = await navigator.clipboard.readText();
+              
               var parts         = url.split('/');
-              var path          = parts.slice(7,-3).join('/')+'/';
-              var mod           = parts.at(-3);
+              var path;
+              var mod;
+              if(parts.at(-2).startsWith('v')){
+                    path        = parts.slice(7,-3).join('/')+'/';
+                    mod         = parts.at(-3);
+              }else{
+                    path        = part.slice(7,-1).join('/')+'/';
+                    mod         = parts.at(-2);
+              }
         }
                                                                                 console.log(path);
                                                                                 console.log(mod);
@@ -33,6 +43,7 @@
         var msg   = `
         path    : ${path}
         mod     : ${mod}
+        
         src     : ${src}
         dest    : ${dest}
         `;
