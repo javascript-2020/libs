@@ -180,7 +180,7 @@
               var repo      = parts.shift();
               parts.shift();
               var branch    = parts.shift();
-              var path      = parts.join('/');
+              var path      = parts.join('/')+'/';
               return {owner,repo,branch,path};
               
         }//dir
