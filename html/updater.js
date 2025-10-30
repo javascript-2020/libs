@@ -61,7 +61,7 @@
         var dest                            = `${path}${mod}/${mod}.html`;
                                                                                 console.log('src :',src);
                                                                                 console.log('dest : ',dest);
-        if(0){
+        if(1){
                                                                                 console.log('test exit');
               return;
         }
