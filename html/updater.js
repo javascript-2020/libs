@@ -29,7 +29,7 @@
                     path        = parts.slice(7,-3).join('/')+'/';
                     mod         = parts.at(-3);
               }else{
-                    path        = part.slice(7,-1).join('/')+'/';
+                    path        = parts.slice(7,-1).join('/')+'/';
                     mod         = parts.at(-2);
               }
         }
