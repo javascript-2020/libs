@@ -96,10 +96,13 @@
           
               ext           = params.ext;
               $             = params.$;
+              
               run           = params.run;
+              
               menu          = params.menu;
               source        = params.source;
               complete      = params.complete;
+              
               log           = params.log;
               
         }//initmod
@@ -387,14 +390,15 @@
               }
               
 
-              var json      = {type:'github',file};
+              var json      = {type:'file',file};
               save.complete(json);
               
         }//file
         
         
         save.complete   = function(json){
-                                                                    console.json(json);
+                                                                                console.json(json);
+                                                                                              
               jsonblob.util.save(json);
           
               log.green('published '+cur.type);
