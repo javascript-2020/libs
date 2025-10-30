@@ -89,17 +89,18 @@
   };
   
 
-        var ext,$,run,menu,source,complete,log
+        var ext,$,menu,source,complete,log,publish
         ;
         
         obj.initmod   = function(params){
           
               ext           = params.ext;
               $             = params.$;
-              run           = params.run;
+              
               menu          = params.menu;
               source        = params.source;
               complete      = params.complete;
+              
               log           = params.log;
               
         }//initmod
@@ -119,7 +120,6 @@
 
         var ui      = {};
         
-        var root;
         var shadow;
 
         //var autorun;
@@ -163,8 +163,7 @@
     
         obj.initdom   = function(rootnode){   //c
           
-              root                                  = $.$(rootnode,'publish-root');
-              shadow                                = root.shadowRoot;
+              shadow                                = node.shadowRoot;
               
               var style                             = $(shadow,'style');
               menu.add.style(shadow);
@@ -240,14 +239,14 @@
         }//file
         
 
-//:
+  //:
 
 
         click.menu    = function(type,opt){
         }//menu
 
         
-//:
+  //:
 
 
         obj.clear   = function(){
@@ -313,14 +312,17 @@
               var txt;
               switch(json.type){
                 
-                case 'github'   : await load.github(json.file);       break;
+                case 'file'     : await load.file(json.file);         break;
                 case 'text'     : txt   = load.text(json);            break;
                 
               }//switch
+              
               if(txt){
                     var blob    = new Blob([txt]);
                     complete.load(null,blob);
               }
+              
+              obj.import?.(json);
               
               log.green('publish loaded');
 
@@ -328,10 +330,19 @@
         }//load
         
         
-        load.github   = async function(json){
+        load.file   = function(file){
+          
+              load.file[file.filetype](file);
+                
+        }//file
+        
+        
+        load.file.github   = async function(file){
           
               var {owner,repo,branch,path}    = json;
+              
               filemod.github.write(owner,repo,branch,path);
+              
               var api   = true;
               await filemod.github.load(api);
               
@@ -387,14 +398,17 @@
               }
               
 
-              var json      = {type:'github',file};
+              var json      = {type:'file',file};
               save.complete(json);
               
         }//file
         
         
         save.complete   = function(json){
-                                                                    console.json(json);
+                                                                                console.json(json);
+              
+              obj.export?.(json);
+              
               jsonblob.util.save(json);
           
               log.green('published '+cur.type);
