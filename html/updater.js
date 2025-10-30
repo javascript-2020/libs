@@ -4,7 +4,10 @@
                                                                                 console.clear();
                                                                                 console.log('libs update');
                                                                                 console.log();
-
+        var test    = true;
+        var test    = false;
+        
+        
         var {ext}                           = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js');
         var [github]                        = await ext.load.libs('js/io/github/github.js');
         github.owner                        = 'javascript-2020';
@@ -61,7 +64,7 @@
         var dest                            = `${path}${mod}/${mod}.html`;
                                                                                 console.log('src :',src);
                                                                                 console.log('dest : ',dest);
-        if(1){
+        if(test){
                                                                                 console.log('test exit');
               return;
         }
