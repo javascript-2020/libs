@@ -32,7 +32,7 @@
               var parts         = path.split('/');
               var path;
               var mod;
-              if(parts.at(-2).startsWith('v')){
+              if(isver(parts.at(-2)){
                     path        = parts.slice(0,-3).join('/')+'/';
                     mod         = parts.at(-3);
               }else{
@@ -49,6 +49,7 @@
                                                                                 console.log('dest : ',dest);
 
         var msg   = `
+        
         url     : ${url}
         
         path    : ${path}
@@ -56,6 +57,7 @@
         
         src     : ${src}
         dest    : ${dest}
+        
         `;
         if(!confirm(msg)){
                                                                                 console.log('aborted');
@@ -74,6 +76,19 @@
         console.log(ok);
         
         
+  //:
+
+              function isver(str){
+                
+                    if(str[0]=='v'){
+                          var c   = str[1];
+                          if(c>='0' && c<='9'){
+                                return true;
+                          }
+                    }
+                    return false;
+                    
+              }//isver
         
         
         
