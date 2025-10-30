@@ -5,11 +5,11 @@
                                                                                 console.log('libs update');
                                                                                 console.log();
         var test    = true;
-        var test    = false;
+        //var test    = false;
                                                                                 console.log(test ? '[ TEST ]' : '[ LIVE ]');
         
         var {ext}                           = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js');
-        var [github]                        = await ext.load.libs('js/io/github/github.js');
+        var [github,datatype,$]             = await ext.load.libs('js/io/github/github.js','js/core/datatype.js','js/dom/$.js');
         github.owner                        = 'javascript-2020';
         var repo                            = 'libs';
 
@@ -64,7 +64,10 @@
         var dest                            = `${path}${mod}/${mod}.html`;
                                                                                 console.log('src :',src);
                                                                                 console.log('dest : ',dest);
-        window.parent.outout.log('my-test');
+        
+        var node    = window.parent.output.log();
+        $.create.input({value:'update',onclick:e=>console.log('click'),append:node});
+
         
         if(test){
                                                                                 console.log('test exit');
