@@ -61,7 +61,7 @@
                                                                                 console.log();
                                                                                 console.log('repo :',repo);
                                                                                 console.log('path :',path);
-                                                                                console.log('mod :',mod);
+                                                                                console.log(' mod :',mod);
 
         var src                             = `${path}${mod}/v2.0/${mod}-v2.0.html`;
         var dest                            = `${path}${mod}/${mod}.html`;
