@@ -17,7 +17,7 @@
         output.node(btn('run',run));
         run();
         
-        function run(){
+        async function run(){
           
               var path                            = 'html/file-nav/html/';
               var mod                             = 'new-file';
