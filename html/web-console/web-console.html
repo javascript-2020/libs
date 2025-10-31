@@ -119,13 +119,13 @@
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
               var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;                                                                        
-              if(root.hasAttribute('h')){
-                    var h   = root.getAttribute('h');
+              if(dom.hasAttribute('h')){
+                    var h   = dom.getAttribute('h');
                     h       = int(h);
                     def.height    = h;
               }
-              if(root.hasAttribute('height')){
-                    var h   = root.getAttribute('height');
+              if(dom.hasAttribute('height')){
+                    var h   = dom.getAttribute('height');
                     h       = int(h);
                     def.height    = h;
               }
