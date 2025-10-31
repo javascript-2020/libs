@@ -306,7 +306,8 @@
               fullsize    ||= def.fullsize;
 
 
-              shadow    = host.shadowRoot;
+              shadow            = host.shadowRoot;
+              obj.shadowRoot    = shadow;
 
   
               menu.add.style(shadow);
