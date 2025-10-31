@@ -63,7 +63,7 @@
       <script>
       
 
-(function web_console({mod,root,host}){
+(function web_console({mod,dom,host}){
   
   var obj   = {
         version   : 'v2.0',
@@ -108,17 +108,7 @@
         var def       = {};
         
         def.height    = '200px';
-        var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
-        if(root.hasAttribute('h')){
-              var h   = root.getAttribute('h');
-              h       = int(h);
-              def.height    = h;
-        }
-        if(root.hasAttribute('height')){
-              var h   = root.getAttribute('height');
-              h       = int(h);
-              def.height    = h;
-        }
+        
         
         
         
@@ -128,6 +118,18 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
+              var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;                                                                        
+              if(root.hasAttribute('h')){
+                    var h   = root.getAttribute('h');
+                    h       = int(h);
+                    def.height    = h;
+              }
+              if(root.hasAttribute('height')){
+                    var h   = root.getAttribute('height');
+                    h       = int(h);
+                    def.height    = h;
+              }
+
           
               await libs();
 
