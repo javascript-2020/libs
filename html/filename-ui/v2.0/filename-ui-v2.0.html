@@ -1,7 +1,7 @@
 
 
 
-<filename-ui>
+<filename-ui v2.0>
 
       <template shadowrootmode=open>
       
@@ -34,9 +34,13 @@
 
 (function filename_ui({mod,dom,host}){
  
-  var obj   = {};
+  var obj   = {
+        version   : 'v2.0',
+  };
   
-  
+        var $
+        ;
+        
         obj.initmod   = function(params){
           
               $     = params.$;
@@ -50,6 +54,7 @@
         var root;
         var icon;
         var filename;
+        
   //:
   
   
@@ -62,7 +67,6 @@
   
         obj.initdom   = function(){
           
-              //var host                  =  $(rootnode,'filename-ui');
               root                      = host.shadowRoot;
               
               
