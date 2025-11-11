@@ -59,6 +59,10 @@
           
               if(arguments.length!=1){
                     [url,hdrs,path]   = arguments;
+              }else{
+                    if(typeof arguments[0]=='string'){
+                          path    = arguments[0];
+                    }
               }
               
               url     = url||obj.url;
