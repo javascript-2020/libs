@@ -551,7 +551,7 @@
         obj.save    = function(file,blob){return save(file,blob)}   //d
         
         async function save(file,blob){
-        
+                                                                                debug('save',file.name,blob.size);
               var url         = file.url;
               var path        = file.path;
               var filename    = file.name;
