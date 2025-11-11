@@ -110,7 +110,7 @@
         version   : 'v1.0'
   };
       
-        var df=false;
+        var df=true;
 
         var ext,$,datatype,menu,source
         ;
@@ -624,7 +624,7 @@
         
         
         async function savefile(url,blob){
-          
+                                                                                debug('savefile',url,blob.size);
               var headers   = {mode:'save'};
               
               if(ui['auth-chk'].checked){
