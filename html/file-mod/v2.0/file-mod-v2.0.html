@@ -47,7 +47,7 @@
         version   : 'v1.0'
   };
   
-        var df    = false
+        var df    = true
         ;
                                                                                 
         var ext,$,menumod,menu,complete,source,focus,editor,log
@@ -178,7 +178,7 @@
         obj.save    = function(file){return save(file)}
           
         async function save(file){
-        
+                                                                                debug('save',file.name);
               if(!file){
                     if(!cur){
                           log.orange('no file');
@@ -317,7 +317,7 @@
         
               if(!df)return;  
               var str   = [...arguments].join(' ');
-              console.log('[ filemod ]',str);
+              console.log('[ file-mod ]',str);
               
         }//debug
         
