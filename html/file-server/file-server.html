@@ -527,7 +527,7 @@
               
               var file            = {};
               
-              file.type           = 'https-file';
+              file.type           = typename;
               file.url            = url;
               file.path           = path;
               file.filename       = filename;
@@ -551,7 +551,7 @@
         obj.save    = function(file,blob){return save(file,blob)}   //d
         
         async function save(file,blob){
-        
+                                                                                debug('save',file.name,blob.size);
               var url         = file.url;
               var path        = file.path;
               var filename    = file.name;
@@ -702,7 +702,7 @@
           
               if(!df)return;
               var str   = [...arguments].join(' ');
-              console.log('[ https-file ]',str);
+              console.log('[ file-server ]',str);
               
         }//debug
         
