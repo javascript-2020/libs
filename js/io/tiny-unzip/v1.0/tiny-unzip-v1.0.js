@@ -10,7 +10,9 @@
 
 
   
-              zip                 = {};
+              var zip             = {};
+              window.zip          = zip;
+              
               zip.files           = [];
               zip.file            = {};
               zip.data            = {};
