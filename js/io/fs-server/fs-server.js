@@ -114,7 +114,12 @@
         async function savefile({url,hdrs,path,blob}){
           
               if(arguments.length!=1){
-                    [url,hdrs,path,blob]    = arguments;
+                    if(arguments.length==2){
+                          path    = arguments[0];
+                          blob    = arguments[1];
+                    }else{
+                          [url,hdrs,path,blob]    = arguments;
+                    }
               }
               
               url     = url||obj.url;
