@@ -78,6 +78,7 @@
                                                 }
                                                 
                                           }//while
+                                          return zip.files;
                                           
                                     }//rd
 
