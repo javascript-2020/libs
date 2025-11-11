@@ -11,7 +11,7 @@
 
   
               var zip             = {};
-              window.zip          = zip;
+              globalThis.zip      = zip;
               
               zip.files           = [];
               zip.file            = {};
