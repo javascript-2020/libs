@@ -58,7 +58,8 @@
                     var parts                     = result.path.split('/');
                     var path;
                     var mod;
-                    var ver   = 'v2.0';
+                    var ver     = 'v2.0';
+                    var fext    = 'html';
                     
                     if(!result.file){
                                                                                 console.log('[ dir ]');
@@ -75,14 +76,16 @@
                                 path              = parts.slice(0,-2).join('/')+'/';
                                 mod               = parts.at(-2);
                           }
+                          fext    = result.file.split('.').at(-1);
                     }
               }
                                                                                 console.log();
-                                                                                console.log('path :',path);
-                                                                                console.log(' mod :',mod);
+                                                                                console.log('   path :',path);
+                                                                                console.log('    mod :',mod);
+                                                                                console.log('   fext :',fext);
 
-              var src                             = `${path}${mod}/${ver}/${mod}-${ver}.html`;
-              var dest                            = `${path}${mod}/${mod}.html`;
+              var src                             = `${path}${mod}/${ver}/${mod}-${ver}.${fext}`;
+              var dest                            = `${path}${mod}/${mod}.${fext}`;
                                                                                 console.log();
                                                                                 console.log('   repo :',repo);
                                                                                 console.log('    src :',src);
