@@ -58,6 +58,8 @@
                     var parts                     = result.path.split('/');
                     var path;
                     var mod;
+                    var ver   = 'v2.0';
+                    
                     if(!result.file){
                                                                                 console.log('[ dir ]');
                           path                    = parts.slice(0,-2).join('/')+'/';
@@ -67,6 +69,7 @@
                                                                                 console.log('[ version ',parts.at(-2),']');
                                 path              = parts.slice(0,-3).join('/')+'/';
                                 mod               = parts.at(-3);
+                                ver               = parts.at(-2);
                           }else{
                                                                                 console.log('[ latest ]');
                                 path              = parts.slice(0,-2).join('/')+'/';
@@ -78,7 +81,7 @@
                                                                                 console.log('path :',path);
                                                                                 console.log(' mod :',mod);
 
-              var src                             = `${path}${mod}/v2.0/${mod}-v2.0.html`;
+              var src                             = `${path}${mod}/${ver}/${mod}-${ver}.html`;
               var dest                            = `${path}${mod}/${mod}.html`;
                                                                                 console.log();
                                                                                 console.log('   repo :',repo);
