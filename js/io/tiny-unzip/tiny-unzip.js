@@ -1,4 +1,8 @@
-              window.zip   = {};
+
+
+
+
+              //window.zip   = {};
               
 
 (()=>{
@@ -6,7 +10,9 @@
 
 
   
-              zip                 = {};
+              var zip             = {};
+              globalThis.zip      = zip;
+              
               zip.files           = [];
               zip.file            = {};
               zip.data            = {};
@@ -72,6 +78,7 @@
                                                 }
                                                 
                                           }//while
+                                          return zip.files;
                                           
                                     }//rd
 
@@ -123,7 +130,7 @@
 
               function unzip(zip,file){
               
-                                                                                //  github foliojs/tiny-inflate
+                      
                       var TINF_OK           = 0;
                       var TINF_DATA_ERROR   = -3;
 
@@ -556,6 +563,5 @@
 
 
 })();
-
 
 
