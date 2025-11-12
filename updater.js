@@ -26,7 +26,7 @@
         
         async function run(){
           
-              output.iframe.contentWindow.focus();
+              //output.iframe.contentWindow.focus();
                                                                                 console.clear();
               
           
