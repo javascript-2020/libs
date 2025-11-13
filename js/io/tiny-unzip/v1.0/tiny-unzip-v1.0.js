@@ -183,7 +183,7 @@
                       var lengths       = new Uint8Array(288+32);
 
                       
-                      var offs = new Uint16Array(16);
+                      var offs          = new Uint16Array(16);
                       
 
 
