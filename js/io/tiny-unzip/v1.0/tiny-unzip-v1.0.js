@@ -244,67 +244,103 @@
                       }//tinf_build_bits_base
                       
                                                                                 /* build the fixed huffman trees */
-                      function tinf_build_fixed_trees(lt, dt) {
+                      function tinf_build_fixed_trees(lt,dt){
                         
                             var i;
-                          
                                                                                 /* build fixed length tree */
-                            for (i = 0; i < 7; ++i) lt.table[i] = 0;
+                            for(i=0;i<7;++i){
+                              
+                                  lt.table[i]   = 0;
+                                  
+                            }//for
                           
-                            lt.table[7] = 24;
-                            lt.table[8] = 152;
-                            lt.table[9] = 112;
+                            lt.table[7]   = 24;
+                            lt.table[8]   = 152;
+                            lt.table[9]   = 112;
                           
-                            for (i = 0; i < 24; ++i) lt.trans[i] = 256 + i;
-                            for (i = 0; i < 144; ++i) lt.trans[24 + i] = i;
-                            for (i = 0; i < 8; ++i) lt.trans[24 + 144 + i] = 280 + i;
-                            for (i = 0; i < 112; ++i) lt.trans[24 + 144 + 8 + i] = 144 + i;
+                            for(i=0;i<24;++i){
+                              
+                                  lt.trans[i]   = 256+i;
+                                  
+                            }//for
+                            
+                            for(i=0;i<144;++i){
+                              
+                                  lt.trans[24+i]    = i;
+                                  
+                            }//for
+                            
+                            for(i=0;i<8;++i){
+                              
+                                  lt.trans[24+144+i]    = 280+i;
+                                  
+                            }//for
+                            
+                            for(i=0;i<112;++i){
+                              
+                                  lt.trans[24+144+8+i]    = 144+i;
+                                  
+                            }//for
+                                                                                /* build fixed distance tree */
+                            for(i=0;i<5;++i){
+                              
+                                  dt.table[i]   = 0;
+                                  
+                            }//for
                           
-                            /* build fixed distance tree */
-                            for (i = 0; i < 5; ++i) dt.table[i] = 0;
+                            dt.table[5]   = 32;
                           
-                            dt.table[5] = 32;
-                          
-                            for (i = 0; i < 32; ++i) dt.trans[i] = i;
-                      }
+                            for(i=0;i<32;++i){
+                              
+                                  dt.trans[i]   = i;
+                                  
+                            }//for
+                            
+                      }//tinf_build_fixed_trees
                       
                                                                                 /* given an array of code lengths, build a tree */
-                      
-                      function tinf_build_tree(t, lengths, off, num) {
+                      function tinf_build_tree(t,lengths,off,num){
                         
-                            var i, sum;
-                          
+                            var i;
+                            var sum;
                                                                                 /* clear code length count table */
-                            for (i = 0; i < 16; ++i) t.table[i] = 0;
-                          
+                            for(i=0;i<16;++i){
+                              
+                                  t.table[i]    = 0;
+                                  
+                            }//for
                                                                                 /* scan symbol lengths, and sum code length counts */
-                            for (i = 0; i < num; ++i) t.table[lengths[off + i]]++;
+                            for(i=0;i<num;++i){
+                              
+                                  t.table[lengths[off+i]]++;
+                                  
+                            }//for
                           
-                            t.table[0] = 0;
-                          
+                            t.table[0]    = 0;
                                                                                 /* compute offset table for distribution sort */
-                            for (sum = 0, i = 0; i < 16; ++i) {
+                            for(sum=0,i=0;i<16;++i){
                               
-                                  offs[i] = sum;
-                                  sum += t.table[i];
+                                  offs[i]   = sum;
+                                  sum      += t.table[i];
                                   
-                            }
-                          
+                            }//for
                                                                                 /* create code->symbol translation table (symbols sorted by code) */
-                            for (i = 0; i < num; ++i) {
+                            for(i=0;i<num;++i){
                               
-                                  if (lengths[off + i]) t.trans[offs[lengths[off + i]]++] = i;
+                                  if(lengths[off+i]){
+                                        t.trans[offs[lengths[off+i]]++]   = i;
+                                  }
                                   
-                            }
+                            }//for
                             
-                      }
+                      }//tinf_build_tree
                       
                                                                                 /* ---------------------- *
                                                                                  * -- decode functions -- *
                                                                                  * ---------------------- */
                       
                                                                                 /* get one bit from source stream */
-                      function tinf_getbit(d) {
+                      function tinf_getbit(d){
                         
                             /* check if tag is empty */
                             if (!d.bitcount--) {
