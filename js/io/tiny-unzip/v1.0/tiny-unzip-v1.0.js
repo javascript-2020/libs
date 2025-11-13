@@ -141,7 +141,8 @@
                                                                                 /* code -> symbol translation table */
                             this.trans = new Uint16Array(288);
                             
-                      }
+                      }//tree
+                      
                       
                       function Data(source, dest) {
                         
@@ -157,7 +158,7 @@
                                                                                 /* dynamic distance tree */
                             this.dtree          = new Tree();  
                             
-                      }
+                      }//data
                       
                                                                                 /* --------------------------------------------------- *
                                                                                  * -- uninitialized global data (static structures) -- *
@@ -218,19 +219,29 @@
                                                                                 /* build extra bits and base tables */
                       function tinf_build_bits_base(bits, base, delta, first) {
                         
-                            var i, sum;                          
+                            var i;
+                            var sum;                          
                                                                                 /* build bits table */
-                            for (i = 0; i < delta; ++i) bits[i] = 0;
-                            for (i = 0; i < 30 - delta; ++i) bits[i + delta] = i / delta | 0;
-                          
-                                                                                /* build base table */
-                            for (sum = first, i = 0; i < 30; ++i) {
+                            for(i=0;i<delta;++i){
                               
-                                  base[i] = sum;
-                                  sum += 1 << bits[i];
+                                  bits[i]   = 0;
                                   
-                            }
-                      }
+                            }//for
+                            
+                            for(i=0;i<30-delta;++i){
+                              
+                                  bits[i+delta]   = i/delta|0;
+                                  
+                            }//for
+                                                                                /* build base table */
+                            for(sum=first,i=0;i<30;++i){
+                              
+                                  base[i]   = sum;
+                                  sum      += 1<<bits[i];
+                                  
+                            }//for
+                            
+                      }//tinf_build_bits_base
                       
                                                                                 /* build the fixed huffman trees */
                       function tinf_build_fixed_trees(lt, dt) {
