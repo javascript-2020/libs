@@ -342,38 +342,40 @@
                                                                                 /* get one bit from source stream */
                       function tinf_getbit(d){
                         
-                            /* check if tag is empty */
-                            if (!d.bitcount--) {
-                              /* load next tag */
-                              d.tag = d.source[d.sourceIndex++];
-                              d.bitcount = 7;
+                                                                                /* check if tag is empty */
+                            if(!d.bitcount--){
+                                                                                /* load next tag */
+                                  d.tag         = d.source[d.sourceIndex++];
+                                  d.bitcount    = 7;
                             }
-                          
-                            /* shift bit out of tag */
-                            var bit = d.tag & 1;
-                            d.tag >>>= 1;
+                                                                                /* shift bit out of tag */
+                            var bit     = d.tag&1;
+                            d.tag    >>>= 1;
                           
                             return bit;
                             
-                      }
+                      }//tinf_getbit
                       
                                                                                 /* read a num bit value from a stream and add base */
-                      function tinf_read_bits(d, num, base) {
+                      function tinf_read_bits(d,num,base){
                         
-                            if (!num)
-                              return base;
-                          
-                            while (d.bitcount < 24) {
-                              d.tag |= d.source[d.sourceIndex++] << d.bitcount;
-                              d.bitcount += 8;
+                            if(!num){
+                                  return base;
                             }
                           
-                            var val = d.tag & (0xffff >>> (16 - num));
-                            d.tag >>>= num;
-                            d.bitcount -= num;
-                            return val + base;
+                            while(d.bitcount<24){
+                              
+                                  d.tag         |= d.source[d.sourceIndex++]<<d.bitcount;
+                                  d.bitcount    += 8;
+                                  
+                            }//while
+                          
+                            var val       = d.tag&(0xffff>>>(16-num));
+                            d.tag      >>>= num;
+                            d.bitcount   -= num;
+                            return val+base;
                             
-                      }
+                      }//tinf_read_bits
                       
                                                                                 /* given a data stream and a tree, decode a symbol */
                       function tinf_decode_symbol(d, t) {
