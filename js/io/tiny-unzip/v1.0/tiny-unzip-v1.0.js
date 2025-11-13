@@ -67,8 +67,8 @@
                                                   
                                                       var fn      = zip.file.fn(buf,off2);
                                                       var data2   = zip.file.data(buf,off2);
-                                                      off         = zip.data.start(buf,off);
-                                                      var size    = zip.data.size(buf,off);
+                                                      off         = zip.data.start(buf,off2);
+                                                      var size    = zip.data.size(buf,off2);
                                                       var data    = new Uint8Array(size);
                                                       unzip(data2,data);
                                                       var blob    = _blob(data);
