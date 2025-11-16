@@ -21,13 +21,13 @@
             
             <div id=root>
             
-                  <editor component v2.0></editor>
+                  <web-editor component></web-editor>
       
                   <div>
                         <input value=run type=button>
                   </div>
                               
-                  <console component v2.0></console>
+                  <web-console component></web-console>
       
             </div>
       
@@ -36,7 +36,7 @@
       
       <script>
       
-(function snippet_console({mod,root,host}){
+(function snippet_console({mod,dom,host}){
   
   var obj   = {
         version   : 'v2.0',
@@ -69,7 +69,7 @@
         var con;
         obj.console     = null;
         
-        var def    = root.innerHTML;
+        var def;
         
         var sandbox;
         
@@ -85,10 +85,12 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
-              editor        = mod.editor;
+              def           = dom.innerHTML;
+                                                                                
+              editor        = mod['web-editor'];
               obj.editor    = editor;
               
-              con           = mod.console;
+              con           = mod['web-console'];
               obj.console   = con;
               
               editor.initmod({ext,$,menu,ace});
@@ -125,8 +127,8 @@
 
         async function src(){
           
-              if(!root.hasAttribute('src'))return;
-              var src   = root.getAttribute('src');
+              if(!dom.hasAttribute('src'))return;
+              var src   = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
               def       = txt;
