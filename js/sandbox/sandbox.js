@@ -294,6 +294,7 @@
                     var ctx;
                     ({console,ctx,on,df=true}    = params);
                     ctx           ||= {};
+                    on            ||= {};
                     ({terminal}     = ctx);
                                                                                 console.log('sandbox.nodejs');
                                                                                 console.log('cross-origin-isolated : ',window.crossOriginIsolated);
