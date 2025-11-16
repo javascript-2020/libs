@@ -49,8 +49,8 @@
 
               menu              = menumod();
               
-              snippet.inline        = mod['snippet-terminal[inline]'];
-              snippet.src           = mod['snippet-terminal[src]'];
+              snippet.inline        = mod.inline;
+              snippet.src           = mod.src;
               
               snippet.inline.initmod({ext,$,menu});
               snippet.src.initmod({ext,$,menu});
@@ -134,8 +134,7 @@
 
 
 
-            <snippet-terminal id=src type=nodejs component v2.0 src='ex/nodejs-ex.js'>
-            </snippet-terminal>
+            <snippet-terminal id=src type=nodejs component v2.0 src='ex/nodejs-ex.js'></snippet-terminal>
 
       
       </body>
