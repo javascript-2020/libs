@@ -28,7 +28,7 @@
             
             <div id=root>
             
-                  <editor component v2.0></editor>
+                  <web-editor component></web-editor>
                   
                   <div>
                         <input value=run type=button>
@@ -38,7 +38,7 @@
                         <iframe></iframe>
                   </div>
                   
-                  <console component v2.0></console>
+                  <web-console component></web-console>
                   
             </div>
       
@@ -119,9 +119,9 @@
               }
 
               
-              editor            = mod.editor;                                                                                
+              editor            = mod['web-editor']
               obj.editor        = editor;
-              console           = mod.console;
+              console           = mod['web-console'];
               obj.console       = console;
 
               
