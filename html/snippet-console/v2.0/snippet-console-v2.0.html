@@ -69,7 +69,7 @@
         var con;
         obj.console     = null;
         
-        var def    = root.innerHTML;
+        var def;
         
         var sandbox;
         
@@ -85,6 +85,8 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
+              def           = root.innerHTML;
+                                                                                
               editor        = mod['web-editor'];
               obj.editor    = editor;
               
