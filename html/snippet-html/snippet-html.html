@@ -28,7 +28,7 @@
             
             <div id=root>
             
-                  <editor component v2.0></editor>
+                  <web-editor component></web-editor>
                   
                   <div>
                         <input value=run type=button>
@@ -97,7 +97,7 @@
               def            = $.htmlentities.decode(dom);
               
               
-              editor    = mod.editor;
+              editor    = mod['web-editor'];
               
               editor.initmod({ext,$,menu,ace});
               
@@ -194,6 +194,3 @@
 
       
 </snippet-html>
-
-
-
