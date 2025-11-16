@@ -32,16 +32,16 @@
             
             <div id=root>
             
-                  <editor component v2.0></editor>
+                  <web-editor component></web-editor>
                   
                   <div id=btns>
                         <input value=run type=button>
                         <input value=clear type=button>
                   </div>
                   
-                  <terminal component v2.0></terminal>
+                  <web-terminal component></web-terminal>
                   
-                  <console component v2.0></console>
+                  <web-console component></web-console>
                   
             </div>
             
@@ -110,11 +110,11 @@
               mode              = dom.getAttribute('type');
 
         
-              editor            = mod.editor;
+              editor            = mod['web-editor'];
               obj.editor        = editor;
-              terminal          = mod.terminal;
+              terminal          = mod['web-terminal'];
               obj.terminal      = terminal;              
-              jsconsole         = mod.console;
+              jsconsole         = mod['web-console'];
               obj.console       = jsconsole;
 
               editor.initmod({ext,$,menu,ace});
