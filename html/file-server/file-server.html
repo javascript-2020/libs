@@ -320,9 +320,9 @@
               
               var res       = await fetch('https://raw.githubusercontent.com/javascript-2020/code/main/nodejs/server/file-server/file-server.js');
               var blob      = await res.blob();
-              zip.file(`file-server/file-server.js`,blob);
+              zip.file(`file-server/https-file-server.js`,blob);
               
-              zip.folder(`file-server/node_modules`);
+              zip.folder(`https-file-server/node_modules`);
 
               var res       = await fetch('https://raw.githubusercontent.com/javascript-2020/libs/main/js/string/getmime/getmime.js');
               var blob      = await res.blob();
@@ -336,7 +336,7 @@
               
               var url       = window.URL.createObjectURL(blob);
               var a         = document.createElement('a');
-              a.download    = 'file-server';
+              a.download    = 'https-file-server';
               a.href        = url;
               a.click();
 
