@@ -3,7 +3,7 @@
 
 /*
 
-//fs-server:d
+//file-server:d
 
 12-08-25
 
@@ -16,8 +16,9 @@
   var obj   = {
         version     : 'v1.0.0'
   };
-  
+  window['file-server']    =  obj;
 
+  
         var df    = false;
         Object.defineProperty(obj,'df',{set:v=>df=v});
         
