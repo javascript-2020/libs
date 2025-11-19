@@ -201,7 +201,7 @@
               
               async function loader({root,mod,mod2}){
 
-                    var {url,inst}    = loader.fn.url(root);
+                    var {url,inst,nn}    = loader.fn.url(root);
                     
 /*
                     var {nn,inst}   =  rd.root(root);
@@ -462,7 +462,7 @@
                           ({url}    = loader.grp({root,type,nn,version}));
                     }
                                                                                 if(!url)debugger;
-                    return {url,inst};
+                    return {url,inst,nn};
                     
               }//url
               
