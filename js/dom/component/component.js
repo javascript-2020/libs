@@ -247,7 +247,7 @@
                     node.__root     = root;
                     node.__dom      = root;
                     
-                    node.setAttribute('url',url);
+                    //  node.setAttribute('url',url);
 
                     for(var attr of root.attributes){
                       
