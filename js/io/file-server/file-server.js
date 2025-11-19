@@ -16,7 +16,7 @@
   var obj   = {
         version     : 'v1.0.0'
   };
-  window['file-server']    =  obj;
+  globalThis['file-server']    =  obj;
 
   
         var df    = false;
