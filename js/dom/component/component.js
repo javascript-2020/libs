@@ -461,7 +461,7 @@
                     if(type.startsWith('grp')){
                           ({url}    = loader.grp({root,type,nn,version}));
                     }
-                    
+                                                                                if(!url)debugger;
                     return {url,inst};
                     
               }//url
