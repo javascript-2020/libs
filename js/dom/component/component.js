@@ -201,9 +201,9 @@
               
               async function loader({root,mod,mod2}){
 
-                    //var {url,inst}    = loader.fn.url(root);
+                    var {url,inst}    = loader.fn.url(root);
                     
-
+/*
                     var {nn,inst}   =  rd.root(root);
                     
                     var type      = rd(root,'component','libs');
@@ -214,16 +214,17 @@
                     
                     switch(type){
                       
-                      case 'libs'       : ({url}   = await loader.libs({root,nn,version}));          break;
+                      case 'libs'       : ({url}   = loader.libs({root,nn,version}));          break;
                       //case 'grp'        : ({url}   = await loader.grp({root,nn,version}));           break;
-                      case 'parent'     : ({url}   = await loader.parent({root,nn,version}));        break;
-                      case 'page'       : ({url}   = await loader.page({root,nn,version}));          break;
+                      case 'parent'     : ({url}   = loader.parent({root,nn,version}));        break;
+                      case 'page'       : ({url}   = loader.page({root,nn,version}));          break;
                       
                     }//switch
                     
                     if(type.startsWith('grp')){
                           ({url}    = await loader.grp({root,type,nn,version}));
                     }
+*/                    
 
 
                     var {html,error}    = await loader.fetch(url);
@@ -309,7 +310,7 @@
               }//loader
 
 
-              loader.libs   = async function({root,nn,version}){
+              loader.libs   = function({root,nn,version}){
                 
                     var url;
                     if(!version){
@@ -325,7 +326,7 @@
               }//libs
               
               
-              loader.grp    = async function({root,type,nn,version}){
+              loader.grp    = function({root,type,nn,version}){
                                                                                 //console.log('loader.grp',nn,version);
                     var sub;
                     if(type.length>3){
@@ -354,13 +355,13 @@
               }//grp
 
 
-              loader.parent   = async function({root,nn,version}){//debugger;
+              loader.parent   = function({root,nn,version}){//debugger;
                 
                     var parent      = rd(root,'parent');
                     var par         = $.parent(root,parent);
                     //var pversion    = rd.version(par);
-                    var url         = rd(par,'url');
-                    //var {url}       = loader.fn.url(par);
+                    //var url         = rd(par,'url');
+                    var {url}       = loader.fn.url(par);
 
                     var parts       = url.split('/');
                     parts.pop();
@@ -456,15 +457,15 @@
                     
                     switch(type){
                       
-                      case 'libs'       : ({url}   = await loader.libs({root,nn,version}));          break;
-                      //case 'grp'        : ({url}   = await loader.grp({root,nn,version}));           break;
-                      case 'parent'     : ({url}   = await loader.parent({root,nn,version}));        break;
-                      case 'page'       : ({url}   = await loader.page({root,nn,version}));          break;
+                      case 'libs'       : ({url}   = loader.libs({root,nn,version}));          break;
+                      //case 'grp'        : ({url}   = loader.grp({root,nn,version}));           break;
+                      case 'parent'     : ({url}   = loader.parent({root,nn,version}));        break;
+                      case 'page'       : ({url}   = loader.page({root,nn,version}));          break;
                       
                     }//switch
                     
                     if(type.startsWith('grp')){
-                          ({url}    = await loader.grp({root,type,nn,version}));
+                          ({url}    = loader.grp({root,type,nn,version}));
                     }
                     
                     return {url,inst};
