@@ -359,8 +359,8 @@
                     var parent      = rd(root,'parent');
                     var par         = $.parent(root,parent);
                     //var pversion    = rd.version(par);
-                    //var url         = rd(par,'url');
-                    var {url}       = loader.fn.url(par);
+                    var url         = rd(par,'url');
+                    //var {url}       = loader.fn.url(par);
 
                     var parts       = url.split('/');
                     parts.pop();
