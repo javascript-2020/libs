@@ -320,9 +320,6 @@
                     }
                     return {url};
                     
-                    var {html,error}    = await loader.fetch(url);    
-                    return {html,url,error};
-                    
               }//libs
               
               
