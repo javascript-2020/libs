@@ -442,7 +442,7 @@
               loader.fn.url   = function(root){
                 
                     var {nn,inst}   =  rd.root(root);
-                    
+                                                                                console.log(nn,inst);
                     var type      = rd(root,'component','libs');
                     root.removeAttribute('component');
                     var version   = rd.version(root);
