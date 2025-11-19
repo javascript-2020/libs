@@ -16,6 +16,8 @@
   var obj   = {
         version   : 'v1.0'
   };
+  globalThis['google-storage']    =  obj;
+
   
         var df    = false;
         Object.defineProperty(obj,'df',{set:v=>df=v});
