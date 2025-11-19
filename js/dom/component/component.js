@@ -201,9 +201,9 @@
               
               async function loader({root,mod,mod2}){
 
-                    var {url,inst}    = loader.fn.url(root);
+                    //var {url,inst}    = loader.fn.url(root);
                     
-/*
+
                     var {nn,inst}   =  rd.root(root);
                     
                     var type      = rd(root,'component','libs');
@@ -224,7 +224,7 @@
                     if(type.startsWith('grp')){
                           ({url}    = await loader.grp({root,type,nn,version}));
                     }
-*/
+
 
                     var {html,error}    = await loader.fetch(url);
                     if(error){
