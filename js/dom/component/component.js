@@ -391,7 +391,7 @@
               }//parent
               
               
-              loader.page   = async function({root,nn,version}){
+              loader.page   = function({root,nn,version}){
 
                     var par   = loader.fn.par();
 
