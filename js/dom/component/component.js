@@ -201,12 +201,14 @@
               
               async function loader({root,mod,mod2}){
 
+                    var {url,inst}    = loader.fn.url(root);
+                    
+/*
                     var {nn,inst}   =  rd.root(root);
                     
                     var type      = rd(root,'component','libs');
                     root.removeAttribute('component');
                     var version   = rd.version(root);
-                    var slots     = [...root.childNodes];                    
                     
                     var url;
                     
@@ -222,6 +224,7 @@
                     if(type.startsWith('grp')){
                           ({url}    = await loader.grp({root,type,nn,version}));
                     }
+*/
 
                     var {html,error}    = await loader.fetch(url);
                     if(error){
@@ -241,6 +244,7 @@
                     
                     node.__html     = html;
                     node.__root     = root;
+                    node.__dom      = root;
                     
                     node.setAttribute('url',url);
 
@@ -253,7 +257,9 @@
                           }
                           
                     }//for
+
         
+                    var slots     = [...root.childNodes];
                     slots.forEach(slot=>{
                      
                           var nslot   = slot.cloneNode(true); 
@@ -353,7 +359,8 @@
                     var parent      = rd(root,'parent');
                     var par         = $.parent(root,parent);
                     //var pversion    = rd.version(par);
-                    var url         = rd(par,'url');
+                    //var url         = rd(par,'url');
+                    var {url}       = loader.fn.url(par);
 
                     var parts       = url.split('/');
                     parts.pop();
@@ -435,6 +442,35 @@
               
               
               loader.fn   = {};
+              
+              
+              loader.fn.url   = function(root){
+                
+                    var {nn,inst}   =  rd.root(root);
+                    
+                    var type      = rd(root,'component','libs');
+                    root.removeAttribute('component');
+                    var version   = rd.version(root);
+                    
+                    var url;
+                    
+                    switch(type){
+                      
+                      case 'libs'       : ({url}   = await loader.libs({root,nn,version}));          break;
+                      //case 'grp'        : ({url}   = await loader.grp({root,nn,version}));           break;
+                      case 'parent'     : ({url}   = await loader.parent({root,nn,version}));        break;
+                      case 'page'       : ({url}   = await loader.page({root,nn,version}));          break;
+                      
+                    }//switch
+                    
+                    if(type.startsWith('grp')){
+                          ({url}    = await loader.grp({root,type,nn,version}));
+                    }
+                    
+                    return {url,inst};
+                    
+              }//url
+              
               
               loader.fn.par   = function({num=0,df=false}={}){
                 
