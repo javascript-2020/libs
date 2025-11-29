@@ -364,9 +364,10 @@
 
               
               set.index   = function(index){set(list[index].id)}
-              var len     = ()=>list.length;
               
-              var group   = {read,set,add,len};
+              var group   = {read,set,add};
+              Object.defineProperty(group,'len',{get:()=>list.length});
+              
               return group;
               
         }//group
