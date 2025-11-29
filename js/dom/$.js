@@ -364,9 +364,9 @@
 
               
               set.index   = function(index){set(list[index].id)}
+              var len     = ()=>list.length;
               
-              
-              var group   = {read,set,add};
+              var group   = {read,set,add,len};
               return group;
               
         }//group
