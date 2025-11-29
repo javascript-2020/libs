@@ -324,14 +324,21 @@
         $.chkbox.group    = function(root,sel0){
         
               var list    = [];
-              var n       = arguments.length;
-              for(var i=1;i<n;i++){
               
-                    var sel     = arguments[i];
-                    var chk     = $.chkbox(root,sel,chk=>set(chk.id));
-                    list.push(chk);
+              add.apply(null,arguments);
+              
+              function add(root,sel0){
+                
+                    var n       = arguments.length;
+                    for(var i=1;i<n;i++){
                     
-              }//for
+                          var sel     = arguments[i];
+                          var chk     = $.chkbox(root,sel,chk=>set(chk.id));
+                          list.push(chk);
+                          
+                    }//for
+                    
+              }//add
               
               
               function read(){
@@ -359,7 +366,7 @@
               set.index   = function(index){set(list[index].id)}
               
               
-              var group   = {read,set};
+              var group   = {read,set,add};
               return group;
               
         }//group
