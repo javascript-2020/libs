@@ -1,5 +1,5 @@
 
-
+(async()=>{
 
         var output    = window.parent.output;
         output.set();
@@ -125,4 +125,6 @@
               }//isver
         
         
-        
+})();
+
+
