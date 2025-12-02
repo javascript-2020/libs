@@ -130,6 +130,7 @@
   //vars:-
 
         var jszip;
+
         
         var filenav;
         
@@ -176,14 +177,6 @@
               ]);
                             
         }//init
-        
-        
-        async function libs(){
-          
-              jszip   = await import('https://cdn.jsdelivr.net/npm/jszip/+esm');
-              jszip   = jszip.default;
-              
-        }//libs
 
 
   //:
@@ -314,6 +307,10 @@
                     return;
               }
 
+              if(!jszip){
+                    jszip   = await import('https://cdn.jsdelivr.net/npm/jszip/+esm');
+                    jszip   = jszip.default;
+              }
               
               var zip       = new jszip();
               zip.folder(`file-server`);
