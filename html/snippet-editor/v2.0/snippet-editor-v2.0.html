@@ -80,14 +80,15 @@
                                                                                 debug('init',obj.version);
               
               def.txt       = $.htmlentities.decode(dom);
+              
+              var node    = host.shadowRoot;
               var mode      = rd.mode();
               if(mode){
-                    $(host,'web-editor').setAttribute('mode',mode);
+                    $(node,'web-editor').setAttribute('mode',mode);
               }
               if(rd.fullsize()){
-              host.shadowRoot;
-              if(!$(host,'web-editor'))debugger;
-                    $(host,'web-editor').toggleAttribute('fullsize',true);
+              if(!$(node,'web-editor'))debugger;
+                    $(node,'web-editor').toggleAttribute('fullsize',true);
               }
               
 
