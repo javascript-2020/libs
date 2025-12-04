@@ -138,6 +138,11 @@
   
   
         function source(){
+          
+              var txt     = editor.getvalue();
+              var blob    = new Blob([txt]);
+              return blob;
+              
         }//source
         
         
