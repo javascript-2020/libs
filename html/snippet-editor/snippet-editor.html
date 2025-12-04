@@ -1,0 +1,184 @@
+
+
+
+<snippet-editor v2.0>
+
+
+      <template shadowrootmode=open>
+      
+            <style>
+    
+  #root
+    {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px;
+      /*height:100%*/
+    }
+    
+  input
+    {font-size:16px;padding:5px 10px}
+  input[type=button]
+    {cursor:pointer}
+
+    
+            </style>
+            
+            <div id=root>
+            
+                  <div>
+                        <file-mod component></file-mod>
+                  </div>
+                  
+                  <web-editor component></web-editor>
+                  
+            </div>
+      
+      </template>
+      
+      
+      <script>
+
+      
+(function snippet_editor({mod,dom,host}){
+
+  var obj   = {
+        version   : 'v2.0',
+  };
+  
+        var df=true,did='snippet-editor'
+        ;
+        
+        
+        var ext,$,menu,ace,menumod
+        ;
+        
+        obj.initmod   = function(params){
+        
+              ext       = params.ext;
+              $         = params.$;
+              menu      = params.menu;
+              ace       = params.ace;
+              menumod   = params.menumod;
+              
+        }//initmod
+        
+        
+  //:
+
+  
+        var filemod;
+        var editor;
+        
+        var def   = {};
+
+        
+        var rd    = {};
+
+        
+  //:
+  
+  
+        obj.init    = async function(){
+                                                                                debug('init',obj.version);
+              
+              def.txt       = $.htmlentities.decode(dom);
+              var mode      = rd.mode();
+              if(mode){
+                    $(host,'web-editor').setAttribute('mode',mode);
+              }
+              
+
+              filemod   = mod['file-mod'];              
+              editor    = mod['web-editor'];
+              
+              filemod.initmod({ext,$,menu,menumod,complete,source});
+              editor.initmod({ext,$,menu,menumod,ace});
+              
+              await Promise.all([
+                    rd.src(),
+                    filemod.init(),
+                    editor.init(),
+              ]);
+              
+              
+        }//init
+        
+        
+        rd.src    = async function(){
+          
+              if(!dom.hasAttribute('src'))return;
+              var src   = dom.getAttribute('src');
+              var res   = await fetch(src);
+              var txt   = await res.text();
+              def.txt   = txt;
+              
+        }//src
+
+
+        rd.mode   = function(){
+          
+              if(!dom.hasAttribute('mode'))return;
+              def.mode    = dom.getAttribute('mode');
+              
+        }//mode
+        
+
+  //:
+  
+  
+        obj.initdom    = function(){
+
+              var shadow                          = host.shadowRoot;
+
+              filemod.initdom();
+              editor.initdom({mode:'html',fullsize:true,txt:def.txt});
+
+              
+        }//initdom
+        
+
+  //:
+  
+  
+        function source(){
+          
+              var txt     = editor.getvalue();
+              var blob    = new Blob([txt]);
+              return blob;
+              
+        }//source
+        
+        
+        function complete(file){
+        }//complete
+        
+        
+        complete.load   = function(file,blob){
+        }//load
+
+        
+        complete.save   = function(file){
+          
+        }//save
+        
+  
+  //:
+  
+        
+        function debug(){
+          
+              if(!df && !obj.df)return;
+              var str   = [...arguments].join(' ');
+              console.log(`[ ${did} ]`,str);
+              
+        }//debug
+
+
+  
+  return obj;
+  
+})//snippet_editor
+
+
+      </script>
+
+      
+</snippet-editor>
