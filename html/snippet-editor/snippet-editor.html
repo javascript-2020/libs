@@ -85,6 +85,7 @@
                     $(host,'web-editor').setAttribute('mode',mode);
               }
               if(rd.fullsize()){
+              if(!$(host,'web-editor'))debugger;
                     $(host,'web-editor').toggleAttribute('fullsize',true);
               }
               
