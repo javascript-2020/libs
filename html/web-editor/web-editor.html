@@ -6,6 +6,9 @@
       
             <style>
 
+  :host
+    {all:initial;font-family:arial}
+
   #root
     {display:flex;flex-direction:column;font-family:arial;height:100%;
     }
@@ -296,6 +299,7 @@
           
               if(!target.hasAttribute('mode'))return;
               def.mode    = target.getAttribute('mode');
+              console.log('web-editor',def.mode);
               
         }//mode
   
