@@ -84,6 +84,9 @@
               if(mode){
                     $(host,'web-editor').setAttribute('mode',mode);
               }
+              if(rd.fullsize()){
+                    $(host,'web-editor').toggleAttribute('fullsize',true);
+              }
               
 
               filemod   = mod['file-mod'];              
@@ -117,8 +120,18 @@
           
               if(!dom.hasAttribute('mode'))return;
               def.mode    = dom.getAttribute('mode');
+              return def.mode;
               
         }//mode
+        
+        
+        rd.fullsize   = function(){
+          
+              if(!dom.hasAttribute('fullsize'))return;
+              def.fullsize    = true;
+              return true;
+              
+        }//fullsize
         
 
   //:
