@@ -1,0 +1,133 @@
+
+
+
+<snippet-editor v2.0>
+
+
+      <template shadowrootmode=open>
+      
+            <style>
+    
+  #root
+    {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px;
+      /*height:100%*/
+    }
+    
+  input
+    {font-size:16px;padding:5px 10px}
+  input[type=button]
+    {cursor:pointer}
+
+    
+            </style>
+            
+            <div id=root>
+            
+                  <web-editor component></web-editor>
+                  
+            </div>
+      
+      </template>
+      
+      
+      <script>
+
+      
+(function snippet_editor({mod,dom,host}){
+
+  var obj   = {
+        version   : 'v2.0',
+  };
+  
+        var df=true,did='snippet-editor'
+        ;
+        
+        
+        var ext,$,menu,ace
+        ;
+        
+        obj.initmod   = function(params){
+        
+              ext       = params.ext;
+              $         = params.$;
+              menu      = params.menu;
+              ace       = params.ace;
+              
+        }//initmod
+        
+        
+  //:
+  
+        var editor;
+        
+        var def;
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+                                                                                debug('init',obj.version);
+              
+              def            = $.htmlentities.decode(dom);
+              
+              
+              editor    = mod['web-editor'];
+              
+              editor.initmod({ext,$,menu,ace});
+              
+              await Promise.all([
+                    src(),
+                    editor.init(),
+              ]);
+              
+              
+        }//init
+        
+        
+        async function src(){
+          
+              if(!dom.hasAttribute('src'))return;
+              var src   = dom.getAttribute('src');
+              var res   = await fetch(src);
+              var txt   = await res.text();
+              def       = txt;
+              
+        }//src
+        
+
+  //:
+  
+  
+        obj.initdom    = function(){
+
+              var shadow                          = host.shadowRoot;
+
+              editor.initdom({mode:'html',fullsize:true,txt:def});
+              
+        }//initdom
+        
+
+  
+  //:
+  
+        
+        function debug(){
+          
+              if(!df && !obj.df)return;
+              var str   = [...arguments].join(' ');
+              console.log(`[ ${did} ]`,str);
+              
+        }//debug
+
+
+  
+  return obj;
+  
+})//snippet_editor
+
+
+      </script>
+
+      
+</snippet-editor>
