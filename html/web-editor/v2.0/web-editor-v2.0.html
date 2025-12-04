@@ -183,6 +183,8 @@
               
               kd2         = params.kd;
               
+              embed       = params.embed;
+              
         }//initmod
         
 
@@ -205,12 +207,14 @@
         var kd    = {};
         var btn   = {};
 
-
+        
+        var target      = dom;
 
         var def         = {};
         def.txt         = '';
         def.fullsize    = false;
         def.mode        = 'javascript';
+        
 
 
   
@@ -221,6 +225,10 @@
                                                                       debug('init',obj.version);
               if(!menu){
                     menu    = menumod();
+              }
+              
+              if(embed){
+                    target    = embed;
               }
               
               rd.txt();
@@ -250,7 +258,7 @@
         
         rd.fullsize   = function(){
           
-              if(!dom.hasAttribute('fullsize'))return;
+              if(!target.hasAttribute('fullsize'))return;
               def.fullsize    = true;
               
         }//fullsize
@@ -258,8 +266,8 @@
         
         rd.src    = async function(){
           
-              if(!dom.hasAttribute('src'))return;
-              var src   = dom.getAttribute('src');
+              if(!target.hasAttribute('src'))return;
+              var src   = target.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
               def.txt   = txt;
@@ -272,7 +280,7 @@
               //$.htmlentities.decode(dom);
               
               var txt   = '';
-              dom.childNodes.forEach(node=>{
+              target.childNodes.forEach(node=>{
                 
                       if(node.nodeType==Node.TEXT_NODE){
                             txt  += node.nodeValue;
@@ -286,8 +294,8 @@
 
         rd.mode   = function(){
           
-              if(!dom.hasAttribute('mode'))return;
-              def.mode    = dom.getAttribute('mode');
+              if(!target.hasAttribute('mode'))return;
+              def.mode    = target.getAttribute('mode');
               
         }//mode
   
