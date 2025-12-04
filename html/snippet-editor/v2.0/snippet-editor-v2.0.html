@@ -47,7 +47,7 @@
         ;
         
         
-        var ext,$,menu,ace
+        var ext,$,menu,ace,menumod
         ;
         
         obj.initmod   = function(params){
@@ -56,6 +56,7 @@
               $         = params.$;
               menu      = params.menu;
               ace       = params.ace;
+              menumod   = params.menumod;
               
         }//initmod
         
@@ -89,7 +90,7 @@
               editor    = mod['web-editor'];
               
               filemod.initmod({ext,$,menu,complete,source});
-              editor.initmod({ext,$,menu,ace});
+              editor.initmod({ext,$,menu,menumod,ace});
               
               await Promise.all([
                     rd.src(),
