@@ -300,7 +300,7 @@
           
               if(!target.hasAttribute('mode'))return;
               def.mode    = target.getAttribute('mode');
-              console.log('web-editor',def.mode);
+                                                                                console.log('web-editor',def.mode);
               
         }//mode
   
@@ -367,6 +367,7 @@
               
               
               if(fullsize){
+                                                                                console.log('web-editor fullsize',mode);
                     node.style.flex                   = 'none';
                     editor                            = $.editor.max(node,{mode,menu,kd:kd2});
                     $(shadow,'#root').style.height    = 'auto';
@@ -406,7 +407,7 @@
               editor.setFontSize(16);
               editor.session.setOptions({tabSize:2,useSoftTabs:true});
               //editor.setGhostText('\n\nctrl-enter - run & autosave\nctrl-s - save\nctrl-del - delete');
-              editor.session.setMode('ace/mode/'+mode)                        
+              editor.session.setMode('ace/mode/'+mode)
               editor.session.on('change',onchange);
               
               update();
