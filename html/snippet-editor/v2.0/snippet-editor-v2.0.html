@@ -23,6 +23,10 @@
             
             <div id=root>
             
+                  <div>
+                        <file-mod component></file-mod>
+                  </div>
+                  
                   <web-editor component></web-editor>
                   
             </div>
@@ -57,11 +61,16 @@
         
         
   //:
+
   
+        var filemod;
         var editor;
         
-        var def;
+        var def   = {};
+
         
+        var rd    = {};
+
         
   //:
   
@@ -69,15 +78,22 @@
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
               
-              def            = $.htmlentities.decode(dom);
+              def.txt       = $.htmlentities.decode(dom);
+              var mode      = rd.mode();
+              if(mode){
+                    $(host,'web-editor').setAttribute('mode',mode);
+              }
               
-              
+
+              filemod   = mod['file-mod'];              
               editor    = mod['web-editor'];
               
+              filemod.initmod({ext,$,menu,complete,source});
               editor.initmod({ext,$,menu,ace});
               
               await Promise.all([
-                    src(),
+                    rd.src(),
+                    filemod.init(),
                     editor.init(),
               ]);
               
@@ -85,15 +101,23 @@
         }//init
         
         
-        async function src(){
+        rd.src    = async function(){
           
               if(!dom.hasAttribute('src'))return;
               var src   = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
-              def       = txt;
+              def.txt   = txt;
               
         }//src
+
+
+        rd.mode   = function(){
+          
+              if(!dom.hasAttribute('mode'))return;
+              def.mode    = dom.getAttribute('mode');
+              
+        }//mode
         
 
   //:
@@ -103,7 +127,9 @@
 
               var shadow                          = host.shadowRoot;
 
-              editor.initdom({mode:'html',fullsize:true,txt:def});
+              filemod.initdom();
+              editor.initdom({mode:'html',fullsize:true,txt:def.txt});
+
               
         }//initdom
         
