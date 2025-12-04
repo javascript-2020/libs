@@ -65,7 +65,9 @@
 
   
         var filemod;
+        obj.filemod   = null;
         var editor;
+        obj.editor    = null;
         
         var def   = {};
 
@@ -92,8 +94,11 @@
               }
               
 
-              filemod   = mod['file-mod'];              
-              editor    = mod['web-editor'];
+              filemod         = mod['file-mod'];  
+              obj.filemod     = filemod;
+              editor          = mod['web-editor'];
+              obj.editor      = editor;
+
               
               filemod.initmod({ext,$,menu,menumod,complete,source});
               editor.initmod({ext,$,menu,menumod,ace,embed:dom});
