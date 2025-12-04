@@ -87,7 +87,6 @@
                     $(node,'web-editor').setAttribute('mode',mode);
               }
               if(rd.fullsize()){
-              if(!$(node,'web-editor'))debugger;
                     $(node,'web-editor').toggleAttribute('fullsize',true);
               }
               
@@ -95,7 +94,7 @@
               filemod   = mod['file-mod'];              
               editor    = mod['web-editor'];
               
-              filemod.initmod({ext,$,menu,menumod,complete,source});
+              filemod.initmod({ext,$,menu,menumod,complete,source,embed:dom});
               editor.initmod({ext,$,menu,menumod,ace});
               
               await Promise.all([
