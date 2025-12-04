@@ -83,6 +83,7 @@
               
               var node    = host.shadowRoot;
               var mode      = rd.mode();
+              console.log(mode);
               if(mode){
                     $(node,'web-editor').setAttribute('mode',mode);
               }
@@ -144,7 +145,7 @@
               var shadow                          = host.shadowRoot;
 
               filemod.initdom();
-              editor.initdom({mode:'html',fullsize:true,txt:def.txt});
+              editor.initdom();
 
               
         }//initdom
