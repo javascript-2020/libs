@@ -776,8 +776,9 @@
         
         $.slider    = function(node1,slider_node,node2,callback,params={}){
 
-              var minw    = params.minw||40;
-              var minh    = params.minh||40;
+              var minw        = params.minw||40;
+              var minh        = params.minh||40;
+              params.root   ||= document.body;
               
               if(typeof node1=='string'){
                     node1         = $(params.root,node1);
