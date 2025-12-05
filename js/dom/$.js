@@ -866,7 +866,7 @@
                     }
               }
               
-              var node    = $.slider(node1,slider,node2,callback,params);
+              var node    = $.slider(node1,slider_node,node2,callback,params);
               return node;
               
         }//glass
