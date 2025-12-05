@@ -231,7 +231,6 @@
               }
               
               if(embed){
-                    console.log(embed);
                     target    = embed;
               }
               
@@ -299,8 +298,7 @@
         rd.mode   = function(){
           
               if(!target.hasAttribute('mode'))return;
-              def.mode    = target.getAttribute('mode');
-                                                                                console.log('web-editor',def.mode);
+              def.mode    = target.getAttribute('mode');                                                                                
               
         }//mode
   
@@ -367,7 +365,7 @@
               
               
               if(fullsize){
-                                                                                console.log('web-editor fullsize',mode);
+                                                                                
                     node.style.flex                   = 'none';
                     editor                            = $.editor.max(node,{mode,menu,kd:kd2});
                     $(shadow,'#root').style.height    = 'auto';
@@ -391,7 +389,7 @@
                 case 'js'   : mode    = 'javascript';       break;
                 
               }//switch
-                                                                                          console.log('web-editor.setup',mode);
+                                                                                          
               
               node.addEventListener('mousedown',update);
               node.addEventListener('keyup',update);
