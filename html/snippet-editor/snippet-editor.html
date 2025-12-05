@@ -70,6 +70,8 @@
         obj.editor    = null;
         
         var def   = {};
+        
+        var src;
 
         
         var rd    = {};
@@ -85,7 +87,7 @@
               
               var node    = host.shadowRoot;
               var mode      = rd.mode();
-              console.log(mode);
+              
               if(mode){
                     $(node,'web-editor').setAttribute('mode',mode);
               }
@@ -116,7 +118,7 @@
         rd.src    = async function(){
           
               if(!dom.hasAttribute('src'))return;
-              var src   = dom.getAttribute('src');
+              src       = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
               def.txt   = txt;
@@ -152,6 +154,9 @@
               filemod.initdom();
               editor.initdom();
 
+              if(src){
+                    editor.filename(src);
+              }
               
         }//initdom
         
