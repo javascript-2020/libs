@@ -866,7 +866,7 @@
                     }
               }
               
-              var node    = $.slider('editor-root','#page-slider','output-root',callback,params);
+              var node    = $.slider(node1,slider,node2,callback,params);
               return node;
               
         }//glass
