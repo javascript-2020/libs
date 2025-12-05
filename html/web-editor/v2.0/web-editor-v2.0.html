@@ -369,6 +369,7 @@
                     node.style.flex                   = 'none';
                     editor                            = $.editor.max(node,{mode,menu,kd:kd2});
                     $(shadow,'#root').style.height    = 'auto';
+                    update();
               }else{
                     setup(node,mode);
               }
@@ -634,6 +635,7 @@
         function set(txt){
         
               editor.setValue(txt,-1);
+              update();
               
         }//set
         
