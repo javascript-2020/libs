@@ -536,23 +536,30 @@
   
         obj.filename    = filename;
         
-        function filename(file){
+        function filename(file,title){
   
               var src         = deficon;
               var filename    = 'html-editor';
               var title       = '';
               
               if(file){
-                    src         = file.icon;
-                    filename    = file.name||file.filename;
-                    title       = file.title;
+                    if(typeof file=='string'){
+                          filename    = file;
+                    }else{
+                          src         = file.icon;
+                          filename    = file.name||file.filename;
+                          title       = file.title;
+                    }
               }
               
               $(shadow,'#filename-icon').src      = src;
   
-              document.title                      = filename;
               $(shadow,'#filename').textContent   = filename;
               $(shadow,'#filename').title         = title;
+              
+              if(title!==false){
+                    document.title                = filename;
+              }
   
         }//filename
   
