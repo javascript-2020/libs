@@ -103,6 +103,12 @@
               
         obj.init    = async function(){
                                                                                 //debug(obj.version);
+            
+            if(!menumod){
+                  menumod   = menu.menumod;
+            }
+            
+            
             localfile                 = mod['local-file'];
             obj.localfile             = localfile;
             
