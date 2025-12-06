@@ -22,7 +22,7 @@
             <div id=root>
             
                   <div>
-                        <file-mod component></file-mod>
+                        <file-mod component v2.0></file-mod>
                   </div>
                   
                   <web-editor component></web-editor>
@@ -105,7 +105,7 @@
               con                 = mod['web-console'];
               obj.console         = con;
               
-              filemod.initmod({ext,$,menu,menumod});
+              filemod.initmod({ext,$,menu,menumod,complete,source});
               editor.initmod({ext,$,menu,ace});
               con.initmod({ext,$,ace});
 
@@ -223,6 +223,31 @@
 
         obj.run   = btn.run;
 
+
+
+  //:
+  
+  
+        function source(){
+          
+              var txt     = editor.getvalue();
+              var blob    = new Blob([txt]);
+              return blob;
+              
+        }//source
+        
+        
+        function complete(){
+        }//complete
+        
+        
+        complete.load   = function(file,blob){
+        }//load
+        
+        
+        complete.save   = function(file){
+        }//save
+        
 
   //:  
   
