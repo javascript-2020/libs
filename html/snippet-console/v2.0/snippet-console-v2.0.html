@@ -21,6 +21,10 @@
             
             <div id=root>
             
+                  <div>
+                        <file-mod component></file-mod>
+                  </div>
+                  
                   <web-editor component></web-editor>
       
                   <div>
@@ -51,10 +55,11 @@
         
         obj.initmod   = function(params){
           
-              ext       = params.ext;
-              $         = params.$;
-              ace       = params.ace;
-              menu      = params.menu;
+              ext           = params.ext;
+              $             = params.$;
+              ace           = params.ace;
+              menu          = params.menu;
+              menumod       = params.menumod;
               
         }//initmod
         
@@ -64,12 +69,16 @@
 
         var ansi;
   
+        var filemod;
+        obj.filemod     = null;
         var editor;
         obj.editor      = null;
         var con;
         obj.console     = null;
         
         var def;
+        var src;
+
         
         var sandbox;
         
@@ -77,7 +86,8 @@
         var root;
         
         
-        var btn   = {};
+        var attr        = {};
+        var btn         = {};
         
         
   //:
@@ -85,21 +95,25 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
-              def           = dom.innerHTML;
-                                                                                
-              editor        = mod['web-editor'];
-              obj.editor    = editor;
+              def                 = dom.innerHTML;
               
-              con           = mod['web-console'];
-              obj.console   = con;
+              filemod             = mod['file-mod'];
+              obj.filemod         = filemod;
+              editor              = mod['web-editor'];
+              obj.editor          = editor;
               
+              con                 = mod['web-console'];
+              obj.console         = con;
+              
+              filemod.initmod({ext,$,menu,menumod});
               editor.initmod({ext,$,menu,ace});
               con.initmod({ext,$,ace});
 
 
               await Promise.all([              
-                    src(),
+                    attr.src(),
                     libs(),
+                    filemod.init(),
                     editor.init(),
                     con.init(),
               ]);
@@ -125,10 +139,10 @@
         }//libs
 
 
-        async function src(){
+        attr.src    = async function(){
           
               if(!dom.hasAttribute('src'))return;
-              var src   = dom.getAttribute('src');
+              src       = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
               def       = txt;
@@ -143,6 +157,8 @@
         
               var shadow                          = host.shadowRoot;
               
+              
+              filemod.initdom();
               editor.initdom({txt:def,fullsize:true});
               
               
@@ -152,6 +168,10 @@
               con.initdom();
 
 
+              if(src){
+                    editor.filename(src);
+              }
+              
               con.clear();
               con.log('ready');
 
