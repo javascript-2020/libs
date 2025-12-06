@@ -171,7 +171,9 @@
 
               var style                         = $(shadow,'style'); 
               menu.add.style(shadow);
-              $.stylesheet.insert(style,'button');
+              //$.stylesheet.insert(style,'button');
+
+              export_icon_css();
 
 
               localfile.initdom();
@@ -185,7 +187,6 @@
               $(shadow,'#root').style.visibility    = '';
 
               
-              export_icon_css();
 
               
         }//initdom
