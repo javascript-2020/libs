@@ -325,6 +325,27 @@
         }//import
 
 
+
+  //:
+  
+  
+        function export_icon_css(){
+          
+              var style   = $(shadow,'style');
+                                                                                console.log(style);
+              var sheet   = style.sheet;
+              var rules   = sheet.cssRules;
+                                                                                console.log(rules);
+              var rule    = [...rules].find(rule=>rule.selectorText=='.icon');
+                                                                                console.log(rule);
+              var css     = rule.cssText;
+              var style   = document.createElement('style');
+              style.textContent   = css;
+              document.head.append(style);
+              
+        }//export_icon_css
+        
+        
   //:
   
   
