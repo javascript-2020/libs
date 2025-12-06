@@ -58,7 +58,7 @@
         ;
         
         
-        var ext,$,menu,ace
+        var ext,$,menu,ace,menumod
         ;
         
         obj.initmod   = function(params){
@@ -67,6 +67,7 @@
               $         = params.$;
               menu      = params.menu;
               ace       = params.ace;
+              menumod   = params.menumod;
               
         }//initmod
         
@@ -82,6 +83,9 @@
         var host;
         var root;
         
+        var src;
+        
+        
         var hldr;
         var iframe;
 
@@ -93,7 +97,7 @@
         def.console.height    = null;
 
 
-        
+        var attr              = {};
         var btn               = {};
         
 
@@ -130,7 +134,7 @@
               
 
               await Promise.all([  
-                    src(),
+                    attr.src(),
                     editor.init(),
                     console.init(),
               ]);
@@ -139,10 +143,10 @@
         }//init
 
 
-        async function src(){
+        attr.src    = async function(){
           
               if(!dom.hasAttribute('src'))return;
-              var src     = dom.getAttribute('src');
+              src         = dom.getAttribute('src');
               var res     = await fetch(src);
               var txt     = await res.text();
               def.html    = txt;
@@ -160,6 +164,9 @@
 
               editor.initdom({mode:'html',fullsize:true,txt:def.html});
               
+              if(src){
+                    editor.filename(src);
+              }
               
               $(shadow,'[value=run]').onclick       = btn.run;
 
