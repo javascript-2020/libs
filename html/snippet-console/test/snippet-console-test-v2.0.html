@@ -32,7 +32,7 @@
         snippet.inline    = null;
         snippet.src       = null;
         
-
+        var log;
         
 
   //:
@@ -44,11 +44,13 @@
                                                                                 debug('init');
 
               menu              = menumod();
-              
+
+              log               = mod['log-mod'];
               
               snippet.inline    = mod.inline;
               snippet.src       = mod.src;
               
+              log.initmod({ext,$});
               
               snippet.inline.initmod({ext,$,ace,menu});
               snippet.src.initmod({ext,$,ace,menu});
@@ -56,7 +58,8 @@
               
               await Promise.all([
                     snippet.inline.init(),
-                    snippet.src.init()
+                    snippet.src.init(),
+                    log.init(),
               ]);
               
 
@@ -104,6 +107,10 @@
     {margin:20px 0}
   #src
     {margin:20px 0}
+
+
+  .icon
+    {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:30px;height:30px;cursor:pointer}
     
             </style>
             
@@ -142,7 +149,8 @@
             <snippet-console id=src component v2.0 src='ex/ex1.js'></snippet-console>
             
 
-      
+            <log-mod component></log-mod>
+            
       </body>
       
       
@@ -157,6 +165,7 @@
         
               root    = rootnode;
               
+              log.initdom();
               
 
               snippet.inline.initdom();
