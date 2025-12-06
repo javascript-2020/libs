@@ -28,7 +28,11 @@
             
             <div id=root>
             
-                  <web-editor component></web-editor>
+                  <div>
+                        <file-mod component></filemod>
+                  </div>
+                  
+                  <web-editor component mode=html></web-editor>
                   
                   <div>
                         <input value=run type=button>
@@ -73,7 +77,10 @@
         
         
   //:
+
   
+        var filemod;
+        obj.filemod   = null;
         var editor;
         obj.editor    = null;
         var console;
@@ -123,12 +130,14 @@
               }
 
               
+              filemod           = mod['file-mod'];
+              obj.filemod       = filemod;
               editor            = mod['web-editor']
               obj.editor        = editor;
               console           = mod['web-console'];
               obj.console       = console;
 
-              
+              filemod.initmod({ext,$,menu,menumod,complete,source});
               editor.initmod({ext,$,menu,ace});
               console.initmod({ext,$});
               
@@ -237,6 +246,30 @@
         `;
 
   
+  //:
+  
+  
+        function source(){
+          
+              vat txt     = editor.getvalue();
+              var blob    = new Blob([txt]);
+              return blob;
+              
+        }//source
+        
+        
+        function complete(){
+        }//complete
+        
+        
+        complete.load   = function(file,blob){
+        }//load
+        
+        
+        complete.save   = function(file){
+        }//save
+        
+        
   //:
   
 
