@@ -142,6 +142,7 @@
                   ftpserver.init(),
             ]);
             
+            complete                        ||= {};
             localfile.load.complete           = complete.load;
             localfile.save.complete           = complete.save;
             fileserver.load.complete          = complete.load;
