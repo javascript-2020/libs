@@ -62,7 +62,7 @@
         ;
         
         
-        var ext,$,menu,ace,menumod
+        var ext,$,menu,ace,menumod,log
         ;
         
         obj.initmod   = function(params){
@@ -72,6 +72,7 @@
               menu      = params.menu;
               ace       = params.ace;
               menumod   = params.menumod;
+              log       = params.log;
               
         }//initmod
         
@@ -270,7 +271,7 @@
         
         complete.save   = function(file){
           
-              log.green(`${file.name} saved`);
+              (log||window.log)?.green(`${file.name} saved`);
               
         }//save
         
