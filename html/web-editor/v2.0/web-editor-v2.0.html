@@ -594,6 +594,8 @@
   
         function update(){
         
+              if(!editor)return;
+              
               var pos                       = editor.getCursorPosition();
               row.value                     = pos.row+1;
               col.value                     = pos.column;
