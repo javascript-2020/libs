@@ -32,6 +32,8 @@
         
         var menu;
         
+        var log;
+        
         var snippet       = {};
         snippet.inline    = null;
         snippet.src       = null;
@@ -42,21 +44,23 @@
   //:
 
 
-        mod.stack.add   = init;
-              
         async function init(){
                                                                                 debug('init');
 
               menu              = menumod();
+        
+              log                   = mod['log-mod'];
               
               snippet.inline        = mod.inline;
               snippet.src           = mod.src;
               
+              log.initmod({ext,$});
               snippet.inline.initmod({ext,$,menu});
               snippet.src.initmod({ext,$,menu});
 
               
               await Promise.all([
+                    log.init(),
                     snippet.inline.init(),
                     snippet.src.init(),
               ]);
@@ -137,6 +141,8 @@
             <snippet-terminal id=src type=nodejs component v2.0 src='ex/nodejs-ex.js'></snippet-terminal>
 
       
+            <log-mod component></log-mod>
+            
       </body>
       
       
@@ -154,12 +160,10 @@
         
               root                = rootnode;
               
-              var node    = $(root,'#inline');
-              snippet.inline.initdom(node);
+              log.initdom();
               
-              var node    = $(root,'#src');
-              snippet.src.initdom(node);
-              
+              snippet.inline.initdom();
+              snippet.src.initdom();
 
               
         }//initdom
