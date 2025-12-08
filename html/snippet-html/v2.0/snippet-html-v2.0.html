@@ -28,6 +28,10 @@
             
             <div id=root>
             
+                  <div>
+                        <file-mod component></file-mod>
+                  </div>
+            
                   <web-editor component></web-editor>
                   
                   <div>
@@ -56,7 +60,7 @@
         ;
         
         
-        var ext,$,menu,ace
+        var ext,$,menu,ace,log
         ;
         
         obj.initmod   = function(params){
@@ -65,12 +69,15 @@
               $         = params.$;
               menu      = params.menu;
               ace       = params.ace;
+              log       = params.log;
               
         }//initmod
         
         
   //:
+
   
+        var filemod;
         var editor;
         
         var def;
@@ -80,11 +87,14 @@
         var host;
         var root;
         
+        var src;
+        
         var hldr;
         var iframe;
 
         
         
+        var rd      = {};
         var btn     = {};
         
         
@@ -96,13 +106,15 @@
               
               def            = $.htmlentities.decode(dom);
               
-              
+              filemod   = mod['file-mod'];
               editor    = mod['web-editor'];
               
+              filemod.initmod({ext,$,menu,source,complete});
               editor.initmod({ext,$,menu,ace});
               
               await Promise.all([
                     src(),
+                    filemod.init(),
                     editor.init(),
               ]);
               
@@ -110,10 +122,10 @@
         }//init
         
         
-        async function src(){
+        rd.src    = async function(){
           
               if(!dom.hasAttribute('src'))return;
-              var src   = dom.getAttribute('src');
+              src       = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
               def       = txt;
@@ -128,7 +140,13 @@
 
               var shadow                          = host.shadowRoot;
 
+
+              filemod.initdom();
               editor.initdom({mode:'html',fullsize:true,txt:def});
+              if(src){
+                    editor.filename(src);
+              }
+
               
               $(shadow,'[value=run]').onclick       = btn.run;
 
@@ -168,7 +186,35 @@
               }//onload
               
         }//run
+
+
+
+  //:
+  
+  
+        function source(){
+          
+              var txt   = editor.getvalue();
+              var blob    = new Blob([txt]);
+              return blob;
+              
+        }//source
         
+        
+        function complete(file){
+        }//complete
+
+        
+        complete.load   = function(file,blob){
+        }//load
+
+        
+        complete.save   = function(file){
+              
+              var m   = log||window.log;
+              m && m.green(file.name+' saved');
+              
+        }//save
         
 
   
