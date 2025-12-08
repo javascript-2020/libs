@@ -32,6 +32,10 @@
             
             <div id=root>
             
+                  <div>
+                        <file-mod component></file-mod>
+                  </div>
+                  
                   <web-editor component></web-editor>
                   
                   <div id=btns>
@@ -75,7 +79,8 @@
         
   //:
 
-  
+        
+        var filemod;
         var editor;
         var terminal;
         
@@ -101,18 +106,21 @@
               mode              = dom.getAttribute('type');
 
 
+              filemod           = mod['file-mod'];
+              obj.filemod       = filemod;
               editor            = mod['web-editor'];
               obj.editor        = editor;
               terminal          = mod['web-terminal'];
               obj.terminal      = terminal;              
 
+              filemod.initmod({ext,$,menu,menumod,source,complete});
               editor.initmod({ext,$,menu,ace});
               terminal.initmod({ext,$});
               
               await Promise.all([
-                
                     rd.src(),
                     libs(),
+                    filemod.init(),
                     editor.init(),
                     terminal.init()
               ]);
@@ -146,6 +154,8 @@
           
               shadow                              = host.shadowRoot;
 
+              filemod.init();
+              
               editor.initdom({mode:'js',txt:def,fullsize:true});
               editor.filename(src);
               
@@ -223,6 +233,33 @@
         }//clear
 
 
+  //:
+  
+  
+        function source(){
+          
+              var txt     = editor.getvalue();
+              var blob    = new Blob([txt]);
+              return blob;
+              
+        }//source
+        
+        
+        function complete(file){
+        }//complete
+        
+        
+        complete.load   = function(file,blob){
+        }//load
+
+        
+        complete.save   = function(file){
+          
+              (log||window.log)?.green(file.name+' saved');
+              
+        }//save
+        
+        
         
   
   return obj;
