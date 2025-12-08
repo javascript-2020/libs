@@ -211,8 +211,7 @@
         
         complete.save   = function(file){
               
-              var m   = log||window.log;
-              m && m.green(file.name+' saved');
+              (log||window.log)?.green(file.name+' saved');
               
         }//save
         
