@@ -79,6 +79,8 @@
         var editor;
         var terminal;
         
+        var src;
+        
         var sandbox;
         var iframe;
         
@@ -86,6 +88,7 @@
         var mode;
 
         
+        var rd            = {};
         var btn           = {};
 
         
@@ -108,7 +111,7 @@
               
               await Promise.all([
                 
-                    src(),
+                    rd.src(),
                     libs(),
                     editor.init(),
                     terminal.init()
@@ -125,10 +128,10 @@
         }//libs
         
         
-        async function src(){
+        rd.src    = async function(){
           
               if(!dom.hasAttribute('src'))return;
-              var src   = dom.getAttribute('src');
+              src       = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
               def       = txt;
@@ -144,6 +147,7 @@
               shadow                              = host.shadowRoot;
 
               editor.initdom({mode:'js',txt:def,fullsize:true});
+              editor.filename(src);
               
               $(shadow,'[value=run]').onclick       = btn.run;
               $(shadow,'[value=clear]').onclick     = btn.clear;
