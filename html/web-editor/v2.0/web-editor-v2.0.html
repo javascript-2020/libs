@@ -168,7 +168,7 @@
         var df=false
         ;
 
-        var ext,$,menu,menumod,ace,kd2
+        var ext,$,menu,menumod,ace,kd2,on2
         ;
         
         
@@ -188,6 +188,8 @@
               
               embed       = params.embed;
               
+              on2         = params.on;
+              
         }//initmod
         
 
@@ -205,18 +207,28 @@
         var col;
         
         var deficon;
-        
-        var rd    = {};
-        var kd    = {};
-        var btn   = {};
 
-        
+
+
         var target      = dom;
 
         var def         = {};
         def.txt         = '';
         def.fullsize    = false;
         def.mode        = 'javascript';
+
+
+
+
+        
+        var rd    = {};
+        var kd    = {};
+        var btn   = {};
+        var on    = {};
+
+        
+        
+        
         
 
 
@@ -367,7 +379,7 @@
               if(fullsize){
                                                                                 
                     node.style.flex                   = 'none';
-                    editor                            = $.editor.max(node,{mode,menu,kd:kd2});
+                    editor                            = $.editor.max(node,{mode,menu,kd:kd2,on});
                     $(shadow,'#root').style.height    = 'auto';
                     update();
               }else{
@@ -407,57 +419,27 @@
               editor.session.setOptions({tabSize:2,useSoftTabs:true});
               //editor.setGhostText('\n\nctrl-enter - run & autosave\nctrl-s - save\nctrl-del - delete');
               editor.session.setMode('ace/mode/'+mode)
-              editor.session.on('change',onchange);
+              editor.session.on('change',on.change);
               
               update();
               editor.focus();
   
                                       
-              function onchange(e){
-  
-                    filename.save(true);
-                    update();
-                                      
-              }//onchange
-              
         }//editor
-  
-/*        
-        import_style.ct   = 0;
-        
-        function import_style(){
-        
-              import_style.ct++;
-              if(import_style.ct>=10){
-                                                                      console.log('import_style timeout');
-                    return;
+
+
+        on.change   = function(e){
+
+              filename.save(true);
+              update();
+              
+              if(on2?.change){
+                    on2.change();
               }
-              
-              var ids   = ['ace-tm','ace_editor\\.css','ace_scrollbar\\.css','error_marker\\.css',];
-              var n     = ids.length;
-              for(var i=0;i<n;i++){
-              
-                    var id      = ids[i];
-                    var style   = $('#'+id);
-                    if(!style){
-                          setTimeout(import_style,500);
-                          return;
-                    }
-                    
-              }//for
-              
-              for(var i=0;i<n;i++){
-              
-                    var id      = ids[i];
-                    var style   = $('#'+id);
-                    var copy    = style.cloneNode(true);
-                    shadow.append(copy);
-              
-              }//for
-              
-              
-        }//style
-*/        
+                                
+        }//onchange
+
+
         
         kd.row    = function(e){
               
