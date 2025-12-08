@@ -32,6 +32,10 @@
             
             <div id=root>
             
+                  <div>
+                        <file-mod component></file-mod>
+                  </div>
+                  
                   <web-editor component></web-editor>
                   
                   <div id=btns>
@@ -60,7 +64,7 @@
         var df=true
         ;
         
-        var ext,$,menu,ace
+        var ext,$,menu,ace,log
         ;
         
         obj.initmod   = function(params){
@@ -74,6 +78,8 @@
               
               ('on' in params) && (obj.on=params.on);
               
+              log           = params.log;
+              
         }//initmod
         
         
@@ -82,10 +88,16 @@
 
         obj.on    = {};
         
-  
+        var filemod;
+        obj.filemod       = null;
         var editor;
+        obj.editor        = null;
         var terminal;
+        obj.terminal      = null;
         var jsconsole;
+        obj.console       = null;
+        
+        var src;
         
         var sandbox;
         var iframe;
@@ -94,6 +106,7 @@
         var mode;
 
 
+        var rd    = {};
         var btn   = {};
         obj.btn   = {};
         var run   = {};
@@ -110,6 +123,8 @@
               mode              = dom.getAttribute('type');
 
         
+              filemod           = mod['file-mod'];
+              obj.filemod       = filemod;
               editor            = mod['web-editor'];
               obj.editor        = editor;
               terminal          = mod['web-terminal'];
@@ -117,6 +132,7 @@
               jsconsole         = mod['web-console'];
               obj.console       = jsconsole;
 
+              filemod.initmod({ext,$,menu,menumod,source,complete,log});
               editor.initmod({ext,$,menu,ace});
               terminal.initmod({ext,$});
               jsconsole.initmod({ext,$,menu,ace});
@@ -125,6 +141,7 @@
               await Promise.all([
                     src(),
                     libs(),
+                    filemod.init(),
                     editor.init(),
                     terminal.init(),
                     jsconsole.init(),
@@ -141,10 +158,10 @@
         }//libs
         
         
-        async function src(){
+        rd.src    = async function(){
           
               if(!dom.hasAttribute('src'))return;
-              var src   = dom.getAttribute('src');
+              src       = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
               def       = txt;
@@ -159,9 +176,10 @@
           
               shadow                                = host.shadowRoot;
 
-
+              filemod.initdom();
+              
               editor.initdom({mode:'js',txt:def,fullsize:true});
-
+              editor.filename(src);
               
               $(shadow,'[value=run]').onclick       = btn.run;
               $(shadow,'[value=clear]').onclick     = btn.clear;
@@ -234,6 +252,32 @@
               
         }//nodejs
         
+        
+  //:
+  
+  
+        function source(){
+          
+              var txt     = editor.getvalue();
+              var blob    = new Blob([txt]);
+              return blob;
+        
+        }//source
+        
+        
+        function complete(file){
+        }//complete
+        
+        
+        complete.load   = function(file,blob){
+        }//load
+        
+        
+        complete.save   = function(file){
+          
+              (log||window.log)?.green(file.name+' saved');
+              
+        }//save
         
         
   //:
