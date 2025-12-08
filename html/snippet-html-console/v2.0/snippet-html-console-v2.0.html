@@ -144,6 +144,7 @@
 
               await Promise.all([  
                     attr.src(),
+                    filemod.init(),
                     editor.init(),
                     console.init(),
               ]);
