@@ -212,12 +212,12 @@
               
               switch(cur.type){
                 
-                case 'github'               : await github.save(cur,blob);              break;
-                case 'localfile'            : await localfile.save(cur,blob);           break;
-                case 'file-server'          : await fileserver.save(cur,blob);          break;
-                case 'db-files'             : await dbfiles.save(cur,blob);             break;
-                case 'google-storage'       : await googlestorage.save(cur,blob);       break;
-                case 'ftp-server'           : await ftpserver.save(cur,blob);           break;
+                case 'github'               : await github.save(file,blob);              break;
+                case 'localfile'            : await localfile.save(file,blob);           break;
+                case 'file-server'          : await fileserver.save(file,blob);          break;
+                case 'db-files'             : await dbfiles.save(file,blob);             break;
+                case 'google-storage'       : await googlestorage.save(file,blob);       break;
+                case 'ftp-server'           : await ftpserver.save(file,blob);           break;
                 
               }//switch
         
@@ -337,12 +337,12 @@
         function export_icon_css(){
           
               var style   = $(shadow,'style');
-                                                                                console.log(style);
+                                                                                //console.log(style);
               var sheet   = style.sheet;
               var rules   = sheet.cssRules;
-                                                                                console.log(rules);
+                                                                                //console.log(rules);
               var rule    = [...rules].find(rule=>rule.selectorText=='.icon');
-                                                                                console.log(rule);
+                                                                                //console.log(rule);
               var css     = rule.cssText;
               var style   = document.createElement('style');
               style.textContent   = css;
