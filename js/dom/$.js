@@ -1286,8 +1286,10 @@
         }//import_style
         
         
-        $.editor.max    = function(node,{mode,kd}={}){
+        $.editor.max    = function(node,params={}){
 
+              var {mode,kd}   = params;
+              
               var editor    = $.editor.apply(null,arguments);
               editor.session.on('change',onchange);
               editor.setOption('maxLines',Infinity);
@@ -1308,6 +1310,10 @@
                     
                     editor.container.style.height = h+'px';
                     editor.resize();
+                    
+                    if(params.on?.change){
+                          params.on.change();
+                    }
                     
               }//onchange
         
