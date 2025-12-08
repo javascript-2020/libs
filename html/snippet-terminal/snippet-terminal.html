@@ -32,6 +32,10 @@
             
             <div id=root>
             
+                  <div>
+                        <file-mod component v2.0></file-mod>
+                  </div>
+                  
                   <web-editor component></web-editor>
                   
                   <div id=btns>
@@ -58,7 +62,7 @@
         var df=true
         ;
         
-        var ext,$,menu,ace
+        var ext,$,menu,ace,menumod
         ;
         
         obj.initmod   = function(params){
@@ -67,6 +71,7 @@
               $             = params.$;
               
               menu          = params.menu;
+              menumod       = params.menumod;
               
               ace           = params.ace;
               
@@ -75,9 +80,15 @@
         
   //:
 
-  
+        
+        var filemod;
+        obj.filemod     = null;
         var editor;
+        obj.editor      = null;
         var terminal;
+        obj.terminal    = null;
+        
+        var src;
         
         var sandbox;
         var iframe;
@@ -86,6 +97,7 @@
         var mode;
 
         
+        var rd            = {};
         var btn           = {};
 
         
@@ -98,18 +110,21 @@
               mode              = dom.getAttribute('type');
 
 
+              filemod           = mod['file-mod'];
+              obj.filemod       = filemod;
               editor            = mod['web-editor'];
               obj.editor        = editor;
               terminal          = mod['web-terminal'];
               obj.terminal      = terminal;              
 
+              filemod.initmod({ext,$,menu,menumod,source,complete});
               editor.initmod({ext,$,menu,ace});
               terminal.initmod({ext,$});
               
               await Promise.all([
-                
-                    src(),
+                    rd.src(),
                     libs(),
+                    filemod.init(),
                     editor.init(),
                     terminal.init()
               ]);
@@ -125,10 +140,10 @@
         }//libs
         
         
-        async function src(){
+        rd.src    = async function(){
           
               if(!dom.hasAttribute('src'))return;
-              var src   = dom.getAttribute('src');
+              src       = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
               def       = txt;
@@ -143,7 +158,10 @@
           
               shadow                              = host.shadowRoot;
 
+              filemod.initdom();
+              
               editor.initdom({mode:'js',txt:def,fullsize:true});
+              editor.filename(src);
               
               $(shadow,'[value=run]').onclick       = btn.run;
               $(shadow,'[value=clear]').onclick     = btn.clear;
@@ -219,6 +237,33 @@
         }//clear
 
 
+  //:
+  
+  
+        function source(){
+          
+              var txt     = editor.getvalue();
+              var blob    = new Blob([txt]);
+              return blob;
+              
+        }//source
+        
+        
+        function complete(file){
+        }//complete
+        
+        
+        complete.load   = function(file,blob){
+        }//load
+
+        
+        complete.save   = function(file){
+          
+              (log||window.log)?.green(file.name+' saved');
+              
+        }//save
+        
+        
         
   
   return obj;
