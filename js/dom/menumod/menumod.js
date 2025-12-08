@@ -741,6 +741,7 @@ function menumod(){
 
               par                 = par||document.head;
               var style           = document.createElement('style');
+              style.id            = 'menumod';
               style.textContent   = css;
               par.append(style);
               
