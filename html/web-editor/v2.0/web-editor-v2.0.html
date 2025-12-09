@@ -160,7 +160,7 @@
       <script>
       
 (function web_editor({mod,dom,host}){
-
+                                                                                console.log('web-editor');
   var obj   = {
         version   : 'v2.0'
   };
@@ -173,7 +173,7 @@
         
         
         obj.initmod   = function(params){
-          
+                                                                                console.log('initmod');
               ext         = params.ext;
               $           = params.$;
               menumod     = params.menumod;
@@ -241,6 +241,7 @@
 
     
         obj.init    = async function(){
+                                                                      console.log('init');
                                                                       debug('init',obj.version);
               await libs2();
               
@@ -268,7 +269,7 @@
   //:
 
         async function libs(){
-          
+                                                                    console.log('libs');
               if(!ace){
                     ace       = await $.editor.ace();
                     obj.ace   = ace;
@@ -278,7 +279,7 @@
         
         
         async function libs2(){
-          
+                                                                    console.log('libs2');
               var get   = url=>fetch(url).then(res=>res.text());
               
               if(!$){
@@ -366,7 +367,7 @@
   
         
         obj.initdom    = async function(rootnode,params){
-          
+                                                                                  console.log('initdom');
               if(arguments.length==1){
                     params                    = rootnode;
               }
