@@ -198,6 +198,10 @@
         
         var editor;
         
+        
+        var src;
+        
+        
         var shadow;
         
         var card;
@@ -282,7 +286,7 @@
         rd.src    = async function(){
           
               if(!target.hasAttribute('src'))return;
-              var src   = target.getAttribute('src');
+              src   = target.getAttribute('src');
               
               var err;
               try{
@@ -409,6 +413,10 @@
                     setup(node,mode);
               }
   
+  
+              if(src){
+                    filename(src);
+              }
   
         }//initdom
   
