@@ -443,8 +443,22 @@
                 
                     var {nn,inst}   =  rd.root(root);
                                                                                 console.log(nn,inst);
-                    var type      = rd(root,'component','libs');
-                    root.removeAttribute('component');
+                    var type      = rd(root,'component');
+                    if(!type){
+                          type    = rd(root,'component_');
+                    }
+                    type    ||= 'libs';
+                    
+                    if(root.hasAttribute('component')){
+                          var attr    = root.getAttribute('component');
+                          root.removeAttribute('component');
+                          if(attr){
+                                root.setAttribute('component_',attr);
+                          }else{
+                                root.toggleAttribute('component_',true);
+                          }
+                    }
+                    
                     var version   = rd.version(root);
                     
                     var url;
