@@ -282,10 +282,14 @@
               var get   = url=>fetch(url).then(res=>res.text());
               
               if(!$){
-                    $   = await get('https://libs.ext-code.com/js/dom/$.js');
+                    var js    = await get('https://libs.ext-code.com/js/dom/$.js');
+                    $         = eval(`${js};($)`);
+                    console.log($);
               }
               if(!menumod && !menu){
-                    menumod   = await get('https://libs.ext-code.com/js/dom/menumod/menumod.js');
+                    var js    = await get('https://libs.ext-code.com/js/dom/menumod/menumod.js');
+                    menumod   = eval(`${js};(menumod)`);
+                    console.log(menumod);
               }
               
         }//libs2
