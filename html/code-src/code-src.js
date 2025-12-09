@@ -10,7 +10,7 @@
                               
                               var root              = this;
 
-                              var src   - root.getAttribute('src');
+                              var src   = root.getAttribute('src');
                               var err;
                               try{
                                 
