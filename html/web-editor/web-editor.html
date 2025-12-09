@@ -284,8 +284,8 @@
               if(!$){
                     $   = await get('https://libs.ext-code.com/js/dom/$.js');
               }
-              if(!menumod){
-                    menumod   = await get('https://libs.ext-code.com/js/menumod/menumod.js');
+              if(!menumod && !menu){
+                    menumod   = await get('https://libs.ext-code.com/js/dom/menumod/menumod.js');
               }
               
         }//libs2
