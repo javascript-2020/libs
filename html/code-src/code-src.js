@@ -4,7 +4,7 @@
       
                   class codesrc extends HTMLElement {
                   
-                        async constructor() {
+                        constructor() {
                                                                                                         console.log('code-src');
                               super();
                               setup();
