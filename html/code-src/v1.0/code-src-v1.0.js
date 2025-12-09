@@ -5,9 +5,15 @@
                   class codesrc extends HTMLElement {
                   
                         async constructor() {
-                                                                                                        console.log('checkbox-one');
+                                                                                                        console.log('code-src');
                               super();
+                              setup();
                               
+                        }//constructor
+
+                        
+                        async setup(){
+                        
                               var root              = this;
 
                               var src   = root.getAttribute('src');
@@ -46,7 +52,7 @@
                               },50);
 */                              
                               
-                        }//constructor
+                        }//setup
                         
                   }//class          
                   
