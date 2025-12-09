@@ -7,7 +7,7 @@
                         constructor() {
                                                                                                         console.log('code-src');
                               super();
-                              setup();
+                              this.setup();
                               
                         }//constructor
 
