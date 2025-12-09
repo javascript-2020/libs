@@ -4,7 +4,7 @@
       
                   class codesrc extends HTMLElement {
                   
-                        constructor() {
+                        async constructor() {
                                                                                                         console.log('checkbox-one');
                               super();
                               
