@@ -1212,6 +1212,9 @@
         //  https://github.com/ajaxorg/ace
         //  https://github.com/ajaxorg/ace-builds
         
+        //  https://stackoverflow.com/questions/tagged/ace-editor?tab=Active
+        
+        
         
         $.editor.ace    = function(){
           
