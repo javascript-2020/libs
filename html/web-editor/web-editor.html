@@ -242,6 +242,8 @@
     
         obj.init    = async function(){
                                                                       debug('init',obj.version);
+              await libs2();
+              
               if(!menu){
                     menu    = menumod();
               }
@@ -273,6 +275,20 @@
               }
               
         }//libs
+        
+        
+        async function libs2(){
+          
+              var get   = url=>fetch(url).then(res=>res.text());
+              
+              if(!$){
+                    $   = await get('https://libs.ext-code.com/js/dom/$.js');
+              }
+              if(!menumod){
+                    menumod   = await get('https://libs.ext-code.com/js/menumod/menumod.js');
+              }
+              
+        }//libs2
         
         
         rd.fullsize   = function(){
