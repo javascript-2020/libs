@@ -681,7 +681,14 @@
   
   //:
   
-  
+        obj.clear   = function(status=false){
+          
+              editor.setValue('',-1);
+              filename(status);
+              
+        }//clear
+        
+        
         obj.setValue    = function(txt){return set(txt)}
         obj.setvalue    = function(txt){return set(txt)}
         obj.set         = function(txt){return set(txt)}
@@ -719,7 +726,10 @@
               editor.resize();
               
         }//resize
-        
+
+
+  //:
+  
         
         obj.horiz   = function(){
         
