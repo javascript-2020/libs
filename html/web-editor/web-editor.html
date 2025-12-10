@@ -173,7 +173,7 @@
         
         
         obj.initmod   = function(params){
-          
+
               ext         = params.ext;
               $           = params.$;
               menumod     = params.menumod;
@@ -242,7 +242,7 @@
     
         obj.init    = async function(){
                                                                       debug('init',obj.version);
-              await libs2();
+              ({$,menumod}    = await libs2());
               
               if(!menu){
                     menu    = menumod();
@@ -268,7 +268,7 @@
   //:
 
         async function libs(){
-          
+
               if(!ace){
                     ace       = await $.editor.ace();
                     obj.ace   = ace;
@@ -278,15 +278,19 @@
         
         
         async function libs2(){
-          
+
               var get   = url=>fetch(url).then(res=>res.text());
               
               if(!$){
-                    $   = await get('https://libs.ext-code.com/js/dom/$.js');
+                    var js    = await get('https://libs.ext-code.com/js/dom/$.js');
+                    $         = eval(`${js}`);
               }
               if(!menumod && !menu){
-                    menumod   = await get('https://libs.ext-code.com/js/dom/menumod/menumod.js');
+                    var js    = await get('https://libs.ext-code.com/js/dom/menumod/menumod.js');
+                    menumod   = eval(`${js};(menumod)`);
               }
+              
+              return {$,menumod}
               
         }//libs2
         
@@ -361,7 +365,7 @@
   
         
         obj.initdom    = async function(rootnode,params){
-          
+
               if(arguments.length==1){
                     params                    = rootnode;
               }
