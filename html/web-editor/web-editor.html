@@ -452,6 +452,8 @@
   //:
   
   
+        var initial=true;
+  
         async function setup(node,mode='javascript'){
   
               $.editor.ace.import_style(shadow);
@@ -489,9 +491,15 @@
 
         on.change   = function(e){
 
-              filename.save(true);
               update();
               
+              if(initial){
+                    initial=false;
+                    return;
+              }
+              
+              filename.save(true);
+                                  
               if(on2?.change){
                     on2.change();
               }
