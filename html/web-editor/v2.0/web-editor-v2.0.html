@@ -289,11 +289,11 @@
                     var js    = await get('https://libs.ext-code.com/js/dom/menumod/menumod.js');
                     menumod   = eval(`${js};(menumod)`);
               }
-              if(!datatype){
+              if(typeof datatype=='undefined'){
                     var js    = await get('https://libs.ext-code.com/js/core/datatype.js');
                     window.eval(js);
               }
-              if(!keydown){
+              if(typeof keydown=='undefined'){
                     var js    = await get('https://libs.ext-code.com/js/dom/keydown/keydown.js');
                     window.eval(js);
               }
