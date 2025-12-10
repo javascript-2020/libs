@@ -289,6 +289,10 @@
                     var js    = await get('https://libs.ext-code.com/js/dom/menumod/menumod.js');
                     menumod   = eval(`${js};(menumod)`);
               }
+              if(!datatype){
+                    var js    = await get('https://libs.ext-code.com/js/core/datatype.js');
+                    window.eval(js);
+              }
               
               return {$,menumod}
               
