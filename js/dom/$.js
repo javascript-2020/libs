@@ -1208,6 +1208,42 @@
   
         }//editor
 
+
+        $.editor.max    = function(node,params={}){
+
+              var {mode,kd}   = params;
+              
+              var editor    = $.editor.apply(null,arguments);
+              editor.session.on('change',onchange);
+              editor.setOption('maxLines',Infinity);
+              
+              onchange();
+              
+              return editor;
+              
+                      
+              function onchange(e){
+                                                                                //console.log('onchange');                
+                    var lh      = editor.renderer.lineHeight;
+                    var lines   = editor.session.getLength();
+                    var h       = lh*lines;
+                    
+                    var w       = editor.renderer.scrollBar.getWidth()
+                    h+=w;
+                    
+                    editor.container.style.height = h+'px';
+                    editor.resize();
+                    
+                    if(params.on?.change){
+                          params.on.change();
+                    }
+                    
+              }//onchange
+        
+        }//max
+        
+
+
   
         //  https://github.com/ajaxorg/ace
         //  https://github.com/ajaxorg/ace-builds
@@ -1288,39 +1324,6 @@
               
         }//import_style
         
-        
-        $.editor.max    = function(node,params={}){
-
-              var {mode,kd}   = params;
-              
-              var editor    = $.editor.apply(null,arguments);
-              editor.session.on('change',onchange);
-              editor.setOption('maxLines',Infinity);
-              
-              onchange();
-              
-              return editor;
-              
-                      
-              function onchange(e){
-                                                                                //console.log('onchange');                
-                    var lh      = editor.renderer.lineHeight;
-                    var lines   = editor.session.getLength();
-                    var h       = lh*lines;
-                    
-                    var w       = editor.renderer.scrollBar.getWidth()
-                    h+=w;
-                    
-                    editor.container.style.height = h+'px';
-                    editor.resize();
-                    
-                    if(params.on?.change){
-                          params.on.change();
-                    }
-                    
-              }//onchange
-        
-        }//max
         
 
 
