@@ -243,7 +243,7 @@
         obj.init    = async function(){
                                                                       console.log('init');
                                                                       debug('init',obj.version);
-              await libs2();
+              ({$,menumod}    = await libs2());
               
               if(!menu){
                     menu    = menumod();
@@ -293,6 +293,7 @@
                     menumod   = eval(`${js};(menumod)`);
                     console.log(menumod);
               }
+              return {$,menumod}
               
         }//libs2
         
