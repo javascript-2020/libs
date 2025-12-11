@@ -72,7 +72,7 @@
         var df=false,did='console'
         ;
         
-        var ext,$,ace
+        var ext,$,ace,embed
         ;
         
         obj.initmod   = function(params){
@@ -80,6 +80,7 @@
               ext       = params.ext;
               $         = params.$;
               ace       = params.ace;
+              embed     = params.embed;
               
               ('echo' in params) && (echo=params.echo);
               
@@ -110,6 +111,10 @@
         def.height    = '200px';
         
         
+        var rd    = {};
+        rd.attr   = {};
+        
+        
         
         
   
@@ -118,18 +123,14 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
-              var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;                                                                        
-              if(dom.hasAttribute('h')){
-                    var h   = dom.getAttribute('h');
-                    h       = int(h);
-                    def.height    = h;
-              }
-              if(dom.hasAttribute('height')){
-                    var h   = dom.getAttribute('height');
-                    h       = int(h);
-                    def.height    = h;
-              }
 
+              target    = dom;
+              if(embed){
+                    target    = embed;
+              }
+              
+              rd.attr.h();
+              rd.attr.height();
           
               await libs();
 
@@ -145,26 +146,27 @@
               
               var list      = [];
               
-              var url       = 'javascript-2020:external:/TarVK/chromeConsole/console.js';
-              var promise   = ext.text.github(url).then(result=>{
-                       
-                    [jsconsole]   = result;
-                    jsconsole     = eval(jsconsole);
+              var promise   = ext.load.libs('js/dom/web-console/web-console.js').then(result=>{
+              
+                    [jsconsole]=result;
                     jsconsole.initmod({ace});
                     jsconsole.init();
                     
               });
               list.push(promise);
+
+
+              var promise   = ext.text.libs('js/dom/web-console/web-console.css').then(result=>{
               
-              var url       = 'javascript-2020:external:main:TarVK/chromeConsole/console.css';
-              var promise   = ext.text.github[url].then(css=>{
-                
-                    style         = document.createElement('style');
+                    var [css]           = result;
+                    style               = document.createElement('style');
                     style.textContent   = css;
-              
+                    
+                    
               });
               list.push(promise);
-
+              
+              
 /*              
               var promise   = import('https://cdn.jsdelivr.net/npm/ansi_up/+esm').then(({AnsiUp})=>{
                 
@@ -174,10 +176,39 @@
               list.push(promise);
 */              
               
+
+
               await Promise.all(list);
               
         }//libs
 
+
+  //:
+  
+  
+        var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
+        
+        rd.attr.h   = function(){
+        
+              if(target.hasAttribute('h')){
+                    var h         = target.getAttribute('h');
+                    h             = int(h);
+                    def.height    = h;
+              }
+              
+        }//h
+        
+        
+        rd.attr.height    = function(){
+        
+              if(target.hasAttribute('height')){
+                    var h         = target.getAttribute('height');
+                    h             = int(h);
+                    def.height    = h;
+              }
+              
+        }//height
+        
 
   //:
   
