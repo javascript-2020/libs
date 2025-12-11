@@ -566,8 +566,9 @@ var ext;
         
         loader.raw    = async function({owner,repo,branch,file}){
           
-              var url           = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${file}`;
-              var {txt,error}   = await loader.fetch(url);
+              branch            ||= 'main';
+              var url             = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${file}`;
+              var {txt,error}     = await loader.fetch(url);
               return {txt,error};
               
         }//raw
