@@ -1,0 +1,214 @@
+
+
+
+<html>
+
+      <head>
+
+            <title>console-test</title>
+
+            <link rel=icon type='image/png' href='images/html-editor-favicon.png'>
+
+            
+            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
+
+            <script init>
+                                                                                console.clear();
+                                                                                console.log('console-test-v2.0.html');
+                                                                                console.log();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+        var df=true
+        ;
+
+
+        var ext;
+        var $;
+        var datatype;
+
+        
+
+        
+        
+        var webconsole;
+        
+
+
+
+
+
+  //:
+
+        
+        mod.stack.add   = init;
+        
+        async function init(){
+
+
+
+              
+              webconsole      = mod['web-console'];
+              log             = mod['log-mod'];
+
+
+              
+              webconsole.initmod({ext,$,ace});
+              log.initmod({ext,$});
+              
+              
+              await Promise.all([
+                    webconsole.init(),
+                    log.init(),
+              ]);
+          
+              
+              await initdom(document.body);
+
+
+        }//init
+
+
+(async()=>{
+
+        mod.stack.add;
+        
+        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
+          
+        var promise   = ext.load.libs(
+              'js/dom/$.js.api',
+              'js/core/datatype.js',
+              'js/dom/menumod/menumod.js',
+              'js/dom/keydown/keydown.js',
+              'js/debug/debug.js',
+        );
+        [$,datatype,menumod,keydown,debug]   = await promise;
+  
+        ace   = await $.editor.ace();
+
+        mod.stack.complete;
+                      
+})();
+        
+
+            </script init>
+
+
+            <link rel=stylesheet href='/utils/css/utils.css'>
+            
+            <style id=page-inline>
+
+  html
+    {height:100%}
+  body
+    {height:calc(100% - 40px);margin:20px}
+
+
+
+
+  input
+    {font-size:16px;padding:5px 10px}
+  input[type=button]
+    {cursor:pointer}
+    
+    
+    
+            </style>
+
+
+      </head>
+
+      
+      <body>
+      
+
+            <web-console component v2.0></web-console>
+      
+      
+            <div>
+                  <input value=test type=button>
+                  <input value=log type=button>
+            </div>
+            
+            <log-mod component v2.0></log-mod>
+            
+      </body>
+      
+      
+      <script>
+      
+
+
+  //:
+  
+  
+        var btn   = {};
+        
+        
+        
+  
+        function initdom(rootnode){
+
+          
+              root                                = rootnode;
+
+              
+              webconsole.initdom();
+              webconsole.height    = 200;
+              
+              
+              $(root,'[value=test]').onclick    = btn.test;
+              $(root,'[value=log]').onclick     = btn.log;
+              
+              
+              webconsole.log('ready');
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+  
+        btn.test    = function(){
+          
+              
+              var span=document.createElement('span');
+              span.textContent    = 'hello';
+              //debugger;
+              webconsole.log(span);
+              
+              
+              
+        }//test
+  
+  
+        btn.log   = function(){
+
+          
+              webconsole.log('helloworld');
+              
+              
+              
+              var test    = {
+                    hello:'world',
+                    key:'value',
+                    test:123,
+                    debug:true
+              };
+              
+              webconsole.log(test);
+              
+          
+        }//log
+        
+        
+        
+  
+  
+      </script>
+      
+</html>
+
+
+
+
+      
