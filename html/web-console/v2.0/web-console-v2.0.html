@@ -154,21 +154,15 @@
                     
               });
               list.push(promise);
+
+
+              var promise   = ext.text.libs('js/dom/web-console/web-console.css').then(result=>{
               
-/*              
-              var url       = 'javascript-2020:external:/TarVK/chromeConsole/console.js';
-              var promise   = ext.text.github(url).then(result=>{
-                       
-                    [jsconsole]   = result;
-                    jsconsole     = eval(jsconsole);
-                    jsconsole.initmod({ace});
-                    jsconsole.init();
+                    console.log('result',result);
                     
               });
-              list.push(promise);
-*/              
-
-
+              
+              
               var url       = 'javascript-2020:external:main:TarVK/chromeConsole/console.css';
               var promise   = ext.text.github[url].then(css=>{
                 
