@@ -158,11 +158,14 @@
 
               var promise   = ext.text.libs('js/dom/web-console/web-console.css').then(result=>{
               
-                    console.log('result',result);
+                    var [css]           = result;
+                    style               = document.createElement('style');
+                    style.textContent   = css;
+                    
                     
               });
               
-              
+/*              
               var url       = 'javascript-2020:external:main:TarVK/chromeConsole/console.css';
               var promise   = ext.text.github[url].then(css=>{
                 
@@ -171,6 +174,7 @@
               
               });
               list.push(promise);
+*/              
 
 
 
