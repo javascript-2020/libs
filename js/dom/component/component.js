@@ -761,7 +761,7 @@
               
 
               
-              function auto(...args){
+              async function auto(...args){
                             
                     if(args.length==0){
                           args    = mod.list;
