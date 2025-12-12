@@ -215,14 +215,14 @@
         
         obj.initmod   = function(params){
           
-              ext           = params.ext;
-              $             = params.$;
-              datatype      = params.datatype;
+              ext           = mod.rd(params,'ext',ext);
+              $             = mod.rd(params,'$',$);
+              datatype      = mod.rd(params,'datatype',datatype);
 
-              menu          = params.menu;
-              source        = params.source;
+              menu          = mod.rd(params,'menu',menu);
+              source        = mod.rd(params,'source',source);
               
-              log           = params.log;
+              log           = mod.rd(params,'log',log);
               
         }//initmod
 
