@@ -162,18 +162,21 @@
         obj.init    = async function(){
                                                                                 debug(obj.version);
 
-                        
+              await mod.auto();
+              
               filenav                   = mod['file-nav'];
               
-              filenav.initmod({ext,$,datatype});
+              //filenav.initmod({ext,$,datatype});
               
               filenav.rd.params         = rd.params;
               filenav.file.click        = file.click;
               filenav.file.dblclick     = file.dblclick;
-              
+
+/*              
               await Promise.all([
                     filenav.init(),
               ]);
+*/              
                             
         }//init
 
@@ -268,7 +271,7 @@
               $(node,'[value=dir]').onclick                     = btn.dir;
 
 
-              filenav.initdom(shadow);
+              //filenav.initdom(shadow);
 
               
         }//initdom
