@@ -34,16 +34,16 @@
 
               
               if(typeof init=='function'){
+                                                                                console.log('call init');
                     init();
               }else{
                     await mod.auto();
+                    
+                    if(typeof start=='function'){
+                          start();
+                    }
               }
 
-              
-              if(typeof start=='function'){
-                    start();
-              }
-              
         }//init
 
 
