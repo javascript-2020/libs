@@ -58,22 +58,20 @@
         var df    = true
         ;
                                                                                 
-        var ext,$,menumod,menu,complete,source,focus,editor,log
+        var ext,$,menumod,menu,complete,source,focus,log
         ;
           
         obj.initmod   = function(params){
           
-              ext             = params.ext;
-              $               = params.$;
-              menumod         = params.menumod;
+              ext             = mod.rd(params,'ext',ext);
+              $               = mod.rd(params,'$',$);
+              menumod         = mod.rd(params,'menumod',menumod);
               
-              menu            = params.menu;
-              complete        = params.complete;
-              source          = params.source;
-              focus           = params.focus;
-              log             = params.log;
-              
-              editor          = params.editor;
+              menu            = mod.rd(params,'menu',menu);
+              complete        = mod.rd(params,'complete',complete);
+              source          = mod.rd(params,'source',source);
+              focus           = mod.rd(params,'focus',focus);
+              log             = mod.rd(params,'log',log);
               
         }//initmod
 
