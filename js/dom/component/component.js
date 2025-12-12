@@ -5,6 +5,8 @@
   
         var full_list   = [];
         var cache       = {};
+        var base        = {};
+        base.add        = params=>Object.assign(mod.base,params);
         
         mod   = create({name:'root'});
         
@@ -14,10 +16,16 @@
         function onload(){
 
               
-              if(typeof init!='undefined'){
+              if(typeof init=='function'){
                     if(!mod.stack.includes(init)){
                                                                                 //console.log('init added');
                           mod.stack.unshift(init);
+                    }
+              }
+              
+              if(typeof init_hdr=='function'){
+                    if(!mod.stack.includes(init_hdr)){
+                          mod.stack.unshift(init_hdr);
                     }
               }
               
@@ -44,6 +52,7 @@
               mod.auto        = auto;
               mod.create      = create;
               mod.build       = build;
+              mod.rd          = rdparams;
               
               var stack       = []
               mod.stack       = stack;
@@ -61,6 +70,8 @@
               }else{
                                                                                 //console.log('auto total');
                     total    = 1;
+                    
+                    mod.base        = base;
                     
               }
               
@@ -734,7 +745,7 @@
                     
               }//inst
               
-              
+/*              
               async function auto(initmod){
                 
                     mod.list.forEach(name=>initmod[name]=mod[name]);
@@ -746,6 +757,44 @@
                     mod.list.forEach(name=>mod[name].initdom());
                     
               }//auto
+*/              
+              
+
+              
+              function auto(...args){
+                            
+                    if(args.length==0){
+                          args    = mod.list;
+                    }
+                    
+                    args.forEach(arg=>{
+                      
+                          var fn;
+                          if(typeof arg=='string'){
+                                fn    = mod[arg];
+                          }else{
+                                fn    = arg;
+                          }
+                          fn.initmod(base);
+                          await fn.init();
+                          fn.initdom();
+                          
+                    });
+                    
+              }//auto
+              
+
+              
+              function rdparams(params,name,value){
+                
+                    if(arguments.length==4){
+                    }
+                    if(name in params){
+                          return params[name];
+                    }
+                    return value;
+                    
+              }//rdoarans
               
               
   //:
