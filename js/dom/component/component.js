@@ -5,10 +5,9 @@
   
         var full_list   = [];
         var cache       = {};
-        var base        = {};
-        base.add        = params=>Object.assign(mod.base,params);
         
-        mod   = create({name:'root'});
+        mod             = create({name:'root'});
+        var mod_root    = mod;
         
         window.addEventListener('load',onload);
 
@@ -56,6 +55,10 @@
               
               var stack       = []
               mod.stack       = stack;
+
+              mod.base        = {};
+              mod.base.add    = params=>Object.assign(mod.base,params);
+
               
               var ct          = 0;
               var total       = 0;
@@ -70,9 +73,6 @@
               }else{
                                                                                 //console.log('auto total');
                     total    = 1;
-                    
-                    mod.base        = base;
-                    
               }
               
                             
@@ -776,7 +776,10 @@
                                 }else{
                                       fn    = arg;
                                 }
-                                fn.initmod(base);
+                                
+                                var params    = Object.assign(mod_root.base,mod.base);
+                                
+                                fn.initmod(params);
                                 await fn.init();
                                 fn.initdom();
                                 
