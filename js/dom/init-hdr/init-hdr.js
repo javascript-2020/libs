@@ -33,10 +33,8 @@
               mod.base.add({ext,$,datatype,keydown,menu,menumod,ace});
 
               
-              if(typeof init=='function'){
-                                                                                console.log('call init');
-                    init();
-              }else{
+              if(typeof init!='function'){
+                                                                                console.log('no init');
                     await mod.auto();
                     
                     if(typeof start=='function'){
