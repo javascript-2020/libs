@@ -62,12 +62,12 @@
 
         obj.initmod   = function(params){
           
-              ext         = params.ext;
-              $           = params.$;
-              datatype    = params.datatype;
-              menumod     = params.menumod;
+              ext         = mod.rd(params,'ext',ext);
+              $           = mod.rd(params,'$',$);
+              datatype    = mod.rd(params,'datatype',datatype);
+              menumod     = mod.rd(params,'menumod',menumod);
               
-              menu.root   = params.menu;
+              menu.root   = mod.rd(params,'menu',menu);
               
         }//initmod
 
