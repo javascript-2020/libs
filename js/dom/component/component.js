@@ -767,19 +767,21 @@
                           args    = mod.list;
                     }
                     
-                    args.forEach(arg=>{
-                      
-                          var fn;
-                          if(typeof arg=='string'){
-                                fn    = mod[arg];
-                          }else{
-                                fn    = arg;
-                          }
-                          fn.initmod(base);
-                          await fn.init();
-                          fn.initdom();
-                          
-                    });
+                    await Promise.all(
+                          args.map(async arg=>{
+                            
+                                var fn;
+                                if(typeof arg=='string'){
+                                      fn    = mod[arg];
+                                }else{
+                                      fn    = arg;
+                                }
+                                fn.initmod(base);
+                                await fn.init();
+                                fn.initdom();
+                                
+                          })
+                    );
                     
               }//auto
               
