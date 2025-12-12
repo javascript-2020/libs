@@ -25,12 +25,20 @@
     //:
 
               
-        async function init(){
+        async function init_hdr(){
                                                                                 debug('init',version);
               
               menu      = menumod();
 
-              await mod.auto({ext,$,datatype,keydown,menu,menumod,ace});
+              mod.base.add({ext,$,datatype,keydown,menu,menumod,ace});
+
+              
+              if(typeof init=='function'){
+                    init();
+              }else{
+                    await mod.auto();
+              }
+
               
               if(typeof start=='function'){
                     start();
