@@ -217,11 +217,11 @@
   
         obj.initmod   = function(params){
           
-              ext           = params.ext;
-              $             = params.$;
+              ext           = mod.rd(params,'ext',ext);
+              $             = mod.rd(params,'$',$);
               
-              menu          = params.menu;
-              source        = params.source;
+              menu          = mod.rd(params,'menu',menu);
+              source        = mod.rd(params,'source',source);
               
         }//initmod
         
