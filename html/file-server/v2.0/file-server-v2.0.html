@@ -162,7 +162,6 @@
         obj.init    = async function(){
                                                                                 debug(obj.version);
 
-              await mod.auto();
               
               filenav                   = mod['file-nav'];
               
@@ -171,6 +170,9 @@
               filenav.rd.params         = rd.params;
               filenav.file.click        = file.click;
               filenav.file.dblclick     = file.dblclick;
+
+
+              await mod.auto();
 
 /*              
               await Promise.all([
