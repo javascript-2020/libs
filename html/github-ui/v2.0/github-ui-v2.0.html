@@ -203,11 +203,11 @@ mod['github-ui']    = function({mod,dom,host}){
         
         obj.initmod   = function(params){
           
-              ext           = params.ext;
-              $             = params.$;
+              ext           = mod.rd(params,'ext',ext);
+              $             = mod.rd(params,'$',$);
               
-              menu          = params.menu;
-              focus         = params.focus;
+              menu          = mod.rd(params,'menu',menu);
+              focus         = mod.rd(params,'focus',focus);
 
         }//initmod
 
