@@ -41,18 +41,17 @@
         var df=false,did='localfile'
         ;
                                                                                 debug(obj.version);
-        var $,menu,editor,filemod,source
+        var $,menu,filemod,source
         ;
         
         obj.initmod   = function(params){
           
-              $         = params.$;
+              $         = mod.rd(params,'$',$);
               
-              menu      = params.menu;
+              menu      = mod.rd(params,'menu',menu);
               
-              editor    = params.editor;
-              filemod   = params.filemod;
-              source    = params.source;
+              filemod   = mod.rd(params,'filemod',filemod);
+              source    = mod.rd(params,'source',source);
               
         }//initmod
 
