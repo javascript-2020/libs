@@ -26,7 +26,7 @@
 
               
         async function init_hdr(){
-                                                                                debug('init',version);
+                                                                                debug('init_hdr',version);
               
               menu      = menumod();
 
