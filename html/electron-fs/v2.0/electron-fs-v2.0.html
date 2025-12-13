@@ -124,6 +124,12 @@
         obj.initdom   = function(){
           
               root                                    = host.shadowRoot;
+
+              menu.add.style(shadow);
+              
+              var style                                         = $(shadow,'style');
+              $.stylesheet.insert(style,'.icon');
+
               
               icon                                    = $(root,'.icon');
               
