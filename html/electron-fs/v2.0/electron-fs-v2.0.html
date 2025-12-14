@@ -93,7 +93,7 @@
         
         var typename    = 'electron';
 
-
+        var shadow;
         var ui          = {};
         var icon;
 
@@ -127,19 +127,19 @@
   
         obj.initdom   = function(){
           
-              root                                    = host.shadowRoot;
+              shadow                                  = host.shadowRoot;
 
               menu.add.style(shadow);
               
-              var style                                         = $(shadow,'style');
+              var style                               = $(shadow,'style');
               $.stylesheet.insert(style,'.icon');
 
               
-              icon                                    = $(root,'.icon');
+              icon                                    = $(shadow,'.icon');
               
-              $(root,'[value=load]').onclick          = btn.load;
-              $(root,'[value=save]').onclick          = btn.save;
-              $(root,'[value=dir]').onclick           = btn.dir;
+              $(shadow,'[value=load]').onclick        = btn.load;
+              $(shadow,'[value=save]').onclick        = btn.save;
+              $(shadow,'[value=dir]').onclick         = btn.dir;
 
                             
         }//initdom
