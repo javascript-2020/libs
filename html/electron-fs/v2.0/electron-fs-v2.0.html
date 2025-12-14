@@ -264,7 +264,7 @@
                           
                     });
               }else{
-                    file            = filemod.new({
+                    file            = {
                     
                           filetype    : filetype,
                           abs         : `${path}${filename}`,
@@ -280,7 +280,7 @@
                           title       : title,
                           icon        : icon.src
                           
-                    });
+                    };
               }
               
               var result      = await load(file);
