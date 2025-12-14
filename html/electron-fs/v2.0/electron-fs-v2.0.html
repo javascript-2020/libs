@@ -364,7 +364,7 @@
               if(result===false){
                     return;
               }
-              
+              debugger;
               obj.save.complete?.(file);
           
           
@@ -381,9 +381,9 @@
               var {error}   = await electron.writeFile({path,buf});
               if(error){
                     console.error(error);
-                    return;
+                    return false;
               }
-                      
+
         }//save
 
 
