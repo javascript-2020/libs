@@ -291,7 +291,7 @@
               
               obj.load.complete(file,blob);
           
-        }//ui
+        }//load.ui
 
 
         obj.load    = load;
@@ -303,37 +303,35 @@
               var blob    = new Blob([buf]);
               return blob;
               
-        }//file
+        }//load
         
 
         save.ui   = async function(path,filename){
           
               var title       = `${path}${filename}`;
 
-/*              
-              var file            = filemod.new({
-              
-                    filetype    : filetype,
-                    abs         : path,
-                    path        : path,
-                    name        : filename,
+              var file;
+              if(filemod){
+                    file            = filemod.new({
                     
-                    kind        : 'file',
-                    size        : null,
-                    ctime       : null,
-                    mtime       : null,
-                    atime       : null,
-                    
-                    title       : title,
-                    icon        : icon.src
-                    
-              });
-              
-              file.url    = url;
-              
-*/              
-              
-              var file            = {
+                          filetype    : filetype,
+                          abs         : path,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          size        : null,
+                          ctime       : null,
+                          mtime       : null,
+                          atime       : null,
+                          
+                          title       : title,
+                          icon        : icon.src
+                          
+                    });
+                    file.url    = url;
+              }else{
+                    file            = {
                     
                           filetype    : filetype,
                           abs         : `${path}${filename}`,
@@ -349,7 +347,8 @@
                           title       : title,
                           icon        : icon.src
                           
-                    };
+                    }
+              }
 
               
               var blob        = await source();
@@ -362,7 +361,7 @@
               obj.save.complete?.(file);
           
           
-        }//ui
+        }//save.ui
         
         
         obj.save    = save;
