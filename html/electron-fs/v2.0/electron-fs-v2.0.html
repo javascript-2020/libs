@@ -242,24 +242,46 @@
         load.ui   = async function(path,filename){
 
               var title       = `${path}\n${filename}`;
-                    
-              var file            = filemod.new({
+
+              var file;
               
-                    filetype    : filetype,
-                    abs         : `${path}${filename}`,
-                    path        : path,
-                    name        : filename,
+              if(filemod){
+                    file            = filemod.new({
                     
-                    kind        : 'file',
-                    size        : null,
-                    ctime       : null,
-                    mtime       : null,
-                    atime       : null,
+                          filetype    : filetype,
+                          abs         : `${path}${filename}`,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          size        : null,
+                          ctime       : null,
+                          mtime       : null,
+                          atime       : null,
+                          
+                          title       : title,
+                          icon        : icon.src
+                          
+                    });
+              }else{
+                    file            = filemod.new({
                     
-                    title       : title,
-                    icon        : icon.src
-                    
-              });
+                          filetype    : filetype,
+                          abs         : `${path}${filename}`,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          size        : null,
+                          ctime       : null,
+                          mtime       : null,
+                          atime       : null,
+                          
+                          title       : title,
+                          icon        : icon.src
+                          
+                    });
+              }
               
               var result      = await load(file);
               if(result===false){
