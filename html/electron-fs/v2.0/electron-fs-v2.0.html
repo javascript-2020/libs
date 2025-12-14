@@ -141,7 +141,10 @@
               $.stylesheet.insert(style,'.icon');
 
               
+              var node                                = $(shadow,'.menu');
               icon                                    = $(shadow,'.icon');
+              icon.onclick                            = menu.click(node,'both',false);
+              
               
               $(shadow,'[value=load]').onclick        = btn.load;
               $(shadow,'[value=save]').onclick        = btn.save;
