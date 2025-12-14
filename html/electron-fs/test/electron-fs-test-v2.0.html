@@ -23,6 +23,7 @@
                                                                                 console.log('init');
               electron      = mod['electron-fs'];
               
+              electron.initmod({source});
               
               electron.load.complete   = complete.load;
               electron.save.complete   = complete.save;
@@ -70,6 +71,10 @@
       <script>
 
 
+        var cur     = {};
+        cur.file    = null;
+        cur.blob    = null;
+        
   //:
   
   
@@ -79,14 +84,24 @@
 
   //:
   
-
+        
+        function source(){
+          
+              return cur.blob;
+              
+        }//source
+        
+        
         function complete(){
         }//complete
         
         
         complete.load   = async function(file,blob){
                                                                                 console.log(file,blob);
-              var txt   = await blob.text();
+              cur.file    = file;
+              cur.blob    = blob;
+              
+              var txt     = await blob.text();
               console.log('txt',txt);
               
         }//load
@@ -94,6 +109,7 @@
         
         complete.save   = function(file,confirm=true){
                                                                                 console.log(file);
+                                                                                              
         }//save
         
 
