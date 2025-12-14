@@ -206,7 +206,7 @@
         }//dblclick
   
   
-        dir.read    = function(path){
+        dir.read    = async function(path){
                                                                                 debug('dir.read',path);
               var {files,dirs,error}    = await electron.dirRead({path});
               
