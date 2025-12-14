@@ -241,15 +241,12 @@
   
         load.ui   = async function(path,filename){
 
-              return;
-              
-              
               var title       = `${path}\n${filename}`;
                     
               var file            = filemod.new({
               
                     filetype    : filetype,
-                    abs         : `${path}/${filename}`,
+                    abs         : `${path}${filename}`,
                     path        : path,
                     name        : filename,
                     
