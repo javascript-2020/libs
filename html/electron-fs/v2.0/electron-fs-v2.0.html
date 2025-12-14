@@ -208,7 +208,7 @@
   
         dir.read    = function(path){
                                                                                 debug('dir.read',path);
-              var {files,dirs,error}    = await window.electronAPI.readFile({path});                                                                                
+              var {files,dirs,error}    = await electron.dirRead({path});
               
               if(error){
                     console.error(error);
