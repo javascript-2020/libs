@@ -84,8 +84,11 @@
         }//complete
         
         
-        complete.load   = function(file,blob){
+        complete.load   = async function(file,blob){
                                                                                 console.log(file,blob);
+              var txt   = await blob.text();
+              console.log('txt',txt);
+              
         }//load
         
         
