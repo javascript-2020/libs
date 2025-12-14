@@ -369,8 +369,6 @@
               if(result===false){
                     return;
               }
-              debugger;
-              obj.save.complete?.(file);
           
           
         }//save.ui
@@ -388,6 +386,10 @@
                     console.error(error);
                     return false;
               }
+
+              obj.save.complete(file);
+              
+              return true;
 
         }//save
 
