@@ -208,8 +208,12 @@
   
         dir.read    = function(path){
                                                                                 debug('dir.read',path);
-              var dirs    = [{name:'test'}];
-              var files   = [{name:'my-test.txt'}];
+              var {files,dirs,error}    = await window.electronAPI.readFile({path});                                                                                
+              
+              if(error){
+                    console.error(error);
+                    return;
+              }
               
               filenav.display(path,dirs,files);
                 
