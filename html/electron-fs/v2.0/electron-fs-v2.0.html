@@ -108,6 +108,8 @@
               filenav.file.click        = file.click;
               filenav.file.dblclick     = file.dblclick;
               filenav.dir.read          = dir.read;
+              filenav.dir.click         = dir.click;
+              filenav.dir.dblclick      = dir.dblclick;
 
               await mod.auto();
 
@@ -221,6 +223,17 @@
               
         }//read
 
+
+        dir.click   = function(path,filename){
+        }//click
+        
+        
+        dir.dblclick    = function(path,filename){
+                                                                                debug('dir.dblclick',path,filename);
+              //path   += 
+              
+        }//dblclick
+        
 
   //:
   
