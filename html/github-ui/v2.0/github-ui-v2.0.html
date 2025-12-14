@@ -196,9 +196,7 @@ mod['github-ui']    = function({mod,dom,host}){
                                                                                 true && debug(obj.version);
   
           
-        var ext,$
-        ;
-        var menu,focus
+        var ext,$,menu,focus,source
         ;
         
         obj.initmod   = function(params){
@@ -209,6 +207,8 @@ mod['github-ui']    = function({mod,dom,host}){
               menu          = mod.rd(params,'menu',menu);
               focus         = mod.rd(params,'focus',focus);
 
+              source        = mod.rd(params,'source',source);
+              
         }//initmod
 
                             
