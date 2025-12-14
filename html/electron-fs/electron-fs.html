@@ -377,6 +377,7 @@
           
               var path      = file.abs;
               var buf       = await blob.arrayBuffer();
+              buf           = new Uint8Array(buf);
               var {error}   = await electron.writeFile({path,buf});
               if(error){
                     console.error(error);
