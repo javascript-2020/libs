@@ -91,6 +91,7 @@
         
         var btn         = {};
         var file        = {};
+        var dir         = {};
         
         
   //:
@@ -106,6 +107,7 @@
               //filenav.rd.params         = rd.params;
               filenav.file.click        = file.click;
               filenav.file.dblclick     = file.dblclick;
+              filenav.dir.read          = dir.read;
 
               await mod.auto();
 
@@ -192,6 +194,18 @@
               
         }//dblclick
   
+  
+        dir.read    = function(path){
+                                                                                debug('dir.read',path);
+              var dirs    = [{name:test}];
+              var files   = [{name:'my-test.txt'}];
+              
+              filenav.display(path,dirs,files);
+                
+              return false;
+              
+        }//read
+
 
   //:
   
