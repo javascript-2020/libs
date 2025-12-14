@@ -230,7 +230,8 @@
         
         dir.dblclick    = function(path,filename){
                                                                                 debug('dir.dblclick',path,filename);
-              //path   += 
+              var abs   = path+filename;
+              filenav.update(abs);
               
         }//dblclick
         
