@@ -299,7 +299,7 @@
         async function load(file){
           
               var path    = file.abs;
-              var buf     = await window.electronAPI.readFile({path});
+              var buf     = await electron.readFile({path});
               var blob    = new Blob([buf]);
               return blob;
               
@@ -307,12 +307,76 @@
         
 
         save.ui   = async function(path,filename){
+          
+              var title       = `${url}\n${path}\n${filename}`;
+
+/*              
+              var file            = filemod.new({
+              
+                    filetype    : filetype,
+                    abs         : path,
+                    path        : path,
+                    name        : filename,
+                    
+                    kind        : 'file',
+                    size        : null,
+                    ctime       : null,
+                    mtime       : null,
+                    atime       : null,
+                    
+                    title       : title,
+                    icon        : icon.src
+                    
+              });
+              
+              file.url    = url;
+              
+*/              
+              
+              var file            = {
+                    
+                          filetype    : filetype,
+                          abs         : `${path}${filename}`,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          size        : null,
+                          ctime       : null,
+                          mtime       : null,
+                          atime       : null,
+                          
+                          title       : title,
+                          icon        : icon.src
+                          
+                    };
+
+              
+              var blob        = await source();
+              
+              var result      = await save(file,blob);
+              if(result===false){
+                    return;
+              }
+              
+              //obj.save.complete ?
+          
+          
         }//ui
         
         
         obj.save    = save;
           
-        async function save(file){
+        async function save(file,blob){
+          
+              var path      = file.abs;
+              var buf       = await blob.arrayBuffer();
+              var {error}   = await electron.writeFile({path,buf});
+              if(error){
+                    console.error(error);
+                    return;
+              }
+                      
         }//save
 
 
