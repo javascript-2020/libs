@@ -175,7 +175,7 @@
         version   : 'v2.0'
   };
 
-        var df=false
+        var df=true,did='file-nav'
         ;
 
         
@@ -979,7 +979,7 @@
           
               if(!df)return;
               var str   = [...arguments].join(' ');
-              console.log('[ file-nav ]',str);
+              console.log(`[ ${did} ]`,str);
               
         }//debug
 
