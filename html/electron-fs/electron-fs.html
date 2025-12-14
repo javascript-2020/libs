@@ -1,0 +1,411 @@
+
+
+<electron-fs>
+
+      <template shadowrootmode=open>
+      
+            <style>
+
+  [root]
+    {}
+    
+
+  .menu
+    {position:absolute;outline:none;font-family:arial;display:flex;flex-direction:column}
+    
+  input
+    {font-size:16px;padding:5px 10px}
+  
+  .icon
+    {padding:1px}
+    
+  file-nav
+    {flex:1}
+    
+            </style>
+
+            <img class=icon style='display:none' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAS1BMVEVHcEx4sLx2sLx0sb50sb6Cr7Z2sb10sb52sb10sb51sb10sb51sb10sb10sb51sb18sLl0sb51sb11sb17sLp1sb11sb11sL1zsb6hkbGfAAAAGHRSTlMAEx3StgI4rSzKedlLwJqHBKNikAlCblSrNgHaAAABdUlEQVQoz31TV3bEIAwERO/de/+TRhg7u8mLoy9AbWYkCPk0Zi0jj9ZLMCU/upmTwx3P2SoEcPU5HXsfzpP/zAb68yHLmVqa+jyzYWZNVd8QBSvAY4scQbGqQNlgS4B4UaRc6b7ChE4Q0qAMJOlS8bOHqGb3YgmUX8es7LqaTSGmM+ow3PcLnFqNW3y7aXKz31D9We9yW54JU0EScbs1IInO5744ybjaOOkJY2EjEvRm3ZJSG50HWJJRM1DgeFWjZXPAeq8XdkK3J/NKJuQAK7dA8fVaOeim4Z4cDbNeY7jWAYsLdovqgYnpqvgY3HdhtBSXdC695yThvVJiUcanEPxdrwZUSNqxCnrHF01CrStyByy9BnAY61w6xxFkKnR06sAWmdele1dL7cMVh2FUoao6GRPrmFJ7js+LTj6axya5tJOlb9wYAFNmOj53ejh54bZaayp+bWCOW1rK299bHArSZSU8/CPNTWtG6acNp7WU+mPJvwC81hAhY7JVwwAAAABJRU5ErkJggg=='>
+            
+            <div root class=menu style='display:none;left:10px;top:100px;width:750px;height:500px'>
+            
+                  <div class=menu-title>
+                        electron fs
+                  </div>
+            
+                  <file-nav v2.0 component></file-nav>
+                  
+                  <div btns>
+                        <input value=dir type=button>
+                        <input value=load type=button>
+                        <input value=save type=button>
+                  </div btns>
+                  
+            </div root>
+      
+      </template>
+      
+      <script>
+      
+(function({mod,dom,host}){
+
+  var obj   = {
+        version   : 'v2.0',
+  };
+  
+        var df=true,did='electron-fs'
+        ;
+        
+        var ext,$,menu,source,filemod
+        ;
+        
+        obj.initmod   = function(params){
+          
+              ext         = mod.rd(params,'ext',ext);
+              $           = mod.rd(params,'$',$);
+              
+              menu        = mod.rd(params,'menu',menu);
+              source      = mod.rd(params,'source',source);
+              
+              filemod     = mod.rd(params,'filemod',filemod);
+              
+        }//initmod
+        
+        
+  //vars:-
+  
+  
+  
+  //:
+  
+        var electron;
+        
+        
+        var filenav;
+        
+        var filetype    = 'electron';
+
+        var shadow;
+        var ui          = {};
+        var icon;
+
+        
+        var btn         = {};
+        var file        = {};
+        var dir         = {};
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+
+        
+              electron                  = window.electronAPI;
+              if(!electron){
+                    return;
+              }
+              
+              filenav                   = mod['file-nav'];
+              //filenav.rd.params         = rd.params;
+              filenav.file.click        = file.click;
+              filenav.file.dblclick     = file.dblclick;
+              filenav.dir.read          = dir.read;
+              filenav.dir.click         = dir.click;
+              filenav.dir.dblclick      = dir.dblclick;
+
+              await mod.auto();
+
+          
+        }//init
+        
+        
+  //:
+  
+  
+        obj.initdom   = function(){
+          
+              if(!electron){
+                    return;
+              }
+              
+              shadow                                  = host.shadowRoot;
+
+              menu.add.style(shadow);
+              
+              var style                               = $(shadow,'style');
+              $.stylesheet.insert(style,'.icon');
+
+              
+              var node                                = $(shadow,'.menu');
+              icon                                    = $(shadow,'.icon');
+              icon.onclick                            = menu.click(node,'both',false);
+              icon.style.display                      = '';
+              
+              
+              $(shadow,'[value=load]').onclick        = btn.load;
+              $(shadow,'[value=save]').onclick        = btn.save;
+              $(shadow,'[value=dir]').onclick         = btn.dir;
+
+                            
+        }//initdom
+        
+        
+  //:
+  
+  
+        btn.load    = function(){
+                                                                                debug('btn.load');
+              if(filenav.cur.type!=='file'){
+                    alert('no file selected');
+                    return;
+              }
+              
+              var path        = filenav.cur.path;
+              var filename    = filenav.cur.filename;
+                                                                                debug(url,path,filename);
+              load.ui(path,filename);
+              
+          
+        }//load
+        
+        
+        btn.save    = function(){
+          
+              if(filenav.cur.type!=='file'){
+                    alert('no file selected');
+                    return;
+              }
+              
+              
+              var path        = filenav.cur.path;
+              var filename    = filenav.cur.filename;
+              
+              save.ui(path,filename);
+                        
+        }//save
+        
+        
+        btn.dir   = function(){
+        }//dir
+        
+        
+  //:
+  
+  
+        obj.update    = update;
+        
+        function update(path){
+          
+              filenav.update(path);
+              
+        }//update
+        
+        
+  //:
+  
+        file.click    = function(path,filename){
+                                                                                debug('file.click',path,filename);
+        }//click
+        
+        
+        file.dblclick   = function(path,filename){
+                                                                                debug('file.dblclick',path,filename);
+              load.ui(path,filename);
+              
+        }//dblclick
+  
+  
+        dir.read    = async function(path){
+                                                                                debug('dir.read',path);
+              var {files,dirs,error}    = await electron.dirRead({path});
+              
+              if(error){
+                    console.error(error);
+                    return;
+              }
+              
+              filenav.display(path,dirs,files);
+                
+              return false;
+              
+        }//read
+
+
+        dir.click   = function(path,filename){
+        }//click
+        
+        
+        dir.dblclick    = function(path,filename){
+                                                                                debug('dir.dblclick',path,filename);
+              var abs   = path+filename;
+              filenav.update(abs);
+              
+        }//dblclick
+        
+
+  //:
+  
+  
+        load.ui   = async function(path,filename){
+
+              var title       = `${path}\n${filename}`;
+
+              var file;
+              
+              if(filemod){
+                    file            = filemod.new({
+                    
+                          filetype    : filetype,
+                          abs         : `${path}${filename}`,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          size        : null,
+                          ctime       : null,
+                          mtime       : null,
+                          atime       : null,
+                          
+                          title       : title,
+                          icon        : icon.src
+                          
+                    });
+              }else{
+                    file            = {
+                    
+                          filetype    : filetype,
+                          abs         : `${path}${filename}`,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          size        : null,
+                          ctime       : null,
+                          mtime       : null,
+                          atime       : null,
+                          
+                          title       : title,
+                          icon        : icon.src
+                          
+                    };
+              }
+              
+              var result      = await load(file);
+              if(result===false){
+                     return;
+              }
+              var blob    = result;
+              
+              obj.load.complete(file,blob);
+          
+        }//load.ui
+
+
+        obj.load    = load;
+        
+        async function load(file){
+          
+              var path    = file.abs;
+              var buf     = await electron.readFile({path});
+              var blob    = new Blob([buf]);
+              return blob;
+              
+        }//load
+        
+
+        save.ui   = async function(path,filename){
+          
+              var title       = `${path}${filename}`;
+
+              var file;
+              if(filemod){
+                    file            = filemod.new({
+                    
+                          filetype    : filetype,
+                          abs         : path,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          size        : null,
+                          ctime       : null,
+                          mtime       : null,
+                          atime       : null,
+                          
+                          title       : title,
+                          icon        : icon.src
+                          
+                    });
+                    file.url    = url;
+              }else{
+                    file            = {
+                    
+                          filetype    : filetype,
+                          abs         : `${path}${filename}`,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          size        : null,
+                          ctime       : null,
+                          mtime       : null,
+                          atime       : null,
+                          
+                          title       : title,
+                          icon        : icon.src
+                          
+                    }
+              }
+
+              
+              var blob        = await source();
+              
+              var result      = await save(file,blob);
+              if(result===false){
+                    return;
+              }
+              
+              obj.save.complete?.(file);
+          
+          
+        }//save.ui
+        
+        
+        obj.save    = save;
+          
+        async function save(file,blob){
+          
+              var path      = file.abs;
+              var buf       = await blob.arrayBuffer();
+              var {error}   = await electron.writeFile({path,buf});
+              if(error){
+                    console.error(error);
+                    return;
+              }
+                      
+        }//save
+
+
+
+  //:
+  
+        function debug(){
+          
+              if(!df)return;
+              var str   = [...arguments].join(' ');
+              console.log(`[ ${did} ]`,str);
+              
+        }//debug
+  
+
+
+  
+  return obj;
+  
+})
+
+      </script>
+      
+</electron-fs>
+
+
