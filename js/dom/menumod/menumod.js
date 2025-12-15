@@ -12,7 +12,9 @@
 
 
 function menumod(){
-                                                                                  console.log('menumod',1);
+                                                                                  console.groupCollapsed('menumod',1);
+                                                                                  console.trace();
+                                                                                  console.groupEnd();
   var obj       = {};
   obj.menumod   = menumod;
 
