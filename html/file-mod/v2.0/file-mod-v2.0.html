@@ -15,18 +15,7 @@
 
   .icon
     {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:30px;height:30px;cursor:pointer}
-    
 
-  localfile
-    {}    
-  github-root
-    {}        
-  https-file
-    {}
-  db-files
-    {}
-  google-storage
-    {}
     
             </style>
 
@@ -39,6 +28,7 @@
                   <db-files component></db-files>
                   <google-storage component></google-storage>
                   <ftp-server component></ftp-server>
+                  <electron-fs component></electron-fs>
                   
             </div>
 
@@ -84,6 +74,7 @@
         var dbfiles;
         var googlestorage;
         var ftpserver;
+        var electron;
         
         var cur;
         Object.defineProperty(obj,'cur',{get:()=>cur,set:v=>cur=v});
@@ -131,16 +122,19 @@
             
             ftpserver                 = mod['ftp-server']
             obj.ftpserver             = ftpserver;
+            
+            electron                  = mod['electron-fs'];
+            obj.electron              = electron;
 
             
-
-
             localfile.initmod({ext,$,menu,filemod:obj,source});
             fileserver.initmod({ext,$,menu,filemod:obj,source});
             github.initmod({ext,$,menu,filemod:obj,source});
             dbfiles.initmod({ext,$,datatype,menumod,menu,filemod:obj,source});
             googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source});
             ftpserver.initmod({ext,$,datatype,menu,source,log});
+            electron.initmod({ext,$,menu,source,log});
+
 
             await Promise.all([
                   localfile.init(),
@@ -149,10 +143,8 @@
                   dbfiles.init(),
                   googlestorage.init(),
                   ftpserver.init(),
+                  electron.init(),
             ]);
-
-
-
 
             
             complete                        ||= {};
@@ -168,6 +160,8 @@
             googlestorage.save.complete       = complete.save;
             ftpserver.load.complete           = complete.load;
             ftpserver.save.complete           = complete.save;
+            electron.load.complete            = complete.load;
+            electron.save.complete            = complete.save;
 
 
             
@@ -194,7 +188,8 @@
               fileserver.initdom();
               dbfiles.initdom();
               googlestorage.initdom();
-              ftpserver.initdom(shadow);
+              ftpserver.initdom();
+              electron.initdom();
 
 
               $(shadow,'#root').style.visibility    = '';
@@ -225,12 +220,13 @@
               
               switch(cur.type){
                 
-                case 'github'               : await github.save(file,blob);              break;
-                case 'localfile'            : await localfile.save(file,blob);           break;
-                case 'file-server'          : await fileserver.save(file,blob);          break;
-                case 'db-files'             : await dbfiles.save(file,blob);             break;
-                case 'google-storage'       : await googlestorage.save(file,blob);       break;
-                case 'ftp-server'           : await ftpserver.save(file,blob);           break;
+                case 'github'               : await github.save(file,blob);               break;
+                case 'localfile'            : await localfile.save(file,blob);            break;
+                case 'file-server'          : await fileserver.save(file,blob);           break;
+                case 'db-files'             : await dbfiles.save(file,blob);              break;
+                case 'google-storage'       : await googlestorage.save(file,blob);        break;
+                case 'ftp-server'           : await ftpserver.save(file,blob);            break;
+                case 'electron'             : await electron.save(file,blob);             break;
                 
               }//switch
         
@@ -251,6 +247,7 @@
                 case 'db-files'         : dbfiles.clear();              break;
                 case 'google-storage'   : googlestorage.clear();        break;
                 case 'ftp-server'       : ftpserver.clear();            break;
+                case 'electron'         : electron.clear();             break;
                 
               }//switch
               
@@ -276,7 +273,7 @@
               
               kind,
               size,
-              ctime,mtime,
+              ctime,mtime,atime
               
               title,icon
               
@@ -297,7 +294,7 @@
               file.rel          = rel;              
               
               file.kind         = kind;
-              file.size         = item.size;
+              file.size         = size;
               file.ctime        = ctime;
               file.mtime        = mtime;
               file.atime        = atime;
@@ -310,14 +307,16 @@
         }//new
         
         
-        obj.export    = function(){
+        obj.export    = function(file){
         
-              if(!cur){
-                    return 'no file';
+              if(!file){
+                    if(!cur){
+                          return 'no file';
+                    }
+                    file    = cur;
               }
               
-              var file;
-              var type    = cur.filetype||cur.type;
+              var type    = file.filetype||file.type;
               
               switch(type){
                 
@@ -327,6 +326,7 @@
                 case 'db-files'         : file    = dbfiles.export(cur);              break;
                 case 'google-storage'   : file    = googlestorage.export(cur);        break;
                 case 'ftp-server'       : file    = ftpserver.export(cur);            break;
+                case 'electron'         : file    = electron.export(cur);             break;
                 
               }//switch
               
@@ -383,6 +383,6 @@
             
       </script>
 
-</file-mod>
+</file-mod v2.0>
 
 
