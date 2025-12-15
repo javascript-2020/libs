@@ -12,7 +12,7 @@
 
 
 function menumod(){
-                                                                                  //console.log('menumod',1);
+                                                                                  console.log('menumod',1);
   var obj       = {};
   obj.menumod   = menumod;
 
