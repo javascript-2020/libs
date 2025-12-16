@@ -278,7 +278,23 @@
               title,icon
               
         }){
-        
+              
+              fieltype===undefined && (filetype=null);
+              ft===undefined && (ft=null);
+              abs===undefined && (abs=null);
+              path===undefined && (path=null);
+              name===undefined && (name=null);
+              filename===undefined && (filename=null);
+              rel===undefined && (rel=null);
+              kind===undefined && (kind=null);
+              size===undefined && (size=null);
+              ctime===undefined && (ctime=null);
+              mtime===undefined && (mtime=null);
+              atime===undefined && (atime=null);
+              title===undefined && (title=null);
+              icon===undefined && (icon=null);
+              
+              
               var file          = {};
               
               file.filetype     = filetype||ft;
@@ -286,12 +302,12 @@
               file.type         = filetype||ft;
               
               
-              file.abs          = abs
+              file.abs          = abs;
               file.path         = path;
               file.name         = name||filename;
               file.filename     = name||filename;
 
-              file.rel          = rel;              
+              file.rel          = rel;
               
               file.kind         = kind;
               file.size         = size;
