@@ -81,7 +81,7 @@
               return keydown;
               
               
-              function(e){
+              function keydown(e){
                                                                                 console.log('keydown');
                                                                                 console.dir(keydown.stack);
                                                                                 var str   = 'keydown';
