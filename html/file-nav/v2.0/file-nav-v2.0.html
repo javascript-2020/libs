@@ -226,12 +226,13 @@
         cur.item            = null;
         cur.path            = def.path;
         cur.file            = null;
-        cur.set             = (type,item,path,filename)=>{
+        cur.set             = (type,item,path,name)=>{
         
                                     cur.type        = type;
                                     cur.item        = item;
                                     cur.path        = path;
-                                    cur.filename    = filename;
+                                    cur.name        = name;
+                                    cur.filename    = name;
                                     
                               }//set
         cur.rem             = ()=>{
@@ -239,6 +240,7 @@
                                     cur.type        = null;
                                     cur.item        = null;
                                     cur.path        = null;
+                                    cur.name        = null;
                                     cur.filename    = null;
                                     
                               }//rem
