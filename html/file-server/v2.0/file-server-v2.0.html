@@ -86,7 +86,7 @@
                         <input id=auth spellcheck=false autocomplete=off value='matt-123'>
                   </div>
                   
-                  <file-nav component></file-nav>
+                  <file-nav v2.0 component></file-nav>
                   
                   <div id=btns>
                         <input value=update type=button>
@@ -420,6 +420,28 @@
         
         
         btn.dir   = function(){
+
+              var path    = filenav.cur.path;
+              var dirname   = filenav.cur.file
+              var file    = filemod.newfile({
+              
+                    filetype    : filetype,
+                    abs         : path,
+                    path        : path,
+                    name        : filename,
+                    
+                    kind        : 'file',
+                    size        : null,
+                    ctime       : null,
+                    mtime       : null,
+                    atime       : null,
+                    
+                    title       : title,
+                    icon        : icon.src
+                    
+              });
+              file.url    = url;
+          
         }//dir
         
         
@@ -456,7 +478,7 @@
                     file            = filemod.newfile({
                     
                           filetype    : filetype,
-                          abs         : path,
+                          abs         : path+filename,
                           path        : path,
                           name        : filename,
                           
