@@ -226,12 +226,12 @@
         cur.item            = null;
         cur.path            = def.path;
         cur.file            = null;
-        cur.set             = (type,item,path,file)=>{
+        cur.set             = (type,item,path,filename)=>{
         
                                     cur.type        = type;
                                     cur.item        = item;
                                     cur.path        = path;
-                                    cur.filename    = file;
+                                    cur.filename    = filename;
                                     
                               }//set
         cur.rem             = ()=>{
@@ -626,6 +626,7 @@
               if(!result){
                     return;
               }
+              cur.set('file',null,path,filename);
               update(path);
               
         }//add
@@ -887,6 +888,12 @@
                     }
                     
                     $(nitem,'.name').textContent    = filename;
+                    
+                    if(path===cur.path && filename===cur.filename){
+                          cur.item    = nitem;
+                          nitem.style.background    = 'lightyellow';
+                    }
+                    
                     nitem.onclick                   = e=>evt.click(nitem,filename);
                     nitem.ondblclick                = e=>evt.dblclick(nitem,filename);
                     
@@ -901,10 +908,10 @@
                           if(cur.item){
                                 cur.item.style.background    = '';
                           }
-                          item.style.background   = 'lightyellow';
                           
                           var path    = ui.rd.path();
                           cur.set(name,item,path,filename);
+                          item.style.background   = 'lightyellow';
                     }else{
                           item.style.background   = '';
                           cur.rem();
