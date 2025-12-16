@@ -298,10 +298,17 @@ function menumod(){
         }//open
         
         
-        obj.close   = function(){return close()};
+        obj.close   = function(node){return close(node)};
         
-        function close(){
+        function close(node){
                                                                                 debug('close',state.cur);
+              if(node){
+                    var cur   = get.cur('node');
+                    if(cur!==node){
+                          return;
+                    }
+              }
+              
               if(keydown){
                     keydown.rem(menu_kd);
               }
