@@ -58,7 +58,7 @@
         obj.bubbles.add   = function(fn){
                                                                                 console.log('bubbles.add',fn);
               var i   = bubbles.stack.indexOf(fn);
-              if(i==-1)return;
+              if(i!=-1)return;
               
               bubbles.stack.unshift(fn);
               
