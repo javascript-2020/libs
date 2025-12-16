@@ -41,7 +41,7 @@
 
         
         function keydown(e){
-                                                                                //console.log(e.key);
+                                                                                console.log('keydown',keydown.stack);
                                                                                 var str   = 'keydown';
               var stop      = false;
               var both      = false;
@@ -49,10 +49,12 @@
               
               var result;
               var fn;
+              
               var n   = keydown.stack.length;
               if(n==0){
                     return;
               }
+              
               var i   = n-1;
               while(i!==null){
               
