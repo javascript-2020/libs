@@ -19,7 +19,8 @@
               if(i!=-1)return;
               
               keydown.focus   = true;
-              keydown.stack.push(fn)
+              //keydown.stack.push(fn)
+              keydown.stack.unshift(fn);
               
         }//add
         
