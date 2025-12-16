@@ -21,10 +21,10 @@
 
         async function init(){
                                                                                 console.log('init');
-              fileserver      = mod['file-server'];
-              fileserver.initmod({source});
+              fileserver                = mod['file-server'];
               fileserver.load.complete   = complete.load;
               fileserver.save.complete   = complete.save;
+              fileserver.initmod({source});
         
               await mod.auto();
               
