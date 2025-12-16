@@ -54,10 +54,10 @@
             
             <img class=icon src='data:image/webp;base64,UklGRh4DAABXRUJQVlA4TBIDAAAvHUAHEIcFOZJkV1H2oDVH5b9NeMFNs/vGDTeOJClSVvUeM5v46fvieevNckNsJEmRFNXH+AaQ/8Yx8xfk2LZVRevd/3FnBimQCGkThEMAMHXrfi/A9XlzLs20QgUXKFCgdCroFT01mKLxkOlBkkoD2gk0DvCJkuAd+Yc15EjAG/lBpgpaBBT4hwItqKGShmQGAQuoIsswbTKH1NkWJAjoQw1NiAoreKI9uUyhA0jx/PHXraE8/xGoMKki1aSCErM81mGUUwzL/4lXYpbVQcWoQPUZncXyhAkKTp55EUT6Q44YI6/pLr7z54w3/wOoX7P2qNs8fX+/Ico70/U7VI7FBFbjiDAuFBHRj1p4Z+k3x/3K1EvEX7sn+bv/2Mat9Wkh1YNv+6+n2O23VpuNmBCT1b+IjjtEmTLz+YiIq4ejiRcm8x+ociy7S5Og2SrHFELFIEJQxYQY01mP/PVj5BMJqrPe5d+v5f7/1XA/MLJuvwtj/Pc3G6kvohTExAvlcEiUbNu0nf1s27Zt27YdvRcnL7Zt2843nrP2Pfv9wV7rKKL/DNy2jSPubrvtHUM7NzYxydGlQKPdyw6w38OasbIc/yAoILOTOTILSqne2LdXZa9XRUZHQTHphQwU13z23h3V3duHOto5bXmpSrNE8S2nbl4Hbty6cA46f6IpgdEslWf5NZ65ehm6Qpxrpxv8rHJGaS5LaycvXdRkWvqSLYlKPI+/ffNaAOrHPEvof33w/idPheiGJBxiEYufXjwTQPqiZIgU2/r1pUiGbEUlZeCoWEeUEcQ/9cFbj0WiLVlvIMIB4REw8OXVc02mBUbAwOEH9zWZZJeA/taHbD58pMnaRDKHEAwsfP7wEXj3HgFpLigjsKTK+VVg5cdPicB8ZSJfQXZ4mCrUaaBfDzVV4bKA619tMVBU6jU+gqVGMVBnc4dkDzeVu6vzwQPO0iCVh864MmoGp6dse+bX9rfv23LGtu3pQTPDQfk9fYreud275B4L+xR2voMqcr19VL6BCgv8AukVXGNdy0IMidw2KUTiziE='>
 
-            <div id=httpsfile class=menu style='display:none;left:-225px;top:100px;width:450px;height:500px'>
+            <div id=file-server class=menu style='display:none;left:10px;top:10px;width:600px;height:500px'>
             
                   <div class=menu-title>
-                        https file server
+                        file server
                   </div>
             
                   <div id=server-root>
@@ -86,17 +86,15 @@
                         <input id=auth spellcheck=false autocomplete=off value='matt-123'>
                   </div>
                   
+                  <file-nav component></file-nav>
+                  
                   <div id=btns>
-                        <img id=parent-dir>
+                        <input value=update type=button>
                         <input value=load type=button>
                         <input value=save type=button>
                         <input value=dir type=button>
-                        <input value=mkdir type=button>
-                        <div class=spc></div>
-                        <input value=del type=button>
                   </div>
                   
-                  <file-nav component></file-nav>
 
             </div>
             
@@ -113,7 +111,7 @@
       
         var df=true;
 
-        var ext,$,datatype,menu,source
+        var ext,$,datatype,menu,source,filemod
         ;
         
         obj.initmod   = function(params){
@@ -124,7 +122,9 @@
 
               menu          = mod.rd(params,'menu',menu);
               source        = mod.rd(params,'source',source);
-
+              
+              filemod       = mod.rd(params,'filemod',filemod);
+              
         }//initmod
 
         
@@ -135,7 +135,7 @@
         
         var filenav;
         
-        var typename    = 'file-server';
+        var filetype    = 'file-server';
         
         var url         = 'https://localhost:3000';
         var auth        = 'matt-123';
@@ -151,6 +151,7 @@
 
         var rd          = {};
         var btn         = {};
+        btn.url         = {};
         var file        = {};
         var dir         = {};
 
@@ -163,6 +164,7 @@
         obj.init    = async function(){
                                                                                 debug(obj.version);
 
+              await libs();
               
               filenav                   = mod['file-nav'];
               
@@ -185,12 +187,18 @@
         }//init
 
 
+        async function libs(){
+          
+              [fs]    = await ext.load.libs('js/io/file-server/file-server.js');
+              
+        }//libs
+        
+
   //:
   
   
         obj.initdom   = function(){
           
-              //root                                              = $.$(rootnode,'https-file');
               shadow                                            = host.shadowRoot;
               
               menu.add.style(shadow);
@@ -200,9 +208,10 @@
               
               var node                                          = $(shadow,'.menu');
               icon                                              = $(shadow,'.icon');
-              icon.onclick                                      = menu.click(node,'both',true,callback);
+              icon.onclick                                      = menu.click(node,'both',false,menu_callback);
+              menu.input.norm(node);
 
-
+/*
               var list    = $.all(node,'input:not([type])');
               list.forEach((input,i)=>{
               
@@ -246,6 +255,8 @@
                     }//keydown
                     
               });
+*/
+
 
 
 
@@ -255,8 +266,8 @@
               $(ui.root.server,'[value=quit]').onclick          = btn.quit;
               $(ui.root.server,'[value=download]').onclick      = btn.download;
               
-              $(node,'.copy').onclick                           = btn.copy;
-              $(node,'.paste').onclick                          = btn.paste;
+              $(node,'#url-root .copy').onclick                 = btn.url.copy;
+              $(node,'#url-root .paste').onclick                = btn.url.paste;
               ui.url                                            = $(node,'#url');
               if(url){
                     ui.url.value                                = url;
@@ -270,6 +281,7 @@
               }
               
               
+              $(
               $(node,'[value=load]').onclick                    = btn.load;
               $(node,'[value=save]').onclick                    = btn.save;
               $(node,'[value=dir]').onclick                     = btn.dir;
@@ -347,7 +359,7 @@
         }//download
 
   
-        btn.copy    = async function(){
+        btn.url.copy    = async function(){
           
               var txt   = ui.url.value;
               await navigator.clipboard.writeText(txt);
@@ -355,7 +367,7 @@
         }//copy
         
         
-        btn.paste   = async function(){
+        btn.url.paste   = async function(){
           
               var txt         = await navigator.clipboard.readText();
               ui.url.value    = txt;
@@ -363,6 +375,17 @@
         }//paste
   
   
+        btn.update    = function(){
+                                                                                debug('btn.update');
+              var url       = ui.url.value;
+              var auth      = ui.auth.value;
+              var path      = filenav.path;
+                                                                                //debug(url,auth,path);              
+              filenav.server.readdir(url,auth,path);
+              
+        }//update
+        
+        
         btn.load    = function(){
                                                                                 debug('btn.load');
               if(filenav.cur.type!=='file'){
@@ -397,23 +420,14 @@
         
         
         btn.dir   = function(){
-          
-              var url       = ui.url.value;
-              var auth      = ui.auth.value;
-              var path      = filenav.path;
-                                                                                debug('btn.dir',url,auth,path);              
-              filenav.server.readdir(url,auth,path);
-              
         }//dir
         
         
   //:
   
   
-        function callback(){
-          
-              console.log('menu.callback');
-              
+        function menu_callback(){
+                                                                                console.log('menu.callback',arguments);
         }//callback
         
 
@@ -437,37 +451,36 @@
                                                                                 debug('load.ui',url,path,filename);
               var title       = `${url}\n${path}\n${filename}`;
 
-/*              
-              var file            = filemod.new({
-              
-                    filetype    : filetype,
-                    abs         : path,
-                    path        : path,
-                    name        : filename,
+              var file;
+              if(filemod){
+                    file            = filemod.newfile({
                     
-                    kind        : 'file',
-                    size        : null,
-                    ctime       : null,
-                    mtime       : null,
-                    atime       : null,
-                    
-                    title       : title,
-                    icon        : icon.src
-                    
-              });
-              
-              file.url    = url;
-              
-*/              
-              
-              var file        = {};
-              file.type       = typename;
-              file.url        = url;
-              file.path       = path;
-              file.filename   = filename;
-              file.name       = filename;
-              file.title      = title;
-              file.icon       = icon.src;
+                          filetype    : filetype,
+                          abs         : path,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          size        : null,
+                          ctime       : null,
+                          mtime       : null,
+                          atime       : null,
+                          
+                          title       : title,
+                          icon        : icon.src
+                          
+                    });
+                    file.url    = url;
+              }else{
+                    file            = {};
+                    file.type       = filetype;
+                    file.url        = url;
+                    file.path       = path;
+                    file.filename   = filename;
+                    file.name       = filename;
+                    file.title      = title;
+                    file.icon       = icon.src;
+              }
                             
               var result      = await load(file);
               if(result===false){
@@ -505,38 +518,36 @@
           
               var title       = `${url}\n${path}\n${filename}`;
 
-/*              
-              var file            = filemod.new({
-              
-                    filetype    : filetype,
-                    abs         : path,
-                    path        : path,
-                    name        : filename,
+              var file;
+              if(filemod){
+                    file            = filemod.new({
                     
-                    kind        : 'file',
-                    size        : null,
-                    ctime       : null,
-                    mtime       : null,
-                    atime       : null,
-                    
-                    title       : title,
-                    icon        : icon.src
-                    
-              });
-              
-              file.url    = url;
-              
-*/              
-              
-              var file            = {};
-              
-              file.type           = typename;
-              file.url            = url;
-              file.path           = path;
-              file.filename       = filename;
-              file.name           = filename;
-              file.title          = title;
-              file.icon           = icon.src;
+                          filetype    : filetype,
+                          abs         : path,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          size        : null,
+                          ctime       : null,
+                          mtime       : null,
+                          atime       : null,
+                          
+                          title       : title,
+                          icon        : icon.src
+                          
+                    });
+                    file.url    = url;
+              }else{
+                    file                = {};
+                    file.type           = filetype;
+                    file.url            = url;
+                    file.path           = path;
+                    file.filename       = filename;
+                    file.name           = filename;
+                    file.title          = title;
+                    file.icon           = icon.src;
+              }
 
               
               var blob        = await source();
@@ -546,8 +557,6 @@
                     return;
               }
               
-              //obj.save.complete ?
-          
         }//ui
         
         
