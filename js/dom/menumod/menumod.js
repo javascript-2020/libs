@@ -288,7 +288,7 @@ function menumod(){
               }
               
               if(keydown){
-                    keydown.add(menu_kd);
+                    keydown.bubbles.add(menu_kd);
               }
               
               state.cur   = index;
