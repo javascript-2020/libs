@@ -92,6 +92,7 @@
   
   
         obj.init    = function(){
+                                                                                debug('init',obj.version);
         }//init
         
         
@@ -99,7 +100,7 @@
   
   
         obj.initdom   = function(){
-        
+                                                                                debug('initdom');
               shadow                                  = host.shadowRoot;
               
               root                                    = $(shadow,'#new-file-root');
