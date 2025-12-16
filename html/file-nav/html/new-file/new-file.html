@@ -52,13 +52,16 @@
       </template>
       
       <script>
-                                                                                //console.log('mod.newfile');
+                                                                                console.log('mod.newfile');
 (function new_file({mod,dom,host}){
 
   var obj   = {
         version   : 'v2.0',
   };
   
+        var df=true,did='new-file'
+        ;
+        
         var $
         ;
         
@@ -89,14 +92,15 @@
   
   
         obj.init    = function(){
+                                                                                debug('init',obj.version);
         }//init
         
         
   //:
   
   
-        obj.initdom   = function(rootnode){
-        
+        obj.initdom   = function(){
+                                                                                debug('initdom');
               shadow                                  = host.shadowRoot;
               
               root                                    = $(shadow,'#new-file-root');
@@ -203,8 +207,12 @@
         function debug(){
         
               if(!df)return;
+              
               var str   = [...arguments].join(' ');
-              console.log('[ https-file ]',str);
+              
+              console.groupCollapsed(`[ ${did} ]`,str);
+              console.trace();
+              console.groupEnd();
               
         }//debug
         
@@ -215,20 +223,7 @@
               
               console.log.apply(console,arguments);
               
-              if(debug.trace){
-                    console.trace();
-              }
-              delete debug.trace;
-              
         }//log
-        
-        
-        debug.log.trace   = function(){
-        
-              debug.trace   = true;
-              debug.log.apply(null,arguments);
-              
-        }//trace
         
         
   //:
