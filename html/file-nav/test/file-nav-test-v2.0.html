@@ -2,9 +2,9 @@
 <html>
 
       <head>
-        
-            <style>
       
+            <style>
+            
   body
     {display:flex;gap:10px;flex-direction:column;font-family:arial}
     
@@ -21,20 +21,20 @@
     }
   #dir-listing
     {height:400px;width:500px;border:1px solid lightgray}
-  
+    
   file-nav
     {width:100%;height:100%;display:block}
-                  
+    
   input
     {font-size:16px;padding:5px 10px}
   input[type=button]
     {cursor:pointer}
     
             </style>
-
-
+            
+            
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+            
             <script init>
                                                                                 console.clear();
                                                                                 console.log('file-nav-v2.0-test.html');
@@ -43,52 +43,52 @@
         var ext;
         var $;
         var datatype;
-
-
+        
+        
         var filenav;
         
         
         var url         = 'https://localhost:3000';
         var auth        = 'matt-123';
-
+        
         
         var fs    = {
-          
+        
           'tmp/'    : {
                             dirs    : [],   //'abc','def'
                             files   : ['a.txt','b.txt']
                       },
         };
-
-
+        
+        
   //:
   
   
         async function init(){
                                                                                 console.log('init');
-              
+                                                                                
               filenav   = mod['file-nav'];
-                            
+              
               filenav.initmod({ext,$,datatype});
               filenav.rd.params   = rd.params;
               
               await filenav.init();
-
+              
               
               initdom();
-  
-  
+              
+              
               await ready();
               
-                
+              
         }//init
-  
-
+        
+        
   //:
   
   
         async function ready(){
-          
+        
               var url     = $('#url').value;
               var auth    = $('#auth').value;
               
@@ -96,8 +96,8 @@
               
               
               return;
-
-
+              
+              
               
               await filenav.server.mkdir(url,auth,'/tmp/test-1');
               await filenav.server.mkdir(url,auth,'/tmp/test-2');
@@ -106,20 +106,20 @@
               await filenav.server.upload(url,auth,'/tmp/test-1/b.txt','123');
               
               await filenav.update();
-
+              
               
         }//ready
-  
+        
         
   //:
-
-
+  
+  
 (async()=>{
 
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
@@ -127,12 +127,12 @@
               'js/dom/keydown/keydown.js'
         );
         [$,datatype,menumod,keydown]   = await promise;
-  
+        
         mod.stack.complete;
-              
+        
 })();
 
-  
+
             </script init>
             
       </head>
@@ -159,55 +159,70 @@
                         <input id=auth>
                   </div>
             </div>
-
-      
+            
+            
             <div id=dir-listing>
             
-                  <file-nav component v2.0>
+                  <file-nav v2.0 component>
                   </file-nav>
                   
             </div>
-
-      </body>                    
-
-        
+            
+            <div id=btns>
+                  <input value=test type=button>
+            </div>
+            
+      </body>
+      
+      
       <script>
-
-
+      
+      
         var btn     = {};
         var rd      = {};
         var file    = {};
         var dir     = {};
         
-
+        
   //:
   
-      
+  
         function initdom(rootnode){
-
+        
               $('#open-tab').onclick      = btn.open;
               $('#url').value             = url;
               $('#auth').value            = auth;
-
+              
               
               filenav.initdom();
+              filenav.path    = '/tmp/';
               
-                      
+              
+              $('[value=test]').onclick   = btn.test;
+              
+              
         }//initdom
         
         
         btn.open    = function(){
-          
+        
               var url   = $('#url').value;
               window.open(url);
               
         }//open
-
-
+        
+        
+        btn.test    = function(){
+        
+              console.log(filenav.cur);
+              
+        }//test
+        
+        
   //:
   
         rd.params   = function(){
-          
+        
               var url     = $('#url').value;
               var auth    = $('#auth').value;
               
@@ -215,25 +230,25 @@
               
         }//params
         
-
+        
   //:
   
   
         file.click    = function(path,filename){
                                                                                 console.log('file.click',path,filename);
-              
+                                                                                
         }//click
-
-  
+        
+        
         file.dblclick   = function(path,filename){
                                                                                 console.log('file.dblclick',path,filename);
         }//dblclick
-
+        
         
         file.add    = async function(path,filename){
-              
+        
               return {url,auth};
-          
+              
               var file      = path+filename;
               var result    = await mkfile(file);
               if(!result){
@@ -245,7 +260,7 @@
         
         
         file.rem    = async function(path,filename){
-          
+        
               return {url,auth};
               
               var file      = path+filename;
@@ -265,19 +280,19 @@
               readdir(path);
               
         }//parent
-
+        
         
         
         dir.click   = function(path,filename){
                                                                                 console.log('dir.click',path,filename);
-              
+                                                                                
         }//click
         
         
         dir.dblclick    = function(path,filename){
                                                                                 console.log('dir.dblclick',path,filename);
               return {url,auth};
-
+              
               
               path   += filename;
               readdir(path);
@@ -288,7 +303,7 @@
         dir.add   = async function(path,name){
                                                                                 console.log('dir.add',path,name);
               return {url,auth};
-
+              
               
               var dir       = path+name;
               var result    = await mkdir(dir);
@@ -301,9 +316,9 @@
         
         
         dir.rem   = async function(path,name){
-                                                                                console.log('dir.rem',path,name);          
+                                                                                console.log('dir.rem',path,name);
               return {url,auth};
-
+              
               
               var dir       = path+name;
               var result    = await rmdir(dir);
@@ -313,15 +328,15 @@
               readdir(path);
               
         }//rem
-
+        
         
   //:
+  
+  
+/*
 
-
-/*  
-        
         async function mkfile(path){
-          
+        
               var headers   = {mode:'mkfile',auth};
               var full      = url+path;
               
@@ -339,7 +354,7 @@
         
         
         async function rmfile(path){
-          
+        
               var headers   = {mode:'rmdir',auth};
               var full      = url+path;
               
@@ -357,8 +372,8 @@
         
         
         async function rmdir(path){
-          
-              var headers     = {mode:'rmdir',auth};              
+        
+              var headers     = {mode:'rmdir',auth};
               var full        = url+path;
               
               var res         = await fetch(full,{headers});
@@ -375,7 +390,7 @@
         
         
         async function mkdir(path){
-
+        
               var headers     = {mode:'mkdir'};
               headers.auth    = auth;
               
@@ -392,13 +407,13 @@
               return true;
               
         }//mkdir
-
+        
         
         async function readdir(path){
-
+        
               var headers     = {mode:'readdir'};
               headers.auth    = auth;
-
+              
               var full        = url+path;
               
               var res         = await fetch(full,{headers});
@@ -421,7 +436,7 @@
 
 
       </script>
-
+      
 </html>
 
 
