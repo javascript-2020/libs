@@ -772,6 +772,8 @@ function menumod(){
                     
                     function keydown(e){
                     
+                          e.stopPropagation();
+                          
                           if(e.key=='ArrowDown'){
                                 e.stopPropagation();
                                 i++;
