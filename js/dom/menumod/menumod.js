@@ -772,8 +772,6 @@ function menumod(){
                     
                     function keydown(e){
                     
-                          e.stopPropagation();
-                          
                           if(e.key=='ArrowDown'){
                                 e.stopPropagation();
                                 i++;
@@ -793,15 +791,15 @@ function menumod(){
                                 input2.focus();
                           }
                           if(e.key=='ArrowLeft'){
+                                e.stopPropagation();
                                 if(e.ctrlKey){
                                       //debugger;
-                                      e.stopPropagation();
                                       prev();
                                 }
                           }
                           if(e.key=='ArrowRight'){
+                                e.stopPropagation();
                                 if(e.ctrlKey){
-                                      e.stopPropagation();
                                       next();
                                 }
                           }
