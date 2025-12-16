@@ -22,8 +22,7 @@
         async function init(){
                                                                                 console.log('init');
               fileserver      = mod['file-server'];
-              
-              
+              fileserver.initmod({source});
               fileserver.load.complete   = complete.load;
               fileserver.save.complete   = complete.save;
         
@@ -51,7 +50,7 @@
       
       <body>
 
-            <file-server component v2.0></file-server>
+            <file-server v2.0 component></file-server>
             
       </body>
 
@@ -69,6 +68,15 @@
 
   //:
   
+  
+        function source(){
+          
+              var txt     = 'helloworld';
+              var blob    = new Blob([txt]);
+              return blob;
+              
+        }//source
+        
 
         function complete(){
         }//complete
