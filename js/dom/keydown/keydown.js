@@ -83,8 +83,7 @@
               
               function keydown(e){
                                                                                 console.log('keydown',name);
-                                                                                console.dir(keydown.stack);
-                                                                                var str   = 'keydown';
+                                                                                console.dir(stack);
                     var stop      = false;
                     var both      = false;
                     var prevent   = false;
