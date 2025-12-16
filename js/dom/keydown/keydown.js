@@ -62,9 +62,14 @@
               
                     fn        = keydown.stack[i];
                     result    = fn(e);
-                    if(result!==false){
+                    
+                    if(datatype(result)=='object'){
                           break;
                     }
+                    if(result===false){
+                          break;
+                    }
+                    
                     i   = prev();
                     
               }//while
@@ -101,6 +106,9 @@
               
         }//keydown
 
+
+        
+        function datatype(v){return Object.prototype.toString.call(v).slice(8,-1).toLowerCase()}
 
 
         return keydown;
