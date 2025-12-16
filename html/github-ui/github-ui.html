@@ -184,7 +184,7 @@
       <script>
 
       
-mod['github-ui']    = function({mod,dom,host}){
+(function({mod,dom,host}){
   
   var obj   = {
       version   : 'v2.0'
@@ -398,6 +398,7 @@ mod['github-ui']    = function({mod,dom,host}){
               $(shadow,'[value=load-raw]').onclick    = btn.load.raw;
               $(shadow,'[value=save]').onclick        = btn.save;
               $(shadow,'[value=backup]').onclick      = btn.backup;
+
               
         }//initdom
 
@@ -558,10 +559,10 @@ mod['github-ui']    = function({mod,dom,host}){
         
               if(type=='show'){
                     $(shadow,'#token').focus();
-                    keydown.add(github_kd);
+                    //keydown.add(github_kd);
               }
               if(type=='hide'){
-                    keydown.rem(github_kd);
+                    //keydown.rem(github_kd);
               }
               
         }//callback
@@ -682,8 +683,9 @@ mod['github-ui']    = function({mod,dom,host}){
 
         
   return obj;
-  
-}//github
+
+//github  
+})
 
       </script>
     
