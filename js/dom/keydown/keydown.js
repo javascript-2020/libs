@@ -8,11 +8,11 @@
         
         var capture         = {};
         capture.stack       = [];
-        capture.keydown     = kd(capture.stack);
+        capture.keydown     = kd(capture.stack,'capture');
         
         var bubbles         = {};
         bubbles.stack       = [];
-        bubbles.keydown     = kd(bubbles.stack);
+        bubbles.keydown     = kd(bubbles.stack,'bubbles');
 
         
   //:
@@ -76,13 +76,13 @@
 
         
         
-        function kd(stack){
+        function kd(stack,name){
           
               return keydown;
               
               
               function keydown(e){
-                                                                                console.log('keydown');
+                                                                                console.log('keydown',name);
                                                                                 console.dir(keydown.stack);
                                                                                 var str   = 'keydown';
                     var stop      = false;
