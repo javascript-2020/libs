@@ -988,7 +988,10 @@
         
               if(!df)return;
               var str   = [...arguments].join(' ');
-              console.log(`[ ${did} ]`,str);
+              
+              console.groupCollapsed(`[ ${did} ]`,str);
+              console.trace();
+              console.groupEnd();
               
         }//debug
         
