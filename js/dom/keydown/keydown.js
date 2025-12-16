@@ -2,7 +2,10 @@
 
                                                                                   //console.log('keydown');
                                                                                   
-        keydown.initdom=function(){
+        keydown.stack   = [];
+        
+        
+        keydown.initdom   = function(){
         
               document.addEventListener('keydown',keydown,true);
               
@@ -10,9 +13,7 @@
         }//initdom
         
         
-        keydown.stack   = [];
-        
-        keydown.add=function(fn){
+        keydown.add   = function(fn){
         
               var i   = keydown.stack.indexOf(fn);
               if(i!=-1)return;
@@ -22,7 +23,8 @@
               
         }//add
         
-        keydown.rem=function(fn){
+
+        keydown.rem   = function(fn){
         
               var i   = keydown.stack.indexOf(fn);
               if(i==-1)return;
@@ -30,11 +32,13 @@
               
         }//rem
         
-        keydown.pop=function(){
+
+        keydown.pop   = function(){
         
               keydown.stack.pop()
               
         }//pop
+
         
         function keydown(e){
                                                                                 //console.log(e.key);
