@@ -42,7 +42,8 @@
 
         
         function keydown(e){
-                                                                                console.log('keydown',keydown.stack);
+                                                                                console.log('keydown');
+                                                                                console.dir(keydown.stack);
                                                                                 var str   = 'keydown';
               var stop      = false;
               var both      = false;
