@@ -103,7 +103,7 @@
                   
                   <div id=view>
                   
-                        <new-file component=parent parent=file-nav v2.0></new-file>
+                        <new-file v2.0 component=parent parent=file-nav></new-file>
                         
                         <div id=dir-root>
                         
@@ -273,7 +273,7 @@
   
   
         obj.init    = async function(){
-                                                                                debug('init');
+                                                                                debug('init',obj.version);
               newfile   = mod['new-file'];
               
               if(!newfile)debugger;
@@ -314,7 +314,7 @@
               ui.path                                         = $(shadow,'#path');
               ui.path.textContent                             = def.path;
               
-              newfile.initdom(shadow);
+              newfile.initdom();
               
               var view                                        = $(shadow,'#view');
               
@@ -973,7 +973,7 @@
               
               
               function onscroll(e){
-                                                                                debug(name,'onscroll');
+                                                                                //debug(name,'onscroll');
                     disp(path,name,list);
                     
               }//onscroll
@@ -988,7 +988,10 @@
         
               if(!df)return;
               var str   = [...arguments].join(' ');
-              console.log(`[ ${did} ]`,str);
+              
+              console.groupCollapsed(`[ ${did} ]`,str);
+              console.trace();
+              console.groupEnd();
               
         }//debug
         
