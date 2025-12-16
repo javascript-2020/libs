@@ -21,12 +21,19 @@
               }
               
               var str   = [...arguments].join(' ');
-              console.log(`[ ${id} ]`,str);
               
+              console.groupCollapsed(`[ ${id} ]`,str);
+              console.trace();
+              console.groupEnd();
+              
+              //console.log(`[ ${id} ]`,str);
+
+/*              
               if(debug._trace){
                     console.trace();
               }
               delete debug._trace;
+*/              
               
         }//debug
         
@@ -43,8 +50,6 @@
 
 
 
-
-  
     return obj;
 
   //debug:-
