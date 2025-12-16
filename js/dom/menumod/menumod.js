@@ -338,6 +338,8 @@ function menumod(){
                     obj.on.close();
               }
               
+              return true;
+              
         }//close
         
         
