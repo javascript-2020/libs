@@ -163,10 +163,11 @@
         
 
         
-        function debug(){
+        function debug(...args){
           
               if(!df)return;
-              console.groupCollapsed.apply(console,arguments);
+              args.unshift(`[ ${did} ]`);
+              console.groupCollapsed.apply(console,args);
               console.trace();
               console.groupEnd();
               
