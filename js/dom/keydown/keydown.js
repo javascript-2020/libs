@@ -4,7 +4,7 @@
         version   : 'v1.0',
   };
 
-        var df=true,did='keydown'
+        var df=false,did='keydown'
         ;
                                                                                 false && debug(obj.version);
 
