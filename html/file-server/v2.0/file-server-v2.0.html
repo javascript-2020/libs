@@ -114,7 +114,7 @@
         version   : 'v2.0'
   };
       
-        var df=true
+        var df=true,did='file-server'
         ;
 
         var ext,$,datatype,menu,source,filemod
@@ -709,11 +709,13 @@
   //:
   
   
-        function debug(){
+        function debug(...args){
           
-              if(!df)return;
-              var str   = [...arguments].join(' ');
-              console.log('[ file-server ]',str);
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              console.groupCollapsed.apply(console,args);
+              console.trace();
+              console.groupEnd();
               
         }//debug
         
