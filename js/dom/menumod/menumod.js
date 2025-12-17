@@ -470,7 +470,7 @@ function menumod(){
   
         
         function menu_kd(e){
-                                                                          console.log('menu.kd',e.key);
+                                                                          //console.log('menu.kd',e.key);
               var node      = get.cur('node');
               if(!node){
                     return;
