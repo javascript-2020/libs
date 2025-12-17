@@ -4,9 +4,9 @@
         version   : 'v1.0',
   };
 
-        var df=false,did='keydown'
+        var df=true,did='keydown'
         ;
-
+                                                                                false && debug(obj.version);
 
   //:
   
@@ -37,7 +37,7 @@
   
   
         obj.add   = function(fn){
-        
+                                                                                debug('capute.add',fn);
               var i   = capture.stack.indexOf(fn);
               if(i!=-1)return;
               
@@ -49,7 +49,7 @@
         
 
         obj.rem   = function(fn){
-        
+                                                                                debug('capute.rem',fn);
               var i   = capture.stack.indexOf(fn);
               if(i==-1)return;
               capture.stack.splice(i,1);
@@ -66,7 +66,7 @@
         
         
         obj.bubbles.add   = function(fn){
-                                                                                //console.log('bubbles.add',fn);
+                                                                                debug('bubbles.add',fn);
               var i   = bubbles.stack.indexOf(fn);
               if(i!=-1)return;
               
@@ -76,7 +76,7 @@
         
         
         obj.bubbles.rem   = function(fn){
-                                                                                //console.log('bubbles.rem',fn);
+                                                                                debug('bubbles.rem',fn);
               var i   = bubbles.stack.indexOf(fn);
               if(i==-1)return;
               bubbles.stack.splice(i);
@@ -92,8 +92,8 @@
               
               
               function keydown(e){
-                                                                                //console.log('keydown',name);
-                                                                                //console.dir(stack);
+                                                                                debug('keydown',name);
+                                                                                console.dir(stack);
                     var stop      = false;
                     var both      = false;
                     var prevent   = false;
@@ -111,7 +111,7 @@
                     
                           fn        = stack[i];
                           result    = fn(e);
-                          
+                                                                                console.dir(fn,result);
                           if(datatype(result)=='object'){
                                 break;
                           }
@@ -127,7 +127,7 @@
                     if(result){
                           ({stop,prevent,both}   = result);
                     }
-                                                                                      //console.log(str,stop,prevent,both);
+                                                                                //console.log(str,stop,prevent,both);
                     if(stop || both){
                           e.stopPropagation();
                     }
