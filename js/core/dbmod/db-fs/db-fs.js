@@ -125,12 +125,19 @@
   //:
   
 
-        obj.delete    = function del(name){
+        obj.delete    = async function del(name){
         
+              var db    = await find(name);
+              if(!db){
+                    return false;
+              }
+              
+              close(db);
+              
               var resolve,promise   = new Promise(res=>resolve=res);
               
               var req               = window.indexedDB.deleteDatabase(name);
-              req.onsuccess         = e=>resolve();
+              req.onsuccess         = e=>resolve(true);
               req.onerror           = e=>console.log('delete.error');
               
               return promise;
@@ -169,6 +176,31 @@
               
         }//list
 
+
+        async function find(name){
+          
+              var list    = await window.indexedDB.databases();
+                                                                                df && debug('===  list databases  ===');
+              if(list.length==0){
+                                                                                df && debug('no databases');
+                    return null;
+              }
+              
+              var n   = list.length;
+              for(var i=0;i<n;i++){
+              
+                    var db    = list[i];
+                                                                                df && debug(i,db.name,db.version);
+                    if(db.name===name){
+                          return db;
+                    }
+                    
+              }//for
+              
+              return null;
+              
+        }//find
+        
 
         obj.exists    = async function(name){
         
