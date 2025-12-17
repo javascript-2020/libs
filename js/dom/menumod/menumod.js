@@ -18,7 +18,7 @@ function menumod(){
   var obj       = {};
   obj.menumod   = menumod;
 
-        var df  false,did='menumod'
+        var df=true,did='menumod'
         ;
   
   
