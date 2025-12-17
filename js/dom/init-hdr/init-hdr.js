@@ -29,6 +29,7 @@
                                                                                 debug('init_hdr',version);
               
               menu      = menumod();
+              menu.initmod({keydown});
 
 
               mod.base.add({ext,$,datatype,keydown,menu,menumod,ace});
