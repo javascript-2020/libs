@@ -190,14 +190,16 @@
               
               dblist.initdom(shadow);
               
-              filenav.initdom(shadow);
-              filenav.update('/');
+              filenav.initdom();
               
               
               $(shadow,'[value=update]').onclick                = btn.update;
               $(shadow,'[value=load]').onclick                  = btn.load;
               $(shadow,'[value=save]').onclick                  = btn.save;
               $(shadow,'[value=dir]').onclick                   = btn.dir;
+              
+              
+              read();
               
         }//initdom
         
