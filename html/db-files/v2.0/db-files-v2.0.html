@@ -443,7 +443,7 @@
               
               var file        = {};
               file.type       = filetype;
-              file.filename   = name;
+              file.name       = name;
               file.title      = abs;
               file.icon       = icon.src;
               file.abs        = abs;
@@ -474,13 +474,15 @@
         save.ui   = async function(path,name){
         
               var abs         = prefix+path+name;
+              var title       = abs;
               
               var file        = {};
               file.type       = filetype;
-              file.filename   = name;
-              file.title      = abs;
-              file.icon       = icon.src;
               file.abs        = abs;
+              file.path       = path;
+              file.name       = name;
+              file.title      = title;
+              file.icon       = icon.src;
               
               var blob        = await source();
               
@@ -491,6 +493,28 @@
               
         }//save.ui
         
+        
+        obj.newfile   = newfile;
+        
+        function newfile({path,name}){
+        
+              if(arguments.length>1){
+                    [path,name]   = areguments;
+              }
+              
+              var abs         = prefix+path+name;
+              var title       = prefix+path+name;
+              
+              var file        = {};
+              file.abs        = abs;
+              file.path       = path;
+              file.name       = name;
+              file.title      = title;
+              file.icon       = icon.src;
+              
+              return file;
+              
+        }//newfile
         
         
         
