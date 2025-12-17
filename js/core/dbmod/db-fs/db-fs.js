@@ -14,7 +14,8 @@
 
   var obj   = {};
   
-        obj.df=df;
+        var df=true,did='db-fs'
+        ;
 
 
         
@@ -183,11 +184,13 @@
   //:
   
   
-        function debug(){
+        function debug(...args){
         
-              if(!obj.df)return;
-              var str   = [...arguments].join(' ');
-              console.log('[ db-fs ]',str);
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              console.groupCollapsed.apply(console,args);
+              console.trace();
+              console.groupEnd();
               
         }//debug
 
