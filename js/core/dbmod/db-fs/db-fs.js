@@ -71,7 +71,8 @@
               req.onsuccess   = e=>resolve(req.result?.data);
               req.onerror     = e=>{
                                                                                 console.log('db.get error',e);
-                                      return 'db.get error';
+                                      var blob    = new Blob(['db.get error']);
+                                      return blob;
                                       
                                 }//onerror
               
