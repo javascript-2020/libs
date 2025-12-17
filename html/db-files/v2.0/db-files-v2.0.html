@@ -185,7 +185,7 @@
               
               var node                                          = $(shadow,'.menu');
               icon                                              = $(shadow,'.icon');
-              icon.onclick                                      = menu.root.click(node);
+              icon.onclick                                      = menu.root.click(node,{callback:menu_callback});
               
               
               dblist.initdom(shadow);
@@ -256,6 +256,20 @@
                                                                                 debug('btn.date');
                                                                                 debug('!! not implemented !!');
         }//dir
+        
+        
+  //:
+  
+  
+        function menu_callback(type){
+        
+              switch(type){
+              
+                case 'show'   : read();       break;
+                
+              }//switch
+              
+        }//menu_callback
         
         
   //:
@@ -395,8 +409,9 @@
   //:
   
   
-        async function read(path='tmp/'){
-                                                                                debug('dir.read',path);
+        async function read(path){
+                                                                                debug('dir.read');
+              path        ||= filenav.path;
               var len       = prefix.length+path.length;
               
               var dirs      = [];
