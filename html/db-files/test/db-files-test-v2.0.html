@@ -5,7 +5,7 @@
       <head>
       
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+            
             <script init>
                                                                                 console.clear();
                                                                                 console.log('db-files-test-v2.0.html');
@@ -17,7 +17,7 @@
         var menu;
         
         var dbfiles;
-
+        
         
   //:
   
@@ -38,12 +38,12 @@
               
               
               initdom(document.body);
-  
+              
               
               
               return;
               
-  
+              
               var txt     = 'helloworld';
               var blob    = new Blob([txt]);
               await dbfiles.save('/test.txt',blob);
@@ -58,8 +58,8 @@
               
               
         }//init
-  
-
+        
+        
   //:
   
   
@@ -68,7 +68,7 @@
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
@@ -76,17 +76,17 @@
               'js/dom/keydown/keydown.js'
         );
         [$,datatype,menumod,keydown]   = await promise;
-  
+        
         mod.stack.complete;
-              
+        
 })();
 
-  
+
             </script>
-
-
+            
+            
             <style>
-
+            
   html
     {font-family:arial}
     
@@ -101,22 +101,22 @@
       <body>
       
       
-            <db-files component v2.0></db-files>
-      
-      
+            <db-files v2.0 component></db-files>
+            
+            
       </body>
       
       <script>
-
-
+      
+      
         var complete    = {};
-
-
+        
+        
   //:
   
   
         function initdom(rootnode){
-          
+        
               var root    = rootnode;
               
               menu.add.style();
@@ -125,7 +125,7 @@
               
         }//initdom
         
-
+        
   //:
   
   
