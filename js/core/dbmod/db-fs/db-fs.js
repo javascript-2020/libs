@@ -22,7 +22,7 @@
 
         
         obj.open    = function(path,flags='r'){
-        
+                                                                                            debug('open',path,flags);
               var resolve,promise   = new Promise(res=>resolve=res);
 
               var db;
