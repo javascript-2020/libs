@@ -134,7 +134,7 @@
                                                                                 debug('not fouund');
                     return false;
               }
-              console.log(db);
+                                                                                console.log(db);
               close(db);
               
               var resolve,promise   = new Promise(res=>resolve=res);
