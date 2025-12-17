@@ -175,7 +175,7 @@
         version   : 'v2.0'
   };
   
-        var df=true,did='file-nav'
+        var df=false,did='file-nav'
         ;
         
         
@@ -984,12 +984,11 @@
   //:
   
   
-        function debug(){
+        function debug(...args){
         
-              if(!df)return;
-              var str   = [...arguments].join(' ');
-              
-              console.groupCollapsed(`[ ${did} ]`,str);
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              console.groupCollapsed.apply(console,args);
               console.trace();
               console.groupEnd();
               
