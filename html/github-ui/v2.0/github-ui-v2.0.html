@@ -191,7 +191,7 @@
   };
   
   
-        var df=obj.df=false
+        var df=false,did='github-ui'
         ;
                                                                                 true && debug(obj.version);
   
@@ -627,12 +627,13 @@
   //:
 
   
-        function debug(){
+        function debug(...args){
         
               if(!df && !obj.df)return;
-              var str   = [...arguments].join(' ');
-              str       = '[ github ] '+str;
-              console.log(str);
+              args.unshift(`[ ${did} ]`);
+              console.groupCollapsed.apply(console,args);
+              console.trace();
+              console.groupEnd();
               
         }//debug
 
