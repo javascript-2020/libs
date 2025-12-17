@@ -309,7 +309,6 @@ function menumod(){
                     index   = list.find(node,'index');
               }
               
-              console.log('menumod.open',keydown);
               if(keydown){
                     keydown.bubbles.add(menu_kd);
               }
@@ -471,7 +470,7 @@ function menumod(){
   
         
         function menu_kd(e){
-                                                                          //console.log('menu.kd',e.key);
+                                                                          console.log('menu.kd',e.key);
               var node      = get.cur('node');
               if(!node){
                     return;
