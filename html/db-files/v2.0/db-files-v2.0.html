@@ -80,7 +80,7 @@
         
         
         
-        var ext,$,datatype,menumod
+        var ext,$,datatype,menumod,filemod
         ;
         
         obj.initmod   = function(params){
@@ -92,6 +92,8 @@
               
               menu.root   = mod.rd(params,'menu',menu);
               
+              filemod     = mod.rd(params,'filemod',filemod);
+              
         }//initmod
         
         
@@ -102,7 +104,9 @@
         var dblist;
         var filenav;
         
-        var prefix    = 'fs';
+        var filetype      = 'db-files';
+        
+        var prefix        = 'fs';
         var list;
         
         
@@ -111,11 +115,11 @@
         
         var icon;
         
-        var menu    = {};
+        var menu          = {};
         
-        var btn     = {};
-        var file    = {};
-        var dir     = {};
+        var btn           = {};
+        var file          = {};
+        var dir           = {};
         
   //:
   
@@ -192,17 +196,57 @@
         
   //:
   
-  
+/*
         btn.dblist    = function(){
         
               db.list();
               
         }//dblist
+*/
+
+
+        btn.update    = function(){
+                                                                                debug('btn.update');
+              var path    = filenav.path;
+              read(path);
+              
+        }//update
         
         
-  //:
-  
-  
+        btn.load    = function(){
+                                                                                debug('btn.load');
+              if(filenav.cur.type!=='file'){
+                    alert('no file selected');
+                    return;
+              }
+              
+              var path    = filenav.cur.path;
+              var name    = filenav.cur.name;
+                                                                                debug(path,name);
+              load.ui(path,name);
+              
+        }//load
+        
+        
+        btn.save    = function(){
+                                                                                debug('btn.save');
+              if(filenav.cur.type!=='file'){
+                    alert('no file selected');
+                    return;
+              }
+              
+              var path    = filenav.cur.path;
+              var name    = filenav.cur.name;
+                                                                                debug(path,name);
+              save.ui(path,name);
+              
+        }//save
+        
+        
+        btn.dir   = function(){
+        }//dir
+        
+        
   //:
   
   
@@ -262,11 +306,10 @@
               fs.close();
               
               var file        = {};
-              file.type       = 'db-files';
+              file.type       = filetype;
               file.filename   = name;
               file.title      = abs;
               file.icon       = icon.src;
-              
               file.abs        = abs;
               
               obj.load.complete(file,blob);
@@ -290,7 +333,7 @@
         
         
         dir.rem   = async function(path,name){
-        
+                                                                                debug('dir.rem',path,name);
               var abs     = prefix+path+name;
               var list    = await db.list(abs);
               
@@ -378,7 +421,9 @@
   //:
   
   
-        obj.load    = async function(file){
+        obj.load    = load;
+        
+        async function load(file){
         
               if(!await db.exists(file.abs)){
                     return false;
@@ -392,6 +437,28 @@
         }//load
         
         
+        load.ui   = function(path,name){
+        
+              var abs         = prefix+path+name;
+              
+              var file        = {};
+              file.type       = filetype;
+              file.filename   = name;
+              file.title      = abs;
+              file.icon       = icon.src;
+              file.abs        = abs;
+              
+              var result      = await load(file);
+              if(result===false){
+                     return;
+              }
+              var blob    = result;
+              
+              obj.load.complete(file,blob);
+              
+        }//load.ui
+        
+        
         obj.save    = save;
         
         async function save(file,blob){
@@ -402,6 +469,30 @@
               obj.save.complete(file);
               
         }//save
+        
+        
+        save.ui   = function(path,name){
+        
+              var abs         = prefix+path+name;
+              
+              var file        = {};
+              file.type       = filetype;
+              file.filename   = name;
+              file.title      = abs;
+              file.icon       = icon.src;
+              file.abs        = abs;
+              
+              var blob        = await source();
+              
+              var result      = await save(file,blob);
+              if(result===false){
+                    return;
+              }
+              
+        }//save.ui
+        
+        
+        
         
         
 /*
