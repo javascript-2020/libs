@@ -29,10 +29,6 @@
         async function init(){
                                                                                 debug('init',version);
                                                                                 
-                                                                                
-              keydown.add(kd);
-              
-              
               filemod     = mod['file-mod'];
               
               filemod.initmod({complete});
@@ -47,26 +43,6 @@
         }//init
         
         
-(async()=>{
-
-        mod.stack.add;
-        
-        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-        
-        var promise   = ext.load.libs(
-              'js/dom/$.js',
-              'js/core/datatype.js',
-              'js/dom/menumod/menumod.js',
-              'js/dom/keydown/keydown.js',
-              'js/debug/debug.js',
-        );
-        [$,datatype,menumod,keydown,debug]   = await promise;
-        
-        mod.stack.complete;
-        
-})();
-
-
             </script>
             
             <style>
@@ -129,15 +105,6 @@
   //:
   
   
-        function kd(e){
-        
-              if(e.key==' ' && e.ctrlKey){
-                    menu.open();
-              }
-              
-        }//kd
-        
-        
         function focus(){
         }//focus
         
