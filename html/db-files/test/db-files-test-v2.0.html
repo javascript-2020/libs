@@ -115,6 +115,14 @@
   //:
   
   
+        function source(){
+        
+                var blob    = new Blob(['123 xyz']);
+                return blob;
+                
+        }//source
+        
+        
         complete.load   = await function(file,blob){
         
                 console.log('load.complete');
