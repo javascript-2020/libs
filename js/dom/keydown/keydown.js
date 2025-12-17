@@ -26,7 +26,7 @@
 
   
         obj.initdom   = function(){
-        
+                                                                                debug('initdom');
               document.addEventListener('keydown',capture.keydown,true);
               document.addEventListener('keydown',bubbles.keydown,false);
               
