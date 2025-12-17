@@ -93,7 +93,7 @@
               
               function keydown(e){
                                                                                 debug('keydown',name);
-                                                                                console.dir(stack);
+                                                                                //console.dir(stack);
                     var stop      = false;
                     var both      = false;
                     var prevent   = false;
@@ -111,7 +111,7 @@
                     
                           fn        = stack[i];
                           result    = fn(e);
-                                                                                console.dir(fn,result);
+                                                                                //console.dir(fn,result);
                           if(datatype(result)=='object'){
                                 break;
                           }
