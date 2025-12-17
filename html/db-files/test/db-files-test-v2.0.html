@@ -115,11 +115,22 @@
   //:
   
   
-        complete.load   = function(file,blob){
+        complete.load   = await function(file,blob){
+        
+                console.log('load.complete');
+                
+                console.log(file);
+                console.log(await blob.text());
+                
         }//load
         
         
         complete.save   = function(file){
+        
+              console.log9'save.complete');
+              
+              console.log(file);
+              
         }//save
         
         
