@@ -193,6 +193,12 @@
               filenav.initdom(shadow);
               filenav.update('/');
               
+              
+              $(shadow,'[value=update]').onclick                = btn.update;
+              $(shadow,'[value=load]').onclick                  = btn.load;
+              $(shadow,'[value=save]').onclick                  = btn.save;
+              $(shadow,'[value=dir]').onclick                   = btn.dir;
+              
         }//initdom
         
         
@@ -247,6 +253,8 @@
         
         
         btn.dir   = function(){
+                                                                                debug('btn.date');
+                                                                                debug('!! not implemented !!');
         }//dir
         
         
