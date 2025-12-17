@@ -28,8 +28,10 @@
         async function init_hdr(){
                                                                                 debug('init_hdr',version);
               
+              keydown.initdom();
               menu      = menumod();
               menu.initmod({keydown});
+              menu.add.style();
 
 
               mod.base.add({ext,$,datatype,keydown,menu,menumod,ace});
