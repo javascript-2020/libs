@@ -5,17 +5,11 @@
       <head>
       
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
+            <script src='https://libs.ext-code.com/js/dom/init-hdr/init-hdr.js'></script>
             
             <script init>
-                                                                                console.clear();
-                                                                                console.log('db-files-test-v2.0.html');
-                                                                                console.log();
-                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
-        var ext,$,datatype,menumod,keydown
-        ;
-        
-        var menu;
-        
+                                                                                console.log('db-files-v2.0-test.html');
+                                                                                
         var dbfiles;
         
         
@@ -24,17 +18,12 @@
   
         async function init(){
                                                                                 console.log('init');
-              menu            = menumod();
-              
-              dbfiles         = mod['db-files'];
-              
-              
-              dbfiles.initmod({ext,$,datatype,menumod,menu});
-              
+              dbfiles                 = mod['db-files'];
               dbfiles.load.complete   = complete.load;
               dbfiles.save.complete   = complete.save;
               
-              await dbfiles.init();
+              
+              await mod.auto();
               
               
               initdom(document.body);
@@ -60,28 +49,6 @@
         }//init
         
         
-  //:
-  
-  
-(async()=>{
-
-        mod.stack.add;
-        
-        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-        
-        var promise   = ext.load.libs(
-              'js/dom/$.js.api',
-              'js/core/datatype.js',
-              'js/dom/menumod/menumod.js',
-              'js/dom/keydown/keydown.js'
-        );
-        [$,datatype,menumod,keydown]   = await promise;
-        
-        mod.stack.complete;
-        
-})();
-
-
             </script>
             
             
@@ -120,8 +87,6 @@
               var root    = rootnode;
               
               menu.add.style();
-              
-              dbfiles.initdom(root);
               
         }//initdom
         
