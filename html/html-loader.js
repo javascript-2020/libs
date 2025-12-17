@@ -10,8 +10,8 @@
 16-06-25    version 3
 
 */
-                                                                        console.log('html-loader-v3.0');
-                                                                        console.log();
+                                                                        //console.log('html-loader-v3.0');
+                                                                        //console.log();
 (async()=>{
 //debugger;
 
@@ -198,7 +198,7 @@
         });
         
         root.parentNode.replaceChild(node,root);
-                                                                                console.log(node);
+                                                                                df && console.log(node);
                                                                                 df && console.log('added');
                                                                                 //debugger;
         
@@ -227,7 +227,7 @@
         });
 
 
-                                                                                console.log('complete',nn);
+                                                                                df && console.log('complete',nn);
         complete();
         
 
@@ -335,10 +335,10 @@
   
   
         async function raw(){
-                                                                                console.log('html-loader.raw');
-                                                                                console.log(repo,path);
+                                                                                df && console.log('html-loader.raw');
+                                                                                df && console.log(repo,path);
               var url               = `https://raw.githubusercontent.com/${user}/${repo}/main/${path}`;
-                                                                                console.log(url);
+                                                                                df && console.log(url);
               var err;
               try{
               
@@ -367,15 +367,15 @@
 
 
         async function api(){
-                                                                                console.log('html-loader.api');
-                                                                                console.log(repo,path);
+                                                                                df && console.log('html-loader.api');
+                                                                                df && console.log(repo,path);
               var headers   = {accept:'application/vnd.github+json'};
               var token     = localStorage.getItem('github-token');
               if(token){
                     headers.authorization   = 'Bearer '+token;
               }
               var url       = `https://api.github.com/repos/${user}/${repo}/contents/${path}`;
-                                                                                console.log(url);
+                                                                                df && console.log(url);
               var err;
               try{
               
@@ -401,9 +401,9 @@
                     
               }
               catch(err){
-                                                                                console.log('html-loader.api');
-                                                                                console.log(nn,type,mode);
-                                                                                console.log(repo,path);
+                                                                                df && console.log('html-loader.api');
+                                                                                df && console.log(nn,type,mode);
+                                                                                df && console.log(repo,path);
                     throw err;
               }
               
