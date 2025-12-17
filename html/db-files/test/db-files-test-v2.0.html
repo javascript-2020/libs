@@ -85,6 +85,7 @@
       <script>
       
       
+        var btn         = {};
         var complete    = {};
         
         
@@ -97,7 +98,18 @@
               
               menu.add.style();
               
+              $('[value=test]').onclick       = btn.test;
+              
         }//initdom
+        
+        
+        btn.test    = function(){
+        
+              var file    = dbfiles.newfile('/tmp/','test.txt');
+              var blob    = new Blob(['helloworld']);
+              dbfiles.save(file,blob);
+              
+        }//test
         
         
   //:
