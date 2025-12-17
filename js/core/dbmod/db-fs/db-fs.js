@@ -2,7 +2,7 @@
 
 /*
 
-//single-value-dbmod:d-
+//db-fs:d-
 
 15-02-25
 
@@ -12,7 +12,9 @@
 
 (function db_fs_mod(df=false){
 
-  var obj   = {};
+  var obj   = {
+        version   : 'v1.0',
+  };
   
         var df=true,did='db-fs'
         ;
