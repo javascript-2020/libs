@@ -18,7 +18,8 @@ function menumod(){
   var obj       = {};
   obj.menumod   = menumod;
 
-        var df                  = false;
+        var df  false,did='menumod'
+        ;
   
   
         var keydown;
@@ -836,12 +837,13 @@ function menumod(){
   //:          
 
           
-        function debug(){
+        function debug(...args){
         
-              if(!df)return;
-
-              var str   = [...arguments].join(' ');
-              console.log(str);
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              console.groupCollapsed.apply(console,args);
+              console.trace();
+              console.groupEnd();
               
         }//debug
         
