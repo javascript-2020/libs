@@ -129,6 +129,7 @@
 
         obj.delete    = async function del(name){
                                                                                 debug('delete',name);
+/*                                                                                
               var db    = await find(name);
               if(!db){
                                                                                 debug('not fouund');
@@ -136,6 +137,7 @@
               }
                                                                                 console.log(db);
               close(db);
+*/              
               
               var resolve,promise   = new Promise(res=>resolve=res);
               
