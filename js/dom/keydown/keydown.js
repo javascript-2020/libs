@@ -56,7 +56,7 @@
         
         
         obj.bubbles.add   = function(fn){
-                                                                                console.log('bubbles.add',fn);
+                                                                                //console.log('bubbles.add',fn);
               var i   = bubbles.stack.indexOf(fn);
               if(i!=-1)return;
               
@@ -66,7 +66,7 @@
         
         
         obj.bubbles.rem   = function(fn){
-                                                                                console.log('bubbles.rem',fn);
+                                                                                //console.log('bubbles.rem',fn);
               var i   = bubbles.stack.indexOf(fn);
               if(i==-1)return;
               bubbles.stack.splice(i);
@@ -82,8 +82,8 @@
               
               
               function keydown(e){
-                                                                                console.log('keydown',name);
-                                                                                console.dir(stack);
+                                                                                //console.log('keydown',name);
+                                                                                //console.dir(stack);
                     var stop      = false;
                     var both      = false;
                     var prevent   = false;
