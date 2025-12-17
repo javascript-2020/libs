@@ -239,7 +239,7 @@
               }
               
               
-              $(node,'[value=update').onclick                   = btn.update;
+              $(node,'[value=update]').onclick                  = btn.update;
               $(node,'[value=load]').onclick                    = btn.load;
               $(node,'[value=save]').onclick                    = btn.save;
               $(node,'[value=dir]').onclick                     = btn.dir;
@@ -405,6 +405,12 @@
   
         function menu_callback(type){
                                                                                 //console.log('menu.callback',arguments);
+              switch(type){
+                
+                case 'show'   : $(node,'[value=update]').focus();       break;
+                
+              }//switch
+              
         }//callback
         
 
