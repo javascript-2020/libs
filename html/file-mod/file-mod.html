@@ -24,7 +24,7 @@
             
                   <local-file component></local-file>
                   <file-server component></file-server>
-                  <github-ui component></github-ui>
+                  <github-fs component></github-fs>
                   <db-files component></db-files>
                   <google-storage component></google-storage>
                   <ftp-server component></ftp-server>
@@ -110,7 +110,7 @@
             obj.fileserver            = fileserver;
             obj.fs                    = fileserver;
             
-            github                    = mod['github-ui'];
+            github                    = mod['github-fs'];
             obj.github                = github;
             
             dbfiles                   = mod['db-files'];
@@ -173,12 +173,10 @@
               
         obj.initdom   = function(){
         
-              //root                              = $.$(rootnode,'filemod-root');
               shadow                            = host.shadowRoot;
 
               var style                         = $(shadow,'style'); 
               menu.add.style(shadow);
-              //$.stylesheet.insert(style,'button');
 
               export_icon_css();
 
@@ -278,7 +276,23 @@
               title,icon
               
         }){
-        
+              
+              fieltype===undefined && (filetype=null);
+              ft===undefined && (ft=null);
+              abs===undefined && (abs=null);
+              path===undefined && (path=null);
+              name===undefined && (name=null);
+              filename===undefined && (filename=null);
+              rel===undefined && (rel=null);
+              kind===undefined && (kind=null);
+              size===undefined && (size=null);
+              ctime===undefined && (ctime=null);
+              mtime===undefined && (mtime=null);
+              atime===undefined && (atime=null);
+              title===undefined && (title=null);
+              icon===undefined && (icon=null);
+              
+              
               var file          = {};
               
               file.filetype     = filetype||ft;
@@ -286,12 +300,12 @@
               file.type         = filetype||ft;
               
               
-              file.abs          = abs
+              file.abs          = abs;
               file.path         = path;
               file.name         = name||filename;
               file.filename     = name||filename;
 
-              file.rel          = rel;              
+              file.rel          = rel;
               
               file.kind         = kind;
               file.size         = size;
