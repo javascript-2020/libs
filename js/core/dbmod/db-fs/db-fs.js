@@ -126,9 +126,10 @@
   
 
         obj.delete    = async function del(name){
-        
+                                                                                debug('delete',name);
               var db    = await find(name);
               if(!db){
+                                                                                debug('not fouund');
                     return false;
               }
               
@@ -138,7 +139,11 @@
               
               var req               = window.indexedDB.deleteDatabase(name);
               req.onsuccess         = e=>resolve(true);
-              req.onerror           = e=>console.log('delete.error');
+              req.onerror           = e=>{
+                                                                                console.log('delete.error');
+                                            resolve(false);
+                                            
+                                      }onerror
               
               return promise;
               
@@ -154,9 +159,9 @@
               prefix    ||= '';
               var names   = [];
               var list    = await window.indexedDB.databases();
-                                                                                df && debug('===  list databases  ===');
+                                                                                debug('===  list databases  ===');
               if(list.length==0){
-                                                                                df && debug('no databases');
+                                                                                debug('no databases');
               }
               
               list.forEach((db,i)=>{
@@ -168,7 +173,7 @@
                     if(f){
                           names.push(db.name);
                     }
-                                                                                df && debug(i,db.name,db.version);
+                                                                                debug(i,db.name,db.version);
                     
               });
               
@@ -180,9 +185,9 @@
         async function find(name){
           
               var list    = await window.indexedDB.databases();
-                                                                                df && debug('===  list databases  ===');
+                                                                                debug('===  list databases  ===');
               if(list.length==0){
-                                                                                df && debug('no databases');
+                                                                                debug('no databases');
                     return null;
               }
               
@@ -190,7 +195,7 @@
               for(var i=0;i<n;i++){
               
                     var db    = list[i];
-                                                                                df && debug(i,db.name,db.version);
+                                                                                debug(i,db.name,db.version);
                     if(db.name===name){
                           return db;
                     }
