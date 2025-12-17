@@ -749,10 +749,10 @@
         }//caret
         
         
-        $.mousetext   = function(e,text){
+        $.mousetext   = function(e,text,{ox=5,oy=5}={}){
         
-              var left            = e.pageX+'px';
-              var top             = e.pageY+'px';
+              var left            = e.pageX+ox+'px';
+              var top             = e.pageY+oy+'px';
               var style           = {
                                           position        : 'absolute',
                                           left            : left,
