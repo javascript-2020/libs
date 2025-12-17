@@ -45,7 +45,7 @@
         version   : 'v1.0'
   };
   
-        var df=true,did='file-mod'
+        var df=false,did='file-mod'
         ;
 
 
@@ -383,7 +383,7 @@
   //:
   
   
-        function debug(){
+        function debug(...args){
         
               if(!df && !obj.df)return;  
               args.unshift(`[ ${did} ]`);
