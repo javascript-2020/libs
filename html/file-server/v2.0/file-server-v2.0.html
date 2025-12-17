@@ -141,6 +141,8 @@
         var url         = 'https://localhost:3000';
         var auth        = 'matt-123';
         
+        var callback;
+        
         var root;
         var shadow;
         var icon;
@@ -211,55 +213,6 @@
               icon                                              = $(shadow,'.icon');
               icon.onclick                                      = menu.click(node,'both',false,menu_callback);
               menu.input.norm(node);
-
-/*
-              var list    = $.all(node,'input:not([type])');
-              list.forEach((input,i)=>{
-              
-                    input.addEventListener('keydown',keydown);
-                    input.onfocus   = e=>input.select();
-                    
-                    function keydown(e){
-                    
-                          if(e.key=='ArrowDown'){
-                                e.stopPropagation();
-                                i++;
-                                if(i==list.length){
-                                      i   = 0;
-                                }
-                                var input2    = list[i];
-                                input2.focus();
-                          }
-                          if(e.key=='ArrowUp'){
-                                e.stopPropagation();
-                                i--;
-                                if(i<0){
-                                      i   = list.length-1;
-                                }
-                                var input2    = list[i];
-                                input2.focus();
-                          }
-                          if(e.key=='ArrowLeft'){
-                                if(e.ctrlKey){
-                                      //debugger;
-                                      e.stopPropagation();
-                                      menumod.prev();
-                                }
-                          }
-                          if(e.key=='ArrowRight'){
-                                if(e.ctrlKey){
-                                      e.stopPropagation();
-                                      menumod.next();
-                                }
-                          }
-                          
-                    }//keydown
-                    
-              });
-*/
-
-
-
 
 
               ui.root.server                                    = $(node,'#server-root');
@@ -422,23 +375,20 @@
         
         btn.dir   = function(){
 
-              var path    = filenav.cur.path;
-              var dirname   = filenav.cur.file
-              var file    = filemod.newfile({
+              var url       = ui.url.value;
+              var path      = filenav.cur.path;
+              var dirname   = filenav.cur.name;
+              
+              var abs       = path+dirname;
+              
+              var file      = filemod.newfile({
               
                     filetype    : filetype,
-                    abs         : path,
+                    abs         : abs,
                     path        : path,
-                    name        : filename,
+                    name        : dirname,
                     
-                    kind        : 'file',
-                    size        : null,
-                    ctime       : null,
-                    mtime       : null,
-                    atime       : null,
-                    
-                    title       : title,
-                    icon        : icon.src
+                    kind        : 'dir',
                     
               });
               file.url    = url;
@@ -449,8 +399,8 @@
   //:
   
   
-        function menu_callback(){
-                                                                                console.log('menu.callback',arguments);
+        function menu_callback(type){
+                                                                                //console.log('menu.callback',arguments);
         }//callback
         
 
@@ -616,6 +566,25 @@
               return file;
               
         }//export
+        
+     
+        obj.show    = function(callback){
+          
+              var node    = $(shadow,'.menu');
+              menu.open(node);
+              
+        }//show
+        
+        
+        obj.hide    = function(){
+          
+              var node      = $(shadow,'.menu');
+              var result    = menu.close(node);
+              if(result){
+                    callback    = null;
+              }
+              
+        }//hide
         
         
   //:
