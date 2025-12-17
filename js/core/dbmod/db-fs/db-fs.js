@@ -140,7 +140,7 @@
               var req               = window.indexedDB.deleteDatabase(name);
               req.onsuccess         = e=>resolve(true);
               req.onerror           = e=>{
-                                                                                console.log('delete.error');
+                                                                                debug('delete.error',e);
                                             resolve(false);
                                             
                                       }onerror
