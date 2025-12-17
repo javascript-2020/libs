@@ -6,15 +6,15 @@
       <head>
       
             <style>
-
+            
   .icon
     {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
-
+    
             </style>
-
-
+            
+            
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+            
             <script init>
                                                                                 console.clear();
                                                                                 console.log('github-test-v2.0.html');
@@ -24,8 +24,8 @@
         var menu;
         
         var github;
-
-
+        
+        
   //:
   
   
@@ -44,17 +44,17 @@
               
               
               initdom(document.body);
-  
+              
               
         }//init
-
-
+        
+        
 (async()=>{
 
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
@@ -62,9 +62,9 @@
               'js/dom/keydown/keydown.js'
         );
         [$,datatype,menumod,keydown]   = await promise;
-  
+        
         mod.stack.complete;
-              
+        
 })();
 
 
@@ -73,33 +73,33 @@
       </head>
       
       <body>
-
-            <github component v2.0></github>
-
+      
+            <github-ui component v2.0></github-ui>
+            
       </body>
-
-
+      
+      
       <script>
-
-
+      
+      
         var complete    = {};
         
-
+        
   //:
   
   
         function initdom(rootnode){
-
-              var root    = rootnode;
         
+              var root    = rootnode;
+              
               menu.add.style();
               
               github.initdom();
-
+              
               
         }//initdom
-
-
+        
+        
   //:
   
   
