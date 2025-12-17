@@ -45,8 +45,10 @@
         version   : 'v1.0'
   };
   
-        var df    = true
+        var df=true,did='file-mod'
         ;
+
+
                                                                                 
         var ext,$,menumod,menu,complete,source,focus,log
         ;
@@ -212,7 +214,7 @@
                     }
                     file    = cur;
               }
-                                                                                console.log(file);
+                                                                                debug(file);
               
               var blob    = await source();
               
@@ -383,17 +385,20 @@
   
         function debug(){
         
-              if(!df)return;  
-              var str   = [...arguments].join(' ');
-              console.log('[ file-mod ]',str);
+              if(!df && !obj.df)return;  
+              args.unshift(`[ ${did} ]`);
+              console.groupCollapsed.apply(console,args);
+              console.trace();
+              console.groupEnd();
               
         }//debug
         
+
         
   return obj;
-  
-});//filemod
 
+//filemod  
+})
             
       </script>
 
