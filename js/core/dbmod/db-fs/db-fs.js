@@ -127,7 +127,7 @@
 
         obj.delete    = function del(name){
         
-              var resolve,pomise    = new Promise(res=>resolve=res);
+              var resolve,promise   = new Promise(res=>resolve=res);
               
               var req               = window.indexedDB.deleteDatabase(name);
               req.onsuccess         = e=>resolve();
