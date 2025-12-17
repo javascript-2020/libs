@@ -145,7 +145,7 @@
                                                                                 debug('delete.error',e);
                                             resolve(false);
                                             
-                                      }onerror
+                                      }//onerror
               
               return promise;
               
