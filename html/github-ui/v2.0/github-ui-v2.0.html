@@ -68,7 +68,7 @@
             
             
                 <div class=menu-title>
-                      github params
+                      github
                 </div>
                 
                 <section id=hdr>
@@ -103,6 +103,7 @@
                     </div>
                     
                     <div class=hldr>
+                        <img class='copy icon'>
                         <img class='paste icon'>
                         <input id=url>
                         <input type=button value=parse>
@@ -275,6 +276,22 @@
                                       
               });
               
+              $.all(shadow,'.copy').forEach(icon=>{
+                
+                    icon.onclick    = async e=>{
+                      
+                                            var par     = icon.parentNode;
+                                            var input   = $(par,'input:not([type])');
+                                            var txt     = input.value;
+                                            await navigaotr.clipboard.writeText(txt);
+                                            $.mousetext(e,'copied');
+                                            
+                                      }//click
+                                      
+              });
+              
+              
+              
               var root2   = $(shadow,'#token').parentNode;
               $(root2,'.paste').onclick   = async e=>{
                                             
@@ -294,7 +311,8 @@
               if(token){
                     $(shadow,'#token').value    = token;
               }
-              
+
+/*              
               $(shadow,'.copy').onclick   = async e=>{
               
                                                   var icon    = e.target;
@@ -304,6 +322,7 @@
                                                   $.mousetext(e,'copied');
                                                   
                                             };
+*/                                            
                                           
               $(shadow,'.storage').onclick    = async e=>{
                                                     
