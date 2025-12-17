@@ -322,7 +322,7 @@ function menumod(){
         obj.close   = function(node){return close(node)};
         
         function close(node){
-                                                                                debug('close',state.cur);
+                                                                                debug('close',node,state.cur);
               if(node){
                     var cur   = get.cur('node');
                     if(cur!==node){
