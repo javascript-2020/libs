@@ -4,6 +4,13 @@
         version   : 'v1.0',
   };
 
+        var df=false,did='keydown'
+        ;
+
+
+  //:
+  
+  
         obj.bubbles   = {};
         
         var capture         = {};
@@ -25,7 +32,10 @@
               
         }//initdom
         
-        
+
+  //:
+  
+  
         obj.add   = function(fn){
         
               var i   = capture.stack.indexOf(fn);
@@ -150,6 +160,18 @@
 
         
         function datatype(v){return Object.prototype.toString.call(v).slice(8,-1).toLowerCase()}
+        
+
+        
+        function debug(){
+          
+              if(!df)return;
+              console.groupCollapsed.apply(console,arguments);
+              console.trace();
+              console.groupEnd();
+              
+        }//debug
+
 
 
   return obj;
