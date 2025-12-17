@@ -309,6 +309,7 @@ function menumod(){
                     index   = list.find(node,'index');
               }
               
+              console.log('menumod.open',keydown);
               if(keydown){
                     keydown.bubbles.add(menu_kd);
               }
