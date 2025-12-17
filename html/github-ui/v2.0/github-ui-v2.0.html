@@ -257,7 +257,7 @@
               
               var node                        = $(shadow,'.menu');
               icon                            = $(shadow,'#icon');
-              icon.onclick                    = menu.click(node,'both',true,callback);
+              icon.onclick                    = menu.click(node,{callback:menu_callback});
               menu.input.norm(node);
 
               
@@ -511,7 +511,7 @@
         }//github_kd
 
         
-        function callback(type){
+        function menu_callback(type){
         
               if(type=='show'){
                     $(shadow,'#token').focus();
