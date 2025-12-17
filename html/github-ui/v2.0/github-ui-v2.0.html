@@ -283,7 +283,7 @@
                                             var par     = icon.parentNode;
                                             var input   = $(par,'input:not([type])');
                                             var txt     = input.value;
-                                            await navigaotr.clipboard.writeText(txt);
+                                            await navigator.clipboard.writeText(txt);
                                             $.mousetext(e,'copied');
                                             
                                       }//click
