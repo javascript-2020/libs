@@ -52,15 +52,17 @@
       </template>
       
       <script>
-                                                                                console.log('mod.newfile');
+      
 (function new_file({mod,dom,host}){
 
   var obj   = {
         version   : 'v2.0',
   };
   
-        var df=true,did='new-file'
+        var df=false,did='new-file'
         ;
+        
+        
         
         var $
         ;
@@ -204,32 +206,19 @@
   //:
   
   
-        function debug(){
+        function debug(...args){
         
-              if(!df)return;
-              
-              var str   = [...arguments].join(' ');
-              
-              console.groupCollapsed(`[ ${did} ]`,str);
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              console.groupCollapsed.apply(console,args);
               console.trace();
               console.groupEnd();
               
         }//debug
         
         
-        debug.log   = function(){
-        
-              if(!df)return;
-              
-              console.log.apply(console,arguments);
-              
-        }//log
         
         
-  //:
-  
-  
-  
   return obj;
   
 //new_file
