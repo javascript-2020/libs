@@ -41,7 +41,9 @@
               full_list.push(mod);
               
               mod.name        = name;
-              mod.df          = false;//(name==='root');
+              
+              mod.df          = false;
+              //mod.df          = (name==='root');
               
               mod.list        = [];
               
@@ -80,7 +82,7 @@
                     get:()=>{
                 
                           total++;
-                                                                                debug.trace('add',name,ct,total);
+                                                                                debug('add',ct,total);
                     },//get
                     set:v=>{
                       
@@ -97,14 +99,14 @@
                           
                           total++;
                           stack.push(v);
-                                                                                debug.trace('add',name,ct,total);
+                                                                                debug('add',name,ct,total);
                     }//set
               });
               
               Object.defineProperty(stack,'complete',{get:()=>{
                 
                     ct++;
-                                                                                debug.trace('complete',name,ct,total);
+                                                                                debug('complete',name,ct,total);
                     if(ct!=total){
                           return;
                     }
@@ -453,7 +455,7 @@
               loader.fn.url   = function(root){
                 
                     var {nn,inst}   =  rd.root(root);
-                                                                                console.log(nn,inst);
+                                                                                //console.log(nn,inst);
                     var type      = rd(root,'component');
                     if(!type){
                           type    = rd(root,'component_');
@@ -805,25 +807,17 @@
   //:
   
   
-              function debug(){
+              function debug(...args){
                 
                     if(!mod.df)return;
-                    var str   = [...arguments].join(' ');
-                    console.log(`[ ${name} ]`,str);
+                    args.unshift(`[ mod.${name} ]`);
+                    console.groupCollapsed.apply(console,args);
+                    console.trace();
+                    console.groupEnd();
                     
               }//debug
               
               
-              debug.trace   = function(){
-                
-                    if(!mod.df)return;
-                    debug.apply(null,arguments);
-                    
-                    console.groupCollapsed(`[ ${name} ]`);
-                    console.trace();
-                    console.groupEnd();
-                    
-              }//trace
   
               
           return mod;
