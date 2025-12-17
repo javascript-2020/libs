@@ -202,7 +202,7 @@
                                                                                 debug('db-files.file.rem',path,name);
               var abs       = prefix+path+name;
                                                                                 debug(abs);
-              var result    = await db.del(abs);
+              var result    = await db.delete(abs);
               return false;
               
         }//rem
