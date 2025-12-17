@@ -80,7 +80,7 @@
         
         
         
-        var ext,$,datatype,menumod,filemod
+        var ext,$,datatype,menumod,source,filemod
         ;
         
         obj.initmod   = function(params){
@@ -91,6 +91,8 @@
               menumod     = mod.rd(params,'menumod',menumod);
               
               menu.root   = mod.rd(params,'menu',menu);
+              
+              source      = mod.rd(params,'source',source);
               
               filemod     = mod.rd(params,'filemod',filemod);
               
