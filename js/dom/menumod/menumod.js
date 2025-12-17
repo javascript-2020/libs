@@ -112,9 +112,16 @@ function menumod(){
   //:
   
   
-        obj.click   = function(node,drag=true,center=true,callback_fns){
+        obj.click   = function(node,params){
         
-              add(node,drag,center,callback_fns);
+              var drag,center,callback;
+              if(datatype(params)=='object'){
+                    ({drag='both',center,callback}   = params);
+              }else{
+                    [node,drag='both',center,callback]    = arguments;
+              }
+              
+              add(node,drag,center,callback);
               
               return click;
               
@@ -131,20 +138,34 @@ function menumod(){
   //:
   
   
-        obj.add   = function(node,drag='both',center=true,callback){return add(node,drag,center,callback)}
+        obj.add   = function(node,params){return add.apply(null,arguments)}
         
-        function add(node,drag='both',center=true,callback){
+        function add(node,params){
                                                                           //console.log('add');
+              var drag,center,callback;
+              if(datatype(params)=='object'){
+                    ({drag='both',center,callback}   = params);
+              }else{
+                    [node,drag='both',center,callback]    = arguments;
+              }
+                                                                          
               list.push({node,callback});
               add.node(node,drag,center);
               
         }//add
         
         
-        obj.add.stack   = function(node,drag='both',center=true,callback){return add.stack(node,drag,center,callback)}
+        obj.add.stack   = function(node,drag='both',center,callback){return add.stack.apply(null,arguments)}
         
-        add.stack   = function(node,drag,center,callback){
+        add.stack   = function(node,params){
         
+              var drag,center,callback;
+              if(datatype(params)=='object'){
+                    ({drag='both',center,callback}   = params);
+              }else{
+                    [node,drag='both',center,callback]    = arguments;
+              }
+                    
               var cur                   = get.cur('node');
               state.prev_opt[cur.id]    = state.opt;
               
