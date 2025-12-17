@@ -48,8 +48,15 @@
       
 (function db_list({mod,dom,host}){
 
-  var obj   = {};
+  var obj   = {
+        version   : 'v2.0',
+  };
   
+        var df=true,did='db-list'
+        ;
+        
+        
+        
         var $,grp,db
         ;
         
@@ -76,6 +83,7 @@
   
   
         obj.init    = function(){
+                                                                                debug('init',obj.version);
         }//init
         
         
@@ -130,8 +138,9 @@
                     
                     
                     async function del(){
-                    
-                          await db.delete(name);
+                                                                                debug('del',name);
+                          var result    = await db.delete(name);
+                                                                                debug(result);
                           show();
                           
                     }//del
@@ -142,6 +151,18 @@
         
         
         
+  //:
+  
+  
+        function debug(...args){
+        
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              console.groupCollapsed.apply(console,args);
+              console.trace();
+              console.groupEnd();
+              
+        }//debug
         
         
         
