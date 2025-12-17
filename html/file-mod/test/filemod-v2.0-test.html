@@ -4,11 +4,13 @@
 <html>
 
       <head>
-
-
+      
+      
       
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+            <script src='https://libs.ext-code.com/js/dom/init-hdr/init-hdr.js'></script>
+            
+            
             <script init>
                                                                                 console.clear();
                                                                                 console.log('filemod-test-v2.0.html');
@@ -17,48 +19,40 @@
         var df=true,version='v2.0'
         ;
         
-        var ext,$,datatype,menumod,keydown,debug
-        ;
-        
-        var menu;
         
         var filemod;
-
-
+        
+        
   //:
   
   
         async function init(){
                                                                                 debug('init',version);
-
-
+                                                                                
+                                                                                
               keydown.add(kd);
-              
-              menu        = menumod();
-              
-              mod.base.add({ext,$,datatype,keydown,menu,menumod});
               
               
               filemod     = mod['file-mod'];
               
-              filemod.initmod({ext,$,menumod,menu,complete});
-
-              await filemod.init();
+              filemod.initmod({complete});
+              
+              
+              await mod.auto();
               
               
               initdom(document.body);
-
-
-        
+              
+              
         }//init
         
-
+        
 (async()=>{
 
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js',
               'js/core/datatype.js',
@@ -67,30 +61,30 @@
               'js/debug/debug.js',
         );
         [$,datatype,menumod,keydown,debug]   = await promise;
-  
-        mod.stack.complete;
-              
-})();
-    
         
+        mod.stack.complete;
+        
+})();
+
+
             </script>
-      
+            
             <style>
-      
+            
   html
     {height:100%}
   body
     {height:calc(100% - 16px);font-family:arial}
-  
+    
   .icon
     {width:30px;height:30px;border:1px solid gray;border-radius:3px;box-sizing:border-box;cursor:pointer;}
   button
-    {padding:5px 10px;cursor:pointer;height:30px;font-size:16px}            
-            
+    {padding:5px 10px;cursor:pointer;height:30px;font-size:16px}
+    
             </style>
-
+            
       <head>
-
+      
       
       <body>
       
@@ -101,19 +95,19 @@
             <div>
                   <button id=test>test</button>
             </div>
-      
-      
-<!--      
+            
+            
+<!--
             <checkbox-one-template>
                   <script src='https://html-loader-dblv8aserliq.runkit.sh/?checkbox-one-template'></script>
             </checkbox-one-template>
--->            
+-->
 
       </body>
-
+      
       <script>
-
-
+      
+      
         var complete    = {};
         
         
@@ -122,21 +116,15 @@
   
         function initdom(rootnode){
                                                                                 debug('initdom');
-              
+                                                                                
               var root    = rootnode;
-              
-              
-              filemod.initdom();
-
-
               
               
               $('#test').onclick    = e=>alert(filemod.autosave);
               
               
-              
         }//initdom
-
+        
         
   //:
   
@@ -144,12 +132,12 @@
         function kd(e){
         
               if(e.key==' ' && e.ctrlKey){
-                    menumod.open();
+                    menu.open();
               }
               
         }//kd
         
-
+        
         function focus(){
         }//focus
         
@@ -157,6 +145,14 @@
   //:
   
   
+        function source(){
+        
+              var blob    = new Blob(['helloworld']);
+              return blob;
+              
+        }//source
+        
+        
         complete.load   = function(file,blob){
                                                                                 console.log(file,blob);
         }//complete.load
@@ -165,24 +161,16 @@
         complete.save   = function(file){
                                                                                 console.log(file);
         }//save
-
-        
-        function source(){
-          
-              var blob    = new Blob(['helloworld']);
-              return blob;
-              
-        }//source
-        
         
         
         
       </script>
       
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
       
