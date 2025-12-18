@@ -97,7 +97,7 @@
               grp.add.style(shadow);
               
               var card                              = $(shadow,'.menu');
-              $(shadow,'#icon').onclick             = grp.click(card,false,false,menu);
+              $(shadow,'#icon').onclick             = grp.click(card,{callback:menu_callback});
               
               list                                  = $(card,'#list');
               item                                  = $(list,'.item');
@@ -110,7 +110,7 @@
   //:
   
   
-        function menu(type,opt){
+        function menu_callback(type,opt){
         
               switch(type){
               
