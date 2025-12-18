@@ -572,7 +572,7 @@
                     
                     var fn        = eval(js);
                                                                                 if(typeof fn!='function')debugger;
-                    var obj       = fn({mod:mod2,dom,host,root:dom,node:host});
+                    var obj       = fn({mod:mod2,dom,host,   root:dom,node:host});
                     
                     var name      = nn;
                     if(inst){
@@ -764,13 +764,13 @@
 
               
               async function auto(...args){
-                            
+                                                                                debug('auto');
                     if(args.length==0){
                           args    = mod.list;
                     }
                     
                     await Promise.all(
-                          args.map(async arg=>{
+                          args.map(async(arg,i)=>{
                             
                                 var fn;
                                 if(typeof arg=='string'){
@@ -778,7 +778,7 @@
                                 }else{
                                       fn    = arg;
                                 }
-                                
+                                                                                debug(i,fn);
                                 var params    = Object.assign(mod_root.base,mod.base);
                                 
                                 fn.initmod(params);
