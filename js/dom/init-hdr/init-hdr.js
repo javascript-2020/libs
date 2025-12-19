@@ -1,7 +1,7 @@
 
 
 
-                                                                                console.clear();
+                                                                                //console.clear();
                                                                                 console.log('[ init-hdr ]');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
