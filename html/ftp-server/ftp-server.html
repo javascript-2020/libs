@@ -375,15 +375,10 @@
         
         btn.download    = async function(e){
         
-              if(e.shiftKey){
-                    window.open('https://github.com/javascript-2020/libs/blob/main/html/ftp-server/ftp-server.js','_blank');
-                    return;
-              }
-              
               var zip   = {
                     'ftp-proxy-server'   :{directory:{
-                          'package.json'          : {file:{github:{repo:'code',path:'/nodejs/servers/ftp-proxy-server/package.json'}}},
-                          'ftp-proxy-server.js'   : {file:{github:{repo:'code',path:'/nodejs/servers/ftp-proxy-server/ftp-proxy-server.js'}}},
+                          'package.json'          : {file:{github:{repo:'code',path:'/nodejs/server/ftp-proxy-server/package.json'}}},
+                          'ftp-proxy-server.js'   : {file:{github:{repo:'code',path:'/nodejs/server/ftp-proxy-server/ftp-proxy-server.js'}}},
                     }}
               };
               
