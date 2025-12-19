@@ -280,11 +280,6 @@
         
         btn.download    = async function(e){
         
-              if(e.shiftKey){
-                    window.open('https://github.com/javascript-2020/code/blob/main/nodejs/server/file-server/file-server.js','_blank');
-                    return;
-              }
-              
               if(!jszip){
                     jszip   = await import('https://cdn.jsdelivr.net/npm/jszip/+esm');
                     jszip   = jszip.default;
