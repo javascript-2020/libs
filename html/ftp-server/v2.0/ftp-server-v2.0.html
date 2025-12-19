@@ -854,37 +854,11 @@
         }//build
         
         
+        
   //:
   
   
-        function debug(){
-        
-              if(!df && !obj.df)return;
-              var str   = [...arguments].join(' ');
-              console.log(did,str);
-              
-        }//debug
-        
-        
-        debug.trace   = function(){
-        
-              if(!df && !obj.df)return;
-              
-              debug.apply(null,arguments);
-              
-              console.groupCollapsed(did);
-              console.trace();
-              console.groupEnd();
-              
-        }//trace
-        
-        
-        
-        
-        
-        
-        
-        
+  
         async function create_archive(dir,{download=true,test,df=false}={}){
                                                                                 df && console.log('download',download);
                                                                                 df && console.log('test',!!test);
@@ -988,6 +962,40 @@
               
               
         }//create_archive
+        
+        
+        
+  //:
+  
+  
+        function debug(){
+        
+              if(!df && !obj.df)return;
+              var str   = [...arguments].join(' ');
+              console.log(did,str);
+              
+        }//debug
+        
+        
+        debug.trace   = function(){
+        
+              if(!df && !obj.df)return;
+              
+              debug.apply(null,arguments);
+              
+              console.groupCollapsed(did);
+              console.trace();
+              console.groupEnd();
+              
+        }//trace
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
