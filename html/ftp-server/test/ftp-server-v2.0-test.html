@@ -4,11 +4,11 @@
 <html>
 
       <head>
-
-
-
+      
+      
+      
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+            
             <script init>
                                                                                 console.clear();
                                                                                 console.log('https-file test');
@@ -22,7 +22,7 @@
         var ftpserver;
         var log;
         var con;
-
+        
         
   //:
   
@@ -32,8 +32,8 @@
               menu            = menumod();
               
               ftpserver       = mod['ftp-server'];
-              log             = mod.log;
-              con             = mod.console;
+              log             = mod['log-mod'];
+              con             = mod['web-console'];
               
               
               ftpserver.initmod({ext,$,datatype,menu,log});
@@ -42,7 +42,7 @@
               
               ftpserver.load.complete   = complete.load;
               ftpserver.save.complete   = complete.save;
-        
+              
               await Promise.all([
                     ftpserver.init(),
                     log.init(),
@@ -51,17 +51,17 @@
               
               
               initdom(document.body);
-  
+              
               
         }//init
-  
-  
+        
+        
 (async()=>{
 
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
@@ -69,71 +69,71 @@
               'js/dom/keydown/keydown.js'
         );
         [$,datatype,menumod,keydown]   = await promise;
-  
+        
         mod.stack.complete;
-              
+        
 })();
 
-      
-            </script init>
 
+            </script init>
+            
             <style>
   html
     {font-family:arial}
   body
     {margin:20px;display:flex;flex-direction:column;gap:20px}
     
-  .icon 
+  .icon
     {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
-
+    
             </style>
-
+            
       </head>
       
       
       <body>
-
+      
             <h3>
                   ftp-server v2.0 test
             </h3>
             
             
             <ftp-server component v2.0></ftp-server>
-
-      
-            <log component v2.0></log>
-
-            <console component v2.0></console>
+            
+            
+            <log-mod component v2.0></log-mod>
+            
+            <web-console component v2.0></web-console>
             
       </body>
-
+      
       <script>
-
-
+      
+      
         var complete    = {};
-
+        
         
   //:
   
   
         function initdom(rootnode){
-
-              var root    = rootnode;
-
         
+              var root    = rootnode;
+              
+              
               ftpserver.initdom();
               
               log.initdom();
               
               con.initdom();
-
-
+              
+              
               con.log('ready');
-
+              
               
         }//initdom
-
-
+        
+        
   //:
   
   
@@ -147,14 +147,14 @@
         
         
         complete.save   = function(file,confirm=true){
-          
+        
               con.log('save '+file.filename);
               
         }//save
         
-
+        
       </script>
-
+      
 </html>
 
 
