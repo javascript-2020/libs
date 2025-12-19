@@ -72,6 +72,7 @@
                         <div class=spc></div>
                         <input value='quit' type=button>
                         <input value=download type=button>
+                        <input value=docs type=button>
                   </div>
                   
                   <div id=url-root>
@@ -223,6 +224,7 @@
               
               $(ui.root.server,'[value=quit]').onclick          = btn.quit;
               $(ui.root.server,'[value=download]').onclick      = btn.download;
+              $(ui.root.server,'[value=docs]').onclick          = btn.docs;
               
               $(node,'#url-root .copy').onclick                 = btn.url.copy;
               $(node,'#url-root .paste').onclick                = btn.url.paste;
@@ -315,6 +317,13 @@
               
               
         }//download
+        
+        
+        btn.docs    = function(){
+        
+              window.open('https://ext-code.com/code/nodejs/servers/file-server/file-server.html');
+              
+        }//docs
         
         
         btn.url.copy    = async function(){
