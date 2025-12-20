@@ -45,7 +45,7 @@
         version   : 'v1.0'
   };
   
-        var df=false,did='file-mod'
+        var df=true,did='file-mod'
         ;
         
         
@@ -93,7 +93,7 @@
   
   
         obj.init    = async function(){
-                                                                                //debug(obj.version);
+                                                                                debug('init',obj.version);
                                                                                 
             if(!menumod){
                   menumod   = menu.menumod;
