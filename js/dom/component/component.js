@@ -812,6 +812,10 @@
               
               function parseconfig(txt){
                 
+                    if(!txt){
+                          return {};
+                    }
+                    
                     if(typeof txt!='string'){
                           var node    = txt;
                           txt         = node.textContent;
