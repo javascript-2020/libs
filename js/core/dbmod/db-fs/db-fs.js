@@ -16,7 +16,7 @@
         version   : 'v1.0',
   };
   
-        var df=true,did='db-fs'
+        var df=obj.df=false,did='db-fs'
         ;
 
 
