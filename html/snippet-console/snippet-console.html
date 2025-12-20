@@ -22,53 +22,54 @@
             <div id=root>
             
                   <div>
-                        <file-mod component></file-mod>
+                        <file-mod v2.0 component></file-mod>
                   </div>
                   
                   <web-editor component></web-editor>
-      
+                  
                   <div>
                         <input value=run type=button>
+                        <input value=clear type=button>
                   </div>
-                              
+                  
                   <web-console component></web-console>
-      
+                  
             </div>
-      
+            
       </template>
       
       
       <script>
       
 (function snippet_console({mod,dom,host}){
-  
+                                                                    console.log(mod);
   var obj   = {
         version   : 'v2.0',
   };
   
         var df=true,did='snippet-console'
         ;
-
+        
         
         var ext,$,ace,menu
         ;
         
         obj.initmod   = function(params){
-          
-              ext           = params.ext;
-              $             = params.$;
-              ace           = params.ace;
-              menu          = params.menu;
-              menumod       = params.menumod;
+        
+              ext           = mod.rd(params,'ext',ext);
+              $             = mod.rd(params,'$',$);
+              ace           = mod.rd(params,'ace',ace);
+              menu          = mod.rd(params,'menu',menu);
+              menumod       = mod.rd(params,'menumod',menumod);
               
         }//initmod
         
         
   //:
-
-
-        var ansi;
   
+  
+        var ansi;
+        
         var filemod;
         obj.filemod     = null;
         var editor;
@@ -78,7 +79,7 @@
         
         var def;
         var src;
-
+        
         
         var sandbox;
         
@@ -105,42 +106,44 @@
               con                 = mod['web-console'];
               obj.console         = con;
               
+              if(!ext)debugger;
+              
               filemod.initmod({ext,$,menu,menumod,complete,source});
               editor.initmod({ext,$,menu,ace});
               con.initmod({ext,$,ace});
-
-
-              await Promise.all([              
+              
+              
+              await Promise.all([
                     attr.src(),
                     libs(),
                     filemod.init(),
                     editor.init(),
                     con.init(),
               ]);
-
-          
+              
+              
         }//init
         
         
         async function libs(){
-          
+        
               var promise;
               var list        = [];
               
               promise   = ext.load.libs('js/sandbox/sandbox.js.api').then(result=>[sandbox]=result);
               list.push(promise);
               
-
+              
               //var {AnsiUp}    = await import('https://cdn.jsdelivr.net/npm/ansi_up/+esm');
               //ansi            = new AnsiUp();
               
               await Promise.all(list);
               
         }//libs
-
-
+        
+        
         attr.src    = async function(){
-          
+        
               if(!dom.hasAttribute('src'))return;
               src       = dom.getAttribute('src');
               var res   = await fetch(src);
@@ -148,7 +151,7 @@
               def       = txt;
               
         }//src
-
+        
         
   //:
   
@@ -163,73 +166,98 @@
               
               
               $(shadow,'[value=run]').onclick       = btn.run;
-              
+              $(shadow,'[value=clear]').onclick     = btn.clear;
               
               con.initdom();
-
-
+              
+              
               if(src){
                     editor.filename(src);
               }
               
               con.clear();
               con.log('ready');
-
+              
               
         }//initdom2
         
         
         
         
-
+        
   //:
   
-        
+  
         btn.run   = function(){
-
+        
               var js          = editor.getvalue();
               
-                    
+              
+/*
+
               var console     = {};
+              
+              var api         = [
+                                      'assert','clear','count','countReset','debug','dir','dirxml','error','group','groupCollapsed',
+                                      'groupEnd','info','log','profile','profileEnd','table','time',
+                                      'timeEnd','timeLog','timeStamp','trace','warn'
+                                ];
+              api.forEach(name=>{
+              
+                    var fn    = ()=>{};
+                    if(window.console[name]){
+                          fn    = window.console[name].bind(window.console);
+                    }
+                    console[name]   = fn;
+                    
+              });
+              
               console.log     = function(){
-                              
-                                      window.console.log.apply(window.console,arguments);
+              
                                       con.log.apply(null,arguments);
-                                    
+                                      
                                 }//log
               console.clear   = function(){
-                  
+              
                                       con.clear();
-                                      window.console.clear();
                                       
                                 }//clear
               console.error   = function(){
-                
+              
                                       con.error.apply(null,arguments);
-                                      window.console.error.apply(window.console,arguments);
                                       
                                 }//error
+                                
+*/
 
-              sandbox.run(js,{console});
 
-          
+              sandbox.run(js,{console:con});
+              
+              
               editor.focus();
               
         }//run
         
         
+        btn.clear   = function(){
+        
+              con.clear();
+              
+        }//clear
+        
+        
   //:
-
-
+  
+  
         obj.run   = btn.run;
-
-
-
+        
+        
+        
   //:
   
   
         function source(){
-          
+        
               var txt     = editor.getvalue();
               var blob    = new Blob([txt]);
               return blob;
@@ -248,20 +276,20 @@
         complete.save   = function(file){
         }//save
         
-
-  //:  
+        
+  //:
   
-
+  
         function debug(){
-          
+        
               if(!df && !obj.df)return;
               var str   = [...arguments].join(' ');
               console.log(`[ ${did} ]`,str);
               
         }//debug
         
-
-
+        
+        
   return obj;
   
 })//snippet_console
