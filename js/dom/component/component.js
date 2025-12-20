@@ -829,7 +829,7 @@
                     txt   = txt.replace(/,\s*([}\]])/g,'$1');
                                                                                 //  quote keys
                     txt   = txt.replace(/([{,]\s*)([A-Za-z_][A-Za-z0-9_]*)\s*:/g, '$1"$2":');
-
+                                                                                console.log(txt);
                     var err;
                     try{
                       
