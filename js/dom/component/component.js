@@ -54,6 +54,7 @@
               mod.create      = create;
               mod.build       = build;
               mod.rd          = rdparams;
+              mod.params      = parseparams;
               
               var stack       = []
               mod.stack       = stack;
@@ -805,7 +806,45 @@
                     }
                     return value;
                     
-              }//rdoarans
+              }//rdparans
+              
+              
+              
+              function parseparams(txt){
+                
+                    if(typeof txt!='string'){
+                          var node    = txt;
+                          txt         = node.textContent;
+                    }
+                                                                                //  remove // comments
+                    txt   = txt.replace(/\/\/.*$/gm, "");        
+                                                                                //  remove /* */ comments
+                    txt   = txt.replace(/\/\*[\s\S]*?\*\//g, ""); 
+                
+                                                                                //  trailing commas
+                    txt   = txt.replace(/,\s*([}\]])/g,'$1');
+                                                                                //  quote keys
+                    txt   = txt.replace(/([{,]\s*)([A-Za-z_][A-Za-z0-9_]*)\s*:/g, '$1"$2":');
+
+                    var err;
+                    try{
+                      
+                          var params    = JSON.parse(txt);
+                          
+                    }//try
+                    catch(err2){
+                      
+                          err           = err2;
+                          
+                    }//catch
+                    if(err){
+                          var error     = err.toString();
+                          return {error};
+                    }
+                    
+                    return {params};
+                    
+              }//parseparams
               
               
   //:
