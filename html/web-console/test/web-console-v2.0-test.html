@@ -4,14 +4,14 @@
 <html>
 
       <head>
-
+      
             <title>console-test</title>
-
+            
             <link rel=icon type='image/png' href='images/html-editor-favicon.png'>
-
+            
             
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+            
             <script init>
                                                                                 console.clear();
                                                                                 console.log('console-test-v2.0.html');
@@ -19,37 +19,38 @@
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var df=true
         ;
-
-
+        
+        
         var ext;
         var $;
         var datatype;
-
         
-
+        
+        
         
         
         var webconsole;
         
-
-
-
-
-
-  //:
-
         
+        
+        
+        
+        
+  //:
+  
+  
         mod.stack.add   = init;
         
         async function init(){
-
-
-
+        
+        
+              mod.base.add({ext,$,datatype,keydown,menumod,menu,ace});
+              
               
               webconsole      = mod['web-console'];
               log             = mod['log-mod'];
-
-
+              
+              
               
               webconsole.initmod({ext,$,ace});
               log.initmod({ext,$});
@@ -59,20 +60,20 @@
                     webconsole.init(),
                     log.init(),
               ]);
-          
+              
               
               await initdom(document.body);
-
-
+              
+              
         }//init
-
-
+        
+        
 (async()=>{
 
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
@@ -81,29 +82,29 @@
               'js/debug/debug.js',
         );
         [$,datatype,menumod,keydown,debug]   = await promise;
-  
-        ace   = await $.editor.ace();
-
-        mod.stack.complete;
-                      
-})();
         
+        ace   = await $.editor.ace();
+        
+        mod.stack.complete;
+        
+})();
+
 
             </script init>
-
-
+            
+            
             <link rel=stylesheet href='/utils/css/utils.css'>
             
             <style id=page-inline>
-
+            
   html
     {height:100%}
   body
     {height:calc(100% - 40px);margin:20px}
-
-
-
-
+    
+    
+    
+    
   input
     {font-size:16px;padding:5px 10px}
   input[type=button]
@@ -112,17 +113,17 @@
     
     
             </style>
-
-
+            
+            
       </head>
-
+      
       
       <body>
       
-
+      
             <web-console component v2.0></web-console>
-      
-      
+            
+            
             <div>
                   <input value=test type=button>
                   <input value=log type=button>
@@ -135,8 +136,8 @@
       
       <script>
       
-
-
+      
+      
   //:
   
   
@@ -144,12 +145,12 @@
         
         
         
-  
+        
         function initdom(rootnode){
-
-          
+        
+        
               root                                = rootnode;
-
+              
               
               webconsole.initdom();
               webconsole.height    = 200;
@@ -169,8 +170,8 @@
   
   
         btn.test    = function(){
-          
-              
+        
+        
               var span=document.createElement('span');
               span.textContent    = 'hello';
               //debugger;
@@ -179,11 +180,11 @@
               
               
         }//test
-  
-  
+        
+        
         btn.log   = function(){
-
-          
+        
+        
               webconsole.log('helloworld');
               
               
@@ -197,13 +198,13 @@
               
               webconsole.log(test);
               
-          
+              
         }//log
         
         
         
-  
-  
+        
+        
       </script>
       
 </html>
@@ -211,4 +212,4 @@
 
 
 
-      
+
