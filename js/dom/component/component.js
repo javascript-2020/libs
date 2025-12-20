@@ -178,7 +178,8 @@
                                                                                       
                                 if(node.hasAttribute){
                                       if(node.hasAttribute('component')){
-                                            let name        = node.nodeName.toLowerCase();
+                                            let {nn,inst}   = rd.root(node);
+                                            let name        = inst||nn;//node.nodeName.toLowerCase();
                                             let mod3        = mod2.create({mod:mod2,name});
                                             let index       = nodes.length;
                                             let complete    = async({node:custom})=>{
