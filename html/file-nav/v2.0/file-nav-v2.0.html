@@ -168,7 +168,7 @@
       </template>
       
       <script>
-                                                                                //console.log('mod.filenav');
+      
 (function file_nav({mod,dom,host}){
 
   var obj   = {
@@ -185,7 +185,7 @@
         ;
         
         obj.initmod   = function(params){
-                                                                                debug('initmod',mod.name);
+        
               ext         = mod.rd(params,'ext',ext);
               $           = mod.rd(params,'$',$);
               datatype    = mod.rd(params,'datatype',datatype);
@@ -273,7 +273,7 @@
   
   
         obj.init    = async function(){
-                                                                                debug('init',obj.version,mod.name,mod.par.name);
+                                                                                debug('init',obj.version);
               newfile   = mod['new-file'];
               
               if(!newfile)debugger;
@@ -291,7 +291,6 @@
         
         async function libs(){
         
-              if(!ext)debugger;
               [server]      = await ext.text.libs('html/file-nav/js/server.js.api');
               
               server        = eval(server);
