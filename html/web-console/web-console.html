@@ -8,7 +8,7 @@
             <style>
             
   #console
-    {border:1px solid lightgray;height:50px}
+    {border:1px solid lightgray;min-height:50px}
     
     
   #ftr
@@ -69,20 +69,20 @@
         version   : 'v2.0',
   };
   
-        var df=false,did='console'
+        var df=obj.df=true,did='web-console'
         ;
         
-        var ext,$,ace,embed
+        var ext,$,ace,embed,config={}
         ;
         
         obj.initmod   = function(params){
         
-              ext       = params.ext;
-              $         = params.$;
-              ace       = params.ace;
-              embed     = params.embed;
-              
-              ('echo' in params) && (echo=params.echo);
+              ext       = mod.rd(params,'ext',ext);
+              $         = mod.rd(params,'$',$);
+              ace       = mod.rd(params,'ace',ace);
+              embed     = mod.rd(params,'embed',embed);
+              config    = mod.rd(params,'config',config);
+              echo      = mod.rd(params,'echo',echo);
               
         }//initmod
         
@@ -123,6 +123,12 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
+              var node    = $(dom,'config');
+              if(node){
+                    node.remove();
+              }
+              config    = Object.assign(config,mod.config(node));
+                                                                                debug('config',config);
                                                                                 
               target    = dom;
               if(embed){
@@ -131,6 +137,12 @@
               
               rd.attr.h();
               rd.attr.height();
+              if(config.h){
+                    def.height    = config.h;
+              }
+              if(config.height){
+                    def.height    = config.height;
+              }
               
               await libs();
               
@@ -383,11 +395,13 @@
   //:
   
   
-        function debug(){
+        function debug(...args){
         
               if(!df && !obj.df)return;
-              var str   = [...arguments].join(' ');
-              window.console.log(`[ ${did} ]`,str);
+              args.unshift(`[ ${did} ]`);
+              window.console.groupCollapsed.apply(window.console,args);
+              window.console.trace();
+              window.console.groupEnd();
               
         }//debug
         
