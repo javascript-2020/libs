@@ -58,8 +58,11 @@
               var stack       = []
               mod.stack       = stack;
 
+
               mod.base        = {};
               mod.base.add    = params=>Object.assign(mod.base,params);
+              
+              //mod.base.add({ext,$,datatype,keydown,menumod,menu,ace});
 
               
               var ct          = 0;
