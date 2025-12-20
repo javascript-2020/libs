@@ -105,6 +105,8 @@
               con                 = mod['web-console'];
               obj.console         = con;
               
+              if(!ext)debugger;
+              
               filemod.initmod({ext,$,menu,menumod,complete,source});
               editor.initmod({ext,$,menu,ace});
               con.initmod({ext,$,ace});
