@@ -69,7 +69,7 @@
         version   : 'v2.0',
   };
   
-        var df=false,did='console'
+        var df=obj.df=true,did='web-console'
         ;
         
         var ext,$,ace,embed,config={}
@@ -395,11 +395,13 @@
   //:
   
   
-        function debug(){
+        function debug(...args){
         
               if(!df && !obj.df)return;
-              var str   = [...arguments].join(' ');
-              window.console.log(`[ ${did} ]`,str);
+              args.unshift(`[ ${did} ]`);
+              window.console.groupCollapsed.apply(window.console,args);
+              window.console.trace();
+              window.console.groupEnd();
               
         }//debug
         
