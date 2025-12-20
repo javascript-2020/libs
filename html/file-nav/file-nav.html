@@ -168,14 +168,14 @@
       </template>
       
       <script>
-                                                                                //console.log('mod.filenav');
+      
 (function file_nav({mod,dom,host}){
 
   var obj   = {
         version   : 'v2.0'
   };
   
-        var df=false,did='file-nav'
+        var df=true,did='file-nav'
         ;
         
         
@@ -186,9 +186,9 @@
         
         obj.initmod   = function(params){
         
-              ext         = params.ext;
-              $           = params.$;
-              datatype    = params.datatype;
+              ext         = mod.rd(params,'ext',ext);
+              $           = mod.rd(params,'$',$);
+              datatype    = mod.rd(params,'datatype',datatype);
               
         }//initmod
         
@@ -290,7 +290,6 @@
         
         
         async function libs(){
-        
         
               [server]      = await ext.text.libs('html/file-nav/js/server.js.api');
               
