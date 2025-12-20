@@ -197,14 +197,17 @@
               
               var api         = [
                                       'assert','clear','count','countReset','debug','dir','dirxml','error','group','groupCollapsed',
-                                      'groupEnd','info','log','profile','Non-standard','profileEnd','Non-standard','table','time',
+                                      'groupEnd','info','log','profile','profileEnd','Non-standard','table','time',
                                       'timeEnd','timeLog','timeStamp','Non-standard','trace','warn'
                                 ];
               api.forEach(name=>{
               
-                if(!window.console[name])debugger;
-                console[name]=window.console[name].bind(window.console)
-                
+                    var fn    = ()=>{};
+                    if(window.console[name]){
+                          fn    = window.console[name].bind(window.console);
+                    }
+                    console[name]   = fn;
+                    
               });
               
               console.log     = function(){
