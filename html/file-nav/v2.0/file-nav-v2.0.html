@@ -175,7 +175,7 @@
         version   : 'v2.0'
   };
   
-        var df=false,did='file-nav'
+        var df=true,did='file-nav'
         ;
         
         
@@ -185,10 +185,10 @@
         ;
         
         obj.initmod   = function(params){
-        
-              ext         = params.ext;
-              $           = params.$;
-              datatype    = params.datatype;
+                                                                                debug('initmod');
+              ext         = mod.rd(params,'ext',ext);
+              $           = mod.rd(params,'$',$);
+              datatype    = mod.rd(params,'datatype',datatype);
               
         }//initmod
         
