@@ -54,7 +54,7 @@
               mod.create      = create;
               mod.build       = build;
               mod.rd          = rdparams;
-              mod.params      = parseparams;
+              mod.config      = parseconfig;
               
               var stack       = []
               mod.stack       = stack;
@@ -810,7 +810,7 @@
               
               
               
-              function parseparams(txt){
+              function parseconfig(txt){
                 
                     if(typeof txt!='string'){
                           var node    = txt;
@@ -829,7 +829,7 @@
                     var err;
                     try{
                       
-                          var params    = JSON.parse(txt);
+                          var config    = JSON.parse(txt);
                           
                     }//try
                     catch(err2){
@@ -842,7 +842,7 @@
                           return {error};
                     }
                     
-                    return {params};
+                    return {config};
                     
               }//parseparams
               
