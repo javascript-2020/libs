@@ -821,14 +821,16 @@
                           txt         = node.textContent;
                     }
                                                                                 //  remove // comments
-                    txt   = txt.replace(/\/\/.*$/gm, "");        
+                    txt   = txt.replace(/\/\/.*$/gm,'');        
                                                                                 //  remove /* */ comments
-                    txt   = txt.replace(/\/\*[\s\S]*?\*\//g, ""); 
+                    txt   = txt.replace(/\/\*[\s\S]*?\*\//g,''); 
                 
                                                                                 //  trailing commas
                     txt   = txt.replace(/,\s*([}\]])/g,'$1');
+                                                                                //  double quote strings
+                    txt   = txt.replace(/'([^'\\]*(\\.[^'\\]*)*)'/g,'"$1"');
                                                                                 //  quote keys
-                    txt   = txt.replace(/([{,]\s*)([A-Za-z_][A-Za-z0-9_]*)\s*:/g, '$1"$2":');
+                    txt   = txt.replace(/([{,]\s*)([A-Za-z_][A-Za-z0-9_]*)\s*:/g,'$1"$2":');
                                                                                 console.log(txt);
                     var err;
                     try{
