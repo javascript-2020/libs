@@ -291,7 +291,7 @@
         
         async function libs(){
         
-        
+              if(!ext)debugger;
               [server]      = await ext.text.libs('html/file-nav/js/server.js.api');
               
               server        = eval(server);
