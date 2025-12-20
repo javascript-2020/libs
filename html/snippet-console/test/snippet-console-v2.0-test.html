@@ -38,12 +38,12 @@
   //:
   
   
-        mod.stack.add   = init;
-        
         async function init(){
                                                                                 debug('init');
                                                                                 
               menu              = menumod();
+              
+              mod.base.add({ext,$,datatype,keydown,menumod,menu,ace});
               
               log               = mod['log-mod'];
               
