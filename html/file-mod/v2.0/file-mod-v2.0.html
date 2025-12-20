@@ -5,20 +5,20 @@
       <template shadowrootmode=open>
       
             <style>
-
+            
   :host
     {all:initial;font-family:arial}
-  
     
-  #root 
+    
+  #root
     {display:inline-flex;gap:5px;margin-right:5px;position:relative}
-
+    
   .icon
     {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:30px;height:30px;cursor:pointer}
-
+    
     
             </style>
-
+            
             
             <div id=root style='visibility:hidden'>
             
@@ -31,30 +31,30 @@
                   <electron-fs component></electron-fs>
                   
             </div>
-
+            
             
       </template>
       
       <script>
-
-
+      
+      
       
 (function filemod({mod,dom,host}){
-  
+
   var obj       = {
         version   : 'v1.0'
   };
   
         var df=false,did='file-mod'
         ;
-
-
-                                                                                
+        
+        
+        
         var ext,$,menumod,menu,complete,source,focus,log
         ;
-          
+        
         obj.initmod   = function(params){
-          
+        
               ext             = mod.rd(params,'ext',ext);
               $               = mod.rd(params,'$',$);
               menumod         = mod.rd(params,'menumod',menumod);
@@ -66,10 +66,10 @@
               log             = mod.rd(params,'log',log);
               
         }//initmod
-
-
-  //vars:-
         
+        
+  //vars:-
+  
         var localfile;
         var github;
         var fileserver;
@@ -80,29 +80,30 @@
         
         var cur;
         Object.defineProperty(obj,'cur',{get:()=>cur,set:v=>cur=v});
-
-
+        
+        
         var root;
         var shadow;
-
+        
         
         var btn   = {};
-
-          
+        
+        
   //:
-
-              
+  
+  
         obj.init    = async function(){
                                                                                 //debug(obj.version);
-            
+                                                                                
             if(!menumod){
                   menumod   = menu.menumod;
             }
-
+            
             
             var filemod   = obj;
             //mod.base.add({filemod,source,log});
             //await mod.auto();
+            if(!ext)debugger;
             
             
             localfile                 = mod['local-file'];
@@ -127,7 +128,7 @@
             
             electron                  = mod['electron-fs'];
             obj.electron              = electron;
-
+            
             
             localfile.initmod({ext,$,menu,filemod:obj,source});
             fileserver.initmod({ext,$,menu,filemod:obj,source});
@@ -136,8 +137,8 @@
             googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source});
             ftpserver.initmod({ext,$,datatype,menu,source,log});
             electron.initmod({ext,$,menu,source,log});
-
-
+            
+            
             await Promise.all([
                   localfile.init(),
                   fileserver.init(),
@@ -147,7 +148,7 @@
                   ftpserver.init(),
                   electron.init(),
             ]);
-
+            
             
             complete                        ||= {};
             localfile.load.complete           = complete.load;
@@ -164,25 +165,25 @@
             ftpserver.save.complete           = complete.save;
             electron.load.complete            = complete.load;
             electron.save.complete            = complete.save;
-
-
+            
+            
             
         }//init
-
-                                      
+        
+        
   //:
-
-              
+  
+  
         obj.initdom   = function(){
         
               shadow                            = host.shadowRoot;
-
-              var style                         = $(shadow,'style'); 
+              
+              var style                         = $(shadow,'style');
               menu.add.style(shadow);
-
+              
               export_icon_css();
-
-
+              
+              
               localfile.initdom();
               github.initdom();
               fileserver.initdom();
@@ -190,21 +191,21 @@
               googlestorage.initdom();
               ftpserver.initdom();
               electron.initdom();
-
-
-              $(shadow,'#root').style.visibility    = '';
-
               
-
+              
+              $(shadow,'#root').style.visibility    = '';
+              
+              
+              
               
         }//initdom
-                    
-
+        
+        
   //:
   
-          
+  
         obj.save    = function(file){return save(file)}
-          
+        
         async function save(file){
                                                                                 debug('save');
               if(!file){
@@ -215,11 +216,11 @@
                     file    = cur;
               }
                                                                                 debug(file);
-              
+                                                                                
               var blob    = await source();
               
               switch(cur.type){
-                
+              
                 case 'github'               : await github.save(file,blob);               break;
                 case 'localfile'            : await localfile.save(file,blob);            break;
                 case 'file-server'          : await fileserver.save(file,blob);           break;
@@ -229,18 +230,18 @@
                 case 'electron'             : await electron.save(file,blob);             break;
                 
               }//switch
-        
+              
         }//save
-                  
-                  
+        
+        
         obj.clear   = function(){
-          
+        
               if(!cur){
                     return 'no file';
               }
               
               switch(cur.type){
-                
+              
                 case 'github'           : github.clear();               break;
                 case 'local'            : localfile.clear();            break;
                 case 'file-server'      : fileserver.clear();           break;
@@ -254,14 +255,14 @@
               cur   = null;
               
         }//clear
-                  
-
+        
+        
   //:
   
   
         obj.new       = newfile;
         obj.newfile   = newfile;
-
+        
         
         function newfile({
         
@@ -278,7 +279,7 @@
               title,icon
               
         }){
-              
+        
               filetype===undefined && (filetype=null);
               ft===undefined && (ft=null);
               abs===undefined && (abs=null);
@@ -306,7 +307,7 @@
               file.path         = path;
               file.name         = name||filename;
               file.filename     = name||filename;
-
+              
               file.rel          = rel;
               
               file.kind         = kind;
@@ -314,7 +315,7 @@
               file.ctime        = ctime;
               file.mtime        = mtime;
               file.atime        = atime;
-
+              
               file.title        = title;
               file.icon         = icon;
               
@@ -335,7 +336,7 @@
               var type    = file.filetype||file.type;
               
               switch(type){
-                
+              
                 case 'github'           : file    = github.export(cur);               break;
                 case 'local'            : return 'local';
                 case 'file-server '     : file    = fileserver.export(cur);           break;
@@ -352,19 +353,19 @@
               return file;
               
         }//export
-                  
-                  
+        
+        
         obj.import    = function(file){
-          
+        
         }//import
-
-
-
+        
+        
+        
   //:
   
   
         function export_icon_css(){
-          
+        
               var style   = $(shadow,'style');
                                                                                 //console.log(style);
               var sheet   = style.sheet;
@@ -385,7 +386,7 @@
   
         function debug(...args){
         
-              if(!df && !obj.df)return;  
+              if(!df && !obj.df)return;
               args.unshift(`[ ${did} ]`);
               console.groupCollapsed.apply(console,args);
               console.trace();
@@ -393,15 +394,15 @@
               
         }//debug
         
-
+        
         
   return obj;
-
-//filemod  
+  
+//filemod
 })
-            
-      </script>
 
+      </script>
+      
 </file-mod v2.0>
 
 
