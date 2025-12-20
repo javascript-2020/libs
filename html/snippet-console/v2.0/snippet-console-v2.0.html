@@ -51,7 +51,7 @@
         ;
         
         
-        var ext,$,ace,menu
+        var ext,$,ace,menu,config={}
         ;
         
         obj.initmod   = function(params){
@@ -61,6 +61,7 @@
               ace           = mod.rd(params,'ace',ace);
               menu          = mod.rd(params,'menu',menu);
               menumod       = mod.rd(params,'menumod',menumod);
+              config        = mod.rd(params,'config',config);
               
         }//initmod
         
@@ -96,6 +97,14 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
+              var node          = $(dom,'config');
+              if(node){
+                    node.remove();
+              }
+              config    = Object.assign(config,mod.config(node));
+                                                                                debug('config',config);
+                                                                                
+                                                                                
               def                 = dom.innerHTML;
               
               filemod             = mod['file-mod'];
@@ -110,7 +119,7 @@
               
               filemod.initmod({ext,$,menu,menumod,complete,source});
               editor.initmod({ext,$,menu,ace});
-              con.initmod({ext,$,ace});
+              con.initmod({ext,$,ace,config:config['web-editor']});
               
               
               await Promise.all([
@@ -192,47 +201,7 @@
         
               var js          = editor.getvalue();
               
-              
-/*
-
-              var console     = {};
-              
-              var api         = [
-                                      'assert','clear','count','countReset','debug','dir','dirxml','error','group','groupCollapsed',
-                                      'groupEnd','info','log','profile','profileEnd','table','time',
-                                      'timeEnd','timeLog','timeStamp','trace','warn'
-                                ];
-              api.forEach(name=>{
-              
-                    var fn    = ()=>{};
-                    if(window.console[name]){
-                          fn    = window.console[name].bind(window.console);
-                    }
-                    console[name]   = fn;
-                    
-              });
-              
-              console.log     = function(){
-              
-                                      con.log.apply(null,arguments);
-                                      
-                                }//log
-              console.clear   = function(){
-              
-                                      con.clear();
-                                      
-                                }//clear
-              console.error   = function(){
-              
-                                      con.error.apply(null,arguments);
-                                      
-                                }//error
-                                
-*/
-
-
               sandbox.run(js,{console:con});
-              
               
               editor.focus();
               
