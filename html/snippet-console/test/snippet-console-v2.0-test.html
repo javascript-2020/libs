@@ -6,26 +6,26 @@
       <head>
       
             <title>snippet-console v2.0 test</title>
-
+            
             <base href='https://libs.ext-code.com/html/snippet-console/'>
-
+            
             
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+            
             <script init>
                                                                                 console.clear();
                                                                                 console.log('snippet-console-v2.0-test.html');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var df=true;
-
+        
         var ace;
         
         var ext;
         var $;
         var datatype;
         var debug;
-
+        
         var menu;
         
         var snippet       = {};
@@ -34,17 +34,17 @@
         
         var log;
         
-
-  //:
-
         
+  //:
+  
+  
         mod.stack.add   = init;
         
         async function init(){
                                                                                 debug('init');
-
+                                                                                
               menu              = menumod();
-
+              
               log               = mod['log-mod'];
               
               snippet.inline    = mod.inline;
@@ -54,7 +54,7 @@
               
               snippet.inline.initmod({ext,$,ace,menu});
               snippet.src.initmod({ext,$,ace,menu});
-
+              
               
               await Promise.all([
                     snippet.inline.init(),
@@ -62,19 +62,19 @@
                     log.init(),
               ]);
               
-
+              
               initdom(document.body);
-
-
+              
+              
         }//init
-
-
+        
+        
 (async()=>{
 
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js',
               'js/core/datatype.js',
@@ -83,16 +83,16 @@
               'js/debug/debug.js',
         );
         [$,datatype,menumod,keydown,debug]   = await promise;
-  
-        ace   = await $.editor.ace();
-
-        mod.stack.complete;
-                      
-})();
         
+        ace   = await $.editor.ace();
+        
+        mod.stack.complete;
+        
+})();
+
 
             </script init>
-      
+            
             <style>
   html
     {font-family:arial}
@@ -102,13 +102,13 @@
     
   code
     {border:1px solid lightgray;padding:10px;font-family:monospace;white-space:pre}
-
+    
   #inline
     {margin:20px 0}
   #src
     {margin:20px 0}
-
-
+    
+    
   .icon
     {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:30px;height:30px;cursor:pointer}
     
@@ -123,10 +123,10 @@
                   snippet-console v2.0 test
             </h3>
             
-            <snippet-console id=inline component v2.0>
-                        
+            <snippet-console v2.0 id=inline component>
+            
         fn();
-
+        
         
         functon fn(){
         
@@ -146,42 +146,42 @@
             </snippet-console>
             
             
-            <snippet-console id=src component v2.0 src='ex/ex1.js'></snippet-console>
+            <snippet-console v2.0 id=src component src='ex/ex1.js'></snippet-console>
             
-
+            
             <log-mod component></log-mod>
             
       </body>
       
       
       <script>
-
+      
       
         var root;
         var code;
         
-
+        
         function initdom(rootnode){
         
               root    = rootnode;
               
               log.initdom();
               
-
+              
               snippet.inline.initdom();
               
               snippet.inline.editor.height   = 200;
               snippet.inline.console.height  = 200;
-
-
+              
+              
               snippet.src.initdom();
               snippet.src.console.height  = 200;
               
-
+              
               
         }//initdom
-      
-
+        
+        
   //:
   
   
