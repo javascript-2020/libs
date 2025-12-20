@@ -200,7 +200,12 @@
                                       'groupEnd','info','log','profile','Non-standard','profileEnd','Non-standard','table','time',
                                       'timeEnd','timeLog','timeStamp','Non-standard','trace','warn'
                                 ];
-              api.forEach(name=>console[name]=window.console[name].bind(window.console));
+              api.forEach(name=>{
+              
+                if(!window.console[name])debugger;
+                console[name]=window.console[name].bind(window.console)
+                
+              });
               
               console.log     = function(){
               
