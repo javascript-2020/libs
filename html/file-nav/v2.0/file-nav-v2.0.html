@@ -185,7 +185,7 @@
         ;
         
         obj.initmod   = function(params){
-                                                                                debug('initmod');
+                                                                                debug('initmod',mod.name);
               ext         = mod.rd(params,'ext',ext);
               $           = mod.rd(params,'$',$);
               datatype    = mod.rd(params,'datatype',datatype);
@@ -273,7 +273,7 @@
   
   
         obj.init    = async function(){
-                                                                                debug('init',obj.version);
+                                                                                debug('init',obj.version,mod.name);
               newfile   = mod['new-file'];
               
               if(!newfile)debugger;
