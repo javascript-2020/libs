@@ -197,6 +197,7 @@
         
         async function libs(){
         
+              if(!ext)debugger;
               [fs]    = await ext.load.libs('js/io/file-server/file-server.js');
               
         }//libs
