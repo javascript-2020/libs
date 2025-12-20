@@ -29,6 +29,7 @@
                   
                   <div>
                         <input value=run type=button>
+                        <input value=clear type=button>
                   </div>
                   
                   <web-console component></web-console>
@@ -165,7 +166,7 @@
               
               
               $(shadow,'[value=run]').onclick       = btn.run;
-              
+              $(shadow,'[value=clear]').onclick     = btn.clear;
               
               con.initdom();
               
@@ -193,6 +194,14 @@
               
               
               var console     = {};
+              
+              var api         = [
+                                      'assert','clear','count','countReset','debug','dir','dirxml','error','group','groupCollapsed',
+                                      'groupEnd','info','log','profile','Non-standard','profileEnd','Non-standard','table','time',
+                                      'timeEnd','timeLog','timeStamp','Non-standard','trace','warn'
+                                ];
+              api.forEach(name=>console[name]=window.console[name].bind(window.console));
+              
               console.log     = function(){
               
                                       window.console.log.apply(window.console,arguments);
@@ -212,12 +221,20 @@
                                       
                                 }//error
                                 
+                                
               sandbox.run(js,{console});
               
               
               editor.focus();
               
         }//run
+        
+        
+        btn.clear   = function(){
+        
+              con.clear();
+              
+        }//clear
         
         
   //:
