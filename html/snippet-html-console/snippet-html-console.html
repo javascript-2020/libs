@@ -285,9 +285,9 @@
               args.unshift(`[ ${did} ]`);
               var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
               var args2   = [fmt].concat(args);
-              console.groupCollapsed.apply(console,args2);
-              console.trace();
-              console.groupEnd();
+              window.console.groupCollapsed.apply(window.console,args2);
+              window.console.trace();
+              window.console.groupEnd();
               
         }//debug
         
