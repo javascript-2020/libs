@@ -88,6 +88,7 @@
         var root;
         
         
+        var rd          = {}
         var attr        = {};
         var btn         = {};
         
@@ -97,18 +98,8 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
-              var node          = $(dom,'config');
-              if(node){
-                    node.remove();
-              }
-              node      = mod.config(node);
-              if(node.error){
-              }
-                                                                                console.log('node.config',node.config);
-              config    = Object.assign(config,node.config);
-                                                                                console.log('config',config);
-                                                                                
-                                                                                
+              rd.config();
+              
               def                 = dom.innerHTML;
               
               filemod             = mod['file-mod'];
@@ -151,6 +142,21 @@
               await Promise.all(list);
               
         }//libs
+        
+        
+        rd.config   = function(){
+        
+              var node          = $(dom,'config');
+              if(node){
+                    node.remove();
+              }
+              node      = mod.config(node);
+              if(node.error){
+              }
+                                                                                //console.log('node.config',node.config);
+              config    = Object.assign(config,node.config);
+                                                                                //console.log('config',config);
+        }//config
         
         
         attr.src    = async function(){
