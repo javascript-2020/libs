@@ -165,7 +165,7 @@
         version   : 'v2.0'
   };
   
-        var df=false
+        var df=obj.df=true,did='wen-editor'
         ;
         
         var ext,$,menu,menumod,ace,kd2,on2,config={},embed
@@ -849,11 +849,15 @@
   //:
   
   
-        function debug(){
+        function debug(...args){
         
               if(!df)return;
-              var str   = [...arguments].join(' ');
-              console.log('[ editor ]',str);
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              console.groupCollapsed.apply(console,args2);
+              console.trace();
+              console.groupEnd();
               
         }//debug
         
