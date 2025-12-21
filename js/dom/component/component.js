@@ -844,8 +844,9 @@
                           
                     }//catch
                     if(err){
+                                                                                console.error(err);
                           var error     = err.toString();
-                          return {error};
+                          return {config:{},error};
                     }
                     
                     return {config};
