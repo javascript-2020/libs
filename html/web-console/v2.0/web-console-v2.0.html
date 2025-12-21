@@ -127,8 +127,10 @@
               if(node){
                     node.remove();
               }
-              debugger;
-              config    = Object.assign(config,mod.config(node));
+              node      = mod.condif(node);
+              if(node.error){
+              }
+              config    = Object.assign(config,node.config);
                                                                                 debug('config',config);
                                                                                 
               target    = dom;
