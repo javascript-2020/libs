@@ -123,16 +123,8 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
-              var node    = $(dom,'config');
-              if(node){
-                    node.remove();
-              }
-              node      = mod.config(node);
-              if(node.error){
-              }
-              config    = Object.assign(config,node.config);
-                                                                                debug('config',config);
-                                                                                
+              rd.config();
+              
               target    = dom;
               if(embed){
                     target    = embed;
@@ -201,6 +193,20 @@
   //:
   
   
+        rd.config   = function(){
+        
+              var node    = $(dom,'config');
+              if(node){
+                    node.remove();
+              }
+              node      = mod.config(node);
+              if(node.error){
+              }
+              config    = Object.assign(config,node.config);
+                                                                                debug('config',config);
+        }//config
+        
+        
         var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
         
         rd.attr.h   = function(){
@@ -375,7 +381,7 @@
         Object.defineProperty(obj,'height',{
         
               set   : v=>{
-                                                                          //window.console.log('console.height',v);
+                                                                          window.console.log('console.height',v);
                     if(!v)return;
                     if(typeof v=='number'){
                           v   = v+'px';
