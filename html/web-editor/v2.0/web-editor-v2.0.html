@@ -460,13 +460,17 @@
                     filename(src);
               }
               
+              
+              obj.height    = config.height;
+              
+              
         }//initdom
         
         
   //:
   
   
-        var initial=true;
+        var initial   = true;
         
         async function setup(node,mode='javascript'){
         
@@ -774,6 +778,10 @@
         
               set   : v=>{
               
+                    if(v===undefined){
+                          return;
+                    }
+                    
                     if(typeof v=='number'){
                           v   = v+'px';
                     }
