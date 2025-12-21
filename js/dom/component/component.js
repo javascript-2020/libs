@@ -797,12 +797,16 @@
               
 
               
-              function rdparams(params,name,value){
+              function rdparams(params,name,value,def){
                 
                     if(arguments.length==4){
                     }
                     if(name in params){
-                          return params[name];
+                          value   = params[name];
+                          if(def){
+                                value   ??= def;
+                          }
+                          return value;
                     }
                     return value;
                     
