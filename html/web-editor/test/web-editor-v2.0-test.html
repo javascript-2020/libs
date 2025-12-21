@@ -4,14 +4,14 @@
 <html>
 
       <head>
-
+      
       
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+            
             <script init>
                                                                                 console.clear();
                                                                                 console.log('editor-test-v2.0.html');
-                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));  
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
         var df                    = true;
         var debug_id              = 'editor.html';
         
@@ -26,15 +26,17 @@
         
   //:
   
-        
+  
         async function init(){
                                                                                 console.log('init');
               menu                      = menumod();
-
+              
+              mod.base.add({ext,$,datatype,keydown,menumod,});
+              
               
               editor                    = mod['web-editor'];
               
-              editor.initmod({ext});//,$});//,menumod,menu});
+              editor.initmod({ext,$,menumod,menu});
               
               await editor.init();
               
@@ -45,21 +47,21 @@
               
               keydown.add(kd);
               
-
+              
               
               initdom(document.body);
-
-
-  
+              
+              
+              
         }//init
-  
-
+        
+        
 (async()=>{
 
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js',
               'js/core/datatype.js',
@@ -67,14 +69,14 @@
               'js/dom/keydown/keydown.js'
         );
         [$,datatype,menumod,keydown]   = await promise;
-  
+        
         mod.stack.complete;
-              
+        
 })();
 
 
             </script init>
-
+            
             <style>
             
   html
@@ -83,53 +85,70 @@
   body
     {height:calc(100% - 16px)}
     
+    
+    
+    
+  [component]
+    {display:none}
+    
+  web-editor:not(:defined)
+    {opacity:0;display:block}
+    
+  *:not(:defined)
+    {opacity:0;display:block}
+    
+    
             </style>
-
+            
       </head>
-
+      
       
       <body>
-
-
+      
+      
       
             <web-editor v2.0 component>
-
+                  <config>
+                        {
+                              height    : '300px'
+                        }
+                  </config>
 function fn(){
   console.log(123);
 }
 
             </web-editor>
-
-
-
+            
+            
+            
       </body>
-
+      
       
       <script initdom>
-
-
+      
+      
   //:
   
   
             function initdom(rootnode){
-              
+            
                   var root                    = rootnode;
-
+                  
                   
                   editor.initdom();
-
-
-
+                  
+                  
+                  
                   
             }//initdom
-
-
+            
+            
   //:
   
   
             function focus(){
-              
-                  editor.focus();              
+            
+                  editor.focus();
                   
             }//focus
             
@@ -138,19 +157,19 @@ function fn(){
   
   
             function kd(e){
-    
+            
                   if(e.key==' ' && e.ctrlKey){
                         menumod.open();
                   }
                   
             }//kd
-
-
-  
-  
+            
+            
+            
+            
       </script>
       
 <html>
 
-      
-      
+
+
