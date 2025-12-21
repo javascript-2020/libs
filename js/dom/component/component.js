@@ -813,7 +813,7 @@
               function parseconfig(txt){
                 
                     if(!txt){
-                          return {};
+                          return {config:{}};
                     }
                     
                     if(typeof txt!='string'){
