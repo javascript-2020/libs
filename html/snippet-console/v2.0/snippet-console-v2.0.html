@@ -101,7 +101,6 @@
               if(node){
                     node.remove();
               }
-              debugger;
               node      = mod.config(node);
               if(node.error){
               }
@@ -119,8 +118,6 @@
               
               con                 = mod['web-console'];
               obj.console         = con;
-              
-              if(!ext)debugger;
               
               filemod.initmod({ext,$,menu,menumod,complete,source});
               editor.initmod({ext,$,menu,ace});
