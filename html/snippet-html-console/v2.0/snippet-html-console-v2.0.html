@@ -63,17 +63,18 @@
         ;
         
         
-        var ext,$,menu,ace,menumod,log
+        var ext,$,menu,ace,menumod,log,config
         ;
         
         obj.initmod   = function(params){
         
-              ext       = params.ext;
-              $         = params.$;
-              menu      = params.menu;
-              ace       = params.ace;
-              menumod   = params.menumod;
-              log       = params.log;
+              ext           = mod.rd(params,'ext',ext);
+              $             = mod.rd(params,'$',$);
+              menu          = mod.rd(params,'menu',menu);
+              ace           = mod.rd(params,'ace',ace);
+              menumod       = mod.rd(params,'menumod',menumod);
+              log           = mod.rd(params,'log',log);
+              config        = mod.rd(params,'config',config,{});
               
         }//initmod
         
@@ -107,8 +108,9 @@
         
         
         
+        
         var rd                = {};
-        var attr              = {};
+        rd.attr               = {};
         var btn               = {};
         
         
@@ -120,22 +122,9 @@
                                                                                 debug('init',obj.version);
                                                                                 
               rd.config();
-              
-              
+              rd.attr.h();
+              rd.attr.height();
               def.html          = $.htmlentities.decode(dom);
-              
-              var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
-              if(dom.hasAttribute('h')){
-                    var h   = dom.getAttribute('h');
-                    h       = int(h);
-                    def.console.height    = h;
-                    
-              }
-              if(dom.hasAttribute('height')){
-                    var h   = dom.getAttribute('height');
-                    h       = int(h);
-                    def.console.height    = h;
-              }
               
               
               filemod           = mod['file-mod'];
@@ -151,7 +140,7 @@
               
               
               await Promise.all([
-                    attr.src(),
+                    rd.attr.src(),
                     filemod.init(),
                     editor.init(),
                     console.init(),
@@ -177,7 +166,33 @@
         }//config
         
         
-        attr.src    = async function(){
+        var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
+        
+        
+        rd.attr.h   = function(){
+        
+              if(dom.hasAttribute('h')){
+                    var h   = dom.getAttribute('h');
+                    h       = int(h);
+                    def.console.height    = h;
+                    
+              }
+              
+        }//h
+        
+        
+        rd.attr.height    = function(){
+        
+              if(dom.hasAttribute('height')){
+                    var h   = dom.getAttribute('height');
+                    h       = int(h);
+                    def.console.height    = h;
+              }
+              
+        }//height
+        
+        
+        rd.attr.src    = async function(){
         
               if(!dom.hasAttribute('src'))return;
               src         = dom.getAttribute('src');
