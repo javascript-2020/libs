@@ -81,7 +81,7 @@
               $         = mod.rd(params,'$',$);
               ace       = mod.rd(params,'ace',ace);
               embed     = mod.rd(params,'embed',embed);
-              config    = mod.rd(params,'config',config);
+              config    = mod.rd(params,'config',config,{});
               echo      = mod.rd(params,'echo',echo);
               
         }//initmod
@@ -127,7 +127,10 @@
               if(node){
                     node.remove();
               }
-              config    = Object.assign(config,mod.config(node));
+              node      = mod.config(node);
+              if(node.error){
+              }
+              config    = Object.assign(config,node.config);
                                                                                 debug('config',config);
                                                                                 
               target    = dom;
@@ -235,6 +238,7 @@
               
               var node    = $(shadow,'#console');
               con         = jsconsole.create(node);
+              console.log('def.height',def.height);
               obj.height  = def.height;
               
               
