@@ -465,7 +465,7 @@
                     host.style.cssText    = config.cssText;
               }
               
-              
+              editor.resize();
               update();
               
               
@@ -505,11 +505,8 @@
               editor.session.setMode('ace/mode/'+mode)
               editor.session.on('change',on.change);
               
-              update();
-              editor.focus();
               
-              
-        }//editor
+        }//setup
         
         
         on.change   = function(e){
