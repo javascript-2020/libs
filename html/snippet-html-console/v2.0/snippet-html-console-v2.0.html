@@ -212,7 +212,7 @@
               html              = sandbox+html;
               
               var niframe       = iframe.cloneNode(true);
-              niframe.log       = log;
+              niframe.console   = console;
               niframe.srcdoc    = html;
               niframe.onload    = onload;
               hldr.append(niframe);
@@ -225,7 +225,7 @@
                     
               }//onload
               
-              
+/*
               function log(){debugger;
               
                     var args    = [...arguments];
@@ -234,7 +234,8 @@
                     console.log.apply(console,arguments);
                     
               }//log
-              
+*/
+
         }//run
         
         
@@ -242,7 +243,7 @@
         
               <script>
               
-                    window.console.log    = window.frameElement.log;
+                    window.console.log    = window.frameElement.console;
                     
               </scr`+`ipt>
               
