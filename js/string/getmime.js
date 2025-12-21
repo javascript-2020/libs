@@ -10,7 +10,9 @@
 
 */
 
-        module.exports    = getmime;
+if(typeof module!=='undefined'){
+      module.exports=getmime;
+}
 
 
 function getmime(file){
