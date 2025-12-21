@@ -46,8 +46,6 @@
   //:
   
   
-        mod.stack.add   = init;
-        
         async function init(){
                                                                                 debug('init');
                                                                                 
@@ -139,10 +137,11 @@
             
             
             
-            <snippet-html-console id=inline component v2.0 h=100 mode=html>
+            <snippet-html-console v2.0 id=inline component mode=html>
                   <config>
                         {
-                              'web-console'    : {height:'300px'}
+                              'web-console'     : {height:'300px'},
+                              'web-editor'      : {cssText:'display:block;height:400px'},
                         }
                   </config>
       &#x3C;h3&#x3E;
@@ -155,7 +154,8 @@
             </snippet-html-console>
             
             
-            <snippet-html-console id=src component v2.0 mode=html src='ex/ex1.html'></snippet-html-console>
+            <snippet-html-console id=src component v2.0 mode=html src='ex/ex1.html'>
+            </snippet-html-console>
             
             
       </body>
@@ -174,12 +174,11 @@
               
               var node          = $('#inline');
               snippet.inline.initdom();
-              //snippet.inline.console.height    = 200;
               
               
               var node          = $('#src');
               snippet.src.initdom();
-              snippet.src.console.height    = 200;
+              //snippet.src.console.height    = 200;
               
               
               
