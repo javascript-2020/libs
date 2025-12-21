@@ -101,7 +101,10 @@
               if(node){
                     node.remove();
               }
-              config    = Object.assign(config,mod.config(node));
+              node      = mod.config(node);
+              if(node.error){
+              }
+              config    = Object.assign(config,node.config);
                                                                                 debug('config',config);
                                                                                 
                                                                                 
