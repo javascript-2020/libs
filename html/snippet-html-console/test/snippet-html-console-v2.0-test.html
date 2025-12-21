@@ -8,10 +8,10 @@
             <title>snippet-html-console v2.0 test</title>
             
             <base href='https://libs.ext-code.com/html/snippet-html-console/'>
-
+            
             
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+            
             <script init>
                                                                                 console.clear();
                                                                                 console.log('snippet-html-console-test-v2.0.html');
@@ -19,43 +19,45 @@
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var df=true
         ;
-
-
+        
+        
         var ace;
-
+        
         
         var ext;
         var $;
         var datatype;
-        var debug;
+        var keydown;
         var menumod;
+        var debug;
         
         var menu;
         
         var snippet           = {};
         snippet.inline        = null;
         snippet.src           = null;
-
+        
         
         var html;
         
-
         
-
+        
+        
   //:
-
-
+  
+  
         mod.stack.add   = init;
-              
+        
         async function init(){
                                                                                 debug('init');
-              
+                                                                                
               menu                  = menumod();
               
+              mod.base.add({ext,$,datatype,keydown,menumod,});
               
               snippet.inline        = mod.inline;
               snippet.src           = mod.src;
-
+              
               
               snippet.inline.initmod({ext,$,menu,ace});
               snippet.src.initmod({ext,$,menu,ace});
@@ -67,40 +69,41 @@
               ]);
               
               
-          
+              
               await initdom(document.body);
-
-
+              
+              
         }//init
-
-
+        
+        
 (async()=>{
 
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
               'js/debug/debug.js',
+              'js/dom/keydown/keydown.js',
               'js/dom/menumod/menumod.js',
         );
-        [$,datatype,debug,menumod]   = await promise;
-
-
+        [$,datatype,debug,keydown,menumod]   = await promise;
+        
+        
         ace   = await $.editor.ace();
         
         //html    = await ext.text.libs('html/snippet-html-console/ex/ex1.html');
-
-
+        
+        
         mod.stack.complete;
-
+        
 })();
 
 
             </script init>
-      
+            
             <style>
   html
     {height:100%}
@@ -110,12 +113,12 @@
     
   code
     {border:1px solid lightgray;padding:10px;font-family:monospace;white-space:pre;font-size:16px}
-
+    
 /*
   snippet-html
     {height:300px}
-*/    
-  
+*/
+
   #inline
     {margin:20px 0}
     
@@ -134,54 +137,58 @@
                   snippet-html-console v2.0 test
             </h3>
             
-
+            
             
             <snippet-html-console id=inline component v2.0 h=100 mode=html>
-            
+                  <config>
+                        {
+                              'web-console'    : {height:'300px'}
+                        }
+                  </config>
       &#x3C;h3&#x3E;
             test
       &#x3C;/h3&#x3E;
       &#x3C;script&#x3E;
             console.log(&#x27;xyz&#x27;);
       &#x3C;/script&#x3E;
-            
+      
             </snippet-html-console>
-
+            
             
             <snippet-html-console id=src component v2.0 mode=html src='ex/ex1.html'></snippet-html-console>
-
-      
+            
+            
       </body>
       
       
       <script>
-
       
-  
+      
+      
         function initdom(rootnode){
         
               var root          = rootnode;
               
               
-
+              
               
               var node          = $('#inline');
               snippet.inline.initdom();
               //snippet.inline.console.height    = 200;
-
+              
               
               var node          = $('#src');
               snippet.src.initdom();
               snippet.src.console.height    = 200;
               
-
+              
               
         }//initdom
-      
-
-  
-  
-  
+        
+        
+        
+        
+        
       </script>
       
       
