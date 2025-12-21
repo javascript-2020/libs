@@ -799,8 +799,6 @@
               
               function rdparams(params,name,value,def){
                 
-                    if(arguments.length==4){
-                    }
                     if(name in params){
                           var value2    = params[name];
                           if(def){
