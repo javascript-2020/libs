@@ -802,7 +802,7 @@
                     if(name in params){
                           var value2    = params[name];
                           if(def){
-                                value2   ??= value||def;
+                                value2   ??= def;
                           }
                           return value2;
                     }
