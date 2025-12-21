@@ -802,11 +802,11 @@
                     if(arguments.length==4){
                     }
                     if(name in params){
-                          value   = params[name];
+                          var value2    = params[name];
                           if(def){
-                                value   ??= def;
+                                value2   ??= value||def;
                           }
-                          return value;
+                          return value2;
                     }
                     return value;
                     
