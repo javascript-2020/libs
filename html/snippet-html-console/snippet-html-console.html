@@ -7,7 +7,7 @@
       <template shadowrootmode=open>
       
             <style>
-    
+            
   #root
     {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px;
       /*height:100%*/
@@ -29,7 +29,7 @@
             <div id=root>
             
                   <div>
-                        <file-mod component v2.0></filemod>
+                        <file-mod component></filemod>
                   </div>
                   
                   <web-editor component mode=html></web-editor>
@@ -37,7 +37,7 @@
                   <div>
                         <input value=run type=button>
                   </div>
-                              
+                  
                   <div id=hldr part=hldr>
                         <iframe></iframe>
                   </div>
@@ -45,12 +45,12 @@
                   <web-console component></web-console>
                   
             </div>
-      
+            
       </template>
       
       
       <script>
-
+      
       
 (function snippet_html_console({mod,dom,host}){
 
@@ -58,7 +58,7 @@
         version   : 'v2.0',
   };
   
-        var df=true,did='snippet-html'
+        var df=obj.df=true,did='snippet-html'
         ;
         
         
@@ -78,7 +78,7 @@
         
         
   //:
-
+  
   
         var filemod;
         obj.filemod   = null;
@@ -86,7 +86,7 @@
         obj.editor    = null;
         var console;
         obj.console   = null;
-
+        
         
         var host;
         var root;
@@ -96,20 +96,20 @@
         
         var hldr;
         var iframe;
-
+        
         
         var def               = {};
         def.html              = null;
         
         def.console           = {};
         def.console.height    = null;
-
-
+        
+        
         var attr              = {};
         var btn               = {};
         
-
-
+        
+        
   //:
   
   
@@ -129,7 +129,7 @@
                     h       = int(h);
                     def.console.height    = h;
               }
-
+              
               
               filemod           = mod['file-mod'];
               obj.filemod       = filemod;
@@ -137,13 +137,13 @@
               obj.editor        = editor;
               console           = mod['web-console'];
               obj.console       = console;
-
+              
               filemod.initmod({ext,$,menu,menumod,complete,source});
               editor.initmod({ext,$,menu,ace});
               console.initmod({ext,$});
               
-
-              await Promise.all([  
+              
+              await Promise.all([
                     attr.src(),
                     filemod.init(),
                     editor.init(),
@@ -152,10 +152,10 @@
               
               
         }//init
-
-
+        
+        
         attr.src    = async function(){
-          
+        
               if(!dom.hasAttribute('src'))return;
               src         = dom.getAttribute('src');
               var res     = await fetch(src);
@@ -164,14 +164,14 @@
               
         }//src
         
-
+        
   //:
   
   
         obj.initdom    = function(){
-
+        
               var shadow                          = host.shadowRoot;
-
+              
               
               filemod.initdom();
               editor.initdom({mode:'html',fullsize:true,txt:def.html});
@@ -181,25 +181,25 @@
               }
               
               $(shadow,'[value=run]').onclick       = btn.run;
-
-
+              
+              
               hldr                                = $(shadow,'#hldr');
               iframe                              = $(hldr,'iframe');
-
-
+              
+              
               console.initdom();
               console.height    = def.console.height;
               
               console.log('ready');
-
-        }//initdom          
+              
+        }//initdom
         
-
-
+        
+        
         
         
   //:
-
+  
   
         btn.run   = run;
         obj.run   = run;
@@ -227,7 +227,7 @@
               
               
               function log(){
-                
+              
                     var args    = [...arguments];
                     args.unshift('[ snippet-html-console ]');
                     window.console.log.apply(window.console,args);
@@ -247,13 +247,13 @@
               </scr`+`ipt>
               
         `;
-
-  
+        
+        
   //:
   
   
         function source(){
-          
+        
               var txt     = editor.getvalue();
               var blob    = new Blob([txt]);
               return blob;
@@ -270,7 +270,7 @@
         
         
         complete.save   = function(file){
-          
+        
               (log||window.log)?.green(`${file.name} saved`);
               
         }//save
@@ -278,23 +278,27 @@
         
   //:
   
-
-        function debug(){
-          
+  
+        function debug(...args){
+        
               if(!df && !obj.df)return;
-              var str   = [...arguments].join(' ');
-              window.console.log(`[ ${did} ]`,str);
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              console.groupCollapsed.apply(console,args2);
+              console.trace();
+              console.groupEnd();
               
         }//debug
-
-
-  
+        
+        
+        
   return obj;
   
 })//snippet_html_console
 
 
       </script>
-
+      
       
 </snippet-html-console>
