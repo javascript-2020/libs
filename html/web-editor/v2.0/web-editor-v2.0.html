@@ -461,7 +461,6 @@
               }
               
               
-              debugger;
               obj.height    = config.height;
               
               
@@ -786,7 +785,10 @@
                     if(typeof v=='number'){
                           v   = v+'px';
                     }
-                    editor.container.style.height   = v;
+                    
+                    //editor.container.style.height   = v;
+                    host.style.height    = v;
+                    
                     
               },//set
               
