@@ -52,8 +52,10 @@
               mod.create            = create;
               mod.build             = build;
               mod.rd                = rdparams;
+              
               mod.rd.config         = rdconfig;
               mod.config            = parseconfig;
+
               
               var stack             = []
               mod.stack             = stack;
