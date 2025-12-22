@@ -309,7 +309,7 @@
         obj.load    = load;
         
         async function load(file){
-        
+                                                                                debug('load',file);
               var path    = file.abs;
               var buf     = await electron.readFile({path});
               var blob    = new Blob([buf]);
@@ -377,7 +377,7 @@
         obj.save    = save;
         
         async function save(file,blob){
-        
+                                                                                debug('save',file);
               var path      = file.abs;
               var buf       = await blob.arrayBuffer();
               buf           = new Uint8Array(buf);
