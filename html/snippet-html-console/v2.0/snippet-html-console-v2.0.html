@@ -124,7 +124,10 @@
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
                                                                                 
-              rd.config();
+              var dom_config    = mod.rd.config(dom);
+              config            = Object.assign(config,dom_config);
+              
+              
               //rd.attr.h();
               //rd.attr.height();
               def.html          = $.htmlentities.decode(dom);
