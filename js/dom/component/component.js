@@ -813,7 +813,7 @@
               }//rdparans
               
               
-              rdconfig   = function(dom){
+              function rdconfig(dom){
                 
                     var node    = $(dom,'config');
                     if(node){
@@ -821,9 +821,10 @@
                     }
                     node      = parseconfig(node);
                     if(node.error){
+                          return {};
                     }
-                    config    = Object.assign(config,node.config);
-
+                    return node.config;
+                    
               }//config
 
               
