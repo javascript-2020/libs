@@ -218,8 +218,8 @@
                                                                                 debug(file);
                                                                                 
               var blob    = await source();
-              debugger
-              switch(cur.type){
+              
+              switch(file.filetype){
               
                 case 'github'               : await github.save(file,blob);               break;
                 case 'localfile'            : await localfile.save(file,blob);            break;
