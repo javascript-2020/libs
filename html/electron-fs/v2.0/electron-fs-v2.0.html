@@ -96,13 +96,14 @@
   
   
         obj.init    = async function(){
-        
-        
+                                                                                debug('init',obj.version);
+                                                                                
               electron                  = window.electronAPI;
               if(!electron){
+                                                                                debug('not enabled');
                     return;
               }
-              
+                                                                                debug('enabled');
               filenav                   = mod['file-nav'];
               //filenav.rd.params         = rd.params;
               filenav.file.click        = file.click;
@@ -125,7 +126,8 @@
               if(!electron){
                     return;
               }
-              
+                                                                                debug('initdom');
+                                                                                
               shadow                                  = host.shadowRoot;
               
               menu.add.style(shadow);
@@ -168,7 +170,7 @@
         
         
         btn.save    = function(){
-        
+                                                                                debug('btn.save');
               if(filenav.cur.type!=='file'){
                     alert('no file selected');
                     return;
@@ -317,7 +319,7 @@
         
         
         save.ui   = async function(path,filename){
-        
+                                                                                debug('save.ui',path,filename);
               var title       = `${path}${filename}`;
               
               var file;
@@ -381,7 +383,7 @@
               buf           = new Uint8Array(buf);
               var {error}   = await electron.writeFile({path,buf});
               if(error){
-                    console.error(error);
+                                                                                console.error(error);
                     return false;
               }
               
