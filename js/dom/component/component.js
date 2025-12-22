@@ -36,34 +36,36 @@
 
         function create({mod:par,name}={}){
                                                                                 //console.log('mod.create',name);
-              var mod         = {};
+              var mod               = {};
               
-              full_list.push(mod);
+              mod.name              = name;
               
-              mod.name        = name;
+              mod.df                = false;
+              //mod.df                = (name==='root');
               
-              mod.df          = false;
-              //mod.df          = (name==='root');
+              mod.list              = [];
               
-              mod.list        = [];
+              mod.full              = full_list;
+              mod.child             = [];
               
-              mod.full        = full_list;
-              mod.child       = [];
+              mod.auto              = auto;
+              mod.create            = create;
+              mod.build             = build;
+              mod.rd                = rdparams;
+              mod.rd.config         = rdconfig;
+              mod.config            = parseconfig;
               
-              mod.auto        = auto;
-              mod.create      = create;
-              mod.build       = build;
-              mod.rd          = rdparams;
-              mod.config      = parseconfig;
-              
-              var stack       = []
-              mod.stack       = stack;
+              var stack             = []
+              mod.stack             = stack;
 
 
-              mod.base        = {};
-              mod.base.add    = params=>Object.assign(mod.base,params);
+              mod.base              = {};
+              mod.base.add          = params=>Object.assign(mod.base,params);
               
               //mod.base.add({ext,$,datatype,keydown,menumod,menu,ace});
+
+
+              full_list.push(mod);
 
               
               var ct          = 0;
@@ -811,6 +813,19 @@
               }//rdparans
               
               
+              rdconfig   = function(){
+                
+                    var node    = $(dom,'config');
+                    if(node){
+                          node.remove();
+                    }
+                    node      = parseconfig(node);
+                    if(node.error){
+                    }
+                    config    = Object.assign(config,node.config);
+
+              }//config
+
               
               function parseconfig(txt){
                 
