@@ -815,7 +815,7 @@
               
               function rdconfig(dom){
                 
-                    var node    = $(dom,'config');
+                    var node    = $(dom,'config')[0];
                     if(node){
                           node.remove();
                     }
