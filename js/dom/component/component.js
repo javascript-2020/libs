@@ -813,7 +813,7 @@
               }//rdparans
               
               
-              rdconfig   = function(){
+              rdconfig   = function(dom){
                 
                     var node    = $(dom,'config');
                     if(node){
