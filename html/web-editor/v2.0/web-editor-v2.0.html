@@ -7,7 +7,7 @@
             <style>
             
   :host
-    {all:initial;font-family:arial}
+    {all:initial;font-family:arial;display:block}
     
   #root
     {display:flex;flex-direction:column;font-family:arial;height:100%;
@@ -215,7 +215,7 @@
         def.txt         = '';
         def.fullsize    = false;
         def.mode        = 'javascript';
-        
+        def.height      = '300px';
         
         
         
@@ -463,6 +463,12 @@
               obj.height    = config.height;
               if(config.cssText){
                     host.style.cssText    = config.cssText;
+              }
+              
+              if(editor.container.offsetHeight==0){
+                                                                                debug('failsafe',200);
+                    host.style.height   = '200px';
+                    
               }
               
               editor.resize();
