@@ -219,7 +219,8 @@
                                                                                 
               var blob    = await source();
               
-              switch(file.filetype){
+              var type    = file.filetype||file.type;
+              switch(type){
               
                 case 'github'               : await github.save(file,blob);               break;
                 case 'localfile'            : await localfile.save(file,blob);            break;
@@ -239,8 +240,8 @@
               if(!cur){
                     return 'no file';
               }
-              
-              switch(cur.type){
+              var type    = cur.filetype||cur.type;
+              switch(type){
               
                 case 'github'           : github.clear();               break;
                 case 'local'            : localfile.clear();            break;
@@ -334,7 +335,6 @@
               }
               
               var type    = file.filetype||file.type;
-              
               switch(type){
               
                 case 'github'           : file    = github.export(cur);               break;
