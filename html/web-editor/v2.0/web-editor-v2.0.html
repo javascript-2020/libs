@@ -465,9 +465,10 @@
                     host.style.cssText    = config.cssText;
               }
               
+                                                                                debug(editor.container.offsetHeight);
               if(editor.container.offsetHeight==0){
-                                                                                debug('failsafe',200);
-                    host.style.height   = '200px';
+                                                                                debug('failsafe',def.height);
+                    host.style.height   = def.height;
                     
               }
               
