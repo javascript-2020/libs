@@ -387,6 +387,10 @@
               txt         ||= def.txt;
               fullsize    ||= def.fullsize;
               
+              mode          = config.mode||mode;
+              fullsize      = config.fullsize||fullsize;
+              
+              
               
               shadow            = host.shadowRoot;
               obj.shadowRoot    = shadow;
