@@ -383,13 +383,17 @@
               }
               var {mode,txt,fullsize}   = params||{};
               
-              mode        ||= def.mode;
-              txt         ||= def.txt;
-              fullsize    ||= def.fullsize;
+              mode            ||= def.mode;
+              txt             ||= def.txt;
+              fullsize        ||= def.fullsize;
               
-              mode          = config.mode||mode;
-              fullsize      = config.fullsize||fullsize;
+              mode              = config.mode||mode;
+              fullsize          = config.fullsize||fullsize;
               
+              var height        = config.height;
+              if(!height){
+                    fullsize    = true;
+              }
               
               
               shadow            = host.shadowRoot;
