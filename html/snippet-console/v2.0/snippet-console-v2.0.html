@@ -85,7 +85,9 @@
         var con;
         obj.console     = null;
         
-        var def;
+        var def         = {};
+        def.txt         = '';
+        
         var src;
         
         
@@ -108,7 +110,7 @@
               var dom_config      = mod.rd.config(dom);
               config              = Object.assign(config,dom_config);
               
-              def                 = dom.innerHTML;
+              def.txt             = dom.innerHTML;
               
               filemod             = mod['file-mod'];
               obj.filemod         = filemod;
@@ -119,7 +121,7 @@
               obj.console         = con;
               
               filemod.initmod({ext,$,menu,menumod,complete,source});
-              editor.initmod({ext,$,menu,ace,});
+              editor.initmod({ext,$,menu,ace,,config:config['web-editor']});
               con.initmod({ext,$,ace,config:config['web-console']});
               
               
@@ -158,7 +160,7 @@
               src       = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
-              def       = txt;
+              def.txt   = txt;
               
         }//src
         
@@ -172,11 +174,12 @@
               
               
               filemod.initdom();
-              editor.initdom({txt:def,fullsize:true});
+              editor.initdom({txt:def.txt,fullsize:true});
               
               
               $(shadow,'[value=run]').onclick       = btn.run;
               $(shadow,'[value=clear]').onclick     = btn.clear;
+              $(shadow,'[value=reset]').onclick     = btn.reset;
               
               con.initdom();
               
@@ -214,6 +217,13 @@
               con.clear();
               
         }//clear
+        
+        
+        btn.reset   = function(){
+        
+              editor.setvalue(def.txt,-1);
+              
+        }//reset
         
         
   //:
