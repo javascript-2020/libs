@@ -5,25 +5,25 @@
       <template shadowrootmode=open>
       
             <style>
-
+            
   :host
-    {all:initial;font-family:arial}
-
+    {all:initial;font-family:arial;display:block}
+    
   #root
     {display:flex;flex-direction:column;font-family:arial;height:100%;
     }
-  
+    
   #hdr
     {display:flex;position:relative;align-items:center;height:26px;margin-bottom:5px}
-
-
-
-
-
+    
+    
+    
+    
+    
   .menu
     {position:absolute;left:0;top:35px;width:600px;}
-
-
+    
+    
   .icon
     {width:27px;height:27px;border:1px solid gray;border-radius:3px;box-sizing:border-box;cursor:pointer}
   .copy
@@ -34,7 +34,7 @@
     {padding:2px;
       content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAdCAMAAACKeiw+AAABm1BMVEVHcEySFg+BHxuWGBGZFg+DDwt4EA66IReRGROXEwybFAx2FROQEwyEEg2FGRShGQ+TFQ2jHhexIBaeFAurFw6lFg2fFw+nFgyoGRCdFg6EEAymGRCeFAuYFQ6bFQyfHBXUQDWXFQ/KMSanHRXEKh/CJRqWEgrUTEKeFAueFg66HxW3GxCyGQ6fFQugFQu+KB28IxnHNSqPEQytHxe3HxWOHxy5LCSUFAuWEgrHLCG4KSDINCqUEwvOOzGREQqlGhGMEg2/IxilFgyuGA2tGA6dGA6aFAu1Gg+2GxC4HxW3HBLBKyDAJBm/Ihe7IBXHLSK8IRjOQjivHRTDKB2QEAqNEQqUGBKHIBrGOzLKOCy+JRrWXFOtFgyyGAywFwypFQu2GQ3BHRGmFQuhFAq7Gw/EHxTcT0TIIxfRMSXIJhvHLCDZS0CdFArmfnfqop7PLCG/IBXSNyvYRTrTQDXhWU7OOy/ma2PVOy/fU0nNNSnmdWzkYljohH7rt7TNKR7lZVzTUUfkYFboi4Xkdm/YQDXkbmXfamPqmJPqqKUi9jteAAAAXHRSTlMAMwMtOh0FQBKPxQh1IxVXaRoowNW3ReerfCV3+IPPD/Jh7Y+Zpf7s20394evn/ebZ+Uiobw3WpOGmx+C329ZcsF3t5fCe1uzo9M76iLO1+H72v7vy3V0L775T7MqXpbYAAAHuSURBVCjPbZJle+JAFIUHdylSpECBInWXrbfbdXedCIGECO5QoKVd+9lNutmlhJxPc5935sqZC5TfviaThzGdEkik1cVXHeD0e6HXK+STMYcE7kbZdxMgnu/9KRQKv38dng4TKHW74Up0RgPA8Zfrq6tuPt/thF9Mi9QRC9e4vXXhutK2fXndzXcajYtqfEKA+s391uCt8PRWGt/25c9OY1Cjyi95rntfGdT2I9phH5bgCnVx3uKq7CvVmyh1zu2pR6dQbKxRLa7OllbaVK26oZFOaYqs1it1lilz1NrMNBiXyvu83W5WKq+ntEBO6gW2+aPJ4JuyVPeMocvlEo4vTsrQuQWGpul5FEEQl2OM2p5ki3TxqcGI8vJuSejxY7JfLM77gN8JUYhOSd4uprL9fslg4i1yQgg9I7ZMnqXILFNyW4XAb8QwzK2/M7ErQ5JZ0qUSwxCGEcP0ejeSSZHkg7n/BswShEfxL/JBPJNKIcFhuvUlgvCaxN/wIDzOOK13mrEH0gHb3715iCE4nrk/YpXWkEsbb+8rliCK4NAwOqn1ILdsFw7mZQgRZNYi8UlxLxcSVmsnjUGUMI+5bA/k7CKGj8bWA2h3EiG+ejBHYGmzzBf6jxKfhCJpsUmpIomDz3xvH47UsvuxdfLRcgP/mm5ojkTjOQAAAABJRU5ErkJggg==);
     }
-
+    
     
   .menu #sha256-root
     {display:flex;flex-direction:column;border:1px solid lightgray;padding:5px}
@@ -43,16 +43,16 @@
   .menu #sha256-root #value
     {flex:1;border:1px solid lightgray;padding:5px 10px;font-family:monospace;overflow:auto}
     
-  
+    
   #menu-icon
     {width:15px;height:26px;border:1px solid gray;padding:2px;background:buttonface;margin-right:10px;box-sizing:border-box;cursor:pointer;border-radius:3px;
       content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAt1BMVEVHcEwbmPYcgfMchvQbsfkay/wbtvkbnfccefMayfwbmfYch/QchvQbtfkbmfYa1P0ddfIcivQcl/Ycj/Ubp/gcmfYdbPEbrvkazPwcmfYbqfgayfwayPwbv/sbvvobsvkazPwbqvga0fwbvPobtvocjvUbofcbpvccfPMcgPMcgvMdafAdbfEckfUbtvka0PwcfPIaxvsbwfsbvPodb/EcnPYclvYckfUbpvccjPQdd/IbofcbrPiPy8D0AAAAMHRSTlMAA/79/v7+5ycVZ3Y3h0xhu9jp8kFeF9OkVfQOrZi+Mh1z/iUJQ+/dx4fOYq7hybzs5xU1AAABIklEQVQ4y+2Ux3aDMBBFpTR6M92AwYB7S6EG/v+7MsJJnBBKVsnGdwHozT1HQgxC6MrfEkiSM+Y4khSgUxhazLDHWGF4QveAO2gyLnGQ9QS4wcDaXGJYiPGegVnU50UzUvdgTsd7AfrMaEaqXvO+sfAAHP0uzz+SmhCfR7FwB5gdpm+SyoeHEJ5P67o2tbanmRBP5/iSgFkUxaplaisIv3kAu6yqihK/RiIF0ZJtT6NTaZpS9iWwm0D/uXB7kmXZ5LOgN0O7ayvEQ57nKtssCbMqDA5i9+YulLIsVQ5MzKnwqCz6Phev3AIcxhy5K3x/A/DbG2CzIdctP9RS9PrxnTU92KOYll8bZHqs7Wk5AcY9hIx9kuyN3/xuxm5nXA+df+cNJSAgjMbiFSoAAAAASUVORK5CYII=)
     }
-
-
-
-
-  
+    
+    
+    
+    
+    
   #filename-root
     {/*display:flex;align-items:center*/ margin-right:20px}
   #filename-icon
@@ -64,41 +64,41 @@
     }
   #filename
     {margin:5px 0;flex:1}
-
+    
   #spc
     {flex:1}
-  
+    
   button
     {height:26px;padding:0 5px;margin-right:5px;font-size:16px;cursor:pointer}
   #paste
     {margin-right:10px}
-  
+    
   #info
     {display:flex;align-items:center;margin-right:20px}
   #sep
     {margin:0 10px}
-  
+    
   #row,#col
     {width:40px;height:26px;text-align:center;box-sizing:border-box;font-size:16px}
   #row
     {margin-right:5px}
   #col
     {margin-right:10px}
-  
+    
   #top,#bottom
     {width:20px;height:20px;border:1px solid dimgray;padding:2px;border-radius:3px;cursor:pointer;}
-  #top 
+  #top
     {margin-right:5px;
      content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAsCAMAAAAgsQpJAAAAP1BMVEVHcExEpvVCpvZLpu5Mpexare1EpfNBpvRFpvNGpvNSp+xuq9xHpvFiq+RHpvFMpu5CpvRTp+mrtLlQp+xBpvbrVekHAAAAFHRSTlMA9P1dHz2e3sy7KgR3CoxQ6xUBM2Gq4CQAAAEASURBVDjL7dVJEoMgEAVQBILM8/3PmsQWFQewKskuf+PmFWh3gwj9JCY9GkmmOMr80IgXEly0uR3MFGwsOjDzMEHFelDMbyk5boY/ytcERxpx9NOqqhDMneITxrnQ3e0ow1AR13FLTb2755oy0qpHnlxBuevllZSHnnsSew5fS8nnSZmefq7ScJCLS9MsjdKeywQOc4kAUlOkVkeXX65AdCaLmw5HgUiBxKus3AqR0kMlaXEwMSuMBmQeoJsOb90GLmtmFldYXAWLtHBixNbVEOSY5uHSTAd0Dl8bWpuW+drWdA8v84ffge+LGo+hD917DKzqw0gEt+HebyfED67XJz8tJngV1cZbAAAAAElFTkSuQmCC)
     }
   #bottom
     {content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAsBAMAAADlQedIAAAAMFBMVEVHcExDpvVLpu5CpvZNpexYrO1EpfNmq+JBpvRFpvNGpvNSp+xHpvGrtLlHpvFBpvabmoDrAAAAD3RSTlMA81r9HDqeBt7Muyp3AYxdzYCkAAABLElEQVQoz2NgwAvYfTHFeLXmOWAIMsn/f44hyPf/cwuGINv//4Nc8DoWQZZjR5AFmd4FAEmv/78cEILsB/+3Ainl//+XIARr5P//gwiClEIEgQr/f7vAwOD5H6wULMgLVPhfCKiSdT5Q6QaIIEih4XGQfTuBSldDBOvs/3+WKWCAKv25ASTI/vj//4/HIS4FKv08GyQIVPgfopCB4TZIadj//90ghbowT4FMnfn/vxhQodAFmCD3eqDo/89AMUNdhP93/YcChEKYUqBCBeTk4QVViBLEV8BKfyigBrwXpkKg0mSgWxXQ46goc9YRzLR4xZ2BEHBSQgEqYIdPNkYBlqDYLPuPBpYDBavQBacABe+hiX1OB6WQREEUILUBZFNpKAoIh4bRXSRwAZfLAT6sAtz4b+DtAAAAAElFTkSuQmCC)
     }
-
+    
   #editor
     {flex:1}
-
-
+    
+    
     
             </style>
             
@@ -107,7 +107,7 @@
                   <div id=hdr>
                   
                         <img id=menu-icon>
-            
+                        
                         <div class=menu style='display:none'>
                         
                               <div id=trim class=menu-opt>trim</div>
@@ -124,7 +124,7 @@
                                     </div>
                               </div>
                         </div>
-                  
+                        
                         <div id=filename-root>
                               <img id=filename-icon src='data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAP1BMVEVHcEwVFRUICAgkJCQMDAwLCwsNDQ1QUFAICAgrKysQEBAVFRUHBwcLCwsZGRkKCgoHBwfd3d0ICAgkJCQEBATHNF52AAAAFXRSTlMAQ9IblZl1BbQOXDbHiiWj1wG2H/ZbTuAhAAAA5klEQVQ4y72V2w6DIAxAKQjIRRT1/791gkg226mJc+elSE5qqYCMPQV0zY4uUF7grdwxc0cl5NNuxvjBO0oUuxnhbUPkxKLxYCQ2yYzMSPT2LMbCmpFbRphJtH0B0ozu/TJsZy+QCF1hTTKpNG4GOKlxK5XfEKNOsBIzkRTt2C5AVDkmRkuKTiUCA1Vx92q8LDqFcAeLeefLYt7actyeyzUKVwnM5ChIUQ2VJgJPUZGiCZXtwdyrURuEpvvoEXQfg0XQX0b/fFN84PIxgwuiTAfX/mXjTtdE4iJdaXk4u5rLBQ2P/Q1eGdEQZZzIbegAAAAASUVORK5CYII='>
                               <img id=filename-save style='display:none'>
@@ -145,7 +145,7 @@
                         <button id=clear>clear</button>
                         <button id=copy>copy</button>
                         <button id=paste>paste</button>
-                                                
+                        
                         <img id=top>
                         <img id=bottom>
                         
@@ -164,38 +164,33 @@
   var obj   = {
         version   : 'v2.0'
   };
-
-        var df=false
+  
+        var df=obj.df=true,did='web-editor'
         ;
-
-        var ext,$,menu,menumod,ace,kd2,on2
+        
+        var ext,$,menu,menumod,ace,kd2,on2,config={},embed
         ;
         
         
         obj.initmod   = function(params){
-
-              ext         = params.ext;
-              $           = params.$;
-              menumod     = params.menumod;
-              
-              menu        = params.menu;
-              
-              params.ace && (ace=params.ace);
-              
-              def.fullsize    = params.fullsize;
-              
-              kd2         = params.kd;
-              
-              embed       = params.embed;
-              
-              on2         = params.on;
+        
+              ext                 = mod.rd(params,'ext',ext);
+              $                   = mod.rd(params,'$',$);
+              menumod             = mod.rd(params,'menumod',menumod);
+              menu                = mod.rd(params,'menu',menu);
+              ace                 = mod.rd(params,'ace',ace);
+              def.fullsize        = mod.rd(params,'fullsize',def.fullsize);
+              kd2                 = mod.rd(params,'kd',kd2);
+              embed               = mod.rd(params,'embed',embed);
+              on2                 = mod.rd(params,'on',on2);
+              config              = mod.rd(params,'config',config,{});
               
         }//initmod
         
-
+        
   //:
   
-        
+  
         var editor;
         
         
@@ -211,38 +206,40 @@
         var col;
         
         var deficon;
-
-
-
+        
+        
+        
         var target      = dom;
-
+        
         var def         = {};
         def.txt         = '';
         def.fullsize    = false;
         def.mode        = 'javascript';
-
-
-
-
+        def.height      = '300px';
+        
+        
+        
         
         var rd    = {};
         rd.attr   = {};
         var kd    = {};
         var btn   = {};
         var on    = {};
-
         
         
         
         
-
-
-  
+        
+        
+        
+        
   //:
-
-    
+  
+  
         obj.init    = async function(){
                                                                       debug('init',obj.version);
+              rd.config();
+              
               ({$,menumod}    = await libs2());
               
               if(!menu){
@@ -264,12 +261,12 @@
               
               
         }//init
-
-
+        
+        
   //:
-
+  
         async function libs(){
-
+        
               if(!ace){
                     ace       = await $.editor.ace();
                     obj.ace   = ace;
@@ -279,7 +276,7 @@
         
         
         async function libs2(){
-
+        
               var get   = url=>fetch(url).then(res=>res.text());
               
               if(!$){
@@ -304,8 +301,22 @@
         }//libs2
         
         
+        rd.config   = function(){
+        
+              var node    = $(dom,'config');
+              if(node){
+                    node.remove();
+              }
+              node      = mod.config(node);
+              if(node.error){
+              }
+              config    = Object.assign(config,node.config);
+                                                                                debug('config',config);
+        }//config
+        
+        
         rd.attr.fullsize   = function(){
-          
+        
               if(!target.hasAttribute('fullsize'))return;
               def.fullsize    = true;
               
@@ -313,23 +324,23 @@
         
         
         rd.attr.src    = async function(){
-          
+        
               if(!target.hasAttribute('src'))return;
               src   = target.getAttribute('src');
               
               var err;
               try{
-                
+              
                     var res   = await fetch(src);
                     
               }//try
               catch(err2){
-                
+              
                     err   = err2;
                     
               }//catch
               if(err){
-                
+              
                     var error   = errtoString();
                     def.txt     = error;
                     return;
@@ -347,20 +358,20 @@
         
         
         rd.attr.mode   = function(){
-          
+        
               if(!target.hasAttribute('mode'))return;
-              def.mode    = target.getAttribute('mode');                                                                                
+              def.mode    = target.getAttribute('mode');
               
         }//mode
         
         
         rd.txt    = function(){
-          
+        
               //$.htmlentities.decode(dom);
               
               var txt   = '';
               target.childNodes.forEach(node=>{
-                
+              
                       if(node.nodeType==Node.TEXT_NODE){
                             txt  += node.nodeValue;
                       }
@@ -369,32 +380,32 @@
               def.txt   = txt;
               
         }//txt
-
-
-  
+        
+        
+        
   //:
   
-        
+  
         obj.initdom    = async function(rootnode,params){
-
+        
               if(arguments.length==1){
                     params                    = rootnode;
               }
               var {mode,txt,fullsize}   = params||{};
-        
+              
               mode        ||= def.mode;
               txt         ||= def.txt;
               fullsize    ||= def.fullsize;
-
-
+              
+              
               shadow            = host.shadowRoot;
               obj.shadowRoot    = shadow;
-
-  
+              
+              
               menu.add.style(shadow);
               var style                                   = $(shadow,'style');
-  
-  
+              
+              
               hdr                                         = $(shadow,'#hdr');
               
               card                                        = $(shadow,'.menu');
@@ -402,17 +413,17 @@
               
               var sha256_root                             = $(card,'#sha256-root');
               $(sha256_root,'.copy').onclick              = async e=>{
-                                                        
+              
                                                                   var txt   = $(card,'#sha256-root #value').textContent;
                                                                   await navigator.clipboard.writeText(txt);
-                                                              
+                                                                  
                                                             }//copy
               $(sha256_root,'.clear').onclick             = async e=>{
-                
-                                                                  $(card,'#sha256-root #value').textContent   = '';
-                                                              
-                                                            }//clear
               
+                                                                  $(card,'#sha256-root #value').textContent   = '';
+                                                                  
+                                                            }//clear
+                                                            
               deficon                                     = $(hdr,'#filename-icon').src;
               
               $(shadow,'#clear').onclick                  = btn.clear;
@@ -428,45 +439,61 @@
               
               $(hdr,'#top').onclick                       = btn.top;
               $(hdr,'#bottom').onclick                    = btn.bottom;
-
-  
+              
+              
               var node                                    = $(shadow,'#editor');
               node.textContent                            = txt;
               
               
               if(fullsize){
-                                                                                
+                                                                                debug('fullsize');
                     node.style.flex                   = 'none';
                     editor                            = $.editor.max(node,{mode,menu,kd:kd2,on});
                     $(shadow,'#root').style.height    = 'auto';
-                    update();
               }else{
                     setup(node,mode);
               }
-  
-  
+              
+              
               if(src){
                     filename(src);
               }
-  
+              
+              
+              obj.height    = config.height;
+              if(config.cssText){
+                    host.style.cssText    = config.cssText;
+              }
+              
+                                                                                debug(editor.container.offsetHeight);
+              if(editor.container.offsetHeight==0){
+                                                                                debug('failsafe',def.height);
+                    host.style.height   = def.height;
+                    
+              }
+              
+              editor.resize();
+              update();
+              
+              
         }//initdom
-  
-  
+        
+        
   //:
   
   
-        var initial=true;
-  
+        var initial   = true;
+        
         async function setup(node,mode='javascript'){
-  
+        
               $.editor.ace.import_style(shadow);
-  
+              
               switch(mode){
               
                 case 'js'   : mode    = 'javascript';       break;
                 
               }//switch
-                                                                                          
+              
               
               node.addEventListener('mousedown',update);
               node.addEventListener('keyup',update);
@@ -485,15 +512,12 @@
               editor.session.setMode('ace/mode/'+mode)
               editor.session.on('change',on.change);
               
-              update();
-              editor.focus();
-  
-                                      
-        }//editor
-
-
+              
+        }//setup
+        
+        
         on.change   = function(e){
-
+        
               update();
               
               if(initial){
@@ -502,17 +526,17 @@
               }
               
               filename.save(true);
-                                  
+              
               if(on2?.change){
                     on2.change();
               }
-                                
+              
         }//onchange
-
-
+        
+        
         
         kd.row    = function(e){
-              
+        
               if(e.key=='Enter'){
                     e.preventDefault();
                     var pos   = editor.getCursorPosition();
@@ -523,10 +547,10 @@
               }
               
         }//row
-  
+        
         
         kd.col    = function(e){
-              
+        
               if(e.key=='Enter'){
                     e.preventDefault();
                     var pos   = editor.getCursorPosition();
@@ -537,33 +561,33 @@
               }
               
         }//col
-  
-  
+        
+        
         btn.clear   = function(e){
-  
+        
               clear();
-  
+              
         }//clear
-  
-  
+        
+        
         btn.copy    = function(){
-  
+        
               var txt       = editor.getValue();
               navigator.clipboard.writeText(txt)
                 .catch(err=>log.error(err));
-  
+                
         }//copy
-  
-  
+        
+        
         btn.paste   = function(){
-  
+        
               navigator.clipboard.readText()
                 .then(txt=>editor.setValue(txt,-1))
                 .catch(err=>log.error(err));
-  
+                
         }//paste
-  
-  
+        
+        
         btn.top   = function(){
         
               editor.gotoLine(0,0);
@@ -571,7 +595,7 @@
               update();
               
         }//top
-  
+        
         
         btn.bottom    = function(){
         
@@ -580,15 +604,15 @@
               update();
               
         }//bottom
-  
-  
+        
+        
   //:
   
   
         obj.filename    = filename;
         
         function filename(file){
-  
+        
               var src         = deficon;
               var filename    = 'html-editor';
               var title       = '';
@@ -606,13 +630,13 @@
               var fn    = filename.split('/').at(-1);
               
               $(shadow,'#filename-icon').src      = src;
-  
+              
               $(shadow,'#filename').textContent   = fn;
               $(shadow,'#filename').title         = title;
               
         }//filename
-  
-  
+        
+        
         filename.getname    = function(path){
         
               var name;
@@ -622,12 +646,12 @@
               }else{
                     name    = path.slice(i+1);
               }
-            
+              
         }//getname
         
-  
+        
         filename.save   = function(status){
-          
+        
               var display   = '';
               if(!status){
                     display   = 'none';
@@ -636,29 +660,29 @@
               
         }//saveicon
         
-  
+        
         filename.save.show    = function(){
-          
+        
               filename.save(true);
               
         }//show
-  
+        
         
         filename.save.hide    = function(){
-          
+        
               filename.save(false);
               
         }//hide
-  
-  
+        
+        
         obj.filename.clear    = function(){
-          
+        
               filename();
               filename.save.hide();
-          
+              
         }//filename
-      
-
+        
+        
   //:
   
   
@@ -677,11 +701,18 @@
               $(hdr,'#chars').textCottent   = n;
               
         }//update
-  
-  
+        
+        
   //:
   
-  
+        obj.clear   = function(status=false){
+        
+              editor.setValue('',-1);
+              filename(status);
+              
+        }//clear
+        
+        
         obj.setValue    = function(txt){return set(txt)}
         obj.setvalue    = function(txt){return set(txt)}
         obj.set         = function(txt){return set(txt)}
@@ -693,7 +724,7 @@
               
         }//set
         
-    
+        
         obj.getValue    = function(){return get()}
         obj.getvalue    = function(){return get()}
         obj.get         = function(){return get()}
@@ -706,14 +737,14 @@
               
         }//get
         
-  
+        
         obj.focus   = function(){
         
               editor && editor.focus();
               
         }//focus
-  
-  
+        
+        
         obj.resize    = function(){
         
               editor.resize();
@@ -721,42 +752,52 @@
         }//resize
         
         
+  //:
+  
+  
         obj.horiz   = function(){
         
               host.style.width    = '100%';
               host.style.height   = '50%';
-        
+              
         }//horiz
-  
+        
         
         obj.vert    = function(){
         
               host.style.width    = '50%';
               host.style.height   = '100%';
-        
+              
         }//vert
-  
-  
+        
+        
   //:
   
   
         obj.clear   = function(){return clear()}
         
         function clear(){
-  
+        
               editor.setValue('',-1);
-  
+              
         }//clear
         
-     
+        
         Object.defineProperty(obj,'height',{
-          
+        
               set   : v=>{
-                
+              
+                    if(v===undefined){
+                          return;
+                    }
+                    
                     if(typeof v=='number'){
                           v   = v+'px';
                     }
-                    editor.container.style.height   = v;
+                    
+                    //editor.container.style.height   = v;
+                    host.style.height    = v;
+                    
                     
               },//set
               
@@ -773,7 +814,7 @@
               }
               
         }//menu
-  
+        
         
         click.trim   = function(){
         
@@ -789,7 +830,7 @@
         
         
         click.wordwrap   = function(){
-          
+        
               var wrap1   = editor.getOption('wrap');
               if(wrap1=='off'){
                     editor.setOption('wrap',true);
@@ -802,19 +843,19 @@
         
         
         click.sha256   = function(){
-          
+        
               var txt   = editor.getValue();
               sha256(txt);
               
         }//sha256
-
-
-
+        
+        
+        
         async function sha256(txt){
-          
+        
             const msg   = new TextEncoder().encode(txt);
             const buf   = await crypto.subtle.digest('SHA-256',msg);
-        
+            
             var uint8   = new Uint8Array(buf);
             var hex     = uint8.reduce((a,byte)=>a   += byte.toString(16).padStart(2,'0'),'')
             
@@ -822,26 +863,30 @@
             console.log(hex);
             
         }//sha256
-
-
-
+        
+        
+        
   //:
   
   
-        function debug(){
-          
-              if(!df)return;
-              var str   = [...arguments].join(' ');
-              console.log('[ editor ]',str);
+        function debug(...args){
+        
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              console.groupCollapsed.apply(console,args2);
+              console.trace();
+              console.groupEnd();
               
         }//debug
         
-      
+        
   return obj;
   
 })//web_editor
-            
-      </script>
 
+      </script>
+      
 </web-editor>
 
