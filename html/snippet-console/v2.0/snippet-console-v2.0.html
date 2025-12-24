@@ -11,6 +11,11 @@
   #root
     {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px}
     
+  #btns
+    {display:flex;margin:0 20px;gap:10px}
+    
+  .spc
+    {flex:1}
   input
     {font-size:16px;padding:5px 10px}
   input[type=button]
@@ -27,9 +32,11 @@
                   
                   <web-editor component></web-editor>
                   
-                  <div>
+                  <div id=btns>
                         <input value=run type=button>
+                        <div class=spc></siv>
                         <input value=clear type=button>
+                        <input value=reset type=button>
                   </div>
                   
                   <web-console v2.0 component></web-console>
@@ -88,8 +95,8 @@
         var root;
         
         
-        var rd          = {}
-        var attr        = {};
+        var rd          = {};
+        rd.attr         = {};
         var btn         = {};
         
         
@@ -98,7 +105,8 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
-              rd.config();
+              var dom_config      = mod.rd.config(dom);
+              config              = Object.assign(config,dom_config);
               
               def                 = dom.innerHTML;
               
@@ -116,7 +124,7 @@
               
               
               await Promise.all([
-                    attr.src(),
+                    rd.attr.src(),
                     libs(),
                     filemod.init(),
                     editor.init(),
@@ -144,22 +152,7 @@
         }//libs
         
         
-        rd.config   = function(){
-        
-              var node          = $(dom,'config');
-              if(node){
-                    node.remove();
-              }
-              node      = mod.config(node);
-              if(node.error){
-              }
-                                                                                //console.log('node.config',node.config);
-              config    = Object.assign(config,node.config);
-                                                                                //console.log('config',config);
-        }//config
-        
-        
-        attr.src    = async function(){
+        rd.attr.src    = async function(){
         
               if(!dom.hasAttribute('src'))return;
               src       = dom.getAttribute('src');
