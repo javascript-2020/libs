@@ -7,7 +7,7 @@
             <style>
             
   :host
-    {all:initial;font-family:arial;display:block}
+    {all:initial;font-family:arial}
     
   #root
     {display:flex;flex-direction:column;font-family:arial;height:100%;
@@ -165,7 +165,7 @@
         version   : 'v2.0'
   };
   
-        var df=obj.df=true,did='web-editor'
+        var df=true,did='web-editor'
         ;
         
         var ext,$,menu,menumod,ace,kd2,on2,config={},embed
@@ -237,9 +237,11 @@
   
   
         obj.init    = async function(){
-                                                                      debug('init',obj.version);
-              rd.config();
-              
+                                                                                debug('init',obj.version);
+              var dom_config    = mod.rd.config(dom);
+              config            = Object.assign(config,dom_config);
+                                                                                debug('config',config);
+                                                                                
               ({$,menumod}    = await libs2());
               
               if(!menu){
@@ -250,9 +252,11 @@
                     target    = embed;
               }
               
+              
               rd.txt();
               rd.attr.fullsize();
               rd.attr.mode();
+              
               
               await Promise.all([
                     rd.attr.src(),
@@ -299,20 +303,6 @@
               return {$,menumod}
               
         }//libs2
-        
-        
-        rd.config   = function(){
-        
-              var node    = $(dom,'config');
-              if(node){
-                    node.remove();
-              }
-              node      = mod.config(node);
-              if(node.error){
-              }
-              config    = Object.assign(config,node.config);
-                                                                                debug('config',config);
-        }//config
         
         
         rd.attr.fullsize   = function(){
@@ -393,9 +383,17 @@
               }
               var {mode,txt,fullsize}   = params||{};
               
-              mode        ||= def.mode;
-              txt         ||= def.txt;
-              fullsize    ||= def.fullsize;
+              mode            ||= def.mode;
+              txt             ||= def.txt;
+              fullsize        ||= def.fullsize;
+              
+              mode              = config.mode||mode;
+              fullsize          = config.fullsize||fullsize;
+              
+              var height        = config.height;
+              if(!height){
+                    fullsize    = true;
+              }
               
               
               shadow            = host.shadowRoot;
