@@ -126,8 +126,10 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
-              rd.config();
-              
+              var dom_config    = mod.rd.config(dom);
+              config            = Object.assign(config,dom_config);
+                                                                                debug('config',config);
+                                                                                
               target    = dom;
               if(embed){
                     target    = embed;
@@ -196,20 +198,7 @@
   //:
   
   
-        rd.config   = function(){
-        
-              var node    = $(dom,'config');
-              if(node){
-                    node.remove();
-              }
-              node      = mod.config(node);
-              if(node.error){
-              }
-              config    = Object.assign(config,node.config);
-                                                                                debug('config',config);
-        }//config
-        
-        
+  
         var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
         
         rd.attr.h   = function(){
