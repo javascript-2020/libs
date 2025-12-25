@@ -220,11 +220,12 @@
         
         
         
-        var rd    = {};
-        rd.attr   = {};
-        var kd    = {};
-        var btn   = {};
-        var on    = {};
+        var rd          = {};
+        rd.attr         = {};
+        var kd          = {};
+        var btn         = {};
+        var on          = {};
+        var setup       = {};
         
         
         
@@ -444,12 +445,20 @@
               
               
               if(fullsize){
+                    setup.fullsize();
+              }
+              if(fullscreen){
+                    setup.fullscreen();
+              }
+              if(height){
+                    setup.height();
+              }
                                                                                 debug('fullsize');
                     //node.style.flex                   = 'none';
                     editor                            = $.editor.max(node,{mode,menu,kd:kd2,on});
                     //$(shadow,'#root').style.height    = 'auto';
               }else{
-                    setup(node,mode);
+                    setup.height(node,mode);
               }
               
               
@@ -482,9 +491,19 @@
   //:
   
   
-        var initial   = true;
+        setup.editor    = function(){
+        }//editor
         
-        async function setup(node,mode='javascript'){
+        
+        setup.fullsize    = function(){
+        }//fullsize
+        
+        
+        setup.fullscreen    = function(){
+        }//fullscreen
+        
+        
+        setup.height    = async function(node,mode='javascript'){
         
               $.editor.ace.import_style(shadow);
               
@@ -515,6 +534,9 @@
               
         }//setup
         
+        
+        
+        var initial   = true;
         
         on.change   = function(e){
         
