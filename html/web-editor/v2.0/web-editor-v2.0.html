@@ -443,7 +443,7 @@
               var node                                    = $(shadow,'#editor');
               node.textContent                            = txt;
               
-              
+              /*
               if(fullsize){
                     setup.fullsize();
               }
@@ -453,7 +453,9 @@
               if(height){
                     setup.height();
               }
-                                                                                debug('fullsize');
+              */
+              if(fullsize){
+                                                                                  debug('fullsize');
                     //node.style.flex                   = 'none';
                     editor                            = $.editor.max(node,{mode,menu,kd:kd2,on});
                     //$(shadow,'#root').style.height    = 'auto';
