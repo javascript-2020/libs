@@ -249,8 +249,8 @@
               
               var node        = $(shadow,'#console');
               con             = jsconsole.create(node);
-                                                                                console.log(con);
-                                                                                console.log(con.element===node);
+                                                                                //console.log(con);
+                                                                                //console.log(con.element===node);
                                                                                 
               if(height){
                                                                                 debug('height',height);
@@ -267,7 +267,12 @@
   
         function update(){
         
-        
+              if(fullsize){
+                    var h   = node.scrollHeight;
+                                                                                console.log('update',h;
+                    node.style.height   = h+'px';
+              }
+              
         }//update
         
         
@@ -280,6 +285,8 @@
               if(echo){
                     window.console.log.apply(window.console,arguments);
               }
+              
+              update();
               
         }//write
         
@@ -305,6 +312,8 @@
               if(echo){
                     window.console.debug.apply(window.console,args);
               }
+              
+              update();
               
         }//debug
         
@@ -338,6 +347,8 @@
                     window.console.log.apply(window.console,arguments);
               }
               
+              update();
+              
         }//log
         
         
@@ -348,6 +359,8 @@
               if(echo){
                     window.console.clear();
               }
+              
+              update();
               
         }//clear
         
@@ -360,6 +373,8 @@
                     window.console.error.apply(window.console,arguments);
               }
               
+              update();
+              
         }//error
         
         
@@ -370,6 +385,8 @@
               if(echo){
                     window.console.warn.apply(window.console,arguments);
               }
+              
+              update();
               
         }//warn
         
