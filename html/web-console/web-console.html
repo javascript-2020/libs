@@ -7,6 +7,9 @@
       
             <style>
             
+  :host
+    {all:initial;font-family:arial;display:block}
+    
   #console
     {border:1px solid lightgray;min-height:50px}
     
@@ -27,6 +30,7 @@
     {}
   #error-icon
     {}
+    
     
             </style>
             
@@ -69,7 +73,7 @@
         version   : 'v2.0',
   };
   
-        var df=obj.df=true,did='web-console'
+        var df=true,did='web-console'
         ;
         
         var ext,$,ace,embed,config={}
@@ -106,13 +110,19 @@
         var root;
         
         
-        var def       = {};
+        var def             = {};
+        def.fullsize        = false;
+        def.height          = '200px';
         
-        def.height    = '200px';
+        var fullsize;
+        var height;
         
         
-        var rd    = {};
-        rd.attr   = {};
+        update.initial      = true;
+        
+        
+        var rd              = {};
+        rd.attr             = {};
         
         
         
@@ -123,21 +133,19 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
-              rd.config();
-              
+              var dom_config    = mod.rd.config(dom);
+              config            = Object.assign(config,dom_config);
+                                                                                debug('config',config);
+                                                                                
               target    = dom;
               if(embed){
                     target    = embed;
               }
               
+              rd.attr.fullsize();
               rd.attr.h();
               rd.attr.height();
-              if(config.h){
-                    def.height    = config.h;
-              }
-              if(config.height){
-                    def.height    = config.height;
-              }
+              
               
               await libs();
               
@@ -155,7 +163,7 @@
               
               var promise   = ext.load.libs('js/dom/web-console/web-console.js').then(result=>{
               
-                    [jsconsole]=result;
+                    [jsconsole]   = result;
                     jsconsole.initmod({ace});
                     jsconsole.init();
                     
@@ -193,40 +201,34 @@
   //:
   
   
-        rd.config   = function(){
+        rd.attr.fullsize   = function(){
         
-              var node    = $(dom,'config');
-              if(node){
-                    node.remove();
-              }
-              node      = mod.config(node);
-              if(node.error){
-              }
-              config    = Object.assign(config,node.config);
-                                                                                debug('config',config);
-        }//config
+              if(!target.hasAttribute('fullsize'))return;
+              def.fullsize    = true;
+              
+        }//fullsize
         
         
         var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
         
         rd.attr.h   = function(){
         
-              if(target.hasAttribute('h')){
-                    var h         = target.getAttribute('h');
-                    h             = int(h);
-                    def.height    = h;
-              }
+              if(!target.hasAttribute('h'))return;
+              
+              var h         = target.getAttribute('h');
+              h             = int(h);
+              def.height    = h;
               
         }//h
         
         
         rd.attr.height    = function(){
         
-              if(target.hasAttribute('height')){
-                    var h         = target.getAttribute('height');
-                    h             = int(h);
-                    def.height    = h;
-              }
+              if(!target.hasAttribute('height'))return;
+              
+              var h         = target.getAttribute('height');
+              h             = int(h);
+              def.height    = h;
               
         }//height
         
@@ -234,22 +236,56 @@
   //:
   
   
-        obj.initdom    = function(){
-        
-              var shadow    = host.shadowRoot;
+  
+  
+        obj.initdom    = function(params={}){
+                                                                                debug('initdom');
+              fullsize        = params.fullsize||config.fullsize||def.fullsize;
+                                                                                debug('fullsize',fullsize);
+              height          = params.height||params.h||config.height||config.h||def.height;
+              if(height){
+                    //fullsize    = false;
+              }
+              
+              
+              var shadow      = host.shadowRoot;
               
               
               $.editor.ace.import_style(shadow,()=>shadow.append(style));
               
               
-              var node    = $(shadow,'#console');
-              con         = jsconsole.create(node);
-              console.log('def.height',def.height);
-              obj.height  = def.height;
+              var node        = $(shadow,'#console');
+              con             = jsconsole.create(node);
+                                                                                //console.log(con);
+                                                                                //console.log(con.element===node);
+                                                                                
+              if(height){
+                                                                                debug('height',height);
+                    obj.height      = height;
+              }
               
+              
+              setTimeout(()=>update.initial=false,50);
               
         }//initdom2
         
+        
+  //:
+  
+  
+        function update(){
+                                                                                debug('update');
+              if(fullsize){
+              
+                    if(update.initial)return;
+                    
+                    var node    = con.element;
+                    var h       = node.scrollHeight;
+                                                                                //console.log('update',h);
+                    node.style.height   = h+'px';
+              }
+              
+        }//update
         
         
         
@@ -261,6 +297,8 @@
               if(echo){
                     window.console.log.apply(window.console,arguments);
               }
+              
+              update();
               
         }//write
         
@@ -286,6 +324,8 @@
               if(echo){
                     window.console.debug.apply(window.console,args);
               }
+              
+              update();
               
         }//debug
         
@@ -319,6 +359,8 @@
                     window.console.log.apply(window.console,arguments);
               }
               
+              update();
+              
         }//log
         
         
@@ -329,6 +371,13 @@
               if(echo){
                     window.console.clear();
               }
+              
+              if(fullsize){
+                console.log('clear',height);
+                    obj.height    = height;
+              }
+              
+              update();
               
         }//clear
         
@@ -341,6 +390,8 @@
                     window.console.error.apply(window.console,arguments);
               }
               
+              update();
+              
         }//error
         
         
@@ -352,8 +403,36 @@
                     window.console.warn.apply(window.console,arguments);
               }
               
+              update();
+              
         }//warn
         
+        
+        
+        
+  //:
+  
+  
+        Object.defineProperty(obj,'height',{
+        
+              set   : v=>{
+                                                                          window.console.log('console.height',v);
+                    if(!v)return;
+                    if(typeof v=='number'){
+                          v   = v+'px';
+                    }
+                    con.element.style.height    = v;
+                    
+              },
+              
+        });
+        
+        
+        Object.defineProperty(obj,'echo',{
+        
+              set   : v=>echo=!!v
+              
+        });
         
         
         
@@ -378,29 +457,6 @@
         }//test
         
         
-        Object.defineProperty(obj,'height',{
-        
-              set   : v=>{
-                                                                          window.console.log('console.height',v);
-                    if(!v)return;
-                    if(typeof v=='number'){
-                          v   = v+'px';
-                    }
-                    con.element.style.height    = v;
-                    
-              },
-              
-        });
-        
-        
-        Object.defineProperty(obj,'echo',{
-        
-              set   : v=>echo=!!v
-              
-        });
-        
-        
-        
         
   //:
   
@@ -409,17 +465,22 @@
         
               if(!df && !obj.df)return;
               args.unshift(`[ ${did} ]`);
-              window.console.groupCollapsed.apply(window.console,args);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              window.console.groupCollapsed.apply(window.console,args2);
               window.console.trace();
               window.console.groupEnd();
               
         }//debug
         
         
+        
+        
+        
   return obj;
   
-  
-})//web_console
+//web_console
+})
 
 
       </script>
