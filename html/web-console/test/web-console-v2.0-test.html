@@ -126,6 +126,14 @@
       <body>
       
       
+            <div>
+                  <input value=clear type=button>
+                  <input value=test type=button>
+                  <input value=log type=button>
+                  
+            </div>
+            
+            
             <web-console v2.0 component>
                   <config>
                         {
@@ -137,10 +145,6 @@
             </web-console>
             
             
-            <div>
-                  <input value=test type=button>
-                  <input value=log type=button>
-            </div>
             
             <log-mod component v2.0></log-mod>
             
@@ -167,7 +171,7 @@
               
               webconsole.initdom();
               
-              
+              $(root,'[value=clear]').onclick   = btn.clear;
               $(root,'[value=test]').onclick    = btn.test;
               $(root,'[value=log]').onclick     = btn.log;
               
@@ -179,7 +183,13 @@
   //:
   
   
-  
+        btn.clear   = function(){
+        
+              webconsole.clear();
+              
+        }//clear
+        
+        
         btn.test    = function(){
         
         
