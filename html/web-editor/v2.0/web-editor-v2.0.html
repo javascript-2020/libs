@@ -357,7 +357,7 @@
         }//mode
         
         
-        var int   = (str)=>(/^\d+$/.test(str)) ? Number(str)+'px' : str;
+        var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
         
         rd.attr.h   = function(){
         
@@ -867,7 +867,7 @@
                     }
                     
                     //editor.container.style.height   = v;
-                    host.style.height    = v;
+                    root.style.height    = v;
                     
                     
               },//set
