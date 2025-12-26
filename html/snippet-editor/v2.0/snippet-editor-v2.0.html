@@ -90,6 +90,10 @@
               
               config['web-editor']    = mod.rd.attr(dom,'web-editor',config);
               
+              
+              if(!'fullsize' in config['web-editor']){
+                    config['webeditor'].fullsize    = true;
+              }
                                                                                 debug('config',config);
                                                                                 
                                                                                 
@@ -97,14 +101,8 @@
               
               
               var mode      = rd.attr.mode();
-              
-              
-              var node    = host.shadowRoot;
               if(mode){
-                    $(node,'web-editor').setAttribute('mode',mode);
-              }
-              if(rd.fullsize()){
-                    $(node,'web-editor').toggleAttribute('fullsize',true);
+                    config['web-editor'].mode   = mode;
               }
               
               
