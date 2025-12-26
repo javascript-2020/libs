@@ -55,6 +55,8 @@
               
               mod.rd.config         = rdconfig;
               mod.config            = parseconfig;
+              
+              mod.rd.attr           = rdattr;
 
               
               var stack             = []
@@ -876,6 +878,30 @@
                     return {config};
                     
               }//parseparams
+              
+
+              function rdattr(node,attr,config={}){
+                
+                    if(!node.hasAttribute(attr))return;
+                    
+                    var config2   = config[attr]||{};
+                    
+                    var str       = node.getAttribute(attr);
+                    var parts     = str.split(';');
+                    parts.forEach(str=>{
+                          
+                          str   = str.trim();
+                          if(str.indexOf('=')!=-1){
+                                config2[str]        = true;
+                          }else{
+                                var [name,value]    = str.split('=');
+                                config2[name]       = value;
+                          }
+                          
+                    });
+                    return config2;
+                    
+              }//parseattr
               
               
   //:
