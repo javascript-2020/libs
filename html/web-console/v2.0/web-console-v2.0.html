@@ -114,6 +114,7 @@
         def.height          = '200px';
         
         var fullsize;
+        var height;
         
         
         update.initial      = true;
@@ -240,7 +241,7 @@
                                                                                 debug('initdom');
               fullsize        = params.fullsize||config.fullsize||def.fullsize;
                                                                                 debug('fullsize',fullsize);
-              var height      = params.height||params.h||config.height||config.h||def.height;
+              height          = params.height||params.h||config.height||config.h||def.height;
               if(height){
                     //fullsize    = false;
               }
@@ -368,6 +369,10 @@
               
               if(echo){
                     window.console.clear();
+              }
+              
+              if(fullsize){
+                    con.element.style.height    = height;
               }
               
               update();
