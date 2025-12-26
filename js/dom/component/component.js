@@ -891,7 +891,7 @@
                     parts.forEach(str=>{
                           
                           str   = str.trim();
-                          if(str.indexOf('=')!=-1){
+                          if(str.indexOf('=')==-1){
                                 config2[str]        = true;
                           }else{
                                 var [name,value]    = str.split('=');
