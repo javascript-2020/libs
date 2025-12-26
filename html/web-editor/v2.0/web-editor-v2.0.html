@@ -10,8 +10,7 @@
     {all:initial;font-family:arial}
     
   #root
-    {display:flex;flex-direction:column;height:100%;
-    }
+    {display:flex;flex-direction:column;height:100%}
     
     
     
@@ -215,7 +214,7 @@
         def.txt         = '';
         def.fullsize    = false;
         def.mode        = 'javascript';
-        def.height      = '300px';
+        def.height      = null;
         
         
         
@@ -257,6 +256,8 @@
               rd.txt();
               rd.attr.fullsize();
               rd.attr.mode();
+              rd.attr.h();
+              rd.attr.height();
               
               
               await Promise.all([
@@ -356,6 +357,30 @@
         }//mode
         
         
+        var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
+        
+        rd.attr.h   = function(){
+        
+              if(!target.hasAttribute('h'))return;
+              
+              var h         = target.getAttribute('h');
+              h             = int(h);
+              def.height    = h;
+              
+        }//h
+        
+        
+        rd.attr.height    = function(){
+        
+              if(!target.hasAttribute('height'))return;
+              
+              var h         = target.getAttribute('height');
+              h             = int(h);
+              def.height    = h;
+              
+        }//height
+        
+        
         rd.txt    = function(){
         
               //$.htmlentities.decode(dom);
@@ -382,21 +407,22 @@
               if(arguments.length==1){
                     params                    = rootnode;
               }
-              var {mode,txt,fullsize}   = params||{};
+              var {mode,txt,fullsize,height}   = params||{};
               
-              mode            ||= def.mode;
+              mode            ||= config.mode||def.mode;
               txt             ||= def.txt;
-              fullsize        ||= def.fullsize;
+              fullsize        ||= config.fullsize||def.fullsize;
               
-              mode              = config.mode||mode;
-              fullsize          = config.fullsize||fullsize;
-              
-              var height        = config.height;
+              height          ||= config.height||def.height;
+              if(height){
+                    fullsize    = false;
+              }
               
               
               shadow            = host.shadowRoot;
               obj.shadowRoot    = shadow;
               
+              root                                        = $(shadow,'#root');
               
               menu.add.style(shadow);
               var style                                   = $(shadow,'style');
@@ -454,20 +480,22 @@
               }
               
               
-/*
-              obj.height    = config.height;
-              if(config.cssText){
-                    host.style.cssText    = config.cssText;
+              if(height){
+                    obj.height    = height;
+              }
+              
+              if(cssText){
+                    host.style.cssText    = cssText;
               }
               
                                                                                 debug(editor.container.offsetHeight);
               if(editor.container.offsetHeight==0){
-                                                                                debug('failsafe',def.height);
-                    host.style.height   = def.height;
+                                                                                debug('xxx  failsafe  xxx');
+                    //host.style.height   = def.height;
                     
               }
-*/
-
+              
+              
               editor.resize();
               update();
               
