@@ -112,7 +112,7 @@
   .icon
     {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:30px;height:30px;cursor:pointer}
     
-  [component]
+  [component], config
     {display:none}
     
             </style>
@@ -137,6 +137,10 @@
                         {
                               'web-editor'    : {
                                     height  : '300px',
+                              },
+                              'web-console'   : {
+                                    fullsize    : true,
+                                    height      : '50px'
                               }
                         }
                   </config>
@@ -166,7 +170,9 @@
                   src
             </h4>
             
-            <snippet-console v2.0 id=src component src='ex/ex1.js'></snippet-console>
+            
+            <snippet-console v2.0 component id=src src='ex/ex1.js'></snippet-console>
+            
             
             
             
@@ -191,12 +197,12 @@
               
               snippet.inline.initdom();
               
-              snippet.inline.editor.height   = 200;
+              //snippet.inline.editor.height   = 200;
               //snippet.inline.console.height  = 200;
               
               
               snippet.src.initdom();
-              snippet.src.console.height  = 200;
+              //snippet.src.console.height  = 200;
               
               
               
