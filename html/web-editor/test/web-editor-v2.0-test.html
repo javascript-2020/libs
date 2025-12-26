@@ -47,6 +47,10 @@
               
               
               
+              keydown.add(kd);
+              
+              
+              
               initdom(document.body);
               
               
@@ -90,6 +94,8 @@
     
   [component]
     {display:none}
+  config
+    {display:none}
     
 /*
   *:not(:defined)
@@ -97,6 +103,9 @@
 */
 
 
+  #ed-1
+    {border:1px solid orange;/*height:400px*/}
+    
             </style>
             
       </head>
@@ -107,18 +116,17 @@
       
             <div id=ed-1>
             
-            <web-editor v2.0 component fullsize>
-                  <config>
-                  /*
-                        {
-                              cssText   : 'height:300px;display:block',
-                        }
-                  */
-                  </config>
+                  <web-editor v2.0 component>
+                        <config>
+                        
+                              {
+                                    cssText   : 'height:100px;display:block',
+                              }
+                              
+                        </config>
+                  </web-editor>
                   
-            </web-editor>
-            
-            
+            </div>
             
       </body>
       
@@ -141,7 +149,7 @@ function fn(){
                   var root                    = rootnode;
                   
                   
-                  editor.initdom(txt:txt.ed1});
+                  editor.initdom({txt:txt.ed1});
                   
                   
                   
