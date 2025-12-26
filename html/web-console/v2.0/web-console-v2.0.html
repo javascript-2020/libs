@@ -116,6 +116,9 @@
         var fullsize;
         
         
+        update.initial      = true;
+        
+        
         var rd              = {};
         rd.attr             = {};
         
@@ -231,9 +234,8 @@
   //:
   
   
-        var initial   = true;
-        
-        
+  
+  
         obj.initdom    = function(params={}){
                                                                                 debug('initdom');
               fullsize        = params.fullsize||config.fullsize||def.fullsize;
@@ -273,11 +275,11 @@
                                                                                 debug('update');
               if(fullsize){
               
-                    if(initial)return;
+                    if(update.initial)return;
                     
                     var node    = con.element;
                     var h       = node.scrollHeight;
-                                                                                console.log('update',h);
+                                                                                //console.log('update',h);
                     node.style.height   = h+'px';
               }
               
