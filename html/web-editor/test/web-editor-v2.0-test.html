@@ -45,8 +45,6 @@
               
               window.onfocus            = focus;
               
-              keydown.add(kd);
-              
               
               
               initdom(document.body);
@@ -107,7 +105,8 @@
       <body>
       
       
-      
+            <div id=ed-1>
+            
             <web-editor v2.0 component fullsize>
                   <config>
                   /*
@@ -116,10 +115,7 @@
                         }
                   */
                   </config>
-function fn(){
-  console.log(123);
-}
-
+                  
             </web-editor>
             
             
@@ -130,6 +126,13 @@ function fn(){
       <script initdom>
       
       
+        var txt   = {};
+        txt.ed1   = `
+        
+function fn(){
+  console.log(123);
+}
+        `;
   //:
   
   
@@ -138,7 +141,7 @@ function fn(){
                   var root                    = rootnode;
                   
                   
-                  editor.initdom();
+                  editor.initdom(txt:txt.ed1});
                   
                   
                   
