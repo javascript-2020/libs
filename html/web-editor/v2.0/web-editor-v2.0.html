@@ -444,9 +444,7 @@
               
               if(fullsize){
                                                                                   debug('fullsize');
-                    node.style.flex                   = 'none';
                     setup.fullsize(node,{mode,kd:kd2});
-                    $(shadow,'#root').style.height    = 'auto';
               }else{
                     setup.editor(node,{mode,kd:kd2});
               }
@@ -523,6 +521,9 @@
         
         setup.fullsize    = function(node,params={}){
         
+              node.style.flex                   = 'none';
+              $(shadow,'#root').style.height    = 'auto';
+              
               setup.editor(node,params);
               
               editor.session.on('change',onchange);
