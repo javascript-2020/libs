@@ -270,9 +270,10 @@
         function update(){
         
               if(fullsize){
-                    var h   = node.scrollHeight;
+                    var node    = con.element;
+                    var h       = node.scrollHeight;
                                                                                 console.log('update',h);
-                    con.element.style.height   = h+'px';
+                    node.style.height   = h+'px';
               }
               
         }//update
