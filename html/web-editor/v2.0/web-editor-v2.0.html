@@ -7,7 +7,7 @@
             <style>
             
   :host
-    {all:initial;font-family:arial}
+    {all:initial;font-family:arial;display:block}
     
   #root
     {display:flex;flex-direction:column;font-family:arial;height:100%;
@@ -392,9 +392,6 @@
               fullsize          = config.fullsize||fullsize;
               
               var height        = config.height;
-              if(!height){
-                    //fullsize    = true;
-              }
               
               
               shadow            = host.shadowRoot;
@@ -443,24 +440,15 @@
               var node                                    = $(shadow,'#editor');
               node.textContent                            = txt;
               
-              /*
-              if(fullsize){
-                    setup.fullsize();
-              }
-              if(fullscreen){
-                    setup.fullscreen();
-              }
-              if(height){
-                    setup.height();
-              }
-              */
+              
+              
               if(fullsize){
                                                                                   debug('fullsize');
                     node.style.flex                   = 'none';
-                    editor                            = $.editor.max(node,{mode,menu,kd:kd2,on});
+                    setup.fullsize(node,{mode,kd:kd2});
                     $(shadow,'#root').style.height    = 'auto';
               }else{
-                    setup.height(node,mode);
+                    setup.editor(node,{mode,kd:kd2});
               }
               
               
@@ -493,22 +481,9 @@
   //:
   
   
-        setup.editor    = function(){
-        }//editor
+        setup.editor    = function(node,{mode,kd}={}){
         
-        
-        setup.fullsize    = function(){
-        }//fullsize
-        
-        
-        setup.fullscreen    = function(){
-        }//fullscreen
-        
-        
-        setup.height    = async function(node,mode='javascript'){
-        
-              $.editor.ace.import_style(shadow);
-              
+              mode    ||= 'javascript';
               switch(mode){
               
                 case 'js'   : mode    = 'javascript';       break;
@@ -516,11 +491,17 @@
               }//switch
               
               
+              
+              if(kd){
+                    node.onkeydown    = kd;
+              }
+              
               node.addEventListener('mousedown',update);
               node.addEventListener('keyup',update);
               
-              editor        = ace.edit(node);
-              obj.editor    = editor;
+              
+              
+              editor    =  ace.edit(node);
               editor.setShowInvisibles(false);
               editor.setShowPrintMargin(false);
               editor.setPrintMarginColumn(false);
@@ -529,12 +510,46 @@
               editor.setScrollSpeed(2);
               editor.setFontSize(16);
               editor.session.setOptions({tabSize:2,useSoftTabs:true});
-              //editor.setGhostText('\n\nctrl-enter - run & autosave\nctrl-s - save\nctrl-del - delete');
-              editor.session.setMode('ace/mode/'+mode)
+              editor.session.setMode('ace/mode/'+mode);
               editor.session.on('change',on.change);
               
+              editor.focus();
               
-        }//setup
+              $.editor.ace.import_style(shadow);
+              
+              
+        }//editor
+        
+        
+        setup.fullsze    = function(node,params={}){
+        
+              setup.editor(node,params);
+              
+              editor.session.on('change',onchange);
+              editor.setOption('maxLines',Infinity);
+              
+              onchange();
+              
+              return editor;
+              
+              
+              function onchange(e){
+                                                                                //console.log('onchange');
+                    var lh      = editor.renderer.lineHeight;
+                    var lines   = editor.session.getLength();
+                    var h       = lh*lines;
+                    
+                    var w       = editor.renderer.scrollBar.getWidth()
+                    h          += w;
+                    
+                    editor.container.style.height   = h+'px';
+                    editor.resize();
+                    
+              }//onchange
+              
+        }//fullscreen
+        
+        
         
         
         
