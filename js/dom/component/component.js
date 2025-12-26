@@ -882,7 +882,7 @@
 
               function rdattr(node,attr,config={}){
                 
-                    if(!node.hasAttribute(attr))return;
+                    if(!node.hasAttribute(attr))return {};
                     
                     var config2   = config[attr]||{};
                     
