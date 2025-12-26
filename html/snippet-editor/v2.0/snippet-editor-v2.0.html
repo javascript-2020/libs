@@ -47,7 +47,7 @@
         ;
         
         
-        var ext,$,menu,ace,menumod,log
+        var ext,$,menu,ace,menumod,log,config={}
         ;
         
         obj.initmod   = function(params){
@@ -58,6 +58,7 @@
               ace             = mod.rd(params,'ace',ace);
               menumod         = mod.rd(params,'menumod',menumod);
               log             = mod.rd(params,'log',log);
+              config          = mod.rd(params,'config',config,{});
               
         }//initmod
         
@@ -76,6 +77,7 @@
         
         
         var rd    = {};
+        rd.attr   = {};
         
         
   //:
@@ -83,12 +85,21 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
+              var dom_config      = mod.rd.config(dom);
+              config              = Object.assign(config,dom_config);
+              
+              config['web-editor']    = mod.rd.attr(dom,'web-editor',config);
+              
+                                                                                debug('config',config);
+                                                                                
                                                                                 
               def.txt       = $.htmlentities.decode(dom);
               
-              var node    = host.shadowRoot;
-              var mode      = rd.mode();
               
+              var mode      = rd.attr.mode();
+              
+              
+              var node    = host.shadowRoot;
               if(mode){
                     $(node,'web-editor').setAttribute('mode',mode);
               }
@@ -107,7 +118,7 @@
               editor.initmod({ext,$,menu,menumod,ace,embed:dom});
               
               await Promise.all([
-                    rd.src(),
+                    rd.attr.src(),
                     filemod.init(),
                     editor.init(),
               ]);
@@ -116,7 +127,7 @@
         }//init
         
         
-        rd.src    = async function(){
+        rd.attr.src    = async function(){
         
               if(!dom.hasAttribute('src'))return;
               src       = dom.getAttribute('src');
@@ -127,7 +138,7 @@
         }//src
         
         
-        rd.mode   = function(){
+        rd.attr.mode   = function(){
         
               if(!dom.hasAttribute('mode'))return;
               def.mode    = dom.getAttribute('mode');
