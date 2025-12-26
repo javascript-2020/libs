@@ -50,12 +50,12 @@
               snippet.src       = mod.src;
               
               
-              //snippet.src.initmod({ext,$,menu,menumod});
+              snippet.src.initmod({ext,$,menu,menumod});
               snippet.inline.initmod({ext,$,menu,menumod});
               
               
               await Promise.all([
-                    //snippet.src.init()
+                    snippet.src.init()
                     snippet.inline.init(),
               ]);
               
@@ -211,7 +211,7 @@
               root                = rootnode;
               
               
-              //snippet.src.initdom();
+              snippet.src.initdom();
               
               snippet.inline.initdom();
               
