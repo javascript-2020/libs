@@ -233,8 +233,6 @@
   
         obj.initdom    = function(params={}){
                                                                                 debug('initdom');
-              var {fullsize,h,height}   = params;
-              
               fullsize        = params.fullsize||config.fullsize||def.fullsize;
                                                                                 debug('fullsize',fullsize);
               var height      = params.height||params.h||config.height||config.h||def.height;
