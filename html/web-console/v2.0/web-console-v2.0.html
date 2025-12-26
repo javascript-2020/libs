@@ -72,7 +72,7 @@
         version   : 'v2.0',
   };
   
-        var df=obj.df=true,did='web-console'
+        var df=true,did='web-console'
         ;
         
         var ext,$,ace,embed,config={}
@@ -109,13 +109,15 @@
         var root;
         
         
-        var def       = {};
+        var def             = {};
+        def.fullsize        = false;
+        def.height          = '200px';
         
-        def.height    = '200px';
+        var fullsize;
         
         
-        var rd    = {};
-        rd.attr   = {};
+        var rd              = {};
+        rd.attr             = {};
         
         
         
@@ -137,12 +139,7 @@
               
               rd.attr.h();
               rd.attr.height();
-              if(config.h){
-                    def.height    = config.h;
-              }
-              if(config.height){
-                    def.height    = config.height;
-              }
+              
               
               await libs();
               
@@ -160,7 +157,7 @@
               
               var promise   = ext.load.libs('js/dom/web-console/web-console.js').then(result=>{
               
-                    [jsconsole]=result;
+                    [jsconsole]   = result;
                     jsconsole.initmod({ace});
                     jsconsole.init();
                     
@@ -198,27 +195,34 @@
   //:
   
   
-  
+        rd.attr.fullsize   = function(){
+        
+              if(!target.hasAttribute('fullsize'))return;
+              def.fullsize    = true;
+              
+        }//fullsize
+        
+        
         var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
         
         rd.attr.h   = function(){
         
-              if(target.hasAttribute('h')){
-                    var h         = target.getAttribute('h');
-                    h             = int(h);
-                    def.height    = h;
-              }
+              if(!target.hasAttribute('h'))return;
+              
+              var h         = target.getAttribute('h');
+              h             = int(h);
+              def.height    = h;
               
         }//h
         
         
         rd.attr.height    = function(){
         
-              if(target.hasAttribute('height')){
-                    var h         = target.getAttribute('height');
-                    h             = int(h);
-                    def.height    = h;
-              }
+              if(!target.hasAttribute('height'))return;
+              
+              var h         = target.getAttribute('height');
+              h             = int(h);
+              def.height    = h;
               
         }//height
         
@@ -226,22 +230,45 @@
   //:
   
   
-        obj.initdom    = function(){
+        obj.initdom    = function(params){
         
-              var shadow    = host.shadowRoot;
+              var {fullsize,h,height}   = params;
+              
+              fullsize        = params.fullsize||config.fullsize||def.fullsize;
+              var height      = params.height||params.h||config.height||config.h||def.height;
+              if(height){
+                    //fullsize    = false;
+              }
+              
+              
+              var shadow      = host.shadowRoot;
               
               
               $.editor.ace.import_style(shadow,()=>shadow.append(style));
               
               
-              var node    = $(shadow,'#console');
-              con         = jsconsole.create(node);
-                                                                                //console.log('def.height',def.height);
-              obj.height  = def.height;
+              var node        = $(shadow,'#console');
+              con             = jsconsole.create(node);
+                                                                                console.log(con);
+                                                                                console.log(con.element===node);
+                                                                                
+              if(height){
+                                                                                debug('height',height);
+                    obj.height      = height;
+              }
+              
               
               
         }//initdom2
         
+        
+  //:
+  
+  
+        function update(){
+        
+        
+        }//update
         
         
         
@@ -352,24 +379,6 @@
   //:
   
   
-        obj.test    = function(){
-        
-        
-              con.log('helloworld');
-              
-              var test    = {
-                    hello:'world',
-                    key:'value',
-                    test:123,
-                    debug:true
-              };
-              
-              con.log(test);
-              
-              
-        }//test
-        
-        
         Object.defineProperty(obj,'height',{
         
               set   : v=>{
@@ -393,6 +402,27 @@
         
         
         
+  //:
+  
+  
+        obj.test    = function(){
+        
+        
+              con.log('helloworld');
+              
+              var test    = {
+                    hello:'world',
+                    key:'value',
+                    test:123,
+                    debug:true
+              };
+              
+              con.log(test);
+              
+              
+        }//test
+        
+        
         
   //:
   
@@ -403,9 +433,9 @@
               args.unshift(`[ ${did} ]`);
               var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
               var args2   = [fmt].concat(args);
-              console.groupCollapsed.apply(console,args2);
-              console.trace();
-              console.groupEnd();
+              window.console.groupCollapsed.apply(window.console,args2);
+              window.console.trace();
+              window.console.groupEnd();
               
         }//debug
         
@@ -415,8 +445,8 @@
         
   return obj;
   
-  
-})//web_console
+//web_console
+})
 
 
       </script>
