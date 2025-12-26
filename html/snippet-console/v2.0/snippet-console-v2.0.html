@@ -110,6 +110,14 @@
               var dom_config      = mod.rd.config(dom);
               config              = Object.assign(config,dom_config);
               
+              config['web-editor']    = mod.rd.attr(dom,'web-editor',config);
+              config['web-console']   = mod.rd.attr(dom,'web-console',config);
+              
+              if(!('fullsize' in config['web-editor'])){
+                    config['web-editor'].fullsize    = true;
+              }
+                                                                                debug('config',config);
+                                                                                
               def.txt             = dom.innerHTML;
               
               filemod             = mod['file-mod'];
