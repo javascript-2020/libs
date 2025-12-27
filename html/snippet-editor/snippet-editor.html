@@ -7,7 +7,7 @@
       <template shadowrootmode=open>
       
             <style>
-    
+            
   #root
     {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px;
       /*height:100%*/
@@ -17,7 +17,7 @@
     {font-size:16px;padding:5px 10px}
   input[type=button]
     {cursor:pointer}
-
+    
     
             </style>
             
@@ -30,12 +30,12 @@
                   <web-editor component></web-editor>
                   
             </div>
-      
+            
       </template>
       
       
       <script>
-
+      
       
 (function snippet_editor({mod,dom,host}){
 
@@ -47,23 +47,24 @@
         ;
         
         
-        var ext,$,menu,ace,menumod,log
+        var ext,$,menu,ace,menumod,log,config={}
         ;
         
         obj.initmod   = function(params){
         
-              ext       = params.ext;
-              $         = params.$;
-              menu      = params.menu;
-              ace       = params.ace;
-              menumod   = params.menumod;
-              log       = params.log;
+              ext             = mod.rd(params,'ext',ext);
+              $               = mod.rd(params,'$',$);
+              menu            = mod.rd(params,'menu',menu);
+              ace             = mod.rd(params,'ace',ace);
+              menumod         = mod.rd(params,'menumod',menumod);
+              log             = mod.rd(params,'log',log);
+              config          = mod.rd(params,'config',config,{});
               
         }//initmod
         
         
   //:
-
+  
   
         var filemod;
         obj.filemod   = null;
@@ -73,41 +74,49 @@
         var def   = {};
         
         var src;
-
+        
         
         var rd    = {};
-
+        rd.attr   = {};
+        
         
   //:
   
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
+              var dom_config          = mod.rd.config(dom);
+              config                  = Object.assign(config,dom_config);
               
+              config['web-editor']    = mod.rd.attr(dom,'web-editor',config);
+              
+              
+              if(!('fullsize' in config['web-editor'])){
+                    config['web-editor'].fullsize    = true;
+              }
+                                                                                debug('config',config);
+                                                                                
+                                                                                
               def.txt       = $.htmlentities.decode(dom);
               
-              var node    = host.shadowRoot;
-              var mode      = rd.mode();
               
+              var mode      = rd.attr.mode();
               if(mode){
-                    $(node,'web-editor').setAttribute('mode',mode);
-              }
-              if(rd.fullsize()){
-                    $(node,'web-editor').toggleAttribute('fullsize',true);
+                    config['web-editor'].mode   = mode;
               }
               
-
-              filemod         = mod['file-mod'];  
+              
+              filemod         = mod['file-mod'];
               obj.filemod     = filemod;
               editor          = mod['web-editor'];
               obj.editor      = editor;
-
+              
               
               filemod.initmod({ext,$,menu,menumod,complete,source});
-              editor.initmod({ext,$,menu,menumod,ace,embed:dom});
+              editor.initmod({ext,$,menu,menumod,ace,embed:dom,config:config['web-editor']});
               
               await Promise.all([
-                    rd.src(),
+                    rd.attr.src(),
                     filemod.init(),
                     editor.init(),
               ]);
@@ -116,8 +125,8 @@
         }//init
         
         
-        rd.src    = async function(){
-          
+        rd.attr.src    = async function(){
+        
               if(!dom.hasAttribute('src'))return;
               src       = dom.getAttribute('src');
               var res   = await fetch(src);
@@ -125,10 +134,10 @@
               def.txt   = txt;
               
         }//src
-
-
-        rd.mode   = function(){
-          
+        
+        
+        rd.attr.mode   = function(){
+        
               if(!dom.hasAttribute('mode'))return;
               def.mode    = dom.getAttribute('mode');
               return def.mode;
@@ -137,36 +146,36 @@
         
         
         rd.fullsize   = function(){
-          
+        
               if(!dom.hasAttribute('fullsize'))return;
               def.fullsize    = true;
               return true;
               
         }//fullsize
         
-
+        
   //:
   
   
         obj.initdom    = function(){
-
+        
               var shadow                          = host.shadowRoot;
-
+              
               filemod.initdom();
               editor.initdom();
-
+              
               if(src){
                     editor.filename(src);
               }
               
         }//initdom
         
-
+        
   //:
   
   
         function source(){
-          
+        
               var txt     = editor.getvalue();
               var blob    = new Blob([txt]);
               return blob;
@@ -180,34 +189,38 @@
         
         complete.load   = function(file,blob){
         }//load
-
+        
         
         complete.save   = function(file){
-          
+        
               (log||window.log)?.green(file.name+' saved');
               
         }//save
         
-  
+        
   //:
   
+  
+        function debug(...args){
         
-        function debug(){
-          
               if(!df && !obj.df)return;
-              var str   = [...arguments].join(' ');
-              console.log(`[ ${did} ]`,str);
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              console.groupCollapsed.apply(console,args2);
+              console.trace();
+              console.groupEnd();
               
         }//debug
-
-
-  
+        
+        
+        
   return obj;
   
-})//snippet_editor
-
+//snippet_editor
+})
 
       </script>
-
+      
       
 </snippet-editor>
