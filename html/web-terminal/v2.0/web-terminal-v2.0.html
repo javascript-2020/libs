@@ -163,8 +163,6 @@
         }//fullsize
         
         
-        var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
-        
         rd.attr.h   = function(){
         
               if(!target.hasAttribute('h'))return;
@@ -333,6 +331,16 @@
 
 
 
+
+
+  //:
+  
+  
+  
+        function int(str){return (/^\d+$/.test(str)) ? Number(str) : str}
+        
+        
+        
   //:
   
   
