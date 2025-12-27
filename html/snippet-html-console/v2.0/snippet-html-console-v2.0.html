@@ -46,7 +46,7 @@
                         <file-mod component></filemod>
                   </div>
                   
-                  <web-editor v2.0 component mode=html></web-editor>
+                  <web-editor component mode=html></web-editor>
                   
                   <div id=btns>
                         <input value=run type=button>
@@ -59,7 +59,7 @@
                         <iframe></iframe>
                   </div>
                   
-                  <web-console v2.0 component></web-console>
+                  <web-console component></web-console>
                   
             </div>
             
@@ -97,7 +97,15 @@
         
   //:
   
-  
+        config                  = {};
+        config['web-editor']    = {
+                                        xyz:123,
+                                  };
+                                  
+        config['web-console']   = {
+                                  };
+                                  
+                                  
         var filemod;
         obj.filemod   = null;
         var editor;
@@ -140,6 +148,16 @@
               var dom_config    = mod.rd.config(dom);
               config            = Object.assign(config,dom_config);
               
+              config['web-editor']    = mod.rd.attr(dom,'web-editor',config);
+              config['web-console']   = mod.rd.attr(dom,'web-console',config);
+              
+              
+              if(!('fullsize' in config['web-editor'])){
+                    config['web-editor'].fullsize    = true;
+              }
+                                                                                debug('config',config);
+                                                                                
+                                                                                
               def.html          = $.htmlentities.decode(dom);
               
               
