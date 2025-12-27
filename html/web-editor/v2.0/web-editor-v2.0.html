@@ -183,6 +183,7 @@
               embed               = mod.rd(params,'embed',embed);
               on2                 = mod.rd(params,'on',on2);
               config              = mod.rd(params,'config',config,{});
+              def.mode            = mod.rd(params,'mode',def.mode);
               
         }//initmod
         
@@ -310,6 +311,7 @@
         rd.attr.fullsize   = function(){
         
               if(!target.hasAttribute('fullsize'))return;
+              
               def.fullsize    = true;
               
         }//fullsize
@@ -318,6 +320,7 @@
         rd.attr.src    = async function(){
         
               if(!target.hasAttribute('src'))return;
+              
               src   = target.getAttribute('src');
               
               var err;
@@ -352,6 +355,7 @@
         rd.attr.mode   = function(){
         
               if(!target.hasAttribute('mode'))return;
+              
               def.mode    = target.getAttribute('mode');
               
         }//mode
