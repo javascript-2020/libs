@@ -882,9 +882,11 @@
 
               function rdattr(node,attr,config={}){
                 
-                    if(!node.hasAttribute(attr))return {};
+                    var def   = config[attr]||{};
                     
-                    var config2   = config[attr]||{};
+                    if(!node.hasAttribute(attr))return def;
+                    
+                    var config2   = def;
                     
                     var str       = node.getAttribute(attr);
                     var parts     = str.split(';');
