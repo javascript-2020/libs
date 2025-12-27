@@ -8,19 +8,19 @@
             <title>snippet-html test v2.0</title>
             
             <base href='https://libs.ext-code.com/html/snippet-html/'>
-
+            
             
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+            
             <script init>
                                                                                 console.clear();
-                                                                                console.log('snippet-html-test-v2.0.html');
+                                                                                console.log('snippet-html-v2.0-test.html');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var df=true
         ;
-
-
+        
+        
         var ext;
         var $;
         var datatype;
@@ -32,18 +32,20 @@
         snippet.inline    = null;
         snippet.src       = null;
         
-
         
-
+        
+        
   //:
-
-
+  
+  
         mod.stack.add   = init;
-              
+        
         async function init(){
                                                                                 debug('init');
               menu              = menumod();
-
+              
+              mod.base.add({ext,$,datatype,keydown,menumod,});
+              
               
               snippet.inline    = mod.inline;
               snippet.src       = mod.src;
@@ -51,21 +53,21 @@
               
               snippet.inline.initmod({ext,$,menu});
               snippet.src.initmod({ext,$,menu});
-
-
-              await Promise.all([              
+              
+              
+              await Promise.all([
                     snippet.inline.init(),
                     snippet.src.init()
               ]);
               
               
-          
+              
               await initdom(document.body);
-
-
+              
+              
         }//init
-
-
+        
+        
   //:
   
   
@@ -74,7 +76,7 @@
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
@@ -83,19 +85,19 @@
               'js/debug/debug.js',
         );
         [$,datatype,menumod,keydown,debug]   = await promise;
-
-  
+        
+        
         //html    = await ext.text.libs('html/snippet-html/ex/ex1.html');
-
-
+        
+        
         mod.stack.complete;
-
+        
 })();
 
 
             </script init>
-
-      
+            
+            
             <style>
   html
     {height:100%}
@@ -105,16 +107,21 @@
     
   code
     {border:1px solid lightgray;padding:10px;font-family:monospace;white-space:pre;font-size:16px}
-
+    
 /*
   snippet-html
     {height:300px}
-*/    
+*/
 
   #inline
     {margin:20px 0}
   #src
     {margin:20px 0}
+    
+    
+  [component],config
+    {display:none}
+    
     
             </style>
             
@@ -127,14 +134,14 @@
                   snippet-html v2.0 test
             </h3>
             
-
+            
             
             <snippet-html id=inline component v2.0>
             
 &#x3C;html&#x3E;
 
       &#x3C;head&#x3E;
-
+      
 &#x3C;style&#x3E;
   .newsletter { font-family: sans-serif; padding: 1em; border: 1px solid #ccc; border-radius: 8px; max-width: 600px; }
   .newsletter input[type=&#x22;email&#x22;] { width: 100%; padding: 0.5em; margin: 0.5em 0; }
@@ -147,31 +154,31 @@
       &#x3C;body&#x3E;
       
             &#x3C;div&#x3E;test&#x3C;/div&#x3E;
-
+            
 &#x3C;article class=&#x22;newsletter&#x22;&#x3E;
   &#x3C;header&#x3E;
     &#x3C;h1&#x3E;Newsletter Signup&#x3C;/h1&#x3E;
     &#x3C;p&#x3E;Stay updated with our latest tools and insights.&#x3C;/p&#x3E;
   &#x3C;/header&#x3E;
-
+  
   &#x3C;form onsubmit=&#x22;event.preventDefault(); alert(&#x27;Thanks for signing up!&#x27;);&#x22;&#x3E;
     &#x3C;label for=&#x22;email&#x22;&#x3E;Email address:&#x3C;/label&#x3E;&#x3C;br&#x3E;
     &#x3C;input type=&#x22;email&#x22; id=&#x22;email&#x22; name=&#x22;email&#x22; required&#x3E;&#x3C;br&#x3E;
     &#x3C;button type=&#x22;submit&#x22;&#x3E;Subscribe&#x3C;/button&#x3E;
   &#x3C;/form&#x3E;
-
+  
   &#x3C;footer&#x3E;
     &#x3C;p&#x3E;We respect your privacy. No spam, ever.&#x3C;/p&#x3E;
   &#x3C;/footer&#x3E;
 &#x3C;/article&#x3E;
 
-            
+
       &#x3C;/body&#x3E;
       
 &#x3C;/html&#x3E;
 
             </snippet-html>
-
+            
             
             <snippet-html id=src component v2.0 src='ex/ex1.html'>
             </snippet-html>
@@ -181,12 +188,12 @@
       
       
       <script>
-
+      
       
         var root;
         var code;
         
-
+        
   //:
   
   
@@ -196,20 +203,20 @@
               
               
               snippet.inline.initdom();
-
+              
               
               snippet.src.initdom();
               
-
+              
               
         }//initdom
-      
-
+        
+        
   //:
   
   
-
-        
+  
+  
   //:
   
   
