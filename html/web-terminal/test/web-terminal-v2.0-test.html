@@ -80,15 +80,15 @@
     
     
     
-    
+/*
   web-terminal
     {display:block;height:200px}
     
   web-terminal::part(terminal)
     {height:100%}
-    
-    
-    
+*/
+
+
             </style>
             
       </head>
@@ -127,7 +127,7 @@
               root                = rootnode;
               
               
-              terminal.initdom();
+              terminal.initdom({h:100});
               
               terminal.writeln('helloworld');
               terminal.writeln('ready');
