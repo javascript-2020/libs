@@ -7,7 +7,7 @@
       <template shadowrootmode=open>
       
             <style>
-    
+            
   #root
     {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px;
       /*height:100%*/
@@ -26,29 +26,30 @@
     
             </style>
             
+            
             <div id=root>
             
                   <div>
                         <file-mod component></file-mod>
                   </div>
-            
+                  
                   <web-editor component></web-editor>
                   
                   <div>
                         <input value=run type=button>
                   </div>
-                              
+                  
                   <div id=hldr>
                         <iframe></iframe>
                   </div>
                   
             </div>
-      
+            
       </template>
       
       
       <script>
-
+      
       
 (function snippet_html({mod,dom,host}){
 
@@ -60,22 +61,23 @@
         ;
         
         
-        var ext,$,menu,ace,log
+        var ext,$,menu,ace,log,config={};
         ;
         
         obj.initmod   = function(params){
         
-              ext       = params.ext;
-              $         = params.$;
-              menu      = params.menu;
-              ace       = params.ace;
-              log       = params.log;
+              ext           = mod.rd(params,'ext',ext);
+              $             = mod.rd(params,'$',$);
+              menu          = mod.rd(params,'menu',menu);
+              ace           = mod.rd(params,'ace',ace);
+              log           = mod.rd(params,'log',log);
+              config        = mod.rd(params,'config',config,config);
               
         }//initmod
         
         
   //:
-
+  
   
         var filemod;
         var editor;
@@ -91,10 +93,11 @@
         
         var hldr;
         var iframe;
-
+        
         
         
         var rd      = {};
+        rd.attr     = {};
         var btn     = {};
         
         
@@ -103,17 +106,30 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
+                                                                                
+              var dom_config          = mod.rd.config(dom);
+              config                  = Object.assign(config,dom_config);
               
+              config['web-editor']    = mod.rd.attr(dom,'web-editor',config);
+              
+              if(!('fullsize' in config['web-editor'])){
+                    config['web-editor'].fullsize    = true;
+              }
+                                                                                debug('config',config);
+                                                                                
+                                                                                
               def            = $.htmlentities.decode(dom);
+              
+              
               
               filemod   = mod['file-mod'];
               editor    = mod['web-editor'];
               
               filemod.initmod({ext,$,menu,source,complete});
-              editor.initmod({ext,$,menu,ace});
+              editor.initmod({ext,$,menu,ace,config:config['web-editor']});
               
               await Promise.all([
-                    rd.src(),
+                    rd.attr.src(),
                     filemod.init(),
                     editor.init(),
               ]);
@@ -122,9 +138,10 @@
         }//init
         
         
-        rd.src    = async function(){
-          
+        rd.attr.src    = async function(){
+        
               if(!dom.hasAttribute('src'))return;
+              
               src       = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
@@ -132,36 +149,36 @@
               
         }//src
         
-
+        
   //:
   
   
         obj.initdom    = function(){
-
+        
               var shadow                          = host.shadowRoot;
-
-
+              
+              
               filemod.initdom();
               editor.initdom({mode:'html',fullsize:true,txt:def});
               if(src){
                     editor.filename(src);
               }
-
+              
               
               $(shadow,'[value=run]').onclick       = btn.run;
-
-
+              
+              
               hldr                                = $(shadow,'#hldr');
               iframe                              = $(hldr,'iframe');
-
-          
+              
+              
         }//initdom2
         
-
+        
         
         
   //:
-
+  
   
         btn.run   = run;
         obj.run   = run;
@@ -186,14 +203,14 @@
               }//onload
               
         }//run
-
-
-
+        
+        
+        
   //:
   
   
         function source(){
-          
+        
               var txt   = editor.getvalue();
               var blob    = new Blob([txt]);
               return blob;
@@ -203,39 +220,43 @@
         
         function complete(file){
         }//complete
-
+        
         
         complete.load   = function(file,blob){
         }//load
-
+        
         
         complete.save   = function(file){
-              
+        
               (log||window.log)?.green(file.name+' saved');
               
         }//save
         
-
-  
+        
+        
   //:
   
-        
+  
         function debug(){
-          
+        
               if(!df && !obj.df)return;
               var str   = [...arguments].join(' ');
               console.log(`[ ${did} ]`,str);
               
         }//debug
-
-
-  
+        
+        
+        
   return obj;
   
-})//snippet_html
+//snippet_html
+})
 
 
       </script>
-
+      
       
 </snippet-html>
+
+
+
