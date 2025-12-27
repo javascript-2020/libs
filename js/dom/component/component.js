@@ -794,7 +794,7 @@
                                 
                                 fn.initmod(params);
                                 await fn.init();
-                                fn.initdom();
+                                await fn.initdom();
                                 
                           })
                     );
