@@ -237,11 +237,15 @@
   //:
   
   
-        function debug(){
+        function debug(...args){
         
               if(!df && !obj.df)return;
-              var str   = [...arguments].join(' ');
-              console.log(`[ ${did} ]`,str);
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              window.console.groupCollapsed.apply(window.console,args2);
+              window.console.trace();
+              window.console.groupEnd();
               
         }//debug
         
