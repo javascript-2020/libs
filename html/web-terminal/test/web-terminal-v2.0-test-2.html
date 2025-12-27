@@ -1,0 +1,112 @@
+
+
+
+<html>
+
+      <head>
+      
+            <title>
+                  terminal test v2.0
+            </title>
+            
+            
+            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
+            <script src='https://libs.ext-code.com/js/dom/init-hdr/init-hdr.js'></script>
+            
+            <script init>
+                                                                                console.log('web-terminal-v2.0-test.html');
+        var df=true
+        ;
+        
+        
+        var terminal;
+        
+        
+  //:
+  
+  
+        async function start(){
+                                                                                debug('start');
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+              terminal           = mod['web-terminal'];
+              
+              
+              await mod.auto();
+              
+              
+              await initdom(document.body);
+              
+              
+        }//init
+        
+        
+            </script init>
+            
+            <style>
+  html
+    {height:100%}
+    
+  body
+    {display:flex;flex-direction:column;gap:10px;font-family:arial}
+    
+    
+  [component],config
+    {display:none}
+    
+    
+            </style>
+            
+      </head>
+      
+      
+      <body>
+      
+            <h3>
+                  web-terminal v2.0 test
+            </h3>
+            
+            
+            
+            <web-terminal component v2.0></web-terminal>
+            
+            
+      </body>
+      
+      
+      <script>
+      
+      
+        var root;
+        var code;
+        
+        
+  //:
+  
+  
+        function initdom(rootnode){
+        
+              root                = rootnode;
+              
+              
+              //terminal.initdom();
+              
+              terminal.writeln('helloworld');
+              terminal.writeln('ready');
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+      </script>
+      
+      
+</html>
+
+
+
