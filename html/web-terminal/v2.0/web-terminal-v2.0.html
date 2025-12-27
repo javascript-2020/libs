@@ -213,7 +213,7 @@
               
               
               
-              if(height){debugger;
+              if(height){
                                                                                 debug('height',height);
                     obj.height      = height;
               }
@@ -302,6 +302,7 @@
               set   : v=>{
               
                     if(!v)return;
+                    v   = int(v);
                     if(typeof v=='number'){
                           v   = v+'px';
                     }
