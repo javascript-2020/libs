@@ -206,7 +206,6 @@
               terminal                      = $(shadow,'#terminal');
               
               term.open(terminal);
-              fitAddon.fit();
               
               term.writeln('xterm.js ready');
               
@@ -218,6 +217,9 @@
                                                                                 debug('height',height);
                     obj.height      = height;
               }
+              
+              
+              fitAddon.fit();
               
               
         }//initdom
