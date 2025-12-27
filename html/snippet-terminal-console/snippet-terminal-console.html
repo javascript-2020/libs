@@ -186,6 +186,24 @@
         }//src
         
         
+        rd.attr.mode    = function(){
+        
+              if(!dom.hasAttribute('mode'))return;
+              
+              mode    = dom.getAttribute('mode');
+              
+        }//mode
+        
+        
+        rd.attr.type    = function(){
+        
+              if(!dom.hasAttribute('type'))return;
+              
+              mode    = dom.getAttribute('type');
+                                                                                debug('deprecated [type]',mode);
+        }//type
+        
+        
   //:
   
   
@@ -195,7 +213,7 @@
               
               filemod.initdom();
               
-              editor.initdom({mode:'js',txt:def,fullsize:true});
+              editor.initdom({mode,txt:def,fullsize:true});
               editor.filename(src);
               
               
@@ -232,7 +250,7 @@
                     js    = editor.getvalue();
               }
                                                                                 //console.log(js);
-              if(mode=='nodejs'){
+              if(mode==='nodejs'||mode==='node-js'){
                     run.nodejs({js});
               }else{
                     run.browser({js});
