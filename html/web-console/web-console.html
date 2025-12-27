@@ -210,8 +210,6 @@
         }//fullsize
         
         
-        var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
-        
         rd.attr.h   = function(){
         
               if(!target.hasAttribute('h'))return;
@@ -417,10 +415,11 @@
         Object.defineProperty(obj,'height',{
         
               set   : v=>{
-                                                                          window.console.log('console.height',v);
+                                                                          //window.console.log('console.height',v);
                     if(!v)return;
+                    v   = int(v);
                     if(typeof v=='number'){
-                          v   = v+'px';
+                          v  += 'px';
                     }
                     con.element.style.height    = v;
                     
@@ -434,6 +433,13 @@
               set   : v=>echo=!!v
               
         });
+        
+        
+        
+  //:
+  
+  
+        function int(str){return (/^\d+$/.test(str)) ? Number(str) : str}
         
         
         
