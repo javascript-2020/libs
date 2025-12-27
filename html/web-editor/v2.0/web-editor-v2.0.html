@@ -514,9 +514,12 @@
         setup.editor    = function(node,{mode,kd}={}){
         
               mode    ||= 'javascript';
+              
               switch(mode){
               
-                case 'js'   : mode    = 'javascript';       break;
+                case 'nodejs'     :
+                case 'node-js'    :
+                case 'js'         : mode    = 'javascript';       break;
                 
               }//switch
               
