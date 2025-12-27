@@ -41,7 +41,7 @@
         
         
         
-        var ext,$,log,config={}
+        var ext,$,log,config={},embed
         ;
         
         obj.initmod   = function(params){
@@ -52,6 +52,7 @@
               FitAddon        = mod.rd(params,'FitAddon',FitAddon);
               log             = mod.rd(params,'log',log);
               config          = mod.rd(params,'config',config,config);
+              embed           = mod.rd(params,'embed',embed);
               
         }//initmod
         
