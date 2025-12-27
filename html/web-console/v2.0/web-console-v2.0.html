@@ -414,8 +414,8 @@
   
         Object.defineProperty(obj,'height',{
         
-              set   : v=>{debugger;
-                                                                          window.console.log('console.height',v);
+              set   : v=>{
+                                                                          //window.console.log('console.height',v);
                     if(!v)return;
                     v   = int(v);
                     if(typeof v=='number'){
