@@ -69,17 +69,44 @@
         var terminal;
         
         
+        var fullsize;
+        var height;
+        
+        var def         = {};
+        def.fullsize    = null;
+        def.height      = null;
+        
+        
+        
+        
+        var rd    = {};
+        rd.attr   = {};
+        
+        
+        
   //:
   
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
                                                                                 
+              var dom_config    = mod.rd.config(dom);
+              config            = Object.assign(config,dom_config);
+                                                                                debug('config',config);
                                                                                 
-                                                                                
-                                                                                
-                                                                                
-                                                                                
+              target    = dom;
+              if(embed){
+                    target    = embed;
+              }
+              
+              rd.attr.fullsize();
+              rd.attr.h();
+              rd.attr.height();
+              
+              
+              
+              
+              
               await Promise.all([
                     libs(),
               ]);
@@ -126,11 +153,53 @@
         }//libs
         
         
+        rd.attr.fullsize   = function(){
+        
+              if(!target.hasAttribute('fullsize'))return;
+              
+              def.fullsize    = true;
+              
+        }//fullsize
+        
+        
+        var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
+        
+        rd.attr.h   = function(){
+        
+              if(!target.hasAttribute('h'))return;
+              
+              var h         = target.getAttribute('h');
+              h             = int(h);
+              def.height    = h;
+              
+        }//h
+        
+        
+        rd.attr.height    = function(){
+        
+              if(!target.hasAttribute('height'))return;
+              
+              var h         = target.getAttribute('height');
+              h             = int(h);
+              def.height    = h;
+              
+        }//height
+        
+        
   //:
   
   
-        obj.initdom   = async function(){
+        obj.initdom   = async function(params={}){
                                                                                 debug('initdom');
+                                                                                
+              fullsize        = params.fullsize||config.fullsize||def.fullsize;
+                                                                                debug('fullsize',fullsize);
+              height          = params.height||params.h||config.height||config.h||def.height;
+              if(height){
+                    //fullsize    = false;
+              }
+              
+              
               var shadow                    = host.shadowRoot;
               
               terminal                      = $(shadow,'#terminal');
@@ -141,6 +210,13 @@
               term.writeln('xterm.js ready');
               
               //setTimeout(()=>log.ok('ok'),50);
+              
+              
+              
+              if(height){
+                                                                                debug('height',height);
+                    obj.height      = height;
+              }
               
               
         }//initdom
