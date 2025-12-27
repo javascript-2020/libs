@@ -4,24 +4,26 @@
 <snippet-terminal-console v2.0>
 
       <template shadowrootmode=open>
-
-            <link rel=stylesheet href='https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.css'>
       
+            <link rel=stylesheet href='https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.css'>
+            
             <style>
-
-/*            
+            
+/*
   editor-root
     {display:block;height:200px}
   terminal-root::part(terminal)
     {height:200px}
-*/    
-    
+*/
+
   #root
     {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px}
     
   #btns
-    {}
-
+    {display:flex;gap:10px;margin:0 20px}
+    
+  .spc
+    {flex:1}
   input
     {font-size:16px;padding:5px 10px;box-sizing:border-box;}
   input[type=button]
@@ -40,7 +42,9 @@
                   
                   <div id=btns>
                         <input value=run type=button>
+                        <div class=spc></div>
                         <input value=clear type=button>
+                        <input value=reset type=button>
                   </div>
                   
                   <web-terminal component></web-terminal>
@@ -53,7 +57,7 @@
       
       
       <script>
-
+      
       
 (function snippet_terminal_console({mod,dom,host}){
 
@@ -61,31 +65,29 @@
         version   : 'v2.0',
   };
   
-        var df=true
+        var df=true,did='snippet-terminal-console'
         ;
         
-        var ext,$,menu,ace,log
+        
+        
+        var ext,$,menu,ace,log,config={}
         ;
         
         obj.initmod   = function(params){
-              
-              ext           = params.ext;
-              $             = params.$;
-              
-              menu          = params.menu;
-              
-              ace           = params.ace;
-              
-              ('on' in params) && (obj.on=params.on);
-              
-              log           = params.log;
+        
+              ext           = mod.rd(params,'ext',ext);
+              $             = mod.rd(params,'$',$);
+              menu          = mod.rd(params,'menu',menu);
+              ace           = mod.rd(params,'ace',ace);
+              obj.on        = mod.rd(params,'on',obj.on);
+              log           = mod.rd(params,'log',log);
               
         }//initmod
         
         
   //:
-
-
+  
+  
         obj.on    = {};
         
         var filemod;
@@ -97,6 +99,7 @@
         var jsconsole;
         obj.console       = null;
         
+        
         var src;
         
         var sandbox;
@@ -104,9 +107,10 @@
         
         var def;
         var mode;
-
-
+        
+        
         var rd    = {};
+        rd.attr   = {};
         var btn   = {};
         obj.btn   = {};
         var run   = {};
@@ -117,50 +121,63 @@
   
   
         obj.init    = async function(){
-
-
+                                                                                debug('init',obj.version);
+              var dom_config            = mod.rd.config(dom);
+              config                    = Object.assign(config,dom_config);
+              
+              config['web-editor']      = mod.rd.attr(dom,'web-editor',config);
+              config['web-terminal']    = mod.rd.attr(dom,'web-terminal',config);
+              config['web-console']     = mod.rd.attr(dom,'web-console',config);
+              
+              if(!('fullsize' in config['web-editor'])){
+                    config['web-editor'].fullsize    = true;
+              }
+                                                                                debug('config',config);
+                                                                                
+                                                                                
               def               = $.htmlentities.decode(dom);
               mode              = dom.getAttribute('type');
-
-        
+              
+              
               filemod           = mod['file-mod'];
               obj.filemod       = filemod;
               editor            = mod['web-editor'];
               obj.editor        = editor;
               terminal          = mod['web-terminal'];
-              obj.terminal      = terminal;              
+              obj.terminal      = terminal;
               jsconsole         = mod['web-console'];
               obj.console       = jsconsole;
-
+              
               filemod.initmod({ext,$,menu,menumod,source,complete,log});
-              editor.initmod({ext,$,menu,ace});
-              terminal.initmod({ext,$});
-              jsconsole.initmod({ext,$,menu,ace});
+              editor.initmod({ext,$,menu,ace,config:config['web-editor']});
+              terminal.initmod({ext,$,config:config['web-terminal']});
+              jsconsole.initmod({ext,$,menu,ace,config:config['web-console']});
               
               
               await Promise.all([
-                    rd.src(),
+                    rd.attr.src(),
                     libs(),
                     filemod.init(),
                     editor.init(),
                     terminal.init(),
                     jsconsole.init(),
               ]);
-
+              
               
         }//init
         
         
         async function libs(){
-          
+        
               [sandbox]       = await ext.load.libs('js/sandbox/sandbox.js.api');
-          
+              
         }//libs
         
         
-        rd.src    = async function(){
-          
+        rd.attr.src    = async function(){
+        
               if(!dom.hasAttribute('src'))return;
+              
               src       = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
@@ -171,35 +188,35 @@
         
   //:
   
-        
+  
         obj.initdom   = async function(){
-          
+                                                                                debug('initdom');
               shadow                                = host.shadowRoot;
-
+              
               filemod.initdom();
               
               editor.initdom({mode:'js',txt:def,fullsize:true});
               editor.filename(src);
               
+              
               $(shadow,'[value=run]').onclick       = btn.run;
               $(shadow,'[value=clear]').onclick     = btn.clear;
-
+              $(shadow,'[value=reset]').onclick     = btn.reset;
+              
               
               terminal.initdom();
-
-              
               jsconsole.initdom(shadow);
-
-
-                            
+              
+              
+              
         }//initdom
         
         
   //:
-
-
+  
+  
         btn.run   = async function(){
-              
+        
               var result;
               if(obj.btn.run){
                     result    = await obj.btn.run();
@@ -207,7 +224,7 @@
                           return;
                     }
               }
-                                                                                console.log('run');
+                                                                                debug('run');
               var js;
               if(typeof result=='string'){
                     js    = result;
@@ -223,32 +240,40 @@
               
         }//btn.run
         
-
+        
         btn.clear   = function(){
-          
+        
               window.console.clear();
               terminal.clear();
+              jsconsole.clear();
               
         }//clear
-
-
-  
+        
+        
+        btn.reset   = function(){
+                                                                                debug('reset');
+              editor.setvalue(def);
+              
+        }//reset
+        
+        
+        
   //:
   
   
         run.browser   = async function({js}){
-          
+                                                                                debug('run.browser');
               var result,error;
               result    = await sandbox.run.iframe(js,{console:jsconsole,ctx:{terminal},iframe});
               ({iframe,result,error}    = result);
-                    
+              
         }//browser
         
-     
+        
         run.nodejs    = async function({js,on}){
-
+                                                                                debug('run.nodejs');
               on    ||= obj.on;
-              await sandbox.nodejs(js,{console:jsconsole,ctx:{terminal},on}); 
+              await sandbox.nodejs(js,{console:jsconsole,ctx:{terminal},on});
               
         }//nodejs
         
@@ -257,11 +282,11 @@
   
   
         function source(){
-          
+        
               var txt     = editor.getvalue();
               var blob    = new Blob([txt]);
               return blob;
-        
+              
         }//source
         
         
@@ -274,7 +299,7 @@
         
         
         complete.save   = function(file){
-          
+        
               (log||window.log)?.green(file.name+' saved');
               
         }//save
@@ -283,13 +308,27 @@
   //:
   
   
-  
+        function debug(...args){
+        
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              window.console.groupCollapsed.apply(window.console,args2);
+              window.console.trace();
+              window.console.groupEnd();
+              
+        }//debug
+        
+        
   return obj;
   
-})//snippet_terminal_console
+//snippet_terminal_console
+})
 
 
       </script>
+      
       
 </snippet-terminal-console>
 
