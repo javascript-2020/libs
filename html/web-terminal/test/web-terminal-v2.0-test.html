@@ -8,10 +8,10 @@
             <title>
                   terminal test v2.0
             </title>
-
+            
             
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+            
             <script init>
                                                                                 console.clear();
                                                                                 console.log('terminal-test-v2.0.html');
@@ -19,23 +19,23 @@
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var df=true
         ;
-
-
+        
+        
         var ext;
         var $;
         var datatype;
         var debug;
         
         var terminal;
-
-
+        
+        
   //:
-
-
+  
+  
         async function init(){
                                                                                 debug('init');
-
-              terminal           = mod.terminal;
+                                                                                
+              terminal           = mod['web-terminal'];
               
               terminal.initmod({ext,$});
               
@@ -43,42 +43,42 @@
               
               
   //:
-
-          
+  
+  
               await initdom(document.body);
-
-
+              
+              
         }//init
-
-
+        
+        
 (async()=>{
 
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
               'js/debug/debug.js',
         );
         [$,datatype,debug]   = await promise;
-
+        
         mod.stack.complete;
-
+        
 })();
 
 
             </script init>
-      
+            
             <style>
   html
     {height:100%}
     
   body
     {display:flex;flex-direction:column;gap:10px;font-family:arial}
-
-
+    
+    
             </style>
             
       </head>
@@ -92,40 +92,40 @@
             
             <code>
             
-      
-            </code>
-
             
-            <terminal component v2.0></terminal>
-
-      
+            </code>
+            
+            
+            <web-terminal component v2.0></web-terminal>
+            
+            
       </body>
       
       
       <script>
-
+      
       
         var root;
         var code;
         
-
+        
   //:
   
   
         function initdom(rootnode){
         
               root                = rootnode;
-
+              
               
               terminal.initdom();
-
+              
               terminal.writeln('helloworld');
               terminal.writeln('ready');
-
+              
               
         }//initdom
-      
-
+        
+        
   //:
   
   
@@ -135,4 +135,4 @@
 </html>
 
 
-            
+
