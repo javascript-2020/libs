@@ -136,7 +136,9 @@
                                                                                 
                                                                                 
               def               = $.htmlentities.decode(dom);
-              mode              = dom.getAttribute('type');
+              mode              = rd.attr.mode();
+              mode            ||= rd.attr.type();
+              
               
               
               filemod           = mod['file-mod'];
