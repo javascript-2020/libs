@@ -47,9 +47,9 @@
                         <input value=reset type=button>
                   </div>
                   
-                  <web-terminal component></web-terminal>
+                  <web-terminal component v2.0></web-terminal>
                   
-                  <web-console component></web-console>
+                  <web-console component v2.0></web-console>
                   
             </div>
             
@@ -136,7 +136,10 @@
                                                                                 
                                                                                 
               def               = $.htmlentities.decode(dom);
-              mode              = dom.getAttribute('type');
+              
+              rd.attr.type();
+              rd.attr.mode();
+              
               
               
               filemod           = mod['file-mod'];
@@ -148,8 +151,9 @@
               jsconsole         = mod['web-console'];
               obj.console       = jsconsole;
               
+              
               filemod.initmod({ext,$,menu,menumod,source,complete,log});
-              editor.initmod({ext,$,menu,ace,config:config['web-editor']});
+              editor.initmod({ext,$,menu,ace,config:config['web-editor'],mode});
               terminal.initmod({ext,$,config:config['web-terminal']});
               jsconsole.initmod({ext,$,menu,ace,config:config['web-console']});
               
