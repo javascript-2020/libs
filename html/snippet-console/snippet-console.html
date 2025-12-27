@@ -11,6 +11,11 @@
   #root
     {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px}
     
+  #btns
+    {display:flex;margin:0 20px;gap:10px}
+    
+  .spc
+    {flex:1}
   input
     {font-size:16px;padding:5px 10px}
   input[type=button]
@@ -22,17 +27,19 @@
             <div id=root>
             
                   <div>
-                        <file-mod v2.0 component></file-mod>
+                        <file-mod component></file-mod>
                   </div>
                   
                   <web-editor component></web-editor>
                   
-                  <div>
+                  <div id=btns>
                         <input value=run type=button>
+                        <div class=spc></div>
                         <input value=clear type=button>
+                        <input value=reset type=button>
                   </div>
                   
-                  <web-console v2.0 component></web-console>
+                  <web-console component></web-console>
                   
             </div>
             
@@ -78,7 +85,9 @@
         var con;
         obj.console     = null;
         
-        var def;
+        var def         = {};
+        def.txt         = '';
+        
         var src;
         
         
@@ -88,7 +97,8 @@
         var root;
         
         
-        var attr        = {};
+        var rd          = {};
+        rd.attr         = {};
         var btn         = {};
         
         
@@ -97,19 +107,18 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
-              var node          = $(dom,'config');
-              if(node){
-                    node.remove();
+              var dom_config      = mod.rd.config(dom);
+              config              = Object.assign(config,dom_config);
+              
+              config['web-editor']    = mod.rd.attr(dom,'web-editor',config);
+              config['web-console']   = mod.rd.attr(dom,'web-console',config);
+              
+              if(!('fullsize' in config['web-editor'])){
+                    config['web-editor'].fullsize    = true;
               }
-              node      = mod.config(node);
-              if(node.error){
-              }
-                                                                                console.log('node.config',node.config);
-              config    = Object.assign(config,node.config);
-                                                                                console.log('config',config);
+                                                                                debug('config',config);
                                                                                 
-                                                                                
-              def                 = dom.innerHTML;
+              def.txt             = dom.innerHTML;
               
               filemod             = mod['file-mod'];
               obj.filemod         = filemod;
@@ -120,12 +129,12 @@
               obj.console         = con;
               
               filemod.initmod({ext,$,menu,menumod,complete,source});
-              editor.initmod({ext,$,menu,ace});
-              con.initmod({ext,$,ace,config:config['web-editor']});
+              editor.initmod({ext,$,menu,ace,config:config['web-editor']});
+              con.initmod({ext,$,ace,config:config['web-console']});
               
               
               await Promise.all([
-                    attr.src(),
+                    rd.attr.src(),
                     libs(),
                     filemod.init(),
                     editor.init(),
@@ -153,13 +162,13 @@
         }//libs
         
         
-        attr.src    = async function(){
+        rd.attr.src    = async function(){
         
               if(!dom.hasAttribute('src'))return;
               src       = dom.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
-              def       = txt;
+              def.txt   = txt;
               
         }//src
         
@@ -173,11 +182,12 @@
               
               
               filemod.initdom();
-              editor.initdom({txt:def,fullsize:true});
+              editor.initdom({txt:def.txt,fullsize:true});
               
               
               $(shadow,'[value=run]').onclick       = btn.run;
               $(shadow,'[value=clear]').onclick     = btn.clear;
+              $(shadow,'[value=reset]').onclick     = btn.reset;
               
               con.initdom();
               
@@ -215,6 +225,13 @@
               con.clear();
               
         }//clear
+        
+        
+        btn.reset   = function(){
+        
+              editor.setvalue(def.txt,-1);
+              
+        }//reset
         
         
   //:
@@ -267,7 +284,8 @@
         
   return obj;
   
-})//snippet_console
+//snippet_console
+})
 
 
 
