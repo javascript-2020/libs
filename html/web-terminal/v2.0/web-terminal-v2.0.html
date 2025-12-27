@@ -80,6 +80,23 @@
               ]);
               
               
+              
+              term        = new Terminal({
+              
+                    fontFamily      : 'monospace',
+                    fontSize        : 16,
+                    lineHeight      : 1.0,
+                    
+                    
+                    theme           : theme.light,
+                    rendererType    : 'dom',
+                    
+              });
+              fitAddon    = new FitAddon();
+              term.loadAddon(fitAddon);
+              
+              
+              
         }//init
         
         
@@ -100,20 +117,6 @@
               }
               
               await Promise.all(list);
-              
-              term        = new Terminal({
-              
-                    fontFamily      : 'monospace',
-                    fontSize        : 16,
-                    lineHeight      : 1.0,
-                    
-                    
-                    theme           : theme.light,
-                    rendererType    : 'dom',
-                    
-              });
-              fitAddon    = new FitAddon();
-              term.loadAddon(fitAddon);
               
         }//libs
         
