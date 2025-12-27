@@ -21,13 +21,15 @@
     
   #btns
     {display:flex;gap:10px;margin:0 20px}
+  [value=run]
+    {margin-right:20px}
     
   .spc
     {flex:1}
   input
     {font-size:16px;padding:5px 10px;box-sizing:border-box;}
   input[type=button]
-    {cursor:pointer}
+    {cursor:pointer;min-width:60px}
     
             </style>
             
@@ -42,7 +44,6 @@
                   
                   <div id=btns>
                         <input value=run type=button>
-                        <div class=spc></div>
                         <input value=clear type=button>
                         <input value=reset type=button>
                   </div>
