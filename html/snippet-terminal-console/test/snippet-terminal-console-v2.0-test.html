@@ -28,6 +28,7 @@
         var $;
         var datatype;
         var debug;
+        var keydown;
         var menumod;
         
         var menu;
@@ -86,9 +87,10 @@
               'js/dom/$.js.api',
               'js/core/datatype.js',
               'js/debug/debug.js',
+              'js/dom/keydown/keydown.js',
               'js/dom/menumod/menumod.js',
         );
-        [$,datatype,debug,menumod]   = await promise;
+        [$,datatype,debug,keydown,menumod]   = await promise;
         
         
         //html    = await ext.text.libs('html/snippet-terminal/ex/ex1.');
