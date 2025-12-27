@@ -361,8 +361,6 @@
         }//mode
         
         
-        var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
-        
         rd.attr.h   = function(){
         
               if(!target.hasAttribute('h'))return;
@@ -869,7 +867,7 @@
                     if(v===undefined){
                           return;
                     }
-                    
+                    v   = int(v);
                     if(typeof v=='number'){
                           v   = v+'px';
                     }
@@ -942,6 +940,10 @@
             console.log(hex);
             
         }//sha256
+        
+        
+        function int(str){return (/^\d+$/.test(str)) ? Number(str) : str}
+        
         
         
         
