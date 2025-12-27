@@ -13,16 +13,24 @@
       /*height:100%*/
     }
     
+    
+  #btns
+    {display:flex;gap:10px}
+  [value=run]
+    {margin-right:20px}
+    
+    
   #hldr
     {border:1px solid lightgray;}
-    
   iframe
     {width:100%;height:100%;border:none}
+    
     
   input
     {font-size:16px;padding:5px 10px}
   input[type=button]
-    {cursor:pointer}
+    {cursor:pointer;min-width:60px}
+    
     
             </style>
             
@@ -35,8 +43,9 @@
                   
                   <web-editor component></web-editor>
                   
-                  <div>
+                  <div id=btns>
                         <input value=run type=button>
+                        <input value=reset type=button>
                   </div>
                   
                   <div id=hldr>
@@ -155,21 +164,21 @@
   
         obj.initdom    = function(){
         
-              var shadow                          = host.shadowRoot;
+              var shadow                            = host.shadowRoot;
               
               
               filemod.initdom();
+              
               editor.initdom({mode:'html',fullsize:true,txt:def});
-              if(src){
-                    editor.filename(src);
-              }
+              editor.filename(src);
               
               
               $(shadow,'[value=run]').onclick       = btn.run;
+              $(shadow,'[value=reset]').onclick     = btn.reset;
               
               
-              hldr                                = $(shadow,'#hldr');
-              iframe                              = $(hldr,'iframe');
+              hldr                                  = $(shadow,'#hldr');
+              iframe                                = $(hldr,'iframe');
               
               
         }//initdom2
@@ -204,6 +213,12 @@
               
         }//run
         
+        
+        btn.reset   = function(){
+        
+              editor.setvalue(def);
+              
+        }//reset
         
         
   //:
