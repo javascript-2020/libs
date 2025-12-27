@@ -163,8 +163,6 @@
         }//fullsize
         
         
-        var int   = (str)=>(/^\d+$/.test(str)) ? Number(str) : str;
-        
         rd.attr.h   = function(){
         
               if(!target.hasAttribute('h'))return;
@@ -206,7 +204,6 @@
               terminal                      = $(shadow,'#terminal');
               
               term.open(terminal);
-              fitAddon.fit();
               
               term.writeln('xterm.js ready');
               
@@ -218,6 +215,9 @@
                                                                                 debug('height',height);
                     obj.height      = height;
               }
+              
+              
+              fitAddon.fit();
               
               
         }//initdom
@@ -300,6 +300,7 @@
               set   : v=>{
               
                     if(!v)return;
+                    v   = int(v);
                     if(typeof v=='number'){
                           v   = v+'px';
                     }
@@ -330,6 +331,16 @@
 
 
 
+
+
+  //:
+  
+  
+  
+        function int(str){return (/^\d+$/.test(str)) ? Number(str) : str}
+        
+        
+        
   //:
   
   
