@@ -54,6 +54,7 @@
               snippet.inline        = mod.inline;
               snippet.src           = mod.src;
               
+              
               snippet.inline.initmod({ext,$,menu});
               snippet.src.initmod({ext,$,menu});
               
@@ -131,7 +132,7 @@
             </code>
             
             
-            <snippet-terminal-console v2.0 component id=inline mode=nodejs>
+            <snippet-terminal-console v2.0 component id=inline mode=nodejs  web-terminal='h=100' web-console='h=100'>
             
         console.log('my-world');
         
@@ -139,7 +140,7 @@
             
             
             
-            <snippet-terminal-console v2.0 component id=src mode=nodejs src='ex/nodejs-ex.js'>
+            <snippet-terminal-console v2.0 component id=src mode=nodejs src='ex/nodejs-ex.js' web-terminal='h=200'>
             </snippet-terminal-console>
             
             
