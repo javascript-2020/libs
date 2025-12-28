@@ -133,10 +133,12 @@
 
               
               async function build({root,mod:mod2}={}){
+                                                                                debug('build',mod2.name);
+
+
                 
                     //root      ||= document.body;
                     //mod2      ||= mod;
-                                                                                debug(mod2.name,'build');
                     
                     /*
                     var list    = $(root,'[component]');
@@ -162,6 +164,8 @@
                     */
                     //list        = list.filter(node=>node.matches('[component]'));
                     
+
+
                     
                     
                     var list    = [root];
@@ -593,7 +597,7 @@
                     
                     mod[name]     = obj;
                     mod[inst]     = obj;
-                    mod.list.push(inst||name);
+                    mod.child.push(inst||name);
 
               }//define
 
@@ -778,7 +782,7 @@
               async function auto(...args){
                                                                                 debug('auto');
                     if(args.length==0){
-                          args    = mod.list;
+                          args    = mod.child;
                     }
                     
                     await Promise.all(
