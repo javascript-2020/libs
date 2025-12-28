@@ -43,10 +43,11 @@
               mod.df                = false;
               //mod.df                = (name==='root');
               
-              mod.list              = [];
-              
-              mod.full              = full_list;
+              mod.par               = null;
               mod.child             = [];
+              
+              mod.list              = [];
+              mod.full              = full_list;
               
               mod.auto              = auto;
               mod.create            = create;
@@ -884,7 +885,9 @@
                 
                     var def   = config[attr]||{};
                     
-                    if(!node.hasAttribute(attr))return def;
+                    if(!node.hasAttribute(attr)){
+                          return def;
+                    }
                     
                     var config2   = def;
                     
