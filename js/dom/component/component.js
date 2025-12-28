@@ -796,7 +796,7 @@
                                 }
                                                                                 debug(i,fn);
                                 var params    = Object.assign(mod_root.base,mod.base);
-                                
+                                if(!fn.initmod)debugger;
                                 fn.initmod(params);
                                 await fn.init();
                                 await fn.initdom();
