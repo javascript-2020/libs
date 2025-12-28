@@ -265,8 +265,8 @@
   
   
         obj.initdom   = function(){
-        
-              //root                            = $.$(rootnode,'google-storage');
+                                                                                debug('initdom');
+                                                                                
               shadow                          = host.shadowRoot;
               
               menu.add.style(shadow);
@@ -278,7 +278,7 @@
               menu.input.norm(mroot);
               
               icon                            = $(shadow,'.icon');
-              icon.onclick                    = menu.click(mroot,'both',true,click);
+              icon.onclick                    = menu.click(mroot,'both',false,menu_callback);
               
               
               
@@ -353,35 +353,35 @@
               
             //client_id
             
-              var clientid                        = window.localStorage[localstorage+'client-id'];
-              $(shadow,'#client-id').value        = clientid||'';
+              var clientid                                = window.localStorage[localstorage+'client-id'];
+              $(shadow,'#client-id').value                = clientid||'';
               
               
             //client_secret
             
-              var clientsecret                    = window.localStorage[localstorage+'client-secret'];
-              $(shadow,'#client-secret').value    = clientsecret||'';
+              var clientsecret                            = window.localStorage[localstorage+'client-secret'];
+              $(shadow,'#client-secret').value            = clientsecret||'';
               
               
             //refresh-token
             
-              var refresh                         = window.localStorage[localstorage+'refresh-token'];
+              var refresh                                 = window.localStorage[localstorage+'refresh-token'];
               $(shadow,'#refresh-token').value            = refresh||'';
+              $(root2,'.refresh.icon').onclick            = btn.token.refresh;
               
               
             //token
             
-              var root2                           = $(shadow,'#token-root');
-              var token                           = window.localStorage[localstorage+'token'];
-              $(shadow,'#token').value            = token||'';
-              $(root2,'.refresh').onclick         = btn.token.refresh;
+              var root2                                   = $(shadow,'#token-root');
+              var token                                   = window.localStorage[localstorage+'token'];
+              $(shadow,'#token').value                    = token||'';
               
               
             //bucket
             
-              var root2                           = $(shadow,'#bucket-root');
-              var value                           = window.localStorage[localstorage+'bucket'];
-              $(shadow,'#bucket').value           = value||'';
+              var root2                                   = $(shadow,'#bucket-root');
+              var value                                   = window.localStorage[localstorage+'bucket'];
+              $(shadow,'#bucket').value                   = value||'';
               
               
               
@@ -392,8 +392,8 @@
               
             //url
             
-              $(shadow,'[value=parse]').onclick   = btn.parse;
-              $(shadow,'[value="+"]').onclick     = btn.parse.load;
+              $(shadow,'[value=parse]').onclick           = btn.parse;
+              $(shadow,'[value="+"]').onclick             = btn.parse.load;
               
               
             //bucket
@@ -405,11 +405,11 @@
             
             //btns
             
-              $(shadow,'[value=load]').onclick        = btn.load;
-              $(shadow,'[value=save]').onclick        = btn.save;
-              $(shadow,'[value=backup]').onclick      = btn.backup;
-              $(shadow,'[value=upload]').onclick      = btn.upload;
-              $(shadow,'[value=download]').onclick    = btn.download;
+              $(shadow,'[value=load]').onclick            = btn.load;
+              $(shadow,'[value=save]').onclick            = btn.save;
+              $(shadow,'[value=backup]').onclick          = btn.backup;
+              $(shadow,'[value=upload]').onclick          = btn.upload;
+              $(shadow,'[value=download]').onclick        = btn.download;
               
               
               
@@ -606,7 +606,7 @@
         }//download
         
         
-        function click(type,opt){}
+        function menu_callback(type,opt){}
         
         
   //:
