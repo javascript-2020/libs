@@ -6,27 +6,27 @@
       
             <style>
             
-  :host 
+  :host
     {font-family:arial}
-
+    
   .menu
     {position:absolute;outline:none;font-family:arial}
-
+    
   section
-    {margin-bottom:10px}          
-  
+    {margin-bottom:10px}
+    
   #hdr
     {text-align:right}
-  
+    
   #icon
     {padding:2px}
-  
+    
   .label
     {}
-  
+    
   .hldr
     {display:flex}
-  
+    
   .paste
     {margin-right:5px;padding:2px;
       content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAVlJREFUSEvtlj1ug0AQhcdIW6RLeiQy6XKElLRIlOlp6LmBlRsgtzTUOQAtcZMzpMpInAGlQSjRWl7LxrM/dlhZUbwtu/PNvH07zAIutBYX4oIzGBG/95MkIuezXHFOh6MoegqC4F0GEELAMAybWL+BG8GI+AwArypjRFTAgyLOSeAIHIbhjRDii5NHgcdxhK7rWHu4JnEEnt6ljK6AUxIRcfAPInq0mVYL/lwSrNa3UL7d2WKA3CvXw8vuKqzeMYKtxMmGK9ik2FVq+XQ2rVE5VSeXMpLNgLp3fZbUrlCVFAc/GaygbdvaioU4jrU9/W+CVUVc6U3TQJIkfio2geVV/C+pi6KAsiz9SN33PaRpyrrbu9R1XbPgLMv83bHJXHmeQ1VVp0tt6w6zN5DtqHMwynJJeAGbqkVEOefc2xTZ/+7Uq10CcgOh7pzz38kFPMce6zQ4B4SL8QNf7+YfCGbtNAAAAABJRU5ErkJggg==);
@@ -39,31 +39,31 @@
     {margin-right:5px;padding:2px;
       content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAACZFBMVEVHcEy9TEyD1eZpgIXXxLrhjWPyYyfxn3bljF/5jFrrpnnvNB/8ai/yh1bUmnLiaDbqLSDaiG/tOCL5dDT1ilrgXC4SabrEVkTwYSLqe0nxl3XsNx75cC74dTX7i1X2iVv+lVr3jlz0iFr4h1LtnWv7sHj5ZCPkazfVQirbeEX4UhvtaC7uUSXrQSD3KhbwSSz2Zij1ZyutZ1f2d0P3iFnAHhX6h1L4f0v6eT3zjlzumW3nnGzroHHeMiDYSin4Wx3sbTDkdj73ZST3QhrlJx32Sxr0OR3seDzvfj7zfz70OBv1aSzoYyfTSTb0Ziv3h1j2iVnxYCnyVSbtUC3wOSDlNiH2cTrWKSDWKyP3gEX6k2H0hlP1mWfypHXPq4vPo4D1soPZqIjis5LVrI3+Xxv/ejT/civ+Qxf/dzH+JBb+Nhb+byz+LRb/bSj/fTX/URb+aSX+YyH+WRf/ZSH+HBX/PxX/SBX/dTCsEhT/aya7EhP+Shb/NBb9fULoJhj/ZyX+JhT9cjP8YR/tKBv+fjj+g03+UBb/jVn/iFT+kl/+dzrmGxfrKxzuMBzIHBX8Sx76VCzUFxbEFBL+nGj/cSr8XB79Lxz8VyjZLhf7UR/9Yyj+hUX+gEP/l2PyaCr8OhnEIxf6XSbaGha7GBT3RCXhVif3ThnoQxn9Zie1EhL4IxrjJhj7YDDQJxbvPBv7Vhv9hVH/om7AIBX+Uxz0RB/dPhzzOiP2IRfsYiz2MR3zJh7RTSjjSx/lUx/LExXuOxz/jU7+iUn8PCnEKB3IOST4cS/jNBP6SBa9IRLWJxXTJhD2HBcZjAsKAAAAZHRSTlMACQICAyWlLzTrqMH+Tzg0pgrB5Ik+AQumHBrC89n2e/5oj+q1lPU9GhjzgZCQ+6XOqwW0v7/d5e1BdaSBSSf2kEPp5nrw2Xahv9iscRWgqtS/mb+4s47CwNGUYtzWEVqLW0Yax/uzPQAAArxJREFUOMvdlGdXGlEQhjfiGqIgarCLvbcYNfb03nvviRRFdLFEXFySRWx0UASxd7BrNDGxpdc/lbuQE3fB/AHfz8+ZufOcuQNBOzX+YXRmTBQ7NpYdFcOkh/pvT4Ux2bl5exyJi4vLzy/g5NxihrpjUVci21rb24vg3c4U5mFKnJGV5oLCufMA6+voKIGeeRMpjo/82MvFG8RZLAoY2+zgFha8PZ/7gtDpRdEfehRK4Uu5lyeJ87zsBDsWHj5++iQhIcEXigEgVg/Aq+SZPHIw0Lq1PbrvAfyoJD6+mA7dA50BJx66votc8TwDawaZb4tkM+kwDBfev6vEhUiN1WYOoID7SxEc68UwTKlUFnA4eyOEiM06ZNbr56Q+LqAYEQoUPT29QAouZFin9bpPXV3ldS1U0OMSAEWd9dxK8C5EXDqn45dXlNW+auS3SG+QQSi9ugYR8QAo6GyoKa2uelHnAMv5Vd/9aOSKfpnjNifIc4DSur8VJ34doLTe91ZlWVv5ylVweaJ/FX/Lfv6wG+9QQK/udyqD9vOX1dWxsfX1tYlly4x2RCKRoDOzAVRQbjWPalSGDSNqlzhjR42GqdluaTgVJPQIGdP60TcatVotkzU1Nb2frBgAU4cHu4IinqBSwcVFNrnptY4/0FVWW0boobSGrpnECHnqLT3Sm9kUPQOm7cBG/vg3Vz2yiSEh0ZoMTmosWuNt8htphJ5hy/LYSn9/v9w0N740q5ka3kDt6Mwm5Y20ELnYPKpWDRu02sHBwcXFkREUJfRsdlOXghZC6MGBniVCj2yK8AP0EMO4g+56HNtDEQ5dkIvJ29OypUeXEUQGg9OOba8nNf0i9WPTWEc4EYJK6j5mnssIzHa/KSlHT585C75LYuLh1JPHT/n4nTiYHPSfKxXknwKzkpICA1mHkoNpO/YYQ38AABZHleIztVMAAAAASUVORK5CYII=);
     }
-  
+    
   .value
     {}
-  
+    
   #btns
     {display:flex;justify-content:center;gap:25px}
   [value=save]
     {margin-right:20px}
-  
+    
   input
     {font-size:16px;padding:5px 10px;box-sizing:border-box;}
   input:not([type])
     {flex:1}
   input[type=button]
     {cursor:pointer}
-  
+    
   #url
     {margin-right:10px}
-                  
+    
             </style>
-      
-      
+            
+            
             <img id=icon class=icon src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAZ9JREFUSEvNls8uBEEQxn9DXFgughNZ3sBNwk3iMYTH4GJPvIQEryFxI3HyBkLcEBf/DsKiNmbSad1d1TO7oW/T/fX31VddPdUF+WMKOAbaP1uvgTXgPoeqMIJfgNEMbEvDasLPwJhGEll/Te1NCX/WFPS3BTViwv0SLYP4peNPjABvfXLq0wj3eywS3+k5sFQzkBNg1dtbGXUdh9Lrrn8AQ4YgTJwlSAiF2FQYBvESEjIzDHRL4VgxaddNiyHK+6fCR8D6ANKcSve+OB5UmlPCxIQPgU3tAI3rB8BGqGpDjleAMyOxBlsGTq3C28Cexmhc3wJ2rcLSY+eNxBrsyundFfbfFZdE1vTnoVb1LHATyVdT8dhVndP+XE2cp3p6ERKWuQXg0smC9FHpp5YhWGkEqVEJC8iNMJWJpq+W3n6X5BaYdsKUtZ3v744zJ5mQ6xEai8CF4vQOmAmdX8i14KRfdw151t5qwRdIqPxzqzpZUG7gueelBWLudLnv6jrCWe/qMivjwKNXcKmjdh1PAE8xsObA3fcATCoFZsH0KL4ABKpK0CB/GK0AAAAASUVORK5CYII='>
-
-          
+            
+            
             <div id=github class=menu style='display:none;left:45px;top:45px;width:600px'>
             
             
@@ -157,7 +157,7 @@
                         </div>
                         
                   </section>
-  
+                  
                   
                   <section>
                   
@@ -170,9 +170,9 @@
                               <img class='icon paste'>
                               <input id=path autocomplete=off spellcheck=false>
                           </div>
-                        
+                          
                   </section>
-  
+                  
                   
                   <div id=btns>
                         <input value=load type=button>
@@ -180,17 +180,17 @@
                         <input value=save type=button>
                         <input value=backup type=button>
                   </div>
-
-                
+                  
+                  
             </div>
-
+            
       </template>
       
       <script>
-
+      
       
 (function({mod,dom,host}){
-  
+
   var obj   = {
         version   : 'v2.0'
   };
@@ -199,62 +199,62 @@
         var df=false,did='github-fs'
         ;
                                                                                 true && debug(obj.version);
-  
-          
+                                                                                
+                                                                                
         var ext,$,menu,focus,source
         ;
         
         obj.initmod   = function(params){
-          
+        
               ext           = mod.rd(params,'ext',ext);
               $             = mod.rd(params,'$',$);
               
               menu          = mod.rd(params,'menu',menu);
               focus         = mod.rd(params,'focus',focus);
-
+              
               source        = mod.rd(params,'source',source);
               
         }//initmod
-
-                            
-  //vars:-                    
         
+        
+  //vars:-
+  
         var github;
         
         var root;
         var shadow;
-          
+        
         var icon;
-  
-                                    
+        
+        
         var btn   = {};
-
+        
         
   //:
   
-
-    
+  
+  
         obj.init    = async function(){
-          
+        
               await libs();
               
         }//init
         
         
         async function libs(){
-          
+        
               [github]    = await ext.load.libs('github/github.js.api');
               
         }//load
         
-
+        
   //:
-
-    
+  
+  
         obj.initdom   = function(){   //c
-  
+        
               shadow                          = host.shadowRoot;
-  
+              
               menu.add.style(shadow);
               
               var style                       = $(shadow,'style');
@@ -264,12 +264,12 @@
               icon                            = $(shadow,'#icon');
               icon.onclick                    = menu.click(node,{callback:menu_callback});
               menu.input.norm(node);
-
+              
               
               $.all(shadow,'.paste').forEach(icon=>{
               
                     icon.onclick    = async e=>{
-                                            
+                    
                                             var txt       = await navigator.clipboard.readText();
                                             var par       = icon.parentNode;
                                             var input     = $(par,'input:not([type])');
@@ -281,9 +281,9 @@
               });
               
               $.all(shadow,'.copy').forEach(icon=>{
-                
+              
                     icon.onclick    = async e=>{
-                      
+                    
                                             var par     = icon.parentNode;
                                             var input   = $(par,'input:not([type])');
                                             var txt     = input.value;
@@ -298,7 +298,7 @@
               
               var root2   = $(shadow,'#token').parentNode;
               $(root2,'.paste').onclick   = async e=>{
-                                            
+              
                                                   var txt       = await navigator.clipboard.readText();
                                                   var par       = icon.parentNode;
                                                   var input     = $(par,'input:not([type])');
@@ -310,15 +310,15 @@
                                                   }
                                                   
                                             };
-                                          
+                                            
               var token   = window.localStorage['github-token'];
               if(token){
                     $(shadow,'#token').value    = token;
               }
-
-
+              
+              
               $(shadow,'.storage').onclick    = async e=>{
-                                                    
+              
                                                       var icon      = e.target;
                                                       var input     = $(icon.parentNode,'input:not([type])');
                                                       
@@ -341,8 +341,8 @@
                                                       input.value   = token;
                                                       
                                                 };
-
-                                          
+                                                
+                                                
               $(shadow,'[value=parse]').onclick   = btn.parse;
               $(shadow,'[value="+"]').onclick     = btn.parse.load;
               
@@ -352,29 +352,29 @@
                                                             btn.parse();
                                                             $(shadow,'#load').focus();
                                                       }
-                                                  
+                                                      
                                                 };
                                                 
               $(shadow,'#path').onkeydown     = e=>{
-                                                
+              
                                                       if(e.key=='Enter'){
                                                             $(shadow,'#load').focus();
                                                       }
                                                       
                                                 };
-                                              
+                                                
               $(shadow,'[value=load]').onclick        = btn.load;
               $(shadow,'[value=load-raw]').onclick    = btn.load.raw;
               $(shadow,'[value=save]').onclick        = btn.save;
               $(shadow,'[value=backup]').onclick      = btn.backup;
-
+              
               
         }//initdom
-
-
-  //:
-
         
+        
+  //:
+  
+  
         btn.parse   = function(e={}){
         
               if(!github){
@@ -393,7 +393,7 @@
               }
               
         }//parse
-
+        
         
         btn.parse.load    = function(e){
         
@@ -414,8 +414,8 @@
               
               var i           = path.lastIndexOf('/');
               var filename    = path.slice(i+1);
-
-
+              
+              
               
               var file        = {};
               file.type       = 'github';
@@ -427,8 +427,8 @@
               file.repo       = repo;
               file.branch     = branch;
               file.path       = path;
-
-
+              
+              
               
               var result      = await load(file,api);
               if(result.error){
@@ -437,16 +437,16 @@
               var blob    = result.ok;
               
               obj.load.complete(file,blob);
-                            
+              
         }//load
         
         
         btn.load.raw    = async function(){
-          
+        
               load(false);
               
         }//raw
-
+        
         
         btn.save    = async function(){
         
@@ -454,8 +454,8 @@
               
               var i               = path.lastIndexOf('/');
               var filename        = path.slice(i+1);
-
-/*              
+              
+/*
               var file            = filemod.new({
               
                     filetype    : 'github',
@@ -472,9 +472,9 @@
                     icon        : icon.src
                     
               });
-*/              
+*/
 
-                    
+
               var file            = {};
               file.type           = 'github';
               file.filename       = filename;
@@ -502,12 +502,12 @@
               var {token,owner,repo,branch,path}    = read();
                                                                                 console.log('btn.backup');
                                                                                 console.log(token,owner,repo,branch,path);
-              
+                                                                                
               github.backup(token,owner,repo,branch,path);
               
         }//backup
-
-
+        
+        
         
         
         function github_kd(e){
@@ -522,7 +522,7 @@
               }
               
         }//github_kd
-
+        
         
         function menu_callback(type){
                                                                                 debug('menu_callback',arguments);
@@ -535,8 +535,8 @@
               }
               
         }//callback
-
-
+        
+        
         obj.read    = read;
         
         function read(){
@@ -553,13 +553,13 @@
         
         
         read.token    = function(){
-          
+        
               var token     = $(shadow,'#token').value;
               return token;
               
         }//token
-
-
+        
+        
         obj.write   = write;
         
         function write(owner,repo,branch,path){
@@ -570,25 +570,25 @@
               $(shadow,'#path').value     = path;
               
         }//write
-
-
+        
+        
         obj.clear   = function(){
-          
+        
               $(shadow,'#owner').value    = '';
               $(shadow,'#repo').value     = '';
               $(shadow,'#branch').value   = '';
               $(shadow,'#path').value     = '';
-                            
+              
         }//clear
         
         
   //:
-
-        
+  
+  
         obj.load    = function(file,api){return load(file,api)}
         
         async function load(file,api){
-
+        
               var token                       = read.token();
               var {owner,repo,branch,path}    = file;
               
@@ -597,8 +597,8 @@
               return result;
               
         }//load
-
-
+        
+        
         obj.save    = function(file,blob){return save(file,blob)}   //d
         
         async function save(file,blob){
@@ -610,55 +610,57 @@
               var result    = await github.save(token,owner,repo,branch,path,blob);
               if(result.ok){
                     obj.save.complete(file);
-              }                            
+              }
               return result;
-        
+              
         }//save
         
-
+        
   //:
-
-
+  
+  
         obj.export    = function(){
-          
+        
               var {owner,repo,branch,path}    = read();
               return {owner,repo,branch,path};
               
         }//export
-
+        
         
   //:
-
-
+  
+  
         obj.icon    = function(){
         
               return icon.src;
               
         }//icon
-
-
+        
+        
   //:
-
+  
   
         function debug(...args){
         
               if(!df && !obj.df)return;
               args.unshift(`[ ${did} ]`);
-              console.groupCollapsed.apply(console,args);
-              console.trace();
-              console.groupEnd();
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              window.console.groupCollapsed.apply(window.console,args2);
+              window.console.trace();
+              window.console.groupEnd();
               
         }//debug
-
-
+        
+        
         
   return obj;
-
+  
 //github-fs
 })
 
       </script>
-    
+      
 </github-fs>
 
 
