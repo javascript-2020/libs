@@ -187,8 +187,11 @@
                   
                   <div class=hr></div>
                   
+                  <file-nav component v2.0></file-nav>
+                  
                   <div id=btns>
                         <img id=parent-dir>
+                        <input value=update type=button>
                         <input value=load type=button>
                         <input value=save type=button>
                         <input value=dir type=button>
@@ -196,8 +199,6 @@
                         <div class=spc></div>
                         <input value=del type=button>
                   </div>
-                  
-                  <file-nav component v2.0></file-nav>
                   
             </div>
             
@@ -223,10 +224,8 @@
               ext           = mod.rd(params,'ext',ext);
               $             = mod.rd(params,'$',$);
               datatype      = mod.rd(params,'datatype',datatype);
-              
               menu          = mod.rd(params,'menu',menu);
               source        = mod.rd(params,'source',source);
-              
               log           = mod.rd(params,'log',log);
               
         }//initmod
@@ -312,9 +311,20 @@
               
               ui.proxy.root                                     = $(node,'#proxy');
               
-              $(node,'.copy').onclick                           = btn.copy;
-              $(node,'.paste').onclick                          = btn.paste;
+              $(node,'.copy').onclick                           = async e=>{
               
+                                                                        var txt   = ui.url.value;
+                                                                        await navigator.clipboard.writeText(txt);
+                                                                        
+                                                                  }//copy
+                                                                  
+              $(node,'.paste').onclick                          = async e=>{
+              
+                                                                        var txt         = await navigator.clipboard.readText();
+                                                                        ui.url.value    = txt;
+                                                                        
+                                                                  }//paste
+                                                                  
               ui.url                                            = $(node,'#url');
               if(url){
                     ui.url.value                                = url;
@@ -341,7 +351,7 @@
               $(ui.ftp.root,'[value=status]').onclick           = btn.ftp.status;
               
               
-              
+              $(node,'[value=update').onclick                   = btn.update;
               $(node,'[value=load]').onclick                    = btn.load;
               $(node,'[value=save]').onclick                    = btn.save;
               $(node,'[value=dir]').onclick                     = btn.dir;
@@ -375,6 +385,8 @@
               var res   = await fetch(url+'quit');
               var txt   = await res.text();
               
+              log(txt);
+              
         }//quit
         
         
@@ -390,22 +402,6 @@
               create_archive(zip,{download:'ftp-proxy-server.zip',df:true});
               
         }//download
-        
-        
-        btn.copy    = async function(){
-        
-              var txt   = ui.url.value;
-              await navigator.clipboard.writeText(txt);
-              
-        }//copy
-        
-        
-        btn.paste   = async function(){
-        
-              var txt         = await navigator.clipboard.readText();
-              ui.url.value    = txt;
-              
-        }//paste
         
         
         btn.load    = function(){
