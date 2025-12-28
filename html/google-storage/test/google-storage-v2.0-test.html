@@ -5,18 +5,18 @@
       <head>
       
             <style>
-
+            
   html
     {font-family:arial}
-  
+    
   .icon
     {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
-            
+    
             </style>
-      
-      
+            
+            
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+            
             <script init>
             
                                                                                 console.clear();
@@ -31,7 +31,7 @@
         var googlestorage;
         var log;
         
-
+        
   //:
   
   
@@ -40,14 +40,19 @@
         
               menu                          = menumod();
               
+              mod.base.add({ext,$,datatype,keydown,menumod,menu});
+              
+              
               
               googlestorage                 = mod['google-storage'];
-              log                           = mod.log;
-
+              
+              log                           = mod['log-mod'];
+              
               
               googlestorage.initmod({ext,$,menu,source});
               googlestorage.load.complete   = complete.load;
               googlestorage.save.complete   = complete.save;
+              
               log.initmod({ext,$});
               
               
@@ -56,20 +61,20 @@
                     log.init(),
               ]);
               
-
-          
+              
+              
               initdom(document.body);
               
-          
+              
         }//init
         
-
+        
 (async()=>{
 
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
@@ -77,12 +82,12 @@
               'js/dom/keydown/keydown.js'
         );
         [$,datatype,menumod,keydown]   = await promise;
-  
+        
         mod.stack.complete;
-              
+        
 })();
 
-            
+
             </script init>
             
       </head>
@@ -93,27 +98,31 @@
       
       
             <google-storage component v2.0></google-storage>
-            <log component v2.0></log>
-      
-      
+            
+            
+            <log-mod component></log-mod>
+            
+            
       </body>
       
-
+      
       <script>
       
-
+      
         var complete    = {};
-
+        
         
   //:
   
   
         function initdom(rootnode){
-          
+        
               var root                  = rootnode;
               
               
               googlestorage.initdom();
+              
+              
               log.initdom();
               
               
@@ -121,10 +130,10 @@
         
         
   //:
-        
-        
+  
+  
         complete.load   = async function(file,blob){
-          
+        
               var txt   = await blob.text();
               alert(txt);
               
@@ -132,25 +141,25 @@
         
         
         complete.save   = function(file){
-          
+        
               alert(file.filename+' saved');
               
         }//save
-
-
+        
+        
   //:
   
   
         function source(){
-          
+        
               var blob    = new Blob(['helloworld']);
               return blob;
               
         }//source
-
-
-
-
+        
+        
+        
+        
         
       </script>
       
