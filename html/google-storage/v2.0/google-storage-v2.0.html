@@ -19,6 +19,9 @@
   section
     {margin-bottom:10px}
     
+  hdr a
+    {display:block}
+    
   .hldr
     {display:flex}
     
@@ -69,6 +72,10 @@
                   
                   <section id=hdr>
                   
+                        <a href='https://ext-code.com/utils/gcloud/generate-token-from-service-account-keyfile/generate-token-from-service-account-keyfile.html' target=_blank>
+                              generate-token-from-service-account-keyfile [ ext-code.com ]
+                        </a>
+                        
                         <a href='https://developers.google.com/oauthplayground' target=_blank>
                               https://developers.google.com/oauthplayground
                         </a>
@@ -214,7 +221,9 @@
   
         var df=false,did='google-storage'
         ;
-                                                                                debug(obj.version);
+        
+        
+        
         var ext,$,menu,source
         ;
         
@@ -250,7 +259,8 @@
   
   
         obj.init    = async function(){
-        
+                                                                                debug('init',obj.version);
+                                                                                
               await libs();
               
         }//init
@@ -464,47 +474,49 @@
               
               var i           = path.lastIndexOf('/');
               var filename    = path.slice(i+1);
-              var abs         = bucket+path;
+              var abs         = bucket+'//'+path;
               
+              var title       = abs;
               
-/*
-              var file            = filemod.new({
-              
-                    filetype    : 'google-storage',
-                    abs         : path,
-                    path        : path,
-                    name        : filename,
+              var file;
+              if(filemod){
+                    file    = filemod.newfile({
                     
-                    kind        : 'file',
-                    size        : null,
-                    ctime       : null,
-                    mtime       : null,
-                    atime       : null,
+                          filetype    : 'google-storage',
+                          abs         : abs,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          size        : null,
+                          ctime       : null,
+                          mtime       : null,
+                          atime       : null,
+                          
+                          title       : title,
+                          icon        : icon.src
+                          
+                    });
                     
-                    title       : repo+' : '+path,
-                    icon        : icon.src
+                    file.bucket   = bucket;
                     
-              });
-              
-              file.abs      = abs;
-              file.bucket   = bucket;
-              
-*/
-
-
-              var file        = {};
-              file.filetype   = 'google-storage';
-              file.type       = 'google-storage';
-              
-              file.filename   = filename;
-              file.name       = filename;
-              file.title      = bucket+' : '+path;
-              file.icon       = icon.src;
-              
-              file.abs        = abs;
-              file.bucket     = bucket;
-              file.path       = path;
-              
+              }else{
+                    file    = {
+                          filetype    : 'google-storage',
+                          
+                          abs         : abs,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          
+                          title       : bucket+' : '+path,
+                          icon        : icon.src,
+                          
+                          
+                          bucket      : bucket,
+                    }
+              }
               
               load(file);
               
@@ -523,17 +535,47 @@
               var i           = path.lastIndexOf('/');
               var filename    = path.slice(i+1);
               
+              var title       = abs;
               
-              var file        = {};
-              file.type       = 'google-storage';
-              file.filename   = filename;
-              file.name       = filename;
-              file.title      = bucket+' : '+path;
-              file.icon       = icon.src;
-              
-              file.abs        = abs;
-              file.bucket     = bucket;
-              file.path       = path;
+              var file;
+              if(filemod){
+                    file    = filemod.newfile({
+                    
+                          filetype    : 'google-storage',
+                          abs         : abs,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          size        : null,
+                          ctime       : null,
+                          mtime       : null,
+                          atime       : null,
+                          
+                          title       : title,
+                          icon        : icon.src
+                          
+                    });
+                    
+                    file.bucket   = bucket;
+                    
+              }else{
+                    file    = {
+                          filetype    : 'google-storage',
+                          
+                          abs         : abs,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          
+                          title       : bucket+' : '+path,
+                          icon        : icon.src,
+                          
+                          
+                          bucket      : bucket,
+                    }
+              }
               
               
               var blob        = await source(file);
