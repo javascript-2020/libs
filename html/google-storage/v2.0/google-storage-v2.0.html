@@ -5,21 +5,21 @@
       <template shadowrootmode=open>
       
             <style>
-
-  :host 
+            
+  :host
     {font-family:arial}
-  
+    
   .icon
     {padding:1px}
   .menu
     {position:absolute}
-
+    
   section
-    {margin-bottom:10px}          
-
+    {margin-bottom:10px}
+    
   .hldr
     {display:flex}
-  
+    
   .paste
     {margin-right:5px;padding:2px;
       content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAVlJREFUSEvtlj1ug0AQhcdIW6RLeiQy6XKElLRIlOlp6LmBlRsgtzTUOQAtcZMzpMpInAGlQSjRWl7LxrM/dlhZUbwtu/PNvH07zAIutBYX4oIzGBG/95MkIuezXHFOh6MoegqC4F0GEELAMAybWL+BG8GI+AwArypjRFTAgyLOSeAIHIbhjRDii5NHgcdxhK7rWHu4JnEEnt6ljK6AUxIRcfAPInq0mVYL/lwSrNa3UL7d2WKA3CvXw8vuKqzeMYKtxMmGK9ik2FVq+XQ2rVE5VSeXMpLNgLp3fZbUrlCVFAc/GaygbdvaioU4jrU9/W+CVUVc6U3TQJIkfio2geVV/C+pi6KAsiz9SN33PaRpyrrbu9R1XbPgLMv83bHJXHmeQ1VVp0tt6w6zN5DtqHMwynJJeAGbqkVEOefc2xTZ/+7Uq10CcgOh7pzz38kFPMce6zQ4B4SL8QNf7+YfCGbtNAAAAABJRU5ErkJggg==);
@@ -36,29 +36,29 @@
     {
       content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAPFBMVEVHcExGfP1GfP1GfP1GfP1GfP1GfP1GfP1GfP1GfP1GfP1GfP1GfP1GfP1GfP1GfP1GfP1GfP1GfP1GfP2+fzHSAAAAE3RSTlMA9gwFGUK0wyQ166RV3tFpmXiESvD4SgAAAQtJREFUKM+1UluWhSAMkwIt7+f+9zqCVwHld/rhQXJokybHsSmwLH4uuVBKCThPktWgVlBnDN4YH2zUttZaZlAlU58yrH30QGWon7L8Qf0XrUzenTdvz0K4GKdzEpXoXCzo2cDd1ZoxK+EW5+iBSbQr6x2f1ONQ0MgrkrNEeXdnIbeWzi3rKf1dW05vzRVfYEmUooYx7O0HHP9QXIjXIDFOMqP3qwh1/YKONnS5eeGY2kJ4DGZe00CpaVAjCDjN1nj1guGBL1JBJynP9Pgrbm7ykHmyKWFn8gsrt9s02Ht72uyyIlaX1qAlMW0n9LEPB4Zu2V9jR0pmi0SYsn6ZBvgjygH4xg7tSexs+gMOKBiHuHhBJwAAAABJRU5ErkJggg==);
     }
-
+    
   #btns
     {display:flex;justify-content:center;gap:25px}
   [value=save]
     {margin-right:20px}
-  
+    
   input
     {font-size:16px;padding:5px 10px;box-sizing:border-box;}
   input:not([type])
     {flex:1}
   input[type=button]
     {cursor:pointer}
-  
+    
   #url
     {margin-right:10px}
-                  
-   
+    
+    
     
             </style>
-
+            
             
             <img class=icon src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAcCAMAAABBJv+bAAAAnFBMVEVHcExLhu1Iiv1Gg+tFh/dLiPBGhvVOie9HhfFHifpRjvZFhvVWju9Jh/JBe91EhvZHhfJGh/ZGftxGguZLivlDfuBklutJiPJCe9tFhPBEhvhDh/xAe+BEhvpDhvpEhfVAe91Gg+xFhfNCfuVol+hBhPf///89eeB8q/mNsu96pOz1+P7t8v3l7fxonPVOjPX9/v9Kg+O0zPSmwvFMf2AYAAAAGXRSTlMAV3f52CzEHZFsEe0JQfH1r6NXeDa0A2HJgki6rgAAARlJREFUKM9t09lygjAUgOFQA4QtLCrIVopAbctW7fu/W8lKRP4rPN8MTjIHAFi69aZk6eApD+ZPQU9V28g3GbbCSbnl0lrVhO/bSmhKRuVrORJ6crKdnBNTN9zTrAxcypq/y5mvsUPxn52MD+jhrIo+V/OXbOaj5XA6rGjdNPzSxscwdWwGdRBWgnvJbXNlwxD4nKv5R3YvmpTOfOBcefO37F4sTmYOQFzTqf+kjX9De+OOgGkIHnra+BgJEyf3nqSsuZUtLydeJ+ROA+5pc+MVrDO5lthzpBdqmG1MjFLpH0oo5msIBdeKY7mOR6GqH4XGtlHLhF/WZQLaYes4UjbVDVauC8JnV1103TisNRhfNp+JqSlFkfjjfwPaSL8f/MANAAAAAElFTkSuQmCC'>
-      
+            
             <div class=menu style='display:none'>
             
                   <div class=menu-title>
@@ -87,8 +87,8 @@
                         </div>
                         
                   </section>
-
-
+                  
+                  
                   <section id=client-secret-root>
                   
                         <div>
@@ -103,8 +103,8 @@
                         </div>
                         
                   </section>
-
-
+                  
+                  
                   <section id=refresh-token-root>
                   
                         <div>
@@ -119,8 +119,9 @@
                         </div>
                         
                   </section>
-
-
+                  
+                  <div class=menu-sep></div>
+                  
                   <section id=token-root>
                   
                         <div>
@@ -136,7 +137,7 @@
                         </div>
                         
                   </section>
-  
+                  
                   <div class=menu-sep></div>
                   
                   <section id=url-root>
@@ -155,7 +156,7 @@
                   </section>
                   
                   <div class=menu-sep></div>
-  
+                  
                   
                   <section id=bucket-root>
                   
@@ -169,8 +170,8 @@
                         </div>
                         
                   </section>
-  
-  
+                  
+                  
                   <section id=path-root>
                   
                         <div>
@@ -192,7 +193,7 @@
                         <input value=upload type=button>
                         <input value=download type=button>
                   </div>
-                
+                  
                   
             </div>
             
@@ -201,9 +202,9 @@
       
       <script>
       
-
+      
 (function google_storage({mod,dom,host}){
-  
+
   var obj   = {
         version   : 'v2.0'
   };
@@ -214,9 +215,9 @@
                                                                                 debug(obj.version);
         var ext,$,menu,source
         ;
-  
+        
         obj.initmod   = function(params){
-          
+        
               ext           = mod.rd(params,'ext',ext);
               $             = mod.rd(params,'$',$);
               
@@ -230,42 +231,42 @@
   
         var gs;
         var localstorage    = 'google-storage-';
-
-  
+        
+        
         var root;
         var shadow;
         var icon;
         var ui                  = {};
         
         
-
-
+        
+        
         var btn         = {};
         btn.token       = {};
         
         
   //:
-
+  
   
         obj.init    = async function(){
-          
+        
               await libs();
               
         }//init
-
+        
         
         async function libs(){
-          
+        
               [gs]    = await ext.load.libs('google/google-storage/google-storage.js.api');
               
         }//libs
         
-
+        
   //:
   
   
         obj.initdom   = function(){
-          
+        
               //root                            = $.$(rootnode,'google-storage');
               shadow                          = host.shadowRoot;
               
@@ -280,15 +281,15 @@
               icon                            = $(shadow,'.icon');
               icon.onclick                    = menu.click(mroot,'both',true,click);
               
-
-
-
+              
+              
+              
               $.all(shadow,'.paste').forEach(icon=>{
               
                     var root        = icon.parentNode.parentNode
                     var input       = $(root,'input:not([type])');
                     icon.onclick    = async e=>{
-                                            
+                    
                                             var txt       = await navigator.clipboard.readText();
                                             input.value   = txt;
                                             input.focus();
@@ -296,25 +297,25 @@
                                       }//icon.onclick
                                       
               });//foreach
-
-
+              
+              
               $.all(shadow,'.copy').forEach(icon=>{
-                
+              
                     var root        = icon.parentNode.parentNode;
                     var input       = $(root,'input:not([type])');
                     icon.onclick    = async e=>{
-                      
+                    
                                             var txt   = input.value;
                                             await navigator.clipboard.writeText(txt);
                                             input.focus();
                                             
                                       }//icon.onclick
                                       
-              });//foreach              
-
-
+              });//foreach
+              
+              
               $.all(shadow,'.storage').forEach(icon=>{
-                
+              
                     var root    = icon.parentNode.parentNode;
                     var key     = root.id.slice(0,-5);
                     var input   = $(root,'input:not([type])');
@@ -323,7 +324,7 @@
                     var token;
                     
                     icon.onclick    = e=>{
-                      
+                    
                                             if(e.shiftKey){
                                                   token   = localStorage[name];
                                                   if(!token){
@@ -333,7 +334,7 @@
                                                   input.value   = token;
                                                   return;
                                             }
-                                                  
+                                            
                                             token   = input.value;
                                             if(!token){
                                                   $.mousetext(`${key} empty`);
@@ -347,62 +348,62 @@
                     icon.title    = `${key} : click - store, shift - read`;
                     
               });//foreach
-                      
-
-
-
+              
+              
+              
+              
             //client_id
             
               var clientid                        = window.localStorage[localstorage+'client-id'];
               $(shadow,'#client-id').value        = clientid||'';
-
-
+              
+              
             //client_secret
             
               var clientsecret                    = window.localStorage[localstorage+'client-secret'];
               $(shadow,'#client-secret').value    = clientsecret||'';
-
-
+              
+              
             //refresh-token
-
+            
               var refresh                         = window.localStorage[localstorage+'refresh-token'];
               $(shadow,'#refresh-token').value            = refresh||'';
-
-
+              
+              
             //token
-
+            
               var root2                           = $(shadow,'#token-root');
               var token                           = window.localStorage[localstorage+'token'];
               $(shadow,'#token').value            = token||'';
               $(root2,'.refresh').onclick         = btn.token.refresh;
-
-
+              
+              
             //bucket
-
+            
               var root2                           = $(shadow,'#bucket-root');
               var value                           = window.localStorage[localstorage+'bucket'];
               $(shadow,'#bucket').value           = value||'';
               
-
-
-
-
-
-            
+              
+              
+              
+              
+              
+              
               
             //url
             
               $(shadow,'[value=parse]').onclick   = btn.parse;
               $(shadow,'[value="+"]').onclick     = btn.parse.load;
               
-            
+              
             //bucket
             
             
             //path
             
             
-              
+            
             //btns
             
               $(shadow,'[value=load]').onclick        = btn.load;
@@ -410,17 +411,17 @@
               $(shadow,'[value=backup]').onclick      = btn.backup;
               $(shadow,'[value=upload]').onclick      = btn.upload;
               $(shadow,'[value=download]').onclick    = btn.download;
-
-
+              
+              
               
         }//initdom
         
-
+        
   //:
   
   
         btn.token.refresh   = async function(){
-          
+        
               var id        = $(shadow,'#client-id').value;
               var secret    = $(shadow,'#client-secret').value;
               var refresh   = $(shadow,'#refresh-token').value;
@@ -429,14 +430,14 @@
               
               localStorage[localstorage+'token']    = token;
               $(shadow,'#token').value              = token;
-
+              
               $.mousetext('token refreshed');
               
         }//refresh
         
         
         btn.parse   = function(){
-          
+        
               var url                     = $(shadow,'#url').value;
               var {bucket,path}           = gs.parse(url);
               $(shadow,'#bucket').value   = bucket;
@@ -446,15 +447,15 @@
         
         
         btn.parse.load    = function(){
-          
+        
               btn.parse();
               btn.load();
               
         }//load
-
-
+        
+        
         btn.load    = async function(){
-          
+        
               var token       = $(shadow,'#token').value;
               
               var bucket      = $(shadow,'#bucket').value;
@@ -463,9 +464,9 @@
               var i           = path.lastIndexOf('/');
               var filename    = path.slice(i+1);
               var abs         = bucket+path;
-
               
-/*              
+              
+/*
               var file            = filemod.new({
               
                     filetype    : 'google-storage',
@@ -487,9 +488,9 @@
               file.abs      = abs;
               file.bucket   = bucket;
               
-*/              
+*/
 
-              
+
               var file        = {};
               file.filetype   = 'google-storage';
               file.type       = 'google-storage';
@@ -502,15 +503,15 @@
               file.abs        = abs;
               file.bucket     = bucket;
               file.path       = path;
-
-
+              
+              
               load(file);
               
         }//load
         
         
         btn.save    = async function(){
-
+        
               var token       = $(shadow,'#token').value;
               
               var bucket      = $(shadow,'#bucket').value;
@@ -532,8 +533,8 @@
               file.abs        = abs;
               file.bucket     = bucket;
               file.path       = path;
-
-
+              
+              
               var blob        = await source(file);
               save(file,blob);
               
@@ -542,15 +543,15 @@
         
         btn.backup    = function(){
         }//backup
-
-
+        
+        
         btn.upload    = function(){
-          
+        
               var token       = $(shadow,'#token').value;
               
               var bucket      = $(shadow,'#bucket').value;
               var path        = $(shadow,'#path').value;
-
+              
               var input         = document.createElement('input');
               input.type        = 'file';
               input.onchange    = onchange;
@@ -558,25 +559,25 @@
               
               
               async function onchange(){
-                
+              
                     var file        = input.files[0];
                     
                     var abs         = bucket+path+file.name;
-
+                    
                     var result      = await gs.save(token,abs,file);
                     if(result.error){
                           log.error(result.error);
                           return;
                     }
                     log.ok(file.name+' uploaded');
-
+                    
               }//onchange
               
         }//upload
         
         
         btn.download    = async function(){
-
+        
               var token       = $(shadow,'#token').value;
               
               var bucket      = $(shadow,'#bucket').value;
@@ -589,14 +590,14 @@
               if(i!=-1){
                     filename    = path.slice(i+1);
               }
-          
+              
               var result      = await gs.load(token,abs);
               if(result.error){
                     log.error(result.error);
                     return;
               }
               var blob        = result.ok;
-
+              
               var url         = window.URL.createObjectURL(blob);
               var a           = document.createElement('a');
               a.href          = url;
@@ -607,17 +608,17 @@
         
         
         function click(type,opt){}
-
-
+        
+        
   //:
   
   
         obj.load    = load;
         
         async function load(file){
-          
+        
               var token       = $(shadow,'#token').value;
-
+              
               var bucket      = file.bucket;
               var path        = file.path;
               
@@ -627,8 +628,8 @@
                     return;
               }
               var blob        = result.ok;
-
-
+              
+              
               obj.load.complete(file,blob);
               
         }//load
@@ -637,7 +638,7 @@
         obj.save    = save;
         
         async function save(file,blob){
-
+        
               var token       = $(shadow,'#token').value;
               
               var bucket      = file.bucket;
@@ -648,10 +649,10 @@
                     log.error(result.error);
                     return;
               }
-
               
-              obj.save.complete(file);              
-          
+              
+              obj.save.complete(file);
+              
         }//save
         
         
@@ -659,7 +660,7 @@
   
   
         function debug(){
-          
+        
               if(!df && !obj.df)return;
               
               var str   = [...arguments].join(' ');
@@ -669,7 +670,7 @@
         
         
         debug.trace   = function(){
-
+        
               if(!df && !obj.df)return;
               
               debug.apply(null,arguments);
@@ -679,8 +680,8 @@
               console.groupEnd();
               
         }//trace
-
-
+        
+        
   //:
   
   
@@ -688,11 +689,10 @@
   
 })//google-storage
 
-      
+
       </script>
       
-</google-storage>  
+</google-storage>
 
 
 
-    
