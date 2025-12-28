@@ -46,7 +46,7 @@
               mod.par               = null;
               mod.child             = [];
               
-              mod.list              = [];
+              mod.list              = [];   //  deprecated
               mod.full              = full_list;
               
               mod.auto              = auto;
