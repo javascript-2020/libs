@@ -46,7 +46,7 @@
         version   : 'v2.0',
   };
   
-        var df=true,did='web-terminal'
+        var df=false,did='web-terminal'
         ;
         
         
@@ -260,7 +260,11 @@
         }//writeln
         
         
-        obj.clear     = function(){term.clear.apply(term,arguments)}
+        obj.clear     = function(){
+        
+              term.clear.apply(term,arguments)
+              
+        }//clear
         
         
         obj.error   = function(err){
