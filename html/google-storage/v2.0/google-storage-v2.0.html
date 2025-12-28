@@ -116,6 +116,7 @@
                             <img class='storage icon'>
                             <input id=refresh-token autocomplete=off spellcheck=false>
                             <img class='copy icon'>
+                            <img class='refresh icon'>
                         </div>
                         
                   </section>
@@ -133,7 +134,6 @@
                             <img class='storage icon'>
                             <input id=token autocomplete=off spellcheck=false>
                             <img class='copy icon'>
-                            <img class='refresh icon'>
                         </div>
                         
                   </section>
@@ -220,7 +220,6 @@
         
               ext           = mod.rd(params,'ext',ext);
               $             = mod.rd(params,'$',$);
-              
               menu          = mod.rd(params,'menu',menu);
               source        = mod.rd(params,'source',source);
               
@@ -659,38 +658,29 @@
   //:
   
   
-        function debug(){
+        function debug(...args){
         
               if(!df && !obj.df)return;
-              
-              var str   = [...arguments].join(' ');
-              console.log(did,str);
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              window.console.groupCollapsed.apply(window.console,args2);
+              window.console.trace();
+              window.console.groupEnd();
               
         }//debug
         
         
-        debug.trace   = function(){
-        
-              if(!df && !obj.df)return;
-              
-              debug.apply(null,arguments);
-              
-              console.groupCollapsed(did);
-              console.trace();
-              console.groupEnd();
-              
-        }//trace
         
         
-  //:
-  
-  
   return obj;
   
-})//google-storage
+//google-storage
+})
 
 
       </script>
+      
       
 </google-storage>
 
