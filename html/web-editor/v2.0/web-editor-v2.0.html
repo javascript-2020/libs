@@ -274,10 +274,33 @@
   
         async function libs(){
         
+/*
               if(!ace){
                     ace       = await $.editor.ace();
                     obj.ace   = ace;
               }
+*/
+
+              var src   = [
+                    'https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/ace.js',
+                    'https://ajaxorg.github.io/ace-builds/src-noconflict/ace.js',
+              ];
+              
+              var resolve,promise=new Promise(res=>resolve=res);
+              
+              var script      = document.createElement('script');
+              script.src      = src[1];
+              script.onload   = onload;
+              document.head.append(script);
+              
+              return promise;
+              
+              
+              function onload(){
+              
+                    resolve(window.ace);
+                    
+              }//onload
               
         }//libs
         
