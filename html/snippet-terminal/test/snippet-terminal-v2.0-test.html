@@ -8,13 +8,16 @@
             <title>
                   snippet-terminal test v2.0
             </title>
-
-
+            
+            
             <base href='https://libs.ext-code.com/html/snippet-terminal/'>
             
             
+            <script src='https://ajaxorg.github.io/ace-builds/src-noconflict/ace.js'></script>
+            
+            
             <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+            
             <script init>
                                                                                 console.clear();
                                                                                 console.log('snippet-terminal-test-v2.0.html');
@@ -22,12 +25,16 @@
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var df=true
         ;
-
-
+        
+        
+        var ace;
+        
+        
         var ext;
         var $;
         var datatype;
         var debug;
+        var keydown;
         var menumod;
         
         var menu;
@@ -37,27 +44,34 @@
         var snippet       = {};
         snippet.inline    = null;
         snippet.src       = null;
-
+        
         var html;
         
-
+        
   //:
-
-
+  
+  
         async function init(){
                                                                                 debug('init');
-
+                                                                                
               menu              = menumod();
-        
+              
+              mod.base.add({ext,$,datatype,keydown,menumod,ace});
+              
+              
               log                   = mod['log-mod'];
+              
+              
               
               snippet.inline        = mod.inline;
               snippet.src           = mod.src;
               
+              
+              
               log.initmod({ext,$});
-              snippet.inline.initmod({ext,$,menu});
-              snippet.src.initmod({ext,$,menu});
-
+              snippet.inline.initmod({ext,$,menu,ace});
+              snippet.src.initmod({ext,$,menu,ace});
+              
               
               await Promise.all([
                     log.init(),
@@ -66,53 +80,52 @@
               ]);
               
               
-  //:
-
-          
+              
               await initdom(document.body);
-
-
+              
+              
               //snippet.editor.setvalue('helloworld');
-
+              
         }//init
-
-
+        
+        
 (async()=>{
 
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
               'js/debug/debug.js',
+              'js/dom/keydown/keydown.js',
               'js/dom/menumod/menumod.js',
         );
-        [$,datatype,debug,menumod]   = await promise;
-
-  
+        [$,datatype,debug,keydown,menumod]   = await promise;
+        
+        
         //html    = await ext.text.libs('html/snippet-terminal/ex/ex1.');
-
-
+        
+        
         mod.stack.complete;
-
+        
 })();
 
 
             </script init>
-      
+            
             <style>
   html
     {height:100%}
     
   body
     {display:flex;flex-direction:column;gap:10px;font-family:arial;padding-bottom:200px}
-
-
+    
+    
   snippet-terminal
     {display:block;margin:20px;border:1px solid lightgray;padding:10px;border-radius:5px}
-
+    
             </style>
             
       </head>
@@ -126,33 +139,33 @@
             
             <code>
             
-      
+            
             </code>
-
-
-            <snippet-terminal v2.0 id=inline component>
+            
+            
+            <snippet-terminal v2.0 component id=inline web-terminal='h=160'>
             
         console.log('my-world');
-                  
+        
             </snippet-terminal>
-
-
-
-            <snippet-terminal v2.0 id=src type=nodejs component src='ex/nodejs-ex.js'></snippet-terminal>
-
-      
+            
+            
+            
+            <snippet-terminal v2.0 component id=src type=nodejs src='ex/nodejs-ex.js' web-terminal='h=200'></snippet-terminal>
+            
+            
             <log-mod component></log-mod>
             
       </body>
       
       
       <script>
-
+      
       
         var root;
         var code;
         
-
+        
   //:
   
   
@@ -164,11 +177,11 @@
               
               snippet.inline.initdom();
               snippet.src.initdom();
-
+              
               
         }//initdom
-      
-
+        
+        
   //:
   
   
@@ -180,4 +193,4 @@
 </html>
 
 
-            
+
