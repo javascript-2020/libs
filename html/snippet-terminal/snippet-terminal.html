@@ -76,6 +76,8 @@
               ace           = mod.rd(params,'ace',ace);
               config        = mod.rd(params,'config',config,config);
               
+              echo          = mod.rd(params,'echo',echo);
+              
         }//initmod
         
         
@@ -88,6 +90,9 @@
         obj.editor      = null;
         var terminal;
         obj.terminal    = null;
+        
+        
+        var echo    = true;
         
         var src;
         
@@ -196,48 +201,69 @@
         
               var js    = editor.getvalue();
               
+              
               var console     = {};
+              
               console.write   = function(){
               
-                                      window.console.log.apply(window.console,arguments);
                                       terminal.write.apply(null,arguments);
+                                      if(echo){
+                                            window.console.log.apply(window.console,arguments);
+                                      }
                                       
                                 }//write
+                                
+                                
               console.log     = function(){
               
-                                      window.console.log.apply(window.console,arguments);
                                       terminal.writeln.apply(null,arguments);
+                                      if(echo){
+                                            window.console.log.apply(window.console,arguments);
+                                      }
                                       
                                 }//log
+                                
+                                
               console.clear   = function(){
               
-                                      window.console.clear();
                                       terminal.clear();
+                                      if(echo){
+                                            window.console.clear();
+                                      }
                                       
                                 }//clear
+                                
+                                
               console.error   = function(err){
               
-                                      window.console.error.apply(window.console,arguments);
                                       terminal.error.apply(null,arguments);
+                                      if(echo){
+                                            window.console.error.apply(window.console,arguments);
+                                      }
                                       
                                 }//error
               console.warn    = function(){
               
-                                      window.console.warn.apply(window.console,arguments);
                                       terminal.warn.apply(null,arguments);
+                                      if(echo){
+                                            window.console.warn.apply(window.console,arguments);
+                                      }
                                       
                                 }//warn
                                 
               console.debug   = function(){
               
-                                      window.console.debug.apply(window.console,arguments);
                                       terminal.debug.apply(null,arguments);
+                                      if(echo){
+                                            window.console.debug.apply(window.console,arguments);
+                                      }
                                       
                                 }//debug
                                 
+                                
               var result,error;
-              if(mode=='nodejs'){
-                    ({result,error}   = await sandbox.nodejs(js,{console}));
+              if(mode==='nodejs'||mode==='node-js'){
+                    ({result,error}           = await sandbox.nodejs(js,{console}));
               }else{
                     ({iframe,result,error}    = await sandbox.run.iframe(js,{console,ctx:{terminal},iframe}));
               }
@@ -249,8 +275,10 @@
         
         btn.clear   = function(){
         
-              window.console.clear();
               terminal.clear();
+              if(echo){
+                    window.console.clear();
+              }
               
         }//clear
         
@@ -305,7 +333,8 @@
         
   return obj;
   
-})//snippet_terminal
+//snippet_terminal
+})
 
 
       </script>
