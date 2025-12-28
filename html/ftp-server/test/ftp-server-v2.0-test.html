@@ -31,17 +31,24 @@
                                                                                 console.log('init');
               menu            = menumod();
               
+              mod.base.add({ext,$,datatype,keydown,menumod,menu});
+              
+              
               ftpserver       = mod['ftp-server'];
+              
+              
               log             = mod['log-mod'];
               con             = mod['web-console'];
               
               
               ftpserver.initmod({ext,$,datatype,menu,log});
+              ftpserver.load.complete   = complete.load;
+              ftpserver.save.complete   = complete.save;
+              
+              
               log.initmod({ext,$});
               con.initmod({ext,$});
               
-              ftpserver.load.complete   = complete.load;
-              ftpserver.save.complete   = complete.save;
               
               await Promise.all([
                     ftpserver.init(),
@@ -101,9 +108,9 @@
             <ftp-server component v2.0></ftp-server>
             
             
-            <log-mod component v2.0></log-mod>
+            <log-mod component></log-mod>
             
-            <web-console component v2.0></web-console>
+            <web-console component></web-console>
             
       </body>
       
@@ -123,8 +130,8 @@
               
               ftpserver.initdom();
               
-              log.initdom();
               
+              log.initdom();
               con.initdom();
               
               
