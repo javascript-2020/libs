@@ -196,6 +196,7 @@
         
               var js    = editor.getvalue();
               
+              
               var console     = {};
               console.write   = function(){
               
@@ -235,9 +236,10 @@
                                       
                                 }//debug
                                 
+                                
               var result,error;
-              if(mode=='nodejs'){
-                    ({result,error}   = await sandbox.nodejs(js,{console}));
+              if(mode==='nodejs'||mode==='node-js'){
+                    ({result,error}           = await sandbox.nodejs(js,{console}));
               }else{
                     ({iframe,result,error}    = await sandbox.run.iframe(js,{console,ctx:{terminal},iframe}));
               }
