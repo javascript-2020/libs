@@ -597,22 +597,29 @@
               
               var input         = document.createElement('input');
               input.type        = 'file';
+              input.multiple    = true;
               input.onchange    = onchange;
               input.click();
               
               
               async function onchange(){
               
-                    var file        = input.files[0];
+                    var n   = input.files.length;
+                    for(var i=0;i<n;i++){
                     
-                    var abs         = bucket+path+file.name;
-                    
-                    var result      = await gs.save(token,abs,file);
-                    if(result.error){
-                          log.error(result.error);
-                          return;
-                    }
-                    log.ok(file.name+' uploaded');
+                          var file        = input.files[i];
+                          
+                          var abs         = bucket+path+file.name;
+                          
+                          var result      = await gs.save(token,abs,file);
+                          if(result.error){
+                                log.error(result.error);
+                                return;
+                          }
+                          
+                          log.ok(file.name+' uploaded');
+                          
+                    }//for
                     
               }//onchange
               
