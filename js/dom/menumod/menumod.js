@@ -764,7 +764,7 @@ function menumod(){
           margin                : 10px 0;
           border-top            : 1px solid lightgray;
   }
-                                
+
         `;
           
         obj.css     = css;
