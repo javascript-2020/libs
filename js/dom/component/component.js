@@ -43,11 +43,11 @@
               mod.df                = false;
               //mod.df                = (name==='root');
               
-              mod.par               = null;
-              mod.child             = [];
+              mod.par               = null;           //  mod
+              mod.child             = [];             //  mod
               
-              mod.list              = [];   //  deprecated
-              mod.full              = full_list;
+              mod.list              = [];             // obj
+              mod.full              = full_list;      // obj
               
               mod.auto              = auto;
               mod.create            = create;
@@ -597,7 +597,8 @@
                     
                     mod[name]     = obj;
                     mod[inst]     = obj;
-                    mod.child.push(inst||name);
+                    
+                    mod.list.push(inst||name);
 
               }//define
 
@@ -782,7 +783,7 @@
               async function auto(...args){
                                                                                 debug('auto');
                     if(args.length==0){
-                          args    = mod.child;
+                          args    = mod.list;
                     }
                     
                     await Promise.all(
