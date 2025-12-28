@@ -298,7 +298,7 @@
               
               var node                                          = $(shadow,'.menu');
               icon                                              = $(shadow,'.icon');
-              icon.onclick                                      = menu.click(node,'both',false,callback);
+              icon.onclick                                      = menu.click(node,'both',false,menu_callback);
               menu.input.norm(node);
               
               
@@ -379,7 +379,7 @@
   
   
         btn.quit    = async function(){
-        
+                                                                                debug('btn.quit');
               var url   = ui.url.value;
               
               var res   = await fetch(url+'quit');
@@ -391,7 +391,7 @@
         
         
         btn.download    = async function(e){
-        
+                                                                                debug('btn.download');
               var zip   = {
                     'ftp-proxy-server'   :{directory:{
                           'package.json'          : {file:{github:{repo:'code',path:'/nodejs/server/ftp-proxy-server/package.json'}}},
@@ -421,7 +421,7 @@
         
         
         btn.save    = async function(){
-        
+                                                                                debug('btn.save');
               if(filenav.cur.type!=='file'){
                     alert('no file selected');
                     return;
@@ -431,32 +431,35 @@
               var url         = ui.url.value;
               var path        = filenav.cur.path;
               var filename    = filenav.cur.filename;
-              
+                                                                                debug(url,path,filename);
               save.ui(url,path,filename);
               
         }//save
         
         
-        btn.dir   = function(){
-        
+        btn.update   = function(){
+                                                                                debug('btn.update');
               var url       = ui.url.value;
               var auth      = ui.auth.value;
               var path      = filenav.path;
-                                                                                debug('btn.dir',url,auth,path);
+                                                                                debug(url,auth,path);
               filenav.server.readdir(url,auth,path);
               
+        }//update
+        
+        
+        btn.dir   = function(){
         }//dir
         
         
-        
         btn.ftp.connect   = async function(){
-        
+                                                                                debug('ftp.connect');
               var host        = ui.ftp.host.value;
               var port        = ui.ftp.port.value;
               var user        = ui.ftp.user.value;
               var password    = ui.ftp.password.value;
               var secure      = ui.ftp.secure.checked;
-                                                                                console.log(host,port,user,password,secure);
+                                                                                debug(host,port,user,password,secure);
               var json        = {host,port,user,password,secure};
               var body        = JSON.stringify(json);
               
@@ -477,12 +480,14 @@
               }//catch
               if(err){
                     var error   = err.toString();
+                                                                                debug(error);
                     log.red(error);
                     return;
               }
               
               var json    = await res.json();
               if(json.error){
+                                                                                debug(json.error);
                     log.red(json.error);
               }else{
                     log.green(json.ok);
@@ -492,7 +497,7 @@
         
         
         btn.ftp.disconnect    = async function(){
-        
+                                                                                debug('fftp.disconnect');
               var url         = ui.url.value;
               var auth        = ui.auth.value;
               
@@ -511,14 +516,17 @@
               }//catch
               if(err){
                     var error   = err.toString();
+                                                                                debug(error);
                     log.red(error);
                     return;
               }
               
               var json    = await res.json();
               if(json.error){
+                                                                                debug(json.error);
                     log.red(json.error);
               }else{
+                                                                                debug(json.ok);
                     log.green(json.ok);
               }
               
@@ -526,7 +534,7 @@
         
         
         btn.ftp.status    = async function(){
-        
+                                                                                debug('ftp.status');
               var url         = ui.url.value;
               var auth        = ui.auth.value;
               
@@ -545,14 +553,17 @@
               }//catch
               if(err){
                     var error   = err.toString();
+                                                                                debug(error);
                     log.red(error);
                     return;
               }
               
               var json    = await res.json();
               if(json.error){
+                                                                                debug(json.error);
                     log.red(json.error);
               }else{
+                                                                                debug(json.ok);
                     log.green(json.ok);
               }
               
@@ -562,11 +573,9 @@
   //:
   
   
-        function callback(){
-        
-              console.log('menu.callback');
-              
-        }//callback
+        function menu_callback(){
+                                                                                debug('menu.callback',arguments);
+        }//menu_callback
         
         
         file.click    = function(path,filename){
