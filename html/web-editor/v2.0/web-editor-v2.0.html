@@ -298,7 +298,10 @@
               
               function onload(){
               
-                    resolve(window.ace);
+                    ace       = window.ace;
+                    obj.ace   = ace;
+                    
+                    resolve(ace);
                     
               }//onload
               
