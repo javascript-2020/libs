@@ -20,12 +20,14 @@
     {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px}
     
   #btns
-    {}
+    {display:flex;gap:10px;margin:0 20px}
+  [value=run]
+    {margin-right:20px}
     
   input
     {font-size:16px;padding:5px 10px;box-sizing:border-box;}
   input[type=button]
-    {cursor:pointer}
+    {cursor:pointer;min-width:60px}
     
             </style>
             
@@ -33,7 +35,7 @@
             <div id=root>
             
                   <div>
-                        <file-mod component v2.0></file-mod>
+                        <file-mod component></file-mod>
                   </div>
                   
                   <web-editor component></web-editor>
@@ -112,7 +114,6 @@
               
               config['web-editor']      = mod.rd.attr(dom,'web-editor',config);
               config['web-terminal']    = mod.rd.attr(dom,'web-terminal',config);
-              config['web-console']     = mod.rd.attr(dom,'web-console',config);
               
               if(!('fullsize' in config['web-editor'])){
                     config['web-editor'].fullsize    = true;
