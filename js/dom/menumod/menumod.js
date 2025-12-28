@@ -760,10 +760,8 @@ function menumod(){
   .menu-item
     {display:flex;align-items:center;padding:5px 10px}
     
-  .menu-sep {
-          margin                : 10px 0;
-          border-top            : 1px solid lightgray;
-  }
+  .menu-sep 
+    {margin:10px 0;border-top:1px solid lightgray;}
 
         `;
           
