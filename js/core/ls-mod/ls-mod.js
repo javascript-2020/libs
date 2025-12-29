@@ -148,7 +148,7 @@ function localstoragemod(){
                     }
                     
               }//for
-              rerturn list;
+              return list;
               
         }//pages
         
