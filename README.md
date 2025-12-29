@@ -2,6 +2,15 @@
 
 various libraries for different languages
 
+
+```
+
+        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
+
+```
+
+
+
 ```
                                                                                 console.clear();
                                                                                 console.json=v=>console.log(JSON.strinigify(v,null,4));
