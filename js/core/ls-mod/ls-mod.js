@@ -4,7 +4,11 @@
 
 function localstoragemod(){
   
-  var obj   = {};
+  var obj   = {
+  };
+  
+        var df=true,did='ls-mod'
+        ;
   
   
         
