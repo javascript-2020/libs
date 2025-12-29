@@ -19,11 +19,6 @@ function localstoragemod(){
   //vars:
 
   
-        var base    = window.location.toString();
-        var i       = base.indexOf('?');
-        if(i!=-1){
-              base    = base.slice(0,i);
-        }
         
         
         obj.grp   = function(n=0){
@@ -42,6 +37,7 @@ function localstoragemod(){
               };
               
         }//grp
+
         
         obj.write   = new Proxy({},{
           
@@ -176,6 +172,39 @@ function localstoragemod(){
   //:
   
   
+        build.file    = function(){
+          
+              var base    = window.location.toString();
+              var i       = base.indexOf('?');
+              if(i!=-1){
+                    base    = base.slice(0,i);
+              }
+              return base;
+          
+        }//file
+
+        
+        build.dir   = function(n=0){
+          
+              var loc         = window.location;
+              var base        = loc.protocol+'//'+location.host;
+              var path        = loc.pathname;
+              var i1          = 0;
+              if(path.startsWith('/')){
+                    i1        = 1;
+              }
+              var i2          = path.lastIndexOf('/');
+              path            = path.slice(i1,i2);
+              var parts       = path.split('/');
+              var np          = parts.length;
+              np             -= n;           
+              path            = '/'+parts.slice(0,n)+'/';
+              base           += path;
+              return base;
+              
+        }//dir
+        
+        
         function stringify(value){
           
               var err;
