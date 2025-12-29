@@ -22,6 +22,23 @@ function localstoragemod(){
         }
         
         
+        obj.grp   = function(n=0){
+          
+              return {
+                
+                    read    : new Proxy({},{
+                    }),
+                    
+                    write   : new Proxy({},{
+                    }),
+                    
+                    delete    : new Proxy({},{
+                    }),
+                    
+              };
+              
+        }//grp
+        
         obj.write   = new Proxy({},{
           
               set(obj,prop,value){
