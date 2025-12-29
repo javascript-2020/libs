@@ -143,7 +143,7 @@ function localstoragemod(){
                     var page    = key.slice(1,i);
                     
                     if(!list.includes(page)){
-                                                                                console.log(page);
+                                                                                debug(page);
                           list.push(page);
                     }
                     
