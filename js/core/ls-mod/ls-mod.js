@@ -115,6 +115,7 @@ function localstoragemod(){
           
               var list    = [];
               var n       = localStorage.length;
+                                                                                debug('list',n);
               for(var i=0;i<n;i++){
                 
                     var key   = localStorage.key(i);
@@ -132,7 +133,7 @@ function localstoragemod(){
         
         
         obj.list.pages    = function(){
-          
+                                                                                debug('list.pages');
               var list    = [];
               var n       = localStorage.length;
               for(var i=0;i<n;i++){
@@ -153,7 +154,7 @@ function localstoragemod(){
         
         
         obj.format    = function(){
-          
+                                                                                debug('format');
               var list    = [];
               var n       = localStorage.length;
               for(var i=0;i<n;i++){
@@ -196,6 +197,20 @@ function localstoragemod(){
   
   //:
   
+
+        function debug(...args){
+          
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' '); 
+              var args2   = [fmt].concat(args);
+              console.groupCollapsed.apply(console,args2);
+              console.trace();
+              console.groupEnd();
+              
+        }//debug
+
+
   
   return obj;
   
