@@ -164,7 +164,7 @@ function localstoragemod(){
                     localStorage.removeItem(key);
                     
               }//for
-              rerturn list;
+              return list;
               
         }//format
         
