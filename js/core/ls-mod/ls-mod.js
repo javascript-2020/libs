@@ -57,8 +57,103 @@ function localstoragemod(){
               
         })//read
         
+        
+        obj.delete    = new Proxy({},{
+          
+              get(target,prop,receiver){
+                
+                    var full    = `[${base}]${prop}`;
+                    
+                    var str     = localStorage[full];
+                    if(str===null){
+                          var error   = 'not found';
+                          return {error};
+                    }
+                    localStorage.removeItem(full);
+                    return {ok:'ok'};
+                    
+              }//get
+              
+        })//delete
 
 
+        obj.clear   = function(){
+          
+              var list    = [];
+              var n       = localStorage.length;
+              for(var i=0;i<n;i++){
+                
+                    var key   = localStorage.key(i);
+                    if(key.startsWith(`[${base}]`)){
+                          localStorage.removeItem(key);
+                          list.push(key);
+                    }
+                    
+              }//for
+
+        }//clear
+        
+        
+        obj.list    = function(name){
+          
+              var list    = [];
+              var n       = localStorage.length;
+              for(var i=0;i<n;i++){
+                
+                    var key   = localStorage.key(i);
+                    if(name){
+                          var i   = key.indexOf(']');
+                          key     = key.slice(i+1);
+                    }
+                                                                                debug(i,key);
+                    list.push(key);
+                    
+              }//for
+              return list;
+              
+        }//list
+        
+        
+        obj.list.pages    = function(){
+          
+              var list    = [];
+              var n       = localStorage.length;
+              for(var i=0;i<n;i++){
+                
+                    var key     = localStoreage.key(i);
+                    var i       = key.indexOf(']');
+                    var page    = key.slice(1,i);
+                    
+                    if(!list.includes(page)){
+                                                                                console.log(page);
+                          list.push(page);
+                    }
+                    
+              }//for
+              rerturn list;
+              
+        }//pages
+        
+        
+        obj.format    = function(){
+          
+              var list    = [];
+              var n       = localStorage.length;
+              for(var i=0;i<n;i++){
+                
+                    var key     = localStoreage.key(i);
+                    list.push(key);
+                    localStorage.removeItem(key);
+                    
+              }//for
+              rerturn list;
+              
+        }//format
+        
+
+  //:
+  
+  
         function stringify(value){
           
               var err;
