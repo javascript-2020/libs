@@ -99,7 +99,7 @@ function localstoragemod(){
               return get;
 
               
-              get(target,prop,receiver){
+              function get(target,prop,receiver){
                 
                     var full    = `[${base}]${prop}`;
                     
