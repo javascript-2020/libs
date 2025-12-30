@@ -27,7 +27,7 @@ function localstoragemod(){
   //:
   
   
-        fn.get   = function({type='file'){
+        fn.get   = function({type='file'}){
           
               var fn;
               var args    = [];
