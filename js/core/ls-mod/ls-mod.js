@@ -115,6 +115,10 @@ function localstoragemod(){
         }//delete
         
 
+        fn.clear    = function(params){
+        }//clear
+        
+        
   //:
   
         
