@@ -27,20 +27,31 @@ function localstoragemod(){
   //:
   
   
-        fn.get   = function({type='file'}){
+        function fn(params={}){
           
+              var {type='file'}   = params;
+              
               var fn;
-              var args    = [];
+              var params;
               
               switch(type){
                 
-                case 'file'   : 
-                                fn    = build.file;
+                case 'file'   : fn    = build.file;           
                                                                 break;
+                case 'dir'    : fn    = build.dir;
+                                        params    = {n};        
+                                                                break;                                                        
               }//switch
               
-              var base    = fn.apply(null,args);
+              var base    = fn.call(null,args);
+              return base;
               
+        }//fn
+        
+        
+        fn.read   = function(params){
+          
+              var base    = fn(params);
               return get;
               
               
@@ -57,19 +68,12 @@ function localstoragemod(){
                     
               }//get
           
-        }//get
+        }//read
         
         
-        fn.set    = function({type='file'}){
+        fn.write    = function(params){
           
-              var fn;
-              var args    = [];
-              if(type=='file'){
-                    fn    = build.file;
-              }
-              
-              var base    = fn.apply(null,args);
-              
+              var base    = fn(params);              
               return set;
               
               
@@ -86,7 +90,29 @@ function localstoragemod(){
                     
               }//set
           
-        }//set
+        }//write
+        
+        
+        fn.delete   = function(params){
+          
+              var base    = fn(params);
+              return get;
+              
+              get(target,prop,receiver){
+                
+                    var full    = `[${base}]${prop}`;
+                    
+                    var str     = localStorage[full];
+                    if(str===null){
+                          var error   = 'not found';
+                          return {error};
+                    }
+                    localStorage.removeItem(full);
+                    return {ok:'ok'};
+                    
+              }//get
+              
+        }//delete
         
 
   //:
@@ -111,28 +137,10 @@ function localstoragemod(){
         }//grp
 
         
-        obj.write   = new Proxy({},{set:fn.set()});
-        obj.read    = new Proxy({},{get:fn.get()});
-        
-        
-        obj.delete    = new Proxy({},{
+        obj.write   = new Proxy({},{set:fn.write()});
+        obj.read    = new Proxy({},{get:fn.read()});
+        obj.delete    = new Proxy({},{get:fn.delete()};
           
-              get(target,prop,receiver){
-                
-                    var full    = `[${base}]${prop}`;
-                    
-                    var str     = localStorage[full];
-                    if(str===null){
-                          var error   = 'not found';
-                          return {error};
-                    }
-                    localStorage.removeItem(full);
-                    return {ok:'ok'};
-                    
-              }//get
-              
-        })//delete
-
 
         obj.clear   = function(){
           
