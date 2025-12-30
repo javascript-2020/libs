@@ -97,6 +97,7 @@ function localstoragemod(){
           
               var base    = fn(params);
               return get;
+
               
               get(target,prop,receiver){
                 
