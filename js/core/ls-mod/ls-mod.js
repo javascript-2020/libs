@@ -20,7 +20,73 @@ function localstoragemod(){
 
 
 
-        var build   = {};
+        var fn          = {};
+        var build       = {};
+        
+        
+  //:
+  
+  
+        fn.get   = function({type='file'){
+          
+              var fn;
+              var args    = [];
+              
+              switch(type){
+                
+                case 'file'   : 
+                                fn    = build.file;
+                                                                break;
+              }//switch
+              
+              var base    = fn.apply(null,args);
+              
+              return get;
+              
+              
+              function get(target,prop,receiver){
+                
+                    var full    = `[${base}]${prop}`;
+                    var str     = localStorage[full];
+                    if(str===null){
+                          var error   = 'not found';
+                          return {error};
+                    }
+                    var value   = JSON.parse(str);
+                    return {value};
+                    
+              }//get
+          
+        }//get
+        
+        
+        fn.set    = function({type='file'}){
+          
+              var fn;
+              var args    = [];
+              if(type=='file'){
+                    fn    = build.file;
+              }
+              
+              var base    = fn.apply(null,args);
+              
+              return set;
+              
+              
+              function set(obj,prop,value){
+                
+                    var {str,error}   = stringify(value);
+                    if(error){
+                          return {error};
+                    }
+                    
+                    var full              = `[${base}]${prop}`;
+                    localStorage[full]    = str;
+                    return {ok:'ok'};
+                    
+              }//set
+          
+        }//set
         
 
   //:
@@ -45,40 +111,8 @@ function localstoragemod(){
         }//grp
 
         
-        obj.write   = new Proxy({},{
-          
-              set(obj,prop,value){
-                
-                    var {str,error}   = stringify(value);
-                    if(error){
-                          return {error};
-                    }
-                    
-                    var full              = `[${base}]${prop}`;
-                    localStorage[full]    = str;
-                    return {ok:'ok'};
-                    
-              }//set
-              
-        });
-        
-        
-        obj.read    = new Proxy({},{
-          
-              get(target,prop,receiver){
-                
-                    var full    = `[${base}]${prop}`;
-                    var str     = localStorage[full];
-                    if(str===null){
-                          var error   = 'not found';
-                          return {error};
-                    }
-                    var value   = JSON.parse(str);
-                    return {value};
-                    
-              }//get
-              
-        })//read
+        obj.write   = new Proxy({},{set:fn.set()});
+        obj.read    = new Proxy({},{get:fn.get()});
         
         
         obj.delete    = new Proxy({},{
@@ -174,7 +208,7 @@ function localstoragemod(){
               
         }//format
         
-
+        
   //:
   
   
