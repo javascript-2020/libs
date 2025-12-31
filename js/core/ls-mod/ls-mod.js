@@ -5,6 +5,7 @@
 function localstoragemod(){
   
   var obj   = {
+        version   : 'v1.0',
   };
   
         var df=true,did='ls-mod'
@@ -19,7 +20,7 @@ function localstoragemod(){
   //vars:
 
 
-        var prefix      = did;
+        var prefix      = did+' : ';
 
         var build       = {};
         
