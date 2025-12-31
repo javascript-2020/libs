@@ -53,6 +53,10 @@ function localstoragemod(){
                     i1        = 1;
               }
               var i2          = path.lastIndexOf('/');
+              if(i2==-1){
+                    i2        = path.length;
+              }
+              
               path            = path.slice(i1,i2);
                                                                                 df2 && debug('path',path);
               var parts       = path.split('/');
