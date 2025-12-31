@@ -171,7 +171,7 @@ function localstoragemod(){
         obj.write     = new Proxy({},{set:fn.write()});
         obj.read      = new Proxy({},{get:fn.read()});
         obj.delete    = new Proxy({},{get:fn.delete()});
-        obj.clear     = function(){return fn.clear()});
+        obj.clear     = function(){return fn.clear()};
           
         
   //:
