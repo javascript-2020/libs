@@ -78,7 +78,8 @@ function localstoragemod(){
                                         params    = {n};        
                                                                 break;                                                        
               }//switch
-              debugger;
+              
+              //debugger;
               var base    = fn.call(null,params);
               return base;
               
