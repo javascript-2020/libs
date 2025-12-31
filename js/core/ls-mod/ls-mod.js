@@ -222,7 +222,7 @@ function localstoragemod(){
                 
                     var key   = localStorage.key(i);
                     
-                    if(key.startsWith(prefix){
+                    if(key.startsWith(prefix)){
                           if(name){
                                 var i     = key.indexOf(']');
                                 key       = key.slice(i+1);
