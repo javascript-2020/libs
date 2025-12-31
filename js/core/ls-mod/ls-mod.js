@@ -248,18 +248,24 @@ function localstoragemod(){
               for(var i=0;i<n;i++){
                 
                     var key     = localStoreage.key(i);
-                    var i       = key.indexOf(']');
-                    var page    = key.slice(1,i);
                     
-                    if(!list.includes(page)){
+                    if(key.startsWith(prefix)){
+                          var i1      = key.indexOf('[');
+                          var i2      = key.indexOf(']');
+                          var page    = key.slice(i1+1,i2);
+                          
+                          if(!list.includes(page)){
                                                                                 debug(page);
-                          list.push(page);
+                                list.push(page);
+                          }
                     }
                     
               }//for
               return list;
               
         }//pages
+        
+        
         
         
         obj.reset    = function(){
@@ -269,8 +275,10 @@ function localstoragemod(){
               for(var i=0;i<n;i++){
                 
                     var key     = localStoreage.key(i);
-                    list.push(key);
-                    localStorage.removeItem(key);
+                    if(key.startsWith(prefix)){
+                          list.push(key);
+                          localStorage.removeItem(key);
+                    }
                     
               }//for
               return list;
