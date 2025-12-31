@@ -40,21 +40,28 @@ function localstoragemod(){
 
         
         build.dir   = function(n=0){
-          
+                                                                                var df2=true;
               var loc         = window.location;
+                                                                                df2 && debug('location',loc);
               var base        = loc.protocol+'//'+location.host;
+                                                                                df2 && debug('base',base);
               var path        = loc.pathname;
+                                                                                df2 && debug('pathname',path);
               var i1          = 0;
               if(path.startsWith('/')){
                     i1        = 1;
               }
               var i2          = path.lastIndexOf('/');
               path            = path.slice(i1,i2);
+                                                                                df2 && debug('path',path);
               var parts       = path.split('/');
+                                                                                df2 && debug('parts',parts);
               var np          = parts.length;
               np             -= n;           
               path            = '/'+parts.slice(0,np)+'/';
+                                                                                df2 && debug('path',path);
               base           += path;
+                                                                                df2 && debug('base',base);
               return base;
               
         }//dir
