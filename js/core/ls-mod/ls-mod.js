@@ -219,7 +219,7 @@ function localstoragemod(){
         }//pages
         
         
-        obj.format    = function(){
+        obj.reset    = function(){
                                                                                 debug('format');
               var list    = [];
               var n       = localStorage.length;
