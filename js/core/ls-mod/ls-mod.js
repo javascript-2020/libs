@@ -62,9 +62,12 @@ function localstoragemod(){
               var parts       = path.split('/');
                                                                                 df2 && debug('parts',parts);
               var np          = parts.length;
-              np             -= n;           
-              path            = '/'+parts.slice(0,np)+'/';
-                                                                                df2 && debug('path',path);
+              np             -= n;
+              path            = '/'+parts.slice(0,np)
+              if(path.length>1){
+                    path     += '/';
+              }
+                                                                                df2 && debug('path',np,path);
               base           += path;
                                                                                 df2 && debug('base',base);
               return base;
@@ -325,6 +328,7 @@ function localstoragemod(){
               debug([123]);
               
         }//test
+
   
   //:
         
