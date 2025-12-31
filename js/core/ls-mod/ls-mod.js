@@ -59,6 +59,9 @@ function localstoragemod(){
               
         }//dir
         
+
+  //:
+  
   
         function fn(params={}){
                                                                                 debug('fn');
