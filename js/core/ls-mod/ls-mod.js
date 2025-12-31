@@ -42,7 +42,7 @@ function localstoragemod(){
         build.dir   = function(n=0){
                                                                                 var df2=true;
               var loc         = window.location;
-                                                                                df2 && debug('location',loc);
+                                                                                df2 && debug('location',loc.toString());
               var base        = loc.protocol+'//'+location.host;
                                                                                 df2 && debug('base',base);
               var path        = loc.pathname;
