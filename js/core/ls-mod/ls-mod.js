@@ -39,7 +39,7 @@ function localstoragemod(){
         }//file
 
         
-        build.dir   = function(n=0){
+        build.dir   = function({n=0}){
                                                                                 var df2=true;
                                                                                 df2 && debug('---  build.dir  ---',n);
               var loc         = window.location;
