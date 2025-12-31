@@ -21,7 +21,6 @@ function localstoragemod(){
 
         var prefix      = did;
 
-        var fn          = {};
         var build       = {};
         
         
