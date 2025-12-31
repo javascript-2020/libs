@@ -322,7 +322,7 @@ function localstoragemod(){
         obj.test    = function(){
           
               debugger;
-              debug(123);
+              debug([123]);
               
         }//test
   
