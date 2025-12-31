@@ -194,7 +194,6 @@ function localstoragemod(){
   
         obj.grp   = function(n=0){
                                                                                 debug('grp',n);
-                                                                                debug(base);
               return {
                     read      : new Proxy({},{get:fn.read({type:'dir',n})}),
                     write     : new Proxy({},{set:fn.write({type:'dir',n})}),
