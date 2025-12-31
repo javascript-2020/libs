@@ -222,8 +222,8 @@ function localstoragemod(){
                 
                     var key   = localStorage.key(i);
                     if(name){
-                          var i   = key.indexOf(']');
-                          key     = key.slice(i+1);
+                          var i     = key.indexOf(']');
+                          key       = key.slice(i+1);
                     }
                                                                                 debug(i,key);
                     list.push(key);
