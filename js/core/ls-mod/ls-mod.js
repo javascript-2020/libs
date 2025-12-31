@@ -28,12 +28,12 @@ function localstoragemod(){
   
   
         function fn(params={}){
-          
+                                                                                debug('fn');
               var {type='file'}   = params;
               
               var fn;
               var params;
-              
+                                                                                debug(type);
               switch(type){
                 
                 case 'file'   : fn    = build.file;           
