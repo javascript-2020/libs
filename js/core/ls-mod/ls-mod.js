@@ -241,7 +241,7 @@ function localstoragemod(){
         }//list
         
         
-        obj.list.pages    = function(){
+        obj.list.pages    = function(disp=true){
                                                                                 debug('list.pages');
               var list    = [];
               var n       = localStorage.length;
@@ -255,7 +255,11 @@ function localstoragemod(){
                           var page    = key.slice(i1+1,i2);
                           
                           if(!list.includes(page)){
+                                if(disp){
+                                                                                console.log(page);
+                                }else{
                                                                                 debug(page);
+                                }
                                 list.push(page);
                           }
                     }
@@ -268,14 +272,19 @@ function localstoragemod(){
         
         
         
-        obj.reset    = function(){
-                                                                                debug('format');
+        obj.reset    = function(disp=true){
+                                                                                debug('reset');
               var list    = [];
               var n       = localStorage.length;
               for(var i=0;i<n;i++){
                 
                     var key     = localStoreage.key(i);
                     if(key.startsWith(prefix)){
+                          if(disp){
+                                                                                console.log(key);
+                          }else{
+                                                                                debug(key);
+                          }
                           list.push(key);
                           localStorage.removeItem(key);
                     }
