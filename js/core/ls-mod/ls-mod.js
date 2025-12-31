@@ -240,7 +240,7 @@ function localstoragemod(){
               var n       = localStorage.length;
               for(var i=0;i<n;i++){
                 
-                    var key     = localStoreage.key(i);
+                    var key     = localStorage.key(i);
                     
                     if(key.startsWith(prefix)){
                           var i1      = key.indexOf('[');
@@ -263,6 +263,22 @@ function localstoragemod(){
         }//pages
         
         
+        obj.list.all    = function(disp=true){
+          
+              var list    = [];
+              var n       = localStorage.length;
+              for(var i=0;i<n;i++){
+              
+                    var key   = localStorage.key(i);  
+                    if(disp){
+                                                                                console.log(i,key);
+                    }else{
+                                                                                debug(i,key);
+                    }
+                    
+              }//for
+              
+        }//all
         
         
         obj.reset    = function(disp=true){
