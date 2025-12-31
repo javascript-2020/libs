@@ -197,7 +197,7 @@ function localstoragemod(){
               return {
                     read      : new Proxy({},{get:fn.read({type:'dir',n})}),
                     write     : new Proxy({},{set:fn.write({type:'dir',n})}),
-                    delete    : new Proxy({},{get:fn.delete({type:'dir',n})});
+                    delete    : new Proxy({},{get:fn.delete({type:'dir',n})}),
               };
               
         }//grp
