@@ -53,7 +53,7 @@ function localstoragemod(){
               var parts       = path.split('/');
               var np          = parts.length;
               np             -= n;           
-              path            = '/'+parts.slice(0,n)+'/';
+              path            = '/'+parts.slice(0,np)+'/';
               base           += path;
               return base;
               
@@ -65,7 +65,7 @@ function localstoragemod(){
   
         function fn(params={}){
                                                                                 debug('fn');
-              var {type='file'}   = params;
+              var {type='file',n}   = params;
               
               var fn;
               var params;
@@ -183,33 +183,27 @@ function localstoragemod(){
   
         
         
-        obj.grp   = function(n=0){
+        obj.read      = new Proxy({},{get:fn.read()});
+        obj.write     = new Proxy({},{set:fn.write()});
+        obj.delete    = new Proxy({},{get:fn.delete()});
+        obj.clear     = function(){return fn.clear()};
           
+        
+  //:
+  
+  
+        obj.grp   = function(n=0){
+                                                                                debug('grp',n);
+                                                                                debug(base);
               return {
-                
-                    read    : new Proxy({},{
-                    }),
-                    
-                    write   : new Proxy({},{
-                    }),
-                    
-                    delete    : new Proxy({},{
-                    }),
-                    
+                    read      : new Proxy({},{get:fn.read({type:'dir',n})}),
+                    write     : new Proxy({},{set:fn.write({type:'dir',n})}),
+                    delete    : new Proxy({},{get:fn.delete({type:'dir',n})});
               };
               
         }//grp
 
 
-  //:
-  
-  
-        obj.write     = new Proxy({},{set:fn.write()});
-        obj.read      = new Proxy({},{get:fn.read()});
-        obj.delete    = new Proxy({},{get:fn.delete()});
-        obj.clear     = function(){return fn.clear()};
-          
-        
   //:
   
   
@@ -292,7 +286,7 @@ function localstoragemod(){
               }//for
               return list;
               
-        }//format
+        }//reset
         
         
   //:
