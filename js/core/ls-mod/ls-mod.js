@@ -213,7 +213,7 @@ function localstoragemod(){
   //:
   
   
-        obj.list    = function(name){
+        obj.list    = function(name,disp=true){
           
               var list    = [];
               var n       = localStorage.length;
@@ -221,12 +221,19 @@ function localstoragemod(){
               for(var i=0;i<n;i++){
                 
                     var key   = localStorage.key(i);
-                    if(name){
-                          var i     = key.indexOf(']');
-                          key       = key.slice(i+1);
-                    }
+                    
+                    if(key.startsWith(prefix){
+                          if(name){
+                                var i     = key.indexOf(']');
+                                key       = key.slice(i+1);
+                          }
+                          if(disp){
+                                                                                console.log(i,key);
+                          }else{
                                                                                 debug(i,key);
-                    list.push(key);
+                          }
+                          list.push(key);
+                    }
                     
               }//for
               return list;
