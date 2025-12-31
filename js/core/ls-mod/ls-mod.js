@@ -287,7 +287,7 @@ function localstoragemod(){
               var n       = localStorage.length;
               for(var i=0;i<n;i++){
                 
-                    var key     = localStoreage.key(i);
+                    var key     = localStorage.key(i);
                     if(key.startsWith(prefix)){
                           if(disp){
                                                                                 console.log(key);
