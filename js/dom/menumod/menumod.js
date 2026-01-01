@@ -119,7 +119,13 @@ function menumod(){
               if(datatype(params)=='object'){
                     ({drag='both',center,callback}   = params);
               }else{
-                    [node,drag='both',center,callback]    = arguments;
+                    if(arguments.length==2){
+                          [node,callback]   = arguments;
+                          drag              = 'both';
+                          center            = false;
+                    }else{
+                          [node,drag='both',center,callback]    = arguments;
+                    }
               }
               
               add(node,drag,center,callback);
