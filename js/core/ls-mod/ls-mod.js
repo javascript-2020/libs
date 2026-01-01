@@ -8,7 +8,7 @@ function localstoragemod(){
         version   : 'v1.0',
   };
   
-        var df=true,did='ls-mod'
+        var df=false,did='ls-mod'
         ;
   
   
