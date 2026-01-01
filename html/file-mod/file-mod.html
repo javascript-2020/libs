@@ -45,7 +45,7 @@
         version   : 'v2.0'
   };
   
-        var df=true,did='file-mod'
+        var df=false,did='file-mod'
         ;
         
         
@@ -387,9 +387,11 @@
         
               if(!df && !obj.df)return;
               args.unshift(`[ ${did} ]`);
-              console.groupCollapsed.apply(console,args);
-              console.trace();
-              console.groupEnd();
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              window.console.groupCollapsed.apply(window.console,args2);
+              window.console.trace();
+              window.console.groupEnd();
               
         }//debug
         
