@@ -769,6 +769,12 @@ function menumod(){
   .menu-sep 
     {margin:10px 0;border-top:1px solid lightgray;}
 
+  .menu input
+    {font-size:16px;padding:5px 10px}
+    
+  .menu [type=checkbox]
+    {width:20px;height:20px;margin:0}
+
         `;
           
         obj.css     = css;
