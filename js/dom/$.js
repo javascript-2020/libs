@@ -288,9 +288,11 @@
         $.chkbox    = function(root,sel,callback){
         
               if(callback===undefined){
-                    callback    = sel;
-                    sel         = root;
-                    root        = document;
+                    if(typeof sel=='function'){
+                          callback    = sel;
+                          sel         = root;
+                          root        = document;
+                    }
               }
               
               var node        = $(root,sel);
