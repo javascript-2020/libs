@@ -65,7 +65,12 @@
 
 
               mod.base              = {};
-              mod.base.add          = params=>Object.assign(mod.base,params);
+              mod.base.add          = params=>{
+                                                                                console.log('mod.base.add');
+                                            if(datatype(params)!='object')debugger;
+                                            Object.assign(mod.base,params);
+                                            
+                                      }//add
               
               //mod.base.add({ext,$,datatype,keydown,menumod,menu,ace});
 
@@ -913,6 +918,9 @@
                     return config2;
                     
               }//parseattr
+              
+              
+              function datatype(v){return Object.prototype.toString.call(v).slice(8,-1).toLowerCase()}
               
               
   //:
