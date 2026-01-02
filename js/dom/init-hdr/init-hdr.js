@@ -45,6 +45,7 @@
 
                       case typeof mod.onReady   : mod.onReady();        break;
                       case typeof mod.onready   : mod.onready();        break;
+                      case typeof mod.ready     : mod.ready();          break;
                       case typeof mod.start     : mod.start();          break;
                       
                       case typeof onReady       : onReady();            break;
