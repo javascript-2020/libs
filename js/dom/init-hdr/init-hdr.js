@@ -41,9 +41,19 @@
                                                                                 console.log('no init');
                     await mod.auto();
                     
-                    if(typeof start=='function'){
-                          start();
-                    }
+                    switch('function'){
+
+                      case typeof mod.onReady   : mod.onReady();        break;
+                      case typeof mod.onready   : mod.onready();        break;
+                      case typeof mod.start     : mod.start();          break;
+                      
+                      case typeof onReady       : onReady();            break;
+                      case typeof onready       : onready();            break;
+                      case typeof ready         : ready();              break;
+                      case typeof start         : start();              break;
+                      
+                    }//switch
+                      
               }
 
         }//init
