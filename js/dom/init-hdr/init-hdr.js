@@ -40,7 +40,13 @@
               if(typeof init!='function'){
                                                                                 console.log('no init');
                     await mod.auto();
-                    
+                    setTimeout(complete,50);
+                      
+              }
+
+              
+              function complete(){
+                
                     switch('function'){
 
                       case typeof mod.onReady   : mod.onReady();        break;
@@ -54,12 +60,12 @@
                       case typeof start         : start();              break;
                       
                     }//switch
-                      
-              }
-
+                    
+              }//complete
+              
         }//init
-
-
+        
+        
   //:
   
   
