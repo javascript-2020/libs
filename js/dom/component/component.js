@@ -786,7 +786,7 @@
                           args    = mod.list;
                     }
                     
-                    var params    = Object.assign(mod_root.base,mod.base);
+                    var params    = Object.assign({},mod_root.base,mod.base);
                     
                     await Promise.all(
                           args.map(async(arg,i)=>{
