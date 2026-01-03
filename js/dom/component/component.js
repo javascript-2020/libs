@@ -968,7 +968,7 @@
 
         ace=null;
         
-        Object.assign(window,{ext,$,datatype,menumod,keydown,debug,ls});
+        //Object.assign(window,{ext,$,datatype,menumod,keydown,debug,ls});
         
         menu=null;
             
