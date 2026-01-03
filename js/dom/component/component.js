@@ -949,7 +949,8 @@
   //init-hdr:
   
         var script    = document.currentScript;
-        var url       = window.URL(script.src);
+                                                                                console.log(script.src);        
+        var url       = new window.URL(script.src);
         var params    = new URLSearchParams(url.search);
         if(!params.has('init-hdr'))return;
                                                                                 console.clear();
