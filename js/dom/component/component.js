@@ -942,7 +942,106 @@
           return mod;
       
         }//create
+
+
+
+
+  //init-hdr:
+  
+        var script    = document.currentScript;
+        var url       = window.URL(script.src);
+        var params    = new URLSearchParams(url.search);
+        if(!params.has('init-hdr'))return;
+                                                                                console.clear();
+                                                                                console.log('[ init-hdr ]');
+                                                                                console.log();
+                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
+        var version='v1.0'
+        ;
         
+        
+        df=false,did='';
+
+        ace;
+        
+        ext,$,datatype,menumod,keydown,debug,ls;
+        
+        menu;
+            
+        
+    //:
+
+              
+        var init_hdr    = async function(){
+                                                                                debug('init_hdr',version);
+              
+              keydown.initdom();
+              menu      = menumod();
+              menu.initmod({keydown});
+              menu.add.style();
+
+
+              mod.base.add({ext,$,datatype,keydown,menu,menumod,ace,ls});
+
+              
+              if(typeof init!='function'){
+                                                                                debug('auto');
+                    await mod.auto();
+                    setTimeout(complete,50);
+                      
+              }
+
+              
+              function complete(){
+                
+                    switch('function'){
+
+                      case typeof mod.onReady   : mod.onReady();        break;
+                      case typeof mod.onready   : mod.onready();        break;
+                      case typeof mod.ready     : mod.ready();          break;
+                      case typeof mod.start     : mod.start();          break;
+                      
+                      case typeof onReady       : onReady();            break;
+                      case typeof onready       : onready();            break;
+                      case typeof ready         : ready();              break;
+                      case typeof start         : start();              break;
+                      
+                    }//switch
+                    
+              }//complete
+              
+        }//init_hdr
+        
+        
+  //:
+  
+  
+(async()=>{
+
+        mod.stack.add;
+        
+        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
+          
+        var lsmod;
+        
+        var promise   = ext.load.libs(
+              'js/dom/$.js.api',
+              'js/core/datatype.js',
+              'js/dom/menumod/menumod.js',
+              'js/dom/keydown/keydown.js',
+              'js/debug/debug.js',
+              'js/core/ls-mod/ls-mod.js',
+        );
+        [$,datatype,menumod,keydown,debug,lsmod]   = await promise;
+  
+        ls    = lsmod();
+        
+        mod.stack.complete;
+              
+})();
+
+                  
+*/
         
         
 })();
