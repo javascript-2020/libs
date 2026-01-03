@@ -288,10 +288,17 @@
         $.chkbox    = function(root,sel,callback){
         
               if(callback===undefined){
-                    if(typeof sel=='function'){
-                          callback    = sel;
-                          sel         = root;
-                          root        = document;
+                    if(arguments.length==2){
+                          if(typeof sel=='function'){
+                                callback    = sel;
+                                sel         = root;
+                                root        = document;
+                          }
+                    }else{
+                          if(typeof root='string'){
+                                sel     = root;
+                                root    = document;
+                          }
                     }
               }
               
