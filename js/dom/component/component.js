@@ -952,7 +952,7 @@
                                                                                 console.log(script.src);        
         var url       = new window.URL(script.src);
         var params    = new URLSearchParams(url.search);
-        if(!params.has('init-hdr')){
+        if(!params.has('init')){
                                                                                 console.log('exit');
               return;
         }
