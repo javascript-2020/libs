@@ -921,7 +921,7 @@
               }//parseattr
               
               
-              //function datatype(v){return Object.prototype.toString.call(v).slice(8,-1).toLowerCase()}
+              function datatype(v){return Object.prototype.toString.call(v).slice(8,-1).toLowerCase()}
               
               
   //:
