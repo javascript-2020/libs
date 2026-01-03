@@ -295,7 +295,7 @@
                                 root        = document;
                           }
                     }else{
-                          if(typeof root='string'){
+                          if(typeof root=='string'){
                                 sel     = root;
                                 root    = document;
                           }
