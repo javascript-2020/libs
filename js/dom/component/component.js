@@ -1020,7 +1020,7 @@
   //:
   
   
-(async()=>{
+!async()=>{
 
         mod.stack.add;
         
@@ -1042,7 +1042,7 @@
         
         mod.stack.complete;
               
-})();
+}();
 
                   
 
