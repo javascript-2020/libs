@@ -966,11 +966,11 @@
         
         df=false,did='';
 
-        ace;
+        ace=null;
         
-        ext,$,datatype,menumod,keydown,debug,ls;
+        Object.assign(window,{ext,$,datatype,menumod,keydown,debug,ls});
         
-        menu;
+        menu=null;
             
         
     //:
