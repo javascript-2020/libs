@@ -976,7 +976,7 @@
     //:
 
               
-        var init_hdr    = async function(){
+        init_hdr    = async function(){
                                                                                 debug('init_hdr',version);
               
               keydown.initdom();
