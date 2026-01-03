@@ -612,7 +612,7 @@ var ext;
                     })();
               `;
 
-              var fn    = eval(code);
+              var fn    = window.eval(code);
                                                                                   ext.df && console.log('define',fn);
               return fn;
               
