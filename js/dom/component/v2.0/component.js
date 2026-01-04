@@ -217,7 +217,7 @@
                     
                     root.attachShadow({mode:'open'});
                     root.shadowRoot.append(...node.shadowRoot.childNodes);
-                    root.append(...div.childNodes());
+                    root.append(...div.childNodes);
                     
                     var node    = root;
                     
