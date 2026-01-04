@@ -97,7 +97,7 @@
         $.is      = {};
         $.center  = {};
         
-        s
+        
         $.all   = function(root,sel){
         
               if(!sel){
