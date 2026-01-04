@@ -97,7 +97,7 @@
         $.is      = {};
         $.center  = {};
         
-        
+        s
         $.all   = function(root,sel){
         
               if(!sel){
@@ -1042,8 +1042,8 @@
                     
                     }//catch
                     if(err){
-                          console.error(err);
-                          console.log(stylesheet);
+                                                                                console.log(err);
+                                                                                console.log(stylesheet);
                     }else{
                     
                           var nj             = rules.length;
