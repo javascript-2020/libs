@@ -1,0 +1,95 @@
+
+
+
+
+
+
+
+            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
+            
+            
+      <script init>
+                                                                                console.clear();
+        var ext;
+        var $;
+        var datatype;
+        
+        var log;
+        
+        
+  //:
+  
+        mod.df            = false;
+        
+        async function init(){
+        
+        
+        
+              $.initmod({ext,datatype});
+              
+              
+              log   = mod.log;
+              
+              log.initmod({ext,$});
+              
+              await log.init();
+              
+              
+              initdom(document.body);
+              
+        }//init
+        
+        
+        (async()=>{
+        
+              mod.stack.add;
+              
+              ({ext}    = await import('https://libs.ext-code.com/js/core/ext-loader/ext-loader.m.js'));
+              
+              var result   = await ext.load.libs(
+                    'js/dom/$.js',
+                    'js/core/datatype.js',
+              );
+              [$,datatype]   = result;
+              
+              mod.stack.complete;
+              
+        })();
+        
+        
+      </script init>
+      
+      
+      <style>
+      
+  [type=button]
+    {padding:5px 10px;font-size:16px;cursor:pointer}
+    
+      </style>
+      
+      <input value='click me' type=button>
+      
+      <log component v2.0></log>
+      
+      
+      <script>
+      
+      
+        async function initdom(rootnode){
+        
+              $('[value="click me"]').onclick   = e=>log.green('ok');
+              
+              log.initdom();
+              
+              log.ok();
+              
+              
+        }//initdom
+        
+        
+        
+      </script>
+      
+      
+      
+      
