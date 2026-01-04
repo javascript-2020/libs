@@ -210,46 +210,15 @@
                                                                                 if(!html.trim)debugger;
                     html            = html.trim();
                     
-                    /*
+                    
                     var div         = document.createElement('div');
                     div.setHTMLUnsafe(html);
-                    var node        = div.firstElementChild;
-                    //var first       = root.firstChild;
-                    */
-                    
-                    var par     = root.parentNode;
-                    var next    = root.nextSibling;
-                    
-                    var list    = [...root.childNodes];
-                    
-                    
-                    var i1=html.indexOf('>');
-                    var i2=html.lastIndexOf('<');
-                    html    = html.slice(i1+1,i2);
-                    debugger;
-                    //root.insertAdjacentHTML('beforeend',html);
-                    root.remove();
-                    root.setHTMLUnsafe(html);
-                    
-                    if(next){
-                          par.insertBefore(root,next);
-                    }else{
-                          par.append(root);
-                    }
 
-
-                    var first       = root.firstChild;
-                    list.forEach(node=>{
-                      
-                          if(first){
-                                root.insertBefore(node,first);
-                          }else{
-                                root.append(node);
-                          }
-                          
-                    });
-
-
+                    
+                    root.attachShadow({mode:'open'});
+                    root.shadowRoot.append(...div.shadowRoot.childNodes());
+                    root.append(...div.childNodes());
+                    
                     var node    = root;
                     
                     
