@@ -235,6 +235,7 @@
                           par.insertBefore(root,next);
                     }else{
                           par.append(root);
+                    }
 
 
                     var first       = root.firstChild;
