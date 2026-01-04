@@ -215,22 +215,32 @@
                     div.setHTMLUnsafe(html);
                     var node        = div.firstElementChild;
                     //var first       = root.firstChild;
-                    [...node.childNodes].forEach(node=>{
-                      
-                          //if(first){
-                                //root.insertBefore(node,first);
-                          //}else{
-                                root.append(node);
-                          //}
-                          
-                    });
                     */
+                    
+                    var list    = [...node.childNodes];
+                    
                     
                     var i1=html.indexOf('>');
                     var i2=html.lastIndexOf('<');
                     html    = html.slice(i1+1,i2);
                     
-                    root.insertAdjacentHTML('beforeend',html);
+                    //root.insertAdjacentHTML('beforeend',html);
+                    root.setHTMLUnsafe(html);
+
+
+
+                    var first       = root.firstChild;
+                    list.forEach(node=>{
+                      
+                          if(first){
+                                root.insertBefore(node,first);
+                          }else{
+                                root.append(node);
+                          }
+                          
+                    });
+
+
                     var node    = root;
                     
                     
