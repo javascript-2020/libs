@@ -213,14 +213,36 @@
                     var div         = document.createElement('div');
                     div.setHTMLUnsafe(html);
                     var node        = div.firstElementChild;
-                                                                                if(!node)debugger;
-                    root.__root     = node;
-                    root.__node     = node;
-                    root.__host     = node;
+                    var first       = root.firstChild;
+                    [...node.childNodes].forEach(node=>{
+                      
+                          if(first){
+                                root.insertBefore(node,first);
+                          }else{
+                                root.append(node);
+                          }
+                          
+                    });
+                    node    = root;
                     
-                    node.__html     = html;
-                    node.__root     = root;
-                    node.__dom      = root;
+/*                    
+                    var value   = root.getAttribute('component');
+                    root.removeAttribute('component');
+                    if(value){
+                          root.setAttribute('component_',value);
+                    }else{
+                          root.toggleAttribute('compeonent',true);
+                    }
+*/
+
+                                                                                if(!node)debugger;
+                    root.__root     = root;
+                    root.__node     = root;
+                    root.__host     = root;
+                    
+                    root.__html     = html;
+                    root.__root     = root;
+                    root.__dom      = root;
                     
                     //  node.setAttribute('url',url);
 
