@@ -217,6 +217,9 @@
                     //var first       = root.firstChild;
                     */
                     
+                    var par     = root.parentNode;
+                    var next    = root.nextSibling;
+                    
                     var list    = [...root.childNodes];
                     
                     
@@ -225,8 +228,13 @@
                     html    = html.slice(i1+1,i2);
                     debugger;
                     //root.insertAdjacentHTML('beforeend',html);
+                    root.remove();
                     root.setHTMLUnsafe(html);
-
+                    
+                    if(next){
+                          par.insertBefore(root,next);
+                    }else{
+                          par.append(root);
 
 
                     var first       = root.firstChild;
