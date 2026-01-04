@@ -17,7 +17,7 @@ The web-console provides a console like dev tools in a webpage
 name      | description
 ----------|------------
 $         |	the dom helper library
-ace       | a global reference to ace editor, otherwise each instance of the web-editor will load its own ace editor, specifying this ensures its only loaded once
+ace       | a global reference to ace editor, otherwise each instance of the web-console will load its own ace editor, specifying this ensures its only loaded once
 embed     | allows reading the supported attributes from another node
 config    | config parameters, see below
 echo      | whether to echo the output to the dev tools console
@@ -77,4 +77,3 @@ warn|display warn information in the console
  | 
  | 
 test|display test data in the console, for quick tests
-
