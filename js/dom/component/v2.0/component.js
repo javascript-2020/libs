@@ -210,6 +210,7 @@
                                                                                 if(!html.trim)debugger;
                     html            = html.trim();
                     
+                    /*
                     var div         = document.createElement('div');
                     div.setHTMLUnsafe(html);
                     var node        = div.firstElementChild;
@@ -223,7 +224,9 @@
                           //}
                           
                     });
-                    node    = root;
+                    */
+                    root.insertAdjacentHTML('beforeend',html);
+                    var node    = root;
                     
 /*                    
                     var value   = root.getAttribute('component');
