@@ -7,7 +7,7 @@
             <style>
             
   #log-root
-    {position:absolute;left:10px;bottom:3px;right:10px;z-index:99999}
+    {position:fixed;left:10px;bottom:3px;right:10px;z-index:99999}
   #log
     {display:flex;background:white;border:2px solid transparent;padding:10px;border-radius:5px;cursor:pointer;
       margin-bottom:10px
@@ -75,8 +75,9 @@
         obj.initdom   = function(){
         
               //var root                = $.$(rootnode,'log-root');
+              
               var shadow              = host.shadowRoot;
-              if(!shadow)debugger;
+                                                                                if(!shadow)debugger;
               log.root                = $(shadow,'#log-root');
               log.item                = $.rem(log.root,'#log');
               
