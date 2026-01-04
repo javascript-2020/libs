@@ -213,10 +213,10 @@
                     
                     var div         = document.createElement('div');
                     div.setHTMLUnsafe(html);
-
+                    var node        = div.firstElementChild;
                     
                     root.attachShadow({mode:'open'});
-                    root.shadowRoot.append(...div.shadowRoot.childNodes());
+                    root.shadowRoot.append(...node.shadowRoot.childNodes());
                     root.append(...div.childNodes());
                     
                     var node    = root;
