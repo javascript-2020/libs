@@ -213,14 +213,14 @@
                     var div         = document.createElement('div');
                     div.setHTMLUnsafe(html);
                     var node        = div.firstElementChild;
-                    var first       = root.firstChild;
+                    //var first       = root.firstChild;
                     [...node.childNodes].forEach(node=>{
                       
-                          if(first){
-                                root.insertBefore(node,first);
-                          }else{
+                          //if(first){
+                                //root.insertBefore(node,first);
+                          //}else{
                                 root.append(node);
-                          }
+                          //}
                           
                     });
                     node    = root;
@@ -266,7 +266,8 @@
                     });
                                                                                 if(!root.parentNode)debugger;
                     root.parentNode.replaceChild(node,root);
-*/                    
+*/
+
                                                                                 //mod.df && console.log(nn,version,root,node);
                                                                                 //if(nn=='filemod')debugger;
                     
