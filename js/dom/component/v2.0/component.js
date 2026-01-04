@@ -223,7 +223,7 @@
                     var i1=html.indexOf('>');
                     var i2=html.lastIndexOf('<');
                     html    = html.slice(i1+1,i2);
-                    
+                    debugger;
                     //root.insertAdjacentHTML('beforeend',html);
                     root.setHTMLUnsafe(html);
 
