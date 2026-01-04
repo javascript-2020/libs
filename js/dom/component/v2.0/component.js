@@ -217,7 +217,7 @@
                     //var first       = root.firstChild;
                     */
                     
-                    var list    = [...node.childNodes];
+                    var list    = [...root.childNodes];
                     
                     
                     var i1=html.indexOf('>');
