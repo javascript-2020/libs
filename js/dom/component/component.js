@@ -1043,7 +1043,8 @@
         
         mod.stack.complete;
               
-})();
+})()
+;
 
                   
 
