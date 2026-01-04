@@ -225,8 +225,17 @@
                           
                     });
                     */
+                    
+                    var i1=html.indexOf('>');
+                    var i2=html.lastIndexOf('<');
+                    html    = html.slice(i1+1,i2);
+                    
                     root.insertAdjacentHTML('beforeend',html);
                     var node    = root;
+                    
+                    
+                    
+                    
                     
 /*                    
                     var value   = root.getAttribute('component');
