@@ -66,8 +66,7 @@
 
               mod.base              = {};
               mod.base.add          = params=>{
-                                                                                console.log('mod.base.add');
-                                                                                
+                                                                                //console.log('mod.base.add');
                                             if(datatype(params)!='object')debugger;
                                             Object.assign(mod.base,params);
                                             
@@ -205,7 +204,7 @@
                     var {html,error}    = await loader.fetch(url);
                     if(error){
                                                                                 console.error(error);
-                          return;
+                          return {error};
                     }
                                                                                 if(!html.trim)debugger;
                     html            = html.trim();
