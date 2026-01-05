@@ -1,6 +1,6 @@
 ## Description
 
-The web-console provides a console like dev tools in a webpage
+The web-console provides a console ( like dev tools ) in a webpage
 
 
 ## Include
