@@ -42,16 +42,12 @@ methods without a description are not currently implmented and are passed throug
 
 name|description
 ---|---
-**standard**|
+**standard** |
 initmod|standard function for importing local dependencies
 init|standard initialisation function
 initdom|standard function to setup the dom
  | 
- | 
-write|write to the console, without adding a newline character at the end of the output
-json|write json stringified output to the console
- | 
- | 
+**console** | 
 assert|
 clear|clear the console
 count|
@@ -74,6 +70,10 @@ timeLog|
 timeStamp|
 trace|
 warn|display warn information in the console
+ | 
+**extended** | 
+write|write to the console, without adding a newline character at the end of the output
+json|write json stringified output to the console
  | 
  | 
 test|display test data in the console, for quick tests
