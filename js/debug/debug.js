@@ -8,45 +8,20 @@
   //:
 
   
-        function debug(){
+        function debug(...args){
           
-              if(!df)return;
-              
-              var id    = 'html';
-              if(typeof debug_id!='undefined'){
-                    id    = debug_id;
-              }
-              if(typeof did!='undefined'){
-                    id    = did;
-              }
-              
-              var str   = [...arguments].join(' ');
-              
-              console.groupCollapsed(`[ ${id} ]`,str);
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' '); 
+              var args2   = [fmt].concat(args);
+              console.groupCollapsed.apply(console,args2);
               console.trace();
               console.groupEnd();
               
-              //console.log(`[ ${id} ]`,str);
-
-/*              
-              if(debug._trace){
-                    console.trace();
-              }
-              delete debug._trace;
-*/              
-              
-        }//debug
+        }//debug  
         
         
         debug.log   = function(){debug.apply(null,arguments)}
-
-        
-        debug.trace   = function(){
-          
-              debug._trace   = true;
-              debug.apply(null,arguments);
-              
-        }//trace
 
 
 
