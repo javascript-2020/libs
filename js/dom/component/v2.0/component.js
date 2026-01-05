@@ -214,28 +214,14 @@
                     var div         = document.createElement('div');
                     div.setHTMLUnsafe(html);
                     var node        = div.firstElementChild;
-                    
+                                                                                if(!node)debugger;
+
                     root.attachShadow({mode:'open'});
                     root.shadowRoot.append(...node.shadowRoot.childNodes);
                     root.append(...div.childNodes);
                     
-                    var node    = root;
+                    var node        = root;
                     
-                    
-                    
-                    
-                    
-/*                    
-                    var value   = root.getAttribute('component');
-                    root.removeAttribute('component');
-                    if(value){
-                          root.setAttribute('component_',value);
-                    }else{
-                          root.toggleAttribute('compeonent',true);
-                    }
-*/
-
-                                                                                if(!node)debugger;
                     root.__root     = root;
                     root.__node     = root;
                     root.__host     = root;
@@ -243,35 +229,8 @@
                     root.__html     = html;
                     root.__root     = root;
                     root.__dom      = root;
-                    
-                    //  node.setAttribute('url',url);
-/*
-                    for(var attr of root.attributes){
-                      
-                          if(attr.value){
-                                node.setAttribute(attr.name,attr.value);
-                          }else{
-                                node.toggleAttribute(attr.name,true);
-                          }
-                          
-                    }//for
-
-        
-                    var slots     = [...root.childNodes];
-                    slots.forEach(slot=>{
-                     
-                          var nslot   = slot.cloneNode(true); 
-                          node.append(nslot)
-                          
-                    });
-                                                                                if(!root.parentNode)debugger;
-                    root.parentNode.replaceChild(node,root);
-*/
-
                                                                                 //mod.df && console.log(nn,version,root,node);
                                                                                 //if(nn=='filemod')debugger;
-                    
-                    
                     var list    = $(node,'script');
                                                                                 //console.log('script',list);
                     list.forEach(script=>{
