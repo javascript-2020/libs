@@ -10,10 +10,13 @@
 
 */
 
+(()=>{
+      
 if(typeof module!=='undefined'){
       module.exports=getmime;
 }
 
+      return getmime;
 
 function getmime(file){
 
@@ -1196,5 +1199,6 @@ mime    = {
 }
 
 
-
+})()
+;
 
