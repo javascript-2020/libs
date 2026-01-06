@@ -82,21 +82,28 @@
   //:
   
   
-      obj.initdom   = function(){
-      
-            var shadow        = host.shadowRoot;
-            
-            tree              = $('#tree');
-            
-            dir               = $('.dir');
-            dir.remove();
-            
-            file              = $(dir,'.file');
-            file.remove();
-            
-      }//initdom
+      obj.init    = function(){
+      }//init
       
       
+  //:
+  
+  
+        obj.initdom   = function(){
+        
+              var shadow        = host.shadowRoot;
+              
+              tree              = $(shadow,'#tree');
+              
+              dir               = $(shadow,'.dir');
+              dir.remove();
+              
+              file              = $(dir,'.file');
+              file.remove();
+              
+        }//initdom
+        
+        
   //:
   
   
@@ -109,11 +116,6 @@
   //:
   
   
-      obj.init    = function(){
-      }//init
-      
-      
-  //:
   
   
       obj.build   = function(data){return build(data)}
