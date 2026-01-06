@@ -177,13 +177,13 @@
             for(var i=0;i<n;i++){
             
             
-                  var o         = data[i];
+                  let o         = data[i];
                   var indent    = depth(o);
                   index++;
                                                                                 console.log(index,o.name,indent);
                                                                                 
                   if(o.type=='file'){
-                        var nfile                           = file.cloneNode(true);
+                        let nfile                           = file.cloneNode(true);
                         o.node                              = nfile;
                         nfile.onclick                       = e=>click_file(nfile,o);
                         $(nfile,'.spc').style.width         = indent*30+'px';
@@ -194,7 +194,7 @@
                   }
                   
                   if(o.type=='dir'){
-                        var ndir                          = dir.cloneNode(true);
+                        let ndir                          = dir.cloneNode(true);
                         o.node                            = ndir;
                         var hdr                           = $(ndir,'.dir-hdr');
                         $(ndir,'.dir-hdr').onclick        = e=>click_dir(ndir,o);
