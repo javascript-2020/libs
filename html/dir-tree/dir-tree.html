@@ -111,7 +111,7 @@
   
   
   
-      var index=0;
+      var index   = 0;
       var cols    = ['rgba(173,216,230,0.15)','rgba(211,211,211,0.15)'];
       
       
@@ -128,8 +128,9 @@
             
             for(var key in data){
             
-                  var v   = data[key];
-                  if(datatype(v)=='object'){
+                  var v       = data[key];
+                  var type    = datatype(v);
+                  if(type=='object'){
                         var d       = {type:'dir',name:key,parent:par}
                         var o       = build(v,d);
                         d.list      = o;
@@ -159,9 +160,9 @@
       }//depth
       
       
-      obj.display   = function(data){return display(data)}
+      obj.display   = function(data,options){return display(data,null,options)}
       
-      function display(data,par=tree){
+      function display(data,par=tree,options){
       
             if(!par){
                   index   = 0;
@@ -180,7 +181,7 @@
                                                                                 
                   if(o.type=='file'){
                         var nfile   = file.cloneNode(true);
-                        $(nfile,'.spc').style.width=(indent+0)*30+'px';
+                        $(nfile,'.spc').style.width   = indent*30+'px';
                         nfile.style.background=cols[index%2];
                         //nfile.style.paddingLeft   =
                         $(nfile,'.file-name').textContent   = o.name;
@@ -193,11 +194,11 @@
                         $(ndir,'.dir-hdr').style.background=cols[index%2];
                         highlight($(ndir,'.dir-hdr'));
                         $(ndir,'.dir-hdr').onclick    = e=>click($(ndir,'.dir-hdr'));
-                        $(ndir,'.spc').style.width=indent*30+'px';
+                        $(ndir,'.spc').style.width    = indent*30+'px';
                         //ndir.style.paddingLeft=
-                        $(ndir,'.dir-name').textContent=o.name;
+                        $(ndir,'.dir-name').textContent   = o.name;
                         list.append(ndir);
-                        display(o.list,ndir);
+                        display(o.list,ndir,options);
                   }
                   
             }//for
@@ -216,12 +217,12 @@
             
                   if($(hdr,'.expand').classList.contains('close')){
                         $(hdr,'.expand').classList.remove('close');
-                        hdr.parentNode.style.maxHeight='';
+                        hdr.parentNode.style.maxHeight    = '';
                         return;
                   }
                   
                   $(hdr,'.expand').classList.add('close');
-                  hdr.parentNode.style.maxHeight='40px';
+                  hdr.parentNode.style.maxHeight    = '40px';
                   
             }//click
             
