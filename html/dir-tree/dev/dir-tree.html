@@ -6,20 +6,19 @@
     {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px}
     
   .dir
-    {display:flex;flex-direction:column}
+    {display:flex;flex-direction:column;overflow:hidden}
   .dir-hdr
-    {display:flex;align-items:center;gap:20px;padding:5px 10px}
-  .dir-hdr:hover
-    {background:lightyellow}
+    {display:flex;align-items:center;gap:20px;padding:5px 10px;cursor:pointer}
   .expand
     {width:17px}
+  .close
+    {transform:rotateZ(90deg)}
+    
   .dir-name
     {}
     
   .file
     {display:flex;gap:20px;align-items:center;cursor:pointer;padding:5px 10px}
-  .file:hover
-    {background:lightyellow}
     
       </style>
       
@@ -168,11 +167,14 @@
                         nfile.style.background=cols[index%2];
                         //nfile.style.paddingLeft   =
                         $(nfile,'.file-name').textContent   = o.name;
+                        highlight(nfile);
                         tree.append(nfile);
                   }
                   if(o.type=='dir'){
                         var ndir    = dir.cloneNode(true);
                         $(ndir,'.dir-hdr').style.background=cols[index%2];
+                        highlight($(ndir,'.dir-hdr'));
+                        $(ndir,'.dir-hdr').onclick    = e=>click($(ndir,'.dir-hdr'));
                         $(ndir,'.spc').style.width=indent*30+'px';
                         //ndir.style.paddingLeft=
                         $(ndir,'.dir-name').textContent=o.name;
@@ -181,6 +183,29 @@
                   }
                   
             }//for
+            
+            
+            function highlight(node){
+            
+                  var prev;
+                  node.onmouseenter   = e=>(prev=node.style.background,node.style.background='lightyellow');
+                  node.onmouseleave   = e=>node.style.background=prev;
+                  
+            }//hightlight
+            
+            
+            function click(hdr){
+            
+                  if($(hdr,'.expand').classList.contains('close')){
+                        $(hdr,'.expand').classList.remove('close');
+                        hdr.parentNode.style.height='';
+                        return;
+                  }
+                  
+                  $(hdr,'.expand').classList.add('close');
+                  hdr.parentNode.style.height='40px';
+                  
+            }//click
             
       }//display
       
