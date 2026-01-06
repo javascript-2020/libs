@@ -197,7 +197,7 @@
                         var ndir    = dir.cloneNode(true);
                         $(ndir,'.dir-hdr').style.background=cols[index%2];
                         highlight($(ndir,'.dir-hdr'));
-                        $(ndir,'.dir-hdr').onclick    = e=>click(ndir,o);
+                        $(ndir,'.dir-hdr').onclick    = e=>click_dir(ndir,o);
                         $(ndir,'.spc').style.width    = indent*30+'px';
                         //ndir.style.paddingLeft=
                         $(ndir,'.dir-name').textContent   = o.name;
