@@ -7,7 +7,7 @@
   
   //:
   
-        if(typeof did=-'undefined'){
+        if(typeof did=='undefined'){
               did   = '???';
         }
         
