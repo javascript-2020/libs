@@ -30,7 +30,7 @@
             </style>
             
             
-            <div id=tree>
+            <div id=tree style='visibility:none'>
             
                   <div class=dir>
                         <div class=dir-hdr>
@@ -91,15 +91,16 @@
   
         obj.initdom   = function(){
         
-              var shadow        = host.shadowRoot;
+              var shadow                  = host.shadowRoot;
               
               
-              tree              = $(shadow,'#tree');
+              tree                        = $(shadow,'#tree');
+              tree.style.visibility       = '';
               
-              dir               = $(shadow,'.dir');
+              dir                         = $(shadow,'.dir');
               dir.remove();
               
-              file              = $(dir,'.file');
+              file                        = $(dir,'.file');
               file.remove();
               
               
