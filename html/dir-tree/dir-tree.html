@@ -62,7 +62,7 @@
         version   : 'v1.0',
   };
   
-      var df=true,did='dir-tree'
+      var df=false,did='dir-tree'
       ;
       
       
@@ -180,7 +180,7 @@
                   let o         = data[i];
                   var indent    = depth(o);
                   index++;
-                                                                                console.log(index,o.name,indent);
+                                                                                debug(index,o.name,indent);
                                                                                 
                   if(o.type=='file'){
                         let nfile                           = file.cloneNode(true);
