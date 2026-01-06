@@ -162,12 +162,13 @@
       
       obj.display   = function(data,options){return display(data,null,options)}
       
-      function display(data,par=tree,options){
+      function display(data,par,options){
       
             if(!par){
+                  par     = tree;
                   index   = 0;
             }
-            if(!par)debugger;
+            
             var list    = $(par,'.dir-list')||par;
             
             
