@@ -183,6 +183,7 @@
                                                                                 
                   if(o.type=='file'){
                         var nfile   = file.cloneNode(true);
+                        nfile.onclick   = e=>click_file(nfile,o);
                         $(nfile,'.spc').style.width   = indent*30+'px';
                         nfile.style.background=cols[index%2];
                         //nfile.style.paddingLeft   =
