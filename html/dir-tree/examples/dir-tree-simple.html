@@ -1,0 +1,63 @@
+
+
+
+      <script src='https://libs.ext-code.com/js/dom/component/v2.0/component.js?init'></script>
+      
+      <dir-tree component></dir-tree>
+      
+      <script>
+      
+      
+        function ready(){
+        
+              var dirtree   = mod['dir-tree'];
+              
+              
+              var data    = [
+                    {
+                          type    : 'dir',
+                          name    : 'tmp',
+                          list    : [
+                                {
+                                      type    : 'dir',
+                                      name    : 'tmp-1',
+                                      list    : [
+                                            {
+                                                  type    : 'file',
+                                                  name    : 'test.txt'
+                                            }
+                                      ]
+                                },
+                                {
+                                      type    : 'file',
+                                      name    : 'hello.txt'
+                                }
+                          ]
+                    }
+              ];
+              
+              
+              
+              var data    = {
+                    'tmp'   : {
+                          'tmp-1'   : {
+                                'test.txt':null,
+                          },
+                          'my-file.bin':null,
+                    },
+                    'hello.txt':null,
+              };
+              
+              data    = dirtree.build(data);
+                                                                                console.log(data);
+                                                                                //console.log(JSON.stringify(data,null,4));
+              dirtree.display(data);
+              
+              
+        }//ready
+        
+        
+      </script>
+      
+      
+      
