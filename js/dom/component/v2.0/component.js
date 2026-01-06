@@ -890,6 +890,7 @@
         df=false,did='';
 
         ace=null;
+        log=null;
         
         //Object.assign(window,{ext,$,datatype,menumod,keydown,debug,ls});
         
@@ -908,7 +909,10 @@
               menu.add.style();
 
 
-              mod.base.add({ext,$,datatype,keydown,menu,menumod,ace,ls});
+              mod.base.add({
+                    ext,$,datatype,keydown,menu,menumod,ls,
+                    ace,log
+              });
 
               
               if(typeof init!='function'){
