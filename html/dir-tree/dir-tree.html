@@ -220,6 +220,7 @@
             
             function click_dir(ndir,o){
             
+                  var hdr   = $(ndir,'.dir-hdr');
                   if($(hdr,'.expand').classList.contains('close')){
                         open(ndir);
                         return;
