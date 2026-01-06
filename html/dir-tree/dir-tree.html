@@ -110,8 +110,8 @@
   //:
   
   
-  
-  
+      var cur;
+      
       var index   = 0;
       var cols    = ['rgba(173,216,230,0.15)','rgba(211,211,211,0.15)'];
       
@@ -166,12 +166,12 @@
       function display(data,par,options){
       
             if(!par){
+                  cur     = data;
                   par     = tree;
                   index   = 0;
             }
             
             var list    = $(par,'.dir-list')||par;
-            
             
             var n   = data.length;
             for(var i=0;i<n;i++){
@@ -183,24 +183,25 @@
                                                                                 console.log(index,o.name,indent);
                                                                                 
                   if(o.type=='file'){
-                        var nfile   = file.cloneNode(true);
-                        nfile.onclick   = e=>click_file(nfile,o);
-                        $(nfile,'.spc').style.width   = indent*30+'px';
-                        nfile.style.background=cols[index%2];
-                        //nfile.style.paddingLeft   =
+                        var nfile                           = file.cloneNode(true);
+                        o.node                              = nfile;
+                        nfile.onclick                       = e=>click_file(nfile,o);
+                        $(nfile,'.spc').style.width         = indent*30+'px';
+                        nfile.style.background              = cols[index%2];
                         $(nfile,'.file-name').textContent   = o.name;
                         highlight(nfile);
                         list.append(nfile);
                   }
                   
                   if(o.type=='dir'){
-                        var ndir    = dir.cloneNode(true);
-                        $(ndir,'.dir-hdr').style.background=cols[index%2];
-                        highlight($(ndir,'.dir-hdr'));
-                        $(ndir,'.dir-hdr').onclick    = e=>click_dir(ndir,o);
-                        $(ndir,'.spc').style.width    = indent*30+'px';
-                        //ndir.style.paddingLeft=
+                        var ndir                          = dir.cloneNode(true);
+                        o.node                            = ndir;
+                        var hdr                           = $(ndir,'.dir-hdr');
+                        $(ndir,'.dir-hdr').onclick        = e=>click_dir(ndir,o);
+                        hdr.style.background              = cols[index%2];
+                        $(ndir,'.spc').style.width        = indent*30+'px';
                         $(ndir,'.dir-name').textContent   = o.name;
+                        highlight($(ndir,'.dir-hdr'));
                         list.append(ndir);
                         display(o.list,ndir,options);
                   }
@@ -219,15 +220,12 @@
             
             function click_dir(ndir,o){
             
-                  var hdr   = $(ndir,'.dir-hdr');
                   if($(hdr,'.expand').classList.contains('close')){
-                        $(hdr,'.expand').classList.remove('close');
-                        hdr.parentNode.style.maxHeight    = '';
+                        open(ndir);
                         return;
                   }
                   
-                  $(hdr,'.expand').classList.add('close');
-                  hdr.parentNode.style.maxHeight    = '40px';
+                  close(ndir);
                   
             }//click
             
@@ -239,6 +237,85 @@
             }//click_file
             
       }//display
+      
+      
+      function open(ndir){
+      
+            var hdr   = $(ndir,'.dir-hdr');
+            $(hdr,'.expand').classList.remove('close');
+            hdr.parentNode.style.maxHeight    = '';
+            
+      }//open
+      
+      
+      function close(ndir){
+      
+            var hdr   = $(ndir,'.dir-hdr');
+            $(hdr,'.expand').classList.add('close');
+            hdr.parentNode.style.maxHeight    = '40px';
+            
+      }//close
+      
+      
+/*
+              var data    = [
+                    {
+                          parent    : null,
+                          type      : 'dir',
+                          name      : 'tmp',
+                          list      : [
+                                {
+                                      parent    : {object},
+                                      type      : 'dir',
+                                      name      : 'tmp-1',
+                                      list      : [
+                                            {
+                                                  parent    : 'object',
+                                                  type      : 'file',
+                                                  name      : 'test.txt'
+                                            }
+                                      ]
+                                },
+                                {
+                                      parent    : {object},
+                                      type      : 'file',
+                                      name      : 'hello.txt'
+                                }
+                          ]
+                    }
+              ];
+*/
+
+
+      function find(path){
+      
+            var parts   = path.split('/').filter(Boolean);
+            var o       = cur.find(o=>o.name===parts[0]);
+            var n       = parts.length;
+            for(var i=1;i<n;i++){
+            
+                  o   = o.list.find(o=>o.name===parts[i]);
+                  
+            }//for
+            return o;
+            
+      }//find
+      
+      
+      obj.open    = function(path){
+      
+            var o   = find(path);
+            open(o.node);
+            
+      }//open
+      
+      
+      obj.close   = function(path){
+      
+            var o   = find(path);
+            close(o.node);
+            
+      }//close
       
       
   //:
