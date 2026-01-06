@@ -1,66 +1,106 @@
 
+<dir-tree>
 
-      <style>
+      <template shadowrootmode=open>
       
+            <style>
+            
   #tree
     {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px}
     
   .dir
-    {display:flex;flex-direction:column;overflow:hidden}
+    {display:flex;flex-direction:column;gap:10px;overflow:hidden;transition:0.3s;max-height:500px}
   .dir-hdr
     {display:flex;align-items:center;gap:20px;padding:5px 10px;cursor:pointer}
   .expand
-    {width:17px}
+    {width:17px;transition:0.2s}
   .close
-    {transform:rotateZ(90deg)}
-    
+    {transform:rotateZ(-90deg)}
   .dir-name
     {}
+  .dir-list
+    {display:flex;flex-direction:column;gap:10px}
     
   .file
     {display:flex;gap:20px;align-items:center;cursor:pointer;padding:5px 10px}
     
-      </style>
-      
-      
-      <div id=tree>
-      
-            <div class=dir>
-                  <div class=dir-hdr>
-                        <img class=expand src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAATCAMAAACwcE1OAAAAS1BMVEVHcExGhb9Df7hGe61OjMdHhsF+suFbl89emtBPjceAtOJ7sOBPjcg/erNgm9JPjcdbmM9qo9ZJh8NKiMKz2vyYxu6cyfGy2ful0PVtT2pPAAAAFHRSTlMAIAUCcSj3uMB5+fV+A8hW2utHRnteqoAAAACRSURBVCjPldFLEoMgDABQgkT5CGob0PuftFCKTgXtNJt83iaTMPYzntia4iPnaXENR7dMKcO8hdrRhW2GWHBh1spRhtUInsouucRau9xkh0NBBjLClvbkID31hzJmhSFfHIaTJu/JD7Crst+rWvXxpu5+ocWjasVbR+ZKk4868vZr+KjpWt9+o8nvNO5n2T/xAsuTB8PYb3TMAAAAAElFTkSuQmCC'>
-                        <span class=spc></span>
-                        <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAsVBMVEVHcEwYHikfICYPFygKFCkNFikQFiYRGSsQFygtLTQ6NCkVHCkLFCkPFyoLFCkbICsOFykOFikOFyoOFysrKCUuMC0MFSobHCYLFSz7003/1k71nguYaBf91E34oAudiUHGgxPsx0xAOiv8oQpqYDewl0PiwEuPfj4rLCmLYRryzE1ZQh9OSjLnlg6BWxscICrOr0fFqUc+PDB4VRu3ehaFdjvDp0aydxbikw/NrkjdkRCt0DWNAAAAGXRSTlMACOzCLCgKGcgB/tufP1jm67lrf/z9qQOBZilVbQAAAOZJREFUKM+t09kSgiAYhmFyQzGybBW1rKw00/b1/i8sE2ocSE/qOX1nPv8DBOBnDa3Q+Bo1u6MX5C4Uq9HtZV4hRk1NyND0xkzQs4WsSMHYZWITKxT8ltNEYvSWIWb3FjCZhMuZfX3+5iajUk6vHgcN4Cc/kujA6+v4nTO0n/KWYUejOUUr4vPIxVJpPkV34vDIwoQ0HzdrX8hO2DSKfMq3hegvUYueFkc7v2o7z7PN2qnaBkp7W7P9yrvKu1+55m4A1HbdNlCtS812/pgmRPDZzp9i/zzhhRYuPWSZN8Dib1AyBP/wBOetOMZSfFbQAAAAAElFTkSuQmCC'>
-                        <span class=dir-name></span>
-                  </div>
-                  <div class=dir-list>
-                        <div class=file>
+  .icon
+    {width:25px;height:25px}
+    
+            </style>
+            
+            
+            <div id=tree>
+            
+                  <div class=dir>
+                        <div class=dir-hdr>
+                              <img class=expand src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAATCAMAAACwcE1OAAAAS1BMVEVHcExGhb9Df7hGe61OjMdHhsF+suFbl89emtBPjceAtOJ7sOBPjcg/erNgm9JPjcdbmM9qo9ZJh8NKiMKz2vyYxu6cyfGy2ful0PVtT2pPAAAAFHRSTlMAIAUCcSj3uMB5+fV+A8hW2utHRnteqoAAAACRSURBVCjPldFLEoMgDABQgkT5CGob0PuftFCKTgXtNJt83iaTMPYzntia4iPnaXENR7dMKcO8hdrRhW2GWHBh1spRhtUInsouucRau9xkh0NBBjLClvbkID31hzJmhSFfHIaTJu/JD7Crst+rWvXxpu5+ocWjasVbR+ZKk4868vZr+KjpWt9+o8nvNO5n2T/xAsuTB8PYb3TMAAAAAElFTkSuQmCC'>
                               <span class=spc></span>
-                              <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAUVBMVEVHcExMlMpNlctNlctNlctNlctNlctLk8lNlctNlctNlctNlctNlctKkcdNlcs4e69MlMpNlctNlcs1d6xNlctNlctNlctNlctIj8U2ea09gbbbwywCAAAAF3RSTlMAAab5LVnwa1ANgM6yROXooNC9UscUeiO0JQUAAACZSURBVCjPvdLbEsMQEIDhdYjQlIgmRd7/QXvRGV2W9Kr9bv/BMgB+j8mpIlmVtYsVp6vsY8NXe/OoFkRFzuocDlMcgWR3QxzJjTZvky6mjeRdIjvJQiGCjnZH6GjBsMJ0LsYRuloU3YuVyWfRy4u2b89ujtebf3lULKXkx/nMebUwyunM6wNGnymls62gFTqXVGB2/rAM/uIFg2QWsl/b0uIAAAAASUVORK5CYII='>
-                              <span class=file-name></span>
+                              <img class=icon src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAsVBMVEVHcEwYHikfICYPFygKFCkNFikQFiYRGSsQFygtLTQ6NCkVHCkLFCkPFyoLFCkbICsOFykOFikOFyoOFysrKCUuMC0MFSobHCYLFSz7003/1k71nguYaBf91E34oAudiUHGgxPsx0xAOiv8oQpqYDewl0PiwEuPfj4rLCmLYRryzE1ZQh9OSjLnlg6BWxscICrOr0fFqUc+PDB4VRu3ehaFdjvDp0aydxbikw/NrkjdkRCt0DWNAAAAGXRSTlMACOzCLCgKGcgB/tufP1jm67lrf/z9qQOBZilVbQAAAOZJREFUKM+t09kSgiAYhmFyQzGybBW1rKw00/b1/i8sE2ocSE/qOX1nPv8DBOBnDa3Q+Bo1u6MX5C4Uq9HtZV4hRk1NyND0xkzQs4WsSMHYZWITKxT8ltNEYvSWIWb3FjCZhMuZfX3+5iajUk6vHgcN4Cc/kujA6+v4nTO0n/KWYUejOUUr4vPIxVJpPkV34vDIwoQ0HzdrX8hO2DSKfMq3hegvUYueFkc7v2o7z7PN2qnaBkp7W7P9yrvKu1+55m4A1HbdNlCtS812/pgmRPDZzp9i/zzhhRYuPWSZN8Dib1AyBP/wBOetOMZSfFbQAAAAAElFTkSuQmCC'>
+                              <span class=dir-name></span>
+                        </div>
+                        <div class=dir-list>
+                              <div class=file>
+                                    <div style='width:17px'></div>
+                                    <span class=spc></span>
+                                    <img class=icon src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAUVBMVEVHcExMlMpNlctNlctNlctNlctNlctLk8lNlctNlctNlctNlctNlctKkcdNlcs4e69MlMpNlctNlcs1d6xNlctNlctNlctNlctIj8U2ea09gbbbwywCAAAAF3RSTlMAAab5LVnwa1ANgM6yROXooNC9UscUeiO0JQUAAACZSURBVCjPvdLbEsMQEIDhdYjQlIgmRd7/QXvRGV2W9Kr9bv/BMgB+j8mpIlmVtYsVp6vsY8NXe/OoFkRFzuocDlMcgWR3QxzJjTZvky6mjeRdIjvJQiGCjnZH6GjBsMJ0LsYRuloU3YuVyWfRy4u2b89ujtebf3lULKXkx/nMebUwyunM6wNGnymls62gFTqXVGB2/rAM/uIFg2QWsl/b0uIAAAAASUVORK5CYII='>
+                                    <span class=file-name></span>
+                              </div>
                         </div>
                   </div>
+                  
             </div>
             
-      </div>
-      
+      </template>
       
       
       <script>
-                                                                                console.clear();
-                                                                                
-                                                                                
-                                                                                
-      var $           = (root,css)=>(!css && (css=root,root=document),root.querySelector(css));
-      var datatype    = v=>Object.prototype.toString.call(v).slice(8,-1).toLowerCase();
+      
+(function({mod,dom,host}){
+
+  var obj   = {
+        version   : 'v1.0',
+  };
+  
+      var df=true,did='dir-tree'
+      ;
       
       
-      var tree    = $('#tree');
-      var dir     = $('.dir');
-      dir.remove();
-      var file    = $(dir,'.file');
-      file.remove();
+      
+      obj.initmod   = function(params){
+      }//initmod
       
       
+  //vars:
+  
+  
+      var tree;
+      var dir;
+      var file;
+      
+      
+  //:
+  
+  
+      obj.initdom   = function(){
+      
+            var shadow        = host.shadowRoot;
+            
+            tree              = $('#tree');
+            
+            dir               = $('.dir');
+            dir.remove();
+            
+            file              = $(dir,'.file');
+            file.remove();
+            
+      }//initdom
+      
+      
+  //:
+  
+  
+  
       var data    = [
             {
                   type    : 'dir',
@@ -91,6 +131,7 @@
                   'tmp-1'   : {
                         'test.txt':null,
                   },
+                  'my-file.bin':null,
             },
             'hello.txt':null,
       };
@@ -108,6 +149,7 @@
       
       
       
+      obj.build   = function(data){return build(data)}
       
       function build(data,par=null){
       
@@ -146,30 +188,35 @@
       }//depth
       
       
+      obj.display   = function(data){return display(data)}
+      
       function display(data,par=tree){
       
-            if(!par)index=0;
+            if(!par){
+                  index   = 0;
+            }
             
-            var list      = $(par,'.dir-list')||par;
+            var list    = $(par,'.dir-list')||par;
             
             var n   = data.length;
             for(var i=0;i<n;i++){
             
             
-                  var o   = data[i];
+                  var o         = data[i];
                   var indent    = depth(o);
                   index++;
-                  console.log(index,o.name,indent);
-                  
+                                                                                console.log(index,o.name,indent);
+                                                                                
                   if(o.type=='file'){
                         var nfile   = file.cloneNode(true);
-                        $(nfile,'.spc').style.width=(indent+1)*30+'px';
+                        $(nfile,'.spc').style.width=(indent+0)*30+'px';
                         nfile.style.background=cols[index%2];
                         //nfile.style.paddingLeft   =
                         $(nfile,'.file-name').textContent   = o.name;
                         highlight(nfile);
-                        tree.append(nfile);
+                        list.append(nfile);
                   }
+                  
                   if(o.type=='dir'){
                         var ndir    = dir.cloneNode(true);
                         $(ndir,'.dir-hdr').style.background=cols[index%2];
@@ -178,7 +225,7 @@
                         $(ndir,'.spc').style.width=indent*30+'px';
                         //ndir.style.paddingLeft=
                         $(ndir,'.dir-name').textContent=o.name;
-                        tree.append(ndir);
+                        list.append(ndir);
                         display(o.list,ndir);
                   }
                   
@@ -198,24 +245,42 @@
             
                   if($(hdr,'.expand').classList.contains('close')){
                         $(hdr,'.expand').classList.remove('close');
-                        hdr.parentNode.style.height='';
+                        hdr.parentNode.style.maxHeight='';
                         return;
                   }
                   
                   $(hdr,'.expand').classList.add('close');
-                  hdr.parentNode.style.height='40px';
+                  hdr.parentNode.style.maxHeight='40px';
                   
             }//click
             
       }//display
       
       
-      
+  //:
+  
+  
+        function debug(...args){
+        
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              console.groupCollapsed.apply(console,args2);
+              console.trace();
+              console.groupEnd();
+              
+        }//debug
+        
+        
+        
+  return obj;
+  
+//dir-tree
+})
+
       </script>
       
-      
-      
-      
-      
-      
-      
+</dir-tree>
+
+
