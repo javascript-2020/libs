@@ -193,7 +193,7 @@
                         var ndir    = dir.cloneNode(true);
                         $(ndir,'.dir-hdr').style.background=cols[index%2];
                         highlight($(ndir,'.dir-hdr'));
-                        $(ndir,'.dir-hdr').onclick    = e=>click($(ndir,'.dir-hdr'));
+                        $(ndir,'.dir-hdr').onclick    = e=>click(ndir,o);
                         $(ndir,'.spc').style.width    = indent*30+'px';
                         //ndir.style.paddingLeft=
                         $(ndir,'.dir-name').textContent   = o.name;
@@ -213,8 +213,9 @@
             }//hightlight
             
             
-            function click(hdr){
+            function click_dir(ndir,o){
             
+                  var hdr   = $(ndir,'.dir-hdr');
                   if($(hdr,'.expand').classList.contains('close')){
                         $(hdr,'.expand').classList.remove('close');
                         hdr.parentNode.style.maxHeight    = '';
@@ -225,6 +226,13 @@
                   hdr.parentNode.style.maxHeight    = '40px';
                   
             }//click
+            
+            
+            function click_file(nfile,o){
+            
+                  options?.callback?.file(o.name);
+                  
+            }//click_file
             
       }//display
       
