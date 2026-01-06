@@ -92,7 +92,8 @@
         obj.initdom   = function(){
         
               var shadow        = host.shadowRoot;
-              debugger;
+              
+              
               tree              = $(shadow,'#tree');
               
               dir               = $(shadow,'.dir');
@@ -100,6 +101,7 @@
               
               file              = $(dir,'.file');
               file.remove();
+              
               
         }//initdom
         
