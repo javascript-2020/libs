@@ -21,32 +21,37 @@
         
               var dirtree   = mod['dir-tree'];
               
-              
+/*
               var data    = [
                     {
-                          type    : 'dir',
-                          name    : 'tmp',
-                          list    : [
+                          parent    : null,
+                          type      : 'dir',
+                          name      : 'tmp',
+                          list      : [
                                 {
-                                      type    : 'dir',
-                                      name    : 'tmp-1',
-                                      list    : [
+                                      parent    : {object},
+                                      type      : 'dir',
+                                      name      : 'tmp-1',
+                                      list      : [
                                             {
-                                                  type    : 'file',
-                                                  name    : 'test.txt'
+                                                  parent    : 'object',
+                                                  type      : 'file',
+                                                  name      : 'test.txt'
                                             }
                                       ]
                                 },
                                 {
-                                      type    : 'file',
-                                      name    : 'hello.txt'
+                                      parent    : {object},
+                                      type      : 'file',
+                                      name      : 'hello.txt'
                                 }
                           ]
                     }
               ];
-              
-              
-              
+*/
+
+
+
               var data    = {
                     'tmp'   : {
                           'tmp-1'   : {
@@ -57,10 +62,11 @@
                     'hello.txt':null,
               };
               
-              data    = dirtree.build(data);
-                                                                                console.log(data);
+              
+              var ndata   = dirtree.build(data);
+                                                                                console.log(ndata);
                                                                                 //console.log(JSON.stringify(data,null,4));
-              dirtree.display(data);
+              dirtree.display(ndata,{callback});
               
               
         }//ready
