@@ -167,8 +167,9 @@
             if(!par){
                   index   = 0;
             }
-            
+            if(!par)debugger;
             var list    = $(par,'.dir-list')||par;
+            
             
             var n   = data.length;
             for(var i=0;i<n;i++){
