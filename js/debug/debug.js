@@ -28,6 +28,27 @@
         debug.log   = function(){debug.apply(null,arguments)}
         
         
+        debug.json    = function(v){
+        
+              var err;
+              try{
+              
+                    var str   = JSON.stringify(v,null,4);
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                    debug(error);
+              }else{
+                    debug(str);
+              }
+              
+        }//json
         
     return obj;
     
