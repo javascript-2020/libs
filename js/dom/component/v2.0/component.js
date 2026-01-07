@@ -516,7 +516,16 @@
                     
                     var fn        = eval(js);
                                                                                 if(typeof fn!='function')debugger;
-                    var obj       = fn({mod:mod2,dom,host,   root:dom,node:host});
+                    var obj;
+                    var args      = sig(fn);
+                                                                                console.log(args);
+                    switch(args){
+                    
+                      //case '({mod,host})'   :
+                      
+                      default               : obj   = fn({mod:mod2,dom,host,   root:dom,node:host});
+                      
+                    }//switch
                     
                     var name      = nn;
                     if(inst){
@@ -535,7 +544,7 @@
                     
                     
                     function suffix(key){
-                                                                                console.log(mod.name);
+                                                                                //console.log(mod.name);
                           var max   = null;
                           
                           mod.list.forEach(name=>{
@@ -573,6 +582,16 @@
                     
               }//define
               
+              
+              function sig(fn){
+              
+                    var str   = fn.toString();
+                    var i1    = str.indexOf('(');
+                    var i2    = str.indexOf(')');
+                    var sig   = str.slice(i1,i2+1);
+                    return sig;
+                    
+              }//sig
               
               
               
