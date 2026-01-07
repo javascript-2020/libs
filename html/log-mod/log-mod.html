@@ -8,12 +8,14 @@
             
   #log-root
     {position:fixed;left:10px;bottom:3px;right:10px;z-index:99999}
+    
   #log
     {display:flex;background:white;border:2px solid transparent;padding:10px;border-radius:5px;cursor:pointer;
-      margin-bottom:10px
-    }
+      margin-bottom:10px}
+      
   #log-text
     {flex:1;white-space:pre-wrap}
+    
   #log-close
     {width:15px;height:15px;
       content:url(data:image/jpeg;base64,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);
@@ -33,7 +35,7 @@
       </template>
       
       
-      <script id=log>
+      <script>
       
 (function log_mod({mod,dom,host}){
 
@@ -41,15 +43,13 @@
         version   : 'v2.0',
   };
   
+        var df=false,did='log-mod';
+        
+        
+  //:
   
-        var ext,$
-        ;
-        
-        obj.initmod=function(params){
-        
-              ext   = params.ext;
-              $     = params.$;
-              
+  
+        obj.initmod   = function(params){
         }//initmod
         
         
@@ -74,14 +74,13 @@
   
         obj.initdom   = function(){
         
-              //var root                = $.$(rootnode,'log-root');
-              
-              var shadow              = host.shadowRoot;
+              var shadow                  = host.shadowRoot;
                                                                                 if(!shadow)debugger;
-              log.root                = $(shadow,'#log-root');
-              log.item                = $.rem(log.root,'#log');
+              log.root                    = $(shadow,'#log-root');
+              log.item                    = $(log.root,'#log');
+              log.item.remove();
               
-              log.root.style.display  = '';
+              log.root.style.display      = '';
               
               
         }//initdom
@@ -93,10 +92,14 @@
         function log(){
         
               var str         = [...arguments].join(' ');
+              
               var nlog        = log.item.cloneNode(true);
               nlog.onclick    = rem;
+              
               $(nlog,'#log-text').textContent   = str;
+              
               log.root.append(nlog);
+              
               
               if(log.config.console){
                     console.log.apply(console,arguments);
@@ -160,6 +163,9 @@
               if(err?.message){
                     str   = err.message;
               }
+              if(!str){
+                    str   = 'error';
+              }
               red(str);
               
         }//error
@@ -168,9 +174,35 @@
         obj.ok    = function(){
         
               var str   = [...arguments].join(' ');
+              if(!str){
+                    str   = 'ok';
+              }
               green(str);
               
         }//ok
+        
+        
+  //:
+  
+  
+        function $(root,css){return (!css && (css=root,root=document),root.querySelector(css))}
+        
+        
+  //:
+  
+  
+        function debug(...args){
+        
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              window.console.groupCollapsed.apply(window.console,args2);
+              window.console.trace();
+              window.console.groupEnd();
+              
+        }//debug
+        
         
         
         
