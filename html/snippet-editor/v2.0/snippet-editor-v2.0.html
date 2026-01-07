@@ -47,7 +47,7 @@
         ;
         
         
-        var ext,$,menu,ace,menumod,log,config={}
+        var ext,$,menu,ace,menumod,log,config={},github
         ;
         
         obj.initmod   = function(params){
@@ -59,6 +59,7 @@
               menumod         = mod.rd(params,'menumod',menumod);
               log             = mod.rd(params,'log',log);
               config          = mod.rd(params,'config',config,{});
+              github          = mod.rd(params,'github',github);
               
         }//initmod
         
