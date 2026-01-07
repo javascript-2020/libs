@@ -185,6 +185,7 @@
                                                                                 console.log(owner,repo,branch,path);
               var {txt,error}   = await github.file.load.text({owner,repo,branch,path});
               if(error){
+                                                                                console.log('error',error);
                     def.txt   = error;
                     return;
               }
