@@ -70,7 +70,7 @@
         ;
         
         
-        var ext,$,menu,ace,log,config={};
+        var ext,$,menu,ace,log,config={},github
         ;
         
         obj.initmod   = function(params){
@@ -81,6 +81,7 @@
               ace           = mod.rd(params,'ace',ace);
               log           = mod.rd(params,'log',log);
               config        = mod.rd(params,'config',config,config);
+              github        = mod.rd(params,'github',github);
               
         }//initmod
         
@@ -116,6 +117,9 @@
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
                                                                                 
+              await libs();
+              
+              
               var dom_config          = mod.rd.config(dom);
               config                  = Object.assign(config,dom_config);
               
@@ -147,12 +151,57 @@
         }//init
         
         
+        async function libs(){
+        
+              if(!github){
+                    [github]    = await ext.load.libs('js/io/github/github.js');
+              }
+              
+        }//libs
+        
+        
         rd.attr.src    = async function(){
         
               if(!dom.hasAttribute('src'))return;
               
               src       = dom.getAttribute('src');
-              var res   = await fetch(src);
+              
+              
+              if(src.startsWith('github:')){
+                    var [a,owner,repo,branch,path]    = src.split(':');
+                    var {txt,error}   = await github.file.load.text({owner,repo,branch,path});
+                    if(error){
+                          def   = error;
+                          return;
+                    }
+                    def   = txt;
+                    return;
+              }
+              
+              
+              var err;
+              try{
+              
+                    var res   = await fetch(src);
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                                                                                console.log(err);
+                    var error   = err.toString();
+                    def         = error;
+                    return;
+              }
+              if(!res.ok){
+                    var error   = await res.text();
+                    def         = error;
+                    return;
+              }
+              
               var txt   = await res.text();
               def       = txt;
               
