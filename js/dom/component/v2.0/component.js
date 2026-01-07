@@ -2,7 +2,7 @@
         var mod;
         
 (()=>{
-  
+
         var full_list   = [];
         var cache       = {};
         
@@ -10,11 +10,11 @@
         var mod_root    = mod;
         
         window.addEventListener('load',onload);
-
-
+        
+        
         function onload(){
-
-              
+        
+        
               if(typeof init=='function'){
                     if(!mod.stack.includes(init)){
                                                                                 //console.log('init added');
@@ -32,8 +32,8 @@
               mod.build({root,mod});
               
         }//onload
-
-
+        
+        
         function create({mod:par,name}={}){
                                                                                 //console.log('mod.create',name);
               var mod               = {};
@@ -58,12 +58,12 @@
               mod.config            = parseconfig;
               
               mod.rd.attr           = rdattr;
-
+              
               
               var stack             = []
               mod.stack             = stack;
-
-
+              
+              
               mod.base              = {};
               mod.base.add          = params=>{
                                                                                 //console.log('mod.base.add');
@@ -71,21 +71,21 @@
                                             Object.assign(mod.base,params);
                                             
                                       }//add
-              
+                                      
               //mod.base.add({ext,$,datatype,keydown,menumod,menu,ace});
-
-
+              
+              
               full_list.push(mod);
-
+              
               
               var ct          = 0;
               var total       = 0;
-
+              
               
               
               if(par){
                     mod.par   = par;
-                    par.child.push(mod);                    
+                    par.child.push(mod);
                     par.stack.add;
                     mod.stack.push(()=>par.stack.complete);
               }else{
@@ -93,16 +93,16 @@
                     total    = 1;
               }
               
-                            
+              
               Object.defineProperty(stack,'add',{
                     get:()=>{
-                
+                    
                           total++;
                                                                                 debug('add',ct,total);
                     },//get
                     set:v=>{
-                      
-                          
+                    
+                    
                           if(!par){
                                 if(typeof v=='function'){
                                       if(v.name=='init'){
@@ -120,7 +120,7 @@
               });
               
               Object.defineProperty(stack,'complete',{get:()=>{
-                
+              
                     ct++;
                                                                                 debug('complete',name,ct,total);
                     if(ct!=total){
@@ -135,19 +135,19 @@
                     list.forEach(fn=>fn());
                     
               }});
-
+              
               
               async function build({root,mod:mod2}={}){
                                                                                 debug('build',mod2.name);
-                    
+                                                                                
                     var list    = [root];
                     var nodes   = [];
                     while(list.length){
-                      
+                    
                           let node    = list.shift();
                           
                           if(!node.assignedSlot){
-      
+                          
                                 if(node.shadowRoot){
                                       list.push(node.shadowRoot);
                                 }
@@ -157,12 +157,12 @@
                                 }
                                 
                                 node.childNodes.forEach(child=>{
-                                  
+                                
                                       if(child.assignedSlot)return;
                                       list.push(child);
                                       
                                 });
-                                                                                      
+                                
                                 if(node.hasAttribute){
                                       if(node.hasAttribute('component')){
                                             let {nn,inst}   = rd.root(node);
@@ -170,7 +170,7 @@
                                             let mod3        = mod2.create({mod:mod2,name});
                                             let index       = nodes.length;
                                             let complete    = async({node:custom})=>{
-                                              
+                                            
                                                                     nodes.splice(index,1,{node,custom});
                                                                     mod3.stack.add;
                                                                     await build({root:custom,mod:mod3});
@@ -185,7 +185,7 @@
                                 }
                                 
                           }
-                    
+                          
                     }//while
                     await Promise.all(nodes);
                     
@@ -199,7 +199,7 @@
               
               
               async function loader({root,mod,mod2}){
-
+              
                     var {url,inst,nn}   = loader.fn.url(root);
                     var {html,error}    = await loader.fetch(url);
                     if(error){
@@ -214,7 +214,7 @@
                     div.setHTMLUnsafe(html);
                     var node        = div.firstElementChild;
                                                                                 if(!node)debugger;
-
+                                                                                
                     root.attachShadow({mode:'open'});
                     root.shadowRoot.append(...node.shadowRoot.childNodes);
                     root.append(...div.childNodes);
@@ -261,14 +261,14 @@
                           }
                           
                     });
-
+                    
                     return {node};
                     
               }//loader
-
-
+              
+              
               loader.libs   = function({root,nn,version}){
-                
+              
                     var url;
                     if(!version){
                           url           = `https://libs.ext-code.com/html/${nn}/${nn}.html`;
@@ -294,7 +294,7 @@
                     }
                     
                     var par   = loader.fn.par({num});
-
+                    
                     var url;
                     if(!version){
                           url   = `../html/${nn}/${nn}.html`;
@@ -307,16 +307,16 @@
                     return {url};
                     
               }//grp
-
-
+              
+              
               loader.parent   = function({root,nn,version}){//debugger;
-                
+              
                     var parent      = rd(root,'parent');
                     var par         = $.parent(root,parent);
                     //var pversion    = rd.version(par);
                     //var url         = rd(par,'url');
                     var {url}       = loader.fn.url(par);
-
+                    
                     var parts       = url.split('/');
                     parts.pop();
                     var last        = parts.at(-1);
@@ -349,9 +349,9 @@
               
               
               loader.page   = function({root,nn,version}){
-
+              
                     var par   = loader.fn.par();
-
+                    
                     var url;
                     if(version){
                           url   = `html/${nn}/${version}/${nn}-${version}.html`;
@@ -367,7 +367,7 @@
               
               
               loader.fetch    = async function(url){
-                
+              
                     var html;
                     if(cache[url]){
                           if(cache[url].html){
@@ -383,13 +383,13 @@
                           
                           var res   = await fetch(url);
                           html      = await res.text();
-                    
+                          
                           cache[url].html   = html;
                           cache[url].resolve({html});
                     }
                                                                                 //console.log(Object.keys(cache));
                     return {html};
-                
+                    
               }//fetch
               
               
@@ -397,7 +397,7 @@
               
               
               loader.fn.url   = function(root){
-                
+              
                     var {nn,inst}   =  rd.root(root);
                                                                                 //console.log(nn,inst);
                     var type      = rd(root,'component');
@@ -421,7 +421,7 @@
                     var url;
                     
                     switch(type){
-                      
+                    
                       case 'libs'       : ({url}   = loader.libs({root,nn,version}));          break;
                       //case 'grp'        : ({url}   = loader.grp({root,nn,version}));           break;
                       case 'parent'     : ({url}   = loader.parent({root,nn,version}));        break;
@@ -439,7 +439,7 @@
               
               
               loader.fn.par   = function({num=0,df=false}={}){
-                
+              
                     var par     = '';
                     
                     var path    = window.location.pathname;
@@ -453,7 +453,7 @@
                                 path        = window.parent.location.pathname;
                           }
                     }
-                                                                                df && console.log(path,base);                    
+                                                                                df && console.log(path,base);
                     path        = path.slice(1);
                     var i       = path.lastIndexOf('/');
                     path        = path.slice(0,i);
@@ -462,11 +462,11 @@
                                                                                 df && console.log('dirs',dirs);
                                                                                 
                     for(var i=0;i<num;i++){
-                      
+                    
                           par  += '../';
                           
                     }//for
-
+                    
                     
                     var last    = dirs.at(-1);
                                                                                 df && console.log('last',last);
@@ -487,9 +487,9 @@
                     
               }//par
               
-
+              
               function isver(str){
-                
+              
                     if(str[0]=='v'){
                           var c   = str[1];
                           if(c>='0' && c<='9'){
@@ -502,10 +502,10 @@
               
               
   //:
-
-
+  
+  
               function define({js,mod,mod2,inst,dom,host,nn}){
-                
+              
                     js    = `
                           //(()=>{return
                           
@@ -531,13 +531,13 @@
                     
                     
                     mod.list.push(key);
-
+                    
                     
               }//define
-
-
+              
+              
               function suffix(key){
-                
+              
                     var max   = null;
                     
                     mod.list.forEach(name=>{
@@ -572,33 +572,33 @@
                     return key;
                     
               }//suffix
-
-
-  
+              
+              
+              
               function $(root,css){
-                
+              
                     var list    = [root];
                     var nodes   = [];
                     while(list.length){
-                      
+                    
                           let node    = list.shift();
                           
                           //if(!node.assignedSlot){
                                 if(node.shadowRoot){
                                       list.push(node.shadowRoot);
                                 }
-                                      
+                                
                                 if(node.nodeName=='SLOT'){
                                       list    = list.concat(node.assignedNodes());
                                 }
-                                      
+                                
                                 node.childNodes.forEach(child=>{
-                                  
+                                
                                       //if(child.assignedSlot)return;
                                       list.push(child);
                                       
                                 });
-                                      
+                                
                                 if(node.matches && node.matches(css)){
                                       if(!nodes.includes(node)){
                                             nodes.push(node);
@@ -610,8 +610,8 @@
                     return nodes;
                     
               }//$
-
-
+              
+              
               $.parent    = function(node,parent){
               
                     var ec    = true;
@@ -638,7 +638,7 @@
                     }//while
                     
                     return null;
-              
+                    
               }//$_parent
               
               
@@ -657,16 +657,16 @@
                     return path;
                     
               }//slashes
-
-  
+              
+              
               function gen(n=17){
-                
+              
                     var str     = '';
                     var c       = '0123456789';
                     var index   = ()=>Math.floor(Math.random()*10);
                     
                     for(var j=0;j<n;j++){
-                      
+                    
                           var i   = index();
                           str    += c[i];
                           
@@ -674,9 +674,9 @@
                     
                     str   = 'x'+str;
                     return str;
-                
+                    
               }//gen
-
+              
               
               function rd(node,name,def){
               
@@ -690,7 +690,7 @@
               
               
               rd.version    = function(node){
-                
+              
                     for(var attr of node.attributes){
                     
                           var name    = attr.name;
@@ -708,7 +708,7 @@
               
               
               rd.root   = function(root){
-                
+              
                     var nn    = root.nodeName.toLowerCase();
                     var inst;
                     
@@ -716,12 +716,12 @@
                     if(inst){
                           return {nn,inst};
                     }
-
+                    
                     var id    = rd(root,'id');
                     if(id){
                           return {nn,inst:id};
                     }
-                      
+                    
                     if(nn.endsWith(']')){
                           var i   = nn.lastIndexOf('[',nn.length);
                           if(i!=-1){
@@ -735,9 +735,9 @@
                     
               }//inst
               
-/*              
+/*
               async function auto(initmod){
-                
+              
                     mod.list.forEach(name=>initmod[name]=mod[name]);
                     mod.list.forEach(name=>mod[name].initmod(initmod));
                     
@@ -747,10 +747,10 @@
                     mod.list.forEach(name=>mod[name].initdom());
                     
               }//auto
-*/              
-              
+*/
 
-              
+
+
               async function auto(...args){
                                                                                 debug('auto');
                     if(args.length==0){
@@ -761,7 +761,7 @@
                     
                     await Promise.all(
                           args.map(async(arg,i)=>{
-                            
+                          
                                 var fn;
                                 if(typeof arg=='string'){
                                       fn    = mod[arg];
@@ -769,6 +769,7 @@
                                       fn    = arg;
                                 }
                                                                                 debug(i,fn);
+                                                                                if(!fn)debugger;
                                                                                 if(!fn.initmod)debugger;
                                 fn.initmod(params);
                                 await fn.init();
@@ -779,10 +780,10 @@
                     
               }//auto
               
-
+              
               
               function rdparams(params,name,value,def){
-                
+              
                     if(name in params){
                           var value2    = params[name];
                           if(def){
@@ -796,7 +797,7 @@
               
               
               function rdconfig(dom){
-                
+              
                     var node    = $(dom,'config')[0];
                     if(node){
                           node.remove();
@@ -808,10 +809,10 @@
                     return node.config;
                     
               }//config
-
+              
               
               function parseconfig(txt){
-                
+              
                     if(!txt){
                           return {config:{}};
                     }
@@ -821,10 +822,10 @@
                           txt         = node.textContent;
                     }
                                                                                 //  remove // comments
-                    txt   = txt.replace(/\/\/.*$/gm,'');        
+                    txt   = txt.replace(/\/\/.*$/gm,'');
                                                                                 //  remove /* */ comments
-                    txt   = txt.replace(/\/\*[\s\S]*?\*\//g,''); 
-                
+                    txt   = txt.replace(/\/\*[\s\S]*?\*\//g,'');
+                    
                                                                                 //  trailing commas
                     txt   = txt.replace(/,\s*([}\]])/g,'$1');
                                                                                 //  double quote strings
@@ -838,12 +839,12 @@
                     
                     var err;
                     try{
-                      
+                    
                           var config    = JSON.parse(txt);
                           
                     }//try
                     catch(err2){
-                      
+                    
                           err           = err2;
                           
                     }//catch
@@ -857,9 +858,9 @@
                     
               }//parseparams
               
-
+              
               function rdattr(node,attr,config={}){
-                
+              
                     var def   = config[attr]||{};
                     
                     if(!node.hasAttribute(attr)){
@@ -871,7 +872,7 @@
                     var str       = node.getAttribute(attr);
                     var parts     = str.split(';');
                     parts.forEach(str=>{
-                          
+                    
                           str   = str.trim();
                           if(str.indexOf('=')==-1){
                                 config2[str]        = true;
@@ -893,7 +894,7 @@
   
   
               function debug(...args){
-                
+              
                     if(!mod.df)return;
                     args.unshift(`[ mod.${name} ]`);
                     console.groupCollapsed.apply(console,args);
@@ -903,19 +904,19 @@
               }//debug
               
               
-  
+              
               
           return mod;
-      
+          
         }//create
-
-
-
-
+        
+        
+        
+        
   //init-hdr:
   
         var script    = document.currentScript;
-                                                                                console.log(script.src);        
+                                                                                console.log(script.src);
         var url       = new window.URL(script.src);
         var params    = new URLSearchParams(url.search);
         if(!params.has('init')){
@@ -929,45 +930,45 @@
         var version='v1.0';
         
         df=false,did='';
-
+        
         ace=null;
         log=null;
         
         //Object.assign(window,{ext,$,datatype,menumod,keydown,debug,ls});
         
         menu=null;
-            
+        
         
     //:
-
-              
+    
+    
         init_hdr    = async function(){
                                                                                 debug('init_hdr',version);
-              
+                                                                                
               keydown.initdom();
               menu      = menumod();
               menu.initmod({keydown});
               menu.add.style();
-
-
+              
+              
               mod.base.add({
                     ext,$,datatype,keydown,menu,menumod,ls,
                     ace,log
               });
-
+              
               
               if(typeof init!='function'){
                                                                                 debug('auto');
                     await mod.auto();
                     setTimeout(complete,50);
-                      
+                    
               }
-
+              
               
               function complete(){
-                
+              
                     switch('function'){
-
+                    
                       case typeof mod.onReady   : mod.onReady();        break;
                       case typeof mod.onready   : mod.onready();        break;
                       case typeof mod.ready     : mod.ready();          break;
@@ -993,7 +994,7 @@
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var lsmod;
         
         var promise   = ext.load.libs(
@@ -1005,18 +1006,18 @@
               'js/core/ls-mod/ls-mod.js',
         );
         [$,datatype,menumod,keydown,debug,lsmod]   = await promise;
-  
+        
         ls    = lsmod();
         
         mod.stack.complete;
-              
+        
 })()
 ;
 
-                  
 
-        
-        
+
+
+
 })();
 
 
