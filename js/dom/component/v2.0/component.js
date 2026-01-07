@@ -534,45 +534,46 @@
                     mod.list.push(key);
                     
                     
+                    function suffix(key){
+                                                                                console.log(mod.name);
+                          var max   = null;
+                          
+                          mod.list.forEach(name=>{
+                          
+                                var f   = false;
+                                if(name===key)f   = true;
+                                if(name.startsWith(key)){
+                                      var t   = name.slice(key.length);
+                                      if(t.match(/^\(\d+\)$/)){
+                                            f   = true;
+                                      }
+                                }
+                                
+                                if(f){
+                                      if(max===null){
+                                            max   = 0;
+                                      }
+                                      var match   = name.match(/\((\d+)\)$/);
+                                      if(match){
+                                            var num   = parseInt(match[1],10);
+                                            if(num>max){
+                                                  max   = num;
+                                            }
+                                      }
+                                }
+                                
+                          });
+                          
+                          if(max!==null){
+                                key  += `(${max+1})`;
+                          }
+                          return key;
+                          
+                    }//suffix
+                    
               }//define
               
               
-              function suffix(key){
-                                                                                console.log(mod.name);
-                    var max   = null;
-                    
-                    mod.list.forEach(name=>{
-                    
-                          var f   = false;
-                          if(name===key)f   = true;
-                          if(name.startsWith(key)){
-                                var t   = name.slice(key.length);
-                                if(t.match(/^\(\d+\)$/)){
-                                      f   = true;
-                                }
-                          }
-                          
-                          if(f){
-                                if(max===null){
-                                      max   = 0;
-                                }
-                                var match   = name.match(/\((\d+)\)$/);
-                                if(match){
-                                      var num   = parseInt(match[1],10);
-                                      if(num>max){
-                                            max   = num;
-                                      }
-                                }
-                          }
-                          
-                    });
-                    
-                    if(max!==null){
-                          key  += `(${max+1})`;
-                    }
-                    return key;
-                    
-              }//suffix
               
               
               
