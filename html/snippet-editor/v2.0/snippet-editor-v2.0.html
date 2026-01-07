@@ -130,21 +130,27 @@
         }//init
         
         
-        async function libs(){
-        
-              if(!github){
-                    [github]    = await ext.load.libs('js/io/github/github.js');
-              }
-              
-        }//libs
-        
-        
         rd.attr.src    = async function(){
         
               if(!dom.hasAttribute('src'))return;
               src       = dom.getAttribute('src');
                                                                                 debug('src',src);
               if(src.startsWith('github:')){
+                    load_github(src);
+                    return;
+              }
+              
+              var res   = await fetch(src);
+              var txt   = await res.text();
+              def.txt   = txt;
+              
+              
+              function load_github(src){
+              
+                    if(!github){
+                          [github]    = await ext.load.libs('js/io/github/github.js');
+                    }
+                    
                     var [a,owner,repo,branch,path]    = src.split(':');
                     var {txt,error}   = await github.file.load.text({owner,repo,branch,path});
                     if(error){
@@ -152,12 +158,8 @@
                           return;
                     }
                     def.txt   = txt;
-                    return;
-              }
-              
-              var res   = await fetch(src);
-              var txt   = await res.text();
-              def.txt   = txt;
+                    
+              }//load_github
               
         }//src
         
