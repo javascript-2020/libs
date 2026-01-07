@@ -182,11 +182,13 @@
               }
               
               var [a,owner,repo,branch,path]    = src.split(':');
+                                                                                console.log(owner,repo,branch,path);
               var {txt,error}   = await github.file.load.text({owner,repo,branch,path});
               if(error){
                     def.txt   = error;
                     return;
               }
+                                                                                console.log('***',txt);
               def.txt   = txt;
               
         }//load_github
