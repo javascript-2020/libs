@@ -107,6 +107,18 @@
               target        = dom;
               
               
+              observer = new MutationObserver(mutations=>mutations.forEach(mutation=>{
+              
+                      if(mutation.type==='attributes'){
+                            console.log(`Attribute "${mutation.attributeName}" changed`);
+                            console.log('Old value:',mutation.oldValue);
+                            console.log('New value:',target.getAttribute(mutation.attributeName));
+                      }
+                      
+              }));
+              observer.observe(target,{attributes:true,attributeOldValue:true});
+              
+              
               def.txt       = $.htmlentities.decode(target);
               
               
