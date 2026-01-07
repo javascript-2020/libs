@@ -145,7 +145,7 @@
               def.txt   = txt;
               
               
-              function load_github(src){
+              async function load_github(src){
               
                     if(!github){
                           [github]    = await ext.load.libs('js/io/github/github.js');
