@@ -47,7 +47,7 @@
         ;
         
         
-        var ext,$,menu,ace,menumod,log,config={}
+        var ext,$,menu,ace,menumod,log,config={},github
         ;
         
         obj.initmod   = function(params){
@@ -59,6 +59,7 @@
               menumod         = mod.rd(params,'menumod',menumod);
               log             = mod.rd(params,'log',log);
               config          = mod.rd(params,'config',config,{});
+              github          = mod.rd(params,'github',github);
               
         }//initmod
         
@@ -85,6 +86,10 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
+                                                                                
+              await libs();
+              
+              
               var dom_config          = mod.rd.config(dom);
               config                  = Object.assign(config,dom_config);
               
@@ -113,7 +118,7 @@
               
               
               filemod.initmod({ext,$,menu,menumod,complete,source});
-              editor.initmod({ext,$,menu,menumod,ace,embed:dom,config:config['web-editor']});
+              editor.initmod({ext,$,menu,menumod,ace,config:config['web-editor']});
               
               await Promise.all([
                     rd.attr.src(),
@@ -129,9 +134,32 @@
         
               if(!dom.hasAttribute('src'))return;
               src       = dom.getAttribute('src');
+                                                                                debug('src',src);
+              if(src.startsWith('github:')){
+                    load_github(src);
+                    return;
+              }
+              
               var res   = await fetch(src);
               var txt   = await res.text();
               def.txt   = txt;
+              
+              
+              async function load_github(src){
+              
+                    if(!github){
+                          [github]    = await ext.load.libs('js/io/github/github.js');
+                    }
+                    
+                    var [a,owner,repo,branch,path]    = src.split(':');
+                    var {txt,error}   = await github.file.load.text({owner,repo,branch,path});
+                    if(error){
+                          def.txt   = error;
+                          return;
+                    }
+                    def.txt   = txt;
+                    
+              }//load_github
               
         }//src
         
