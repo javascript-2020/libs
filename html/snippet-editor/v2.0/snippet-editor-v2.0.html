@@ -85,6 +85,10 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
+                                                                                
+              await libs();
+              
+              
               var dom_config          = mod.rd.config(dom);
               config                  = Object.assign(config,dom_config);
               
@@ -125,10 +129,31 @@
         }//init
         
         
+        async function libs(){
+        
+              if(!github){
+                    [github]    = await ext.load.libs('js/io/github/github.js');
+              }
+              
+        }//libs
+        
+        
         rd.attr.src    = async function(){
         
               if(!dom.hasAttribute('src'))return;
               src       = dom.getAttribute('src');
+              
+              if(src.startsWith('github:')){
+                    var [a,owner,repo,branch,path]    = src.split(':');
+                    var {txt,error}   = await github.file.load.text({owner,repo,branch,path});
+                    if(error){
+                          def   = error;
+                          return;
+                    }
+                    def   = txt;
+                    return;
+              }
+              
               var res   = await fetch(src);
               var txt   = await res.text();
               def.txt   = txt;
