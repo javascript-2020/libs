@@ -829,18 +829,20 @@
         
               editor.setValue('',-1);
               filename(status);
+              filename.save.hide();
               
         }//clear
         
         
-        obj.setValue    = function(txt){return set(txt)}
-        obj.setvalue    = function(txt){return set(txt)}
-        obj.set         = function(txt){return set(txt)}
+        obj.setValue    = function(txt,opts){return set(txt,opts)}
+        obj.setvalue    = function(txt,opts){return set(txt,opts)}
+        obj.set         = function(txt,opts){return set(txt,opts)}
         
-        function set(txt){
+        function set(txt,opts){
         
               editor.setValue(txt,-1);
               update();
+              filename.save.hide();
               
         }//set
         
@@ -870,6 +872,13 @@
               editor.resize();
               
         }//resize
+        
+        
+  //:
+  
+  
+        obj.load    = function(src){
+        }//load
         
         
   //:
