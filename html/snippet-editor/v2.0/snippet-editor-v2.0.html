@@ -195,7 +195,7 @@
               var shadow                          = host.shadowRoot;
               
               filemod.initdom();
-              editor.initdom();
+              editor.initdom({txt:def.txt});
               
               if(src){
                     editor.filename(src);
