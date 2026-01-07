@@ -143,7 +143,7 @@
               src       = target.getAttribute('src');
                                                                                 debug('src',src);
               if(src.startsWith('github:')){
-                    load_github(src);
+                    await load_github(src);
                     return;
               }
               
