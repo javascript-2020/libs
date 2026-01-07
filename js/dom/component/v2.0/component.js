@@ -523,11 +523,12 @@
                           name   += `[${inst}]`;
                     }
                     
-                    mod[name]     = obj;
-                    mod[inst]     = obj;
                     
                     var key   = inst||name;
                     key       = suffix(key);
+                    
+                    mod[key]      = obj;
+                    mod[inst]     = obj;
                     
                     
                     mod.list.push(key);
