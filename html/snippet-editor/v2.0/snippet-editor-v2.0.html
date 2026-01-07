@@ -105,9 +105,8 @@
                                                                                 debug('config',config);
                                                                                 
               target        = dom;
-                                                                                console.log(target);
-                                                                                
-                                                                                
+              
+              
               def.txt       = $.htmlentities.decode(target);
               
               
@@ -118,7 +117,6 @@
               
               
               filemod         = mod['file-mod'];
-              if(!filemod)debugger;
               obj.filemod     = filemod;
               editor          = mod['web-editor'];
               obj.editor      = editor;
@@ -132,8 +130,8 @@
                     filemod.init(),
                     editor.init(),
               ]);
-                                                                                debug('init complete');
-                                                                                
+              
+              
         }//init
         
         
@@ -183,14 +181,14 @@
               }
               
               var [a,owner,repo,branch,path]    = src.split(':');
-                                                                                console.log(owner,repo,branch,path);
+              
               var {txt,error}   = await github.file.load.text({owner,repo,branch,path});
               if(error){
                                                                                 console.log('error',error);
                     def.txt   = error;
                     return;
               }
-                                                                                console.log('***',txt);
+              
               def.txt   = txt;
               
         }//load_github
@@ -222,12 +220,8 @@
               var shadow                          = host.shadowRoot;
               
               filemod.initdom();
-                                                                                console.log(def.txt);
               editor.initdom({txt:def.txt});
-              
-              if(src){
-                    editor.filename(src);
-              }
+              editor.filename(src);
               
         }//initdom
         
