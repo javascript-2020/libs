@@ -186,25 +186,25 @@
               var txt   = await res.text();
               def       = txt;
               
-              
-              async function load_github(){
-              
-                    if(!github){
-                          [github]    = await ext.load.libs('js/io/github/github.js');
-                    }
-                    
-                    var [a,owner,repo,branch,path]    = src.split(':');
-                    var {txt,error}   = await github.file.load.text({owner,repo,branch,path});
-                    if(error){
-                          def   = error;
-                          return;
-                    }
-                    def   = txt;
-                    return;
-                    
-              }//lod_github
-              
         }//src
+        
+        
+        async function load_github(){
+        
+              if(!github){
+                    [github]    = await ext.load.libs('js/io/github/github.js');
+              }
+              
+              var [a,owner,repo,branch,path]    = src.split(':');
+              var {txt,error}   = await github.file.load.text({owner,repo,branch,path});
+              if(error){
+                    def   = error;
+                    return;
+              }
+              def   = txt;
+              return;
+              
+        }//lod_github
         
         
   //:
