@@ -148,10 +148,10 @@
                     var [a,owner,repo,branch,path]    = src.split(':');
                     var {txt,error}   = await github.file.load.text({owner,repo,branch,path});
                     if(error){
-                          def   = error;
+                          def.txt   = error;
                           return;
                     }
-                    def   = txt;
+                    def.txt   = txt;
                     return;
               }
               
