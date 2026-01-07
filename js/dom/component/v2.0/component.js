@@ -932,8 +932,12 @@
         
         df=false,did='';
         
-        ace=null;
-        log=null;
+        if(typeof ace=='undefined'){
+              ace=null;
+        }
+        if(typeof log=='undefined'){
+              log=null;
+        }
         
         //Object.assign(window,{ext,$,datatype,menumod,keydown,debug,ls});
         
