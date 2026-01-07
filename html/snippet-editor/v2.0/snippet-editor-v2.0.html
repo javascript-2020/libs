@@ -71,6 +71,8 @@
         config['web-editor']    = {fullsize:true};
         
         
+        var target;
+        
         var filemod;
         obj.filemod   = null;
         var editor;
@@ -102,8 +104,10 @@
               }
                                                                                 debug('config',config);
                                                                                 
-                                                                                
-              def.txt       = $.htmlentities.decode(dom);
+              target        = dom;
+              
+              
+              def.txt       = $.htmlentities.decode(target);
               
               
               var mode      = rd.attr.mode();
@@ -133,8 +137,8 @@
         
         rd.attr.src    = async function(){
         
-              if(!dom.hasAttribute('src'))return;
-              src       = dom.getAttribute('src');
+              if(!target.hasAttribute('src'))return;
+              src       = target.getAttribute('src');
                                                                                 debug('src',src);
               if(src.startsWith('github:')){
                     load_github(src);
@@ -145,24 +149,24 @@
               var txt   = await res.text();
               def.txt   = txt;
               
-              
-              async function load_github(src){
-              
-                    if(!github){
-                          [github]    = await ext.load.libs('js/io/github/github.js');
-                    }
-                    
-                    var [a,owner,repo,branch,path]    = src.split(':');
-                    var {txt,error}   = await github.file.load.text({owner,repo,branch,path});
-                    if(error){
-                          def.txt   = error;
-                          return;
-                    }
-                    def.txt   = txt;
-                    
-              }//load_github
-              
         }//src
+        
+        
+        async function load_github(src){
+        
+              if(!github){
+                    [github]    = await ext.load.libs('js/io/github/github.js');
+              }
+              
+              var [a,owner,repo,branch,path]    = src.split(':');
+              var {txt,error}   = await github.file.load.text({owner,repo,branch,path});
+              if(error){
+                    def.txt   = error;
+                    return;
+              }
+              def.txt   = txt;
+              
+        }//load_github
         
         
         rd.attr.mode   = function(){
