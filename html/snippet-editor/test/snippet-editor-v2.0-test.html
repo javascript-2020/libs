@@ -9,125 +9,12 @@
             
             <base href='https://libs.ext-code.com/html/snippet-editor/'>
             
-            
-            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-            
-            <script init>
-                                                                                console.clear();
-                                                                                console.log('snippet-editor-test-v2.0.html');
-                                                                                console.log();
-                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
-        var df=true
-        ;
-        
-        
-        var ext;
-        var $;
-        var datatype;
-        var debug;
-        
-        var html;
-        
-        var snippet       = {};
-        snippet.inline    = null;
-        snippet.src       = null;
-        
-        
-        
-        
-  //:
-  
-  
-        mod.stack.add   = init;
-        
-        async function init(){
-                                                                                debug('init');
-              menu              = menumod();
-              
-              mod.base.add({ext,$,datatype,keydown,menumod,menu});
-              
-              snippet.inline    = mod.inline;
-              snippet.src       = mod.src;
-              
-              
-              snippet.src.initmod({ext,$,menu,menumod});
-              snippet.inline.initmod({ext,$,menu,menumod});
-              
-              
-              await Promise.all([
-                    snippet.src.init(),
-                    snippet.inline.init(),
-              ]);
-              
-              
-              
-              await initdom(document.body);
-              
-              
-        }//init
-        
-        
-  //:
-  
-  
-(async()=>{
-
-        mod.stack.add;
-        
-        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-        
-        var promise   = ext.load.libs(
-              'js/dom/$.js.api',
-              'js/core/datatype.js',
-              'js/dom/menumod/menumod.js',
-              'js/dom/keydown/keydown.js',
-              'js/debug/debug.js',
-        );
-        [$,datatype,menumod,keydown,debug]   = await promise;
-        
-        
-        //html    = await ext.text.libs('html/snippet-html/ex/ex1.html');
-        
-        
-        mod.stack.complete;
-        
-})();
-
-
-            </script init>
-            
+            <script src='https://libs.ext-code.com/js/dom/component/v2.0/component.js?init'></script>
             
             <style>
-  html
-    {height:100%}
-    
-  body
-    {display:flex;flex-direction:column;gap:10px;font-family:arial;margin:20px}
-    
-  code
-    {border:1px solid lightgray;padding:10px;font-family:monospace;white-space:pre;font-size:16px}
-    
-    
-  .icon
-    {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:30px;height:30px;cursor:pointer}
-    
-    
-    
-/*
-  snippet-html
-    {height:300px}
-*/
-
-  #inline
-    {margin:20px 0}
-  #src
-    {margin:20px 0}
-    
-    
-  [component],config
-    {display:none}
-    
-    
+                  html                  {font-family:arial}
+                  .icon                 {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:30px;height:30px;cursor:pointer}
+                  [component],config    {display:none}
             </style>
             
       </head>
@@ -140,98 +27,10 @@
             </h3>
             
             
-            <snippet-editor id=src component v2.0 src='ex/ex-1.js' mode=c></snippet-editor>
-            
-            
-            
-            
-            <snippet-editor id=inline component v2.0 mode=html>
-            
-&#x3C;html&#x3E;
-
-      &#x3C;head&#x3E;
-      
-&#x3C;style&#x3E;
-  .newsletter { font-family: sans-serif; padding: 1em; border: 1px solid #ccc; border-radius: 8px; max-width: 600px; }
-  .newsletter input[type=&#x22;email&#x22;] { width: 100%; padding: 0.5em; margin: 0.5em 0; }
-  .newsletter button { padding: 0.5em 1em; }
-  .newsletter footer { margin-top: 1em; font-size: 0.9em; color: #666; }
-&#x3C;/style&#x3E;
-
-      &#x3C;/head&#x3E;
-      
-      &#x3C;body&#x3E;
-      
-            &#x3C;div&#x3E;test&#x3C;/div&#x3E;
-            
-&#x3C;article class=&#x22;newsletter&#x22;&#x3E;
-  &#x3C;header&#x3E;
-    &#x3C;h1&#x3E;Newsletter Signup&#x3C;/h1&#x3E;
-    &#x3C;p&#x3E;Stay updated with our latest tools and insights.&#x3C;/p&#x3E;
-  &#x3C;/header&#x3E;
-  
-  &#x3C;form onsubmit=&#x22;event.preventDefault(); alert(&#x27;Thanks for signing up!&#x27;);&#x22;&#x3E;
-    &#x3C;label for=&#x22;email&#x22;&#x3E;Email address:&#x3C;/label&#x3E;&#x3C;br&#x3E;
-    &#x3C;input type=&#x22;email&#x22; id=&#x22;email&#x22; name=&#x22;email&#x22; required&#x3E;&#x3C;br&#x3E;
-    &#x3C;button type=&#x22;submit&#x22;&#x3E;Subscribe&#x3C;/button&#x3E;
-  &#x3C;/form&#x3E;
-  
-  &#x3C;footer&#x3E;
-    &#x3C;p&#x3E;We respect your privacy. No spam, ever.&#x3C;/p&#x3E;
-  &#x3C;/footer&#x3E;
-&#x3C;/article&#x3E;
-
-
-      &#x3C;/body&#x3E;
-      
-&#x3C;/html&#x3E;
-
-            </snippet-editor>
-            
-            
-            
-            
+            <snippet-editor component v2.0 src='github:javascript-2020:browser-extensions:main:/cors/chrome/manifest.json'></snippet-editor>
             
             
       </body>
-      
-      
-      <script>
-      
-      
-        var root;
-        var code;
-        
-        
-  //:
-  
-  
-        function initdom(rootnode){
-        
-              root                = rootnode;
-              
-              
-              snippet.src.initdom();
-              
-              snippet.inline.initdom();
-              
-              
-              
-              
-              
-        }//initdom
-        
-        
-  //:
-  
-  
-  
-  
-  //:
-  
-  
-      </script>
-      
       
 </html>
 
