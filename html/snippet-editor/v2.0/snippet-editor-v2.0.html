@@ -143,7 +143,7 @@
         
               if(!dom.hasAttribute('src'))return;
               src       = dom.getAttribute('src');
-              
+                                                                                debug('src',src);
               if(src.startsWith('github:')){
                     var [a,owner,repo,branch,path]    = src.split(':');
                     var {txt,error}   = await github.file.load.text({owner,repo,branch,path});
