@@ -538,7 +538,7 @@
               
               
               function suffix(key){
-              
+                                                                                console.log(mod.name);
                     var max   = null;
                     
                     mod.list.forEach(name=>{
@@ -568,7 +568,7 @@
                     });
                     
                     if(max!==null){
-                          key+=`(${max+1})`;
+                          key  += `(${max+1})`;
                     }
                     return key;
                     
