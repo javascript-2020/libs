@@ -1,6 +1,31 @@
 ## Description
 
-The web-console provides a console ( like dev tools ) in a webpage
+The web-console provides a console ( like dev tools ) in a webpage.
+
+A lightweight, embeddable component that brings a fully interactive DevTools‑style console directly into your webpage. It captures
+console.log, warn, error, and custom messages, displaying them in a scrollable UI that mirrors the feel of a browser’s built‑in
+developer console.
+
+Designed for demos, sandboxes, tutorials, and debugging in environments where the native DevTools aren’t available or convenient.
+
+Has the option to echo to the console.
+
+
+**Key Features**
+
+- Real‑time logging of standard console output
+
+- Supports logs, warnings, errors, and custom message types
+
+- Expandable object/JSON inspection
+
+- Clear‑console functionality
+
+- Optional command input for evaluating JavaScript expressions
+
+- Fully stylable and framework‑agnostic
+
+- Ideal for embedded widgets, documentation examples, and teaching tools
 
 
 ## Include
