@@ -686,6 +686,7 @@
         btn.clear   = function(e){
         
               clear();
+              editor.focus();
               
         }//clear
         
@@ -693,18 +694,16 @@
         btn.copy    = function(){
         
               var txt       = editor.getValue();
-              navigator.clipboard.writeText(txt)
-                .catch(err=>log.error(err));
-                
+              navigator.clipboard.writeText(txt).catch(err=>log.error(err));
+              
         }//copy
         
         
         btn.paste   = function(){
         
-              navigator.clipboard.readText()
-                .then(txt=>editor.setValue(txt,-1))
-                .catch(err=>log.error(err));
-                
+              var txt   = await navigator.clipboard.readText().catch(err=>log.error(err));
+              editor.setValue(txt,-1);
+              
         }//paste
         
         
