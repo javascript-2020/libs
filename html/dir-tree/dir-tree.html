@@ -251,6 +251,10 @@
       
       function open(ndir){
       
+            if(typeof ndir=='string'){
+                  ndir    = find(ndir);
+            }
+            
             var hdr   = $(ndir,'.dir-hdr');
             $(hdr,'.expand').classList.remove('close');
             hdr.parentNode.style.maxHeight    = '';
@@ -260,6 +264,10 @@
       
       function close(ndir){
       
+            if(typeof ndir=='string'){
+                  ndir    = find(ndir);
+            }
+            
             var hdr   = $(ndir,'.dir-hdr');
             $(hdr,'.expand').classList.add('close');
             hdr.parentNode.style.maxHeight    = '40px';
