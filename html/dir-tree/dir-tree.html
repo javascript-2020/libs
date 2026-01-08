@@ -252,7 +252,8 @@
       function open(ndir){
       
             if(typeof ndir=='string'){
-                  ndir    = find(ndir);
+                  var o   = find(ndir);
+                  ndir    = o.node;
             }
             
             var hdr   = $(ndir,'.dir-hdr');
@@ -265,7 +266,8 @@
       function close(ndir){
       
             if(typeof ndir=='string'){
-                  ndir    = find(ndir);
+                  var o   = find(ndir);
+                  ndir    = o.node;
             }
             
             var hdr   = $(ndir,'.dir-hdr');
