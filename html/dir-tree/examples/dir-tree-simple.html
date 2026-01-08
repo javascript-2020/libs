@@ -4,14 +4,13 @@
       <script src='https://libs.ext-code.com/js/dom/component/v2.0/component.js?init'></script>
       
       <style>
-      
-  [component],config
-    {display:none}
-    
+            html                {height:300px;font-family:arial}
+            [component],config  {display:none}
       </style>
       
       
       <dir-tree component></dir-tree>
+      
       
       <log-mod component></log-mod>
       
@@ -25,37 +24,7 @@
               var log       = mod['log-mod'];
               var dirtree   = mod['dir-tree'];
               
-/*
-              var data    = [
-                    {
-                          parent    : null,
-                          type      : 'dir',
-                          name      : 'tmp',
-                          list      : [
-                                {
-                                      parent    : {object},
-                                      type      : 'dir',
-                                      name      : 'tmp-1',
-                                      list      : [
-                                            {
-                                                  parent    : 'object',
-                                                  type      : 'file',
-                                                  name      : 'test.txt'
-                                            }
-                                      ]
-                                },
-                                {
-                                      parent    : {object},
-                                      type      : 'file',
-                                      name      : 'hello.txt'
-                                }
-                          ]
-                    }
-              ];
-*/
-
-
-
+              
               var data    = {
                     'tmp'   : {
                           'tmp-1'   : {
@@ -68,12 +37,8 @@
                     'hello-2.txt':null,
               };
               
-              
               var ndata   = dirtree.build(data);
-                                                                                console.log(ndata);
-                                                                                //console.log(JSON.stringify(data,null,4));
               dirtree.display(ndata,{callback});
-              
               dirtree.close('/tmp/tmp-1/');
               
         }//ready
