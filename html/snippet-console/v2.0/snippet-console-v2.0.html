@@ -207,7 +207,7 @@
               $(shadow,'[value=run]').onclick       = btn.run;
               
               chk.persist                           = $.chkbox(btns,'#persist',()=>editor.focus());
-              chk.echo                              = $.chkbox(btns,'#echo',v=>(con.echo=v,window.console.log(v)));
+              chk.echo                              = $.chkbox(btns,'#echo',v=>con.echo=v.checked);
               $(shadow,'[value=clear]').onclick     = btn.clear;
               $(shadow,'[value=kill]').onclick      = btn.kill;
               
