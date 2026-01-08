@@ -1,220 +1,34 @@
 
 
 
-<html>
-
-      <head>
+      <base href='https://libs.ext-code.com/html/snippet-console/'>
       
-            <title>snippet-console v2.0 test</title>
-            
-            <base href='https://libs.ext-code.com/html/snippet-console/'>
-            
-            
-            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-            
-            <script init>
-                                                                                console.clear();
-                                                                                console.log('snippet-console-v2.0-test.html');
-                                                                                console.log();
-                                                                                console.json=v=>console.log(JSON.stringify(v,null,4));
-        var df=true;
-        
-        var ace;
-        
-        var ext;
-        var $;
-        var datatype;
-        var debug;
-        
-        var menu;
-        
-        var snippet       = {};
-        snippet.inline    = null;
-        snippet.src       = null;
-        
-        var log;
-        
-        
-  //:
-  
-  
-        async function init(){
-                                                                                debug('init');
-                                                                                
-              menu              = menumod();
-              
-              mod.base.add({ext,$,datatype,keydown,menumod,menu,ace});
-              
-              log               = mod['log-mod'];
-              
-              snippet.inline    = mod.inline;
-              snippet.src       = mod.src;
-              
-              log.initmod({ext,$});
-              
-              snippet.inline.initmod({ext,$,ace,menu});
-              snippet.src.initmod({ext,$,ace,menu});
-              
-              
-              await Promise.all([
-                    snippet.inline.init(),
-                    snippet.src.init(),
-                    log.init(),
-              ]);
-              
-              
-              initdom(document.body);
-              
-              
-        }//init
-        
-        
-(async()=>{
-
-        mod.stack.add;
-        
-        ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-        
-        var promise   = ext.load.libs(
-              'js/dom/$.js',
-              'js/core/datatype.js',
-              'js/dom/menumod/menumod.js',
-              'js/dom/keydown/keydown.js',
-              'js/debug/debug.js',
-        );
-        [$,datatype,menumod,keydown,debug]   = await promise;
-        
-        ace   = await $.editor.ace();
-        
-        mod.stack.complete;
-        
-})();
-
-
-            </script init>
-            
-            <style>
-  html
-    {font-family:arial}
-    
-  body
-    {display:flex;flex-direction:column;gap:10px;margin:20px}
-    
-  code
-    {border:1px solid lightgray;padding:10px;font-family:monospace;white-space:pre}
-    
-  #inline
-    {margin:20px 0}
-  #src
-    {margin:20px 0}
-    
-    
-  .icon
-    {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:30px;height:30px;cursor:pointer}
-    
-  [component], config
-    {display:none}
-    
-            </style>
-            
-      </head>
+      <script src='https://libs.ext-code.com/js/dom/component/v2.0/component.js?hdr'></script>
       
-      
-      <body>
-      
-            <h3>
-                  snippet-console v2.0 test
-            </h3>
-            
-            
-            
-            <h4>
-                  inline
-            </h4>
-            
-            <snippet-console v2.0 id=inline component>
-                  <config>
-                        {
-                              'web-editor'    : {
-                                    height  : '300px',
-                              },
-                              'web-console'   : {
-                                    fullsize    : true,
-                                    height      : '50px'
-                              }
-                        }
-                  </config>
-        fn();
-        
-        
-        functon fn(){
-        
-              console.log('myFn');
-              
-              var test    = {
-                    hello:'world',
-                    key:'value',
-                    test:123,
-                    debug:true
-              };
-              
-              console.log(test);
-              
-        }//fn
-        
-            </snippet-console>
-            
-            
-            
-            <h4>
-                  src
-            </h4>
-            
-            
-            <snippet-console v2.0 component id=src src='ex/ex1.js'></snippet-console>
-            
-            
-            
-            
-            <log-mod component></log-mod>
-            
-      </body>
-      
+      <snippet-console v2.0 component src='ex/ex2.js' web-console='h=420'></snippet-console>
       
       <script>
       
-      
-        var root;
-        var code;
+        function ready(){
         
+              snippet   = mod['snippet-console'];
+              
+        }//ready
         
-        function initdom(rootnode){
-        
-              root    = rootnode;
-              
-              log.initdom();
-              
-              
-              snippet.inline.initdom();
-              
-              //snippet.inline.editor.height   = 200;
-              //snippet.inline.console.height  = 200;
-              
-              
-              snippet.src.initdom();
-              //snippet.src.console.height  = 200;
-              
-              
-              
-        }//initdom
-        
-        
-  //:
-  
-  
       </script>
       
+      <style>
       
-</html>
+/*
+  .icon
+    {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:30px;height:30px;cursor:pointer}
+*/
 
 
+      </style>
+      
+      
+      
+      
+      
+      
