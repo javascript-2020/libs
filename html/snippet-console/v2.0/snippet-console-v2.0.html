@@ -251,6 +251,7 @@
                                                                                 debug('kill');
               if(!iframe)return;
               iframe.remove();
+              editor.focus();
               
         }//kill
         
@@ -258,6 +259,7 @@
         btn.clear   = function(){
         
               con.clear();
+              editor.focus();
               
         }//clear
         
