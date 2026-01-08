@@ -518,7 +518,7 @@
                                                                                 if(typeof fn!='function')debugger;
                     var obj;
                     var args      = sig(fn);
-                                                                                console.log(args);
+                                                                                //console.log(args);
                     switch(args){
                     
                       case '({mod,host})'   : obj   = fn({mod:mod2,host});        break;
@@ -945,7 +945,7 @@
               return;
         }
                                                                                 console.clear();
-                                                                                console.log('[ init-hdr ]');
+                                                                                //console.log('[ init-hdr ]');
                                                                                 console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var version='v1.0';
