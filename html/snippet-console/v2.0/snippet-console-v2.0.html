@@ -14,12 +14,17 @@
   #btns
     {display:flex;margin:0 20px;gap:10px}
     
+  #persist
+    {border:1px solid lightgray;padding:0 10px;cursor:pointer}
+    
   .spc
     {flex:1}
   input
     {font-size:16px;padding:5px 10px}
   input[type=button]
     {cursor:pointer}
+  input[type=checkbox]
+    {width:20px;height:20px;margin:0}
     
             </style>
             
@@ -36,6 +41,10 @@
                         <input value=reset type=button>
                         <input value=run type=button>
                         <div class=spc></div>
+                        <div id=persist>
+                              persist
+                              <input type=checkbox>
+                        </div>
                         <input value=clear type=button>
                         <input value=kill type=button>
                   </div>
@@ -96,6 +105,7 @@
         
         
         var root;
+        var chk         = {};
         
         
         var rd          = {};
@@ -186,10 +196,14 @@
               editor.initdom({txt:def.txt,fullsize:true});
               
               
+              var btns                              = $(shadow,'#btns');
+              
               $(shadow,'[value=reset]').onclick     = btn.reset;
               $(shadow,'[value=run]').onclick       = btn.run;
-              $(shadow,'[value=kill]').onclick      = btn.kill;
+              
+              chk.persist                           = $.chkbox(btns,'#persist');
               $(shadow,'[value=clear]').onclick     = btn.clear;
+              $(shadow,'[value=kill]').onclick      = btn.kill;
               
               con.initdom();
               
@@ -223,10 +237,12 @@
         
               var js          = editor.getvalue();
               
+              var clear   = chk.persist.checked;
+              
               var result;
               var error;
               
-              ({iframe,result,error}   = await sandbox.run.iframe(js,{clear:true,console:con}));
+              ({iframe,result,error}   = await sandbox.run.iframe(js,{clear,console:con}));
               
               editor.focus();
               
