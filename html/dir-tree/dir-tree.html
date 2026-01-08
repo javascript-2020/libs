@@ -240,7 +240,9 @@
       }//display
       
       
-      obj.clear   = function(){
+      obj.clear   = function(){return clear()}
+      
+      function clear(){
       
             tree.replaceChildren();
             
@@ -298,6 +300,31 @@
       }//close
       
       
+  //:
+  
+  
+        obj.test    = function(){
+        
+              var data    = {
+                    'tmp'   : {
+                          'tmp-1'   : {
+                                'test.txt':null,
+                          },
+                          'my-file-1.bin':null,
+                          'my-file-2.bin':null,
+                    },
+                    'hello-1.txt':null,
+                    'hello-2.txt':null,
+              };
+              
+              data    = build(data);
+              
+              clear();
+              display(data);
+              
+        }//test
+        
+        
   //:
   
   
