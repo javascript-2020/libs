@@ -123,7 +123,7 @@
                     
                           win   = iframe.contentWindow;
                           setup();
-                          resolve();
+                          resolve({iframe});
                           
                     }//onload
                     
