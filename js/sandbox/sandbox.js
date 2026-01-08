@@ -5,8 +5,8 @@
 
   var obj   = {};
   
-  
-  
+        var df=true,did='sandbox';
+        
   //:
   
   
@@ -412,8 +412,20 @@
   //:
   
   
-  
-  
+        function debug(...args){
+        
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              console.groupCollapsed.apply(console,args2);
+              console.trace();
+              console.groupEnd();
+              
+        }//debug
+        
+        
+        
   return obj;
   
   
