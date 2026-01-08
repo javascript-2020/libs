@@ -226,7 +226,7 @@
               var result;
               var error;
               
-              (iframe,result,error}   = await sandbox.run.iframe(js,{clear:true,console:con}));
+              ({iframe,result,error}   = await sandbox.run.iframe(js,{clear:true,console:con}));
               
               editor.focus();
               
