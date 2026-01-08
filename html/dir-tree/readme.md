@@ -1,6 +1,6 @@
 ## Description
 
-displays a directory structure in a webpage
+display a directory structure in a webpage
 
 
 ## Include
