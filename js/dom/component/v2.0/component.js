@@ -940,8 +940,11 @@
                                                                                 console.log(script.src);
         var url       = new window.URL(script.src);
         var params    = new URLSearchParams(url.search);
-        if(!params.has('init')){
-                                                                                console.log('exit');
+        var flag      = false;
+        if(params.has('init'))flag    = true;
+        if(params.has('hdr'))flag   = true;
+        if(!flag){
+                                                                                //console.log('exit');
               return;
         }
                                                                                 console.clear();
