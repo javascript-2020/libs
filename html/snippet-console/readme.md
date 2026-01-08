@@ -30,7 +30,9 @@ these attribute can be defined on the html tag itself
 
 attribute     | description
 ---------     |-----------
-
+src|src url to load 
+web-editor|pass config to web-editor
+web-console|pass config to web-console
 
 ## module
 
@@ -42,67 +44,15 @@ initmod|standard function for importing local dependencies
 init|standard initialisation function
 initdom|standard function to setup the dom
  | 
-build(data)|takes a simple object structure and return a structure that dirtree can use ( see below )
-display(data,options)|display the directory structure
-clear|clear the directory tree
-find(path)|find the object representing the directory
-open(path)|expand the directory
-close(path)|collapse the directory
-test()|display test data
+run|run the current snippet
 
 
 ## api
 
 
-### build(data)
+## config
 
-takes a simple, easy to represent object structure representing a directory
 
-```
+web-editor    - see web-editor for supported config
+web-console   - see web-console for supported config
 
-      var data    = {
-            'tmp'   : {
-                  'tmp-1'   : {
-                        'test.txt':null,
-                  },
-                  'my-file-1.bin':null,
-                  'my-file-2.bin':null,
-            },
-            'hello-1.txt':null,
-            'hello-2.txt':null,
-      };
-
-```
-
-and produces a ibject structure that can be used by dir-tree to display the directory
-
-```
-
-              var data    = [
-                    {
-                          parent    : null,
-                          type      : 'dir',
-                          name      : 'tmp',
-                          list      : [
-                                {
-                                      parent    : {object},
-                                      type      : 'dir',
-                                      name      : 'tmp-1',
-                                      list      : [
-                                            {
-                                                  parent    : 'object',
-                                                  type      : 'file',
-                                                  name      : 'test.txt'
-                                            }
-                                      ]
-                                },
-                                {
-                                      parent    : {object},
-                                      type      : 'file',
-                                      name      : 'hello.txt'
-                                }
-                          ]
-                    }
-              ];
-
-```
