@@ -33,10 +33,11 @@
                   <web-editor component></web-editor>
                   
                   <div id=btns>
+                        <input value=reset type=button>
                         <input value=run type=button>
                         <div class=spc></div>
                         <input value=clear type=button>
-                        <input value=reset type=button>
+                        <input value=kill type=button>
                   </div>
                   
                   <web-console component></web-console>
@@ -185,9 +186,10 @@
               editor.initdom({txt:def.txt,fullsize:true});
               
               
-              $(shadow,'[value=run]').onclick       = btn.run;
-              $(shadow,'[value=clear]').onclick     = btn.clear;
               $(shadow,'[value=reset]').onclick     = btn.reset;
+              $(shadow,'[value=run]').onclick       = btn.run;
+              $(shadow,'[value=kill]').onclick      = btn.kill;
+              $(shadow,'[value=clear]').onclick     = btn.clear;
               
               con.initdom();
               
@@ -209,15 +211,28 @@
   //:
   
   
+        btn.reset   = function(){
+        
+              editor.setvalue(def.txt,-1);
+              
+        }//reset
+        
+        
         btn.run   = function(){
         
               var js          = editor.getvalue();
               
-              sandbox.run(js,{console:con});
+              sandbox.run.iframe(js,{clear:true,console:con});
               
               editor.focus();
               
         }//run
+        
+        
+        btn.kill    = function(){
+        
+        
+        }//kill
         
         
         btn.clear   = function(){
@@ -225,13 +240,6 @@
               con.clear();
               
         }//clear
-        
-        
-        btn.reset   = function(){
-        
-              editor.setvalue(def.txt,-1);
-              
-        }//reset
         
         
   //:
