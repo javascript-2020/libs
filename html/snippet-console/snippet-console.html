@@ -9,10 +9,13 @@
             <style>
             
   #root
-    {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px}
+    {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px;font-family:arial}
     
   #btns
     {display:flex;margin:0 20px;gap:10px}
+    
+  #persist
+    {display:flex;align-items:center;gap:10px;border:1px solid lightgray;padding:0 10px;cursor:pointer}
     
   .spc
     {flex:1}
@@ -20,6 +23,8 @@
     {font-size:16px;padding:5px 10px}
   input[type=button]
     {cursor:pointer}
+  input[type=checkbox]
+    {width:20px;height:20px;margin:0}
     
             </style>
             
@@ -33,10 +38,15 @@
                   <web-editor component></web-editor>
                   
                   <div id=btns>
+                        <input value=reset type=button>
                         <input value=run type=button>
                         <div class=spc></div>
+                        <div id=persist>
+                              persist
+                              <input type=checkbox>
+                        </div>
                         <input value=clear type=button>
-                        <input value=reset type=button>
+                        <input value=kill type=button>
                   </div>
                   
                   <web-console component></web-console>
@@ -49,7 +59,7 @@
       <script>
       
 (function snippet_console({mod,dom,host}){
-                                                                    console.log(mod);
+                                                                    //console.log(mod);
   var obj   = {
         version   : 'v2.0',
   };
@@ -95,6 +105,7 @@
         
         
         var root;
+        var chk         = {};
         
         
         var rd          = {};
@@ -126,10 +137,11 @@
               obj.editor          = editor;
               
               con                 = mod['web-console'];
+              con.df=true;
               obj.console         = con;
               
               filemod.initmod({ext,$,menu,menumod,complete,source});
-              editor.initmod({ext,$,menu,ace,config:config['web-editor']});
+              editor.initmod({ext,$,menu,kd,ace,config:config['web-editor']});
               con.initmod({ext,$,ace,config:config['web-console']});
               
               
@@ -185,9 +197,14 @@
               editor.initdom({txt:def.txt,fullsize:true});
               
               
-              $(shadow,'[value=run]').onclick       = btn.run;
-              $(shadow,'[value=clear]').onclick     = btn.clear;
+              var btns                              = $(shadow,'#btns');
+              
               $(shadow,'[value=reset]').onclick     = btn.reset;
+              $(shadow,'[value=run]').onclick       = btn.run;
+              
+              chk.persist                           = $.chkbox(btns,'#persist',()=>editor.focus());
+              $(shadow,'[value=clear]').onclick     = btn.clear;
+              $(shadow,'[value=kill]').onclick      = btn.kill;
               
               con.initdom();
               
@@ -196,35 +213,23 @@
                     editor.filename(src);
               }
               
-              con.clear();
-              con.log('ready');
+              //con.clear();
+              //con.log('ready');
               
               
-        }//initdom2
-        
-        
-        
+        }//initdom
         
         
   //:
   
   
-        btn.run   = function(){
+        function kd(e){
         
-              var js          = editor.getvalue();
+              if(e.ctrlKey && e.key=='Enter'){
+                    run();
+              }
               
-              sandbox.run(js,{console:con});
-              
-              editor.focus();
-              
-        }//run
-        
-        
-        btn.clear   = function(){
-        
-              con.clear();
-              
-        }//clear
+        }//kd
         
         
         btn.reset   = function(){
@@ -233,12 +238,51 @@
               
         }//reset
         
+        var iframe;
+        
+        btn.run   = function(){
+        
+              run();
+              
+        }//run
+        
+        
+        btn.kill    = function(){
+                                                                                debug('kill');
+              if(!iframe)return;
+              iframe.remove();
+              editor.focus();
+              
+        }//kill
+        
+        
+        btn.clear   = function(){
+        
+              con.clear();
+              editor.focus();
+              
+        }//clear
+        
         
   //:
   
   
-        obj.run   = btn.run;
+        obj.run   = function(){return run()}
         
+        async function run(){
+        
+              var js      = editor.getvalue();
+              
+              var clear   = !chk.persist.checked;
+              
+              var result;
+              var error;
+              
+              ({iframe,result,error}   = await sandbox.run.iframe(js,{clear,console:con}));
+              
+              editor.focus();
+              
+        }//run
         
         
   //:
