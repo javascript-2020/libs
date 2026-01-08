@@ -699,7 +699,7 @@
         }//copy
         
         
-        btn.paste   = function(){
+        btn.paste   = async function(){
         
               var txt   = await navigator.clipboard.readText().catch(err=>log.error(err));
               editor.setValue(txt,-1);
