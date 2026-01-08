@@ -1,6 +1,6 @@
 ## Description
 
-Produces a file listing in a webpage
+displays a directory structure in a webpage
 
 
 ## Include
