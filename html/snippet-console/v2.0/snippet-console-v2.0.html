@@ -240,7 +240,7 @@
         
         var iframe;
         
-        btn.run   = async function(){
+        btn.run   = function(){
         
               run();
               
@@ -267,7 +267,7 @@
   
         obj.run   = function(){return run()}
         
-        function run(){
+        async function run(){
         
               var js      = editor.getvalue();
               
