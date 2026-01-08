@@ -18,9 +18,7 @@ name      | description
 ----------|------------
 
 
-## api
-
-### attribute
+## attribute
 
 these attribute can be defined on the html tag itself
 
@@ -28,7 +26,7 @@ attribute     | description
 ---------     |-----------
 
 
-### module
+## module
 
 
 name|description
@@ -47,10 +45,10 @@ close(path)|collapse the directory
 test()|display test data
 
 
-### api
+## api
 
 
-#### build(data)
+### build(data)
 
 takes a simple, easy to represent object structure representing a directory
 
