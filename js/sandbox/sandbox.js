@@ -14,7 +14,7 @@
         
         obj.run           = run;
         obj.nodejs        = nodejs;
-        
+        obj.kill          = kill;
         
   //:
   
@@ -45,6 +45,13 @@
               
         }//js
         
+        
+        function kill(){
+        
+              if(!iframe)return;
+              iframe.remove();
+              
+        }//kill
         
         
         async function run(js,{clear,disp_result,console,ctx}={}){
