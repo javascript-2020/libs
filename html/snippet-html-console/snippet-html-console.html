@@ -164,7 +164,8 @@
               
               filemod           = mod['file-mod'];
               obj.filemod       = filemod;
-              editor            = mod['web-editor']
+              editor            = mod['web-editor'];
+              if(!editor)debugger;
               obj.editor        = editor;
               console           = mod['web-console'];
               obj.console       = console;
@@ -224,20 +225,28 @@
                                                                           debug('def.console.height',def.console.height);
               console.height    = def.console.height;
               
+              
               console.log('ready');
               
+              
         }//initdom
-        
-        
-        
         
         
   //:
   
   
+        function kd(e){
+        
+              if(e.ctrlKey && e.key=='Enter'){
+                    run();
+              }
+              
+        }//kd
+        
+        
         btn.clear   = function(){
         
-              console.clear();
+              clear();
               
         }//clear
         
@@ -248,12 +257,31 @@
               
         }//reset
         
+        btn.run   = function(){
         
-        btn.run   = run;
-        obj.run   = run;
+              run();
+              
+        }//run
+        
+        
+        
+        obj.clear   = function(){return clear()}
+        
+        function clear(){
+                                                                                debug('clear');
+              hldr.replaceChildren();
+              var niframe       = iframe.cloneNode(true);
+              hldr.append(niframe);
+              console.clear();
+              
+        }//clear
+        
+        
+        
+        obj.run   = function(){return run()}
         
         function run(){
-        
+                                                                                debug('run');
               hldr.replaceChildren();
               
               var html          = editor.getvalue();
@@ -273,17 +301,6 @@
                     
               }//onload
               
-/*
-              function log(){debugger;
-              
-                    var args    = [...arguments];
-                    args.unshift('[ snippet-html-console ]');
-                    window.console.log.apply(window.console,args);
-                    console.log.apply(console,arguments);
-                    
-              }//log
-*/
-
         }//run
         
         
