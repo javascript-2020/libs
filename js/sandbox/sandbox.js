@@ -10,24 +10,26 @@
   //:
   
   
+        var iframe;
+        
         obj.run           = run;
         obj.nodejs        = nodejs;
-  
-  
+        
+        
   //:
   
   
         var wrap    = {};
         
         wrap.js   = function(js){
-          
+        
               js    = `
               
-                    (async()=>{ 
+                    (async()=>{
                     
                           try{
                           
-                                ${js} 
+                                ${js}
                                 
                           }//try
                           catch(err2){
@@ -37,17 +39,17 @@
                           }//catch
                           
                     })()
-              
+                    
               `;
               return js;
               
         }//js
         
-  
-  
+        
+        
         async function run(js,{clear,disp_result,console,ctx}={}){
-
-
+        
+        
               ctx   ||= {};
               js      = wrap.js(js);
               
@@ -60,7 +62,7 @@
                           if(clear){
                                 console.clear();
                           }
-      
+                          
                           var err;
                           try{
                           
@@ -83,16 +85,16 @@
                           }
                           
                     })();
-              
+                    
               `);
-
+              
               
         }//run
         
         
         
         run.iframe    = async function(js,{clear,disp_result,console,ctx,iframe}={}){
-
+        
               if(iframe){
                     iframe.remove();
               }
@@ -106,7 +108,7 @@
               
               
               function create(){
-                
+              
                     var resolve,promise=new Promise(res=>resolve=res);
                     
                     iframe          = document.createElement('iframe');
@@ -118,37 +120,38 @@
                     return promise;
                     
                     async function onload(){
-                      
+                    
                           win   = iframe.contentWindow;
                           setup();
                           resolve();
-      
+                          
                     }//onload
+                    
               }//create
               
               
               
               
               function setup(){
-
+              
                     js        = wrap.js(js);
                     ctx     ||= {};
                     
                     win.onerror                       = onerror;
                     win.onunhandledpromiserejection   = onunhandledrejection;
-                
-                
+                    
+                    
                     var str   = Object.keys(ctx).join(',');
-                
+                    
                     win.eval(`
                           async function run(js,{clear,disp_result,console,ctx}={}){
-                                
+                          
                                 var {${str}}    = ctx;
                                 
                                 if(clear){
                                       console.clear();
                                 }
-            
+                                
                                 var err;
                                 try{
                                 
@@ -174,40 +177,40 @@
                                 
                           }//run
                     `);
-
-
+                    
+                    
                     function onerror(msg,src,line,col,err){
-                      
+                    
                           err   = norm(err||msg);
                                                                                 console.error(err);
                           resolve({error:err});
                           
                     }//onerror
-
+                    
                     
                     function onunhandledrejection(event){
-                      
+                    
                           var err   = norm(event.reason);
                                                                                 console.error(err);
                           resolve({error:err});
                           
                     }//onunhandledpromiserejection
-
+                    
                     
                     function norm(err){
-                      
+                    
                           if(Object.prototype.toString.call(err)==='[object Error]')return err;
                           if(typeof err=='string')return new Error(err);
                           
                           var str;
                           var err2;
                           try{
-                            
+                          
                                 str   = JSON.stringify(err);
-                            
+                                
                           }//try
                           catch(err3){
-                            
+                          
                                 err2   = err3;
                                 
                           }//catch
@@ -217,17 +220,17 @@
                           return new Error(str);
                           
                     }//norm
-
+                    
               }//setup
               
         }//iframe
         
-
+        
   //:
   
   
         async function nodejs(js,{clear,disp_result,console,ctx,on}={}){
-          
+        
               var resolve,promise=new Promise(res=>resolve=res);
               
               var iframe              = document.createElement('iframe');
@@ -237,10 +240,10 @@
               document.body.append(iframe);
               
               return promise;
-
+              
               
               async function onload(){
-                
+              
                     var doc               = iframe.contentDocument;
                     var win               = iframe.contentWindow;
                     
@@ -257,15 +260,15 @@
                     resolve({code});
                     
               }//onload
-
+              
         }//nodejs
         
-
+        
   //:
-
-
+  
+  
         function fnstr(fn){
-          
+        
               var s     = fn.toString();
               var i1    = s.indexOf('{');
               var i2    = s.lastIndexOf('}');
@@ -274,20 +277,20 @@
               
         }//fnstr
         
-  
+        
         var srcdoc    = {};
         
         srcdoc.nodejs   = function(){
-
+        
 (()=>{
 
-              
+
               var webcontainer;
               var terminal;
               var console;
               var on;
               var df;
-
+              
               
               window.init   = async function(params={}){
               
@@ -319,24 +322,24 @@
                           //on?.['server-ready']?.({port,url});
                           
                     });
-                                                                                
+                    
                     return webcontainer;
                     
               }//init
-
-      
+              
+              
               window.run    = async function(js){
                                                                                 console.log('write main.js ...');
                     await webcontainer.fs.writeFile('main.js',js);
                                                                                 console.log('ok');
-                    
-                                                                                console.log('launch process ...');              
+                                                                                
+                                                                                console.log('launch process ...');
                     var process   = await webcontainer.spawn('node',['main.js']);
                                                                                 console.log('ok');
                                                                                 
                     var stream    = new WritableStream({write(data){terminal?.write(data)}});
                     process.output.pipeTo(stream);
-
+                    
                     await callback('run',{process});
                     //await on?.run?.({process});
                     
@@ -352,9 +355,9 @@
                     
               }//run
               
-
+              
               async function callback(name,...args){
-                
+              
                     if(!on[name]){
                           return;
                     }
@@ -367,15 +370,15 @@
                     var list    = on[name];
                     var n       = list.length;
                     for(var i=0;i<n;i++){
-                      
+                    
                           var fn    = list[i];
                           await fn.apply(null,args);
                           
                     }//for
                     
               }//callback
-
-                            
+              
+              
               function debug(){
               
                     if(!df)return;
@@ -383,15 +386,15 @@
                     console.debug(str);
                     
               }//debug
-
-
-
+              
+              
+              
 })();
 
         }//nodejs
         
-
-
+        
+        
   //:
   
   
@@ -401,12 +404,12 @@
         
   //:
   
-
-
+  
+  
   
   return obj;
-
-
+  
+  
 })();
 
 
