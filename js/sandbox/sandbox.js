@@ -55,8 +55,8 @@
         
         
         async function run(js,{clear,disp_result,console,ctx}={}){
-        
-        
+                                                                                debug('run');
+                                                                                
               ctx   ||= {};
               js      = wrap.js(js);
               
@@ -101,7 +101,7 @@
         
         
         run.iframe    = async function(js,{clear,disp_result,console,ctx,iframe}={}){
-        
+                                                                                debug('run.iframe');
               if(iframe){
                     iframe.remove();
               }
