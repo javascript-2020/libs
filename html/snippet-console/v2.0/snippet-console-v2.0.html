@@ -217,15 +217,21 @@
               //con.log('ready');
               
               
-        }//initdom2
-        
-        
-        
+        }//initdom
         
         
   //:
   
   
+        function kd(e){
+        
+              if(e.ctrlKey && e.key=='Enter'){
+                    run();
+              }
+              
+        }//kd
+        
+        
         btn.reset   = function(){
         
               editor.setvalue(def.txt,-1);
@@ -236,16 +242,7 @@
         
         btn.run   = async function(){
         
-              var js          = editor.getvalue();
-              
-              var clear   = !chk.persist.checked;
-              
-              var result;
-              var error;
-              
-              ({iframe,result,error}   = await sandbox.run.iframe(js,{clear,console:con}));
-              
-              editor.focus();
+              run();
               
         }//run
         
@@ -268,8 +265,22 @@
   //:
   
   
-        obj.run   = btn.run;
+        obj.run   = function(){return run()}
         
+        function run(){
+        
+              var js      = editor.getvalue();
+              
+              var clear   = !chk.persist.checked;
+              
+              var result;
+              var error;
+              
+              ({iframe,result,error}   = await sandbox.run.iframe(js,{clear,console:con}));
+              
+              editor.focus();
+              
+        }//run
         
         
   //:
