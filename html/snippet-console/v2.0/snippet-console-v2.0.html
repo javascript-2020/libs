@@ -202,7 +202,7 @@
               $(shadow,'[value=reset]').onclick     = btn.reset;
               $(shadow,'[value=run]').onclick       = btn.run;
               
-              chk.persist                           = $.chkbox(btns,'#persist');
+              chk.persist                           = $.chkbox(btns,'#persist',()=>editor.focus());
               $(shadow,'[value=clear]').onclick     = btn.clear;
               $(shadow,'[value=kill]').onclick      = btn.kill;
               
