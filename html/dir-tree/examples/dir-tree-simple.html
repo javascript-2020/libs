@@ -24,7 +24,6 @@
               var log       = mod['log-mod'];
               var dirtree   = mod['dir-tree'];
               
-              
               var data    = {
                     'tmp'   : {
                           'tmp-1'   : {
@@ -41,14 +40,13 @@
               dirtree.display(ndata,{callback});
               dirtree.close('/tmp/tmp-1/');
               
-        }//ready
-        
-        
-        callback.file   = function(name){
-        
-              log.green(name);
+              callback.file   = function(name){
               
-        }//file
+                    log.green(name);
+                    
+              }//file
+              
+        }//ready
         
         
       </script>
