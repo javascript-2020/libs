@@ -217,12 +217,16 @@
               
         }//reset
         
+        var iframe;
         
         btn.run   = function(){
         
               var js          = editor.getvalue();
               
-              sandbox.run.iframe(js,{clear:true,console:con});
+              var result;
+              var error;
+              
+              (iframe,result,error}   = await sandbox.run.iframe(js,{clear:true,console:con}));
               
               editor.focus();
               
@@ -231,7 +235,8 @@
         
         btn.kill    = function(){
                                                                                 debug('kill');
-              sandbox.kill();
+              if(!iframe)return;
+              iframe.remove();
               
         }//kill
         
