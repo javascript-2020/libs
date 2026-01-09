@@ -756,22 +756,7 @@
                     
               }//inst
               
-/*
-              async function auto(initmod){
               
-                    mod.list.forEach(name=>initmod[name]=mod[name]);
-                    mod.list.forEach(name=>mod[name].initmod(initmod));
-                    
-                    var list    = mod.list.map(async name=>await mod[name].init());
-                    await Promise.all(list);
-                    
-                    mod.list.forEach(name=>mod[name].initdom());
-                    
-              }//auto
-*/
-
-
-
               async function auto(...args){
                                                                                 debug('auto');
                     if(args.length==0){
