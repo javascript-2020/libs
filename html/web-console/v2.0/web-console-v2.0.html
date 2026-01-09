@@ -76,17 +76,18 @@
         var df=false,did='web-console'
         ;
         
-        var ext,$,ace,embed,config={}
+        var ext,$,ace,embed,config={},callback
         ;
         
         obj.initmod   = function(params){
         
-              ext       = mod.rd(params,'ext',ext);
-              $         = mod.rd(params,'$',$);
-              ace       = mod.rd(params,'ace',ace);
-              embed     = mod.rd(params,'embed',embed);
-              config    = mod.rd(params,'config',config,{});
-              echo      = mod.rd(params,'echo',echo);
+              ext         = mod.rd(params,'ext',ext);
+              $           = mod.rd(params,'$',$);
+              ace         = mod.rd(params,'ace',ace);
+              embed       = mod.rd(params,'embed',embed);
+              config      = mod.rd(params,'config',config,{});
+              echo        = mod.rd(params,'echo',echo);
+              callback    = mod.rd(params,'callback',callback,callback);
               
         }//initmod
         
@@ -431,8 +432,13 @@
         Object.defineProperty(obj,'echo',{
         
               get   : ()=>echo,
-              set   : v=>echo=!!v,
+              set   : v=>{
               
+                            echo    = !!v;
+                            callback?.echo?.(echo);
+                            
+                      }//set
+                      
         });
         
         
