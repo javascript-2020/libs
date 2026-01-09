@@ -162,7 +162,7 @@
               
               filemod.initmod({ext,$,menu,menumod,complete,source});
               editor.initmod({ext,$,menu,kd,ace,config:config['web-editor']});
-              con.initmod({ext,$,ace,config:config['web-console']});
+              con.initmod({ext,$,ace,config:config['web-console'],callback:callback['web-console']});
               
               
               await Promise.all([
