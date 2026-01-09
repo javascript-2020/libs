@@ -115,14 +115,16 @@
         
         
         var root;
-        var chk         = {};
+        var chk                       = {};
         
         var iframe;
         
+        var callback                  = {};
+        callback['web-console']       = {};
         
-        var rd          = {};
-        rd.attr         = {};
-        var btn         = {};
+        var rd                        = {};
+        rd.attr                       = {};
+        var btn                       = {};
         
         
   //:
@@ -320,6 +322,16 @@
         
         complete.save   = function(file){
         }//save
+        
+        
+  //:
+  
+  
+        callback['web-console'].echo    = function(v){
+        
+              chk.echo.checked    = v;
+              
+        }//echo
         
         
   //:
