@@ -31,8 +31,8 @@ these attribute can be defined on the html tag itself
 attribute     | description
 ---------     |-----------
 src|src url to load 
-web-editor|pass config to web-editor
-web-console|pass config to web-console
+web-editor|pass config to web-editor ( see web-editor ) for supported config
+web-console|pass config to web-console ( see web-console ) for supported config
 
 ## module
 
