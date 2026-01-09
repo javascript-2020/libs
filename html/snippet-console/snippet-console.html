@@ -115,12 +115,16 @@
         
         
         var root;
-        var chk         = {};
+        var chk                       = {};
         
+        var iframe;
         
-        var rd          = {};
-        rd.attr         = {};
-        var btn         = {};
+        var callback                  = {};
+        callback['web-console']       = {};
+        
+        var rd                        = {};
+        rd.attr                       = {};
+        var btn                       = {};
         
         
   //:
@@ -139,20 +143,26 @@
               }
                                                                                 debug('config',config);
                                                                                 
-              def.txt             = dom.innerHTML;
+              def.txt                 = dom.innerHTML;
               
-              filemod             = mod['file-mod'];
-              obj.filemod         = filemod;
-              editor              = mod['web-editor'];
-              obj.editor          = editor;
               
-              con                 = mod['web-console'];
-              con.df=true;
-              obj.console         = con;
+              filemod                 = mod['file-mod'];
+              obj.filemod             = filemod;
+              obj['file-mod']         = filemod;
+              
+              editor                  = mod['web-editor'];
+              obj.editor              = editor;
+              obj['web-editor']       = editor;
+              
+              con                     = mod['web-console'];
+              //con.df=true;
+              obj.console             = con;
+              obj['web-console']      = con;
+              
               
               filemod.initmod({ext,$,menu,menumod,complete,source});
               editor.initmod({ext,$,menu,kd,ace,config:config['web-editor']});
-              con.initmod({ext,$,ace,config:config['web-console']});
+              con.initmod({ext,$,ace,config:config['web-console'],callback:callback['web-console']});
               
               
               await Promise.all([
@@ -214,6 +224,7 @@
               
               chk.persist                           = $.chkbox(btns,'#persist',()=>editor.focus());
               chk.echo                              = $.chkbox(btns,'#echo',v=>con.echo=v.checked);
+              chk.echo.checked                      = con.echo;
               $(shadow,'[value=clear]').onclick     = btn.clear;
               $(shadow,'[value=kill]').onclick      = btn.kill;
               
@@ -249,7 +260,6 @@
               
         }//reset
         
-        var iframe;
         
         btn.run   = function(){
         
@@ -289,7 +299,7 @@
               var result;
               var error;
               
-              ({iframe,result,error}   = await sandbox.run.iframe(js,{clear,console:con}));
+              ({iframe,result,error}   = await sandbox.run.iframe(js,{clear,console:con,iframe}));
               
               editor.focus();
               
@@ -318,6 +328,16 @@
         
         complete.save   = function(file){
         }//save
+        
+        
+  //:
+  
+  
+        callback['web-console'].echo    = function(v){
+        
+              chk.echo.checked    = v;
+              
+        }//echo
         
         
   //:
