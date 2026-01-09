@@ -31,8 +31,8 @@ these attribute can be defined on the html tag itself
 attribute     | description
 ---------     |-----------
 src|src url to load 
-web-editor|pass config to web-editor ( see web-editor ) for supported config
-web-console|pass config to web-console ( see web-console ) for supported config
+web-editor|pass config to web-editor ( see [web-editor](../web-editor/web-editor.html) for supported config )
+web-console|pass config to web-console ( see [web-console](../web-console/web-console.html) for supported config )
 
 ## module
 
@@ -53,7 +53,7 @@ run|run the current snippet
 ## config
 
 
-web-editor    - see web-editor for supported config
+web-editor    - see [web-editor](../web-editor/web-editor.html) for supported config
 
-web-console   - see web-console for supported config
+web-console   - see [web-console](../web-console/web-console.html) for supported config
 
