@@ -117,6 +117,8 @@
         var root;
         var chk         = {};
         
+        var iframe;
+        
         
         var rd          = {};
         rd.attr         = {};
@@ -214,6 +216,7 @@
               
               chk.persist                           = $.chkbox(btns,'#persist',()=>editor.focus());
               chk.echo                              = $.chkbox(btns,'#echo',v=>con.echo=v.checked);
+              chk.echo.checked                      = con.echo;
               $(shadow,'[value=clear]').onclick     = btn.clear;
               $(shadow,'[value=kill]').onclick      = btn.kill;
               
@@ -249,7 +252,6 @@
               
         }//reset
         
-        var iframe;
         
         btn.run   = function(){
         
