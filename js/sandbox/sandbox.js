@@ -3,7 +3,8 @@
 
 (()=>{
 
-  var obj   = {};
+  var obj   = {
+  };
   
         var df=false,did='sandbox';
         
