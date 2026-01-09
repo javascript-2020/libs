@@ -11,10 +11,13 @@
   #root
     {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px;font-family:arial}
     
+  #tag
+    {font-weight:bold;font-style:italic}
+    
   #btns
     {display:flex;margin:0 20px;gap:10px}
     
-  #persist
+  .con-btn
     {display:flex;align-items:center;gap:10px;border:1px solid lightgray;padding:0 10px;cursor:pointer}
     
   .spc
@@ -32,6 +35,9 @@
             <div id=root>
             
                   <div>
+                        <div id=tag>
+                              snippet-console
+                        </div>
                         <file-mod component></file-mod>
                   </div>
                   
@@ -41,9 +47,13 @@
                         <input value=reset type=button>
                         <input value=run type=button>
                         <div class=spc></div>
-                        <div id=persist>
+                        <div id=persist class=con-btn>
                               persist
                               <input type=checkbox>
+                        </div>
+                        <div id=echo class=con-btn>
+                              echo
+                              <input type=checkbox checked>
                         </div>
                         <input value=clear type=button>
                         <input value=kill type=button>
@@ -64,7 +74,7 @@
         version   : 'v2.0',
   };
   
-        var df=true,did='snippet-console'
+        var df=false,did='snippet-console'
         ;
         
         
@@ -203,6 +213,7 @@
               $(shadow,'[value=run]').onclick       = btn.run;
               
               chk.persist                           = $.chkbox(btns,'#persist',()=>editor.focus());
+              chk.echo                              = $.chkbox(btns,'#echo',v=>con.echo=v.checked);
               $(shadow,'[value=clear]').onclick     = btn.clear;
               $(shadow,'[value=kill]').onclick      = btn.kill;
               
