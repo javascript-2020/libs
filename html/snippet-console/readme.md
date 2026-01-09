@@ -54,5 +54,6 @@ run|run the current snippet
 
 
 web-editor    - see web-editor for supported config
+
 web-console   - see web-console for supported config
 
