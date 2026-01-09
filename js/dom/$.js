@@ -7,7 +7,7 @@
 
         $.initmod=function(){}
         
-
+        
         $.in      = {};
         $.icon    = {};
         
@@ -37,8 +37,8 @@
               return node;
               
         }//$
-
-
+        
+        
         $.full    = function(sel,par,all){
         
               var list      = par ? [par] : [document.head,document.body];
@@ -79,7 +79,7 @@
               return result;
               
         }//full
-
+        
         
         $.$   = function(rootnode,nodename){
         
@@ -91,7 +91,7 @@
               return node;
               
         }//$
-
+        
         
         $.input   = {};
         $.is      = {};
@@ -145,8 +145,8 @@
               return node;
               
         }//remove
-
-
+        
+        
         $.clear   = function(root){
         
               root.replaceChildren();
@@ -164,7 +164,7 @@
         }//nodename
         
         
-
+        
         //$.computed:b
         
         $.computed    = new Proxy({},{get:(target,prop)=>(node,numeric)=>{
@@ -182,7 +182,7 @@
               return value;
               
         }});
-
+        
         
         //$.style:b
         
@@ -195,7 +195,7 @@
               return value;
               
         }});
-
+        
         
         //$.create:b
         
@@ -215,13 +215,13 @@
                     return node;
                     
               }//set
-
+              
               
               set.object    = function(attr){
               
                     var keys    = Object.keys(attr);
                     keys.forEach(name=>{
-
+                    
                           if(name=='text'){
                                 attr['textContent']    = attr['text'];
                                 name    = 'textContent';
@@ -243,7 +243,7 @@
                                       node.style    = attr.style;
                                 }else{
                                       for(var sname in attr.style){
-                                        
+                                      
                                             node.style[sname]    = attr.style[sname];
                                             
                                       }//for
@@ -256,7 +256,7 @@
                     })//for
                     
               }//object
-
+              
               
               set.string    = function(str){
               
@@ -269,10 +269,10 @@
               return set;
               
         }});
-
+        
         
         $.define    = function(html){
-          
+        
               html                  = html.trim();
               var template          = document.createElement('template');
               template.innerHTML    = html;
@@ -283,8 +283,8 @@
         
         
   //:
-
-        
+  
+  
         $.chkbox    = function(root,sel,callback){
         
               if(callback===undefined){
@@ -306,7 +306,15 @@
               var chkbox      = $(node,'[type=checkbox]');
               node.onclick    = click;
               
-              var chk   = {read,set,id:node.id,checked:chkbox.checked,root:node,chkbox};
+              
+              var chk   = {read,set,id:node.id,root:node,chkbox};
+              
+              Object.defineProperty(chk,'checked',{
+              
+                    get:()=>chkbox.checked,
+                    set:v=>chkbox.checked=!!v,
+              });
+              
               return chk;
               
               
@@ -315,9 +323,9 @@
                     if(e.target!==chkbox){
                           chkbox.checked    = !chkbox.checked;
                     }
-                      
+                    
                     chk.checked  = chkbox.checked;
-                      
+                    
                     if(typeof callback=='function'){
                           callback(chk);
                     }
@@ -337,7 +345,7 @@
               add.apply(null,arguments);
               
               function add(root,sel0){
-                
+              
                     var n       = arguments.length;
                     for(var i=1;i<n;i++){
                     
@@ -363,14 +371,14 @@
                     }//for
                     
               }//read
-
+              
               
               function set(id){
               
                     list.forEach(chk=>chk.id!=id && chk.set(false));
                     
               }//set
-
+              
               
               set.index   = function(index){set(list[index].id)}
               
@@ -393,8 +401,8 @@
               $(root,`#${name}`).value            = def;
               
         }//input.paste
-
-
+        
+        
         $.is.parent   = function(par,node){
         
               while(node){
@@ -409,7 +417,7 @@
         
         
         $.is.node   = function(node){
-          
+        
               if(typeof node!='object')return false;
               if(node===null)return false;
               if(!node.nodeType)return false;
@@ -417,8 +425,8 @@
               return true;
               
         }//node
-
-
+        
+        
         $.center.width    = function(node){
         
               var w             = $.computed.width(node)||$.style.width(node);
@@ -430,7 +438,7 @@
               node.style.left   = l+'px';
               
         }//width
-
+        
         
         $.center.height   = function(node){
         
@@ -529,7 +537,7 @@
                     e.preventDefault();
                     
               }//contextmenu
-
+              
               
               function mu(e){
               
@@ -624,8 +632,8 @@
               }//timer
               
         }//drag
-
-
+        
+        
         $.select    = function(root,sel){
         
               var node    = $(root,sel);
@@ -649,7 +657,7 @@
               return node;
               
         }//select
-
+        
         
         $.buildnode2    = function(node,params){
         
@@ -678,7 +686,7 @@
               
               var mx;
               var my;
-
+              
               
               function md(e){
               
@@ -692,7 +700,7 @@
                     }
                     
               }//md
-
+              
               
               function mm(e){
               
@@ -711,7 +719,7 @@
                     }
                     
               }//mm
-
+              
               
               function mu(e){
               
@@ -725,8 +733,8 @@
               }//mu
               
         }//track
-
-
+        
+        
         $.caret   = function(node,timeout=50){
         
               if(timeout){
@@ -734,7 +742,7 @@
                     return;
               }
               caret();
-
+              
               
               function caret(){
               
@@ -784,7 +792,7 @@
         
         
         $.slider    = function(node1,slider_node,node2,callback,params={}){
-
+        
               var minw        = params.minw||40;
               var minh        = params.minh||40;
               params.root   ||= document.body;
@@ -800,53 +808,53 @@
               }
                                                                                 params.df && console.log(node1,slider_node,node2);
               $.track(slider_node,slider);
-
-
+              
+              
               function slider(ox,oy){
-
+              
                     if(params.mode=='horiz'){
                           slider.horiz(oy);
                     }else{
                           slider.vert(ox);
                     }
-
+                    
               }//slider
-
-
+              
+              
               slider.md   = function(){
-
+              
                     document.body.style.userSelect    = 'none';
                     if(typeof callback?.md=='function'){
                           callback.md();
                     }
-
+                    
               }//slider.md
-
-
+              
+              
               slider.mu   = function(){
-
+              
                     document.body.style.userSelect    = '';
                     if(typeof callback?.mu=='function'){
                           callback.mu();
                     }
-
+                    
               }//slider.mu
-
-
+              
+              
               slider.vert   = function(ox){
-
+              
                     var w1    = node1.offsetWidth;
                     var w2    = node2.offsetWidth;
                                                                                 params.df && console.log(ox,w1,w2);
                     if(w1+ox<minw)return;
                     if(w2-ox<minw)return;
-
+                    
                     node1.style.width   = w1+ox+'px';
                     node2.style.width   = w2-ox+'px';
-
+                    
               }//vert
-
-
+              
+              
               slider.horiz    = function(oy){
               
                     var h1    = node1.offsetHeight;
@@ -854,16 +862,16 @@
                                                                                 params.df && console.log(oy,h1,h2);
                     if(h1+oy<minh)return;
                     if(h2-oy<minh)return;
-
+                    
                     node1.style.height    = h1+oy+'px'
                     node2.style.height    = h2-oy+'px';
-
+                    
               }//horiz
-
+              
               return slider_node;
-                
+              
         }//slider
-
+        
         
         $.slider.glass    = function(node1,slider_node,node2,callback,params={},mod){
         
@@ -880,10 +888,10 @@
               return node;
               
         }//glass
-
-
+        
+        
         $.closest   = function(node,css){
-
+        
               node    = node.host||node;
               
               while(node){
@@ -896,12 +904,12 @@
                     
               }//while
               return null;
-        
+              
         }//closest
         
         
         $.icon.copy    = function(icon){
-          
+        
               var css;
               var root;
               
@@ -917,31 +925,31 @@
                     }
                     icon        = $(root,css);
               }
-/*              
+/*
               if(typeof icon=='string'){
                     var css     = icon;
                     var root    = arguments[1];
                     icon        = $(root,css);
               }
-*/              
+*/
               var par         = icon.parentNode;
               var input       = par.querySelector('input:not([type])');
               
               $.icon.copy2(icon,input);
-
+              
         }//copy
         
         
         $.icon.copy2    = function({icon,input,callback}){
-          
+        
               if(arguments.length!=1){
                     [icon,input]    = arguments;
               }
               
               icon.onclick    = click;
-
+              
               async function click(e){
-                
+              
                     var txt   = input.value;
                     await navigator.clipboard.writeText(txt);
                     $.mousetext(e,'copied');
@@ -955,7 +963,7 @@
         
         
         $.icon.paste    = function(icon){
-
+        
               var css;
               var root;
               
@@ -971,7 +979,7 @@
                     }
                     icon        = $(root,css);
               }
-/*          
+/*
               if(typeof icon=='string'){
                     var css     = icon;
                     var root    = arguments[1];
@@ -980,23 +988,23 @@
 */
               var par         = icon.parentNode;
               var input       = par.querySelector('input:not([type])');
-
-              $.icon.paste2(icon,input);              
+              
+              $.icon.paste2(icon,input);
               
         }//paste
         
         
         $.icon.paste2   = function({icon,input,callback,remove}){
-          
+        
               if(arguments.length!=1){
                     [icon,input]    = arguments;
               }
-          
+              
               icon.onclick    = click;
-
+              
               
               async function click(){
-                
+              
                     var txt       = await navigator.clipboard.readText();
                     input.value   = txt;
                     if(remove){
@@ -1022,7 +1030,7 @@
                     selector    = arguments[1];
                     rtype       = arguments[2];
               }
-                                                                        //console.log(document.title);        
+                                                                        //console.log(document.title);
               var list    = doc.styleSheets;
               var ni      = list.length;
               for(var i=0;i<ni;i++){
@@ -1032,14 +1040,14 @@
                                                                       //console.log(stylesheet.ownerNode.id);
                     var err;
                     try{
-                      
+                    
                           var rules   = stylesheet.cssRules;
                           
                     }//try
                     catch(err2){
-                      
-                          err   = err2;
                     
+                          err   = err2;
+                          
                     }//catch
                     if(err){
                                                                                 console.log(err);
@@ -1069,12 +1077,12 @@
                     
               }//for
               return null;
-                    
+              
         }//find.css
         
         
         $.stylesheet.copyrule   = function(style,selector,style2){
-
+        
               if(typeof style=='string'){
                     style     = $(style);
               }
@@ -1097,9 +1105,9 @@
               if(css){
                     style2.sheet.insertRule(css);
               }
-        
+              
         }//copyrule
-
+        
         
         $.stylesheet.insert   = function(style){
         
@@ -1122,7 +1130,7 @@
         
         $.loc   = function(node){
         
-              
+        
         }//loc
         
         
@@ -1140,14 +1148,14 @@
         
   //:
   
-
-        
+  
+  
         $.editor    = function(node,{mode,kd}={}){
         
               mode    ||= 'javascript';
               
               switch(mode){
-                
+              
                 case 'js'   : mode    = 'javascript';       break;
                 
               }//switch
@@ -1169,17 +1177,17 @@
               editor.session.setMode('ace/mode/'+mode);
               
               editor.focus();
-
+              
               
               if($.in.shadow(node)){
                     var shadow    = node.getRootNode();
                     import_style();
               }
-                    
+              
               
               return editor;
-
-
+              
+              
               import_style.ct   = 0;
               
               function import_style(){
@@ -1209,17 +1217,17 @@
                           var style   = $('#'+id);
                           var copy    = style.cloneNode(true);
                           shadow.append(copy);
-                    
+                          
                     }//for
                     
                     
               }//style
-  
+              
         }//editor
-
-
+        
+        
         $.editor.max    = function(node,params={}){
-
+        
               var {mode,kd}   = params;
               
               var editor    = $.editor.apply(null,arguments);
@@ -1230,9 +1238,9 @@
               
               return editor;
               
-                      
+              
               function onchange(e){
-                                                                                //console.log('onchange');                
+                                                                                //console.log('onchange');
                     var lh      = editor.renderer.lineHeight;
                     var lines   = editor.session.getLength();
                     var h       = lh*lines;
@@ -1248,12 +1256,12 @@
                     }
                     
               }//onchange
-        
+              
         }//max
         
-
-
-  
+        
+        
+        
         //  https://github.com/ajaxorg/ace
         //  https://github.com/ajaxorg/ace-builds
         
@@ -1262,7 +1270,7 @@
         
         
         $.editor.ace    = function(){
-          
+        
               var src   = [
                     'https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/ace.js',
                     'https://ajaxorg.github.io/ace-builds/src-noconflict/ace.js',
@@ -1279,7 +1287,7 @@
               
               
               function onload(){
-                
+              
                     resolve(window.ace);
                     
               }//onload
@@ -1288,13 +1296,13 @@
         
         
         $.editor.ace.import_style   = function(root,complete){
-          
+        
               var ids   = ['ace-tm','ace_editor\\.css','ace_scrollbar\\.css','error_marker\\.css',];
               var ct    = 0;
               var max   = 10;
               
               import_style();
-        
+              
               function import_style(){
               
                     ct++;
@@ -1322,9 +1330,9 @@
                           var style   = $('#'+id);
                           var copy    = style.cloneNode(true);
                           root.append(copy);
-                    
+                          
                     }//for
-                                        
+                    
                     if(typeof complete=='function'){
                           complete();
                     }
@@ -1334,11 +1342,11 @@
         }//import_style
         
         
-
-
-
+        
+        
+        
         $.htmlentities    = function(v){
-          
+        
               if(!v){
                     return '';
               }
@@ -1357,7 +1365,7 @@
         
         
         $.htmlentities.decode   = function(v){
-          
+        
               if(!v){
                     return '';
               }
@@ -1373,15 +1381,15 @@
               return html;
               
         }//decode
-
-
-
         
         
-
+        
+        
+        
+        
         
   return $;
-
+  
 })();
 
 
