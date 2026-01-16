@@ -45,9 +45,9 @@ eval(require('fs').readFileSync(require('base').root+'projects/ext-code/loader.j
 
 
             <scr  ipt ext>
-
+            
 (async()=>{
-  
+
         init.stack.add;
         
         var token   = localStorage['github-token'];
@@ -62,10 +62,10 @@ eval(require('fs').readFileSync(require('base').root+'projects/ext-code/loader.j
         
         //fetch(url,headers).then(res=>res.text()).then(ext);
         await fetch(url,{headers}).then(res=>res.text()).then(complete);
-
-            
+        
+        
         async function complete(txt){
-
+        
               ext           = eval(txt);
               var promise   = ext.load.libs(
                     'js/dom/$.js.api',
@@ -75,17 +75,17 @@ eval(require('fs').readFileSync(require('base').root+'projects/ext-code/loader.j
                     'js/crypto/encrypt/encrypt.js.api'
               );
               [$,datatype,menumod,keydown,encrypt]   = await promise;
-
+              
               init.stack.complete;
-
+              
         }//ext_fn
-
+        
 })();
             </scr  ipt ext>
-
-
-
-
+            
+            
+            
+            
 */
 
 
@@ -101,7 +101,7 @@ var ext;
                                                                                 //console.clear();
                                                                                 //console.log('ext-code.loader-v1.1');
                                                                                 //console.log();
-        
+                                                                                
         ext.load          = {};
         ext.text          = {};
         ext.create        = {};
@@ -118,7 +118,7 @@ var ext;
         
         
         //snippets();
-
+        
         
         var dbmod
         ;
@@ -146,19 +146,19 @@ var ext;
                     
                     
                     function simple(args){
-                      
+                    
                           if(name!=='libs'){
                                 return args;
                           }
                           
                           var n   = args.length;
                           for(var i=0;i<n;i++){
-                            
+                          
                                 var fn    = args[i];
                                 var fn2;
                                 
                                 switch(fn){
-                                  
+                                
                                   case '$'          : fn2   = 'js/dom/$.js.api';            break;
                                   case 'datatype'   : fn2   = 'js/core/datatype.js';        break;
                                   case 'debug'      : fn2   = 'js/debug/debug.js';          break;
@@ -180,7 +180,7 @@ var ext;
                     
                     load.get    = async function(target,prop,text){
                                                                                 ext.df && console.log(`load.${name}`,prop);
-                          
+                                                                                
                           var lname   = prop.split('/');
                           var key     = modproxy.key(lname);
                           
@@ -220,7 +220,7 @@ var ext;
                     
                     
                     ext[name]   = modproxy(list,notfound);
-
+                    
                     
                     async function notfound(lname,args){
                                                                                 ext.df && console.log('notfound',lname);
@@ -256,22 +256,28 @@ var ext;
                           }
                           
                           var token;
-                          if(typeof localStorage!='undefined'){
-                                token   = localStorage['github-token'];
-                          }
+                          try{
+                          
+                                if(typeof localStorage!='undefined'){
+                                      token   = localStorage['github-token'];
+                                }
+                                
+                          }//try
+                          catch(err2){}
+                          
                           if(token){
                                 mode    = 'api';
                           }
-
+                          
                           var {txt,error}   = await loader({mode,token,owner,repo,branch,file});
                           if(error){
                                                                                 console.log('failed to load remote-function: '+file);
                                                                                 console.log(error);
                                 return '[ not found '+file+' ]';
                           }
-
+                          
                           return txt;
-
+                          
                     }//load
                     
               }//create.repo
@@ -290,7 +296,7 @@ var ext;
               var load    = {};
               var cur;
               var proxy   = {};
-
+              
               
               load.get    = async function(target,prop,text){
                                                                                   ext.df && console.log('load.proxy',prop);
@@ -311,17 +317,17 @@ var ext;
                     return value;
                     
               }//get
-
+              
               
               load.apply    = function(target,thisArg,args,text){
               
                     return Promise.all(args.map(arg=>load.get(target,arg,text)));
                     
               }//apply
-
+              
               
               ext.load.github   = new Proxy(()=>{},{get:load.get,apply:load.apply});
-
+              
               
               ext.text.github   = new Proxy(()=>{},{
                     get   : (target,prop)=>load.get(target,prop,'text'),
@@ -343,7 +349,7 @@ var ext;
                     return value;
                     
               }//get2
-
+              
               
               proxy.apply   = async function(target,thisArg,args){
               
@@ -358,39 +364,45 @@ var ext;
                     return result;
                     
               }//apply2
-
+              
               
               ext.github    = new Proxy({},{get:proxy.get,apply:proxy.apply});
-
-
               
-
+              
+              
+              
               
               load.text   = async function(prop){
               
                     var {owner,repo,branch,file}    = parse(prop);
-
+                    
                     
                     var token;
                     var mode    = 'raw';
-                    if(typeof localStorage!='undefined'){
-                          token   = localStorage['github-token'];
-                    }
+                    try{
+                    
+                          if(typeof localStorage!='undefined'){
+                                token   = localStorage['github-token'];
+                          }
+                          
+                    }//try
+                    catch(err2){}
+                    
                     if(token){
                           mode    = 'api';
                     }
-                      
+                    
                     var {txt,error}   = await loader({mode,token,owner,repo,branch,file});
-                    if(error){                                                                                
+                    if(error){
                                                                                 console.log('failed to load remote-function: '+file);
                                                                                 console.log(error);
                           return '[ not found '+file+' ]';
                     }
-
+                    
                     return txt;
-
+                    
               }//load
-
+              
               
               function parse(prop){
               
@@ -436,17 +448,17 @@ var ext;
                     return value;
                     
               }//get
-
+              
               
               load.apply    = function(target,thisArg,args,text){
               
                     return args.map(arg=>load.get(target,arg,text));
                     
               }//apply
-
+              
               
               ext.load.local    = new Proxy(()=>{},{get:load.get,apply:load.apply});
-
+              
               
               ext.text.local    = new Proxy(()=>{},{
                     get     : (target,prop)=>load.get(target,prop,'text'),
@@ -468,7 +480,7 @@ var ext;
                     return value;
                     
               }//get
-
+              
               
               proxy.apply   = function(target,thisArg,args){
               
@@ -483,7 +495,7 @@ var ext;
                     return result;
                     
               }//apply
-
+              
               
               ext.local    = new Proxy({},{get:proxy.get,apply:proxy.apply});
               
@@ -496,17 +508,22 @@ var ext;
               }//load
               
         }//local
-
+        
         
   //:
-
-
+  
+  
         async function loader({mode,token,owner,repo,branch,file}){
-          
+        
               if(!token){
-                    if(typeof localStorage!='undefined'){
-                          token   = localStorage['github-token'];
-                    }
+                    try{
+                    
+                          if(typeof localStorage!='undefined'){
+                                token   = localStorage['github-token'];
+                          }
+                          
+                    }//try
+                    catch(err2){}
               }
               
               var {txt,error}   = await loader[mode]({token,owner,repo,branch,file});
@@ -517,17 +534,17 @@ var ext;
               
         }//loader
         
-
+        
         loader.fetch    = async function(url,opts){
-          
+        
               var err;
               try{
-                
+              
                     var res   = await fetch(url,opts);
                     
               }//try
               catch(err2){
-                
+              
                     err   = err2;
                     
               }//catch
@@ -546,7 +563,7 @@ var ext;
               if(res.headers.get('content-type').includes('json')){
                     var err;
                     try{
-                      
+                    
                           var json    = JSON.parse(txt);
                           var b64     = json.content;
                           var txt2    = atob(b64);
@@ -554,7 +571,7 @@ var ext;
                           
                     }//try
                     catch(err2){
-                      
+                    
                           err   = err2;
                     }
               }
@@ -565,39 +582,44 @@ var ext;
         
         
         loader.raw    = async function({owner,repo,branch,file}){
-          
+        
               branch            ||= 'main';
               var url             = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${file}`;
               var {txt,error}     = await loader.fetch(url);
               return {txt,error};
               
         }//raw
-
+        
         
         loader.api    = async function({token,owner,repo,branch,file}){
-          
+        
               var url     = `https://api.github.com/repos/${owner}/${repo}/contents/${file}`;
               if(branch){
                     url  += `?ref=${branch}`;
               }
               
               var opts    = {headers:{accept:'application/vnd.github.raw'}};
-            
+              
               if(!token){
-                    if(typeof localStorage!='undefined'){
-                          token    = localStorage['github-token'];
-                    }
+                    try{
+                    
+                          if(typeof localStorage!='undefined'){
+                                token    = localStorage['github-token'];
+                          }
+                          
+                    }//try
+                    catch(err2){}
               }
               if(token){
                     opts.headers.authorization    = `bearer ${token}`;
               }
-          
+              
               var {txt,error}   = await loader.fetch(url,opts);
               return {txt,error};
               
         }//api
-  
-  
+        
+        
   //:
   
   
@@ -611,16 +633,16 @@ var ext;
                           
                     })();
               `;
-
+              
               var fn    = window.eval(code);
                                                                                   ext.df && console.log('define',fn);
               return fn;
               
         }//define
-
+        
         
   //:
-
+  
   
         function modproxy(mem,notfound,opts={}){
         
@@ -657,7 +679,7 @@ var ext;
                                                                                   //console.log(`wt : ${key} - ${newval}`);
                     mem[key]    = newval;
                     return true;
-                  
+                    
               }//setter
               
               
@@ -691,8 +713,8 @@ var ext;
               }//newproxy
               
         }//modproxy
-
-
+        
+        
   //:
   
   
@@ -733,15 +755,15 @@ var ext;
         var urls      = {};
         urls.rsa      = 'https://cdn.jsdelivr.net/npm/jsrsasign/+esm';
         urls.forge    = 'https://cdn.jsdelivr.net/npm/node-forge/+esm';
-
-
+        
+        
         
         function load_libs(){
-
+        
               var resolve,promise   = new Promise(res=>resolve=res);
               
               setTimeout(fn,100);
-
+              
               return promise;
               
               
@@ -753,21 +775,21 @@ var ext;
               }//fn
               
         }//load_libs
-
-
-
-
         
-
+        
+        
+        
+        
+        
   //:
   
   
   
-
+  
   return ext;
-
-
-        
+  
+  
+  
 })();
 
 
