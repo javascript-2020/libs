@@ -213,6 +213,9 @@
               
               var shadow                    = host.shadowRoot;
               
+              var hldr=$(shadow,'#hldr');
+              hldr.style.background=theme.light.background;
+              
               terminal                      = $(shadow,'#terminal');
               
               term.open(terminal);
