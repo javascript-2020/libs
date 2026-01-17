@@ -10,18 +10,29 @@
             <style>
             
             
+  #hldr
+    {border: 2px solid gray;border-radius:5px;overflow:hidden;padding:10px}
+    
   #terminal
-    {border: 2px solid gray;border-radius:5px;overflow:hidden}
+    {height:100px}
     
-    
+/*
   .xterm
     {padding:10px;}
+*/
+
+  .xterm .slider
+    {width:8px !important;border-radius:10px}
+  .xterm .slider:hover
+    {width:14px !important;cursor:pointer}
     
-    
+  .xterm .xterm-cursor
+    {opacity:0.8;transform:scaleX(0.6)}
             </style>
             
-            
-            <div id=terminal part=terminal></div>
+            <div id=hldr>
+                  <div id=terminal part=terminal></div>
+            </div>
             
             
       </template>
@@ -211,9 +222,13 @@
               
               var shadow                    = host.shadowRoot;
               
+              var hldr=$(shadow,'#hldr');
+              hldr.style.background=theme.light.background;
+              
               terminal                      = $(shadow,'#terminal');
               
               term.open(terminal);
+              term.options.theme =theme.light;
               
               term.writeln('xterm.js ready');
               
