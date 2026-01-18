@@ -13,7 +13,7 @@
     {display:inline-block;border:1px solid lightgray;background:whitesmoke;border-radius:5px;padding:5px 10px;cursor:pointer}
     
   #hldr
-    {position:fixed;top:50px;left:10px;right:10px;max-height:calc(100vh - 50px);
+    {position:fixed;top:50px;left:10px;right:10px;max-height:calc(100vh - 100px);
       border:2px solid cyan;padding:5px;background:white;overflow:auto;z-index:9999;
       display:none;flex-direction:column;gap:10px}
       
@@ -50,7 +50,7 @@
                               -->
                         </div>
                         
-                        <web-editor component fullsize mode=html></web-editor>
+                        <snippet-editor component fullsize mode=html></snippet-editor>
                         
                   </div>
                   
@@ -81,6 +81,7 @@
         
         
         var shadow    = host.shadowRoot;
+        var snippet;
         var editor;
         
         var status    = false;
@@ -95,7 +96,8 @@
                                                                                 debug('init');
               await mod.auto();
               
-              editor    = mod['web-editor'];
+              snippet   = mod['snippet-editor'];
+              editor    = snippet.editor;
               editor.filename(page.url);
               
               
