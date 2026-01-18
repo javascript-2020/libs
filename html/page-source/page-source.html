@@ -14,7 +14,7 @@
     
   #hldr
     {position:fixed;top:100px;left:0;right:0;
-      display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:5px}
+      display:none;flex-direction:column;gap:10px;border:1px solid lightgray;padding:5px}
       
   #hdr
     {display:flex;gap:10px}
@@ -120,7 +120,7 @@
                     return;
               }
               
-              hldr.style.display    = '';
+              hldr.style.display    = 'flex';
               if(!page.source){
                     page.source    = await fetch(page.url).then(res=>res.text());
               }
@@ -131,7 +131,7 @@
         
         btn.close   = function(){
         
-              hldr.style.display    = 'none';
+              hldr.style.display    = '';
               
               status    = false;
               
