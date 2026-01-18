@@ -61,8 +61,12 @@
   
         var df=true,did='page-source';
         
+        var config    = {};
         
         obj.initmod   = function(params){
+        
+              config    = mod.rd(params,'config',{});
+              
         }//initmod
         
         
@@ -89,9 +93,11 @@
         
               await mod.auto();
               
-              
               editor    = mod['web-editor'];
               editor.filename(page.url);
+              
+              
+              config.url && (page.url=config.url);
               
               
         }//init
