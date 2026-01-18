@@ -61,7 +61,7 @@
         
   //vars:-
   
-  
+        var shadow    = host.shadowRoot;
         var editor;
         
         
@@ -85,8 +85,6 @@
   
         obj.initdom   = function(){
         
-              var shadow    = host.shadowRoot;
-              
               $('#btn').onclick     = btn.open;
               $('#close').onclick   = btn.close;
               
