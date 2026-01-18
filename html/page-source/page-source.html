@@ -61,6 +61,8 @@
         
   //vars:-
   
+        var source;
+        
         var shadow    = host.shadowRoot;
         var editor;
         
@@ -99,6 +101,10 @@
         btn.open    = function(){
         
               hldr.style.display    = 'block';
+              if(!source){
+                    source    = await fetch('').then(res=>res.txt());
+              }
+              editor.setvalue(source);
               
         }//open
         
