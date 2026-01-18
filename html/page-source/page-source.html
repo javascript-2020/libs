@@ -70,6 +70,7 @@
         var shadow    = host.shadowRoot;
         var editor;
         
+        var status    = false;
         
         var btn   = {};
         
@@ -105,6 +106,11 @@
   
         btn.open    = async function(){
         
+              if(status){
+                    btn.close();
+                    return;
+              }
+              
               hldr.style.display    = 'block';
               if(!page.source){
                     page.source    = await fetch(page.url).then(res=>res.text());
@@ -117,6 +123,8 @@
         btn.close   = function(){
         
               hldr.style.display    = '';
+              
+              status    = false;
               
         }//close
         
