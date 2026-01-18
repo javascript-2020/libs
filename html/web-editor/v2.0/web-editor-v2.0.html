@@ -794,12 +794,20 @@
         }//hide
         
         
-        obj.filename.clear    = function(){
+        filename.clear    = function(){
         
               filename();
               filename.save.hide();
               
         }//filename
+        
+        
+        filename.read   = function(){
+        
+              var str   = $(shadow,'#filename').textContent.trim();
+              return str;
+              
+        }//read
         
         
   //:
