@@ -1,0 +1,99 @@
+
+
+<page-source>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+  #root
+    {}
+    
+  #btn
+    {border:1px solid lightgray;background:whitesmoke;border-radius:5px}
+    
+            </style>
+            
+            <div id=root>
+            
+                  <div id=btn>
+                        page source
+                  </div>
+                  
+                  <div id=hldr>
+                  
+                        <div id=hdr>
+                        </div>
+                        
+                        <web-editor component></web-editor>
+                        
+                  </div>
+                  
+            </div>
+            
+      </template>
+      
+      <script>
+      
+(function({mod,host}){
+
+  var obj   = {};
+  
+        var df=true,did='page-source';
+        
+        
+        obj.initmod   = function(params){
+        }//initmod
+        
+  //vars:-
+  
+  
+        var editor;
+        
+        
+        obj.init    = function(){
+        
+              editor    = mod['web-editor'];
+              
+              await mod.auto();
+              
+        }//init
+        
+        
+  //:
+  
+  
+        obj.initdom   = function(){
+        
+              var shadow    = host.shadowRoot;
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+        function debug(...args){
+        
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              console.groupCollapsed.apply(console,args2);
+              console.trace();
+              console.groupEnd();
+              
+        }//debug
+        
+        
+  return obj;
+  
+//page-source
+})
+
+      </script>
+      
+</page-source>
+
+
