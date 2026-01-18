@@ -106,7 +106,7 @@
         
               hldr.style.display    = 'block';
               if(!page.source){
-                    page.source    = await fetch(page.url).then(res=>res.txt());
+                    page.source    = await fetch(page.url).then(res=>res.text());
               }
               editor.setvalue(page.source);
               
