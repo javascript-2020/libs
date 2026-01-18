@@ -21,7 +21,7 @@
     
   #btns
     {display:flex;gap:10px;margin:0 20px}
-  [value=run]
+  [value=reset]
     {margin-right:20px}
     
   .spc
@@ -43,9 +43,10 @@
                   <web-editor component></web-editor>
                   
                   <div id=btns>
-                        <input value=run type=button>
-                        <input value=clear type=button>
                         <input value=reset type=button>
+                        <input value=run type=button>
+                        <div class=spc></div>
+                        <input value=clear type=button>
                   </div>
                   
                   <web-terminal component v2.0></web-terminal>
