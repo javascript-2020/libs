@@ -938,7 +938,7 @@
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var version='v1.0';
         
-        df=false,did='';
+        df=true,did='';
         
         if(typeof ace=='undefined'){
               ace=null;
