@@ -61,7 +61,11 @@
         
   //vars:-
   
-        var source;
+        var page    = {
+              source    : '',
+              url       : window===window.top ? window.location.toString() : 'https://libs.ext-code.com/html/page-source/examples/page-source-example.html'
+        };
+        
         
         var shadow    = host.shadowRoot;
         var editor;
@@ -101,10 +105,10 @@
         btn.open    = async function(){
         
               hldr.style.display    = 'block';
-              if(!source){
-                    source    = await fetch('').then(res=>res.txt());
+              if(!page.source){
+                    page.source    = await fetch(page.url).then(res=>res.txt());
               }
-              editor.setvalue(source);
+              editor.setvalue(page.source);
               
         }//open
         
