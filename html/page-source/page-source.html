@@ -25,7 +25,7 @@
     {vertical-align:middle}
     
   #close
-    {width:16px;height:16px;border:1px solid lightgray;padding:1px;cursor:pointer;margin-left:10px}
+    {width:16px;height:16px;border:1px solid lightgray;padding:1px;cursor:pointer;margin-left:5px;vertical-align:middle}
     
   web-editor
     {flex:1}
@@ -112,7 +112,7 @@
         obj.initdom   = function(){
                                                                                 debug('initdom');
               $('#btn').onclick     = btn.open;
-              //$('#close').onclick   = btn.close;
+              $('#close').onclick   = btn.close;
               
               hldr    = $('#hldr');
               
