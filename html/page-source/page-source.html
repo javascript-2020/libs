@@ -59,14 +59,11 @@
 
   var obj   = {};
   
-        var df=true,did='page-source';
+        var df=false,did='page-source';
         
-        var config    = {};
+        
         
         obj.initmod   = function(params){
-        
-              config    = mod.rd(params,'config',{});
-              
         }//initmod
         
         
@@ -90,7 +87,7 @@
   
   
         obj.init    = async function(){
-        
+                                                                                debug('init');
               await mod.auto();
               
               editor    = mod['web-editor'];
@@ -107,7 +104,7 @@
   
   
         obj.initdom   = function(){
-        
+                                                                                debug('initdom');
               $('#btn').onclick     = btn.open;
               //$('#close').onclick   = btn.close;
               
@@ -150,7 +147,7 @@
   
   
         obj.url   = function(url){
-        
+                                                                                debug('url',url);
               page.url    = url;
               
         }//url
