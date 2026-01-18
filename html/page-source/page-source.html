@@ -80,6 +80,7 @@
         obj.init    = async function(){
         
               editor    = mod['web-editor'];
+              editor.filename(page.url);
               
               await mod.auto();
               
