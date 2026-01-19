@@ -22,10 +22,10 @@
   #label
     {position:absolute;top:-5px;right:-1px;font-style:italic;color:gray;font-weight:bold}
   #label span
-    {vertical-align:middle}
+    {vertical-align:middle;background white;border:1px solid lightgray;padding:1px;cursor:pointer;border-radius:5px;z-index:1}
     
   #close
-    {width:16px;height:16px;border:1px solid lightgray;padding:1px;cursor:pointer;margin-left:5px;vertical-align:middle}
+    {width:16px;height:16px;margin-left:5px;vertical-align:middle}
     
   web-editor
     {flex:1}
@@ -118,7 +118,7 @@
         obj.initdom   = function(){
                                                                                 debug('initdom');
               $('#btn').onclick     = btn.open;
-              $('#close').onclick   = btn.close;
+              $('#label').onclick   = btn.close;
               
               hldr    = $('#hldr');
               
