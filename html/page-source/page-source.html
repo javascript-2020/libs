@@ -141,6 +141,7 @@
                     page.source    = await fetch(page.url).then(res=>res.text());
               }
               editor.setvalue(page.source);
+              editor.filename(page.url);
               
               status    = true;
               
