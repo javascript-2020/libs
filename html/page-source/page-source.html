@@ -78,7 +78,7 @@
   
         var page    = {
               source    : '',
-              url       : window===window.top ? window.location.toString() : 'https://libs.ext-code.com/html/page-source/examples/page-source-example.html'
+              url       : ''
         };
         
         
@@ -102,6 +102,12 @@
               editor    = snippet.editor;
               editor.filename(page.url);
               
+              var url   = window.location.toString();
+              var base    = document.querySelector('base');
+              if(base){
+                    url   = base.href;
+              }
+              page.url    = url;
               
         }//init
         
