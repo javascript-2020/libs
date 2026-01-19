@@ -138,7 +138,7 @@
               
               hldr.style.display    = 'flex';
               if(!page.source){
-                    page.source    = await fetch(page.url).then(res=>res.text());
+                    page.source    = await load();
               }
               editor.setvalue(page.source);
               editor.filename(page.url);
@@ -166,6 +166,32 @@
               editor.filename(url);
               
         }//url
+        
+        
+        async function load(){
+                                                                                debug('load',page.url);
+              var url   = page.url;
+              
+              var err;
+              try{
+              
+                    var res   = await fetch(url);
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var txt   = err.toString();
+                    return txt;
+              }
+              
+              var txt   = await res.text();
+              return txt;
+              
+        }//load
         
         
   //:
