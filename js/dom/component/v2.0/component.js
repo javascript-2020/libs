@@ -797,8 +797,9 @@
                                       fn    = arg;
                                 }
                                                                                 debug(i,fn);
-                                                                                if(!fn)debugger;
-                                                                                if(!fn.initmod)debugger;
+                                if(!fn)return;
+                                                                                //if(!fn)debugger;
+                                                                                //if(!fn.initmod)debugger;
                                 if(typeof fn.initmod=='function'){
                                       fn.initmod(params);
                                 }
