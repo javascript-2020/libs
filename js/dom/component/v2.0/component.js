@@ -268,14 +268,22 @@
               }//loader
               
               
-              loader.libs   = function({root,nn,version}){
+              loader.libs   = function({root,nn,version,dir}){
               
+                    if(dir){
+                          dir  +='/';
+                    }else{
+                          dir   = '';
+                    }
+                    
+                    var base    = `https://libs.ext-code.com/html/${dir}`;
                     var url;
                     if(!version){
-                          url           = `https://libs.ext-code.com/html/${nn}/${nn}.html`;
+                          url           = base+`${nn}/${nn}.html`;
                     }else{
-                          url           = `https://libs.ext-code.com/html/${nn}/${version}/${nn}-${version}.html`;
+                          url           = base+`${nn}/${version}/${nn}-${version}.html`;
                     }
+                    
                     return {url};
                     
               }//libs
@@ -407,6 +415,13 @@
                     }
                     type    ||= 'libs';
                     
+                    var dir;
+                    if(type.startsWith('/')){
+                          dir     = type;
+                          type    = 'libs';
+                    }
+                    
+                    
                     if(root.hasAttribute('component')){
                           var attr    = root.getAttribute('component');
                           root.removeAttribute('component');
@@ -423,12 +438,13 @@
                     
                     switch(type){
                     
-                      case 'libs'       : ({url}   = loader.libs({root,nn,version}));          break;
+                      case 'libs'       : ({url}   = loader.libs({root,nn,version,dir}));          break;
                       //case 'grp'        : ({url}   = loader.grp({root,nn,version}));           break;
                       case 'parent'     : ({url}   = loader.parent({root,nn,version}));        break;
                       case 'page'       : ({url}   = loader.page({root,nn,version}));          break;
                       
                     }//switch
+                    
                     
                     if(type.startsWith('grp')){
                           ({url}    = loader.grp({root,type,nn,version}));
