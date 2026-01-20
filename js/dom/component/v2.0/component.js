@@ -974,10 +974,9 @@
               menu.initmod({keydown});
               menu.add.style();
               
-              var log;
-              if(mod['log-mod']){
-                    log   = mod['log-mod'];
-              }
+              
+              var log   = mod['log-mod'];
+              
               
               mod.base.add({
                     ext,$,datatype,keydown,menu,menumod,ls,
