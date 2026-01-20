@@ -13,11 +13,11 @@
       <script>
       
 (function({mod,host}){
-console.log(1);
+
         var shadow    = host.shadowRoot;
         var root      = shadow.querySelector('#root');
         
-        root.setvalue      = txt=>root.textContent=txt;
+        host.setvalue      = txt=>root.textContent=txt;
         
 //demo-example
 })
