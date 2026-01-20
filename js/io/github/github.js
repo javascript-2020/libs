@@ -22,7 +22,7 @@
 
         var github            = {};
         github.version        = 'v1.0.0';
-
+        
         var download          = {};
         var upload            = {};
         var get               = {};
@@ -31,8 +31,8 @@
         
         
   //:
-
-        
+  
+  
         github.df                   = false;
         
         
@@ -41,10 +41,10 @@
         
         
         
-        github.parse                = parse;  
+        github.parse                = parse;
         github.build                = build;
         github.build.website        = build_website;
-
+        
         
         github.file                 = {};
         github.file.load            = load;
@@ -55,28 +55,28 @@
         github.backup               = backup;
         github.file.download        = download;
         github.download             = download;
-
+        
         
         github.dir                  = {};
         github.dir.download         = dirdownload;
         github.dir.list             = dirlist;
         github.dir.list.full        = dirlistfull;
-
-
+        
+        
         github.user                 = {};
         github.user.repolist        = repolist;
         github.user.repolist.all    = repolistall;
-
-
+        
+        
         github.repo                 = {};
         github.repo.default         = repodefault;
         github.repo.tree            = repotree;
         github.repo.zip             = repozip;
         
-
-
-
-              
+        
+        
+        
+        
   //:
   
   
@@ -87,7 +87,7 @@
               if(!url.startsWith('http')){
                     url   = 'https://'+url;
               }
-
+              
               
               var err;
               try{
@@ -98,12 +98,12 @@
               catch(err2){
               
                     err   = err2;
-                  
+                    
               }//catch
               if(err){
                     return {error:err};
               }
-
+              
               
               var result;
               
@@ -114,14 +114,14 @@
               if(url.hostname=='github.com'){
                     if(url.pathname.indexOf('blob')!=-1){
                           result    = parse.file(url);
-                    }else 
+                    }else
                     if(url.pathname.indexOf('tree')!=-1){
                           result    = parse.dir(url);
                     }else{
                           result    = parse.repo(url);
                     }
               }
-                    
+              
               if(result){
                     return result;
               }
@@ -129,7 +129,7 @@
               return {error:'unrecognised url format'};
               
         }//parse
-
+        
                                                                                 //  https://javascript-2020.github.io/html-components/log/log.html
         parse['github.io']    = function(url){
                                                                                 debug('github.io');
@@ -155,7 +155,7 @@
               return {owner,repo,branch,path,file};
               
         }//repo
-
+        
                                                                                 //  https://github.com/javascript-2020/libs/blob/main/docker/nodejs-min.dockerfile
         parse.file    = function(url){
                                                                                 debug('file');
@@ -168,7 +168,7 @@
               var path      = parts.join('/');
               var file      = parts.at(-1);
               return {owner,repo,branch,path,file};
-        
+              
         }//file
         
                                                                                 //  https://github.com/javascript-2020/libs/tree/main/docker
@@ -185,7 +185,7 @@
               return {owner,repo,branch,path,file};
               
         }//dir
-
+        
         
         parse.is.api    = function(url){
         
@@ -203,15 +203,15 @@
                     return true;
               }
               return false;
-
+              
         }//raw
         
-
+        
   //:
   
   
         parse.to.api    = function(url){
-          
+        
               var {owner,repo,branch,path}    = parse(url);
               var url   = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
               return url;
@@ -231,11 +231,11 @@
         
         
         
-  //:        
-
-
+  //:
+  
+  
         function build({api,token,owner,repo,branch,path}){
-
+        
               if(arguments.length!=1){
                     [api,token,owner,repo,branch,path]    = arguments;
               }
@@ -247,18 +247,18 @@
               var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
               
               if(api){
-                    token   = token||github.token||localStorage.getItem('github-token');                    
-                    url     = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;                                
+                    token   = token||github.token||localStorage.getItem('github-token');
+                    url     = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
               }
               
               return url;
-
+              
         }//build
         
         
         
         function build_website({owner,repo,branch,path,type}){
-          
+        
               type      = type||'blob';
               
               var url   = `https://github.com/${owner}/${repo}/${type}/${branch}`;
@@ -269,7 +269,7 @@
               return url;
               
         }//website
-
+        
         
         function build_to_raw({}){
         }//raw
@@ -280,7 +280,7 @@
         
   //:
   
-
+  
         function load({token,owner,repo,branch,path}){
         
               if(arguments.length!=1){
@@ -306,7 +306,7 @@
         
         
         load.text   = async function({token,owner,repo,branch,path}){
-          
+        
               var {blob,error}    = await load.apply(null,arguments);
               if(error){
                     return {error};
@@ -324,10 +324,6 @@
                     [owner,repo,branch,path]    = arguments;
               }
               
-              token     = token||github.token;
-              if(!token && typeof localStorage!='undefined'){
-                    token   = localStorage['github-token'];
-              }              
               owner     = owner||github.owner;
               branch    = branch||'main';
               if(path.startsWith('/')){
@@ -335,35 +331,35 @@
               }
               
               var url   = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`;
-                                                                                debug('load.raw',url);                                                                                
-              var err;              
+                                                                                debug('load.raw',url);
+              var err;
               try{
               
                     var res   = await fetch(url);
                     
-              }//try              
+              }//try
               catch(err2){
               
                     err   = err2;
                     
-              }//catch              
+              }//catch
               if(err){
                     return {error:err};
               }
-
+              
               if(!res.ok){
                     var txt   = await res.text();
                     return {error:txt};
               }
               
-              var blob    = await res.blob();              
+              var blob    = await res.blob();
               return {ok:blob,blob};
               
         }//raw
         
         
         load.api    = async function({token,owner,repo,branch,path}){
-
+        
               if(arguments.length!=1){
                     [token,owner,repo,branch,path]    = arguments;
               }
@@ -379,32 +375,32 @@
                     path    = path.slice(1);
               }
               
-              var url       = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;                                
+              var url       = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
               var headers   = {authorization:`Bearer ${token}`,accept:'application/vnd.github+json'};
                                                                                 debug('load.api',url);
                                                                                 
-              var err;              
+              var err;
               try{
               
                     var res   = await fetch(url,{headers});
                     
-              }//try              
+              }//try
               catch(err2){
               
                     err   = err2;
                     
-              }//catch              
+              }//catch
               if(err){
                                                                                 debug('error',err);
                     return {error:err};
               }
-
+              
               if(!res.ok){
                     var error   = await res.text();
-                                                                                debug('http error',error);                    
+                                                                                debug('http error',error);
                     return {error};
               }
-                                                                                debug('ok');              
+                                                                                debug('ok');
               var json    = await res.json();
               
               if(datatype(json)=='array'){
@@ -418,8 +414,8 @@
               return {ok:blob,blob};
               
         }//api
-
-
+        
+        
   //:
   
   
@@ -435,7 +431,7 @@
               }
               owner     = owner||github.owner;
               branch    = branch||'main';
-
+              
               if(path.startsWith('/')){
                     path    = path.slice(1);
               }
@@ -450,23 +446,23 @@
               
               var headers     = {authorization:`Bearer ${token}`};
               var url         = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
-
               
-              var err;              
+              
+              var err;
               try{
               
                     var json        = await fetch(url,{headers}).then(res=>res.json());
                     
-              }//try              
+              }//try
               catch(err2){
               
                     err   = err2;
                     
-              }//catch              
+              }//catch
               if(err){
                     return {error:err};
               }
-
+              
               
               var sha         = json.sha;
               
@@ -476,23 +472,23 @@
               body            = JSON.stringify(body);
               var headers     = {authorization:`Bearer ${token}`};
               var opts        = {method:'put',headers,body};
-
               
-              var err;              
+              
+              var err;
               try{
               
                     var res         = await fetch(url,opts);
                     
-              }//try              
+              }//try
               catch(err2){
               
                     err   = err2;
                     
-              }//catch              
+              }//catch
               if(err){
                     return {error:err};
               }
-                            
+              
               if(!res.ok){
                     var txt         = await res.text();
                     return {error:txt};
@@ -503,9 +499,9 @@
               
         }//save
         
-
+        
         async function backup({token,owner,repo,branch,path}){
-          
+        
               if(arguments.length!=1){
                     [token,owner,repo,branch,path]    = arguments;
               }
@@ -551,18 +547,18 @@
                                                                                 //console.log(path);
                                                                                 //console.log(fn);
                                                                                 //console.log(ext);
-              var err;              
+              var err;
               try{
               
                     var url     = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
                     var res     = await fetch(url)
                     
-              }//try              
+              }//try
               catch(err2){
               
                     err   = err2;
                     
-              }//catch              
+              }//catch
               if(err){
                     var str   = err.toString();
                     return {error:str};
@@ -610,11 +606,11 @@
         
         
         backup.clear    = async function({token,owner,repo,branch,path,all}){
-          
+        
               if(arguments.length!=1){
                     [token,owner,repo,branch,path,all]    = arguments;
               }
-        
+              
               token     = token||github.token;
               if(!token && typeof localStorage!='undefined'){
                     token   = localStorage['github-token'];
@@ -637,18 +633,18 @@
                     path    = path.slice(0,i);
               }
               
-              var err;              
+              var err;
               try{
               
                     var url     = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=true`;
                     var res     = await fetch(url)
                     
-              }//try              
+              }//try
               catch(err2){
               
                     err   = err2;
                     
-              }//catch              
+              }//catch
               if(err){
                     var str   = err.toString();
                     return {error:str};
@@ -660,7 +656,7 @@
               }
               
               var json    = await res.json();
-
+              
               var max     = 0;
               json.forEach(item=>{
               
@@ -676,7 +672,7 @@
                     }
                     
               });
-
+              
               var ct    = 0;
               var n     = json.length;
               for(var i=0;i<n;i++){
@@ -709,11 +705,11 @@
               
               async function del(path,sha){
               
-                    var err;                    
+                    var err;
                     try{
-
+                    
                           var json      = {messsage:'delete file',sha};
-                          var body      = JSON.stringify(json);                                
+                          var body      = JSON.stringify(json);
                           var url       = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
                           var headers   = {};
                           if(token){
@@ -721,17 +717,17 @@
                           }
                           var res     = await fetch(url,{method:'delete',headers,body});
                           
-                    }//try                    
+                    }//try
                     catch(err2){
                     
                           err   = err2;
                           
-                    }//catch                    
+                    }//catch
                     if(err){
                           var str   = err.toString();
                           return {error:str};
                     }
-
+                    
                     var txt   = await res.text();
                     
                     if(!res.ok){
@@ -739,17 +735,17 @@
                     }
                     
                     return {ok:txt};
-              
+                    
               }//del
               
         }//clear
-
-
+        
+        
   //:
   
   
         function dirdownload({owner,repo,branch,path,update,complete,token,api}){
-          
+        
               if(arguments.length!=1){
                     [owner,repo,branch,path,update,complete,token,api]    = arguments;
               }
@@ -764,7 +760,7 @@
               if(path.startsWith('/')){
                     path    = path.slice(1);
               }
-                                                                                debug('download.dir',owner,repo,branch,path,token,api);              
+                                                                                debug('download.dir',owner,repo,branch,path,token,api);
               var resolve,promise=new Promise(res=>resolve=res);
               
               setTimeout(fn,50);
@@ -785,7 +781,7 @@
                     }
                     
                     var json    = await fetch(url,{headers}).then(res=>res.json()).catch(error);
-
+                    
                     var item    = json.tree.find(o=>o.path===path);
                     if(item){
                           if(item.type=='blob'){
@@ -817,9 +813,9 @@
                     if(typeof update=='function'){
                           update(ct,total);
                     }
-
-                     
-                    var err;                               
+                    
+                    
+                    var err;
                     try{
                     
                           await Promise.all(json.tree.map(async item=>{
@@ -851,12 +847,12 @@
                                 
                           }));
                           
-                    }//try                    
+                    }//try
                     catch(err2){
                     
                           err   = err2;
                           
-                    }//catch                    
+                    }//catch
                     if(err){
                           error(err);
                           return;
@@ -876,7 +872,7 @@
                           a.download      = file;
                           a.click();
                     }
-                   
+                    
                     done({file,blob});
                     
               }//fn
@@ -896,7 +892,7 @@
                     }
                     
                     resolve(result);
-              
+                    
               }//done
               
               
@@ -920,23 +916,23 @@
                     var b64     = json.content;
                     var blob    = b64_blob(b64);
                     return blob;
-              
+                    
               }//api
-
+              
               
               return promise;
-        
+              
         }//dir
-
-
+        
+        
         async function dirlist({token,owner,repo,branch,path}){
-          
-          
+        
+        
         }//dirlist
-
+        
         
         async function dirlistfull({token,owner,repo,branch,path,files_only}){
-          
+        
               if(arguments.length!=1){
                     [token,owner,repo,branch,path,files_only]   = arguments;
               }
@@ -964,12 +960,12 @@
               
               var err;
               try{
-                
+              
                     var res   = await fetch(url,{headers});
                     
               }//try
               catch(err2){
-                
+              
                     err   = err2;
                     
               }//catch
@@ -1012,13 +1008,13 @@
                                                                           debug('path',path);
               var list    = [];
               var list    = json.tree.filter(item=>{
-
+              
                                   if(!item.path.startsWith(path))return;
                                   if(files_only){
                                         if(item.type!='blob')return;
                                   }
-                                  return true;      
-                          
+                                  return true;
+                                  
                             });
               list        = list.map(item=>{
                                                                           //console.log(item);
@@ -1029,7 +1025,7 @@
                                   var abs         = '/'+item.path;
                                   var type        = item.type=='blob' ? 'file' : 'dir';
                                   var size        = item.size;
-
+                                  
                                   
                                   var file        = {};
                                   
@@ -1042,23 +1038,23 @@
                                   file.size       = size;
                                   
                                   return file;
-                
+                                  
                             });
-              
+                            
               return {list};
               
         }//dirlistfull
         
-
-
+        
+        
   //:
   
   
         async function repolist({owner,token}={}){
-          
+        
               owner             = get.owner(owner);
               token             = get.token(token);
-
+              
               var headers       = get.headers({token});
               
               var url           = `https://api.github.com/users/${owner}/repos`;
@@ -1074,13 +1070,13 @@
               return {list};
               
         }//repolist
-      
-
+        
+        
   //:
   
   
         async function repodefault({owner,repo,token}){
-          
+        
               owner               = get.owner(owner);
               token               = get.token(token);
               var headers         = get.headers({token});
@@ -1099,7 +1095,7 @@
         
         
         async function repotree({owner,repo,branch,token}){
-
+        
               owner             = get.owner(owner);
               token             = get.token(token);
               var headers       = get.headers({token});
@@ -1117,14 +1113,14 @@
               
         }//repotree
         
-
-
-
+        
+        
+        
         async function repolistall({token}={}){
-          
+        
               token             = get.token(token);
               var headers       = get.headers({token});
-
+              
               var url           = 'https://api.github.com/user/repos';
               
               var {res,error}   = await gfetch(url,{headers});
@@ -1136,10 +1132,10 @@
               return json;
               
         }//repolistall
-
-
+        
+        
         async function repozip({owner,repo,branch,token}){
-          
+        
               token             = get.token(token);
               owner             = get.owner(owner);
               var headers       = get.headers({token});
@@ -1157,22 +1153,22 @@
               return {blob};
               
         }//repozip
-          
+        
         
         
   //:
   
   
         get.owner   = function(owner){
-
+        
               owner   ||= github.owner;
               return owner;
-          
+              
         }//owner
         
         
         get.headers   = function({token,accept}){
-          
+        
               var headers   = {};
               if(token){
                     headers.authorization   = `bearer ${token}`;
@@ -1181,12 +1177,12 @@
                     headers.accept    = accept;
               }
               return headers;
-          
+              
         }//headers
-  
-  
+        
+        
         get.token   = function(token){
-          
+        
               if(token===false){
                     return token;
               }
@@ -1202,15 +1198,15 @@
         
         
         async function gfetch(url,{headers}){
-          
+        
               var err;
               try{
-                
+              
                     var res   = await fetch(url,{headers});
                     
               }//try
               catch(err2){
-                
+              
                     err   = err2;
                     
               }//catch
@@ -1228,7 +1224,7 @@
               
         }//gfetch
         
-  
+        
         function datatype(v){
         
               var str   = Object.prototype.toString.call(v);
@@ -1237,7 +1233,7 @@
               return str;
               
         }//datatype
-
+        
         
         async function blob_b64(blob){
         
@@ -1246,10 +1242,10 @@
               var bin     = bytes.reduce((acc,byte)=>acc+=String.fromCharCode(byte),'');
               var b64     = btoa(bin);
               return b64;
-        
+              
         }//blob_b64
-  
-  
+        
+        
         function b64_blob(b64,type='text/plain'){
         
               var bin     = atob(b64);
@@ -1260,11 +1256,11 @@
               
         }//b64_blob
         
-                
+        
         function getmime(filename){
-          
+        
               var list    = {
-                
+              
                     // Text
                     
                     'txt': 'text/plain',
@@ -1275,8 +1271,8 @@
                     'json': 'application/json',
                     'csv': 'text/csv',
                     'xml': 'application/xml',
-
-                
+                    
+                    
                     // Images
                     
                     'jpg': 'image/jpeg',
@@ -1288,16 +1284,16 @@
                     'ico': 'image/x-icon',
                     'bmp': 'image/bmp',
                     'tiff': 'image/tiff',
-
-                
+                    
+                    
                     // Audio
                     
                     'mp3': 'audio/mpeg',
                     'wav': 'audio/wav',
                     'ogg': 'audio/ogg',
                     'm4a': 'audio/mp4',
-
-                
+                    
+                    
                     // Video
                     
                     'mp4': 'video/mp4',
@@ -1305,16 +1301,16 @@
                     'mov': 'video/quicktime',
                     'avi': 'video/x-msvideo',
                     'mkv': 'video/x-matroska',
-
-                
+                    
+                    
                     // Fonts
                     
                     'woff': 'font/woff',
                     'woff2': 'font/woff2',
                     'ttf': 'font/ttf',
                     'otf': 'font/otf',
-
-                
+                    
+                    
                     // Docs
                     
                     'pdf'       : 'application/pdf',
@@ -1324,8 +1320,8 @@
                     'xlsx'      : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                     'ppt'       : 'application/vnd.ms-powerpoint',
                     'pptx'      : 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-
-                
+                    
+                    
                     // Archives
                     
                     'zip'       : 'application/zip',
@@ -1342,13 +1338,13 @@
               var def     = 'application/octet-stream';
               var mime    = list[ext]||def
               
-              return mime;              
+              return mime;
               
         }//getmime
-
-
-  //:  
-
+        
+        
+  //:
+  
   
         function debug(){
         
@@ -1361,7 +1357,7 @@
               
         }//debug
         
-
+        
         
         return github;
         
