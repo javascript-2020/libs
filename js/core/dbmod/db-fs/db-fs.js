@@ -182,8 +182,6 @@
                     err   = err2;
                     
               }//catch
-              
-              
               if(err){
                     console.log('exit');
                     var error   = err.toString();
