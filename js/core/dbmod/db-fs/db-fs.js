@@ -18,13 +18,15 @@
   
         var df=obj.df=false,did='db-fs'
         ;
-
-
+        
+        
+        var status    = false;
+        
         
         obj.open    = function(path,flags='r'){
                                                                                             debug('open',path,flags);
               var resolve,promise   = new Promise(res=>resolve=res);
-
+              
               var db;
               var req               = window.indexedDB.open(path,1);
               
@@ -47,7 +49,7 @@
                                                                                             console.error(e);
                                                                                             console.error(req.error);
                                       }//onerror
-
+                                      
                                       
               var fs            = {};
               fs.read           = ()=>read(path,db);
@@ -55,15 +57,16 @@
               fs.write.str      = str=>write.str(path,db,str);
               fs.delete         = ()=>del(path,db);
               fs.close          = ()=>close(db);
-
+              
               
               return promise;
-
+              
         }//open
         
         
         function read(path,db){
         
+              var blob    = new Blob(['db.get error']);
               var resolve,promise   = new Promise(res=>resolve=res);
               
               var store       = db.transaction(path,'readwrite').objectStore(path);
@@ -71,16 +74,15 @@
               req.onsuccess   = e=>resolve(req.result?.data);
               req.onerror     = e=>{
                                                                                 console.log('db.get error',e);
-                                      var blob    = new Blob(['db.get error']);
                                       return blob;
                                       
                                 }//onerror
-              
+                                
               return promise;
               
         }//read
         
-  
+        
         function write(path,db,data){
         
               var resolve,promise   = new Promise(res=>resolve=res);
@@ -112,7 +114,7 @@
               db.close();
               
         }//close
-
+        
         
         function del(path,db){
         
@@ -128,13 +130,13 @@
               
         }//delete
         
-
+        
   //:
   
-
+  
         obj.delete    = async function del(name){
                                                                                 debug('delete',name);
-/*                                                                                
+/*
               var db    = await find(name);
               if(!db){
                                                                                 debug('not fouund');
@@ -142,8 +144,8 @@
               }
                                                                                 console.log(db);
               close(db);
-*/              
-              
+*/
+
               var resolve,promise   = new Promise(res=>resolve=res);
               
               var req               = window.indexedDB.deleteDatabase(name);
@@ -153,12 +155,12 @@
                                             resolve(false);
                                             
                                       }//onerror
-              
+                                      
               return promise;
               
         }//delete
-
-
+        
+        
         obj.list    = list;
         
         async function list(prefix,disp){
@@ -167,7 +169,23 @@
               
               prefix    ||= '';
               var names   = [];
-              var list    = await window.indexedDB.databases();
+              
+              var err;
+              try{
+              
+                    var list    = await window.indexedDB.databases();
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                                                                                debug(error);
+                    return {error};
+              }
+              
                                                                                 debug('===  list databases  ===');
               if(list.length==0){
                                                                                 debug('no databases');
@@ -183,16 +201,16 @@
                           names.push(db.name);
                     }
                                                                                 debug(i,db.name,db.version);
-                    
+                                                                                
               });
               
-              return names;
+              return {names};
               
         }//list
-
-
+        
+        
         async function find(name){
-          
+        
               var list    = await window.indexedDB.databases();
                                                                                 debug('===  list databases  ===');
               if(list.length==0){
@@ -215,7 +233,7 @@
               
         }//find
         
-
+        
         obj.exists    = async function(name){
         
               var names   = await list();
@@ -225,8 +243,8 @@
               return true;
               
         }//exists
-  
-
+        
+        
   //:
   
   
@@ -239,16 +257,16 @@
               console.groupEnd();
               
         }//debug
-
-      
+        
+        
   return obj;
-
+  
 //dbmod
 })();
 
 
-        
-        
+
+
 
 
 
