@@ -178,6 +178,7 @@ var err;
                       err=err2
               });
               
+              console.log(1,list,err);
               
 /*
               var err;
