@@ -1,0 +1,40 @@
+
+
+<demo-example>
+
+      <template shadowrootmode=open>
+      
+            <div id=root></div>
+            
+      </template>
+      
+      <script>
+      
+(function({mod,host}){
+
+  var obj   = {};
+  
+        obj.initmod   = function(params){}
+        obj.init    = async function(){}
+        
+        
+        var root;
+        
+        obj.initdom   = function(){
+        
+              root    = host.shadowRoot.querySelector('#root');
+              
+        }//initdom
+        
+        obj.set   = txt=>root.textContent=txt;
+        
+        
+  return obj;
+  
+//demo-example
+})
+
+      </script>
+      
+</demo-example>
+
