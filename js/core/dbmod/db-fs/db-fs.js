@@ -170,42 +170,20 @@
               prefix    ||= '';
               var names   = [];
               
-var list;
-var err;
-
-              var resolve,promise=new Promise(res=>resolve=res);
-              window.indexedDB.databases().then(result=>{
-                    list=result
-                    resolve();
-              }).catch(err2=>{
               
-                      console.log('indexeddb.catch',err2);
-                      err=err2
-                      resolve();
-                      
-              });
-              await promise;
-              console.log(1,list,err);
-              
-/*
               var err;
               try{
               
-                    var promise   = window.indexedDB.databases().catch(err2=>{
-                      console.log('indexeddbcatch',err2);
-                      err=err2
-                    });
-                    var list      = await promise;
+                    var list   = await window.indexedDB.databases().catch(err2=>{
                     
               }//try
               catch(err2){
-                    console.log('try.catch',err2);
+              
                     err   = err2;
                     
               }//catch
-*/
-
-
+              
+              
               if(err){
                     console.log('exit');
                     var error   = err.toString();
