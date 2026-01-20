@@ -337,7 +337,23 @@
                     icon.onclick    = e=>{
                     
                                             if(e.shiftKey){
-                                                  token   = localStorage[name];
+                                                  var err;
+                                                  try{
+                                                  
+                                                        token   = localStorage[name];
+                                                        
+                                                  }//try
+                                                  catch(err2){
+                                                  
+                                                        err   = err2;
+                                                        
+                                                  }//catch
+                                                  if(err){
+                                                        var error   = err.tostring();
+                                                        log.red(error);
+                                                        return;
+                                                  }
+                                                  
                                                   if(!token){
                                                         $.mousetext(`no stored ${key}, localStorage[${name}]`);
                                                         return;
@@ -351,7 +367,24 @@
                                                   $.mousetext(`${key} empty`);
                                                   return;
                                             }
-                                            localStorage[name]    = token;
+                                            
+                                            var err;
+                                            try{
+                                            
+                                                  localStorage[name]    = token;
+                                                  
+                                            }//try
+                                            catch(err2){
+                                            
+                                                  err   = err2;
+                                                  
+                                            }//catch
+                                            if(err){
+                                                  var error   = err.toString();
+                                                  log.red(error);
+                                                  return;
+                                            }
+                                            
                                             $.mousetext(`localStorage[${name}] saved`);
                                             
                                       }//icon.onclick
@@ -364,20 +397,38 @@
               
               
             //client_id
-            
-              var clientid                                = window.localStorage[localstorage+'client-id'];
+              var clientid;
+              try{
+              
+                    clientid                                = window.localStorage[localstorage+'client-id'];
+                    
+              }//try
+              catch(err2){}
               $(shadow,'#client-id').value                = clientid||'';
               
               
             //client_secret
             
-              var clientsecret                            = window.localStorage[localstorage+'client-secret'];
+              var err;
+              try{
+              
+                    var clientsecret                            = window.localStorage[localstorage+'client-secret'];
+                    
+              }//try
+              catch(err2){}
+              
               $(shadow,'#client-secret').value            = clientsecret||'';
               
               
             //refresh-token
             
-              var refresh                                 = window.localStorage[localstorage+'refresh-token'];
+              try{
+              
+                    var refresh                                 = window.localStorage[localstorage+'refresh-token'];
+                    
+              }//try
+              catch(err2){}
+              
               $(shadow,'#refresh-token').value            = refresh||'';
               $(shadow,'.refresh.icon').onclick           = btn.token.refresh;
               
@@ -385,14 +436,26 @@
             //token
             
               var root2                                   = $(shadow,'#token-root');
-              var token                                   = window.localStorage[localstorage+'token'];
+              var err;
+              try{
+              
+                    var token                                   = window.localStorage[localstorage+'token'];
+                    
+              }//try
+              catch(err2){}
               $(shadow,'#token').value                    = token||'';
               
               
             //bucket
             
               var root2                                   = $(shadow,'#bucket-root');
-              var value                                   = window.localStorage[localstorage+'bucket'];
+              try{
+              
+                    var value                                   = window.localStorage[localstorage+'bucket'];
+                    
+              }//try
+              catch(err2){}
+              
               $(shadow,'#bucket').value                   = value||'';
               
               
@@ -439,7 +502,13 @@
               
               var token     = await gs.refresh(id,secret,refresh);
               
-              localStorage[localstorage+'token']    = token;
+              try{
+              
+                    localStorage[localstorage+'token']    = token;
+                    
+              }//try
+              catch(err2){}
+              
               $(shadow,'#token').value              = token;
               
               $.mousetext('token refreshed');
