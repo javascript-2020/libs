@@ -324,7 +324,7 @@
                           chkbox.checked    = !chkbox.checked;
                     }
                     
-                    chk.checked  = chkbox.checked;
+                    //chk.checked  = chkbox.checked;
                     
                     if(typeof callback=='function'){
                           callback(chk);
