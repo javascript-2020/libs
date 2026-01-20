@@ -1,0 +1,28 @@
+
+
+<demo-example>
+
+      <template shadowrootmode=open>
+      
+            <h2 id=root>
+                  demo-example
+            </h2>
+            
+      </template>
+      
+      <script>
+      
+(function({mod,host}){
+
+        var shadow    = host.shadowRoot;
+        var root      = shadow.querySelector('#root');
+        
+        root.set      = txt=>root.textContent=txt;
+        
+//demo-example
+})
+
+      </script>
+      
+</demo-example>
+
