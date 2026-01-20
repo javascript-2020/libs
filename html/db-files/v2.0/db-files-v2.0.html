@@ -159,7 +159,7 @@
               
               db.df                     = true;
               
-              var {names,error}   = db.list();
+              var {names,error}   = await db.list();
               status    = error;
               if(error){
                                                                                 debug(error);
