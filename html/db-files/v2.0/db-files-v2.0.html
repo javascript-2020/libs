@@ -81,7 +81,7 @@
         
   //initmod:
   
-        var ext,$,datatype,menumod,source,filemod
+        var ext,$,datatype,menumod,source,filemod,log
         ;
         
         obj.initmod   = function(params){
@@ -97,12 +97,17 @@
               
               filemod     = mod.rd(params,'filemod',filemod);
               
+              log         = mod.rd(params,'log',log);
+              
         }//initmod
         
         
   //vars:-
   
   
+        var status        = false;
+        
+        
         var db;
         var dblist;
         var filenav;
@@ -154,8 +159,8 @@
               
               db.df                     = false;
               
-              db.list();
-              
+              var {names,error}   = db.list();
+              status    = error;
               
               //resolve
               
@@ -220,6 +225,11 @@
                                                                                 debug('btn.update');
               var path    = filenav.path;
                                                                                 debug(path);
+              if(status){
+                    log(status);
+                    return;
+              }
+              
               read(path);
               
         }//update
@@ -229,6 +239,11 @@
                                                                                 debug('btn.load');
               if(filenav.cur.type!=='file'){
                     alert('no file selected');
+                    return;
+              }
+              
+              if(status){
+                    log(status);
                     return;
               }
               
@@ -247,6 +262,11 @@
                     return;
               }
               
+              if(status){
+                    log(status);
+                    return;
+              }
+              
               var path    = filenav.cur.path;
               var name    = filenav.cur.name;
                                                                                 debug(path,name);
@@ -258,6 +278,11 @@
         btn.dir   = function(){
                                                                                 debug('btn.date');
                                                                                 debug('!! not implemented !!');
+              if(status){
+                    log(status);
+                    return;
+              }
+              
         }//dir
         
         
@@ -282,6 +307,11 @@
                                                                                 debug('db-files.file.add',path+name);
               var abs     = prefix+path+name;
                                                                                 debug(abs);
+              if(status){
+                    log(status);
+                    return;
+              }
+              
               var fs      = await db.open(abs);
               fs.write.str('');
               fs.close();
@@ -294,6 +324,11 @@
                                                                                 debug('db-files.file.rem',path,name);
               var abs       = prefix+path+name;
                                                                                 debug(abs);
+              if(status){
+                    log(status);
+                    return;
+              }
+              
               var result    = await db.delete(abs);
               return false;
               
@@ -303,6 +338,12 @@
         file.upload   = async function(path,name,blob){
         
               var abs     = prefix+path+name;
+              
+              if(status){
+                    log(status);
+                    return;
+              }
+              
               var file    = await db.open(abs);
               await file.write(blob);
               file.close();
@@ -314,6 +355,12 @@
         file.download   = async function(path){
         
               var abs     = prefix+path;
+              
+              if(status){
+                    log(status);
+                    return;
+              }
+              
               var file    = await db.open(abs);
               var blob    = await file.read();
               file.close();
@@ -325,6 +372,11 @@
         file.dblclick   = async function(path,name){
         
               var abs     = prefix+path+name;
+              
+              if(status){
+                    log(status);
+                    return;
+              }
               
               var fs      = await db.open(abs);
               var blob    = await fs.read();
@@ -346,6 +398,12 @@
         
         
         dir.parent    = function(){
+        
+              if(status){
+                    log(status);
+                    return;
+              }
+              
         }//parent
         
         
@@ -353,6 +411,11 @@
                                                                                 debug('dir.add',path,name);
               var abs     = prefix+path+name+'/';
                                                                                 debug(abs);
+              if(status){
+                    log(status);
+                    return;
+              }
+              
               var file    = await db.open(abs);
               file.close();
               return false;
@@ -363,6 +426,12 @@
         dir.rem   = async function(path,name){
                                                                                 debug('dir.rem',path,name);
               var abs     = prefix+path+name;
+              
+              if(status){
+                    log(status);
+                    return;
+              }
+              
               var list    = await db.list(abs);
               
               var n   = list.length;
@@ -381,6 +450,12 @@
         dir.clear   = async function(path){
                                                                                 debug('dir.clear',path);
               var abs     = prefix+path;
+              
+              if(status){
+                    log(status);
+                    return;
+              }
+              
               var list    = await db.list(abs);
               
               var n   = list.length;
@@ -403,6 +478,11 @@
         
         dir.dblclick    = function(path,name){
                                                                                 debug('dir.dblclick',path,name);
+              if(status){
+                    log(status);
+                    return;
+              }
+              
               read(path+name);
               return false;
               
@@ -415,6 +495,12 @@
         async function read(path){
                                                                                 debug('dir.read');
               path        ||= filenav.path;
+              
+              if(status){
+                    log(status);
+                    return;
+              }
+              
               var len       = prefix.length+path.length;
               
               var dirs      = [];
@@ -454,6 +540,11 @@
         
         async function load(file){
         
+              if(status){
+                    log(status);
+                    return false;
+              }
+              
               if(!await db.exists(file.abs)){
                     return false;
               }
@@ -469,6 +560,11 @@
         load.ui   = async function(path,name){
         
               var abs         = prefix+path+name;
+              
+              if(status){
+                    log(status);
+                    return;
+              }
               
               var file        = {};
               file.type       = filetype;
@@ -492,6 +588,11 @@
         
         async function save(file,blob){
         
+              if(status){
+                    log(status);
+                    return;
+              }
+              
               var fs    = await db.open(file.abs);
               await fs.write(blob);
               
@@ -503,6 +604,12 @@
         save.ui   = async function(path,name){
         
               var abs         = prefix+path+name;
+              
+              if(status){
+                    log(status);
+                    return;
+              }
+              
               var title       = abs;
               
               var file        = {};
@@ -532,6 +639,12 @@
               }
               
               var abs         = prefix+path+name;
+              
+              if(status){
+                    log(status);
+                    return;
+              }
+              
               var title       = prefix+path+name;
               
               var file        = {};
