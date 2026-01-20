@@ -976,7 +976,7 @@
               
               var log;
               if(mod['log-mod']){
-                    log   = log['mod-log'];
+                    log   = mod['log-mod'];
               }
               
               mod.base.add({
