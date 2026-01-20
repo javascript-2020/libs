@@ -174,6 +174,7 @@
               try{
               
                     var list    = await window.indexedDB.databases();
+                    
               }//try
               catch(err2){
               
