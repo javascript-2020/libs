@@ -24,7 +24,8 @@
         
         obj.initdom   = function(){
         
-              root    = host.shadowRoot.querySelector('#root');
+              var shadow    = host.shadowRoot;
+              root          = shadow.querySelector('#root');
               
         }//initdom
         
