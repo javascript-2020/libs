@@ -75,7 +75,7 @@
         version   : 'v1.0'
   };
   
-        var df=obj.df=false,did='db-files'
+        var df=false,did='db-files'
         ;
         
         
@@ -161,7 +161,9 @@
               
               var {names,error}   = db.list();
               status    = error;
-              
+              if(error){
+                                                                                debug(error);
+              }
               //resolve
               
         }//init
