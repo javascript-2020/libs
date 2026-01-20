@@ -777,9 +777,15 @@
                                                                                 debug(i,fn);
                                                                                 if(!fn)debugger;
                                                                                 if(!fn.initmod)debugger;
-                                fn.initmod(params);
-                                await fn.init();
-                                await fn.initdom();
+                                if(typeof fn.initmod=='function'){
+                                      fn.initmod(params);
+                                }
+                                if(typeof fn.init=='function'){
+                                      await fn.init();
+                                }
+                                if(typeof fn.initdom=='function'){
+                                      await fn.initdom();
+                                }
                                 
                           })
                     );
