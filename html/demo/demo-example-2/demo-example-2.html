@@ -14,10 +14,10 @@
       
 (function({mod,host}){
 
-        var shadow      = host.shadowRoot;
-        var root        = shadow.querySelector('#root');
+        var shadow    = host.shadowRoot;
+        var root      = shadow.querySelector('#root');
         
-        host.setvalue   = txt=>root.textContent=txt;
+        host.set      = txt=>root.textContent=txt;
         
 })
 
