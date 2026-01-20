@@ -57,15 +57,15 @@
         
         
         
-        var $,grp,db
+        var $,grp,db,log
         ;
         
         obj.initmod   = function(params){
         
-              $             = params.$;
-              grp           = params.menu;
-              db            = params.db;
-              
+              $             = mod.rd(params,'$',$);
+              grp           = mod.rd(params,'menu',menu);
+              db            = mod.rd(params,'db',db);
+              log           = mod.rd(params,'log',log);
         }//initmod
         
         
@@ -128,7 +128,12 @@
         
               list.replaceChildren();
               
-              var names   = await db.list();
+              var {names,error}   = await db.list();
+              if(error){
+                    log(error);
+                    return;
+              }
+              
               names.forEach(name=>{
               
                     var nitem                       = item.cloneNode(true);
