@@ -201,7 +201,7 @@
                                                                                 true && debug(obj.version);
                                                                                 
                                                                                 
-        var ext,$,menu,focus,source
+        var ext,$,menu,focus,source,log
         ;
         
         obj.initmod   = function(params){
@@ -213,6 +213,8 @@
               focus         = mod.rd(params,'focus',focus);
               
               source        = mod.rd(params,'source',source);
+              
+              log           = mod.rd(params,'log',log);
               
         }//initmod
         
@@ -311,7 +313,15 @@
                                                   
                                             };
                                             
-              var token   = window.localStorage['github-token'];
+              var token;
+              
+              try{
+              
+                    token   = window.localStorage['github-token'];
+                    
+              }//try
+              catch(err2){}
+              
               if(token){
                     $(shadow,'#token').value    = token;
               }
@@ -328,12 +338,46 @@
                                                                   $.mousetext('no token');
                                                                   return;
                                                             }
-                                                            localStorage.setItem('github-token',token);
+                                                            
+                                                            var err;
+                                                            try{
+                                                            
+                                                                  localStorage.setItem('github-token',token);
+                                                                  
+                                                            }//try
+                                                            catch(err2){
+                                                            
+                                                                  err   = err2;
+                                                                  
+                                                            }//catch
+                                                            if(err){
+                                                                  var error   = err.toString();
+                                                                  log.red(error);
+                                                                  return;
+                                                            }
+                                                            
                                                             $.mousetext(e,'localStorage[\'github-token\'] saved');
                                                             return;
                                                       }
                                                       
-                                                      var token   = localStorage.getItem('github-token');
+                                                      var token;
+                                                      var err;
+                                                      try{
+                                                      
+                                                            token   = localStorage.getItem('github-token');
+                                                            
+                                                      }//try
+                                                      catch(err2){
+                                                      
+                                                            err   = err2;
+                                                            
+                                                      }//catch
+                                                      if(err){
+                                                            var error   = err.toString();
+                                                            log.red(error);
+                                                            return;
+                                                      }
+                                                      
                                                       if(!token){
                                                             $.mousetext('no stored token, localStorage[\'github-token\']');
                                                             return;
