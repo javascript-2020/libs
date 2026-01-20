@@ -271,6 +271,7 @@
               loader.libs   = function({root,nn,version,dir}){
               
                     if(dir){
+                          dir   = dir.slice(1);
                           dir  +='/';
                     }else{
                           dir   = '';
