@@ -173,11 +173,15 @@
 var list;
 var err;
 
+              var resolve,promise=new Promise(res=>resolve=res);
               window.indexedDB.databases().then(result=>list=result).catch(err2=>{
-                      console.log('indexeddbcatch',err2);
-                      err=err2
-              });
               
+                      console.log('indexeddb.catch',err2);
+                      err=err2
+                      resolve();
+                      
+              });
+              await promise;
               console.log(1,list,err);
               
 /*
