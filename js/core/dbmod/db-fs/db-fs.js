@@ -172,10 +172,12 @@
               
 var list;
 var err;
+
               window.indexedDB.databases().then(result=>list=result).catch(err2=>{
                       console.log('indexeddbcatch',err2);
                       err=err2
               });
+              
               
 /*
               var err;
