@@ -507,6 +507,7 @@
               var files     = [];
               
               var list      = await db.list(prefix+path,true);
+              if(!list.forEach)debugger;
               list.forEach(abs=>{
               
                     var i   = abs.indexOf('/',len);
