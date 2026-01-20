@@ -173,7 +173,8 @@
               var err;
               try{
               
-                    var list    = await window.indexedDB.databases().catch(err2=>err=err2);
+                    var promise   = window.indexedDB.databases().catch(err2=>err=err2);
+                    var list      = await promise;
                     
               }//try
               catch(err2){
