@@ -432,7 +432,7 @@
                     return;
               }
               
-              var list    = await db.list(abs);
+              var {names:list}    = await db.list(abs);
               
               var n   = list.length;
               for(var i=0;i<n;i++){
@@ -456,7 +456,7 @@
                     return;
               }
               
-              var list    = await db.list(abs);
+              var {names:list}    = await db.list(abs);
               
               var n   = list.length;
               for(var i=0;i<n;i++){
@@ -506,7 +506,7 @@
               var dirs      = [];
               var files     = [];
               
-              var {list}      = await db.list(prefix+path,true);
+              var {names:list}      = await db.list(prefix+path,true);
               list.forEach(abs=>{
               
                     var i   = abs.indexOf('/',len);
