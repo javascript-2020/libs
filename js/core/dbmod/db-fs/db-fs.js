@@ -170,6 +170,13 @@
               prefix    ||= '';
               var names   = [];
               
+var list;
+              window.indexedDB.databases().then(result=>list=result).catch(err2=>{
+                      console.log('indexeddbcatch',err2);
+                      err=err2
+              });
+              
+/*
               var err;
               try{
               
@@ -185,12 +192,18 @@
                     err   = err2;
                     
               }//catch
+*/
+
+
               if(err){
                     console.log('exit');
                     var error   = err.toString();
                                                                                 debug(error);
                     return {error};
               }
+              
+              
+              
               
                                                                                 debug('===  list databases  ===');
               if(list.length==0){
