@@ -221,6 +221,7 @@
                     
                     var node        = root;
                     
+                    
                     root.__root     = root;
                     root.__node     = root;
                     root.__host     = root;
@@ -538,6 +539,10 @@
                     
                     mod[key]      = obj;
                     mod[inst]     = obj;
+                    
+                    host.__mod    = mod;
+                    host.__obj    = obj;
+                    
                     
                     
                     mod.list.push(key);
