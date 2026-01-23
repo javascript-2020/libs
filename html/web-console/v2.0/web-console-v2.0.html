@@ -425,7 +425,10 @@
                     if(typeof v=='number'){
                           v  += 'px';
                     }
-                    con.element.style.height    = v;
+                    
+                    var target    = con.element;
+                    var target    = host;
+                    target.style.height    = v;
                     
               },
               
