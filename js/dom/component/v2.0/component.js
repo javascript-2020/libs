@@ -560,6 +560,8 @@
                     host.__mod    = mod;
                     host.__obj    = obj;
                     
+                    obj.__host    = host;
+                    
                     
                     
                     mod.list.push(key);
