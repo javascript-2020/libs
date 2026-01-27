@@ -254,6 +254,7 @@ var callback    = (mutationList,observer)=>{
             }else if(mutation.type==='attributes'){
                   var newValue = mutation.target.getAttribute(mutation.attributeName)
                   console.log(mutation.target.nodeName,mutation.attributeName,newValue);
+                  console.trace();
                   
             }
             
