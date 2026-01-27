@@ -1,0 +1,100 @@
+
+
+
+<html>
+
+      <head>
+      
+            <title>
+                  snippet-html-console v2.0 test 2
+            </title>
+            
+            <base href='https://libs.ext-code.com/html/snippet-html-console/'>
+            
+            <script src='https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/ace.js'></script>
+            <!--
+            <script src='https://ajaxorg.github.io/ace-builds/src-noconflict/ace.js'></script>
+            -->
+            
+            
+            <script src='https://libs.ext-code.com/js/dom/component/v2.0/component.js?hdr'></script>
+            
+            <script>
+                                                                                console.log('snippet-html-console-v2.0-test-2.html');
+        var df=true,did='html';
+        
+        var ace;
+        
+        var snippet;
+        
+        
+        async function ready(){
+                                                                                debug('ready');
+        }//init
+        
+        
+            </script>
+            
+            <style>
+  html
+    {height:100%}
+    
+  body
+    {display:flex;flex-direction:column;gap:10px;font-family:arial;margin:20px}
+    
+    
+  #inline
+    {margin:20px 0}
+    
+    
+  [component],config
+    {display:none}
+    
+    
+            </style>
+            
+      </head>
+      
+      
+      <body>
+      
+            <h3>
+                  snippet-html-console v2.0 test 2
+            </h3>
+            
+            
+<!--
+            <snippet-html-console v2.0 component id=inline mode=html>
+                  <config>
+                        {
+                              'web-console'     : {height:'300px'},
+                              'web-editor'      : {cssText:'display:block;height:400px'},
+                        }
+                  </config>
+      &#x3C;h3&#x3E;
+            test
+      &#x3C;/h3&#x3E;
+      &#x3C;script&#x3E;
+            console.log(&#x27;xyz&#x27;);
+      &#x3C;/script&#x3E;
+      
+            </snippet-html-console>
+-->
+            <snippet-html-console id=src component v2.0 mode=html src='ex/ex1.html'>
+                  <config>
+                        {
+                              'web-console'     : {height:'300px'},
+                              'web-editor'      : {cssText:'display:block;height:400px'},
+                        }
+                  </config>
+            </snippet-html-console>
+            
+            
+            <log-mod component></log-mod>
+            
+      </body>
+      
+      
+</html>
+
+
