@@ -253,7 +253,7 @@ var callback    = (mutationList,observer)=>{
                   
             }else if(mutation.type==='attributes'){
                   var newValue = mutation.target.getAttribute(mutation.attributeName)
-                  console.log(`The ${mutation.attributeName} attribute was modified.`,newValue);
+                  console.log(mutation.target.nodeName,mutation.attributeName,newValue);
                   
             }
             
