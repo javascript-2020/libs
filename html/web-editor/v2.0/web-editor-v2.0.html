@@ -493,12 +493,14 @@ observer.observe(host,mconfig);
                     fullsize    = false;
               }
               
-              var cssText   = config.cssText;
-              
+              var cssText       = config.cssText;
               
               
               shadow            = host.shadowRoot;
               obj.shadowRoot    = shadow;
+              
+              
+              
               
               root                                        = $(shadow,'#root');
               
@@ -588,7 +590,7 @@ observer.observe(host,mconfig);
   
   
         setup.editor    = function(node,{mode,kd}={}){
-        
+                                                                                debug('setup.editor');
               mode    ||= 'javascript';
               
               switch(mode){
@@ -631,7 +633,7 @@ observer.observe(host,mconfig);
         
         
         setup.fullsize    = function(node,params={}){
-        
+                                                                                debug('setup.fullsize');
               //node.style.flex                   = 'none';
               //$(shadow,'#root').style.height    = 'auto';
               
