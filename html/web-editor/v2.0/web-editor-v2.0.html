@@ -775,11 +775,14 @@ observer.observe(host,mconfig);
               }
               
               var fn    = filename.split('/').at(-1);
+              var ext   = fn.split('.').at(-1);
               
               $(shadow,'#filename-icon').src      = src;
               
               $(shadow,'#filename').textContent   = fn;
               $(shadow,'#filename').title         = title;
+              
+              obj.mode(ext);
               
         }//filename
         
@@ -964,6 +967,24 @@ observer.observe(host,mconfig);
                     
                     
               },//set
+              
+        });
+        
+        
+        Object.defineProperty(obj,'mode',{
+        
+              set   : v=>{
+              
+                      switch(v){
+                      
+                        case 'js'   : v='javascript';       break;
+                        case 'py'   : v='python';           break;
+                        
+                      }//switch
+                      
+                      editor.session.setMode(`ace/mode/${v}`)
+                      
+              }
               
         });
         
