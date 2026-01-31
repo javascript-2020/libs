@@ -252,10 +252,10 @@ var callback    = (mutationList,observer)=>{
                   console.log('A child node has been added or removed.');
                   
             }else if(mutation.type==='attributes'){
-                  var newValue = mutation.target.getAttribute(mutation.attributeName)
-                  console.log(mutation.target.nodeName,mutation.attributeName,newValue);
+                  var newValue = mutation.target.getAttribute(mutation.attributeName);
+                  console.groupCollapsed(mutation.target,mutation.attributeName,newValue);
                   console.trace();
-                  
+                  console.groupEnd();
             }
             
       }//for
