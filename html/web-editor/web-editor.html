@@ -226,7 +226,7 @@
         var def         = {};
         def.txt         = '';
         def.fullsize    = false;
-        def.mode        = 'javascript';
+        def.mode        = 'text';
         def.height      = null;
         
         
@@ -241,11 +241,37 @@
         
         
         
-        
-        
-        
-        
-        
+var mconfig    = {attributes:true};//,childList:true,subtree:true};
+
+var callback    = (mutationList,observer)=>{
+
+      for (const mutation of mutationList) {
+      
+            if(mutation.type==='childList'){
+            
+                  console.log('A child node has been added or removed.');
+                  
+            }else if(mutation.type==='attributes'){
+                  var newValue = mutation.target.getAttribute(mutation.attributeName)
+                  console.log(mutation.target.nodeName,mutation.attributeName,newValue);
+                  console.trace();
+                  
+            }
+            
+      }//for
+      
+}//callback
+
+var observer    = new MutationObserver(callback);
+
+observer.observe(host,mconfig);
+
+//observer.disconnect();
+
+
+
+
+
   //:
   
   
@@ -515,6 +541,8 @@
               var node                                    = $(shadow,'#editor');
               node.textContent                            = txt;
               
+              observer.observe(node,mconfig);
+              
               if(fullsize){
                                                                                   debug('fullsize');
                     setup.fullsize(node,{mode,kd:kd2});
@@ -747,11 +775,14 @@
               }
               
               var fn    = filename.split('/').at(-1);
+              var ext   = fn.split('.').at(-1);
               
               $(shadow,'#filename-icon').src      = src;
               
               $(shadow,'#filename').textContent   = fn;
               $(shadow,'#filename').title         = title;
+              
+              obj.mode(ext);
               
         }//filename
         
@@ -936,6 +967,24 @@
                     
                     
               },//set
+              
+        });
+        
+        
+        Object.defineProperty(obj,'mode',{
+        
+              set   : v=>{
+              
+                      switch(v){
+                      
+                        case 'js'   : v='javascript';       break;
+                        case 'py'   : v='python';           break;
+                        
+                      }//switch
+                      
+                      editor.session.setMode(`ace/mode/${v}`)
+                      
+              }
               
         });
         
