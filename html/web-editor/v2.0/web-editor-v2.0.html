@@ -7,10 +7,10 @@
             <style>
             
   :host
-    {font-family:arial;line-height:1;display:flex;flex-direction:column;min-height:0}
+    {all:initial;font-family:arial}
     
   #root
-    {display:flex;flex-direction:column;flex:1;min-height:0}
+    {display:flex;flex-direction:column}
     
     
     
@@ -95,13 +95,11 @@
     }
     
   #hldr
-    {flex:1;min-height:50px;min-height:0}
-  #editor
-    {border:1px solid lightgray;box-sizing:border-box;height: 100% !important;position:relative}
+    {flex:1;min-height:50px}
     
-/*#editor .ace_editor { position: absolute; inset: 0; } #editor .ace_scroller { position: absolute; inset: 0; }*/
-#editor.ace_editor .ace_scroller { height: 100% !important; }
-
+  #editor
+    {border:1px solid lightgray;box-sizing:border-box}
+    
             </style>
             
             <div id=root part=root>
