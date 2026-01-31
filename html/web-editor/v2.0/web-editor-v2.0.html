@@ -629,7 +629,7 @@ observer.observe(host,mconfig);
         
         setup.fullsize    = function(node,params={}){
         
-              node.style.flex                   = 'none';
+              //node.style.flex                   = 'none';
               //$(shadow,'#root').style.height    = 'auto';
               
               setup.editor(node,params);
@@ -963,7 +963,7 @@ observer.observe(host,mconfig);
                     }
                     
                     //editor.container.style.height   = v;
-                    root.style.height    = v;
+                    root.style.minHeight    = v;
                     
                     
               },//set
