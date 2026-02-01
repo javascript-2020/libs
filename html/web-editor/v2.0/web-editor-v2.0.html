@@ -98,7 +98,10 @@
     {flex:1;min-height:50px}
     
   #editor
-    {border:1px solid lightgray;box-sizing:border-box;height:100% !important}
+    {border:1px solid lightgray;box-sizing:border-box}
+    
+  #editor:not(.fullsize){
+    {height:100% !important}
     
             </style>
             
@@ -645,6 +648,7 @@ observer.observe(host,mconfig);
               
               editor.session.on('change',onchange);
               editor.setOption('maxLines',Infinity);
+              editor.container.classList.add('fullsize');
               
               onchange();
               
@@ -669,6 +673,7 @@ observer.observe(host,mconfig);
 */
 
                     hldr.style.flex     = 'none';
+                    
                     var lines = editor.getSession().getDocument().getLength();
                     editor.setOptions({
                           maxLines:lines,
