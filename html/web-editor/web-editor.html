@@ -94,10 +94,11 @@
     {content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAsBAMAAADlQedIAAAAMFBMVEVHcExDpvVLpu5CpvZNpexYrO1EpfNmq+JBpvRFpvNGpvNSp+xHpvGrtLlHpvFBpvabmoDrAAAAD3RSTlMA81r9HDqeBt7Muyp3AYxdzYCkAAABLElEQVQoz2NgwAvYfTHFeLXmOWAIMsn/f44hyPf/cwuGINv//4Nc8DoWQZZjR5AFmd4FAEmv/78cEILsB/+3Ainl//+XIARr5P//gwiClEIEgQr/f7vAwOD5H6wULMgLVPhfCKiSdT5Q6QaIIEih4XGQfTuBSldDBOvs/3+WKWCAKv25ASTI/vj//4/HIS4FKv08GyQIVPgfopCB4TZIadj//90ghbowT4FMnfn/vxhQodAFmCD3eqDo/89AMUNdhP93/YcChEKYUqBCBeTk4QVViBLEV8BKfyigBrwXpkKg0mSgWxXQ46goc9YRzLR4xZ2BEHBSQgEqYIdPNkYBlqDYLPuPBpYDBavQBacABe+hiX1OB6WQREEUILUBZFNpKAoIh4bRXSRwAZfLAT6sAtz4b+DtAAAAAElFTkSuQmCC)
     }
     
+  #hldr
+    {flex:1;min-height:50px}
+    
   #editor
-    {flex:1;min-height:50px;border:1px solid lightgray}
-    
-    
+    {border:1px solid lightgray;box-sizing:border-box;height:100% !important}
     
             </style>
             
@@ -150,7 +151,9 @@
                         
                   </div>
                   
-                  <div id=editor part=editor></div>
+                  <div id=hldr>
+                        <div id=editor part=editor></div>
+                  </div>
                   
             </div>
             
@@ -252,10 +255,10 @@ var callback    = (mutationList,observer)=>{
                   console.log('A child node has been added or removed.');
                   
             }else if(mutation.type==='attributes'){
-                  var newValue = mutation.target.getAttribute(mutation.attributeName)
-                  console.log(mutation.target.nodeName,mutation.attributeName,newValue);
+                  var newValue = mutation.target.getAttribute(mutation.attributeName);
+                  console.groupCollapsed(mutation.target,mutation.attributeName,newValue);
                   console.trace();
-                  
+                  console.groupEnd();
             }
             
       }//for
@@ -490,12 +493,14 @@ observer.observe(host,mconfig);
                     fullsize    = false;
               }
               
-              var cssText   = config.cssText;
-              
+              var cssText       = config.cssText;
               
               
               shadow            = host.shadowRoot;
               obj.shadowRoot    = shadow;
+              
+              
+              
               
               root                                        = $(shadow,'#root');
               
@@ -585,7 +590,7 @@ observer.observe(host,mconfig);
   
   
         setup.editor    = function(node,{mode,kd}={}){
-        
+                                                                                debug('setup.editor');
               mode    ||= 'javascript';
               
               switch(mode){
@@ -628,8 +633,8 @@ observer.observe(host,mconfig);
         
         
         setup.fullsize    = function(node,params={}){
-        
-              node.style.flex                   = 'none';
+                                                                                debug('setup.fullsize');
+              //node.style.flex                   = 'none';
               //$(shadow,'#root').style.height    = 'auto';
               
               setup.editor(node,params);
@@ -650,9 +655,11 @@ observer.observe(host,mconfig);
                     
                     var w       = editor.renderer.scrollBar.getWidth()
                     h          += w;
+                    h          += 10;
                     
-                    editor.container.style.height   = h+'px';
+                    editor.container.style.minHeight   = h+'px';
                     editor.resize();
+                    editor.container.style.height   = '';
                     
               }//onchange
               
@@ -963,7 +970,7 @@ observer.observe(host,mconfig);
                     }
                     
                     //editor.container.style.height   = v;
-                    root.style.height    = v;
+                    host.style.height    = v;
                     
                     
               },//set
