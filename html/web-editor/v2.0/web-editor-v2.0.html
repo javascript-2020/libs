@@ -664,11 +664,11 @@ observer.observe(host,mconfig);
                                                                                 debug('onchange',h,lh,lines);
                     //editor.container.style.minHeight   = h+'px';
                     hldr.style.height   = h+'px';
-                    hldr.style.flex     = 'none';
                     editor.resize();
                     //editor.container.style.height   = '';
 */
 
+                    hldr.style.flex     = 'none';
                     var lines = editor.getSession().getDocument().getLength();
                     editor.setOptions({
                           maxLines:lines,
