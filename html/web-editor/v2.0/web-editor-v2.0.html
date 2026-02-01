@@ -652,6 +652,7 @@ observer.observe(host,mconfig);
               
               
               function onchange(e){
+                /*
                                                                                 //console.log('onchange');
                     var lh      = editor.renderer.lineHeight;
                     var lines   = editor.session.getLength();
@@ -666,7 +667,13 @@ observer.observe(host,mconfig);
                     hldr.style.flex     = 'none';
                     editor.resize();
                     //editor.container.style.height   = '';
-                    
+*/
+
+                    var lines = editor.getSession().getDocument().getLength();
+                    editor.setOptions({
+                          maxLines:lines,
+                          // or a number minLines: 1
+                    });
               }//onchange
               
         }//fullscreen
