@@ -100,8 +100,11 @@
   #editor
     {border:1px solid lightgray;box-sizing:border-box;min-height:50px}
     
-  #editor:not(.fullsize)
+  #root:not(.fullsize) #editor
     {height:100% !important}
+    
+  #root.fullsize
+    {display:block}
     
             </style>
             
@@ -646,7 +649,8 @@ observer.observe(host,mconfig);
               
               editor.session.on('change',onchange);
               editor.setOption('maxLines',Infinity);
-              editor.container.classList.add('fullsize');
+              
+              $(shadow,'#root').classList.add('fullsize');
               
               onchange();
               
@@ -677,6 +681,8 @@ observer.observe(host,mconfig);
                           maxLines:lines,
                           // or a number minLines: 1
                     });
+                    editor.resize();
+                    
               }//onchange
               
         }//fullscreen
