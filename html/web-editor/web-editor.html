@@ -95,10 +95,10 @@
     }
     
   #hldr
-    {flex:1;min-height:50px}
+    {flex:1;}
     
   #editor
-    {border:1px solid lightgray;box-sizing:border-box}
+    {border:1px solid lightgray;box-sizing:border-box;min-height:50px}
     
   #editor:not(.fullsize)
     {height:100% !important}
@@ -154,9 +154,7 @@
                         
                   </div>
                   
-                  <div id=hldr>
-                        <div id=editor part=editor></div>
-                  </div>
+                  <div id=editor part=editor></div>
                   
             </div>
             
@@ -672,7 +670,7 @@ observer.observe(host,mconfig);
                     //editor.container.style.height   = '';
 */
 
-                    hldr.style.flex     = 'none';
+                    //hldr.style.flex     = 'none';
                     
                     var lines = editor.getSession().getDocument().getLength();
                     editor.setOptions({
