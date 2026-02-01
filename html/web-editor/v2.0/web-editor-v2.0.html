@@ -660,10 +660,10 @@ observer.observe(host,mconfig);
                     var w       = editor.renderer.scrollBar.getWidth()
                     h          += w;
                     h          += 10;
-                                                                                debug('onchange',h);
+                                                                                debug('onchange',h,lh,lines);
                     //editor.container.style.minHeight   = h+'px';
                     hldr.style.height   = h+'px';
-                    hldr.style.flex     = 0;
+                    hldr.style.flex     = 'none';
                     editor.resize();
                     //editor.container.style.height   = '';
                     
