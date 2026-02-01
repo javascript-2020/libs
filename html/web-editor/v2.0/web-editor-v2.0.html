@@ -650,7 +650,7 @@ observer.observe(host,mconfig);
               editor.session.on('change',onchange);
               editor.setOption('maxLines',Infinity);
               
-              editor.container.classList.add('fullsize');
+              $(shadow,'#root').classList.add('fullsize');
               
               onchange();
               
