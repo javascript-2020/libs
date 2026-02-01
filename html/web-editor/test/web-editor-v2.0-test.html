@@ -37,6 +37,7 @@
               editor                    = mod['web-editor'];
               
               editor.initmod({ext,$,menumod,menu});
+              editor.df=true;
               
               await editor.init();
               
@@ -149,6 +150,7 @@ function fn(){
                   
                   
                   editor.initdom({txt:txt.ed1});
+                  editor.mode='js';
                   
                   
                   
