@@ -814,7 +814,7 @@
               $(shadow,'#filename').title         = title;
               
               var mode    = modelist.getModeForPath(fn).mode
-              obj.mode    = mode;
+              editor.session.setMode(mode)
               
         }//filename
         
