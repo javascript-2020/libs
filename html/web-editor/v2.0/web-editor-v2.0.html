@@ -250,37 +250,37 @@
         
         
         
-var mconfig    = {attributes:true};//,childList:true,subtree:true};
-
-var callback    = (mutationList,observer)=>{
-
-      for (const mutation of mutationList) {
-      
-            if(mutation.type==='childList'){
-            
-                  console.log('A child node has been added or removed.');
-                  
-            }else if(mutation.type==='attributes'){
-                  var newValue = mutation.target.getAttribute(mutation.attributeName);
-                  console.groupCollapsed(mutation.target,mutation.attributeName,newValue);
-                  console.trace();
-                  console.groupEnd();
-            }
-            
-      }//for
-      
-}//callback
-
-var observer    = new MutationObserver(callback);
-
-observer.observe(host,mconfig);
-
-//observer.disconnect();
-
-
-
-
-
+                                                                                var mconfig    = {attributes:true};//,childList:true,subtree:true};
+                                                                                
+                                                                                var callback    = (mutationList,observer)=>{
+                                                                                
+                                                                                      for (const mutation of mutationList) {
+                                                                                      
+                                                                                            if(mutation.type==='childList'){
+                                                                                            
+                                                                                                  console.log('A child node has been added or removed.');
+                                                                                                  
+                                                                                            }else if(mutation.type==='attributes'){
+                                                                                                  var newValue = mutation.target.getAttribute(mutation.attributeName);
+                                                                                                  console.groupCollapsed(mutation.target,mutation.attributeName,newValue);
+                                                                                                  console.trace();
+                                                                                                  console.groupEnd();
+                                                                                            }
+                                                                                            
+                                                                                      }//for
+                                                                                      
+                                                                                }//callback
+                                                                                
+                                                                                var observer    = new MutationObserver(callback);
+                                                                                
+                                                                                observer.observe(host,mconfig);
+                                                                                
+                                                                                //observer.disconnect();
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
   //:
   
   
@@ -554,8 +554,8 @@ observer.observe(host,mconfig);
               var node                                    = $(shadow,'#editor');
               node.textContent                            = txt;
               
-              observer.observe(node,mconfig);
-              
+                                                                                  //observer.observe(node,mconfig);
+                                                                                  
               if(fullsize){
                                                                                   debug('fullsize');
                     setup.fullsize(node,{mode,kd:kd2});
