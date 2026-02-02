@@ -637,7 +637,7 @@
               
               $.editor.ace.import_style(shadow);
               
-              modelist    = ace.require('ace/ext/modelist');
+              //modelist    = ace.require('ace/ext/modelist');
               
         }//editor
         
@@ -813,8 +813,10 @@
               $(shadow,'#filename').textContent   = fn;
               $(shadow,'#filename').title         = title;
               
-              var mode    = modelist.getModeForPath(fn).mode
-              editor.session.setMode(mode)
+              obj.mode    = ext;
+              
+              //var mode    = modelist.getModeForPath(fn).mode
+              //editor.session.setMode(mode)
               
         }//filename
         
