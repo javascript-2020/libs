@@ -27,6 +27,7 @@
         async function run(){
         
               //output.iframe.contentWindow.focus();
+              div.replaceChildren();
                                                                                 console.clear();
                                                                                 
                                                                                 
