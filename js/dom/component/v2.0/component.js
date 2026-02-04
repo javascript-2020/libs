@@ -966,7 +966,7 @@
                                                                                 console.clear();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var version='v1.0';
-        df=true,did='';
+        df=true,did='html';
         
         if(typeof ace=='undefined'){
               ace   = null;
