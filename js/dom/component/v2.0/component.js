@@ -964,23 +964,20 @@
               return;
         }
                                                                                 console.clear();
-                                                                                //console.log('[ init-hdr ]');
-                                                                                console.log();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
         var version='v1.0';
-        
         df=true,did='';
         
         if(typeof ace=='undefined'){
-              ace=null;
+              ace   = null;
         }
         if(typeof log=='undefined'){
-              log=null;
+              log   = null;
         }
         
         //Object.assign(window,{ext,$,datatype,menumod,keydown,debug,ls});
         
-        menu=null;
+        menu    = null;
         
         
     //:
@@ -995,7 +992,7 @@
               menu.add.style();
               
               
-              var log   = mod['log-mod'];
+              log   = mod['log-mod'];
               
               
               mod.base.add({
