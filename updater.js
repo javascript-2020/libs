@@ -8,7 +8,6 @@
                                                                                 console.log();
                                                                                 
                                                                                 
-                                                                                
         var {ext}                           = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js');
         [github,datatype,$]                 = await ext.load.libs('js/io/github/github.js','js/core/datatype.js','js/dom/$.js.api');
         github.owner                        = 'javascript-2020';
@@ -105,7 +104,7 @@
                           return;
                     }
                     
-                                                                                console.write('ok').style.color='green';
+                                                                                console.log('ok');//.style.color='green';
                                                                                 //console.log(ok);
               }//update
               
