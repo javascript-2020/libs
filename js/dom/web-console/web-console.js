@@ -495,7 +495,10 @@
                                                                                 //debugger;
                                                                                 //if(typeof txt=='string')debugger;
                           node.append(span);
-                          var errorStack    = htmlEscape(this.data.stack,false);
+                          var errorStack    = ['','[ No Stack Trace Available ]'];
+                          if(this.data.stack){
+                                errorStack    = htmlEscape(this.data.stack,false);
+                          }
                           var errorLines    = errorStack.split('\n');
                           errorLines.shift();
                           errorLines.forEach(function(line){
