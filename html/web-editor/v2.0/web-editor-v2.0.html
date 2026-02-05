@@ -1023,7 +1023,7 @@
               },
               get   : ()=>{
               
-                    var mode    = editor.session.getMode();
+                    var mode    = editor.session.getMode().$id;
                     console.log(mode);
                     var parts   = mode.split('/');
                     var mode    = parts.at(-1);
