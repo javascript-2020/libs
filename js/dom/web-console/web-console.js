@@ -4,22 +4,22 @@
 (function(){
 
   var obj   = {};
-
+  
   
         var df              = false;
         
-
+        
   //:
-
+  
         var ace
         ;
         
-  
+        
         obj.initmod   = function(params){
         
               ace     = params.ace;
               if(!ace)debugger;
-
+              
               
         }//initmod
         
@@ -28,38 +28,38 @@
   
   
         obj.init    = function(){
-          
+        
               Range           = ace.require('ace/range').Range;
               
         }//init
         
-
-  //:        
-
-
-        obj.create    = function(root){
-
-              var params    = {
-                    mode            : 'r',
-                    onInput         : function (text) {},
-                    onRightClick    : function (obj) {},
-              };              
-              
-              var cons      = new Console(params,root);
-                                                                                //window.console.log(cons);
-              return cons;
-        
-        }//create
-
         
   //:
   
   
+        obj.create    = function(root){
         
+              var params    = {
+                    mode            : 'r',
+                    onInput         : function (text) {},
+                    onRightClick    : function (obj) {},
+              };
+              
+              var cons      = new Console(params,root);
+                                                                                //window.console.log(cons);
+              return cons;
+              
+        }//create
+        
+        
+  //:
+  
+  
+  
         var Range;
         //var log             = window.console.log.bind(console);
                                                                                 // extracts the line number at the end of a file in an error log
-        var fileRegex       = /((?:https?:\/\/|www\.)(?:(?:[^\.\:])*(?:\.|\:))(?:[^:\/]+\/)*([^:\/]+)*)(?::(\d*))?(?::(\d*))?/; 
+        var fileRegex       = /((?:https?:\/\/|www\.)(?:(?:[^\.\:])*(?:\.|\:))(?:[^:\/]+\/)*([^:\/]+)*)(?::(\d*))?(?::(\d*))?/;
         var evalFileRegex   = /\((((?:[^):\/]+\/)*([^):\/]+)*)(?::(\d*))?(?::(\d*))?)/;
         
         var htmlEscape      = function(text,format){
@@ -67,6 +67,11 @@
               if(typeof text=='symbol'){
                     text = text.toString();
               }
+              if(typeof text!='string'){
+                    debugger;
+                    return text;
+              }
+              
               text    = text.replace(/&/g,'&amp;');
               text    = text.replace(/</g,'&lt;');
               text    = text.replace(/>/g,'&gt;');
@@ -90,7 +95,7 @@
         var maxHistoryLength          = 140;
         var maxObjectPreviewLength    = 60; //characters
         var maxStringPreviewLength    = 30; //characters
-
+        
         
         var inputCodeTemplate =
             "<div class='js-console inputLine'>"              +
@@ -110,8 +115,8 @@
             "<div class='js-console output'>"   +
             "</div>"                            +
             inputCodeTemplate.replace("inputCode","inputCode input");
-
-    
+            
+            
         var dividerClass    = "ace_print-margin";
         var lBrace          = "<span class='ace_lparen'>{</span>";
         var rBrace          = "<span class='ace_rparen'>}</span>";
@@ -145,7 +150,7 @@
                       htmlEscape(val.toString())                              +
                   "</span>"
               );
-            
+              
         }//getStringText
         
         
@@ -218,7 +223,7 @@
               
         }//getKeySymbolText
         
-    
+        
                                                                                   //some util functions
         function setupEditor(el,style,mode){
         
@@ -243,12 +248,12 @@
               
         }//setupEditor
         
-
-
-
+        
+        
+        
         
         function createCollapseEl(clas,parClass){
-          
+        
               var element   = define(`
                     <span class='js-console-collapsible js-console ${(parClass||"")}'>
                           <div class='js-console-collapsible header-outer js-console'>
@@ -282,7 +287,7 @@
                                 element.classList.remove('open');
                                 display   = 'none';
                           }
-
+                          
                           
                           var node              = element.querySelector('.content');
                           node.style.display    = display;
@@ -319,16 +324,16 @@
                         if(e.button==0 && e.detail>1){
                               e.preventDefault();
                         }
-                      
+                        
                   }//onmousedown
                   
               return element;
-            
+              
         }//createCollapseEl
-
-
-
-  
+        
+        
+        
+        
         
         function closest(el,selector){
         
@@ -343,7 +348,7 @@
               return null;
               
         }//closest
-  
+        
         
         function specialObj(obj){
         
@@ -359,7 +364,7 @@
         
         
         function isnode(v){
-          
+        
               if(!v)return;
               if(!v.nodeType)return;
               if(!v.nodeName)return;
@@ -369,7 +374,7 @@
         
         
         function getFileLocationElement(line,clas){
-          
+        
               var fileMatch       = line.match(fileRegex);
               var evalFileMatch   = line.match(evalFileRegex);
               var out             = {};
@@ -381,13 +386,13 @@
                     if(file && lineNumber){
                           file   += ':';
                     }
-        
+                    
                     out.el      = createCollapseEl('');
                     
                     var txt     = file.replace(/%20/g,' ')+lineNumber;
                     var list    = out.el.querySelectorAll('.header');
                     list.forEach(node=>node.append(txt));
-
+                    
                     var html    = `
                           <a href='${fileMatch[1]}'>
                                 ${fileMatch[0].replace(/%20/g," ")}
@@ -408,12 +413,12 @@
                     if(file&&lineNumber){
                           file   += ':';
                     }
-        
+                    
                     out.el      = createCollapseEl('');
                     var txt     = file.replace(/%20/g,' ')+lineNumber;
                     var list    = out.el.querySelectorAll('.header');
                     list.forEach(node=>node.append(txt));
-  
+                    
                     var txt     = evalFileMatch[1].replace(/%20/g,' ');
                     var list    = out.el.querySelectorAll(':scope>.content');
                     list.forEach(node=>node.append(txt));
@@ -421,7 +426,7 @@
                     out.match   = evalFileMatch;
                     out.end     = evalFileMatch.index+evalFileMatch[0].length;
                     out.start   = out.end-evalFileMatch[1].length;
-                  
+                    
               }else{
                     return;
               }
@@ -430,11 +435,11 @@
               out.file          = file;
               out.el.classList.add(clas);
               return out;
-            
+              
         }//getFileLocationElement
-
-
-    
+        
+        
+        
                                                                                   //data to be logged
         function DataObject(data,outputLineData,parent,name){
         
@@ -447,7 +452,7 @@
             this.name             = name;
             
         }//DataObject
-  
+        
         
         DataObject.prototype.getPreviewElement    = function(prefix,depth){
         
@@ -466,9 +471,9 @@
               
         }//getPreviewElement
         
-
-
-
+        
+        
+        
         
         DataObject.prototype.getElement   = function(prefix,depth){
         
@@ -480,7 +485,7 @@
               if(depth==null){
                     depth   = 0;
               }
-      
+              
               if(this.data instanceof Error){
                     if(!this.element){
                           this.element    = createCollapseEl('errorMessage','errorOutput');
@@ -551,7 +556,7 @@
                                 var isArray   = this.data instanceof Array;
                                 var isFunc    = this.data instanceof Function;
                           }
-          
+                          
                           var name    = 'object';
                           if(isArray){
                                 name    = 'array';
@@ -562,7 +567,7 @@
                           name   += 'Output';
                           this.element    = createCollapseEl(name);
                     }
-      
+                    
                     if(depth<=1){
                           if(!this.previewElement){
                                 if(specialObj(this.data)){
@@ -575,7 +580,7 @@
                                                                                 if(typeof this.previewElement=='string'){
                                                                                       this.previewElement   = define(this.previewElement);
                                                                                 }
-                          
+                                                                                
                           var node    = this.element.querySelector('.header');
                           node.replaceChildren();
                           node.append(this.previewElement);
@@ -588,7 +593,7 @@
                     
                           var node        = this.element.querySelector('.header-outer');
                           node.onclick    = function(e) {
-                              
+                          
                                 var opens   = This.element.classList.contains('open');
                                 if(opens){
                                       This.getElement();
@@ -618,9 +623,9 @@
                           this.element    = r;
                     }
               }
-
-
-      
+              
+              
+              
               if(!hadElement && this.element){
                   this.element.data         = this;
                   this.element.onmouseup    = function(e){
@@ -630,19 +635,19 @@
                               e.stopImmediatePropagation();
                               e.preventDefault();
                         }
-                      
+                        
                   }//onmouseup
               }
-
-      
+              
+              
               return this.element;
-            
+              
         }//getElement
         
-
-
-
-
+        
+        
+        
+        
         
         DataObject.prototype.getNonObjectData   = function(preview){
         
@@ -685,7 +690,7 @@
                                                       break;
                                                       
                 case (typeof this.data=='boolean')  :
-              
+                
                                                       html    = `
                                                           <span class='undefinedOutput'>
                                                               ${this.prefix+getBooleanText(this.data,'value')}
@@ -695,7 +700,7 @@
                                                       break;
                                                       
                 case (typeof this.data=='function') :
-              
+                
                                                       html    = `
                                                           <span class='functionOutput'>
                                                               ${this.prefix+func}
@@ -705,7 +710,7 @@
                                                       break;
                                                       
                 case (this.data instanceof RegExp)  :
-              
+                
                                                       html    = `
                                                           <span class='regexOutput'>
                                                               ${this.prefix+getRegexText(this.data,'value')}
@@ -715,7 +720,7 @@
                                                       break;
                                                       
                 case (this.data instanceof Error)   :
-              
+                
                                                       html    = `
                                                           <span class='errorOutput'>
                                                               ${this.prefix+getErrorText(this.data)}
@@ -725,7 +730,7 @@
                                                       break;
                                                       
                 case (this.data===null)             :
-              
+                
                                                       html    = `
                                                           <span class='nullOutput'>
                                                               ${this.prefix+nul}
@@ -735,7 +740,7 @@
                                                       break;
                                                       
                 case (this.data===undefined)        :
-              
+                
                                                       html    = `
                                                           <span class='undefinedOutput'>
                                                               ${this.prefix+undef}
@@ -745,7 +750,7 @@
                                                       break;
                                                       
                 case (typeof this.data=='symbol')   :
-              
+                
                                                       html    = `
                                                           <span class='symbol'>
                                                               ${this.prefix+getSymbolText(this.data)}
@@ -754,12 +759,12 @@
                                                       
                                                       break;
                                                       
-                case (isnode(this.data))            : 
+                case (isnode(this.data))            :
                                                       node    = this.data;
                                                       break;
-                
+                                                      
                 default                             :
-              
+                
                                                       html    = `
                                                             <span class='rawOutput'>
                                                                   ${this.prefix+this.data}
@@ -771,7 +776,7 @@
                     node    = define(html);
               }
               return node;
-            
+              
         }//getNonObjectData
         
         
@@ -788,31 +793,31 @@
               if(this.data && this.data.__proto__!=Object.prototype){
                     keys.push('__proto__');
               }
-
-                    
+              
+              
               for(var i=0;i<keys.length;i++){
               
                     var key   = keys[i];
                     try {
                                                                                 //  try to catch arguments request on function
-
+                                                                                
                           var obj;
                           if(this.getterObj && key!='__proto__'){
                                 obj   = this.getterObj[key];
                           }else{
                                 obj   = this.data[key];
                           }
-          
+                          
                                                                                 // var obj = this.data[key];
                           var dObj    = new DataObject(obj,this.outputLineData,this,key);
                           if(key=='__proto__'){
                                 dObj.getterObj    = this.getterObj || this.data;
                           }
-
-          
+                          
+                          
                           var list    = this.element.querySelectorAll(':scope>.content');
                           list.forEach(node=>{
-                                
+                          
                                 var k     = typeof key=='symbol' ? getKeySymbolText(key) : getKeyText(key);
                                 var t     = k+colon+' ';
                                 var el    = dObj.getElement(t,1);
@@ -829,12 +834,12 @@
                                       
                                 });
                           }
-                        
+                          
                     }//try
                     catch(e){}
-                  
+                    
               }//for
-            
+              
         }//createObjectData
         
         
@@ -870,10 +875,10 @@
             var html    = isArray ? lSquareBrack : lBrace;
             var node    = define(html);
             previewEl.append(node);
-    
+            
             if(depth<1){
-                
-                  var n     = keys.length;                   
+            
+                  var n     = keys.length;
                   for(var i=0;i<n;i++){
                   
                         var txt   = previewEl.textContent;
@@ -883,34 +888,34 @@
                         }
                         
                         var key   = keys[i];
-
-        
+                        
+                        
                         var obj;
                         if(this.getterObj && key!='__proto__'){
                               obj   = this.getterObj[key];
                         }else{
                               obj   = this.data[key];
                         }
-        
+                        
                         var dObj    = new DataObject(obj);
                         if(key=='__proto__'){
                               dObj.getterObj    = this.getterObj||this.data;
                         }
-
-        
+                        
+                        
                         if(i>0){
                               var html    = comma+' '
                               var node    = define(html);
                               previewEl.append(node);
                         }
-
+                        
                         
                         var s   = htmlEscape(key)+colon+' ';
                         var t   = (isArray && key==i) ? '' : s;
                         var r   = dObj.getPreviewElement(t,depth+1);
                                                                                 if(df && typeof r=='string')debugger;
                         previewEl.append(r);
-                      
+                        
                   }//for
                   
                   if(i<keys.length){
@@ -924,7 +929,7 @@
                   var node    = define(html);
                   previewEl.append(node);
             }
-    
+            
             var html    = isArray ? rSquareBrack : rBrace;
             var node    = define(html);
             previewEl.append(node);
@@ -945,17 +950,17 @@
               }
               
         }//getPath
-    
-    
-    
-    
+        
+        
+        
+        
                                                                                     //console interface
         var Console   = function(data,element){
         
               if(Object.keys(this).length==0){
               
                     if(!data)data   = {};
-        
+                    
                     var This        = this;
                     var el          = element;
                     el.innerHTML    = consoleTemplate;
@@ -965,12 +970,12 @@
                             return false;
                             
                     }//oncontextmenu
-        
+                    
                     if(!data)data               = {};
                     if(!data.theme)data.theme   = 'xcode';
                     if(!data.mode)data.mode     = 'javascript';
                     if(!data.style)data.style   = 'light';
-        
+                    
                                                                                     //create ace editors
                     this.outputEl       = el.querySelector('.output');
                     var node            = el.querySelector('.input');
@@ -1002,7 +1007,7 @@
                                                   
                                               }//exec
                           });
-                            
+                          
                           this.inputEditor.commands.addCommand({
                               name      : 'arrowUp',
                               bindKey   : {win:'Up',mac:'Up'},
@@ -1054,17 +1059,17 @@
                     }
                     
                     el.classList.add('ace-'+data.theme,data.style);
-        
-                                                                                    //FIX: "Input element isn't focussed when 
+                    
+                                                                                    //FIX: "Input element isn't focussed when
                                                                                     //clicking in the history element #5"
                     el.onclick    = function(e){
                     
                           if(window.getSelection().toString()==''){
                                 This.inputEditor.focus();
                           }
-                                
+                          
                     }//onclick
-        
+                    
                                                                                     //create variables needed to manage the console
                     this.data               = data;
                     this.outputs            = [];
@@ -1128,7 +1133,7 @@
               editor.setReadOnly(true);
               editor.renderer.$cursorLayer.element.style.display    = 'none';
               editor.setValue(text,-1);
-      
+              
                                                                                     //  FIX: "Input element isn't focussed when clicking
                                                                                     //  in the history element #5"
               var ThisConsole   = this;
@@ -1137,7 +1142,7 @@
               list.forEach(node=>{
               
                     node.onclick   = e=>{
-              
+                    
                           if(editor.getSelectedText()==''){
                                 ThisConsole.inputEditor.focus();
                           }
@@ -1162,9 +1167,9 @@
               this.elementLog.push(dataObj);
               this.historyIndex   = this.inputs.length;
                                                                                     //  remove history if the limit has been reached
-              this.$removeHistory(); 
+              this.$removeHistory();
                                                                                     //  remove elements if the limit has been reached
-              this.$removeElement(); 
+              this.$removeElement();
               return dataObj;
               
         }//input
@@ -1185,7 +1190,7 @@
         
         
         Console.prototype.$print    = function(clas){
-          
+        
               var st            = this.element.scrollTop;
               var sh            = this.element.scrollHeight;
               var h             = this.element.offsetHeight;
@@ -1196,7 +1201,7 @@
               
               var el            = define(outputTemplate);
               var out           = el.querySelector('.outputData');
-      
+              
               var objects       = Array.from(arguments);
               objects.shift();
               
@@ -1207,7 +1212,7 @@
                     id        : this.messageID++,
                     console   : this
               };
-      
+              
               var dataObjects   = [];
               
               for(var i=1;i<arguments.length;i++){
@@ -1227,27 +1232,27 @@
                     }
                     
               }//for
-      
+              
               el.classList.add(clas);
               if(this.showIcons){
                     var str   = (clas=='warn'?'warning':clas);
                     var txt   = 'ace_gutter-cell ace_'+str;
                     el.classList.add(txt);
               }
-      
+              
               this.outputEl.append(el);
               if(isMaxScroll){
                                                                                   //  scroll all the way down if it was all the way down
-                    this.element.scrollTop    = this.element.scrollHeight; 
+                    this.element.scrollTop    = this.element.scrollHeight;
               }
-      
+              
               dataObj.dataObjects   = dataObjects;
               this.outputs.push(dataObj);
               this.elementLog.push(dataObj);
                                                                                   //  remove elements if the limit has been reached
               this.$removeElement();
               return dataObj;
-            
+              
         }//$print
         
         
@@ -1266,7 +1271,7 @@
         
         
         Console.prototype.log = function(){
-          
+        
               var prevPrint   = this.$getLastPrint();
                                                                                 //  increment log counter code
               {
@@ -1274,7 +1279,7 @@
                           if(arguments.length==prevPrint.arguments.length){
                                                                                 //  check if arguments are identical
                                 for(var i=0;i<arguments.length;i++){
-                                  
+                                
                                       var arg       = arguments[i];
                                       var lastArg   = prevPrint.arguments[i];
                                       
@@ -1285,14 +1290,14 @@
                                       if(
                                           arg instanceof Console.LineNumber             &&
                                           lastArg instanceof Console.LineNumber         &&
-                                          arg.element.text()==lastArg.element.text()    
+                                          arg.element.text()==lastArg.element.text()
                                       ){
                                             continue;
                                       }
                                       break outer;
                                       
                                 }//for
-            
+                                
                                                                                 //  increment counter
                                 var icon    = prevPrint.element.querySelector('.outputIcon');
                                 icon.classList.add('number');
@@ -1310,24 +1315,24 @@
                                       node.style.maxWidth   = max;
                                       
                                 });
-                                    
+                                
                                 return;
                           }
                     }
               }
-      
+              
               var args    = Array.from(arguments);
               this.$makeStringsPlain(args);
               args.unshift("log");
-      
+              
               var ret         = this.$print.apply(this,args);
                                                                                 //  append arguments for increment log counter process
-              ret.arguments   = Array.from(arguments); 
-      
+              ret.arguments   = Array.from(arguments);
+              
               this.$addDivider(ret.element);
-      
+              
               return ret;
-            
+              
         }//log
         
         
@@ -1398,7 +1403,7 @@
               if(!this.timers){
                     this.timers   = {};
               }
-      
+              
               var args    = Array.from(arguments);
               if(!label || typeof label!='string'){
                     label   = 'default';
@@ -1406,7 +1411,7 @@
                     args.shift();
               }
               this.$makeStringsPlain(args);
-      
+              
               if(!this.timers[label]){
                     var t   = new Console.PlainText(label+': 0ms');
                     args.unshift('timeEnd',t);
@@ -1416,16 +1421,16 @@
                     args.unshift('timeEnd',t);
                     delete this.timers[label];
               }
-      
+              
               var ret   = this.$print.apply(this,args);
               this.$addDivider(ret.element);
               return ret;
-            
+              
         }//timeEnd
         
         
         Console.prototype.$removeElement    = function(element){
-          
+        
               if(element==null){
                                                                                     //  remove until below threshold
                   while(this.elementLog.length>this.maxLogLength){
@@ -1437,7 +1442,7 @@
                   }//while
                   return;
               }
-      
+              
               var obj;
               var index;
               if(typeof element=='number'){
@@ -1470,12 +1475,12 @@
                         
                   }//for
               }
-      
+              
               if(obj){
                     if(this.$trigger('elementRemove',obj)){
                           return;
                     }
-        
+                    
                     if(obj.dataObjects){
                                                                                 //output object
                           var index   = this.outputs.indexOf(obj);
@@ -1489,11 +1494,11 @@
                           obj.element.remove();
                           obj.editor.destroy();
                     }
-        
+                    
                     this.elementLog.splice(index,1);
                     return true;
               }
-            
+              
         }//$removeElement
         
         
@@ -1510,7 +1515,7 @@
                   }//while
                   return;
               }
-      
+              
               var obj;
               var index;
               
@@ -1529,7 +1534,7 @@
                       }
                   }
               }
-      
+              
               if(obj){
                     this.inputs.splice(index,1);
                     if(this.historyIndex>index){
@@ -1546,19 +1551,19 @@
               if(this.historyIndex==this.inputs.length){
                     this.tempHist   = this.inputEditor.getValue();
               }
-      
+              
               this.historyIndex   = Math.max(this.historyIndex-1,0);
-      
+              
               var h   = this.inputs[this.historyIndex];
               if(h&&h.text){
                     this.inputEditor.setValue(h.text,1);
                                                                                       //  select last column of first line
-                    var fl    = h.text.split("\n")[0].length; 
+                    var fl    = h.text.split("\n")[0].length;
                     var r     = new Range(0,fl,0,fl);
                     this.inputEditor.selection.setRange(r);
               }
               return this;
-            
+              
         }//$prevHistory
         
         
@@ -1567,9 +1572,9 @@
               if(this.historyIndex==this.inputs.length){
                     this.tempHist   = this.inputEditor.getValue();
               }
-      
+              
               this.historyIndex   = Math.min(this.historyIndex+1,this.inputs.length);
-      
+              
               if(this.historyIndex==this.inputs.length){
                     this.inputEditor.setValue(this.tempHist,1);
               }else{
@@ -1598,7 +1603,7 @@
                     if(typeof args[i]=='string' && args[i].length>0){
                           args[i]   = new Console.PlainText(args[i]);
                     }
-                        
+                    
               }//for
               
         }//$makeStringsPlain
@@ -1675,7 +1680,7 @@
               if(listeners){
                   var args    = Array.from(arguments);
                   args.shift();
-      
+                  
                   var out   = undefined;
                   
                   for(var i=0;i<listeners.length;i++){
@@ -1687,18 +1692,18 @@
                         }
                         
                   }//for
-      
+                  
                   return out;
               }
               
               return false;
               
         }//$trigger
-    
-    
+        
+        
                                                                                     // special log input objects
         Console.prototype.LineNumber    = Console.LineNumber;
-                                                                                    
+        
         Console.LineNumber    = function(file,lineNumber,trace){
         
               if(typeof file=='number'){
@@ -1710,10 +1715,10 @@
                     trace       = node;
                     file        = '';
               }
-      
+              
               file          = htmlEscape(file||'');
               lineNumber    = lineNumber!=null ? lineNumber : '';
-      
+              
               if(trace){
                     var fileData    = getFileLocationElement(trace,'lineNumber');
                     if(fileData){
@@ -1730,13 +1735,13 @@
                     var html        = `<span class=lineNumber>${str}</span>`;
                     this.element    = define(html);
               }
-      
+              
               this.file         = file;
               this.lineNumber   = lineNumber;
               
         }//LineNumber
         
-
+        
         
         Console.prototype.PlainText   = Console.PlainText;
         
@@ -1759,12 +1764,12 @@
               
         }//HtmlElement
         
-
+        
   //:
   
   
         Console.prototype.ansi    = function(html){
-          
+        
               var node    = define(html);
               this.$print('debug',node);
               
@@ -1772,21 +1777,21 @@
         
         
         Console.prototype.write   = function(){
-          
+        
               this.log.apply(this,arguments);
               
         }//write
-
-
-
-    
+        
+        
+        
+        
         //$.fn.console = Console;
-
-
-
-    
+        
+        
+        
+        
   return obj;
-    
+  
 })();
 
 
