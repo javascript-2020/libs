@@ -1024,6 +1024,7 @@
               get   : ()=>{
               
                     var mode    = editor.session.getMode();
+                    console.log(mode);
                     var parts   = mode.split('/');
                     var mode    = parts.at(-1);
                     return mode;
