@@ -152,6 +152,7 @@
                     
                     var str   = Object.keys(ctx).join(',');
                     
+                    win.eval(`console.log('sandbox',window.crossOriginIsolated`);
                     win.eval(`
                           async function run(js,{clear,disp_result,console,ctx}={}){
                           
