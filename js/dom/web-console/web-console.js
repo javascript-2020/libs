@@ -495,12 +495,14 @@
                                                                                 //debugger;
                                                                                 //if(typeof txt=='string')debugger;
                           node.append(span);
-                          var errorStack    = ['','[ No Stack Trace Available ]'];
+                          
+                          var errorLines    = ['[ No Stack Trace Available ]'];
                           if(this.data.stack){
-                                errorStack    = htmlEscape(this.data.stack,false);
+                                var errorStack    = htmlEscape(this.data.stack,false);
+                                errorLines    = errorStack.split('\n');
+                                errorLines.shift();
                           }
-                          var errorLines    = errorStack.split('\n');
-                          errorLines.shift();
+                          
                           errorLines.forEach(function(line){
                           
                                 var lineEl    = define('<span></span>');
