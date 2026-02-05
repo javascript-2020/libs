@@ -250,7 +250,7 @@
         var setup       = {};
         
         
-        
+                                                                                /*
                                                                                 var mconfig    = {attributes:true};//,childList:true,subtree:true};
                                                                                 
                                                                                 var callback    = (mutationList,observer)=>{
@@ -277,7 +277,7 @@
                                                                                 observer.observe(host,mconfig);
                                                                                 
                                                                                 //observer.disconnect();
-                                                                                
+                                                                                */
                                                                                 
                                                                                 
                                                                                 
@@ -1011,15 +1011,24 @@
         
               set   : v=>{
               
-                      switch(v){
+                    switch(v){
+                    
+                      case 'js'   : v='javascript';       break;
+                      case 'py'   : v='python';           break;
                       
-                        case 'js'   : v='javascript';       break;
-                        case 'py'   : v='python';           break;
-                        
-                      }//switch
-                      
-                      editor.session.setMode(`ace/mode/${v}`)
-                      
+                    }//switch
+                    
+                    editor.session.setMode(`ace/mode/${v}`)
+                    
+              },
+              get   : ()=>{
+              
+                    var mode    = editor.session.getMode().$id;
+                    console.log(mode);
+                    var parts   = mode.split('/');
+                    var mode    = parts.at(-1);
+                    return mode;
+                    
               }
               
         });
