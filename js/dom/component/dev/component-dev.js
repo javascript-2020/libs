@@ -229,13 +229,19 @@
               
               build.host.template2    = function({root,html,i2}){
               
-                    var i4    = html.indexOf('template',i2);
-                    i4        = html.lastIndexOf('<',i4);
+                    var i4              = html.indexOf('template',i2);
+                    var i5              = html.lastIndexOf('<',i4);
                     
-                    var html2   = html.slice(i2+1,i4);
+                    var html2           = html.slice(i2+1,i5);
                     
                     root.attachShadow({mode:'open'});
                     root.shadowRoot.innerHTML   = html2;
+                    
+                    var i6              = html.indexOf('>',i4);
+                    var i7              = html.lastIndexOf('<');
+                    
+                    var html3           = html.slice(i6+1,i7);
+                    root.innerHTML      = html3;
                     
               }//teplate2
               
@@ -258,7 +264,8 @@
                                                                                 if(!html.trim)debugger;
                     html            = html.trim();
                     
-                    
+                    build.host({root,html});
+                    /*
                     var div         = document.createElement('div');
                     div.setHTMLUnsafe(html);
                     var node        = div.firstElementChild;
