@@ -241,7 +241,9 @@
                     var i7              = html.lastIndexOf('<');
                     var html3           = html.slice(i6+1,i7);
                     
-                    root.innerHTML      = html3;
+                    var div             = document.createElement('div');
+                    div.innerHTML       = html3;
+                    root.append(...div.childNodes);
                     
               }//teplate2
               
