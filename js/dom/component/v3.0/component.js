@@ -3,6 +3,7 @@
         
 (()=>{
 
+                                                                                //debug('component','v3.0');
         var full_list   = [];
         var cache       = {};
         
@@ -13,8 +14,8 @@
         
         
         function onload(){
-        
-        
+                                                                                //debug('onload');
+                                                                                
               if(typeof init=='function'){
                     if(!mod.stack.includes(init)){
                                                                                 //console.log('init added');
@@ -215,7 +216,7 @@
               
               
               build.host.template   = function({root,html}){
-                                                                                console.log('build.host.template');
+                                                                                debug('build.host.template');
                     var div         = document.createElement('div');
                     div.setHTMLUnsafe(html);
                     var node        = div.firstElementChild;
@@ -228,7 +229,7 @@
               
               
               build.host.template2    = function({root,html,i2}){
-                                                                                console.log('build.host.template2');
+                                                                                debug('build.host.template2');
                     var i4              = html.indexOf('template',i2);
                     var i5              = html.lastIndexOf('<',i4);
                     var html2           = html.slice(i2+1,i5);
@@ -246,7 +247,7 @@
               
               
               build.host.html    = function({root,html,i1}){
-                                                                                console.log('build.host.html');
+                                                                                debug('build.host.html');
                     var i2            = html.lastIndexOf('<');
                     var html2         = html.slice(i1+1,i2);
                     
@@ -1024,7 +1025,7 @@
         }
                                                                                 console.clear();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
-        var version='v1.0';
+        version='v1.0';
         df=true,did='html';
         
         if(typeof ace=='undefined'){
