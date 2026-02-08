@@ -198,7 +198,7 @@
               }//build
               
               
-              build.host    = function(){
+              build.host    = function({root,html}){
               
                     var i1    = html.indexOf('>');
                     var i2    = html.indexOf('>',i1+1);
