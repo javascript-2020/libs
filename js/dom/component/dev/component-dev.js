@@ -215,7 +215,7 @@
               
               
               build.host.template   = function({root,html}){
-              
+                                                                                console.log('build.host.template');
                     var div         = document.createElement('div');
                     div.setHTMLUnsafe(html);
                     var node        = div.firstElementChild;
@@ -228,7 +228,7 @@
               
               
               build.host.template2    = function({root,html,i2}){
-              
+                                                                                console.log('build.host.template2');
                     var i4              = html.indexOf('template',i2);
                     var i5              = html.lastIndexOf('<',i4);
                     
@@ -247,7 +247,7 @@
               
               
               build.host.html    = function({root,html}){
-              
+                                                                                console.log('build.host.html');
                     root.innerHTML    = html;
                     
               }//html
