@@ -208,7 +208,7 @@
                           //build.host.template({root,html});
                           build.host.template2({root,html,i2});
                     }else{
-                          build.host.html({root,html});
+                          build.host.html({root,html,i1});
                     }
                     
               }//host
@@ -245,9 +245,12 @@
               }//teplate2
               
               
-              build.host.html    = function({root,html}){
+              build.host.html    = function({root,html,i1}){
                                                                                 console.log('build.host.html');
-                    root.innerHTML    = html;
+                    var i2            = html.lastIndexOf('<');
+                    var html2         = html.slice(i1+1,i2);
+                    
+                    root.innerHTML    = html2;
                     
               }//html
               
@@ -263,7 +266,8 @@
                                                                                 if(!html.trim)debugger;
                     html            = html.trim();
                     
-                    build.host({root,html});
+                    build.host({root,html,nn});
+                    
                     /*
                     var div         = document.createElement('div');
                     div.setHTMLUnsafe(html);
