@@ -231,7 +231,6 @@
                                                                                 console.log('build.host.template2');
                     var i4              = html.indexOf('template',i2);
                     var i5              = html.lastIndexOf('<',i4);
-                    
                     var html2           = html.slice(i2+1,i5);
                     
                     root.attachShadow({mode:'open'});
@@ -239,8 +238,8 @@
                     
                     var i6              = html.indexOf('>',i4);
                     var i7              = html.lastIndexOf('<');
-                    
                     var html3           = html.slice(i6+1,i7);
+                    
                     root.innerHTML      = html3;
                     
               }//teplate2
