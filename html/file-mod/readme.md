@@ -48,7 +48,7 @@ initmod|standard function for importing local dependencies
 init|standard initialisation function
 initdom|standard function to setup the dom
  | 
-save ( file )   | read source and save under *file*
+save ( file )   | read source blob and save under *file* or current file
 clear ()        | clear the current file
 new ( ...opts ), newfile( ...opts )   | create a new file object, see below
 export ( file )   | serialise *file*
