@@ -34,7 +34,6 @@ these attribute can be defined on the html tag itself
 
 attribute     | description
 ---------     |-----------
-
 none | no supported attributes
 
 
