@@ -49,7 +49,7 @@
         
         
         function kill(){
-          debugger;
+        
               if(!iframe)return;
               iframe.remove();
               
