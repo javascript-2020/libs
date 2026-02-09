@@ -267,7 +267,7 @@
                     
                     iframe.remove();
                     
-                    resolve({code});
+                    resolve({});
                     
               }//onload
               
