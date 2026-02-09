@@ -2,8 +2,8 @@
 
 
 
-            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+            <script src='https://libs.ext-code.com/js/dom/component/v3.0/component.js'></script>
+            
             <script init>
                                                                           console.clear();
                                                                           console.log('publish-ui-v2.0-test.html');
@@ -15,8 +15,8 @@
             
             var publish;
             var log;
-
-
+            
+            
   //:
   
   
@@ -25,8 +25,8 @@
                   keydown.add(kd);
                   
                   menu                      = menumod();
-
-
+                  
+                  
                   publish                   = mod['publish-ui'];
                   log                       = mod.log;
                   
@@ -38,14 +38,14 @@
                         publish.init(),
                         log.init(),
                   ]);
-
+                  
                   
                   initdom(document.body);
-
-
+                  
+                  
             }//init
-  
-
+            
+            
   //:
   
   
@@ -54,7 +54,7 @@
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
@@ -62,33 +62,33 @@
               'js/dom/keydown/keydown.js'
         );
         [$,datatype,menumod,keydown]   = await promise;
-  
+        
         mod.stack.complete;
-              
+        
 })();
 
-      
+
       </script init>
       
-
-
+      
+      
             <style>
             
   html
     {height:100%}
   body
     {height:calc(100% - 16px);font-family:arial}
-  
+    
   .icon
     {width:30px;height:30px;border:1px solid gray;border-radius:3px;box-sizing:border-box;cursor:pointer;}
   button
-    {padding:5px 10px;cursor:pointer;height:30px;font-size:16px}            
-            
+    {padding:5px 10px;cursor:pointer;height:30px;font-size:16px}
+    
             </style>
             
       </head>
       
-
+      
       <body>
       
             <div>
@@ -100,29 +100,29 @@
             <div>
                   <button id=test>test</button>
             </div>
-
-
+            
+            
             <log component v2.0></log>
-
-
+            
+            
             
             <checkbox-one-template>
                   <script src='https://html-loader-1024713184986.us-central1.run.app/'></script>
             </checkbox-one-template>
-
-
+            
+            
             
       </body>
-
-
+      
+      
       <script initdom>
-
-        
+      
+      
     //:
     
     
         function initdom(rootnode){
-
+        
         
               publish.initdom();
               
@@ -134,23 +134,23 @@
               
               
         }//initdom
-
-
+        
+        
   //:
   
   
         function kd(e){
-
+        
               if(e.key==' ' && e.ctrlKey){
                     menumod.open();
               }
               
         }//kd
-            
-
+        
+        
   //:
   
-        
+  
         function source(){
         
               var txt     = 'helloworld';
@@ -159,7 +159,7 @@
               
         }//source
         
-
+        
         
         var complete    = {};
         
@@ -172,11 +172,12 @@
         complete.save   = function(file){
                                                                                 console.log(file);
         }//save
-
-
+        
+        
       </script>
       
-
-
-
+      
+      
+      
+      
       
