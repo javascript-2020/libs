@@ -5,20 +5,19 @@
 
       <head>
       
-
-            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-            <script src='https://libs.ext-code.com/js/dom/init-hdr/init-hdr.js'></script>
+      
+            <script src='https://libs.ext-code.com/js/dom/component/v3.0/component.js?hdr'></script>
             
             <script init>
                                                                                 console.log('electron-fs test');
                                                                                 console.log();
-        
+                                                                                
         var electron;
-
+        
         
   //:
-
-
+  
+  
         async function init(){
                                                                                 console.log('init');
               electron      = mod['electron-fs'];
@@ -27,7 +26,7 @@
               
               electron.load.complete   = complete.load;
               electron.save.complete   = complete.save;
-        
+              
               await mod.auto();
               
               initdom();
@@ -37,40 +36,40 @@
               
               
         }//init
-  
-
+        
+        
             </script>
-
+            
             <style>
-
+            
   html
     {font-family:arial}
     
-  .icon 
+  .icon
     {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
-
+    
             </style>
-
-
+            
+            
       </head>
       
       <body>
-
+      
             <h3>
                   electron-fs v2.0 test
             </h3>
-
+            
             
             <electron-fs component v2.0></electron-fs>
-
+            
             
       </body>
-
-
-
+      
+      
+      
       <script>
-
-
+      
+      
         var cur     = {};
         cur.file    = null;
         cur.blob    = null;
@@ -80,13 +79,13 @@
   
         function initdom(){
         }//initdom
-
-
+        
+        
   //:
   
-        
+  
         function source(){
-          
+        
               return cur.blob;
               
         }//source
@@ -109,12 +108,12 @@
         
         complete.save   = function(file,confirm=true){
                                                                                 console.log(file);
-                                                                                              
+                                                                                
         }//save
         
-
+        
       </script>
-
+      
 </html>
 
 
