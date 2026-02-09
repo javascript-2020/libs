@@ -5,79 +5,78 @@
 
       <head>
       
-
-            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-            <script src='https://libs.ext-code.com/js/dom/init-hdr/init-hdr.js'></script>
+      
+            <script src='https://libs.ext-code.com/js/dom/component/v3.0/component.js?hdr'></script>
             
             <script init>
                                                                                 console.log('https-file test');
                                                                                 console.log();
-        
+                                                                                
         var fileserver;
-
+        
         
   //:
-
-
+  
+  
         async function init(){
                                                                                 console.log('init');
               fileserver                = mod['file-server'];
               fileserver.load.complete   = complete.load;
               fileserver.save.complete   = complete.save;
               fileserver.initmod({source});
-        
+              
               await mod.auto();
               
               initdom();
               
         }//init
-  
-
+        
+        
             </script>
-
+            
             <style>
-
+            
   html
     {font-family:arial}
     
-  .icon 
+  .icon
     {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
-
+    
             </style>
-
-
+            
+            
       </head>
       
       <body>
-
+      
             <file-server v2.0 component></file-server>
             
       </body>
-
-
-
+      
+      
+      
       <script>
-
-
+      
+      
   //:
   
   
         function initdom(){
         }//initdom
-
-
+        
+        
   //:
   
   
         function source(){
-          
+        
               var txt     = 'helloworld';
               var blob    = new Blob([txt]);
               return blob;
               
         }//source
         
-
+        
         function complete(){
         }//complete
         
@@ -91,9 +90,9 @@
                                                                                 console.log(file);
         }//save
         
-
+        
       </script>
-
+      
 </html>
 
 
