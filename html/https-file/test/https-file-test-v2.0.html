@@ -5,9 +5,9 @@
 
       <head>
       
-
-            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+      
+            <script src='https://libs.ext-code.com/js/dom/component/v3.0/component.js'></script>
+            
             <script init>
                                                                                 console.clear();
                                                                                 console.log('https-file test');
@@ -19,11 +19,11 @@
         var menu;
         
         var httpsfile;
-
+        
         
   //:
-
-
+  
+  
         async function init(){
                                                                                 console.log('init');
               menu            = mod.menumod();
@@ -35,16 +35,16 @@
               
               httpsfile.load.complete   = complete.load;
               httpsfile.save.complete   = complete.save;
-        
+              
               await httpsfile.init();
               
               
               initdom();
-  
+              
               
         }//init
-  
-
+        
+        
   //:
   
   
@@ -53,7 +53,7 @@
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
@@ -61,53 +61,53 @@
               'js/dom/keydown/keydown.js'
         );
         [$,datatype,menumod,keydown]   = await promise;
-  
+        
         mod.stack.complete;
-              
+        
 })();
 
-  
+
             </script>
-
+            
             <style>
-
+            
   html
     {font-family:arial}
     
-  .icon 
+  .icon
     {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
-
+    
             </style>
-
-
+            
+            
       </head>
       
       <body>
-
+      
             <https-file component v2.0></https-file>
             
       </body>
-
-
-
+      
+      
+      
       <script>
-
-
+      
+      
   //:
   
   
         function initdom(){
-
+        
         
               httpsfile.initdom();
-
+              
               
         }//initdom
-
-
+        
+        
   //:
   
-
+  
         function complete(){
         }//complete
         
@@ -119,9 +119,9 @@
         complete.save   = function(file,confirm=true){
         }//save
         
-
+        
       </script>
-
+      
 </html>
 
 
