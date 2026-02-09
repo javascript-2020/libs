@@ -3,9 +3,9 @@
 <html>
 
       <head>
-
-            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
-
+      
+            <script src='https://libs.ext-code.com/js/dom/component/v3.0/component.js'></script>
+            
             <script init>
                                                                                 console.clear();
                                                                                 console.log('https-file test');
@@ -18,8 +18,8 @@
         ;
         
         var localfile;
-
-
+        
+        
   //:
   
   
@@ -35,20 +35,20 @@
               
               localfile.load.complete   = complete.load;
               localfile.save.complete   = complete.save;
-
+              
               
               initdom();
               
         }//init
-
-
-
+        
+        
+        
 (async()=>{
 
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js',
               'js/core/datatype.js',
@@ -56,47 +56,47 @@
               'js/dom/keydown/keydown.js'
         );
         [$,datatype,menumod,keydown]   = await promise;
-  
-              
+        
+        
         window.$          = $;
         window.datatype   = datatype;
-
-              
+        
+        
         mod.stack.complete;
-              
+        
 })();
-    
+
             </script>
-
+            
             <style>
-
+            
   html
     {font-family:arial}
     
-  .icon 
+  .icon
     {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
-
+    
             </style>
             
       </head>
       
       
       <body>
-
-            <localfile component v2.0></localfile>
-
       
+            <localfile component v2.0></localfile>
+            
+            
             <script>
-
-
+            
+            
         function initdom(){
                                                                                 console.log('initdom');
               localfile.initdom();
               
               
         }//initdom
-
-
+        
+        
   //:
   
   
