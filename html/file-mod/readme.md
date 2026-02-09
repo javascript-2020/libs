@@ -64,7 +64,47 @@ test()|display test data
 reads a blob from source and saves it according to the file descriptor, then calls complete.save( file )
 
 
-### load ( file )
+### clear ( )
 
-loads a blob from file descriptor, then calls complete.load( file,blob )
+clear the current file.  file-mod maintains a reference to the current file so that save can be called
+externally, ie say ctrl-s
+
+
+### new ()
+
+alias for newfile
+
+
+### newfile (
+
+filetype = the filetype ( localfile,github,googlestorage ... )
+
+abs = the absolute path of the file
+
+path    = the path for the file
+
+name,   = the name of the file
+
+rel     = relative path for the file, should this be relevant
+
+kind    = kind of file structure this file object represents ( file,directory )
+
+size    = the size of the file in bytes
+
+ctime   = the create time of the file 
+
+mtime   = the modified time of the file
+
+atime   = the last access time of the file
+
+title   = the title for the file
+
+icon    = an icon for the file
+
+### )
+
+
+### export ( file )
+
+serialise and return file or the current file
 
