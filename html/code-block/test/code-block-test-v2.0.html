@@ -4,10 +4,10 @@
 <html>
 
       <head>
-
-
-            
-            <script src='https://libs.ext-code.com/js/dom/component/component.js'></script>
+      
+      
+      
+            <script src='https://libs.ext-code.com/js/dom/component/v3.0/component.js'></script>
             
             <script init>
                                                                                 console.clear();
@@ -22,23 +22,23 @@
         var datatype;
         var debug;
         var menumod;
-
+        
         var menu;
         
         var codeblock1;
         var codeblock2;
         var codeblock3;
         
-                  
-
+        
+        
   //:
-
+  
         mod.stack.df    = true;
         mod.stack.add   = init;
         
         async function init(){
                                                                                 debug('init');
-
+                                                                                
               menu        = menumod();
               
               codeblock1    = mod['code-block[c1]'];
@@ -50,27 +50,27 @@
               codeblock1.initmod({ext,$,datatype,menu});
               codeblock2.initmod({ext,$,datatype,menu});
               codeblock3.initmod({ext,$,datatype,menu});
-
+              
               
               await codeblock1.init();
               await codeblock2.init();
               await codeblock3.init();
-
+              
               
               initdom(document.body);
-
+              
               
         }//init
         
         
         
-
+        
 (async()=>{
 
         mod.stack.add;
         
         ({ext}    = await import('https://libs.ext-code.com/js/io/ext-loader/ext-loader.m.js'));
-          
+        
         var promise   = ext.load.libs(
               'js/dom/$.js.api',
               'js/core/datatype.js',
@@ -78,7 +78,7 @@
               'js/dom/menumod/menumod.js',
         );
         [$,datatype,debug,menumod]   = await promise;
-
+        
         mod.stack.complete;
         
 })();
@@ -89,14 +89,14 @@
             
   html
     {font-family:arial}
-  
+    
   body>section
     {margin:20px 0 10px}
     
             </style>
             
       </head>
-
+      
       
       <body>
       
@@ -112,9 +112,9 @@
         let a=42;
         
             </code-block>
-
-
-
+            
+            
+            
             <section>
                   console
             </section>
@@ -125,30 +125,30 @@
         console.log(a);
         
             </code-block>
-
-
-
+            
+            
+            
             <section>
                   html
             </section>
-
+            
             <code-block id=c3 snippet-html component v2.0>
-                  
+            
         <div>
               hello
         </div>
-                  
+        
             </code-block>
-
-
-
+            
+            
+            
       </body>
       
       <script>
-
-
-
-
+      
+      
+      
+      
   //:
   
   
@@ -158,13 +158,13 @@
                   
                   var c1    = $('#c1');
                   codeblock1.initdom(c1);
-
-
+                  
+                  
                   var c2    = $('#c2');
                   
                   codeblock2.initdom(c2);
-
-
+                  
+                  
                   
                   var c3    = $('#c3');
                   codeblock3.initdom(c3);
@@ -172,11 +172,10 @@
                   
                   
             }//initdom
-
-
-
-  
+            
+            
+            
+            
       </script>
       
 </html>
-      
