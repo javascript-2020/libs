@@ -123,7 +123,7 @@ The promise rejects with:
 
 
 
-<div id=file-descriptor>
+<div id=file-descriptor style='scroll-margin-top: 80px'>
 
 ### newfile ({filetype,path,name,rel,kind,size,ctime,mtime,atime,title,icon})
 
