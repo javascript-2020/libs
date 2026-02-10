@@ -76,11 +76,9 @@ alias for newfile
 
 ### newfile (
 
-filetype = the filetype ( localfile,github,googlestorage ... )
+filetype||ft = the filetype ( localfile,github,googlestorage ... )
 
 abs = the absolute path of the file
-
-path    = the path for the file
 
 name,   = the name of the file
 
