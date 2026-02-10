@@ -1,13 +1,13 @@
 ## Description
 
-the snippet-html-console, allows running a html snippet with console output
+run a html snippet with console output
 
 
 ## Include
 
 ```
 
-      <snippet-console component></snippet-console>
+      <snippet-html-console component></snippet-html-console>
       
 ```
 
@@ -41,20 +41,35 @@ src|src url to load
 web-editor|pass config to web-editor ( see [web-editor](../web-editor/web-editor.html) for supported config )
 web-console|pass config to web-console ( see [web-console](../web-console/web-console.html) for supported config )
 
-## module
 
+## module
 
 name|description
 ---|---
 **standard** |
-initmod|standard function for importing local dependencies
-init|standard initialisation function
-initdom|standard function to setup the dom
+initmod   | standard function for importing local dependencies
+init      | standard initialisation function
+initdom   | standard function to setup the dom
  | 
-run|run the current snippet
+clear | clear the output and console
+run   | run the current snippet
 
 
 ## api
+
+
+### clear ()
+
+clear the output and console
+
+#### parameters
+
+no parameters
+
+#### returns
+
+no return value
+
 
 ### run ()
 
