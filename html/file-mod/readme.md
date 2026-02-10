@@ -163,7 +163,7 @@ create a file descriptor object
 #### Errors
 - **none**
 
-### export ( file )
+### export ( [file] )
 
 serialise and return file or the current file
 
