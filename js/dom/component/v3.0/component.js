@@ -1058,7 +1058,7 @@
               
               
               mod.base.add({
-                    ext,$,datatype,keydown,menu,menumod,ls,
+                    ext,$,datatype,keydown,menu,menumod,ls,debug,
                     ace,log
               });
               
