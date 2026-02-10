@@ -132,7 +132,7 @@ The promise rejects with:
 create a file descriptor object
 
 
-- **filetype||ft** = the filetype ( localfile,github,googlestorage ... )
+- **filetype || ft** = the filetype ( localfile,github,googlestorage ... )
 
 - **abs**     = the absolute path of the file
 
