@@ -56,4 +56,3 @@ run|run the current snippet
 web-editor    - see [web-editor](../web-editor/web-editor.html) for supported config
 
 web-console   - see [web-console](../web-console/web-console.html) for supported config
-
