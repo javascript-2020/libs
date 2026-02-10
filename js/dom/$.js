@@ -377,12 +377,17 @@
               
                     list.forEach(chk=>chk.id!=id && chk.set(false));
                     
+                    var chk   = list.find(chk=>chk.id==id);
+                    if(typeof group.callback=='function'){
+                          group.callback(chk,id);
+                    }
+                    
               }//set
               
               
               set.index   = function(index){set(list[index].id)}
               
-              var group   = {read,set,add};
+              var group   = {read,set,add,callback:null};
               Object.defineProperty(group,'len',{get:()=>list.length});
               
               return group;
