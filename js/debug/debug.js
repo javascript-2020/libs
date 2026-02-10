@@ -1,6 +1,6 @@
 
 
-(()=>{
+(function debugmod(){
 
   var obj    =  debug;
   
@@ -52,12 +52,11 @@
         
         
         
+        Object.definePrperty(obj,'mod',{get:`(${debugmod.toString()})()`});
+        
         
     return obj;
     
-  //debug:-
-  
-  
 })();
 
 
