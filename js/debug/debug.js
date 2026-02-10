@@ -52,7 +52,7 @@
         
         
         
-        Object.definePrperty(obj,'mod',{get:`(${debugmod.toString()})()`});
+        Object.defineProperty(obj,'mod',{get:`(${debugmod.toString()})()`});
         
         
     return obj;
