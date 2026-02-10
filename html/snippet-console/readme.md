@@ -20,15 +20,15 @@ ext       | reference to ext-loader
 $         | reference to $ library
 ace       | reference to ace editor, else each instance of snippet-console loads its own
 menu      | reference to the menu group snippet-console should use, else it creates its own
-menumod   | reference to menumod library
+menumod   | reference to menumod library, only required if menu is not given
 config    | config parameters, see below
 
 
 ## config
 
-web-editor    - see [web-editor](../web-editor/web-editor.html) for supported config
+config['web-editor']    - see [web-editor](../web-editor/web-editor.html) for supported config
 
-web-console   - see [web-console](../web-console/web-console.html) for supported config
+config['web-console']   - see [web-console](../web-console/web-console.html) for supported config
 
 
 ## attribute
