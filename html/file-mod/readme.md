@@ -131,6 +131,7 @@ The promise rejects with:
 
 create a file descriptor object
 
+#### Parameters
 
 - **filetype || ft** = the filetype ( localfile,github,googlestorage ... )
 
