@@ -123,11 +123,11 @@ The promise rejects with:
 
 
 
-<p id=file-descriptor>X</p>
-
+<p id=file-descriptor>
 
 ### newfile ({filetype,path,name,rel,kind,size,ctime,mtime,atime,title,icon})
 
+</p>
 
 create a file descriptor object
 
