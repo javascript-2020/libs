@@ -5,6 +5,8 @@ The file-mod manages file access
 
 ## Include
 
+requires component v3.0
+
 ```
 
       <file-mod component></file-mod>
