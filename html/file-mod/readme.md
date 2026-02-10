@@ -121,11 +121,11 @@ The promise rejects with:
 
 -->
 
-<a id=file-descriptor>
+<a id=file-descriptor></a>
+
 
 ### newfile ({filetype,path,name,rel,kind,size,ctime,mtime,atime,title,icon})
 
-</a>
 
 create a file descriptor object
 
