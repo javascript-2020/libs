@@ -49,7 +49,8 @@ initdom|standard function to setup the dom
  | 
 save ( file )   | read source blob and save under *file* or current file
 clear ()        | clear the current file
-new ( ...opts ), newfile( ...opts )   | create a new file object, see below
+new ( ...opts )   | alias for newfile
+[newfile](#file-descriptor) ( ...opts )   | create a new file desciptor object
 export ( file )   | serialise *file*
 import ( file )   | deserialise *file*
 test()|display test data
