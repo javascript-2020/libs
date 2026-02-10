@@ -1,6 +1,6 @@
 ## Description
 
-The file-mod manages various file access
+The file-mod manages file access
 
 
 ## Include
