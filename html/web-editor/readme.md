@@ -87,7 +87,7 @@ mode | getter / setter to get and set the mode of the editor
 
 ### filename ( file ) {.blue}
 
-:::
+::: {.red}
 
 set the filename that the editor displays, also sets the mode
 
@@ -99,7 +99,7 @@ file - a file-mod file descriptor
 
 no return value
 
-::: {.red}
+::: 
 
 
 ### filename.getname ( path ) () {.blue}
