@@ -87,25 +87,11 @@ Performs the main operation.
 - **input** — string or object to process  
 - **[options]** — optional settings  
   - **[options.mode="fast"]** — processing mode  
-  - **[options.verbose=false]** *(alias: debug)* — enable verbose output  
+  - **[options.verbose=false]** — enable verbose output  
 - **...extras** — additional values appended to the operation
 
 #### Returns
 - **Promise<Result>**
-
-
-
-### doThing(input, [options], ...extras)
-
-Performs the main operation.
-
-#### Parameters
-- **input** — string or object to process  
-- **[options]** — optional settings  
-  - **[options.mode="fast"]** — processing mode  
-  - **[options.verbose=false]** — enable verbose output  
-- **...extras** — additional values appended to the operation
-
 
 #### Result
 - **success** — boolean indicating whether the operation succeeded  
