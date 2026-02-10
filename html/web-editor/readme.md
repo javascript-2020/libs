@@ -206,6 +206,8 @@ no return value
 
 ### get ()
 
+#### alias getvalue,getValue
+
 get the text of the editor
 
 #### parameters
