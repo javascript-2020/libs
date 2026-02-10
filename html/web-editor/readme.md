@@ -98,7 +98,7 @@ file - a file-mod file descriptor
 no return value
 
 
-### filename.getname ( path ) ()
+### filename.getname ( path ) () {.blue}
 
 helper function to return the filename from a path
 
@@ -111,7 +111,7 @@ helper function to return the filename from a path
 string - the filename
 
 
-### filename.save ( status )
+### filename.save ( status ) {.blue}
 
 show or hide the save status icon
 
@@ -124,7 +124,7 @@ status - truthy value
 no return value
 
 
-### filename.save.show ()
+### filename.save.show () {.blue}
 
 show the save status icon
 
@@ -137,7 +137,7 @@ no parameters
 no return value
 
 
-### filename.save.hide ()
+### filename.save.hide () {.blue}
 
 hide the save status icon
 
@@ -150,7 +150,7 @@ no parameters
 no return value
 
 
-### filename.clear
+### filename.clear () {.blue}
 
 clear the current filename
 
@@ -163,7 +163,7 @@ no parameters
 no return value
 
 
-### filename.read ()
+### filename.read () {.blue}
 
 read the current filename
 
@@ -176,7 +176,7 @@ no parameters
 string - the filename
 
 
-### clear ()
+### clear () {.blue}
 
 clear the editor
 
@@ -189,7 +189,7 @@ no parameters
 no return value
 
 
-### set ( txt )
+### set ( txt ) {.blue}
 
 #### alias setvalue,setValue
 
@@ -204,7 +204,7 @@ txt - string, the text to set the editor to
 no return value
 
 
-### get ()
+### get () {.blue}
 
 #### alias getvalue,getValue
 
@@ -219,7 +219,7 @@ no parameters
 string - the text of the editor
 
 
-### focus ()
+### focus () {.blue}
 
 focus the editor
 
@@ -232,7 +232,7 @@ no parameters
 no return value
 
 
-### resize ()
+### resize () {.blue}
 
 call when the editor has changed size so it can be re-rendered
 
@@ -245,7 +245,7 @@ no parameters
 no return value
 
 
-### load ( src )
+### load ( src ) {.blue}
 
 fetch the file src and display it in the editor
 
@@ -260,7 +260,7 @@ src - string, the url of the file to load
 no return value
 
 
-### horiz ()
+### horiz () {.blue}
 
 set the editor to horizontal mode
 
@@ -273,7 +273,7 @@ no parameters
 no return value
 
 
-### vert ()
+### vert () {.blue}
 
 set the editor to vertical mode
 
@@ -286,7 +286,7 @@ no parameters
 no return value
 
 
-### height
+### height {.blue}
 
 setter to set the height of the editor
 
@@ -295,7 +295,7 @@ setter to set the height of the editor
 editor.height = 300;
 
 
-### mode
+### mode {.blue}
 
 getter / setter for the mode of the editor, javascript,css,html,python etc
 
