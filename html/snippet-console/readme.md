@@ -24,6 +24,13 @@ menumod   | reference to menumod library
 config    | config parameters, see below
 
 
+## config
+
+web-editor    - see [web-editor](../web-editor/web-editor.html) for supported config
+
+web-console   - see [web-console](../web-console/web-console.html) for supported config
+
+
 ## attribute
 
 these attribute can be defined on the html tag itself
@@ -49,10 +56,15 @@ run|run the current snippet
 
 ## api
 
+### run ()
 
-## config
+run the code in the editor
 
+#### parameters
 
-web-editor    - see [web-editor](../web-editor/web-editor.html) for supported config
+no parameters
 
-web-console   - see [web-console](../web-console/web-console.html) for supported config
+#### returns
+
+no return value
+
