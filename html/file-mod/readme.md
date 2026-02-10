@@ -121,7 +121,9 @@ The promise rejects with:
 
 -->
 
-<a id=file-descriptor>X</a>
+
+
+<p id=file-descriptor>X</p>
 
 
 ### newfile ({filetype,path,name,rel,kind,size,ctime,mtime,atime,title,icon})
