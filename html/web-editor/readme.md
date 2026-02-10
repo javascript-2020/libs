@@ -99,7 +99,7 @@ file - a file-mod file descriptor
 
 no return value
 
-:::
+::: {.red}
 
 
 ### filename.getname ( path ) () {.blue}
