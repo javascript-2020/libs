@@ -120,9 +120,12 @@ The promise rejects with:
 
 -->
 
-<a id="file-descriptor"></a>
+<a id=file-descriptor>
 
 ### newfile ({filetype,path,name,rel,kind,size,ctime,mtime,atime,title,icon})
+
+</a>
+
 
 - **filetype||ft** = the filetype ( localfile,github,googlestorage ... )
 
