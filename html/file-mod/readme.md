@@ -74,32 +74,86 @@ externally, ie say ctrl-s
 alias for newfile
 
 
-### newfile (
 
-filetype||ft = the filetype ( localfile,github,googlestorage ... )
 
-abs = the absolute path of the file
+<!--
 
-name,   = the name of the file
+### doThing(input, [options], ...extras)
 
-rel     = relative path for the file, should this be relevant
+Performs the main operation.
 
-kind    = kind of file structure this file object represents ( file,directory )
+#### Parameters
+- **input** — string or object to process  
+- **[options]** — optional settings  
+  - **[options.mode="fast"]** — processing mode  
+  - **[options.verbose=false]** *(alias: debug)* — enable verbose output  
+- **...extras** — additional values appended to the operation
 
-size    = the size of the file in bytes
+#### Returns
+- **Promise<Result>**
 
-ctime   = the create time of the file 
 
-mtime   = the modified time of the file
 
-atime   = the last access time of the file
+### doThing(input, [options], ...extras)
 
-title   = the title for the file
+Performs the main operation.
 
-icon    = an icon for the file
+#### Parameters
+- **input** — string or object to process  
+- **[options]** — optional settings  
+  - **[options.mode="fast"]** — processing mode  
+  - **[options.verbose=false]** — enable verbose output  
+- **...extras** — additional values appended to the operation
 
-### )
 
+#### Result
+- **success** — boolean indicating whether the operation succeeded  
+- **value** — the processed output  
+- **warnings** — array of strings describing non‑fatal issues  
+- **durationMs** — number of milliseconds the operation took  
+
+#### Errors
+The promise rejects with:
+- **TypeError** — thrown when `input` is missing or invalid  
+- **OperationError** — thrown when processing fails internally  
+- **TimeoutError** — thrown when the operation takes too long
+
+-->
+
+<a id="file-descriptor"></a>
+
+### newfile ({filetype,path,name,rel,kind,size,ctime,mtime,atime,title,icon})
+
+- **filetype||ft** = the filetype ( localfile,github,googlestorage ... )
+
+- **abs**     = the absolute path of the file
+
+- **path**    = path of the file
+
+- **name**    = the name of the file
+
+- **rel**     = relative path for the file, should this be relevant
+
+- **kind**    = kind of file structure this file object represents ( file,directory )
+
+- **size**    = the size of the file in bytes
+
+- **ctime**   = the create time of the file 
+
+- **mtime**   = the modified time of the file
+
+- **atime**   = the last access time of the file
+
+- **title**   = the title for the file
+
+- **icon**    = an icon for the file
+
+#### Returns
+
+- **Object** — the file descriptor
+
+#### Errors
+- **none**
 
 ### export ( file )
 
