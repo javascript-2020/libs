@@ -89,6 +89,7 @@ mode | getter / setter to get and set the mode of the editor
 
 ## api
 
+---
 
 ### filename ( file ) {.blue}
 
@@ -106,6 +107,7 @@ no return value
 
 ::: 
 
+---
 
 ### filename.getname ( path ) () {.blue}
 
@@ -118,6 +120,9 @@ helper function to return the filename from a path
 #### returns
 
 string - the filename
+
+
+---
 
 
 ### filename.save ( status ) {.blue}
@@ -133,6 +138,9 @@ status - truthy value
 no return value
 
 
+---
+
+
 ### filename.save.show () {.blue}
 
 show the save status icon
@@ -144,6 +152,9 @@ no parameters
 #### returns
 
 no return value
+
+
+---
 
 
 ### filename.save.hide () {.blue}
@@ -159,6 +170,9 @@ no parameters
 no return value
 
 
+---
+
+
 ### filename.clear () {.blue}
 
 clear the current filename
@@ -170,6 +184,9 @@ no parameters
 #### returns
 
 no return value
+
+
+---
 
 
 ### filename.read () {.blue}
@@ -185,6 +202,9 @@ no parameters
 string - the filename
 
 
+---
+
+
 ### clear () {.blue}
 
 clear the editor
@@ -196,6 +216,9 @@ no parameters
 #### returns
 
 no return value
+
+
+---
 
 
 ### set ( txt ) {.blue}
@@ -213,6 +236,9 @@ txt - string, the text to set the editor to
 no return value
 
 
+---
+
+
 ### get () {.blue}
 
 #### alias getvalue,getValue
@@ -228,6 +254,9 @@ no parameters
 string - the text of the editor
 
 
+---
+
+
 ### focus () {.blue}
 
 focus the editor
@@ -241,6 +270,9 @@ no parameters
 no return value
 
 
+---
+
+
 ### resize () {.blue}
 
 call when the editor has changed size so it can be re-rendered
@@ -252,6 +284,9 @@ no parameters
 #### returns
 
 no return value
+
+
+---
 
 
 ### load ( src ) {.blue}
@@ -269,6 +304,9 @@ src - string, the url of the file to load
 no return value
 
 
+---
+
+
 ### horiz () {.blue}
 
 set the editor to horizontal mode
@@ -280,6 +318,9 @@ no parameters
 #### returns
 
 no return value
+
+
+---
 
 
 ### vert () {.blue}
@@ -295,6 +336,9 @@ no parameters
 no return value
 
 
+---
+
+
 ### height {.blue}
 
 setter to set the height of the editor
@@ -302,6 +346,9 @@ setter to set the height of the editor
 #### syntax
 
 editor.height = 300;
+
+
+---
 
 
 ### mode {.blue}
