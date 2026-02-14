@@ -95,7 +95,7 @@ mode | getter / setter to get and set the mode of the editor
 
 ### filename ( file ) {.blue}
 
-::: {.red}
+::: warning
 
 set the filename that the editor displays, also sets the mode
 
