@@ -34,11 +34,16 @@ mode      | the mode for the editor, javascript,css,html etc
 embed     | a dom node that the component will take its attributes from
 
 
-## config
+#### config
 
 config.mode    - set the mode for the editor, javascript,css,html,python etc
 config.fullsize - true|false whether the editor should display the entire document
 config.height - set the height of the editor
+
+
+#### on
+
+on.change - callback when the editor has a change event
 
 
 ## attribute
