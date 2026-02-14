@@ -48,7 +48,7 @@ these attribute can be defined on the html tag itself
 attribute     | description
 ---------     |-----------
 src         | src url to load 
-h,height    | set the height of the editor
+h \|\| height    | set the height of the editor
 mode        | set the mode for the editor
 fullsize    | boolean attribute, whether the editor display the entire document
 
@@ -70,8 +70,8 @@ filename.save.hide () | hide the save status icon
 filename.clear () | clear the filename
 filename.read () | read the current filename
 clear () | clear the editor
-set,setvalue,setValue ( txt ) | set the text of the editor
-get,getvalue,getValue () | get the text of the editor
+set \|\| setvalue \|\| setValue ( txt ) | set the text of the editor
+get \|\| getvalue \|\| getValue () | get the text of the editor
 focus () | set focus to the editor
 resize () | update the editor dimensions ( width / height )
 load ( src ) |
