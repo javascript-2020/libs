@@ -25,9 +25,9 @@
   
         async function init(){
                                                                                 console.log('init');
-              menu        = mod.menumod();
+              menu        = menumod();
               
-              localfile   = mod.localfile;
+              localfile   = mod['local-file'];
               
               localfile.initmod({menu,$,ext});
               
@@ -83,7 +83,7 @@
       
       <body>
       
-            <localfile component v2.0></localfile>
+            <local-file component v2.0></local-file>
             
             
             <script>
