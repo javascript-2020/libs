@@ -68,7 +68,7 @@ filename.save ( status ) | show or hide the save status icon
 filename.save.show () | show the save status icon
 filename.save.hide () | hide the save status icon
 filename.clear () | clear the filename
-fielname.read () | read the current filename
+filename.read () | read the current filename
 clear () | clear the editor
 set,setvalue,setValue ( txt ) | set the text of the editor
 get,getvalue,getValue () | get the text of the editor
