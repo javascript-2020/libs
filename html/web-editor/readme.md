@@ -28,7 +28,7 @@ menu      | reference to the menu group snippet-console should use, else it crea
 menumod   | reference to menumod library, only required if menu is not given
 config    | config parameters, see below
 fullsize  | true|false whether the editor should display the entire document
-kd        | callback for determining keys pressed in the editor, ctrl-s = save, ctrl-enter - run etc
+kd        | callback for keydown event
 on        | callback for various events, see below
 mode      | the mode for the editor, javascript,css,html etc
 embed     | a dom node that the component will take its attributes from
