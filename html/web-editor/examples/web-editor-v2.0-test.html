@@ -36,7 +36,7 @@
               
               editor                    = mod['web-editor'];
               
-              editor.initmod({ext,$,menumod,menu});
+              editor.initmod({ext,$,menumod,menu,kd});
               editor.df=true;
               
               await editor.init();
@@ -174,7 +174,7 @@ function fn(){
             function kd(e){
             
                   if(e.key==' ' && e.ctrlKey){
-                        menumod.open();
+                        menu.open();
                   }
                   
             }//kd
