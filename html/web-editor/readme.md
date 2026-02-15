@@ -116,7 +116,7 @@ set the filename that the editor displays, also sets the mode
 
 #### return
 
-no return value
+none
 
 </div>
 
