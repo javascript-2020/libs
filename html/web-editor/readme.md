@@ -102,7 +102,7 @@ set the filename that the editor displays, also sets the mode
 
 #### parameters
 
-file - a file-mod file descriptor
+file - a [file-mod file descriptor](#)
 
 #### returns
 
