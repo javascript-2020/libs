@@ -2,6 +2,8 @@
 
 ## Description
 
+<div class=desc-txt}
+
 The web-editor component produces an editor in the webpage
 
 A modern, feature‑rich text editor built directly into the browser, this component is designed to make writing and editing feel effortless. Whether you’re building documentation tools, note‑taking apps, or custom content interfaces, it provides a smooth, polished experience that fits naturally into any webpage. Its clean interface keeps the focus on the text, while thoughtful details make everyday editing tasks quicker and more intuitive.
@@ -9,6 +11,9 @@ A modern, feature‑rich text editor built directly into the browser, this compo
 Under the hood, the editor offers a flexible architecture that adapts to a wide range of use cases. It supports rich formatting, keyboard shortcuts, custom styling, and extensible behaviours, giving developers the freedom to tailor the writing environment to their needs. Despite its capabilities, it remains lightweight and responsive, ensuring fast load times and a fluid typing experience even in complex layouts.
 
 This component is built with usability in mind, making it just as comfortable for casual writing as it is for more structured content creation. Whether you’re embedding it in a small widget or using it as the core of a larger application, it provides a dependable, modern editing foundation that feels right at home on the web.
+
+</div>
+
 
 ## Include
 
