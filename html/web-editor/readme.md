@@ -109,7 +109,7 @@ set the filename that the editor displays, also sets the mode
 
 file - a [file-mod file descriptor](#)
 
-#### returns
+#### return
 
 no return value
 
@@ -121,9 +121,13 @@ no return value
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### filename.getname ( path ) () {.blue}
 
 helper function to return the filename from a path
+
+<div class=api-function-desc>
 
 #### parameters
 
@@ -133,8 +137,11 @@ helper function to return the filename from a path
 
 string - the filename
 
+</div>
 
----
+</section>
+
+--- {.hr-sub}
 
 
 ### filename.save ( status ) {.blue}
