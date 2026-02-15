@@ -15,6 +15,8 @@ This component is built with usability in mind, making it just as comfortable fo
 </div>
 
 
+--- {.hr-main}
+
 ## Include
 
 ```
@@ -22,6 +24,9 @@ This component is built with usability in mind, making it just as comfortable fo
       <web-editor component></web-editor>
       
 ```
+
+
+--- {.hr-main}
 
 ## initmod
 
@@ -55,7 +60,11 @@ config.height - set the height of the editor
 on.change - callback when the editor has a change event
 
 
+--- {.hr-main}
+
 ## attribute
+
+
 
 these attribute can be defined on the html tag itself
 
@@ -66,6 +75,8 @@ h \|\| height    | set the height of the editor
 mode        | set the mode for the editor
 fullsize    | boolean attribute, whether the editor display the entire document
 
+
+--- {.hr-main}
 
 ## module
 
@@ -162,7 +173,7 @@ status - truthy value
 no return value
 
 
----
+--- {.hr-sub}
 
 
 ### filename.save.show () {.blue}
@@ -178,7 +189,7 @@ no parameters
 no return value
 
 
----
+--- {.hr-sub}
 
 
 ### filename.save.hide () {.blue}
@@ -194,7 +205,7 @@ no parameters
 no return value
 
 
----
+--- {.hr-sub}
 
 
 ### filename.clear () {.blue}
@@ -210,7 +221,7 @@ no parameters
 no return value
 
 
----
+--- {.hr-sub}
 
 
 ### filename.read () {.blue}
@@ -226,7 +237,7 @@ no parameters
 string - the filename
 
 
----
+--- {.hr-sub}
 
 
 ### clear () {.blue}
@@ -242,7 +253,7 @@ no parameters
 no return value
 
 
----
+--- {.hr-sub}
 
 
 ### set ( txt ) {.blue}
@@ -260,7 +271,7 @@ txt - string, the text to set the editor to
 no return value
 
 
----
+--- {.hr-sub}
 
 
 ### get () {.blue}
@@ -278,7 +289,7 @@ no parameters
 string - the text of the editor
 
 
----
+--- {.hr-sub}
 
 
 ### focus () {.blue}
@@ -294,7 +305,7 @@ no parameters
 no return value
 
 
----
+--- {.hr-sub}
 
 
 ### resize () {.blue}
@@ -310,7 +321,7 @@ no parameters
 no return value
 
 
----
+--- {.hr-sub}
 
 
 ### load ( src ) {.blue}
@@ -328,7 +339,7 @@ src - string, the url of the file to load
 no return value
 
 
----
+--- {.hr-sub}
 
 
 ### horiz () {.blue}
@@ -344,7 +355,7 @@ no parameters
 no return value
 
 
----
+--- {.hr-sub}
 
 
 ### vert () {.blue}
@@ -360,7 +371,7 @@ no parameters
 no return value
 
 
----
+--- {.hr-sub}
 
 
 ### height {.blue}
@@ -372,7 +383,7 @@ setter to set the height of the editor
 editor.height = 300;
 
 
----
+--- {.hr-sub}
 
 
 ### mode {.blue}
@@ -385,6 +396,7 @@ console.log(editor.mode) // html
 editor.mode = 'javascript';
 
 
+--- {.hr-sub}
 
 
 
