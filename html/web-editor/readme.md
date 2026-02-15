@@ -90,6 +90,7 @@ height | setter to set the height of the editor
 mode | getter / setter to get and set the mode of the editor
 
 
+--- {.hr-main}
 
 ## api
 
@@ -115,7 +116,8 @@ no return value
 </section>
 
 
----
+--- {.hr-sub}
+
 
 ### filename.getname ( path ) () {.blue}
 
