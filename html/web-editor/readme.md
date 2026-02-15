@@ -112,7 +112,7 @@ set the filename that the editor displays, also sets the mode
 
 #### parameters
 
-file - a [file-mod file descriptor](#)
+- file - a [file-mod file descriptor](#)
 
 #### return
 
@@ -140,7 +140,7 @@ helper function to return the filename from a path
 
 #### returns
 
-string - the filename
+- string - the filename
 
 </div>
 
