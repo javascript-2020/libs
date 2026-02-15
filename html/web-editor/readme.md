@@ -94,9 +94,13 @@ mode | getter / setter to get and set the mode of the editor
 ---
 
 
-### filename ( file ) {.blue}
+<section class=api-function>
+
+### filename ( file ) {.api-function-title}
 
 set the filename that the editor displays, also sets the mode
+
+<div class=api-function-desc>
 
 #### parameters
 
@@ -105,6 +109,11 @@ file - a file-mod file descriptor
 #### returns
 
 no return value
+
+</div>
+
+</section>
+
 
 ---
 
