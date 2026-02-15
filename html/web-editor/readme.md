@@ -247,7 +247,7 @@ no return value
 
 ### set ( txt ) {.blue}
 
-#### alias setvalue,setValue
+#### alias setvalue,setValue {.blue}
 
 set the text of the editor
 
@@ -265,7 +265,7 @@ no return value
 
 ### get () {.blue}
 
-#### alias getvalue,getValue
+#### alias getvalue,getValue {.blue}
 
 get the text of the editor
 
