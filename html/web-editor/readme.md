@@ -247,7 +247,7 @@ no return value
 
 ### set ( txt ) {.blue}
 
-#### setvalue,setValue {.blue}
+#### setvalue, setValue {.blue}
 
 set the text of the editor
 
@@ -265,7 +265,7 @@ no return value
 
 ### get () {.blue}
 
-#### getvalue,getValue {.blue}
+#### getvalue, getValue {.blue}
 
 get the text of the editor
 
