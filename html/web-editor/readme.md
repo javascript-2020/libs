@@ -91,8 +91,6 @@ mode | getter / setter to get and set the mode of the editor
 
 ## api
 
----
-
 
 <section class=api-function>
 
