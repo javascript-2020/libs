@@ -2,7 +2,7 @@
 
 ## Description
 
-<div class=desc-txt}>
+<div class=desc-txt>
 
 The web-editor component produces an editor in the webpage
 
