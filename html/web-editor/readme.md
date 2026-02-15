@@ -149,7 +149,7 @@ helper function to return the filename from a path
 
 - path - string, the path of the file
 
-#### returns
+#### return
 
 - string - the filename
 
@@ -157,26 +157,39 @@ helper function to return the filename from a path
 
 </section>
 
+
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### filename.save ( status ) {.blue}
+
+<div class=api-function-desc>
 
 show or hide the save status icon
 
 #### parameters
 
-status - truthy value
+- status - truthy value
 
-#### returns
+#### return
 
-no return value
+none
+
+</div>
+
+</section>
 
 
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### filename.save.show () {.blue}
+
+<div class=api-function-desc>
 
 show the save status icon
 
@@ -184,15 +197,23 @@ show the save status icon
 
 no parameters
 
-#### returns
+#### return
 
-no return value
+none
+
+</div>
+
+</section>
 
 
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### filename.save.hide () {.blue}
+
+<div class=api-function-desc>
 
 hide the save status icon
 
@@ -200,15 +221,23 @@ hide the save status icon
 
 no parameters
 
-#### returns
+#### return
 
-no return value
+none
+
+</div>
+
+</section>
 
 
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### filename.clear () {.blue}
+
+<div class=api-function-desc>
 
 clear the current filename
 
@@ -216,15 +245,23 @@ clear the current filename
 
 no parameters
 
-#### returns
+#### return
 
-no return value
+none
+
+</div>
+
+</section>
 
 
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### filename.read () {.blue}
+
+<div class=api-function-desc>
 
 read the current filename
 
@@ -232,15 +269,23 @@ read the current filename
 
 no parameters
 
-#### returns
+#### return
 
-string - the filename
+- string - the filename
+
+</div>
+
+</section>
 
 
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### clear () {.blue}
+
+<div class=api-function-desc>
 
 clear the editor
 
@@ -248,35 +293,51 @@ clear the editor
 
 no parameters
 
-#### returns
+#### return
 
-no return value
+none
+
+</div>
+
+</section>
 
 
 --- {.hr-sub}
 
+
+<section class=api-function>
 
 ### set ( txt ) {.blue}
 
 #### setvalue, setValue {.blue}
 
+<div class=api-function-desc>
+
 set the text of the editor
 
 #### parameters
 
-txt - string, the text to set the editor to
+- txt - string, the text to set the editor to
 
-#### returns
+#### return
 
-no return value
+none
+
+</div>
+
+</section>
 
 
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### get () {.blue}
 
 #### getvalue, getValue {.blue}
+
+<div class=api-function-desc>
 
 get the text of the editor
 
@@ -284,15 +345,23 @@ get the text of the editor
 
 no parameters
 
-#### returns
+#### return
 
-string - the text of the editor
+- string - the text of the editor
+
+</div>
+
+</section>
 
 
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### focus () {.blue}
+
+<div class=api-function-desc>
 
 focus the editor
 
@@ -300,15 +369,23 @@ focus the editor
 
 no parameters
 
-#### returns
+#### return
 
-no return value
+none
+
+</div>
+
+</section>
 
 
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### resize () {.blue}
+
+<div class=api-function-desc>
 
 call when the editor has changed size so it can be re-rendered
 
@@ -316,15 +393,23 @@ call when the editor has changed size so it can be re-rendered
 
 no parameters
 
-#### returns
+#### return
 
-no return value
+none
+
+</div>
+
+</section>
 
 
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### load ( src ) {.blue}
+
+<div class=api-function-desc>
 
 fetch the file src and display it in the editor
 
@@ -332,17 +417,25 @@ fetch the file src and display it in the editor
 
 #### parameters
 
-src - string, the url of the file to load
+- src - string, the url of the file to load
 
-#### returns
+#### return
 
 no return value
+
+</div>
+
+</section>
 
 
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### horiz () {.blue}
+
+<div class=api-function-desc>
 
 set the editor to horizontal mode
 
@@ -350,15 +443,23 @@ set the editor to horizontal mode
 
 no parameters
 
-#### returns
+#### return
 
-no return value
+none
+
+</div>
+
+</section>
 
 
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### vert () {.blue}
+
+<div class=api-function-desc>
 
 set the editor to vertical mode
 
@@ -366,15 +467,23 @@ set the editor to vertical mode
 
 no parameters
 
-#### returns
+#### return
 
-no return value
+none
+
+</div>
+
+</section>
 
 
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### height {.blue}
+
+<div class=api-function-desc>
 
 setter to set the height of the editor
 
@@ -382,11 +491,19 @@ setter to set the height of the editor
 
 editor.height = 300;
 
+</div>
+
+</section>
+
 
 --- {.hr-sub}
 
 
+<section class=api-function>
+
 ### mode {.blue}
+
+<div class=api-function-desc>
 
 getter / setter for the mode of the editor, javascript,css,html,python etc
 
@@ -394,6 +511,10 @@ getter / setter for the mode of the editor, javascript,css,html,python etc
 
 console.log(editor.mode) // html
 editor.mode = 'javascript';
+
+</div>
+
+</section>
 
 
 --- {.hr-sub}
