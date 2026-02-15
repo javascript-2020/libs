@@ -94,6 +94,8 @@ mode | getter / setter to get and set the mode of the editor
 
 ## api
 
+--- {.hr-sub}
+
 
 <section class=api-function>
 
