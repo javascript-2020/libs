@@ -604,11 +604,16 @@
                     var obj;
                     var args      = sig(fn);
                                                                                 //console.log(args);
+                    if(!args.startsWith('({mod,')){
+                          return;
+                    }
+                    
                     switch(args){
                     
-                      case '({mod,host})'   : obj   = fn({mod:mod2,host});        break;
+                      case '({mod,host})'       : obj   = fn({mod:mod2,host});        break;
+                      case '({mod,dom,host})'   : obj   = fn({mod:mod2,dom:host,host});       break;
                       
-                      default               : obj   = fn({mod:mod2,dom,host,   root:dom,node:host});
+                      default                   : obj   = fn({mod:mod2,dom,host,   root:dom,node:host});
                       
                     }//switch
                     
