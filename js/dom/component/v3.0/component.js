@@ -595,7 +595,12 @@
                     `;
                     
                     var fn        = eval(js);
+                                                                                console.log(fn);
                                                                                 if(typeof fn!='function')debugger;
+                    if(!fn){
+                          return;
+                    }
+                    
                     var obj;
                     var args      = sig(fn);
                                                                                 //console.log(args);
