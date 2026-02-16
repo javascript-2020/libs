@@ -586,29 +586,31 @@
   
               function define({js,mod,mod2,inst,dom,host,nn}){
               
-                    js    = `
-                          //(()=>{return
-                          
-                                ${js}
-                                
-                          //})();
-                    `;
+                    var fn;
+                    switch('eval'){
                     
-                    var fn        = eval(js);
-                                                                                console.log(typeof fn,fn);
+                      case 'eval'       : fn    = define.eval(js);        break;
+                      case 'function'   : fn    = define.fn(js);          break;
+                      
+                    }//switch
+                                                                                //console.log(typeof fn,fn);
                                                                                 if(typeof fn!='function')debugger;
                     if(typeof fn!='function'){
                           return;
                     }
                     
-                    var obj;
                     var args      = sig(fn);
                                                                                 //console.log(args);
+                    if(!args.startsWith('({mod,')){
+                          return;
+                    }
+                    
+                    var obj;
                     switch(args){
                     
-                      case '({mod,host})'   : obj   = fn({mod:mod2,host});        break;
+                      case '({mod,host})'       : obj   = fn({mod:mod2,host});        break;
                       
-                      default               : obj   = fn({mod:mod2,dom,host,   root:dom,node:host});
+                      default                   : obj   = fn({mod:mod2,dom,host,   root:dom,node:host});
                       
                     }//switch
                     
@@ -672,6 +674,65 @@
                     }//suffix
                     
               }//define
+              
+              
+              define.eval   = function(js){
+              
+                    js    = `
+                          //(()=>{return
+                          
+                                ${js}
+                                
+                          //})();
+                    `;
+                    
+                    var err;
+                    try{
+                    
+                          var fn    = window.eval(js);
+                          
+                    }//try
+                    catch(err2){
+                    
+                          err   = err2;
+                          
+                    }//catch
+                    if(err){
+                                                                                console.error(err);
+                          return;
+                    }
+                    
+                    return fn;
+                    
+              }//eval
+              
+              
+              define.fn   = function(js){
+              
+                    js    = `
+                                  return ${js}
+                            `;
+                    var err;
+                    try{
+                    
+                          var dfn   = new Function(js);
+                          var fn    = dfn();
+                          
+                    }//try
+                    catch(err2){
+                    
+                          err   = err2;
+                          
+                    }//catch
+                    if(err){
+                                                                                console.error(err);
+                          return;
+                    }
+                    
+                    return fn;
+                    
+              }//script
+              
               
               
               function sig(fn){
