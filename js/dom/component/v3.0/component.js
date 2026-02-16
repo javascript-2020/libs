@@ -594,7 +594,7 @@
                       
                     }//switch
                                                                                 //console.log(typeof fn,fn);
-                                                                                if(typeof fn!='function')debugger;
+                                                                                //if(typeof fn!='function')debugger;
                     if(typeof fn!='function'){
                           return;
                     }
