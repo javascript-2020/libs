@@ -597,7 +597,7 @@
                     var fn        = eval(js);
                                                                                 console.log(typeof fn,fn);
                                                                                 if(typeof fn!='function')debugger;
-                    if(!fn){
+                    if(typeof fn!='function'){
                           return;
                     }
                     
