@@ -595,7 +595,7 @@
                     `;
                     
                     var fn        = eval(js);
-                                                                                console.log(fn);
+                                                                                console.log(typeof fn,fn);
                                                                                 if(typeof fn!='function')debugger;
                     if(!fn){
                           return;
