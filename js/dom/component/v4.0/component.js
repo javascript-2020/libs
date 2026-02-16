@@ -41,8 +41,8 @@
               
               mod.name              = name;
               
-              mod.df                = false;
-              mod.df                = (name==='root');
+              mod.df                = true;
+              //mod.df                = (name==='root');
               
               mod.par               = null;           //  mod
               mod.child             = [];             //  mod
