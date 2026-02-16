@@ -586,15 +586,13 @@
   
               function define({js,mod,mod2,inst,dom,host,nn}){
               
-                    js    = `
-                          //(()=>{return
-                          
-                                ${js}
-                                
-                          //})();
-                    `;
+                    var fn;
+                    switch('eval'){
                     
-                    var fn        = window.eval(js);
+                      case 'eval'       : fn    = define.eval(js);        break;
+                      case 'function'   : fn    = define.fn(js);          break;
+                      
+                    }//switch
                                                                                 //console.log(typeof fn,fn);
                                                                                 if(typeof fn!='function')debugger;
                     if(typeof fn!='function'){
@@ -676,6 +674,65 @@
                     }//suffix
                     
               }//define
+              
+              
+              define.eval   = function(js){
+              
+                    js    = `
+                          //(()=>{return
+                          
+                                ${js}
+                                
+                          //})();
+                    `;
+                    
+                    var err;
+                    try{
+                    
+                          var fn    = window.eval(js);
+                          
+                    }//try
+                    catch(err2){
+                    
+                          err   = err2;
+                          
+                    }//catch
+                    if(err){
+                                                                                console.error(err);
+                          return;
+                    }
+                    
+                    return fn;
+                    
+              }//eval
+              
+              
+              define.fn   = function(js){
+              
+                    js    = `
+                                  return ${js}
+                            `;
+                    var err;
+                    try{
+                    
+                          var dfn   = new Function(js);
+                          var fn    = dfn();
+                          
+                    }//try
+                    catch(err2){
+                    
+                          err   = err2;
+                          
+                    }//catch
+                    if(err){
+                                                                                console.error(err);
+                          return;
+                    }
+                    
+                    return fn;
+                    
+              }//script
+              
               
               
               function sig(fn){
