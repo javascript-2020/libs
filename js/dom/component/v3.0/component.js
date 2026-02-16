@@ -594,7 +594,7 @@
                           //})();
                     `;
                     
-                    var fn        = window.eval(js);
+                    var fn        = eval(js);
                                                                                 console.log(typeof fn,fn);
                                                                                 if(typeof fn!='function')debugger;
                     if(typeof fn!='function'){
