@@ -601,13 +601,13 @@
                           return;
                     }
                     
-                    var obj;
                     var args      = sig(fn);
                                                                                 //console.log(args);
                     if(!args.startsWith('({mod,')){
                           return;
                     }
                     
+                    var obj;
                     switch(args){
                     
                       case '({mod,host})'       : obj   = fn({mod:mod2,host});        break;
