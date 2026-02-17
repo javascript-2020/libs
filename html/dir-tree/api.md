@@ -67,6 +67,9 @@ takes a simple, easy to represent object structure representing a directory and 
 
 ```
 
+#### Errors
+
+**none**
 
 </div>
 
@@ -133,6 +136,10 @@ ie opening and closing directory
 
 none
 
+#### Errors
+
+**none**
+
 </div>
 
 </section>
@@ -154,6 +161,10 @@ clear the directory tree
 **none**
 
 #### return
+
+**none**
+
+#### Errors
 
 **none**
 
@@ -181,6 +192,10 @@ return the original object in the data structure for a given path
 
 - object - the original data structure object
 
+#### Errors
+
+**none**
+
 </div>
 
 </section>
@@ -204,6 +219,10 @@ open the directory specified by path
 #### return
 
 - object - the original object in the data structure
+
+#### Errors
+
+**none**
 
 </div>
 
@@ -229,6 +248,10 @@ close the directory specified by path
 
 - object - the original object om the data structure
 
+#### Errors
+
+**none**
+
 </div>
 
 </section>
@@ -252,6 +275,10 @@ none
 #### return
 
 none
+
+#### Errors
+
+**none**
 
 </div>
 
