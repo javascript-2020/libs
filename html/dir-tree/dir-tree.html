@@ -302,7 +302,9 @@
       obj.open    = function(path){
       
             var o   = find(path);
+            if(!o)return;
             open(o.node);
+            return o;
             
       }//open
       
@@ -310,7 +312,9 @@
       obj.close   = function(path){
       
             var o   = find(path);
+            if(!o)return;
             close(o.node);
+            return o;
             
       }//close
       
