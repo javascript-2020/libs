@@ -220,13 +220,17 @@
             
             function click_dir(ndir,o){
             
-                  var hdr   = $(ndir,'.dir-hdr');
-                  if($(hdr,'.expand').classList.contains('close')){
-                        open(ndir);
-                        return;
-                  }
+                  var result    = options?.callback?.dir(o.name,o);
                   
-                  close(ndir);
+                  if(result!==false){
+                        var hdr   = $(ndir,'.dir-hdr');
+                        if($(hdr,'.expand').classList.contains('close')){
+                              open(ndir);
+                              return;
+                        }
+                        
+                        close(ndir);
+                  }
                   
             }//click
             
