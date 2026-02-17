@@ -69,7 +69,7 @@
       <script>
       
       
-(function snippet_html_console({mod,dom,host}){
+(function snippet_html_console({mod,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -149,11 +149,11 @@
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
                                                                                 
-              var dom_config          = mod.rd.config(dom);
+              var dom_config          = mod.rd.config(host);
               config                  = Object.assign(config,dom_config);
               
-              config['web-editor']    = mod.rd.attr(dom,'web-editor',config);
-              config['web-console']   = mod.rd.attr(dom,'web-console',config);
+              config['web-editor']    = mod.rd.attr(host,'web-editor',config);
+              config['web-console']   = mod.rd.attr(host,'web-console',config);
               
               if(!('fullsize' in config['web-editor'])){
                     config['web-editor'].fullsize    = true;
@@ -162,7 +162,7 @@
                                                                                 debug('config',config);
                                                                                 
                                                                                 
-              def.html          = $.htmlentities.decode(dom);
+              def.html          = $.htmlentities.decode(host);
               
               
               
@@ -191,8 +191,8 @@
         
         rd.attr.src    = async function(){
         
-              if(!dom.hasAttribute('src'))return;
-              src         = dom.getAttribute('src');
+              if(!host.hasAttribute('src'))return;
+              src         = host.getAttribute('src');
               var res     = await fetch(src);
               var txt     = await res.text();
               def.html    = txt;
