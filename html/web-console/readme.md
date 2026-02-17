@@ -48,9 +48,8 @@ config    | config parameters, see below
 echo      | whether to echo the output to the dev tools console
 
 
-## api
 
-### attribute
+## attributes
 
 these attribute can be defined on the html tag itself
 
@@ -60,7 +59,7 @@ fullsize      | the console will keep expanding to show all content
 h \| height   | sets the height of the console
 
 
-### module
+## module
 
 methods without a description are not currently implmented and are passed through to dev tools
 
@@ -102,3 +101,7 @@ json|write json stringified output to the console
  | 
  | 
 test|display test data in the console, for quick tests
+
+
+
+
