@@ -1,30 +1,50 @@
 ## api
 
 
-### clear ()
+<section class=api-function>
+
+### clear () {.api-function-title}
 
 clear the output and console
 
+<div class=api-function-desc>
+
 #### parameters
 
-no parameters
+none
 
-#### returns
+#### return
 
-no return value
+none
+
+</div>
+
+</section>
 
 
-### run ()
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### run () {.api-function-title}
 
 run the code in the editor
 
+<div class=api-function-desc>
+
 #### parameters
 
-no parameters
+none
 
-#### returns
+#### return
 
-no return value
+none
+
+</div>
+
+</section>
+
 
 
 
