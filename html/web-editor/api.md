@@ -19,6 +19,10 @@ set the filename that the editor displays, also sets the mode
 
 none
 
+#### Errors
+
+**none**
+
 </div>
 
 </section>
@@ -42,6 +46,10 @@ helper function to return the filename from a path
 #### return
 
 - string - the filename
+
+#### Errors
+
+**none**
 
 </div>
 
@@ -67,6 +75,10 @@ show or hide the save status icon
 
 none
 
+#### Errors
+
+**none**
+
 </div>
 
 </section>
@@ -90,6 +102,10 @@ no parameters
 #### return
 
 none
+
+#### Errors
+
+**none**
 
 </div>
 
@@ -115,6 +131,10 @@ no parameters
 
 none
 
+#### Errors
+
+**none**
+
 </div>
 
 </section>
@@ -138,6 +158,10 @@ no parameters
 #### return
 
 none
+
+#### Errors
+
+**none**
 
 </div>
 
@@ -163,6 +187,10 @@ no parameters
 
 - string - the filename
 
+#### Errors
+
+**none**
+
 </div>
 
 </section>
@@ -186,6 +214,10 @@ no parameters
 #### return
 
 none
+
+#### Errors
+
+**none**
 
 </div>
 
@@ -213,6 +245,10 @@ set the text of the editor
 
 none
 
+#### Errors
+
+**none**
+
 </div>
 
 </section>
@@ -239,6 +275,10 @@ no parameters
 
 - string - the text of the editor
 
+#### Errors
+
+**none**
+
 </div>
 
 </section>
@@ -263,6 +303,10 @@ no parameters
 
 none
 
+#### Errors
+
+**none**
+
 </div>
 
 </section>
@@ -286,6 +330,10 @@ no parameters
 #### return
 
 none
+
+#### Errors
+
+**none**
 
 </div>
 
@@ -313,6 +361,10 @@ fetch the file src and display it in the editor
 
 no return value
 
+#### Errors
+
+**none**
+
 </div>
 
 </section>
@@ -337,6 +389,10 @@ no parameters
 
 none
 
+#### Errors
+
+**none**
+
 </div>
 
 </section>
@@ -360,6 +416,10 @@ no parameters
 #### return
 
 none
+
+#### Errors
+
+**none**
 
 </div>
 
