@@ -23,7 +23,7 @@ $         |       various dom helper functions
 menumod   |       the menumod library
  |
 menu      |       reference to the menu to add its menu's to
-source    |       the source text
+source    |       the source blob
 focus     |       function to reset focus
 log       |       reference to log-mod component
  |
