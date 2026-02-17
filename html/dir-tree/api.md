@@ -11,41 +11,6 @@
 takes a simple, easy to represent object structure representing a directory and produces an object structure that can be used by dir-tree to display the directory
 
 
-and produces a ibject structure that can be used by dir-tree to display the directory
-
-```
-
-              var data    = [
-                    {
-                          parent    : null,
-                          type      : 'dir',
-                          name      : 'tmp',
-                          list      : [
-                                {
-                                      parent    : {object},
-                                      type      : 'dir',
-                                      name      : 'tmp-1',
-                                      list      : [
-                                            {
-                                                  parent    : 'object',
-                                                  type      : 'file',
-                                                  name      : 'test.txt'
-                                            }
-                                      ]
-                                },
-                                {
-                                      parent    : {object},
-                                      type      : 'file',
-                                      name      : 'hello.txt'
-                                }
-                          ]
-                    }
-              ];
-
-```
-      
-
-
 <div class=api-function-desc>
 
 #### parameters
