@@ -1,13 +1,58 @@
 ## api
 
-### run ()
+
+<section class=api-function>
+
+### run () {.api-function-title}
 
 run the code in the editor
 
+<div class=api-function-desc>
+
 #### parameters
 
-no parameters
+none
 
-#### returns
+#### return
 
-no return value
+none
+
+</div>
+
+</section>
+
+
+
+
+
+
+<!--
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### filename ( file ) {.api-function-title}
+
+set the filename that the editor displays, also sets the mode
+
+<div class=api-function-desc>
+
+#### parameters
+
+- file - a [file-mod file descriptor](#)
+
+#### return
+
+none
+
+</div>
+
+</section>
+
+-->
+
+
+
+
