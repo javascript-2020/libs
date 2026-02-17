@@ -147,7 +147,7 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
-              var dom_config      = mod.rd.config(dom);
+              var dom_config      = mod.rd.config(host);
               config              = Object.assign(config,dom_config);
               
               config['web-editor']    = mod.rd.attr(dom,'web-editor',config);
