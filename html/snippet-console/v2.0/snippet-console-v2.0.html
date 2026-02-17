@@ -150,15 +150,15 @@
               var dom_config      = mod.rd.config(host);
               config              = Object.assign(config,dom_config);
               
-              config['web-editor']    = mod.rd.attr(dom,'web-editor',config);
-              config['web-console']   = mod.rd.attr(dom,'web-console',config);
+              config['web-editor']    = mod.rd.attr(host,'web-editor',config);
+              config['web-console']   = mod.rd.attr(host,'web-console',config);
               
               if(!('fullsize' in config['web-editor'])){
                     config['web-editor'].fullsize    = true;
               }
                                                                                 debug('config',config);
                                                                                 
-              def.txt                 = dom.innerHTML;
+              def.txt                 = host.innerHTML;
               
               
               filemod                 = mod['file-mod'];
@@ -211,8 +211,8 @@
         
         rd.attr.src    = async function(){
         
-              if(!dom.hasAttribute('src'))return;
-              src       = dom.getAttribute('src');
+              if(!host.hasAttribute('src'))return;
+              src       = host.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
               def.txt   = txt;
