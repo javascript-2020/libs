@@ -28,7 +28,7 @@
                                                                                 
               filemod     = mod['file-mod'];
               
-              filemod.initmod({complete});
+              filemod.initmod({complete,source});
               
               
               await mod.auto();
@@ -65,17 +65,6 @@
                   <file-mod component v2.0></file-mod>
             </div>
             
-            <div>
-                  <button id=test>test</button>
-            </div>
-            
-            
-<!--
-            <checkbox-one-template>
-                  <script src='https://html-loader-dblv8aserliq.runkit.sh/?checkbox-one-template'></script>
-            </checkbox-one-template>
--->
-
       </body>
       
       <script>
@@ -93,7 +82,7 @@
               var root    = rootnode;
               
               
-              $('#test').onclick    = e=>alert(filemod.autosave);
+              $('#test').onclick    = e=>
               
               
         }//initdom
@@ -129,6 +118,7 @@
         
         
       </script>
+      
       
       
       
