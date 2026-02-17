@@ -138,8 +138,124 @@ none
 </section>
 
       
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### clear () {.api-function-title}
+
+clear the directory tree
+
+<div class=api-function-desc>
+
+#### parameters
+
+**none**
+
+#### return
+
+**none**
+
+</div>
+
+</section>
       
-      
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### find ( path ) {.api-function-title}
+
+return the original object in the data structure for a given path
+
+<div class=api-function-desc>
+
+#### parameters
+
+- path - string - the path to find
+
+#### return
+
+- object - the original data structure object
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### open ( path ) {.api-function-title}
+
+open the directory specified by path
+
+<div class=api-function-desc>
+
+#### parameters
+
+- path - string - the path to open
+
+#### return
+
+- object - the original object in the data structure
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### close ( path ) {.api-function-title}
+
+close the directory specified by path
+
+<div class=api-function-desc>
+
+#### parameters
+
+- path - string - the path of the directory to close
+
+#### return
+
+- object - the original object om the data structure
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### test () {.api-function-title}
+
+display a test directory
+
+<div class=api-function-desc>
+
+#### parameters
+
+none
+
+#### return
+
+none
+
+</div>
+
+</section>
 
 
 
