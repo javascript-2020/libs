@@ -54,16 +54,3 @@ initdom|standard function to setup the dom
 run|run the current snippet
 
 
-## api
-
-### run ()
-
-run the code in the editor
-
-#### parameters
-
-no parameters
-
-#### returns
-
-no return value
