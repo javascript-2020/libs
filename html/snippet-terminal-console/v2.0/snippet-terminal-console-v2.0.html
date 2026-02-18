@@ -61,7 +61,7 @@
       <script>
       
       
-(function snippet_terminal_console({mod,dom,host}){
+(function snippet_terminal_console({mod,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -124,12 +124,12 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
-              var dom_config            = mod.rd.config(dom);
+              var dom_config            = mod.rd.config(host);
               config                    = Object.assign(config,dom_config);
               
-              config['web-editor']      = mod.rd.attr(dom,'web-editor',config);
-              config['web-terminal']    = mod.rd.attr(dom,'web-terminal',config);
-              config['web-console']     = mod.rd.attr(dom,'web-console',config);
+              config['web-editor']      = mod.rd.attr(host,'web-editor',config);
+              config['web-terminal']    = mod.rd.attr(host,'web-terminal',config);
+              config['web-console']     = mod.rd.attr(host,'web-console',config);
               
               if(!('fullsize' in config['web-editor'])){
                     config['web-editor'].fullsize    = true;
@@ -137,7 +137,7 @@
                                                                                 debug('config',config);
                                                                                 
                                                                                 
-              def               = $.htmlentities.decode(dom);
+              def               = $.htmlentities.decode(host);
               
               rd.attr.type();
               rd.attr.mode();
@@ -182,9 +182,9 @@
         
         rd.attr.src    = async function(){
         
-              if(!dom.hasAttribute('src'))return;
+              if(!host.hasAttribute('src'))return;
               
-              src       = dom.getAttribute('src');
+              src       = host.getAttribute('src');
               var res   = await fetch(src);
               var txt   = await res.text();
               def       = txt;
@@ -194,18 +194,18 @@
         
         rd.attr.mode    = function(){
         
-              if(!dom.hasAttribute('mode'))return;
+              if(!host.hasAttribute('mode'))return;
               
-              mode    = dom.getAttribute('mode');
+              mode    = host.getAttribute('mode');
               
         }//mode
         
         
         rd.attr.type    = function(){
         
-              if(!dom.hasAttribute('type'))return;
+              if(!host.hasAttribute('type'))return;
               
-              mode    = dom.getAttribute('type');
+              mode    = host.getAttribute('type');
                                                                                 debug('deprecated [type]',mode);
         }//type
         
