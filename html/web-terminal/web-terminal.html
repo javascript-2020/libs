@@ -51,7 +51,7 @@
 
 
 
-(function web_terminal({mod,dom,host}){
+(function web_terminal({mod,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -112,11 +112,11 @@
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
                                                                                 
-              var dom_config    = mod.rd.config(dom);
+              var dom_config    = mod.rd.config(host);
               config            = Object.assign(config,dom_config);
                                                                                 debug('config',config);
                                                                                 
-              target    = dom;
+              target    = host;
               if(embed){
                     target    = embed;
               }
