@@ -1377,7 +1377,9 @@
               
               var str   = v;
               if($.is.node(v)){
-                    str   = v.innerHTML;
+                    str   = '';
+                    [...v.childNodes].forEach(node=>node.nodeType==Node.TEXT_NODE && (str+=node.nodeValue));
+                    //str   = v.innerHTML;
               }
               
               var txt         = document.createElement('textarea');
