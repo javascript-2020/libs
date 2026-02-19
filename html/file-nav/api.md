@@ -6,9 +6,9 @@
 
 <section class=api-function>
 
-### async load ( file ) {.api-function-title}
+### update ( path? ) {.api-function-title}
 
-load a blob from file descriptor file
+update the directory structure
 
 
 
@@ -16,16 +16,17 @@ load a blob from file descriptor file
 
 #### parameters
 
-- file - object - a file-mod file descriptor
+- path - string - optional - the path to the directory
 
 
 #### return
 
-- blob
-- 
+none
+
 </div>
 
 </section>
+
 
 
 --- {.hr-sub}
@@ -33,29 +34,21 @@ load a blob from file descriptor file
 
 <section class=api-function>
 
-### load.ui ( path, name ) {.api-function-title}
+### display ( path, dirs, files ) {.api-function-title}
 
-creates a file-mod file descriptor and loads the blob from path / name
-
-optionally calls user defined callback when finished
-
-load.complete( file,blob ) 
-
+display the directory
 
 <div class=api-function-desc>
 
 #### parameters
 
 - path - string - file  path
-- name - string - filename
+- dirs - array [ string ] - the directory names
+- files - array [ string ] - the file names
 
 </div>
 
 #### return
-
-- blob - the loaded blob
-
-#### Errors
 
 none
 
@@ -69,26 +62,27 @@ none
 
 <section class=api-function>
 
-### save ( file, blob ) {.api-function-title}
+### display.flat ( path, list ) {.api-function-title}
 
-save the blob using file-mod file descriptor
+display the directory using a flat directory structure
 
-optionally call user defined callback function 
+```
 
-save.complete( file )
+      [
+            '/main/sub/file-1.txt',
+            '/main/sub-2/file-2.txt',
+      ]
+      
+```
 
 <div class=api-function-desc>
 
 #### parameters
 
-- file - file-mod file descriptor
-- blob - the blob to save
+- path - string - the directory path
+- list - array [ string ] - the list of files
 
 #### return
-
-none
-
-#### Errors
 
 none
 
@@ -96,66 +90,6 @@ none
 
 </section>
       
-
---- {.hr-sub}
-
-
-<section class=api-function>
-
-### save.ui ( path,name ) {.api-function-title}
-
-creates a file descriptor from path / name and reads the blob from source
-
-then calls save( file,blob )
-
-<div class=api-function-desc>
-
-#### parameters
-
-- path - string - the path of the file
-- name - string - the filename
-
-#### return
-
-none
-
-#### Errors
-
-none
-
-</div>
-
-</section>
-
-
---- {.hr-sub}
-
-
-<section class=api-function>
-
-### newfile ( {path,name} ) {.api-function-title}
-
-create a file-mod file descriptor from path / name
-
-<div class=api-function-desc>
-
-#### parameters
-
-- path - string - the file path
-- name - string - the filename
-
-#### return
-
-- file - object - the file-mod file descriptor
-
-#### Errors
-
-none
-
-</div>
-
-</section>
-
 
 
 
