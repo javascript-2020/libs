@@ -1,6 +1,6 @@
 ## Description
 
-provides toast style notifications
+display source code
 
 by default uses the current page source
 
@@ -9,7 +9,7 @@ by default uses the current page source
 
 ```
 
-      <log-mod component></log-mod>
+      <page-source component></page-source>
       
 ```
 
