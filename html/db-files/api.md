@@ -6,71 +6,23 @@
 
 <section class=api-function>
 
-### build( data ) {.api-function-title}
+### async load ( file ) {.api-function-title}
 
-takes a simple, easy to represent object structure representing a directory and produces an object structure that can be used by dir-tree to display the directory
+load a blob from file descriptor file
+
 
 
 <div class=api-function-desc>
 
 #### parameters
 
-- data 
-```
-
-      var data    = {
-            'tmp'   : {
-                  'tmp-1'   : {
-                        'test.txt':null,
-                  },
-                  'my-file-1.bin':null,
-                  'my-file-2.bin':null,
-            },
-            'hello-1.txt':null,
-            'hello-2.txt':null,
-      };
-
-```
+- file - object - a file-mod file descriptor
 
 
 #### return
 
-- object
-```
-
-              var data    = [
-                    {
-                          parent    : null,
-                          type      : 'dir',
-                          name      : 'tmp',
-                          list      : [
-                                {
-                                      parent    : {object},
-                                      type      : 'dir',
-                                      name      : 'tmp-1',
-                                      list      : [
-                                            {
-                                                  parent    : 'object',
-                                                  type      : 'file',
-                                                  name      : 'test.txt'
-                                            }
-                                      ]
-                                },
-                                {
-                                      parent    : {object},
-                                      type      : 'file',
-                                      name      : 'hello.txt'
-                                }
-                          ]
-                    }
-              ];
-
-```
-
-#### Errors
-
-**none**
-
+- blob
+- 
 </div>
 
 </section>
@@ -81,64 +33,31 @@ takes a simple, easy to represent object structure representing a directory and 
 
 <section class=api-function>
 
-### display (data, options) {.api-function-title}
+### load.ui ( path, name ) {.api-function-title}
 
-display directory structure data
+creates a file-mod file descriptor and loads the blob from path / name
+
+optionally calls user defined callback when finished
+
+load.complete( file,blob ) 
+
 
 <div class=api-function-desc>
 
 #### parameters
 
-- data - directory structure of the form
-```
-
-              var data    = [
-                    {
-                          parent    : null,
-                          type      : 'dir',
-                          name      : 'tmp',
-                          list      : [
-                                {
-                                      parent    : {object},
-                                      type      : 'dir',
-                                      name      : 'tmp-1',
-                                      list      : [
-                                            {
-                                                  parent    : 'object',
-                                                  type      : 'file',
-                                                  name      : 'test.txt'
-                                            }
-                                      ]
-                                },
-                                {
-                                      parent    : {object},
-                                      type      : 'file',
-                                      name      : 'hello.txt'
-                                }
-                          ]
-                    }
-              ];
-
-```
-- options - object
-<div style='padding-left:50px'>
-
-**options.callback** - object
-
-**options.callback.dir** - function ( name,o ) - callback when directory is clicked, name - name of directory, o - the original object in the data structure, return from callback [false] prevent default,
-ie opening and closing directory
-
-**options.callback.file** - function (name,o ) - callback when file is clicked, name - name of file, o - the original object in the data structure
+- path - string - file  path
+- name - string - filename
 
 </div>
 
 #### return
 
-none
+- blob - the loaded blob
 
 #### Errors
 
-**none**
+none
 
 </div>
 
@@ -150,23 +69,28 @@ none
 
 <section class=api-function>
 
-### clear () {.api-function-title}
+### save ( file, blob ) {.api-function-title}
 
-clear the directory tree
+save the blob using file-mod file descriptor
+
+optionally call user defined callback function 
+
+save.complete( file )
 
 <div class=api-function-desc>
 
 #### parameters
 
-**none**
+- file - file-mod file descriptor
+- blob - the blob to save
 
 #### return
 
-**none**
+none
 
 #### Errors
 
-**none**
+none
 
 </div>
 
@@ -178,99 +102,18 @@ clear the directory tree
 
 <section class=api-function>
 
-### find ( path ) {.api-function-title}
+### save.ui ( path,name ) {.api-function-title}
 
-return the original object in the data structure for a given path
+creates a file descriptor from path / name and reads the blob from source
 
-<div class=api-function-desc>
-
-#### parameters
-
-- path - string - the path to find
-
-#### return
-
-- object - the original data structure object
-
-#### Errors
-
-**none**
-
-</div>
-
-</section>
-
-
---- {.hr-sub}
-
-
-<section class=api-function>
-
-### open ( path ) {.api-function-title}
-
-open the directory specified by path
+then calls save( file,blob )
 
 <div class=api-function-desc>
 
 #### parameters
 
-- path - string - the path to open
-
-#### return
-
-- object - the original object in the data structure
-
-#### Errors
-
-**none**
-
-</div>
-
-</section>
-
-
---- {.hr-sub}
-
-
-<section class=api-function>
-
-### close ( path ) {.api-function-title}
-
-close the directory specified by path
-
-<div class=api-function-desc>
-
-#### parameters
-
-- path - string - the path of the directory to close
-
-#### return
-
-- object - the original object om the data structure
-
-#### Errors
-
-**none**
-
-</div>
-
-</section>
-
-
---- {.hr-sub}
-
-
-<section class=api-function>
-
-### test () {.api-function-title}
-
-display a test directory
-
-<div class=api-function-desc>
-
-#### parameters
-
-none
+- path - string - the path of the file
+- name - string - the filename
 
 #### return
 
@@ -278,11 +121,41 @@ none
 
 #### Errors
 
-**none**
+none
 
 </div>
 
 </section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### newfile ( {path,name} ) {.api-function-title}
+
+create a file-mod file descriptor from path / name
+
+<div class=api-function-desc>
+
+#### parameters
+
+- path - string - the file path
+- name - string - the filename
+
+#### return
+
+- file - object - the file-mod file descriptor
+
+#### Errors
+
+none
+
+</div>
+
+</section>
+
 
 
 
