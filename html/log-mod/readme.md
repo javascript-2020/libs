@@ -1,17 +1,12 @@
 ## Description
 
-provides a ui for loading and saving files from the local computer
-
-note :
-
-uses <input type=file> for instance
-
+provides toast style notifications
 
 ## Include
 
 ```
 
-      <local-file component></local-file>
+      <log-mod component></log-mod>
       
 ```
 
@@ -21,10 +16,6 @@ uses <input type=file> for instance
 name      | description
 ----------|------------
 $|reference to the dom helper library
-menu | reference to the current menu group 
-filemod | reference to the file-mod component
-source | a function to be called to get a source blob to save
-log|reference to the log-mod component
 
 
 ## attribute
@@ -45,10 +36,11 @@ initmod | standard function for importing local dependencies
 init | standard initialisation function
 initdom | standard function to setup the dom
  | 
-load ( file ) | load the file
-save ( file, blob ) | save the blob to file
-clear () | clear the current file
-
+red () | display a red notification ( error )
+green () | display a green notification ( ok ) 
+orange () | display an orange notification ( warning )
+error() | display an error message
+ok() | display an ok notification
 
 
 
