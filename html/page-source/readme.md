@@ -2,6 +2,9 @@
 
 provides toast style notifications
 
+by default uses the current page
+
+
 ## Include
 
 ```
@@ -15,7 +18,6 @@ provides toast style notifications
 
 name      | description
 ----------|------------
-$|reference to the dom helper library
 
 
 ## attribute
@@ -36,11 +38,7 @@ initmod | standard function for importing local dependencies
 init | standard initialisation function
 initdom | standard function to setup the dom
  | 
-red () | display a red notification ( error )
-green () | display a green notification ( ok ) 
-orange () | display an orange notification ( warning )
-error() | display an error message
-ok() | display an ok notification
+url ( url ) | set the url for the page source
 
 
 
