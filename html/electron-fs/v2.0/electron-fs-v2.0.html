@@ -100,10 +100,6 @@
                                                                                 debug('init',obj.version);
                                                                                 
               electron                  = window.electronAPI;
-              if(!electron){
-                                                                                debug('not enabled');
-                    return;
-              }
                                                                                 debug('enabled');
               filenav                   = mod['file-nav'];
               //filenav.rd.params         = rd.params;
@@ -114,6 +110,11 @@
               filenav.dir.dblclick      = dir.dblclick;
               
               await mod.auto();
+              
+              if(!electron){
+                                                                                debug('not enabled');
+                    return;
+              }
               
               
         }//init
