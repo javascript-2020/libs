@@ -1,10 +1,6 @@
 ## Description
 
-provide the ui for navigating files while in the electron dev environment
-
-note :
-
-this is only really working in electron environments
+display the directory structure, allows navigating around directories, loading and creating files and directories
 
 
 ## Include
