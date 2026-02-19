@@ -448,7 +448,9 @@
               }
               var blob    = result;
               
-              obj.load.complete(file,blob);
+              obj.load?.complete?.(file,blob);
+              
+              return blob;
               
         }//ui
         
@@ -534,7 +536,7 @@
                     return false;
               }
               
-              obj.save.complete(file);
+              obj.save?.complete?.(file);
               
               return true;
               
