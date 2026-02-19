@@ -9,7 +9,9 @@ create-archive.js
 */
 
         export {create_archive};
-        
+
+        var jszip;
+
         async function create_archive(dir,{download=true,test,df=false,def}={}){
                                                                                 df && console.log('download',download);
                                                                                 df && console.log('test',!!test);
