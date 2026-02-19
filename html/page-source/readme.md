@@ -2,7 +2,7 @@
 
 provides toast style notifications
 
-by default uses the current page
+by default uses the current page source
 
 
 ## Include
