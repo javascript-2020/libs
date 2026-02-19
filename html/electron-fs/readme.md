@@ -2,6 +2,10 @@
 
 provide the ui for navigating files while in the electron dev environment
 
+note :
+
+this is only really working in electron environments
+
 
 ## Include
 
