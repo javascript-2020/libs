@@ -6,20 +6,21 @@
 
 <section class=api-function>
 
-### async : load ( file ) {.api-function-title}
+### read () {.api-function-title}
 
-load the file specified by file file-mod file desciptor
+read the values from the ui : token, owner, repo, branch, path
+
 
 <div class=api-function-desc>
 
 #### parameters
 
-- file - object - file-mod file descriptor
+none
 
 
 #### return
 
-- blob - the loaded blob
+- object - the values {token,owner,repo,branch,path}
 
 </div>
 
@@ -32,32 +33,21 @@ load the file specified by file file-mod file desciptor
 
 <section class=api-function>
 
-### async : load.ui ( url, path, filename ) {.api-function-title}
+### read.token () {.api-function-title}
 
-load the file specified by url / path / filename
+read the value of the token from the ui
 
 <div class=api-function-desc>
 
 #### parameters
 
-- url - string - the server url 
-```
-https://localhost:3000
-```
-- path - string - the path of the file
-```
-/main/sub/
-```
-- filename - string - file filename
-```
-my-file.txt
-```
+none
 
 </div>
 
 #### return
 
-- blob - the loaded file
+- string - the token
 
 </div>
 
@@ -69,20 +59,22 @@ my-file.txt
 
 <section class=api-function>
 
-### async : save ( file, blob ) {.api-function-title}
+### write ( owner, repo, branch, path ) {.api-function-title}
 
-save the blob to the file specified by file
+write the values of the ui
 
 <div class=api-function-desc>
 
 #### parameters
 
-- file - object - file-mod file descriptor
-- blob - blob - the blob data
+- owner - string - the repo owner
+- repo - string - the repo name
+- branch - string - the repo branch name
+- path - string - the path 
 
 #### return
 
-- boolean - true / false - status of the operation
+none
 
 </div>
 
@@ -94,30 +86,20 @@ save the blob to the file specified by file
 
 <section class=api-function>
 
-### async : save.ui ( url, path, filename ) {.api-function-title}
+### load ( file, api) {.api-function-title}
 
-read the blob from source and save it
+load the file
 
 <div class=api-function-desc>
 
 #### parameters
 
-- url - string - the server url 
-```
-https://localhost:3000
-```
-- path - string - the path of the file
-```
-/main/sub/
-```
-- filename - string - file filename
-```
-my-file.txt
-```
+- file - object - file-mod file descritor
+- api - boolean - whether to use the github api or raw.githubusercontent.com url
 
 #### return
 
-none
+ - result
 
 </div>
 
@@ -129,21 +111,21 @@ none
 
 <section class=api-function>
 
-### clear () {.api-function-title}
+### save ( file, blob ) {.api-function-title}
 
-clear the current file
+save the blob
 
-( not implemented yet )
 
 <div class=api-function-desc>
 
 #### parameters
 
-none
+- file - object - file descriptor
+- blob - blob - the file data to save
 
 #### return
 
-none
+- result
 
 </div>
 
@@ -155,23 +137,52 @@ none
 
 <section class=api-function>
 
-### export ( file ) {.api-function-title}
+### export () {.api-function-title}
 
-serialise file
+export the values from the ui
 
 <div class=api-function-desc>
 
 #### parameters
 
-- file - a [file-mod file descriptor](#)
+none
 
 #### return
 
-- object - the exported file object
+- object - {owner,repo,branch,path}
 
 </div>
 
 </section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### icon () {.api-function-title}
+
+retrieve icon src value
+
+<div class=api-function-desc>
+
+#### parameters
+
+none
+
+#### return
+
+- string - the icon src value ( image data )
+
+</div>
+
+</section>
+
+
+
+
+
 
 
 
