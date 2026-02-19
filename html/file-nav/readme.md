@@ -24,11 +24,7 @@ initmod|standard used to pass references to module
 init|standard : used to initialise the module
 initdom| standard : used to initialise the dom
  |
-menu| reference to the menu group to add the ui to
-source|function that returns the source blob ( blob to save )
-filemod|reference to the file-mod module
-log|reference to the log-mod module for status and error reporting
-
+datatype | reference to the datatype function
 
 ## attribute
 
@@ -48,11 +44,10 @@ initmod|standard function for importing local dependencies
 init|standard initialisation function
 initdom|standard function to setup the dom
  | 
-update () | update the file navigation structure
-load ( file ) | load file
-load.ui ( path,name ) | load file from path / name
-save ( file,blob ) | save blob to file
-save.ui ( path,name ) | read the blob from source and save to file
+update ( path? ) | update the file navigation structure
+display ( path, dirs, files ) | display the directory structure
+display.flat ( path,list ) | display the directory structure in list, this is a different flat directory structure, see API
+
 
 
 
