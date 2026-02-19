@@ -51,6 +51,30 @@ save the blob
 </section>
 
 
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### clear () {.api-function-title}
+
+clear the current file
+
+not implemented yet
+
+<div class=api-function-desc>
+
+#### parameters
+
+none
+
+#### return
+
+none
+
+</div>
+
+</section>
 
 
 
