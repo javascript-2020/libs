@@ -55,7 +55,7 @@
         var df=false,did='electron-fs'
         ;
         
-        var ext,$,menu,source,filemod
+        var ext,$,menu,source,filemod,log
         ;
         
         obj.initmod   = function(params){
@@ -65,6 +65,7 @@
               menu        = mod.rd(params,'menu',menu);
               source      = mod.rd(params,'source',source);
               filemod     = mod.rd(params,'filemod',filemod);
+              log         = mod.rd(params,'log',log);
               
         }//initmod
         
@@ -301,7 +302,9 @@
               }
               var blob    = result;
               
-              obj.load.complete(file,blob);
+              obj.load?.complete?.(file,blob);
+              
+              return blob;
               
         }//load.ui
         
