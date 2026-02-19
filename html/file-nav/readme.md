@@ -7,7 +7,7 @@ display the directory structure, allows navigating around directories, loading a
 
 ```
 
-      <electron-fs component></electron-fs>
+      <file-nav component></file-nav>
       
 ```
 
@@ -43,6 +43,7 @@ initdom|standard function to setup the dom
 update ( path? ) | update the file navigation structure
 display ( path, dirs, files ) | display the directory structure
 display.flat ( path,list ) | display the directory structure in list, this is a different flat directory structure, see API
+
 
 
 
