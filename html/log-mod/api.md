@@ -6,19 +6,19 @@
 
 <section class=api-function>
 
-### load ( file ) {.api-function-title}
+### red ( ...args ) {.api-function-title}
 
-load the file
+display a red notification
 
 <div class=api-function-desc>
 
 #### parameters
 
-- file - object - file descritor
+- args - values to display
 
 #### return
 
- - result
+- node - the dom node of the notification
 
 </div>
 
@@ -30,21 +30,20 @@ load the file
 
 <section class=api-function>
 
-### save ( file, blob ) {.api-function-title}
+### green ( ...args ) {.api-function-title}
 
-save the blob
+display a green notification
 
 
 <div class=api-function-desc>
 
 #### parameters
 
-- file - object - file descriptor
-- blob - blob - the file data to save
+- args - the values to display
 
 #### return
 
-- result
+- node - the dom node of the notification
 
 </div>
 
@@ -56,21 +55,67 @@ save the blob
 
 <section class=api-function>
 
-### clear () {.api-function-title}
+### orange ( ...args ) {.api-function-title}
 
-clear the current file
-
-not implemented yet
+display an orange notification
 
 <div class=api-function-desc>
 
 #### parameters
 
-none
+- args - the values to display
 
 #### return
 
-none
+- node - the dom node of the notification
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### error ( ...args ) {.api-function-title}
+
+display an error notification
+
+<div class=api-function-desc>
+
+#### parameters
+
+- args the values to display ( can be error object )
+
+#### return
+
+- node - the dom node of the notification
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### ok ( ...args ) {.api-function-title}
+
+display an ok notification
+
+<div class=api-function-desc>
+
+#### parameters
+
+- args - the values to display
+
+#### return
+
+- node - the dom node of the notification
 
 </div>
 
