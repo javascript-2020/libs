@@ -6,7 +6,7 @@
 
 <section class=api-function>
 
-### async load ( file ) {.api-function-title}
+### async : load ( file ) {.api-function-title}
 
 load the file specified by file file-mod file desciptor
 
@@ -32,7 +32,7 @@ load the file specified by file file-mod file desciptor
 
 <section class=api-function>
 
-### async load.ui ( url, path, filename ) {.api-function-title}
+### async : load.ui ( url, path, filename ) {.api-function-title}
 
 load the file specified by url / path / filename
 
@@ -69,7 +69,7 @@ my-file.txt
 
 <section class=api-function>
 
-### async save ( file, blob ) {.api-function-title}
+### async : save ( file, blob ) {.api-function-title}
 
 save the blob to the file specified by file
 
@@ -94,7 +94,7 @@ save the blob to the file specified by file
 
 <section class=api-function>
 
-### async save.ui ( url, path, filename ) {.api-function-title}
+### async : save.ui ( url, path, filename ) {.api-function-title}
 
 read the blob from source and save it
 
