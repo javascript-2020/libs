@@ -6,116 +6,19 @@
 
 <section class=api-function>
 
-### red ( ...args ) {.api-function-title}
+### url ( url ) {.api-function-title}
 
-display a red notification
-
-<div class=api-function-desc>
-
-#### parameters
-
-- args - values to display
-
-#### return
-
-- node - the dom node of the notification
-
-</div>
-
-</section>
-
-
---- {.hr-sub}
-
-
-<section class=api-function>
-
-### green ( ...args ) {.api-function-title}
-
-display a green notification
-
+set the url of the page source
 
 <div class=api-function-desc>
 
 #### parameters
 
-- args - the values to display
+- url - string the url of the page source
 
 #### return
 
-- node - the dom node of the notification
-
-</div>
-
-</section>
-
-
---- {.hr-sub}
-
-
-<section class=api-function>
-
-### orange ( ...args ) {.api-function-title}
-
-display an orange notification
-
-<div class=api-function-desc>
-
-#### parameters
-
-- args - the values to display
-
-#### return
-
-- node - the dom node of the notification
-
-</div>
-
-</section>
-
-
---- {.hr-sub}
-
-
-<section class=api-function>
-
-### error ( ...args ) {.api-function-title}
-
-display an error notification
-
-<div class=api-function-desc>
-
-#### parameters
-
-- args the values to display ( can be error object )
-
-#### return
-
-- node - the dom node of the notification
-
-</div>
-
-</section>
-
-
---- {.hr-sub}
-
-
-<section class=api-function>
-
-### ok ( ...args ) {.api-function-title}
-
-display an ok notification
-
-<div class=api-function-desc>
-
-#### parameters
-
-- args - the values to display
-
-#### return
-
-- node - the dom node of the notification
+none
 
 </div>
 
