@@ -749,7 +749,7 @@
               var blob        = result.ok;
               
               
-              obj.load.complete(file,blob);
+              obj.load?.complete?.(file,blob);
               
         }//load
         
@@ -770,7 +770,7 @@
               }
               
               
-              obj.save.complete(file);
+              obj.save?.complete?.(file);
               
         }//save
         
