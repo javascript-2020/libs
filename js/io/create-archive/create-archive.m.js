@@ -12,7 +12,7 @@ create-archive.js
 
         var jszip;
 
-        async function create_archive(dir,{download=true,test,df=false,def}={}){
+        async function create_archive(dir,{download=true,test,df=false,def={}}={}){
                                                                                 df && console.log('download',download);
                                                                                 df && console.log('test',!!test);
                                                                                 df && console.log(JSON.stringify(dir,null,4));
