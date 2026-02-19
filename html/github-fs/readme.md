@@ -1,13 +1,13 @@
 ## Description
 
-provides a ui for navigating and loading / save / creating / deleting on a file system accessed via the file-server 
+provides a ui for navigating and loading and saving files from github
 
 
 ## Include
 
 ```
 
-      <file-server component></file-server>
+      <github-fs component></github-fs>
       
 ```
 
@@ -16,14 +16,12 @@ provides a ui for navigating and loading / save / creating / deleting on a file 
 
 name      | description
 ----------|------------
-initmod|standard used to pass references to module
-init|standard : used to initialise the module
-initdom| standard : used to initialise the dom
- |
-datatype | reference to the datatype function
+ext|reference to the ext loader helper
+$|reference to the dom helper library
 menu | reference to the current menu group 
+focus|function to send focus when the menu closes
 source | a function to be called to get a source blob to save
-filemod | a reference to the file-mod component
+log|reference to the log-mod component
 
 
 ## attribute
@@ -40,16 +38,18 @@ attribute     | description
 name|description
 ---|---
 **standard** |
-initmod|standard function for importing local dependencies
-init|standard initialisation function
-initdom|standard function to setup the dom
+initmod | standard function for importing local dependencies
+init | standard initialisation function
+initdom | standard function to setup the dom
  | 
-load ( file ) | load the file specified by the file descriptor
-load.ui ( url, path, filename ) | load a file specified by url / path / filename see API
-save ( file ,blob ) | save the blob via the file descriptor file
-save.ui ( url, path, filename ) | a blob is read from source and saved according to url / path / filename
-clear () | clear the current file
-export ( file? ) | serialise the file object or use the current file
+read () | read the current values from the ui
+read.token () | read the value of the github token
+write( owner, repo, branch, path ) | write values to the ui
+clear () | clear the values from the ui
+load ( file, api ) | load the file
+save ( file, blob ) | save the blob to file
+export () | export the file object
+icon () | read the src value of the icon
 
 
 
