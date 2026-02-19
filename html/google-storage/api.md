@@ -6,87 +6,7 @@
 
 <section class=api-function>
 
-### read () {.api-function-title}
-
-read the values from the ui : token, owner, repo, branch, path
-
-
-<div class=api-function-desc>
-
-#### parameters
-
-none
-
-
-#### return
-
-- object - the values {token,owner,repo,branch,path}
-
-</div>
-
-</section>
-
-
-
---- {.hr-sub}
-
-
-<section class=api-function>
-
-### read.token () {.api-function-title}
-
-read the value of the token from the ui
-
-<div class=api-function-desc>
-
-#### parameters
-
-none
-
-</div>
-
-#### return
-
-- string - the token
-
-</div>
-
-</section>
-
-      
---- {.hr-sub}
-
-
-<section class=api-function>
-
-### write ( owner, repo, branch, path ) {.api-function-title}
-
-write the values of the ui
-
-<div class=api-function-desc>
-
-#### parameters
-
-- owner - string - the repo owner
-- repo - string - the repo name
-- branch - string - the repo branch name
-- path - string - the path 
-
-#### return
-
-none
-
-</div>
-
-</section>
-      
-
---- {.hr-sub}
-
-
-<section class=api-function>
-
-### load ( file, api) {.api-function-title}
+### load ( file ) {.api-function-title}
 
 load the file
 
@@ -94,8 +14,7 @@ load the file
 
 #### parameters
 
-- file - object - file-mod file descritor
-- api - boolean - whether to use the github api or raw.githubusercontent.com url
+- file - object - file descritor
 
 #### return
 
@@ -130,56 +49,6 @@ save the blob
 </div>
 
 </section>
-
-
---- {.hr-sub}
-
-
-<section class=api-function>
-
-### export () {.api-function-title}
-
-export the values from the ui
-
-<div class=api-function-desc>
-
-#### parameters
-
-none
-
-#### return
-
-- object - {owner,repo,branch,path}
-
-</div>
-
-</section>
-
-
---- {.hr-sub}
-
-
-<section class=api-function>
-
-### icon () {.api-function-title}
-
-retrieve icon src value
-
-<div class=api-function-desc>
-
-#### parameters
-
-none
-
-#### return
-
-- string - the icon src value ( image data )
-
-</div>
-
-</section>
-
-
 
 
 
