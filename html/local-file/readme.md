@@ -1,17 +1,17 @@
 ## Description
 
-provides a ui for loading and saving files from google cloud storage
+provides a ui for loading and saving files from the local computer
 
 note :
 
-uses the google-storage library for io operations
+uses <input type=file> for instance
 
 
 ## Include
 
 ```
 
-      <google-storage component></google-storage>
+      <local-file component></local-file>
       
 ```
 
@@ -20,9 +20,9 @@ uses the google-storage library for io operations
 
 name      | description
 ----------|------------
-ext|reference to the ext loader helper
 $|reference to the dom helper library
 menu | reference to the current menu group 
+filemod | reference to the file-mod component
 source | a function to be called to get a source blob to save
 log|reference to the log-mod component
 
@@ -47,6 +47,7 @@ initdom | standard function to setup the dom
  | 
 load ( file ) | load the file
 save ( file, blob ) | save the blob to file
+clear () | clear the current file
 
 
 
