@@ -3,19 +3,19 @@
 
 <section class=api-function>
 
-### run () {.api-function-title}
+### btn.run ( event ) {.api-function-title}
 
-run the current file
+override the btn.run event, used for building a javascript from multiple sources say
 
 <div class=api-function-desc>
 
 #### parameters
 
-none
+- event - event object
 
 #### return
 
-none
+- false - do not run the default btn.run handler
 
 </div>
 
