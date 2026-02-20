@@ -83,6 +83,7 @@
               ace           = mod.rd(params,'ace',ace);
               obj.on        = mod.rd(params,'on',obj.on);
               log           = mod.rd(params,'log',log);
+              config        = mod.rd(params,'config',config,{});
               
         }//initmod
         
@@ -239,11 +240,11 @@
   //:
   
   
-        btn.run   = async function(){
+        btn.run   = async function(e){
         
               var result;
               if(obj.btn.run){
-                    result    = await obj.btn.run();
+                    result    = await obj.btn.run(e);
                     if(result===false){
                           return;
                     }
