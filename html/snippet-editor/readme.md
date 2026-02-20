@@ -1,13 +1,13 @@
 ## Description
 
-ui for publishing the current file
+display a file in the editor, with full file controls
 
 
 ## Include
 
 ```
 
-      <publish-ui component></publish-ui>
+      <snippet-editor component></snippet-editor>
       
 ```
 
@@ -19,9 +19,16 @@ name      | description
 ext | reference to ext loader 
 $ | reference to dom helper library
 menu | reference to menu group
-source | function that returns data blob
-complete | holds load and save callbacks
+ace | reference to ace editor otherwise each instance loads its own version
+menumod | reference to the menumod library, if menu is not given
 log | reference to log-mod component
+config | configuration object, see below
+github | reference to the github io library, else it loads it
+
+
+## config
+
+config['web-editor'] web-editor config, see web-editor
 
 
 ## attribute
@@ -30,7 +37,9 @@ these attribute can be defined on the html tag itself
 
 attribute     | description
 ---------     |-----------
-
+mode | mode for the webieditor, css, html, js etc
+src | src url to load
+fullsize | put the editor in fullsize mode
 
 ## module
 
@@ -42,12 +51,6 @@ initmod | standard function for importing local dependencies
 init | standard initialisation function
 initdom | standard function to setup the dom
  | 
-clear () | clear the current publish status
-query () | read the query string, holds publish status
-delete () | delete the current publish state
-save () | publish the current source
-save.text () | publish the current source as text
-save.file () | publish the current file object
 
 
 
