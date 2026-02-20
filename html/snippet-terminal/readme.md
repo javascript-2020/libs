@@ -19,17 +19,17 @@ name      | description
 ext | reference to ext loader 
 $ | reference to dom helper library
 menu | reference to menu group
+menumod | reference to menumod library if menu is not given
 ace | reference to ace editor otherwise each instance loads its own version
-on | server events, see API
-log | reference to log-mod component
 config | configuration object, see below
+log | reference to log-mod component
+echo | boolea, whether to echo terminal output to dev tools console
 
 
 ## config
 
 config['web-editor'] web-editor config, see web-editor
 config['web-terminal']  web-terminal config, see web-terminal
-config['web-console'] web-console config, see web-console
 
 
 ## attribute
@@ -39,7 +39,6 @@ these attribute can be defined on the html tag itself
 attribute     | description
 ---------     |-----------
 src | src url to load
-mode | mode for running, typically nodejs | browser
 
 
 ## module
@@ -52,8 +51,9 @@ initmod | standard function for importing local dependencies
 init | standard initialisation function
 initdom | standard function to setup the dom
  | 
-btn.run | override the run button with this callback, see API
-run () | run the current html
+filemod | reference to the file-mod component
+editor | reference to the web-editor component
+terminal | reference to the web-terminal component
 
 
 
