@@ -629,7 +629,9 @@
                     host.__mod    = mod;
                     host.__obj    = obj;
                     
-                    obj.__host    = host;
+                    if(obj){
+                          obj.__host    = host;
+                    }
                     
                     
                     
