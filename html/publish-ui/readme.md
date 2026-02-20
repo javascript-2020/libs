@@ -1,15 +1,13 @@
 ## Description
 
-display source code
-
-by default uses the current page source
+ui for publishing the current file
 
 
 ## Include
 
 ```
 
-      <page-source component></page-source>
+      <publish-ui component></publish-ui>
       
 ```
 
