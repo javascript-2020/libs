@@ -1,13 +1,13 @@
 ## Description
 
-display an editor which can run code with terminal output
+display a web terminal
 
 
 ## Include
 
 ```
 
-      <snippet-terminal component></snippet-terminal>
+      <web-terminal component></web-terminal>
       
 ```
 
