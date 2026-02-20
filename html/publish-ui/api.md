@@ -6,15 +6,15 @@
 
 <section class=api-function>
 
-### url ( url ) {.api-function-title}
+### clear () {.api-function-title}
 
-set the url of the page source
+clear the current publish state
 
 <div class=api-function-desc>
 
 #### parameters
 
-- url - string the url of the page source
+none
 
 #### return
 
@@ -23,6 +23,129 @@ none
 </div>
 
 </section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### query () {.api-function-title}
+
+read the query string from the webpage url and determine if a publish state exists, if it does load the data
+
+<div class=api-function-desc>
+
+#### parameters
+
+none
+
+#### return
+
+none
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### delete () {.api-function-title}
+
+delete the current publish state
+
+<div class=api-function-desc>
+
+#### parameters
+
+none
+
+#### return
+
+none
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### save () {.api-function-title}
+
+publish the current
+
+<div class=api-function-desc>
+
+#### parameters
+
+none
+
+#### return
+
+none
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### save.text () {.api-function-title}
+
+publish the current text
+
+<div class=api-function-desc>
+
+#### parameters
+
+none
+
+#### return
+
+none
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### save.file () {.api-function-title}
+
+publish the current file
+
+<div class=api-function-desc>
+
+#### parameters
+
+none
+
+#### return
+
+none
+
+</div>
+
+</section>
+
+
+
 
 
 
