@@ -82,6 +82,36 @@ load the file at path
 
 <section class=api-function>
 
+### async : file.load.txt ( { path, url?, hdrs? } ) {.api-function-title}
+
+load the file at path as text
+
+
+<div class=api-function-desc>
+
+#### parameters
+
+- path - string - the path of the file ```/main/sub/my-file.txt``` {.code-inline}
+- url - optional if set via library.url - the url of the server ```httpsL//localhost:3000``` {.code-inline}
+- hdrs - optional if set via library.hdrs - the headers object sent with the request ```{'x-custom-header':'123'}``` {.code-inline}
+
+
+#### return
+
+- object - {blob,error}
+  - blob - blob - the file data
+  - error - string - error message
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
 ### file.save ( { path, blob, url?, hdrs? } ) {.api-function-title}
 
 save blob to path
@@ -140,7 +170,6 @@ create a file at path
 <section class=api-function>
 
 ### file.delete ( { path, url?, hdrs? } ) {.api-function-title}
-
 #### alias : file.del
 
 delete file at path
@@ -284,7 +313,7 @@ create a directory
 <section class=api-function>
 
 ### dir.delete ( { path, url?, hdrs? } ) {.api-function-title}
-### alias : dir.del
+#### alias : dir.del
 
 delete directory recursively
 
