@@ -21,12 +21,13 @@ This library interfaces the [file-server](/code/nodejs/servers/file-server/file-
 ## initmod
 
 name | description
- |
+
 
 
 ## Module
 
 name | description
+---|---
 url | set the default url for the server
 hdrs | set default headers object for the server
 auth | set the default auth header for the server
