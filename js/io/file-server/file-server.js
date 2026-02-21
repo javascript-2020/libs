@@ -12,26 +12,26 @@
 
 
 (()=>{
-  
+
   var obj   = {
         version     : 'v1.0.0'
   };
   globalThis['file-server']    =  obj;
-
+  
   
         var df    = false;
         Object.defineProperty(obj,'df',{set:v=>df=v});
         
         
   //:
-        
-        
+  
+  
         obj.url                 = null;
         obj.hdrs                = null;
         obj.auth                = null;
         
-
-  
+        
+        
         obj.file                = {};
         obj.file.load           = loadfile;
         obj.file.load.txt       = loadfiletxt;
@@ -49,15 +49,15 @@
         obj.dir.delete          = rmdir;
         obj.dir.del             = rmdir;
         obj.dir.clear           = dirclear;
-  
-
-
         
-  //:  
+        
+        
+        
+  //:
   
-
+  
         async function loadfile({url,hdrs,path}){
-          
+        
               if(arguments.length!=1){
                     [url,hdrs,path]   = arguments;
               }else{
@@ -72,15 +72,15 @@
               var headers   = {mode:'load'};
               Object.assign(headers,hdrs);
               var full      = url+path;
-
+              
               var err;
               try{
-                
+              
                     var res         = await fetch(full,{headers});
                     
               }
               catch(err2){
-                
+              
                     err   = err2;
                     
               }
@@ -101,7 +101,7 @@
         
         
         async function loadfiletxt(){
-          
+        
               var {blob,error}    = await loadfile.apply(null,arguments);
               if(error){
                     return {error};
@@ -113,7 +113,7 @@
         
         
         async function savefile({url,hdrs,path,blob}){
-          
+        
               if(arguments.length!=1){
                     if(arguments.length==2){
                           path    = arguments[0];
@@ -133,12 +133,12 @@
               
               var err;
               try{
-                
+              
                     var res       = await fetch(full,{method:'post',headers,body});
                     
               }
               catch(err2){
-                
+              
                     err   = err2;
                     
               }
@@ -157,13 +157,13 @@
               
         }//save
         
-
-
-
-  
+        
+        
+        
+        
         
         async function mkfile({url,hdrs,path}){
-
+        
               if(arguments.length!=1){
                     [url,hdrs,path]   = arguments;
               }
@@ -174,15 +174,15 @@
               var headers   = {mode:'mkfile'};
               Object.assign(headers,hdrs);
               var full      = url+path;
-
+              
               var err;
               try{
-                
+              
                     var res       = await fetch(full,{headers});
                     
               }
               catch(err2){
-                
+              
                     err   = err2;
                     
               }
@@ -203,7 +203,7 @@
         
         
         async function rmfile({url,hdrs,path}){
-          
+        
               if(arguments.length!=1){
                     [url,hdrs,path]   = arguments;
               }
@@ -217,12 +217,12 @@
               
               var err;
               try{
-                
+              
                     var res       = await fetch(full,{headers});
                     
               }
               catch(err2){
-                
+              
                     err   = err2;
                     
               }
@@ -239,10 +239,10 @@
               return {ok};
               
         }//rmfile
-
-
+        
+        
         async function upload({url,hdrs,path,blob}){
-
+        
               if(arguments.length!=1){
                     [url,hdrs,path,blob]    = arguments;
               }
@@ -254,7 +254,7 @@
               Object.assign(headers,hdrs);
               var body        = blob;
               var full        = url+path;
-
+              
               var err;
               try{
               
@@ -262,7 +262,7 @@
                     
               }
               catch(err2){
-                
+              
                     err   = err2;
                     
               }
@@ -276,7 +276,7 @@
                     var error   = await res.text();
                     return {error};
               }
-          
+              
               var ok    = await res.text();
               return {ok};
               
@@ -284,7 +284,7 @@
         
         
         async function download({url,hdrs,path}){
-          
+        
               if(arguments.length!=1){
                     [url,hdrs,path]   = arguments;
               }
@@ -295,7 +295,7 @@
               var headers     = {mode:'download'};
               Object.assign(headers,hdrs);
               var full        = url+path;
-
+              
               var err;
               try{
               
@@ -303,7 +303,7 @@
                     
               }
               catch(err2){
-                
+              
                     err   = err2;
                     
               }
@@ -319,95 +319,15 @@
               
               var blob         = await res.blob();
               return {blob};
-          
+              
         }//download
         
-
+        
   //:
   
-        
-        async function rmdir({url,hdrs,path}){
-          
-              if(arguments.length!=1){
-                    [url,hdrs,path]   = arguments;
-              }
-              
-              url     = url||obj.url;
-              hdrs    = hdrs||obj.hdrs||{auth:obj.auth};
-              
-              var headers     = {mode:'rmdir'};
-              Object.assign(headers,hdrs);
-              var full        = url+path;
-              
-              var err;
-              try{
-                
-                    var res         = await fetch(full,{headers});
-                    
-              }
-              catch(err2){
-                
-                    err   = err2;
-                    
-              }
-              if(err){
-                    var error   = err.toString();
-                    return {error};
-              }
-                                          
-              if(!res.ok){
-                    var error   = await res.text();
-                    return {error};
-              }
-              
-              var ok    = await res.text();
-              return {ok};
-              
-        }//rmdir
-        
-        
-        async function mkdir({url,hdrs,path}){
-
-              if(arguments.length!=1){
-                    [url,hdrs,path]   = arguments;
-              }
-              
-              url     = url||obj.url;
-              hdrs    = hdrs||obj.hdrs||{auth:obj.auth};
-              
-              var headers     = {mode:'mkdir'};
-              Object.assign(headers,hdrs);
-              var full        = url+path;
-              
-              var err;
-              try{
-                
-                    var res         = await fetch(full,{headers});
-                    
-              }//try
-              catch(err2){
-                
-                    err   = err2;
-                    
-              }//catch
-              if(err){
-                    var error   = err.toString();
-                    return {error};
-              }
-              
-              if(!res.ok){
-                    var error   = await res.text();
-                    return {error};
-              }
-              
-              var ok    = await res.text();
-              return {ok};
-              
-        }//mkdir
-
-        
+  
         async function readdir({url,hdrs,path}){
-
+        
               if(arguments.length!=1){
                     [url,hdrs,path]   = arguments;
               }
@@ -418,7 +338,7 @@
               var headers     = {mode:'readdir'};
               Object.assign(headers,hdrs);
               var full        = url+path;
-
+              
               var err;
               try{
               
@@ -426,7 +346,7 @@
                     
               }//try
               catch(err2){
-                
+              
                     err   = err2;
                     
               }//catch
@@ -448,10 +368,93 @@
               return {dirs,files};
               
         }//readdir
-
-
+        
+        
+        async function mkdir({url,hdrs,path}){
+        
+              if(arguments.length!=1){
+                    [url,hdrs,path]   = arguments;
+              }
+              
+              url     = url||obj.url;
+              hdrs    = hdrs||obj.hdrs||{auth:obj.auth};
+              
+              var headers     = {mode:'mkdir'};
+              Object.assign(headers,hdrs);
+              var full        = url+path;
+              
+              var err;
+              try{
+              
+                    var res         = await fetch(full,{headers});
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                    return {error};
+              }
+              
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
+              }
+              
+              var ok    = await res.text();
+              return {ok};
+              
+        }//mkdir
+        
+        
+        async function rmdir({url,hdrs,path}){
+        
+              if(arguments.length!=1){
+                    [url,hdrs,path]   = arguments;
+              }
+              
+              url     = url||obj.url;
+              hdrs    = hdrs||obj.hdrs||{auth:obj.auth};
+              
+              var headers     = {mode:'rmdir'};
+              Object.assign(headers,hdrs);
+              var full        = url+path;
+              
+              var err;
+              try{
+              
+                    var res         = await fetch(full,{headers});
+                    
+              }
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }
+              if(err){
+                    var error   = err.toString();
+                    return {error};
+              }
+              
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
+              }
+              
+              var ok    = await res.text();
+              return {ok};
+              
+        }//rmdir
+        
+        
+        
+        
+        
         function process(json){
-          
+        
               var {dirs,files}    = json;
               
               if(json.version){
@@ -465,19 +468,19 @@
               return {dirs,files};
               
         }//process
-
+        
         
         process.c   = {};
         
         process.c.v1    = function(json){
-          
+        
               var dirs    = [];
               var files   = [];
               
               var n       = json.list.length;
               
               for(var i=0;i<n;i+=2){
-                
+              
                     var fn      = json.list[i];
                     var type    = json.list[i+1];
                     
@@ -492,10 +495,10 @@
               return {dirs,files};
               
         }//v1
-
-
+        
+        
         async function dirclear({url,hdrs,path}){
-          
+        
               if(arguments.length!=1){
                     [url,hdrs,path]   = arguments;
               }
@@ -506,7 +509,7 @@
               var headers     = {mode:'dir-clear'};
               Object.assign(headers,hdrs);
               var full        = url+path;
-
+              
               var err;
               try{
               
@@ -514,7 +517,7 @@
                     
               }//try
               catch(err2){
-                
+              
                     err   = err2;
                     
               }//catch
@@ -527,16 +530,16 @@
                     var error   = await res.text();
                     return {error};
               }
-
+              
               var ok    = await res.text();
               return {ok};
               
         }//dirclear
-
-
-  
-  
-  
+        
+        
+        
+        
+        
   //:
   
   
