@@ -56,26 +56,50 @@ set the auth for the server in the library, saves having to include it with ever
 
 load the file at path
 
+
 <div class=api-function-desc>
 
 #### parameters
 
-- path - string - the path of the file
-```
-/main/sub/my-file.txt
-```
-- url - optional if set via library.url - the url of the server
-```
-httpsL//localhost:3000
-```
-- hdrs - optional if set via library.hdrs - the headers object sent with the request
+- path - string - the path of the file ```/main/sub/my-file.txt``` {.code-inline}
+- url - optional if set via library.url - the url of the server ```httpsL//localhost:3000``` {.code-inline}
+- hdrs - optional if set via library.hdrs - the headers object sent with the request ```{'x-custom-header':'123'}``` {.code-inline}
+
 
 #### return
 
 - object - {blob,error}
+  - blob - blob - the file data
+  - error - string - error message
 
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### file.save ( { path, blob, url?, hdrs? } ) {.api-function-title}
+
+save blob to path
+
+<div class=api-function-desc>
+
+#### parameters
+
+- path - string - the path of the file ```/main/sub/my-file.txt``` {.code-inline}
 - blob - blob - the file data
-- error - string - error message
+- url - optional if set via library.url - the url of the server ```httpsL//localhost:3000``` {.code-inline}
+- hdrs - optional if set via library.hdrs - the headers object sent with the request ```{'x-custom-header':'123'}``` {.code-inline}
+
+#### return
+
+- object - {ok,error}
+  - ok - string - ok message
+  - error - string - error message
 
 </div>
 
@@ -84,40 +108,18 @@ httpsL//localhost:3000
 
 
 
-
-
-
-        obj.file.load           = loadfile;
-        obj.file.load.txt       = loadfiletxt;
-        obj.file.save           = savefile;
-        obj.file.create         = mkfile;
-        obj.file.delete         = rmfile;
-        obj.file.del            = rmfile;
-        obj.file.upload         = upload;
-        obj.file.download       = download;
-        
-        
-        obj.dir                 = {};
-        obj.dir.read            = readdir;
-        obj.dir.create          = mkdir;
-        obj.dir.delete          = rmdir;
-        obj.dir.del             = rmdir;
-        obj.dir.clear           = dirclear;
-
-
-
-load → retrieve file contents
-
-save → write or overwrite file data
-
-file delete → remove a file
-
-dir read → list directory contents
-
-dir create → make a new directory
-
-dir delete → remove a directory
-
+file.save ( { path, blob, url?, hdrs? } ) | save blob to path
+file.create ( {path, url?, hdrs? } ) | create a file at path
+file.delete ( {path, url?, hdrs? } ) | delete file at path
+file.del | file.delete alias
+file.upload ( { path, blob, url?, hdrs? } ) | upload file
+file.download ( { path, url?, hdrs? } ) | download file
+ |      
+dir.read ( { path, url?, hdrs? } ) | read directory
+dir.create ( { path, url?, hdrs? } ) | create directory
+dir.delete ( { path, url?, hdrs? } ) | delete directory
+dir.del | alias for dir.delete
+dir.clear ( { path, url?, hdrs? } ) | clear the directory
 
 
 
