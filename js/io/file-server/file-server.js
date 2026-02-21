@@ -14,9 +14,10 @@
 (()=>{
 
   var obj   = {
-        version     : 'v1.0.0'
+        version                 : 'v1.0.0',
+        [Symbol.toStringTag]    : 'file-server',
   };
-  globalThis['file-server']    =  obj;
+  globalThis['file-server']     =  obj;
   
   
         var df    = false;
