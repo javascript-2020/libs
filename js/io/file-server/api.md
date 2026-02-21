@@ -125,23 +125,216 @@ create a file at path
 
 #### return
 
-none
+- object - {ok,error}
+  - ok - string - ok message
+  - error - string - error message
 
 </div>
 
 </section>
 
 
-file.create ( {path, url?, hdrs? } ) | create a file at path
-file.delete ( {path, url?, hdrs? } ) | delete file at path
-file.del | file.delete alias
-file.upload ( { path, blob, url?, hdrs? } ) | upload file
-file.download ( { path, url?, hdrs? } ) | download file
- |      
-dir.read ( { path, url?, hdrs? } ) | read directory
-dir.create ( { path, url?, hdrs? } ) | create directory
-dir.delete ( { path, url?, hdrs? } ) | delete directory
-dir.del | alias for dir.delete
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### file.delete ( { path, url?, hdrs? } ) {.api-function-title}
+
+#### alias : file.del
+
+delete file at path
+
+<div class=api-function-desc>
+
+#### parameters
+
+- path - string - the path of the file ```/main/sub/my-file.txt``` {.code-inline}
+- url - optional if set via library.url - the url of the server ```httpsL//localhost:3000``` {.code-inline}
+- hdrs - optional if set via library.hdrs - the headers object sent with the request ```{'x-custom-header':'123'}``` {.code-inline}
+
+#### return
+
+- object - {ok,error}
+  - ok - string - ok message
+  - error - string - error message
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### file.upload ( { path, blob, url?, hdrs? } ) {.api-function-title}
+
+upload blob to path
+
+<div class=api-function-desc>
+
+#### parameters
+
+- path - string - the path of the file ```/main/sub/my-file.txt``` {.code-inline}
+- blob - blob - the file data
+- url - optional if set via library.url - the url of the server ```httpsL//localhost:3000``` {.code-inline}
+- hdrs - optional if set via library.hdrs - the headers object sent with the request ```{'x-custom-header':'123'}``` {.code-inline}
+
+#### return
+
+- object - {ok,error}
+  - ok - string - ok message
+  - error - string - error message
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### file.download ( { path, url?, hdrs? } ) {.api-function-title}
+
+download file from path
+
+<div class=api-function-desc>
+
+#### parameters
+
+- path - string - the path of the file ```/main/sub/my-file.txt``` {.code-inline}
+- url - optional if set via library.url - the url of the server ```httpsL//localhost:3000``` {.code-inline}
+- hdrs - optional if set via library.hdrs - the headers object sent with the request ```{'x-custom-header':'123'}``` {.code-inline}
+
+#### return
+
+- object - {blob,error}
+  - blob - blob - the file data
+  - error - string - error message
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### dir.read ( { path, url?, hdrs? } ) {.api-function-title}
+
+read the content of directory path
+
+<div class=api-function-desc>
+
+#### parameters
+
+- path - string - the path of the file ```/main/sub/my-file.txt``` {.code-inline}
+- url - optional if set via library.url - the url of the server ```httpsL//localhost:3000``` {.code-inline}
+- hdrs - optional if set via library.hdrs - the headers object sent with the request ```{'x-custom-header':'123'}``` {.code-inline}
+
+#### return
+
+- object - {dirs,files,error}
+  - dirs - array - directory names
+  - files - array - file names
+  - error - string - error message
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### dir.create ( { path, url?, hdrs? } ) {.api-function-title}
+
+create a directory
+
+<div class=api-function-desc>
+
+#### parameters
+
+- path - string - the path of the file ```/main/sub/my-file.txt``` {.code-inline}
+- url - optional if set via library.url - the url of the server ```httpsL//localhost:3000``` {.code-inline}
+- hdrs - optional if set via library.hdrs - the headers object sent with the request ```{'x-custom-header':'123'}``` {.code-inline}
+
+#### return
+
+- object - {ok,error}
+  - ok - string - ok message
+  - error - string - error message
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### dir.delete ( { path, url?, hdrs? } ) {.api-function-title}
+### alias : dir.del
+
+delete directory recursively
+
+<div class=api-function-desc>
+
+#### parameters
+
+- path - string - the path of the file ```/main/sub/my-file.txt``` {.code-inline}
+- url - optional if set via library.url - the url of the server ```httpsL//localhost:3000``` {.code-inline}
+- hdrs - optional if set via library.hdrs - the headers object sent with the request ```{'x-custom-header':'123'}``` {.code-inline}
+
+#### return
+
+- object - {ok,error}
+  - ok - string - ok message
+  - error - string - error message
+
+</div>
+
+</section>
+
+
+--- {.hr-sub}
+
+
+<section class=api-function>
+
+### dir.clear ( { path, url?, hdrs? } ) {.api-function-title}
+
+clear the directory
+
+<div class=api-function-desc>
+
+#### parameters
+
+- path - string - the path of the file ```/main/sub/my-file.txt``` {.code-inline}
+- url - optional if set via library.url - the url of the server ```httpsL//localhost:3000``` {.code-inline}
+- hdrs - optional if set via library.hdrs - the headers object sent with the request ```{'x-custom-header':'123'}``` {.code-inline}
+
+#### return
+
+- object - {ok,error}
+  - ok - string - ok message
+  - error - string - error message
+
+</div>
+
+</section>
+
+
 dir.clear ( { path, url?, hdrs? } ) | clear the directory
 
 
