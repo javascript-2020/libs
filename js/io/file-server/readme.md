@@ -2,6 +2,11 @@
 
 This library interfaces the [file-server](/code/nodejs/servers/file-server/file-server.html) to expose direct file system operations to the browser through a simple http‑based API.
 
+Note : 
+
+As of recent browser changes PNA ( Private Network Access ) restrictions are now implemented, this code works in the main page,
+however there are still some issues running it in the editors which run in an iframe
+
 
 ## Include
 
@@ -18,16 +23,12 @@ This library interfaces the [file-server](/code/nodejs/servers/file-server/file-
 ```
 
 
-## initmod
-
-name | description
----|---
-
 
 ## Module
 
 name | description
 ---|---
+
 url | set the default url for the server
 hdrs | set default headers object for the server
 auth | set the default auth header for the server
