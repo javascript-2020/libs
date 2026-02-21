@@ -7,7 +7,7 @@
                     return mod;
               })();
         `);
-        export {'file-server':file_server};
+        export { file_server as 'file-server' };
         
         
         
