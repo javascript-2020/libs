@@ -335,13 +335,8 @@ clear the directory
 </section>
 
 
-dir.clear ( { path, url?, hdrs? } ) | clear the directory
 
 
-
-      
-      
-      
 <!--
 
 --- {.hr-sub}
