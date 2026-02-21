@@ -106,9 +106,32 @@ save blob to path
 </section>
 
 
+--- {.hr-sub}
 
 
-file.save ( { path, blob, url?, hdrs? } ) | save blob to path
+<section class=api-function>
+
+### file.create ( { path, url?, hdrs? } ) {.api-function-title}
+
+create a file at path
+
+<div class=api-function-desc>
+
+#### parameters
+
+- path - string - the path of the file ```/main/sub/my-file.txt``` {.code-inline}
+- url - optional if set via library.url - the url of the server ```httpsL//localhost:3000``` {.code-inline}
+- hdrs - optional if set via library.hdrs - the headers object sent with the request ```{'x-custom-header':'123'}``` {.code-inline}
+
+#### return
+
+none
+
+</div>
+
+</section>
+
+
 file.create ( {path, url?, hdrs? } ) | create a file at path
 file.delete ( {path, url?, hdrs? } ) | delete file at path
 file.del | file.delete alias
