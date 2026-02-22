@@ -1,6 +1,6 @@
 ## Description
 
-This library interfaces the [file-server](/code/nodejs/servers/file-server/file-server.html) to expose direct file system operations to the browser through a simple http‑based API.
+This library interfaces the [file-server](/code/nodejs/servers/file-server/file-server.html) [ ext-code.com ] to expose direct file system operations to the browser through a simple http‑based API.
 
 Note : 
 
