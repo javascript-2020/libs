@@ -133,7 +133,7 @@
                     
                     var list        = [...stack];
                     stack.length    = 0;
-                    list.forEach(fn=>fn());
+                    list.forEach(fn=>fn({mod}));
                     
               }});
               
@@ -1143,15 +1143,15 @@
               
                     switch('function'){
                     
-                      case typeof mod.onReady   : mod.onReady();        break;
-                      case typeof mod.onready   : mod.onready();        break;
-                      case typeof mod.ready     : mod.ready();          break;
-                      case typeof mod.start     : mod.start();          break;
+                      case typeof mod.onReady   : mod.onReady({mod});        break;
+                      case typeof mod.onready   : mod.onready({mod});        break;
+                      case typeof mod.ready     : mod.ready({mod});          break;
+                      case typeof mod.start     : mod.start({mod});          break;
                       
-                      case typeof onReady       : onReady();            break;
-                      case typeof onready       : onready();            break;
-                      case typeof ready         : ready();              break;
-                      case typeof start         : start();              break;
+                      case typeof onReady       : onReady({mod});            break;
+                      case typeof onready       : onready({mod});            break;
+                      case typeof ready         : ready({mod});              break;
+                      case typeof start         : start({mod});              break;
                       
                     }//switch
                     
