@@ -359,22 +359,32 @@
                           sub   = type.slice(3);
                     }
                     
-                    var int   = (str)=>(/^\d+$/.test(str));
-                    var num   = 0;
-                    if(int(sub)){
-                          num   = Number(sub);
-                    }
-                    
-                    var par   = loader.fn.par({num});
-                    
                     var url;
-                    if(!version){
-                          url   = `../html/${nn}/${nn}.html`;
-                    }else{
-                          url   = `../html/${nn}/${version}/${nn}-${version}.html`;
-                    }
                     
-                    url   = par+url;
+                    if(sub==='_root'){
+                          if(!version){
+                                url   = `/html/${nn}/${nn}.html`;
+                          }else{
+                                url   = `/html/${nn}/${version}/${nn}-${version}.html`;
+                          }
+                    }else{
+                    
+                          var int   = (str)=>(/^\d+$/.test(str));
+                          var num   = 0;
+                          if(int(sub)){
+                                num   = Number(sub);
+                          }
+                          
+                          var page    = loader.fn.page({num});
+                          
+                          if(!version){
+                                url   = `../html/${nn}/${nn}.html`;
+                          }else{
+                                url   = `../html/${nn}/${version}/${nn}-${version}.html`;
+                          }
+                          
+                          url   = page+url;
+                    }
                                                                                 //console.log(url);
                     return {url};
                     
@@ -422,7 +432,7 @@
               
               loader.page   = function({root,nn,version}){
               
-                    var par   = loader.fn.par();
+                    var par   = loader.fn.page();
                     
                     var url;
                     if(version){
@@ -518,7 +528,7 @@
               }//url
               
               
-              loader.fn.par   = function({num=0,df=false}={}){
+              loader.fn.page   = function({num=0,df=false}={}){
               
                     var par     = '';
                     
@@ -565,7 +575,7 @@
                     
                     return par;
                     
-              }//par
+              }//page
               
               
               function isver(str){
