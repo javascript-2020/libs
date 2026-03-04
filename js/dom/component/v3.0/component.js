@@ -391,7 +391,7 @@
               }//grp
               
               
-              loader.parent   = function({root,nn,version}){debugger;
+              loader.parent   = function({root,nn,version}){//debugger;
               
                     var parent      = rd(root,'parent');
                     var par;
