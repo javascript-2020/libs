@@ -401,9 +401,7 @@
                           var sroot   = root.getRootNode();
                           par         = sroot?.host;
                           if(!par){
-                                if(root.hasAttribute('slot')){
-                                      par   = root.parentNode;
-                                }
+                                par   = root.parentNode;
                           }
                     }
                                                                                 if(!par)debugger;
