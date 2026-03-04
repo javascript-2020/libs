@@ -400,6 +400,11 @@
                     }else{
                           var sroot   = root.getRootNode();
                           par         = sroot?.host;
+                          if(!par){
+                                if(root.hasAttribute('slot')){
+                                      par   = root.parentNode;
+                                }
+                          }
                     }
                                                                                 if(!par)debugger;
                     //var pversion    = rd.version(par);
