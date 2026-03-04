@@ -394,7 +394,14 @@
               loader.parent   = function({root,nn,version}){//debugger;
               
                     var parent      = rd(root,'parent');
-                    var par         = $.parent(root,parent);
+                    var par;
+                    if(parent){
+                          par         = $.parent(root,parent);
+                    }else{
+                          var sroot   = root.getRootNode();
+                          par         = sroot.host;
+                    }
+                                                                                if(!par)debugger;
                     //var pversion    = rd.version(par);
                     //var url         = rd(par,'url');
                     var {url}       = loader.fn.url(par);
@@ -711,7 +718,7 @@
                     }//catch
                     if(err){
                                                                                 console.error(err);
-                                                                                console.log(js);
+                                                                                //console.log(js);
                           return;
                     }
                     
