@@ -711,6 +711,7 @@
                     }//catch
                     if(err){
                                                                                 console.error(err);
+                                                                                console.log(js);
                           return;
                     }
                     
