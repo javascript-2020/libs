@@ -399,7 +399,7 @@
                           par         = $.parent(root,parent);
                     }else{
                           var sroot   = root.getRootNode();
-                          par         = sroot.host;
+                          par         = sroot?.host;
                     }
                                                                                 if(!par)debugger;
                     //var pversion    = rd.version(par);
