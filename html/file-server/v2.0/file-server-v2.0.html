@@ -24,7 +24,10 @@
     }
   #url
     {flex:1}
-    
+  #open-tab
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAfCAMAAADHso01AAAAUVBMVEVHcEwCAvgAAP0BAvkAAPwEBe8CAvEEBO8BAfsBAfsNC9gCAvkDA/UAAPwCAvQBAfwDBPEFBfMJCeQCAvEGBucDA/QCAvUBAvgBAvgBAfkAAP52crO/AAAAGnRSTlMAivyV7hUtJNPaBp5Y+YPmRGEOUBx6krSsxqlGResAAAD6SURBVCjPpdNRjoUgDAVQRAQpFhFQn93/QgfHh6ijicncH0wOwYotY68CwVpbnTPKnTtBf7PEzBO1U32OERgy11Rd39e0fMjPJnN0W+Itw4enIPIZvhyVUnLObNtWa07U+l+GUfcpmA+HpolTYSdIpGApDUbkOnPA3kkpPzsnpXoorJtj5WCRjO8eeNXaswdOyifPmMNl+7DuyGtVqzIf5HYtHT9w7HkFh0vtzgzDAOyZr7/kH+xPbOQlTheuCMU1JFxmNfclmPamRY+QmXlVUtMs07I2YuZjLH32Dr5l85IDCnNp8GkpHJeb8cC9g5kaz5OVZs0GeDeZP9SHF/p6kkOdAAAAAElFTkSuQmCC);
+    }
   #auth-root
     {display:flex;align-items:center;margin-bottom:10px;gap:5px}
   #auth
@@ -82,6 +85,7 @@
                         <img class=copy>
                         <img class=paste>
                         <input id=url spellcheck=false autocomplete=off value='https://localhost:3000'>
+                        <img id=open-server>
                   </div>
                   
                   <div id=auth-root>
