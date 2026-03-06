@@ -237,7 +237,7 @@
               if(url){
                     ui.url.value                                = url;
               }
-              
+              $(node,'#open-tab').onclick                       = btn['open-tab'];
               
               ui['auth-chk']                                    = $(node,'#auth-chk');
               ui.auth                                           = $(node,'#auth');
@@ -312,6 +312,14 @@
               ui.url.value    = txt;
               
         }//paste
+        
+        
+        btn['open-tab']   = function(){
+                                                                                debug('btn.update');
+              var url       = ui.url.value;
+              window.open(url,'_blank');
+              
+        }//open-tab
         
         
         btn.update    = function(){
