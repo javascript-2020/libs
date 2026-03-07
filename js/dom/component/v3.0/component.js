@@ -779,8 +779,6 @@
                     
                           let node    = list.shift();
                           
-                          if(!node.hasAttribute('component_')){
-                          
                           //if(!node.assignedSlot){
                           
                           
@@ -808,7 +806,6 @@
                                 
                           //}
                           
-                          }
                           
                           
                     }//while
