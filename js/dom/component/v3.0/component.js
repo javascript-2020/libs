@@ -89,9 +89,14 @@
                     par.child.push(mod);
                     par.stack.add;
                     mod.stack.push(()=>par.stack.complete);
+                    
+                    mod.root    = mod.par.root;
               }else{
                                                                                 //console.log('auto total');
                     total    = 1;
+                    
+                    mod.root=mod;
+                    mod.script=[];
               }
               
               
@@ -192,6 +197,10 @@
                     
                                                                                 debug('build.complete',mod2.name,root.nodeName);
                     mod2.stack.complete;
+                    
+                    if(!mod.par){
+                          mod.script=null;
+                    }
                     
                     return nodes;
                     
@@ -297,6 +306,11 @@
                                                                                 //console.log('script',list);
                     list.forEach(script=>{
                     
+                          if(mod.root.script.includes(script)){
+                                return;
+                          }
+                          mod.root.script.push(script);
+                          
                           if(script.src){
                                                                                 //mod.df && console.log('script.src',script.src,script.parentNode.nodeName);
                                 mod.stack.add;
@@ -779,7 +793,7 @@
                     
                           let node    = list.shift();
                           
-                          if(!node.assignedSlot){
+                          //if(!node.assignedSlot){
                           
                           
                                 if(node.shadowRoot){
@@ -805,7 +819,7 @@
                                 }
                                 
                                 
-                          }
+                          //}
                           
                           
                     }//while
