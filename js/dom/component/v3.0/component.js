@@ -779,7 +779,7 @@
                     
                           let node    = list.shift();
                           
-                          //if(!node.assignedSlot){
+                          if(!node.assignedSlot){
                           
                           
                                 if(node.shadowRoot){
@@ -805,8 +805,7 @@
                                 }
                                 
                                 
-                          //}
-                          
+                          }
                           
                           
                     }//while
