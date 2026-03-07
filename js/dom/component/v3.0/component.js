@@ -792,7 +792,7 @@
                                 
                                 node.childNodes.forEach(child=>{
                                 
-                                      if(child.assignedSlot){
+                                      if(!child.assignedSlot){
                                             list.push(child);
                                       }
                                       
