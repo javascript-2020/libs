@@ -779,7 +779,11 @@
                     
                           let node    = list.shift();
                           
+                          if(!node.hasAttribute('component_')){
+                          
                           //if(!node.assignedSlot){
+                          
+                          
                                 if(node.shadowRoot){
                                       list.push(node.shadowRoot);
                                 }
@@ -800,7 +804,12 @@
                                             nodes.push(node);
                                       }
                                 }
+                                
+                                
                           //}
+                          
+                          }
+                          
                           
                     }//while
                     return nodes;
