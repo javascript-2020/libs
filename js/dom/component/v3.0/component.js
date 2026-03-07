@@ -198,9 +198,6 @@
                                                                                 debug('build.complete',mod2.name,root.nodeName);
                     mod2.stack.complete;
                     
-                    if(!mod.par){
-                          mod.script=null;
-                    }
                     
                     return nodes;
                     
