@@ -303,6 +303,7 @@
                                                                                 //console.log('script',list);
                     list.forEach(script=>{
                     
+                          if(!mod.root.script.includes)debugger;
                           if(mod.root.script.includes(script)){
                                 return;
                           }
