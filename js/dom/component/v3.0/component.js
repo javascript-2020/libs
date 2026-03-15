@@ -732,8 +732,8 @@
                           
                     }//catch
                     if(err){
+                                                                                console.log(js);
                                                                                 console.error(err);
-                                                                                //console.log(js);
                           return;
                     }
                     
