@@ -255,17 +255,19 @@ function localstoragemod(){
               
                     var key   = localStorage.key(i);
                     
-                    if(key.startsWith(prefix)){
-                          if(name){
-                                var i     = key.indexOf(']');
-                                key       = key.slice(i+1);
+                    if(typeof key=='string'){
+                          if(key.startsWith(prefix)){
+                                if(name){
+                                      var i     = key.indexOf(']');
+                                      key       = key.slice(i+1);
+                                }
+                                if(disp){
+                                                                                      console.log(i,key);
+                                }else{
+                                                                                      debug(i,key);
+                                }
+                                list.push(key);
                           }
-                          if(disp){
-                                                                                console.log(i,key);
-                          }else{
-                                                                                debug(i,key);
-                          }
-                          list.push(key);
                     }
                     
               }//for
@@ -286,14 +288,16 @@ function localstoragemod(){
               
                     var key     = localStorage.key(i);
                                                                                 console.log(i,key);
-                    if(key.startsWith(page)){
-                          if(disp){
-                                                                                console.log(key);
-                          }else{
-                                                                                debug(key);
+                    if(typeof key=='string'){
+                          if(key.startsWith(page)){
+                                if(disp){
+                                                                                      console.log(key);
+                                }else{
+                                                                                      debug(key);
+                                }
+                                list.push(key);
+                                localStorage.removeItem(key);
                           }
-                          list.push(key);
-                          localStorage.removeItem(key);
                     }
                     
               }//for
@@ -310,18 +314,20 @@ function localstoragemod(){
               
                     var key     = localStorage.key(i);
                     
-                    if(key.startsWith(prefix)){
-                          var i1      = key.indexOf('[');
-                          var i2      = key.indexOf(']');
-                          var page    = key.slice(i1+1,i2);
-                          
-                          if(!list.includes(page)){
-                                if(disp){
-                                                                                console.log(page);
-                                }else{
-                                                                                debug(page);
+                    if(typeof key=='string'){
+                          if(key.startsWith(prefix)){
+                                var i1      = key.indexOf('[');
+                                var i2      = key.indexOf(']');
+                                var page    = key.slice(i1+1,i2);
+                                
+                                if(!list.includes(page)){
+                                      if(disp){
+                                                                                      console.log(page);
+                                      }else{
+                                                                                      debug(page);
+                                      }
+                                      list.push(page);
                                 }
-                                list.push(page);
                           }
                     }
                     
@@ -356,14 +362,16 @@ function localstoragemod(){
               for(var i=0;i<n;i++){
               
                     var key     = localStorage.key(i);
-                    if(key.startsWith(prefix)){
-                          if(disp){
-                                                                                console.log(key);
-                          }else{
-                                                                                debug(key);
+                    if(typeof key=='string'){
+                          if(key.startsWith(prefix)){
+                                if(disp){
+                                                                                      console.log(key);
+                                }else{
+                                                                                      debug(key);
+                                }
+                                list.push(key);
+                                localStorage.removeItem(key);
                           }
-                          list.push(key);
-                          localStorage.removeItem(key);
                     }
                     
               }//for
@@ -382,14 +390,16 @@ function localstoragemod(){
               for(var i=0;i<n;i++){
               
                     var key     = localStorage.key(i);
-                    if(key.startsWith(page)){
-                          if(disp){
-                                                                                console.log(key);
-                          }else{
-                                                                                debug(key);
+                    if(typeof key=='string'){
+                          if(key.startsWith(page)){
+                                if(disp){
+                                                                                      console.log(key);
+                                }else{
+                                                                                      debug(key);
+                                }
+                                list.push(key);
+                                localStorage.removeItem(key);
                           }
-                          list.push(key);
-                          localStorage.removeItem(key);
                     }
                     
               }//for
