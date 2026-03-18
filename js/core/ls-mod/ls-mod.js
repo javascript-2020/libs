@@ -117,6 +117,7 @@ function localstoragemod(){
               
                     var full    = `${prefix}[${base}]${prop}`;
                     var str     = localStorage[full];
+                    
                     if(str===null){
                           var error   = prop+' not found';
                           return {error};
