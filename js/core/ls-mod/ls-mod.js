@@ -276,7 +276,7 @@ function localstoragemod(){
         
         obj.list.page    = function(disp=true){
         
-              var base    = fn(params);
+              var base    = fn({type:'file'});
               var page    = `${prefix}[${base}]`;
                                                                                 debug(page);
               var list    = [];
