@@ -262,9 +262,9 @@ function localstoragemod(){
                                       key       = key.slice(i+1);
                                 }
                                 if(disp){
-                                                                                      console.log(i,key);
+                                                                                console.log(i,key);
                                 }else{
-                                                                                      debug(i,key);
+                                                                                debug(i,key);
                                 }
                                 list.push(key);
                           }
