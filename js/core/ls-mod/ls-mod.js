@@ -275,7 +275,7 @@ function localstoragemod(){
         
         
         obj.list.page    = function(disp=true){
-        
+                                                                                console.log('lsmod.list.page');
               var base    = fn({type:'file'});
               var page    = `${prefix}[${base}]`;
                                                                                 debug(page);
