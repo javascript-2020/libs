@@ -122,10 +122,25 @@ function localstoragemod(){
                           return {error};
                     }
                     if(str===undefined){
-                          return str;
+                          var error   = prop+' not found';
+                          return {error};
                     }
                     
-                    var value   = JSON.parse(str);
+                    var err;
+                    try{
+                    
+                          var value   = JSON.parse(str);
+                          
+                    }//try
+                    catch(erre){
+                    
+                          err   = err2;
+                          
+                    }//catch
+                    if(err){
+                          var error   = err.toString();
+                          return {error};
+                    }
                                                                                 debug('read',full,value);
                     return {value};
                     
