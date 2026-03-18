@@ -281,9 +281,11 @@ function localstoragemod(){
                                                                                 debug(page);
               var list    = [];
               var n       = localStorage.length;
+                                                                                console.log(n);
               for(var i=0;i<n;i++){
               
                     var key     = localStorage.key(i);
+                                                                                console.log(i,key);
                     if(key.startsWith(page)){
                           if(disp){
                                                                                 console.log(key);
