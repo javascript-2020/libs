@@ -277,23 +277,23 @@ function localstoragemod(){
         
         
         obj.list.page    = function(disp=true){
-                                                                                console.log('lsmod.list.page');
+                                                                                disp && console.log('lsmod.list.page');
               var base    = fn({type:'file'});
               var page    = `${prefix}[${base}]`;
                                                                                 debug(page);
               var list    = [];
               var n       = localStorage.length;
-                                                                                console.log(n);
+                                                                                disp && console.log(n);
               for(var i=0;i<n;i++){
               
                     var key     = localStorage.key(i);
-                                                                                console.log(i,key);
+                                                                                disp && console.log(i,key);
                     if(typeof key=='string'){
                           if(key.startsWith(page)){
                                 if(disp){
-                                                                                      console.log(key);
+                                                                                console.log(key);
                                 }else{
-                                                                                      debug(key);
+                                                                                debug(key);
                                 }
                                 list.push(key);
                                 localStorage.removeItem(key);
