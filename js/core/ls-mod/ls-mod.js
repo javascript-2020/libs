@@ -3,42 +3,42 @@
 
 
 function localstoragemod(){
-  
+
   var obj   = {
         version   : 'v1.0',
   };
   
         var df=false,did='ls-mod'
         ;
-  
-  
+        
+        
         
         obj.initmod   = function(){
         }//initmod
         
         
   //vars:
-
-
+  
+  
         var prefix      = did+' : ';
-
+        
         var build       = {};
         
         
   //:
   
-
+  
         build.file    = function(){
-          
+        
               var base    = window.location.toString();
               var i       = base.indexOf('?');
               if(i!=-1){
                     base    = base.slice(0,i);
               }
               return base;
-          
+              
         }//file
-
+        
         
         build.dir   = function({n=0}){
                                                                                 var df2=false;
@@ -79,7 +79,7 @@ function localstoragemod(){
               
         }//dir
         
-
+        
   //:
   
   
@@ -91,12 +91,12 @@ function localstoragemod(){
               var params;
                                                                                 debug(type);
               switch(type){
-                
-                case 'file'   : fn    = build.file;           
+              
+                case 'file'   : fn    = build.file;
                                                                 break;
                 case 'dir'    : fn    = build.dir;
-                                        params    = {n};        
-                                                                break;                                                        
+                                        params    = {n};
+                                                                break;
               }//switch
               
               //debugger;
@@ -114,31 +114,35 @@ function localstoragemod(){
               
               
               function get(target,prop,receiver){
-                
+              
                     var full    = `${prefix}[${base}]${prop}`;
                     var str     = localStorage[full];
                     if(str===null){
                           var error   = prop+' not found';
                           return {error};
                     }
+                    if(str===undefined){
+                          return str;
+                    }
+                    
                     var value   = JSON.parse(str);
                                                                                 debug('read',full,value);
                     return {value};
                     
               }//get
-          
+              
         }//read
         
         
         fn.write    = function(params){
                                                                                 debug('write');
-              var base    = fn(params);              
+              var base    = fn(params);
                                                                                 debug(base);
               return set;
               
               
               function set(obj,prop,value){
-                
+              
                     var {str,error}   = stringify(value);
                     if(error){
                           return {error};
@@ -150,7 +154,7 @@ function localstoragemod(){
                     return {ok:'ok'};
                     
               }//set
-          
+              
         }//write
         
         
@@ -159,10 +163,10 @@ function localstoragemod(){
               var base    = fn(params);
                                                                                 debug(base);
               return get;
-
+              
               
               function get(target,prop,receiver){
-                
+              
                     var full    = `${prefix}[${base}]${prop}`;
                     
                     var str     = localStorage[full];
@@ -178,7 +182,7 @@ function localstoragemod(){
               
         }//delete
         
-
+        
         fn.clear    = function(params){
                                                                                 debug('clear');
               var base    = fn(params);
@@ -186,7 +190,7 @@ function localstoragemod(){
               var list    = [];
               var n       = localStorage.length;
               for(var i=0;i<n;i++){
-                
+              
                     var key   = localStorage.key(i);
                     if(key.startsWith(`${prefix}[${base}]`)){
                                                                                 debug('remove',key);
@@ -195,19 +199,19 @@ function localstoragemod(){
                     }
                     
               }//for
-          
+              
         }//clear
         
         
   //:
   
-        
-        
+  
+  
         obj.read      = new Proxy({},{get:fn.read()});
         obj.write     = new Proxy({},{set:fn.write()});
         obj.delete    = new Proxy({},{get:fn.delete()});
         obj.clear     = function(){return fn.clear()};
-          
+        
         
   //:
   
@@ -221,18 +225,18 @@ function localstoragemod(){
               };
               
         }//grp
-
-
+        
+        
   //:
   
   
         obj.list    = function(name,disp=true){
-          
+        
               var list    = [];
               var n       = localStorage.length;
                                                                                 debug('list',n);
               for(var i=0;i<n;i++){
-                
+              
                     var key   = localStorage.key(i);
                     
                     if(key.startsWith(prefix)){
@@ -259,7 +263,7 @@ function localstoragemod(){
               var list    = [];
               var n       = localStorage.length;
               for(var i=0;i<n;i++){
-                
+              
                     var key     = localStorage.key(i);
                     
                     if(key.startsWith(prefix)){
@@ -284,12 +288,12 @@ function localstoragemod(){
         
         
         obj.list.all    = function(disp=true){
-          
+        
               var list    = [];
               var n       = localStorage.length;
               for(var i=0;i<n;i++){
               
-                    var key   = localStorage.key(i);  
+                    var key   = localStorage.key(i);
                     if(disp){
                                                                                 console.log(i,key);
                     }else{
@@ -306,7 +310,7 @@ function localstoragemod(){
               var list    = [];
               var n       = localStorage.length;
               for(var i=0;i<n;i++){
-                
+              
                     var key     = localStorage.key(i);
                     if(key.startsWith(prefix)){
                           if(disp){
@@ -328,25 +332,25 @@ function localstoragemod(){
   
   
         obj.test    = function(){
-          
+        
               debugger;
               debug([123]);
               
         }//test
-
-  
-  //:
         
+        
+  //:
+  
         function stringify(value){
-          
+        
               var err;
               try{
-                
+              
                     var str   = JSON.stringify(value);
                     
               }//try
               catch(err2){
-                
+              
                     err   = err2;
                     
               }//catch
@@ -359,24 +363,24 @@ function localstoragemod(){
               
         }//stringify
         
-  
+        
   //:
   
-
+  
         function debug(...args){
-          
+        
               if(!df && !obj.df)return;
               args.unshift(`[ ${did} ]`);
-              var fmt     = Array.from({length:args.length}).fill('%O').join(' '); 
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
               var args2   = [fmt].concat(args);
               console.groupCollapsed.apply(console,args2);
               console.trace();
               console.groupEnd();
               
         }//debug
-
-
-  
+        
+        
+        
   return obj;
   
 //localstoragemod
