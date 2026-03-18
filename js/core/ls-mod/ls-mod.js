@@ -274,6 +274,32 @@ function localstoragemod(){
         }//list
         
         
+        obj.list.page    = function(disp=true){
+        
+              var base    = fn(params);
+              var page    = `${prefix}[${base}]`;
+                                                                                debug(page);
+              var list    = [];
+              var n       = localStorage.length;
+              for(var i=0;i<n;i++){
+              
+                    var key     = localStorage.key(i);
+                    if(key.startsWith(page)){
+                          if(disp){
+                                                                                console.log(key);
+                          }else{
+                                                                                debug(key);
+                          }
+                          list.push(key);
+                          localStorage.removeItem(key);
+                    }
+                    
+              }//for
+              return list;
+              
+        }//page
+        
+        
         obj.list.pages    = function(disp=true){
                                                                                 debug('list.pages');
               var list    = [];
@@ -342,6 +368,32 @@ function localstoragemod(){
               return list;
               
         }//reset
+        
+        
+        obj.reset.page    = function(disp=true){
+        
+              var base    = fn(params);
+              var page    = `${prefix}[${base}]`;
+                                                                                debug(page);
+              var list    = [];
+              var n       = localStorage.length;
+              for(var i=0;i<n;i++){
+              
+                    var key     = localStorage.key(i);
+                    if(key.startsWith(page)){
+                          if(disp){
+                                                                                console.log(key);
+                          }else{
+                                                                                debug(key);
+                          }
+                          list.push(key);
+                          localStorage.removeItem(key);
+                    }
+                    
+              }//for
+              return list;
+              
+        }//page
         
         
   //:
