@@ -900,7 +900,9 @@
         
   //:
   
-        obj.clear   = function(status=false){
+        obj.clear   = function(status=false){return clear(status)}
+        
+        function clear(status=false){
         
               editor.setValue('',-1);
               filename(status);
