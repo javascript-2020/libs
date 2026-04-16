@@ -9,9 +9,9 @@ create-archive.js
 */
 
         export {create_archive};
-
+        
         var jszip;
-
+        
         async function create_archive(dir,{download=true,test,df=false,def={}}={}){
                                                                                 df && console.log('download',download);
                                                                                 df && console.log('test',!!test);
@@ -54,46 +54,51 @@ create-archive.js
                           ct++;
                           var o   = dir[key];
                           
-                          if(o.directory){
-                                                                                df && console.log('dir :',abs+key);
-                                if(zip){
-                                      zip.folder(abs+key);
-                                }
-                                add(o.directory,abs+key+'/');
+                          if(typeof o=='string'){
+                                zip.file(abs+key,o);
                                 complete();
-                          }
-                          
-                          if(o.file?.contents){
-                                                                                df && console.log('file create :',abs+key);
-                                if(zip){
-                                      zip.file(abs+key,o.file.contents);
+                          }else{
+                                if(o.directory){
+                                                                                      df && console.log('dir :',abs+key);
+                                      if(zip){
+                                            zip.folder(abs+key);
+                                      }
+                                      add(o.directory,abs+key+'/');
+                                      complete();
                                 }
-                                complete();
-                          }
-                          
-                          if(o.file?.github){
-                                var owner,repo,branch,path;
-                                if(typeof o.file.github=='string'){
-                                      path    = o.file.github;
-                                }else{
-                                      ({owner,repo,branch,path}    = o.file.github);
+                                
+                                if(o.file?.contents){
+                                                                                      df && console.log('file create :',abs+key);
+                                      if(zip){
+                                            zip.file(abs+key,o.file.contents);
+                                      }
+                                      complete();
                                 }
-                                owner     ||= def.owner||'javascript-2020';
-                                repo      ||= def.repo||'libs';
-                                branch    ||= def.branch||'main';
-                                if(path.startsWith('/')){
-                                      path    = path.slice(1);
-                                }
-                                                                                df && console.log('file github :',abs+key);
-                                                                                df && console.log(owner,repo,branch,path);
-                                if(zip){
-                                      fetch(`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`)
-                                        .then(res=>res.text().then(txt=>{
-                                        
-                                              zip.file(abs+key,txt);
-                                              complete();
+                                
+                                if(o.file?.github){
+                                      var owner,repo,branch,path;
+                                      if(typeof o.file.github=='string'){
+                                            path    = o.file.github;
+                                      }else{
+                                            ({owner,repo,branch,path}    = o.file.github);
+                                      }
+                                      owner     ||= def.owner||'javascript-2020';
+                                      repo      ||= def.repo||'libs';
+                                      branch    ||= def.branch||'main';
+                                      if(path.startsWith('/')){
+                                            path    = path.slice(1);
+                                      }
+                                                                                      df && console.log('file github :',abs+key);
+                                                                                      df && console.log(owner,repo,branch,path);
+                                      if(zip){
+                                            fetch(`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`)
+                                              .then(res=>res.text().then(txt=>{
                                               
-                                        }));
+                                                    zip.file(abs+key,txt);
+                                                    complete();
+                                                    
+                                              }));
+                                      }
                                 }
                           }
                           
@@ -115,6 +120,7 @@ create-archive.js
               
               
         }//create_archive
-              
-
-      
+        
+        
+        
+        
