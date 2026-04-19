@@ -1036,7 +1036,7 @@
                     rtype       = arguments[2];
               }
                                                                         //console.log(document.title);
-              var list    = doc.styleSheets;
+              var list    = [...doc.styleSheets];
                                                                       console.log(list,list.length);
               var ni      = list.length;
               for(var i=0;i<ni;i++){
