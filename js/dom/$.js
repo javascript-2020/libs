@@ -1057,7 +1057,7 @@
                     }//catch
                     if(err){
                                                                                 //console.log(err);
-                                                                                console.log(i,stylesheet);
+                                                                                console.log(i,stylesheet,stylesheet.href,stylesheet.ownerNode);
                     }else{
                     
                           var nj             = rules.length;
