@@ -1055,7 +1055,7 @@
                           
                     }//catch
                     if(err){
-                                                                                console.log(err);
+                                                                                //console.log(err);
                                                                                 console.log(stylesheet);
                     }else{
                     
