@@ -1063,6 +1063,7 @@
                           for(var j=0;j<nj;j++){
                           
                                 var rule    = rules[j];
+                                console.log(rule.selectorText);
                                 if(rule.selectorText===selector){
                                       switch(rtype){
                                       
