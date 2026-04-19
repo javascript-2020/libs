@@ -1037,6 +1037,7 @@
               }
                                                                         //console.log(document.title);
               var list    = doc.styleSheets;
+                                                                      console.log(list);
               var ni      = list.length;
               for(var i=0;i<ni;i++){
               
@@ -1063,7 +1064,7 @@
                           for(var j=0;j<nj;j++){
                           
                                 var rule    = rules[j];
-                                console.log(rule.selectorText);
+                                
                                 if(rule.selectorText===selector){
                                       switch(rtype){
                                       
