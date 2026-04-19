@@ -130,7 +130,7 @@
                     filename    = cur;
               }
               
-              var blob    = source();
+              var blob    = await source();
               
               var file    = await savefile(filename,blob);
               
@@ -146,7 +146,7 @@
               if(file){
                     filename    = file.filename;
               }
-              var blob         = source();
+              var blob         = await source();
               savefile(filename,blob);
               
         }//download
