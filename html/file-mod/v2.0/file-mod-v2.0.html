@@ -69,6 +69,10 @@
         
   //vars:-
   
+  
+        var registry    = [];
+        
+        
         var localfile;
         var github;
         var fileserver;
@@ -177,6 +181,9 @@
         
               shadow                            = host.shadowRoot;
               
+              root                              = $(shadow,'#root');
+              
+              
               var style                         = $(shadow,'style');
               menu.add.style(shadow);
               
@@ -192,7 +199,8 @@
               electron.initdom();
               
               
-              $(shadow,'#root').style.visibility    = '';
+              root.style.visibility    = '';
+              
               
               
               
@@ -231,6 +239,11 @@
                 
               }//switch
               
+              var entry   = registry.find(entry=>entry.filetype===type);
+              if(entry){
+                    entry.mod.save(file,blob);
+              }
+              
         }//save
         
         
@@ -251,6 +264,11 @@
                 case 'electron'         : electron.clear();             break;
                 
               }//switch
+              
+              var entry   = registry.find(entry=>entry.filetype===type);
+              if(entry){
+                    entry.mod.clear();
+              }
               
               cur   = null;
               
@@ -346,6 +364,11 @@
                 
               }//switch
               
+              var entry   = registry.find(entry=>entry.filetype===type);
+              if(entry){
+                    file    = entry.mod.export(cur);
+              }
+              
               //file.filetype   = type;
               //file.type       = type;
               
@@ -358,6 +381,17 @@
         
         }//import
         
+        
+        obj.register    = function(filetype,mod,icon){
+        
+              var entry   = registry.find(entry=>entry.filetype===filetype);
+              if(entry){
+                    return;
+              }
+              registry.push({filetype,mod});
+              root.append(icon);
+              
+        }//register
         
         
   //:
