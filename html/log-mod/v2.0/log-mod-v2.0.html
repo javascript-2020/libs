@@ -139,6 +139,11 @@
         
         function green(){
         
+              if(obj.green.config){
+                    log.config    = obj.green.config;
+              }
+              obj.green.config    = null;
+              
               var nlog    = log.apply(null,arguments);
               nlog.style.borderColor    = 'green';
               nlog.style.color          = 'green';
