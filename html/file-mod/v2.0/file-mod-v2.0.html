@@ -382,14 +382,14 @@
         }//import
         
         
-        obj.register    = function(filetype,mod,icon){
+        obj.register    = function(filetype,mod,dom){
         
               var entry   = registry.find(entry=>entry.filetype===filetype);
               if(entry){
                     return;
               }
               registry.push({filetype,mod});
-              root.append(icon);
+              root.append(dom);
               
         }//register
         
