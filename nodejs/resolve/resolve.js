@@ -4,6 +4,10 @@
     path,fs
 */
 
+
+        module.exports    =  resolve;
+
+
         resolve.df    = false;
         //resolve.df    = true
         
