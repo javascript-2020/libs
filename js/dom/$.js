@@ -532,6 +532,10 @@
                     
                     timer.reset();
                     
+                    if(callback){
+                          callback(e,'drag-start');
+                    }
+                    
                     return false;
                     
               }//md
@@ -551,6 +555,10 @@
                     doc.removeEventListener('mouseup',mu);
                     doc.removeEventListener('mousemove',mm);
                     doc.removeEventListener('contextmenu',cm);
+                    
+                    if(callback){
+                          callback(e,'drag-end');
+                    }
                     
               }//mu
               
