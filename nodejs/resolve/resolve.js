@@ -6,8 +6,10 @@
 
 
         module.exports    =  resolve;
-
-
+        
+        var path          = require('node:path');
+        
+        
         resolve.df    = false;
         //resolve.df    = true
         
@@ -71,6 +73,7 @@
               return {abs};
               
         }//resolve
+        
         
         
         
