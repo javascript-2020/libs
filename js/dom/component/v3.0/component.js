@@ -177,7 +177,7 @@
                                             let index       = nodes.length;
                                             let complete    = async({node:custom})=>{
                                             
-                                                                    nodes.splice(index,1,{node,custom});
+                                                                    nodes.splice(index,1,{node,custom,mod:mod3});
                                                                     mod3.stack.add;
                                                                     await build({root:custom,mod:mod3});
                                                                     resolve();
