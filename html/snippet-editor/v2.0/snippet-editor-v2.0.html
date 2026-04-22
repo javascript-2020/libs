@@ -136,8 +136,8 @@
               obj.editor      = editor;
               
               
-              filemod.initmod({ext,$,menu,menumod,complete,source});
-              editor.initmod({ext,$,menu,menumod,ace,config:config['web-editor'],kd:keydown});
+              filemod.initmod({ext,$,menu,menumod,complete,source,log});
+              editor.initmod({ext,$,menu,menumod,ace,config:config['web-editor'],kd:keydown,log});
               
               await Promise.all([
                     rd.attr.src(),
@@ -258,7 +258,7 @@
   
   
         function keydown(e){
-                                                                                debug('keydown',e.key);
+                                                                                //debug('keydown',e.key);
               if(e.key=='s' && e.ctrlKey){
                     btn.save();
               }
