@@ -47,8 +47,13 @@
         var df=true,did=host.nodeName.toLowerCase()
         ;
         
+        var $
+        ;
         
         obj.initmod   = function(params){
+        
+              $           = mod.rd(params,'$',$);
+              
         }//initmod
         
         
@@ -66,6 +71,17 @@
   
   
         obj.initdom   = function(){
+        
+              var shadow                      = host.shadowRoot;
+              
+              var root                        = $(shadow,'#root');
+              $.drag(root,callback.drag);
+              root.onmouseenter               = e=>icons.style.display='';
+              root.onmouseleave               = e=>icons.style.display='none';
+              
+              icons                           = $(shadow,'#icons');
+              $(icons,'#close').onclick       = e=>root.remove();
+              
         }//initdom
         
         
