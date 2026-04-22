@@ -137,7 +137,7 @@
               
               
               filemod.initmod({ext,$,menu,menumod,complete,source});
-              editor.initmod({ext,$,menu,menumod,ace,config:config['web-editor']});
+              editor.initmod({ext,$,menu,menumod,ace,config:config['web-editor'],kd:keydown});
               
               await Promise.all([
                     rd.attr.src(),
@@ -234,6 +234,7 @@
               var shadow                          = host.shadowRoot;
               
               filemod.initdom();
+              
               editor.initdom({txt:def.txt});
               editor.filename(src);
               
@@ -251,6 +252,18 @@
               filemod.save();
               
         }//save
+        
+        
+  //:
+  
+  
+        function keydown(e){
+                                                                                debug('keydown',e.key);
+              if(e.key=='s' && e.ctrlKey){
+                    btn.save();
+              }
+              
+        }//keydown
         
         
   //:
