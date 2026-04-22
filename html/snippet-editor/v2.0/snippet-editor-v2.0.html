@@ -254,7 +254,11 @@
         }//complete
         
         
-        complete.load   = function(file,blob){
+        complete.load   = async function(file,blob){
+        
+              var txt   = await blob.text();
+              editor.setValue(txt,-1);
+              
         }//load
         
         
