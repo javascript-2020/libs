@@ -57,8 +57,9 @@
       
       <body>
       
-      
+            <!--
             <view-port component></view-port>
+            -->
             
             <log-mod component></log-mod>
             
@@ -69,22 +70,31 @@
       <script>
       
       
-        function initdom(){
+        async function initdom(){
         
-/*
-              $('#hdr [value=iframe]').onclick    = async e=>{
+              var node    = document.createElement('view-port');
+              node.toggleAttribute('component',true);
+              document.body.append(node);
+              var mod2    = mod.create({mod,name:'view-port'});
+              var result    = await mod.build({root:node,mod:mod2});
+              var viewport    = mod2['view-port'];
+              await mod2.auto();
               
-                    var node    = document.createElement('webcontainer-iframe');
-                    node.setAttribute('component','page');
-                    document.body.append(node);
-                    var mod2      = mod.create({mod,name:'webcontainer-iframe'});
-                    var result    = await mod.build({root:node,mod:mod2});
-                    await mod2.auto();
-                    var wciframe    = mod2['webcontainer-iframe'];
+              var node    = document.createElement('snippet-editor');
+              node.toggleAttribute('component',true);
+              viewport.body.append(node);
+              var mod2    = mod.create({mod,name:'snippet-editor'});
+              var result    = await mod.build({root:node,mod:mod2});
+              var snippet   = mod2['snippet-editor'];
+              await mod2.auto();
+              
+              setTimeout(()=>{
+              
+                    console.log('rule');
+                    viewport.css('snippet-editor {height:100%}');
                     
-              };
-*/
-
+              },3000);
+              
         }//initdom
         
         
