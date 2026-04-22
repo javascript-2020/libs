@@ -81,7 +81,7 @@
         
               var shadow                      = host.shadowRoot;
               
-              var root                        = $(shadow,'#root');
+              var root                        = $(shadow,'#view-port');
               $.drag(root,callback.drag);
               root.onmouseenter               = e=>icons.style.display='';
               root.onmouseleave               = e=>icons.style.display='none';
