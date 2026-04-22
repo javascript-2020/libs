@@ -71,6 +71,7 @@
   
   
         var root;
+        obj.root        = null;
         var style;
         var body;
         obj.body        = null;
@@ -99,6 +100,8 @@
               style                           = $(shadow,'style');
               
               root                            = $(shadow,'#view-port');
+              obj.root                        = root;
+              
               $.drag(root,callback.drag);
               root.onmouseenter               = e=>icons.style.display='';
               root.onmouseleave               = e=>icons.style.display='none';
