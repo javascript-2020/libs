@@ -99,7 +99,7 @@
         
         obj.tofront   = tofront;
         
-        function tofront(viewport){debugger;
+        function tofront(viewport){
         
               list.forEach(viewport2=>{
               
