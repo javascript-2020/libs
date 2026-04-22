@@ -60,7 +60,7 @@
   //:
   
   
-        obj.new   = function({par}){
+        obj.new   = async function({par}){
         
               par           ||= root;
               
