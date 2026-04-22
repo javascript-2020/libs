@@ -55,13 +55,14 @@
         var df=true,did='view-port'
         ;
         
-        var $,debug
+        var $,debug,vm
         ;
         
         obj.initmod   = function(params){
         
               $           = mod.rd(params,'$',$);
               debug       = mod.rd(params,'debug',debug);
+              vm          = mod.rd(params,'vm',vm);
               
         }//initmod
         
@@ -103,7 +104,7 @@
               root.onmouseleave               = e=>icons.style.display='none';
               
               var icons                       = $(shadow,'#icons');
-              $(icons,'#close').onclick       = e=>root.remove();
+              $(icons,'#close').onclick       = remove;
               
               body                            = $(shadow,'#body');
               obj.body                        = body;
@@ -145,6 +146,18 @@
               }
               
         }//pos
+        
+        
+        obj.remove   = remove;
+        
+        function remove(){
+        
+              root.remove();
+              if(vm){
+                    vm.remove(obj);
+              }
+              
+        }//close
         
         
   //:
