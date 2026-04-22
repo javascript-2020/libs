@@ -74,7 +74,7 @@
               
               var viewport    = mod2['view-port'];
               viewport.initmod({vm:obj});
-              viewport.pos({x:200,y:200});
+              //viewport.pos({x:200,y:200});
               viewport.css(`snippet-editor {display:block;height:100%}`);
               viewport.css(`snippet-editor::part(root) {height:100%}`);
               
