@@ -88,6 +88,7 @@
               var result    = await mod.build({root:node,mod:mod2});
               var snippet   = mod2['snippet-editor'];
               await mod2.auto();
+              snippet.editor.df=true;
               
               setTimeout(()=>{
               
