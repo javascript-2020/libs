@@ -37,7 +37,7 @@
                         </div>
                   </div>
                   
-                  <div id=view>
+                  <div id=body>
                   </div>
                   
             </div>
@@ -68,8 +68,8 @@
   //:
   
   
-        var view;
-        obj.view        = null;
+        var body;
+        obj.body        = null;
         
         
         var callback    = {};
@@ -100,8 +100,8 @@
               var icons                       = $(shadow,'#icons');
               $(icons,'#close').onclick       = e=>root.remove();
               
-              view                            = $(shadow,'#view');
-              obj.view                        = view;
+              body                            = $(shadow,'#body');
+              obj.body                        = body;
               
               
         }//initdom
