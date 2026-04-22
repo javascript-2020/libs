@@ -100,6 +100,10 @@
         
         function tofront(viewport){
         
+              if(viewport.host.parentNode!==root){
+                    return;
+              }
+              
               list.forEach(viewport2=>{
               
                     if(viewport.host.parentNode===root){
