@@ -13,6 +13,9 @@
       /*height:100%*/
     }
     
+  #hdr>*
+    {vertical-align:top}
+    
   input
     {font-size:16px;padding:5px 10px}
   input[type=button]
@@ -21,10 +24,11 @@
     
             </style>
             
-            <div id=root>
+            <div id=root part=root>
             
-                  <div>
+                  <div id=hdr>
                         <file-mod component></file-mod>
+                        <input value=save type=button>
                   </div>
                   
                   <web-editor component v2.0></web-editor>
@@ -74,17 +78,18 @@
         var target;
         
         var filemod;
-        obj.filemod   = null;
+        obj.filemod             = null;
         var editor;
-        obj.editor    = null;
+        obj.editor              = null;
         
-        var def   = {};
+        var def                 = {};
         
         var src;
         
         
-        var rd    = {};
-        rd.attr   = {};
+        var rd                  = {};
+        rd.attr                 = {};
+        var btn                 = {};
         
         
   //:
@@ -134,8 +139,8 @@
               obj.editor      = editor;
               
               
-              filemod.initmod({ext,$,menu,menumod,complete,source});
-              editor.initmod({ext,$,menu,menumod,ace,config:config['web-editor']});
+              filemod.initmod({ext,$,menu,menumod,complete,source,log});
+              editor.initmod({ext,$,menu,menumod,ace,config:config['web-editor'],kd:keydown,log});
               
               await Promise.all([
                     rd.attr.src(),
@@ -232,8 +237,12 @@
               var shadow                          = host.shadowRoot;
               
               filemod.initdom();
+              
               editor.initdom({txt:def.txt});
               editor.filename(src);
+              
+              $(shadow,'[value=save]').onclick    = btn.save;
+              
               
         }//initdom
         
@@ -241,6 +250,41 @@
   //:
   
   
+        btn.save    = async function(){
+        
+              var result    = await filemod.save();
+              if(result!==false){
+                    complete.save(filemod.cur);
+              }
+              
+        }//save
+        
+        
+  //:
+  
+  
+        function keydown(e){
+                                                                                //debug('keydown',e.key);
+              var f   = false;
+              
+              if(e.key=='s' && e.ctrlKey){
+                    f   = true;
+                    btn.save();
+              }
+              
+              if(f){
+                    e.preventDefault();
+                    e.stopPropagation();
+              }
+              
+        }//keydown
+        
+        
+  //:
+  
+  
+        obj.source    = source;
+        
         function source(){
         
               var txt     = editor.getvalue();
@@ -250,17 +294,32 @@
         }//source
         
         
+        obj.complete    = complete;
+        
         function complete(file){
+        
+              editor.filename(file);
+              filemod.cur   = file;
+              
         }//complete
         
         
-        complete.load   = function(file,blob){
+        complete.load   = async function(file,blob){
+        
+              var txt   = await blob.text();
+              editor.setValue(txt,-1);
+              complete(file);
+              
         }//load
         
         
-        complete.save   = function(file){
+        complete.save   = function(file,confirm=true){
         
-              (log||window.log)?.green(file.name+' saved');
+              if(confirm){
+                    (log||window.log)?.green(file.name+' saved');
+              }
+              complete(file);
+              editor.filename.save.hide();
               
         }//save
         
