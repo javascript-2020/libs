@@ -87,15 +87,15 @@
               var result    = await mod.build({root:node,mod:mod2});
               var viewport    = mod2['view-port'];
               await mod2.auto();
-                    viewport.css(`
-                          snippet-editor
-                            {display:block;height:100%}
-                    `);
-                    viewport.css(`
-                          snippet-editor::part(root)
-                            {height:100%}
-                    `);
-                    
+              viewport.css(`
+                    snippet-editor
+                      {display:block;height:100%}
+              `);
+              viewport.css(`
+                    snippet-editor::part(root)
+                      {height:100%}
+              `);
+              
               var node    = document.createElement('snippet-editor');
               node.toggleAttribute('component',true);
               node.toggleAttribute('v2.0',true);
