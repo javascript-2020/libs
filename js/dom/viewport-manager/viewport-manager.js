@@ -27,6 +27,8 @@
   
   
         var root;
+        var list    = [];
+        
         
   //:
   
@@ -55,9 +57,9 @@
   
         obj.new   = function({par}){
         
-              par   ||= root;
+              par           ||= root;
               
-              var node    = document.createElement('view-port');
+              var node        = document.createElement('view-port');
               node.toggleAttribute('component',true);
               par.append(node);
               
@@ -66,6 +68,7 @@
               await mod2.auto();
               
               var viewport    = mod2['view-port'];
+              viewport.initmod({vm:obj});
               viewport.pos({x:200,y:200});
               viewport.css(`snippet-editor {display:block;height:100%}`);
               viewport.css(`snippet-editor::part(root) {height:100%}`);
@@ -81,6 +84,15 @@
         }//tofront
         
         
+        obj.remove    = function(viewport){
+        
+              var index   = list.findIndex(viewport2=>viewport2===viewport);
+              if(index==-1){
+                    return;
+              }
+              list.splice(index,1);
+              
+        }//remove
         
         
   return obj;
