@@ -45,7 +45,7 @@
   //:
   
   
-        obj.initdom   = function({par}){
+        obj.initdom   = function({par}={}){
         
               par           ||= document.body;
               
@@ -60,7 +60,7 @@
   //:
   
   
-        obj.new   = async function({par}){
+        obj.new   = async function({par}={}){
         
               par           ||= root;
               
