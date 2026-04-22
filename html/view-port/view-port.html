@@ -11,7 +11,7 @@
     
   #view-port
     {display:flex;flex-direction:column;gap:5px;border:1px solid lightgray;box-sizing:border-box;border-radius:10px;background:whitesmoke;
-      padding:10px;padding-top:20px}
+      padding:10px;padding-top:20px;height:100%}
       
   #title
     {height:15px;background:lightblue;position:absolute;left:0;top:0;width:100%;border-top-left-radius:10px;border-top-right-radius:10px}
@@ -98,6 +98,8 @@
   
         obj.initdom   = function(){
         
+              $.drag(host,callback.drag);
+              
               var shadow                      = host.shadowRoot;
               
               style                           = $(shadow,'style');
@@ -105,7 +107,6 @@
               root                            = $(shadow,'#view-port');
               obj.root                        = root;
               
-              $.drag(root,callback.drag);
               root.onmouseenter               = e=>icons.style.display='';
               root.onmouseleave               = e=>icons.style.display='none';
               
