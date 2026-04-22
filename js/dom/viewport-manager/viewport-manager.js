@@ -103,11 +103,11 @@
               list.forEach(viewport2=>{
               
                     if(viewport2===viewport){
-                          viewport.root.style.zIndex    = list.length;
+                          viewport.host.style.zIndex    = list.length;
                     }else{
-                          var z   = Number(viewport.root.style.zIndex);
+                          var z   = Number(viewport.host.style.zIndex);
                           z--;
-                          viewport.root.style.zIndex    = z;
+                          viewport.host.style.zIndex    = z;
                     }
                     
               });
