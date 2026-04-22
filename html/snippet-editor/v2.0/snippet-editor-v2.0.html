@@ -25,6 +25,7 @@
             
                   <div>
                         <file-mod component></file-mod>
+                        <input value=save type=button>
                   </div>
                   
                   <web-editor component v2.0></web-editor>
@@ -74,17 +75,18 @@
         var target;
         
         var filemod;
-        obj.filemod   = null;
+        obj.filemod             = null;
         var editor;
-        obj.editor    = null;
+        obj.editor              = null;
         
-        var def   = {};
+        var def                 = {};
         
         var src;
         
         
-        var rd    = {};
-        rd.attr   = {};
+        var rd                  = {};
+        rd.attr                 = {};
+        var btn                 = {};
         
         
   //:
@@ -235,7 +237,20 @@
               editor.initdom({txt:def.txt});
               editor.filename(src);
               
+              $(shadow,'[value=save]').onclick    = btn.save;
+              
+              
         }//initdom
+        
+        
+  //:
+  
+  
+        btn.save    = function(){
+        
+              filemod.save();
+              
+        }//save
         
         
   //:
