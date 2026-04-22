@@ -128,17 +128,19 @@
         
         obj.pos   = function({x,y,w,h}){
         
-              if(x){
-                    root.style.left       = x;
+              var css(v)=>(typeof v=='number' ? v+'px' : v);
+              
+              if(x!==undefined){
+                    root.style.left       = css(x);
               }
-              if(y)
-                    root.style.top        = y;
+              if(y!==undefined)
+                    root.style.top        = css(y);
               }
-              if(w){
-                    root.style.width      = w;
+              if(w!==undefined){
+                    root.style.width      = css(w);
               }
-              if(h){
-                    root.style.height     = h;
+              if(h!==undefined){
+                    root.style.height     = css(h);
               }
               
         }//pos
