@@ -497,25 +497,25 @@
         obj.initdom    = async function(rootnode,params){
         
               if(arguments.length==1){
-                    params                    = rootnode;
+                    params                                = rootnode;
               }
               
-              var {mode,txt,fullsize,height}   = params||{};
+              var {mode,txt,fullsize,height}              = params||{};
               
-              mode            ||= config.mode||def.mode;
-              txt             ||= def.txt;
-              fullsize        ||= config.fullsize||def.fullsize;
+              mode                                      ||= config.mode||def.mode;
+              txt                                       ||= def.txt;
+              fullsize                                  ||= config.fullsize||def.fullsize;
               
-              height          ||= config.height||def.height;
+              height                                    ||= config.height||def.height;
               if(height){
-                    fullsize    = false;
+                    fullsize                              = false;
               }
               
-              var cssText       = config.cssText;
+              var cssText                                 = config.cssText;
               
               
-              shadow            = host.shadowRoot;
-              obj.shadowRoot    = shadow;
+              shadow                                      = host.shadowRoot;
+              obj.shadowRoot                              = shadow;
               
               
               
@@ -564,6 +564,7 @@
               hldr                                        = $(shadow,'#hldr');
               
               var node                                    = $(shadow,'#editor');
+              node.onmousedown                            = e=>e.stopPropagation();
               node.textContent                            = txt;
               $(shadow,'.seo-code').textContent           = txt;
               
