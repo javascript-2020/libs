@@ -102,12 +102,14 @@
         
               list.forEach(viewport2=>{
               
-                    if(viewport2===viewport){
-                          viewport.host.style.zIndex    = list.length;
-                    }else{
-                          var z   = Number(viewport.host.style.zIndex);
-                          z--;
-                          viewport2.host.style.zIndex    = z;
+                    if(viewport.host.parentNode===root){
+                          if(viewport2===viewport){
+                                viewport.host.style.zIndex    = list.length;
+                          }else{
+                                var z   = Number(viewport.host.style.zIndex);
+                                z--;
+                                viewport2.host.style.zIndex    = z;
+                          }
                     }
                     
               });
