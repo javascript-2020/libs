@@ -13,7 +13,9 @@
 
 (function(){
 
-  var obj   = {};
+  var obj   = {
+        version   : 'v1.0',
+  };
   
   
         obj.initmod   = function(params){
