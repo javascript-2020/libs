@@ -252,7 +252,10 @@
   
         btn.save    = function(){
         
-              filemod.save();
+              var result    = await filemod.save();
+              if(result!==false){
+                    complete.save(filemod.cur);
+              }
               
         }//save
         
