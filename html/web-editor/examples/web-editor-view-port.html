@@ -18,12 +18,14 @@
               
               var host    = document.createElement('web-editor');
               host.toggleAttribute('component',true);
+              host.toggleAttribute('v2.0',true);
               host.setAttribute('height','100%');
               var mod2    = mod.create({mod,name:'web-editor'});
               await mod.build({root:host,mod:mod2});
               var editor    = mod2['web-editor'];
               await mod2.auto();
               viewport.body.append(editor.__host);
+              editor.set('helloworld');
               
         }//ready
         
