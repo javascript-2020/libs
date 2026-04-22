@@ -1,6 +1,6 @@
 
 
-<view-port style='left:0;top:0;width:750px;height:500px'>
+<view-port>
 
 
       <template shadowrootmode=open>
@@ -98,6 +98,7 @@
   
         obj.initdom   = function(){
         
+              host.style.cssText              = 'left:0;top:0;width:750px;height:500px';
               $.drag(host,callback.drag);
               
               var shadow                      = host.shadowRoot;
