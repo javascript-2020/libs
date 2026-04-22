@@ -1,0 +1,42 @@
+
+
+      <script src='https://libs.ext-code.com/js/dom/component/v3.0/component.js?hdr'></script>
+      
+      
+      <script>
+      
+        async function ready(){
+        
+              var [vm]    = await ext.load.libs('/js/dom/viewport-manager/viewport-manager.js');
+              
+              vm    = vm();
+              vm.initmod({mod});
+              await vm.init();
+              await vm.initdom();
+              
+              var viewport    = await vm.new();
+              
+              var host    = document.createElement('web-editor');
+              host.toggleAttribute('component',true);
+              host.setAttribute('height','100%');
+              var mod2    = mod.create({mod,name:'web-editor'});
+              await mod.build({root:host,mod:mod2});
+              var editor    = mod2['web-editor'];
+              await mod2.auto();
+              viewport.body.append(editor.__host);
+              
+        }//ready
+        
+      </script>
+      
+<!--
+      <div id=hldr style='position:absolute;left:50px;top:50px;width:600px;height:500px;border:1px solid lightgray;padding:5px'>
+      
+            <web-editor component h=100%></web-editor>
+            
+      </div>
+-->
+
+
+
+
