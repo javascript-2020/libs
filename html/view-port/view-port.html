@@ -78,7 +78,7 @@
         var style;
         var body;
         obj.body        = null;
-        
+        obj.on          = {};
         
         var callback    = {};
         
@@ -125,6 +125,11 @@
   
   
         callback.drag   = function(e,dragtype,ox,oy){
+        
+              if(typeof obj.on.drag=='function'){
+                    obj.on.drag(e,fargtype,ox,oy);
+              }
+              
         }//drag
         
         
