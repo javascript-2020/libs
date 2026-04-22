@@ -61,7 +61,6 @@
   //:
   
   
-        var icons;
         var callback    = {};
         
         
@@ -87,7 +86,7 @@
               root.onmouseenter               = e=>icons.style.display='';
               root.onmouseleave               = e=>icons.style.display='none';
               
-              icons                           = $(shadow,'#icons');
+              var icons                       = $(shadow,'#icons');
               $(icons,'#close').onclick       = e=>root.remove();
               
         }//initdom
