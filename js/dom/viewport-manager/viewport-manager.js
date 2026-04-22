@@ -80,6 +80,9 @@
               
               viewport.root.addEventListener('mousedown',md);
               
+              list.push(viewport);
+              tofront(viewport);
+              
               return {viewport};
               
               
