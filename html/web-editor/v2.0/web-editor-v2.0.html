@@ -506,7 +506,7 @@
               txt                                       ||= def.txt;
               fullsize                                  ||= config.fullsize||def.fullsize;
               
-              height                                    ||= config.height||def.height;
+              height                                    ||= config.height||config.h||def.height;
               if(height){
                     fullsize                              = false;
               }
