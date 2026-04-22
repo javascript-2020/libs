@@ -108,7 +108,7 @@
                     }else{
                           var z   = Number(viewport.host.style.zIndex);
                           z--;
-                          viewport.host.style.zIndex    = z;
+                          viewport2.host.style.zIndex    = z;
                     }
                     
               });
