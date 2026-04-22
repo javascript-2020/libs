@@ -241,6 +241,8 @@
   //:
   
   
+        obj.source    = source;
+        
         function source(){
         
               var txt     = editor.getvalue();
@@ -250,7 +252,12 @@
         }//source
         
         
+        obj.complete    = complete;
+        
         function complete(file){
+        
+              editor.filename(file);
+              
         }//complete
         
         
