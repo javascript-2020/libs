@@ -265,13 +265,17 @@
         
               var txt   = await blob.text();
               editor.setValue(txt,-1);
+              complete(file);
               
         }//load
         
         
-        complete.save   = function(file){
+        complete.save   = function(file,confirm=true){
         
-              (log||window.log)?.green(file.name+' saved');
+              if(confirm){
+                    (log||window.log)?.green(file.name+' saved');
+              }
+              complete(file);
               
         }//save
         
