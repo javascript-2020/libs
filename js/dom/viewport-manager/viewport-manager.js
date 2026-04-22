@@ -50,7 +50,7 @@
               par           ||= document.body;
               
               root            = document.createElement('div');
-              div.id          = 'viewport-manager';
+              root.id         = 'viewport-manager';
               par.append(root);
               
               
