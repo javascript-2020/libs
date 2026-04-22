@@ -32,6 +32,9 @@
         var list    = [];
         
         
+        var front;
+        
+        
   //:
   
   
@@ -75,14 +78,38 @@
               viewport.css(`snippet-editor {display:block;height:100%}`);
               viewport.css(`snippet-editor::part(root) {height:100%}`);
               
+              viewport.root.addEventListener('mousedown',md);
+              
               return {viewport};
+              
+              
+              function md(e){
+              
+                    tofront(viewport);
+                    
+              }//md
               
         }//new
         
         
-        obj.tofront   = function(viewport){
         
+        obj.tofront   = tofront;
         
+        function tofront(viewport){
+        
+              list.forEach(viewport2=>{
+              
+                    if(viewport2===viewport){
+                          viewport.root.style.zIndex    = list.length;
+                    }else{
+                          var z   = Number(viewport.root.style.zIndex);
+                          z--;
+                          viewport.root.style.zIndex    = z;
+                    }
+                    
+              });
+              front   = viewport;
+              
         }//tofront
         
         
