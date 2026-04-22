@@ -119,7 +119,8 @@
         
         obj.css   = function(css){
         
-              style.sheet.insertRule(css);
+              var index   = style.sheet.insertRule(css);
+              console.log(index);
               
         }//css
         
