@@ -69,6 +69,7 @@
   //:
   
   
+        var root;
         var style;
         var body;
         obj.body        = null;
@@ -96,7 +97,7 @@
               
               style                           = $(shadow,'style');
               
-              var root                        = $(shadow,'#view-port');
+              root                            = $(shadow,'#view-port');
               $.drag(root,callback.drag);
               root.onmouseenter               = e=>icons.style.display='';
               root.onmouseleave               = e=>icons.style.display='none';
@@ -128,7 +129,7 @@
         
         obj.pos   = function({x,y,w,h}){
         
-              var css(v)=>(typeof v=='number' ? v+'px' : v);
+              var css   = v=>(typeof v=='number' ? v+'px' : v);
               
               if(x!==undefined){
                     root.style.left       = css(x);
