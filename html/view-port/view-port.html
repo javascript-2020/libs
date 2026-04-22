@@ -126,6 +126,24 @@
         }//css
         
         
+        obj.pos   = function({x,y,w,h}){
+        
+              if(x){
+                    root.style.left       = x;
+              }
+              if(y)
+                    root.style.top        = y;
+              }
+              if(w){
+                    root.style.width      = w;
+              }
+              if(h){
+                    root.style.height     = h;
+              }
+              
+        }//pos
+        
+        
   //:
   
   return obj;
