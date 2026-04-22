@@ -259,8 +259,16 @@
   
         function keydown(e){
                                                                                 //debug('keydown',e.key);
+              var f   = false;
+              
               if(e.key=='s' && e.ctrlKey){
+                    f   = true;
                     btn.save();
+              }
+              
+              if(f){
+                    e.preventDefault();
+                    e.stopPropagation();
               }
               
         }//keydown
