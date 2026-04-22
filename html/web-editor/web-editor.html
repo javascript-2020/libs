@@ -564,7 +564,9 @@
               hldr                                        = $(shadow,'#hldr');
               
               var node                                    = $(shadow,'#editor');
-              node.onmousedown                            = e=>e.stopPropagation();
+              node.onmousedown                            = e=>{console.log(e.ctrlKey);
+                                                                !e.ctrlKey && e.stopPropagation();
+              }
               node.textContent                            = txt;
               $(shadow,'.seo-code').textContent           = txt;
               
