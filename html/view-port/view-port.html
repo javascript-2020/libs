@@ -1,17 +1,17 @@
 
 
-<view-port>
+<view-port style='left:0;top:0;width:750px;height:500px'>
 
 
       <template shadowrootmode=open>
       
             <style>
   :host
-    {display:block}
+    {display:block;position:absolute}
     
   #view-port
     {display:flex;flex-direction:column;gap:5px;border:1px solid lightgray;box-sizing:border-box;border-radius:10px;background:whitesmoke;
-      position:absolute;padding:10px;padding-top:20px}
+      padding:10px;padding-top:20px}
       
   #title
     {height:15px;background:lightblue;position:absolute;left:0;top:0;width:100%;border-top-left-radius:10px;border-top-right-radius:10px}
@@ -32,7 +32,7 @@
             </style>
             
             
-            <div id=view-port style='left:0;top:0;width:750px;height:500px'>
+            <div id=view-port>
             
                   <div id=title>
                         <div id=icons>
@@ -139,16 +139,16 @@
               var css   = v=>(typeof v=='number' ? v+'px' : v);
               
               if(x!==undefined){
-                    root.style.left       = css(x);
+                    host.style.left       = css(x);
               }
               if(y!==undefined){
-                    root.style.top        = css(y);
+                    host.style.top        = css(y);
               }
               if(w!==undefined){
-                    root.style.width      = css(w);
+                    host.style.width      = css(w);
               }
               if(h!==undefined){
-                    root.style.height     = css(h);
+                    host.style.height     = css(h);
               }
               
         }//pos
