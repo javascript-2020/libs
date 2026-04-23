@@ -7,7 +7,7 @@
       
             <style>
   :host
-    {display:block;position:absolute}
+    {display:block;position:absolute;box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;}
     
   #view-port
     {display:flex;flex-direction:column;gap:5px;border:1px solid lightgray;box-sizing:border-box;border-radius:10px;background:whitesmoke;
@@ -17,9 +17,13 @@
     {height:15px;background:lightblue;position:absolute;left:0;top:0;width:100%;border-top-left-radius:10px;border-top-right-radius:10px}
     
   #icons
-    {position:absolute;right:5px;top:1}
+    {position:absolute;right:5px;top:1;display:flex;align-items;center;gap:5px}
   #icons img
     {width:13px;height:13px;cursor:pointer;box-sizing:border-box}
+  #icons #minify
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAtFBMVEU7OzsSEREDAwN4eHgICAj4+Pn19fPz8/EGBQXx8e8AAAAABgNKSkr5+fju7uxLSkojpmLv8O8w5ogejFMw4oZ/f3+1tbNbW1vd4eX39/VSUVGfo6cBAgHX2Nnq6unk5eW2trZlZWQosmqHh4cKCgq8vLsxMTGur6+AgH/NzcvIyMcWFhYdnF8HhlQPPSYiqWUpkVubm5sMEw8SXDlMTU0mJiUSw3wOaUB0dnkGdkkDVjYGwHf8Cwe4AAAABnRSTlP8uqQjbRaKBBgWAAABcklEQVQoz22TiXKCMBBA41FygLGpBxATkCKHgNbbHv//Xw1BQMU3MEN47A672YC3wbDf64FxB4uHmQSDPjJNdXURgmdgiLab4v0VxRaFoC82l+nHSwrBQc/8/ZnsJl12u6uwwJgoVivyjH41Bpbg37M0TGePpOEstVW0hRY+dA1suHeopeGOlkhrh0GIKYYN1cKdt7r1mGGMDcd71LXHlFJsrEHgPeqb13oNSEertOrGlbV9+KzLL7ws8rQ1XmhMPTtOKtvVKrHHV2cRlLajy7/yASFx4sGuxsxT0YAgkWdttKjbopwqbWEHdiAbHcRJpVlZMIRG0z+tfSlvXWNNW6sHrZnyFCvHlMbQeNoSPzxZnHOba4Kojdc6REJN5eFQTSc5yyZe65O4Fl+fNVs0d+t4HJIAWObmb9pwRPNRZN845EmpL/c6cfeoIo/3FHBynLSjr5JDuayIJKNgn4u7g0NiiZv9Y9QBUhXWHjs7Yi3Ukf8oqzz3ElHc5wAAAABJRU5ErkJggg==);
+    }
   #icons #close
     {
       content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAj1QTFRFAAAA4Cco6hkY7xQU8RgZ8RgY8BgZ8hgY7xIU6BcW3Sgt2To67RMV9AkJ+QQE/AIC/AIC+AQF9AkK7RET4DMy2Tg38RAP+QQE/AEB/QAB/gAA/QEA+wEB+QQE8Q8P3TQz7BIT+QQE/QEB/QAA+QQD6xMT4CUl9QkJ/AEC9AgI5CMj7BcW+QQE+AUE9wcH+QQE+QQE9wcH+AQF+gME7BYW6REQ+wIB+QUE6RYW0To+6hUV9gcG9gUF6hUR1js66RQX+QQE8g0O5QsL9wgI3kA+////6BYU9gYG9wUF6RMUylBT9QkK/QEC8g0N5QwK+gQE6RER6BIR9gYG9gYG6BQT6RUV+AQF8g0N9QUF6BAO5RQW5RUX5xYY9QcH8w0N5QsK9gYF6hAP5xUX9AcI+wIC/gAB9gYF5RMU5hgb9gcH9gYF5BUV5hYX9wQF6BIT6BMT9QYG9gUE6BER4RQV5BQT6BMS+QQE6RMR5REU9AYH9QYF6RIQ6RQV+gQE5QsL9wcH2zo74xIT8wYG/AIB9wYF6hMR0jg59QcH8Q4O6hAR/AIC+QQF7BUXyzc35xMS9AYF9gYG6RUU3Dk36RUW+QQE8Q8O7BgX+QQD9AcH+QQE+gMD6xYT3Sgm8wkI9QgI4yQk7BIT+AQE+gME7BIV3TQz+AQE+wEC/AEA8A8Q3DQz1zw56xMU8goJ+QQE+wIC+wMC+wMC8wkI6hMU2Ds43Sst6RcX6xMU7xcW7xcV8BcV8BcW7xcY6hUV6BkX3ignt1x/WQAAAL90Uk5TABE5UlhYWFhSORIIYsjy/P3yymQJCYr5///////6jwpo+////GwX0P/UGkb36cTr7sXq+Utk/+1NCErf5FEJSuhpassN/0Xh5EwIwf9uae5PSOLlTE3sbeJKQ0ZI4W1p40tI4f//5EVD4+VGQuNLSOHjS0VFSPBRSuTkS0zsacsMSuP/40wLyG5k/+xPCk/j41EMT+xqRvfH7flLF9DUGmf6/G0J+f//jwoHYMbx/P38yWQJEThSV1dXV1dTOhK+MhyLAAABr0lEQVR4nK3SQUgUURgH8P9/l+jNusIiLB5EEEXFJFmM1csiuHST3IMHQSox2IMEYYIkBXlZFjwpBJ3UwgSriwf1qOvBLhFrGiS4GBQRFHmIZZ1FYsf35o3L7Ahe9Du9md983/vem4+4MHglTBUW4IMFn1weu7nK1nKOpT74W+ZwpTq1vp9xg7Sie0sDhSBzDreQecvbE6v5VXM7jwKmkPvnVQmrlvxtWYEQP2mO8idQr7Y7DBTRqBYHQKktozl+UALa5P5kjs38j2vcATq5qrk/W1IlCkBQJv4DQtwGRPSdi0WXOmmYf4BabspORWxR8/CGZIge1QLsLjKml/vWxW1+k09NXIH/fDaYUA2j9ddn+468PMB9u/gNvvW5WbeW4Begg7tAZC9X9GbfZRa4JQ/2EejmvOtgzxckJ/kBMfLVA26hly/krY1Nap7mLPBY3eXyD594pBZpYLTmoeaXTAnTGKrjNGFC3IyEZ0wYT5jUPMdnfu8PNQppjjjj8JpPUeFGUUzx3tm0LI3PcMLtRurkOgfLo/i+cth4/w15pzyKMtZsp/1GLePOh7gwLsenPLh5H68t6T4AAAAASUVORK5CYII=);
@@ -36,6 +40,7 @@
             
                   <div id=title>
                         <div id=icons>
+                              <img id=minify>
                               <img id=close>
                         </div>
                   </div>
@@ -99,7 +104,7 @@
   //:
   
   
-        obj.initdom   = function(){
+        obj.initdom   = function({icons}={}){
         
               host.style.cssText              = 'left:0;top:0;width:750px;height:500px';
               $.drag(host,callback.drag);
@@ -115,7 +120,16 @@
               root.onmouseleave               = e=>icons.style.display='none';
               
               var icons                       = $(shadow,'#icons');
-              $(icons,'#close').onclick       = remove;
+              if(icons.remove!==false){
+                    $(icons,'#close').onclick       = remove;
+              }else{
+                    $(icons,'#close').remove();
+              }
+              if(icons.minify!==false){
+                    $(icon,'#minify').onclick       = minify;
+              }else{
+                    $(icon,'#minify').remove();
+              }
               
               body                            = $(shadow,'#body');
               obj.body                        = body;
