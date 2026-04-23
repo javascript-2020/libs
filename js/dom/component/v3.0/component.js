@@ -60,6 +60,8 @@
               
               mod.rd.attr           = rdattr;
               
+              mod.component         = component;
+              
               
               var stack             = []
               mod.stack             = stack;
@@ -1091,6 +1093,32 @@
                     return config2;
                     
               }//parseattr
+              
+              
+              async function component(name,attrs,{auto}={}){
+              
+                    var node    = document.createElement(name);
+                    for(var key in attrs){
+                    
+                          var value   = attrs[key];
+                          if(typeof value=='boolean'){
+                                node.toggleAttribute(key,value);
+                          }else{
+                                value   = String(value);
+                                node.setAttribute(value);
+                          }
+                          
+                    }//for
+                    
+                    var mod2      = mod.create({mod,name});
+                    var result    = await mod.build({root:node,mod:mod2});
+                    var obj       = mod2[name];
+                    if(auto!==false){
+                          await mod2.auto();
+                    }
+                    return obj;
+                    
+              }//component
               
               
               //function datatype(v){return Object.prototype.toString.call(v).slice(8,-1).toLowerCase()}
