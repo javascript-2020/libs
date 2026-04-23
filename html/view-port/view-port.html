@@ -79,6 +79,7 @@
         var body;
         obj.body        = null;
         obj.on          = {};
+        obj.on.before   = {};
         obj.status      = 'hidden';
         
         var callback    = {};
@@ -177,8 +178,16 @@
         
         function hide(){
         
+              if(typeof on.before.hide=='function'){
+                    on.before.hide(obj);
+              }
+              
               host.style.display    = 'none';
               obj.status            = 'hidden';
+              
+              if(typeof on.hide=='function'){
+                    on.hide(obj);
+              }
               
         }//hide
         
@@ -187,8 +196,16 @@
         
         function show(){
         
+              if(typeof on.before.show=='function'){
+                    on.before.show(obj);
+              }
+              
               host.style.display    = 'block';
               obj.status            = 'visible';
+              
+              if(typeof on.show=='function'){
+                    on.show(obj);
+              }
               
         }//show
         
