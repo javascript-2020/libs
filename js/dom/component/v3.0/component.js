@@ -1105,7 +1105,7 @@
                                 node.toggleAttribute(key,value);
                           }else{
                                 value   = String(value);
-                                node.setAttribute(value);
+                                node.setAttribute(key,value);
                           }
                           
                     }//for
