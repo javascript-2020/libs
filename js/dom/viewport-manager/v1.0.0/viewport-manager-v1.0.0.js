@@ -60,7 +60,7 @@
   //:
   
   
-        obj.new   = async function({par}={}){
+        obj.new   = async function({par,initdom}={}){
         
               par           ||= root;
               
@@ -70,10 +70,14 @@
               
               var mod2        = mod.create({mod,name:'view-port'});
               var result      = await mod.build({root:node,mod:mod2});
-              await mod2.auto();
+              
+              //await mod2.auto();
               
               var viewport    = mod2['view-port'];
+              viewport.initmod(mod.base);
               viewport.initmod({vm:obj});
+              await viewport.init();
+              await viewport.initdom(initdom);
               //viewport.pos({x:200,y:200});
               viewport.css(`snippet-editor {display:block;height:100%}`);
               viewport.css(`snippet-editor::part(root) {height:100%}`);
