@@ -129,10 +129,12 @@
   
         obj.initdom   = function(){
                                                                                 debug('initdom');
-              $('#btn').onclick         = btn.open;
-              $('#label').onclick       = btn.close;
+              var shadow                        = host.shadowRoot;
               
-              hldr                      = $('#hldr');
+              $(shadow,'#btn').onclick          = btn.open;
+              $(shadow,'#label').onclick        = btn.close;
+              
+              hldr                              = $(shadow,'#hldr');
               
         }//initdom
         
