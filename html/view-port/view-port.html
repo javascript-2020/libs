@@ -79,6 +79,7 @@
         var body;
         obj.body        = null;
         obj.on          = {};
+        obj.status      = 'hidden';
         
         var callback    = {};
         
@@ -170,6 +171,26 @@
               }
               
         }//close
+        
+        
+        obj.hide    = hide;
+        
+        function hide(){
+        
+              host.style.display    = 'none';
+              obj.status            = 'hidden';
+              
+        }//hide
+        
+        
+        obj.show    = show;
+        
+        function show(){
+        
+              host.style.display    = 'block';
+              obj.status            = 'visible';
+              
+        }//show
         
         
   //:
