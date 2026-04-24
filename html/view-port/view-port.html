@@ -108,7 +108,7 @@
   //:
   
   
-        obj.initdom   = function({icons}={}){debugger;
+        obj.initdom   = function(params={}){debugger;
         
               host.style.cssText              = 'left:0;top:0;width:750px;height:500px';
               $.drag(host,callback.drag);
@@ -124,12 +124,12 @@
               root.onmouseleave               = e=>icons.style.display='none';
               
               var icons                       = $(shadow,'#icons');
-              if(icons.remove!==false){
+              if(params.icons.remove!==false){
                     $(icons,'#close').onclick       = remove;
               }else{
                     $(icons,'#close').remove();
               }
-              if(icons.minify!==false){
+              if(params.icons.minify!==false){
                     $(icons,'#minify').onclick       = hide;
               }else{
                     $(icons,'#minify').remove();
