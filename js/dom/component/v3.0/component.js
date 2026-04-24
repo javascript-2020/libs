@@ -1207,7 +1207,7 @@
               
               
               function complete(){
-                                                                                debug('init_hdr.complete');
+                                                                                debug('init_hdr.complete',typeof ready);
                                                                                 
                     switch('function'){
                     
