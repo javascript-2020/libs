@@ -68,7 +68,7 @@
         var df=true,did='view-port'
         ;
         
-        var $,debug,vm
+        var $,debug,vm,uconfig
         ;
         
         obj.initmod   = function(params){
@@ -76,6 +76,7 @@
               $           = mod.rd(params,'$',$);
               debug       = mod.rd(params,'debug',debug);
               vm          = mod.rd(params,'vm',vm);
+              uconfig     = mod.rd(params,'config',uconfig);
               
         }//initmod
         
@@ -97,6 +98,14 @@
         var callback    = {};
         
         
+        var config      = {
+                                icons   : {
+                                                close     : true,
+                                                minify    : true,
+                                          },
+                          };
+                          
+                          
   //:
   
   
@@ -104,6 +113,9 @@
         
                                                                                 debug=eval(debug.mod);
                                                                                 debug('init');
+              uconfig   ||= {};
+              
+              
         }//init
         
         
@@ -112,33 +124,33 @@
   
         obj.initdom   = function(params={}){
         
-              host.style.cssText              = 'left:0;top:0;width:750px;height:500px';
+              host.style.cssText                      = 'left:0;top:0;width:750px;height:500px';
               $.drag(host,callback.drag);
               
-              var shadow                      = host.shadowRoot;
+              var shadow                              = host.shadowRoot;
               
-              style                           = $(shadow,'style');
+              style                                   = $(shadow,'style');
               
-              root                            = $(shadow,'#view-port');
-              obj.root                        = root;
+              root                                    = $(shadow,'#view-port');
+              obj.root                                = root;
               
-              root.onmouseenter               = e=>icons.style.display='';
-              root.onmouseleave               = e=>icons.style.display='none';
+              root.onmouseenter                       = e=>icons.style.display='';
+              root.onmouseleave                       = e=>icons.style.display='none';
               
-              var icons                       = $(shadow,'#icons');
+              var icons                               = $(shadow,'#icons');
               if(params.icons.remove!==false){
-                    $(icons,'#close').onclick       = remove;
+                    $(icons,'#close').onclick         = remove;
               }else{
                     $(icons,'#close').remove();
               }
               if(params.icons.minify!==false){
-                    $(icons,'#minify').onclick       = hide;
+                    $(icons,'#minify').onclick        = hide;
               }else{
                     $(icons,'#minify').remove();
               }
               
-              body                            = $(shadow,'#body');
-              obj.body                        = body;
+              body                                    = $(shadow,'#body');
+              obj.body                                = body;
               
               
         }//initdom
