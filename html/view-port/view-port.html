@@ -187,9 +187,17 @@
         
         function remove(){
         
+              if(typeof on.before.close=='function'){
+                    on.before.close(obj);
+              }
+              
               root.remove();
               if(vm){
                     vm.remove(obj);
+              }
+              
+              if(typeof on.close=='function'){
+                    on.close(obj);
               }
               
         }//remove
