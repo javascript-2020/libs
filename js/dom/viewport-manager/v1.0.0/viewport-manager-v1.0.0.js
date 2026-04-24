@@ -76,7 +76,7 @@
               
               var viewport    = mod2['view-port'];
               viewport.initmod(mod.base);
-              viwport.initmod(initmod);
+              viewport.initmod(initmod);
               viewport.initmod({vm:obj});
               await viewport.init();
               await viewport.initdom(initdom);
