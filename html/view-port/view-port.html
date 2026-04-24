@@ -119,10 +119,34 @@
         }//init
         
         
+        function rdconfig(config,uconfig){
+        
+              fn(config,uconfig);
+              
+              function fn(config,uconfig){
+              
+                    for(var key in uconfig){
+                    
+                          if(typeof uconfig[key]=='object'){
+                                if(!config[key]){
+                                      config[key]   = {};
+                                }
+                                fn(config[key],uconfig[key]);
+                          }else{
+                                config[key]   = uconfig[key];
+                          }
+                          
+                    }//for
+                    
+              }//fn
+              
+        }//rdconfig
+        
+        
   //:
   
   
-        obj.initdom   = function(params={}){
+        obj.initdom   = function(){
         
               host.style.cssText                      = 'left:0;top:0;width:750px;height:500px';
               $.drag(host,callback.drag);
@@ -138,12 +162,12 @@
               root.onmouseleave                       = e=>icons.style.display='none';
               
               var icons                               = $(shadow,'#icons');
-              if(params.icons.remove!==false){
+              if(config.icons.remove!==false){
                     $(icons,'#close').onclick         = remove;
               }else{
                     $(icons,'#close').remove();
               }
-              if(params.icons.minify!==false){
+              if(config.icons.minify!==false){
                     $(icons,'#minify').onclick        = hide;
               }else{
                     $(icons,'#minify').remove();
