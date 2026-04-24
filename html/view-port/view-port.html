@@ -117,14 +117,14 @@
         
                                                                                 debug=eval(debug.mod);
                                                                                 debug('init');
-              uconfig   ||= {};
-              
+              rdconfig.open(config,uconfig);
               
         }//init
         
         
         rdconfig.open   = function(config,uconfig){
         
+              uconfig   ||= {};
               fn(config,uconfig);
               
               
