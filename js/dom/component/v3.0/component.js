@@ -1207,7 +1207,8 @@
               
               
               function complete(){
-              
+                                                                                debug('init_hdr.complete');
+                                                                                
                     switch('function'){
                     
                       case typeof mod.onReady   : mod.onReady({mod});        break;
