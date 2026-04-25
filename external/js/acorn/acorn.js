@@ -1,4 +1,4 @@
-var espree = (function () {
+var acorn = (function () {
   'use strict';
 
   // This file was generated. Do not modify manually!
@@ -6241,10 +6241,57 @@ var espree = (function () {
     nonASCIIwhitespace: nonASCIIwhitespace
   };
 
-  //export {acorn};
-                
-                var espree$1 = espree;  // iife / umd
+  // The main exported interface (under `self.acorn` when in the
+  // browser) is a `parse` function that takes a code string and returns
+  // an abstract syntax tree as specified by the [ESTree spec][estree].
+  //
+  // [estree]: https://github.com/estree/estree
 
-  return espree$1;
+  function parse(input, options) {
+    return Parser.parse(input, options)
+  }
+
+  // This function tries to parse a single expression at a given
+  // offset in a string. Useful for parsing mixed-language formats
+  // that embed JavaScript expressions.
+
+  function parseExpressionAt(input, pos, options) {
+    return Parser.parseExpressionAt(input, pos, options)
+  }
+
+  // Acorn is organized as a tokenizer and a recursive-descent parser.
+  // The `tokenizer` export provides an interface to the tokenizer.
+
+  function tokenizer(input, options) {
+    return Parser.tokenizer(input, options)
+  }
+
+  var acorn = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    Node: Node,
+    Parser: Parser,
+    Position: Position,
+    SourceLocation: SourceLocation,
+    TokContext: TokContext,
+    Token: Token,
+    TokenType: TokenType,
+    defaultOptions: defaultOptions,
+    getLineInfo: getLineInfo,
+    isIdentifierChar: isIdentifierChar,
+    isIdentifierStart: isIdentifierStart,
+    isNewLine: isNewLine,
+    keywordTypes: keywords,
+    lineBreak: lineBreak,
+    lineBreakG: lineBreakG,
+    nonASCIIwhitespace: nonASCIIwhitespace,
+    parse: parse,
+    parseExpressionAt: parseExpressionAt,
+    tokContexts: types,
+    tokTypes: types$1,
+    tokenizer: tokenizer,
+    version: version
+  });
+
+  return acorn;
 
 })();
