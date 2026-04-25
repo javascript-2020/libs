@@ -1,4 +1,4 @@
-var espree = (function () {
+var scope = (function () {
 	'use strict';
 
 	/**
