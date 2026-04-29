@@ -65,11 +65,13 @@
         
         github.user                 = {};
         github.user.repolist        = repolist;
+        github.user.repolist.all    = repolistall;
         
         
         github.repo                 = {};
         github.repo.default         = repodefault;
         github.repo.tree            = repotree;
+        github.repo.zip             = repozip;
         
         
         
@@ -88,19 +90,16 @@
               
               
               var err;
-              
               try{
               
                     url   = new URL(url);
                     
               }//try
-              
               catch(err2){
               
                     err   = err2;
                     
               }//catch
-              
               if(err){
                     return {error:err};
               }
@@ -139,7 +138,8 @@
               var repo      = url.hostname;
               var branch    = 'main';
               var path      = url.pathname.slice(1);
-              return {owner,repo,branch,path};
+              var file      = path.split('/').at(-1);
+              return {owner,repo,branch,path,file};
               
         }//github.io
         
@@ -151,7 +151,8 @@
               var repo      = parts.shift();
               var branch    = 'main';
               var path      = '';
-              return {owner,repo,branch,path};
+              var file      = '';
+              return {owner,repo,branch,path,file};
               
         }//repo
         
@@ -165,7 +166,8 @@
               parts.shift();
               var branch    = parts.shift();
               var path      = parts.join('/');
-              return {owner,repo,branch,path};
+              var file      = parts.at(-1);
+              return {owner,repo,branch,path,file};
               
         }//file
         
@@ -178,8 +180,9 @@
               var repo      = parts.shift();
               parts.shift();
               var branch    = parts.shift();
-              var path      = parts.join('/');
-              return {owner,repo,branch,path};
+              var path      = parts.join('/')+'/';
+              var file      = '';
+              return {owner,repo,branch,path,file};
               
         }//dir
         
@@ -404,6 +407,32 @@
                     var error   = 'notfound';
                     return {error};
               }
+
+              
+              if(json.size>0 && json.content==''){
+                    var url   = json.git_url;
+                    var err;
+                    try{
+                      
+                          var res   = await fetch(url,{headers});
+                          
+                    }//try
+                    catch(err2){
+                      
+                          err   = err2;
+                          
+                    }//catch
+                    if(err){
+                          return {error:err};
+                    }
+                    if(!res.ok){
+                          var error   = await res.text();
+                          return {error};
+                    }
+                    var json2       = await res.json();
+                    json.content    = json2.content;
+              }
+
               
               var mime    = getmime(json.name);
               var blob    = await b64_blob(json.content,mime);
@@ -1047,7 +1076,7 @@
   //:
   
   
-        async function repolist({owner,token}){
+        async function repolist({owner,token}={}){
         
               owner             = get.owner(owner);
               token             = get.token(token);
@@ -1062,6 +1091,7 @@
               }
               
               var json          = await res.json();
+                                                                                console.log(json);
               var list          = json.map(item=>item.name);
               return {list};
               
@@ -1110,6 +1140,48 @@
         }//repotree
         
         
+        
+        
+        async function repolistall({token}={}){
+        
+              token             = get.token(token);
+              var headers       = get.headers({token});
+              
+              var url           = 'https://api.github.com/user/repos';
+              
+              var {res,error}   = await gfetch(url,{headers});
+              if(error){
+                    return {error};
+              }
+              
+              var json    = await res.json();
+              return json;
+              
+        }//repolistall
+        
+        
+        async function repozip({owner,repo,branch,token}){
+        
+              token             = get.token(token);
+              owner             = get.owner(owner);
+              var headers       = get.headers({token});
+                                                                                console.log(repo,token);
+              var url           = `https://github.com/${owner}/${repo}/archive/refs/heads/${branch}.zip`;
+              if(token){
+                    url         = `https://api.github.com/repos/${owner}/${repo}/zipball/${branch}`;
+              }
+              
+              var {res,error}   = await gfetch(url,{headers});
+              if(error){
+                    return {error};
+              }
+              var blob    = await res.blob();
+              return {blob};
+              
+        }//repozip
+        
+        
+        
   //:
   
   
@@ -1137,7 +1209,12 @@
         
         get.token   = function(token){
         
+              if(token===false){
+                    return token;
+              }
+              
               token     = token||github.token;
+              
               if(!token && typeof localStorage!='undefined'){
                     token   = localStorage['github-token'];
               }
@@ -1311,6 +1388,5 @@
         return github;
         
 })();
-
 
 
