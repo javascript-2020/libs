@@ -784,10 +784,18 @@ var codeFrame = (function () {
 	var libExports = requireLib();
 	var index = /*@__PURE__*/getDefaultExportFromCjs(libExports);
 
-	var codeFrame = /*#__PURE__*/_mergeNamespaces({
+	var ns = /*#__PURE__*/_mergeNamespaces({
 		__proto__: null,
 		default: index
 	}, [libExports]);
+
+	// Build a mutable namespace object
+	              var codeFrame    = {
+	                    ...ns,
+	                                                                                // add alias
+	                    codeFrame    : index,
+	                                                                                // preserve default
+	              };
 
 	return codeFrame;
 
