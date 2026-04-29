@@ -408,6 +408,31 @@
                     return {error};
               }
               
+              
+              if(json.size>0 && json.content==''){
+                    var url   = json.git_url;
+                    var err;
+                    try{
+                    
+                          var res   = await fetch(url,{headers});
+                          
+                    }//try
+                    catch(err2){
+                    
+                          err   = err2;
+                          
+                    }//catch
+                    if(err){
+                          return {error:err};
+                    }
+                    if(!res.ok){
+                          var error   = await res.text();
+                          return {error};
+                    }
+                    json   = await res.json();
+              }
+              
+              
               var mime    = getmime(json.name);
               var blob    = await b64_blob(json.content,mime);
               
