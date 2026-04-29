@@ -429,7 +429,8 @@
                           var error   = await res.text();
                           return {error};
                     }
-                    json   = await res.json();
+                    var json2       = await res.json();
+                    json.content    = json2.content;
               }
               
               
