@@ -9,6 +9,9 @@ mod.openssl   = function(params={}){
   var obj   = {};
   
   
+        var df=obj.df=false,did='openssl';
+        
+        
         var {EmscrJSR_openssl}    = params;
         
         var initial;
@@ -25,11 +28,12 @@ mod.openssl   = function(params={}){
         obj.init    = function({url}={}){return init({url})}
         
         async function init({url}={}){
-                                                                          console.log('init');
+                                                                                debug.log('init');
               url         ||= params.url;
               var Module    = {print,printErr,onRuntimeInitialized,url};
+              
               await EmscrJSR_openssl(Module);
-                                                                          console.log('init.complete');
+                                                                                debug.log('init.complete');
               return Module;
               
               
@@ -38,7 +42,6 @@ mod.openssl   = function(params={}){
                     if(params.stdout){
                           params.stdout(txt);
                     }
-                    //output.textContent   += txt+'\n';
                     
               }//print
               
@@ -48,23 +51,21 @@ mod.openssl   = function(params={}){
                     if(params.stderr){
                           params.stderr(txt);
                     }
-                    //output.textContent    += '[stderr] '+txt+'\n';
                     
               }//printErr
               
               
               function onRuntimeInitialized(){
-                                                                                console.log("OpenSSL ready");
-                                                                                console.log(Module);
+                                                                                debug.log("OpenSSL ready");
+                                                                                debug.log(Module);
                       if(!initial){
-                                                                                console.log('initial');
+                                                                                debug.log('initial');
                             initial   = fs.snapshot(Module);
                       }
                       if(snapshot){
-                                                                                console.log('snapshot');
+                                                                                debug.log('snapshot');
                             fs.restore(Module,snapshot);
                       }
-                      //resolve(Module);
                       
               }//onRuntimeInitialized
               
@@ -75,7 +76,7 @@ mod.openssl   = function(params={}){
   
   
         obj.run   = async function(){
-                                                                                console.log('run',...arguments);
+                                                                                debug.log('run',...arguments);
               var Module    = await init();
               
               Module.callMain([...arguments]);
@@ -90,7 +91,7 @@ mod.openssl   = function(params={}){
   
   
         fs.snapshot   = function(Module,path='/'){
-                                                                                //console.log('fs.snapshot');
+                                                                                //debug.log('fs.snapshot');
               var snapshot    = {};
               var entries     = Module.FS.readdir(path);
               
@@ -99,13 +100,13 @@ mod.openssl   = function(params={}){
                     if(entry==='.'||entry==='..')return;
                     
                     var fullPath    = path+entry;
-                                                                                //console.log('fullpath',fullPath);
+                                                                                //debug.log('fullpath',fullPath);
                     try{
                     
                           var stats   = Module.FS.stat(fullPath);
                           
                           if(Module.FS.isFile(stats.mode)){
-                                                                                //console.log('fullpath',fullPath);
+                                                                                //debug.log('fullpath',fullPath);
                                 var uint8             = Module.FS.readFile(fullPath);
                                 snapshot[fullPath]    = uint8;
                           }
@@ -125,7 +126,7 @@ mod.openssl   = function(params={}){
         
         
         fs.restore    = function(Module,snapshot){
-                                                                                console.log('fs.restore');
+                                                                                debug.log('fs.restore');
               Object.entries(snapshot).forEach(([path,content])=>{
               
                     var parts     = path.split("/").slice(1,-1);
@@ -146,7 +147,7 @@ mod.openssl   = function(params={}){
                           
                           current   = next;
                     });
-                                                                                console.log(path);
+                                                                                debug.log(path);
                     Module.FS.writeFile(path,content);
                     
               });
@@ -226,8 +227,51 @@ mod.openssl   = function(params={}){
         
         
         
+  //:
+  
+  
+        function debug(...args){
+        
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              console.groupCollapsed.apply(console,args2);
+              console.trace();
+              console.groupEnd();
+              
+        }//debug
         
         
+        debug.log   = function(){debug.apply(null,arguments)}
+        
+        
+        debug.json    = function(v){
+        
+              var err;
+              try{
+              
+                    var str   = JSON.stringify(v,null,4);
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.toString();
+                    debug(error);
+              }else{
+                    debug(str);
+              }
+              
+        }//json
+        
+        
+  //:
+  
+  
   return obj;
   
 }//openssl
