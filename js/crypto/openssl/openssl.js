@@ -115,9 +115,13 @@ function opensslmod(params={}){
   //:
   
   
-        obj.run   = async function(){
+        obj.run   = async function(...args){
                                                                                 debug.log('run',...arguments);
               var Module    = await init();
+              
+              if(args[0]==='openssl'){
+                    args.shift();
+              }
               
               Module.callMain([...arguments]);
               snapshot    = fs.snapshot(Module);
