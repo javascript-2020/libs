@@ -118,7 +118,7 @@ function opensslmod(params={}){
         obj.run   = async function(...args){
                                                                                 debug.log('run',...arguments);
               if(args.length==1 && typeof args[0]=='string'){
-                    args    = args.split(' ');
+                    args    = args[0].split(' ');
               }
               if(args[0]==='openssl'){
                     args.shift();
