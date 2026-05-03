@@ -11,7 +11,7 @@
   
         var df=obj.df=false,did='openssl';
         
-        
+        vaar _params    = params;
         var {EmscrJSR_openssl,stdout,stderr}   = params;
         
         
@@ -20,6 +20,7 @@
               stdout    = params.stdout;
               stderr    = params.stderr;
               ('EmscrJSR_openssl' in params) && (EmscrJSR_openssl=params.EmscrJSR_openssl);
+              ('url' in params) && (_params.url=params.url);
               
         }//initmod
         
@@ -46,7 +47,7 @@
                                                                                 debug.log('init');
               await libs();
               
-              url         ||= params.url;
+              url         ||= _params.url;
               var Module    = {print,printErr,onRuntimeInitialized,url};
               cur           = Module;
               await EmscrJSR_openssl(Module);
@@ -92,6 +93,21 @@
         async function libs(){
         
               if(!EmscrJSR_openssl){
+        var [txt1,txt2]         = await Promise.all([
+                                        fetch('https://libs.ext-code.com/external/js/openssl/openssl.wasm.js').then(res=>res.text()),
+                                        fetch('https://libs.ext-code.com/js/crypto/openssl/openssl.js').then(res=>res.text()),
+                                  ]);
+        var js                  = `
+                                        (()=>{
+                                        
+                                              ${txt1}
+                                              
+                                              return EmscrJSR_openssl;
+                                              
+                                        })();
+                                  `;
+        var EmscrJSR_openssl    = eval(js);
+        
               }
               
         }//libs
