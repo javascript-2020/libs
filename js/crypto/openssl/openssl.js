@@ -127,7 +127,7 @@ function opensslmod(params={}){
               var Module    = await init();
               
               
-              Module.callMain([...arguments]);
+              Module.callMain([...args]);
               snapshot    = fs.snapshot(Module);
               
               return Module;
