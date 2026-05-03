@@ -19,7 +19,7 @@
         
               stdout    = params.stdout;
               stderr    = params.stderr;
-              ('EmscrJSR_openssl' in params) && EmscrJSR_openssl=params.EmscrJSR_openssl;
+              ('EmscrJSR_openssl' in params) && (EmscrJSR_openssl=params.EmscrJSR_openssl);
               
         }//initmod
         
