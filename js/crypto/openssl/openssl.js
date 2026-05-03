@@ -199,6 +199,34 @@ mod.openssl   = function(params={}){
         }//clear
         
         
+        
+  //:
+  
+  
+        obj.normalisePem    = normalise_pem;
+        obj.normalizePem    = normalise_pem;
+        
+        function normalise_pem(pem){
+        
+              pem         = pem.replace(/\r/g,'');
+              var lines   = pem.split('\n');
+              var n       = lines.length;
+              for(var i=1;i<n-1;i++){
+              
+                    var line    = lines[i];
+                    line        = line.trimStart();
+                    lines[i]     = line;
+                    
+              }//for
+              pem   = lines.join('\n').trim();
+              return pem;
+              
+        }//normalise_pem
+        
+        
+        
+        
+        
   return obj;
   
 }//openssl
