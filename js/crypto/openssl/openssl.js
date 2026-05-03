@@ -75,7 +75,7 @@ mod.openssl   = function(params={}){
   
   
         obj.run   = async function(){
-        
+                                                                                console.log('run',...arguments);
               var Module    = await init();
               
               Module.callMain([...arguments]);
