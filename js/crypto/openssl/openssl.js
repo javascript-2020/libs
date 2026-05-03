@@ -17,8 +17,8 @@
         
         obj.initmod   = function(params){
         
-              stdout    = params.stdout;
-              stderr    = params.stderr;
+              ('stdout' in params) && (stdout=params.stdout);
+              ('stderr' in params) && (stderr=params.stderr);
               ('EmscrJSR_openssl' in params) && (EmscrJSR_openssl=params.EmscrJSR_openssl);
               ('url' in params) && (_params.url=params.url);
               
@@ -28,7 +28,9 @@
   //:
   
   
-  
+        var wasm_url    = 'https://javascript-2020.github.io/libs/js/external/openssl/openssl.js';
+        
+        
         var cur;
         var initial;
         var snapshot;
@@ -93,21 +95,18 @@
         async function libs(){
         
               if(!EmscrJSR_openssl){
-        var [txt1,txt2]         = await Promise.all([
-                                        fetch('https://libs.ext-code.com/external/js/openssl/openssl.wasm.js').then(res=>res.text()),
-                                        fetch('https://libs.ext-code.com/js/crypto/openssl/openssl.js').then(res=>res.text()),
-                                  ]);
-        var js                  = `
-                                        (()=>{
-                                        
-                                              ${txt1}
-                                              
-                                              return EmscrJSR_openssl;
-                                              
-                                        })();
-                                  `;
-        var EmscrJSR_openssl    = eval(js);
-        
+                    var txt   = await fetch('https://libs.ext-code.com/external/js/openssl/openssl.wasm.js').then(res=>res.text()),
+                    var js    = `
+                                      (()=>{
+                                      
+                                            ${txt1}
+                                            
+                                            return EmscrJSR_openssl;
+                                            
+                                      })();
+                                `;
+                    EmscrJSR_openssl    = eval(js);
+                    _params.url         = wasm_url;
               }
               
         }//libs
