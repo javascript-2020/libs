@@ -125,7 +125,7 @@ mod.openssl   = function(params={}){
         
         
         fs.restore    = function(Module,snapshot){
-                                                                          //console.log('fs.restore');
+                                                                                console.log('fs.restore');
               Object.entries(snapshot).forEach(([path,content])=>{
               
                     var parts     = path.split("/").slice(1,-1);
@@ -141,12 +141,12 @@ mod.openssl   = function(params={}){
                                 
                           }//try
                           catch(err){
-                                                                    // already exists
+                                                                                // already exists
                           }//catch
                           
                           current   = next;
                     });
-                                                                          //console.log(path);
+                                                                                console.log(path);
                     Module.FS.writeFile(path,content);
                     
               });
