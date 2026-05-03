@@ -4,7 +4,7 @@
 
 
 
-mod.openssl   = function(params){
+mod.openssl   = function(params={}){
 
   var obj   = {};
   
@@ -24,7 +24,7 @@ mod.openssl   = function(params){
   
         obj.init    = function({url}){return init({url})}
         
-        async function init({url}){
+        async function init({url}={}){
                                                                           console.log('init');
               url         ||= params.url;
               var Module    = {print,printErr,onRuntimeInitialized,url};
