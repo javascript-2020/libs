@@ -82,11 +82,11 @@ function opensslmod(params={}){
                                                                                 //debug.log(Module);
                       if(!initial){
                                                                                 debug.log('initial');
-                            initial   = fs.snapshot(Module);
+                            initial   = fs.snapshot({Module});
                       }
                       if(snapshot){
                                                                                 debug.log('snapshot');
-                            fs.restore(Module,snapshot);
+                            fs.restore({Module,snapshot});
                       }
                       
               }//onRuntimeInitialized
@@ -129,7 +129,7 @@ function opensslmod(params={}){
               var Module    = await init();
               
               Module.callMain([...args]);
-              snapshot    = fs.snapshot(Module);
+              snapshot    = fs.snapshot({Module});
               
               return Module;
               
@@ -139,8 +139,9 @@ function opensslmod(params={}){
   //:
   
   
-        fs.snapshot   = function(Module,path='/'){
-                                                                                //debug.log('fs.snapshot');
+        fs.snapshot   = function({Module,path='/'}={}){
+                                                                                debug.log('fs.snapshot');
+              Module        ||= cur;
               var snapshot    = {};
               var entries     = Module.FS.readdir(path);
               
@@ -149,18 +150,18 @@ function opensslmod(params={}){
                     if(entry==='.'||entry==='..')return;
                     
                     var fullPath    = path+entry;
-                                                                                //debug.log('fullpath',fullPath);
+                                                                                debug.log('fullpath',fullPath);
                     try{
                     
                           var stats   = Module.FS.stat(fullPath);
                           
                           if(Module.FS.isFile(stats.mode)){
-                                                                                //debug.log('fullpath',fullPath);
+                                                                                debug.log('fullpath',fullPath);
                                 var uint8             = Module.FS.readFile(fullPath);
                                 snapshot[fullPath]    = uint8;
                           }
                           if(Module.FS.isDir(stats.mode)){
-                                Object.assign(snapshot,fs.snapshot(Module,fullPath+'/')); // recurse
+                                Object.assign(snapshot,fs.snapshot({Module,fullPath+'/'})); // recurse
                           }
                           
                     }//try
@@ -174,12 +175,14 @@ function opensslmod(params={}){
         }//snapshotfs
         
         
-        fs.restore    = function(Module,snapshot){
+        fs.restore    = function({Module,snapshot}){
                                                                                 debug.log('fs.restore');
+              Module    ||= cur;
+              
               Object.entries(snapshot).forEach(([path,content])=>{
               
-                    var parts     = path.split("/").slice(1,-1);
-                    var current   = "/";
+                    var parts     = path.split('/').slice(1,-1);
+                    var current   = '/';
                     
                     parts.forEach((part) => {
                     
@@ -204,13 +207,13 @@ function opensslmod(params={}){
         }//restore
         
         
-        fs.save    = function(Module){
+        fs.save    = function({Module}){
         
-              var snap    = fs.snapshot(Module);
+              var snap    = fs.snapshot({Module});
               snapshot    = snap;
               return snap;
               
-        }//store
+        }//save
         
         
         fs.set    = function(snap){
@@ -260,6 +263,7 @@ function opensslmod(params={}){
         obj.normalisePem    = normalise_pem;
         obj.normalizePem    = normalise_pem;
         obj.normalise_pem   = normalise_pem;
+        obj.normalize_pem   = normalise_pem;
         
         function normalise_pem(pem){
         
