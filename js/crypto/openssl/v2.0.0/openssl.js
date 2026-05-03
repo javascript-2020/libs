@@ -119,17 +119,21 @@ function opensslmod(params={}){
   
         obj.run   = async function(...args){
                                                                                 debug.log('run',...arguments);
-              if(args.length==1 && typeof args[0]=='string'){
-                    args    = args[0].split(' ');
-              }
-              if(args[0]==='openssl'){
-                    args.shift();
-              }
+              var n   = args.length;
+              for(var i=0;i<n;i++){
               
-              var Module    = await init();
-              
-              Module.callMain([...args]);
-              snapshot    = fs.snapshot({Module});
+                    var cmdline   = args[i];
+                    var cmd       = cmdline.split(' ');
+                    
+                    if(cmd[0]==='openssl'){
+                          cmd.shift();
+                    }
+                    
+                    var Module    = await init();
+                    Module.callMain(cmd);
+                    snapshot    = fs.snapshot({Module});
+                    
+              }//for
               
               return Module;
               
