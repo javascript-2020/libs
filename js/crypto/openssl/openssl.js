@@ -99,7 +99,7 @@ function opensslmod(params={}){
                     var js    = `
                                       (()=>{
                                       
-                                            ${txt1}
+                                            ${txt}
                                             
                                             return EmscrJSR_openssl;
                                             
