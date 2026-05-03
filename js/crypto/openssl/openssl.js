@@ -12,8 +12,23 @@ mod.openssl   = function(params={}){
         var df=obj.df=false,did='openssl';
         
         
+        var {stdout,stderr}   = params;
+        
+        
+        obj.initmod   = function(params){
+        
+              stdout    = params.stdout;
+              stderr    = params.stderr;
+              
+        }//initmod
+        
+        
+  //:
+  
+  
         var {EmscrJSR_openssl}    = params;
         
+        var cur;
         var initial;
         var snapshot;
         
@@ -31,7 +46,7 @@ mod.openssl   = function(params={}){
                                                                                 debug.log('init');
               url         ||= params.url;
               var Module    = {print,printErr,onRuntimeInitialized,url};
-              
+              cur           = Module;
               await EmscrJSR_openssl(Module);
                                                                                 debug.log('init.complete');
               return Module;
@@ -39,8 +54,8 @@ mod.openssl   = function(params={}){
               
               function print(txt){
               
-                    if(params.stdout){
-                          params.stdout(txt);
+                    if(stdout){
+                          stdout(txt);
                     }
                     
               }//print
@@ -48,16 +63,16 @@ mod.openssl   = function(params={}){
               
               function printErr(txt){
               
-                    if(params.stderr){
-                          params.stderr(txt);
+                    if(stderr){
+                          stderr(txt);
                     }
                     
               }//printErr
               
               
               function onRuntimeInitialized(){
-                                                                                debug.log("OpenSSL ready");
-                                                                                debug.log(Module);
+                                                                                debug.log('OpenSSL ready');
+                                                                                //debug.log(Module);
                       if(!initial){
                                                                                 debug.log('initial');
                             initial   = fs.snapshot(Module);
