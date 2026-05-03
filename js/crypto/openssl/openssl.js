@@ -4,7 +4,7 @@
 
 
 
-mod.openssl   = function(params={}){
+(function(params={}){
 
   var obj   = {};
   
@@ -289,7 +289,8 @@ mod.openssl   = function(params={}){
   
   return obj;
   
-}//openssl
+//openssl
+})
 
 
 
