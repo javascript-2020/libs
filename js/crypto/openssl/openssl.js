@@ -5,22 +5,28 @@
 
 
 mod.openssl   = function(params){
-        
+
   var obj   = {};
-      
+  
+  
         var {EmscrJSR_openssl}    = params;
         
         var initial;
         var snapshot;
+        
+        
         var fs    = {};
         obj.fs    = fs;
+        
+        
+  //:
   
+  
+        obj.init    = function(url){return init(url)}
         
-        obj.init    = function(){return init()}
-        
-        async function init(){
+        async function init(url){
                                                                           console.log('init');
-              var Module    = {print,printErr,onRuntimeInitialized};
+              var Module    = {print,printErr,onRuntimeInitialized,url};
               await EmscrJSR_openssl(Module);
                                                                           console.log(1);
               return Module;
@@ -34,7 +40,7 @@ mod.openssl   = function(params){
                     //output.textContent   += txt+'\n';
                     
               }//print
-  
+              
               
               function printErr(txt){
               
@@ -44,7 +50,7 @@ mod.openssl   = function(params){
                     //output.textContent    += '[stderr] '+txt+'\n';
                     
               }//printErr
-  
+              
               
               function onRuntimeInitialized(){
                                                                                 console.log("OpenSSL ready");
@@ -59,11 +65,13 @@ mod.openssl   = function(params){
                       //resolve(Module);
                       
               }//onRuntimeInitialized
-                    
+              
         }//init
         
         
-        
+  //:
+  
+  
         obj.run   = async function(){
         
               var Module    = await init();
@@ -74,14 +82,16 @@ mod.openssl   = function(params){
               return Module;
               
         }//run
-  
+        
+        
+  //:
   
   
         fs.snapshot   = function(Module,path='/'){
                                                                                 //console.log('fs.snapshot');
               var snapshot    = {};
               var entries     = Module.FS.readdir(path);
-            
+              
               entries.forEach((entry) => {
               
                     if(entry==='.'||entry==='..')return;
@@ -91,7 +101,7 @@ mod.openssl   = function(params){
                     try{
                     
                           var stats   = Module.FS.stat(fullPath);
-                      
+                          
                           if(Module.FS.isFile(stats.mode)){
                                                                                 //console.log('fullpath',fullPath);
                                 var uint8             = Module.FS.readFile(fullPath);
@@ -104,9 +114,9 @@ mod.openssl   = function(params){
                     }//try
                     catch(err){
                     }//catch
-                
+                    
               });
-            
+              
               return snapshot;
               
         }//snapshotfs
@@ -149,7 +159,7 @@ mod.openssl   = function(params){
               return snap;
               
         }//store
-  
+        
         
         fs.set    = function(snap){
         
@@ -185,10 +195,10 @@ mod.openssl   = function(params){
               initial   = null;
               
         }//clear
-      
-      
+        
+        
   return obj;
-
+  
 }//openssl
 
 
