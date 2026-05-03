@@ -254,7 +254,7 @@ function opensslmod(params={}){
         function build_fs(){
         
               for(var key in cur.FS){
-                                                                                console.log(key,typeof cur.FS{key]);
+                                                                                console.log(key,typeof cur.FS[key]);
                     obj.fs[key]   = cur.FS[key].bind(cur);
                     
               }//for
