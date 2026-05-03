@@ -11,7 +11,7 @@
   
         var df=obj.df=false,did='openssl';
         
-        vaar _params    = params;
+        var _params    = params;
         var {EmscrJSR_openssl,stdout,stderr}   = params;
         
         
