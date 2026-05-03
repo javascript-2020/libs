@@ -29,7 +29,7 @@ mod.openssl   = function(params={}){
               url         ||= params.url;
               var Module    = {print,printErr,onRuntimeInitialized,url};
               await EmscrJSR_openssl(Module);
-                                                                          console.log(1);
+                                                                          console.log('init.complete');
               return Module;
               
               
