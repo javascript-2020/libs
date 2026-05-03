@@ -22,7 +22,7 @@ mod.openssl   = function(params={}){
   //:
   
   
-        obj.init    = function({url}){return init({url})}
+        obj.init    = function({url}={}){return init({url})}
         
         async function init({url}={}){
                                                                           console.log('init');
