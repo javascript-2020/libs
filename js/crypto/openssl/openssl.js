@@ -61,6 +61,7 @@ mod.openssl   = function(params={}){
                             initial   = fs.snapshot(Module);
                       }
                       if(snapshot){
+                                                                                console.log('snapshot');
                             fs.restore(Module,snapshot);
                       }
                       //resolve(Module);
