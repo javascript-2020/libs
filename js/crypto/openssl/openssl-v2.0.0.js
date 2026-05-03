@@ -54,7 +54,7 @@ function opensslmod(params={}){
               cur           = Module;
               await EmscrJSR_openssl(Module);
               
-              build_fs();
+              obj.FS        = Module.FS;
                                                                                 debug.log('init.complete');
               return Module;
               
@@ -251,15 +251,6 @@ function opensslmod(params={}){
         
         
         
-        function build_fs(){
-        
-              for(var key in cur.FS){
-                                                                                console.log(key,typeof cur.FS[key]);
-                    obj.fs[key]   = cur.FS[key].bind(cur);
-                    
-              }//for
-              
-        }//build_fs
         
         
         
