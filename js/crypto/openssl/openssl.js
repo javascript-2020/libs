@@ -12,13 +12,14 @@
         var df=obj.df=false,did='openssl';
         
         
-        var {stdout,stderr}   = params;
+        var {EmscrJSR_openssl,stdout,stderr}   = params;
         
         
         obj.initmod   = function(params){
         
               stdout    = params.stdout;
               stderr    = params.stderr;
+              ('EmscrJSR_openssl' in params) && EmscrJSR_openssl=params.EmscrJSR_openssl;
               
         }//initmod
         
@@ -26,8 +27,7 @@
   //:
   
   
-        var {EmscrJSR_openssl}    = params;
-        
+  
         var cur;
         var initial;
         var snapshot;
@@ -44,6 +44,8 @@
         
         async function init({url}={}){
                                                                                 debug.log('init');
+              await libs();
+              
               url         ||= params.url;
               var Module    = {print,printErr,onRuntimeInitialized,url};
               cur           = Module;
@@ -85,6 +87,14 @@
               }//onRuntimeInitialized
               
         }//init
+        
+        
+        async function libs(){
+        
+              if(!EmscrJSR_openssl){
+              }
+              
+        }//libs
         
         
   //:
