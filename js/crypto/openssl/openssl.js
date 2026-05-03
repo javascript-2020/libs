@@ -205,6 +205,7 @@ mod.openssl   = function(params={}){
   
         obj.normalisePem    = normalise_pem;
         obj.normalizePem    = normalise_pem;
+        obj.normalise_pem   = normalise_pem;
         
         function normalise_pem(pem){
         
