@@ -4,7 +4,7 @@
 
 
 
-(function(params={}){
+(function opensslmod(params={}){
 
   var obj   = {};
   
