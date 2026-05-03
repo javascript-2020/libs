@@ -95,7 +95,7 @@
         async function libs(){
         
               if(!EmscrJSR_openssl){
-                    var txt   = await fetch('https://libs.ext-code.com/external/js/openssl/openssl.wasm.js').then(res=>res.text()),
+                    var txt   = await fetch('https://libs.ext-code.com/external/js/openssl/openssl.wasm.js').then(res=>res.text());
                     var js    = `
                                       (()=>{
                                       
