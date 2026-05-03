@@ -22,10 +22,11 @@ mod.openssl   = function(params){
   //:
   
   
-        obj.init    = function(url){return init(url)}
+        obj.init    = function({url}){return init({url})}
         
-        async function init(url){
+        async function init({url}){
                                                                           console.log('init');
+              url         ||= params.url;
               var Module    = {print,printErr,onRuntimeInitialized,url};
               await EmscrJSR_openssl(Module);
                                                                           console.log(1);
