@@ -95,10 +95,12 @@
                     mod.root    = mod.par.root;
               }else{
                                                                                 //console.log('auto total');
-                    total    = 1;
+                    total         = 1;
                     
-                    mod.root=mod;
-                    mod.script=[];
+                    mod.root      = mod;
+                    mod.script    = [];
+                    mod.nodes     = [];
+                    
               }
               
               
@@ -220,7 +222,27 @@
                           build.host.html({root,html,i1});
                     }
                     
+                    build.host.attrs({root,html,i1});
+                    
               }//host
+              
+              
+              build.host.attrs    = function({root,html,i1}){
+              
+                    var str               = html.slice(0,i1+1);
+                    str                   = str.trim();
+                    var str2              = '</'+str.slice(1);
+                    var host_html         = str+str2;
+                    var template          = document.createElement('template');
+                    template.innerHTML    = html.trim();
+                    var host              = template.content.firstElementChild;
+                    for(var attr of host.attributes){
+                    
+                          root.setAttribute(attr.name,attr.value);
+                          
+                    }//for
+                    
+              }//attrs
               
               
               build.host.template   = function({root,html}){
@@ -268,6 +290,10 @@
               
               async function loader({root,mod,mod2}){
               
+                    if(mod.root.nodes.includes(root)){
+                          return;
+                    }
+                    
                     var {url,inst,nn}   = loader.fn.url(root);
                     var {html,error}    = await loader.fetch(url);
                     if(error){
