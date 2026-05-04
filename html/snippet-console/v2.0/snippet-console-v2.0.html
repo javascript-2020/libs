@@ -159,6 +159,7 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA0lBMVEVHcE
               config['web-console']   = mod.rd.attr(host,'web-console',config);
               
               if(!('fullsize' in config['web-editor'])){
+                                                                                debug('web-editor.fullsize=true');
                     config['web-editor'].fullsize    = true;
               }
                                                                                 debug('config',config);
