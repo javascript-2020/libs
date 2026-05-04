@@ -1,7 +1,8 @@
 
 
-
-        var txt   = await fetch('https://libs.ext-code.com/js/crypto/openssl/v2.0.0/openssl-v2.0.0.js').then(res=>res.text());
+        console.log(import.meta.url);
+        
+        var txt   = await fetch('https://libs.ext-code.com/js/crypto/openssl/v2.0.0/openssl.js').then(res=>res.text());
         var js    = `
                     (()=>{
                     
