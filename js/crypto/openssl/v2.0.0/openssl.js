@@ -257,7 +257,7 @@ function opensslmod(params={}){
         }//clear
         
         
-        fs.download   = function(v,{type}={}){
+        fs.download   = function(v,{type,name}={}){
         
               var blob;
               var dtype   = datatype(v);
@@ -267,7 +267,7 @@ function opensslmod(params={}){
                                   break;
               }//switch
               
-              fs.download.blob(blob);
+              fs.download.blob(blob,{name});
               
         }//download
         
