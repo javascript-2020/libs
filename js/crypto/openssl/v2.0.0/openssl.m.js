@@ -10,12 +10,12 @@
         var js = `
         (()=>{
         
-              var opensslmod = ${js};
+              var opensslmod = ${txt};
               return opensslmod;
               
         })();
         `;
-        var opensslmod    = eval(txt);
+        var opensslmod    = eval(js);
         
         export {opensslmod};
         
