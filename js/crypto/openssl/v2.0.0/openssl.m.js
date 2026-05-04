@@ -13,8 +13,8 @@
         })();
         `;
         */
-        //var opensslmod    = eval(js);
-        eval(txt);
+        var opensslmod    = eval(js);
+        //eval(txt);
         
         
         export {opensslmod};
