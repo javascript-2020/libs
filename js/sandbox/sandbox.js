@@ -120,13 +120,14 @@
               
                     var resolve,promise=new Promise(res=>resolve=res);
                     
-                    iframe          = document.createElement('iframe');
+                    iframe                  = document.createElement('iframe');
                     iframe.style.display    = 'none';
-                    iframe.srcdoc   = '';
-                    iframe.onload   = onload;
+                    iframe.srcdoc           = '';
+                    iframe.onload           = onload;
                     document.body.append(iframe);
                     
                     return promise;
+                    
                     
                     async function onload(){
                     
