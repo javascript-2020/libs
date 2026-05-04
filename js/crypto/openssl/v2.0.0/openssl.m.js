@@ -7,7 +7,7 @@
         var js    = `
                     (()=>{
                     
-                          var opensslmod = ${txt};
+                          var opensslmod    = ${txt};
                           return opensslmod;
                           
                     })();
