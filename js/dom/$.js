@@ -1043,15 +1043,15 @@
                     selector    = arguments[1];
                     rtype       = arguments[2];
               }
-                                                                        //console.log(document.title);
+                                                                                //console.log(document.title);
               var list    = [...doc.styleSheets];
-                                                                      console.log(list,list.length);
+                                                                                //console.log(list,list.length);
               var ni      = list.length;
               for(var i=0;i<ni;i++){
               
                     var stylesheet    = list[i];
-                                                                      //stylesheet.ownerNode &&
-                                                                      //console.log(stylesheet.ownerNode.id);
+                                                                                //stylesheet.ownerNode &&
+                                                                                //console.log(stylesheet.ownerNode.id);
                     var err;
                     try{
                     
@@ -1065,7 +1065,7 @@
                     }//catch
                     if(err){
                                                                                 //console.log(err);
-                                                                                console.log(i,stylesheet,stylesheet.href,stylesheet.ownerNode);
+                                                                                //console.log(i,stylesheet,stylesheet.href,stylesheet.ownerNode);
                     }else{
                     
                           var nj             = rules.length;
