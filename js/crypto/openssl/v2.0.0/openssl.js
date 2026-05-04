@@ -257,8 +257,15 @@ function opensslmod(params={}){
         }//clear
         
         
-        fs.download   = function(v,{type,name}={}){
+        fs.download   = function(v,params={}){
         
+              var type,name;
+              if(typeof params=='string'){
+                    name    = params;
+              }else{
+                    ({type,name}   = params);
+              }
+              
               var blob;
               var dtype   = datatype(v);
               switch(dtype){
