@@ -319,7 +319,12 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA0lBMVEVHcE
               var result;
               var error;
               
-              ({iframe,result,error}   = await sandbox.run.iframe(js,{clear,console:con,iframe}));
+              var ctx   = obj.ctx;
+              if(typeof obj.ctx=='function'){
+                    ctx   = obj.ctx();
+              }
+              
+              ({iframe,result,error}   = await sandbox.run.iframe(js,{clear,console:con,iframe,ctx}));
               
               editor.focus();
               
