@@ -1095,9 +1095,14 @@
               }//parseattr
               
               
-              async function component(name,attrs,{auto}={}){
+              async function component(name,attrs,{auto,par}={}){
               
                     var node    = document.createElement(name);
+                    
+                    if(par){
+                          par.append(node);
+                    }
+                    
                     for(var key in attrs){
                     
                           var value   = attrs[key];
