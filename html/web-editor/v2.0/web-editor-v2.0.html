@@ -564,15 +564,13 @@
               hldr                                        = $(shadow,'#hldr');
               
               var node                                    = $(shadow,'#editor');
-              node.onmousedown                            = e=>{console.log(e.ctrlKey);
-                                                                !e.ctrlKey && e.stopPropagation();
-              }
+              node.onmousedown                            = e=>{!e.ctrlKey && e.stopPropagation()};
               node.textContent                            = txt;
               $(shadow,'.seo-code').textContent           = txt;
               
                                                                                   //observer.observe(node,mconfig);
                                                                                   
-              if(fullsize){
+              if(fullsize!==false && fullsize!=='false'){
                                                                                   debug('fullsize');
                     setup.fullsize(node,{mode,kd:kd2});
               }else{
