@@ -272,7 +272,7 @@ function opensslmod(params={}){
         }//download
         
         
-        fs.download.blob    = function(blob){
+        fs.download.blob    = function(blob,{name}){
         
               var url       = window.URL.createObjectURL(blob);
               var a         = document.createElement('a');
@@ -287,7 +287,7 @@ function opensslmod(params={}){
         
               var uint8   = cur.FS.readFile(name);
               var blob    = new Blob([uint8]);
-              fs.download.blob(blob);
+              fs.download.blob(blob,{name});
               
         }//file
         
