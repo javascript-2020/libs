@@ -166,7 +166,7 @@ function opensslmod(params={}){
                                 snapshot[fullPath]    = uint8;
                           }
                           if(Module.FS.isDir(stats.mode)){
-                                Object.assign(snapshot,fs.snapshot({Module,fullPath+'/'})); // recurse
+                                Object.assign(snapshot,fs.snapshot({Module,path:fullPath+'/'})); // recurse
                           }
                           
                     }//try
