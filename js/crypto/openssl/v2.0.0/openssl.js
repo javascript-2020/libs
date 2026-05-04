@@ -257,9 +257,54 @@ function opensslmod(params={}){
         }//clear
         
         
+        fs.download   = function(v,{type}={}){
+        
+              var blob;
+              var dtype   = datatype(v);
+              switch(dtype){
+              
+                case 'string'   : blob    = new Blob([v],{type});
+                                  break;
+              }//switch
+              
+              fs.download.blob(blob);
+              
+        }//download
         
         
+        fs.download.blob    = function(blob){
         
+              var url       = window.URL.createObjectURL(blob);
+              var a         = document.createElement('a');
+              a.href        = url;
+              a.download    = name;
+              a.click();
+              
+        }//blob
+        
+        
+        fs.download.file    = function(name){
+        
+              var uint8   = cur.FS.readFile(name);
+              var blob    = new Blob([uint8]);
+              fs.download.blob(blob);
+              
+        }//file
+        
+        
+  //:
+  
+  
+        obj.datatype    = datatype;
+        
+        function datatype(v){
+        
+              var str   = Object.prototype.toString.call(v);
+              str       = str.slice(8,-1);
+              str       = str.toLowerCase();
+              return str;
+              
+        }//datatype
         
         
   //:
