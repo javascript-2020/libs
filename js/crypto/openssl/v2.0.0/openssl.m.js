@@ -13,7 +13,7 @@
         })();
         `;
         */
-        var opensslmod    = eval(js);
+        var opensslmod    = eval(txt);
         //eval(txt);
         
         
