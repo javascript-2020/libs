@@ -10,7 +10,7 @@
         var js = `
         (()=>{
         
-              var opensslmod = ${txt};
+              var opensslmod = ${js};
               return opensslmod;
               
         })();
