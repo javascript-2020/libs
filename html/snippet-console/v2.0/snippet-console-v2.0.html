@@ -391,7 +391,12 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA0lBMVEVHcE
               }
               args.forEach(arg=>{
               
-                    var [css,pos]   = arg;
+                    var css,pos;
+                    if(typeof arg=='string'){
+                          css   = arg;
+                    }else{
+                          [css,pos]   = arg;
+                    }
                     
                     var style   = $(shadow,'style');
                     var sheet   = style.sheet;
