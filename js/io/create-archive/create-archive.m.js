@@ -8,10 +8,13 @@ create-archive.js
 
 */
 
-        export {create_archive};
         
-        var jszip;
-        
+        var jszip   = await import('https://cdn.jsdelivr.net/npm/jszip/+esm');
+        jszip       = jszip.default;
+
+        export {create_archive,jszip};
+
+
         async function create_archive(dir,{download=true,test,df=false,def={}}={}){
                                                                                 df && console.log('download',download);
                                                                                 df && console.log('test',!!test);
