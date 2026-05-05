@@ -374,14 +374,36 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA0lBMVEVHcE
         
         obj.css.insert_rule   = function(css,pos){
         
-              var style   = $(shadow,'style');
-              var sheet   = style.sheet;
-              if(pos===undefined){
-                    pos   = sheet.cssRules.length;
+              var args    = [...arguments];
+              var f   = false;
+              if(args.length==2){
+                    f   = true;
               }
-              sheet.insertRule(css,pos);
+              if(arguments.length==1){
+                    if(datatype(arguments[0])!='array'){
+                          f   = true;
+                    }
+              }
+              if(f){
+                    args    = [args];
+              }
+              args.forEach(arg=>{
+              
+                    var [css,pos]   = arg;
+                    
+                    var style   = $(shadow,'style');
+                    var sheet   = style.sheet;
+                    if(pos===undefined){
+                          pos   = sheet.cssRules.length;
+                    }
+                    sheet.insertRule(css,pos);
+                    
+              });
               
         }//insert_rule
+        
+        
+        function datatype(v){return Object.prototype.toString.call(v).slice(8,-1).toLowerCase()}
         
         
   //:
