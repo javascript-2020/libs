@@ -133,7 +133,7 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA0lBMVEVHcE
         
         var sandbox;
         
-        
+        var shadow;
         var root;
         var chk                       = {};
         
@@ -145,6 +145,7 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA0lBMVEVHcE
         var rd                        = {};
         rd.attr                       = {};
         var btn                       = {};
+        obj.css                       = {};
         
         
   //:
@@ -231,7 +232,7 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA0lBMVEVHcE
   
         obj.initdom    = function(){
         
-              var shadow                          = host.shadowRoot;
+              shadow                                = host.shadowRoot;
               
               
               filemod.initdom();
@@ -364,6 +365,20 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA0lBMVEVHcE
               chk.echo.checked    = v;
               
         }//echo
+        
+        
+  //:
+  
+  
+        obj.css.insertRule    = obj.css.insert_rule;
+        
+        obj.css.insert_rule   = function(css,pos){
+        
+              var style   = $(shadow,'style');
+              var sheet   = style.styleSheet;
+              sheet.insertRule(css,pos);
+              
+        }//insert_rule
         
         
   //:
