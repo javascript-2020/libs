@@ -1128,7 +1128,11 @@
         
               var style   = $(shadow,'style#web-editor');
               var sheet   = style.sheet;
-              sheet.insertRule(css,pos);
+              if(pos){
+                    sheet.insertRule(css,pos);
+              }else{
+                    sheet.insertRule(css);
+              }
               
         }//rule
         
