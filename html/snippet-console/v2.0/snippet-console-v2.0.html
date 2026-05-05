@@ -380,8 +380,10 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA0lBMVEVHcE
                     f   = true;
               }
               if(arguments.length==1){
-                    if(datatype(arguments[0])!='array'){
+                    if(typeof args[0]=='string'){
                           f   = true;
+                    }else{
+                          args    = args[0];
                     }
               }
               if(f){
