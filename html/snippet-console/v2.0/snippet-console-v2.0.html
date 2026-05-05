@@ -376,7 +376,11 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA0lBMVEVHcE
         
               var style   = $(shadow,'style');
               var sheet   = style.sheet;
-              sheet.insertRule(css,pos);
+              if(pos){
+                    sheet.insertRule(css,pos);
+              }else{
+                    sheet.insertRule(css);
+              }
               
         }//insert_rule
         
