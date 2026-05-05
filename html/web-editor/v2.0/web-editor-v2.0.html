@@ -259,6 +259,7 @@
         var btn         = {};
         var on          = {};
         var setup       = {};
+        obj.css         = {};
         
         
                                                                                 /*
@@ -1116,6 +1117,18 @@
         function int(str){return (/^\d+$/.test(str)) ? Number(str) : str}
         
         
+        
+        
+  //:
+  
+  
+        obj.css.insert_rule   = function(css,pos){
+        
+              var style   = $(shadow,'style');
+              var sheet   = style.styleSheet;
+              sheet.insertRule(css,pos);
+              
+        }//rule
         
         
   //:
