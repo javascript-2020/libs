@@ -1128,11 +1128,10 @@
         
               var style   = $(shadow,'style#web-editor');
               var sheet   = style.sheet;
-              if(pos){
-                    sheet.insertRule(css,pos);
-              }else{
-                    sheet.insertRule(css);
+              if(pos===undefined){
+                    pos   = sheet.cssRules.length;
               }
+              sheet.insertRule(css,pos);
               
         }//rule
         
