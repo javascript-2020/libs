@@ -4,7 +4,7 @@
 
       <template shadowrootmode=open>
       
-            <style>
+            <style id=web-editor>
             
   :host
     {all:initial;font-family:arial;display:block}
@@ -1126,7 +1126,7 @@
         
         obj.css.insert_rule   = function(css,pos){
         
-              var style   = $(shadow,'style');
+              var style   = $(shadow,'style[id=web-editor]');
               var sheet   = style.sheet;
               sheet.insertRule(css,pos);
               
