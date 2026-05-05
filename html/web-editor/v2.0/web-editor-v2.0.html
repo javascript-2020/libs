@@ -1126,7 +1126,7 @@
         
         obj.css.insert_rule   = function(css,pos){
         
-              var style   = $(shadow,'style[id=web-editor]');
+              var style   = $(shadow,'style#web-editor');
               var sheet   = style.sheet;
               sheet.insertRule(css,pos);
               
