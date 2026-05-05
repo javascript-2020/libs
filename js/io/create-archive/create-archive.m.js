@@ -9,7 +9,8 @@ create-archive.js
 */
 
         
-        var jszip;
+        var jszip   = await import('https://cdn.jsdelivr.net/npm/jszip/+esm');
+        jszip       = jszip.default;
 
         export {create_archive,jszip};
 
