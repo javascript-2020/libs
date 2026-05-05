@@ -1128,12 +1128,40 @@
         
               var style   = $(shadow,'style#web-editor');
               var sheet   = style.sheet;
-              if(pos===undefined){
-                    pos   = sheet.cssRules.length;
-              }
-              sheet.insertRule(css,pos);
               
-        }//rule
+              var args    = [...arguments];
+              var f   = false;
+              if(args.length==2){
+                    f   = true;
+              }
+              if(arguments.length==1){
+                    if(typeof args[0]=='string'){
+                          f   = true;
+                    }else{
+                          args    = args[0];
+                    }
+              }
+              if(f){
+                    args    = [args];
+              }
+              args.forEach(arg=>{
+              
+                    var css,pos;
+                    if(typeof arg=='string'){
+                          css   = arg;
+                    }else{
+                          [css,pos]   = arg;
+                    }
+                    
+                    if(pos===undefined){
+                          pos   = sheet.cssRules.length;
+                    }
+                    sheet.insertRule(css,pos);
+                    
+              });
+              
+        }//insert_rule
+        
         
         
   //:
