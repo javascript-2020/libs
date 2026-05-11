@@ -167,7 +167,7 @@
               root.onmouseleave                       = e=>icons.style.display='none';
               
               var icons                               = $(shadow,'#icons');
-              if(config.icons.remove!==false){
+              if(config.icons.close!==false){
                     $(icons,'#close').onclick         = remove;
               }else{
                     $(icons,'#close').remove();
@@ -224,9 +224,11 @@
         }//pos
         
         
-        obj.remove   = remove;
+        obj.remove    = close;
         
-        function remove(){
+        obj.close     = close;
+        
+        function close(){
         
               if(typeof on.before.close=='function'){
                     on.before.close(obj);
