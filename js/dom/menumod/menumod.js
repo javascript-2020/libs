@@ -148,6 +148,17 @@ function menumod(){
         }//click
         
         
+        obj.click2    = function(node,params){
+        
+              if(!node.classList.contains('.menu')){
+                    node    = $(node,'.menu');
+              }
+              var result    = obj.click(node,params);
+              return result;
+              
+        }//click2
+        
+        
   //:
   
   
