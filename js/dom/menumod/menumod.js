@@ -7,7 +7,7 @@
 */
 
 
-        
+
 //mod.menumod   = menumod;
 
 
@@ -17,16 +17,16 @@ function menumod(){
                                                                                   //console.groupEnd();
   var obj       = {};
   obj.menumod   = menumod;
-
+  
         var df=false,did='menumod'
         ;
-  
-  
+        
+        
         var keydown;
         
         
         obj.initmod   = function(params){
-          
+        
               keydown   = params.keydown;
               
         }//initmod
@@ -34,7 +34,7 @@ function menumod(){
         
   //:
   
-        
+  
         obj.on                  = {};
         obj.input               = {};
         var kd                  = {};
@@ -90,7 +90,7 @@ function menumod(){
         
         
         var get           = {};
-  
+        
         
   //:
   
@@ -108,7 +108,7 @@ function menumod(){
               return str;
               
         }//export
-  
+        
         
   //:
   
@@ -119,6 +119,7 @@ function menumod(){
               if(datatype(params)=='object'){
                     ({drag='both',center,callback}   = params);
               }else{
+                    var f   = false;
                     if(arguments.length==2){
                           [node,callback]   = arguments;
                           drag              = 'both';
@@ -127,6 +128,11 @@ function menumod(){
                           [node,drag='both',center,callback]    = arguments;
                     }
               }
+              /*
+              if(!node.classList.contains('.menu')){
+                    node    = $(node,'.menu');
+              }
+              */
               
               add(node,drag,center,callback);
               
@@ -140,7 +146,7 @@ function menumod(){
               }//click
               
         }//click
-  
+        
         
   //:
   
@@ -155,7 +161,7 @@ function menumod(){
               }else{
                     [node,drag='both',center,callback]    = arguments;
               }
-                                                                          
+              
               list.push({node,callback});
               add.node(node,drag,center);
               
@@ -172,7 +178,7 @@ function menumod(){
               }else{
                     [node,drag='both',center,callback]    = arguments;
               }
-                    
+              
               var cur                   = get.cur('node');
               state.prev_opt[cur.id]    = state.opt;
               
@@ -283,7 +289,7 @@ function menumod(){
               });
               
         }//add.node
-  
+        
         
   //:
   
@@ -409,9 +415,9 @@ function menumod(){
               state.cur   = cur;
               node        = list.find(cur,'node');
               setTimeout(show,50,node);
-        
+              
         }//next
-  
+        
         
   //:
   
@@ -470,11 +476,11 @@ function menumod(){
               }//while
               
         }//hide.stack.all
-  
+        
         
   //:
   
-        
+  
         function menu_kd(e){
                                                                           debug('menu.kd',e.key);
               var node      = get.cur('node');
@@ -554,7 +560,7 @@ function menumod(){
         
         
         kd.arrowright   = function(e,node,opts){
-                                                                          
+        
               next();
               
         }//arrowright
@@ -573,7 +579,7 @@ function menumod(){
               
         }//enter
         
-  
+        
         kd.escape   = function(e,node,opts){
         
               if(stack.length){
@@ -594,7 +600,7 @@ function menumod(){
               state.cur   = 0;
               node        = list.find(0,'node');
               show(node);
-                
+              
         }//tab
         
         
@@ -645,7 +651,7 @@ function menumod(){
               }//chk
               
         }//onfocusout
-  
+        
         
   //:
   
@@ -659,7 +665,7 @@ function menumod(){
               callback.apply(null,arguments);
               
         }//callback
-  
+        
         
   //:
   
@@ -690,8 +696,8 @@ function menumod(){
               return list;
               
         }//opts
-
-
+        
+        
   //:
   
   
@@ -700,13 +706,13 @@ function menumod(){
 /*
   //menu:
 */
-        
+
   .menu-root
     {
           display             : inline;
           position            : relative
     }
-  
+    
   .menu-icon {
           padding               : 3px;
           width                 : 20px;
@@ -766,25 +772,25 @@ function menumod(){
   .menu-item
     {display:flex;align-items:center;padding:5px 10px}
     
-  .menu-sep 
+  .menu-sep
     {margin:10px 0;border-top:1px solid lightgray;}
-
+    
   .menu input
     {font-size:16px;padding:5px 10px}
     
   .menu [type=checkbox]
     {width:20px;height:20px;margin:0}
-
+    
         `;
-          
+        
         obj.css     = css;
-
-
+        
+        
   //:
   
   
         obj.add.style   = function(par){    //d
-
+        
               par                 = par||document.head;
               var style           = document.createElement('style');
               style.id            = 'menumod';
@@ -839,14 +845,14 @@ function menumod(){
                     }//keydown
                     
               });
-            
+              
         }//norm
-
-
-          
-  //:          
-
-          
+        
+        
+        
+  //:
+  
+  
         function debug(...args){
         
               if(!df && !obj.df)return;
@@ -859,9 +865,9 @@ function menumod(){
         
         
         
-              
+        
   return obj;
-          
+  
 }//menumodmod
 
 
