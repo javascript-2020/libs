@@ -772,6 +772,8 @@ function menumod(){
   
   .menu-title-2
     {background:lightgray;padding:5px 10px;margin:20px 0 10px;font-weight:bold}
+  .menu-title-2:nth-child(1 of .menu-title-2)
+    {margin-top: 0}
     
   .menu-opt {
           white-space           : nowrap;
