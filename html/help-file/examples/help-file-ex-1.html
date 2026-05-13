@@ -17,10 +17,33 @@
       
       <script>
       
-      
-        function ready(){
-        }//ready
+        var vm;
         
+        async function init(){
+        
+              await libs();
+              
+              var help    = mod['help-file'];
+              help.initmod({vm},mod.base);
+              
+              await help.init();
+              await help.initdom();
+              
+              
+        }//init
+        
+        async function libs(){
+        
+              var promise   = ext.load.libs(
+                    'js/dom/viewport-manager/v1.0.0/viewport-manager.js.api',
+              );
+              [vm]   = await promise;
+              
+              vm    = vm();
+              await vm.init();
+              await vm.initdom();
+              
+        }//libs
         
       </script>
       
