@@ -28,7 +28,7 @@
     
             </style>
             
-            <div id=icon-root>
+            <div id=icon-root style='dislay:none'>
                   <img id=icon src=>
                   <div id=txt>
                         help
@@ -157,6 +157,7 @@
               var shadow              = host.shadowRoot;
               
               var icon                = $(shadow,'#icon-root');
+              icon.style.display      = '';
               icon.onclick            = btn.icon;
               var style               = $(shadow,'#style-icon');
               var div                 = document.createElement('div');
