@@ -160,8 +160,8 @@
               icon.onclick            = btn.icon;
               var style               = $(shadow,'#style-icon');
               var div                 = document.createElement('div');
-              var shadow              = div.attachShadow({mode:'open'});
-              shadow.append(style,icon);
+              var shadow2             = div.attachShadow({mode:'open'});
+              shadow2.append(style,icon);
               host.before(div);
               
               viewport                = await vm.new();
