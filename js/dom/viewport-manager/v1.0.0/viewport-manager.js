@@ -78,9 +78,6 @@
               viewport.initmod(mod.base,initmod,{vm:obj});
               await viewport.init();
               await viewport.initdom();
-              //viewport.pos({x:200,y:200});
-              viewport.css(`snippet-editor {display:block;height:100%}`);
-              viewport.css(`snippet-editor::part(root) {height:100%}`);
               
               viewport.root.addEventListener('mousedown',md);
               
