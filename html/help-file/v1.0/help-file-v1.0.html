@@ -23,13 +23,14 @@
   
         var df=true,did='help-file';
         
-        var $;
+        var $,debug;
         
         obj.initmod   = function(...params){
         
               params.forEach(params=>{
               
                     $             = mod.rd(params,'$',$);
+                    debug         = mod.rd(params,'debug',debug);
                     
                     base          = mod.rd(params,'base',base);
                     
@@ -44,7 +45,7 @@
         var base          = window.location.toStrin();
         var target        = host;
         
-        
+        var md;
         
         var rd            = {};
         rd.attr           = {};
@@ -54,8 +55,9 @@
   
   
         obj.init    = async function(){
-        
-        
+                                                                                debug=eval(debug.mod);
+                                                                                debug('init');
+                                                                                
               rd.attr.src();
               
               
@@ -80,16 +82,25 @@
       
             var resolve,promise=new Promise(res=>resolve=res);
             var ct          = 0;
+            var total       = 1;
             
-            var script      = document.createElement('script');
-            script.src      = 'https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js';
-            script.onload   = onload;
-            document.head.append(script);
+            if(typeof markdownit=='undefined'){
+                  total++;
+                  var script      = document.createElement('script');
+                  script.src      = 'https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js';
+                  script.onload   = onload;
+                  document.head.append(script);
+            }
             
-            var script      = document.createElement('script');
-            script.src      = 'https://cdn.jsdelivr.net/npm/markdown-it-attrs@4.3.1/markdown-it-attrs.browser.min.js';
-            script.onload   = onload;
-            document.head.append(script);
+            if(typeof markdownItAttrs=='undefined'){
+                  total++;
+                  var script      = document.createElement('script');
+                  script.src      = 'https://cdn.jsdelivr.net/npm/markdown-it-attrs@4.3.1/markdown-it-attrs.browser.min.js';
+                  script.onload   = onload;
+                  document.head.append(script);
+            }
+            
+            onload();
             
             return promise;
             
@@ -97,7 +108,7 @@
             function onload(){
             
                   ct++;
-                  if(ct!=2)return;
+                  if(ct!=total)return;
                   resolve();
                   
             }//onload
@@ -109,11 +120,36 @@
   
   
         obj.initdom   = async function(){
+        
+              display(md);
+              
         }//initdom
         
         
   //:
   
+  
+        obj.display   = display;
+        
+        function display(md){
+        
+            var opts            = {
+                  linkTarget    : '_blank',
+            };
+            opts.html           = true;
+            opts.breaks         = false;
+            opts.linkify        = true;
+                                                                                debug.json(opts);
+            var md              = markdownit(opts);
+            md.use(markdownItAttrs,{leftDelimiter:'{',rightDelimiter:'}',allowedAttributes:['id','class',/^data-.*$/]});
+            
+            var html            = md.render(md);
+            
+            
+        }//display
+        
+        
+  //:
   
   
         function resolve(url){
