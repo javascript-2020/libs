@@ -87,6 +87,7 @@
               if(!target.hasAttribute('src'))return;
               var src   = target.getAttribute('src');
               var url   = resolve(src);
+                                                                                debug('src',url);
               var {txt,error}   = await get(url);
               if(error){
                     txt   = error;
@@ -199,10 +200,10 @@
   
   
         function resolve(url){
-                                                                                debug('resolve',url);
+                                                                                //debug('resolve',url);
               url   = new URL(url,base);
               url   = url.toString();
-                                                                                debug(url);
+                                                                                //debug(url);
               return url;
               
         }//resolve
