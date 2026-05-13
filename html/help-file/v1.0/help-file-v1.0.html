@@ -31,6 +31,8 @@
               
                     $             = mod.rd(params,'$',$);
                     
+                    base          = mod.rd(params,'base',base);
+                    
               });
               
         }//initmod
@@ -39,18 +41,70 @@
   //:
   
   
-  
-        var rd    = {};
-        rd.attr   = {};
+        var base          = window.location.toStrin();
+        var target        = host;
+        
+        
+        
+        var rd            = {};
+        rd.attr           = {};
         
         
   //:
   
   
         obj.init    = async function(){
+        
+        
+              rd.attr.src();
+              
+              
         }//init
         
         
+        rd.attr.src   = async function(){
+        
+              if(!target.hasAttribute('src'))return;
+              var src   = target.getAttribute('src');
+              var url   = resolve(src);
+              var {txt,error}   = await get(url);
+              if(error){
+                    txt   = error;
+              }
+              md    = txt;
+              
+        }//src
+        
+        
+      function libs(){
+      
+            var resolve,promise=new Promise(res=>resolve=res);
+            var ct          = 0;
+            
+            var script      = document.createElement('script');
+            script.src      = 'https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js';
+            script.onload   = onload;
+            document.head.append(script);
+            
+            var script      = document.createElement('script');
+            script.src      = 'https://cdn.jsdelivr.net/npm/markdown-it-attrs@4.3.1/markdown-it-attrs.browser.min.js';
+            script.onload   = onload;
+            document.head.append(script);
+            
+            return promise;
+            
+            
+            function onload(){
+            
+                  ct++;
+                  if(ct!=2)return;
+                  resolve();
+                  
+            }//onload
+            
+      }//libs
+      
+      
   //:
   
   
@@ -61,6 +115,44 @@
   //:
   
   
+  
+        function resolve(url){
+        
+              url   = new URL(url,base);
+              url   = url.toStirng();
+              return url;
+              
+        }//resolve
+        
+        
+        function get(url){
+        
+              var err;
+              try{
+              
+                    var res   = await fetch(url);
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.message;
+                    return {error};
+              }
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
+              }
+              
+              var txt   = await res.text();
+              return {txt};
+              
+        }//get
+        
+        
   //:
   
   
