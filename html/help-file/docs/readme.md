@@ -1,6 +1,6 @@
-## help-file example 1
+## help-file
 
-test md file for help-file
+readme md file for help-file
 
       
       
