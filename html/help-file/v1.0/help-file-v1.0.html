@@ -165,6 +165,7 @@
               host.before(div);
               
               viewport                = await vm.new();
+              viewport.initmod({config:{icons:{close:false}}});
               viewport.pos({x:20,y:20,w:500,h:500});
               viewport.body.append(host);
               viewport.hide();
