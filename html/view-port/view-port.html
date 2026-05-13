@@ -71,12 +71,16 @@
         var $,debug,vm,uconfig
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...params){
         
-              $           = mod.rd(params,'$',$);
-              debug       = mod.rd(params,'debug',debug);
-              vm          = mod.rd(params,'vm',vm);
-              uconfig     = mod.rd(params,'config',uconfig);
+              params.forEach(params=>{
+              
+                    $           = mod.rd(params,'$',$);
+                    debug       = mod.rd(params,'debug',debug);
+                    vm          = mod.rd(params,'vm',vm);
+                    uconfig     = mod.rd(params,'config',uconfig);
+                    
+              });
               
         }//initmod
         
