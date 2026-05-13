@@ -138,6 +138,8 @@
   
         obj.initdom   = async function(){
         
+              var shadow      = host.shadowRoot;
+              
               var icon        = $(shadow,'#icon');
               var style       = $(shadowm,'#style-icon');
               var div         = document.createElement('div');
