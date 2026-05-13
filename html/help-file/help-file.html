@@ -4,19 +4,38 @@
 
       <template shadowrootmode=open>
       
-            <link rel=stylesheet href='/css/github-markdown-light.css'>
+            <link rel=stylesheet href='https://ext-code.com/css/github-markdown-light.css'>
+            
+            <style id=style-icon>
+            
+  #icon-root
+    {border:1px solid lightgray;border-radius:5px;display:inline-flex;flex-direction:column;align-items:center;padding:1px 7px;cursor:pointer;background:buttonface}
+  #icon
+    {width:20px;height:20px;
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA1VBMVEVHcEzd7fBllKlslKVjk6lilazg7/Bqlqlolaljlq7a6+/o8fLb6+9ik6pjlavk8PHi7/Di7/Hj7/Hm8PJik6nd6+3k7/Fjk6jl8PFmlKhllKni7/Hi7/Di7/Bik6ni7/Bhk6pik6l5rciuz97i7/Bjk6ji8PHj8PFjlKni7/Df7vDj8PHh7/HY6++92+jW6e6x1eWu0+W42efS6O3i7/HB3um11+bH4evL4+zR5u2q0eRrn7lnm7R1q8eJvtp9uNhupcB5stHO5eyey+F3qMB/sMibxNhx7PXbAAAAKnRSTlMA/koGlfnnFB/pWwSI3rcsrqJ3CdQnDn8YKjXHa46F2MuurPhDXlIdcr7oUGvUAAABi0lEQVQoz82SWXfaQAyFGQMGJ+w0bfatWyppNnvs8YzBgCH5/z+pJobTnKZ9z33TfEeae3XUan0s/fwxuP78Pzi+uWMGTv4N59chIZM0OX37enqo5gOGLFUpheM/42bTyWQ6OBnPWzPAyscSgWZHen5FZNAQhL8GIea+IhfHcHU0dxYSOJdwQExTEFIqbblh3xraH31FKWKllZCJBqq8Jagc3Rzw8JkbRAJpE9AJUw6szpy5O294pxCYZyoTOadUEJMqq72xY/Sg+0LSJc4K5RIPTNn6M52baRO2d/8sUVpbSQ6kHUgQPuVE4VnTflvE6MTenYA0Rq5ijojgDtMvoxcwwDiTFUgPeUoIVm3Lx/Yrbo+WztisjpZK0BUZyrflallEF0370yKrgwFzIuP1dBLlZr3ofur0GnwRlfXK9iKUnmWbomZB77j19sMuzoX2XsdW+u0yesP2+r5YlavVZrNcF7vdIgr+OoL+cF2TRXc4uu3cPwTvjqTTrdGXoF9H6bXf39Dl0yv6UPoNCgFBRlIKMJUAAAAASUVORK5CYII=);
+    }
+  #txt
+    {color:blue}
+            </style>
             
             <style>
             
   :host
-    {}
+    {display:flex;flex-direction:column}
     
   #view
-    {height:100%}
+    {flex:1;padding:10px}
     
             </style>
             
-            <div id=view>
+            <div id=icon-root style='dislay:none'>
+                  <img id=icon src=>
+                  <div id=txt>
+                        help
+                  </div>
+            </div>
+            
+            <div id=view class=markdown-body>
             </div>
             
       </template>
@@ -51,13 +70,16 @@
   //:
   
   
-        var base          = window.location.toString();
+        var base          = document.baseURI;
         var target        = host;
         
         var md;
         
+        var view;
+        
         var rd            = {};
         rd.attr           = {};
+        var btn           = {};
         
         
   //:
@@ -66,8 +88,9 @@
         obj.init    = async function(){
                                                                                 debug=eval(debug.mod);
                                                                                 debug('init');
-                                                                                
-              rd.attr.src();
+              await libs();
+              
+              await rd.attr.src();
               
               
         }//init
@@ -78,6 +101,7 @@
               if(!target.hasAttribute('src'))return;
               var src   = target.getAttribute('src');
               var url   = resolve(src);
+                                                                                debug('src',url);
               var {txt,error}   = await get(url);
               if(error){
                     txt   = error;
@@ -129,16 +153,44 @@
   
   
         obj.initdom   = async function(){
-        
-              viewport    = await vm.new();
+                                                                                debug('initdom');
+              var shadow              = host.shadowRoot;
+              
+              var icon                = $(shadow,'#icon-root');
+              icon.style.display      = '';
+              icon.onclick            = btn.icon;
+              var style               = $(shadow,'#style-icon');
+              var div                 = document.createElement('div');
+              div.setAttribute('slot','help');
+              var shadow2             = div.attachShadow({mode:'open'});
+              shadow2.append(style,icon);
+              host.before(div);
+              
+              viewport                = await vm.new({initmod:{config:{icons:{close:false}}}});
               viewport.pos({x:20,y:20,w:500,h:500});
               viewport.body.append(host);
               viewport.hide();
+              
+              
+              view                    = $(shadow,'#view');
               
               display(md);
               
         }//initdom
         
+        
+  //:
+  
+  
+        btn.icon    = function(){
+        
+              if(viewport.status=='hidden'){
+                    viewport.show();
+              }else{
+                    viewport.hide();
+              }
+              
+        }//icon
         
   //:
   
@@ -157,9 +209,9 @@
         }//hide
         
         
-        function display(md){
+        function display(txt){
                                                                                 debug('display');
-            md                ||= '';
+            txt               ||= '';
             
             var opts            = {
                   linkTarget    : '_blank',
@@ -171,8 +223,8 @@
             var md              = markdownit(opts);
             md.use(markdownItAttrs,{leftDelimiter:'{',rightDelimiter:'}',allowedAttributes:['id','class',/^data-.*$/]});
             
-            var html            = md.render(md);
-            
+            var html            = md.render(txt);
+            view.innerHTML      = html;
             
         }//display
         
@@ -181,10 +233,10 @@
   
   
         function resolve(url){
-                                                                                debug('resolve',url);
+                                                                                //debug('resolve',url);
               url   = new URL(url,base);
-              url   = url.toStirng();
-                                                                                debug(url);
+              url   = url.toString();
+                                                                                //debug(url);
               return url;
               
         }//resolve
