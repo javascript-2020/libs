@@ -1,0 +1,234 @@
+
+
+<help-file>
+
+      <template shadowrootmode=open>
+      
+            <link rel=stylesheet href='/css/github-markdown-light.css'>
+            
+            <style>
+            
+  :host
+    {}
+    
+  #view
+    {height:100%}
+    
+            </style>
+            
+            <div id=view>
+            </div>
+            
+      </template>
+      
+      <script>
+      
+(function({mod,host}){
+
+  var obj   = {
+        version   : 'v1.0.0',
+  };
+  
+        var df=true,did='help-file';
+        
+        var $,debug,vm;
+        
+        obj.initmod   = function(...params){
+        
+              params.forEach(params=>{
+              
+                    $             = mod.rd(params,'$',$);
+                    debug         = mod.rd(params,'debug',debug);
+                    vm            = mod.rd(params,'vm',vm);
+                    
+                    base          = mod.rd(params,'base',base);
+                    
+              });
+              
+        }//initmod
+        
+        
+  //:
+  
+  
+        var base          = window.location.toString();
+        var target        = host;
+        
+        var md;
+        
+        var rd            = {};
+        rd.attr           = {};
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+                                                                                debug=eval(debug.mod);
+                                                                                debug('init');
+                                                                                
+              rd.attr.src();
+              
+              
+        }//init
+        
+        
+        rd.attr.src   = async function(){
+        
+              if(!target.hasAttribute('src'))return;
+              var src   = target.getAttribute('src');
+              var url   = resolve(src);
+              var {txt,error}   = await get(url);
+              if(error){
+                    txt   = error;
+              }
+              md    = txt;
+              
+        }//src
+        
+        
+      function libs(){
+      
+            var resolve,promise=new Promise(res=>resolve=res);
+            var ct          = 0;
+            var total       = 1;
+            
+            if(typeof markdownit=='undefined'){
+                  total++;
+                  var script      = document.createElement('script');
+                  script.src      = 'https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js';
+                  script.onload   = onload;
+                  document.head.append(script);
+            }
+            
+            if(typeof markdownItAttrs=='undefined'){
+                  total++;
+                  var script      = document.createElement('script');
+                  script.src      = 'https://cdn.jsdelivr.net/npm/markdown-it-attrs@4.3.1/markdown-it-attrs.browser.min.js';
+                  script.onload   = onload;
+                  document.head.append(script);
+            }
+            
+            onload();
+            
+            return promise;
+            
+            
+            function onload(){
+            
+                  ct++;
+                  if(ct!=total)return;
+                  resolve();
+                  
+            }//onload
+            
+      }//libs
+      
+      
+  //:
+  
+  
+        obj.initdom   = async function(){
+        
+              viewport    = await vm.new();
+              viewport.pos({x:20,y:20,w:500,h:500});
+              viewport.body.append(host);
+              viewport.hide();
+              
+              display(md);
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+        obj.show    = function(){
+        
+              viewport.show();
+              
+        }//show
+        
+        
+        obj.hide    = function(){
+        
+              viewport.hide();
+              
+        }//hide
+        
+        
+        function display(md){
+                                                                                debug('display');
+            md                ||= '';
+            
+            var opts            = {
+                  linkTarget    : '_blank',
+            };
+            opts.html           = true;
+            opts.breaks         = false;
+            opts.linkify        = true;
+                                                                                debug.json(opts);
+            var md              = markdownit(opts);
+            md.use(markdownItAttrs,{leftDelimiter:'{',rightDelimiter:'}',allowedAttributes:['id','class',/^data-.*$/]});
+            
+            var html            = md.render(md);
+            
+            
+        }//display
+        
+        
+  //:
+  
+  
+        function resolve(url){
+                                                                                debug('resolve',url);
+              url   = new URL(url,base);
+              url   = url.toStirng();
+                                                                                debug(url);
+              return url;
+              
+        }//resolve
+        
+        
+        function get(url){
+        
+              var err;
+              try{
+              
+                    var res   = await fetch(url);
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.message;
+                    return {error};
+              }
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
+              }
+              
+              var txt   = await res.text();
+              return {txt};
+              
+        }//get
+        
+        
+  //:
+  
+  
+  return obj;
+  
+//help-file
+})
+
+      </script>
+      
+</help-file>
+
+
+
