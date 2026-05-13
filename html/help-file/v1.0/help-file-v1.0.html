@@ -28,7 +28,7 @@
     
             </style>
             
-            <div id=icon-root slot=help style='dislay:none'>
+            <div id=icon-root style='dislay:none'>
                   <img id=icon src=>
                   <div id=txt>
                         help
@@ -161,6 +161,7 @@
               icon.onclick            = btn.icon;
               var style               = $(shadow,'#style-icon');
               var div                 = document.createElement('div');
+              div.setAttribute('slot','help');
               var shadow2             = div.attachShadow({mode:'open'});
               shadow2.append(style,icon);
               host.before(div);
