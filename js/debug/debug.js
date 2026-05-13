@@ -51,6 +51,21 @@
         }//json
         
         
+        debug.hex   = function(...args){
+        
+              args.forEach(v=>{
+              
+                    var args    = [v];
+                    v           = v.toString();
+                    var hex     = [...v].map(c=>c.charCodeAt(0).toString(16).padStart(2,'0')).join(' ');
+                    args.push('hex:',hex);
+                    debug.apply(null,args);
+                    
+              });
+              
+        }//hex
+        
+        
         
         Object.defineProperty(obj,'mod',{get:()=>`(${debugmod.toString()})()`});
         
