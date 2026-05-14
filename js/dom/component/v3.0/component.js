@@ -70,7 +70,7 @@
               mod.base              = {};
               mod.base.add          = params=>{
                                                                                 //console.log('mod.base.add');
-                                                                                var datatype=Object.prototype.toString.call(params).slice(8,-1).toLowerCase();
+                                                                                var type=Object.prototype.toString.call(params).slice(8,-1).toLowerCase();
                                                                                 if(type!='object')debugger;
                                             Object.assign(mod.base,params);
                                             
