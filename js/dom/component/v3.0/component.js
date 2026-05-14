@@ -87,7 +87,7 @@
               
               
               if(par){
-                    mod.par   = par;
+                    mod.par     = par;
                     par.child.push(mod);
                     par.stack.add;
                     mod.stack.push(()=>par.stack.complete);
@@ -1020,8 +1020,11 @@
               
                     if(name in params){
                           var value2    = params[name];
-                          if(def){
-                                value2   ??= def;
+                          if(value2!==undefined){
+                                return value2;
+                          }
+                          if(def===undefined){
+                                return value;
                           }
                           return value2;
                     }
