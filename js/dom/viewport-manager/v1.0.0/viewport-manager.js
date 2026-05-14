@@ -47,10 +47,11 @@
   
         obj.initdom   = function({par}={}){
         
-              par           ||= document.body;
+              par               ||= document.body;
               
-              root            = document.createElement('div');
-              root.id         = 'viewport-manager';
+              root                = document.createElement('div');
+              root.id             = 'viewport-manager';
+              root.style.zIndex   = 1;
               par.append(root);
               
               
