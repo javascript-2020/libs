@@ -1027,7 +1027,7 @@
                           if(def===undefined){
                                 return value;
                           }
-                          return value2;
+                          return def;
                     }
                     return value;
                     
