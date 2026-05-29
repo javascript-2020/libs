@@ -1,7 +1,26 @@
 
 
 
+/*
 
+openssl.js
+
+27-05-26
+
+*/
+
+
+globalThis.opensslmod   = opensslmod;
+
+if(typeof module!='undefined'){
+      if(module.exports){
+            module.exports    = opensslmod;
+      }
+}
+
+
+opensslmod.fs     = null;
+opensslmod.path   = null;
 
 
 function opensslmod(params={}){
@@ -10,28 +29,51 @@ function opensslmod(params={}){
   
   
         var df=obj.df=false,did='openssl';
+
+        var platform            = typeof document=='undefined' ? 'node' : 'browser';
         
-        var _params    = params;
-        var {EmscrJSR_openssl,stdout,stderr}   = params;
+        var wasmJs;
         
+        var wasmBinary;
+        var wasmBinaryFile;
         
-        obj.initmod   = function(params){
+        var EmscrJSR_openssl;
+        var stdout;
+        var stderr;
+        
+        var echo                = true;
+
+
+  //:
+
+  
+        initmod(params);
+        
+        obj.initmod   = initmod
+        
+        function initmod(params){
         
               ('stdout' in params) && (stdout=params.stdout);
               ('stderr' in params) && (stderr=params.stderr);
+              
               ('EmscrJSR_openssl' in params) && (EmscrJSR_openssl=params.EmscrJSR_openssl);
-              ('url' in params) && (_params.url=params.url);
+              ('wasmJs' in params) && (wasmJs=params.wasmJs);
+              ('wasmBinary' in params) && (wasmBinary=params.wasmBinary);
+              ('wasmBinaryFile' in params) && (wasmBinaryFile=params.wasmBinaryFile);
+              
+              ('echo' in params) && (echo=params.echo);
+              ('df' in params) && (df=params.df);
               
         }//initmod
         
         
   //:
+
   
-  
-        var wasm_js     = 'https://libs.ext-code.com/external/js/openssl/openssl.wasm.js';
-        var wasm_url    = 'https://javascript-2020.github.io/libs/js/external/openssl/openssl.js';
+        var def           = {};
+        def.wasmJs        = 'https://javascript-2020.github.io/libs/js/external/openssl/openssl.js';
         
-        
+
         var cur;
         var initial;
         var snapshot;
@@ -41,18 +83,26 @@ function opensslmod(params={}){
         obj.fs    = fs;
         
         
+        var libs    = {};
+        
+        
   //:
   
-  
-        obj.init    = function({url}={}){return init({url})}
+
+        obj.init    = init;
         
-        async function init({url}={}){
+        async function init(){
                                                                                 debug.log('init');
-              await libs();
+              await libs[platform]();
               
-              url         ||= _params.url;
-              var Module    = {print,printErr,onRuntimeInitialized,url};
+              if(cur){
+                    fs.save();
+              }
+              
+              var src       = wasmJs;
+              var Module    = {print,printErr,onRuntimeInitialized,src,wasmBinary,wasmBinaryFile};
               cur           = Module;
+              
               await EmscrJSR_openssl(Module);
               
               obj.FS        = Module.FS;
@@ -62,7 +112,11 @@ function opensslmod(params={}){
               
               function print(txt){
               
-                    if(stdout){
+                    if(echo){
+                                                                                console.log('[ stdout ]',txt);
+                    }
+                    
+                    if(typeof stdout=='function'){
                           stdout(txt);
                     }
                     
@@ -71,7 +125,11 @@ function opensslmod(params={}){
               
               function printErr(txt){
               
-                    if(stderr){
+                    if(echo){
+                                                                                console.log('[ stderr ]',txt);
+                    }
+                    
+                    if(typeof stderr=='function'){
                           stderr(txt);
                     }
                     
@@ -95,10 +153,12 @@ function opensslmod(params={}){
         }//init
         
         
-        async function libs(){
-        
+        libs.browser    = async function(){
+                                                                                debug.log('libs.browser');
               if(!EmscrJSR_openssl){
-                    var txt   = await fetch(wasm_js).then(res=>res.text());
+                    wasmJs  ||= def.wasmJs;
+                                                                                debug.log('wasmJs',wasmJs);
+                    var txt   = await fetch(wasmJs).then(res=>res.text());
                     var js    = `
                                       (()=>{
                                       
@@ -109,10 +169,56 @@ function opensslmod(params={}){
                                       })();
                                 `;
                     EmscrJSR_openssl    = eval(js);
-                    _params.url         = wasm_url;
               }
               
         }//libs
+        
+        
+        libs.node   = async function(){
+                                                                                debug.log('libs.node');
+              var fs              = opensslmod.fs||require('node:fs');
+              var path            = opensslmod.path||require('node:path');
+            
+              if(!wasmJs){
+                    var tmp   = './openssl.wasm.js';
+                    if(fs.existsSync(tmp)){
+                          wasmJs    = tmp;
+                    }
+              }
+              
+              if(!wasmJs){
+                    var dir   = opensslmod.__dirname||(__dirname+'/');
+                    tmp       = dir+'openssl.wasm.js';
+                    if(fs.existsSync(tmp)){
+                          wasmJs    = tmp;
+                    }
+              }
+              
+              if(!wasmJs){
+                    await libs.browser();
+                    return;
+              }
+                                
+              var cwd             = process.cwd();
+              var abs             = path.resolve(cwd,wasmJs);
+              var dir             = path.dirname(abs);              
+              
+              var txt             = fs.readFileSync(wasmJs,'utf8');
+              var js              = `
+                                          (()=>{
+                                          
+                                                ${txt}
+                                                
+                                                return EmscrJSR_openssl;
+                                                
+                                          })();
+                                    `;
+              EmscrJSR_openssl    = eval(js);
+              
+              wasmBinaryFile    ||= path.resolve(dir,'openssl.wasm');
+              wasmBinary          = fs.readFileSync(wasmBinaryFile);
+            
+        }//node
         
         
   //:
@@ -136,15 +242,46 @@ function opensslmod(params={}){
                     
               }//for
               
-              return Module;
+              return {Module};
               
         }//run
+        
+        
+        obj.download    = download;
+        
+        function download(v,{type}){
+          
+              var blob      = new Blob([v],{type});
+              download_blob(blob);
+          
+        }//download
+        
+        
+        obj.download.file   = function(path,{type}){
+          
+              var buf   = cur.FS.readFile(path);
+              download(buf,{type});
+              
+        }//file
+        
+        
+        obj.download.blob   = download_blob;
+        
+        function download_blob(blob){
+          
+              var url       = window.URL.createObjectURL(blob);
+              var a         = document.createElement('a');
+              a.href        = url;
+              a.download    = name||'';
+              a.click();
+              
+        }//blob
         
         
   //:
   
   
-        fs.snapshot   = function({Module,path='/'}={}){
+        fs.snapshot   = function({path='/',Module}={}){
                                                                                 debug.log('fs.snapshot');
               Module        ||= cur;
               var snapshot    = {};
@@ -177,17 +314,20 @@ function opensslmod(params={}){
               
               return snapshot;
               
-        }//snapshotfs
+        }//snapshot
         
         
-        fs.restore    = function({Module,snapshot}){
+        
+        
+        fs.restore    = function({path='/',snapshot,Module}){
                                                                                 debug.log('fs.restore');
               Module    ||= cur;
+              var src     = path;
               
               Object.entries(snapshot).forEach(([path,content])=>{
               
                     var parts     = path.split('/').slice(1,-1);
-                    var current   = '/';
+                    var current   = src;
                     
                     parts.forEach((part) => {
                     
@@ -212,8 +352,9 @@ function opensslmod(params={}){
         }//restore
         
         
-        fs.save    = function({Module}){
+        fs.save    = function({Module}={}){
         
+              Module    ||= cur;
               var snap    = fs.snapshot({Module});
               snapshot    = snap;
               return snap;
@@ -252,66 +393,15 @@ function opensslmod(params={}){
         
         fs.clear    = function(){
         
-              initial   = null;
+              initial     = null;
+              snapshot    = null;
               
         }//clear
         
         
-        fs.download   = function(v,params={}){
-        
-              var type,name;
-              if(typeof params=='string'){
-                    name    = params;
-              }else{
-                    ({type,name}   = params);
-              }
-              
-              var blob;
-              var dtype   = datatype(v);
-              switch(dtype){
-              
-                case 'string'   : blob    = new Blob([v],{type});
-                                  break;
-              }//switch
-              
-              fs.download.blob(blob,{name});
-              
-        }//download
         
         
-        fs.download.blob    = function(blob,{name}={}){
         
-              var url       = window.URL.createObjectURL(blob);
-              var a         = document.createElement('a');
-              a.href        = url;
-              a.download    = name;
-              a.click();
-              
-        }//blob
-        
-        
-        fs.download.file    = function(name){
-        
-              var uint8   = cur.FS.readFile(name);
-              var blob    = new Blob([uint8]);
-              fs.download.blob(blob,{name});
-              
-        }//file
-        
-        
-  //:
-  
-  
-        obj.datatype    = datatype;
-        
-        function datatype(v){
-        
-              var str   = Object.prototype.toString.call(v);
-              str       = str.slice(8,-1);
-              str       = str.toLowerCase();
-              return str;
-              
-        }//datatype
         
         
   //:
@@ -339,6 +429,17 @@ function opensslmod(params={}){
               
         }//normalise_pem
         
+        
+        obj.datatype    = datatype;
+        
+        function datatype(v){
+          
+              var str   = Object.prototype.toString.call(v);
+              str       = str.slice(8,-1);
+              str       = str.toLowerCase();
+              return str;
+              
+        }//datatype
         
         
   //:
