@@ -8,7 +8,7 @@ openssl.m.js
 27-05-26
 
 */
-        var df=false;
+        var df=true;
 
         var platform    = typeof document=='undefined' ? 'node' : 'browser';
                                                                                 df && console.log('       platform  :',platform);
