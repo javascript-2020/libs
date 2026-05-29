@@ -99,8 +99,7 @@ function opensslmod(params={}){
                     fs.save();
               }
               
-              var src       = wasmJs;
-              var Module    = {print,printErr,onRuntimeInitialized,src,wasmBinary,wasmBinaryFile};
+              var Module    = {print,printErr,onRuntimeInitialized,wasmJs,wasmBinary,wasmBinaryFile};
               cur           = Module;
               
               await EmscrJSR_openssl(Module);
