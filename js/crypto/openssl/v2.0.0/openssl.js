@@ -71,7 +71,7 @@ function opensslmod(params={}){
 
   
         var def           = {};
-        def.wasmJs        = 'https://javascript-2020.github.io/libs/js/external/openssl/openssl.js';
+        def.wasmJs        = 'https://javascript-2020.github.io/libs/js/external/openssl/openssl.wasm.js';
         
 
         var cur;
