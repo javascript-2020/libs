@@ -350,13 +350,18 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA0lBMVEVHcE
         obj.complete    = complete;
         
         function complete(file){
+        
+              editor.filename(file);
+              
         }//complete
         
         
         complete.load   = async function(file,blob){
         
               var txt   = await blob.text();
+              
               editor.set(txt);
+              complete(file);
               
         }//load
         
