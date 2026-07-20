@@ -1,14 +1,19 @@
 
 
 
-<snippet-console v2.0>
+<snippet-console v2.0 test=abc>
 
       <template shadowrootmode=open>
       
       
             <style>
+/*
+icon
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA0lBMVEVHcEwaHzgSFSsKDSQXHDQWGzIXHDIKDyMaHzcBAhEXHDMTFy0WHDMeJj8RFSoQFCcPEyYTGC0RFSkTGC0aHzcmLkcaIDgWGjIWHDIUGC8LDiInMEcXHDQWGzEZHjYZIDYbITkUGzMlLkYrMkoaIjkRFSscITgmMEcbITkpMEgjLEMUGzIlLUUoL0gVGC0VGy4mL0YbITktNUwlLEMXHjYeJDtnanjj4+QhKD9MUGOLjZi7vMJfY3Lt7e04PVBITGDS09ZOU2Xr6+tzdoQ9QlVKTmGtyqSqAAAAMXRSTlMA/FIPzrNWCfcF0ZzLnSJ8cpKMqP3Z8KPEuoGO2L7lNuIWzusfQWSM+/JxLMS3ahq7XSnkAwAAAVBJREFUKM+t0tdywjAQBVBjW7gJ907vooUIFxxKSP3/Xwo2dmZYQvKS+6JyRiPNahnmP8Jd0i9H7loFReYxxrzMF5EV4YolRC/JojwJkq6PewXGdFMkU8DdRq6b9w+n2ZxOHzMTsJaffdqmjXwxT3TADxUL8+Z0mUwA1+2SucH5bsICHosVL4fOTBwD7rolSwt1tHQXgNVOxf01N+iogNetLIs/t6mzchprp9WHNcev+91um0bDVX3U80HNGSE4vbwdjyka5e+ANWUYK3k+7PYHrztpOJl386MGjWMaRbNhXnLjhrXiT5IzRhHVbljVUY/QJMpID+nqDw0jqayBfZNVpbs9JQhgg/01TK2MbVezGvme1Ziyx1wLiSIVbZEQ0u6QcpdW3LawZXimZVqKYiqaDNj3gtDQlTDUQlPTdQxYRG0e8S0c+H4gy8gFfCd/8BdhCEKPCPsRBQAAAABJRU5ErkJggg==
+*/
+
   :host
-    {display:block;border:1px solid lightgray;padding:10px;border-radius:5px}
+    {display:block;padding:5px;box-sizing:border-box;/*border:1px solid lightgray;border-radius:5px*/}
     
   #root
     {position:relative;display:flex;flex-direction:column;gap:10px;font-family:arial}
@@ -44,7 +49,7 @@
             </style>
             
             
-            <div id=root>
+            <div id=root part=root>
             
                   <div>
                         <div id=tag>
@@ -53,7 +58,7 @@
                         <file-mod component></file-mod>
                   </div>
                   
-                  <web-editor component></web-editor>
+                  <web-editor v2.0 component></web-editor>
                   
                   <div id=btns>
                         <input value=reset type=button>
@@ -86,7 +91,7 @@
         version   : 'v2.0',
   };
   
-        var df=false,did='snippet-console'
+        var df=true,did='snippet-console'
         ;
         
         
@@ -128,7 +133,7 @@
         
         var sandbox;
         
-        
+        var shadow;
         var root;
         var chk                       = {};
         
@@ -140,6 +145,7 @@
         var rd                        = {};
         rd.attr                       = {};
         var btn                       = {};
+        obj.css                       = {};
         
         
   //:
@@ -154,11 +160,12 @@
               config['web-console']   = mod.rd.attr(host,'web-console',config);
               
               if(!('fullsize' in config['web-editor'])){
+                                                                                debug('web-editor.fullsize=true');
                     config['web-editor'].fullsize    = true;
               }
                                                                                 debug('config',config);
                                                                                 
-              def.txt                 = host.innerHTML;
+              //def.txt                 = host.innerHTML;
               
               
               filemod                 = mod['file-mod'];
@@ -225,11 +232,11 @@
   
         obj.initdom    = function(){
         
-              var shadow                          = host.shadowRoot;
+              shadow                                = host.shadowRoot;
               
               
               filemod.initdom();
-              editor.initdom({txt:def.txt,fullsize:true});
+              editor.initdom({txt:def.txt});//,fullsize:true});
               
               
               var btns                              = $(shadow,'#btns');
@@ -314,7 +321,12 @@
               var result;
               var error;
               
-              ({iframe,result,error}   = await sandbox.run.iframe(js,{clear,console:con,iframe}));
+              var ctx   = obj.ctx;
+              if(typeof obj.ctx=='function'){
+                    ctx   = obj.ctx();
+              }
+              
+              ({iframe,result,error}   = await sandbox.run.iframe(js,{clear,console:con,iframe,ctx}));
               
               editor.focus();
               
@@ -324,6 +336,8 @@
   //:
   
   
+        obj.source    = source;
+        
         function source(){
         
               var txt     = editor.getvalue();
@@ -333,11 +347,22 @@
         }//source
         
         
-        function complete(){
+        obj.complete    = complete;
+        
+        function complete(file){
+        
+              editor.filename(file);
+              
         }//complete
         
         
-        complete.load   = function(file,blob){
+        complete.load   = async function(file,blob){
+        
+              var txt   = await blob.text();
+              
+              editor.set(txt);
+              complete(file);
+              
         }//load
         
         
@@ -353,6 +378,53 @@
               chk.echo.checked    = v;
               
         }//echo
+        
+        
+  //:
+  
+  
+        obj.css.insertRule    = obj.css.insert_rule;
+        
+        obj.css.insert_rule   = function(css,pos){
+        
+              var style   = $(shadow,'style');
+              var sheet   = style.sheet;
+              
+              var args    = [...arguments];
+              var f   = false;
+              if(args.length==2){
+                    f   = true;
+              }
+              if(arguments.length==1){
+                    if(typeof args[0]=='string'){
+                          f   = true;
+                    }else{
+                          args    = args[0];
+                    }
+              }
+              if(f){
+                    args    = [args];
+              }
+              args.forEach(arg=>{
+              
+                    var css,pos;
+                    if(typeof arg=='string'){
+                          css   = arg;
+                    }else{
+                          [css,pos]   = arg;
+                    }
+                    
+                    if(pos===undefined){
+                          pos   = sheet.cssRules.length;
+                    }
+                    sheet.insertRule(css,pos);
+                    
+              });
+              
+        }//insert_rule
+        
+        
+        function datatype(v){return Object.prototype.toString.call(v).slice(8,-1).toLowerCase()}
         
         
   //:
