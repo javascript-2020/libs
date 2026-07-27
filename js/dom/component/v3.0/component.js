@@ -62,6 +62,8 @@
               
               mod.component         = component;
               
+              mod.cache             = cache;
+              
               
               var stack             = []
               mod.stack             = stack;
