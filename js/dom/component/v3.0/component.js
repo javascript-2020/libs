@@ -517,9 +517,10 @@
                           cache[url].promise    = new Promise(res=>cache[url].resolve=res);
                           
                           var res   = await fetch(url);
-                          html      = await res.text();
-                          
-                          cache[url].html   = html;
+                          if(res.ok){
+                                html      = await res.text();
+                                cache[url].html   = html;
+                          }
                           cache[url].resolve({html});
                     }
                                                                                 //console.log(Object.keys(cache));
