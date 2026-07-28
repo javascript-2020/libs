@@ -30,7 +30,7 @@
   
         var root;
         var list    = [];
-        
+        obj.list    = list;
         
         var front;
         
