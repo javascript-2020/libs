@@ -278,7 +278,8 @@
         
         obj.clear     = function(){
         
-              term.clear.apply(term,arguments)
+              term.clear.apply(term,arguments);
+              fitAddon.fit();
               
         }//clear
         
@@ -319,6 +320,16 @@
               obj.writeln.apply(null,arguments);
               
         }//log
+        
+        
+  //:
+  
+  
+        obj.resize    = function(){
+        
+              fitAddon.fit();
+              
+        }//resize
         
         
   //:
