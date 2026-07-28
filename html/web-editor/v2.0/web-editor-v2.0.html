@@ -625,10 +625,7 @@
               }//switch
               
               
-              
-              if(kd2){
-                    node.onkeydown    = kd2;
-              }
+              node.onkeydown    = kd.editor;
               
               node.addEventListener('mousedown',update);
               node.addEventListener('keyup',update);
@@ -728,6 +725,15 @@
               
         }//onchange
         
+        
+        
+        kd.editor   = function(e){
+        
+              if(kd2){
+                    kd2(e);
+              }
+              
+        }//editor
         
         
         kd.row    = function(e){
