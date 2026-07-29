@@ -373,18 +373,14 @@
         
         obj.adj   = {};
         
-        Object.defineProperty(obj.adj,'h',{
+        obj.adj.h   = function(v){
         
-              set   : v=>{
+              var h   = parseFloat(terminal.style.height);
+              h      += v;
+              terminal.style.height    = h+'px';
+              fitAddon.fit();
               
-                    var h   = parseFloat(terminal.style.height);
-                    h      += v;
-                    terminal.style.height    = h+'px';
-                    fitAddon.fit();
-                    
-              }
-              
-        });
+        }//h
         
         
 /*
