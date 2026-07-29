@@ -69,11 +69,12 @@
         
               ext             = mod.rd(params,'ext',ext);
               $               = mod.rd(params,'$',$);
-              Terminal        = mod.rd(params,'Terminal',Terminal);
-              FitAddon        = mod.rd(params,'FitAddon',FitAddon);
               log             = mod.rd(params,'log',log);
               config          = mod.rd(params,'config',config,config);
               embed           = mod.rd(params,'embed',embed);
+              
+              Terminal        = mod.rd(params,'Terminal',Terminal);
+              FitAddon        = mod.rd(params,'FitAddon',FitAddon);
               
         }//initmod
         
@@ -277,7 +278,8 @@
         
         obj.clear     = function(){
         
-              term.clear.apply(term,arguments)
+              term.clear.apply(term,arguments);
+              fitAddon.fit();
               
         }//clear
         
@@ -318,6 +320,16 @@
               obj.writeln.apply(null,arguments);
               
         }//log
+        
+        
+  //:
+  
+  
+        obj.resize    = function(){
+        
+              fitAddon.fit();
+              
+        }//resize
         
         
   //:
