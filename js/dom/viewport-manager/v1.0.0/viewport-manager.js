@@ -68,7 +68,9 @@
               
               var node        = document.createElement('view-port');
               node.toggleAttribute('component',true);
-              par.append(node);
+              if(par){
+                    par.append(node);
+              }
               
               var mod2        = mod.create({mod,name:'view-port'});
               var result      = await mod.build({root:node,mod:mod2});
