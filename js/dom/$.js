@@ -823,7 +823,7 @@
               $.track(slider_node,slider);
               
               
-              function slider(ox,oy){
+              function slider(ox,oy,e){
               
                     if(params.mode=='horiz'){
                           slider.horiz(oy);
