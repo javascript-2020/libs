@@ -831,24 +831,33 @@
                           slider.vert(ox);
                     }
                     
+                    if(typeof callback=='function'){
+                          callback(ox,oy,e);
+                    }else{
+                          if(typeof callback.mm=='function'){
+                                callback.mm(ox,oy,e);
+                          }
+                    }
+                    
+                    
               }//slider
               
               
-              slider.md   = function(){
+              slider.md   = function(e){
               
                     document.body.style.userSelect    = 'none';
                     if(typeof callback?.md=='function'){
-                          callback.md();
+                          callback.md(e);
                     }
                     
               }//slider.md
               
               
-              slider.mu   = function(){
+              slider.mu   = function(e){
               
                     document.body.style.userSelect    = '';
                     if(typeof callback?.mu=='function'){
-                          callback.mu();
+                          callback.mu(e);
                     }
                     
               }//slider.mu
