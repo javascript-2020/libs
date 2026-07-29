@@ -19,7 +19,7 @@
     {display:flex;flex-direction:column;gap:5px;border:1px solid lightgray;box-sizing:border-box;border-radius:5px;background:whitesmoke;
       padding:5px;padding-top:20px;height:100%}
       
-  #title
+  #hdr
     {height:15px;background:lightblue;position:absolute;left:0;top:0;width:100%;border-top-left-radius:10px;border-top-right-radius:10px}
     
   #icons
@@ -45,6 +45,9 @@
             <div id=view-port>
             
                   <div id=title>
+                  </div>
+                  
+                  <div id=hdr>
                         <div id=icons>
                               <img id=minify title=minify>
                               <img id=close title=close>
@@ -92,6 +95,7 @@
         var root;
         obj.root        = null;
         var style;
+        var hdr;
         var body;
         obj.body        = null;
         obj.on          = {};
@@ -170,7 +174,10 @@
               root.onmouseenter                       = e=>icons.style.display='';
               root.onmouseleave                       = e=>icons.style.display='none';
               
-              var icons                               = $(shadow,'#icons');
+              hdr                                     = $(root,'#hdr');
+              obj.hdr                                 = hdr;
+              
+              var icons                               = $(hdr,'#icons');
               if(config.icons.close!==false){
                     $(icons,'#close').onclick         = close;
               }else{
@@ -201,6 +208,24 @@
         }//drag
         
         
+        obj.title   = function(txt){
+        
+              if(txt){
+                    if(typeof txt=='string'){
+                          $(hdr,'#title').textContent   = txt;
+                    }else{
+                          $(hdr,'#title').append(txt);
+                    }
+              }
+              txt   = $(hdr,'#title').textContent;
+              return txt;
+              
+        }//title
+        
+        
+  //:
+  
+  
         obj.css   = function(css){
         
               var index   = style.sheet.insertRule(css);
