@@ -612,7 +612,7 @@
   //:
   
   
-        setup.editor    = function(node,{mode,kd}={}){
+        setup.editor    = function(node,{mode,kd:kd3}={}){
                                                                                 debug('setup.editor');
               mode    ||= 'javascript';
               
@@ -623,6 +623,7 @@
                 case 'js'         : mode    = 'javascript';       break;
                 
               }//switch
+              
               
               
               node.onkeydown    = kd.editor;
@@ -728,13 +729,12 @@
         
         
         kd.editor   = function(e){
-          console.log('kd.editor');
+        
               if(kd2){
                     kd2(e);
               }
               
         }//editor
-        
         
         kd.row    = function(e){
         
