@@ -693,61 +693,6 @@
         }//scrollbottom
         
         
-        $.track   = function(node,callback){
-        
-              node.addEventListener('mousedown',md);
-              
-              var mx;
-              var my;
-              
-              
-              function md(e){
-              
-                    mx    = e.pageX;
-                    my    = e.pageY;
-                    document.addEventListener('mousemove',mm);
-                    document.addEventListener('mouseup',mu);
-                    
-                    if(typeof callback.md=='function'){
-                          callback.md(e);
-                    }
-                    
-              }//md
-              
-              
-              function mm(e){
-              
-                    var ox    = e.pageX-mx;
-                    var oy    = e.pageY-my;
-                    mx        = e.pageX;
-                    my        = e.pageY;
-                    
-                    if(typeof callback=='function'){
-                          callback(ox,oy,e);
-                    }else{
-                          if(typeof callback.mm=='function'){
-                                callback.mm(ox,oy,e);
-                          }
-                          
-                    }
-                    
-              }//mm
-              
-              
-              function mu(e){
-              
-                    document.removeEventListener('mousemove',mm);
-                    document.removeEventListener('mouseup',mu);
-                    
-                    if(typeof callback.mu=='function'){
-                          callback.mu(e);
-                    }
-                    
-              }//mu
-              
-        }//track
-        
-        
         $.caret   = function(node,timeout=50){
         
               if(timeout){
@@ -802,6 +747,61 @@
               setTimeout(rem,time);
               
         }//mousetext
+        
+        
+        $.track   = function(node,callback){
+        
+              node.addEventListener('mousedown',md);
+              
+              var mx;
+              var my;
+              
+              
+              function md(e){
+              
+                    mx    = e.pageX;
+                    my    = e.pageY;
+                    document.addEventListener('mousemove',mm);
+                    document.addEventListener('mouseup',mu);
+                    
+                    if(typeof callback.md=='function'){
+                          callback.md(e);
+                    }
+                    
+              }//md
+              
+              
+              function mm(e){
+              
+                    var ox    = e.pageX-mx;
+                    var oy    = e.pageY-my;
+                    mx        = e.pageX;
+                    my        = e.pageY;
+                    
+                    if(typeof callback=='function'){
+                          callback(ox,oy,e);
+                    }else{
+                          if(typeof callback.mm=='function'){
+                                callback.mm(ox,oy,e);
+                          }
+                          
+                    }
+                    
+              }//mm
+              
+              
+              function mu(e){
+              
+                    document.removeEventListener('mousemove',mm);
+                    document.removeEventListener('mouseup',mu);
+                    
+                    if(typeof callback.mu=='function'){
+                          callback.mu(e);
+                    }
+                    
+              }//mu
+              
+        }//track
         
         
         $.slider    = function(node1,slider_node,node2,callback,params={}){
