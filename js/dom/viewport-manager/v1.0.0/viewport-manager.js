@@ -61,7 +61,7 @@
   //:
   
   
-        obj.new   = async function({par,initmod}={}){
+        obj.new   = async function({par,initmod,title}={}){
         
               par           ||= root;
               initmod       ||= {};
@@ -79,6 +79,10 @@
               viewport.initmod(mod.base,initmod,{vm:obj});
               await viewport.init();
               await viewport.initdom();
+              
+              if(title){
+                    viewport.title(title);
+              }
               
               viewport.root.addEventListener('mousedown',md);
               
