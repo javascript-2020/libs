@@ -82,14 +82,17 @@
   //:
   
   
+  
         var Terminal;
         var FitAddon;
         
         var term;
+        obj.term    = null;
         var fitAddon;
-        
+        obj.fitaddon    = null;
         
         var terminal;
+        objterminal     = null;
         
         
         var fullsize;
@@ -147,8 +150,13 @@
                     rendererType    : 'dom',
                     
               });
-              fitAddon    = new FitAddon();
+              obj.term    = term;
+              
+              fitAddon        = new FitAddon();
+              obj.fitaddon    = fitAddon;
               term.loadAddon(fitAddon);
+              console.log(term);
+              
               
               
               
@@ -227,6 +235,7 @@
               hldr.style.background=theme.light.background;
               
               terminal                      = $(shadow,'#terminal');
+              obj.terminal                  = terminal;
               
               term.open(terminal);
               term.options.theme =theme.light;
