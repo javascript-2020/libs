@@ -371,6 +371,22 @@
         });
         
         
+        obj.adj   = {};
+        
+        Object.defineProperty(obj.adj,'h',{
+        
+              set   : v=>{
+              
+                    var h   = parseFloat(terminal.style.height);
+                    h      += v;
+                    terminal.style.height    = h+'px';
+                    fitAddon.fit();
+                    
+              }
+              
+        });
+        
+        
 /*
 
 
