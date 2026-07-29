@@ -4,7 +4,7 @@
 
       <template shadowrootmode=open>
       
-            <style>
+            <style id=web-editor>
             
   :host
     {all:initial;font-family:arial;display:block}
@@ -192,7 +192,7 @@
         version   : 'v2.0'
   };
   
-        var df=false,did='web-editor'
+        var df=true,did='web-editor'
         ;
         
         var ext,$,menu,menumod,ace,kd2,on2,config={},embed,log
@@ -259,6 +259,7 @@
         var btn         = {};
         var on          = {};
         var setup       = {};
+        obj.css         = {};
         
         
                                                                                 /*
@@ -313,7 +314,7 @@
               }
               
               
-              rd.txt();
+              //rd.txt();
               rd.attr.fullsize();
               rd.attr.mode();
               rd.attr.h();
@@ -506,7 +507,7 @@
               txt                                       ||= def.txt;
               fullsize                                  ||= config.fullsize||def.fullsize;
               
-              height                                    ||= config.height||def.height;
+              height                                    ||= config.height||config.h||def.height;
               if(height){
                     fullsize                              = false;
               }
@@ -564,15 +565,13 @@
               hldr                                        = $(shadow,'#hldr');
               
               var node                                    = $(shadow,'#editor');
-              node.onmousedown                            = e=>{console.log(e.ctrlKey);
-                                                                !e.ctrlKey && e.stopPropagation();
-              }
+              node.onmousedown                            = e=>{!e.ctrlKey && e.stopPropagation()};
               node.textContent                            = txt;
               $(shadow,'.seo-code').textContent           = txt;
               
                                                                                   //observer.observe(node,mconfig);
                                                                                   
-              if(fullsize){
+              if(fullsize!==false && fullsize!=='false'){
                                                                                   debug('fullsize');
                     setup.fullsize(node,{mode,kd:kd2});
               }else{
@@ -626,10 +625,7 @@
               }//switch
               
               
-              
-              if(kd2){
-                    node.onkeydown    = kd2;
-              }
+              node.onkeydown    = kd.editor;
               
               node.addEventListener('mousedown',update);
               node.addEventListener('keyup',update);
@@ -729,6 +725,15 @@
               
         }//onchange
         
+        
+        
+        kd.editor   = function(e){
+        
+              if(kd2){
+                    kd2(e);
+              }
+              
+        }//editor
         
         
         kd.row    = function(e){
@@ -1117,6 +1122,51 @@
         
         function int(str){return (/^\d+$/.test(str)) ? Number(str) : str}
         
+        
+        
+        
+  //:
+  
+  
+        obj.css.insertRule    = obj.css.insert_rule;
+        
+        obj.css.insert_rule   = function(css,pos){
+        
+              var style   = $(shadow,'style#web-editor');
+              var sheet   = style.sheet;
+              
+              var args    = [...arguments];
+              var f   = false;
+              if(args.length==2){
+                    f   = true;
+              }
+              if(arguments.length==1){
+                    if(typeof args[0]=='string'){
+                          f   = true;
+                    }else{
+                          args    = args[0];
+                    }
+              }
+              if(f){
+                    args    = [args];
+              }
+              args.forEach(arg=>{
+              
+                    var css,pos;
+                    if(typeof arg=='string'){
+                          css   = arg;
+                    }else{
+                          [css,pos]   = arg;
+                    }
+                    
+                    if(pos===undefined){
+                          pos   = sheet.cssRules.length;
+                    }
+                    sheet.insertRule(css,pos);
+                    
+              });
+              
+        }//insert_rule
         
         
         
