@@ -709,7 +709,7 @@
                     document.addEventListener('mouseup',mu);
                     
                     if(typeof callback.md=='function'){
-                          callback.md();
+                          callback.md(e);
                     }
                     
               }//md
@@ -723,10 +723,10 @@
                     my        = e.pageY;
                     
                     if(typeof callback=='function'){
-                          callback(ox,oy);
+                          callback(ox,oy,e);
                     }else{
                           if(typeof callback.mm=='function'){
-                                callback.mm(ox,oy);
+                                callback.mm(ox,oy,e);
                           }
                           
                     }
@@ -740,7 +740,7 @@
                     document.removeEventListener('mouseup',mu);
                     
                     if(typeof callback.mu=='function'){
-                          callback.mu();
+                          callback.mu(e);
                     }
                     
               }//mu
