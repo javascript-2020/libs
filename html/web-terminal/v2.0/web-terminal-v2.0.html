@@ -279,7 +279,7 @@
         obj.clear     = function(){
         
               term.clear.apply(term,arguments);
-              fitAddon.fit();
+              resize2();
               
         }//clear
         
@@ -325,11 +325,20 @@
   //:
   
   
-        obj.resize    = function(){
+        obj.resize    = resize;
+        
+        function resize(){
         
               fitAddon.fit();
               
         }//resize
+        
+        
+        function resize2(){
+        
+              setTimeout(resize,50);
+              
+        }//resize2
         
         
   //:
