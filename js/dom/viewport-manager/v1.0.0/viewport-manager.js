@@ -63,7 +63,9 @@
   
         obj.new   = async function({par,initmod,title}={}){
         
-              par           ||= root;
+              if(par!==false){
+                    par     ||= root;
+              }
               initmod       ||= {};
               
               var node        = document.createElement('view-port');
