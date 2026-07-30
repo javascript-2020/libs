@@ -4,6 +4,9 @@
       
             <style>
             
+  #hdr
+    {display:flex;gap:10px}
+    
   #list
     {border:1px solid lightgray;padding:10px}
     
@@ -29,11 +32,21 @@
     
   .spc
     {flex:1}
+  input
+    {font-size:16px;padding:5px 10px;box-sizing:border-box}
+  input[type=button]
+    {cursor:pointer}
+  input[type=checkbox]
+    {width:20px;height:20px;margin:0}
     
             </style>
             
             <div id=root>
             
+                  <div id=hdr>
+                        <input value=update type=button>
+                  </div>
+                  
                   <div id=list>
                         <div class=item>
                         
@@ -113,7 +126,7 @@
         
         async function createviewport(){
         
-              viewport        = await vm.new({par:shadow,title:'snippet-nodejs'});
+              viewport        = await vm.new({par:shadow,title:'viewport-manager-ui'});
               obj.viewport    = viewport;
               
               viewport.pos({x:250,y:200,w:850,h:500});
