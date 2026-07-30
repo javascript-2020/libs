@@ -122,9 +122,11 @@
   
         obj.initdom   = async function(){
         
+        
+              await createviewport();
+              
               host.style.display                      = '';
               
-              await createviewport();
               shadow                                  = host.shadowRoot;
               
               root                                    = $(shadow,'#root');
