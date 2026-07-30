@@ -132,6 +132,7 @@
               root                                    = $(shadow,'#root');
               
               $(root,'[value=update]').onclick        = btn.update;
+              
               list                                    = $(root,'#list');
               item                                    = $(list,'.item');
               item.remove();
@@ -159,7 +160,8 @@
   
         btn.update    = function(){
         
-        
+              update();
+              
         }//update
         
         
