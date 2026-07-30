@@ -1,4 +1,4 @@
-<veiwport-manager-ui>
+<veiwport-manager-ui style='display:none'>
 
       <template shadowrootmode=open>
       
@@ -122,6 +122,8 @@
   
         obj.initdom   = async function(){
         
+              host.style.display                      = '';
+              
               await createviewport();
               shadow                                  = host.shadowRoot;
               
