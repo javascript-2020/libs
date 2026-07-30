@@ -37,7 +37,7 @@
                   <div id=list>
                         <div class=item>
                         
-                              <div class=name>
+                              <div class=title>
                               </div>
                               
                               <div class=spc>
@@ -149,7 +149,7 @@
               
                     var nitem                           = item.cloneNode(true);
                     
-                    $(nitem,'.name').textContent        = vp.name||'';
+                    $(nitem,'.title').textContent       = vp.title()||'';
                     
                     $(nitem,'.show').onclick            = e=>vp.show();
                     $(nitem,'.minify').onclick          = e=>vp.hide();
