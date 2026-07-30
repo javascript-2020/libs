@@ -128,6 +128,7 @@
   
         obj.show    = function(){
         
+              update();
               viewport.show();
               
         }//show
@@ -139,6 +140,8 @@
               
         }//hide
         
+        
+        obj.update    = update;
         
         function update(){
         
