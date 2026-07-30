@@ -4,15 +4,28 @@
       
             <style>
             
-  .item
+  #list
     {}
     
+  .item:nth-child(3n+1){background-color: #f3f0ff}
+  .item:nth-child(3n+2){background-color: #e6ffe6}
+  .item:nth-child(3n){background-color: #e6f2ff}
+  
+  .item
+    {display:flex;gap:5px}
+    
+  .vp-icon
+    {width:15px;height:15px;cursor:pointer}
   .show
-    {}
-  .hide
-    {}
+    {background:lightgreen;border-radius:3px}
+  .minify
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAANlBMVEVHcExEa+BCadtGbN5gfdJLb9pFa95HbN1McN1Yd9hWdthwi9RNcdtXdthGa95CauBJbt1BaeIbh+3uAAAAEXRSTlMA8efRFIDgwpMoOwd6L7r4qZFYKX8AAAB+SURBVCjP7dK7EsMgDETRBYEE+Mn//2yw3WiUoFTpctszKjSzANIqzBxNLGvCaJM+SbZxO9XhCbk7ZZDHhOhx9Dkg/PlHfJzZdB6K6d6NLpHifbG87IrlnUUxt2Rq/PAzh0im2DVPx/RlisXjguqcUwXa1KldL9bC4UNcxu0LKVUuYZQAW1cAAAAASUVORK5CYII=);
+    }
   .close
-    {}
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAj1QTFRFAAAA4Cco6hkY7xQU8RgZ8RgY8BgZ8hgY7xIU6BcW3Sgt2To67RMV9AkJ+QQE/AIC/AIC+AQF9AkK7RET4DMy2Tg38RAP+QQE/AEB/QAB/gAA/QEA+wEB+QQE8Q8P3TQz7BIT+QQE/QEB/QAA+QQD6xMT4CUl9QkJ/AEC9AgI5CMj7BcW+QQE+AUE9wcH+QQE+QQE9wcH+AQF+gME7BYW6REQ+wIB+QUE6RYW0To+6hUV9gcG9gUF6hUR1js66RQX+QQE8g0O5QsL9wgI3kA+////6BYU9gYG9wUF6RMUylBT9QkK/QEC8g0N5QwK+gQE6RER6BIR9gYG9gYG6BQT6RUV+AQF8g0N9QUF6BAO5RQW5RUX5xYY9QcH8w0N5QsK9gYF6hAP5xUX9AcI+wIC/gAB9gYF5RMU5hgb9gcH9gYF5BUV5hYX9wQF6BIT6BMT9QYG9gUE6BER4RQV5BQT6BMS+QQE6RMR5REU9AYH9QYF6RIQ6RQV+gQE5QsL9wcH2zo74xIT8wYG/AIB9wYF6hMR0jg59QcH8Q4O6hAR/AIC+QQF7BUXyzc35xMS9AYF9gYG6RUU3Dk36RUW+QQE8Q8O7BgX+QQD9AcH+QQE+gMD6xYT3Sgm8wkI9QgI4yQk7BIT+AQE+gME7BIV3TQz+AQE+wEC/AEA8A8Q3DQz1zw56xMU8goJ+QQE+wIC+wMC+wMC8wkI6hMU2Ds43Sst6RcX6xMU7xcW7xcV8BcV8BcW7xcY6hUV6BkX3ignt1x/WQAAAL90Uk5TABE5UlhYWFhSORIIYsjy/P3yymQJCYr5///////6jwpo+////GwX0P/UGkb36cTr7sXq+Utk/+1NCErf5FEJSuhpassN/0Xh5EwIwf9uae5PSOLlTE3sbeJKQ0ZI4W1p40tI4f//5EVD4+VGQuNLSOHjS0VFSPBRSuTkS0zsacsMSuP/40wLyG5k/+xPCk/j41EMT+xqRvfH7flLF9DUGmf6/G0J+f//jwoHYMbx/P38yWQJEThSV1dXV1dTOhK+MhyLAAABr0lEQVR4nK3SQUgUURgH8P9/l+jNusIiLB5EEEXFJFmM1csiuHST3IMHQSox2IMEYYIkBXlZFjwpBJ3UwgSriwf1qOvBLhFrGiS4GBQRFHmIZZ1FYsf35o3L7Ahe9Du9md983/vem4+4MHglTBUW4IMFn1weu7nK1nKOpT74W+ZwpTq1vp9xg7Sie0sDhSBzDreQecvbE6v5VXM7jwKmkPvnVQmrlvxtWYEQP2mO8idQr7Y7DBTRqBYHQKktozl+UALa5P5kjs38j2vcATq5qrk/W1IlCkBQJv4DQtwGRPSdi0WXOmmYf4BabspORWxR8/CGZIge1QLsLjKml/vWxW1+k09NXIH/fDaYUA2j9ddn+468PMB9u/gNvvW5WbeW4Begg7tAZC9X9GbfZRa4JQ/2EejmvOtgzxckJ/kBMfLVA26hly/krY1Nap7mLPBY3eXyD594pBZpYLTmoeaXTAnTGKrjNGFC3IyEZ0wYT5jUPMdnfu8PNQppjjjj8JpPUeFGUUzx3tm0LI3PcMLtRurkOgfLo/i+cth4/w15pzyKMtZsp/1GLePOh7gwLsenPLh5H68t6T4AAAAASUVORK5CYII=);
+    }
     
   .spc
     {flex:1}
@@ -21,19 +34,22 @@
             
             <div id=root>
             
-                  <div class=item>
-                  
-                        <div class=name>
-                        </div>
+                  <div id=list>
+                        <div class=item>
                         
-                        <div class=spc>
+                              <div class=name>
+                              </div>
+                              
+                              <div class=spc>
+                              </div>
+                              
+                              <div class='show vp-icon'>
+                              </div>
+                              <img class='minify vp-icon'>
+                              <img class='close vp-icon'>
                         </div>
-                        
-                        <div class=show>
-                        </div>
-                        <img class=hide>
-                        <img class=close>
                   </div>
+                  
             </div>
             
       </template>
@@ -46,8 +62,14 @@
   
         var df=true,did='viewport-manager-ui';
         
+        var $,vm
+        ;
         
         obj.initmod   = function(params){
+        
+              $       = mod.rd(params,'$',$);
+              vm      = mod.rd(params,'vm',vm);
+              
         }//initmod
         
         
@@ -56,6 +78,7 @@
   
         var shadow;
         var root;
+        var list;
         
         
   //:
@@ -71,12 +94,14 @@
         obj.initdom   = async function(){
         
               shadow    = host.shadowRoot;
-              root      = $(shadow,'#root');
               
               await createviewport();
               
+              root      = $(shadow,'#root');
+              viewport.body.append(root);
               
-              item      = $(shadow,'.item');
+              list      = $(root,'#list');
+              item      = $(list,'.item');
               item.remove();
               
               
@@ -85,10 +110,9 @@
         
         async function createviewport(){
         
-              viewport    = await vm.new({par:root,title:'snippet-nodejs'});
+              viewport    = await vm.new({par:shadow,title:'snippet-nodejs'});
               viewport.pos({x:250,y:200,w:850,h:500});
               viewport.css(`#body {display:flex;flex-direction:column}`);
-              viewport.body.append(host);
               viewport.mod    = obj;
               
         }//createviewport
@@ -114,7 +138,7 @@
                     $(nitem,'.name').textContent        = vp.name||'';
                     
                     $(nitem,'.show').onclick            = e=>vp.show();
-                    $(nitem,'.hide').onclick            = e=>vp.hide();
+                    $(nitem,'.minify').onclick          = e=>vp.hide();
                     $(nitem,'.close').onclick           = e=>vp.close();
                     
               });
