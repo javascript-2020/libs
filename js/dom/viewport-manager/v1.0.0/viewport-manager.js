@@ -61,7 +61,7 @@
   //:
   
   
-        obj.new   = async function({par,initmod,title}={}){
+        obj.new   = async function({par,initmod,title,icon}={}){
         
               if(par!==false){
                     par     ||= root;
@@ -86,6 +86,9 @@
               
               if(title){
                     viewport.title(title);
+              }
+              if(icon){
+                    viewport.icon(icon);
               }
               
               viewport.root.addEventListener('mousedown',md);
