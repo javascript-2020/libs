@@ -1,0 +1,340 @@
+
+
+<view-port>
+
+
+      <template shadowrootmode=open>
+      
+            <style>
+  :host
+    {display:block;position:absolute;
+      /*box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;*/
+      /*box-shadow:rgba(173, 216, 230, 0.25) 0px 1px 1px 0px inset,rgba(0, 0, 0, 0.15) 0px 50px 100px -20px,rgba(0, 0, 0, 0.25) 0px 30px 60px -30px;*/
+      box-shadow:rgba(50, 130, 230, 0.1) 0px 1px 1px 0px inset,rgba(50, 130, 230, 0.1) 0px 50px 100px -20px,rgba(50, 130, 230, 0.1) 0px 30px 60px -30px;
+      
+      
+    }
+    
+  #view-port
+    {display:flex;flex-direction:column;gap:5px;border:1px solid lightgray;box-sizing:border-box;border-radius:5px;background:whitesmoke;
+      padding:5px;padding-top:20px;height:100%}
+      
+  #hdr
+    {height:16px;background:lightblue;position:absolute;left:0;top:0;width:100%;border-top-left-radius:10px;border-top-right-radius:10px;padding:1px 5px;box-sizing:border-box}
+    
+  #title
+    {font-weight:bold;font-size:13px}
+    
+  #icons
+    {position:absolute;right:7px;top:2px;display:flex;align-items;center;gap:5px}
+  #icons img
+    {width:13px;height:13px;cursor:pointer;box-sizing:border-box}
+  #icons #minify
+    {width:11px;height:11px;
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAANlBMVEVHcExEa+BCadtGbN5gfdJLb9pFa95HbN1McN1Yd9hWdthwi9RNcdtXdthGa95CauBJbt1BaeIbh+3uAAAAEXRSTlMA8efRFIDgwpMoOwd6L7r4qZFYKX8AAAB+SURBVCjP7dK7EsMgDETRBYEE+Mn//2yw3WiUoFTpctszKjSzANIqzBxNLGvCaJM+SbZxO9XhCbk7ZZDHhOhx9Dkg/PlHfJzZdB6K6d6NLpHifbG87IrlnUUxt2Rq/PAzh0im2DVPx/RlisXjguqcUwXa1KldL9bC4UNcxu0LKVUuYZQAW1cAAAAASUVORK5CYII=);
+    }
+  #icons #close
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAj1QTFRFAAAA4Cco6hkY7xQU8RgZ8RgY8BgZ8hgY7xIU6BcW3Sgt2To67RMV9AkJ+QQE/AIC/AIC+AQF9AkK7RET4DMy2Tg38RAP+QQE/AEB/QAB/gAA/QEA+wEB+QQE8Q8P3TQz7BIT+QQE/QEB/QAA+QQD6xMT4CUl9QkJ/AEC9AgI5CMj7BcW+QQE+AUE9wcH+QQE+QQE9wcH+AQF+gME7BYW6REQ+wIB+QUE6RYW0To+6hUV9gcG9gUF6hUR1js66RQX+QQE8g0O5QsL9wgI3kA+////6BYU9gYG9wUF6RMUylBT9QkK/QEC8g0N5QwK+gQE6RER6BIR9gYG9gYG6BQT6RUV+AQF8g0N9QUF6BAO5RQW5RUX5xYY9QcH8w0N5QsK9gYF6hAP5xUX9AcI+wIC/gAB9gYF5RMU5hgb9gcH9gYF5BUV5hYX9wQF6BIT6BMT9QYG9gUE6BER4RQV5BQT6BMS+QQE6RMR5REU9AYH9QYF6RIQ6RQV+gQE5QsL9wcH2zo74xIT8wYG/AIB9wYF6hMR0jg59QcH8Q4O6hAR/AIC+QQF7BUXyzc35xMS9AYF9gYG6RUU3Dk36RUW+QQE8Q8O7BgX+QQD9AcH+QQE+gMD6xYT3Sgm8wkI9QgI4yQk7BIT+AQE+gME7BIV3TQz+AQE+wEC/AEA8A8Q3DQz1zw56xMU8goJ+QQE+wIC+wMC+wMC8wkI6hMU2Ds43Sst6RcX6xMU7xcW7xcV8BcV8BcW7xcY6hUV6BkX3ignt1x/WQAAAL90Uk5TABE5UlhYWFhSORIIYsjy/P3yymQJCYr5///////6jwpo+////GwX0P/UGkb36cTr7sXq+Utk/+1NCErf5FEJSuhpassN/0Xh5EwIwf9uae5PSOLlTE3sbeJKQ0ZI4W1p40tI4f//5EVD4+VGQuNLSOHjS0VFSPBRSuTkS0zsacsMSuP/40wLyG5k/+xPCk/j41EMT+xqRvfH7flLF9DUGmf6/G0J+f//jwoHYMbx/P38yWQJEThSV1dXV1dTOhK+MhyLAAABr0lEQVR4nK3SQUgUURgH8P9/l+jNusIiLB5EEEXFJFmM1csiuHST3IMHQSox2IMEYYIkBXlZFjwpBJ3UwgSriwf1qOvBLhFrGiS4GBQRFHmIZZ1FYsf35o3L7Ahe9Du9md983/vem4+4MHglTBUW4IMFn1weu7nK1nKOpT74W+ZwpTq1vp9xg7Sie0sDhSBzDreQecvbE6v5VXM7jwKmkPvnVQmrlvxtWYEQP2mO8idQr7Y7DBTRqBYHQKktozl+UALa5P5kjs38j2vcATq5qrk/W1IlCkBQJv4DQtwGRPSdi0WXOmmYf4BabspORWxR8/CGZIge1QLsLjKml/vWxW1+k09NXIH/fDaYUA2j9ddn+468PMB9u/gNvvW5WbeW4Begg7tAZC9X9GbfZRa4JQ/2EejmvOtgzxckJ/kBMfLVA26hly/krY1Nap7mLPBY3eXyD594pBZpYLTmoeaXTAnTGKrjNGFC3IyEZ0wYT5jUPMdnfu8PNQppjjjj8JpPUeFGUUzx3tm0LI3PcMLtRurkOgfLo/i+cth4/w15pzyKMtZsp/1GLePOh7gwLsenPLh5H68t6T4AAAAASUVORK5CYII=);
+    }
+    
+  #body
+    {flex:1;position:relative;overflow:auto}
+    
+    
+            </style>
+            
+            
+            <div id=view-port>
+            
+                  <div id=hdr>
+                        <div id=title>
+                        </div>
+                        <div id=icons>
+                              <img id=minify title=minify>
+                              <img id=close title=close>
+                        </div>
+                  </div>
+                  
+                  <div id=body>
+                  </div>
+                  
+            </div>
+            
+      </template>
+      
+      
+      <script>
+      
+(function({mod,host}){
+
+  var obj   = {};
+  
+        var df=true,did='view-port'
+        ;
+        
+        var $,debug,vm,uconfig
+        ;
+        
+        obj.initmod   = function(...params){
+        
+              params.forEach(params=>{
+              
+                    $           = mod.rd(params,'$',$);
+                    debug       = mod.rd(params,'debug',debug);
+                    vm          = mod.rd(params,'vm',vm);
+                    uconfig     = mod.rd(params,'config',uconfig);
+                    
+              });
+              
+        }//initmod
+        
+        
+  //:
+  
+        obj.host        = host;
+        
+        var root;
+        obj.root        = null;
+        var style;
+        var hdr;
+        var body;
+        obj.body        = null;
+        obj.on          = {};
+        var on          = obj.on;
+        obj.on.before   = {};
+        obj.status      = 'hidden';
+        
+        var callback    = {};
+        
+        
+        var config      = {
+                                icons   : {
+                                                close     : true,
+                                                minify    : true,
+                                          },
+                          };
+                          
+                          
+                          
+        var rdconfig    = {};
+        
+        
+  //:
+  
+  
+        obj.init    = function(){
+        
+                                                                                debug=eval(debug.mod);
+                                                                                debug('init');
+              rdconfig.open(config,uconfig);
+              
+        }//init
+        
+        
+        rdconfig.open   = function(config,uconfig){
+        
+              uconfig   ||= {};
+              fn(config,uconfig);
+              
+              
+              function fn(config,uconfig){
+              
+                    for(var key in uconfig){
+                    
+                          if(typeof uconfig[key]=='object'){
+                                if(!config[key]){
+                                      config[key]   = {};
+                                }
+                                fn(config[key],uconfig[key]);
+                          }else{
+                                config[key]   = uconfig[key];
+                          }
+                          
+                    }//for
+                    
+              }//fn
+              
+        }//rdconfig
+        
+        
+  //:
+  
+  
+        obj.initdom   = function(){
+        
+              host.style.cssText                      = 'left:0;top:0;width:750px;height:500px';
+              $.drag(host,callback.drag);
+              
+              var shadow                              = host.shadowRoot;
+              
+              style                                   = $(shadow,'style');
+              
+              root                                    = $(shadow,'#view-port');
+              obj.root                                = root;
+              
+              root.onmouseenter                       = e=>icons.style.display='';
+              root.onmouseleave                       = e=>icons.style.display='none';
+              
+              hdr                                     = $(root,'#hdr');
+              obj.hdr                                 = hdr;
+              
+              var icons                               = $(hdr,'#icons');
+              if(config.icons.close!==false){
+                    $(icons,'#close').onclick         = close;
+              }else{
+                    $(icons,'#close').remove();
+              }
+              if(config.icons.minify!==false){
+                    $(icons,'#minify').onclick        = hide;
+              }else{
+                    $(icons,'#minify').remove();
+              }
+              
+              body                                    = $(shadow,'#body');
+              obj.body                                = body;
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+        callback.drag   = function(e,dragtype,ox,oy){
+        
+              if(typeof obj.on.drag=='function'){
+                    obj.on.drag(e,dragtype,ox,oy);
+              }
+              
+        }//drag
+        
+        
+        obj.title   = function(txt){
+        
+              if(txt){
+                    if(typeof txt=='string'){
+                          $(hdr,'#title').textContent   = txt;
+                    }else{
+                          $(hdr,'#title').append(txt);
+                    }
+              }
+              txt   = $(hdr,'#title').textContent;
+              return txt;
+              
+        }//title
+        
+        
+  //:
+  
+  
+        obj.css   = function(css){
+        
+              var index   = style.sheet.insertRule(css);
+              
+        }//css
+        
+        
+        obj.pos   = function({x,y,w,h}){
+        
+              var css   = v=>(typeof v=='number' ? v+'px' : v);
+              
+              if(x!==undefined){
+                    host.style.left       = css(x);
+              }
+              if(y!==undefined){
+                    host.style.top        = css(y);
+              }
+              if(w!==undefined){
+                    host.style.width      = css(w);
+              }
+              if(h!==undefined){
+                    host.style.height     = css(h);
+              }
+              
+        }//pos
+        
+        
+        obj.remove    = close;
+        
+        obj.close     = close;
+        
+        function close(){
+        
+              if(typeof on.before.close=='function'){
+                    on.before.close(obj);
+              }
+              
+              host.remove();
+              if(vm){
+                    vm.remove(obj);
+              }
+              
+              if(typeof on.close=='function'){
+                    on.close(obj);
+              }
+              
+        }//remove
+        
+        
+        obj.hide    = hide;
+        
+        function hide(){
+        
+              if(typeof on.before.hide=='function'){
+                    on.before.hide(obj);
+              }
+              
+              host.style.display    = 'none';
+              obj.status            = 'hidden';
+              
+              if(typeof on.hide=='function'){
+                    on.hide(obj);
+              }
+              
+        }//hide
+        
+        
+        obj.show    = show;
+        
+        function show(){
+        
+              if(typeof on.before.show=='function'){
+                    on.before.show(obj);
+              }
+              
+              host.style.display    = 'block';
+              obj.status            = 'visible';
+              vm.tofront(viewport);
+              
+              if(typeof on.show=='function'){
+                    on.show(obj);
+              }
+              
+        }//show
+        
+        
+        obj.icon    = function(){
+        
+              if(obj.status=='hidden'){
+                    show();
+              }else{
+                    hide();
+              }
+              
+        }//icon
+        
+        
+  //:
+  
+  return obj;
+  
+})
+
+      </script>
+      
+      
+</view-port>
+
+
+
