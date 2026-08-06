@@ -23,7 +23,9 @@
   
         async function ready(){
         
-        
+              var vp    = mod['view-port'];
+              vp.title('hello-world');
+              
               initdom();
               
               
@@ -70,21 +72,6 @@
       
       
         function initdom(){
-        
-/*
-              $('#hdr [value=iframe]').onclick    = async e=>{
-              
-                    var node    = document.createElement('webcontainer-iframe');
-                    node.setAttribute('component','page');
-                    document.body.append(node);
-                    var mod2      = mod.create({mod,name:'webcontainer-iframe'});
-                    var result    = await mod.build({root:node,mod:mod2});
-                    await mod2.auto();
-                    var wciframe    = mod2['webcontainer-iframe'];
-                    
-              };
-*/
-
         }//initdom
         
         
