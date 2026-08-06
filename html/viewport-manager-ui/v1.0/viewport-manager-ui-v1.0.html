@@ -23,7 +23,9 @@
   .item
     {display:flex;gap:5px;padding:5px 10px}
     
-  .vp-icon
+  .v-icon
+    {width:13px;height:13px}
+  .f-icon
     {width:15px;height:15px;cursor:pointer}
   .show
     {background:lightgreen;border-radius:3px}
@@ -56,17 +58,17 @@
                   <div id=list>
                         <div class=item>
                         
-                              <img class=icon>
+                              <img class=v-icon>
                               <div class=title>
                               </div>
                               
                               <div class=spc>
                               </div>
                               
-                              <div class='show vp-icon'>
+                              <div class='show f-icon'>
                               </div>
-                              <img class='minify vp-icon'>
-                              <img class='close vp-icon'>
+                              <img class='minify f-icon'>
+                              <img class='close f-icon'>
                         </div>
                   </div>
                   
@@ -207,7 +209,7 @@
               
                     var nitem                           = item.cloneNode(true);
                     
-                    $(nitem,'.icon').src                = vp.icon()||'';
+                    $(nitem,'.v-icon').src              = vp.icon()||'';
                     $(nitem,'.title').textContent       = vp.title()||'';
                     
                     $(nitem,'.show').onclick            = e=>vp.show();
