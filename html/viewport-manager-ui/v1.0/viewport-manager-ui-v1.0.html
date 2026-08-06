@@ -184,6 +184,9 @@
         obj.show.toggle    = function(){
         
               viewport.show.toggle();
+              if(viewport.status=='visible'){
+                    update();
+              }
               
         }//icon
         
