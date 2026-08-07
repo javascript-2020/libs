@@ -73,6 +73,7 @@
               if(par){
                     par.append(node);
               }
+              node.toggleAttribute('v2.0',true);
               
               var mod2        = mod.create({mod,name:'view-port'});
               var result      = await mod.build({root:node,mod:mod2});
