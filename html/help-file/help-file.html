@@ -94,7 +94,7 @@
   
         obj.init    = async function(){
                                                                                 debug=eval(debug.mod);
-                                                                                debug('init');
+                                                                                debug('init',obj.version);
               await libs();
               
               await rd.attr.src();
