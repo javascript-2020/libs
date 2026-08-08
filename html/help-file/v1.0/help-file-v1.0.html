@@ -125,9 +125,11 @@
                                                                                 debug('src',url);
               var {txt,error}   = await get(url);
               if(error){
-                    txt   = error;
+                                                                                debug('error',error);
+                    text    = error;
+              }else{
+                    text    = txt;
               }
-              text    = txt;
               
         }//src
         
