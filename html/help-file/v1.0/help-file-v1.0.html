@@ -203,7 +203,7 @@
               
               view                    = $(shadow,'#view');
               
-              await load();
+              await load(src);
               
               
         }//initdom
@@ -277,10 +277,8 @@
   //:
   
   
-        function load(){
-                                                                                debug('load');
-              var url   = resolve(src);
-                                                                                debug('src',url);
+        function load(url){
+                                                                                debug('load',url);
               var {txt,error}   = await get(url);
               if(error){
                                                                                 debug('error',error);
