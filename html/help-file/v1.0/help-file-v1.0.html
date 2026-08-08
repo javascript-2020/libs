@@ -74,6 +74,9 @@
   //:
   
   
+        var md;
+        
+        
         var base          = document.baseURI;
         var target        = host;
         
@@ -110,7 +113,7 @@
               opts.breaks         = false;
               opts.linkify        = true;
                                                                                 debug.json(opts);
-              var md              = markdownit(opts);
+              md                  = markdownit(opts);
               md.use(markdownItAttrs,{leftDelimiter:'{',rightDelimiter:'}',allowedAttributes:['id','class',/^data-.*$/]});
               
               
