@@ -54,7 +54,8 @@
   
         var df=true,did='help-file';
         
-        var $,debug,vm;
+        var $,debug,vm,src
+        ;
         
         obj.initmod   = function(...params){
         
@@ -63,6 +64,7 @@
                     $             = mod.rd(params,'$',$);
                     debug         = mod.rd(params,'debug',debug);
                     vm            = mod.rd(params,'vm',vm);
+                    src           = mod.rd(params,'src',src);
                     
                     base          = mod.rd(params,'base',base);
                     
@@ -117,23 +119,16 @@
               md.use(markdownItAttrs,{leftDelimiter:'{',rightDelimiter:'}',allowedAttributes:['id','class',/^data-.*$/]});
               
               
+              load();
+              
+              
         }//init
         
         
         rd.attr.src   = async function(){
         
               if(!target.hasAttribute('src'))return;
-              var src   = target.getAttribute('src');
-              var url   = resolve(src);
-                                                                                debug('src',url);
-              var {txt,error}   = await get(url);
-              if(error){
-                                                                                debug('error',error);
-                    text    = error;
-              }else{
-                                                                                debug('ok',txt.length);
-                    text    = txt;
-              }
+              src   = target.getAttribute('src');
               
         }//src
         
@@ -266,6 +261,22 @@
   //:
   
   
+        function load(){
+                                                                                debug('load');
+              var url   = resolve(src);
+                                                                                debug('src',url);
+              var {txt,error}   = await get(url);
+              if(error){
+                                                                                debug('error',error);
+                    text    = error;
+              }else{
+                                                                                debug('ok',txt.length);
+                    text    = txt;
+              }
+              
+        }//load
+        
+        
         function resolve(url){
                                                                                 //debug('resolve',url);
               url   = new URL(url,base);
