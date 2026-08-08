@@ -78,9 +78,12 @@
   
         var md;
         
-        debugger;
+        
         var base          = document.baseURI;
         var target        = host;
+        
+        var src           = 'docs/help.md';
+        
         
         var viewport;
         var title         = 'help file';
@@ -117,9 +120,6 @@
                                                                                 debug.json(opts);
               md                  = markdownit(opts);
               md.use(markdownItAttrs,{leftDelimiter:'{',rightDelimiter:'}',allowedAttributes:['id','class',/^data-.*$/]});
-              
-              
-              load();
               
               
         }//init
@@ -203,7 +203,8 @@
               
               view                    = $(shadow,'#view');
               
-              display(text);
+              await load();
+              
               
         }//initdom
         
@@ -256,6 +257,20 @@
             var html            = md.render(txt);
             view.innerHTML      = html;
             
+            
+            
+            $.all(view,'a').forEach(a=>a.onclick=click);
+            
+            
+            function click(e){
+            
+                  e.preventDefault();
+                  var url   = e.target.href;
+                  load(url);
+                  
+            }//click
+            
+            
         }//display
         
         
@@ -274,6 +289,8 @@
                                                                                 debug('ok',txt.length);
                     text    = txt;
               }
+              
+              display(text);
               
         }//load
         
