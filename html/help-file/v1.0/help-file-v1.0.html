@@ -278,7 +278,7 @@
   //:
   
   
-        function load(url){
+        async function load(url){
                                                                                 debug('load',url);
               var {txt,error}   = await get(url);
               if(error){
