@@ -122,15 +122,15 @@
               
                     if(viewport.host.parentNode===root){
                           if(viewport2===viewport){
-                                viewport.host.style.zIndex    = list.length;
-                                viewport.host.classList.add('active');
-                                viewport.host.classList.remove('inactive');
+                                viewport2.host.style.zIndex    = list.length;
+                                viewport2.host.classList.add('active');
+                                viewport2.host.classList.remove('inactive');
                           }else{
-                                var z   = Number(viewport.host.style.zIndex);
+                                var z   = Number(viewport2.host.style.zIndex);
                                 z--;
                                 viewport2.host.style.zIndex    = z;
-                                viewport.host.classList.remove('active');
-                                viewport.host.classList.add('inactive');
+                                viewport2.host.classList.remove('active');
+                                viewport2.host.classList.add('inactive');
                           }
                     }
                     
