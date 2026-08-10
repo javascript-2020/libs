@@ -260,7 +260,15 @@
             
             
             
-            $.all(view,'a').forEach(a=>a.onclick=click);
+            $.all(view,'a').forEach(a=>{
+            
+                  if(a.href.startsWith('https')){
+                        a.setAttribute('target','_blank');
+                        return;
+                  }
+                  a.onclick   = click
+                  
+            });
             
             
             function click(e){
