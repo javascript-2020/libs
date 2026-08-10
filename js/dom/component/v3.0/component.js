@@ -1,6 +1,13 @@
 
         var mod;
         
+        var version;
+        var df,did;
+        var $,datatype,menumod,keydown,debug;
+        var menu,ace,log;
+        var ls;
+        
+        
 (()=>{
 
                                                                                 //debug('component','v3.0');
