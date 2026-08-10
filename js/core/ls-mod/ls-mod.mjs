@@ -10,7 +10,7 @@ lsmod.mjs
 
 */
                                                                                 //debugger;
-                                                                                var df=false,did='lsmod.mjs';
+                                                                                var df=true,did='lsmod.mjs';
                                                                                 df && console.log(`[ ${did} ]`);
                                                                                 
                                                                                 df && console.log(`[ ${did} ]`,'import.meta.url  :',import.meta.url);
