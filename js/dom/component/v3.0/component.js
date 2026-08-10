@@ -1201,6 +1201,7 @@
         }
                                                                                 console.clear();
                                                                                 console.json=v=>console.log(JSON.stringify(v,null,4));
+                                                                                console.hex=v=>console.log(v,'Hex:',[...v].map(c=>c.charCodeAt(0).toString(16).padStart(2,'0')).join(' '));
         version='v1.0';
         df=true,did='html';
         
