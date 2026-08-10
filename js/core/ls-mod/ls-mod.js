@@ -1,10 +1,9 @@
 
 
 
-console.log('localstoragemod-1');
 
 function localstoragemod(){
-console.log('localstoragemod-2');
+
   var obj   = {
         version   : 'v1.0',
   };
