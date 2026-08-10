@@ -3,7 +3,7 @@
         
         var version;
         var df,did;
-        var $,datatype,menumod,keydown,debug;
+        var ext,$,datatype,menumod,keydown,debug;
         var menu,ace,log;
         var ls;
         
