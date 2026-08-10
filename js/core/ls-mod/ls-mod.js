@@ -1,9 +1,10 @@
 
 
 
+console.log('localstoragemod-1');
 
 function localstoragemod(){
-
+console.log('localstoragemod-2');
   var obj   = {
         version   : 'v1.0',
   };
@@ -322,9 +323,9 @@ function localstoragemod(){
                                 
                                 if(!list.includes(page)){
                                       if(disp){
-                                                                                      console.log(page);
+                                                                                console.log(page);
                                       }else{
-                                                                                      debug(page);
+                                                                                debug(page);
                                       }
                                       list.push(page);
                                 }
@@ -365,9 +366,9 @@ function localstoragemod(){
                     if(typeof key=='string'){
                           if(key.startsWith(prefix)){
                                 if(disp){
-                                                                                      console.log(key);
+                                                                                console.log(key);
                                 }else{
-                                                                                      debug(key);
+                                                                                debug(key);
                                 }
                                 list.push(key);
                                 localStorage.removeItem(key);
