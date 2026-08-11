@@ -408,6 +408,68 @@ function localstoragemod(){
         }//page
         
         
+        
+  //:
+  
+  
+        obj.create    = {};
+        
+        function create({name,save,df}){
+        
+              var config   = {get,set,deleteProperty};
+              return config;
+              
+              
+              function get(target,prop,receiver){
+                                                                                df && console.log(`[${name}:GET] ${String(prop)}`);
+                    return Reflect.get(target,prop,receiver);
+                    
+              }//get
+              
+              
+              function set(target,prop,value,receiver){
+                                                                                df && console.log(`[${name}:SET] ${String(prop)} = ${value}`);
+                    save();
+                    return Reflect.set(target,prop,value,receiver);
+                    
+              }//set
+              
+              
+              function deleteProperty(target,prop){
+                                                                                df && console.log(`[${name}:DELETE] ${String(prop)}`);
+                    save();
+                    return Reflect.deleteProperty(target,prop);
+                    
+              }//deleteProperty
+              
+        }//create
+        
+        
+        obj.create.array    = function(name,df=false){
+        
+              var status    = false;
+              var arr       = [];
+              var config    = create({name,save,df});
+              var proxy     = new Proxy(arr,config);
+              return proxy;
+              
+              
+              function save(){
+              
+                    if(status)return;
+                    status    = true;
+                    queueMicrotask(()=>{
+                                                                                df && console.log(`${name} save`,arr);
+                          obj.write[name]   = arr;
+                          status            = false;
+                          
+                    });
+                    
+              }//save
+              
+        }//array
+        
+        
   //:
   
   
