@@ -445,29 +445,33 @@ function localstoragemod(){
         }//create
         
         
-        obj.create.array    = function(name,df=false){
+        obj.create    = new Proxy({},{set:function(obj,prop,value){
         
-              var status    = false;
-              var arr       = [];
-              var config    = create({name,save,df});
-              var proxy     = new Proxy(arr,config);
-              return proxy;
-              
-              
-              function save(){
-              
-                    if(status)return;
-                    status    = true;
-                    queueMicrotask(()=>{
-                                                                                df && console.log(`${name} save`,arr);
-                          obj.write[name]   = arr;
-                          status            = false;
-                          
-                    });
+                                                                                var df=false;
+                    var name      = prop;
                     
-              }//save
+                    var status    = false;
+                    var config    = create({name,save,df});
+                    var proxy     = new Proxy(value,config);
+                    return proxy;
+                    
+                    
+                    function save(){
+                    
+                          if(status)return;
+                          status    = true;
+                          queueMicrotask(()=>{
+                                                                                df && console.log(`${name} save`,arr);
+                                obj.write[name]   = value;
+                                status            = false;
+                                
+                          });
+                          
+                    }//save
+                    
+              }//set
               
-        }//array
+        }//write
         
         
   //:
