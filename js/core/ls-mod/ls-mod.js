@@ -411,7 +411,7 @@ function localstoragemod(){
         
   //:
   
-  
+/*  
         obj.create    = {};
         
         function create({name,save,df}){
@@ -472,7 +472,7 @@ function localstoragemod(){
               }//set
               
         }//write
-        
+*/        
         
   //:
   
