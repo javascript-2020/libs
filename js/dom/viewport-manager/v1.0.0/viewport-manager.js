@@ -171,7 +171,7 @@
                           }else{
                                 //var z   = Number(viewport2.host.style.zIndex);
                                 //z--;
-                                viewport2.host.style.zIndex    = z;
+                                //viewport2.host.style.zIndex    = z;
                                 viewport2.host.classList.remove('active');
                                 viewport2.host.classList.add('inactive');
                           }
