@@ -14,14 +14,14 @@
     }
     
   #view-port
-    {display:flex;flex-direction:column;gap:5px;border:1px solid lightgray;box-sizing:border-box;border-radius:5px;background:whitesmoke;
+    {display:flex;flex-direction:column;gap:5px;border:1px solid;border-color:lightgray;box-sizing:border-box;border-radius:5px;background:whitesmoke;
       padding:5px;padding-top:20px;height:100%;
       font-family:arial;
     }
     
   #hdr
     {height:16px;background:lightblue;position:absolute;left:0;top:0;width:100%;border-top-left-radius:10px;border-top-right-radius:10px;padding:1px 10px;box-sizing:border-box;
-      display:flex;gap:5px;
+      display:flex;gap:5px;align-items:center;
     }
     
   #icon
@@ -44,6 +44,18 @@
     
   #body
     {flex:1;position:relative;overflow:auto}
+    
+    
+  :host(.active)
+    {
+      box-shadow:rgba(34,197,94,0.2) 0px 1px 1px 0px inset,rgba(34,197,94,0.15) 0px 25px 50px -10px,rgba(34,197,94,0.15) 0px 15px 30px -15px;
+      /*transform: translateY(1px);*/
+    }
+  :host(.active) #view-port
+    {border-color:lightgreen}
+  :host(.active) #hdr
+    {background:lightgreen}
+    
     
     
             </style>
@@ -98,6 +110,7 @@
   //:
   
         obj.host        = host;
+        var viewport    = obj;
         
         var root;
         obj.root        = null;
@@ -167,8 +180,7 @@
   
   
         obj.initdom   = function(){
-        console.log('initdom');
-        console.log(host);
+        
               host.style.cssText                      = 'left:0;top:0;width:750px;height:500px';
               $.drag(host,callback.drag);
               
@@ -277,7 +289,7 @@
         obj.close     = close;
         
         function close(){
-        console.log('close');
+        
               if(typeof on.before.close=='function'){
                     on.before.close(obj);
               }
@@ -352,6 +364,5 @@
       
       
 </view-port>
-
 
 
