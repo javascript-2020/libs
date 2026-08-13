@@ -276,7 +276,7 @@
         obj.close     = close;
         
         function close(){
-        
+        console.log('close');
               if(typeof on.before.close=='function'){
                     on.before.close(obj);
               }
