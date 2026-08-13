@@ -34,6 +34,11 @@
   
   
         var root;
+        
+        var ontop     = {};
+        ontop.root    = null;
+        ontop.list    = [];
+        
         var list    = [];
         obj.list    = list;
         
@@ -52,13 +57,17 @@
   
         obj.initdom   = function({par}={}){
         
-              par               ||= document.body;
+              par                   ||= document.body;
               
-              root                = document.createElement('div');
-              root.id             = 'viewport-manager';
-              root.style.zIndex   = 1;
+              root                    = document.createElement('div');
+              root.id                 = 'viewport-manager';
+              root.style.zIndex       = 1;
               par.append(root);
               
+              ontop                   = document.createElement('div');
+              ontop.id                = 'viewport-manager-ontop';
+              ontop.style.zIndex      = 2;
+              par.append(ontop);
               
         }//initdom
         
