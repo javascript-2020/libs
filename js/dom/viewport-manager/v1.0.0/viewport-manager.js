@@ -147,7 +147,7 @@
               var root;
               var list;
               var f   = false;
-              if(viewport.host.parentNode===root){
+              if(viewport.host.parentNode===main.root){
                     f       = 'main';
                     ({root,list}    = main);
               }
