@@ -164,14 +164,14 @@
               
                     if(viewport.host.parentNode===root){
                           if(viewport2===viewport){
-                                //viewport2.host.style.zIndex    = list.length;
+                                viewport2.host.style.zIndex    = list.length;
                                 viewport2.host.classList.add('active');
                                 viewport2.host.classList.remove('inactive');
-                                root.append(viewport2.host);
+                                //root.append(viewport2.host);
                           }else{
-                                //var z   = Number(viewport2.host.style.zIndex);
-                                //z--;
-                                //viewport2.host.style.zIndex    = z;
+                                var z   = Number(viewport2.host.style.zIndex);
+                                z--;
+                                viewport2.host.style.zIndex    = z;
                                 viewport2.host.classList.remove('active');
                                 viewport2.host.classList.add('inactive');
                           }
