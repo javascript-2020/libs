@@ -124,8 +124,8 @@
   
   
         obj.initdom   = async function(){
-        
-        
+                                                                                debug('initdom');
+                                                                                
               await createviewport();
               
               host.style.display                      = '';
@@ -140,7 +140,7 @@
               item                                    = $(list,'.item');
               item.remove();
               
-              
+              debug('initdom-compplete');
         }//initdom
         
         
