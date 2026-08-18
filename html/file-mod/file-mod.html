@@ -211,6 +211,38 @@
   //:
   
   
+        obj.load    = async function(file){
+        
+              var fmod;
+              var type    = file.filetype||file.type;
+              switch(type){
+              
+                case 'github'               : fmod    = github;             break;
+                case 'localfile'            : fmod    = localfile           break;
+                case 'file-server'          : fmod    = fileserver          break;
+                case 'db-files'             : fmod    = dbfiles             break;
+                case 'google-storage'       : fmod    = googlestorage       break;
+                case 'ftp-server'           : fmod    = ftpserver           break;
+                case 'electron'             : fmod    = electron            break;
+                
+              }//switch
+              
+              if(!fmod){
+                    fmod    = registry.find(entry=>entry.filetype===type);
+              }
+              
+              if(!fmod){
+                    alert('an error occurred, unknown filetype : '+type);
+                    return;
+              }
+              
+              var blob    = await fmod.load(file);
+              return blob;
+              
+        }//load
+        
+        
+        
         obj.save    = function(file){return save(file)}
         
         async function save(file){
