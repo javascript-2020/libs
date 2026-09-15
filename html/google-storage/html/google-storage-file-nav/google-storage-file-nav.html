@@ -128,7 +128,7 @@
               var token     = 'ya29.c.c0AZ4bNpbP-g-E3kwKJufUtYHiXTnIcZoPHbxvxv0qKhCHcV96UzW0BQUwjzQe_7T1zudds0CNdo8IuAnE7x8Xfd0Rilr69RJ_zbN99PEqQUVeLvNY-iNbkLZKU3j1aFQd9waSFVYl_edW8HEV2edlS2Zu_w81MnUlmBEzPa3aJmyMYa5NtmwcyxeQdIRfw8xsuf9ZZX57WbiOxecwTNXbawOG2ZRw8WOsVb6dLhe1la__2p2jAEJtMkOOcU9RcNj-wFsq1U5QUOxdEv2d-wodFRs1WbNp6OvBC2zBL-Hp73z_QQbR2FBeKcC_pYFaEBigOGy--baJPEyx2UsTbuspe4ru9Awedylm8iI069kDJybvU14dkrI0zPUpUgE387CFUk5VrZQ1WUkVsOdb3ld7Sq018uVaaocaU4x0WlyV8o3UcaRreMxspUwp4fmBiZMh52n4_eMSOuVZ17IRwtt7XqzaUeokv4S0wXVwjZknyZBv44UbMcfZF-fF37ua9s3iw4nBpO1uoF4v29XXVpknu1UZvSkvVdlcB4v5nO80Vfenojjvh-kXijM4o1efrWsnjm0v70vd-tO7idxa4bXRahs8gbkSevXb68_ecwgnezBQSUcZiJR3Qf7-7ru-WJW4eye08oRJu41Vrq-8Wu2fB1g34WilVJvJ9XVM0tda-vsivgyx02ljqQzZexoI407chSe5rb5MvfyXm9BubI-4zrkQ4yxXhooWsXJ7ns_-08p4bve4wzSZx6Whsn0VgQgecouj_Sz7mVZogqnWQ-q8_4kBlQ1VzWpIVxUOznb8Fqfxlwqg6cu73fYpzrXO7Ou5oajZ3X2Yio7rpRcBvYeX0xBYBMQ8c4-25nteJkJh3vvdwVsk2jr6Yhzpubd3qxsWIge0p1-h5-9ImpZb1Wtlrih79fVgt-zOnikJpf--yfid3zuscJ47Q94QlsigFQB5284ySORvpbImXt4pbQ9k6du-6knSiYl5xY_aIBczrXY5JXwuSgR_tbR';
               var bucket    = 'ext-code-test_cloudbuild';
               var path      = '/';
-              var list      = await gs.dir.list.full({token,bucket,path});
+              var list      = await gs.dir.list({token,bucket,path});
               console.log(list);
               
         }//readdir
