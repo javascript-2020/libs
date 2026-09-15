@@ -86,8 +86,6 @@
         obj.init    = async function(){
                                                                                 debug=eval(debug.mod);
                                                                                 debug('init');
-console.log('gs',gs);
-
               await mod.auto();
               
               filenav   = mod['file-nav'];
@@ -108,6 +106,12 @@ console.log('gs',gs);
               
               var btns    = $(shadow,'#btns');
               $(btns,'[value=update]').onclick        = btn.update;
+              
+              
+              var bucket    = 'ext-code-test_cloudbuild';
+              var path      = '/';
+              var list      = await gs.dir.list.full({token,bucket,path});
+              console.log(list);
               
         }//initdom
         
