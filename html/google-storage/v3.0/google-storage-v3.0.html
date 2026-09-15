@@ -291,7 +291,8 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
-                                                                                
+              await mod.build();
+              
               await libs();
               
         }//init
