@@ -7,6 +7,19 @@
   :host
     {flex:1;display:flex;flex-direction:column;gap:10px}
     
+    
+  #btns
+    {display:flex;justify-content:center;gap:25px}
+    
+    
+  input
+    {font-size:16px;padding:5px 10px;box-sizing:border-box;}
+  input:not([type])
+    {flex:1}
+  input[type=button]
+    {cursor:pointer}
+    
+    
             </style>
             
             <div id=root>
@@ -17,6 +30,9 @@
                   
                   <file-nav component>
                   </file-nav>
+                  
+                  <div id=btns>
+                  </div>
                   
             </div>
             
