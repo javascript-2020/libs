@@ -292,6 +292,8 @@
   
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
+              mod.base.add({gs});
+              
               await mod.auto();
               
               await libs();
