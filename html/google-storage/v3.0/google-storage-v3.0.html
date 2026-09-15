@@ -254,7 +254,7 @@
         
         
         
-        var ext,$,menu,source
+        var ext,$,menu,source,debug
         ;
         
         obj.initmod   = function(params){
@@ -263,6 +263,7 @@
               $             = mod.rd(params,'$',$);
               menu          = mod.rd(params,'menu',menu);
               source        = mod.rd(params,'source',source);
+              debug         = mod.rd(params,'debug',debug)
               
         }//initmod
         
@@ -838,7 +839,7 @@
         
   //:
   
-  
+/*
         function debug(...args){
         
               if(!df && !obj.df)return;
@@ -850,10 +851,10 @@
               window.console.groupEnd();
               
         }//debug
-        
-        
-        
-        
+*/
+
+
+
   return obj;
   
 //google-storage
