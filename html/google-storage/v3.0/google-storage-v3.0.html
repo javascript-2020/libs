@@ -324,8 +324,8 @@
               icon.onclick                    = menu.click(mroot,'both',false,menu_callback);
               
               
-              $('#tabs #url').onclick         = btn.tab.url;
-              $('#tabs #file-nav').onclick    = btn.tab.filenav;
+              $(shadow,'#tabs #url').onclick         = btn.tab.url;
+              $(shadow,'#tabs #file-nav').onclick    = btn.tab.filenav;
               
               
               
@@ -530,13 +530,13 @@
   
         btn.tab.url   = function(){
         
-              $('#tabs #url').classList.add('active');
-              $('#tabs #url').classList.remove('inactive');
-              $('#tabs #file-nav').classList.remove('active');
-              $('#tabs #file-nav').classList.add('inactive');
+              $(shadow,'#tabs #url').classList.add('active');
+              $(shadow,'#tabs #url').classList.remove('inactive');
+              $(shadow,'#tabs #file-nav').classList.remove('active');
+              $(shadow,'#tabs #file-nav').classList.add('inactive');
               
-              $('#view #url').style.display         = '';
-              $('#view #file-nav').style.display    = 'none';
+              $(shadow,'#view #url').style.display         = '';
+              $(shadow,'#view #file-nav').style.display    = 'none';
               
         }//url
         
