@@ -60,11 +60,12 @@
   }
         var df=true,did='google-storage-file-nav';
         
-        var debug;
+        var debug,gs;
         
         obj.initmod   = function(params){
         
               debug   = mod.rd(params,'debug',debug);
+              gs      = mod.rd(params,'gs',gs);
               
         }//initmod
         
@@ -85,6 +86,8 @@
         obj.init    = async function(){
                                                                                 debug=eval(debug.mod);
                                                                                 debug('init');
+console.log(gs);
+
               await mod.auto();
               
               filenav   = mod['file-nav'];
