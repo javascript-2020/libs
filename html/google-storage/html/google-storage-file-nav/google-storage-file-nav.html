@@ -32,6 +32,7 @@
                   </file-nav>
                   
                   <div id=btns>
+                        <input value=update type=button>
                   </div>
                   
             </div>
@@ -61,7 +62,9 @@
   
         var filenav;
         
+        var shadow;
         
+        var btn     = {};
         var file    = {};
         
   //:
@@ -85,12 +88,24 @@
   
   
         obj.initdom   = async function(){
+        
+              shadow      = host.shadowRoot;
+              
+              var btns    = $(shadow,'#btns');
+              $(btns,'[value=update']).onclick        = btn.update;
+              
         }//initdom
         
         
   //:
   
   
+        btn.update    = function(){
+        }//update
+        
+        
+        
+        
   return obj;
   
 })
