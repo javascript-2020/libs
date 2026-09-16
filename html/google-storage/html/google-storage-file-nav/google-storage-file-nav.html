@@ -64,7 +64,8 @@
   }
         var df=true,did='google-storage-file-nav';
         
-        var $,gs,log,debug;
+        var $,gs,log,debug,filemod,par
+        ;
         
         obj.initmod   = function(params){
         
@@ -72,6 +73,8 @@
               gs            = mod.rd(params,'gs',gs);
               log           = mod.rd(params,'log',log);
               debug         = mod.rd(params,'debug',debug);
+              filemod       = mod.rd(params,'filemod',filemod);
+              par           = mod.rd(params,'google-storage',par);
               
         }//initmod
         
@@ -79,9 +82,18 @@
   //:
   
   
+        var token     = 'ya29.c.c0AZ4bNpYxXcXP2PFJphJ5NJ3lNcBXHHcRHeYmQZGxb6JeAHT40-d_JnlCVl5Im8gSO3aedJbUaldnNzI61bp51Mv0d-OAlT6kquSyA_Sjwe1n-afowKIVLcVKCyey-05OpYUJ2R-E2xPR4WxZ95aBb8dDIp-5mfxVuBrerytdEiH0ueRIRK0YwC0rwpK-TgovanIJNIpzat7F9b1q-o0bLS8XxjxYR5WEZS97mLuaGFCq9BQFRP6tpeSo3xj_Q3qi3lyKbwDf3QDrixaSNxa4EGqTIzJG_-jD8sfdqEvH-HrDe2oVpYJkUL49bpBnFlFnqZKyrGFaNOIYR4fPjMbyDKi3C3DmNSde9eI7yFcr12T6Ic00rwjA8EOuN385CVBv34eeq89ij3V9VMWRlc7b1ZO13fwIjs8Z2f1WyMukscp2gy33ls4Jj_Zxa7qpQ-2iOk5IJzb3_e4I25075dOy1OXw-ogdkkw5IqkJx--9IWmcQ1ou_cq2YyIvI2jWgOtj7wZptQuw50qpjtdUXp_7MbbQ4jruYadq84oZ9mJYxYVMwtyOn-jhVj4Rqs6hnnh4FBj7rljzyOu4WWOajho970IS3ukZXwWk3vc4aoI_zIQrevcm1tB2o02u82R-VQnjjMrQ-6rB-Y25sJ3hSkBs3Zd6_lrZUkxrY7hyzb0zoI_ZO9OrX7QoxvkMmqqtb4VqB2zzprUYBvnolrSMp3y5eiaBvIa1svpQ0vzVsmdMj_8Uiq0Y_b-1ZMjZ6R98fBw8WuZroy0_0tnunivlgojzc48ssgYhhYdfk_9SWjsel2IZjQpzzn1On2wrlmp5ByVV_V4W28gg60UtOpvpgmzWpmU_oSi6uYgeB_ahteII2W726uQlX1v92aQqz3aV27V-qwa-hvU-vnM5SYMyeS80661ovxSFjMgVt2XgM5fe281I_I-pU_pzJitZ5BodYo_0QQqgZ4-2iQUu1MuooWpfhfsoMaklzUzYJWMg2W8fBhzhMRlJOzUUxhj';
+        var bucket    = 'ext-code-test_cloudbuild';
+        
+        
         var filenav;
         
+        
+        
         var shadow;
+        
+        
+        
         
         var btn     = {};
         var file    = {};
@@ -129,11 +141,51 @@
   //:
   
   
+        file.dblclick   = function(path,filename){
+                                                                                debug('file.dblclick');
+              path                = path+filename;
+              var {blob,error}    = await gs.file.load({token,bucket,path});
+              if(error){
+                    log.error(result.error);
+                    return;
+              }
+              
+              
+              var i           = path.lastIndexOf('/');
+              var filename    = path.slice(i+1);
+              var abs         = bucket+'//'+path;
+              
+              var title       = abs;
+              
+              var file;
+              var file    = filemod.newfile({
+              
+                    filetype    : 'google-storage',
+                    abs         : abs,
+                    path        : path,
+                    name        : filename,
+                    
+                    kind        : 'file',
+                    size        : null,
+                    ctime       : null,
+                    mtime       : null,
+                    atime       : null,
+                    
+                    title       : title,
+                    icon        : icon.src
+                    
+              });
+              
+              file.bucket   = bucket;
+              
+              
+              par.load?.complete?.(file,blob);
+              
+        }//dblclick
+        
+        
         dir.read    = async function(path){
                                                                                 debug('dir.read',path);
-              var token     = 'ya29.c.c0AZ4bNpYxXcXP2PFJphJ5NJ3lNcBXHHcRHeYmQZGxb6JeAHT40-d_JnlCVl5Im8gSO3aedJbUaldnNzI61bp51Mv0d-OAlT6kquSyA_Sjwe1n-afowKIVLcVKCyey-05OpYUJ2R-E2xPR4WxZ95aBb8dDIp-5mfxVuBrerytdEiH0ueRIRK0YwC0rwpK-TgovanIJNIpzat7F9b1q-o0bLS8XxjxYR5WEZS97mLuaGFCq9BQFRP6tpeSo3xj_Q3qi3lyKbwDf3QDrixaSNxa4EGqTIzJG_-jD8sfdqEvH-HrDe2oVpYJkUL49bpBnFlFnqZKyrGFaNOIYR4fPjMbyDKi3C3DmNSde9eI7yFcr12T6Ic00rwjA8EOuN385CVBv34eeq89ij3V9VMWRlc7b1ZO13fwIjs8Z2f1WyMukscp2gy33ls4Jj_Zxa7qpQ-2iOk5IJzb3_e4I25075dOy1OXw-ogdkkw5IqkJx--9IWmcQ1ou_cq2YyIvI2jWgOtj7wZptQuw50qpjtdUXp_7MbbQ4jruYadq84oZ9mJYxYVMwtyOn-jhVj4Rqs6hnnh4FBj7rljzyOu4WWOajho970IS3ukZXwWk3vc4aoI_zIQrevcm1tB2o02u82R-VQnjjMrQ-6rB-Y25sJ3hSkBs3Zd6_lrZUkxrY7hyzb0zoI_ZO9OrX7QoxvkMmqqtb4VqB2zzprUYBvnolrSMp3y5eiaBvIa1svpQ0vzVsmdMj_8Uiq0Y_b-1ZMjZ6R98fBw8WuZroy0_0tnunivlgojzc48ssgYhhYdfk_9SWjsel2IZjQpzzn1On2wrlmp5ByVV_V4W28gg60UtOpvpgmzWpmU_oSi6uYgeB_ahteII2W726uQlX1v92aQqz3aV27V-qwa-hvU-vnM5SYMyeS80661ovxSFjMgVt2XgM5fe281I_I-pU_pzJitZ5BodYo_0QQqgZ4-2iQUu1MuooWpfhfsoMaklzUzYJWMg2W8fBhzhMRlJOzUUxhj';
-              var bucket    = 'ext-code-test_cloudbuild';
-              
               var list      = await gs.dir.list({token,bucket,path});
               var {dirs,files}    = list;
               filenav.display(path,dirs,files);
