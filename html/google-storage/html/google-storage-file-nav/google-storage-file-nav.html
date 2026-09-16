@@ -142,17 +142,7 @@
   
   
         file.dblclick   = function(path,filename){
-                                                                                debug('file.dblclick');
-              path                = path+filename;
-              var {blob,error}    = await gs.file.load({token,bucket,path});
-              if(error){
-                    log.error(result.error);
-                    return;
-              }
-              
-              
-              var i           = path.lastIndexOf('/');
-              var filename    = path.slice(i+1);
+                                                                                debug('file.dblclick',path,filename);
               var abs         = bucket+'//'+path;
               
               var title       = abs;
@@ -178,8 +168,7 @@
               
               file.bucket   = bucket;
               
-              
-              par.load?.complete?.(file,blob);
+              load(file);
               
         }//dblclick
         
