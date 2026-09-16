@@ -144,28 +144,26 @@
         file.dblclick   = function(path,filename){
                                                                                 debug('file.dblclick',path,filename);
               var abs         = bucket+'//'+path;
-              
               var title       = abs;
               
-              var file;
-              var file    = filemod.newfile({
+              var file        = filemod.newfile({
               
-                    filetype    : 'google-storage',
-                    abs         : abs,
-                    path        : path,
-                    name        : filename,
-                    
-                    kind        : 'file',
-                    size        : null,
-                    ctime       : null,
-                    mtime       : null,
-                    atime       : null,
-                    
-                    title       : title,
-                    icon        : icon.src
-                    
-              });
-              
+                                      filetype    : 'google-storage',
+                                      abs         : abs,
+                                      path        : path,
+                                      name        : filename,
+                                      
+                                      kind        : 'file',
+                                      size        : null,
+                                      ctime       : null,
+                                      mtime       : null,
+                                      atime       : null,
+                                      
+                                      title       : title,
+                                      icon        : icon.src
+                                      
+                                });
+                                
               file.bucket   = bucket;
               
               load(file);
