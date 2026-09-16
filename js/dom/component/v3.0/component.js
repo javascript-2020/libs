@@ -991,7 +991,7 @@
               }//inst
               
               
-              async function auto({inc,exc}){
+              async function auto({inc,exc}={}){
                                                                                 debug('auto');
                     if(!inc){
                           inc     = mod.list;
