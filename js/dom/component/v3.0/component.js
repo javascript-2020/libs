@@ -1020,9 +1020,6 @@
                                 if(typeof fn.initdom=='function'){
                                       await fn.initdom();
                                 }
-                                if(typeof fn.init.complete=='function'){
-                                      await fn.init.complete();
-                                }
                                 
                           })
                     );
