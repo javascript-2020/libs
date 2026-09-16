@@ -273,6 +273,7 @@
         var gs;
         var localstorage    = 'google-storage-';
         
+        var gs_filenav;
         
         var root;
         var shadow;
@@ -297,6 +298,11 @@
               mod.base.add({gs});
               
               await mod.auto();
+              
+              gs_filenav    = mod['google-storage-file-nav'];
+              gs_filenav.initmod({'google-storage':obj});
+              
+              
               
               
         }//init
