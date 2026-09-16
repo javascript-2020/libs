@@ -51,12 +51,14 @@
               mod.df                = false;
               //mod.df                = (name==='root');
               
+              mod.root              = null;
               mod.par               = null;           //  mod
               mod.child             = [];             //  mod
               
               mod.list              = [];             // obj
               mod.full              = full_list;      // obj
               
+              mod.initmod           = initmod;
               mod.auto              = auto;
               mod.complete          = complete;
               mod.create            = create;
@@ -1033,6 +1035,20 @@
                     );
                     
               }//auto
+              
+              
+              function initmod(fn){
+              
+                    if(typeof fn!='function'){
+                          if(typeof fn.initmod!='function'){
+                                return;
+                          }
+                          fn    = fn.initmod;
+                    }
+                    var params    = Object.assign({},mod_root.base,mod.base);
+                    fn(params);
+                    
+              }//initmod
               
               
               async function complete(){
