@@ -337,6 +337,8 @@
   
         file.dblclick   = function(path,filename){
                                                                                 debug('file.dblclick',path,filename);
+              var bucket      = $(shadow,'#bucket').value;
+              
               path           += filename;
               var abs         = bucket+'//'+path;
               var title       = abs;
@@ -388,6 +390,9 @@
         
         dir.read    = async function(path){
                                                                                 debug('dir.read',path);
+              var token       = $(shadow,'#token').value;
+              var bucket      = $(shadow,'#bucket').value;
+              
               var list      = await gs.dir.list({token,bucket,path});
               var {dirs,files}    = list;
               filenav.display(path,dirs,files);
@@ -409,7 +414,7 @@
         
         async function load(file){
                                                                                 debug('load',file);
-              //var token       = $(shadow,'#token').value;
+              var token       = $(shadow,'#token').value;
               
               var bucket      = file.bucket;
               var path        = file.path;
