@@ -200,7 +200,35 @@
         }//dblclick
         
         
+  //:
+  
+  
+        obj.load    = load;
         
+        function load(file){
+        
+              var token       = $(shadow,'#token').value;
+              
+              var bucket      = file.bucket;
+              var path        = file.path;
+              
+              var {blob,error}    = await gs.file.load({token,bucket,path});
+              if(error){
+                    log.error(result.error);
+                    return;
+              }
+              
+              par.load?.complete?.(file,blob);
+              
+        }//load
+        
+        
+        
+  //:
+  
+  
+  
+  
   return obj;
   
 })
