@@ -40,13 +40,15 @@
         
               menu                          = menumod();
               
-              mod.base.add({ext,$,datatype,keydown,menumod,menu,debug});
               
               
               
               googlestorage                 = mod['google-storage'];
               
               log                           = mod['log-mod'];
+              
+              
+              mod.base.add({ext,$,datatype,keydown,menumod,menu,debug,log});
               
               
               googlestorage.initmod({ext,$,menu,source,debug});
