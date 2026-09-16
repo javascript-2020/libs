@@ -203,6 +203,7 @@
                     
                                             var txt   = input.value;
                                             await navigator.clipboard.writeText(txt);
+                                            $.mousetext('copied');
                                             input.focus();
                                             
                                       }//icon.onclick
