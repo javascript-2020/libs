@@ -106,7 +106,7 @@
   }
         var df=true,did='google-storage-file-nav';
         
-        var $,gs,log,debug,filemod,par
+        var $,gs,log,debug,filemod,par,menu
         ;
         
         obj.initmod   = function(params){
@@ -117,6 +117,7 @@
               debug         = mod.rd(params,'debug',debug);
               filemod       = mod.rd(params,'filemod',filemod);
               par           = mod.rd(params,'google-storage',par);
+              menu          = mod.rd(params,'menu',menu);
               
         }//initmod
         
@@ -157,6 +158,8 @@
               
               filenav.file    = file;
               filenav.dir     = dir;
+              
+              console.log(menu);
               
               
         }//init
@@ -429,6 +432,8 @@
               }
               
               par.load?.complete?.(file,blob);
+              
+              menu.close();
               
         }//load
         
