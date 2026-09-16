@@ -1037,7 +1037,7 @@
                                 if(typeof obj.init?.complete=='function'){
                                       await obj.init.complete();
                                 }
-                                var mod2    = mod.child[name];
+                                var mod2    = mod.child.find(o=>o.name===name);
                                 mod2.complete();
                                 
                           })
