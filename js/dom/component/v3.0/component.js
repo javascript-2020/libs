@@ -1021,7 +1021,7 @@
                                       await fn.initdom();
                                 }
                                 if(typeof fn.init.complete=='function'){
-                                      await init.complete();
+                                      await fn.init.complete();
                                 }
                                 
                           })
