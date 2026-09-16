@@ -104,6 +104,8 @@
             <log-mod component></log-mod>
             
             
+            <pre id=output></pre>
+            
       </body>
       
       
@@ -136,14 +138,15 @@
         complete.load   = async function(file,blob){
         
               var txt   = await blob.text();
-              alert(txt);
+              
+              output.textContent    = txt;
               
         }//load
         
         
         complete.save   = function(file){
         
-              alert(file.filename+' saved');
+              output.textContent    = file.filename+' saved';
               
         }//save
         
