@@ -237,7 +237,7 @@
               
               var {blob,error}    = await gs.file.load({token,bucket,path});
               if(error){
-                    log.error(result.error);
+                    log.error(error);
                     return;
               }
               
