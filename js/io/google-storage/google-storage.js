@@ -533,6 +533,10 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//list
         
         
+        parse.storage   = function(){
+        }//storage
+        
+        
         async function dirlistfull({token,bucket,path,files_only}){
         
               bucket  ||= obj.bucket;
@@ -577,7 +581,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               }
               
               var json    = await res.json();
-                                                                                      //console.log(json);
+                                                                                      console.log(json);
                                                                                       //console.log(path);
               var list    = [];
               
