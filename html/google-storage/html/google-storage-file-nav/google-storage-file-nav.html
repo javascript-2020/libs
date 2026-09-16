@@ -175,6 +175,9 @@
               shadow                                  = host.shadowRoot;
               
               
+              var style                       = $(shadow,'style');
+              $.stylesheet.insert(style,'.icon');
+              
               
               
               $.all(shadow,'.paste').forEach(icon=>{
