@@ -96,11 +96,10 @@
                                                                                 debug('init');
               await mod.auto();
               
-              filenav   = mod['file-nav'];
+              filenav         = mod['file-nav'];
               
-              filenav.file.click        = file.click;
-              filenav.file.dblclick     = file.dblclick;
-              filenav.dir.read          = dir.read;
+              filenav.file    = file;
+              filenav.dir     = dir;
               
               
         }//init
@@ -142,6 +141,9 @@
         }//readdir
         
         
+        dir.dblclick    = function(path,filename){
+        
+        }//dblclick
         
         
         
