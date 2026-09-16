@@ -133,7 +133,7 @@
               var path      = '/';
               var list      = await gs.dir.list({token,bucket,path});
               var {dirs,files}    = list;
-              filenav.display(pathh,dirs,files);
+              filenav.display(path,dirs,files);
               
         }//readdir
         
