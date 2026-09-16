@@ -393,8 +393,11 @@
               var token       = $(shadow,'#token').value;
               var bucket      = $(shadow,'#bucket').value;
               
-              var list      = await gs.dir.list({token,bucket,path});
-              var {dirs,files}    = list;
+              var {dirs,files,error}    = await gs.dir.list({token,bucket,path});
+              if(error){
+                    log.error(error);
+                    return;
+              }
               filenav.display(path,dirs,files);
               
         }//readdir
