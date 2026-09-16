@@ -1,0 +1,382 @@
+
+
+
+<snippet-html-console v2.0>
+
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+  #root
+    {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px;
+      /*height:100%*/
+    }
+    
+    
+    
+  #btns
+    {display:flex;margin:0 20px;gap:10px}
+    
+    
+  #hldr
+    {border:1px solid lightgray;}
+    
+  iframe
+    {width:100%;height:100%;border:none}
+    
+    
+    
+  web-console
+    {display:block}
+    
+    
+  .spc
+    {flex:1}
+  input
+    {font-size:16px;padding:5px 10px}
+  input[type=button]
+    {cursor:pointer}
+    
+            </style>
+            
+            <div id=root>
+            
+                  <div>
+                        <file-mod component></filemod>
+                  </div>
+                  
+                  <web-editor v2.0 component mode=html></web-editor>
+                  
+                  <div id=btns>
+                        <input value=run type=button>
+                        <div class=spc></div>
+                        <input value=clear type=button>
+                        <input value=reset type=button>
+                  </div>
+                  
+                  <div id=hldr part=hldr>
+                        <iframe></iframe>
+                  </div>
+                  
+                  <web-console component></web-console>
+                  
+            </div>
+            
+      </template>
+      
+      
+      <script>
+      
+      
+(function snippet_html_console({mod,host}){
+
+  var obj   = {
+        version   : 'v2.0',
+  };
+  
+        var df=true,did='snippet-html-console'
+        ;
+        
+        
+        
+        var ext,$,menu,ace,menumod,log,config={};
+        
+        
+        obj.initmod   = function(params){
+        
+              ext           = mod.rd(params,'ext',ext);
+              $             = mod.rd(params,'$',$);
+              menu          = mod.rd(params,'menu',menu);
+              ace           = mod.rd(params,'ace',ace);
+              menumod       = mod.rd(params,'menumod',menumod);
+              log           = mod.rd(params,'log',log);
+              config        = mod.rd(params,'config',config,config);
+              
+        }//initmod
+        
+        
+  //:
+  
+        config                  = {};
+        config['web-editor']    = {
+                                        xyz:123,
+                                  };
+                                  
+        config['web-console']   = {
+                                  };
+                                  
+                                  
+        var filemod;
+        obj.filemod   = null;
+        var editor;
+        obj.editor    = null;
+        var console;
+        obj.console   = null;
+        
+        
+        var host;
+        var root;
+        
+        var src;
+        
+        
+        var hldr;
+        var iframe;
+        
+        
+        var def               = {};
+        def.html              = null;
+        
+        def.iframe            = {};
+        def.iframe.height     = '300px';
+        
+        def.console           = {};
+        def.console.height    = '200px';
+        
+        
+        
+        
+        var rd                = {};
+        rd.attr               = {};
+        var btn               = {};
+        
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+                                                                                debug('init',obj.version);
+                                                                                
+              var dom_config          = mod.rd.config(host);
+              config                  = Object.assign(config,dom_config);
+              
+              config['web-editor']    = mod.rd.attr(host,'web-editor',config);
+              config['web-console']   = mod.rd.attr(host,'web-console',config);
+              
+              if(!('fullsize' in config['web-editor'])){
+                    config['web-editor'].fullsize    = true;
+              }
+                                                                                window.console.json(config);
+                                                                                debug('config',config);
+                                                                                
+                                                                                
+              def.html          = $.htmlentities.decode(host);
+              
+              
+              
+              filemod           = mod['file-mod'];
+              obj.filemod       = filemod;
+              editor            = mod['web-editor'];
+              obj.editor        = editor;
+              console           = mod['web-console'];
+              obj.console       = console;
+              
+              filemod.initmod({ext,$,menu,menumod,complete,source});
+              editor.initmod({ext,$,menu,ace,config:config['web-editor']});
+              console.initmod({ext,$,ace,config:config['web-console']});
+              
+              
+              await Promise.all([
+                    rd.attr.src(),
+                    filemod.init(),
+                    editor.init(),
+                    console.init(),
+              ]);
+              
+              
+        }//init
+        
+        
+        rd.attr.src    = async function(){
+        
+              if(!host.hasAttribute('src'))return;
+              src         = host.getAttribute('src');
+              var res     = await fetch(src);
+              var txt     = await res.text();
+              def.html    = txt;
+              
+        }//src
+        
+        
+  //:
+  
+  
+        obj.initdom    = function(){
+        
+              var shadow                          = host.shadowRoot;
+              
+              
+              filemod.initdom();
+              editor.initdom({mode:'html',txt:def.html});
+              
+              if(src){
+                    editor.filename(src);
+              }
+              
+              $(shadow,'[value=run]').onclick         = btn.run;
+              $(shadow,'[value=clear]').onclick       = btn.clear;
+              $(shadow,'[value=reset]').onclick       = btn.reset;
+              
+              
+              hldr                                    = $(shadow,'#hldr');
+              iframe                                  = $(hldr,'iframe');
+              
+              
+              console.initdom();
+                                                                          debug('def.console.height',def.console.height);
+              console.height    = def.console.height;
+              
+              
+              //clear();
+              //console.log('ready');
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+        function kd(e){
+        
+              if(e.ctrlKey && e.key=='Enter'){
+                    run();
+              }
+              
+        }//kd
+        
+        
+        btn.clear   = function(){
+        
+              clear();
+              
+        }//clear
+        
+        
+        btn.reset   = function(){
+        
+              editor.setvalue(def.html);
+              
+        }//reset
+        
+        btn.run   = function(){
+        
+              run();
+              
+        }//run
+        
+        
+        
+        obj.clear   = function(){return clear()}
+        
+        function clear(){
+                                                                                debug('clear');
+              hldr.replaceChildren();
+              hldr.style.height     = def.iframe.height;
+              var niframe           = iframe.cloneNode(true);
+              hldr.append(niframe);
+              console.clear();
+              
+        }//clear
+        
+        
+        
+        obj.run   = function(){return run()}
+        
+        function run(){
+                                                                                debug('run');
+              hldr.replaceChildren();
+              
+              var html              = editor.getvalue();
+              html                  = sandbox+html;
+              
+              hldr.style.height     = def.iframe.height;
+              
+              var niframe           = iframe.cloneNode(true);
+              niframe.console       = console;
+              niframe.srcdoc        = html;
+              niframe.onload        = onload;
+              hldr.append(niframe);
+              
+              
+              function onload(){
+              
+                    var h   = niframe.contentDocument.documentElement.scrollHeight;
+                    hldr.style.height   = h+'px';
+                    
+              }//onload
+              
+        }//run
+        
+        
+        var sandbox   = `
+        
+              <script>
+              
+                    window.console    = window.frameElement.console;
+                    
+              </scr`+`ipt>
+              
+        `;
+        
+        
+  //:
+  
+  
+        function source(){
+        
+              var txt     = editor.getvalue();
+              var blob    = new Blob([txt]);
+              return blob;
+              
+        }//source
+        
+        
+        function complete(){
+        }//complete
+        
+        
+        complete.load   = function(file,blob){
+        }//load
+        
+        
+        complete.save   = function(file){
+        
+              (log||window.log)?.green(`${file.name} saved`);
+              
+        }//save
+        
+        
+  //:
+  
+  
+        function debug(...args){
+        
+              if(!df && !obj.df)return;
+              args.unshift(`[ ${did} ]`);
+              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
+              var args2   = [fmt].concat(args);
+              window.console.groupCollapsed.apply(window.console,args2);
+              window.console.trace();
+              window.console.groupEnd();
+              
+        }//debug
+        
+        
+        
+  return obj;
+  
+//snippet_html_console
+})
+
+
+      </script>
+      
+      
+</snippet-html-console>
+
+
+
+
