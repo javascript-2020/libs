@@ -206,6 +206,9 @@
                     return;
               }
               
+              var txt   = await blob.text();
+              console.log(txt);
+              
               par.load?.complete?.(file,blob);
               
         }//load
