@@ -254,7 +254,7 @@
         
         
         
-        var ext,$,menu,source,debug
+        var ext,$,menu,source,debug,filemod
         ;
         
         obj.initmod   = function(params){
@@ -264,6 +264,7 @@
               menu          = mod.rd(params,'menu',menu);
               source        = mod.rd(params,'source',source);
               debug         = mod.rd(params,'debug',debug)
+              filemod       = mod.rd(params,'filemod',filemod);
               
         }//initmod
         
@@ -300,7 +301,7 @@
               await mod.auto();
               
               gs_filenav    = mod['file-nav'];
-              gs_filenav.initmod({'google-storage':obj});
+              gs_filenav.initmod({'google-storage':obj,filemod});
               
               
               
