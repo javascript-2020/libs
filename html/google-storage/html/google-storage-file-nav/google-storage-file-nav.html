@@ -158,6 +158,7 @@
   
         file.dblclick   = function(path,filename){
                                                                                 debug('file.dblclick',path,filename);
+              path           += filename;
               var abs         = bucket+'//'+path;
               var title       = abs;
               
