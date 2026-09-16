@@ -991,16 +991,19 @@
               }//inst
               
               
-              async function auto(...args){
+              async function auto({inc,exc}){
                                                                                 debug('auto');
-                    if(args.length==0){
-                          args    = mod.list;
+                    if(!inc){
+                          inc     = mod.list;
+                    }
+                    if(!exc){
+                          exc     = [];
                     }
                     
                     var params    = Object.assign({},mod_root.base,mod.base);
                     
                     await Promise.all(
-                          args.map(async(arg,i)=>{
+                          inc.map(async(arg,i)=>{
                           
                                 var fn;
                                 if(typeof arg=='string'){
@@ -1008,7 +1011,11 @@
                                 }else{
                                       fn    = arg;
                                 }
-                                                                                debug(i,fn);
+                                
+                                if(exc.includes(arg)||exc.includes(fn)){
+                                      return;
+                                }
+                                                                                //debug(i,fn);
                                 if(!fn)return;
                                                                                 //if(!fn)debugger;
                                                                                 //if(!fn.initmod)debugger;
