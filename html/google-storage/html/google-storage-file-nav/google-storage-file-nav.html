@@ -43,6 +43,9 @@
   #btns
     {display:flex;justify-content:center;gap:25px}
     
+  [value=update], [value=save], [vaalue=backup]
+    {margin-right:20px}
+    
     
     
   input
@@ -68,10 +71,13 @@
                   </div>
                   
                   <div id=bucket-root class=field>
+                        <img class='paste icon'>
+                        <img class='storage icon'>
                         <label>
                               bucket
                         </label>
                         <input id=bucket value=ext-code-test>
+                        <img class='copy icon'>
                   </div>
                   
                   <file-nav component>
@@ -79,6 +85,11 @@
                   
                   <div id=btns>
                         <input value=update type=button>
+                        <input value=load type=button>
+                        <input value=save type=button>
+                        <input value=backup type=button>
+                        <input value=upload type=button>
+                        <input value=download type=button>
                   </div>
                   
             </div>
