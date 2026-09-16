@@ -58,6 +58,7 @@
               mod.full              = full_list;      // obj
               
               mod.auto              = auto;
+              mod.complete          = complete;
               mod.create            = create;
               mod.build             = build;
               mod.rd                = rdparams;
@@ -1025,6 +1026,24 @@
                     );
                     
               }//auto
+              
+              
+              async function complete(){
+              
+                    await Promise.all(
+                          mod.list.map(async name=>{
+                          
+                                var obj     = mod[name];
+                                if(typeof obj.init?.complete=='function'){
+                                      await obj.init.complete();
+                                }
+                                var mod2    = mod.child[name];
+                                mod2.complete();
+                                
+                          })
+                    );
+                    
+              }//complete
               
               
               
