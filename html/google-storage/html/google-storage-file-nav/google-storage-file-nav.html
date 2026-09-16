@@ -123,10 +123,11 @@
   
         obj.initdom   = async function(){
                                                                                 debug('initdom');
-              shadow      = host.shadowRoot;
+              shadow                                  = host.shadowRoot;
               
-              var btns    = $(shadow,'#btns');
+              var btns                                = $(shadow,'#btns');
               $(btns,'[value=update]').onclick        = btn.update;
+              
               
               
         }//initdom
