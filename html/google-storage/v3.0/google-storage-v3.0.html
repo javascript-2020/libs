@@ -534,6 +534,17 @@
               $(shadow,'[value=download]').onclick        = btn.download;
               
               
+              try{
+              
+                    var str                             = window.localStorage[localstorage+'view'];
+                    
+              }//try
+              catch(err2){}
+              if(str){
+                    btn.tab[str]();
+              }
+              
+              
               
         }//initdom
         
@@ -551,6 +562,13 @@
               $(shadow,'#view #url').style.display         = '';
               $(shadow,'#view #file-nav').style.display    = 'none';
               
+              try{
+              
+                    window.localStorage[localstorage+'view']    = 'url';
+                    
+              }//try
+              catch(err2){}
+              
         }//url
         
         
@@ -563,6 +581,13 @@
               
               $(shadow,'#view #url').style.display         = 'none';
               $(shadow,'#view #file-nav').style.display    = '';
+              
+              try{
+              
+                    window.localStorage[localstorage+'view']    = 'filenav';
+                    
+              }//try
+              catch(err2){}
               
         }//filenav
         
