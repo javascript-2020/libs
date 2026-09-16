@@ -65,7 +65,7 @@
               
               
               
-              initdom(document.body);
+              await initdom(document.body);
               
               
               mod.complete();
@@ -123,15 +123,15 @@
   //:
   
   
-        function initdom(rootnode){
+        async function initdom(rootnode){
         
               var root                  = rootnode;
               
               
-              googlestorage.initdom();
+              await googlestorage.initdom();
               
               
-              log.initdom();
+              await log.initdom();
               
               
         }//initdom
