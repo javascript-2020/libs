@@ -210,10 +210,10 @@
                                       
               });//foreach
               
-              debugger;
+              
               $.all(shadow,'.storage').forEach(icon=>{
               
-                    var root    = icon.parentNode.parentNode;
+                    var root    = icon.parentNode;
                     var key     = root.id.slice(0,-5);
                     var input   = $(root,'input:not([type])');
                                                                                 console.log(key,input);
