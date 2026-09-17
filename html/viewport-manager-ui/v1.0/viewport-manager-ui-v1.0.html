@@ -87,11 +87,15 @@
         var $,vm,debug
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...list){
         
-              $       = mod.rd(params,'$',$);
-              vm      = mod.rd(params,'vm',vm);
-              debug   = mod.rd(params,'debug',debug);
+              list.forEach(params=>{
+              
+                    $       = mod.rd(params,'$',$);
+                    vm      = mod.rd(params,'vm',vm);
+                    debug   = mod.rd(params,'debug',debug);
+                    
+              });
               
         }//initmod
         
@@ -115,6 +119,8 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
                                                                                 debug=eval(debug.mod);
                                                                                 debug('init');
         }//init
@@ -124,7 +130,7 @@
   
   
         obj.initdom   = async function(){
-                                                                                debug('initdom2');
+                                                                                debug('initdom');
                                                                                 
               await createviewport();
               
