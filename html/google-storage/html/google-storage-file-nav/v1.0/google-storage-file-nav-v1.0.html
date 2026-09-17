@@ -109,15 +109,21 @@
         var $,gs,log,debug,filemod,par,menu
         ;
         
-        obj.initmod   = function(params){
+        mod.initmod(obj);
         
-              $             = mod.rd(params,'$',$);
-              gs            = mod.rd(params,'gs',gs);
-              log           = mod.rd(params,'log',log);
-              debug         = mod.rd(params,'debug',debug);
-              filemod       = mod.rd(params,'filemod',filemod);
-              par           = mod.rd(params,'google-storage',par);
-              menu          = mod.rd(params,'menu',menu);
+        obj.initmod   = function(...params){
+        
+              params.forEach(params=>{
+              
+                    $             = mod.rd(params,'$',$);
+                    gs            = mod.rd(params,'gs',gs);
+                    log           = mod.rd(params,'log',log);
+                    debug         = mod.rd(params,'debug',debug);
+                    filemod       = mod.rd(params,'filemod',filemod);
+                    par           = mod.rd(params,'google-storage',par);
+                    menu          = mod.rd(params,'menu',menu);
+                    
+              });
               
         }//initmod
         
