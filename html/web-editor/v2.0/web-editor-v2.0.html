@@ -199,20 +199,24 @@
         ;
         
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...list){
         
-              ext                 = mod.rd(params,'ext',ext);
-              $                   = mod.rd(params,'$',$);
-              menumod             = mod.rd(params,'menumod',menumod);
-              menu                = mod.rd(params,'menu',menu);
-              ace                 = mod.rd(params,'ace',ace);
-              def.fullsize        = mod.rd(params,'fullsize',def.fullsize);
-              kd2                 = mod.rd(params,'kd',kd2);
-              embed               = mod.rd(params,'embed',embed);
-              on2                 = mod.rd(params,'on',on2);
-              config              = mod.rd(params,'config',config,{});
-              def.mode            = mod.rd(params,'mode',def.mode);
-              log                 = mod.rd(params,'log',log);
+              list.forEach(params=>{
+              
+                    ext                 = mod.rd(params,'ext',ext);
+                    $                   = mod.rd(params,'$',$);
+                    menumod             = mod.rd(params,'menumod',menumod);
+                    menu                = mod.rd(params,'menu',menu);
+                    ace                 = mod.rd(params,'ace',ace);
+                    def.fullsize        = mod.rd(params,'fullsize',def.fullsize);
+                    kd2                 = mod.rd(params,'kd',kd2);
+                    embed               = mod.rd(params,'embed',embed);
+                    on2                 = mod.rd(params,'on',on2);
+                    config              = mod.rd(params,'config',config,{});
+                    def.mode            = mod.rd(params,'mode',def.mode);
+                    log                 = mod.rd(params,'log',log);
+                    
+              });
               
         }//initmod
         
@@ -297,6 +301,8 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
                                                                                 debug('init',obj.version);
               var dom_config    = mod.rd.config(dom);
               config            = Object.assign(config,dom_config);
