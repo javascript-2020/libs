@@ -8,37 +8,37 @@
             
   #root
     {display:inline-flex;margin-right:5px}
-  
+    
   .menu
     { position:absolute;left:0;top:30px;width:400px;
       display:flex;flex-direction:column;gap:10px
     }
   .sub
     {border:1px solid lightgray;padding:20px;border-radius:5px}
-  
+    
   .hdr
     {}
   .delete
     {}
-  
+    
   .opts
     {}
   #autorun
     {margin-right:10px}
-  
+    
   .txt
     { display:flex;align-items:center}
   .txt-publish
     {}
-        
+    
   .file
     {border:1px solid lightgray;padding:20px;border-radius:5px}
   .file-publish
     {}
-                  
-                  
+    
+    
             </style>
-
+            
             
             <div id=root style='visibility:hidden'>
             
@@ -75,25 +75,25 @@
                   </div>
                   
             </div>
-
+            
       </template>
-
+      
       
       <script>
-
+      
       
 (function publish_ui({mod,root,node}){
-  
+
   var obj   = {
         version   : 'v2.0',
   };
   
-
+  
         var ext,$,menu,source,complete,log,publish
         ;
         
         obj.initmod   = function(params){
-          
+        
               ext           = params.ext;
               $             = params.$;
               
@@ -104,8 +104,8 @@
               log           = params.log;
               
         }//initmod
-
-
+        
+        
   //:
   
   
@@ -115,32 +115,34 @@
         
         var cur     = {};
         cur.type    = 'text';
-
-
-
+        
+        
+        
         var ui      = {};
         
         var shadow;
-
+        
         //var autorun;
-
-
-
+        
+        
+        
         
         var btn     = {};
         var click   = {};
-
-
+        
+        
     //:
-
+    
     
         obj.init    = async function(){
-
+        
+              mod.initmod(obj);
+              
               libs();
               
         }//init
-
-
+        
+        
         function libs(){
         
               var resolve;
@@ -148,35 +150,35 @@
               
               ext.load.libs('js/io/jsonblob/jsonblob.js')
                 .then(result=>{
-                                  
+                
                       [jsonblob]    = result;
                       jsonblob      = jsonblob();
                       resolve();
                       
                 });
-        
+                
         }//libs
         
         
     //:
-
+    
     
         obj.initdom   = function(rootnode){   //c
-          
+        
               shadow                                = node.shadowRoot;
               
               var style                             = $(shadow,'style');
               menu.add.style(shadow);
               $.stylesheet.insert(style,'button');
               
-          
+              
               $(shadow,'#publish').onclick          = btn.publish;
               
-
+              
               var card                              = $(shadow,'.menu');
               $(shadow,'.menu-icon').onclick        = menu.click(card,false,false,click.menu);
-
-
+              
+              
               $(card,'.delete').onclick             = btn.delete;
               
               /*
@@ -187,9 +189,9 @@
               ui.autorun.onchange                   = e=>obj.autorun   = autorun.checked;
               obj.autorun                           = autorun.checked;
               */
-
-            //txt:-
               
+            //txt:-
+            
               $(shadow,'.txt-publish').onclick      = btn.txt;
               
               
@@ -197,27 +199,27 @@
             
               $(shadow,'.file-publish').onclick     = btn.file;
               
-
-
-              $(shadow,'#root').style.visibility    = '';                          
-
-
+              
+              
+              $(shadow,'#root').style.visibility    = '';
+              
+              
               
         }//initdom
         
-
+        
   //:
   
   
         btn.publish   = function(e){
-          
+        
               save();
               
         }//share
         
         
         btn.delete    = function(){
-          
+        
               del();
               
         }//delete
@@ -229,28 +231,28 @@
               save.text();
               
         }//txt
-
+        
         
         btn.file    = function(){
-          
+        
               cur   = {type:'file'};
               save.file();
               
         }//file
         
-
-  //:
-
-
-        click.menu    = function(type,opt){
-        }//menu
-
         
   //:
-
-
+  
+  
+        click.menu    = function(type,opt){
+        }//menu
+        
+        
+  //:
+  
+  
         obj.clear   = function(){
-          
+        
               var url       = window.location.toString();
               var search    = window.location.search;
               if(search){
@@ -260,24 +262,19 @@
               
         }//clear
         
-
+        
         obj.query   = function(){return query()}
         
         async function query(){
-          
-              return;
-              
-              
-              
                                                                                 //console.log('[ publish ]','query loading ...');
               await libs.complete;
                                                                                 //console.log('[ publish ]','query load complete');
-              
+                                                                                
               var json;
               var error;
               
               switch(mode){
-                
+              
                 case 'jsonblob'   : ({json,error}    = await jsonblob.util.query());        break;
                 
               }//switch
@@ -295,33 +292,28 @@
               
         }//query
         
-
+        
         obj.delete    = async function(){return del()}
         
         async function del(){
-
+        
               switch(mode){
-                
+              
                 case 'jsonblob'   : await jsonblob.util.delete();       break;
                 
               }//switch
-          
+              
               log.green('publish deleted');
               
         }//delete
         
         
         async function load(json){
-          
-              alert('tmp disabled');
-              return;
-              
-              
                                                                                 //console.log('[ publish ]','query.complete');
                                                                                 //console.json(json);
               var txt;
               switch(json.type){
-                
+              
                 case 'file'     : await load.file(json.file);         break;
                 case 'text'     : txt   = load.text(json);            break;
                 
@@ -335,20 +327,20 @@
               obj.import?.(json);
               
               log.green('publish loaded');
-
-          
+              
+              
         }//load
         
         
         load.file   = function(file){
-          
+        
               load.file[file.filetype](file);
-                
+              
         }//file
         
         
         load.file.github   = async function(file){
-          
+        
               var {owner,repo,branch,path}    = json;
               
               filemod.github.write(owner,repo,branch,path);
@@ -360,51 +352,41 @@
         
         
         load.text   = function(json){
-          
+        
               return json.txt;
               
         }//text
         
-
+        
 //:
 
 
         obj.save    = save;
         
         function save(json){
-
-
-              alert('tmp disabled');
-              return;
-
-
-
+        
               if(!cur){
                     alert('no current publish type');
                     return;
               }
               
               save[cur.type]();
-          
+              
         }//save
-
-
+        
+        
         save.text   = async function(){
-
-              alert('tmp disabled');
-              return;
-
-          
+        
               var blob      = source();
               var txt       = await blob.text();
               var json      = {type:'text',txt};
               save.complete(json);
               
         }//text
-
+        
         
         save.file   = function(){
-          
+        
               var file    = filemod.export();
               
               if(file==='no file'){
@@ -417,7 +399,7 @@
                     return;
               }
               
-
+              
               var json      = {type:'file',file};
               save.complete(json);
               
@@ -426,23 +408,23 @@
         
         save.complete   = function(json){
                                                                                 console.json(json);
-              
+                                                                                
               obj.export?.(json);
               
               jsonblob.util.save(json);
-          
+              
               log.green('published '+cur.type);
               
         }//complete
-
-
+        
+        
         
         
   return obj;
   
 })//publish_ui
 
-            
+
       </script>
       
 </publish-ui>
