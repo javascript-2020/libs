@@ -1,6 +1,6 @@
 
 
-<google-storage v2.0>
+<google-storage v3.0>
 
       <template shadowrootmode=open>
       
@@ -18,6 +18,18 @@
     
   section
     {margin-bottom:10px}
+    
+  #tabs
+    {display:flex;gap:5px;margin-bottom:10px}
+  #tabs>div
+    {flex:1;border:1px solid;padding:5px 10px;text-align:center;cursor:pointer}
+  #tabs>div.active
+    {border-color:blue;background:white}
+  #tabs>div.inactive
+    {border-color:gray;background:whitesmoke}
+    
+    
+    
     
   #hdr a
     {display:block}
@@ -70,141 +82,159 @@
                         google cloud storage
                   </div>
                   
-                  <section id=hdr>
-                  
-                        <a href='https://ext-code.com/utils/gcloud/generate-token-from-service-account-keyfile/generate-token-from-service-account-keyfile.html' target=_blank>
-                              generate-token-from-service-account-keyfile [ ext-code.com ]
-                        </a>
-                        
-                        <a href='https://developers.google.com/oauthplayground' target=_blank>
-                              https://developers.google.com/oauthplayground
-                        </a>
-                        
-                  </section>
-                  
-                  <section id=client-id-root>
-                  
-                        <div>
-                              client id
+                  <div id=tabs>
+                        <div id=url class=active>
+                              url
                         </div>
-                        
-                        <div class=hldr>
-                            <img class='paste icon'>
-                            <img class='storage icon'>
-                            <input id=client-id autocomplete=off spellcheck=false>
-                            <img class='copy icon'>
+                        <div id=file-nav class=inactive>
+                              file-nav
                         </div>
-                        
-                  </section>
-                  
-                  
-                  <section id=client-secret-root>
-                  
-                        <div>
-                              client secret
-                        </div>
-                        
-                        <div class=hldr>
-                            <img class='paste icon'>
-                            <img class='storage icon'>
-                            <input id=client-secret autocomplete=off spellcheck=false>
-                            <img class='copy icon'>
-                        </div>
-                        
-                  </section>
-                  
-                  
-                  <section id=refresh-token-root>
-                  
-                        <div>
-                              refresh token
-                        </div>
-                        
-                        <div class=hldr>
-                            <img class='paste icon'>
-                            <img class='storage icon'>
-                            <input id=refresh-token autocomplete=off spellcheck=false>
-                            <img class='copy icon'>
-                            <img class='refresh icon'>
-                        </div>
-                        
-                  </section>
-                  
-                  <div class=menu-sep></div>
-                  
-                  <section id=token-root>
-                  
-                        <div>
-                              token
-                        </div>
-                        
-                        <div class=hldr>
-                            <img class='paste icon'>
-                            <img class='storage icon'>
-                            <input id=token autocomplete=off spellcheck=false>
-                            <img class='copy icon'>
-                        </div>
-                        
-                  </section>
-                  
-                  <div class=menu-sep></div>
-                  
-                  <section id=url-root>
-                  
-                      <div>
-                            parse url
-                      </div>
-                      
-                      <div class=hldr>
-                          <img class='paste icon'>
-                          <input id=url autocomplete=off spellcheck=false>
-                          <input type=button value=parse>
-                          <input type=button value='+'>
-                      </div>
-                      
-                  </section>
-                  
-                  <div class=menu-sep></div>
-                  
-                  
-                  <section id=bucket-root>
-                  
-                        <div>
-                              bucket name
-                        </div>
-                        
-                        <div class=hldr>
-                            <img class='paste icon'>
-                            <input id=bucket autocomplete=off spellcheck=false>
-                        </div>
-                        
-                  </section>
-                  
-                  
-                  <section id=path-root>
-                  
-                        <div>
-                              path
-                        </div>
-                        
-                        <div class=hldr>
-                            <img class='icon paste'>
-                            <input id=path autocomplete=off spellcheck=false>
-                        </div>
-                        
-                  </section>
-                  
-                  
-                  <div id=btns>
-                        <input value=load type=button>
-                        <input value=save type=button>
-                        <input value=backup type=button>
-                        <input value=upload type=button>
-                        <input value=download type=button>
                   </div>
                   
+                  <div id=view>
+                        <div id=url>
+                              <section id=hdr>
+                              
+                                    <a href='https://ext-code.com/utils/gcloud/generate-token-from-service-account-keyfile/generate-token-from-service-account-keyfile.html' target=_blank>
+                                          generate-token-from-service-account-keyfile [ ext-code.com ]
+                                    </a>
+                                    
+                                    <a href='https://developers.google.com/oauthplayground' target=_blank>
+                                          https://developers.google.com/oauthplayground
+                                    </a>
+                                    
+                              </section>
+                              
+                              <section id=client-id-root>
+                              
+                                    <div>
+                                          client id
+                                    </div>
+                                    
+                                    <div class=hldr>
+                                        <img class='paste icon'>
+                                        <img class='storage icon'>
+                                        <input id=client-id autocomplete=off spellcheck=false>
+                                        <img class='copy icon'>
+                                    </div>
+                                    
+                              </section>
+                              
+                              
+                              <section id=client-secret-root>
+                              
+                                    <div>
+                                          client secret
+                                    </div>
+                                    
+                                    <div class=hldr>
+                                        <img class='paste icon'>
+                                        <img class='storage icon'>
+                                        <input id=client-secret autocomplete=off spellcheck=false>
+                                        <img class='copy icon'>
+                                    </div>
+                                    
+                              </section>
+                              
+                              
+                              <section id=refresh-token-root>
+                              
+                                    <div>
+                                          refresh token
+                                    </div>
+                                    
+                                    <div class=hldr>
+                                        <img class='paste icon'>
+                                        <img class='storage icon'>
+                                        <input id=refresh-token autocomplete=off spellcheck=false>
+                                        <img class='copy icon'>
+                                        <img class='refresh icon'>
+                                    </div>
+                                    
+                              </section>
+                              
+                              <div class=menu-sep></div>
+                              
+                              <section id=token-root>
+                              
+                                    <div>
+                                          token
+                                    </div>
+                                    
+                                    <div class=hldr>
+                                        <img class='paste icon'>
+                                        <img class='storage icon'>
+                                        <input id=token autocomplete=off spellcheck=false>
+                                        <img class='copy icon'>
+                                    </div>
+                                    
+                              </section>
+                              
+                              <div class=menu-sep></div>
+                              
+                              <section id=url-root>
+                              
+                                  <div>
+                                        parse url
+                                  </div>
+                                  
+                                  <div class=hldr>
+                                      <img class='paste icon'>
+                                      <input id=url autocomplete=off spellcheck=false>
+                                      <input type=button value=parse>
+                                      <input type=button value='+'>
+                                  </div>
+                                  
+                              </section>
+                              
+                              <div class=menu-sep></div>
+                              
+                              
+                              <section id=bucket-root>
+                              
+                                    <div>
+                                          bucket name
+                                    </div>
+                                    
+                                    <div class=hldr>
+                                        <img class='paste icon'>
+                                        <input id=bucket autocomplete=off spellcheck=false>
+                                    </div>
+                                    
+                              </section>
+                              
+                              
+                              <section id=path-root>
+                              
+                                    <div>
+                                          path
+                                    </div>
+                                    
+                                    <div class=hldr>
+                                        <img class='icon paste'>
+                                        <input id=path autocomplete=off spellcheck=false>
+                                    </div>
+                                    
+                              </section>
+                              
+                              
+                              <div id=btns>
+                                    <input value=load type=button>
+                                    <input value=save type=button>
+                                    <input value=backup type=button>
+                                    <input value=upload type=button>
+                                    <input value=download type=button>
+                              </div>
+                              
+                        </div url>
+                        
+                        <google-storage-file-nav component=parent id=file-nav>
+                        </google-storage-file-nav>
+                        
+                  </div view>
                   
-            </div>
+                  
+            </div menu>
             
       </template>
       
@@ -215,24 +245,28 @@
 (function google_storage({mod,dom,host}){
 
   var obj   = {
-        version   : 'v2.0'
+        version   : 'v3.0'
   };
   
-  
-        var df=false,did='google-storage'
+        var df=true,did='google-storage';
+        
+        var ext,$,menu,source,debug,filemod
         ;
         
+        mod.initmod(obj);
         
+        obj.initmod   = function(...params){
         
-        var ext,$,menu,source
-        ;
-        
-        obj.initmod   = function(params){
-        
-              ext           = mod.rd(params,'ext',ext);
-              $             = mod.rd(params,'$',$);
-              menu          = mod.rd(params,'menu',menu);
-              source        = mod.rd(params,'source',source);
+              params.forEach(params=>{
+                                                                                console.log(did,params);
+                    ext           = mod.rd(params,'ext',ext);
+                    $             = mod.rd(params,'$',$);
+                    menu          = mod.rd(params,'menu',menu);
+                    source        = mod.rd(params,'source',source);
+                    debug         = mod.rd(params,'debug',debug)
+                    filemod       = mod.rd(params,'filemod',filemod);
+                    
+              });
               
         }//initmod
         
@@ -242,6 +276,7 @@
         var gs;
         var localstorage    = 'google-storage-';
         
+        var gs_filenav;
         
         var root;
         var shadow;
@@ -252,6 +287,7 @@
         
         
         var btn         = {};
+        btn.tab         = {};
         btn.token       = {};
         
         
@@ -259,9 +295,19 @@
   
   
         obj.init    = async function(){
+                                                                                debug=eval(debug.mod);
                                                                                 debug('init',obj.version);
-                                                                                
               await libs();
+              
+              mod.base.add({gs});
+              
+              await mod.auto();
+              
+              gs_filenav    = mod['file-nav'];
+              gs_filenav.initmod({'google-storage':obj,filemod});
+              
+              
+              
               
         }//init
         
@@ -290,14 +336,18 @@
               menu.input.norm(mroot);
               
               icon                            = $(shadow,'.icon');
+              obj.icon                        = icon;
               icon.onclick                    = menu.click(mroot,'both',false,menu_callback);
               
+              
+              $(shadow,'#tabs #url').onclick         = btn.tab.url;
+              $(shadow,'#tabs #file-nav').onclick    = btn.tab.filenav;
               
               
               
               $.all(shadow,'.paste').forEach(icon=>{
               
-                    var root        = icon.parentNode.parentNode
+                    var root        = icon.parentNode.parentNode;
                     var input       = $(root,'input:not([type])');
                     icon.onclick    = async e=>{
                     
@@ -400,7 +450,7 @@
               var clientid;
               try{
               
-                    clientid                                = window.localStorage[localstorage+'client-id'];
+                    clientid                              = window.localStorage[localstorage+'client-id'];
                     
               }//try
               catch(err2){}
@@ -412,7 +462,7 @@
               var err;
               try{
               
-                    var clientsecret                            = window.localStorage[localstorage+'client-secret'];
+                    var clientsecret                      = window.localStorage[localstorage+'client-secret'];
                     
               }//try
               catch(err2){}
@@ -424,7 +474,7 @@
             
               try{
               
-                    var refresh                                 = window.localStorage[localstorage+'refresh-token'];
+                    var refresh                           = window.localStorage[localstorage+'refresh-token'];
                     
               }//try
               catch(err2){}
@@ -439,7 +489,7 @@
               var err;
               try{
               
-                    var token                                   = window.localStorage[localstorage+'token'];
+                    var token                             = window.localStorage[localstorage+'token'];
                     
               }//try
               catch(err2){}
@@ -451,11 +501,10 @@
               var root2                                   = $(shadow,'#bucket-root');
               try{
               
-                    var value                                   = window.localStorage[localstorage+'bucket'];
+                    var value                             = window.localStorage[localstorage+'bucket'];
                     
               }//try
               catch(err2){}
-              
               $(shadow,'#bucket').value                   = value||'';
               
               
@@ -487,6 +536,17 @@
               $(shadow,'[value=download]').onclick        = btn.download;
               
               
+              try{
+              
+                    var str                             = window.localStorage[localstorage+'view'];
+                    
+              }//try
+              catch(err2){}
+              if(str){
+                    btn.tab[str]();
+              }
+              
+              
               
         }//initdom
         
@@ -494,6 +554,46 @@
   //:
   
   
+        btn.tab.url   = function(){
+        
+              $(shadow,'#tabs #url').classList.add('active');
+              $(shadow,'#tabs #url').classList.remove('inactive');
+              $(shadow,'#tabs #file-nav').classList.remove('active');
+              $(shadow,'#tabs #file-nav').classList.add('inactive');
+              
+              $(shadow,'#view #url').style.display         = '';
+              $(shadow,'#view #file-nav').style.display    = 'none';
+              
+              try{
+              
+                    window.localStorage[localstorage+'view']    = 'url';
+                    
+              }//try
+              catch(err2){}
+              
+        }//url
+        
+        
+        btn.tab.filenav   = function(){
+        
+              $(shadow,'#tabs #url').classList.remove('active');
+              $(shadow,'#tabs #url').classList.add('inactive');
+              $(shadow,'#tabs #file-nav').classList.add('active');
+              $(shadow,'#tabs #file-nav').classList.remove('inactive');
+              
+              $(shadow,'#view #url').style.display         = 'none';
+              $(shadow,'#view #file-nav').style.display    = '';
+              
+              try{
+              
+                    window.localStorage[localstorage+'view']    = 'filenav';
+                    
+              }//try
+              catch(err2){}
+              
+        }//filenav
+        
+        
         btn.token.refresh   = async function(){
         
               var id        = $(shadow,'#client-id').value;
@@ -777,7 +877,7 @@
         
   //:
   
-  
+/*
         function debug(...args){
         
               if(!df && !obj.df)return;
@@ -789,10 +889,10 @@
               window.console.groupEnd();
               
         }//debug
-        
-        
-        
-        
+*/
+
+
+
   return obj;
   
 //google-storage
