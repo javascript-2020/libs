@@ -67,11 +67,16 @@
 
   var obj   = {};
   
-        var df=false,did='page-source';
+        var df=false,did='page-source'
+        ;
         
-        
+        var $
+        ;
         
         obj.initmod   = function(params){
+        
+              $   = mod.rd(params,'$',$);
+              
         }//initmod
         
         
@@ -96,6 +101,8 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
                                                                                 debug('init');
               await mod.auto();
               
@@ -124,10 +131,12 @@
   
         obj.initdom   = function(){
                                                                                 debug('initdom');
-              $('#btn').onclick         = btn.open;
-              $('#label').onclick       = btn.close;
+              var shadow                        = host.shadowRoot;
               
-              hldr                      = $('#hldr');
+              $(shadow,'#btn').onclick          = btn.open;
+              $(shadow,'#label').onclick        = btn.close;
+              
+              hldr                              = $(shadow,'#hldr');
               
         }//initdom
         
