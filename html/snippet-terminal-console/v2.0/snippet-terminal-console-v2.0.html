@@ -75,15 +75,19 @@
         var ext,$,menu,ace,log,config={}
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...list){
         
-              ext           = mod.rd(params,'ext',ext);
-              $             = mod.rd(params,'$',$);
-              menu          = mod.rd(params,'menu',menu);
-              ace           = mod.rd(params,'ace',ace);
-              obj.on        = mod.rd(params,'on',obj.on);
-              log           = mod.rd(params,'log',log);
-              config        = mod.rd(params,'config',config,{});
+              list.forEach(params=>{
+              
+                    ext           = mod.rd(params,'ext',ext);
+                    $             = mod.rd(params,'$',$);
+                    menu          = mod.rd(params,'menu',menu);
+                    ace           = mod.rd(params,'ace',ace);
+                    obj.on        = mod.rd(params,'on',obj.on);
+                    log           = mod.rd(params,'log',log);
+                    config        = mod.rd(params,'config',config,{});
+                    
+              });
               
         }//initmod
         
@@ -124,6 +128,8 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
                                                                                 debug('init',obj.version);
               var dom_config            = mod.rd.config(host);
               config                    = Object.assign(config,dom_config);
