@@ -126,16 +126,20 @@
         var ext,$,datatype,menu,source,filemod
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...params){
         
-              ext           = mod.rd(params,'ext',ext);
-              $             = mod.rd(params,'$',$);
-              datatype      = mod.rd(params,'datatype',datatype);
+              params.forEach(params=>{
               
-              menu          = mod.rd(params,'menu',menu);
-              source        = mod.rd(params,'source',source);
-              
-              filemod       = mod.rd(params,'filemod',filemod);
+                    ext           = mod.rd(params,'ext',ext);
+                    $             = mod.rd(params,'$',$);
+                    datatype      = mod.rd(params,'datatype',datatype);
+                    
+                    menu          = mod.rd(params,'menu',menu);
+                    source        = mod.rd(params,'source',source);
+                    
+                    filemod       = mod.rd(params,'filemod',filemod);
+                    
+              });
               
         }//initmod
         
@@ -175,6 +179,8 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
                                                                                 debug('init',obj.version);
                                                                                 
               await libs();
