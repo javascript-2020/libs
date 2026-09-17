@@ -1,6 +1,6 @@
 
 
-<google-storage v3.0>
+<google-storage>
 
       <template shadowrootmode=open>
       
@@ -242,7 +242,7 @@
       <script>
       
       
-(function google_storage({mod,dom,host}){
+(function google_storage({mod,host}){
 
   var obj   = {
         version   : 'v3.0'
@@ -253,12 +253,10 @@
         var ext,$,menu,source,debug,filemod
         ;
         
-        mod.initmod(obj);
+        obj.initmod   = function(...list){
         
-        obj.initmod   = function(...params){
-        
-              params.forEach(params=>{
-                                                                                console.log(did,params);
+              list.forEach(params=>{
+              
                     ext           = mod.rd(params,'ext',ext);
                     $             = mod.rd(params,'$',$);
                     menu          = mod.rd(params,'menu',menu);
@@ -274,29 +272,30 @@
   //vars:-
   
         var gs;
-        var localstorage    = 'google-storage-';
+        var localstorage      = 'google-storage-';
         
         var gs_filenav;
         
+        var mode              = 'url';
         var root;
         var shadow;
         var icon;
-        var ui                  = {};
+        var ui                = {};
         
         
         
         
-        var btn         = {};
-        btn.tab         = {};
-        btn.token       = {};
-        
+        var btn               = {};
+        btn.tab               = {};
+        btn.token             = {};
+        var rd                = {};
         
   //:
   
   
         obj.init    = async function(){
-          console.log('gs-init');
-        mod.initmod(obj);
+        
+              mod.initmod(obj);
                                                                                 debug=eval(debug.mod);
                                                                                 debug('init',obj.version);
               await libs();
@@ -558,6 +557,8 @@
   
         btn.tab.url   = function(){
         
+              mode    = 'url';
+              
               $(shadow,'#tabs #url').classList.add('active');
               $(shadow,'#tabs #url').classList.remove('inactive');
               $(shadow,'#tabs #file-nav').classList.remove('active');
@@ -578,6 +579,8 @@
         
         btn.tab.filenav   = function(){
         
+              mode    = 'filenav';
+              
               $(shadow,'#tabs #url').classList.remove('active');
               $(shadow,'#tabs #url').classList.add('inactive');
               $(shadow,'#tabs #file-nav').classList.add('active');
@@ -834,11 +837,27 @@
   //:
   
   
+        rd.token    = function(){
+        
+              var token;
+              if(mode=='url'){
+                    token   = $(shadow,'#token').value;
+              }else{
+                    token   = gs_filenav.rd.token();
+              }
+              return token;
+              
+        }//token
+        
+        
+  //:
+  
+  
         obj.load    = load;
         
         async function load(file){
         
-              var token       = $(shadow,'#token').value;
+              var token       = rd.token();
               
               var bucket      = file.bucket;
               var path        = file.path;
@@ -860,7 +879,7 @@
         
         async function save(file,blob){
         
-              var token       = $(shadow,'#token').value;
+              var token       = rd.token();
               
               var bucket      = file.bucket;
               var path        = file.path;
