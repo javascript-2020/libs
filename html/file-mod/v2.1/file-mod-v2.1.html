@@ -53,16 +53,21 @@
         var ext,$,menumod,menu,complete,source,focus,log
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...params){
         
-              ext             = mod.rd(params,'ext',ext);
-              $               = mod.rd(params,'$',$);
-              menumod         = mod.rd(params,'menumod',menumod);
-              menu            = mod.rd(params,'menu',menu);
-              complete        = mod.rd(params,'complete',complete);
-              source          = mod.rd(params,'source',source);
-              focus           = mod.rd(params,'focus',focus);
-              log             = mod.rd(params,'log',log);
+              params.forEach(params=>{
+              
+                    ext             = mod.rd(params,'ext',ext);
+                    $               = mod.rd(params,'$',$);
+                    menumod         = mod.rd(params,'menumod',menumod);
+                    menu            = mod.rd(params,'menu',menu);
+                    log             = mod.rd(params,'log',log);
+                    
+                    complete        = mod.rd(params,'complete',complete);
+                    source          = mod.rd(params,'source',source);
+                    focus           = mod.rd(params,'focus',focus);
+                    
+              });
               
         }//initmod
         
