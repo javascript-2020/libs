@@ -70,6 +70,9 @@
   //vars:-
   
   
+        var filemod   = obj;
+        
+        
         var registry    = [];
         
         
@@ -96,6 +99,8 @@
   
   
         obj.init    = async function(){
+        
+            mod.initmod(obj);
                                                                                 debug('init',obj.version);
                                                                                 
             if(!menumod){
@@ -103,7 +108,6 @@
             }
             
             
-            var filemod   = obj;
             //mod.base.add({filemod,source,log});
             //await mod.auto();
             if(!ext)debugger;
@@ -133,6 +137,7 @@
             obj.electron              = electron;
             
             
+            /*
             localfile.initmod({ext,$,menu,filemod:obj,source});
             fileserver.initmod({ext,$,menu,filemod:obj,source});
             github.initmod({ext,$,menu,filemod:obj,source});
@@ -151,7 +156,7 @@
                   ftpserver.init(),
                   electron.init(),
             ]);
-            
+            */
             
             complete                        ||= {};
             localfile.load.complete           = complete.load;
@@ -169,6 +174,8 @@
             electron.load.complete            = complete.load;
             electron.save.complete            = complete.save;
             
+            
+            await mod.auto();
             
             
         }//init
@@ -189,7 +196,7 @@
               
               export_icon_css();
               
-              
+              /*
               localfile.initdom();
               github.initdom();
               fileserver.initdom();
@@ -197,6 +204,7 @@
               googlestorage.initdom();
               ftpserver.initdom();
               electron.initdom();
+              */
               
               
               root.style.visibility    = '';
