@@ -80,18 +80,25 @@
         
         
         
-        var ext,$,menu,ace,menumod,log,config={}
-        ;
+        var ext,$,menu,ace,menumod,log,config={};
         
-        obj.initmod   = function(params){
         
-              ext           = mod.rd(params,'ext',ext);
-              $             = mod.rd(params,'$',$);
-              menu          = mod.rd(params,'menu',menu);
-              ace           = mod.rd(params,'ace',ace);
-              menumod       = mod.rd(params,'menumod',menumod);
-              log           = mod.rd(params,'log',log);
-              config        = mod.rd(params,'config',config,config);
+        mod.initmod(obj);
+        
+        obj.initmod   = function(...list){
+        
+              list.forEach(params=>{
+              
+                    ext           = mod.rd(params,'ext',ext);
+                    $             = mod.rd(params,'$',$);
+                    menu          = mod.rd(params,'menu',menu);
+                    ace           = mod.rd(params,'ace',ace);
+                    menumod       = mod.rd(params,'menumod',menumod);
+                    log           = mod.rd(params,'log',log);
+                    
+                    config        = mod.rd(params,'config',config,config);
+                    
+              });
               
         }//initmod
         
@@ -147,6 +154,8 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
                                                                                 debug('init',obj.version);
                                                                                 
               var dom_config          = mod.rd.config(host);
@@ -165,6 +174,8 @@
               def.html          = $.htmlentities.decode(host);
               
               
+              mod.base.add({complete,source});
+              
               
               filemod           = mod['file-mod'];
               obj.filemod       = filemod;
@@ -173,16 +184,16 @@
               console           = mod['web-console'];
               obj.console       = console;
               
-              filemod.initmod({ext,$,menu,menumod,complete,source});
-              editor.initmod({ext,$,menu,ace,config:config['web-editor']});
-              console.initmod({ext,$,ace,config:config['web-console']});
+              editor.initmod({config:config['web-editor']});
+              console.initmod({config:config['web-console']});
+              
+              
+              await mod.auto();
+              
               
               
               await Promise.all([
                     rd.attr.src(),
-                    filemod.init(),
-                    editor.init(),
-                    console.init(),
               ]);
               
               
@@ -208,8 +219,9 @@
               var shadow                          = host.shadowRoot;
               
               
-              filemod.initdom();
-              editor.initdom({mode:'html',txt:def.html});
+              //filemod.initdom();
+              //editor.initdom({mode:'html',txt:def.html});
+              editor.setvalue(def.html);
               
               if(src){
                     editor.filename(src);
@@ -224,7 +236,7 @@
               iframe                                  = $(hldr,'iframe');
               
               
-              console.initdom();
+              //console.initdom();
                                                                           debug('def.console.height',def.console.height);
               console.height    = def.console.height;
               
