@@ -1,7 +1,7 @@
 
 
 
-<web-terminal v2.0>
+<web-terminal>
 
       <template shadowrootmode=open>
       
@@ -66,16 +66,20 @@
         var ext,$,log,config={},embed
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...list){
         
-              ext             = mod.rd(params,'ext',ext);
-              $               = mod.rd(params,'$',$);
-              log             = mod.rd(params,'log',log);
-              config          = mod.rd(params,'config',config,config);
-              embed           = mod.rd(params,'embed',embed);
+              list.forEach(params=>{
               
-              Terminal        = mod.rd(params,'Terminal',Terminal);
-              FitAddon        = mod.rd(params,'FitAddon',FitAddon);
+                    ext             = mod.rd(params,'ext',ext);
+                    $               = mod.rd(params,'$',$);
+                    log             = mod.rd(params,'log',log);
+                    config          = mod.rd(params,'config',config,config);
+                    embed           = mod.rd(params,'embed',embed);
+                    
+                    Terminal        = mod.rd(params,'Terminal',Terminal);
+                    FitAddon        = mod.rd(params,'FitAddon',FitAddon);
+                    
+              });
               
         }//initmod
         
@@ -115,6 +119,8 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
                                                                                 debug('init',obj.version);
                                                                                 
               var dom_config    = mod.rd.config(host);
