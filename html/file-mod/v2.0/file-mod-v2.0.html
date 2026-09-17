@@ -50,19 +50,28 @@
         
         
         
-        var ext,$,menumod,menu,complete,source,focus,log
+        var ext,$,menumod,menu,complete,source,focus,log,debug
         ;
         
-        obj.initmod   = function(params){
         
-              ext             = mod.rd(params,'ext',ext);
-              $               = mod.rd(params,'$',$);
-              menumod         = mod.rd(params,'menumod',menumod);
-              menu            = mod.rd(params,'menu',menu);
-              complete        = mod.rd(params,'complete',complete);
-              source          = mod.rd(params,'source',source);
-              focus           = mod.rd(params,'focus',focus);
-              log             = mod.rd(params,'log',log);
+        mod.initmod(obj);
+        
+        obj.initmod   = function(...list){
+        
+              list.forEach(params=>{
+              
+                    ext             = mod.rd(params,'ext',ext);
+                    $               = mod.rd(params,'$',$);
+                    menumod         = mod.rd(params,'menumod',menumod);
+                    menu            = mod.rd(params,'menu',menu);
+                    log             = mod.rd(params,'log',log);
+                    debug           = mod.rd(params,'debug',debug);
+                    
+                    complete        = mod.rd(params,'complete',complete);
+                    source          = mod.rd(params,'source',source);
+                    focus           = mod.rd(params,'focus',focus);
+                    
+              });
               
         }//initmod
         
@@ -135,13 +144,13 @@
             obj.electron              = electron;
             
             
-            localfile.initmod({ext,$,menu,filemod:obj,source});
-            fileserver.initmod({ext,$,menu,filemod:obj,source});
-            github.initmod({ext,$,menu,filemod:obj,source});
-            dbfiles.initmod({ext,$,datatype,menumod,menu,filemod:obj,source});
-            googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source});
-            ftpserver.initmod({ext,$,datatype,menu,source,log});
-            electron.initmod({ext,$,menu,source,log});
+            localfile.initmod({ext,$,menu,filemod:obj,source,debug});
+            fileserver.initmod({ext,$,menu,filemod:obj,source,debug});
+            github.initmod({ext,$,menu,filemod:obj,source,debug});
+            dbfiles.initmod({ext,$,datatype,menumod,menu,filemod:obj,source,debug});
+            googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source,debug});
+            ftpserver.initmod({ext,$,datatype,menu,source,log,debug});
+            electron.initmod({ext,$,menu,source,log,debug});
             
             
             await Promise.all([
@@ -450,7 +459,7 @@
         
   //:
   
-  
+/*
         function debug(...args){
         
               if(!df && !obj.df)return;
@@ -462,9 +471,9 @@
               window.console.groupEnd();
               
         }//debug
-        
-        
-        
+*/
+
+
   return obj;
   
 //filemod
