@@ -102,6 +102,8 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
                                                                                 debug=eval(debug.mod);
                                                                                 debug('init',obj.version);
               await Promise.all([
