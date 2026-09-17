@@ -150,6 +150,7 @@
         var btn     = {};
         var file    = {};
         var dir     = {};
+        obj.rd      = {};
         
         
   //:
@@ -339,6 +340,17 @@
               dir.read(path);
               
         }//update
+        
+        
+  //:
+  
+  
+        obj.rd.token    = function(){
+        
+              var token   = $(shadow,'#token');
+              return token;
+              
+        }//token
         
         
   //:
