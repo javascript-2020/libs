@@ -1279,12 +1279,14 @@
               menu.add.style();
               
               
-              log   = mod['log-mod'];
+              log       = mod['log-mod'];
+              filemod   = mod['file-mod'];
               
               
               mod.base.add({
                     ext,$,datatype,keydown,menu,menumod,ls,debug,
-                    ace,log
+                    ace,
+                    log,filemod
               });
               
               
