@@ -169,26 +169,27 @@
       
       <script>
       
+      
 (function file_nav({mod,dom,host}){
 
   var obj   = {
         version   : 'v2.0'
   };
   
-        var df=false,did='file-nav'
-        ;
+        var df=false,did='file-nav';
         
-        
-  //modvars:-
-  
         var ext,$,datatype
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...params){
         
-              ext         = mod.rd(params,'ext',ext);
-              $           = mod.rd(params,'$',$);
-              datatype    = mod.rd(params,'datatype',datatype);
+              params.forEach(params=>{
+              
+                    ext         = mod.rd(params,'ext',ext);
+                    $           = mod.rd(params,'$',$);
+                    datatype    = mod.rd(params,'datatype',datatype);
+                    
+              });
               
         }//initmod
         
@@ -273,17 +274,18 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
                                                                                 debug('init',obj.version);
+                                                                                
               newfile   = mod['new-file'];
+              //newfile.initmod({$});
+              //newfile.init();
               
-              if(!newfile)debugger;
-              
-              newfile.initmod({$});
-              
-              newfile.init();
-              
-              
-              await libs();
+              await Promise.all([
+                    mod.auto(),
+                    libs(),
+              ]);
               
               
         }//init
@@ -313,7 +315,7 @@
               ui.path                                         = $(shadow,'#path');
               ui.path.textContent                             = def.path;
               
-              newfile.initdom();
+              //newfile.initdom();
               
               var view                                        = $(shadow,'#view');
               
@@ -466,7 +468,6 @@
               a.download    = name;
               a.click();
               
-              
         }//download
         
         
@@ -599,6 +600,13 @@
   //:
   
   
+        obj.clear   = function(){
+        
+              cur.rem();
+              
+        }//clear
+        
+        
         obj.update    = update;
         
         async function update(path){
@@ -999,6 +1007,7 @@
   return obj;
   
 })//file_nav
+
 
       </script>
       
