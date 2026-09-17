@@ -87,7 +87,8 @@
                                             Object.assign(mod.base,params);
                                             
                                       }//add
-                                      
+              mod.base.find         = ()=>{};
+              
               //mod.base.add({ext,$,datatype,keydown,menumod,menu,ace});
               
               
