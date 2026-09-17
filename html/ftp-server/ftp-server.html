@@ -5,11 +5,16 @@
       <template shadowrootmode=open>
       
             <style>
+            
+  :host
+    {font-family:arial}
+    
+    
   .hr
     {border-top:1px solid lightgray;margin:10px 20px}
     
   .menu
-    {position:absolute;outline:none;font-family:arial;display:flex;flex-direction:column}
+    {position:absolute;outline:none;display:flex;flex-direction:column}
     
     
   .category
@@ -53,7 +58,7 @@
     
     
   #btns
-    {display:flex;gap:5px;margin-bottom:10px}
+    {display:flex;gap:5px;margin-top:10px}
     
   #parent-dir
     {cursor:pointer;width:32px;height:32px;border:1px solid gray;box-sizing:border-box;padding:1px;border-radius:3px;
@@ -75,7 +80,7 @@
             
             <img class=icon src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAABYlBMVEVHcEwAAAAYFg0QDw8AAAEAAADSvV4DAgMBAQELEBAFAwQAAALMuFsBAQEICAfDsFfWwV8pJBTHtFm9q1UBAQEBAAAXHh3dyGMlND0LFREcOSanl0sjHxIJCAkEBAMaFw0CAwNHQCIPDQ4XMCGJfD8AAAMEBwUJBggBAAJZUCoBAAECAgIAAADm0GcxLBcAAADon48AAAB2TkvGhnpwZjR5bTirdGqyoVGCdjz/5nD/jbH/6nIODAf/7HPDsFf/53A+OB313WxHQCH54G7/6HH/j7QuGyBeViru12n842/8i7C2pFD+5W+QT2PHboqARlpULjr0h6r3321yPlCZikV2psAcERWgWG5iNUPqgaNGJzBcwoJ4/6tDPR9fhpqW0/Sd3f8/WWfn0We7Z4JJm2dBiFooWztcw4MoPkZbOzowRU+Szu00SFNSc4Q7ISl8r8nifZ1NbX42cEt09qRu6pzkzmVNb2+NAAAAV3RSTlMAZv4FXbT9I3HmM2D9h/L8/v7+/VVP/P7+8/7+/hTK8vf8DP78PuraRPynwJX+/qX9q/79+/3+/fz///////////////////////////////////////514g4cAAABsklEQVQoz3XTh1LCQBAG4HhICAgYunQEEXtvlxgDeIRQFEREml2wd31/L6BOCv4puzPfXMrOHEH8JDoToXAJ6iMWHaGJzhLreIcJwuV+Mhq0TLlb7WvjFOEcOxrApsnrdvvjPRT9h42xzmc3NvsPE6Y5342XMlGzYy/eZafWXb6W0WCyXhydnT4mgurF1Iyv5bXMRd7Ozx/uJy2uqEITTcF3A5rlcu307ELAhZLzyPPBlbsrvDL5Y/etsM8wJb18NkPNfP64fpVhsNf3M0xmT86GxdohTgkv60fBhtBJVkpawAu17Fy45CFOKl0axCPJSo/5bL3RaBzk8VHSB2Wc6jGqAkEQNlZXlu5q1hClUzHctRcKhS+Rlmo1HJczQohHHMexCEknmzsZkvEuTZKX8yRJzldo0pPDT0r/8nAyhcwBm21iKwACE3apK/IKZkfBpkcU/cCfcgDHuk3U8LQfsnZg5hygmpXepuK1QhH1eDs57eChmkkO9hmYIVJ/GjnuQRDR4zRrljoV8zkR/wyU7v1OxbA/N/7nUnKFxXNSJvfH8XB1RxN/eOpvf1m3NbH2duI3WLB5YemTat8AAAAASUVORK5CYII='>
             
-            <div id=ftp-server class=menu style='display:none;left:-225px;top:100px;width:600px;height:800px'>
+            <div id=ftp-server class=menu style='display:none;left:45px;top:45px;width:600px;height:800px'>
             
                   <div class=menu-title>
                         ftp server
@@ -182,8 +187,11 @@
                   
                   <div class=hr></div>
                   
+                  <file-nav component v2.0></file-nav>
+                  
                   <div id=btns>
                         <img id=parent-dir>
+                        <input value=update type=button>
                         <input value=load type=button>
                         <input value=save type=button>
                         <input value=dir type=button>
@@ -191,8 +199,6 @@
                         <div class=spc></div>
                         <input value=del type=button>
                   </div>
-                  
-                  <file-nav component v2.0></file-nav>
                   
             </div>
             
@@ -213,16 +219,18 @@
         var ext,$,datatype,menu,source,log
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...params){
         
-              ext           = mod.rd(params,'ext',ext);
-              $             = mod.rd(params,'$',$);
-              datatype      = mod.rd(params,'datatype',datatype);
+              params.forEach(params=>{
               
-              menu          = mod.rd(params,'menu',menu);
-              source        = mod.rd(params,'source',source);
-              
-              log           = mod.rd(params,'log',log);
+                    ext           = mod.rd(params,'ext',ext);
+                    $             = mod.rd(params,'$',$);
+                    datatype      = mod.rd(params,'datatype',datatype);
+                    menu          = mod.rd(params,'menu',menu);
+                    source        = mod.rd(params,'source',source);
+                    log           = mod.rd(params,'log',log);
+                    
+              });
               
         }//initmod
         
@@ -263,17 +271,20 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
                                                                                 debug(obj.version);
                                                                                 
               filenav                   = mod['file-nav'];
               
-              filenav.initmod({ext,$,datatype});
+              //filenav.initmod({ext,$,datatype});
+              //await filenav.init();
               
               filenav.rd.params         = rd.params;
               filenav.file.click        = file.click;
               filenav.file.dblclick     = file.dblclick;
               
-              await filenav.init();
+              await mod.auto();
               
               
         }//init
@@ -294,7 +305,7 @@
               
               var node                                          = $(shadow,'.menu');
               icon                                              = $(shadow,'.icon');
-              icon.onclick                                      = menu.click(node,'both',true,callback);
+              icon.onclick                                      = menu.click(node,'both',false,menu_callback);
               menu.input.norm(node);
               
               
@@ -307,9 +318,20 @@
               
               ui.proxy.root                                     = $(node,'#proxy');
               
-              $(node,'.copy').onclick                           = btn.copy;
-              $(node,'.paste').onclick                          = btn.paste;
+              $(node,'.copy').onclick                           = async e=>{
               
+                                                                        var txt   = ui.url.value;
+                                                                        await navigator.clipboard.writeText(txt);
+                                                                        
+                                                                  }//copy
+                                                                  
+              $(node,'.paste').onclick                          = async e=>{
+              
+                                                                        var txt         = await navigator.clipboard.readText();
+                                                                        ui.url.value    = txt;
+                                                                        
+                                                                  }//paste
+                                                                  
               ui.url                                            = $(node,'#url');
               if(url){
                     ui.url.value                                = url;
@@ -336,13 +358,13 @@
               $(ui.ftp.root,'[value=status]').onclick           = btn.ftp.status;
               
               
-              
+              $(node,'[value=update').onclick                   = btn.update;
               $(node,'[value=load]').onclick                    = btn.load;
               $(node,'[value=save]').onclick                    = btn.save;
               $(node,'[value=dir]').onclick                     = btn.dir;
               
               
-              filenav.initdom(shadow);
+              //filenav.initdom(shadow);
               
               
         }//initdom
@@ -364,17 +386,19 @@
   
   
         btn.quit    = async function(){
-        
+                                                                                debug('btn.quit');
               var url   = ui.url.value;
               
               var res   = await fetch(url+'quit');
               var txt   = await res.text();
               
+              log(txt);
+              
         }//quit
         
         
         btn.download    = async function(e){
-        
+                                                                                debug('btn.download');
               var zip   = {
                     'ftp-proxy-server'   :{directory:{
                           'package.json'          : {file:{github:{repo:'code',path:'/nodejs/server/ftp-proxy-server/package.json'}}},
@@ -385,22 +409,6 @@
               create_archive(zip,{download:'ftp-proxy-server.zip',df:true});
               
         }//download
-        
-        
-        btn.copy    = async function(){
-        
-              var txt   = ui.url.value;
-              await navigator.clipboard.writeText(txt);
-              
-        }//copy
-        
-        
-        btn.paste   = async function(){
-        
-              var txt         = await navigator.clipboard.readText();
-              ui.url.value    = txt;
-              
-        }//paste
         
         
         btn.load    = function(){
@@ -420,7 +428,7 @@
         
         
         btn.save    = async function(){
-        
+                                                                                debug('btn.save');
               if(filenav.cur.type!=='file'){
                     alert('no file selected');
                     return;
@@ -430,32 +438,35 @@
               var url         = ui.url.value;
               var path        = filenav.cur.path;
               var filename    = filenav.cur.filename;
-              
+                                                                                debug(url,path,filename);
               save.ui(url,path,filename);
               
         }//save
         
         
-        btn.dir   = function(){
-        
+        btn.update   = function(){
+                                                                                debug('btn.update');
               var url       = ui.url.value;
               var auth      = ui.auth.value;
               var path      = filenav.path;
-                                                                                debug('btn.dir',url,auth,path);
+                                                                                debug(url,auth,path);
               filenav.server.readdir(url,auth,path);
               
+        }//update
+        
+        
+        btn.dir   = function(){
         }//dir
         
         
-        
         btn.ftp.connect   = async function(){
-        
+                                                                                debug('ftp.connect');
               var host        = ui.ftp.host.value;
               var port        = ui.ftp.port.value;
               var user        = ui.ftp.user.value;
               var password    = ui.ftp.password.value;
               var secure      = ui.ftp.secure.checked;
-                                                                                console.log(host,port,user,password,secure);
+                                                                                debug(host,port,user,password,secure);
               var json        = {host,port,user,password,secure};
               var body        = JSON.stringify(json);
               
@@ -476,12 +487,14 @@
               }//catch
               if(err){
                     var error   = err.toString();
+                                                                                debug(error);
                     log.red(error);
                     return;
               }
               
               var json    = await res.json();
               if(json.error){
+                                                                                debug(json.error);
                     log.red(json.error);
               }else{
                     log.green(json.ok);
@@ -491,7 +504,7 @@
         
         
         btn.ftp.disconnect    = async function(){
-        
+                                                                                debug('fftp.disconnect');
               var url         = ui.url.value;
               var auth        = ui.auth.value;
               
@@ -510,14 +523,17 @@
               }//catch
               if(err){
                     var error   = err.toString();
+                                                                                debug(error);
                     log.red(error);
                     return;
               }
               
               var json    = await res.json();
               if(json.error){
+                                                                                debug(json.error);
                     log.red(json.error);
               }else{
+                                                                                debug(json.ok);
                     log.green(json.ok);
               }
               
@@ -525,7 +541,7 @@
         
         
         btn.ftp.status    = async function(){
-        
+                                                                                debug('ftp.status');
               var url         = ui.url.value;
               var auth        = ui.auth.value;
               
@@ -544,14 +560,17 @@
               }//catch
               if(err){
                     var error   = err.toString();
+                                                                                debug(error);
                     log.red(error);
                     return;
               }
               
               var json    = await res.json();
               if(json.error){
+                                                                                debug(json.error);
                     log.red(json.error);
               }else{
+                                                                                debug(json.ok);
                     log.green(json.ok);
               }
               
@@ -561,11 +580,9 @@
   //:
   
   
-        function callback(){
-        
-              console.log('menu.callback');
-              
-        }//callback
+        function menu_callback(){
+                                                                                debug('menu.callback',arguments);
+        }//menu_callback
         
         
         file.click    = function(path,filename){
