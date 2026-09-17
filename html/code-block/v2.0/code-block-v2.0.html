@@ -27,17 +27,17 @@
             <div id=root>
             
                   <code></code>
-            
+                  
             </div>
             
       </template>
-
+      
       
       <script>
-
+      
       
 (function code_block({mod,dom,host}){
-  
+
   var obj   = {};
   
   
@@ -45,7 +45,7 @@
         ;
         
         obj.initmod   = function(params){
-          
+        
               ext         = params.ext;
               $           = params.$;
               datatype    = params.datatype;
@@ -57,14 +57,14 @@
         
         
   //:
-
+  
   
         var type;
         var editor;
         
         var snippet_console;
         obj.snippet_console   = null;
-
+        
         var snippet_html;
         obj.snippet_html      = null;
         
@@ -75,12 +75,14 @@
         
         var setup   = {};
         
-  
+        
   //:
   
   
         obj.init    = async function(){
         
+              mod.initmod(obj);
+              
               await libs();
               
         }//init
@@ -119,19 +121,19 @@
         obj.initdom   = async function(rootnode,params){return obj.initdom2(params)}
         
         obj.initdom2    = async function({mode}={}){
-          
+        
               var shadow                = host.shadowRoot;
               
               var txt                   = $.htmlentities.decode(dom);
               var i1                    = txt.indexOf('\n');
               var i2                    = txt.lastIndexOf('\n');
               txt                       = txt.slice(i1+1,i2);
-
-
+              
+              
               var node                  = $(shadow,'code');
               node.textContent          = txt;
               
-
+              
               var has   = dom.hasAttribute.bind(dom);
               switch(true){
               
@@ -140,12 +142,12 @@
                 default                       : await setup.code(shadow,dom,node,mode);             break;
                 
               }//switch
-
-          
+              
+              
         }//initdom2
         
-          
-              
+        
+        
         
         
   //:
@@ -156,7 +158,7 @@
               type    = 'code';
               
               var root,promise;
-        
+              
               var src   = dom.getAttribute('src');
               if(src){
                     var {txt,error}     = await load(src);
@@ -171,8 +173,8 @@
               });
               
         }//code
-
-  
+        
+        
         setup.snippet_console   = async function(shadow,dom,node){
         
               type    = 'snippet-console';
@@ -192,13 +194,13 @@
               
               snippet_console       = await code.snippet_console(mod,node,{menu,ace,mode});
                                                                                 //console.log(snippet_console);
-              
+                                                                                
               obj.snippet_console   = snippet_console;
-
+              
               
         }//snippet_console
-  
-  
+        
+        
         setup.snippet_html    = async function(shadow,dom,node){
         
               type    = 'snippet-html';
@@ -210,7 +212,7 @@
               
               snippet_html          = await code.snippet_html(mod,node,{});
                                                                                 //console.log(snippet_html);
-              
+                                                                                
               obj.snippet_html      = snippet_html;
               
         }//html
