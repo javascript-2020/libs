@@ -27,17 +27,17 @@
             <div id=root>
             
                   <code></code>
-            
+                  
             </div>
             
       </template>
-
+      
       
       <script>
-
       
-mod['code-block']   = function(){
-  
+      
+(function code_block({mod,dom,host}){
+
   var obj   = {};
   
   
@@ -45,7 +45,7 @@ mod['code-block']   = function(){
         ;
         
         obj.initmod   = function(params){
-          
+        
               ext         = params.ext;
               $           = params.$;
               datatype    = params.datatype;
@@ -57,45 +57,44 @@ mod['code-block']   = function(){
         
         
   //:
-
+  
   
         var type;
         var editor;
         
         var snippet_console;
         obj.snippet_console   = null;
-
+        
         var snippet_html;
         obj.snippet_html      = null;
         
         
-        var host;
         var root;
         
         
         
         var setup   = {};
         
-  
+        
   //:
   
   
         obj.init    = async function(){
         
-              var list      = libs();
-              var promise   = Promise.all(list);
-              return promise;
+              mod.initmod(obj);
+              
+              await libs();
               
         }//init
         
         
-        function libs(){
+        async function libs(){
         
               var promise;
               var list    = [];
               
               if(!code){
-                    promise   = ext.load.libs('js/dom/code/code.js.api');
+                    promise   = ext.load.libs('js/dom/code/v2.0/code-v2.0.js.api');
                     promise.then(v=>{
                     
                           [code]    = v;
@@ -111,7 +110,7 @@ mod['code-block']   = function(){
                     list.push(promise);
               }
               
-              return list;
+              await Promise.all(list);
               
         }//libs
         
@@ -119,64 +118,64 @@ mod['code-block']   = function(){
   //:
   
   
-        obj.initdom   = async function(rootnode,{mode}={}){
-          
-              if($.nodename(rootnode)=='code-block'){
-                    host                = rootnode;
-              }else{
-                    host                = $.$(rootnode,'code-block');
-              }
-              root                      = host.shadowRoot;
+        obj.initdom   = async function(rootnode,params){return obj.initdom2(params)}
+        
+        obj.initdom2    = async function({mode}={}){
+        
+              var shadow                = host.shadowRoot;
               
-              var dom                   = host.__root;
-              var txt                   = dom.textContent;
+              var txt                   = $.htmlentities.decode(dom);
               var i1                    = txt.indexOf('\n');
               var i2                    = txt.lastIndexOf('\n');
               txt                       = txt.slice(i1+1,i2);
-
-              var node                  = $(root,'code');
+              
+              
+              var node                  = $(shadow,'code');
               node.textContent          = txt;
               
-
+              
               var has   = dom.hasAttribute.bind(dom);
               switch(true){
               
-                case has('snippet-console')   : await setup.snippet_console(root,dom,node);       break;
-                case has('snippet-html')      : await setup.snippet_html(root,dom,node);          break;
-                default                       : await setup.code(root,dom,node,mode);             break;
+                case has('snippet-console')   : await setup.snippet_console(shadow,dom,node);       break;
+                case has('snippet-html')      : await setup.snippet_html(shadow,dom,node);          break;
+                default                       : await setup.code(shadow,dom,node,mode);             break;
                 
               }//switch
-
-          
-        }//initdom
+              
+              
+        }//initdom2
+        
+        
+        
         
         
   //:
   
   
-        setup.code    = async function(root,dom,node,mode){
+        setup.code    = async function(shadow,dom,node,mode){
         
               type    = 'code';
               
               var root,promise;
-        
+              
               var src   = dom.getAttribute('src');
               if(src){
                     var {txt,error}     = await load(src);
                     node.textContent    = txt;
               }
-              ({promise,root}            = await code.editor.code(node,{mode,menu,ace}));
+              ({promise,root}            = await code.editor.code(mod,node,{mode,menu,ace}));
               promise.then(({editor:ed2,root:r2})=>{
               
-                    console.log('code-block.setup.code',root===r2);
+                                                                                //console.log('code-block.setup.code',root===r2);
                     editor    = ed2;
                     
               });
               
         }//code
-
-  
-        setup.snippet_console   = async function(root,dom,node){
+        
+        
+        setup.snippet_console   = async function(shadow,dom,node){
         
               type    = 'snippet-console';
               
@@ -193,16 +192,16 @@ mod['code-block']   = function(){
                 
               }//switch
               
-              snippet_console       = await code.snippet_console(root,{menu,ace,mode});
-              console.log(snippet_console);
-              
+              snippet_console       = await code.snippet_console(mod,node,{menu,ace,mode});
+                                                                                //console.log(snippet_console);
+                                                                                
               obj.snippet_console   = snippet_console;
-
+              
               
         }//snippet_console
-  
-  
-        setup.snippet_html    = async function(root,dom,node){
+        
+        
+        setup.snippet_html    = async function(shadow,dom,node){
         
               type    = 'snippet-html';
               
@@ -211,9 +210,9 @@ mod['code-block']   = function(){
                     node.setAttribute('src',src);
               }
               
-              snippet_html          = await code.snippet_html(root,{});
-              console.log(snippet_html);
-              
+              snippet_html          = await code.snippet_html(mod,node,{});
+                                                                                //console.log(snippet_html);
+                                                                                
               obj.snippet_html      = snippet_html;
               
         }//html
@@ -290,7 +289,7 @@ mod['code-block']   = function(){
         
   return obj;
   
-}//code-block
+})//code_block
 
 
       </script>
