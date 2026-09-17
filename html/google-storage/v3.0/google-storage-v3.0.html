@@ -253,9 +253,9 @@
         var ext,$,menu,source,debug,filemod
         ;
         
-        obj.initmod   = function(...params){
+        obj.initmod   = function(...list){
         
-              params.forEach(params=>{
+              list.forEach(params=>{
               
                     ext           = mod.rd(params,'ext',ext);
                     $             = mod.rd(params,'$',$);
