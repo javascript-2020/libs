@@ -133,6 +133,8 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
                                                                                 debug('init',obj.version);
               //var resolve;
               //obj.init    = new Promise(res=>resolve=res);
@@ -581,7 +583,8 @@
               }
               var blob    = result;
               
-              obj.load.complete(file,blob);
+              obj.load?.complete?.(file,blob);
+              return blob;
               
         }//load.ui
         
@@ -598,7 +601,7 @@
               var fs    = await db.open(file.abs);
               await fs.write(blob);
               
-              obj.save.complete(file);
+              obj.save?.complete?.(file);
               
         }//save
         
