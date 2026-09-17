@@ -253,8 +253,6 @@
         var ext,$,menu,source,debug,filemod
         ;
         
-        mod.initmod(obj);
-        
         obj.initmod   = function(...params){
         
               params.forEach(params=>{
@@ -295,8 +293,8 @@
   
   
         obj.init    = async function(){
-          console.log('gs-init');
-        mod.initmod(obj);
+        
+              mod.initmod(obj);
                                                                                 debug=eval(debug.mod);
                                                                                 debug('init',obj.version);
               await libs();
