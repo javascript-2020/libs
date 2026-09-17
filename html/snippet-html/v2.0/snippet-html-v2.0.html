@@ -73,15 +73,19 @@
         var ext,$,menu,ace,log,config={},github
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...list){
         
-              ext           = mod.rd(params,'ext',ext);
-              $             = mod.rd(params,'$',$);
-              menu          = mod.rd(params,'menu',menu);
-              ace           = mod.rd(params,'ace',ace);
-              log           = mod.rd(params,'log',log);
-              config        = mod.rd(params,'config',config,config);
-              github        = mod.rd(params,'github',github);
+              list.forEach(params=>{
+              
+                    ext           = mod.rd(params,'ext',ext);
+                    $             = mod.rd(params,'$',$);
+                    menu          = mod.rd(params,'menu',menu);
+                    ace           = mod.rd(params,'ace',ace);
+                    log           = mod.rd(params,'log',log);
+                    config        = mod.rd(params,'config',config,config);
+                    github        = mod.rd(params,'github',github);
+                    
+              });
               
         }//initmod
         
@@ -115,6 +119,8 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
                                                                                 debug('init',obj.version);
               var dom_config          = mod.rd.config(dom);
               config                  = Object.assign(config,dom_config);
