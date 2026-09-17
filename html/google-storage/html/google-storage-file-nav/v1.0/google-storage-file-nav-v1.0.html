@@ -111,9 +111,9 @@
         
         mod.initmod(obj);
         
-        obj.initmod   = function(...params){
+        obj.initmod   = function(...list){
         
-              params.forEach(params=>{
+              list.forEach(params=>{
               
                     $             = mod.rd(params,'$',$);
                     gs            = mod.rd(params,'gs',gs);
