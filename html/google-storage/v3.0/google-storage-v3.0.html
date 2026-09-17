@@ -248,23 +248,25 @@
         version   : 'v3.0'
   };
   
-  
-        var df=true,did='google-storage'
-        ;
-        
-        
+        var df=true,did='google-storage';
         
         var ext,$,menu,source,debug,filemod
         ;
         
-        obj.initmod   = function(params){
+        mod.initmod(obj);
         
-              ext           = mod.rd(params,'ext',ext);
-              $             = mod.rd(params,'$',$);
-              menu          = mod.rd(params,'menu',menu);
-              source        = mod.rd(params,'source',source);
-              debug         = mod.rd(params,'debug',debug)
-              filemod       = mod.rd(params,'filemod',filemod);
+        obj.initmod   = function(...params){
+        
+              params.forEach(params=>{
+              
+                    ext           = mod.rd(params,'ext',ext);
+                    $             = mod.rd(params,'$',$);
+                    menu          = mod.rd(params,'menu',menu);
+                    source        = mod.rd(params,'source',source);
+                    debug         = mod.rd(params,'debug',debug)
+                    filemod       = mod.rd(params,'filemod',filemod);
+                    
+              });
               
         }//initmod
         
