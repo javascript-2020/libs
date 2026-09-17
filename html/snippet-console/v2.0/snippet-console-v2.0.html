@@ -98,14 +98,18 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA0lBMVEVHcE
         var ext,$,ace,menu,config={}
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...list){
         
-              ext           = mod.rd(params,'ext',ext);
-              $             = mod.rd(params,'$',$);
-              ace           = mod.rd(params,'ace',ace);
-              menu          = mod.rd(params,'menu',menu);
-              menumod       = mod.rd(params,'menumod',menumod);
-              config        = mod.rd(params,'config',config,{});
+              list.forEach(params=>{
+              
+                    ext           = mod.rd(params,'ext',ext);
+                    $             = mod.rd(params,'$',$);
+                    ace           = mod.rd(params,'ace',ace);
+                    menu          = mod.rd(params,'menu',menu);
+                    menumod       = mod.rd(params,'menumod',menumod);
+                    config        = mod.rd(params,'config',config,{});
+                    
+              });
               
         }//initmod
         
@@ -152,6 +156,8 @@ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAA0lBMVEVHcE
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
                                                                                 debug('init',obj.version);
               var dom_config      = mod.rd.config(host);
               config              = Object.assign(config,dom_config);
