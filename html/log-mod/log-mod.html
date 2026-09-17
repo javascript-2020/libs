@@ -37,7 +37,7 @@
       
       <script>
       
-(function log_mod({mod,dom,host}){
+(function log_mod({mod,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -66,6 +66,9 @@
   
   
         obj.init    = function(){
+        
+              mod.initmod(obj);
+              
         }//init
         
         
@@ -130,6 +133,7 @@
               var nlog    = log.apply(null,arguments);
               nlog.style.borderColor    = 'red';
               nlog.style.color          = 'red';
+              return nlog;
               
         }//red
         
@@ -138,9 +142,15 @@
         
         function green(){
         
+              if(obj.green.config){
+                    log.config    = obj.green.config;
+              }
+              obj.green.config    = null;
+              
               var nlog    = log.apply(null,arguments);
               nlog.style.borderColor    = 'green';
               nlog.style.color          = 'green';
+              return nlog;
               
         }//green
         
@@ -150,6 +160,7 @@
               var nlog    = log.apply(null,arguments);
               nlog.style.borderColor    = 'orange';
               nlog.style.color          = 'orange';
+              return nlog;
               
         }//orange
         
@@ -166,7 +177,8 @@
               if(!str){
                     str   = 'error';
               }
-              red(str);
+              var nlog    = red(str);
+              return nlog;
               
         }//error
         
@@ -177,7 +189,8 @@
               if(!str){
                     str   = 'ok';
               }
-              green(str);
+              var nlog    = green(str);
+              return nlog;
               
         }//ok
         
