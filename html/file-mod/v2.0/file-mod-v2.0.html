@@ -50,28 +50,19 @@
         
         
         
-        var ext,$,menumod,menu,complete,source,focus,log,debug
+        var ext,$,menumod,menu,complete,source,focus,log
         ;
         
+        obj.initmod   = function(params){
         
-        mod.initmod(obj);
-        
-        obj.initmod   = function(...params){
-        
-              params.forEach(params=>{
-              
-                    ext             = mod.rd(params,'ext',ext);
-                    $               = mod.rd(params,'$',$);
-                    menumod         = mod.rd(params,'menumod',menumod);
-                    menu            = mod.rd(params,'menu',menu);
-                    log             = mod.rd(params,'log',log);
-                    debug           = mod.rd(params,'debug',debug);
-                    
-                    complete        = mod.rd(params,'complete',complete);
-                    source          = mod.rd(params,'source',source);
-                    focus           = mod.rd(params,'focus',focus);
-                    
-              });
+              ext             = mod.rd(params,'ext',ext);
+              $               = mod.rd(params,'$',$);
+              menumod         = mod.rd(params,'menumod',menumod);
+              menu            = mod.rd(params,'menu',menu);
+              complete        = mod.rd(params,'complete',complete);
+              source          = mod.rd(params,'source',source);
+              focus           = mod.rd(params,'focus',focus);
+              log             = mod.rd(params,'log',log);
               
         }//initmod
         
@@ -105,6 +96,8 @@
   
   
         obj.init    = async function(){
+        
+            mod.initmod(obj);
                                                                                 debug('init',obj.version);
                                                                                 
             if(!menumod){
@@ -142,13 +135,13 @@
             obj.electron              = electron;
             
             
-            localfile.initmod({ext,$,menu,filemod:obj,source,debug});
-            fileserver.initmod({ext,$,menu,filemod:obj,source,debug});
-            github.initmod({ext,$,menu,filemod:obj,source,debug});
-            dbfiles.initmod({ext,$,datatype,menumod,menu,filemod:obj,source,debug});
-            googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source,debug});
-            ftpserver.initmod({ext,$,datatype,menu,source,log,debug});
-            electron.initmod({ext,$,menu,source,log,debug});
+            localfile.initmod({ext,$,menu,filemod:obj,source});
+            fileserver.initmod({ext,$,menu,filemod:obj,source});
+            github.initmod({ext,$,menu,filemod:obj,source});
+            dbfiles.initmod({ext,$,datatype,menumod,menu,filemod:obj,source});
+            googlestorage.initmod({ext,$,menumod,menu,filemod:obj,source});
+            ftpserver.initmod({ext,$,datatype,menu,source,log});
+            electron.initmod({ext,$,menu,source,log});
             
             
             await Promise.all([
@@ -457,7 +450,7 @@
         
   //:
   
-/*
+  
         function debug(...args){
         
               if(!df && !obj.df)return;
@@ -469,9 +462,9 @@
               window.console.groupEnd();
               
         }//debug
-*/
-
-
+        
+        
+        
   return obj;
   
 //filemod
