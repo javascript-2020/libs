@@ -169,26 +169,29 @@
       
       <script>
       
+      
 (function file_nav({mod,dom,host}){
 
   var obj   = {
         version   : 'v2.0'
   };
   
-        var df=false,did='file-nav'
-        ;
+        var df=false,did='file-nav';
         
-        
-  //modvars:-
-  
         var ext,$,datatype
         ;
         
-        obj.initmod   = function(params){
+        mod.initmod(obj);
         
-              ext         = mod.rd(params,'ext',ext);
-              $           = mod.rd(params,'$',$);
-              datatype    = mod.rd(params,'datatype',datatype);
+        obj.initmod   = function(...params){
+        
+              params.forEach(params=>{
+              
+                    ext         = mod.rd(params,'ext',ext);
+                    $           = mod.rd(params,'$',$);
+                    datatype    = mod.rd(params,'datatype',datatype);
+                    
+              });
               
         }//initmod
         
@@ -1003,6 +1006,7 @@
   return obj;
   
 })//file_nav
+
 
       </script>
       
