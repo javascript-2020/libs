@@ -90,7 +90,7 @@
   };
         var df=true,did='google-storage-token';
         
-        var key
+        var key,par
         ;
         
         obj.initmod   = function(...list){
@@ -98,6 +98,7 @@
               list.forEach(params=>{
               
                     key         = mod.rd(params,'key',key);
+                    par         = mod.rd(params,'google-storage',par);
                     
               });
               
