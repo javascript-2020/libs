@@ -104,72 +104,19 @@
                   </section>
                   
                   <div id=view>
-                        <div id=url>
-                        
-                        
-                              <div class=menu-sep></div>
-                              
-                              <section id=url-root>
-                              
-                                  <div>
-                                        parse url
-                                  </div>
-                                  
-                                  <div class=hldr>
-                                      <img class='paste icon'>
-                                      <input id=url autocomplete=off spellcheck=false>
-                                      <input type=button value=parse>
-                                      <input type=button value='+'>
-                                  </div>
-                                  
-                              </section>
-                              
-                              <div class=menu-sep></div>
-                              
-                              
-                              <section id=bucket-root>
-                              
-                                    <div>
-                                          bucket name
-                                    </div>
-                                    
-                                    <div class=hldr>
-                                        <img class='paste icon'>
-                                        <input id=bucket autocomplete=off spellcheck=false>
-                                    </div>
-                                    
-                              </section>
-                              
-                              
-                              <section id=path-root>
-                              
-                                    <div>
-                                          path
-                                    </div>
-                                    
-                                    <div class=hldr>
-                                        <img class='icon paste'>
-                                        <input id=path autocomplete=off spellcheck=false>
-                                    </div>
-                                    
-                              </section>
-                              
-                              
-                              <div id=btns>
-                                    <input value=load type=button>
-                                    <input value=save type=button>
-                                    <input value=backup type=button>
-                                    <input value=upload type=button>
-                                    <input value=download type=button>
-                              </div>
-                              
-                        </div url>
-                        
-                        <google-storage-file-nav component=parent id=file-nav>
-                        </google-storage-file-nav>
+                  
+                        <google-storage-url component=parent id=url></google-storage-url>
+                        <google-storage-file-nav component=parent id=file-nav></google-storage-file-nav>
                         
                   </div view>
                   
+                  <div id=btns>
+                        <input value=load type=button>
+                        <input value=save type=button>
+                        <input value=backup type=button>
+                        <input value=upload type=button>
+                        <input value=download type=button>
+                  </div>
                   
             </div menu>
             
@@ -384,54 +331,6 @@
               
               
               
-            //client_id
-              var clientid;
-              try{
-              
-                    clientid                              = window.localStorage[localstorage+'client-id'];
-                    
-              }//try
-              catch(err2){}
-              $(shadow,'#client-id').value                = clientid||'';
-              
-              
-            //client_secret
-            
-              var err;
-              try{
-              
-                    var clientsecret                      = window.localStorage[localstorage+'client-secret'];
-                    
-              }//try
-              catch(err2){}
-              
-              $(shadow,'#client-secret').value            = clientsecret||'';
-              
-              
-            //refresh-token
-            
-              try{
-              
-                    var refresh                           = window.localStorage[localstorage+'refresh-token'];
-                    
-              }//try
-              catch(err2){}
-              
-              $(shadow,'#refresh-token').value            = refresh||'';
-              $(shadow,'.refresh.icon').onclick           = btn.token.refresh;
-              
-              
-            //token
-            
-              var root2                                   = $(shadow,'#token-root');
-              var err;
-              try{
-              
-                    var token                             = window.localStorage[localstorage+'token'];
-                    
-              }//try
-              catch(err2){}
-              $(shadow,'#token').value                    = token||'';
               
               
             //bucket
