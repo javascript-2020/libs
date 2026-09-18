@@ -164,130 +164,6 @@
               par.ui.setup(shadow);
               
               
-              
-              
-              
-/*
-              $.all(shadow,'.paste').forEach(icon=>{
-              
-                    var root        = icon.parentNode;
-                    var input       = $(root,'input:not([type])');
-                    icon.onclick    = async e=>{
-                    
-                                            var txt       = await navigator.clipboard.readText();
-                                            input.value   = txt;
-                                            input.focus();
-                                            
-                                      }//icon.onclick
-                                      
-              });//foreach
-              
-              
-              $.all(shadow,'.copy').forEach(icon=>{
-              
-                    var root        = icon.parentNode;
-                    var input       = $(root,'input:not([type])');
-                    icon.onclick    = async e=>{
-                    
-                                            var txt   = input.value;
-                                            await navigator.clipboard.writeText(txt);
-                                            $.mousetext('copied');
-                                            input.focus();
-                                            
-                                      }//icon.onclick
-                                      
-              });//foreach
-              
-              
-              $.all(shadow,'.storage').forEach(icon=>{
-              
-                    var root    = icon.parentNode;
-                    var key     = root.id.slice(0,-5);
-                    var input   = $(root,'input:not([type])');
-                                                                                console.log(key,input);
-                    var name    = localstorage+key;
-                                                                                console.log(name);
-                    var token;
-                    
-                    icon.onclick    = e=>{
-                    
-                                            if(e.shiftKey){
-                                                  var err;
-                                                  try{
-                                                  
-                                                        token   = localStorage[name];
-                                                        
-                                                  }//try
-                                                  catch(err2){
-                                                  
-                                                        err   = err2;
-                                                        
-                                                  }//catch
-                                                  if(err){
-                                                        var error   = err.tostring();
-                                                        log.red(error);
-                                                        return;
-                                                  }
-                                                  
-                                                  if(!token){
-                                                        $.mousetext(`no stored ${key}, localStorage[${name}]`);
-                                                        return;
-                                                  }
-                                                  input.value   = token;
-                                                  return;
-                                            }
-                                            
-                                            token   = input.value;
-                                            if(!token){
-                                                                                console.log(`${key} empty`);
-                                                  $.mousetext(`${key} empty`);
-                                                  return;
-                                            }
-                                            
-                                            var err;
-                                            try{
-                                            
-                                                  localStorage[name]    = token;
-                                                  
-                                            }//try
-                                            catch(err2){
-                                            
-                                                  err   = err2;
-                                                  
-                                            }//catch
-                                            if(err){
-                                                  var error   = err.toString();
-                                                  log.red(error);
-                                                  return;
-                                            }
-                                                                                console.log(`localStorage[${name}] saved`);
-                                            $.mousetext(`localStorage[${name}] saved`);
-                                            
-                                      }//icon.onclick
-                                      
-                    icon.title    = `${key} : click - store, shift - read`;
-                    
-              });//foreach
-*/
-
-
-
-
-/*
-            //token
-            
-              var root2                                   = $(shadow,'#token-root');
-              var err;
-              try{
-              
-                    var token                             = window.localStorage[localstorage+'token'];
-                    
-              }//try
-              catch(err2){}
-              $(shadow,'#token').value                    = token||'';
-*/
-
-
             //bucket
             
               var root2                                   = $(shadow,'#bucket-root');
@@ -298,12 +174,6 @@
               }//try
               catch(err2){}
               $(shadow,'#bucket').value                   = value||'';
-              
-              
-              
-              
-              var btns                                = $(shadow,'#btns');
-              
               
               
         }//initdom
@@ -330,54 +200,6 @@
               
               par.load.ui(bucket,path);
               
-/*
-              var abs         = bucket+'//'+path;
-              var title       = abs;
-              
-              var file;
-              if(filemod){
-                    file    = filemod.newfile({
-                    
-                                    filetype    : 'google-storage',
-                                    abs         : abs,
-                                    path        : path,
-                                    name        : filename,
-                                    
-                                    kind        : 'file',
-                                    size        : null,
-                                    ctime       : null,
-                                    mtime       : null,
-                                    atime       : null,
-                                    
-                                    title       : title,
-                                    icon        : par.icon.src
-                                    
-                              });
-              }else{
-                    file  = {
-                          filetype    : 'google-storage',
-                          
-                          abs         : abs,
-                          path        : path,
-                          name        : filename,
-                          
-                          kind        : 'file',
-                          
-                          title       : bucket+' : '+path,
-                          icon        : par.icon.src,
-                          
-                          
-                          bucket      : bucket,
-                    }
-              }
-              
-              
-              file.bucket   = bucket;
-              
-              load(file);
-*/
-
-
         }//dblclick
         
         
@@ -405,35 +227,6 @@
         
   //:
   
-  
-  
-/*
-        obj.load    = load;
-        
-        async function load(file){
-                                                                                debug('load',file);
-              var token       = $(shadow,'#token').value;
-              
-              var bucket      = file.bucket;
-              var path        = file.path;
-              
-              var {blob,error}    = await gs.file.load({token,bucket,path});
-              if(error){
-                    log.error(error);
-                    return;
-              }
-              
-              par.load?.complete?.(file,blob);
-              
-              menu.close();
-              
-        }//load
-        
-*/
-
-
-
-  //:
   
   
   
