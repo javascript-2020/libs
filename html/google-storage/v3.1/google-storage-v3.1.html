@@ -275,8 +275,12 @@
         
         ui.setup    = function(shadow){
         
-              var style                       = $(shadow,'style');
-              $.stylesheet.insert(style,'.icon');
+              var style2                      = $(shadow,'style');
+              $.stylesheet.insert(style2,'.icon');
+              
+              $.stylesheet.copyrule(style,'.paste',style2);
+              $.stylesheet.copyrule(style,'.copy',style2);
+              $.stylesheet.copyrule(style,'.storage',style2);
               
               
               $.all(shadow,'.paste').forEach(icon=>{
