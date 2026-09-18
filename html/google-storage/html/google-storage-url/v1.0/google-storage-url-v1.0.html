@@ -7,6 +7,11 @@
             <style>
             
             
+  #url
+    {margin-right:10px}
+    
+    
+    
   input
     {font-size:16px;padding:5px 10px;box-sizing:border-box;}
   input:not([type])
@@ -20,48 +25,42 @@
             
             <div class=menu-sep></div>
             
-            <section id=url-root>
+            <section id=url-root class=field>
             
-                <div>
-                      parse url
-                </div>
-                
-                <div class=hldr>
-                    <img class='paste icon'>
-                    <input id=url autocomplete=off spellcheck=false>
-                    <input type=button value=parse>
-                    <input type=button value='+'>
-                </div>
-                
+                  <label>
+                        parse url
+                  </label>
+                  
+                  <img class='paste icon'>
+                  <input id=url autocomplete=off spellcheck=false>
+                  <input type=button value=parse>
+                  <input type=button value='+'>
+                  
             </section>
             
             <div class=menu-sep></div>
             
             
-            <section id=bucket-root>
+            <section id=bucket-root class=field>
             
-                  <div>
+                  <label>
                         bucket name
-                  </div>
+                  </label>
                   
-                  <div class=hldr>
-                      <img class='paste icon'>
-                      <input id=bucket autocomplete=off spellcheck=false>
-                  </div>
+                  <img class='paste icon'>
+                  <input id=bucket autocomplete=off spellcheck=false>
                   
             </section>
             
             
-            <section id=path-root>
+            <section id=path-root class=field>
             
-                  <div>
+                  <label>
                         path
-                  </div>
+                  </label>
                   
-                  <div class=hldr>
-                      <img class='icon paste'>
-                      <input id=path autocomplete=off spellcheck=false>
-                  </div>
+                  <img class='icon paste'>
+                  <input id=path autocomplete=off spellcheck=false>
                   
             </section>
             
