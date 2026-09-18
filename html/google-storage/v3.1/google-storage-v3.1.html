@@ -287,7 +287,7 @@
         
         ui.setup    = function(shadow){
         
-              var style2                      = $(shadow,'style');
+              var style2    = $(shadow,'style');
               $.stylesheet.insert(style2,'.icon');
               
               $.stylesheet.copyrule(style,'.field',style2);
@@ -454,13 +454,6 @@
         btn.load    = async function(){
         
               var {token,bucket,path}   = rd.ui();
-              
-              /*
-              var token       = $(shadow,'#token').value;
-              var bucket      = $(shadow,'#bucket').value;
-              var path        = $(shadow,'#path').value;
-              */
-              
               load.ui(token,bucket,path);
               
         }//load
@@ -468,14 +461,7 @@
         
         btn.save    = async function(){
         
-              var {token,bucket,ppath}    = rd.ui();
-              
-              /*
-              var token       = $(shadow,'#token').value;
-              var bucket      = $(shadow,'#bucket').value;
-              var path        = $(shadow,'#path').value;
-              */
-              
+              var {token,bucket,path}    = rd.ui();
               save.ui(token,bucket,path);
               
         }//save
@@ -487,10 +473,10 @@
         
         btn.upload    = function(){
         
-              var token       = $(shadow,'#token').value;
+              var {token,bucket,path}   = rd.ui();
               
-              var bucket      = $(shadow,'#bucket').value;
-              var path        = $(shadow,'#path').value;
+              if(!chk(token,bucket,path))return;
+              
               
               var input         = document.createElement('input');
               input.type        = 'file';
@@ -504,17 +490,15 @@
                     var n   = input.files.length;
                     for(var i=0;i<n;i++){
                     
-                          var file        = input.files[i];
+                          var blob          = input.files[i];
                           
-                          var abs         = bucket+path+file.name;
-                          
-                          var result      = await gs.save(token,abs,file);
-                          if(result.error){
-                                log.error(result.error);
+                          var {ok,error}    = await gs.save({token,bucket,path,blob});
+                          if(error){
+                                log.error(error);
                                 return;
                           }
                           
-                          log.ok(file.name+' uploaded');
+                          log.ok(blob.name+' uploaded');
                           
                     }//for
                     
@@ -525,12 +509,9 @@
         
         btn.download    = async function(){
         
-              var token       = $(shadow,'#token').value;
+              var {token,bucket,path}   = rd.ui();
               
-              var bucket      = $(shadow,'#bucket').value;
-              var path        = $(shadow,'#path').value;
-              
-              var abs         = bucket+path;
+              if(!chk(token,bucket,path))return;
               
               var filename    = path;
               var i   = path.lastIndexOf('/');
@@ -538,12 +519,11 @@
                     filename    = path.slice(i+1);
               }
               
-              var result      = await gs.load(token,abs);
-              if(result.error){
-                    log.error(result.error);
+              var {blob,error}    = await gs.load({token,bucket,path});
+              if(error){
+                    log.error(error);
                     return;
               }
-              var blob        = result.ok;
               
               var url         = window.URL.createObjectURL(blob);
               var a           = document.createElement('a');
@@ -762,22 +742,8 @@
         
   //:
   
-/*
-        function debug(...args){
-        
-              if(!df && !obj.df)return;
-              args.unshift(`[ ${did} ]`);
-              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
-              var args2   = [fmt].concat(args);
-              window.console.groupCollapsed.apply(window.console,args2);
-              window.console.trace();
-              window.console.groupEnd();
-              
-        }//debug
-*/
-
-
-
+  
+  
   return obj;
   
 //google-storage
