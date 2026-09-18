@@ -173,6 +173,9 @@
         btn.tab               = {};
         btn.token             = {};
         var rd                = {};
+        var ui                = {};
+        obj.ui                = ui;
+        
         
   //:
   
@@ -189,7 +192,7 @@
               await mod.auto();
               
               gs_filenav    = mod['file-nav'];
-              gs_filenav.initmod({'google-storage':obj,filemod});
+              gs_filenav.initmod({'google-storage':obj,filemod,key:localstorage});
               
               
               
@@ -230,9 +233,36 @@
               
               
               
+            //btns
+            
+              $(shadow,'[value=load]').onclick            = btn.load;
+              $(shadow,'[value=save]').onclick            = btn.save;
+              $(shadow,'[value=backup]').onclick          = btn.backup;
+              $(shadow,'[value=upload]').onclick          = btn.upload;
+              $(shadow,'[value=download]').onclick        = btn.download;
+              
+              
+              
+              try{
+              
+                    var str                             = window.localStorage[localstorage+'view'];
+                    
+              }//try
+              catch(err2){}
+              if(str){
+                    btn.tab[str]();
+              }
+              
+              
+              
+        }//initdom
+        
+        
+        ui.setup    = function(shadow){
+        
               $.all(shadow,'.paste').forEach(icon=>{
               
-                    var root        = icon.parentNode.parentNode;
+                    var root        = icon.parentNode;
                     var input       = $(root,'input:not([type])');
                     icon.onclick    = async e=>{
                     
@@ -247,7 +277,7 @@
               
               $.all(shadow,'.copy').forEach(icon=>{
               
-                    var root        = icon.parentNode.parentNode;
+                    var root        = icon.parentNode;
                     var input       = $(root,'input:not([type])');
                     icon.onclick    = async e=>{
                     
@@ -262,7 +292,7 @@
               
               $.all(shadow,'.storage').forEach(icon=>{
               
-                    var root    = icon.parentNode.parentNode;
+                    var root    = icon.parentNode;
                     var key     = root.id.slice(0,-5);
                     var input   = $(root,'input:not([type])');
                     var name    = localstorage+key;
@@ -328,64 +358,7 @@
                     
               });//foreach
               
-              
-              
-              
-              
-              
-            //bucket
-            
-              var root2                                   = $(shadow,'#bucket-root');
-              try{
-              
-                    var value                             = window.localStorage[localstorage+'bucket'];
-                    
-              }//try
-              catch(err2){}
-              $(shadow,'#bucket').value                   = value||'';
-              
-              
-              
-              
-              
-              
-              
-              
-            //url
-            
-              $(shadow,'[value=parse]').onclick           = btn.parse;
-              $(shadow,'[value="+"]').onclick             = btn.parse.load;
-              
-              
-            //bucket
-            
-            
-            //path
-            
-            
-            
-            //btns
-            
-              $(shadow,'[value=load]').onclick            = btn.load;
-              $(shadow,'[value=save]').onclick            = btn.save;
-              $(shadow,'[value=backup]').onclick          = btn.backup;
-              $(shadow,'[value=upload]').onclick          = btn.upload;
-              $(shadow,'[value=download]').onclick        = btn.download;
-              
-              
-              try{
-              
-                    var str                             = window.localStorage[localstorage+'view'];
-                    
-              }//try
-              catch(err2){}
-              if(str){
-                    btn.tab[str]();
-              }
-              
-              
-              
-        }//initdom
+        }//setup
         
         
   //:
@@ -435,44 +408,6 @@
         }//filenav
         
         
-        btn.token.refresh   = async function(){
-        
-              var id        = $(shadow,'#client-id').value;
-              var secret    = $(shadow,'#client-secret').value;
-              var refresh   = $(shadow,'#refresh-token').value;
-              
-              var token     = await gs.refresh(id,secret,refresh);
-              
-              try{
-              
-                    localStorage[localstorage+'token']    = token;
-                    
-              }//try
-              catch(err2){}
-              
-              $(shadow,'#token').value              = token;
-              
-              $.mousetext('token refreshed');
-              
-        }//refresh
-        
-        
-        btn.parse   = function(){
-        
-              var url                     = $(shadow,'#url').value;
-              var {bucket,path}           = gs.parse(url);
-              $(shadow,'#bucket').value   = bucket;
-              $(shadow,'#path').value     = path;
-              
-        }//parse
-        
-        
-        btn.parse.load    = function(){
-        
-              btn.parse();
-              btn.load();
-              
-        }//load
         
         
         btn.load    = async function(){
