@@ -192,6 +192,31 @@
   //:
   
   
+        btn.token.refresh   = async function(){
+        
+              var id        = $(shadow,'#client-id').value;
+              var secret    = $(shadow,'#client-secret').value;
+              var refresh   = $(shadow,'#refresh-token').value;
+              
+              var token     = await gs.refresh(id,secret,refresh);
+              
+              try{
+              
+                    localStorage[localstorage+'token']    = token;
+                    
+              }//try
+              catch(err2){}
+              
+              $(shadow,'#token').value              = token;
+              
+              $.mousetext('token refreshed');
+              
+        }//refresh
+        
+        
+  //:
+  
+  
         obj.rd.token    = function(){
         
               var token   = $(shadowm,'#token').value;
@@ -201,6 +226,10 @@
         
         
   //:
+  
+  
+  
+  
   
   return obj;
   
