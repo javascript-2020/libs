@@ -186,12 +186,13 @@
                                                                                 debug('initdom');
               shadow                                  = host.shadowRoot;
               
-              
-              var style                       = $(shadow,'style');
-              $.stylesheet.insert(style,'.icon');
+              par.ui.setup(shadow);
               
               
               
+              
+              
+/*
               $.all(shadow,'.paste').forEach(icon=>{
               
                     var root        = icon.parentNode;
@@ -292,12 +293,12 @@
                     icon.title    = `${key} : click - store, shift - read`;
                     
               });//foreach
-              
-              
-              
-              
-              
-              
+*/
+
+
+
+
+/*
             //token
             
               var root2                                   = $(shadow,'#token-root');
@@ -309,8 +310,9 @@
               }//try
               catch(err2){}
               $(shadow,'#token').value                    = token||'';
-              
-              
+*/
+
+
             //bucket
             
               var root2                                   = $(shadow,'#bucket-root');
@@ -342,17 +344,6 @@
               dir.read(path);
               
         }//update
-        
-        
-  //:
-  
-  
-        obj.rd.token    = function(){
-        
-              var token   = $(shadow,'#token');
-              return token;
-              
-        }//token
         
         
   //:
@@ -413,7 +404,7 @@
         
         dir.read    = async function(path){
                                                                                 debug('dir.read',path);
-              var token       = $(shadow,'#token').value;
+              var token       = par.rd.token();
               var bucket      = $(shadow,'#bucket').value;
               
               var {dirs,files,error}    = await gs.dir.list({token,bucket,path});
