@@ -56,16 +56,6 @@
             
             <div id=root>
             
-                  <div id=token-root class=field>
-                        <img class='paste icon'>
-                        <img class='storage icon'>
-                        <label>
-                              token
-                        </label>
-                        <input id=token autocomplete=off spellcheck=false>
-                        <img class='copy icon'>
-                  </div>
-                  
                   <div id=bucket-root class=field>
                         <img class='paste icon'>
                         <img class='storage icon'>
@@ -79,15 +69,6 @@
                   <file-nav component>
                   </file-nav>
                   
-                  <div id=btns>
-                        <input value=update type=button>
-                        <input value=load type=button>
-                        <input value=save type=button>
-                        <input value=backup type=button>
-                        <input value=upload type=button>
-                        <input value=download type=button>
-                  </div>
-                  
             </div>
             
       </template>
@@ -99,10 +80,11 @@
 
   var obj   = {
         version   : 'v1.0',
-  }
+  };
+  
         var df=true,did='google-storage-file-nav';
         
-        var $,gs,log,debug,filemod,par,menu
+        var $,gs,log,debug,filemod,par,menu,key
         ;
         
         mod.initmod(obj);
@@ -118,6 +100,7 @@
                     filemod       = mod.rd(params,'filemod',filemod);
                     par           = mod.rd(params,'google-storage',par);
                     menu          = mod.rd(params,'menu',menu);
+                    key           = mod.rd(params,'key',key);
                     
               });
               
@@ -144,9 +127,9 @@
         
         
         var btn     = {};
+        obj.btn     = btn;
         var file    = {};
         var dir     = {};
-        obj.rd      = {};
         
         
   //:
@@ -161,8 +144,6 @@
               
               filenav.file    = file;
               filenav.dir     = dir;
-              
-              console.log(menu);
               
               
         }//init
@@ -312,7 +293,7 @@
               var root2                                   = $(shadow,'#bucket-root');
               try{
               
-                    var value                             = window.localStorage[localstorage+'bucket'];
+                    var value                             = window.localStorage[key+'bucket'];
                     
               }//try
               catch(err2){}
@@ -322,7 +303,6 @@
               
               
               var btns                                = $(shadow,'#btns');
-              $(btns,'[value=update]').onclick        = btn.update;
               
               
               
@@ -426,6 +406,8 @@
   //:
   
   
+  
+/*
         obj.load    = load;
         
         async function load(file){
@@ -447,8 +429,10 @@
               
         }//load
         
-        
-        
+*/
+
+
+
   //:
   
   
