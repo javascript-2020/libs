@@ -134,9 +134,11 @@
         
               shadow                                      = host.shadowRoot;
               
+              par.ui.setup(shadow);
               
               
             //client_id
+            
               var clientid;
               try{
               
@@ -219,7 +221,7 @@
   
         obj.rd.token    = function(){
         
-              var token   = $(shadowm,'#token').value;
+              var token   = $(shadow,'#token').value;
               return token;
               
         }//token
