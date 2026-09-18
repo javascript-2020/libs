@@ -560,12 +560,49 @@
   //:
   
   
+        rd.ui   = function(){
+        
+              var mod;
+              if(mode=='url'){
+                    mod   = gs_url;
+              }else{
+                    mod   = gs_filenav;
+              }
+              
+              var token     = rd.token();
+              var bucket    = mod.rd.bucket();
+              var path      = mod.rd.path();
+              
+              return {token,bucket,path};
+              
+        }//ui
+        
+        
         rd.token    = function(){
         
               var token   = gs_token.rd.token();
               return token;
               
         }//token
+        
+        
+        function chk(token,bucket,path){
+        
+              if(!token){
+                    log.red('token not set');
+                    return;
+              }
+              if(!bucket){
+                    log.red('bucket not set');
+                    return;
+              }
+              if(!path){
+                    log.red('path not set');
+                    return;
+              }
+              return true;
+              
+        }//chk
         
         
   //:
@@ -580,13 +617,11 @@
               var bucket      = file.bucket;
               var path        = file.path;
               
-              var result      = await gs.load(token,bucket,path);
-              if(result.error){
-                    log.error(result.error);
+              var {blob,error}    = await gs.load(token,bucket,path);
+              if(error){
+                    log.error(error);
                     return;
               }
-              var blob        = result.ok;
-              
               
               obj.load?.complete?.(file,blob);
               
@@ -595,10 +630,11 @@
         
         load.ui   = function(token,bucket,path){
         
+              if(!chk(token,bucket,path))return;
+              
               var i           = path.lastIndexOf('/');
               var filename    = path.slice(i+1);
               var abs         = bucket+'//'+path;
-              
               var title       = abs;
               
               var file;
@@ -656,9 +692,9 @@
               var bucket      = file.bucket;
               var path        = file.path;
               
-              var result      = await gs.save(token,bucket,path,blob);
-              if(result.error){
-                    log.error(result.error);
+              var {ok,error}    = await gs.save(token,bucket,path,blob);
+              if(error){
+                    log.error(error);
                     return;
               }
               
@@ -670,11 +706,11 @@
         
         save.ui   = async function(token,bucket,path){
         
-              var abs         = bucket+path;
+              if(!chk(token,bucket,path))return;
               
               var i           = path.lastIndexOf('/');
               var filename    = path.slice(i+1);
-              
+              var abs         = bucket+path;
               var title       = abs;
               
               var file;
