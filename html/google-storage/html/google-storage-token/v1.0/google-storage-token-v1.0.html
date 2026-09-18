@@ -74,6 +74,8 @@
                   
             </section>
             
+            <div class=hr></div>
+            
       </template>
       
       
@@ -85,15 +87,17 @@
   var obj   = {
         version   : 'v1.0',
   };
+  
         var df=true,did='google-storage-token';
         
-        var key,par
+        var key,par,$
         ;
         
         obj.initmod   = function(...list){
         
               list.forEach(params=>{
               
+                    $           = mod.rd(params,'$',$);
                     key         = mod.rd(params,'key',key);
                     par         = mod.rd(params,'google-storage',par);
                     
