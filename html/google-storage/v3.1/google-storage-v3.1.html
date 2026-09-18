@@ -35,7 +35,13 @@
     {display:block}
     
   .field
-    {display:flex;align-items:center}
+    {display:flex;gap:10px;align-items:center}
+  .field label
+    {display:inline-block;width:60px;text-align:right}
+  .field input
+    {flex:1}
+    
+    
     
   .paste
     {margin-right:5px;padding:2px;
@@ -282,6 +288,9 @@
               $.stylesheet.insert(style2,'.icon');
               
               $.stylesheet.copyrule(style,'.field',style2);
+              $.stylesheet.copyrule(style,'.field label',style2);
+              $.stylesheet.copyrule(style,'.field input',style2);
+              
               $.stylesheet.copyrule(style,'.paste',style2);
               $.stylesheet.copyrule(style,'.copy',style2);
               $.stylesheet.copyrule(style,'.storage',style2);
