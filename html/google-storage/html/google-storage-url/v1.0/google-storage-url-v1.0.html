@@ -112,7 +112,6 @@
               mod.initmod(obj);
                                                                                 debug=eval(debug.mod);
                                                                                 debug('init',obj.version);
-                                                                                
         }//init
         
         
@@ -126,31 +125,10 @@
               par.ui.setup(shadow);
               
               
-              
-            //bucket
-            
-              var root2                                   = $(shadow,'#bucket-root');
-              try{
-              
-                    var value                             = window.localStorage[key+'bucket'];
-                    
-              }//try
-              catch(err2){}
-              $(shadow,'#bucket').value                   = value||'';
-              
-              
-              
-              
-              
-              
-              
-              
             //url
             
               $(shadow,'[value=parse]').onclick           = btn.parse;
               $(shadow,'[value="+"]').onclick             = btn.parse.load;
-              
-              
               
               
               
@@ -173,7 +151,12 @@
         btn.parse.load    = function(){
         
               btn.parse();
-              btn.load();
+              
+              var token     = par.rd.token();
+              var bucket    = $(shadow,'#bucket').value;
+              var path      = $(shadow,'#path').value;
+              
+              par.load.ui(token,bucket,path);
               
         }//load
         
