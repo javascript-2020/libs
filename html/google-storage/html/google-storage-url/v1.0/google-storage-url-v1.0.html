@@ -68,11 +68,16 @@
   };
         var df=true,did='google-storage-url';
         
+        var debug,par
+        ;
         
         obj.initmod   = function(...list){
         
               list.forEach(params=>{
               
+                    debug       = mod.rd(params,'debug',debug);
+                    par         = mod.rd(params,'google-storage',par);
+                    
               });
               
         }//initmod
@@ -81,11 +86,18 @@
   //:
   
   
+        var shadow;
+        
+        
   //:
   
   
         obj.init    = async function(){
         
+              mod.initmod(obj);
+                                                                                debug=eval(debug.mod);
+                                                                                debug('init',obj.version);
+                                                                                
         }//init
         
         
@@ -93,10 +105,44 @@
   
   
         obj.initdom   = async function(){
+                                                                                debug('initdom');
+              shadow                                      = host.shadowRoot;
+              
+            //bucket
+            
+              var root2                                   = $(shadow,'#bucket-root');
+              try{
+              
+                    var value                             = window.localStorage[localstorage+'bucket'];
+                    
+              }//try
+              catch(err2){}
+              $(shadow,'#bucket').value                   = value||'';
+              
+              
+              
+              
+              
+              
+              
+              
+            //url
+            
+              $(shadow,'[value=parse]').onclick           = btn.parse;
+              $(shadow,'[value="+"]').onclick             = btn.parse.load;
+              
+              
+              
+              
+              
         }//initdom
         
         
   //:
+  
+  
+  
+  
   
   
   return obj;
