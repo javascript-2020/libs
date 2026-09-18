@@ -74,9 +74,10 @@
   var obj   = {
         version   : 'v1.0',
   };
+  
         var df=true,did='google-storage-url';
         
-        var debug,par,key
+        var debug,par,key,$
         ;
         
         obj.initmod   = function(...list){
@@ -86,6 +87,7 @@
                     debug       = mod.rd(params,'debug',debug);
                     par         = mod.rd(params,'google-storage',par);
                     key         = mod.rd(params,'key',key);
+                    $           = mod.rd(params,'$',$);
                     
               });
               
