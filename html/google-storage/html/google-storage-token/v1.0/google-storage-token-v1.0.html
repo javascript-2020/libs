@@ -7,11 +7,75 @@
             <style>
             
             
+  .hr
+    {border-top:1px solid lightgray;margin:10px 20px}
+    
             </style>
             
-            <div id=root>
+            <section id=client-id-root>
             
-            </div>
+                  <div>
+                        client id
+                  </div>
+                  
+                  <div class=hldr>
+                      <img class='paste icon'>
+                      <img class='storage icon'>
+                      <input id=client-id autocomplete=off spellcheck=false>
+                      <img class='copy icon'>
+                  </div>
+                  
+            </section>
+            
+            
+            <section id=client-secret-root>
+            
+                  <div>
+                        client secret
+                  </div>
+                  
+                  <div class=hldr>
+                      <img class='paste icon'>
+                      <img class='storage icon'>
+                      <input id=client-secret autocomplete=off spellcheck=false>
+                      <img class='copy icon'>
+                  </div>
+                  
+            </section>
+            
+            
+            <section id=refresh-token-root>
+            
+                  <div>
+                        refresh token
+                  </div>
+                  
+                  <div class=hldr>
+                      <img class='paste icon'>
+                      <img class='storage icon'>
+                      <input id=refresh-token autocomplete=off spellcheck=false>
+                      <img class='copy icon'>
+                      <img class='refresh icon'>
+                  </div>
+                  
+            </section>
+            
+            <div class=hr></div>
+            
+            <section id=token-root>
+            
+                  <div>
+                        token
+                  </div>
+                  
+                  <div class=hldr>
+                      <img class='paste icon'>
+                      <img class='storage icon'>
+                      <input id=token autocomplete=off spellcheck=false>
+                      <img class='copy icon'>
+                  </div>
+                  
+            </section>
             
       </template>
       
@@ -26,11 +90,15 @@
   };
         var df=true,did='google-storage-token';
         
+        var key
+        ;
         
         obj.initmod   = function(...list){
         
               list.forEach(params=>{
               
+                    key         = mod.rd(params,'key',key);
+                    
               });
               
         }//initmod
@@ -39,6 +107,14 @@
   //:
   
   
+        var shadow;
+        
+        
+        
+        obj.rd        = {};
+        
+        
+        
   //:
   
   
@@ -54,11 +130,77 @@
   
   
         obj.initdom   = async function(){
+        
+        
+              shadow                                      = host.shadowRoot;
+              
+              
+              
+            //client_id
+              var clientid;
+              try{
+              
+                    clientid                              = window.localStorage[key+'client-id'];
+                    
+              }//try
+              catch(err2){}
+              $(shadow,'#client-id').value                = clientid||'';
+              
+              
+            //client_secret
+            
+              var err;
+              try{
+              
+                    var clientsecret                      = window.localStorage[key+'client-secret'];
+                    
+              }//try
+              catch(err2){}
+              
+              $(shadow,'#client-secret').value            = clientsecret||'';
+              
+              
+            //refresh-token
+            
+              try{
+              
+                    var refresh                           = window.localStorage[key+'refresh-token'];
+                    
+              }//try
+              catch(err2){}
+              
+              $(shadow,'#refresh-token').value            = refresh||'';
+              $(shadow,'.refresh.icon').onclick           = btn.token.refresh;
+              
+              
+            //token
+            
+              var root2                                   = $(shadow,'#token-root');
+              var err;
+              try{
+              
+                    var token                             = window.localStorage[key+'token'];
+                    
+              }//try
+              catch(err2){}
+              $(shadow,'#token').value                    = token||'';
+              
+              
         }//initdom
         
         
   //:
   
+  
+        obj.rd.token    = function(){
+        
+              var token   = $(shadowm,'#token').value;
+              return token;
+              
+        }//token
+        
+        
+  //:
   
   return obj;
   
