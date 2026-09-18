@@ -159,8 +159,12 @@
         var localstorage      = 'google-storage-';
         
         var gs_filenav;
+        var gs_url;
+        var gs_token;
         
         var mode              = 'url';
+        
+        
         var root;
         var shadow;
         var icon;
@@ -173,6 +177,7 @@
         btn.tab               = {};
         btn.token             = {};
         var rd                = {};
+        obj.rd                = rd;
         var ui                = {};
         obj.ui                = ui;
         
@@ -189,12 +194,20 @@
               
               mod.base.add({gs});
               
-              await mod.auto();
+              
+              var params    = {'google-storage':obj,filemod,key:localstorage};
               
               gs_filenav    = mod['file-nav'];
-              gs_filenav.initmod({'google-storage':obj,filemod,key:localstorage});
+              gs_filenav.initmod(params);
+              
+              gs_url        = mod['url'];
+              gs_url.initmod(params);
+              
+              gs_token      = mod['token'];
+              gs_url.initmod(params);
               
               
+              await mod.auto();
               
               
         }//init
@@ -210,7 +223,7 @@
   //:
   
   
-        obj.initdom   = function(){
+        obj.initdom   = async function(){
                                                                                 debug('initdom');
                                                                                 
               shadow                          = host.shadowRoot;
@@ -260,6 +273,10 @@
         
         ui.setup    = function(shadow){
         
+              var style                       = $(shadow,'style');
+              $.stylesheet.insert(style,'.icon');
+              
+              
               $.all(shadow,'.paste').forEach(icon=>{
               
                     var root        = icon.parentNode;
@@ -413,57 +430,10 @@
         btn.load    = async function(){
         
               var token       = $(shadow,'#token').value;
-              
               var bucket      = $(shadow,'#bucket').value;
               var path        = $(shadow,'#path').value;
               
-              var i           = path.lastIndexOf('/');
-              var filename    = path.slice(i+1);
-              var abs         = bucket+'//'+path;
-              
-              var title       = abs;
-              
-              var file;
-              if(filemod){
-                    file    = filemod.newfile({
-                    
-                          filetype    : 'google-storage',
-                          abs         : abs,
-                          path        : path,
-                          name        : filename,
-                          
-                          kind        : 'file',
-                          size        : null,
-                          ctime       : null,
-                          mtime       : null,
-                          atime       : null,
-                          
-                          title       : title,
-                          icon        : icon.src
-                          
-                    });
-                    
-                    file.bucket   = bucket;
-                    
-              }else{
-                    file    = {
-                          filetype    : 'google-storage',
-                          
-                          abs         : abs,
-                          path        : path,
-                          name        : filename,
-                          
-                          kind        : 'file',
-                          
-                          title       : bucket+' : '+path,
-                          icon        : icon.src,
-                          
-                          
-                          bucket      : bucket,
-                    }
-              }
-              
-              load(file);
+              load.ui(token,bucket,path);
               
         }//load
         
@@ -471,60 +441,10 @@
         btn.save    = async function(){
         
               var token       = $(shadow,'#token').value;
-              
               var bucket      = $(shadow,'#bucket').value;
               var path        = $(shadow,'#path').value;
               
-              var abs         = bucket+path;
-              
-              var i           = path.lastIndexOf('/');
-              var filename    = path.slice(i+1);
-              
-              var title       = abs;
-              
-              var file;
-              if(filemod){
-                    file    = filemod.newfile({
-                    
-                          filetype    : 'google-storage',
-                          abs         : abs,
-                          path        : path,
-                          name        : filename,
-                          
-                          kind        : 'file',
-                          size        : null,
-                          ctime       : null,
-                          mtime       : null,
-                          atime       : null,
-                          
-                          title       : title,
-                          icon        : icon.src
-                          
-                    });
-                    
-                    file.bucket   = bucket;
-                    
-              }else{
-                    file    = {
-                          filetype    : 'google-storage',
-                          
-                          abs         : abs,
-                          path        : path,
-                          name        : filename,
-                          
-                          kind        : 'file',
-                          
-                          title       : bucket+' : '+path,
-                          icon        : icon.src,
-                          
-                          
-                          bucket      : bucket,
-                    }
-              }
-              
-              
-              var blob        = await source(file);
-              save(file,blob);
+              save.ui(token,bucket,path);
               
         }//save
         
@@ -646,6 +566,60 @@
         }//load
         
         
+        load.ui   = function(token,bucket,path){
+        
+              var i           = path.lastIndexOf('/');
+              var filename    = path.slice(i+1);
+              var abs         = bucket+'//'+path;
+              
+              var title       = abs;
+              
+              var file;
+              if(filemod){
+                    file    = filemod.newfile({
+                    
+                          filetype    : 'google-storage',
+                          abs         : abs,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          size        : null,
+                          ctime       : null,
+                          mtime       : null,
+                          atime       : null,
+                          
+                          title       : title,
+                          icon        : icon.src
+                          
+                    });
+                    
+                    file.bucket   = bucket;
+                    
+              }else{
+                    file    = {
+                          filetype    : 'google-storage',
+                          
+                          abs         : abs,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          
+                          title       : bucket+' : '+path,
+                          icon        : icon.src,
+                          
+                          
+                          bucket      : bucket,
+                    }
+              }
+              
+              load(file);
+              
+        }//ui
+        
+        
+        
         obj.save    = save;
         
         async function save(file,blob){
@@ -665,6 +639,62 @@
               obj.save?.complete?.(file);
               
         }//save
+        
+        
+        save.ui   = function(token,bucket,path){
+        
+              var abs         = bucket+path;
+              
+              var i           = path.lastIndexOf('/');
+              var filename    = path.slice(i+1);
+              
+              var title       = abs;
+              
+              var file;
+              if(filemod){
+                    file    = filemod.newfile({
+                    
+                          filetype    : 'google-storage',
+                          abs         : abs,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          size        : null,
+                          ctime       : null,
+                          mtime       : null,
+                          atime       : null,
+                          
+                          title       : title,
+                          icon        : icon.src
+                          
+                    });
+                    
+                    file.bucket   = bucket;
+                    
+              }else{
+                    file    = {
+                          filetype    : 'google-storage',
+                          
+                          abs         : abs,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          
+                          title       : bucket+' : '+path,
+                          icon        : icon.src,
+                          
+                          
+                          bucket      : bucket,
+                    }
+              }
+              
+              
+              var blob        = await source(file);
+              save(file,blob);
+              
+        }//ui
         
         
   //:
