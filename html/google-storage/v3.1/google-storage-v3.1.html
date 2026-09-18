@@ -429,9 +429,13 @@
         
         btn.load    = async function(){
         
+              var {token,bucket,path}   = rd.ui();
+              
+              /*
               var token       = $(shadow,'#token').value;
               var bucket      = $(shadow,'#bucket').value;
               var path        = $(shadow,'#path').value;
+              */
               
               load.ui(token,bucket,path);
               
@@ -440,9 +444,13 @@
         
         btn.save    = async function(){
         
+              var {token,bucket,ppath}    = rd.ui();
+              
+              /*
               var token       = $(shadow,'#token').value;
               var bucket      = $(shadow,'#bucket').value;
               var path        = $(shadow,'#path').value;
+              */
               
               save.ui(token,bucket,path);
               
