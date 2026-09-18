@@ -34,8 +34,8 @@
   #hdr a
     {display:block}
     
-  .hldr
-    {display:flex}
+  .field
+    {display:flex;align-items:center}
     
   .paste
     {margin-right:5px;padding:2px;
@@ -66,8 +66,6 @@
   input[type=button]
     {cursor:pointer}
     
-  #url
-    {margin-right:10px}
     
     
     
@@ -198,19 +196,19 @@
               mod.base.add({gs});
               
               
-              shadow                          = host.shadowRoot;
-              style                           = $(shadow,'style');
+              shadow                    = host.shadowRoot;
+              style                     = $(shadow,'style');
               
               
-              var params    = {'google-storage':obj,filemod,key:localstorage};
+              var params                = {'google-storage':obj,filemod,key:localstorage};
               
-              gs_filenav    = mod['file-nav'];
+              gs_filenav                = mod['file-nav'];
               gs_filenav.initmod(params);
               
-              gs_url        = mod['url'];
+              gs_url                    = mod['url'];
               gs_url.initmod(params);
               
-              gs_token      = mod['token'];
+              gs_token                  = mod['token'];
               gs_token.initmod(params);
               
               
@@ -283,9 +281,11 @@
               var style2                      = $(shadow,'style');
               $.stylesheet.insert(style2,'.icon');
               
+              $.stylesheet.copyrule(style,'.field',style2);
               $.stylesheet.copyrule(style,'.paste',style2);
               $.stylesheet.copyrule(style,'.copy',style2);
               $.stylesheet.copyrule(style,'.storage',style2);
+              $.stylesheet.copyrule(style,'.refresh',style2);
               
               
               $.all(shadow,'.paste').forEach(icon=>{
