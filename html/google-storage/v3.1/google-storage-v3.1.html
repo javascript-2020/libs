@@ -117,6 +117,7 @@
                   </div view>
                   
                   <div id=btns>
+                        <input value=update type=button>
                         <input value=load type=button>
                         <input value=save type=button>
                         <input value=backup type=button>
@@ -237,28 +238,29 @@
         obj.initdom   = async function(){
                                                                                 debug('initdom');
                                                                                 
-              shadow                          = host.shadowRoot;
-              style                           = $(shadow,'style');
+              shadow                                      = host.shadowRoot;
+              style                                       = $(shadow,'style');
               menu.add.style(shadow);
               
-              var style                       = $(shadow,'style');
+              var style                                   = $(shadow,'style');
               $.stylesheet.insert(style,'.icon');
               
-              var mroot                       = $(shadow,'.menu');
+              var mroot                                   = $(shadow,'.menu');
               menu.input.norm(mroot);
               
-              icon                            = $(shadow,'.icon');
-              obj.icon                        = icon;
-              icon.onclick                    = menu.click(mroot,'both',false,menu_callback);
+              icon                                        =  $(shadow,'.icon');
+              obj.icon                                    = icon;
+              icon.onclick                                = menu.click(mroot,'both',false,menu_callback);
               
               
-              $(shadow,'#tabs #url').onclick         = btn.tab.url;
-              $(shadow,'#tabs #file-nav').onclick    = btn.tab.filenav;
+              $(shadow,'#tabs #url').onclick              = btn.tab.url;
+              $(shadow,'#tabs #file-nav').onclick         = btn.tab.filenav;
               
               
               
             //btns
             
+              $(btns,'[value=update]').onclick            = gs_filenav.btn.update;
               $(shadow,'[value=load]').onclick            = btn.load;
               $(shadow,'[value=save]').onclick            = btn.save;
               $(shadow,'[value=backup]').onclick          = btn.backup;
@@ -269,7 +271,7 @@
               
               try{
               
-                    var str                             = window.localStorage[localstorage+'view'];
+                    var str                               = window.localStorage[localstorage+'view'];
                     
               }//try
               catch(err2){}
@@ -447,6 +449,7 @@
         
         
         
+        
         btn.load    = async function(){
         
               var {token,bucket,path}   = rd.ui();
@@ -558,12 +561,7 @@
   
         rd.token    = function(){
         
-              var token;
-              if(mode=='url'){
-                    token   = $(shadow,'#token').value;
-              }else{
-                    token   = gs_filenav.rd.token();
-              }
+              var token   = gs_token.rd.token();
               return token;
               
         }//token
