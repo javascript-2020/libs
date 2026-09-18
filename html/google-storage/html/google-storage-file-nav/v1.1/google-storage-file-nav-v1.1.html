@@ -352,8 +352,11 @@
         file.dblclick   = function(path,filename){
                                                                                 debug('file.dblclick',path,filename);
               var bucket      = $(shadow,'#bucket').value;
-              
               path           += filename;
+              
+              par.load.ui(bucket,path);
+              
+/*
               var abs         = bucket+'//'+path;
               var title       = abs;
               
@@ -398,7 +401,9 @@
               file.bucket   = bucket;
               
               load(file);
-              
+*/
+
+
         }//dblclick
         
         
