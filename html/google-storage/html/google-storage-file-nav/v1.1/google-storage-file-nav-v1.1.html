@@ -1,0 +1,477 @@
+
+
+<google-storage-file-nav style='height:500px;display:none'>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+  :host
+    {flex:1;display:flex;flex-direction:column}
+    
+  #root
+    {flex:1;display:flex;flex-direction:column;gap:10px;height:100%}
+    
+    
+    
+    
+  .paste
+    {padding:2px;
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAVlJREFUSEvtlj1ug0AQhcdIW6RLeiQy6XKElLRIlOlp6LmBlRsgtzTUOQAtcZMzpMpInAGlQSjRWl7LxrM/dlhZUbwtu/PNvH07zAIutBYX4oIzGBG/95MkIuezXHFOh6MoegqC4F0GEELAMAybWL+BG8GI+AwArypjRFTAgyLOSeAIHIbhjRDii5NHgcdxhK7rWHu4JnEEnt6ljK6AUxIRcfAPInq0mVYL/lwSrNa3UL7d2WKA3CvXw8vuKqzeMYKtxMmGK9ik2FVq+XQ2rVE5VSeXMpLNgLp3fZbUrlCVFAc/GaygbdvaioU4jrU9/W+CVUVc6U3TQJIkfio2geVV/C+pi6KAsiz9SN33PaRpyrrbu9R1XbPgLMv83bHJXHmeQ1VVp0tt6w6zN5DtqHMwynJJeAGbqkVEOefc2xTZ/+7Uq10CcgOh7pzz38kFPMce6zQ4B4SL8QNf7+YfCGbtNAAAAABJRU5ErkJggg==);
+    }
+  .copy
+    {padding:2px;
+      content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAABSlBMVEVHcEwnz/4C8P4g1P4L6P43wf5Mr/4a2v4Y3P4/uv5PrP4+vf5Auv4ozv5KsP4vyv45wP5Jsf5Auf49vP5Mrv4zxf44wf5Lr/46wP4h1P5Lr/46vv5Jsv4R5P5Hs/5Etv44wf5Hs/41w/4uyv47vv49vP5Ftf5GtP4c2f4rzP4tyv4m0f5Etv5Nrv4xxv4xxv4xx/4W3/5KsP5Mr/4/u/4uyv5Isv4K6f4l0f4qzv4W3/4V3/5Nrv5Mrv5Mrv5Mr/4W3v4e2P5BuP5Hsv4N5v4K6f4O5v42w/5Dt/4E7/4uyf4C8P4nz/4M5/4K6v4oz/4P5f4k0v4b2v5Gs/4E7v4I6/5Nrf4e1/4H7P4E7v5Auv5Dtv4sy/5Isv5GtP4wx/49vP4zxf47vv44wP42w/5LsP5Jsf4i1P4n0P4N5v4k0v4a2v4S4v4X3v6OfcqkAAAAVnRSTlMACo7CjQWN/VczjgIJMfIXJzHtjj5iVekR71Hvtz7CjelXjre2wiJj2PCFIWbR7+fEnXaodz3544/USfOC22Tm7CXOnqfUZ+/3VTV9bsTzqGDahpb2tyRB6bIAAAIDSURBVDjLrZVpV9pAFIYntdFiQkZsLCQECtJSlqAsFRBU3Kuta1sncYGuJEDt///aISkkkyHo6enzLTlP5s5758wNAC526pd3d1++/fzx/evNze1tp210wxURUMTWBz2v2EWtLc7jBTPmoJfNrqy8i0ajixgB00VISJIeW9JMKbcWDAYDNiFMQN1EqAAJcUfSBif0fsQWQjLxpjGnXUJa5CoIbTiP8KJ0OqfNMLQIZhGad/Ke3t///vWwGKv1+yPxfW55+TnmJWZW5ggxcqX3m6WSVTpSdPcxHCLExmf97AI8e1j8cK1f8X9Fq/Sotrf0k2v9KRiJ08L8mwhf2CQx8oK/yJyPw3Q67ULaV4Tr7tRCwFfkllLF4ushccwGPyUMzwzhMQz/X1Kz+QVMmh2LcjgsTxDZ3OpqIpFYfDu+KGwoxE5JvTtpF9NX9BEB792jn0gD4eNEsVAQHyXOO7fQFmNNLZOnPV5BqEyI+Yxm1qkluS0BCWRp8FEze6mTJQtVVd8MUfcEhBSGFOGMOWmaoc0AmRoXP5cmiHEReEXANOopzCsLRYlXjWolGXE2jK/r/ujEWAdOFIxWGrjO8ljXazG6MeynthEn2gAP9P7B4XCE2thzdG2v2jbK5LfHZ3hINbclSco6o/kIh1Einq4e1qxp5m2PkqZ/CPvbXvFot+xe7w/EpaiUrJ24NAAAAABJRU5ErkJggg==);
+    }
+  .storage
+    {padding:2px;
+      content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAACZFBMVEVHcEy9TEyD1eZpgIXXxLrhjWPyYyfxn3bljF/5jFrrpnnvNB/8ai/yh1bUmnLiaDbqLSDaiG/tOCL5dDT1ilrgXC4SabrEVkTwYSLqe0nxl3XsNx75cC74dTX7i1X2iVv+lVr3jlz0iFr4h1LtnWv7sHj5ZCPkazfVQirbeEX4UhvtaC7uUSXrQSD3KhbwSSz2Zij1ZyutZ1f2d0P3iFnAHhX6h1L4f0v6eT3zjlzumW3nnGzroHHeMiDYSin4Wx3sbTDkdj73ZST3QhrlJx32Sxr0OR3seDzvfj7zfz70OBv1aSzoYyfTSTb0Ziv3h1j2iVnxYCnyVSbtUC3wOSDlNiH2cTrWKSDWKyP3gEX6k2H0hlP1mWfypHXPq4vPo4D1soPZqIjis5LVrI3+Xxv/ejT/civ+Qxf/dzH+JBb+Nhb+byz+LRb/bSj/fTX/URb+aSX+YyH+WRf/ZSH+HBX/PxX/SBX/dTCsEhT/aya7EhP+Shb/NBb9fULoJhj/ZyX+JhT9cjP8YR/tKBv+fjj+g03+UBb/jVn/iFT+kl/+dzrmGxfrKxzuMBzIHBX8Sx76VCzUFxbEFBL+nGj/cSr8XB79Lxz8VyjZLhf7UR/9Yyj+hUX+gEP/l2PyaCr8OhnEIxf6XSbaGha7GBT3RCXhVif3ThnoQxn9Zie1EhL4IxrjJhj7YDDQJxbvPBv7Vhv9hVH/om7AIBX+Uxz0RB/dPhzzOiP2IRfsYiz2MR3zJh7RTSjjSx/lUx/LExXuOxz/jU7+iUn8PCnEKB3IOST4cS/jNBP6SBa9IRLWJxXTJhD2HBcZjAsKAAAAZHRSTlMACQICAyWlLzTrqMH+Tzg0pgrB5Ik+AQumHBrC89n2e/5oj+q1lPU9GhjzgZCQ+6XOqwW0v7/d5e1BdaSBSSf2kEPp5nrw2Xahv9iscRWgqtS/mb+4s47CwNGUYtzWEVqLW0Yax/uzPQAAArxJREFUOMvdlGdXGlEQhjfiGqIgarCLvbcYNfb03nvviRRFdLFEXFySRWx0UASxd7BrNDGxpdc/lbuQE3fB/AHfz8+ZufOcuQNBOzX+YXRmTBQ7NpYdFcOkh/pvT4Ux2bl5exyJi4vLzy/g5NxihrpjUVci21rb24vg3c4U5mFKnJGV5oLCufMA6+voKIGeeRMpjo/82MvFG8RZLAoY2+zgFha8PZ/7gtDpRdEfehRK4Uu5lyeJ87zsBDsWHj5++iQhIcEXigEgVg/Aq+SZPHIw0Lq1PbrvAfyoJD6+mA7dA50BJx66votc8TwDawaZb4tkM+kwDBfev6vEhUiN1WYOoID7SxEc68UwTKlUFnA4eyOEiM06ZNbr56Q+LqAYEQoUPT29QAouZFin9bpPXV3ldS1U0OMSAEWd9dxK8C5EXDqn45dXlNW+auS3SG+QQSi9ugYR8QAo6GyoKa2uelHnAMv5Vd/9aOSKfpnjNifIc4DSur8VJ34doLTe91ZlWVv5ylVweaJ/FX/Lfv6wG+9QQK/udyqD9vOX1dWxsfX1tYlly4x2RCKRoDOzAVRQbjWPalSGDSNqlzhjR42GqdluaTgVJPQIGdP60TcatVotkzU1Nb2frBgAU4cHu4IinqBSwcVFNrnptY4/0FVWW0boobSGrpnECHnqLT3Sm9kUPQOm7cBG/vg3Vz2yiSEh0ZoMTmosWuNt8htphJ5hy/LYSn9/v9w0N740q5ka3kDt6Mwm5Y20ELnYPKpWDRu02sHBwcXFkREUJfRsdlOXghZC6MGBniVCj2yK8AP0EMO4g+56HNtDEQ5dkIvJ29OypUeXEUQGg9OOba8nNf0i9WPTWEc4EYJK6j5mnssIzHa/KSlHT585C75LYuLh1JPHT/n4nTiYHPSfKxXknwKzkpICA1mHkoNpO/YYQ38AABZHleIztVMAAAAASUVORK5CYII=);
+    }
+    
+    
+    
+  .field
+    {display:flex;gap:10px;align-items:center}
+  .field label
+    {display:inline-block;width:60px;text-align:right}
+  .field input
+    {flex:1}
+    
+    
+    
+  file-nav
+    {flex:1}
+    
+  #btns
+    {display:flex;justify-content:center;gap:25px}
+    
+  [value=update], [value=backup]
+    {margin-right:20px}
+    
+    
+    
+  input
+    {font-size:16px;padding:5px 10px;box-sizing:border-box;}
+  input:not([type])
+    {flex:1}
+  input[type=button]
+    {cursor:pointer}
+    
+    
+            </style>
+            
+            <div id=root>
+            
+                  <div id=token-root class=field>
+                        <img class='paste icon'>
+                        <img class='storage icon'>
+                        <label>
+                              token
+                        </label>
+                        <input id=token autocomplete=off spellcheck=false>
+                        <img class='copy icon'>
+                  </div>
+                  
+                  <div id=bucket-root class=field>
+                        <img class='paste icon'>
+                        <img class='storage icon'>
+                        <label>
+                              bucket
+                        </label>
+                        <input id=bucket value=ext-code-test autocomplete=off spellcheck=false>
+                        <img class='copy icon'>
+                  </div>
+                  
+                  <file-nav component>
+                  </file-nav>
+                  
+                  <div id=btns>
+                        <input value=update type=button>
+                        <input value=load type=button>
+                        <input value=save type=button>
+                        <input value=backup type=button>
+                        <input value=upload type=button>
+                        <input value=download type=button>
+                  </div>
+                  
+            </div>
+            
+      </template>
+      
+      <script>
+      
+      
+(function({mod,host}){
+
+  var obj   = {
+        version   : 'v1.0',
+  }
+        var df=true,did='google-storage-file-nav';
+        
+        var $,gs,log,debug,filemod,par,menu
+        ;
+        
+        mod.initmod(obj);
+        
+        obj.initmod   = function(...list){
+        
+              list.forEach(params=>{
+              
+                    $             = mod.rd(params,'$',$);
+                    gs            = mod.rd(params,'gs',gs);
+                    log           = mod.rd(params,'log',log);
+                    debug         = mod.rd(params,'debug',debug);
+                    filemod       = mod.rd(params,'filemod',filemod);
+                    par           = mod.rd(params,'google-storage',par);
+                    menu          = mod.rd(params,'menu',menu);
+                    
+              });
+              
+        }//initmod
+        
+        
+  //:
+  
+  
+        var localstorage    = 'google-storage-';
+        
+        
+        var token     = 'ya29.c.c0AZ4bNpbn81wiiz4bdIcA2T8RVPxejVFJ-y2_0L4hI79gLp_FP5xJJLu2OvVdOZWldBhz5UMiw9hJWxwI7qVEqmWcHGIo4JnFq9JW7RNuuUC-X_NkftaOjXw1pTK6e851Hyfw7VrzQOQPj9c27A78ZDBNwRc_-xIzuQQ9GNiAhgjXy2Dw8BZj6PjzciBPyQo7WRbuoJqt7B2sD3GdPblEI-wjnx7HG131HmXTDt6DwOMY3dLCavkdQtqs6UtPbmR4U07Fl3fiXIZKHMS-6V5LYsVnZvf2vviHbNWTSejqgpC5van4WaU6jkio_lpFAwS9O1Fj_G1aPX3pv1LMxj3UZnKyguvJzz2GuMG2WQ2vT91VjdQ4kjsMr7aTAQH387Do6Vefc8V8jy2s4cgSFzm84Or9mRdwW29Zxqvywu8cd0kxgcdr-urg9xWc11g244-psQmgOBJM7riJ3J3SmbplfMWrM17MoFbQvt2v-VV784eFQgFuwYzk-YF29x017MRa26kj-YdBnconskeZrYzic8Qo_rVdMzv2y_MuQ2ztdJ7ms4RdYIcmdWftQrol0U7XMBe8qqYj1wBvJeBybO0gdvpbJW_Q8v-cqSZldUs46x6eSBugzjk0_uRsomazn2vyUbq119InhkOo892mj7q1rjonWzht69Xqilyqyl4fU0w0nus800zwRfSrmx0O4olo6JWImshQRm8U1mnbe132207gnei5fkgcw_Yn4uczBv1tgIZtgYsUw5J9lbq6vhSdbSI5yl5563sngsxbw7bbetF7r9lu5d70B5ce07zZZ0vx62vqn2U39k7sBq6r4FnUzaWoamFfjaM_5UpcYZZZ2iUhWwvqFce02iZ_kQIoheIWn_QZssmRlBtOt48OF0yZt82kzhaojlZIsBOQb-n1pR13o5hh8ryO-OSynh7I41o29YJWjjmsR9j-l82h7xagrYlpXW5pFv7MWxMItBR7fxulygFxFtUYB5cbk44Sg7w--trcQ1rshfh';
+        var bucket    = 'ext-code-test_cloudbuild';
+        var icon;
+        
+        var filenav;
+        
+        
+        
+        var shadow;
+        
+        
+        
+        
+        var btn     = {};
+        var file    = {};
+        var dir     = {};
+        obj.rd      = {};
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+                                                                                debug=eval(debug.mod);
+                                                                                debug('init');
+              await mod.auto();
+              
+              filenav         = mod['file-nav'];
+              
+              filenav.file    = file;
+              filenav.dir     = dir;
+              
+              console.log(menu);
+              
+              
+        }//init
+        
+        
+        obj.init.complete   = function(){
+                                                                                debug('init.complete');
+        }//complete
+        
+        
+  //:
+  
+  
+        obj.initdom   = async function(){
+                                                                                debug('initdom');
+              shadow                                  = host.shadowRoot;
+              
+              
+              var style                       = $(shadow,'style');
+              $.stylesheet.insert(style,'.icon');
+              
+              
+              
+              $.all(shadow,'.paste').forEach(icon=>{
+              
+                    var root        = icon.parentNode;
+                    var input       = $(root,'input:not([type])');
+                    icon.onclick    = async e=>{
+                    
+                                            var txt       = await navigator.clipboard.readText();
+                                            input.value   = txt;
+                                            input.focus();
+                                            
+                                      }//icon.onclick
+                                      
+              });//foreach
+              
+              
+              $.all(shadow,'.copy').forEach(icon=>{
+              
+                    var root        = icon.parentNode;
+                    var input       = $(root,'input:not([type])');
+                    icon.onclick    = async e=>{
+                    
+                                            var txt   = input.value;
+                                            await navigator.clipboard.writeText(txt);
+                                            $.mousetext('copied');
+                                            input.focus();
+                                            
+                                      }//icon.onclick
+                                      
+              });//foreach
+              
+              
+              $.all(shadow,'.storage').forEach(icon=>{
+              
+                    var root    = icon.parentNode;
+                    var key     = root.id.slice(0,-5);
+                    var input   = $(root,'input:not([type])');
+                                                                                console.log(key,input);
+                    var name    = localstorage+key;
+                                                                                console.log(name);
+                    var token;
+                    
+                    icon.onclick    = e=>{
+                    
+                                            if(e.shiftKey){
+                                                  var err;
+                                                  try{
+                                                  
+                                                        token   = localStorage[name];
+                                                        
+                                                  }//try
+                                                  catch(err2){
+                                                  
+                                                        err   = err2;
+                                                        
+                                                  }//catch
+                                                  if(err){
+                                                        var error   = err.tostring();
+                                                        log.red(error);
+                                                        return;
+                                                  }
+                                                  
+                                                  if(!token){
+                                                        $.mousetext(`no stored ${key}, localStorage[${name}]`);
+                                                        return;
+                                                  }
+                                                  input.value   = token;
+                                                  return;
+                                            }
+                                            
+                                            token   = input.value;
+                                            if(!token){
+                                                                                console.log(`${key} empty`);
+                                                  $.mousetext(`${key} empty`);
+                                                  return;
+                                            }
+                                            
+                                            var err;
+                                            try{
+                                            
+                                                  localStorage[name]    = token;
+                                                  
+                                            }//try
+                                            catch(err2){
+                                            
+                                                  err   = err2;
+                                                  
+                                            }//catch
+                                            if(err){
+                                                  var error   = err.toString();
+                                                  log.red(error);
+                                                  return;
+                                            }
+                                                                                console.log(`localStorage[${name}] saved`);
+                                            $.mousetext(`localStorage[${name}] saved`);
+                                            
+                                      }//icon.onclick
+                                      
+                    icon.title    = `${key} : click - store, shift - read`;
+                    
+              });//foreach
+              
+              
+              
+              
+              
+              
+            //token
+            
+              var root2                                   = $(shadow,'#token-root');
+              var err;
+              try{
+              
+                    var token                             = window.localStorage[localstorage+'token'];
+                    
+              }//try
+              catch(err2){}
+              $(shadow,'#token').value                    = token||'';
+              
+              
+            //bucket
+            
+              var root2                                   = $(shadow,'#bucket-root');
+              try{
+              
+                    var value                             = window.localStorage[localstorage+'bucket'];
+                    
+              }//try
+              catch(err2){}
+              $(shadow,'#bucket').value                   = value||'';
+              
+              
+              
+              
+              var btns                                = $(shadow,'#btns');
+              $(btns,'[value=update]').onclick        = btn.update;
+              
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+        btn.update    = function(){
+        
+              var path    = filenav.path;
+              dir.read(path);
+              
+        }//update
+        
+        
+  //:
+  
+  
+        obj.rd.token    = function(){
+        
+              var token   = $(shadow,'#token');
+              return token;
+              
+        }//token
+        
+        
+  //:
+  
+  
+        file.dblclick   = function(path,filename){
+                                                                                debug('file.dblclick',path,filename);
+              var bucket      = $(shadow,'#bucket').value;
+              
+              path           += filename;
+              var abs         = bucket+'//'+path;
+              var title       = abs;
+              
+              var file;
+              if(filemod){
+                    file    = filemod.newfile({
+                    
+                                    filetype    : 'google-storage',
+                                    abs         : abs,
+                                    path        : path,
+                                    name        : filename,
+                                    
+                                    kind        : 'file',
+                                    size        : null,
+                                    ctime       : null,
+                                    mtime       : null,
+                                    atime       : null,
+                                    
+                                    title       : title,
+                                    icon        : par.icon.src
+                                    
+                              });
+              }else{
+                    file  = {
+                          filetype    : 'google-storage',
+                          
+                          abs         : abs,
+                          path        : path,
+                          name        : filename,
+                          
+                          kind        : 'file',
+                          
+                          title       : bucket+' : '+path,
+                          icon        : par.icon.src,
+                          
+                          
+                          bucket      : bucket,
+                    }
+              }
+              
+              
+              file.bucket   = bucket;
+              
+              load(file);
+              
+        }//dblclick
+        
+        
+        dir.read    = async function(path){
+                                                                                debug('dir.read',path);
+              var token       = $(shadow,'#token').value;
+              var bucket      = $(shadow,'#bucket').value;
+              
+              var {dirs,files,error}    = await gs.dir.list({token,bucket,path});
+              if(error){
+                    log.error(error);
+                    return;
+              }
+              filenav.display(path,dirs,files);
+              
+        }//readdir
+        
+        
+        dir.dblclick    = function(path,filename){
+                                                                                debug('dir.dblclick',path,filename);
+              dir.read(path+filename);
+              
+        }//dblclick
+        
+        
+  //:
+  
+  
+        obj.load    = load;
+        
+        async function load(file){
+                                                                                debug('load',file);
+              var token       = $(shadow,'#token').value;
+              
+              var bucket      = file.bucket;
+              var path        = file.path;
+              
+              var {blob,error}    = await gs.file.load({token,bucket,path});
+              if(error){
+                    log.error(error);
+                    return;
+              }
+              
+              par.load?.complete?.(file,blob);
+              
+              menu.close();
+              
+        }//load
+        
+        
+        
+  //:
+  
+  
+  
+  
+  return obj;
+  
+})
+
+
+      </script>
+      
+</google-storage-file-nav>
+
+
+
