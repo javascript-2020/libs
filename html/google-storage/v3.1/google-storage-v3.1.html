@@ -198,6 +198,10 @@
               mod.base.add({gs});
               
               
+              shadow                          = host.shadowRoot;
+              style                           = $(shadow,'style');
+              
+              
               var params    = {'google-storage':obj,filemod,key:localstorage};
               
               gs_filenav    = mod['file-nav'];
@@ -230,7 +234,6 @@
                                                                                 debug('initdom');
                                                                                 
               shadow                          = host.shadowRoot;
-              
               style                           = $(shadow,'style');
               menu.add.style(shadow);
               
