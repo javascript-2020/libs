@@ -14,7 +14,7 @@
   .menu
     {position:absolute;display:flex;flex-direction:column}
   .menu>*
-    {padding-bottom:10px;box-sizing:border-box}
+    {margin-bottom:10px;box-sizing:border-box}
     
   .menu-sep
     {margin:20px 10px 15px !important}
@@ -434,7 +434,9 @@
         ui.hide   = function(){
         
               gs_token.__host.style.height          = 0;
+              gs_token.__host.style.marginBottom    = 0;
               $(shadow,'#hdr').style.height         = 0;
+              $(shadow,'#hdr').style.marginBottom   = 0;
               $(shadow,'#hide').style.transform     = 'rotateZ(0deg)';
               
         }//hide
@@ -443,7 +445,9 @@
         ui.show   = function(){
         
               gs_token.__host.style.height          = 'auto';
+              gs_token.__host.style.marginBottom    = '';
               $(shadow,'#hdr').style.height         = 'auto';
+              $(shadow,'#hdr').style.marginBottom   = '';
               $(shadow,'#hide').style.transform     = 'rotateZ(180deg)';
               
         }//show
