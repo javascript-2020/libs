@@ -261,6 +261,7 @@
               $(shadow,'#tabs #url').onclick              = btn.tab.url;
               $(shadow,'#tabs #file-nav').onclick         = btn.tab.filenav;
               
+              $(shadow,'#hide').onclick                   = btn.hide;
               
               
             //btns
@@ -453,6 +454,15 @@
         }//filenav
         
         
+        btn.hide    = function(){
+        
+              if(gs_token.host.style.height=='auto'){
+                    gs_token.host.style.height   = 0;
+              }else{
+                    gs_token.host.style.height   = 'auto';
+              }
+              
+        }//hide
         
         
         
