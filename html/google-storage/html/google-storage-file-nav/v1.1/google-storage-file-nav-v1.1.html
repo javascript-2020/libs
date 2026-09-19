@@ -220,7 +220,7 @@
               var bucket        = $(shadow,'#bucket').value;
               path             += name;
               
-              var {ok,error}    = await gs.del({token,bucket,path});
+              var {ok,error}    = await gs.file.delete({token,bucket,path});
               if(error){
                     log.error(error);
                     return;
