@@ -416,6 +416,24 @@
         }//setup
         
         
+        ui.hide   = function(){
+        
+              gs_token.__host.style.height          = 0;
+              $(shadow,'#hdr').style.height         = 0;
+              $(shadow,'#hide').style.transform     = 'rotateZ(0deg)';
+              
+        }//hide
+        
+        
+        ui.show   = function(){
+        
+              gs_token.__host.style.height          = 'auto';
+              $(shadow,'#hdr').style.height         = 'auto';
+              $(shadow,'#hide').style.transform     = 'rotateZ(180deg)';
+              
+        }//show
+        
+        
   //:
   
   
@@ -466,13 +484,9 @@
         btn.hide    = function(){
         
               if(gs_token.__host.style.height=='auto'){
-                    gs_token.__host.style.height          = 0;
-                    $(shadow,'#hdr').style.height         = 0;
-                    $(shadow,'#hide').style.transform     = 'rotateZ(0deg)';
+                    ui.hide();
               }else{
-                    gs_token.__host.style.height          = 'auto';
-                    $(shadow,'#hdr').style.height         = 'auto';
-                    $(shadow,'#hide').style.transform     = 'rotateZ(180deg)';
+                    ui.show();
               }
               
         }//hide
