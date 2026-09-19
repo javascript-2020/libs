@@ -613,7 +613,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//full
         
         
-        function dir_create(token,bucket,path){
+        async function dir_create({token,bucket,path}){
         
             if(path.startsWith('/')){
                   path    = path.slice(1);
