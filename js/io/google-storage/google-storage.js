@@ -645,6 +645,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
             }
             catch(err2) {
                 err = err2;
+                console.error(err);
             }
             
         }//dir_create
