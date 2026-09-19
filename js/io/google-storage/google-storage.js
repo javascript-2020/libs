@@ -623,8 +623,9 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                       path   += '/';
                   }
               }
+              path    = encodeURIComponent(path);
               
-              var url   = `https://storage.googleapis.com/upload/storage/v1/b/${bucket}/o?uploadType=media&name=${encodeURIComponent(path)}`;
+              var url   = `https://storage.googleapis.com/upload/storage/v1/b/${bucket}/o?uploadType=media&name=${path}`;
               var headers   = {
                     authorization     : `Bearer ${token}`,
                     'Content-Type'    : 'application/octet-stream'
