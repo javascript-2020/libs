@@ -50,6 +50,7 @@
         obj.list            = dirlist;
         obj.dir.list        = dirlist;
         obj.dir.list.full   = dirlistfull;
+        obj.dir.create      = dir_create;
         
         
         
@@ -610,6 +611,51 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               return {list};
               
         }//full
+        
+        
+        function dir_create(token,bucket,path){
+        
+            if(path.startsWith('/')){
+                  path    = path.slice(1);
+            }
+            
+            if(path){
+                if(!path.endsWith('/')){
+                    path   += '/';
+                }
+            }
+            
+            var url   = `https://storage.googleapis.com/upload/storage/v1/b/${bucket}/o?uploadType=media&name=${encodeURIComponent(path)}`;
+            
+            var headers = {
+                authorization: `Bearer ${token}`,
+                'Content-Type': 'application/octet-stream'
+            };
+            
+            var err;
+            try {
+            
+                var res = await fetch(url, {method:'post',headers,body:null});
+                
+                if (!res.ok) {
+                    throw new Error(`Failed to create directory: ${res.statusText}`);
+                }
+                
+                var data = await res.json();
+            }
+            catch(err2) {
+                err = err2;
+            }
+            
+        }//dir_create
+        
+        
+        function dir_delete(token,bucket,path){
+        }//dir_delete
+        
+        
+        function dir_clear(token,bucket,path){
+        }//dir_clear
         
         
   //:
