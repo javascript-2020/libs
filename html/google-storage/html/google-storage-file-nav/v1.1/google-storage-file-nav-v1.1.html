@@ -300,17 +300,28 @@
         }//add
         
         
-/*
-
         dir.rem   = function(path,name){
+                                                                                console.log('dir.rem',path,name);
+              var path2       = path;
+              var token       = par.rd.token();
+              var bucket      = $(shadow,'#bucket').value;
+              path           += name+'/';
+              
+              await gs.dir.delete({token,bucket,path});
+              
         }//rem
         
         
         dir.clear   = function(path){
+                                                                                console.log('dir.clear',path,name);
+              var token       = par.rd.token();
+              var bucket      = $(shadow,'#bucket').value;
+              
+              await gs.dir.clear({token,bucket,path});
+              
         }//clear
         
-*/
-
+        
         dir.dblclick    = function(path,filename){
                                                                                 debug('dir.dblclick',path,filename);
               dir.read(path+filename);
