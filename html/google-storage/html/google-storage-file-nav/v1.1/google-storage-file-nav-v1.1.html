@@ -213,15 +213,27 @@
         }//add
         
         
-/*
-
-        file.rem    = function(path.name){
+        file.rem    = function(path,name){
         
+              var path2         = path;
+              var token         = par.rd.token();
+              var bucket        = $(shadow,'#bucket').value;
+              path             += name;
+              
+              var {ok,error}    = await gs.del({token,bucket,path});
+              if(error){
+                    log.error(error);
+                    return;
+              }
+              dir.read(path2);
+              
               return false;
               
         }//rem
         
         
+/*
+
         file.upload   = function(path,name,blob){
         }//upload
         
