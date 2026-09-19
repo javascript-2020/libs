@@ -245,7 +245,7 @@
               async function onchange(){
               
                     var file      = input.files[0];
-                    $('#keyfile-root #name').textContent    = file.name;
+                    $(shadow,'#keyfile-root #name').textContent    = file.name;
                     var txt       = await file.text();
                     keyfile       = JSON.parse(txt);
                     create();
