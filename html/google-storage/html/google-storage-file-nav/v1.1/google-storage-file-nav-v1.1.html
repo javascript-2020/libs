@@ -300,7 +300,7 @@
         }//add
         
         
-        dir.rem   = function(path,name){
+        dir.rem   = async function(path,name){
                                                                                 console.log('dir.rem',path,name);
               var path2       = path;
               var token       = par.rd.token();
@@ -312,7 +312,7 @@
         }//rem
         
         
-        dir.clear   = function(path){
+        dir.clear   = async function(path){
                                                                                 console.log('dir.clear',path,name);
               var token       = par.rd.token();
               var bucket      = $(shadow,'#bucket').value;
