@@ -51,7 +51,8 @@
         obj.dir.list        = dirlist;
         obj.dir.list.full   = dirlistfull;
         obj.dir.create      = dir_create;
-        
+        obj.dir.clear       = dir_clear;
+        obj.dir.delete      = dir_delete;
         
         
         obj.token           = {};
@@ -656,11 +657,73 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         }//dir_create
         
         
-        function dir_delete(token,bucket,path){
+        async function dir_delete({token,bucket,path}){
+        
+              // Ensure path is cleaned up and ends with '/'
+              if (path.startsWith('/')) { path = path.slice(1); }
+              if (path && !path.endsWith('/')) { path += '/'; }
+              
+              var listUrl = `https://storage.googleapis.com/storage/v1/b/${bucket}/o?prefix=${encodeURIComponent(path)}`;
+              var headers = { authorization: `Bearer ${token}` };
+              
+              try {
+                  // 1. List all objects under the prefix (including the folder placeholder itself)
+                  var listRes = await fetch(listUrl, { headers });
+                  if (!listRes.ok) throw new Error(`Failed to list directory: ${listRes.statusText}`);
+                  
+                  var listData = await listRes.json();
+                  
+                  if (listData.items && listData.items.length > 0) {
+                      // 2. Loop through and delete every single item found under this prefix
+                      for (var item of listData.items) {
+                          var deleteUrl = `https://storage.googleapis.com/storage/v1/b/${bucket}/o/${encodeURIComponent(item.name)}`;
+                          var delRes = await fetch(deleteUrl, { method: 'DELETE', headers });
+                          
+                          if (!delRes.ok) {
+                              console.error(`Failed to delete: ${item.name}`);
+                          }
+                      }
+                  }
+              } catch (err2) {
+                  err = err2;
+              }
+              
         }//dir_delete
         
         
-        function dir_clear(token,bucket,path){
+        async function dir_clear({token,bucket,path}){
+        
+              if (path.startsWith('/')) { path = path.slice(1); }
+              if (path && !path.endsWith('/')) { path += '/'; }
+              
+              var listUrl = `https://storage.googleapis.com/storage/v1/b/${bucket}/o?prefix=${encodeURIComponent(path)}`;
+              var headers = { authorization: `Bearer ${token}` };
+              
+              try {
+                  // 1. List all objects under the prefix
+                  var listRes = await fetch(listUrl, { headers });
+                  if (!listRes.ok) throw new Error(`Failed to list directory: ${listRes.statusText}`);
+                  
+                  var listData = await listRes.json();
+                  
+                  if (listData.items && listData.items.length > 0) {
+                      // 2. Loop through and delete each item
+                      for (var item of listData.items) {
+                          // Skip the target directory's own placeholder object so the directory stays intact
+                          if (item.name === path) continue;
+                          
+                          var deleteUrl = `https://storage.googleapis.com/storage/v1/b/${bucket}/o/${encodeURIComponent(item.name)}`;
+                          var delRes = await fetch(deleteUrl, { method: 'DELETE', headers });
+                          
+                          if (!delRes.ok) {
+                              console.error(`Failed to delete: ${item.name}`);
+                          }
+                      }
+                  }
+              } catch (err2) {
+                  err = err2;
+              }
+              
         }//dir_clear
         
         
