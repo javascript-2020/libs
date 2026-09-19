@@ -112,7 +112,9 @@
                   
                   <google-storage-token v1.0 component=parent id=token></google-storage-token>
                   
-                  <img id=hide>
+                  <div>
+                        <img id=hide>
+                  </div>
                   
                   <div id=view>
                   
@@ -457,11 +459,13 @@
         btn.hide    = function(){
         
               if(gs_token.__host.style.height=='auto'){
-                    gs_token.__host.style.height    = 0;
-                    $(shadow,'#hdr').style.height   = 0;
+                    gs_token.__host.style.height          = 0;
+                    $(shadow,'#hdr').style.height         = 0;
+                    $(shadow,'#hide').styyle.transform    = 'rotateZ(0deg)';
               }else{
-                    gs_token.__host.style.height    = 'auto';
-                    $(shadow,'#hdr').style.height   = 'auto';
+                    gs_token.__host.style.height          = 'auto';
+                    $(shadow,'#hdr').style.height         = 'auto';
+                    $(shadow,'#hide').styyle.transform    = 'rotateZ(180deg)';
               }
               
         }//hide
