@@ -44,6 +44,9 @@
     {flex:1}
     
     
+  .hr
+    {border-top:1px solid lightgray;margin:0px 20px}
+    
     
   .paste
     {padding:2px;
@@ -113,6 +116,7 @@
                   <google-storage-token v1.0 component=parent id=token></google-storage-token>
                   
                   <div>
+                        <div class=spc></div>
                         <img id=hide>
                   </div>
                   
@@ -297,6 +301,8 @@
         
               var style2    = $(shadow,'style');
               $.stylesheet.insert(style2,'.icon');
+              
+              $.stylesheet.copyrule(style,'.hr',style2);
               
               $.stylesheet.copyrule(style,'.field',style2);
               $.stylesheet.copyrule(style,'.field label',style2);
