@@ -235,6 +235,7 @@
               $(shadow,'#token').value                    = token||'';
               
               
+              $(shadow,'#hide').onclick                         = btn.hide;
         }//initdom
         
         
@@ -289,6 +290,17 @@
               $.mousetext('token refreshed');
               
         }//refresh
+        
+        
+        btn.hide    = function(){
+        
+              if(host.style.height=='auto'){
+                    host.style.height   = 0;
+              }else{
+                    host.style.height   = 'auto';
+              }
+              
+        }//hide
         
         
   //:
