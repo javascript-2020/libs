@@ -229,7 +229,6 @@
         }//rem
         
         
-/*
         file.upload   = async function(path,name,blob){
         
               var path2         = path;
@@ -245,21 +244,25 @@
               //dir.read(path2);
               
         }//upload
-*/
-
-
-/*
-
-        file.download   = function(path.name){
         
+        
+        file.download   = function(path,name){
+        
+              var path2         = path;
+              var token         = par.rd.token();
+              var bucket        = $(shadow,'#bucket').value;
+              path             += name;
+              
+              var {blob,error}    = await gs.load({token,bucket,path});
+              if(error){
+                    log.error(error);
+                    return;
+              }
               return {blob};
               
         }//download
         
         
-*/
-
-
         file.dblclick   = function(path,filename){
                                                                                 debug('file.dblclick',path,filename);
               var bucket      = $(shadow,'#bucket').value;
