@@ -232,12 +232,26 @@
         }//rem
         
         
-/*
-
+        
         file.upload   = function(path,name,blob){
+        
+              var path2         = path;
+              var token         = par.rd.token();
+              var bucket        = $(shadow,'#bucket').value;
+              path             += name;
+              
+              var {ok,error}    = await gs.save({token,bucket,path,blob});
+              if(error){
+                    log.error(error);
+                    return;
+              }
+              //dir.read(path2);
+              
         }//upload
         
         
+/*
+
         file.download   = function(path.name){
         
               return {blob};
