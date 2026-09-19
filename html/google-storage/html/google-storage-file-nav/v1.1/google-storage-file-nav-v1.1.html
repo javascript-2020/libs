@@ -193,6 +193,49 @@
   //:
   
   
+        file.add    = async function(path,name){
+        
+              var path2         = path;
+              var token         = par.rd.token();
+              var bucket        = $(shadow,'#bucket').value;
+              path             += name;
+              var blob          = new Blob(['']);
+              
+              var {ok,error}    = await gs.save({token,bucket,path,blob});
+              if(error){
+                    log.error(error);
+                    return;
+              }
+              dir.read(path2);
+              
+              return false;
+              
+        }//add
+        
+        
+/*
+
+        file.rem    = function(path.name){
+        
+              return false;
+              
+        }//rem
+        
+        
+        file.upload   = function(path,name,blob){
+        }//upload
+        
+        
+        file.download   = function(path.name){
+        
+              return {blob};
+              
+        }//download
+        
+        
+*/
+
+
         file.dblclick   = function(path,filename){
                                                                                 debug('file.dblclick',path,filename);
               var bucket      = $(shadow,'#bucket').value;
@@ -201,6 +244,8 @@
               par.load.ui(bucket,path);
               
         }//dblclick
+        
+        
         
         
         dir.read    = async function(path){
@@ -218,6 +263,21 @@
         }//readdir
         
         
+/*
+
+        dir.add   = function(path,name){
+        }//add
+        
+        
+        dir.rem   = function(path,name){
+        }//rem
+        
+        
+        dir.clear   = function(path){
+        }//clear
+        
+*/
+
         dir.dblclick    = function(path,filename){
                                                                                 debug('dir.dblclick',path,filename);
               dir.read(path+filename);
