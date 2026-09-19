@@ -540,6 +540,7 @@
               
               if(!chk(token,bucket,path))return;
               
+              var path2         = path;
               
               var input         = document.createElement('input');
               input.type        = 'file';
@@ -554,7 +555,8 @@
                     for(var i=0;i<n;i++){
                     
                           var blob          = input.files[i];
-                          
+                          path              = path2+blob.name;
+                                                                                console.log(token,bucket,path,blob);
                           var {ok,error}    = await gs.save({token,bucket,path,blob});
                           if(error){
                                 log.error(error);
