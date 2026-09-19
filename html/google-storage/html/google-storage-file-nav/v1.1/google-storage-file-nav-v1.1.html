@@ -287,12 +287,21 @@
         }//readdir
         
         
-/*
-
+        
         dir.add   = function(path,name){
+                                                                                console.log('dir.add',path,name);
+              var path2       = path;
+              var token       = par.rd.token();
+              var bucket      = $(shadow,'#bucket').value;
+              path           += name+'/';
+              
+              await gs.dir.create({token,bucket,path});
+              
         }//add
         
         
+/*
+
         dir.rem   = function(path,name){
         }//rem
         
