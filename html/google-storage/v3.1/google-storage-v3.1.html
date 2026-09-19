@@ -293,6 +293,15 @@
                     btn.tab[str]();
               }
               
+              try{
+              
+                    var str                               = localStorage[localstorage+'token-hide'];
+                    
+              }//try
+              catch(err2){}
+              if(str){
+                    ui[str]();
+              }
               
               
         }//initdom
@@ -484,8 +493,10 @@
         btn.hide    = function(){
         
               if(gs_token.__host.style.height=='auto'){
+                    localStorage[localstorage+'token-hide']   = 'hide';
                     ui.hide();
               }else{
+                    localStorage[localstorage+'token-hide']   = 'show';
                     ui.show();
               }
               
