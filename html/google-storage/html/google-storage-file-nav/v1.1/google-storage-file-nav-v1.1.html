@@ -328,6 +328,23 @@
         }//path
         
         
+        obj.rd.path.cur    = function(){
+        
+              if(!filenav.cur.type){
+                    return;
+              }
+              
+              var path        = filenav.cur.path;
+              var filename    = filenav.cur.filename;
+              path           += filename;
+              if(filenav.cur.type=='dir'){
+                    path     += '/';
+              }
+              return path;
+              
+        }//full
+        
+        
   //:
   
   
