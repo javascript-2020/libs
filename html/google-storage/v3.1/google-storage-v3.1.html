@@ -578,7 +578,7 @@
         
         btn.download    = async function(){
         
-              var {token,bucket,path}   = rd.ui();
+              var {token,bucket,path}   = rd.ui(true);
               
               if(!chk(token,bucket,path))return;
               
@@ -609,18 +609,24 @@
   //:
   
   
-        rd.ui   = function(){
+        rd.ui   = function(cursor=false){
         
               var mod;
+              var path;
               if(mode=='url'){
-                    mod   = gs_url;
+                    mod             = gs_url;
+                    path            = mod.rd.path();
               }else{
-                    mod   = gs_filenav;
+                    mod             = gs_filenav;
+                    if(!cursor){
+                          path      = mod.rd.path();
+                    }else{
+                          path      = mod.rd.path.cursor();
+                    }
               }
               
               var token     = rd.token();
               var bucket    = mod.rd.bucket();
-              var path      = mod.rd.path();
               
               return {token,bucket,path};
               
