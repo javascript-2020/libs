@@ -127,6 +127,17 @@
               par.ui.initdom(shadow);
               
               var hdr                             = $(shadow,'#hdr');
+              $(hdr,'#project').oninput           = e=>{
+              
+                                                          var str   = e.target.value;
+                                                          try{
+                                                          
+                                                                localStorage[key+'bucket-list-project']   = str;
+                                                                
+                                                          }//try
+                                                          catch(err){}
+                                                          
+                                                    }
               $(hdr,'[value=read]').onclick       = btn.read;
               
               list                                = $(shadow,'#list');
