@@ -134,8 +134,7 @@
         var github_url;
         var github_token;
         
-        
-        var root;
+        var style;
         var shadow;
         
         var icon;
@@ -179,6 +178,8 @@
         obj.initdom   = function(){   //c
                                                                                 debug('initdom');
               shadow                          = host.shadowRoot;
+              
+              style                           = $(shadow,'style');
               
               menu.add.style(shadow);
               
