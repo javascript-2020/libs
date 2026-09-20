@@ -6,6 +6,18 @@
       
             <style>
             
+  :host
+    {}
+    
+  #list
+    {display:flex;flex-direction:column}
+    
+  .item
+    {display:flex;align-items:center}
+    
+  #empty
+    {text-align:center;color:gray;font-weight:bold}
+    
             </style>
             
             <div id=hdr>
@@ -17,6 +29,9 @@
                         <div class=name></div>
                         <img class='copy icon'>
                         <img class='rem icon'>
+                  </div>
+                  <div id=empty>
+                        Empty
                   </div>
             </div>
             
@@ -32,11 +47,16 @@
   
         var df=true,did='google-storage-bucket-list';
         
+        var $,par
+        ;
         
         obj.initmod   = function(...list){
         
               list.forEach(params=>{
               
+                    $       = mod.rd(params,'$',$);
+                    par     = mod.rd(params,'google-storage',par);
+                    
               });
               
         }//initmod
@@ -45,6 +65,16 @@
   //:
   
   
+        var shadow;
+        
+        var list;
+        var item;
+        var empty;
+        
+        
+        var btn   = {};
+        
+        
   //:
   
   
@@ -56,12 +86,59 @@
   
   
         obj.initdom   = async function(){
+        
+              shadow                              = host.shadowRoot;
+              
+              par.ui.initdom(shadow);
+              
+              var hdr                             = $(shadow,'#hdr');
+              $(hdr,'[value=read]').onclick       = btn.read;
+              list                                = $(shadow,'#list');
+              item                                = $(list,'.item');
+              item.remove();
+              empty                               = $(list,'#empty');
+              
+              
         }//initdom
         
         
   //:
   
   
+        btn.read    = async e=>{
+        
+        
+        }//read
+        
+        
+  //:
+  
+  
+        function display(names){
+        
+              list.replaceChildren();
+              if(names.length==0){
+                    list.append(empty);
+                    return;
+              }
+              
+              names.forEach(name=>{
+              
+                    var nitem   = item.cloneNode(true);
+                    $(nitem,'.name').textContent    = name;
+                    $nitem,'.rem').onclick          = e=>rem(name,nitem);
+                    
+                    list.append(nitem);
+                    
+              });
+              
+              
+              function rem(name,item){
+              }//rem
+              
+        }//display
+        
+        
   //:
   
   
