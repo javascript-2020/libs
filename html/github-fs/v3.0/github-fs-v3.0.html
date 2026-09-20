@@ -43,10 +43,6 @@
   .value
     {}
     
-  #btns
-    {display:flex;justify-content:center;gap:25px}
-  [value=save]
-    {margin-right:20px}
     
   input
     {font-size:16px;padding:5px 10px;box-sizing:border-box;}
@@ -55,8 +51,6 @@
   input[type=button]
     {cursor:pointer}
     
-  #url
-    {margin-right:10px}
     
             </style>
             
@@ -96,90 +90,6 @@
                   
                   <div class=menu-sep></div>
                   
-                  <section>
-                  
-                      <div>
-                            parse url
-                      </div>
-                      
-                      <div class=hldr>
-                            <img class='copy icon'>
-                            <img class='paste icon'>
-                            <input id=url autocomplete=off spellcheck=false>
-                            <input type=button value=parse>
-                            <input type=button value='+'>
-                      </div>
-                      
-                  </section>
-                  
-                  <div class=menu-sep></div>
-                  
-                  <section>
-                  
-                        <div>
-                              owner
-                        </div>
-                        
-                        <div class=hldr>
-                              <img class='copy icon'>
-                              <img class='paste icon'>
-                              <input id=owner autocomplete=off spellcheck=false>
-                        </div>
-                        
-                  </section>
-                  
-                  
-                  <section>
-                  
-                        <div>
-                              repo
-                        </div>
-                        
-                        <div class=hldr>
-                              <img class='copy icon'>
-                              <img class='paste icon'>
-                              <input id=repo autocomplete=off spellcheck=false>
-                        </div>
-                        
-                  </section>
-                  
-                  
-                  <section>
-                  
-                        <div>
-                              branch
-                        </div>
-                        
-                        <div class=hldr>
-                              <img class='copy icon'>
-                              <img class='icon paste'>
-                              <input id=branch autocomplete=off spellcheck=false value=main>
-                        </div>
-                        
-                  </section>
-                  
-                  
-                  <section>
-                  
-                        <div>
-                              path
-                        </div>
-                        
-                        <div class=hldr>
-                              <img class='copy icon'>
-                              <img class='icon paste'>
-                              <input id=path autocomplete=off spellcheck=false>
-                          </div>
-                          
-                  </section>
-                  
-                  
-                  <div id=btns>
-                        <input value=load type=button>
-                        <input value=load-raw type=button>
-                        <input value=save type=button>
-                        <input value=backup type=button>
-                  </div>
                   
                   
             </div>
@@ -196,25 +106,24 @@
   };
   
   
-        var df=false,did='github-fs'
-        ;
-                                                                                true && debug(obj.version);
-                                                                                
-                                                                                
-        var ext,$,menu,focus,source,log
+        var df=false,did='github-fs';
+        
+        var ext,$,menu,focus,source,log,debug
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...list){
         
-              ext           = mod.rd(params,'ext',ext);
-              $             = mod.rd(params,'$',$);
+              list.forEach(params=>{
               
-              menu          = mod.rd(params,'menu',menu);
-              focus         = mod.rd(params,'focus',focus);
-              
-              source        = mod.rd(params,'source',source);
-              
-              log           = mod.rd(params,'log',log);
+                    ext           = mod.rd(params,'ext',ext);
+                    $             = mod.rd(params,'$',$);
+                    menu          = mod.rd(params,'menu',menu);
+                    log           = mod.rd(params,'log',log);
+                    debug         = mod.rd(params,'debug',debug);
+                    focus         = mod.rd(params,'focus',focus);
+                    source        = mod.rd(params,'source',source);
+                    
+              });
               
         }//initmod
         
@@ -229,6 +138,7 @@
         var icon;
         
         
+        var ui    = {};
         var btn   = {};
         
         
@@ -241,6 +151,7 @@
               mod.initmod(obj);
               
               await libs();
+              
               
         }//init
         
@@ -268,36 +179,6 @@
               icon                            = $(shadow,'#icon');
               icon.onclick                    = menu.click(node,{callback:menu_callback});
               menu.input.norm(node);
-              
-              
-              $.all(shadow,'.paste').forEach(icon=>{
-              
-                    icon.onclick    = async e=>{
-                    
-                                            var txt       = await navigator.clipboard.readText();
-                                            var par       = icon.parentNode;
-                                            var input     = $(par,'input:not([type])');
-                                            input.value   = txt;
-                                            input.focus();
-                                            
-                                      };
-                                      
-              });
-              
-              $.all(shadow,'.copy').forEach(icon=>{
-              
-                    icon.onclick    = async e=>{
-                    
-                                            var par     = icon.parentNode;
-                                            var input   = $(par,'input:not([type])');
-                                            var txt     = input.value;
-                                            await navigator.clipboard.writeText(txt);
-                                            $.mousetext(e,'copied');
-                                            
-                                      }//click
-                                      
-              });
-              
               
               
               var root2   = $(shadow,'#token').parentNode;
@@ -328,6 +209,43 @@
                     $(shadow,'#token').value    = token;
               }
               
+              
+              
+              
+              
+              
+        }//initdom
+        
+        
+        ui.initdom    = function(shadow){
+        
+              $.all(shadow,'.paste').forEach(icon=>{
+              
+                    icon.onclick    = async e=>{
+                    
+                                            var txt       = await navigator.clipboard.readText();
+                                            var par       = icon.parentNode;
+                                            var input     = $(par,'input:not([type])');
+                                            input.value   = txt;
+                                            input.focus();
+                                            
+                                      };
+                                      
+              });
+              
+              $.all(shadow,'.copy').forEach(icon=>{
+              
+                    icon.onclick    = async e=>{
+                    
+                                            var par     = icon.parentNode;
+                                            var input   = $(par,'input:not([type])');
+                                            var txt     = input.value;
+                                            await navigator.clipboard.writeText(txt);
+                                            $.mousetext(e,'copied');
+                                            
+                                      }//click
+                                      
+              });
               
               $(shadow,'.storage').onclick    = async e=>{
               
@@ -389,173 +307,13 @@
                                                 };
                                                 
                                                 
-              $(shadow,'[value=parse]').onclick   = btn.parse;
-              $(shadow,'[value="+"]').onclick     = btn.parse.load;
-              
-              $(shadow,'#url').onkeydown    = e=>{
-              
-                                                      if(e.key=='Enter'){
-                                                            btn.parse();
-                                                            $(shadow,'#load').focus();
-                                                      }
-                                                      
-                                                };
-                                                
-              $(shadow,'#path').onkeydown     = e=>{
-              
-                                                      if(e.key=='Enter'){
-                                                            $(shadow,'#load').focus();
-                                                      }
-                                                      
-                                                };
-                                                
-              $(shadow,'[value=load]').onclick        = btn.load;
-              $(shadow,'[value=load-raw]').onclick    = btn.load.raw;
-              $(shadow,'[value=save]').onclick        = btn.save;
-              $(shadow,'[value=backup]').onclick      = btn.backup;
-              
-              
         }//initdom
         
         
   //:
   
   
-        btn.parse   = function(e={}){
-        
-              if(!github){
-                    alert('library not ready');
-                    return;
-              }
-              
-              var url   = $(shadow,'#url').value;
-              
-              var {owner,repo,branch,path}    = github.parse(url);
-              
-              write(owner,repo,branch,path);
-              
-              if(e.ctrlKey){
-                    btn.load(e);
-              }
-              
-        }//parse
-        
-        
-        btn.parse.load    = function(e){
-        
-              btn.parse();
-              btn.load(e);
-              
-        }//parse.load
-        
-        
-        btn.load    = async function(e){
-        
-              var api   = true;
-              if(e.shiftKey){
-                    api   = false;
-              }
-              
-              var {token,owner,repo,branch,path}    = read();
-              
-              var i           = path.lastIndexOf('/');
-              var filename    = path.slice(i+1);
-              
-              
-              
-              var file        = {};
-              file.type       = 'github';
-              file.filename   = filename;
-              file.title      = repo+' : '+path;
-              file.icon       = icon.src;
-              
-              file.owner      = owner;
-              file.repo       = repo;
-              file.branch     = branch;
-              file.path       = path;
-              
-              
-              
-              var result      = await load(file,api);
-              if(result.error){
-                    return;
-              }
-              var blob    = result.ok;
-              
-              obj.load.complete(file,blob);
-              
-        }//load
-        
-        
-        btn.load.raw    = async function(){
-        
-              load(false);
-              
-        }//raw
-        
-        
-        btn.save    = async function(){
-        
-              var {token,owner,repo,branch,path}    = read();
-              
-              var i               = path.lastIndexOf('/');
-              var filename        = path.slice(i+1);
-              
-/*
-              var file            = filemod.new({
-              
-                    filetype    : 'github',
-                    abs         : path,
-                    name        : filename,
-                    
-                    kind        : 'file',
-                    size        : null,
-                    ctime       : null,
-                    mtime       : null,
-                    atime       : null,
-                    
-                    title       : repo+' : '+path,
-                    icon        : icon.src
-                    
-              });
-*/
-
-
-              var file            = {};
-              file.type           = 'github';
-              file.filename       = filename;
-              file.title          = repo+' : '+path;
-              file.icon           = icon.src;
-              
-              file.owner          = owner;
-              file.repo           = repo;
-              file.branch         = branch;
-              file.path           = path;
-              file.abs            = path;
-              
-              var blob            = await source(file);
-              
-              var result          = await save(file,blob);
-              if(result.error){
-                    return;
-              }
-              
-        }//save
-        
-        
-        btn.backup    = function(){
-        
-              var {token,owner,repo,branch,path}    = read();
-                                                                                console.log('btn.backup');
-                                                                                console.log(token,owner,repo,branch,path);
-                                                                                
-              github.backup(token,owner,repo,branch,path);
-              
-        }//backup
-        
-        
-        
-        
+  
         function github_kd(e){
         
               //  only needs to return undefined to stop keydown stack from running
