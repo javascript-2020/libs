@@ -809,8 +809,8 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                     return {error};
               }
               
-              var buckets   = await res.json();
-              return buckets;
+              var names   = await res.json();
+              return {names};
               
         }//list
         
