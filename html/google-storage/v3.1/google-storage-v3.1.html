@@ -314,7 +314,7 @@
         }//initdom
         
         
-        ui.setup    = function(shadow){
+        ui.initdom    = function(shadow){
         
               var style2    = $(shadow,'style');
               $.stylesheet.insert(style2,'.icon');
@@ -330,6 +330,7 @@
               $.stylesheet.copyrule(style,'.storage',style2);
               $.stylesheet.copyrule(style,'.refresh',style2);
               
+              $.all(shadow,'input:not([type])').forEach(input=>input.onfocus   = e=>input.select());
               
               $.all(shadow,'.paste').forEach(icon=>{
               
