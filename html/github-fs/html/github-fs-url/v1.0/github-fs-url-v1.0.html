@@ -155,7 +155,9 @@
   
         obj.initdom   = async function(){
         
-              shadow    = host.shhadowRoot;
+              shadow    = host.shadowRoot;
+              
+              par.ui.initdom(shadow);
               
               
               $(shadow,'[value=parse]').onclick   = btn.parse;
