@@ -308,6 +308,14 @@
               var token                   = json.access_token;
               $(shadow,'#token').value    = token;
               
+              var err;
+              try{
+              
+                    window.localStorage[key+'token']    = token;
+                    
+              }//try
+              catch(err2){}
+              
         }//create
         
         
