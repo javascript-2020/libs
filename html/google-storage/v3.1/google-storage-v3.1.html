@@ -108,6 +108,9 @@
                         <div id=url class=inactive>
                               url
                         </div>
+                        <div id=buckets class=inactive>
+                              bucket list
+                        </div>
                   </div>
                   
                   <section id=hdr>
@@ -128,7 +131,7 @@
                   
                         <google-storage-url v1.0 component=parent id=url></google-storage-url>
                         <google-storage-file-nav v1.1 component=parent id=file-nav></google-storage-file-nav>
-                        
+                        <google-storage-bucket-list v1.0 component=parent id=buckets></google-storage-bucket-list>
                   </div view>
                   
                   <div id=btns>
@@ -183,6 +186,7 @@
         var gs_filenav;
         var gs_url;
         var gs_token;
+        var gs_buckets;
         
         var mode              = 'url';
         
@@ -234,6 +238,10 @@
               gs_token.initmod(params);
               
               
+              gs_buckets                = mod['buckets'];
+              gs_buckets.initmod(params);
+              
+              
               await mod.auto();
               
               
@@ -271,6 +279,7 @@
               
               $(shadow,'#tabs #url').onclick              = btn.tab.url;
               $(shadow,'#tabs #file-nav').onclick         = btn.tab.filenav;
+              $(shadow,'#tabs #buckets').onclick          = btn.tab.buckets;
               
               $(shadow,'#hide').onclick                   = btn.hide;
               
@@ -466,9 +475,12 @@
               $(shadow,'#tabs #url').classList.remove('inactive');
               $(shadow,'#tabs #file-nav').classList.remove('active');
               $(shadow,'#tabs #file-nav').classList.add('inactive');
+              $(shadow,'#tabs #buckets').classList.remove('active');
+              $(shadow,'#tabs #buckets').classList.add('inactive');
               
-              $(shadow,'#view #url').style.display         = '';
-              $(shadow,'#view #file-nav').style.display    = 'none';
+              $(shadow,'#view #url').style.display          = '';
+              $(shadow,'#view #file-nav').style.display     = 'none';
+              $(shadow,'#view #buckets').style.display      = 'none';
               
               try{
               
@@ -488,9 +500,12 @@
               $(shadow,'#tabs #url').classList.add('inactive');
               $(shadow,'#tabs #file-nav').classList.add('active');
               $(shadow,'#tabs #file-nav').classList.remove('inactive');
+              $(shadow,'#tabs #buckets').classList.remove('active');
+              $(shadow,'#tabs #buckets').classList.add('inactive');
               
-              $(shadow,'#view #url').style.display         = 'none';
-              $(shadow,'#view #file-nav').style.display    = '';
+              $(shadow,'#view #url').style.display          = 'none';
+              $(shadow,'#view #file-nav').style.display     = '';
+              $(shadow,'#view #buckets').style.display      = 'none';
               
               try{
               
@@ -500,6 +515,31 @@
               catch(err2){}
               
         }//filenav
+        
+        
+        btn.tab.buckets   = function(){
+        
+              mode    = 'buckets';
+              
+              $(shadow,'#tabs #url').classList.remove('active');
+              $(shadow,'#tabs #url').classList.add('inactive');
+              $(shadow,'#tabs #file-nav').classList.remove('active');
+              $(shadow,'#tabs #file-nav').classList.add('inactive');
+              $(shadow,'#tabs #buckets').classList.add('active');
+              $(shadow,'#tabs #buckets').classList.remove('inactive');
+              
+              $(shadow,'#view #url').style.display          = 'none';
+              $(shadow,'#view #file-nav').style.display     = 'none';
+              $(shadow,'#view #buckets').style.display      = '';
+              
+              try{
+              
+                    window.localStorage[localstorage+'view']    = 'buckets';
+                    
+              }//try
+              catch(err2){}
+              
+        }//buckets
         
         
         btn.hide    = function(){
