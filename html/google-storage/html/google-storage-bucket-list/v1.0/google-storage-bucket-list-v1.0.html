@@ -73,7 +73,7 @@
   
         var df=true,did='google-storage-bucket-list';
         
-        var $,par,key,debug
+        var $,par,key,debug,gs
         ;
         
         obj.initmod   = function(...list){
@@ -84,6 +84,7 @@
                     par     = mod.rd(params,'google-storage',par);
                     key     = mod.rd(params,'localstorage',key);
                     debug   = mod.rd(params,'debug',debug);
+                    gs      = mod.rd(params,'gs',gs);
                     
               });
               
