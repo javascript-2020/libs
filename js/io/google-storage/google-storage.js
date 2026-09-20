@@ -702,6 +702,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                           
                                 var path    = encodeURIComponent(item.name);
                                 var url     = `https://storage.googleapis.com/storage/v1/b/${bucket}/o/${path}`;
+                                var err;
                                 var res;
                                 try{
                                 
@@ -726,7 +727,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                       return;
                                 }
                                 
-                          });
+                          })
                     );
                     if(list.length){
                           return {error:true,list};
