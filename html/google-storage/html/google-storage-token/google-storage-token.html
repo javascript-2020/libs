@@ -1,0 +1,338 @@
+
+
+<google-storage-token style='height:auto'>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+  :host
+    {display:flex;flex-direction:column;gap:10px;overflow:hidden;transition:0.4s;
+        interpolate-size:allow-keywords;
+    }
+    
+  #keyfile-root label
+    {margin-right:40px}
+    
+  #keyfile-root #name
+    {flex:1;border:1px solid lightgray;padding:5px 10px}
+    
+  .file
+    {content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAABIFBMVEVHcEzrvwDrvgDitgAhaasVac3arwDrvwDNpQAAXs7MpADNpADswADjuADhtQDEnQAmiv/rvwDrvwDrvwDrvwDrvwDrvwDeswDTqgDdsgDYrQDBoA1Bfa87lf8AXs0AXs49i9brvwDrvwDrvwDjuADMpABRof9XpP/NpABQn/w7jvEBX88AXc4pifi8oRgAXs4AXs7/zQDsvwD6ygD+zQDNpAAAX885jfCky/mdyPmx0vePwfurzvi31feXxPqCu/9NnPsKZ9fzxQD/zQG9nw95tv2RsqPwwgD3xwDRqABusP5wn6OKvvtep//AohOFq6PTrgthqf5Xo/8/jNKqzvhzjmxjjIl3o6NxoKOOrp8FZduHpIY3k/9Emf+kyvdxoKTZQE9sAAAAMXRSTlMAT/v//hEqk5OTlLgeDzoDE8rwvmSClgjdkv6oJdLVlf2m2+aVhNaQxrz36dLYz3qERHaPEQAAASpJREFUKM+N03dXglAcxnG0IMpR7lVpew8vl3YJ2k0gyJHt9f7fRZcfipcETt9/P+dyHhbH/SP+qDrLdsx7efnE096il/fVU7bdnS3ec1pVyCWTsbkwVqEyrSrmBRNZYrhyS5mcMxljTgjbNjfOmHoHo3FCrCgDX40b9GuHSYc3ZBmY3LiZ5OvxITYPPDdk89pt8N2nXAAWgd8VowERo2dZ1mdtdJqy3n16fruz63ReXu9pPx/dYjY+ZIQxbtlht1YToVQcWJfqE+E2QtEIcBn7czoJPDWpdQkhtOpcPOrDGuVMAe677cN0GcrDY9G1AM4Cl8OGc2LQsjUhlFMJYBQwfAUeutgMWJaDV1IKXcaVNOlvmn047Xwu68i/DCzjIvkZv3JC6G/nfCu/rP2BniqREmsAAAAASUVORK5CYII=);
+    }
+    
+  input
+    {font-size:16px;padding:5px 10px;box-sizing:border-box;}
+  input:not([type])
+    {flex:1}
+  input[type=button]
+    {cursor:pointer}
+    
+            </style>
+            
+            <section id=client-id-root class=field>
+            
+                  <label>
+                        client id
+                  </label>
+                  
+                  <img class='paste icon'>
+                  <img class='storage icon'>
+                  <input id=client-id autocomplete=off spellcheck=false>
+                  <img class='copy icon'>
+                  
+            </section>
+            
+            <section id=client-secret-root class=field>
+            
+                  <label>
+                        client secret
+                  </label>
+                  
+                  <img class='paste icon'>
+                  <img class='storage icon'>
+                  <input id=client-secret autocomplete=off spellcheck=false>
+                  <img class='copy icon'>
+                  
+            </section>
+            
+            <section id=refresh-token-root class=field>
+            
+                  <label>
+                        refresh token
+                  </label>
+                  
+                  <img class='paste icon'>
+                  <img class='storage icon'>
+                  <input id=refresh-token autocomplete=off spellcheck=false>
+                  <img class='refresh icon'>
+                  <img class='copy icon'>
+                  
+            </section>
+            
+            <div class=hr></div>
+            
+            <section id=keyfile-root class=field>
+            
+                  <label>
+                        keyfile
+                  </label>
+                  <img class='file icon'>
+                  <div id=name>
+                        no file
+                  </div>
+                  <img class='refresh icon'>
+                  
+            </section>
+            
+            <div class=hr></div>
+            
+            <section id=token-root class=field>
+            
+                  <label>
+                        token
+                  </label>
+                  
+                  <img class='paste icon'>
+                  <img class='storage icon'>
+                  <input id=token autocomplete=off spellcheck=false>
+                  <img class='copy icon'>
+                  
+            </section>
+            
+      </template>
+      
+      
+      <script>
+      
+      
+(function({mod,host}){
+
+  var obj   = {
+        version   : 'v1.0',
+  };
+  
+        var df=true,did='google-storage-token';
+        
+        var key,par,$,gs
+        ;
+        
+        obj.initmod   = function(...list){
+        
+              list.forEach(params=>{
+              
+                    $           = mod.rd(params,'$',$);
+                    key         = mod.rd(params,'key',key);
+                    par         = mod.rd(params,'google-storage',par);
+                    gs          = mod.rd(params,'gs',gs);
+                    
+              });
+              
+        }//initmod
+        
+        
+  //:
+  
+  
+        var shadow;
+        
+        
+        var keyfile;
+        var scope     = ['https://www.googleapis.com/auth/devstorage.read_write'];
+        
+        
+        
+        var btn       = {};
+        btn.keyfile   = {};
+        btn.token     = {};
+        obj.rd        = {};
+        
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+        
+              mod.initmod(obj);
+              
+              
+        }//init
+        
+        
+  //:
+  
+  
+        obj.initdom   = async function(){
+        
+        
+              shadow                                      = host.shadowRoot;
+              
+              par.ui.initdom(shadow);
+              
+              
+            //client_id
+            
+              var clientid;
+              try{
+              
+                    clientid                              = window.localStorage[key+'client-id'];
+                    
+              }//try
+              catch(err2){}
+              $(shadow,'#client-id').value                = clientid||'';
+              
+              
+            //client_secret
+            
+              var err;
+              try{
+              
+                    var clientsecret                      = window.localStorage[key+'client-secret'];
+                    
+              }//try
+              catch(err2){}
+              
+              $(shadow,'#client-secret').value            = clientsecret||'';
+              
+              
+            //refresh-token
+            
+              try{
+              
+                    var refresh                           = window.localStorage[key+'refresh-token'];
+                    
+              }//try
+              catch(err2){}
+              
+              $(shadow,'#refresh-token').value            = refresh||'';
+              $(shadow,'.refresh.icon').onclick           = btn.token.refresh;
+              
+              
+              $(shadow,'#keyfile-root .file').onclick           = btn.keyfile.file;
+              $(shadow,'#keyfile-root .refresh').onclick        = btn.keyfile.refresh;
+              
+              
+            //token
+            
+              var root2                                   = $(shadow,'#token-root');
+              var err;
+              try{
+              
+                    var token                             = window.localStorage[key+'token'];
+                    
+              }//try
+              catch(err2){}
+              $(shadow,'#token').value                    = token||'';
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+        btn.keyfile.file    = function(){
+        
+              var input         = document.createElement('input');
+              input.type        = 'file';
+              input.onchange    = onchange;
+              input.click();
+              
+              
+              async function onchange(){
+              
+                    var file      = input.files[0];
+                    $(shadow,'#keyfile-root #name').textContent    = file.name;
+                    var txt       = await file.text();
+                    keyfile       = JSON.parse(txt);
+                    create();
+                    
+              }//onchange
+              
+        }//file
+        
+        
+        btn.keyfile.refresh   = function(){
+        
+              create();
+              
+        }//refresh
+        
+        
+        btn.token.refresh   = async function(){
+        
+              var id        = $(shadow,'#client-id').value;
+              var secret    = $(shadow,'#client-secret').value;
+              var refresh   = $(shadow,'#refresh-token').value;
+              
+              var token     = await gs.refresh(id,secret,refresh);
+              
+              try{
+              
+                    localStorage[localstorage+'token']    = token;
+                    
+              }//try
+              catch(err2){}
+              
+              $(shadow,'#token').value              = token;
+              
+              $.mousetext('token refreshed');
+              
+        }//refresh
+        
+        
+  //:
+  
+  
+        obj.rd.token    = function(){
+        
+              var token   = $(shadow,'#token').value;
+              return token;
+              
+        }//token
+        
+        
+  //:
+  
+  
+        async function create(){
+        
+        
+              var {json,error}    = await gs.token.fromkeyfile(keyfile,scope);
+              if(error){
+                    log.error(error);
+                    return;
+              }
+              
+              var token                   = json.access_token;
+              $(shadow,'#token').value    = token;
+              
+              var err;
+              try{
+              
+                    window.localStorage[key+'token']    = token;
+                    
+              }//try
+              catch(err2){}
+              
+        }//create
+        
+        
+        
+        
+        
+  return obj;
+  
+  
+//google-storage-token
+})
+
+
+      </script>
+      
+      
+</google-storage-token>
+
+
+
