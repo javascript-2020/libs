@@ -1113,21 +1113,31 @@
                     style2    = $(style);
               }
               
-              var rules                     = style.sheet.cssRules;
-              var n                         = rules.length;
-              var css;
-              for(var i=0;i<n;i++){
+              if(!Array.isArray(selector)){
+                    selector    = [selector];
+              }
+              var list    = selector;
               
-                    var rule    = rules[i];
-                    if(rule.selectorText===selector){
-                          css   = rule.cssText;
-                          break;
+              var rules   = style.sheet.cssRules;
+              var n       = rules.length;
+              
+              list.forEach(selector=>{
+              
+                    var css;
+                    for(var i=0;i<n;i++){
+                    
+                          var rule    = rules[i];
+                          if(rule.selectorText===selector){
+                                css   = rule.cssText;
+                                break;
+                          }
+                          
+                    }//for
+                    if(css){
+                          style2.sheet.insertRule(css);
                     }
                     
-              }//for
-              if(css){
-                    style2.sheet.insertRule(css);
-              }
+              });
               
         }//copyrule
         
