@@ -23,7 +23,7 @@
   #tabs
     {display:flex;gap:10px}
   .tab
-    {flex:1;border:1px solid;text-align:center}
+    {flex:1;border:1px solid;text-align:center;padding:5px 10px;cursor:pointer}
   .active
     {border-color:blue;background:white}
   .inactive
@@ -89,6 +89,7 @@
                   <div id=view>
                   
                         <github-fs-url v1.0 component=parent></github-fs-url>
+                        <github-fs-file-nav v1.0 component=parent></github-fs-file-nav>
                         
                   </div>
                   
@@ -140,8 +141,9 @@
         var icon;
         
         
-        var ui    = {};
-        var btn   = {};
+        var ui            = {};
+        var btn           = {};
+        btn.tabs          = {};
         
         
   //:
@@ -183,13 +185,17 @@
                                                                                 
               menu.add.style(shadow);
               
-              var style                       = $(shadow,'style');
+              var style                                 = $(shadow,'style');
               $.stylesheet.insert(style,'.icon');
               
-              var node                        = $(shadow,'.menu');
-              icon                            = $(shadow,'#icon');
-              icon.onclick                    = menu.click(node,{callback:menu_callback});
+              var node                                  = $(shadow,'.menu');
+              icon                                      = $(shadow,'#icon');
+              icon.onclick                              = menu.click(node,{callback:menu_callback});
               menu.input.norm(node);
+              
+              
+              $(shadow,'#tabs #url').onclick            = btn.tabs.url;
+              $(shadow,'#tabs #filenav').onclick        = btn.tabs.filenav;
               
               
         }//initdom
@@ -297,6 +303,38 @@
         
   //:
   
+  
+        btn.tabs.url    = e=>{
+        
+              mode    = 'url';
+              
+              $(shadow,'#tabs #url').classList.add('active');
+              $(shadow,'#tabs #url').classList.remove('inactive');
+              $(shadow,'#tabs #filenav').classList.remove('active');
+              $(shadow,'#tabs #filenav').classList.add('inactive');
+              
+              $(shadow,'#view github-fs-url').style.display       = '';
+              $(shadow,'#view github-fs-filenav').style.display   = 'none';
+              
+        }//url
+        
+        
+        btn.tabs.filenav    = e=>{
+        
+              mode    = 'filenav';
+              
+              $(shadow,'#tabs #url').classList.remove('active');
+              $(shadow,'#tabs #url').classList.add('inactive');
+              $(shadow,'#tabs #filenav').classList.add('active');
+              $(shadow,'#tabs #filenav').classList.remove('inactive');
+              
+              $(shadow,'#view github-fs-url').style.display       = 'none';
+              $(shadow,'#view github-fs-filenav').style.display   = '';
+              
+        }//filenav
+        
+        
+  //:
   
   
         function github_kd(e){
