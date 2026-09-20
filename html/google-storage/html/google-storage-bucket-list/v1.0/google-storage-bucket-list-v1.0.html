@@ -194,7 +194,7 @@
                     var nitem                       = item.cloneNode(true);
                     
                     $(nitem,'.name').textContent    = name;
-                    $nitem,'.rem').onclick          = e=>rem(name,nitem);
+                    $(nitem,'.rem').onclick         = e=>rem(name,nitem);
                     
                     list.append(nitem);
                     
