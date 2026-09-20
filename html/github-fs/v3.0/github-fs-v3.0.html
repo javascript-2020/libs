@@ -229,8 +229,10 @@
                                       
               });
               
-              $(shadow,'.storage').onclick    = async e=>{
+              $.all(shadow,'.storage').forEach(icon=>{
               
+                    icon.onclick    = async e=>{
+                    
                                                       var icon      = e.target;
                                                       var input     = $(icon.parentNode,'input:not([type])');
                                                       
@@ -287,8 +289,9 @@
                                                       input.value   = token;
                                                       
                                                 };
-                                                
-                                                
+              }//storage
+              
+              
         }//initdom
         
         
