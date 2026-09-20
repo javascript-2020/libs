@@ -134,8 +134,8 @@
         var github_url;
         var github_token;
         
-        var style;
         var shadow;
+        var style;
         
         var icon;
         
@@ -151,6 +151,9 @@
         obj.init    = async function(){
                                                                                 debug('init',obj.version);
               mod.initmod(obj);
+              
+              shadow                          = host.shadowRoot;
+              style                           = $(shadow,'style');
               
               await libs();
               
@@ -177,10 +180,7 @@
   
         obj.initdom   = function(){   //c
                                                                                 debug('initdom');
-              shadow                          = host.shadowRoot;
-              
-              style                           = $(shadow,'style');
-              
+                                                                                
               menu.add.style(shadow);
               
               var style                       = $(shadow,'style');
