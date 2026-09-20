@@ -120,6 +120,18 @@
                     $(shadow,'#project').value    = value;
               }
               
+              var names;
+              try{
+              
+                    var str   = localStorage[key+'bucket-list-names'];
+                    names       = JSON.parse(str);
+                    
+              }//try
+              catch(err2){}
+              if(names){
+                    display(names);
+              }
+              
               
               
         }//initdom
