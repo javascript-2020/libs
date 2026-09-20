@@ -662,34 +662,78 @@ curl -X POST --data-binary @OBJECT_LOCATION \
         
         async function dir_delete({token,bucket,path}){
         
-              // Ensure path is cleaned up and ends with '/'
-              if (path.startsWith('/')) { path = path.slice(1); }
-              if (path && !path.endsWith('/')) { path += '/'; }
-              
-              var listUrl = `https://storage.googleapis.com/storage/v1/b/${bucket}/o?prefix=${encodeURIComponent(path)}`;
-              var headers = { authorization: `Bearer ${token}` };
-              
-              try {
-                  // 1. List all objects under the prefix (including the folder placeholder itself)
-                  var listRes = await fetch(listUrl, { headers });
-                  if (!listRes.ok) throw new Error(`Failed to list directory: ${listRes.statusText}`);
-                  
-                  var listData = await listRes.json();
-                  
-                  if (listData.items && listData.items.length > 0) {
-                      // 2. Loop through and delete every single item found under this prefix
-                      for (var item of listData.items) {
-                          var deleteUrl = `https://storage.googleapis.com/storage/v1/b/${bucket}/o/${encodeURIComponent(item.name)}`;
-                          var delRes = await fetch(deleteUrl, { method: 'DELETE', headers });
-                          
-                          if (!delRes.ok) {
-                              console.error(`Failed to delete: ${item.name}`);
-                          }
-                      }
-                  }
-              } catch (err2) {
-                  err = err2;
+              if(path.startsWith('/')){
+                    path    = path.slice(1);
               }
+              if(path && !path.endsWith('/')){
+                    path   += '/';
+              }
+              
+              var headers   = {authorization:`Bearer ${token}`};
+              var prefix    = encodeURIComponent(path);
+              var url       = `https://storage.googleapis.com/storage/v1/b/${bucket}/o?prefix=${prefix}`;
+              var err;
+              var data;
+              try{
+              
+                    var res   = await fetch(url,{headers});
+                    if(!res.ok){
+                          throw new Error(`Failed to list directory: ${path} - ${res.statusText}`);
+                    }
+                    data      = await res.json();
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.message;
+                                                                                console.error(error);
+                    return {error};
+              }
+              
+              if(data.items){
+              
+                    var list    = [];
+                    await Promise.all(
+                          data.items.map(async item=>{
+                          
+                                var path    = encodeURIComponent(item.name);
+                                var url     = `https://storage.googleapis.com/storage/v1/b/${bucket}/o/${path}`;
+                                var res;
+                                try{
+                                
+                                      res   = await fetch(url,{method:'delete',headers});
+                                      
+                                }//try
+                                catch(err2){
+                                
+                                      err   = err2;
+                                      
+                                }//catch
+                                if(err){
+                                      var error   = `failed to delete: ${item.name} - ${res.statusText}`+err.message;
+                                                                                console.error(error);
+                                      list.push(error);
+                                      return;
+                                }
+                                if(!res.ok){
+                                      var error   = `Failed to delete: ${item.name} - ${res.statusText}`
+                                                                                console.error(error);
+                                      list.push(error);
+                                      return;
+                                }
+                                
+                          });
+                    )
+                    if(list.length){
+                          return {error:true,list};
+                    }
+              }
+              
+              return {ok:'ok'};
               
         }//dir_delete
         
