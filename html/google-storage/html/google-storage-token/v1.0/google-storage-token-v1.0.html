@@ -297,7 +297,8 @@
   
         async function create(){
         
-              var {json,error}    = await generate(keyfile,scope);
+        
+              var {json,error}    = await gs.token.fromkeyfile(keyfile,scope);
               if(error){
                     log.error(error);
                     return;
@@ -309,6 +310,8 @@
         }//create
         
         
+/*
+
         async function generate(keyfile,scope){
         
               var encoder           = new TextEncoder();
@@ -485,8 +488,9 @@
               
         }//generate
         
-        
-        
+*/
+
+
   //:
   
   
