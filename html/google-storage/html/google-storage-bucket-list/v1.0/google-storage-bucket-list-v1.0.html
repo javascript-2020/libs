@@ -20,9 +20,19 @@
     
   .item
     {display:flex;align-items:center}
+  .item .name
+    {padding:5px 10px}
     
   #empty
     {text-align:center;color:gray;font-weight:bold}
+    
+    
+  input
+    {font-size:16px;padding:5px 10px;box-sizing:border-box;}
+  input:not([type])
+    {flex:1}
+  input[type=button]
+    {cursor:pointer}
     
             </style>
             
@@ -168,7 +178,8 @@
               
               names.forEach(name=>{
               
-                    var nitem   = item.cloneNode(true);
+                    var nitem                       = item.cloneNode(true);
+                    
                     $(nitem,'.name').textContent    = name;
                     $nitem,'.rem').onclick          = e=>rem(name,nitem);
                     
