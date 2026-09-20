@@ -62,7 +62,10 @@
         obj.tokenmod        = tokenmod;
         obj.token.mod       = tokenmod;
         
-        obj.token.fromKeyFile   = fromkeyfile;
+        obj.token.fromKeyFile         = fromkeyfile;
+        obj.token.fromkeyfile         = fromkeyfile;
+        obj.token.from_key_file       = fromkeyfile;
+        
         
         
         
@@ -1244,6 +1247,8 @@ function tokenmod(file,scopes,{fsp,crypto,platform}){
               return token;
               
         }//gettoken
+        
+        
         
         
   return obj;
