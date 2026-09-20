@@ -114,7 +114,7 @@
   
         var df=true,did='google-storage-token';
         
-        var key,par,$
+        var key,par,$,gs
         ;
         
         obj.initmod   = function(...list){
@@ -124,6 +124,7 @@
                     $           = mod.rd(params,'$',$);
                     key         = mod.rd(params,'key',key);
                     par         = mod.rd(params,'google-storage',par);
+                    gs          = mod.rd(params,'gs',gs);
                     
               });
               
