@@ -169,11 +169,20 @@
               var project   = $(shadow,'#project').value;
               var token     = par.rd.token();
               
-              var {names,error}   = await gs.bucket.list({token,project});
+              var {json,error}   = await gs.bucket.list({token,project});
               if(error){
                     log.error(error);
                     return;
               }
+              
+              var names   = [];
+              json.items.forEach(item=>{
+              
+                    var name    = item.name;
+                    names.push(name);
+                    
+              });
+              
               display(names);
               
         }//read
