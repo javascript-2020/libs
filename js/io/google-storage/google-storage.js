@@ -1260,7 +1260,7 @@ function tokenmod(file,scopes,{fsp,crypto,platform}){
   //:
   
   
-        async function fromkeyfile(keyfile,scope,{}){
+        async function fromkeyfile(keyfile,scope,{}={}){
         
               var encoder           = new TextEncoder();
               
