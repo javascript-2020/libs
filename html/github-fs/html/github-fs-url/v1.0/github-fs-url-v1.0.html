@@ -8,7 +8,16 @@
             <style>
             
             
-            
+  #url
+    {margin-right:10px}
+    
+    
+  #btns
+    {display:flex;justify-content:center;gap:25px}
+  [value=save]
+    {margin-right:20px}
+    
+    
   input
     {font-size:16px;padding:5px 10px;box-sizing:border-box;}
   input:not([type])
@@ -127,6 +136,9 @@
         
         
         
+        var btn   = {};
+        
+        
   //:
   
   
@@ -146,6 +158,32 @@
               shadow    = host.shhadowRoot;
               
               
+              $(shadow,'[value=parse]').onclick   = btn.parse;
+              $(shadow,'[value="+"]').onclick     = btn.parse.load;
+              
+              $(shadow,'#url').onkeydown    = e=>{
+              
+                                                      if(e.key=='Enter'){
+                                                            btn.parse();
+                                                            $(shadow,'#load').focus();
+                                                      }
+                                                      
+                                                };
+                                                
+              $(shadow,'#path').onkeydown     = e=>{
+              
+                                                      if(e.key=='Enter'){
+                                                            $(shadow,'#load').focus();
+                                                      }
+                                                      
+                                                };
+                                                
+              $(shadow,'[value=load]').onclick        = btn.load;
+              $(shadow,'[value=load-raw]').onclick    = btn.load.raw;
+              $(shadow,'[value=save]').onclick        = btn.save;
+              $(shadow,'[value=backup]').onclick      = btn.backup;
+              
+              
               
         }//initdom
         
@@ -153,8 +191,143 @@
   //:
   
   
-  
-  
+        btn.parse   = function(e={}){
+        
+              if(!github){
+                    alert('library not ready');
+                    return;
+              }
+              
+              var url   = $(shadow,'#url').value;
+              
+              var {owner,repo,branch,path}    = github.parse(url);
+              
+              write(owner,repo,branch,path);
+              
+              if(e.ctrlKey){
+                    btn.load(e);
+              }
+              
+        }//parse
+        
+        
+        btn.parse.load    = function(e){
+        
+              btn.parse();
+              btn.load(e);
+              
+        }//parse.load
+        
+        
+        btn.load    = async function(e){
+        
+              var api   = true;
+              if(e.shiftKey){
+                    api   = false;
+              }
+              
+              var {token,owner,repo,branch,path}    = read();
+              
+              var i           = path.lastIndexOf('/');
+              var filename    = path.slice(i+1);
+              
+              
+              
+              var file        = {};
+              file.type       = 'github';
+              file.filename   = filename;
+              file.title      = repo+' : '+path;
+              file.icon       = icon.src;
+              
+              file.owner      = owner;
+              file.repo       = repo;
+              file.branch     = branch;
+              file.path       = path;
+              
+              
+              
+              var result      = await load(file,api);
+              if(result.error){
+                    return;
+              }
+              var blob    = result.ok;
+              
+              obj.load.complete(file,blob);
+              
+        }//load
+        
+        
+        btn.load.raw    = async function(){
+        
+              load(false);
+              
+        }//raw
+        
+        
+        btn.save    = async function(){
+        
+              var {token,owner,repo,branch,path}    = read();
+              
+              var i               = path.lastIndexOf('/');
+              var filename        = path.slice(i+1);
+              
+/*
+              var file            = filemod.new({
+              
+                    filetype    : 'github',
+                    abs         : path,
+                    name        : filename,
+                    
+                    kind        : 'file',
+                    size        : null,
+                    ctime       : null,
+                    mtime       : null,
+                    atime       : null,
+                    
+                    title       : repo+' : '+path,
+                    icon        : icon.src
+                    
+              });
+*/
+
+
+              var file            = {};
+              file.type           = 'github';
+              file.filename       = filename;
+              file.title          = repo+' : '+path;
+              file.icon           = icon.src;
+              
+              file.owner          = owner;
+              file.repo           = repo;
+              file.branch         = branch;
+              file.path           = path;
+              file.abs            = path;
+              
+              var blob            = await source(file);
+              
+              var result          = await save(file,blob);
+              if(result.error){
+                    return;
+              }
+              
+        }//save
+        
+        
+        btn.backup    = function(){
+        
+              var {token,owner,repo,branch,path}    = read();
+                                                                                console.log('btn.backup');
+                                                                                console.log(token,owner,repo,branch,path);
+                                                                                
+              github.backup(token,owner,repo,branch,path);
+              
+        }//backup
+        
+        
+        
+        
+        
+        
   //:
   
   
