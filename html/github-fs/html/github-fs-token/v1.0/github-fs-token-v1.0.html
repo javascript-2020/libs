@@ -9,6 +9,15 @@
             
             </style>
             
+            <label>
+                  token
+            </label>
+            
+            <img class='copy icon'>
+            <img class='paste icon'>
+            <img class='storage icon'>
+            <input id=token autocomplete=off spellcheck=false>
+            
       </template>
       
       <script>
@@ -21,12 +30,16 @@
   
         var df=true,did='github-fs-token';
         
+        var $,par,key
+        ;
         
         obj.initmod   = function(...list){
         
               list.forEach(params=>{
               
-                    $   = mod.rd(params,'$',$);
+                    $         = mod.rd(params,'$',$);
+                    par       = mod.rd(params,'par',par);
+                    key       = mod.rd(params,'key',key);
                     
               });
               
@@ -40,6 +53,11 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
+              
+              
+              
         }//init
         
         
@@ -47,6 +65,40 @@
   
   
         obj.initdom   = async function(){
+        
+              shadow    = host.shadowRoot;
+              
+              par.ui.initdom(shadow);
+              
+              
+              var root2   = $(shadow,'#token').parentNode;
+              $(root2,'.paste').onclick   = async e=>{
+              
+                                                  var txt       = await navigator.clipboard.readText();
+                                                  var par       = icon.parentNode;
+                                                  var input     = $(par,'input:not([type])');
+                                                  input.value   = txt;
+                                                  
+                                                  if(e.ctrlKey){
+                                                        btn.parse();
+                                                        btn.load(e);
+                                                  }
+                                                  
+                                            };
+                                            
+              var token;
+              try{
+              
+                    token   = window.localStorage[key+'token'];
+                    
+              }//try
+              catch(err2){}
+              if(token){
+                    $(shadow,'#token').value    = token;
+              }
+              
+              
+              
         }//initdom
         
         
