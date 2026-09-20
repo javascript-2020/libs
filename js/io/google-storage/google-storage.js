@@ -678,7 +678,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               
                     var res   = await fetch(url,{headers});
                     if(!res.ok){
-                          throw new Error(`Failed to list directory: ${path} - ${res.statusText}`);
+                          throw new Error(`failed to list directory: ${path} - ${res.statusText}`);
                     }
                     data      = await res.json();
                     
@@ -720,7 +720,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                       return;
                                 }
                                 if(!res.ok){
-                                      var error   = `Failed to delete: ${item.name} - ${res.statusText}`;
+                                      var error   = `failed to delete: ${item.name} - ${res.statusText}`;
                                                                                 console.error(error);
                                       list.push(error);
                                       return;
