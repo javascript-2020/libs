@@ -208,6 +208,12 @@
                     var nitem                       = item.cloneNode(true);
                     
                     $(nitem,'.name').textContent    = name;
+                    $(nitem,'.copy').onclick        = async e=>{
+                    
+                                                            await navigator.clipboard.writeText(name);
+                                                            $.mousetext('copied');
+                                                            
+                                                      }
                     $(nitem,'.rem').onclick         = e=>rem(name,nitem);
                     
                     list.append(nitem);
