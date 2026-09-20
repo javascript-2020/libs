@@ -64,7 +64,7 @@
   
         var df=true,did='google-storage-bucket-list';
         
-        var $,par
+        var $,par,key
         ;
         
         obj.initmod   = function(...list){
@@ -73,6 +73,7 @@
               
                     $       = mod.rd(params,'$',$);
                     par     = mod.rd(params,'google-storage',par);
+                    key     = mod.rd(params,'localstorage',key);
                     
               });
               
@@ -133,7 +134,7 @@
               var names;
               try{
               
-                    var str   = localStorage[key+'bucket-list-names'];
+                    var str     = localStorage[key+'bucket-list-names'];
                     names       = JSON.parse(str);
                     
               }//try
