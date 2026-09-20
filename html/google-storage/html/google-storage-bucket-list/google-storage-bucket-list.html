@@ -1,0 +1,276 @@
+
+
+<google-storage-bucket-list style='height:300px;display:none'>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+  :host
+    {flex:1;display:flex;flex-direction:column;gap:10px}
+    
+  #hdr
+    {display:flex;gap:10px;align-items:center}
+    
+  #hdr #project
+    {flex:1}
+    
+  #list
+    {flex:1;display:flex;flex-direction:column;border:1px solid lightgray;padding:10px;overflow:auto;gap:5px}
+    
+  .item:nth-child(odd)
+    {background-color:white}
+    
+  .item:nth-child(even)
+    {background-color:hsl(0,0%,90%)}
+    
+  .item
+    {display:flex;align-items:center;gap:5px;padding:5px}
+  .item .name
+    {padding:5px 10px;flex:1}
+  .item .rem
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAj1QTFRFAAAA4Cco6hkY7xQU8RgZ8RgY8BgZ8hgY7xIU6BcW3Sgt2To67RMV9AkJ+QQE/AIC/AIC+AQF9AkK7RET4DMy2Tg38RAP+QQE/AEB/QAB/gAA/QEA+wEB+QQE8Q8P3TQz7BIT+QQE/QEB/QAA+QQD6xMT4CUl9QkJ/AEC9AgI5CMj7BcW+QQE+AUE9wcH+QQE+QQE9wcH+AQF+gME7BYW6REQ+wIB+QUE6RYW0To+6hUV9gcG9gUF6hUR1js66RQX+QQE8g0O5QsL9wgI3kA+////6BYU9gYG9wUF6RMUylBT9QkK/QEC8g0N5QwK+gQE6RER6BIR9gYG9gYG6BQT6RUV+AQF8g0N9QUF6BAO5RQW5RUX5xYY9QcH8w0N5QsK9gYF6hAP5xUX9AcI+wIC/gAB9gYF5RMU5hgb9gcH9gYF5BUV5hYX9wQF6BIT6BMT9QYG9gUE6BER4RQV5BQT6BMS+QQE6RMR5REU9AYH9QYF6RIQ6RQV+gQE5QsL9wcH2zo74xIT8wYG/AIB9wYF6hMR0jg59QcH8Q4O6hAR/AIC+QQF7BUXyzc35xMS9AYF9gYG6RUU3Dk36RUW+QQE8Q8O7BgX+QQD9AcH+QQE+gMD6xYT3Sgm8wkI9QgI4yQk7BIT+AQE+gME7BIV3TQz+AQE+wEC/AEA8A8Q3DQz1zw56xMU8goJ+QQE+wIC+wMC+wMC8wkI6hMU2Ds43Sst6RcX6xMU7xcW7xcV8BcV8BcW7xcY6hUV6BkX3ignt1x/WQAAAL90Uk5TABE5UlhYWFhSORIIYsjy/P3yymQJCYr5///////6jwpo+////GwX0P/UGkb36cTr7sXq+Utk/+1NCErf5FEJSuhpassN/0Xh5EwIwf9uae5PSOLlTE3sbeJKQ0ZI4W1p40tI4f//5EVD4+VGQuNLSOHjS0VFSPBRSuTkS0zsacsMSuP/40wLyG5k/+xPCk/j41EMT+xqRvfH7flLF9DUGmf6/G0J+f//jwoHYMbx/P38yWQJEThSV1dXV1dTOhK+MhyLAAABr0lEQVR4nK3SQUgUURgH8P9/l+jNusIiLB5EEEXFJFmM1csiuHST3IMHQSox2IMEYYIkBXlZFjwpBJ3UwgSriwf1qOvBLhFrGiS4GBQRFHmIZZ1FYsf35o3L7Ahe9Du9md983/vem4+4MHglTBUW4IMFn1weu7nK1nKOpT74W+ZwpTq1vp9xg7Sie0sDhSBzDreQecvbE6v5VXM7jwKmkPvnVQmrlvxtWYEQP2mO8idQr7Y7DBTRqBYHQKktozl+UALa5P5kjs38j2vcATq5qrk/W1IlCkBQJv4DQtwGRPSdi0WXOmmYf4BabspORWxR8/CGZIge1QLsLjKml/vWxW1+k09NXIH/fDaYUA2j9ddn+468PMB9u/gNvvW5WbeW4Begg7tAZC9X9GbfZRa4JQ/2EejmvOtgzxckJ/kBMfLVA26hly/krY1Nap7mLPBY3eXyD594pBZpYLTmoeaXTAnTGKrjNGFC3IyEZ0wYT5jUPMdnfu8PNQppjjjj8JpPUeFGUUzx3tm0LI3PcMLtRurkOgfLo/i+cth4/w15pzyKMtZsp/1GLePOh7gwLsenPLh5H68t6T4AAAAASUVORK5CYII=);
+    }
+    
+  #empty
+    {text-align:center;color:gray;font-weight:bold}
+    
+    
+  input
+    {font-size:16px;padding:5px 10px;box-sizing:border-box;}
+  input:not([type])
+    {flex:1}
+  input[type=button]
+    {cursor:pointer}
+    
+            </style>
+            
+            <div id=hdr>
+                  <label>
+                        project
+                  </label>
+                  <input id=project autocomplete=off spellcheck=false>
+                  <input value=read type=button>
+            </div>
+            
+            <div id=list>
+                  <div class=item>
+                        <div class=name></div>
+                        <img class='copy icon'>
+                        <img class='rem icon'>
+                  </div>
+                  <div id=empty>
+                        Empty
+                  </div>
+            </div>
+            
+      </template>
+      
+      <script>
+      
+(function({mod,host}){
+
+  var obj   = {
+        version   : 'v1.0',
+  };
+  
+        var df=true,did='google-storage-bucket-list';
+        
+        var $,par,key,debug,gs
+        ;
+        
+        obj.initmod   = function(...list){
+        
+              list.forEach(params=>{
+              
+                    $       = mod.rd(params,'$',$);
+                    par     = mod.rd(params,'google-storage',par);
+                    key     = mod.rd(params,'localstorage',key);
+                    debug   = mod.rd(params,'debug',debug);
+                    gs      = mod.rd(params,'gs',gs);
+                    
+              });
+              
+        }//initmod
+        
+        
+  //:
+  
+  
+        var shadow;
+        
+        var list;
+        var item;
+        var empty;
+        
+        
+        var btn   = {};
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+                                                                                debug=eval(debug.mod);
+                                                                                debug('init',obj.version);
+        }//init
+        
+        
+  //:
+  
+  
+        obj.initdom   = async function(){
+                                                                                debug('initdom');
+              shadow                              = host.shadowRoot;
+              
+              par.ui.initdom(shadow);
+              
+              var hdr                             = $(shadow,'#hdr');
+              $(hdr,'#project').oninput           = e=>{
+              
+                                                          var str   = e.target.value;
+                                                          try{
+                                                          
+                                                                localStorage[key+'bucket-list-project']   = str;
+                                                                
+                                                          }//try
+                                                          catch(err){}
+                                                          
+                                                    }
+              $(hdr,'[value=read]').onclick       = btn.read;
+              
+              list                                = $(shadow,'#list');
+              item                                = $(list,'.item');
+              item.remove();
+              empty                               = $(list,'#empty');
+              
+              
+              
+              
+              var value;
+              try{
+              
+                    value   = localStorage[key+'bucket-list-project'];
+                    
+              }//try
+              catch(err2){}
+              if(value){
+                    $(shadow,'#project').value    = value;
+              }
+              
+              var names;
+              try{
+              
+                    var str     = localStorage[key+'bucket-list-names'];
+                    names       = JSON.parse(str);
+                    
+              }//try
+              catch(err2){}
+              if(names){
+                    display(names);
+              }
+              
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+        btn.read    = async e=>{
+        
+              var project   = $(shadow,'#project').value;
+              var token     = par.rd.token();
+              
+              var {json,error}   = await gs.bucket.list({token,project});
+              if(error){
+                    log.error(error);
+                    return;
+              }
+              
+              var names   = [];
+              json.items.forEach(item=>{
+              
+                    var name    = item.name;
+                    names.push(name);
+                    
+              });
+              
+              display(names);
+              
+        }//read
+        
+        
+  //:
+  
+  
+        function display(names){
+        
+              list.replaceChildren();
+              if(names.length==0){
+                    list.append(empty);
+                    return;
+              }
+              
+              names.forEach(name=>{
+              
+                    var nitem                       = item.cloneNode(true);
+                    
+                    $(nitem,'.name').textContent    = name;
+                    $(nitem,'.copy').onclick        = async e=>{
+                    
+                                                            await navigator.clipboard.writeText(name);
+                                                            $.mousetext('copied');
+                                                            
+                                                      }
+                    $(nitem,'.rem').onclick         = e=>rem(name,nitem);
+                    
+                    list.append(nitem);
+                    
+              });
+              
+              store();
+              
+              
+              function store(){
+              
+                    var str   = JSON.stringify(names);
+                    try{
+                    
+                          localStorage[key+'bucket-list-names']   = str;
+                          
+                    }//try
+                    catch(err2){}
+                    
+              }//store
+              
+              
+              function rem(name,item){
+              
+                    var i   = names.findIndex(name2=>name2===name);
+                    if(i==-1)return;
+                    names.splice(i,1);
+                    item.remove();
+                    store();
+                    
+              }//rem
+              
+        }//display
+        
+        
+  //:
+  
+  
+  return obj;
+  
+//google-storage-bucket-list
+})
+
+      </script>
+      
+</google-storage-bucket-list>
+
+
+
