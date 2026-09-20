@@ -16,7 +16,7 @@
     {flex:1}
     
   #list
-    {display:flex;flex-direction:column}
+    {display:flex;flex-direction:column;border:1px solid lightgray;padding:10px;overflow:auto}
     
   .item
     {display:flex;align-items:center}
@@ -37,6 +37,9 @@
             </style>
             
             <div id=hdr>
+                  <label>
+                        project
+                  </label>
                   <input id=project>
                   <input value=read type=button>
             </div>
@@ -188,8 +191,30 @@
                     
               });
               
+              store();
+              
+              
+              function store(){
+              
+                    var str                                 = JSON.stringify(names);
+                    try{
+                    
+                          localStorage[key+'bucket-list-names']   = str;
+                          
+                    }//try
+                    catch(err2){}
+                    
+              }//store
+              
               
               function rem(name,item){
+              
+                    var i   = names.findIndex(name2=>name2===name);
+                    if(i==-1)return;
+                    names.splice(i,1);
+                    item.remove();
+                    store();
+                    
               }//rem
               
         }//display
