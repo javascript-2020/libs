@@ -9,6 +9,12 @@
   :host
     {}
     
+  #hdr
+    {display:flex;gap:10px}
+    
+  #hdr #project
+    {flex:1}
+    
   #list
     {display:flex;flex-direction:column}
     
@@ -21,6 +27,7 @@
             </style>
             
             <div id=hdr>
+                  <input id=project>
                   <input value=read type=button>
             </div>
             
@@ -93,10 +100,26 @@
               
               var hdr                             = $(shadow,'#hdr');
               $(hdr,'[value=read]').onclick       = btn.read;
+              
               list                                = $(shadow,'#list');
               item                                = $(list,'.item');
               item.remove();
               empty                               = $(list,'#empty');
+              
+              
+              
+              
+              var value;
+              try{
+              
+                    value   = localStorage[key+'bucket-list-project'];
+                    
+              }//try
+              catch(err2){}
+              if(value){
+                    $(shadow,'#project').value    = value;
+              }
+              
               
               
         }//initdom
@@ -107,7 +130,16 @@
   
         btn.read    = async e=>{
         
-        
+              var project   = $(shadow,'#project').value;
+              var token     = par.rd.token();
+              
+              var {names,error}   = await gs.bucket.list({token,project});
+              if(error){
+                    log.error(error);
+                    return;
+              }
+              display(names);
+              
         }//read
         
         
