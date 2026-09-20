@@ -870,6 +870,29 @@
   //:
   
   
+        function gfetch(){
+        
+              var err;
+              try{
+              
+                    var res   = await fetch.apply(fetch,arguments);
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+              }
+              
+        }//gfetch
+        
+        
+  //:
+  
+  
+  
   
   return obj;
   
