@@ -30,7 +30,7 @@
   
         var df=true,did='github-fs-token';
         
-        var $,par,key
+        var $,par,key,ui
         ;
         
         obj.initmod   = function(...list){
@@ -40,6 +40,7 @@
                     $         = mod.rd(params,'$',$);
                     par       = mod.rd(params,'par',par);
                     key       = mod.rd(params,'key',key);
+                    ui        = mod.rd(params,'ui',ui);
                     
               });
               
@@ -68,7 +69,7 @@
         
               shadow    = host.shadowRoot;
               
-              par.ui.initdom(shadow);
+              ui.initdom(shadow);
               
               
               var root2   = $(shadow,'#token').parentNode;
