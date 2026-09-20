@@ -1,0 +1,172 @@
+
+
+
+<github-fs-url>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+            
+            
+  input
+    {font-size:16px;padding:5px 10px;box-sizing:border-box;}
+  input:not([type])
+    {flex:1}
+  input[type=button]
+    {cursor:pointer}
+    
+    
+    
+            </style>
+            
+            <section>
+            
+                  <label>
+                        parse url
+                  </label>
+                  <img class='copy icon'>
+                  <img class='paste icon'>
+                  <input id=url autocomplete=off spellcheck=false>
+                  <input type=button value=parse>
+                  <input type=button value='+'>
+                  
+            </section>
+            
+            <div class=menu-sep></div>
+            
+            <section>
+            
+                  <label>
+                        owner
+                  </label>
+                  <img class='copy icon'>
+                  <img class='paste icon'>
+                  <input id=owner autocomplete=off spellcheck=false>
+                  
+            </section>
+            
+            
+            <section>
+            
+                  <label>
+                        repo
+                  </label>
+                  
+                  <img class='copy icon'>
+                  <img class='paste icon'>
+                  <input id=repo autocomplete=off spellcheck=false>
+                  
+            </section>
+            
+            
+            <section>
+            
+                  <label>
+                        branch
+                  </label>
+                  
+                  <img class='copy icon'>
+                  <img class='icon paste'>
+                  <input id=branch autocomplete=off spellcheck=false value=main>
+                  
+            </section>
+            
+            
+            <section>
+            
+                  <label>
+                        path
+                  </label>
+                  
+                  <img class='copy icon'>
+                  <img class='icon paste'>
+                  <input id=path autocomplete=off spellcheck=false>
+                  
+            </section>
+            
+            
+            <div id=btns>
+                  <input value=load type=button>
+                  <input value=load-raw type=button>
+                  <input value=save type=button>
+                  <input value=backup type=button>
+            </div>
+            
+      </template>
+      
+      <script>
+      
+(function({mod,host}){
+
+  var obj   = {
+        version   : 'v1.0',
+  };
+  
+        var df=true,did='github-fs-url';
+        
+        var $,par
+        ;
+        
+        obj.initmod   = function(...list){
+        
+              list.forEach(params=>{
+              
+                    $         = mod.rd(params,'$',$);
+                    par       = mod.rd(params,'par',par);
+                    
+              });
+              
+        }//initmod
+        
+        
+  //:
+  
+  
+        var shadow;
+        
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+        
+              mod.initmod(obj);
+              
+              
+        }//init
+        
+        
+  //:
+  
+  
+        obj.initdom   = async function(){
+        
+              shadow    = host.shhadowRoot;
+              
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+  
+  
+  //:
+  
+  
+  return obj;
+  
+//github-fs-url
+})
+
+
+      </script>
+      
+</github-fs-url>
+
+
+
