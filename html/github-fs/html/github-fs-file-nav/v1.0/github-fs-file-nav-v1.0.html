@@ -1,0 +1,108 @@
+
+
+<github-fs-file-nav>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+            
+            </style>
+            
+            <div id=repo-root>
+                  <label>
+                        repo
+                  </label>
+                  <img class='psate icon'>
+                  <input id=repo>
+                  <img class='copy icon'>
+            </div>
+            
+            <file-nav component></file-nav>
+            
+            <div id=btns>
+                  <input value=update type=button>
+            </div>
+            
+      </template>
+      
+      <script>
+      
+(function({mod,host}){
+
+  var obj   = {
+        version   : 'v1.0',
+  };
+  
+        var df=true,did='github-fs-file-nav';
+        
+        var $,ui,par,debug
+        ;
+        
+        obj.initmod   = function(...list){
+        
+              list.forEach(params=>{
+              
+                    $           = mod.rd(params,'$',$);
+                    ui          = mod.rd(params,'ui',ui);
+                    par         = mod.rd(params,'par',par);
+                    debug       = mod.rd(params,'debug',debug);
+                    
+              });
+              
+        }//initmod
+        
+        
+  //:
+  
+  
+        var shadow;
+        
+        
+        var btn   = {};
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+                                                                                debug=eval(debug.mod);
+                                                                                debug('init',obj.version);
+              mod.initmod(obj);
+              
+              
+        }//init
+        
+        
+  //:
+  
+  
+        obj.initdom   = async function(){
+                                                                                debug('initdom');
+              shadow        = host.shadowRoot;
+              
+              ui.initdom(shadow);
+              
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+  //:
+  
+  
+  return obj;
+  
+//github-fs-file-nav
+})
+
+      </script>
+      
+      
+</github-fs-file-nav>
+
+
+
