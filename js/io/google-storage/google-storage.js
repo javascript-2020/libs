@@ -720,14 +720,14 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                       return;
                                 }
                                 if(!res.ok){
-                                      var error   = `Failed to delete: ${item.name} - ${res.statusText}`
+                                      var error   = `Failed to delete: ${item.name} - ${res.statusText}`;
                                                                                 console.error(error);
                                       list.push(error);
                                       return;
                                 }
                                 
                           });
-                    )
+                    );
                     if(list.length){
                           return {error:true,list};
                     }
