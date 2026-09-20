@@ -715,7 +715,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                                       
                                 }//catch
                                 if(err){
-                                      var error   = `failed to delete: ${item.name} - ${res.statusText}`+err.message;
+                                      var error   = `failed to delete: ${item.name} - ${err.message}`;
                                                                                 console.error(error);
                                       list.push(error);
                                       return;
