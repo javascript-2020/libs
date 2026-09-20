@@ -67,7 +67,7 @@
   
         var df=true,did='google-storage-bucket-list';
         
-        var $,par,key
+        var $,par,key,debug
         ;
         
         obj.initmod   = function(...list){
@@ -77,6 +77,7 @@
                     $       = mod.rd(params,'$',$);
                     par     = mod.rd(params,'google-storage',par);
                     key     = mod.rd(params,'localstorage',key);
+                    debug   = mod.rd(params,'debug',debug);
                     
               });
               
@@ -100,6 +101,8 @@
   
   
         obj.init    = async function(){
+                                                                                debug=eval(debug.mod);
+                                                                                debug('init',obj.version);
         }//init
         
         
@@ -107,7 +110,7 @@
   
   
         obj.initdom   = async function(){
-        
+                                                                                debug('initdom');
               shadow                              = host.shadowRoot;
               
               par.ui.initdom(shadow);
