@@ -47,6 +47,8 @@
     }
     
     
+  .icon
+    {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
     
   input
     {font-size:16px;padding:5px 10px;box-sizing:border-box;}
@@ -151,8 +153,8 @@
               
               shadow                          = host.shadowRoot;
               style                           = $(shadow,'style');
-              var style2                      = $.stylesheet.find.css('.icon','style');
-              $.stylesheet.copyrule(style2,'.icon',style);
+              //var style2                      = $.stylesheet.find.css('.icon','style');
+              //$.stylesheet.copyrule(style2,'.icon',style);
               
               await libs();
               
