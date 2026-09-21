@@ -1050,7 +1050,7 @@
                                   var path2       = item.path.slice(len,i);
                                   var type        = item.type=='blob' ? 'file' : 'dir';
                                   var abs         = '/'+item.path;
-                                  iftype=='dir'){
+                                  if(type=='dir'){
                                         abs      += '/';
                                   }
                                   var size        = item.size;
