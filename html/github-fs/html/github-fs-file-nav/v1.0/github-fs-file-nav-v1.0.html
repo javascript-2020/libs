@@ -122,9 +122,6 @@
               var dirs    = [];
               var files   = [];
               
-              console.log('list',list);
-              return;
-              
               list.forEach(item=>{
               
                     if(!item.abs.startsWith(path))return;
@@ -133,7 +130,8 @@
                           files.push(item);
                     }
                     if(item.type=='dir'){
-                          if(item.abs.lastIndexOf('/')!=path.length)return;
+                          var d   = item.abs.slice(0,-1);
+                          if(d.lastIndexOf('/')!=path.length-1)return;
                           dirs.push(item);
                     }
                     
