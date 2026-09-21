@@ -65,7 +65,9 @@
         var shadow;
         
         
-        var btn   = {};
+        var btn     = {};
+        var file    = {};
+        var dir     = {};
         
         
   //:
@@ -78,7 +80,10 @@
                                                                                 debug('init',obj.version);
                                                                                 
                                                                                 
-              filenav   = mod['file-nav'];
+              filenav         = mod['file-nav'];
+              filenav.file    = file;
+              filenav.dir     = dir;
+              
               
               await mod.auto();
               
