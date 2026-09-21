@@ -95,6 +95,8 @@
               ui.initdom(shadow);
               
               
+              $(shadow,'[value=update]').onclick      = btn.update;
+              
               
         }//initdom
         
@@ -102,6 +104,25 @@
   //:
   
   
+        btn.update    = ()=>{
+        
+              var token     = ui.rd.token();
+              var owner     = 'javascript-2020';
+              var repo      = 'libs';
+              var branch    = 'main';
+              var path      = '/';
+              
+              var {list,error}    = await github.dir.list({token,owner,repo,branch,path});
+              if(error){
+                                                                                console.error(error);
+                    log.error(error);
+                    return;
+              }
+              console.log(list);
+              
+        }//update
+        
+        
   //:
   
   
