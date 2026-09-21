@@ -42,7 +42,7 @@
   
         var df=true,did='github-fs-token';
         
-        var $,par,key,ui
+        var $,par,key,ui,debug
         ;
         
         obj.initmod   = function(...list){
@@ -53,6 +53,7 @@
                     par       = mod.rd(params,'par',par);
                     key       = mod.rd(params,'key',key);
                     ui        = mod.rd(params,'ui',ui);
+                    debug     = mod.rd(params,'debug',debug);
                     
               });
               
@@ -68,9 +69,9 @@
         obj.init    = async function(){
         
               mod.initmod(obj);
-              
-              
-              
+                                                                                debug('init',obj.version);
+                                                                                
+                                                                                
         }//init
         
         
@@ -78,7 +79,7 @@
   
   
         obj.initdom   = async function(){
-        
+                                                                                debug('initdom');
               shadow    = host.shadowRoot;
               
               ui.initdom(shadow);
