@@ -93,7 +93,7 @@
   
         var df=true,did='github-fs-url';
         
-        var $,par,ui,debug
+        var $,par,ui,debug,load,save
         ;
         
         obj.initmod   = function(...list){
@@ -104,6 +104,8 @@
                     par       = mod.rd(params,'par',par);
                     ui        = mod.rd(params,'ui',ui);
                     debug     = mod.rd(params,'debug',debug);
+                    load      = mod.rd(params,'load',load);
+                    save      = mod.rd(params,'save',save);
                     
               });
               
