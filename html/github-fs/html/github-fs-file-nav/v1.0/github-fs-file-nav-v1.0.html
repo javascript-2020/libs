@@ -111,7 +111,7 @@
               var owner     = 'javascript-2020';
               var repo      = 'libs';
               var branch    = 'main';
-              var path      = '/';
+              var path      = filenav.path;
               
               var {list,error}    = await github.dir.list.full({token,owner,repo,branch,path});
               if(error){
@@ -137,10 +137,9 @@
                     }
                     
               });
-              
-              console.log('dirs',dirs);
-              console.log('files',files);
-              
+                                                                                //console.log('dirs',dirs);
+                                                                                //console.log('files',files);
+              filenav.display(path,dirs,files);
               
         }//update
         
