@@ -207,7 +207,7 @@
         ui.initdom    = function(shadow){
         
               var style2    = $(shadow,'style');
-              var list      = ['.icon','.field','.paste','.copy','.storage','input','input:not([type])','input[type=button]'];
+              var list      = ['.icon','.field',,'.field label','.paste','.copy','.storage','input','input:not([type])','input[type=button]'];
               $.stylesheet.copyrule(style,list,style2);
               
               $.all(shadow,'.paste').forEach(icon=>{
