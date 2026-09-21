@@ -1054,6 +1054,7 @@
                                         abs      += '/';
                                   }
                                   var size        = item.size;
+                                  var sha         = item.sha;
                                   
                                   
                                   var file        = {};
@@ -1065,6 +1066,7 @@
                                   file.rel        = path2;
                                   file.name       = name;
                                   file.size       = size;
+                                  file.sha        = sha;
                                   
                                   return file;
                                   
