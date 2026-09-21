@@ -74,6 +74,7 @@
   
   
         var rd    = {};
+        var wt    = {};
         
         
   //:
@@ -86,6 +87,7 @@
                                                                                 debug('init',obj.version);
               ui.rd.token   = rd.token;
               ui.rd.owner   = rd.owner;
+              ui.wt.owner   = wt.owner;
               
               
         }//init
@@ -147,6 +149,13 @@
         
               var owner   = $(shadow,'#owner').value;
               return owner;
+              
+        }//owner
+        
+        
+        wt.owner    = function(owner){
+        
+              $(shadow,'#owner').value    = owner;
               
         }//owner
         
