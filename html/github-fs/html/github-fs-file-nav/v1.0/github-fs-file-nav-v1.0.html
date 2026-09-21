@@ -119,7 +119,26 @@
                     log.error(error);
                     return;
               }
-              console.log(list);
+              var dirs    = [];
+              var files   = [];
+              
+              list.forEach(item=>{
+              
+                    if(!item.abs.startsWith(path))return;
+                    if(item.type=='file'){
+                          if(item.abs.indexOf('/')>path.length)return;
+                          files.push(item);
+                    }
+                    if(item.type=='dir'){
+                          if(item.abs.lastIndexOf('/')!=path.length)return;
+                          dirs.push(item);
+                    }
+                    
+              });
+              
+              console.log(dirs);
+              console.log(files);
+              
               
         }//update
         
