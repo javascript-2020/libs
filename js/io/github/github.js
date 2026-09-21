@@ -1048,8 +1048,11 @@
                                   var name        = item.path.slice(i+1);
                                   var i           = -name.length;
                                   var path2       = item.path.slice(len,i);
-                                  var abs         = '/'+item.path;
                                   var type        = item.type=='blob' ? 'file' : 'dir';
+                                  var abs         = '/'+item.path;
+                                  iftype=='dir'){
+                                        abs      += '/';
+                                  }
                                   var size        = item.size;
                                   
                                   
