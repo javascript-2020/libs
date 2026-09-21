@@ -123,6 +123,24 @@
   
   
         file.dblclick   = function(path,name){
+        
+              path   += name;
+              
+              var token     = ui.rd.token();
+              var owner     = 'javascript-2020';
+              var repo      = 'libs';
+              var branch    = 'main';
+              
+              var {blob,error}    = await github.file.load({token,owner,repo,branch,path});
+              iferror){
+                                                                                console.error(error);
+                    log.red(error);
+                    return;
+              }
+              
+              var txt   = await blob.text();
+              console.log(txt);
+              
         }//dblclick
         
         
