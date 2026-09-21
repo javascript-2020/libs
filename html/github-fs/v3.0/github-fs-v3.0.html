@@ -518,7 +518,7 @@
         }//save
         
         
-        save.ui   = function(repo,branch,path,){
+        save.ui   = async function(repo,branch,path,){
         
               var i           = path.lastIndexOf('/');
               var filename    = path.slice(i+1);
