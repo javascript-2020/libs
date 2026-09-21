@@ -133,6 +133,30 @@
   //:
   
   
+        file.add    = async function(path,name){
+        
+              path         += name;
+              var repo      = $(shadow,'#repo').value;
+              var branch    = $(shadow,'#branch').value;
+              var blob      = new Blob(['']);
+              
+              save.ui({repo,branch,path,blob});
+              
+        }//add
+        
+        
+        file.rem    = async function(){
+        }//rem
+        
+        
+        file.upload   = async function(){
+        }//upload
+        
+        
+        file.download   = async function(){
+        }//download
+        
+        
         file.dblclick   = async function(path,name){
         
               path   += name;
@@ -181,6 +205,18 @@
               filenav.display(path,dirs,files);
               
         }//read
+        
+        
+        dir.add = async function(){
+        }//add
+        
+        
+        dir.rem   = async function(){
+        }//rem
+        
+        
+        dir.clear   = async function(){
+        }//clear
         
         
         dir.dblclick    = function(path,name){
