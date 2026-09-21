@@ -152,6 +152,8 @@
         var github_url;
         var github_token;
         
+        var mode          = 'url';
+        
         var shadow;
         var style;
         
@@ -218,6 +220,8 @@
               $(shadow,'#tabs #url').onclick            = btn.tabs.url;
               $(shadow,'#tabs #filenav').onclick        = btn.tabs.filenav;
               
+              
+              $(shadow,'#token-toggle').onclick         = btn['token-toggle'];
               
         }//initdom
         
@@ -327,6 +331,14 @@
         }//initdom
         
         
+        ui.token.show   = ()=>{
+        }//show
+        
+        
+        ui.token.hide   = ()=>{
+        }//hide
+        
+        
   //:
   
   
@@ -358,6 +370,10 @@
               $(shadow,'#view github-fs-file-nav').style.display   = '';
               
         }//filenav
+        
+        
+        btn['token-toggle']   = e=>{
+        }//token-toggle
         
         
   //:
