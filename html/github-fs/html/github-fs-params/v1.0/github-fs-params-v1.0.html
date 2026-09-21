@@ -1,0 +1,175 @@
+
+
+
+<github-fs-params>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+  :host
+    {display:flex;flex-direction:column;gap:10px}
+    
+            </style>
+            
+            <section id=hdr>
+            
+                  <a href='https://github.com/settings/personal-access-tokens'>
+                        github.com/settings/personal-access-tokens
+                  </a>
+                  
+            </section>
+            
+            <section class=field>
+                  <label>
+                        token
+                  </label>
+                  <img class='paste icon'>
+                  <img class='storage icon'>
+                  <input id=token autocomplete=off spellcheck=false>
+                  <img class='copy icon'>
+            </section>
+            
+            <section class=field>
+                  <label>
+                        owner
+                  </label>
+                  <img class='paste icon'>
+                  <img class='storage icon'>
+                  <input id=owner autocomplete=off spellcheck=false>
+                  <img class='copy icon'>
+            </section>
+            
+      </template>
+      
+      <script>
+      
+(function({mod,host}){
+
+  var obj   = {
+        version   : 'v1.0',
+  };
+  
+        var df=true,did='github-fs-params';
+        
+        var $,par,key,ui,debug
+        ;
+        
+        obj.initmod   = function(...list){
+        
+              list.forEach(params=>{
+              
+                    $         = mod.rd(params,'$',$);
+                    par       = mod.rd(params,'par',par);
+                    key       = mod.rd(params,'key',key);
+                    ui        = mod.rd(params,'ui',ui);
+                    debug     = mod.rd(params,'debug',debug);
+                    
+              });
+              
+        }//initmod
+        
+        
+  //:
+  
+  
+        var rd    = {};
+        var wt    = {};
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+        
+              mod.initmod(obj);
+                                                                                debug=eval(debug.mod);
+                                                                                debug('init',obj.version);
+              ui.rd.token   = rd.token;
+              ui.rd.owner   = rd.owner;
+              ui.wt.owner   = wt.owner;
+              
+              
+        }//init
+        
+        
+  //:
+  
+  
+        obj.initdom   = async function(){
+                                                                                debug('initdom');
+              shadow    = host.shadowRoot;
+              
+              ui.initdom(shadow);
+              
+              
+              var root2   = $(shadow,'#token').parentNode;
+              $(root2,'.paste').onclick   = async e=>{
+              
+                                                  var txt       = await navigator.clipboard.readText();
+                                                  var par       = icon.parentNode;
+                                                  var input     = $(par,'input:not([type])');
+                                                  input.value   = txt;
+                                                  
+                                                  if(e.ctrlKey){
+                                                        btn.parse();
+                                                        btn.load(e);
+                                                  }
+                                                  
+                                            };
+                                            
+              var token;
+              try{
+              
+                    token   = window.localStorage[key+'token'];
+                    
+              }//try
+              catch(err2){}
+              if(token){
+                    $(shadow,'#token').value    = token;
+              }
+              
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+        rd.token    = function(){
+        
+              var token   = $(shadow,'#token').value;
+              return token;
+              
+        }//token
+        
+        
+        rd.owner    = function(){
+        
+              var owner   = $(shadow,'#owner').value;
+              return owner;
+              
+        }//owner
+        
+        
+        wt.owner    = function(owner){
+        
+              $(shadow,'#owner').value    = owner;
+              
+        }//owner
+        
+        
+  //:
+  
+  
+  return obj;
+  
+//github-fs-params
+})
+
+      </script>
+      
+</github-fs-params>
+
+
