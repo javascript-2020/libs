@@ -132,7 +132,7 @@
               var branch    = 'main';
               
               var {blob,error}    = await github.file.load({token,owner,repo,branch,path});
-              iferror){
+              if(error){
                                                                                 console.error(error);
                     log.red(error);
                     return;
