@@ -46,16 +46,6 @@
             
             <section class=field>
                   <label>
-                        owner
-                  </label>
-                  <img class='copy icon'>
-                  <img class='paste icon'>
-                  <input id=owner autocomplete=off spellcheck=false>
-            </section>
-            
-            
-            <section class=field>
-                  <label>
                         repo
                   </label>
                   <img class='copy icon'>
@@ -196,11 +186,10 @@
               
               var {owner,repo,branch,path}    = github.parse(url);
               
-              write(owner,repo,branch,path);
-              
-              if(e.ctrlKey){
-                    btn.load(e);
-              }
+              ui.wt.owner(owner);
+              $(shadow,'#repo').value     = repo;
+              $(shadow,'#branch').value   = branch;
+              $(shadow,'#path').value     = path;
               
         }//parse
         
@@ -220,33 +209,11 @@
                     api   = false;
               }
               
-              var {token,owner,repo,branch,path}    = read();
+              var repo      = $(shadow,'#repo').value;
+              var branch    = $(shadow,'#branch').value;
+              var path      = $(shadow,'#path').value;
               
-              var i           = path.lastIndexOf('/');
-              var filename    = path.slice(i+1);
-              
-              
-              
-              var file        = {};
-              file.type       = 'github';
-              file.filename   = filename;
-              file.title      = repo+' : '+path;
-              file.icon       = icon.src;
-              
-              file.owner      = owner;
-              file.repo       = repo;
-              file.branch     = branch;
-              file.path       = path;
-              
-              
-              
-              var result      = await load(file,api);
-              if(result.error){
-                    return;
-              }
-              var blob    = result.ok;
-              
-              obj.load.complete(file,blob);
+              load.ui(repo,branch,path);
               
         }//load
         
@@ -260,49 +227,9 @@
         
         btn.save    = async function(){
         
-              var {token,owner,repo,branch,path}    = read();
+              var {repo,branch,path}    = read();
               
-              var i               = path.lastIndexOf('/');
-              var filename        = path.slice(i+1);
-              
-/*
-              var file            = filemod.new({
-              
-                    filetype    : 'github',
-                    abs         : path,
-                    name        : filename,
-                    
-                    kind        : 'file',
-                    size        : null,
-                    ctime       : null,
-                    mtime       : null,
-                    atime       : null,
-                    
-                    title       : repo+' : '+path,
-                    icon        : icon.src
-                    
-              });
-*/
-
-
-              var file            = {};
-              file.type           = 'github';
-              file.filename       = filename;
-              file.title          = repo+' : '+path;
-              file.icon           = icon.src;
-              
-              file.owner          = owner;
-              file.repo           = repo;
-              file.branch         = branch;
-              file.path           = path;
-              file.abs            = path;
-              
-              var blob            = await source(file);
-              
-              var result          = await save(file,blob);
-              if(result.error){
-                    return;
-              }
+              save.ui(repo,branch,path);
               
         }//save
         
@@ -312,7 +239,6 @@
               var {token,owner,repo,branch,path}    = read();
                                                                                 console.log('btn.backup');
                                                                                 console.log(token,owner,repo,branch,path);
-                                                                                
               github.backup(token,owner,repo,branch,path);
               
         }//backup
