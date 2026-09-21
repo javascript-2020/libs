@@ -126,7 +126,8 @@
               
                     if(!item.abs.startsWith(path))return;
                     if(item.type=='file'){
-                          if(item.abs.indexOf('/')>path.length)return;
+                          var f   = item.abs.slice(path.length);
+                          if(f.indexOf('/')!=-1)return;
                           files.push(item);
                     }
                     if(item.type=='dir'){
