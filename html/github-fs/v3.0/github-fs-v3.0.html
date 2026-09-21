@@ -151,6 +151,8 @@
               
               shadow                          = host.shadowRoot;
               style                           = $(shadow,'style');
+              var style2                      = $.stylesheet.find.css('.icon','style');
+              $.stylesheet.copyrule(style2,'.icon',style);
               
               await libs();
               
