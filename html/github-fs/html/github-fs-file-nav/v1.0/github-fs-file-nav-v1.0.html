@@ -23,6 +23,15 @@
                   <img class='copy icon'>
             </section>
             
+            <section id=branch-root class=field>
+                  <label>
+                        branch
+                  </label>
+                  <img class='paste icon'>
+                  <input id=branch value=main>
+                  <img class='copy icon'>
+            </section>
+            
             <file-nav component></file-nav>
             
             <section id=btns>
@@ -127,9 +136,9 @@
               path   += name;
               
               var token     = ui.rd.token();
-              var owner     = 'javascript-2020';
-              var repo      = 'libs';
-              var branch    = 'main';
+              var owner     = ui.rd.owner();
+              var repo      = $(shadow,'#repo').value;
+              var branch    = $(shadow,'#branch').value;
               
               var {blob,error}    = await github.file.load({token,owner,repo,branch,path});
               if(error){
