@@ -53,7 +53,7 @@
       
       <script>
       
-(function new_file({mod,dom,host}){
+(function new_file({mod,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -67,9 +67,13 @@
         var $
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...list){
         
-              $   = params.$;
+              list.forEach(params=>{
+              
+                    $   = mod.rd(params,'$',$);
+                    
+              });
               
         }//initmod
         
@@ -94,6 +98,8 @@
   
   
         obj.init    = function(){
+        
+              mod.initmod(obj);
                                                                                 debug('init',obj.version);
         }//init
         
