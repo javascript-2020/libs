@@ -148,9 +148,10 @@
   
   
         obj.init    = async function(){
-                                                                                debug('init',obj.version);
+        
               mod.initmod(obj);
-              
+                                                                                debug('init',obj.version);
+                                                                                
               shadow                          = host.shadowRoot;
               style                           = $(shadow,'style');
               //var style2                      = $.stylesheet.find.css('.icon','style');
