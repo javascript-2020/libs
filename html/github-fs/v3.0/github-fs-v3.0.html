@@ -98,7 +98,7 @@
                         </div>
                   </div>
                   
-                  <github-fs-token v1.0 component=parent></github-fs-token>
+                  <github-fs-params v1.0 component=parent></github-fs-params>
                   
                   <div class=hr>
                         <img id=token-toggle>
@@ -152,7 +152,7 @@
   
         var github;
         var github_url;
-        var github_token;
+        var github_params;
         
         var mode          = 'url';
         
@@ -192,10 +192,9 @@
               mod.base.add({par:obj,ui,github,load,save});
               
               github_url          = mod['github-fs-url'];
-              github_token        = mod['github-fs-token'];
+              github_params       = mod['github-fs-params'];
               
               await mod.auto();
-              
               
         }//init
         
@@ -229,6 +228,7 @@
               
               
               $(shadow,'#token-toggle').onclick         = btn['token-toggle'];
+              
               
         }//initdom
         
