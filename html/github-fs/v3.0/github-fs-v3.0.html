@@ -30,10 +30,17 @@
     {border-color:gray;background:lightgray}
     
     
+  #token-toggle
+    {
+      content:url();
+    }
+    
   .field
     {display:flex;align-items:center;gap:5px}
   .field label
     {display:inline-block;width:100px;text-align:right}
+  .field input:not([type])
+    {flex:1}
     
   .paste
     {margin-right:5px;padding:2px;
@@ -53,6 +60,8 @@
     {flex:1}
     
     
+  .hr
+    {border-top:1px solid lightgray;margin:0px 20px}
   .icon
     {border:1px solid gray;border-radius:3px;box-sizing:border-box;width:32px;height:32px;cursor:pointer}
     
@@ -88,6 +97,10 @@
                   </div>
                   
                   <github-fs-token v1.0 component=parent></github-fs-token>
+                  
+                  <div class=hr>
+                        <img id=token-toggle>
+                  </div>
                   
                   <div id=view>
                   
@@ -213,7 +226,7 @@
               var style2    = $(shadow,'style');
               var list      = [
                     '.icon',
-                    '.field','.field label',
+                    '.field','.field label','.field input:not([type])',
                     '.paste','.copy','.storage',
                     'input','input:not([type])','input[type=button]'
               ];
