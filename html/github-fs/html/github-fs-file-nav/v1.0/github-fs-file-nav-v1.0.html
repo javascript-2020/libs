@@ -113,7 +113,7 @@
               var branch    = 'main';
               var path      = '/';
               
-              var {list,error}    = await github.dir.list({token,owner,repo,branch,path});
+              var {list,error}    = await github.dir.list.full({token,owner,repo,branch,path});
               if(error){
                                                                                 console.error(error);
                     log.error(error);
