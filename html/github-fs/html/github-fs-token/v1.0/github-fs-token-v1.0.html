@@ -66,6 +66,9 @@
   //:
   
   
+        var rd    = {};
+        
+        
   //:
   
   
@@ -74,8 +77,9 @@
               mod.initmod(obj);
                                                                                 debug=eval(debug.mod);
                                                                                 debug('init',obj.version);
-                                                                                
-                                                                                
+              ui.rd.token   = rd.token;
+              
+              
         }//init
         
         
@@ -123,7 +127,15 @@
   //:
   
   
-  
+        rd.token    = function(){
+        
+              var token   = $(shadow,'#token').value;
+              return token;
+              
+        }//token
+        
+        
+        
   //:
   
   
