@@ -130,7 +130,7 @@
   
         var df=true,did='github-fs';
         
-        var ext,$,menu,focus,source,log,debug
+        var ext,$,menu,focus,source,log,debug,ls
         ;
         
         obj.initmod   = function(...list){
@@ -144,6 +144,7 @@
                     debug         = mod.rd(params,'debug',debug);
                     focus         = mod.rd(params,'focus',focus);
                     source        = mod.rd(params,'source',source);
+                    ls            = mod.rd(params,'ls',ls);
                     
               });
               
