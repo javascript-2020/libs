@@ -66,11 +66,12 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
                                                                                 debug=eval(debug.mod);
                                                                                 debug('init',obj.version);
-              mod.initmod(obj);
-              
-              
+                                                                                
+                                                                                
               filenav   = mod['file-nav'];
               
               await mod.auto();
