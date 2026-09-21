@@ -85,6 +85,7 @@
                                                                                 debug=eval(debug.mod);
                                                                                 debug('init',obj.version);
               ui.rd.token   = rd.token;
+              ui.rd.owner   = rd.owner;
               
               
         }//init
@@ -141,6 +142,13 @@
               
         }//token
         
+        
+        rd.owner    = function(){
+        
+              var owner   = $(shadow,'#owner').value;
+              return owner;
+              
+        }//owner
         
         
   //:
