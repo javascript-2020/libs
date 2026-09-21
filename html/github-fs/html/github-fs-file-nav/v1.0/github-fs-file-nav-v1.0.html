@@ -112,11 +112,26 @@
   
         btn.update    = async ()=>{
         
+              var path      = filenav.path;
+              
+              dir.read(path);
+              
+        }//update
+        
+        
+  //:
+  
+  
+        file.dblclick   = function(path,name){
+        }//dblclick
+        
+        
+        dir.read    = async function(path){
+                                                                                debug('dir.read',path);
               var token     = ui.rd.token();
               var owner     = 'javascript-2020';
               var repo      = 'libs';
               var branch    = 'main';
-              var path      = filenav.path;
               
               var {list,error}    = await github.dir.list.full({token,owner,repo,branch,path});
               if(error){
@@ -146,12 +161,17 @@
                                                                                 //console.log('files',files);
               filenav.display(path,dirs,files);
               
-        }//update
+        }//read
         
         
-  //:
-  
-  
+        dir.dblclick    = function(path,name){
+                                                                                debug('dir.dblclick',path,name);
+              dir.read(path+name);
+              
+        }//dblclick
+        
+        
+        
   return obj;
   
 //github-fs-file-nav
