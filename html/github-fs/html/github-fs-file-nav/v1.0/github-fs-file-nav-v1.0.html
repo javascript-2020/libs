@@ -122,6 +122,9 @@
               var dirs    = [];
               var files   = [];
               
+              console.log('list',list);
+              return;
+              
               list.forEach(item=>{
               
                     if(!item.abs.startsWith(path))return;
@@ -136,8 +139,8 @@
                     
               });
               
-              console.log(dirs);
-              console.log(files);
+              console.log('dirs',dirs);
+              console.log('files',files);
               
               
         }//update
