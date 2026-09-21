@@ -50,7 +50,7 @@
   
         var df=true,did='github-fs-file-nav';
         
-        var $,ui,par,debug,github
+        var $,ui,par,debug,github,load,save
         ;
         
         obj.initmod   = function(...list){
@@ -62,6 +62,8 @@
                     par         = mod.rd(params,'par',par);
                     debug       = mod.rd(params,'debug',debug);
                     github      = mod.rd(params,'github',github);
+                    load        = mod.rd(params,'load',load);
+                    save        = mod.rd(params,'save',save);
                     
               });
               
@@ -135,20 +137,10 @@
         
               path   += name;
               
-              var token     = ui.rd.token();
-              var owner     = ui.rd.owner();
               var repo      = $(shadow,'#repo').value;
               var branch    = $(shadow,'#branch').value;
               
-              var {blob,error}    = await github.file.load({token,owner,repo,branch,path});
-              if(error){
-                                                                                console.error(error);
-                    log.red(error);
-                    return;
-              }
-              
-              var txt   = await blob.text();
-              console.log(txt);
+              load.ui(repo,branch,path);
               
         }//dblclick
         
