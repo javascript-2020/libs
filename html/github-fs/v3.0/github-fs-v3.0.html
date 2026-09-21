@@ -465,11 +465,10 @@
   //:
   
   
-        obj.load    = function(file,api){return load(file,api)}
+        obj.load    = function(file,token){return load(file,token)}
         
-        async function load(file,api){
+        async function load(file,token){
         
-              var token                       = ui.rd.token();
               var {owner,repo,branch,path}    = file;
               
               var {blob,error}    = await github.load({token,owner,repo,branch,path});
@@ -477,14 +476,16 @@
                     log.error(error);
                     return;
               }
-              
               obj.load.complete(file,blob);
               
         }//load
         
         
-        load.ui   = function(repo,branch,path){
+        load.ui   = function({token,owner,repo,branch,path}){
         
+              token         ||= ui.rd.token();
+              owner         ||= ui.rd.owner();
+              
               var i           = path.lastIndexOf('/');
               var filename    = path.slice(i+1);
               
@@ -494,12 +495,12 @@
               file.title      = repo+' : '+path;
               file.icon       = icon.src;
               
-              file.owner      = ui.rd.owner();
+              file.owner      = owner;
               file.repo       = repo;
               file.branch     = branch;
               file.path       = path;
               
-              load(file);
+              load(file,token);
               
         }//ui
         
@@ -516,13 +517,12 @@
                     log.error(error);
                     return;
               }
-              
               obj.save.complete(file);
               
         }//save
         
         
-        save.ui   = async function(repo,branch,path,){
+        save.ui   = async function({repo,branch,path}){
         
               var i           = path.lastIndexOf('/');
               var filename    = path.slice(i+1);
