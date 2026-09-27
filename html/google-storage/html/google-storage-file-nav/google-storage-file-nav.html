@@ -265,10 +265,11 @@
         
         file.dblclick   = function(path,filename){
                                                                                 debug('file.dblclick',path,filename);
+              var token       = par.rd.token();
               var bucket      = $(shadow,'#bucket').value;
               path           += filename;
               
-              par.load.ui(bucket,path);
+              par.load.ui(token,bucket,path);
               
         }//dblclick
         
