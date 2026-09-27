@@ -681,6 +681,16 @@
                     }else{
                           path      = mod.rd.path.cursor();
                     }
+                    var cur     = gs_filenav.filenav.cur;
+                    var type    = cur.type;
+                    if(type){
+                          if(type=='file'){
+                                path   += cur.name;
+                          }
+                          if(type=='dir'){
+                                path   += cur.name+'/';
+                          }
+                    }
               }
               
               return {token,bucket,path};
