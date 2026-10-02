@@ -111,6 +111,13 @@
     {display:none}
     
     
+.ace_non-ascii-marker {
+    position: absolute;
+    background-color: rgba(255, 170, 0, 0.3); /* Soft orange/yellow tint */
+    border-bottom: 1px dotted #ff8800;
+}
+
+
             </style>
             
             <div id=root part=root>
@@ -123,6 +130,8 @@
                         
                               <div id=trim class=menu-opt>trim</div>
                               <div id=wordwrap class=menu-opt>word wrap</div>
+                              <div id=ascii-chk class=menu-opt>ascii check</div>
+                              <div id=sample class=menu-opt>sample text</div>
                               
                               <div id=sha256-root>
                                     <div id=sha256 class=menu-opt>
@@ -304,7 +313,7 @@
         
               mod.initmod(obj);
                                                                                 debug('init',obj.version);
-              var dom_config    = mod.rd.config(hhost);
+              var dom_config    = mod.rd.config(host);
               config            = Object.assign(config,dom_config);
                                                                                 debug('config',config);
                                                                                 
@@ -1128,11 +1137,178 @@
         }//sha256
         
         
+        click['ascii-chk']    = function(){
+        
+              var txt     = editor.getValue();
+              var list    = ascii_chk(txt);
+              console.log(list);
+              
+        }//ascii-chk
+        
+        
+        click.sample    = function(){
+        
+              var txt   = `
+                    const user = "admin"; // Standard ASCII
+                    const invisibleVar = "l\u200Bogin"; // Contains a Zero-Width Space (\u200B)
+                    const brokenDash = "grid\u2014template"; // Contains an Em-Dash (\u2014)
+                    const ghostBreak = "soft\u00ADhyphen"; // Contains a Soft Hyphen (\u00AD)
+                    const complexEmoji = "family: \u{1F468}\u200D\u{1F469}\u200D\u{1F467}"; // ZWJ (\u200D) joining family emojis
+                    const bidiTrick = "file\u202Egnp.exe"; // Right-to-Left override trick (\u202E)
+              `;
+              editor.setValue(txt,-1);
+              
+        }//sample
+        
+        
+        function ascii(text){
+                                                                                // 1-indexed line number
+                                                                                // 1-indexed column/character position
+            var findings    = [];
+            var lines       = text.split(/\r?\n/);
+            var n           = lines.length;
+            for(var i=0;i<n;i++){
+            
+                  var line          = lines[i];
+                  var lineNumber    = i+1;
+                  
+                  var column = 1;
+                  for(var char of line){
+                  
+                        var codePoint   = char.codePointAt(0);
+                        
+                        if(codePoint>127){
+                              var hex   = '0x'+codePoint.toString(16).toUpperCase();
+                              findings.push({char,codePoint,hex,line:lineNumber,column});
+                        }
+                        
+                        column++;
+                        
+                  }//for
+                  
+            }//for
+                                                                                console.log(findings);
+            return findings;
+            
+        }//ascii
+        
+        
         function int(str){return (/^\d+$/.test(str)) ? Number(str) : str}
         
+  //:
+  
+  
+/*
+const Range = ace.require('ace/range').Range;
+
+// Keep track of active marker IDs so we can clear them later
+let markerIds = [];
+
+function highlightNonAsciiInEditor(editor) {
+    const session = editor.getSession();
+    
+    // 1. Clear previous markers
+    markerIds.forEach(id => session.removeMarker(id));
+    markerIds = [];
+    
+    const text = session.getValue();
+    const findings = findNonAsciiCharacters(text); // From our previous scanner
+    
+    // 2. Loop through findings and add a marker for each character
+    findings.forEach(item => {
+        // Ace rows are 0-indexed, but our scanner reported 1-indexed lines
+        const row = item.line - 1;
+        // Columns are 1-indexed; convert to 0-indexed start and end column (+1 for single char width)
+        const startCol = item.column - 1;
+        const endCol = item.column;
         
+        const range = new Range(row, startCol, row, endCol);
         
+        // addMarker(range, className, type, inFront)
+        // type 'text' highlights the exact text range without spanning the whole line
+        const markerId = session.addMarker(range, "ace_non-ascii-marker", "text", false);
         
+        markerIds.push(markerId);
+    });
+    
+    console.log(`Highlighted ${findings.length} non-ASCII characters.`);
+}
+
+// --- Example Trigger ---
+// Call this whenever the document changes or on demand:
+// highlightNonAsciiInEditor(editor);
+
+
+
+
+function updateGutterAnnotations(editor, findings) {
+    const session = editor.getSession();
+    
+    // Group findings by line number to avoid duplicate icons on the same line
+    const linesWithNonAscii = new Set(findings.map(f => f.line));
+    
+    const annotations = [];
+    linesWithNonAscii.forEach(lineNum => {
+        // Ace rows are 0-indexed, so we subtract 1 from lineNum
+        annotations.push({
+            row: lineNum - 1,
+            text: "Contains non-ASCII character(s)",
+            type: "warning" // Options: "error", "warning", "info"
+        });
+    });
+    
+    // Apply annotations to the session
+    session.setAnnotations(annotations);
+}
+
+
+
+
+
+// Import Ace's built-in Tooltip class
+const Tooltip = ace.require("ace/tooltip").Tooltip;
+const tooltip = new Tooltip(document.body);
+
+let currentTooltipText = null;
+
+function setupNonAsciiTooltips(editor, findings) {
+    const renderer = editor.renderer;
+    
+    // Listen to mouse movement over the editor content area
+    editor.on("mousemove", (e) => {
+        const cursor = e.getDocumentPosition(); // Gets row and column from mouse coords
+        
+        // Find if our mouse is currently hovering over a known non-ASCII finding
+        const match = findings.find(f => (f.line - 1) === cursor.row && (f.column - 1) === cursor.column);
+        
+        if (match) {
+            const text = `Non-ASCII: "${match.char}" (Code: ${match.codePoint}, Hex: ${match.hex})`;
+            
+            if (currentTooltipText !== text) {
+                tooltip.setText(text);
+                tooltip.show(e.getDocumentPosition()); // Or use screen coordinates
+                currentTooltipText = text;
+            }
+        } else {
+            if (currentTooltipText !== null) {
+                tooltip.hide();
+                currentTooltipText = null;
+            }
+        }
+    });
+    
+    // Hide tooltip when mouse leaves the editor
+    editor.on("mouseout", () => {
+        tooltip.hide();
+        currentTooltipText = null;
+    });
+}
+
+
+
+*/
+
+
   //:
   
   
