@@ -1,6 +1,6 @@
 
 
-<web-editor v2.0>
+<web-editor>
 
       <template shadowrootmode=open>
       
@@ -111,6 +111,12 @@
     {display:none}
     
     
+.ace_non-ascii-marker {
+    position: absolute;
+    background-color: rgba(255, 170, 0, 0.3); /* Soft orange/yellow tint */
+    border-bottom: 1px dotted #ff8800;
+}
+
             </style>
             
             <div id=root part=root>
@@ -123,6 +129,11 @@
                         
                               <div id=trim class=menu-opt>trim</div>
                               <div id=wordwrap class=menu-opt>word wrap</div>
+                              <div style='display:flex;gap:10px;border:1px solid lightgray;padding:5px 10px'>
+                                    <div id=ascii-chk class=menu-opt style='flex:1;margin:0'>ascii check</div>
+                                    <div id=ascii-chk-clear class=menu-opt style='flex:1;margin:0'>clear</div>
+                              </div>
+                              <div id=sample class=menu-opt>sample text</div>
                               
                               <div id=sha256-root>
                                     <div id=sha256 class=menu-opt>
@@ -227,6 +238,7 @@
         var editor;
         var modelist;
         
+        var Range;
         
         var src;
         
@@ -245,7 +257,7 @@
         var deficon;
         
         
-        var target      = dom;
+        var target      = host;
         
         var def         = {};
         def.txt         = '';
@@ -304,7 +316,7 @@
         
               mod.initmod(obj);
                                                                                 debug('init',obj.version);
-              var dom_config    = mod.rd.config(dom);
+              var dom_config    = mod.rd.config(host);
               config            = Object.assign(config,dom_config);
                                                                                 debug('config',config);
                                                                                 
@@ -330,6 +342,7 @@
                     rd.attr.src(),
                     libs(),
               ]);
+              
               
               
         }//init
@@ -370,6 +383,8 @@
               
                     ace       = window.ace;
                     obj.ace   = ace;
+                    
+                    Range     = ace.require('ace/range').Range;
                     
                     resolve(ace);
                     
@@ -608,6 +623,7 @@
               }
               
               
+              
               editor.resize();
               update();
               
@@ -720,7 +736,7 @@
               update();
               
               if(initial){
-                    initial=false;
+                    initial   = false;
                     return;
               }
               
@@ -943,6 +959,8 @@
         
         function set(txt,opts){
         
+              initial   = opts.initial;
+              
               editor.setValue(txt,-1);
               update();
               filename.save.hide();
@@ -1126,11 +1144,303 @@
         }//sha256
         
         
+        click['ascii-chk']    = function(){
+        
+              var txt     = editor.getValue();
+              var list    = ascii_chk(txt);
+              
+              highlight(list);
+              gutter(list);
+              tooltip(list);
+              
+              console.log(list);
+              
+        }//ascii-chk
+        
+        
+        click['ascii-chk-clear']    = function(){
+        
+              highlight.clear();
+              gutter.clear();
+              tooltip.clear();
+              
+        }//ascii-chk-clear
+        
+        
+        click.sample    = function(){
+        
+              var txt   = `
+                    const user = "admin"; // Standard ASCII
+                    const invisibleVar = "l\u200Bogin"; // Contains a Zero-Width Space (\u200B)
+                    const brokenDash = "grid\u2014template"; // Contains an Em-Dash (\u2014)
+                    const ghostBreak = "soft\u00ADhyphen"; // Contains a Soft Hyphen (\u00AD)
+                    const complexEmoji = "family: \u{1F468}\u200D\u{1F469}\u200D\u{1F467}"; // ZWJ (\u200D) joining family emojis
+                    const bidiTrick = "file\u202Egnp.exe"; // Right-to-Left override trick (\u202E)
+                    const greeting = "Hello";
+                    const icon = "\u{1F680}"; // Rocket emoji
+                    const fire = "\u{1F525}"; // Fire emoji
+                    const world = "\u{1F30D}"; // Globe emoji
+                    const cafe = "Caf\u00E9 \u00A9 2026"; // Accent & copyright symbol
+                    const nbsp = "test\u00A0string"; // Non-breaking space
+              `;
+              editor.setValue(txt,-1);
+              
+        }//sample
+        
+        
+        function ascii_chk(text){
+                                                                                // 1-indexed line number
+                                                                                // 1-indexed column/character position
+            var findings    = [];
+            var lines       = text.split(/\r?\n/);
+            var n           = lines.length;
+            for(var i=0;i<n;i++){
+            
+                  var line          = lines[i];
+                  var lineNumber    = i+1;
+                  
+                  var column = 1;
+                  for(var char of line){
+                  
+                        var codePoint   = char.codePointAt(0);
+                        
+                        if(codePoint>127){
+                              var hex   = '0x'+codePoint.toString(16).toUpperCase();
+                              findings.push({char,codePoint,hex,line:lineNumber,column});
+                        }
+                        
+                        column++;
+                        
+                  }//for
+                  
+            }//for
+                                                                                console.log(findings);
+            return findings;
+            
+        }//ascii
+        
+        
         function int(str){return (/^\d+$/.test(str)) ? Number(str) : str}
         
+  //:
+  
+  
+{
+
+let markerIds = [];
+
+function highlight(findings){
+
+    var session   = editor.getSession();
+    
+    // 1. Clear previous markers
+    markerIds.forEach(id => session.removeMarker(id));
+    markerIds = [];
+    
+    
+    // 2. Loop through findings and add a marker for each character
+    findings.forEach(item => {
+        // Ace rows are 0-indexed, but our scanner reported 1-indexed lines
+        const row = item.line - 1;
+        // Columns are 1-indexed; convert to 0-indexed start and end column (+1 for single char width)
+        const startCol = item.column - 1;
+        const endCol = item.column;
         
+        const range = new Range(row, startCol, row, endCol);
         
+        // addMarker(range, className, type, inFront)
+        // type 'text' highlights the exact text range without spanning the whole line
+        const markerId = session.addMarker(range, "ace_non-ascii-marker", "text", false);
         
+        markerIds.push(markerId);
+    });
+    
+    console.log(`Highlighted ${findings.length} non-ASCII characters.`);
+}
+highlight.clear   = function(){
+                                                                                debug('highlight.clear');
+      const session = editor.getSession();
+      markerIds.forEach(id => session.removeMarker(id));
+      
+}//clear
+
+}
+
+
+
+
+
+function gutter(findings) {
+
+    const session = editor.getSession();
+    
+    // Group findings by line number to avoid duplicate icons on the same line
+    const linesWithNonAscii = new Set(findings.map(f => f.line));
+    
+    const annotations = [];
+    linesWithNonAscii.forEach(lineNum => {
+        // Ace rows are 0-indexed, so we subtract 1 from lineNum
+        annotations.push({
+            row: lineNum - 1,
+            text: "Contains non-ASCII character(s)",
+            type: "warning" // Options: "error", "warning", "info"
+        });
+    });
+    
+    // Apply annotations to the session
+    session.setAnnotations(annotations);
+    
+}
+
+gutter.clear=function() {
+    const session = editor.getSession();
+    
+    // Passing an empty array wipes out all gutter annotations across the session
+    session.setAnnotations([]);
+}
+
+
+
+
+
+/*
+let currentTooltipText = null;
+
+function set_tooltip(findings) {
+
+    // Listen to mouse movement over the editor content area
+    editor.on("mousemove", (e) => {
+        const cursor = e.getDocumentPosition();
+        const match = findings.find(f => (f.line - 1) === cursor.row && (f.column - 1) === cursor.column);
+        console.log(cursor,match);
+        if (match) {
+            const text = `Non-ASCII: "${match.char}" (Code: ${match.codePoint}, Hex: ${match.hex})`;
+            
+            if (currentTooltipText !== text) {
+                const clientX = e.domEvent ? e.domEvent.clientX : 0;
+                const clientY = e.domEvent ? e.domEvent.clientY : 0;
+                
+                // Ace Tooltip show signature: show(text, x, y)
+                // Add a small pixel offset so it doesn't block the cursor directly
+                tooltip.show(text, clientX + 12, clientY + 15);
+                
+                //tooltip.setText(text);
+                //tooltip.show(e.getDocumentPosition());
+                currentTooltipText = text;
+            }
+        } else {
+            if (currentTooltipText !== null) {
+                tooltip.hide(); // Hides the tooltip element
+                currentTooltipText = null;
+            }
+        }
+    });
+    
+    editor.on("mouseout", () => {
+        tooltip.hide();
+        currentTooltipText = null;
+    });
+}
+
+// How to completely remove/destroy the tooltip instance when tearing down the editor:
+set_tooltip.clear   = function() {
+    if (tooltip && typeof tooltip.destroy === "function") {
+        console.log('destroy');
+        tooltip.destroy(); // Removes the DOM element entirely
+    }
+}
+
+*/
+
+var docTooltip;
+
+function tooltip(findings){
+
+// 1. Require HoverTooltip from Ace
+const HoverTooltip = ace.require("ace/tooltip").HoverTooltip;
+docTooltip = new HoverTooltip();
+console.log(docTooltip);
+
+// 2. Create a persistent container node for the tooltip content
+const hoverNode = document.createElement('div');
+hoverNode.style.padding = "10px";
+hoverNode.style.background = "white";
+hoverNode.style.color = "black";
+hoverNode.style.borderRadius = "4px";
+//hoverNode.style.fontSize = "12px";
+
+// 3. Set up the data provider callback
+docTooltip.setDataProvider(function (e, editor) {
+    const session = editor.session;
+    const docPos = e.getDocumentPosition(); // { row, column } (0-indexed)
+    
+    // Check if the user is hovering over a character that matches one of your findings
+    // (Note: findings rows/cols are 1-indexed based on your earlier mapping, so we add 1)
+    const match = findings.find(f =>
+        (f.line - 1) === docPos.row && (f.column - 1) === docPos.column
+    );
+    
+    if (!match) {
+        return null; // Return null to prevent showing a tooltip if nothing matches
+    }
+    
+    // Populate the tooltip content with your finding details
+    hoverNode.innerHTML = `
+        <strong>Non-ASCII Character Found:</strong><br/>
+        Char: "${match.char}" | Code: ${match.codePoint} | Hex: ${match.hex}
+    `;
+    
+    // Get the character range at the hovered position to anchor the tooltip
+    const range = session.getDocumentRangeOverlap ?
+        new (ace.require("ace/range").Range)(docPos.row, docPos.column, docPos.row, docPos.column + 1) :
+        session.getWordRange(docPos.row, docPos.column);
+        
+    // Show the tooltip anchored to the character range
+    docTooltip.showForRange(editor, range, hoverNode, e);
+});
+
+// 4. Attach the tooltip provider to your editor instance
+docTooltip.addToEditor(editor);
+
+}//test
+
+
+
+tooltip.clear   = function(){
+    if (docTooltip) {
+        // Removes the tooltip bindings from the editor instance
+        if (typeof docTooltip.destroy === "function") {
+          console.log('destroy');
+            docTooltip.destroy();
+        }
+        if (typeof docTooltip.removeFromEditor === "function") {
+          console.log('removefromeditor');
+            docTooltip.removeFromEditor(editor);
+        }
+    }
+    
+    
+    // 1. If it was added via addToEditor, you can remove it or clear its data provider
+    if (docTooltip) {
+        // Clear the data provider so it stops firing callbacks immediately
+        docTooltip.setDataProvider(null);
+        
+        // 2. If it's attached to the editor's listeners, remove the mouse handler binding
+        if (typeof docTooltip.removeFromEditor === "function") {
+          console.log(123);
+            docTooltip.removeFromEditor(editor);
+        } else {
+            // Manual fallback: detach from editor's event bus if it registered events
+            editor.off("mousemove", docTooltip.onMouseMove); // internal safety fallback
+        }
+    }
+}
+
+
+
+
+
+
   //:
   
   
