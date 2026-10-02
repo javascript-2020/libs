@@ -1342,7 +1342,7 @@ function set_tooltip(findings) {
 }
 
 // How to completely remove/destroy the tooltip instance when tearing down the editor:
-function set_tooltip.clear() {
+set_tooltip.clear   = function() {
     if (tooltip && typeof tooltip.destroy === "function") {
         console.log('destroy');
         tooltip.destroy(); // Removes the DOM element entirely
