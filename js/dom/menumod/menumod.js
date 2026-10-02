@@ -440,7 +440,12 @@ function menumod(){
               if(opts.length){
                     state.opt               = state.prev_opt[node.id]||0;
                     var opt                 = opts[state.opt];
-                    opt.style.background    = 'lightyellow';
+                    if(!opt){
+                          debugger;
+                    }
+                    if(opt){
+                          opt.style.background    = 'lightyellow';
+                    }
               }
               
               $.show(node);
@@ -457,8 +462,12 @@ function menumod(){
               if(typeof state.opt=='number'){
                     var opts                = get.opts(node);
                     var opt                 = opts[state.opt];
-                    if(!opt)debugger;
-                    opt.style.background    = '';
+                    if(!opt){
+                          debugger;
+                    }
+                    if(opt){
+                          opt.style.background    = '';
+                    }
                     state.opt               = null;
               }
               
