@@ -1323,8 +1323,15 @@ function set_tooltip(findings) {
             const text = `Non-ASCII: "${match.char}" (Code: ${match.codePoint}, Hex: ${match.hex})`;
             
             if (currentTooltipText !== text) {
-                tooltip.setText(text);
-                tooltip.show(e.getDocumentPosition());
+                const clientX = e.domEvent ? e.domEvent.clientX : 0;
+                const clientY = e.domEvent ? e.domEvent.clientY : 0;
+                
+                // Ace Tooltip show signature: show(text, x, y)
+                // Add a small pixel offset so it doesn't block the cursor directly
+                tooltip.show(text, clientX + 12, clientY + 15);
+                
+                //tooltip.setText(text);
+                //tooltip.show(e.getDocumentPosition());
                 currentTooltipText = text;
             }
         } else {
