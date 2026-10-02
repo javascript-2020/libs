@@ -1363,11 +1363,11 @@ console.log(docTooltip);
 
 // 2. Create a persistent container node for the tooltip content
 const hoverNode = document.createElement('div');
-hoverNode.style.padding = "4px 8px";
-hoverNode.style.background = "#222";
-hoverNode.style.color = "#fff";
+hoverNode.style.padding = "10px";
+hoverNode.style.background = "white";
+hoverNode.style.color = "black";
 hoverNode.style.borderRadius = "4px";
-hoverNode.style.fontSize = "12px";
+//hoverNode.style.fontSize = "12px";
 
 // 3. Set up the data provider callback
 docTooltip.setDataProvider(function (e, editor) {
