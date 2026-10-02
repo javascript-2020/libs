@@ -806,6 +806,8 @@
         
         $.slider    = function(node1,slider_node,node2,callback,params={}){
         
+              callback    ||= {};
+              
               var minw        = params.minw||40;
               var minh        = params.minh||40;
               params.root   ||= document.body;
