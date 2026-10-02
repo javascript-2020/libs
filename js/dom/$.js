@@ -771,9 +771,9 @@
                           callback.md(e);
                     }
                     
+                    last    = e;
                     clearTimeout(timer);
                     timer   = setTimeout(mu,500,last);
-                    last    = e;
                     
               }//md
               
@@ -795,6 +795,8 @@
                     }
                     
                     last    = e;
+                    clearTimeout(timer);
+                    timer   = setTimeout(mu,500,last);
                     
               }//mm
               
