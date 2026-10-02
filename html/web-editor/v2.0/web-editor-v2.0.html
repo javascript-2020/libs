@@ -116,9 +116,6 @@
     background-color: rgba(255, 170, 0, 0.3); /* Soft orange/yellow tint */
     border-bottom: 1px dotted #ff8800;
 }
-.ace-multi-cursor {
-    pointer-events: auto;
-}
 
             </style>
             
@@ -1159,7 +1156,7 @@
               
               highlight(list);
               gutter(list);
-              set_tooltip(list);
+              test(list);
               
               console.log(list);
               
@@ -1311,7 +1308,7 @@ gutter.clear=function() {
 
 
 
-
+/*
 let currentTooltipText = null;
 
 function set_tooltip(findings) {
@@ -1357,6 +1354,64 @@ set_tooltip.clear   = function() {
         tooltip.destroy(); // Removes the DOM element entirely
     }
 }
+
+*/
+
+function test(findings){
+
+// 1. Require HoverTooltip from Ace
+const HoverTooltip = ace.require("ace/tooltip").HoverTooltip;
+const docTooltip = new HoverTooltip();
+
+// 2. Create a persistent container node for the tooltip content
+const hoverNode = document.createElement('div');
+hoverNode.style.padding = "4px 8px";
+hoverNode.style.background = "#222";
+hoverNode.style.color = "#fff";
+hoverNode.style.borderRadius = "4px";
+hoverNode.style.fontSize = "12px";
+
+// 3. Set up the data provider callback
+docTooltip.setDataProvider(function (e, editor) {
+    const session = editor.session;
+    const docPos = e.getDocumentPosition(); // { row, column } (0-indexed)
+    
+    // Check if the user is hovering over a character that matches one of your findings
+    // (Note: findings rows/cols are 1-indexed based on your earlier mapping, so we add 1)
+    const match = findings.find(f =>
+        (f.line - 1) === docPos.row && (f.column - 1) === docPos.column
+    );
+    
+    if (!match) {
+        return null; // Return null to prevent showing a tooltip if nothing matches
+    }
+    
+    // Populate the tooltip content with your finding details
+    hoverNode.innerHTML = `
+        <strong>Non-ASCII Character Found:</strong><br/>
+        Char: "${match.char}" | Code: ${match.codePoint} | Hex: ${match.hex}
+    `;
+    
+    // Get the character range at the hovered position to anchor the tooltip
+    const range = session.getDocumentRangeOverlap ?
+        new (ace.require("ace/range").Range)(docPos.row, docPos.column, docPos.row, docPos.column + 1) :
+        session.getWordRange(docPos.row, docPos.column);
+        
+    // Show the tooltip anchored to the character range
+    docTooltip.showForRange(editor, range, hoverNode, e);
+});
+
+// 4. Attach the tooltip provider to your editor instance
+docTooltip.addToEditor(editor);
+
+}//test
+
+
+
+
+
+
+
 
 
 
