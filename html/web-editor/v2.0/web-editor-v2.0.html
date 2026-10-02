@@ -1410,10 +1410,28 @@ tooltip.clear   = function(){
     if (docTooltip) {
         // Removes the tooltip bindings from the editor instance
         if (typeof docTooltip.destroy === "function") {
+          console.log('destroy');
             docTooltip.destroy();
         }
         if (typeof docTooltip.removeFromEditor === "function") {
+          console.log('removefromeditor');
             docTooltip.removeFromEditor(editor);
+        }
+    }
+    
+    
+    // 1. If it was added via addToEditor, you can remove it or clear its data provider
+    if (docTooltip) {
+        // Clear the data provider so it stops firing callbacks immediately
+        docTooltip.setDataProvider(null);
+        
+        // 2. If it's attached to the editor's listeners, remove the mouse handler binding
+        if (typeof docTooltip.removeFromEditor === "function") {
+          console.log(123);
+            docTooltip.removeFromEditor(editor);
+        } else {
+            // Manual fallback: detach from editor's event bus if it registered events
+            editor.off("mousemove", docTooltip.onMouseMove); // internal safety fallback
         }
     }
 }
