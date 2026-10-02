@@ -755,6 +755,10 @@
               
               var mx;
               var my;
+              var timer;
+              var delay   = 500;
+              var last;
+              
               
               
               function md(e){
@@ -767,6 +771,10 @@
                     if(typeof callback.md=='function'){
                           callback.md(e);
                     }
+                    
+                    cancelTimeout(timer);
+                    timer   = setTimeout(mu,500,last);
+                    last    = e;
                     
               }//md
               
@@ -786,6 +794,8 @@
                           }
                           
                     }
+                    
+                    last    = e;
                     
               }//mm
               
