@@ -1162,7 +1162,26 @@
                     const cafe = "Caf\u00E9 \u00A9 2026"; // Accent & copyright symbol
                     const nbsp = "test\u00A0string"; // Non-breaking space
               `;
+              txt=unescape(txt);
               editor.setValue(txt,-1);
+              
+              function unescape(str) {
+                                                                    // 1. Convert ES6 bracketed Unicode escapes like \u{1F680}
+                  let processed = str.replace(/\\u\{([0-9a-fA-F]+)\}/g, (match, code) => {
+                      return String.fromCodePoint(parseInt(code, 16));
+                  });
+                  
+                  // 2. Convert standard 4-digit Unicode escapes like \u00A0
+                  processed = processed.replace(/\\u([0-9a-fA-F]{4})/g, (match, code) => {
+                      return String.fromCharCode(parseInt(code, 16));
+                  });
+                  
+                  // 3. Convert literal \n text into actual newlines if needed
+                  processed = processed.replace(/\\n/g, '\n');
+                  
+                  return processed;
+              }
+              
               
         }//sample
         
