@@ -130,7 +130,10 @@
                         
                               <div id=trim class=menu-opt>trim</div>
                               <div id=wordwrap class=menu-opt>word wrap</div>
-                              <div id=ascii-chk class=menu-opt>ascii check</div>
+                              <div style='display:flex;gap:10px'>
+                                    <div id=ascii-chk class=menu-opt>ascii check</div>
+                                    <div id=ascii-chk-clear class=menu-opt>clear</div>
+                              </div>
                               <div id=sample class=menu-opt>sample text</div>
                               
                               <div id=sha256-root>
@@ -1149,6 +1152,10 @@
         }//ascii-chk
         
         
+        click['ascii-chk-clear']    = function(){
+        }//ascii-chk-clear
+        
+        
         click.sample    = function(){
         
               var txt   = `
@@ -1240,6 +1247,11 @@ function highlight(){
     
     console.log(`Highlighted ${findings.length} non-ASCII characters.`);
 }
+highlight.clear   = function(){
+
+      markerIds.forEach(id => session.removeMarker(id));
+      
+}//clear
 
 }
 
