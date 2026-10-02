@@ -335,12 +335,12 @@
               rd.attr.h();
               rd.attr.height();
               
-              Range = ace.require('ace/range').Range;
               
               await Promise.all([
                     rd.attr.src(),
                     libs(),
               ]);
+              
               
               
         }//init
@@ -381,6 +381,7 @@
               
                     ace       = window.ace;
                     obj.ace   = ace;
+                    Range     = ace.require('ace/range').Range;
                     
                     resolve(ace);
                     
