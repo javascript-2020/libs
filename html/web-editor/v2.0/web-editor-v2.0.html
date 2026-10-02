@@ -1146,7 +1146,11 @@
         click['ascii-chk']    = function(){
         
               var txt     = editor.getValue();
-              var list    = highlight(txt);
+              var list    = ascii_chk(txt);
+              
+              highlight(list);
+              gutter(list);
+              
               console.log(list);
               
         }//ascii-chk
@@ -1155,6 +1159,7 @@
         click['ascii-chk-clear']    = function(){
         
               highlight.clear();
+              gutter.clear();
               
         }//ascii-chk-clear
         
@@ -1221,15 +1226,13 @@
 
 let markerIds = [];
 
-function highlight(){
-    const session = editor.getSession();
-    
+function highlight(findings){
+
+
     // 1. Clear previous markers
     markerIds.forEach(id => session.removeMarker(id));
     markerIds = [];
     
-    const text = session.getValue();
-    const findings = ascii_chk(text); // From our previous scanner
     
     // 2. Loop through findings and add a marker for each character
     findings.forEach(item => {
@@ -1259,15 +1262,12 @@ highlight.clear   = function(){
 
 }
 
-/*
-// --- Example Trigger ---
-// Call this whenever the document changes or on demand:
-// highlightNonAsciiInEditor(editor);
 
 
 
 
-function updateGutterAnnotations(editor, findings) {
+function gutter(findings) {
+
     const session = editor.getSession();
     
     // Group findings by line number to avoid duplicate icons on the same line
@@ -1285,9 +1285,18 @@ function updateGutterAnnotations(editor, findings) {
     
     // Apply annotations to the session
     session.setAnnotations(annotations);
+    
+}
+
+gutter.clear=function() {
+    const session = editor.getSession();
+    
+    // Passing an empty array wipes out all gutter annotations across the session
+    session.setAnnotations([]);
 }
 
 
+/*
 
 
 
