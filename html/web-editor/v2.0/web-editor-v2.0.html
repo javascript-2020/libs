@@ -1318,7 +1318,7 @@ function set_tooltip(findings) {
     editor.on("mousemove", (e) => {
         const cursor = e.getDocumentPosition();
         const match = findings.find(f => (f.line - 1) === cursor.row && (f.column - 1) === cursor.column);
-        
+        console.log(cursor,match);
         if (match) {
             const text = `Non-ASCII: "${match.char}" (Code: ${match.codePoint}, Hex: ${match.hex})`;
             
