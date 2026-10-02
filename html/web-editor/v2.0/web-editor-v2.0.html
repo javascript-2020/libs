@@ -1207,13 +1207,11 @@
   //:
   
   
-/*
-const Range = ace.require('ace/range').Range;
+{
 
-// Keep track of active marker IDs so we can clear them later
 let markerIds = [];
 
-function highlightNonAsciiInEditor(editor) {
+function highlight(){
     const session = editor.getSession();
     
     // 1. Clear previous markers
@@ -1221,7 +1219,7 @@ function highlightNonAsciiInEditor(editor) {
     markerIds = [];
     
     const text = session.getValue();
-    const findings = findNonAsciiCharacters(text); // From our previous scanner
+    const findings = ascii_chk(text); // From our previous scanner
     
     // 2. Loop through findings and add a marker for each character
     findings.forEach(item => {
@@ -1243,6 +1241,9 @@ function highlightNonAsciiInEditor(editor) {
     console.log(`Highlighted ${findings.length} non-ASCII characters.`);
 }
 
+}
+
+/*
 // --- Example Trigger ---
 // Call this whenever the document changes or on demand:
 // highlightNonAsciiInEditor(editor);
