@@ -275,7 +275,7 @@
               
               build.host.template2    = function({root,html,i2}){
                                                                                 debug('build.host.template2');
-                    var i4              = html.indexOf('template',i2);
+                    var i4              = html.indexOf('</template>',i2);
                     var i5              = html.lastIndexOf('<',i4);
                     var html2           = html.slice(i2+1,i5);
                     
