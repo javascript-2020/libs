@@ -344,6 +344,8 @@
               ]);
               
               
+              Range     = ace.require('ace/range').Range;
+              
               
         }//init
         
@@ -383,8 +385,6 @@
               
                     ace       = window.ace;
                     obj.ace   = ace;
-                    
-                    Range     = ace.require('ace/range').Range;
                     
                     resolve(ace);
                     
