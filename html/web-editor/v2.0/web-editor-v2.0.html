@@ -239,8 +239,6 @@
         var modelist;
         
         var Range;
-        var Tooltip;
-        var tooltip;
         
         var src;
         
@@ -387,7 +385,6 @@
                     obj.ace   = ace;
                     
                     Range     = ace.require('ace/range').Range;
-                    Tooltip   = ace.require("ace/tooltip").Tooltip;
                     
                     resolve(ace);
                     
@@ -625,8 +622,6 @@
                     
               }
               
-              var tooltipContainer    = shadow.host||shadow;
-              tooltip                 = new Tooltip(tooltipContainer);
               
               
               editor.resize();
@@ -1156,7 +1151,7 @@
               
               highlight(list);
               gutter(list);
-              test(list);
+              tooltip(list);
               
               console.log(list);
               
@@ -1357,11 +1352,14 @@ set_tooltip.clear   = function() {
 
 */
 
-function test(findings){
+var docTooltip;
+
+function tooltip(findings){
 
 // 1. Require HoverTooltip from Ace
 const HoverTooltip = ace.require("ace/tooltip").HoverTooltip;
-const docTooltip = new HoverTooltip();
+docTooltip = new HoverTooltip();
+console.log(docTooltip);
 
 // 2. Create a persistent container node for the tooltip content
 const hoverNode = document.createElement('div');
@@ -1408,7 +1406,17 @@ docTooltip.addToEditor(editor);
 
 
 
-
+tooltip.clear   = function(){
+    if (docTooltip) {
+        // Removes the tooltip bindings from the editor instance
+        if (typeof docTooltip.destroy === "function") {
+            docTooltip.destroy();
+        }
+        if (typeof docTooltip.removeFromEditor === "function") {
+            docTooltip.removeFromEditor(editor);
+        }
+    }
+}
 
 
 
