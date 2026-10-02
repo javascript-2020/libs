@@ -1248,7 +1248,8 @@ function highlight(){
     console.log(`Highlighted ${findings.length} non-ASCII characters.`);
 }
 highlight.clear   = function(){
-
+                                                                                debug('highlight.clear');
+      const session = editor.getSession();
       markerIds.forEach(id => session.removeMarker(id));
       
 }//clear
