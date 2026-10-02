@@ -85,6 +85,7 @@ function menumod(){
         state.select      = {};
         state.prev_opt    = {};
         
+        var ct            = 0;
         
         var defz          = 12;
         
@@ -203,6 +204,11 @@ function menumod(){
         
         add.node    = function(node,drag,center){
         
+              ct++;
+              if(!node.id){
+                    node.id   = `menu-${ct}`;
+              }
+              
               node.style.zIndex   = defz;
               node.tabIndex       = -1;
               
