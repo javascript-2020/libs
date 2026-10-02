@@ -771,7 +771,7 @@
                           callback.md(e);
                     }
                     
-                    cancelTimeout(timer);
+                    clearTimeout(timer);
                     timer   = setTimeout(mu,500,last);
                     last    = e;
                     
