@@ -1228,7 +1228,8 @@ let markerIds = [];
 
 function highlight(findings){
 
-
+    var session   = editor.getSession();
+    
     // 1. Clear previous markers
     markerIds.forEach(id => session.removeMarker(id));
     markerIds = [];
