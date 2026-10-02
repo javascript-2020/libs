@@ -240,6 +240,8 @@
         var modelist;
         
         var Range;
+        var Tooltip;
+        var tooltip;
         
         var src;
         
@@ -384,7 +386,9 @@
               
                     ace       = window.ace;
                     obj.ace   = ace;
+                    
                     Range     = ace.require('ace/range').Range;
+                    Tooltip   = ace.require("ace/tooltip").Tooltip;
                     
                     resolve(ace);
                     
@@ -621,6 +625,9 @@
                     //host.style.height   = def.height;
                     
               }
+              
+              var tooltipContainer    = shadow.host||shadow;
+              tooltip                 = new Tooltip(tooltipContainer);
               
               
               editor.resize();
@@ -1297,24 +1304,17 @@ gutter.clear=function() {
 }
 
 
-/*
 
 
 
-// Import Ace's built-in Tooltip class
-const Tooltip = ace.require("ace/tooltip").Tooltip;
-const tooltip = new Tooltip(document.body);
 
 let currentTooltipText = null;
 
-function setupNonAsciiTooltips(editor, findings) {
-    const renderer = editor.renderer;
-    
+function set_tooltip(findings) {
+
     // Listen to mouse movement over the editor content area
     editor.on("mousemove", (e) => {
-        const cursor = e.getDocumentPosition(); // Gets row and column from mouse coords
-        
-        // Find if our mouse is currently hovering over a known non-ASCII finding
+        const cursor = e.getDocumentPosition();
         const match = findings.find(f => (f.line - 1) === cursor.row && (f.column - 1) === cursor.column);
         
         if (match) {
@@ -1322,27 +1322,31 @@ function setupNonAsciiTooltips(editor, findings) {
             
             if (currentTooltipText !== text) {
                 tooltip.setText(text);
-                tooltip.show(e.getDocumentPosition()); // Or use screen coordinates
+                tooltip.show(e.getDocumentPosition());
                 currentTooltipText = text;
             }
         } else {
             if (currentTooltipText !== null) {
-                tooltip.hide();
+                tooltip.hide(); // Hides the tooltip element
                 currentTooltipText = null;
             }
         }
     });
     
-    // Hide tooltip when mouse leaves the editor
     editor.on("mouseout", () => {
         tooltip.hide();
         currentTooltipText = null;
     });
 }
 
+// How to completely remove/destroy the tooltip instance when tearing down the editor:
+function set_tooltip.clear() {
+    if (tooltip && typeof tooltip.destroy === "function") {
+        console.log('destroy');
+        tooltip.destroy(); // Removes the DOM element entirely
+    }
+}
 
-
-*/
 
 
   //:
