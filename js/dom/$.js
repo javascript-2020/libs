@@ -760,7 +760,6 @@
               var last;
               
               
-              
               function md(e){
               
                     mx    = e.pageX;
