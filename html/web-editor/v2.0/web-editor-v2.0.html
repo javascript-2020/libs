@@ -943,6 +943,8 @@
         
         function set(txt,opts){
         
+              initial   = opts.initial;
+              
               editor.setValue(txt,-1);
               update();
               filename.save.hide();
