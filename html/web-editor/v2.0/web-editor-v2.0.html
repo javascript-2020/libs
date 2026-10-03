@@ -170,46 +170,46 @@
                               
                                     <div class=menu-div>light</div>
                                     <div class=menu-opt>none</div>
-                                    <div class=menu-opt>Chrome</div>
-                                    <div class=menu-opt>Clouds</div>
-                                    <div class=menu-opt>Crimson Editor</div>
-                                    <div class=menu-opt>Dawn</div>
-                                    <div class=menu-opt>Dreamweaver</div>
-                                    <div class=menu-opt>Eclipse</div>
-                                    <div class=menu-opt>GitHub</div>
-                                    <div class=menu-opt>IPlastic</div>
-                                    <div class=menu-opt>KatzenMilch</div>
-                                    <div class=menu-opt>Kuroir</div>
-                                    <div class=menu-opt>Solarized Light</div>
-                                    <div class=menu-opt>SQL Server</div>
-                                    <div class=menu-opt>TextMate</div>
-                                    <div class=menu-opt>Tomorrow</div>
-                                    <div class=menu-opt>XCode</div>
+                                    <div id=chrome class=menu-opt>Chrome</div>
+                                    <div id=clouds class=menu-opt>Clouds</div>
+                                    <div id=crimson_editor class=menu-opt>Crimson Editor</div>
+                                    <div id=dawn class=menu-opt>Dawn</div>
+                                    <div id=dreamweaver class=menu-opt>Dreamweaver</div>
+                                    <div id=eclipse class=menu-opt>Eclipse</div>
+                                    <div id=github class=menu-opt>GitHub</div>
+                                    <div id=iplastic class=menu-opt>IPlastic</div>
+                                    <div id=katzenmilch class=menu-opt>KatzenMilch</div>
+                                    <div id=kuroir class=menu-opt>Kuroir</div>
+                                    <div id=solarized_light class=menu-opt>Solarized Light</div>
+                                    <div id=sqlserver class=menu-opt>SQL Server</div>
+                                    <div id=textmate class=menu-opt>TextMate</div>
+                                    <div id=tomorrow class=menu-opt>Tomorrow</div>
+                                    <div id=xcode class=menu-opt>XCode</div>
                                     
                                     <div class=menu-div>dark</div>
                                     <div class=menu-opt>none dark</div>
-                                    <div class=menu-opt>Ambiance</div>
-                                    <div class=menu-opt>Chaos</div>
-                                    <div class=menu-opt>Clouds Midnight</div>
-                                    <div class=menu-opt>Cobalt</div>
-                                    <div class=menu-opt>Dracula</div>
-                                    <div class=menu-opt>Greeon on Black</div>
-                                    <div class=menu-opt>Gruvbox</div>
-                                    <div class=menu-opt>idle Fingers</div>
-                                    <div class=menu-opt>krTheme</div>
-                                    <div class=menu-opt>Merbivore</div>
-                                    <div class=menu-opt>Merbivore Soft</div>
-                                    <div class=menu-opt>Mono Industrial</div>
-                                    <div class=menu-opt>Monokai</div>
-                                    <div class=menu-opt>Pastel on Dark</div>
-                                    <div class=menu-opt>Solarized Dark</div>
-                                    <div class=menu-opt>Terminal</div>
-                                    <div class=menu-opt>Tomorrow Night</div>
-                                    <div class=menu-opt>Tomorrow Night Blue</div>
-                                    <div class=menu-opt>Tomorrow Night Bright</div>
-                                    <div class=menu-opt>Tomorrow Night 80s</div>
-                                    <div class=menu-opt>Twilight</div>
-                                    <div class=menu-opt>Vibrant Ink</div>
+                                    <div id=ambiance class=menu-opt>Ambiance</div>
+                                    <div id=chaos class=menu-opt>Chaos</div>
+                                    <div id=clouds_midnight class=menu-opt>Clouds Midnight</div>
+                                    <div id=cobalt class=menu-opt>Cobalt</div>
+                                    <div id=dracula class=menu-opt>Dracula</div>
+                                    <div id=gob class=menu-opt>Greeon on Black</div>
+                                    <div id=gruvbox class=menu-opt>Gruvbox</div>
+                                    <div id=idle_fingers class=menu-opt>idle Fingers</div>
+                                    <div id=kr_theme class=menu-opt>krTheme</div>
+                                    <div id=merbivore class=menu-opt>Merbivore</div>
+                                    <div id=merbivore_soft class=menu-opt>Merbivore Soft</div>
+                                    <div id=mono_industrial class=menu-opt>Mono Industrial</div>
+                                    <div id=monokai class=menu-opt>Monokai</div>
+                                    <div id=pastel_on_dark class=menu-opt>Pastel on Dark</div>
+                                    <div id=solarized_dark class=menu-opt>Solarized Dark</div>
+                                    <div id=terminal class=menu-opt>Terminal</div>
+                                    <div id=tomorrow_night class=menu-opt>Tomorrow Night</div>
+                                    <div id=tomorrow_night_blue class=menu-opt>Tomorrow Night Blue</div>
+                                    <div id=tomorrow_night_bright class=menu-opt>Tomorrow Night Bright</div>
+                                    <div id=tomorrow_night_eighties class=menu-opt>Tomorrow Night 80s</div>
+                                    <div id=twilight class=menu-opt>Twilight</div>
+                                    <div id=vibrant_ink class=menu-opt>Vibrant Ink</div>
                               </div>
                         </div>
                         
@@ -1238,7 +1238,7 @@
         function click2(type,opt){
         
               if(type=='opt'){
-                    var theme   = opt.textContent.trim();
+                    var theme   = opt.id;
                     if(theme=='none'){
                           theme   = 'textmate';
                     }
