@@ -19,8 +19,24 @@
     
     
     
-  .menu
-    {position:absolute;left:0;top:35px;width:600px;}
+  #menu-1
+    {position:absolute;left:30px;top:35px;width:600px}
+  #theme-menu
+    {position:absolute;left:30px;top:35px}
+  #mode-menu-root
+    {margin-right:25px}
+  #mode-menu
+    {position:absolute;left:30px;top:35px}
+  .param
+    {/*border:1px solid lightgray;padding:5px 10px;border-radius:5px;*/display:flex !important;align-items:center;position:relative;
+      margin-right:10px}
+  .param label
+    {padding-right:5px;border-right:1px solid lightgray;margin-right:5px}
+  .param #theme
+    {width:80px;font-weight:bold}
+  .param #mode
+    {width:80px;font-weight:bold}
+    
     
     
   .icon
@@ -43,8 +59,8 @@
     {flex:1;border:1px solid lightgray;padding:5px 10px;font-family:monospace;overflow:auto}
     
     
-  #menu-icon
-    {width:15px;height:26px;border:1px solid gray;padding:2px;background:buttonface;margin-right:10px;box-sizing:border-box;cursor:pointer;border-radius:3px;
+  .menu-icon
+    {width:15px;height:26px;border:1px solid gray;padding:2px;background:buttonface;margin-right:5px;box-sizing:border-box;cursor:pointer;border-radius:3px;
       content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAt1BMVEVHcEwbmPYcgfMchvQbsfkay/wbtvkbnfccefMayfwbmfYch/QchvQbtfkbmfYa1P0ddfIcivQcl/Ycj/Ubp/gcmfYdbPEbrvkazPwcmfYbqfgayfwayPwbv/sbvvobsvkazPwbqvga0fwbvPobtvocjvUbofcbpvccfPMcgPMcgvMdafAdbfEckfUbtvka0PwcfPIaxvsbwfsbvPodb/EcnPYclvYckfUbpvccjPQdd/IbofcbrPiPy8D0AAAAMHRSTlMAA/79/v7+5ycVZ3Y3h0xhu9jp8kFeF9OkVfQOrZi+Mh1z/iUJQ+/dx4fOYq7hybzs5xU1AAABIklEQVQ4y+2Ux3aDMBBFpTR6M92AwYB7S6EG/v+7MsJJnBBKVsnGdwHozT1HQgxC6MrfEkiSM+Y4khSgUxhazLDHWGF4QveAO2gyLnGQ9QS4wcDaXGJYiPGegVnU50UzUvdgTsd7AfrMaEaqXvO+sfAAHP0uzz+SmhCfR7FwB5gdpm+SyoeHEJ5P67o2tbanmRBP5/iSgFkUxaplaisIv3kAu6yqihK/RiIF0ZJtT6NTaZpS9iWwm0D/uXB7kmXZ5LOgN0O7ayvEQ57nKtssCbMqDA5i9+YulLIsVQ5MzKnwqCz6Phev3AIcxhy5K3x/A/DbG2CzIdctP9RS9PrxnTU92KOYll8bZHqs7Wk5AcY9hIx9kuyN3/xuxm5nXA+df+cNJSAgjMbiFSoAAAAASUVORK5CYII=)
     }
     
@@ -114,34 +130,36 @@
   .ace_non-ascii-marker
     {position:absolute;background-color:rgba(255,170,0,0.3);border-bottom:1px dotted #ff8800}
     
+    
             </style>
             
             <div id=root part=root>
             
                   <div id=hdr>
                   
-                        <img id=menu-icon>
-                        
-                        <div class=menu style='display:none'>
-                        
-                              <div id=trim class=menu-opt>trim</div>
-                              <div id=wordwrap class=menu-opt>word wrap</div>
+                        <div class=menu-root>
+                              <img id=menu-1-icon class=menu-icon>
+                              <div id=menu-1 class=menu style='display:none'>
                               
-                              <div style='display:flex;gap:10px;border:1px solid lightgray;padding:5px 10px;margin-bottom:10px'>
-                                    <div id=ascii-chk class=menu-opt style='flex:1;margin:0'>ascii check</div>
-                                    <div id=ascii-chk-clear class=menu-opt style='flex:1;margin:0'>clear</div>
-                              </div>
-                              
-                              <div id=sample class=menu-opt>sample text</div>
-                              
-                              <div id=sha256-root>
-                                    <div id=sha256 class=menu-opt>
-                                          sha256
+                                    <div id=trim class=menu-opt>trim</div>
+                                    <div id=wordwrap class=menu-opt>word wrap</div>
+                                    
+                                    <div style='display:flex;gap:10px;border:1px solid lightgray;padding:5px 10px;margin-bottom:10px'>
+                                          <div id=ascii-chk class=menu-opt style='flex:1;margin:0'>ascii check</div>
+                                          <div id=ascii-chk-clear class=menu-opt style='flex:1;margin:0'>clear</div>
                                     </div>
-                                    <div id=value-root>
-                                          <img class='copy icon'>
-                                          <img class='clear icon'>
-                                          <div id=value>---</div>
+                                    
+                                    <div id=sample class=menu-opt>sample text</div>
+                                    
+                                    <div id=sha256-root>
+                                          <div id=sha256 class=menu-opt>
+                                                sha256
+                                          </div>
+                                          <div id=value-root>
+                                                <img class='copy icon'>
+                                                <img class='clear icon'>
+                                                <div id=value>---</div>
+                                          </div>
                                     </div>
                               </div>
                         </div>
@@ -159,6 +177,82 @@
                         </div>
                         
                         <span id=spc></span>
+                        
+                        <div id=theme-menu-root class='menu-root param'>
+                              <img id=theme-menu-icon class=menu-icon>
+                              <label>
+                                    theme
+                              </label>
+                              <div id=theme>
+                                    textmate
+                              </div>
+                              <div id=theme-menu class=menu style='display:none'>
+                              
+                                    <div class=menu-div>light</div>
+                                    <div id=none class=menu-opt>none</div>
+                                    <div id=chrome class=menu-opt>Chrome</div>
+                                    <div id=clouds class=menu-opt>Clouds</div>
+                                    <div id=crimson_editor class=menu-opt>Crimson Editor</div>
+                                    <div id=dawn class=menu-opt>Dawn</div>
+                                    <div id=dreamweaver class=menu-opt>Dreamweaver</div>
+                                    <div id=eclipse class=menu-opt>Eclipse</div>
+                                    <div id=github class=menu-opt>GitHub</div>
+                                    <div id=iplastic class=menu-opt>IPlastic</div>
+                                    <div id=katzenmilch class=menu-opt>KatzenMilch</div>
+                                    <div id=kuroir class=menu-opt>Kuroir</div>
+                                    <div id=solarized_light class=menu-opt>Solarized Light</div>
+                                    <div id=sqlserver class=menu-opt>SQL Server</div>
+                                    <div id=textmate class=menu-opt>TextMate</div>
+                                    <div id=tomorrow class=menu-opt>Tomorrow</div>
+                                    <div id=xcode class=menu-opt>XCode</div>
+                                    
+                                    <div class=menu-div>dark</div>
+                                    <div id=none-dark class=menu-opt>none dark</div>
+                                    <div id=ambiance class=menu-opt>Ambiance</div>
+                                    <div id=chaos class=menu-opt>Chaos</div>
+                                    <div id=clouds_midnight class=menu-opt>Clouds Midnight</div>
+                                    <div id=cobalt class=menu-opt>Cobalt</div>
+                                    <div id=dracula class=menu-opt>Dracula</div>
+                                    <div id=gob class=menu-opt>Greeon on Black</div>
+                                    <div id=gruvbox class=menu-opt>Gruvbox</div>
+                                    <div id=idle_fingers class=menu-opt>idle Fingers</div>
+                                    <div id=kr_theme class=menu-opt>krTheme</div>
+                                    <div id=merbivore class=menu-opt>Merbivore</div>
+                                    <div id=merbivore_soft class=menu-opt>Merbivore Soft</div>
+                                    <div id=mono_industrial class=menu-opt>Mono Industrial</div>
+                                    <div id=monokai class=menu-opt>Monokai</div>
+                                    <div id=pastel_on_dark class=menu-opt>Pastel on Dark</div>
+                                    <div id=solarized_dark class=menu-opt>Solarized Dark</div>
+                                    <div id=terminal class=menu-opt>Terminal</div>
+                                    <div id=tomorrow_night class=menu-opt>Tomorrow Night</div>
+                                    <div id=tomorrow_night_blue class=menu-opt>Tomorrow Night Blue</div>
+                                    <div id=tomorrow_night_bright class=menu-opt>Tomorrow Night Bright</div>
+                                    <div id=tomorrow_night_eighties class=menu-opt>Tomorrow Night 80s</div>
+                                    <div id=twilight class=menu-opt>Twilight</div>
+                                    <div id=vibrant_ink class=menu-opt>Vibrant Ink</div>
+                              </div>
+                        </div>
+                        
+                        <div id=mode-menu-root class='menu-root param'>
+                              <img id=mode-menu-icon class=menu-icon>
+                              <label>
+                                    mode
+                              </label>
+                              <div id=mode>
+                                    javascript
+                              </div>
+                              <div id=mode-menu class=menu style='display:none'>
+                                    <div class=menu-opt>javascript</div>
+                                    <div class=menu-opt>typescript</div>
+                                    <div class=menu-opt>c_cpp</div>
+                                    <div class=menu-opt>python</div>
+                                    <div class=menu-opt>html</div>
+                                    <div class=menu-opt>css</div>
+                                    <div class=menu-opt>markdown</div>
+                                    <div class=menu-opt>json</div>
+                                    <div class=menu-opt>text</div>
+                              </div>
+                        </div>
                         
                         <input id=row value=0>
                         <input id=col value=0>
@@ -256,6 +350,10 @@
         var deficon;
         
         
+        var theme       = 'textmate';
+        var mode        = 'text';
+        
+        
         var target      = host;
         
         var def         = {};
@@ -274,6 +372,9 @@
         var on          = {};
         var setup       = {};
         obj.css         = {};
+        var set         = {};
+        //obj.set         = {};
+        var click       = {};
         
         
                                                                                 /*
@@ -549,8 +650,8 @@
               
               hdr                                         = $(shadow,'#hdr');
               
-              card                                        = $(shadow,'.menu');
-              $(shadow,'#menu-icon').onclick              = menu.click(card,'both',false,click);
+              card                                        = $(shadow,'#menu-1');
+              $(shadow,'#menu-1-icon').onclick            = menu.click(card,'both',false,click1);
               
               var sha256_root                             = $(card,'#sha256-root');
               $(sha256_root,'.copy').onclick              = async e=>{
@@ -567,9 +668,13 @@
                                                             
               deficon                                     = $(hdr,'#filename-icon').src;
               
-              $(shadow,'#clear').onclick                  = btn.clear;
-              $(shadow,'#copy').onclick                   = btn.copy;
-              $(shadow,'#paste').onclick                  = btn.paste;
+              
+              var node                                    = $(shadow,'#theme-menu');
+              $(shadow,'#theme-menu-icon').onclick        = menu.click(node,'both',false,click.theme);
+              
+              var node                                    = $(shadow,'#mode-menu');
+              $(shadow,'#mode-menu-icon').onclick         = menu.click(node,'both',false,click.mode);
+              
               
               row                                         = $(hdr,'#row');
               row.onkeydown                               = kd.row;
@@ -577,6 +682,12 @@
               col                                         = $(hdr,'#col');
               col.onkeydown                               = kd.col;
               col.onmousedown                             = e=>e.target.select();
+              
+              
+              $(shadow,'#clear').onclick                  = btn.clear;
+              $(shadow,'#copy').onclick                   = btn.copy;
+              $(shadow,'#paste').onclick                  = btn.paste;
+              
               
               $(hdr,'#top').onclick                       = btn.top;
               $(hdr,'#bottom').onclick                    = btn.bottom;
@@ -1057,22 +1168,11 @@
         
         Object.defineProperty(obj,'mode',{
         
-              set   : v=>{
-              
-                    switch(v){
-                    
-                      case 'js'   : v='javascript';       break;
-                      case 'py'   : v='python';           break;
-                      
-                    }//switch
-                    
-                    editor.session.setMode(`ace/mode/${v}`)
-                    
-              },
+              set   : set.mode,
               get   : ()=>{
               
                     var mode    = editor.session.getMode().$id;
-                    console.log(mode);
+                                                                                console.log(mode);
                     var parts   = mode.split('/');
                     var mode    = parts.at(-1);
                     return mode;
@@ -1082,19 +1182,46 @@
         });
         
         
+        obj.set.theme   = set.theme;
+        
+        set.theme    = function(v){
+        
+              editor.setTheme(`ace/theme/${v}`);
+              $(shadow,'#theme-menu-root #theme').textContent   = v;
+              
+        }//mode
+        
+        
+        obj.set.mode    = set.mode;
+        
+        set.mode    = function(v){
+        
+              switch(v){
+              
+                case 'js'   : v='javascript';       break;
+                case 'py'   : v='python';           break;
+                
+              }//switch
+              
+              editor.session.setMode(`ace/mode/${v}`);
+              $(shadow,'#mode-menu-root #mode').textContent   = v;
+              
+        }//mode
+        
+        
   //:
   
   
-        function click(type,opt){
+        function click1(type,opt){
         
               if(type=='opt'){
-                    click[opt.id]();
+                    click1[opt.id]();
               }
               
         }//menu
         
         
-        click.trim   = function(){
+        click1.trim   = function(){
         
               var pos     = editor.getCursorPosition();
               var txt     = editor.getValue();
@@ -1107,7 +1234,7 @@
         }//trim
         
         
-        click.wordwrap   = function(){
+        click1.wordwrap   = function(){
         
               var wrap1   = editor.getOption('wrap');
               if(wrap1=='off'){
@@ -1120,7 +1247,7 @@
         }//wordwrap
         
         
-        click.sha256   = function(){
+        click1.sha256   = function(){
         
               var txt   = editor.getValue();
               sha256(txt);
@@ -1128,22 +1255,7 @@
         }//sha256
         
         
-        
-        async function sha256(txt){
-        
-            const msg   = new TextEncoder().encode(txt);
-            const buf   = await crypto.subtle.digest('SHA-256',msg);
-            
-            var uint8   = new Uint8Array(buf);
-            var hex     = uint8.reduce((a,byte)=>a   += byte.toString(16).padStart(2,'0'),'')
-            
-            $(card,'#sha256-root #value').textContent   = hex;
-            console.log(hex);
-            
-        }//sha256
-        
-        
-        click['ascii-chk']    = function(){
+        click1['ascii-chk']    = function(){
         
               var txt     = editor.getValue();
               var list    = ascii_chk(txt);
@@ -1157,7 +1269,7 @@
         }//ascii-chk
         
         
-        click['ascii-chk-clear']    = function(){
+        click1['ascii-chk-clear']    = function(){
         
               highlight.clear();
               gutter.clear();
@@ -1166,7 +1278,7 @@
         }//ascii-chk-clear
         
         
-        click.sample    = function(){
+        click1.sample    = function(){
         
               var txt   = `
                     const user = "admin"; // Standard ASCII
@@ -1185,6 +1297,57 @@
               editor.setValue(txt,-1);
               
         }//sample
+        
+        
+  //:
+  
+  
+        click.theme   = function(type,opt){
+        
+              if(type=='opt'){
+                    var theme   = opt.id;
+                    if(theme=='none'){
+                          set.theme('textmate');
+                          set.mode('text');
+                          return;
+                    }
+                    if(theme=='none-dark'){
+                          set.theme('terminal');
+                          set.mode('text');
+                          return;
+                    }
+                                                                                console.log(opt.id,theme);
+                    set.theme(theme);
+              }
+              
+        }//theme
+        
+        
+        click.mode    = function(type,opt){
+        
+              if(type=='opt'){
+                    var mode    = opt.textContent;
+                    set.mode(mode);
+              }
+              
+        }//mode
+        
+        
+  //:
+  
+  
+        async function sha256(txt){
+        
+            const msg   = new TextEncoder().encode(txt);
+            const buf   = await crypto.subtle.digest('SHA-256',msg);
+            
+            var uint8   = new Uint8Array(buf);
+            var hex     = uint8.reduce((a,byte)=>a   += byte.toString(16).padStart(2,'0'),'')
+            
+            $(card,'#sha256-root #value').textContent   = hex;
+            console.log(hex);
+            
+        }//sha256
         
         
         obj.ascii_chk   = ascii_chk;
@@ -1221,13 +1384,10 @@
         }//ascii
         
         
-        function int(str){return (/^\d+$/.test(str)) ? Number(str) : str}
-        
   //:
   
   
         {
-        
               let markerIds   = [];
               
               function highlight(findings){
@@ -1251,6 +1411,7 @@
                   
                                                                                 debug(`Highlighted ${findings.length} non-ASCII characters.`);
               }//highlight
+              
               
               highlight.clear   = function(){
                                                                                 debug('highlight.clear');
@@ -1282,6 +1443,7 @@
             session.setAnnotations(annotations);
             
         }//gutter
+        
         
         gutter.clear=function() {
         
@@ -1323,8 +1485,7 @@
               
               docTooltip.addToEditor(editor);
               
-        }//test
-        
+        }//tooltip
         
         
         tooltip.clear   = function(){
@@ -1336,10 +1497,6 @@
             docTooltip.removeFromEditor(editor);
             
         }//clear
-        
-        
-        
-        
         
         
   //:
@@ -1385,6 +1542,11 @@
               
         }//insert_rule
         
+        
+  //:
+  
+  
+        function int(str){return (/^\d+$/.test(str)) ? Number(str) : str}
         
         
   //:
