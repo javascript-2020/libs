@@ -1191,6 +1191,8 @@
               if(result){
                     editor.setTheme(path);
                     $(shadow,'#theme-menu-root #theme').textContent   = v;
+              }else{
+                    log.error('failed to load :',v);
               }
               
         }//mode
@@ -1207,8 +1209,15 @@
                 
               }//switch
               
-              editor.session.setMode(`ace/mode/${v}`);
-              $(shadow,'#mode-menu-root #mode').textContent   = v;
+              var path      = `ace/mode/${v}`;
+              var result    = await loadmodule(path);
+              if(result){
+                    editor.session.setMode(path);
+                    $(shadow,'#mode-menu-root #mode').textContent   = v;
+              }else{
+                    log.error('failed to load :',v);
+              }
+              
         }//mode
         
         
