@@ -170,6 +170,8 @@
                               </div>
                         </div>
                         
+                        <img id=clear class='clear icon'>
+                        
                         <div id=filename-root>
                               <img id=filename-icon src='data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAP1BMVEVHcEwVFRUICAgkJCQMDAwLCwsNDQ1QUFAICAgrKysQEBAVFRUHBwcLCwsZGRkKCgoHBwfd3d0ICAgkJCQEBATHNF52AAAAFXRSTlMAQ9IblZl1BbQOXDbHiiWj1wG2H/ZbTuAhAAAA5klEQVQ4y72V2w6DIAxAKQjIRRT1/791gkg226mJc+elSE5qqYCMPQV0zY4uUF7grdwxc0cl5NNuxvjBO0oUuxnhbUPkxKLxYCQ2yYzMSPT2LMbCmpFbRphJtH0B0ozu/TJsZy+QCF1hTTKpNG4GOKlxK5XfEKNOsBIzkRTt2C5AVDkmRkuKTiUCA1Vx92q8LDqFcAeLeefLYt7actyeyzUKVwnM5ChIUQ2VJgJPUZGiCZXtwdyrURuEpvvoEXQfg0XQX0b/fFN84PIxgwuiTAfX/mXjTtdE4iJdaXk4u5rLBQ2P/Q1eGdEQZZzIbegAAAAASUVORK5CYII='>
                               <img id=filename-save style='display:none'>
@@ -269,7 +271,7 @@
                         <input id=row value=0>
                         <input id=col value=0>
                         
-                        <button id=clear>clear</button>
+                        <!-- <button id=clear>clear</button> -->
                         <button id=copy>copy</button>
                         <button id=paste>paste</button>
                         
@@ -665,6 +667,8 @@
               card                                        = $(shadow,'#menu-1');
               $(shadow,'#menu-1-icon').onclick            = menu.click(card,'both',false,click1);
               
+              $(shadow,'#clear').onclick                  = btn.clear;
+              
               var sha256_root                             = $(card,'#sha256-root');
               $(sha256_root,'.copy').onclick              = async e=>{
               
@@ -696,7 +700,7 @@
               col.onmousedown                             = e=>e.target.select();
               
               
-              $(shadow,'#clear').onclick                  = btn.clear;
+              //$(shadow,'#clear').onclick                  = btn.clear;
               $(shadow,'#copy').onclick                   = btn.copy;
               $(shadow,'#paste').onclick                  = btn.paste;
               
