@@ -206,6 +206,7 @@ function menumod(){
         
               ct++;
               if(!node.id){
+                                                                                //  this should be a map based on the node itself
                     node.id   = `menu-${ct}`;
               }
               
@@ -811,6 +812,11 @@ function menumod(){
     
   .menu [type=checkbox]
     {width:20px;height:20px;margin:0}
+    
+  .menu-div
+    {display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:5px;color:gray;margin:10px 0}
+  .menu-div::before, .divider::after
+    {content:' ';border-top: 1px solid gray}
     
         `;
         
