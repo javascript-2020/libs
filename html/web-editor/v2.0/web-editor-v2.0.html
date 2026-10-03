@@ -109,6 +109,9 @@
     {display:block}
     
     
+  .param
+    {border:1px solid lightgray;padding:5px 10px;border-radius:5px;width:60px}
+    
   .seo-code
     {display:none}
     
@@ -164,9 +167,15 @@
                         
                         <span id=spc></span>
                         
-                        <div class=menu-root>
-                              <img id=menu-2-icon class=menu-icon>
-                              <div id=menu-2 class=menu style='display:none'>
+                        <div id=theme-menu-root class='menu-root param'>
+                              <img id=theme-menu-icon class=menu-icon>
+                              <label>
+                                    theme
+                              </label>
+                              <div id=theme>
+                                    textmate
+                              </div>
+                              <div id=theme-menu class=menu style='display:none'>
                               
                                     <div class=menu-div>light</div>
                                     <div id=none class=menu-opt>none</div>
@@ -210,6 +219,21 @@
                                     <div id=tomorrow_night_eighties class=menu-opt>Tomorrow Night 80s</div>
                                     <div id=twilight class=menu-opt>Twilight</div>
                                     <div id=vibrant_ink class=menu-opt>Vibrant Ink</div>
+                              </div>
+                        </div>
+                        
+                        <div id=mode-menu-root class='menu-root param'>
+                              <img id=mode-menu-icon class=menu-icon>
+                              <label>
+                                    mode
+                              </label>
+                              <div id=mode>
+                                    javascript
+                              </div>
+                              <div id=mode-menu class=menu style='display:none'>
+                                    <div class=menu-opt>javascript</div>
+                                    <div class=menu-opt>python</div>
+                                    <div class=menu-opt>html</div>
                               </div>
                         </div>
                         
@@ -309,6 +333,10 @@
         var deficon;
         
         
+        var theme       = 'textmate';
+        var mode        = 'text';
+        
+        
         var target      = host;
         
         var def         = {};
@@ -327,6 +355,8 @@
         var on          = {};
         var setup       = {};
         obj.css         = {};
+        var set         = {};
+        //obj.set         = {};
         
         
                                                                                 /*
@@ -621,8 +651,11 @@
               deficon                                     = $(hdr,'#filename-icon').src;
               
               
-              var node                                    = $(shadow,'#menu-2');
-              $(shadow,'#menu-2-icon').onclick            = menu.click(node,'both',false,click2);
+              var node                                    = $(shadow,'#theme-menu-2');
+              $(shadow,'#theme-menu-icon').onclick        = menu.click(node,'both',false,click.theme);
+              
+              var node                                    = $(shadow,'#mode-menu');
+              $(shadow,'#mode-menu-icon').onclick         = menu.click(node,'both',false,click.mode);
               
               
               row                                         = $(hdr,'#row');
@@ -1117,22 +1150,11 @@
         
         Object.defineProperty(obj,'mode',{
         
-              set   : v=>{
-              
-                    switch(v){
-                    
-                      case 'js'   : v='javascript';       break;
-                      case 'py'   : v='python';           break;
-                      
-                    }//switch
-                    
-                    editor.session.setMode(`ace/mode/${v}`)
-                    
-              },
+              set   : set.mode,
               get   : ()=>{
               
                     var mode    = editor.session.getMode().$id;
-                    console.log(mode);
+                                                                                console.log(mode);
                     var parts   = mode.split('/');
                     var mode    = parts.at(-1);
                     return mode;
@@ -1140,6 +1162,33 @@
               }
               
         });
+        
+        
+        obj.set.theme   = set.theme;
+        
+        set.theme    = function(v){
+        
+              editor.setTheme(`ace/theme/${v}`);
+              $(shadow,'#theme-menu-root #theme').textContent   = v;
+              
+        }//mode
+        
+        
+        obj.set.mode    = set.mode;
+        
+        set.mode    = function(v){
+        
+              switch(v){
+              
+                case 'js'   : v='javascript';       break;
+                case 'py'   : v='python';           break;
+                
+              }//switch
+              
+              editor.session.setMode(`ace/mode/${v}`);
+              $(shadow,'#mode-menu-root #mode').textContent   = v;
+              
+        }//mode
         
         
   //:
@@ -1235,28 +1284,38 @@
   //:
   
   
-        function click2(type,opt){
+        click.theme   = function(type,opt){
         
               if(type=='opt'){
                     var theme   = opt.id;
                     if(theme=='none'){
                           //theme   = 'textmate';
-                          editor.session.setMode('ace/mode/text');
+                          set.mode('text');
                           return;
                     }
                     if(theme=='none-dark'){
                           theme   = 'terminal';
-                          editor.setTheme(`ace/theme/${theme}`);
-                          editor.session.setMode('ace/mode/text');
+                          set.theme(theme);
+                          set.mode('text');
+                          //editor.session.setMode('ace/mode/text');
                           return;
                     }
                     //theme   = theme.toLowerCase();
                                                                                 console.log(opt.id,theme);
-                    editor.session.setMode('ace/mode/javascript');
-                    editor.setTheme(`ace/theme/${theme}`);
+                    set.theme(theme);
               }
               
-        }//click2
+        }//theme
+        
+        
+        click.mode    = function(type,opt){
+        
+              if(type=='opt'){
+                    var mode    = opt.textContent;
+                    set.mode(mode);
+              }
+              
+        }//mode
         
         
   //:
