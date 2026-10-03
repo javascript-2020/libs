@@ -1240,13 +1240,19 @@
               if(type=='opt'){
                     var theme   = opt.id;
                     if(theme=='none'){
-                          theme   = 'textmate';
+                          //theme   = 'textmate';
+                          editor.session.setMode('ace/mode/text');
+                          return;
                     }
                     if(theme=='none-dark'){
                           theme   = 'terminal';
+                          editor.setTheme(`ace/theme/${theme}`);
+                          editor.session.setMode('ace/mode/text');
+                          return;
                     }
-                    theme   = theme.toLowerCase();
+                    //theme   = theme.toLowerCase();
                                                                                 console.log(opt.id,theme);
+                    editor.session.setMode('ace/mode/javascript');
                     editor.setTheme(`ace/theme/${theme}`);
               }
               
