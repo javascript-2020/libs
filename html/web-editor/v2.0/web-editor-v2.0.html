@@ -163,9 +163,11 @@
                         <img id=menu-2-icon class=menu-icon>
                         <div id=menu-2 class=menu style='display:none'>
                               <div class=menu-div>light</div>
+                              <div class=menu-opt>none</div>
                               <div class=menu-opt>github</div>
                               <div class=menu-opt>chrome</div>
                               <div class=menu-div>dark</div>
+                              <div class=menu-opt>none dark</div>
                               <div class=menu-opt>monokai</div>
                               <div class=menu-opt>one_dark</div>
                               <div class=menu-opt>dracula</div>
@@ -1197,6 +1199,12 @@
         
               if(type=='opt'){
                     var theme   = opt.textContent.trim();
+                    if(theme=='none'){
+                          theme   = 'textmate';
+                    }
+                    if(theme=='none dark'){
+                          theme   = 'terminal';
+                    }
                     editor.setTheme(`ace/theme/${theme}`);
               }
               
