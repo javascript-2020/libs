@@ -1063,11 +1063,11 @@
         }//clear
         
         
-        obj.setValue    = function(txt,opts){return set(txt,opts)}
-        obj.setvalue    = function(txt,opts){return set(txt,opts)}
-        obj.set         = function(txt,opts){return set(txt,opts)}
+        obj.setValue    = function(txt,opts){return setvalue(txt,opts)}
+        obj.setvalue    = function(txt,opts){return setvalue(txt,opts)}
+        obj.set         = function(txt,opts){return setvalue(txt,opts)}
         
-        function set(txt,opts){
+        function setvalue(txt,opts){
         
               initial   = opts.initial;
               
@@ -1078,12 +1078,12 @@
         }//set
         
         
-        obj.getValue    = function(){return get()}
-        obj.getvalue    = function(){return get()}
-        obj.get         = function(){return get()}
+        obj.getValue    = function(){return getvalue()}
+        obj.getvalue    = function(){return getvalue()}
+        obj.get         = function(){return getvalue()}
         
         
-        function get(){
+        function getvalue(){
         
               var txt   = editor.getValue();
               return txt;
