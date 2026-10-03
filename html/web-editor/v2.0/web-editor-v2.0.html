@@ -130,6 +130,12 @@
   .ace_non-ascii-marker
     {position:absolute;background-color:rgba(255,170,0,0.3);border-bottom:1px dotted #ff8800}
     
+  .spinner-hldr
+    {width:20px;height:20px}
+  .spinner
+    {width:100%;height:100%;
+      content:url(/images/spinner.gif);
+    }
     
             </style>
             
@@ -180,7 +186,9 @@
                         
                         <div id=theme-menu-root class='menu-root param'>
                               <img id=theme-menu-icon class=menu-icon>
-                              <img class=spinner style='visibility:hidden'>
+                              <div class=spinner-hldr>
+                                    <img class=spinner style='display:none'>
+                              </div>
                               <label>
                                     theme
                               </label>
@@ -236,7 +244,9 @@
                         
                         <div id=mode-menu-root class='menu-root param'>
                               <img id=mode-menu-icon class=menu-icon>
-                              <img class=spinner style='visibility:hidden'>
+                              <div class=spinner-hldr>
+                                    <img class=spinner style='display:none'>
+                              </div>
                               <label>
                                     mode
                               </label>
@@ -1189,6 +1199,7 @@
         set.theme    = async function(v){
         
               var path      = `ace/theme/${v}`;
+              $('#theme-menu-root .spinner').style.display   = '';
               var result    = await loadmodule(path);
               if(result){
                     editor.setTheme(path);
@@ -1196,6 +1207,7 @@
               }else{
                     log.error('failed to load :',v);
               }
+              $('#theme-menu-root .spinner').style.display   = 'none';
               
         }//mode
         
@@ -1212,6 +1224,7 @@
               }//switch
               
               var path      = `ace/mode/${v}`;
+              $('#mode-menu-root .spinner').style.display   = '';
               var result    = await loadmodule(path);
               if(result){
                     editor.session.setMode(path);
@@ -1219,6 +1232,7 @@
               }else{
                     log.error('failed to load :',v);
               }
+              $('#mode-menu-root .spinner').style.display   = 'none';
               
         }//mode
         
