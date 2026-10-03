@@ -1184,17 +1184,23 @@
         
         obj.set.theme   = set.theme;
         
-        set.theme    = function(v){
+        set.theme    = async function(v){
         
-              editor.setTheme(`ace/theme/${v}`);
-              $(shadow,'#theme-menu-root #theme').textContent   = v;
+              var path      = `ace/theme/${v}`;
+              var result    = await loadmodule(path);
+              if(result){
+                    editor.setTheme(path);
+                    $(shadow,'#theme-menu-root #theme').textContent   = v;
+              }else{
+                    log.error('failed to load :',v);
+              }
               
         }//mode
         
         
         obj.set.mode    = set.mode;
         
-        set.mode    = function(v){
+        set.mode    = async function(v){
         
               switch(v){
               
@@ -1203,11 +1209,36 @@
                 
               }//switch
               
-              editor.session.setMode(`ace/mode/${v}`);
-              $(shadow,'#mode-menu-root #mode').textContent   = v;
+              var path      = `ace/mode/${v}`;
+              var result    = await loadmodule(path);
+              if(result){
+                    editor.session.setMode(path);
+                    $(shadow,'#mode-menu-root #mode').textContent   = v;
+              }else{
+                    log.error('failed to load :',v);
+              }
               
         }//mode
         
+        
+        function loadmodule(path){
+        
+              var resolve,promise=new Promise(res=>resolve=res);
+              
+              ace.config.loadModule(path,module=>{
+              
+                    if(!module){
+                                                                                console.error('Failed to load module : '+path);
+                    }else{
+                                                                                console.log('Successfully loaded module :',path);
+                    }
+                    var result    = !!module;
+                    resolve(result);
+              });
+              
+              return promise;
+              
+        }//loadmodule
         
   //:
   
