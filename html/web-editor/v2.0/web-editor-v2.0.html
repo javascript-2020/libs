@@ -121,8 +121,8 @@
             
                   <div id=hdr>
                   
-                        <img id=menu-1 class=menu-icon>
-                        <div class=menu style='display:none'>
+                        <img id=menu-1-icon class=menu-icon>
+                        <div id=menu-1 class=menu style='display:none'>
                         
                               <div id=trim class=menu-opt>trim</div>
                               <div id=wordwrap class=menu-opt>word wrap</div>
@@ -160,8 +160,8 @@
                         
                         <span id=spc></span>
                         
-                        <img id=menu-2 class=menu-icon>
-                        <div class=menu style='display:none'>
+                        <img id=menu-2-icon class=menu-icon>
+                        <div id=menu-2 class=menu style='display:none'>
                               <div class=menu-div>light</div>
                               <div class=menu-opt>github</div>
                               <div class=menu-opt>chrome</div>
@@ -560,8 +560,8 @@
               
               hdr                                         = $(shadow,'#hdr');
               
-              card                                        = $(shadow,'.menu');
-              $(shadow,'#menu-1').onclick                 = menu.click(card,'both',false,click1);
+              card                                        = $(shadow,'#menu-1');
+              $(shadow,'#menu-1-icon').onclick            = menu.click(card,'both',false,click1);
               
               var sha256_root                             = $(card,'#sha256-root');
               $(sha256_root,'.copy').onclick              = async e=>{
@@ -578,9 +578,10 @@
                                                             
               deficon                                     = $(hdr,'#filename-icon').src;
               
-              $(shadow,'#clear').onclick                  = btn.clear;
-              $(shadow,'#copy').onclick                   = btn.copy;
-              $(shadow,'#paste').onclick                  = btn.paste;
+              
+              var node                                    = $(shadow,'#menu-2');
+              $(shadow,'#menu-2').onclick                 = menu.click(card,'both',false,click2);
+              
               
               row                                         = $(hdr,'#row');
               row.onkeydown                               = kd.row;
@@ -588,6 +589,12 @@
               col                                         = $(hdr,'#col');
               col.onkeydown                               = kd.col;
               col.onmousedown                             = e=>e.target.select();
+              
+              
+              $(shadow,'#clear').onclick                  = btn.clear;
+              $(shadow,'#copy').onclick                   = btn.copy;
+              $(shadow,'#paste').onclick                  = btn.paste;
+              
               
               $(hdr,'#top').onclick                       = btn.top;
               $(hdr,'#bottom').onclick                    = btn.bottom;
