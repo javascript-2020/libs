@@ -1307,18 +1307,15 @@
               if(type=='opt'){
                     var theme   = opt.id;
                     if(theme=='none'){
-                          //theme   = 'textmate';
+                          set.theme('textmate');
                           set.mode('text');
                           return;
                     }
                     if(theme=='none-dark'){
-                          theme   = 'terminal';
-                          set.theme(theme);
+                          set.theme('terminal');
                           set.mode('text');
-                          //editor.session.setMode('ace/mode/text');
                           return;
                     }
-                    //theme   = theme.toLowerCase();
                                                                                 console.log(opt.id,theme);
                     set.theme(theme);
               }
