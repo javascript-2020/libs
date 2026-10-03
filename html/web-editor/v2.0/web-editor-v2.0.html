@@ -1199,7 +1199,7 @@
         set.theme    = async function(v){
         
               var path      = `ace/theme/${v}`;
-              $('#theme-menu-root .spinner').style.display   = '';
+              $(shadow,'#theme-menu-root .spinner').style.display   = '';
               var result    = await loadmodule(path);
               if(result){
                     editor.setTheme(path);
@@ -1207,7 +1207,7 @@
               }else{
                     log.error('failed to load :',v);
               }
-              $('#theme-menu-root .spinner').style.display   = 'none';
+              $(shadow,'#theme-menu-root .spinner').style.display   = 'none';
               
         }//mode
         
@@ -1224,7 +1224,7 @@
               }//switch
               
               var path      = `ace/mode/${v}`;
-              $('#mode-menu-root .spinner').style.display   = '';
+              $(shadow,'#mode-menu-root .spinner').style.display   = '';
               var result    = await loadmodule(path);
               if(result){
                     editor.session.setMode(path);
@@ -1232,7 +1232,7 @@
               }else{
                     log.error('failed to load :',v);
               }
-              $('#mode-menu-root .spinner').style.display   = 'none';
+              $(shadow,'#mode-menu-root .spinner').style.display   = 'none';
               
         }//mode
         
