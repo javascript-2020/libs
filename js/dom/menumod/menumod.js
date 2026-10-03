@@ -815,8 +815,8 @@ function menumod(){
     
   .menu-div
     {display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:5px;color:gray;margin:10px 0}
-  .menu-div::before, .divider::after
-    {content:' ';border-top: 1px solid gray}
+  .menu-div::before, .menu-div::after
+    {content:' ';border-top:1px solid gray}
     
         `;
         
