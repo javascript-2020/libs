@@ -1205,7 +1205,20 @@
               
               editor.session.setMode(`ace/mode/${v}`);
               $(shadow,'#mode-menu-root #mode').textContent   = v;
-              
+/*
+ace.config.loadModule(modePath, function(module) {
+    if (!module) {
+        console.error("Failed to load mode: " + modePath);
+        // Fallback to plain text
+        editor.session.setMode("ace/mode/text");
+        return;
+    }
+    
+    // Success: apply the mode
+    editor.session.setMode(modePath);
+    console.log("Successfully loaded and applied mode:", modePath);
+});
+*/
         }//mode
         
         
