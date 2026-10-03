@@ -1245,6 +1245,7 @@
                     if(theme=='none dark'){
                           theme   = 'terminal';
                     }
+                    theme   = theme.toLowerCase();
                                                                                 console.log(theme);
                     editor.setTheme(`ace/theme/${theme}`);
               }
