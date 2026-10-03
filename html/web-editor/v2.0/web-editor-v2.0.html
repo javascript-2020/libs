@@ -169,7 +169,7 @@
                               <div id=menu-2 class=menu style='display:none'>
                               
                                     <div class=menu-div>light</div>
-                                    <div class=menu-opt>none</div>
+                                    <div id=none class=menu-opt>none</div>
                                     <div id=chrome class=menu-opt>Chrome</div>
                                     <div id=clouds class=menu-opt>Clouds</div>
                                     <div id=crimson_editor class=menu-opt>Crimson Editor</div>
@@ -187,7 +187,7 @@
                                     <div id=xcode class=menu-opt>XCode</div>
                                     
                                     <div class=menu-div>dark</div>
-                                    <div class=menu-opt>none dark</div>
+                                    <div id=none-dark class=menu-opt>none dark</div>
                                     <div id=ambiance class=menu-opt>Ambiance</div>
                                     <div id=chaos class=menu-opt>Chaos</div>
                                     <div id=clouds_midnight class=menu-opt>Clouds Midnight</div>
@@ -1242,11 +1242,11 @@
                     if(theme=='none'){
                           theme   = 'textmate';
                     }
-                    if(theme=='none dark'){
+                    if(theme=='none-dark'){
                           theme   = 'terminal';
                     }
                     theme   = theme.toLowerCase();
-                                                                                console.log(theme);
+                                                                                console.log(opt.id,theme);
                     editor.setTheme(`ace/theme/${theme}`);
               }
               
