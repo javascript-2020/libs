@@ -24,22 +24,18 @@
   #theme-menu
     {position:absolute;left:30px;top:35px}
   #mode-menu-root
-    {margin-right:25px}
+    {}
   #mode-menu
     {position:absolute;left:30px;top:35px}
   .param
-    {/*border:1px solid lightgray;padding:5px 10px;border-radius:5px;*/display:flex !important;align-items:center;position:relative;
-      margin-right:10px}
+    {border:1px solid gray;padding:5px 10px;border-radius:5px;display:flex !important;align-items:center;position:relative;
+    }
   .param label
     {padding-right:5px;border-right:1px solid lightgray;margin-right:5px}
   .param #theme
     {width:120px;font-weight:bold}
   .param #mode
     {width:120px;font-weight:bold}
-    
-    
-  #clear
-    {width:20px;height:20px;margin:0 10px}
     
     
   .icon
@@ -55,7 +51,7 @@
     
     
   .menu #sha256-root
-    {display:flex;flex-direction:column;border:1px solid lightgray;padding:5px}
+    {display:flex;flex-direction:column;border:1px solid gray;padding:5px;border-radius:5px}
   .menu #sha256-root #value-root
     {display:flex;gap:5px}
   .menu #sha256-root #value
@@ -129,6 +125,8 @@
   .seo-code
     {display:none}
     
+  #ascii-chk-root
+    {display:flex;gap:10px;border:1px solid gray;padding:5px 10px;margin-bottom:10px;border-radius:5px}
     
   .ace_non-ascii-marker
     {position:absolute;background-color:rgba(255,170,0,0.3);border-bottom:1px dotted #ff8800}
@@ -140,6 +138,11 @@
       content:url(https://ext-code.com/images/spinner.gif);
     }
     
+  .flex
+    {display:flex;gap:10px}
+  .flex>*
+    {flex:1}
+    
             </style>
             
             <div id=root part=root>
@@ -150,17 +153,110 @@
                               <img id=menu-1-icon class=menu-icon>
                               <div id=menu-1 class=menu style='display:none'>
                               
+                                    <div class=menu-title>
+                                          editor menu
+                                    </div>
+                                    
+                                    <div id=clear class=menu-opt>clear</div>
                                     <div id=trim class=menu-opt>trim</div>
                                     <div id=wordwrap class=menu-opt>word wrap</div>
                                     
-                                    <div style='display:flex;gap:10px;border:1px solid lightgray;padding:5px 10px;margin-bottom:10px'>
+                                    <hr style='height:1px;background:blue;margin:10px 20px 20px'>
+                                    
+                                    <div class=flex>
+                                          <div id=theme-menu-root class='menu-root param'>
+                                                <img id=theme-menu-icon class=menu-icon>
+                                                <div class=spinner-hldr>
+                                                      <img class=spinner style='display:none'>
+                                                </div>
+                                                <label>
+                                                      theme
+                                                </label>
+                                                <div id=theme>
+                                                      textmate
+                                                </div>
+                                                <div id=theme-menu class=menu style='display:none;height:250px;overflow:auto'>
+                                                
+                                                      <div class=menu-div>light</div>
+                                                      <div id=none class=menu-opt>none</div>
+                                                      <div id=chrome class=menu-opt>Chrome</div>
+                                                      <div id=clouds class=menu-opt>Clouds</div>
+                                                      <div id=crimson_editor class=menu-opt>Crimson Editor</div>
+                                                      <div id=dawn class=menu-opt>Dawn</div>
+                                                      <div id=dreamweaver class=menu-opt>Dreamweaver</div>
+                                                      <div id=eclipse class=menu-opt>Eclipse</div>
+                                                      <div id=github class=menu-opt>GitHub</div>
+                                                      <div id=iplastic class=menu-opt>IPlastic</div>
+                                                      <div id=katzenmilch class=menu-opt>KatzenMilch</div>
+                                                      <div id=kuroir class=menu-opt>Kuroir</div>
+                                                      <div id=solarized_light class=menu-opt>Solarized Light</div>
+                                                      <div id=sqlserver class=menu-opt>SQL Server</div>
+                                                      <div id=textmate class=menu-opt>TextMate</div>
+                                                      <div id=tomorrow class=menu-opt>Tomorrow</div>
+                                                      <div id=xcode class=menu-opt>XCode</div>
+                                                      
+                                                      <div class=menu-div>dark</div>
+                                                      <div id=none-dark class=menu-opt>none dark</div>
+                                                      <div id=ambiance class=menu-opt>Ambiance</div>
+                                                      <div id=chaos class=menu-opt>Chaos</div>
+                                                      <div id=clouds_midnight class=menu-opt>Clouds Midnight</div>
+                                                      <div id=cobalt class=menu-opt>Cobalt</div>
+                                                      <div id=dracula class=menu-opt>Dracula</div>
+                                                      <div id=gob class=menu-opt>Greeon on Black</div>
+                                                      <div id=gruvbox class=menu-opt>Gruvbox</div>
+                                                      <div id=idle_fingers class=menu-opt>idle Fingers</div>
+                                                      <div id=kr_theme class=menu-opt>krTheme</div>
+                                                      <div id=merbivore class=menu-opt>Merbivore</div>
+                                                      <div id=merbivore_soft class=menu-opt>Merbivore Soft</div>
+                                                      <div id=mono_industrial class=menu-opt>Mono Industrial</div>
+                                                      <div id=monokai class=menu-opt>Monokai</div>
+                                                      <div id=pastel_on_dark class=menu-opt>Pastel on Dark</div>
+                                                      <div id=solarized_dark class=menu-opt>Solarized Dark</div>
+                                                      <div id=terminal class=menu-opt>Terminal</div>
+                                                      <div id=tomorrow_night class=menu-opt>Tomorrow Night</div>
+                                                      <div id=tomorrow_night_blue class=menu-opt>Tomorrow Night Blue</div>
+                                                      <div id=tomorrow_night_bright class=menu-opt>Tomorrow Night Bright</div>
+                                                      <div id=tomorrow_night_eighties class=menu-opt>Tomorrow Night 80s</div>
+                                                      <div id=twilight class=menu-opt>Twilight</div>
+                                                      <div id=vibrant_ink class=menu-opt>Vibrant Ink</div>
+                                                      
+                                                </div theme-menu>
+                                          </div theme-menu-root>
+                                          
+                                          <div id=mode-menu-root class='menu-root param'>
+                                                <img id=mode-menu-icon class=menu-icon>
+                                                <div class=spinner-hldr>
+                                                      <img class=spinner style='display:none'>
+                                                </div>
+                                                <label>
+                                                      mode
+                                                </label>
+                                                <div id=mode>
+                                                      javascript
+                                                </div>
+                                                <div id=mode-menu class=menu style='display:none;height:250px;overflow:auto'>
+                                                      <div class=menu-opt>javascript</div>
+                                                      <div class=menu-opt>typescript</div>
+                                                      <div class=menu-opt>c_cpp</div>
+                                                      <div class=menu-opt>python</div>
+                                                      <div class=menu-opt>html</div>
+                                                      <div class=menu-opt>css</div>
+                                                      <div class=menu-opt>markdown</div>
+                                                      <div class=menu-opt>json</div>
+                                                      <div class=menu-opt>text</div>
+                                                </div mode-menu>
+                                          </div mode-menu-root>
+                                          
+                                    </div>
+                                    
+                                    <div class=menu-sep style='border-color:blue;margin:20px'></div>
+                                    
+                                    <div id=ascii-chk-root>
                                           <div id=ascii-chk class=menu-opt style='flex:1;margin:0'>ascii check</div>
                                           <div id=ascii-chk-clear class=menu-opt style='flex:1;margin:0'>clear</div>
                                     </div>
                                     
-                                    <div id=sample class=menu-opt>sample text</div>
-                                    
-                                    <div id=sha256-root>
+                                    <div id=sha256-root style='margin-bottom:10px'>
                                           <div id=sha256 class=menu-opt>
                                                 sha256
                                           </div>
@@ -170,10 +266,11 @@
                                                 <div id=value>---</div>
                                           </div>
                                     </div>
-                              </div>
+                                    
+                                    <div id=sample class=menu-opt>sample text</div>
+                                    
+                              </div menu-1>
                         </div>
-                        
-                        <img id=clear class='clear icon'>
                         
                         <div id=filename-root>
                               <img id=filename-icon src='data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAP1BMVEVHcEwVFRUICAgkJCQMDAwLCwsNDQ1QUFAICAgrKysQEBAVFRUHBwcLCwsZGRkKCgoHBwfd3d0ICAgkJCQEBATHNF52AAAAFXRSTlMAQ9IblZl1BbQOXDbHiiWj1wG2H/ZbTuAhAAAA5klEQVQ4y72V2w6DIAxAKQjIRRT1/791gkg226mJc+elSE5qqYCMPQV0zY4uUF7grdwxc0cl5NNuxvjBO0oUuxnhbUPkxKLxYCQ2yYzMSPT2LMbCmpFbRphJtH0B0ozu/TJsZy+QCF1hTTKpNG4GOKlxK5XfEKNOsBIzkRTt2C5AVDkmRkuKTiUCA1Vx92q8LDqFcAeLeefLYt7actyeyzUKVwnM5ChIUQ2VJgJPUZGiCZXtwdyrURuEpvvoEXQfg0XQX0b/fFN84PIxgwuiTAfX/mXjTtdE4iJdaXk4u5rLBQ2P/Q1eGdEQZZzIbegAAAAASUVORK5CYII='>
@@ -189,87 +286,6 @@
                         
                         <span id=spc></span>
                         
-                        <div id=theme-menu-root class='menu-root param'>
-                              <img id=theme-menu-icon class=menu-icon>
-                              <div class=spinner-hldr>
-                                    <img class=spinner style='display:none'>
-                              </div>
-                              <label>
-                                    theme
-                              </label>
-                              <div id=theme>
-                                    textmate
-                              </div>
-                              <div id=theme-menu class=menu style='display:none'>
-                              
-                                    <div class=menu-div>light</div>
-                                    <div id=none class=menu-opt>none</div>
-                                    <div id=chrome class=menu-opt>Chrome</div>
-                                    <div id=clouds class=menu-opt>Clouds</div>
-                                    <div id=crimson_editor class=menu-opt>Crimson Editor</div>
-                                    <div id=dawn class=menu-opt>Dawn</div>
-                                    <div id=dreamweaver class=menu-opt>Dreamweaver</div>
-                                    <div id=eclipse class=menu-opt>Eclipse</div>
-                                    <div id=github class=menu-opt>GitHub</div>
-                                    <div id=iplastic class=menu-opt>IPlastic</div>
-                                    <div id=katzenmilch class=menu-opt>KatzenMilch</div>
-                                    <div id=kuroir class=menu-opt>Kuroir</div>
-                                    <div id=solarized_light class=menu-opt>Solarized Light</div>
-                                    <div id=sqlserver class=menu-opt>SQL Server</div>
-                                    <div id=textmate class=menu-opt>TextMate</div>
-                                    <div id=tomorrow class=menu-opt>Tomorrow</div>
-                                    <div id=xcode class=menu-opt>XCode</div>
-                                    
-                                    <div class=menu-div>dark</div>
-                                    <div id=none-dark class=menu-opt>none dark</div>
-                                    <div id=ambiance class=menu-opt>Ambiance</div>
-                                    <div id=chaos class=menu-opt>Chaos</div>
-                                    <div id=clouds_midnight class=menu-opt>Clouds Midnight</div>
-                                    <div id=cobalt class=menu-opt>Cobalt</div>
-                                    <div id=dracula class=menu-opt>Dracula</div>
-                                    <div id=gob class=menu-opt>Greeon on Black</div>
-                                    <div id=gruvbox class=menu-opt>Gruvbox</div>
-                                    <div id=idle_fingers class=menu-opt>idle Fingers</div>
-                                    <div id=kr_theme class=menu-opt>krTheme</div>
-                                    <div id=merbivore class=menu-opt>Merbivore</div>
-                                    <div id=merbivore_soft class=menu-opt>Merbivore Soft</div>
-                                    <div id=mono_industrial class=menu-opt>Mono Industrial</div>
-                                    <div id=monokai class=menu-opt>Monokai</div>
-                                    <div id=pastel_on_dark class=menu-opt>Pastel on Dark</div>
-                                    <div id=solarized_dark class=menu-opt>Solarized Dark</div>
-                                    <div id=terminal class=menu-opt>Terminal</div>
-                                    <div id=tomorrow_night class=menu-opt>Tomorrow Night</div>
-                                    <div id=tomorrow_night_blue class=menu-opt>Tomorrow Night Blue</div>
-                                    <div id=tomorrow_night_bright class=menu-opt>Tomorrow Night Bright</div>
-                                    <div id=tomorrow_night_eighties class=menu-opt>Tomorrow Night 80s</div>
-                                    <div id=twilight class=menu-opt>Twilight</div>
-                                    <div id=vibrant_ink class=menu-opt>Vibrant Ink</div>
-                              </div>
-                        </div>
-                        
-                        <div id=mode-menu-root class='menu-root param'>
-                              <img id=mode-menu-icon class=menu-icon>
-                              <div class=spinner-hldr>
-                                    <img class=spinner style='display:none'>
-                              </div>
-                              <label>
-                                    mode
-                              </label>
-                              <div id=mode>
-                                    javascript
-                              </div>
-                              <div id=mode-menu class=menu style='display:none'>
-                                    <div class=menu-opt>javascript</div>
-                                    <div class=menu-opt>typescript</div>
-                                    <div class=menu-opt>c_cpp</div>
-                                    <div class=menu-opt>python</div>
-                                    <div class=menu-opt>html</div>
-                                    <div class=menu-opt>css</div>
-                                    <div class=menu-opt>markdown</div>
-                                    <div class=menu-opt>json</div>
-                                    <div class=menu-opt>text</div>
-                              </div>
-                        </div>
                         
                         <input id=row value=0>
                         <input id=col value=0>
@@ -670,7 +686,14 @@
               card                                        = $(shadow,'#menu-1');
               $(shadow,'#menu-1-icon').onclick            = menu.click(card,'both',false,click1);
               
-              $(shadow,'#clear').onclick                  = btn.clear;
+              var node                                    = $(shadow,'#theme-menu');
+              $(shadow,'#theme-menu-icon').onclick        = menu.click.stack(node,'both',false,click.theme);
+              
+              var node                                    = $(shadow,'#mode-menu');
+              $(shadow,'#mode-menu-icon').onclick         = menu.click.stack(node,'both',false,click.mode);
+              
+              
+              
               
               var sha256_root                             = $(card,'#sha256-root');
               $(sha256_root,'.copy').onclick              = async e=>{
@@ -686,13 +709,6 @@
                                                             }//clear
                                                             
               deficon                                     = $(hdr,'#filename-icon').src;
-              
-              
-              var node                                    = $(shadow,'#theme-menu');
-              $(shadow,'#theme-menu-icon').onclick        = menu.click(node,'both',false,click.theme);
-              
-              var node                                    = $(shadow,'#mode-menu');
-              $(shadow,'#mode-menu-icon').onclick         = menu.click(node,'both',false,click.mode);
               
               
               row                                         = $(hdr,'#row');
@@ -914,15 +930,16 @@
               
         }//col
         
-        
+/*
         btn.clear   = function(e){
         
               clear();
               editor.focus();
               
         }//clear
-        
-        
+*/
+
+
         btn.copy    = function(){
         
               var txt       = editor.getValue();
@@ -1268,13 +1285,23 @@
   
   
         function click1(type,opt){
-        
+                                                                                console.log('click1',type,opt);
               if(type=='opt'){
                     click1[opt.id]();
+              }
+              if(type=='hide'){
+                    editor.focus();
               }
               
         }//menu
         
+        
+        click1.clear    = function(){
+        
+              clear();
+              editor.focus();
+              
+        }//clear
         
         click1.trim   = function(){
         
@@ -1306,6 +1333,7 @@
         
               var txt   = editor.getValue();
               sha256(txt);
+              editor.focus();
               
         }//sha256
         
@@ -1318,8 +1346,7 @@
               highlight(list);
               gutter(list);
               tooltip(list);
-              
-              console.log(list);
+              editor.focus();
               
         }//ascii-chk
         
@@ -1329,6 +1356,7 @@
               highlight.clear();
               gutter.clear();
               tooltip.clear();
+              editor.focus();
               
         }//ascii-chk-clear
         
@@ -1350,6 +1378,7 @@
                     const nbsp = "test\u00A0string"; // Non-breaking space
               `;
               editor.setValue(txt,-1);
+              editor.focus();
               
         }//sample
         
@@ -1373,6 +1402,7 @@
                     }
                                                                                 console.log(opt.id,theme);
                     set.theme(theme);
+                    //editor.focus();
               }
               
         }//theme
@@ -1383,6 +1413,7 @@
               if(type=='opt'){
                     var mode    = opt.textContent;
                     set.mode(mode);
+                    //editor.focus();
               }
               
         }//mode
