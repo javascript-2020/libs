@@ -651,7 +651,7 @@ function menumod(){
   //:
   
   
-        function focusout(e){
+        function focusout(e){debugger;
                                                                           debug('focusout');
               var focus   = e.relatedTarget;
                                                                           console.log('focus',focus);
