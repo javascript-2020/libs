@@ -151,7 +151,7 @@ function menumod(){
         
         obj.click.stack   = function(node,params){
         
-              node.onclick    = e=>add.stack.appply(null,arguments);
+              return e=>add.stack.appply(null,arguments);
               
         }//stack
         
@@ -172,7 +172,7 @@ function menumod(){
               if(!node.classList.contains('.menu')){
                     node    = $(node,'.menu');
               }
-              node.onclick    = e=>add.stack.apply(null,arguments);
+              return e=>add.stack.apply(null,arguments);
               
         }//stack
         
