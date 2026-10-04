@@ -496,8 +496,8 @@ function menumod(){
                     state.opt               = null;
               }
               
-              $.hide(node);
               callback('hide');
+              $.hide(node);
               
         }//hide
         
