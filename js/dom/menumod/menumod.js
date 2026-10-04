@@ -659,7 +659,7 @@ function menumod(){
                                                                           debug('chk');
                     return;
               }
-              console.log('focusout.close');
+                                                                          console.log('focusout.close');
               close();
               
               
