@@ -149,6 +149,13 @@ function menumod(){
         }//click
         
         
+        obj.click.stack   = function(node,params){
+        
+              node.onclick    = e=>add.stack.appply(null,arguments);
+              
+        }//stack
+        
+        
         obj.click2    = function(node,params){
         
               if(!node.classList.contains('.menu')){
@@ -158,6 +165,16 @@ function menumod(){
               return result;
               
         }//click2
+        
+        
+        obj.click2.stack    = function(node,params){
+        
+              if(!node.classList.contains('.menu')){
+                    node    = $(node,'.menu');
+              }
+              node.onclick    = e=>add.stack.apply(null,arguments);
+              
+        }//stack
         
         
   //:
