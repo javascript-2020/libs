@@ -430,7 +430,7 @@
                     if(node.parentNode){
                           node    = node.parentNode;
                     }else{
-                          var root    = current.getRootNode();
+                          var root    = node.getRootNode();
                           node        = (root instanceof ShadowRoot) ? root.host : null;
                     }
                     
