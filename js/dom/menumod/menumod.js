@@ -655,7 +655,7 @@ function menumod(){
                     for(var i=0;i<n;i++){
                     
                           var o    = list[i];
-                          if($.is.parent(o.node,focus)){
+                          if($.is.parent.full(o.node,focus)){
                                                                           //console.log('list',o.node);
                                 return true;
                           }
