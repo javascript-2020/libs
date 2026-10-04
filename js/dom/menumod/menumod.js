@@ -457,6 +457,7 @@ function menumod(){
   //:
   
         function show(node){
+                                                                                if(!node)debugger;
                                                                                 debug('show',node.id);
               state.opt   = null;
               
