@@ -151,7 +151,7 @@ function menumod(){
         
         obj.click.stack   = function(node,params){
         
-              return e=>add.stack.appply(null,arguments);
+              return e=>add.stack.apply(null,arguments);
               
         }//stack
         
