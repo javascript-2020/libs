@@ -421,6 +421,25 @@
         }//is.parent
         
         
+        $.is.parent.full    = function(par,node){
+        
+              while(node){
+              
+                    if(node===par)return true;
+                    
+                    if(node.parentNode){
+                          node    = node.parentNode;
+                    }else{
+                          var root    = current.getRootNode();
+                          node        = (root instanceof ShadowRoot) ? root.host : null;
+                    }
+                    
+              }//while
+              return false;
+              
+        }//full
+        
+        
         $.is.node   = function(node){
         
               if(typeof node!='object')return false;
