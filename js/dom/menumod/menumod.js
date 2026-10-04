@@ -256,7 +256,7 @@ function menumod(){
                                 return;
                           }
                           
-                          if(stack.length){
+                          if(stack.length){debugger;
                                 stack.pop();
                                 hide(node);
                                 cur   = get.cur('node');
