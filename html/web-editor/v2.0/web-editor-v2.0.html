@@ -1279,6 +1279,13 @@
         }//menu
         
         
+        click1.clear    = function(){
+        
+              clear();
+              editor.focus();
+              
+        }//clear
+        
         click1.trim   = function(){
         
               var pos     = editor.getCursorPosition();
@@ -1309,6 +1316,7 @@
         
               var txt   = editor.getValue();
               sha256(txt);
+              editor.focus();
               
         }//sha256
         
@@ -1321,8 +1329,7 @@
               highlight(list);
               gutter(list);
               tooltip(list);
-              
-              console.log(list);
+              editor.focus();
               
         }//ascii-chk
         
@@ -1332,6 +1339,7 @@
               highlight.clear();
               gutter.clear();
               tooltip.clear();
+              editor.focus();
               
         }//ascii-chk-clear
         
@@ -1353,6 +1361,7 @@
                     const nbsp = "test\u00A0string"; // Non-breaking space
               `;
               editor.setValue(txt,-1);
+              editor.focus();
               
         }//sample
         
@@ -1377,6 +1386,7 @@
                                                                                 console.log(opt.id,theme);
                     set.theme(theme);
               }
+              editor.focus();
               
         }//theme
         
@@ -1387,6 +1397,7 @@
                     var mode    = opt.textContent;
                     set.mode(mode);
               }
+              editor.focus();
               
         }//mode
         
