@@ -654,12 +654,12 @@ function menumod(){
         function focusout(e){
                                                                           debug('focusout');
               var focus   = e.relatedTarget;
-                                                                          console.log('focus',focus);
+                                                                          //console.log('focus',focus);
               if(chk(focus)){
                                                                           debug('chk');
                     return;
               }
-                                                                          console.log('focusout.close');
+                                                                          //console.log('focusout.close');
               close();
               
               
