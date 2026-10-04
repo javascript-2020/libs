@@ -140,6 +140,11 @@
       content:url(https://ext-code.com/images/spinner.gif);
     }
     
+  .flex
+    {display:flex;gap:10px}
+  .flex>*
+    {flex:1}
+    
             </style>
             
             <div id=root part=root>
@@ -172,88 +177,91 @@
                                           </div>
                                     </div>
                                     
-                                    <div id=theme-menu-root class='menu-root param'>
-                                          <img id=theme-menu-icon class=menu-icon>
-                                          <div class=spinner-hldr>
-                                                <img class=spinner style='display:none'>
-                                          </div>
-                                          <label>
-                                                theme
-                                          </label>
-                                          <div id=theme>
-                                                textmate
-                                          </div>
-                                          <div id=theme-menu class=menu style='display:none;height:250px;overflow:auto'>
+                                    <div class=flex>
+                                          <div id=theme-menu-root class='menu-root param'>
+                                                <img id=theme-menu-icon class=menu-icon>
+                                                <div class=spinner-hldr>
+                                                      <img class=spinner style='display:none'>
+                                                </div>
+                                                <label>
+                                                      theme
+                                                </label>
+                                                <div id=theme>
+                                                      textmate
+                                                </div>
+                                                <div id=theme-menu class=menu style='display:none;height:250px;overflow:auto'>
+                                                
+                                                      <div class=menu-div>light</div>
+                                                      <div id=none class=menu-opt>none</div>
+                                                      <div id=chrome class=menu-opt>Chrome</div>
+                                                      <div id=clouds class=menu-opt>Clouds</div>
+                                                      <div id=crimson_editor class=menu-opt>Crimson Editor</div>
+                                                      <div id=dawn class=menu-opt>Dawn</div>
+                                                      <div id=dreamweaver class=menu-opt>Dreamweaver</div>
+                                                      <div id=eclipse class=menu-opt>Eclipse</div>
+                                                      <div id=github class=menu-opt>GitHub</div>
+                                                      <div id=iplastic class=menu-opt>IPlastic</div>
+                                                      <div id=katzenmilch class=menu-opt>KatzenMilch</div>
+                                                      <div id=kuroir class=menu-opt>Kuroir</div>
+                                                      <div id=solarized_light class=menu-opt>Solarized Light</div>
+                                                      <div id=sqlserver class=menu-opt>SQL Server</div>
+                                                      <div id=textmate class=menu-opt>TextMate</div>
+                                                      <div id=tomorrow class=menu-opt>Tomorrow</div>
+                                                      <div id=xcode class=menu-opt>XCode</div>
+                                                      
+                                                      <div class=menu-div>dark</div>
+                                                      <div id=none-dark class=menu-opt>none dark</div>
+                                                      <div id=ambiance class=menu-opt>Ambiance</div>
+                                                      <div id=chaos class=menu-opt>Chaos</div>
+                                                      <div id=clouds_midnight class=menu-opt>Clouds Midnight</div>
+                                                      <div id=cobalt class=menu-opt>Cobalt</div>
+                                                      <div id=dracula class=menu-opt>Dracula</div>
+                                                      <div id=gob class=menu-opt>Greeon on Black</div>
+                                                      <div id=gruvbox class=menu-opt>Gruvbox</div>
+                                                      <div id=idle_fingers class=menu-opt>idle Fingers</div>
+                                                      <div id=kr_theme class=menu-opt>krTheme</div>
+                                                      <div id=merbivore class=menu-opt>Merbivore</div>
+                                                      <div id=merbivore_soft class=menu-opt>Merbivore Soft</div>
+                                                      <div id=mono_industrial class=menu-opt>Mono Industrial</div>
+                                                      <div id=monokai class=menu-opt>Monokai</div>
+                                                      <div id=pastel_on_dark class=menu-opt>Pastel on Dark</div>
+                                                      <div id=solarized_dark class=menu-opt>Solarized Dark</div>
+                                                      <div id=terminal class=menu-opt>Terminal</div>
+                                                      <div id=tomorrow_night class=menu-opt>Tomorrow Night</div>
+                                                      <div id=tomorrow_night_blue class=menu-opt>Tomorrow Night Blue</div>
+                                                      <div id=tomorrow_night_bright class=menu-opt>Tomorrow Night Bright</div>
+                                                      <div id=tomorrow_night_eighties class=menu-opt>Tomorrow Night 80s</div>
+                                                      <div id=twilight class=menu-opt>Twilight</div>
+                                                      <div id=vibrant_ink class=menu-opt>Vibrant Ink</div>
+                                                      
+                                                </div theme-menu>
+                                          </div theme-menu-root>
                                           
-                                                <div class=menu-div>light</div>
-                                                <div id=none class=menu-opt>none</div>
-                                                <div id=chrome class=menu-opt>Chrome</div>
-                                                <div id=clouds class=menu-opt>Clouds</div>
-                                                <div id=crimson_editor class=menu-opt>Crimson Editor</div>
-                                                <div id=dawn class=menu-opt>Dawn</div>
-                                                <div id=dreamweaver class=menu-opt>Dreamweaver</div>
-                                                <div id=eclipse class=menu-opt>Eclipse</div>
-                                                <div id=github class=menu-opt>GitHub</div>
-                                                <div id=iplastic class=menu-opt>IPlastic</div>
-                                                <div id=katzenmilch class=menu-opt>KatzenMilch</div>
-                                                <div id=kuroir class=menu-opt>Kuroir</div>
-                                                <div id=solarized_light class=menu-opt>Solarized Light</div>
-                                                <div id=sqlserver class=menu-opt>SQL Server</div>
-                                                <div id=textmate class=menu-opt>TextMate</div>
-                                                <div id=tomorrow class=menu-opt>Tomorrow</div>
-                                                <div id=xcode class=menu-opt>XCode</div>
-                                                
-                                                <div class=menu-div>dark</div>
-                                                <div id=none-dark class=menu-opt>none dark</div>
-                                                <div id=ambiance class=menu-opt>Ambiance</div>
-                                                <div id=chaos class=menu-opt>Chaos</div>
-                                                <div id=clouds_midnight class=menu-opt>Clouds Midnight</div>
-                                                <div id=cobalt class=menu-opt>Cobalt</div>
-                                                <div id=dracula class=menu-opt>Dracula</div>
-                                                <div id=gob class=menu-opt>Greeon on Black</div>
-                                                <div id=gruvbox class=menu-opt>Gruvbox</div>
-                                                <div id=idle_fingers class=menu-opt>idle Fingers</div>
-                                                <div id=kr_theme class=menu-opt>krTheme</div>
-                                                <div id=merbivore class=menu-opt>Merbivore</div>
-                                                <div id=merbivore_soft class=menu-opt>Merbivore Soft</div>
-                                                <div id=mono_industrial class=menu-opt>Mono Industrial</div>
-                                                <div id=monokai class=menu-opt>Monokai</div>
-                                                <div id=pastel_on_dark class=menu-opt>Pastel on Dark</div>
-                                                <div id=solarized_dark class=menu-opt>Solarized Dark</div>
-                                                <div id=terminal class=menu-opt>Terminal</div>
-                                                <div id=tomorrow_night class=menu-opt>Tomorrow Night</div>
-                                                <div id=tomorrow_night_blue class=menu-opt>Tomorrow Night Blue</div>
-                                                <div id=tomorrow_night_bright class=menu-opt>Tomorrow Night Bright</div>
-                                                <div id=tomorrow_night_eighties class=menu-opt>Tomorrow Night 80s</div>
-                                                <div id=twilight class=menu-opt>Twilight</div>
-                                                <div id=vibrant_ink class=menu-opt>Vibrant Ink</div>
-                                                
-                                          </div theme-menu>
-                                    </div theme-menu-root>
-                                    
-                                    <div id=mode-menu-root class='menu-root param'>
-                                          <img id=mode-menu-icon class=menu-icon>
-                                          <div class=spinner-hldr>
-                                                <img class=spinner style='display:none'>
-                                          </div>
-                                          <label>
-                                                mode
-                                          </label>
-                                          <div id=mode>
-                                                javascript
-                                          </div>
-                                          <div id=mode-menu class=menu style='display:none;height:250px;overflow:auto'>
-                                                <div class=menu-opt>javascript</div>
-                                                <div class=menu-opt>typescript</div>
-                                                <div class=menu-opt>c_cpp</div>
-                                                <div class=menu-opt>python</div>
-                                                <div class=menu-opt>html</div>
-                                                <div class=menu-opt>css</div>
-                                                <div class=menu-opt>markdown</div>
-                                                <div class=menu-opt>json</div>
-                                                <div class=menu-opt>text</div>
-                                          </div mode-menu>
-                                    </div mode-menu-root>
+                                          <div id=mode-menu-root class='menu-root param'>
+                                                <img id=mode-menu-icon class=menu-icon>
+                                                <div class=spinner-hldr>
+                                                      <img class=spinner style='display:none'>
+                                                </div>
+                                                <label>
+                                                      mode
+                                                </label>
+                                                <div id=mode>
+                                                      javascript
+                                                </div>
+                                                <div id=mode-menu class=menu style='display:none;height:250px;overflow:auto'>
+                                                      <div class=menu-opt>javascript</div>
+                                                      <div class=menu-opt>typescript</div>
+                                                      <div class=menu-opt>c_cpp</div>
+                                                      <div class=menu-opt>python</div>
+                                                      <div class=menu-opt>html</div>
+                                                      <div class=menu-opt>css</div>
+                                                      <div class=menu-opt>markdown</div>
+                                                      <div class=menu-opt>json</div>
+                                                      <div class=menu-opt>text</div>
+                                                </div mode-menu>
+                                          </div mode-menu-root>
+                                          
+                                    </div>
                                     
                               </div menu-1>
                         </div>
