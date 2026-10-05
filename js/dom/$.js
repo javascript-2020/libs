@@ -608,19 +608,19 @@
                     
                     if(dragtype==='pos'){
                           if(left!==null){
-                                left              = left+ox;
+                                left             += ox;
                                 el.style.left     = left+'px';
                           }
                           if(right!==null){
-                                right            += ox;
+                                right            -= ox;
                                 el.style.right    = right+'px';
                           }
                           if(top!==null){
-                                top               = top+oy;
+                                top              += oy;
                                 el.style.top      = top+'px';
                           }
                           if(bottom!==null){
-                                bottom           += oy;
+                                bottom           -= oy;
                                 el.style.bottom   = bottom+'px';
                           }
                     }
