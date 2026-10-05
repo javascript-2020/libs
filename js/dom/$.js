@@ -486,8 +486,10 @@
               timer     = timer(mu);
               
               var dragtype;
-              var top;
-              var left;
+              var top       = null;
+              var left      = null;
+              var right     = null;
+              var bottom    = null;
               var width;
               var height;
               var mx;
@@ -518,8 +520,18 @@
                     if(type==='both'||type==='pos'){
                           if(e.button===0){
                                 dragtype    = 'pos';
-                                left        = get.left(el);
-                                top         = get.top(el);
+                                if(has.left(el)){
+                                      left        = get.left(el);
+                                }
+                                if(has.right(el)){
+                                      right       = get.right(el);
+                                }
+                                if(has.top(el)){
+                                      top         = get.top(el);
+                                }
+                                if(has.bottom(el)){
+                                      bottom      = get.bottom(el);
+                                }
                           }//left
                     }
                     
@@ -595,11 +607,22 @@
                     e.preventDefault();
                     
                     if(dragtype==='pos'){
-                          left    = left+ox;
-                          el.style.left   = left+'px';
-                          
-                          top     = top+oy;
-                          el.style.top    = top+'px';
+                          if(left!==null){
+                                left              = left+ox;
+                                el.style.left     = left+'px';
+                          }
+                          if(right!==null){
+                                right            += ox;
+                                el.style.right    = right+'px';
+                          }
+                          if(top!==null){
+                                top               = top+oy;
+                                el.style.top      = top+'px';
+                          }
+                          if(bottom!==null){
+                                bottom           += oy;
+                                el.style.bottom   = bottom+'px';
+                          }
                     }
                     
                     if( (dragtype==='horiz')    ||
@@ -642,6 +665,7 @@
                     
               }//mm
               
+              
               var get   = new Proxy({},{get:(target,prop)=>node=>{
               
                     var doc       = node.ownerDocument;
@@ -650,6 +674,15 @@
                     var value     = cstyle.getPropertyValue(prop);
                     value         = parseInt(value);
                     return value;
+                    
+              }});
+              
+              
+              var has   = new Promxy({},{get:(target,prop)=>node=>{
+              
+                    var v     = node.style.getPropertyValue(prop);
+                    var has   = (v!='');
+                    return has;
                     
               }});
               
