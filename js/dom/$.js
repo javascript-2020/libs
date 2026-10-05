@@ -320,6 +320,7 @@
               
               function click(e){
               
+                    if(chkbox.disabled)return;
                     if(e.target!==chkbox){
                           chkbox.checked    = !chkbox.checked;
                     }
