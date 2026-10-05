@@ -678,7 +678,7 @@
               }});
               
               
-              var has   = new Promxy({},{get:(target,prop)=>node=>{
+              var has   = new Proxy({},{get:(target,prop)=>node=>{
               
                     var v     = node.style.getPropertyValue(prop);
                     var has   = (v!='');
