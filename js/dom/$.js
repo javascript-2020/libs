@@ -680,7 +680,7 @@
               
               var has   = new Proxy({},{get:(target,prop)=>node=>{
               
-                    var v     = get[prop(el);
+                    var v     = get[prop](el);
                     var has   = (v!='auto');
                     return has;
                     
