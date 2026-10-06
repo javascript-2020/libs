@@ -687,7 +687,7 @@
               }});
               
               
-              function timer(callback,auto=false,delay=500){
+              function timer(callback,auto=false,delay=1500){
               
                     var timer;
                     var abort   = ()=>clearTimeout(timer);
