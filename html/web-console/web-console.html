@@ -340,6 +340,8 @@
         
         
         
+        
+        
   //  standard
   
   
@@ -382,7 +384,7 @@
               }
               
               if(fullsize){
-                console.log('clear',height);
+                                                                                //console.log('clear',height);
                     obj.height    = height;
               }
               
@@ -451,6 +453,17 @@
                             
                       }//set
                       
+        });
+        
+        
+        obj.style   = new Proxy({},{
+        
+              set   : (obj,prop,value)=>{
+              
+                    con.element.style[prop]   = value;
+                    
+              }
+              
         });
         
         
