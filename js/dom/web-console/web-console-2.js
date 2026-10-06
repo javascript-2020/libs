@@ -59,7 +59,7 @@
         
         
         
-    var Range = ace.require("ace/range").Range;
+    //var Range = ace.require("ace/range").Range;
     var log = console.log.bind(console);
     var fileRegex = /((?:https?:\/\/|www\.)(?:(?:[^\.\:])*(?:\.|\:))(?:[^:\/]+\/)*([^:\/]+)*)(?::(\d*))?(?::(\d*))?/;
     var evalFileRegex = /\((((?:[^):\/]+\/)*([^):\/]+)*)(?::(\d*))?(?::(\d*))?)/;
