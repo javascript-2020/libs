@@ -1,4 +1,64 @@
-(function() {
+
+
+
+
+
+
+(function(){
+
+  var obj   = {};
+  
+  
+        var df              = false;
+        
+        
+  //:
+  
+        var ace
+        ;
+        
+        
+        obj.initmod   = function(params){
+        
+              ace     = params.ace;
+              if(!ace)debugger;
+              
+              
+        }//initmod
+        
+        
+  //:
+  
+  
+        obj.init    = function(){
+        
+              Range           = ace.require('ace/range').Range;
+              
+        }//init
+        
+        
+  //:
+  
+  
+        obj.create    = function(root){
+        
+              var params    = {
+                    mode            : 'r',
+                    onInput         : function (text) {},
+                    onRightClick    : function (obj) {},
+              };
+              
+              var cons      = new Console(params,root);
+                                                                                //window.console.log(cons);
+              return cons;
+              
+        }//create
+        
+        
+        
+        
+        
+        
     var Range = ace.require("ace/range").Range;
     var log = console.log.bind(console);
     var fileRegex = /((?:https?:\/\/|www\.)(?:(?:[^\.\:])*(?:\.|\:))(?:[^:\/]+\/)*([^:\/]+)*)(?::(\d*))?(?::(\d*))?/;
@@ -26,12 +86,12 @@
                 "<span style='display:inline-block;margin-left:20px'></span>"
             );
     };
-
+    
     var maxLogLength = 140;
     var maxHistoryLength = 140;
     var maxObjectPreviewLength = 60;
     var maxStringPreviewLength = 30;
-
+    
     var inputCodeTemplate =
         "<div class='js-console inputLine'>" +
             "<div class='js-console inputArrow'></div>" +
@@ -47,7 +107,7 @@
     var consoleTemplate =
         "<div class='js-console output'></div>" +
         inputCodeTemplate.replace("inputCode", "inputCode input");
-
+        
     var dividerClass = "ace_print-margin";
     var lBrace = "<span class='ace_lparen'>{</span>";
     var rBrace = "<span class='ace_rparen'>}</span>";
@@ -61,7 +121,7 @@
     var undef = "<span class='ace_constant ace_language'>undefined</span>";
     var nul = "<span class='ace_constant ace_language'>null</span>";
     var func = "<span class=''>f</span>" + lBrack + rBrack;
-
+    
     function getNumericText(val, clas) {
         return "<span class='" + (clas || "") + " ace_constant ace_numeric'>" + htmlEscape(val.toString()) + "</span>";
     }
@@ -86,7 +146,7 @@
     function getKeySymbolText(val, clas) {
         return "<span class='" + (clas || "") + " objectKeySymbol ace_constant ace_language'>" + htmlEscape(val.toString()) + "</span>";
     }
-
+    
     function setupEditor(el, style, mode) {
         var editor = ace.edit(el);
         editor.setTheme("ace/theme/" + style);
@@ -102,10 +162,10 @@
         });
         return editor;
     }
-
+    
     function createCollapseEl(clas, parClass) {
         var temp = document.createElement("div");
-        temp.innerHTML = 
+        temp.innerHTML =
             "<span class='js-console-collapsible js-console " + (parClass || "") + "'>" +
                 "<div class='js-console-collapsible header-outer js-console'>" +
                     "<span class='js-console header-arrow'></span>" +
@@ -116,12 +176,12 @@
             "</span>";
         var element = temp.firstElementChild;
         var headerOuter = element.querySelector(".header-outer");
-
+        
         headerOuter.addEventListener("mouseup", function(e) {
             if (e.button === 0) {
                 var consoleEl = element.closest(".js-console.root");
                 var offset = consoleEl.scrollHeight - consoleEl.clientHeight - consoleEl.scrollTop;
-
+                
                 e.preventDefault();
                 var contentEl = element.querySelector(".content");
                 if (!element.classList.contains("open")) {
@@ -131,7 +191,7 @@
                     element.classList.remove("open");
                     contentEl.style.display = "none";
                 }
-
+                
                 var maxScroll = element.getBoundingClientRect().top - consoleEl.getBoundingClientRect().top + consoleEl.scrollTop;
                 var minScroll = maxScroll - consoleEl.clientHeight + element.querySelector(".header").clientHeight;
                 
@@ -141,20 +201,20 @@
                 );
             }
         });
-
+        
         headerOuter.addEventListener("mousedown", function(e) {
             if (e.button === 0 && e.detail > 1) {
                 e.preventDefault();
             }
         });
-
+        
         return element;
     }
-
+    
     function specialObj(obj) {
         return obj instanceof Function || obj instanceof RegExp || obj instanceof Error;
     }
-
+    
     function getFileLocationElement(line, clas) {
         var fileMatch = line.match(fileRegex);
         var evalFileMatch = line.match(evalFileRegex);
@@ -163,7 +223,7 @@
             var file = fileMatch[2] || "(index)";
             var lineNumber = fileMatch[3] || "";
             if (file && lineNumber) file += ":";
-
+            
             out.el = createCollapseEl("");
             out.el.querySelector(".header").insertAdjacentHTML("beforeend", file.replace(/%20/g, " ") + lineNumber);
             out.el.querySelector(".content").insertAdjacentHTML(
@@ -177,7 +237,7 @@
             var file = evalFileMatch[3];
             var lineNumber = evalFileMatch[4] || "";
             if (file && lineNumber) file += ":";
-
+            
             out.el = createCollapseEl("");
             out.el.querySelector(".header").insertAdjacentHTML("beforeend", file.replace(/%20/g, " ") + lineNumber);
             out.el.querySelector(".content").insertAdjacentHTML("beforeend", evalFileMatch[1].replace(/%20/g, " "));
@@ -192,7 +252,7 @@
         out.el.classList.add(clas);
         return out;
     }
-
+    
     function DataObject(data, outputLineData, parent, name) {
         this.data = data;
         this.element = null;
@@ -202,7 +262,7 @@
         this.parent = parent;
         this.name = name;
     }
-
+    
     DataObject.prototype.getPreviewElement = function(prefix, depth) {
         if (prefix) this.prefix = prefix;
         if (this.data != null && typeof this.data == "object" && !specialObj(this.data)) {
@@ -213,13 +273,13 @@
             return temp.firstElementChild;
         }
     };
-
+    
     DataObject.prototype.getElement = function(prefix, depth) {
         var This = this;
         var hadElement = this.element;
         if (prefix) this.prefix = prefix;
         if (depth == null) depth = 0;
-
+        
         if (this.data instanceof Error) {
             if (!this.element) {
                 this.element = createCollapseEl("errorMessage", "errorOutput");
@@ -248,7 +308,7 @@
                 var isFunc = this.data instanceof Function;
                 this.element = createCollapseEl((isArray ? "array" : isFunc ? "function" : "object") + "Output");
             }
-
+            
             if (depth <= 1) {
                 if (!this.previewElement) {
                     if (specialObj(this.data)) {
@@ -284,7 +344,7 @@
                 this.element = temp.firstElementChild;
             }
         }
-
+        
         if (!hadElement && this.element) {
             this.element.data = this;
             this.element.addEventListener("mouseup", function(e) {
@@ -295,10 +355,10 @@
                 }
             });
         }
-
+        
         return this.element;
     };
-
+    
     DataObject.prototype.getNonObjectData = function(preview) {
         if (typeof this.data == "number")
             return "<span class='numberOutput'>" + this.prefix + getNumericText(this.data, "value") + "</span>";
@@ -323,7 +383,7 @@
             return "<span class='symbol'>" + this.prefix + getSymbolText(this.data) + "</span>";
         return "<span class='rawOutput'>" + this.prefix + this.data + "</span>";
     };
-
+    
     DataObject.prototype.createObjectData = function() {
         var keys = Object.getOwnPropertyNames(this.data);
         if (Object.getOwnPropertySymbols)
@@ -338,11 +398,11 @@
                 if (this.getterObj && key != "__proto__")
                     obj = this.getterObj[key];
                 else obj = this.data[key];
-
+                
                 var dObj = new DataObject(obj, this.outputLineData, this, key);
                 if (key == "__proto__")
                     dObj.getterObj = this.getterObj || this.data;
-
+                    
                 var contentEl = this.element.querySelector(".content");
                 contentEl.appendChild(
                     dObj.getElement(
@@ -350,13 +410,13 @@
                         1
                     )
                 );
-
+                
                 if (i < keys.length - 1)
                     contentEl.appendChild(document.createElement("br"));
             } catch (e) {}
         }
     };
-
+    
     DataObject.prototype.createObjectName = function(depth) {
         var keys = Object.keys(this.data);
         if (Object.getOwnPropertySymbols)
@@ -370,7 +430,7 @@
         else if (this.data.__proto__ != Object.prototype)
             previewEl.insertAdjacentHTML("beforeend", this.data.__proto__.constructor.name + " ");
         previewEl.insertAdjacentHTML("beforeend", isArray ? lSquareBrack : lBrace);
-
+        
         if (depth < 1) {
             for (var i = 0; i < keys.length && previewEl.textContent.length < maxLength; i++) {
                 var key = keys[i];
@@ -378,11 +438,11 @@
                 if (this.getterObj && key != "__proto__")
                     obj = this.getterObj[key];
                 else obj = this.data[key];
-
+                
                 var dObj = new DataObject(obj);
                 if (key == "__proto__")
                     dObj.getterObj = this.getterObj || this.data;
-
+                    
                 if (i > 0) previewEl.insertAdjacentHTML("beforeend", comma + " ");
                 
                 var previewSubEl = dObj.getPreviewElement(
@@ -395,40 +455,40 @@
         } else {
             previewEl.insertAdjacentHTML("beforeend", ddd);
         }
-
+        
         previewEl.insertAdjacentHTML("beforeend", isArray ? rSquareBrack : rBrace);
         return previewEl;
     };
-
+    
     var Console = function(data, element) {
         if (!(this instanceof Console)) {
             return new Console(data, element);
         }
-
+        
         if (!data && element instanceof HTMLElement) {
             // Allows calling as new Console(element) if options are omitted
             var temp = data;
             data = element;
             element = temp;
         }
-
+        
         if (!element && data instanceof HTMLElement) {
             element = data;
             data = {};
         }
-
+        
         if (!data) data = {};
-
+        
         var This = this;
         var el = element;
         el.innerHTML = consoleTemplate;
         el.classList.add("js-console", "root");
         el.oncontextmenu = function() { return false; };
-
+        
         if (!data.theme) data.theme = "xcode";
         if (!data.mode) data.mode = "javascript";
         if (!data.style) data.style = "light";
-
+        
         this.outputEl = el.querySelector(".output");
         this.inputEditor = setupEditor(el.querySelector(".input"), data.theme, data.mode);
         
@@ -438,7 +498,7 @@
                 el.scrollTop = el.scrollHeight;
             });
         });
-
+        
         this.inputEditor.commands.addCommand({
             name: "enter",
             bindKey: { win: "Enter", mac: "Enter" },
@@ -469,14 +529,14 @@
                 return false;
             }
         });
-
+        
         el.classList.add("ace-" + data.theme, data.style);
-
+        
         el.addEventListener("click", function(e) {
             if (window.getSelection().toString() == "")
                 This.inputEditor.focus();
         });
-
+        
         this.data = data;
         this.outputs = [];
         this.inputs = [];
@@ -503,7 +563,7 @@
         
         element.console = this;
     };
-
+    
     Console.prototype.$handleInput = function(force) {
         var text = this.inputEditor.getValue();
         var elData = this.input(text);
@@ -513,7 +573,7 @@
             this.$removeElement(elData.element);
         }
     };
-
+    
     Console.prototype.input = function(text) {
         var temp = document.createElement("div");
         temp.innerHTML = inputCodeTemplate;
@@ -524,14 +584,14 @@
         editor.setReadOnly(true);
         editor.renderer.$cursorLayer.element.style.display = "none";
         editor.setValue(text, -1);
-
+        
         var ThisConsole = this;
         el.querySelectorAll("*").forEach(function(child) {
             child.addEventListener("click", function(e) {
                 if (editor.getSelectedText() == "") ThisConsole.inputEditor.focus();
             });
         });
-
+        
         var dataObj = {
             text: text,
             type: "input",
@@ -548,15 +608,15 @@
         this.$removeElement();
         return dataObj;
     };
-
+    
     Console.prototype.$print = function(clas) {
         var isMaxScroll = this.element.scrollTop >= this.element.scrollHeight - this.element.clientHeight - 10;
-
+        
         var temp = document.createElement("div");
         temp.innerHTML = outputTemplate;
         var el = temp.firstElementChild;
         var out = el.querySelector(".outputData");
-
+        
         var objects = Array.from(arguments);
         objects.shift();
         var dataObj = {
@@ -566,7 +626,7 @@
             id: this.messageID++,
             console: this
         };
-
+        
         var dataObjects = [];
         for (var i = 1; i < arguments.length; i++) {
             var arg = arguments[i];
@@ -578,21 +638,21 @@
                 out.appendChild(dataObject.getElement());
             }
         }
-
+        
         el.classList.add(clas);
         if (this.showIcons)
             el.classList.add("ace_gutter-cell", "ace_" + (clas == "warn" ? "warning" : clas));
-
+            
         this.outputEl.appendChild(el);
         if (isMaxScroll) this.element.scrollTop = this.element.scrollHeight;
-
+        
         dataObj.dataObjects = dataObjects;
         this.outputs.push(dataObj);
         this.elementLog.push(dataObj);
         this.$removeElement();
         return dataObj;
     };
-
+    
     Console.prototype.output = function() {
         var args = Array.from(arguments);
         args.unshift("return");
@@ -600,7 +660,7 @@
         ret.element.insertAdjacentHTML("beforeend", "<div class='" + dividerClass + "'></div>");
         return ret;
     };
-
+    
     Console.prototype.log = function() {
         var args = Array.from(arguments);
         this.$makeStringsPlain(args);
@@ -610,35 +670,35 @@
         this.$addDivider(ret.element);
         return ret;
     };
-
+    
     Console.prototype.error = function() {
         var args = Array.from(arguments);
         this.$makeStringsPlain(args);
         args.unshift("error");
         return this.$print.apply(this, args);
     };
-
+    
     Console.prototype.warn = function() {
         var args = Array.from(arguments);
         this.$makeStringsPlain(args);
         args.unshift("warn");
         return this.$print.apply(this, args);
     };
-
+    
     Console.prototype.info = function() {
         var args = Array.from(arguments);
         this.$makeStringsPlain(args);
         args.unshift("info");
         return this.$print.apply(this, args);
     };
-
+    
     Console.prototype.clear = function() {
         while (this.elementLog.length > 0) {
             if (!this.$removeElement(0)) break;
         }
         return this;
     };
-
+    
     Console.prototype.$removeElement = function(element) {
         if (element == null) {
             while (this.elementLog.length > this.maxLogLength) {
@@ -646,7 +706,7 @@
             }
             return;
         }
-
+        
         var obj, index;
         if (typeof element == "number") {
             obj = this.elementLog[element];
@@ -662,7 +722,7 @@
                 }
             }
         }
-
+        
         if (obj) {
             if (this.$trigger("elementRemove", obj)) return;
             obj.element.remove();
@@ -671,7 +731,7 @@
             return true;
         }
     };
-
+    
     Console.prototype.$removeHistory = function(element) {
         if (element == null) {
             while (this.inputs.length > this.maxHistoryLength) {
@@ -684,14 +744,14 @@
         if (this.historyIndex > index) this.historyIndex--;
         return true;
     };
-
+    
     Console.prototype.$prevHistory = function() {
         this.historyIndex = Math.max(this.historyIndex - 1, 0);
         var h = this.inputs[this.historyIndex];
         if (h && h.text) this.inputEditor.setValue(h.text, 1);
         return this;
     };
-
+    
     Console.prototype.$nextHistory = function() {
         this.historyIndex = Math.min(this.historyIndex + 1, this.inputs.length);
         if (this.historyIndex == this.inputs.length) {
@@ -702,21 +762,21 @@
         }
         return this;
     };
-
+    
     Console.prototype.$makeStringsPlain = function(args) {
         for (var i = 0; i < args.length; i++)
             if (typeof args[i] == "string" && args[i].length > 0)
                 args[i] = new Console.PlainText(args[i]);
     };
-
+    
     Console.prototype.$addDivider = function(element) {
         element.insertAdjacentHTML("beforeend", "<div class='" + dividerClass + "'></div>");
     };
-
+    
     Console.prototype.on = function(event, func) {
         if (this.listeners[event]) this.listeners[event].push(func);
     };
-
+    
     Console.prototype.$trigger = function(event) {
         var listeners = this.listeners[event];
         if (listeners) {
@@ -731,25 +791,27 @@
         }
         return false;
     };
-
+    
     Console.PlainText = function(text) {
         this.text = text;
         var temp = document.createElement("span");
         temp.innerHTML = "<span class='js-console plainText'>" + htmlEscape(text, true) + "</span>";
         this.element = temp.firstElementChild;
     };
-
+    
     Console.LineNumber = function(file) {
         var temp = document.createElement("span");
         temp.innerHTML = "<span class='lineNumber'>" + htmlEscape(file || "") + "</span>";
         this.element = temp.firstElementChild;
     };
-
+    
     Console.HtmlElement = function(element) {
         this.element = element;
     };
-
+    
     // Expose globally so `new Console(...)` works cleanly
-    window.Console = Console;
+    //window.Console = Console;
+    
+  return obj;
+  
 })();
-
