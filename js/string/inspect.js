@@ -62,7 +62,7 @@
               }//stylizeNoColor
               
               
-              function stylizeWithColor(str, styleType) {
+              function stylizeWithColor(str,styleType){
               
                     var style   = inspect.styles[styleType];
                     
@@ -174,6 +174,8 @@
               }//arrayToHash
               
               
+  //:
+  
               function formatArray(ctx,value,recurseTimes,visibleKeys,keys){
               
                     var output    = [];
