@@ -22,6 +22,9 @@
     {border-color:darkred}
     
     
+  .sys
+    {color:gray;font-style:italic}
+    
   .caret
     {width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #333;display:inline-block;transition:transform 0.2s ease;}
   .caret .oppen
@@ -185,7 +188,7 @@
         
               if(chk['console-persist'].checked){
                     var node            = fn.log('console.clear override');
-                    node.style.color    = 'lightgray';
+                    node.classList.add('sys');
                     return;
               }
               
@@ -199,9 +202,9 @@
         
         function log(...args){
         
-              var txt           = build(arguments);
+              var html          = build(arguments);
               var node          = ui.log.cloneNode(true);
-              node.textContent   = txt;
+              node.innerHTML    = html;
               disp(node);
               return node;
               
@@ -225,9 +228,9 @@
         
         function error(){
         
-              var txt             = build(arguments);
+              var html            = build.html(arguments);
               var node            = ui.error.cloneNode(true);
-              node.textContent    = txt;
+              node.innerHTML      = html;
               disp(node);
               return node;
               
@@ -239,9 +242,9 @@
         
         function warn(){
         
-              var txt             = build(arguments);
+              var html            = build.html(arguments);
               var node            = ui.warn.cloneNode(true);
-              node.textContent    = txt;
+              node.innerHTML      = html;
               disp(node);
               return node;
               
