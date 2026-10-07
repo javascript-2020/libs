@@ -231,6 +231,8 @@
                     
                     build.host.attrs({root,html,i1});
                     
+                    if(i3==-1)return;
+                    
                     if(i3!=-1 && i3<i2){
                           //build.host.template({root,html});
                           build.host.template2({root,html,i2});
