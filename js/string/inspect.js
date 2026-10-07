@@ -341,7 +341,7 @@
                     
                     desc    = {value:void 0};
                     try{
-                                                                                // ie6  navigator.toString
+                                                                                // ie6 -> navigator.toString
                                                                                 // throws Error: Object doesn't support this property or method
                           desc.value    = value[key];
                           
@@ -354,7 +354,7 @@
                     }//catch
                     
                     try{
-                                                                                // ie10  Object.getOwnPropertyDescriptor(window.location, 'hash')
+                                                                                // ie10 -> Object.getOwnPropertyDescriptor(window.location, 'hash')
                                                                                 // throws TypeError: Object doesn't support this action
                           if(Object.getOwnPropertyDescriptor){
                                 desc    = Object.getOwnPropertyDescriptor(value,key) || desc;
