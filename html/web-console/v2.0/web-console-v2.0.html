@@ -470,6 +470,13 @@
               obj.log(test);
               
               
+              var str   = [...Array(250)].reduce((a,v,i)=>a+=(i%9),'x');
+              mod['web-console'].log(str);
+              [...Array(5)].forEach(()=>obj.log(str));
+              
+              obj.log('helloworld');
+              
+              
         }//test
         
         
