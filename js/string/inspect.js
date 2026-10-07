@@ -50,6 +50,7 @@
               if(isUndefined(ctx.colors))ctx.colors   = false;
               if(isUndefined(ctx.customInspect))ctx.customInspect   = true;
               if(ctx.colors)ctx.stylize   = stylizeWithColor;
+              
               return formatValue(ctx,obj,ctx.depth);
               
               
