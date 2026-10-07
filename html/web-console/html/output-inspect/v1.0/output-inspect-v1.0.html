@@ -6,9 +6,31 @@
       
             <style>
             
+  .item
+    {border:none;border-bottom:1px solid}
+    
+  .log
+    {border-color:lightgray}
+    
+  .warn
+    {}
+    
+  .error
+    {}
+    
             </style>
             
             <div id=root>
+            
+                  <div class='log item'>
+                  </div>
+                  
+                  <div class='warn item'>
+                  </div>
+                  
+                  <div class='error item'>
+                  </div>
+                  
             </div>
             
       </template>
@@ -48,6 +70,8 @@
         
         var shadow;
         var root;
+        
+        var ui          = {};
         
         var cur         = {};
         cur.node        = null;
@@ -94,6 +118,16 @@
               
               root            = $(shadow,'#root');
               
+              ui.log          = $(root,'.log');
+              ui.log.remove();
+              
+              ui.warn         = $(root,'.warn');
+              ui.warn.remove();
+              
+              ui.error        = $(root,'.error');
+              ui.error.remove();
+              
+              
         }//initdom
         
         
@@ -101,22 +135,15 @@
   
   
   
-        function disp(){
+        function disp(node){
         
-              var txt           = build(arguments);
-              var div           = document.createElement('div');
-              div.textContent   = txt;
-              root.append(div);
+              cur.node    = node;
               
-              cur.node    = div;
-              
-              if(txt==''){
-                    div.style.height    = '16px';
+              if(node.textContent==''){
+                    node.style.height    = '16px';
               }
-              
+              root.append(node);
               root.scrollTop    = 999999999;
-              
-              return div;
               
         }//disp
         
@@ -143,10 +170,13 @@
         obj.log   = function(){return log.apply(null,arguments)}
         fn.log    = function(){return log.apply(null,arguments)}
         
-        function log(){
+        function log(...args){
         
-              var div   = disp.apply(null,arguments);
-              return div;
+              var txt           = build(arguments);
+              var log           = ui.log.cloneNode(true);
+              log.textContent   = txt;
+              disp(log);
+              return log;
               
         }//log
         
