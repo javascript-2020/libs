@@ -1,0 +1,467 @@
+
+
+<output-inpsect>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+            </style>
+            
+            <div id=root>
+            </div>
+            
+      </template>
+      
+      <script>
+      
+      
+(function({mod,host}){
+
+  var obj   = {
+        version   : 'v1.0',
+  };
+  
+        var df=true,did='output-inspect';
+        
+        var ext,debug
+        ;
+        
+        obj.initmod   = function(...list){
+        
+              list.forEach(params=>{
+              
+                    ext       = mod.rd(params,'ext',ext);
+                    debug     = mod.rd(params,'debug',debug);
+                    
+              });
+              
+        }//initmod
+        
+        
+  //:
+  
+  
+        var inspect;
+        
+        
+        var shadow;
+        var root;
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+                                                                                debug=eval(debug.mod);
+                                                                                debug('init');
+              await libs();
+              
+        }//init
+        
+        
+        async function libs(){
+        
+              var list      = [];
+              
+              var promise   = ext.load.libs('js/string/inspect.js').then(result=>{
+              
+                   [inspect]    = result;
+                   
+              });
+              list.push(promise);
+              
+              await Promise.all(list);
+              
+        }//libs
+        
+        
+  //:
+  
+  
+        obj.initdom   = async function(){
+                                                                                debug('initdom');
+              shadow          = host.shadowRoot;
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+  
+        function disp(){
+        
+              var txt           = build(arguments);
+              var div           = document.createElement('div');
+              div.textContent   = txt;
+              cur.root.append(div);
+              
+              cur.node    = div;
+              
+              if(txt==''){
+                    div.style.height    = '16px';
+              }
+              
+              cur.root.scrollTop    = 999999999;
+              
+              return div;
+              
+        }//disp
+        
+        
+  //:
+  
+  
+        obj.clear   = function(){return clear()}
+        fn.clear    = function(){return clear.apply(null,arguments)}
+        
+        function clear(){
+        
+              if(chk['console-persist'].checked){
+                    var node            = fn.log('console.clear override');
+                    node.style.color    = 'lightgray';
+                    return;
+              }
+              
+              switch(mode){
+              
+                case 'pretty'     : cur.root.replaceChildren();       break;
+                case 'console'    : jsconsole.clear();                break;
+                
+              }//switch
+              
+              if(settings.chk['console-echo'].checked){
+                    console.clear();
+              }
+              
+        }//clear
+        
+        
+        obj.log   = function(){return log.apply(null,arguments)}
+        fn.log    = function(){return log.apply(null,arguments)}
+        
+        function log(){
+        
+              var div;
+              
+              switch(mode){
+              
+                case 'pretty'     : div   = disp.apply(null,arguments);       break;
+                case 'console'    : jsconsole.log.apply(jsconsole,arguments);       break;
+                
+              }//switch
+              
+              return div;
+              
+        }//log
+        
+        
+        obj.groupCollapsed    = function(){return groupCollapsed.apply(null,arguments)}
+        fn.groupCollapsed     = function(){return groupCollapsed.apply(null,arguments)}
+        
+        function groupCollapsed(...args){
+        
+              switch(mode){
+              
+                case 'pretty'   :
+                                  var out   = format(arguments);
+                                  var div   = disp.apply(null,out);
+                                  return div;
+                                  
+                case 'console'    : jsconsole.groupCollapsed.apply(jsconsole,arguments);
+                                    break;
+                                    
+              }//switch
+              
+        }//groupCollapsed
+        
+        
+        obj.error   = function(){return error.apply(null,arguments)}
+        fn.error    = function(){return error.apply(null,arguments)}
+        
+        function error(){
+        
+              var node;
+              
+              switch(mode){
+              
+                case 'pretty'     :
+                                    node                = log.apply(null,arguments);
+                                    node.style.color    = 'darkred';
+                                                                                          break;
+                case 'console'    :
+                                    jsconsole.error.apply(jsconsole,arguments);
+                                                                                          break;
+                                                                                          
+              }//switch
+              
+              return node;
+              
+        }//error
+        
+        
+        
+        
+        obj.node    = function(){return node.apply(null,arguments)}
+        fn.node     = function(){return node.apply(null,arguments)}
+        
+        function node(node){
+        
+              node    = create(node);
+              
+              cur.root.append(node);
+              
+              return node;
+              
+        }//node
+        
+        
+        
+        obj.write    = function(){return write.apply(null,arguments)}
+        fn.write    = function(){return write.apply(null,arguments)}
+        
+        function write(){
+        
+        
+              var txt             = build(arguments);
+              
+              var span            = document.createElement('span');
+              span.textContent    = txt;
+              
+              if(cur.node){
+                    cur.node.append(span);
+              }else{
+                    cur.root.append(span);
+              }
+              
+              
+              return span;
+              
+        }//write
+        
+        
+        
+        
+  //:
+  
+  
+  
+        function build(args){
+        
+              var str     = '';
+              var args    = [...args];
+              args        = args.map(v=>{
+              
+                    var type    = datatype(v);
+                    switch(type){
+                    
+                      case 'function'         :
+                      case 'asyncfunction'    : str   = v.toString();       break;
+                      case 'string'           : str   = v;                  break;
+                      default                 : str   = inspect(v);         break;
+                      
+                    }//switch
+                    return str;
+                    
+              });
+              
+              var txt   = args.join(' ');
+              return txt;
+              
+        }//build
+        
+        
+        
+  //:
+  
+  
+        function format(args){
+        
+              if(typeof args[0]!=='string')return args;
+              
+              let fmt         = args[0];
+              let out         = [];
+              let argIndex    = 1;
+              
+              out.push(fmt.replace(/%[sdifoO]/g,match=>{
+              
+                    var val   = args[argIndex++];
+                    
+                    switch (match) {
+                    
+                      case '%s'   : return ''+val;
+                      case '%d'   :
+                      case '%i'   : return parseInt(val, 10);
+                      case '%f'   : return parseFloat(val);
+                      case '%o'   :
+                      case '%O'   : return format.fn(val);
+                      default     : return match;
+                      
+                    }//switch
+                    
+              }));
+              
+              
+              while(argIndex<args.length){
+              
+                    var v   = args[argIndex++];
+                    out.push(v);
+                    
+              }//while
+              
+              return out;
+              
+              
+              function fn(val){
+              
+                    if(val===null)return 'null';
+                    if(val===undefined)return 'undefined';
+                    
+                    switch(typeof val){
+                    
+                      case 'number'   : return val;
+                      case 'string'   : return val;
+                      
+                    }//switch
+                    
+                    return JSON.stringify(val,null,4);
+              }//fn
+              
+        }//format
+        
+        
+        format.fn   = function(val,seen=new WeakSet()){
+        
+              if(val === null)return 'null';
+              if(val === undefined)return 'undefined';
+              
+                                                                                  // Prevent circular references
+              if(typeof val==='object' || typeof val==='function'){
+                    if(seen.has(val))return '[ Circular ]';
+                    seen.add(val);
+              }
+              
+                                                                                  // Primitive types
+              switch(typeof val){
+              
+                case 'number'     : return String(val);
+                case 'string'     : return val;
+                case 'boolean'    : return String(val);
+                case 'bigint'     : return val.toString() + 'n';
+                case 'symbol'     : return val.toString();
+                case 'function'   : return `[Function${val.name ? ': '+val.name : ''}]`;
+                
+              }//switch
+              
+              
+              var type    = datatype(val);
+                                                                                console.log('format.fn',type);
+              if(type=='array'){
+                    val       = val.map(v=>format.fn(v,seen));
+                    var str   = val.join(', ')
+                    return '['+str+']';
+              }
+              
+              if(type=='date'){//val instanceof Date){
+                    return `Date("${val.toISOString()}")`;
+              }
+              
+              if(val instanceof RegExp){
+                    return val.toString();
+              }
+              
+              if(val instanceof Error){
+                    return `${val.name}: ${val.message}`;
+              }
+              
+              if(val instanceof Map){
+                    const entries = [];
+                    for (const [k, v] of val.entries()) {
+                      entries.push(`${fn(k, seen)} => ${format.fn(v, seen)}`);
+                    }
+                    return `Map { ${entries.join(', ')} }`;
+              }
+              
+              if(val instanceof Set){
+                    const entries   = [...val].map(v=>format.fn(v,seen));
+                    return `Set { ${entries.join(', ')} }`;
+              }
+              
+              if(ArrayBuffer.isView(val) && !(val instanceof DataView)){
+                    return `${val.constructor.name} [ ${Array.from(val).join(', ')} ]`;
+              }
+              
+              if(val instanceof Node){
+                    if(val.nodeType===1){
+                          return `<${val.tagName.toLowerCase()}>`;
+                    }
+                    return val.toString();
+              }
+              
+              if(typeof val==='object'){
+                    const entries   = Object.entries(val).map(([k,v])=>{
+                    
+                          return `${k}: ${format.fn(v,seen)}`;
+                          
+                    });
+                    return `{ ${entries.join(', ')} }`;
+              }
+              
+              try{
+              
+                    return JSON.stringify(val);
+                    
+              }//try
+              catch{
+              
+                    return String(val);
+                    
+              }//catch
+              
+        }//fn
+        
+        
+  //:
+  
+  
+        function datatype(v){return Object.prototype.toString.call(v).slice(8,-1).toLowerCase()}
+        
+        
+        function create(node){
+        
+              var type    = datatype(node);
+              switch(type){
+              
+                case 'string'   : node    = create.string(node);        break;
+                
+              }//switch
+              return node;
+              
+        }//create
+        
+        
+        create.string   = function(str){
+        
+              var node    = document.createElement(str);
+              return node;
+              
+        }//string
+        
+        
+        
+        
+  //:
+  
+  return obj;
+  
+//output-inspect
+})
+
+
+      </script>
+      
+</output-inspect>
+
+
