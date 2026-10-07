@@ -1,0 +1,176 @@
+
+
+<output-jsconsole>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+            
+            </style>
+            
+      </template>
+      
+      <script>
+      
+(function({mod,ost}){
+
+  var obj   = {
+        version   : 'v1.0',
+  };
+  
+        var df=true,did='output-jsconsole';
+        
+        var ext,debug,$,ace
+        ;
+        
+        obj.initmod   = funciton(...list){
+        
+              list.forEach(params=>{
+              
+                    ext       = mod.rd(params,'ext',ext);
+                    debug     = mod.rd(params,'debug',debug);
+                    $         = mod.rd(params,'$',$);
+                    df        = mod.rd(params,'df',df);
+                    ace       = mod.rd(params,'ace',ace);
+                    
+              });
+              
+        }//initmod
+        
+        
+  //:
+  
+  
+        var jsconsole;
+        var con;
+        var style;
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+        
+              await ibs();
+              
+              
+        }//init
+        
+        
+        async function libs(){
+        
+              if(!ace){
+                    ace   = await $.editor.ace();
+              }
+              
+              var list      = [];
+              
+              var promise   = ext.load.libs('js/dom/web-console/web-console-2.js').then(result=>{
+              
+                    [jsconsole]   = result;
+                    jsconsole.initmod({ace});
+                    jsconsole.init();
+                    
+              });
+              list.push(promise);
+              
+              
+              var promise   = ext.text.libs('js/dom/web-console/web-console.css').then(result=>{
+              
+                    var [css]           = result;
+                    style               = document.createElement('style');
+                    style.textContent   = css;
+                    
+                    
+              });
+              list.push(promise);
+              
+        }//libs
+  //:
+  
+  
+        obj.initdom   = async function(){
+        
+              shadow              = host.shadowRoot;
+              
+              $.editor.ace.import_style(shadow,()=>shadow.append(style));
+              
+              
+              var node        = $(shadow,'#console');
+              
+              con             = jsconsole.create(node);
+                                                                                //console.log(con);
+                                                                                //console.log(con.element===node);
+                                                                                
+                                                                                
+        }//initdom
+        
+        
+  //:
+  
+  
+        obj.update    = function(){
+        
+              var node    = con.element;
+              var h       = node.scrollHeight;
+                                                                                //console.log('update',h);
+              node.style.height   = h+'px';
+              
+        }//update
+        
+        
+        obj.write   = function(){
+        
+              con.write.apply(con,arguments);
+              
+        }//write
+        
+        
+        obj.debug   = function(){
+        
+              con.log.apply(con,args);
+              
+        }//debug
+        
+        
+        obj.log   = function(){
+        
+              con.log.apply(con,arguments);
+              
+        }//log
+        
+        
+        obj.error   = function(){
+        
+              con.error.apply(con,arguments);
+              
+        }//error
+        
+        
+        obj.warn    = function(){
+        
+              con.warn.apply(con,arguments);
+              
+        }//warn
+        
+        
+        
+  //:
+  
+  
+  
+  
+  
+  
+  return obj;
+  
+//output-jsconsole
+})
+
+      </script>
+      
+      
+</output-jsconsole>
+
+
