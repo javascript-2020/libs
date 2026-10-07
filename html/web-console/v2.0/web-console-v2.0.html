@@ -34,6 +34,8 @@
     
             </style>
             
+            <output-inspect v1.0 component=parent>
+            </output-inspect>
             
             <div id=console part=console>
             </div>
@@ -99,20 +101,22 @@
   //:
   
   
+        var inspect;
+        var jsconsole;
+        var m       = {};
+        
+        
         obj.host    = host;
         
         
-        var ansi;
         
+        var mode    = 'jsconsole';
         
         
         var echo    = true;
         
         
         
-        var jsconsole;
-        var con;
-        var style;
         
         
         var root;
@@ -157,7 +161,20 @@
               rd.attr.height();
               
               
-              await libs();
+              
+              inspect         = mod['output-inspect'];
+              m.inspect       = inspect;
+              inspect.innitmod({df});
+              
+              jsconsole       = mod['output-jsconsole'];
+              m.jsconsole     = jsconsole;
+              jsconsole.initmod({df});
+              
+              
+              await Promise.all([
+                    libs(),
+                    auto(),
+              ]);
               
               
         }//init
@@ -165,44 +182,17 @@
         
         async function libs(){
         
-              if(!ace){
-                    ace   = await $.editor.ace();
-              }
+              var list    = [];
               
-              var list      = [];
-              
-              var promise   = ext.load.libs('js/dom/web-console/web-console-2.js').then(result=>{
-              
-                    [jsconsole]   = result;
-                    jsconsole.initmod({ace});
-                    jsconsole.init();
-                    
-              });
-              list.push(promise);
-              
-              
-              var promise   = ext.text.libs('js/dom/web-console/web-console.css').then(result=>{
-              
-                    var [css]           = result;
-                    style               = document.createElement('style');
-                    style.textContent   = css;
-                    
-                    
-              });
-              list.push(promise);
-              
-              
-/*
+              /*
               var promise   = import('https://cdn.jsdelivr.net/npm/ansi_up/+esm').then(({AnsiUp})=>{
               
                     ansi    = new AnsiUp();
                     
               });
               list.push(promise);
-*/
-
-
-
+              */
+              
               await Promise.all(list);
               
         }//libs
@@ -260,14 +250,6 @@
               var shadow      = host.shadowRoot;
               
               
-              $.editor.ace.import_style(shadow,()=>shadow.append(style));
-              
-              
-              var node        = $(shadow,'#console');
-              con             = jsconsole.create(node);
-                                                                                //console.log(con);
-                                                                                //console.log(con.element===node);
-                                                                                
               if(height){
                                                                                 debug('height',height);
                     obj.height      = height;
@@ -276,7 +258,7 @@
               
               setTimeout(()=>update.initial=false,50);
               
-        }//initdom2
+        }//initdom
         
         
   //:
@@ -288,10 +270,7 @@
               
                     if(update.initial)return;
                     
-                    var node    = con.element;
-                    var h       = node.scrollHeight;
-                                                                                //console.log('update',h);
-                    node.style.height   = h+'px';
+                    jsconsole.update();
               }
               
         }//update
@@ -300,9 +279,11 @@
         
   //  ext
   
-        obj.write   = function(){
+  
+        obj.write   = function(...args){
         
-              con.write.apply(con,arguments);
+              m[mode].write(...args);
+              
               if(echo){
                     window.console.log.apply(window.console,arguments);
               }
@@ -328,7 +309,8 @@
         obj.debug   = function(...args){
         
               args.unshift('[ debug ]');
-              con.log.apply(con,args);
+              
+              m[mode].log(...args);
               
               if(echo){
                     window.console.debug.apply(window.console,args);
@@ -362,9 +344,9 @@
         });
         
         
-        obj.log   = function(){
+        obj.log   = function(...args){
         
-              con.log.apply(con,arguments);
+              m[mode].log(...args);
               
               if(echo){
                     window.console.log.apply(window.console,arguments);
@@ -375,9 +357,9 @@
         }//log
         
         
-        obj.clear   = function(){
+        obj.clear   = function(...args){
         
-              con.clear.apply(con);
+              m[mode].clear(args);
               
               if(echo){
                     window.console.clear();
@@ -393,9 +375,9 @@
         }//clear
         
         
-        obj.error   = function(){
+        obj.error   = function(...args){
         
-              con.error.apply(con,arguments);
+              m[mode].error(...args);
               
               if(echo){
                     window.console.error.apply(window.console,arguments);
@@ -406,9 +388,9 @@
         }//error
         
         
-        obj.warn    = function(){
+        obj.warn    = function(...args){
         
-              con.warn.apply(con,arguments);
+              m[mode].warn(...args);
               
               if(echo){
                     window.console.warn.apply(window.console,arguments);
@@ -434,9 +416,9 @@
                           v  += 'px';
                     }
                     
-                    var target    = con.element;
-                    var target    = host;
-                    target.style.height    = v;
+                    //var target    = con.element;
+                    var target            = host;
+                    target.style.height   = v;
                     
               },
               
@@ -481,7 +463,7 @@
         obj.test    = function(){
         
         
-              con.log('helloworld');
+              obj.log('helloworld');
               
               var test    = {
                     hello:'world',
@@ -490,7 +472,7 @@
                     debug:true
               };
               
-              con.log(test);
+              obj.log(test);
               
               
         }//test
@@ -500,22 +482,7 @@
   //:
   
   
-        function debug(...args){
-        
-              if(!df && !obj.df)return;
-              args.unshift(`[ ${did} ]`);
-              var fmt     = Array.from({length:args.length}).fill('%O').join(' ');
-              var args2   = [fmt].concat(args);
-              window.console.groupCollapsed.apply(window.console,args2);
-              window.console.trace();
-              window.console.groupEnd();
-              
-        }//debug
-        
-        
-        
-        
-        
+  
   return obj;
   
 //web_console
