@@ -300,7 +300,7 @@
                       case 'function'         :
                       case 'asyncfunction'    : str   = v.toString();       break;
                       case 'string'           : str   = v;                  break;
-                      default                 : str   = inspect(v);         break;
+                      default                 : str   = inspect(v,{colors:true});         break;
                       
                     }//switch
                     return str;
