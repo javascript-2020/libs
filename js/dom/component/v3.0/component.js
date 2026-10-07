@@ -515,6 +515,14 @@
               }//page
               
               
+              loader.url    = function({root,nn,version}){
+              
+                    var url   = rd(root,'url');
+                    return {url};
+                    
+              }//url
+              
+              
               loader.fetch    = async function(url){
               
                     var html;
@@ -583,6 +591,7 @@
                       //case 'grp'        : ({url}   = loader.grp({root,nn,version}));           break;
                       case 'parent'     : ({url}   = loader.parent({root,nn,version}));        break;
                       case 'page'       : ({url}   = loader.page({root,nn,version}));          break;
+                      case 'url'        : ({url}    = loader.url({root,nn,version}));            break;
                       
                     }//switch
                     
