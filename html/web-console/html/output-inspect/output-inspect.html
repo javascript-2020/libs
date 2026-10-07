@@ -1,0 +1,608 @@
+
+
+<output-inpsect>
+
+      <template shadowrootmode=open>
+      
+            <style>
+            
+  #root
+    {line-height:1.5}
+    
+  .item
+    {border:none;border-bottom:1px solid}
+    
+  .log
+    {border-color:lightgray}
+    
+  .warn
+    {border-color:darkorange;color:darkorange;background:hsl(28,100%,45%);}
+    
+  .error
+    {border-color:darkred;color:darkred;background:hsl(0,100%,50%);}
+    
+    
+  .sys
+    {color:gray;font-style:italic}
+    
+  .caret
+    {width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #333;display:inline-block;transition:transform 0.2s ease;}
+  .caret .oppen
+    {transform:rotate(180deg);}
+    
+    
+    
+            </style>
+            
+            <div id=root>
+            
+                  <div class='log item'>
+                  </div>
+                  
+                  <div class='warn item'>
+                  </div>
+                  
+                  <div class='error item'>
+                  </div>
+                  
+                  <div class=group-collapsed>
+                        <div class=top>
+                              <div class=caret></div>
+                              <div class=txt>
+                              </div>
+                        </div>
+                        <div class=main>
+                        </div>
+                  </div>
+                  
+            </div>
+            
+      </template>
+      
+      <script>
+      
+      
+(function({mod,host}){
+
+  var obj   = {
+        version   : 'v1.0',
+  };
+  
+        var df=true,did='output-inspect';
+        
+        var ext,debug,$
+        ;
+        
+        obj.initmod   = function(...list){
+        
+              list.forEach(params=>{
+              
+                    ext       = mod.rd(params,'ext',ext);
+                    debug     = mod.rd(params,'debug',debug);
+                    $         = mod.rd(params,'$',$);
+                    
+              });
+              
+        }//initmod
+        
+        
+  //:
+  
+  
+        var inspect;
+        
+        
+        var shadow;
+        var root;
+        
+        var ui          = {};
+        
+        var cur         = {};
+        cur.node        = null;
+        
+        
+        var fn          = {};
+        
+        
+        
+  //:
+  
+  
+        obj.init    = async function(){
+                                                                                debug=eval(debug.mod);
+                                                                                debug('init');
+              await libs();
+              
+        }//init
+        
+        
+        async function libs(){
+        
+              var list      = [];
+              
+              var promise   = ext.load.libs('js/string/inspect.js').then(result=>{
+              
+                   [inspect]    = result;
+                   
+              });
+              list.push(promise);
+              
+              await Promise.all(list);
+              
+        }//libs
+        
+        
+  //:
+  
+  
+        obj.initdom   = async function(){
+                                                                                debug('initdom');
+              shadow                          = host.shadowRoot;
+              
+              
+              root                            = $(shadow,'#root');
+              
+              ui.log                          = $(root,'.log');
+              ui.log.remove();
+              
+              ui.warn                         = $(root,'.warn');
+              ui.warn.remove();
+              
+              ui.error                        = $(root,'.error');
+              ui.error.remove();
+              
+              ui.groupcollapsed               = $(root,'.group-collapsed');
+              ui.groupcollapsed.remove();
+              
+              
+              
+              
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+  
+        function disp(node){
+        
+              cur.node    = node;
+              
+              if(node.textContent==''){
+                    node.style.height    = '16px';
+              }
+              root.append(node);
+              root.scrollTop    = 999999999;
+              
+        }//disp
+        
+        
+  //:
+  
+  
+        obj.clear   = function(){return clear()}
+        fn.clear    = function(){return clear.apply(null,arguments)}
+        
+        function clear(){
+        
+              if(chk['console-persist'].checked){
+                    var node            = fn.log('console.clear override');
+                    node.classList.add('sys');
+                    return;
+              }
+              
+              root.replaceChildren();
+              
+        }//clear
+        
+        
+        obj.log   = function(){return log.apply(null,arguments)}
+        fn.log    = function(){return log.apply(null,arguments)}
+        
+        function log(...args){
+        
+              var html          = build.html(arguments);
+              var node          = ui.log.cloneNode(true);
+              node.innerHTML    = html;
+              disp(node);
+              return node;
+              
+        }//log
+        
+        
+        obj.groupCollapsed    = function(){return groupCollapsed.apply(null,arguments)}
+        fn.groupCollapsed     = function(){return groupCollapsed.apply(null,arguments)}
+        
+        function groupCollapsed(...args){
+        
+              var out   = format(arguments);
+              var div   = disp.apply(null,out);
+              return div;
+              
+        }//groupCollapsed
+        
+        
+        obj.error   = function(){return error.apply(null,arguments)}
+        fn.error    = function(){return error.apply(null,arguments)}
+        
+        function error(){
+        
+              var html            = build.html(arguments);
+              var node            = ui.error.cloneNode(true);
+              node.innerHTML      = html;
+              disp(node);
+              return node;
+              
+        }//error
+        
+        
+        obj.warn    = function(){return warn.apply(null,arguments)}
+        fn.warn     = function(){return warn.apply(null,arguments)}
+        
+        function warn(){
+        
+              var html            = build.html(arguments);
+              var node            = ui.warn.cloneNode(true);
+              node.innerHTML      = html;
+              disp(node);
+              return node;
+              
+        }//warn
+        
+        
+        obj.node    = function(){return node.apply(null,arguments)}
+        fn.node     = function(){return node.apply(null,arguments)}
+        
+        function node(node){
+        
+              node    = create(node);
+              root.append(node);
+              return node;
+              
+        }//node
+        
+        
+        
+        obj.write    = function(){return write.apply(null,arguments)}
+        fn.write    = function(){return write.apply(null,arguments)}
+        
+        function write(){
+        
+              var html            = build.html(arguments);
+              
+              var span            = document.createElement('span');
+              span.innerHTML      = html;
+              
+              if(cur.node){
+                    cur.node.append(span);
+              }else{
+                    root.append(span);
+              }
+              
+              return span;
+              
+        }//write
+        
+        
+        
+        
+  //:
+  
+  
+  
+        function build(args){
+        
+              var str     = '';
+              var args    = [...args];
+              args        = args.map(v=>{
+              
+                    var type    = datatype(v);
+                    switch(type){
+                    
+                      case 'function'         :
+                      case 'asyncfunction'    : str   = v.toString();       break;
+                      case 'string'           : str   = v;                  break;
+                      default                 : str   = inspect(v,{colors:true});         break;
+                      
+                    }//switch
+                    return str;
+                    
+              });
+              
+              var txt     = args.join(' ');
+              return txt;
+              
+        }//build
+        
+        
+        build.html    = function(args){
+        
+              var txt     = build(args);
+              var html    = ansi_html(txt);
+              return html;
+              
+        }//html
+        
+        
+  //:
+  
+  
+        function format(args){
+        
+              if(typeof args[0]!=='string')return args;
+              
+              let fmt         = args[0];
+              let out         = [];
+              let argIndex    = 1;
+              
+              out.push(fmt.replace(/%[sdifoO]/g,match=>{
+              
+                    var val   = args[argIndex++];
+                    
+                    switch (match) {
+                    
+                      case '%s'   : return ''+val;
+                      case '%d'   :
+                      case '%i'   : return parseInt(val, 10);
+                      case '%f'   : return parseFloat(val);
+                      case '%o'   :
+                      case '%O'   : return format.fn(val);
+                      default     : return match;
+                      
+                    }//switch
+                    
+              }));
+              
+              
+              while(argIndex<args.length){
+              
+                    var v   = args[argIndex++];
+                    out.push(v);
+                    
+              }//while
+              
+              return out;
+              
+              
+              function fn(val){
+              
+                    if(val===null)return 'null';
+                    if(val===undefined)return 'undefined';
+                    
+                    switch(typeof val){
+                    
+                      case 'number'   : return val;
+                      case 'string'   : return val;
+                      
+                    }//switch
+                    
+                    return JSON.stringify(val,null,4);
+              }//fn
+              
+        }//format
+        
+        
+        format.fn   = function(val,seen=new WeakSet()){
+        
+              if(val === null)return 'null';
+              if(val === undefined)return 'undefined';
+              
+                                                                                  // Prevent circular references
+              if(typeof val==='object' || typeof val==='function'){
+                    if(seen.has(val))return '[ Circular ]';
+                    seen.add(val);
+              }
+              
+                                                                                  // Primitive types
+              switch(typeof val){
+              
+                case 'number'     : return String(val);
+                case 'string'     : return val;
+                case 'boolean'    : return String(val);
+                case 'bigint'     : return val.toString() + 'n';
+                case 'symbol'     : return val.toString();
+                case 'function'   : return `[Function${val.name ? ': '+val.name : ''}]`;
+                
+              }//switch
+              
+              
+              var type    = datatype(val);
+                                                                                console.log('format.fn',type);
+              if(type=='array'){
+                    val       = val.map(v=>format.fn(v,seen));
+                    var str   = val.join(', ')
+                    return '['+str+']';
+              }
+              
+              if(type=='date'){//val instanceof Date){
+                    return `Date("${val.toISOString()}")`;
+              }
+              
+              if(val instanceof RegExp){
+                    return val.toString();
+              }
+              
+              if(val instanceof Error){
+                    return `${val.name}: ${val.message}`;
+              }
+              
+              if(val instanceof Map){
+                    const entries = [];
+                    for (const [k, v] of val.entries()) {
+                      entries.push(`${fn(k, seen)} => ${format.fn(v, seen)}`);
+                    }
+                    return `Map { ${entries.join(', ')} }`;
+              }
+              
+              if(val instanceof Set){
+                    const entries   = [...val].map(v=>format.fn(v,seen));
+                    return `Set { ${entries.join(', ')} }`;
+              }
+              
+              if(ArrayBuffer.isView(val) && !(val instanceof DataView)){
+                    return `${val.constructor.name} [ ${Array.from(val).join(', ')} ]`;
+              }
+              
+              if(val instanceof Node){
+                    if(val.nodeType===1){
+                          return `<${val.tagName.toLowerCase()}>`;
+                    }
+                    return val.toString();
+              }
+              
+              if(typeof val==='object'){
+                    const entries   = Object.entries(val).map(([k,v])=>{
+                    
+                          return `${k}: ${format.fn(v,seen)}`;
+                          
+                    });
+                    return `{ ${entries.join(', ')} }`;
+              }
+              
+              try{
+              
+                    return JSON.stringify(val);
+                    
+              }//try
+              catch{
+              
+                    return String(val);
+                    
+              }//catch
+              
+        }//fn
+        
+        
+  //:
+  
+  
+        function datatype(v){return Object.prototype.toString.call(v).slice(8,-1).toLowerCase()}
+        
+        
+        function create(node){
+        
+              var type    = datatype(node);
+              switch(type){
+              
+                case 'string'   : node    = create.string(node);        break;
+                
+              }//switch
+              return node;
+              
+        }//create
+        
+        
+        create.string   = function(str){
+        
+              var node    = document.createElement(str);
+              return node;
+              
+        }//string
+        
+        
+  //:
+  
+        function ansi_html(text) {
+                                                                                // Escape HTML special characters to prevent injection/rendering issues
+            const safeText = text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+                
+            // Map ANSI codes to their corresponding CSS styles using your dictionary values
+            const colorMap = {
+                1: { style: 'font-weight: bold;', end: 22 },
+                3: { style: 'font-style: italic;', end: 23 },
+                4: { style: 'text-decoration: underline;', end: 24 },
+                7: { style: 'filter: invert(100%);', end: 27 },
+                30: { style: 'color: black;', end: 39 },
+                31: { style: 'color: red;', end: 39 },
+                32: { style: 'color: green;', end: 39 },
+                33: { style: 'color: goldenrod;', end: 39 },
+                34: { style: 'color: blue;', end: 39 },
+                35: { style: 'color: magenta;', end: 39 },
+                36: { style: 'color: cyan;', end: 39 },
+                37: { style: 'color: white;', end: 39 },
+                90: { style: 'color: gray;', end: 39 }
+            };
+            
+            // Reverse map for end codes
+            const endToStarts = {};
+            for (const [startCode, data] of Object.entries(colorMap)) {
+                if (!endToStarts[data.end]) endToStarts[data.end] = [];
+                endToStarts[data.end].push(Number(startCode));
+            }
+            
+            let activeStyles = [];
+            
+            // Regex to match ANSI escape sequences (e.g., \x1b[31m or \u001b[1;31m)
+            const ansiRegex = /\x1b\[([0-9;]*)m/g;
+            
+            // Split text by ANSI sequences and process chunks
+            let parts = safeText.split(ansiRegex);
+            let result = [];
+            
+            for (let i = 0; i < parts.length; i++) {
+                if (i % 2 === 0) {
+                    // Regular text content
+                    const part = parts[i];
+                    if (part) {
+                        if (activeStyles.length > 0) {
+                            const combinedStyle = activeStyles.join(' ');
+                            result.push(`<span style="${combinedStyle}">${part}</span>`);
+                        } else {
+                            result.push(part);
+                        }
+                    }
+                } else {
+                    // ANSI control code group
+                    const codesStr = parts[i];
+                    if (!codesStr || codesStr === '0') {
+                        activeStyles = [];
+                        continue;
+                    }
+                    
+                    const codes = codesStr.split(';').map(Number);
+                    for (const code of codes) {
+                        if (code === 0) {
+                            activeStyles = [];
+                        } else if (colorMap[code]) {
+                            const styleStr = colorMap[code].style;
+                            if (!activeStyles.includes(styleStr)) {
+                                activeStyles.push(styleStr);
+                            }
+                        } else if (endToStarts[code]) {
+                            for (const startCode of endToStarts[code]) {
+                                const styleStr = colorMap[startCode]?.style;
+                                const index = activeStyles.indexOf(styleStr);
+                                if (index > -1) {
+                                    activeStyles.splice(index, 1);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            return result.join('');
+            
+        }
+        
+        
+        
+  //:
+  
+  return obj;
+  
+//output-inspect
+})
+
+
+      </script>
+      
+</output-inspect>
+
+
