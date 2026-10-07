@@ -24,7 +24,7 @@
   
         var df=true,did='output-inspect';
         
-        var ext,debug
+        var ext,debug,$
         ;
         
         obj.initmod   = function(...list){
@@ -33,6 +33,7 @@
               
                     ext       = mod.rd(params,'ext',ext);
                     debug     = mod.rd(params,'debug',debug);
+                    $         = mod.rd(params,'$',$);
                     
               });
               
@@ -47,6 +48,13 @@
         
         var shadow;
         var root;
+        
+        var cur         = {};
+        cur.node        = null;
+        
+        
+        var fn          = {};
+        
         
         
   //:
@@ -84,6 +92,8 @@
               shadow          = host.shadowRoot;
               
               
+              root            = $(shadow,'#root');
+              
         }//initdom
         
         
@@ -96,7 +106,7 @@
               var txt           = build(arguments);
               var div           = document.createElement('div');
               div.textContent   = txt;
-              cur.root.append(div);
+              root.append(div);
               
               cur.node    = div;
               
@@ -104,7 +114,7 @@
                     div.style.height    = '16px';
               }
               
-              cur.root.scrollTop    = 999999999;
+              root.scrollTop    = 999999999;
               
               return div;
               
@@ -125,16 +135,7 @@
                     return;
               }
               
-              switch(mode){
-              
-                case 'pretty'     : cur.root.replaceChildren();       break;
-                case 'console'    : jsconsole.clear();                break;
-                
-              }//switch
-              
-              if(settings.chk['console-echo'].checked){
-                    console.clear();
-              }
+              root.replaceChildren();
               
         }//clear
         
@@ -144,15 +145,7 @@
         
         function log(){
         
-              var div;
-              
-              switch(mode){
-              
-                case 'pretty'     : div   = disp.apply(null,arguments);       break;
-                case 'console'    : jsconsole.log.apply(jsconsole,arguments);       break;
-                
-              }//switch
-              
+              var div   = disp.apply(null,arguments);
               return div;
               
         }//log
@@ -163,17 +156,9 @@
         
         function groupCollapsed(...args){
         
-              switch(mode){
-              
-                case 'pretty'   :
-                                  var out   = format(arguments);
-                                  var div   = disp.apply(null,out);
-                                  return div;
-                                  
-                case 'console'    : jsconsole.groupCollapsed.apply(jsconsole,arguments);
-                                    break;
-                                    
-              }//switch
+              var out   = format(arguments);
+              var div   = disp.apply(null,out);
+              return div;
               
         }//groupCollapsed
         
@@ -183,20 +168,8 @@
         
         function error(){
         
-              var node;
-              
-              switch(mode){
-              
-                case 'pretty'     :
-                                    node                = log.apply(null,arguments);
-                                    node.style.color    = 'darkred';
-                                                                                          break;
-                case 'console'    :
-                                    jsconsole.error.apply(jsconsole,arguments);
-                                                                                          break;
-                                                                                          
-              }//switch
-              
+              var node            = log.apply(null,arguments);
+              node.style.color    = 'darkred';
               return node;
               
         }//error
@@ -210,9 +183,7 @@
         function node(node){
         
               node    = create(node);
-              
-              cur.root.append(node);
-              
+              root.append(node);
               return node;
               
         }//node
@@ -224,7 +195,6 @@
         
         function write(){
         
-        
               var txt             = build(arguments);
               
               var span            = document.createElement('span');
@@ -233,9 +203,8 @@
               if(cur.node){
                     cur.node.append(span);
               }else{
-                    cur.root.append(span);
+                    root.append(span);
               }
-              
               
               return span;
               
