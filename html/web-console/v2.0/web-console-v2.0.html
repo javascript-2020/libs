@@ -168,7 +168,7 @@
               
               await Promise.all([
                     libs(),
-                    mod.auto(),
+                    mod.auto({exc:jsconsole}),
               ]);
               
               
