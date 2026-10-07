@@ -33,7 +33,7 @@
             </style>
             
             <output-inspect v1.0 component=parent></output-inspect>
-            <output-jsconsole v1.0 component=parent></output-jsconsole>
+            <!-- <output-jsconsole v1.0 component=parent></output-jsconsole> -->
             
             
             <div id=ftr>
@@ -161,14 +161,16 @@
               m.inspect       = inspect;
               inspect.initmod({df});
               
+              /*
               jsconsole       = mod['output-jsconsole'];
               m.jsconsole     = jsconsole;
               jsconsole.initmod({df});
+              */
               
               
               await Promise.all([
                     libs(),
-                    mod.auto({exc:jsconsole}),
+                    mod.auto(),
               ]);
               
               
