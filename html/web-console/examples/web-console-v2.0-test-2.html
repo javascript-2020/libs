@@ -4,13 +4,19 @@
 
 <script src='https://libs.ext-code.com/js/dom/component/v3.0/component.js?hdr'></script>
 
-<web-console component></web-console>
+<web-console v2.0 component></web-console>
 
 <script>
 
         function ready(){
         
-              mod['web-console'].log({hello:'world'});
+              mod['web-console'].log('helloworld');
+              
+              var str   = [...Array(50)].reduce((a,v,i)=>a+=(i%9),'x');
+              mod['web-console'].log(str);
+              [...Array(5)].forEach(()=>mod['web-console'].log(str));
+              
+              mod['web-console'].log('helloworld');
               
         }//ready
         
