@@ -13,10 +13,18 @@
     {border-color:lightgray}
     
   .warn
-    {}
+    {border-color:darkorange}
     
   .error
-    {}
+    {border-color:darkred}
+    
+    
+  .caret
+    {width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #333;display:inline-block;transition:transform 0.2s ease;}
+  .caret .oppen
+    {transform:rotate(180deg);}
+    
+    
     
             </style>
             
@@ -29,6 +37,16 @@
                   </div>
                   
                   <div class='error item'>
+                  </div>
+                  
+                  <div class=group-collapsed>
+                        <div class=top>
+                              <div class=caret></div>
+                              <div class=txt>
+                              </div>
+                        </div>
+                        <div class=main>
+                        </div>
                   </div>
                   
             </div>
@@ -113,19 +131,25 @@
   
         obj.initdom   = async function(){
                                                                                 debug('initdom');
-              shadow          = host.shadowRoot;
+              shadow                          = host.shadowRoot;
               
               
-              root            = $(shadow,'#root');
+              root                            = $(shadow,'#root');
               
-              ui.log          = $(root,'.log');
+              ui.log                          = $(root,'.log');
               ui.log.remove();
               
-              ui.warn         = $(root,'.warn');
+              ui.warn                         = $(root,'.warn');
               ui.warn.remove();
               
-              ui.error        = $(root,'.error');
+              ui.error                        = $(root,'.error');
               ui.error.remove();
+              
+              ui.groupcollapsed               = $(root,'.group-collapsed');
+              ui.groupcollapsed.remove();
+              
+              
+              
               
               
         }//initdom
@@ -173,10 +197,10 @@
         function log(...args){
         
               var txt           = build(arguments);
-              var log           = ui.log.cloneNode(true);
-              log.textContent   = txt;
-              disp(log);
-              return log;
+              var node          = ui.log.cloneNode(true);
+              node.textContent   = txt;
+              disp(node);
+              return node;
               
         }//log
         
@@ -198,13 +222,27 @@
         
         function error(){
         
-              var node            = log.apply(null,arguments);
-              node.style.color    = 'darkred';
+              var txt             = build(arguments);
+              var node            = ui.error.cloneNode(true);
+              node.textContent    = txt;
+              disp(node);
               return node;
               
         }//error
         
         
+        obj.warn    = function(){return warn.apply(null,arguments)}
+        fn.warn     = function(){return warn.apply(null,arguments)}
+        
+        function warn(){
+        
+              var txt             = build(arguments);
+              var node            = ui.warn.cloneNode(true);
+              node.textContent    = txt;
+              disp(node);
+              return node;
+              
+        }//warn
         
         
         obj.node    = function(){return node.apply(null,arguments)}
