@@ -1010,8 +1010,14 @@
                     if(!inc){
                           inc     = mod.list;
                     }
+                    if(dtype(inc)!='array'){
+                          inc     = [inc];
+                    }
                     if(!exc){
                           exc     = [];
+                    }
+                    if(dtype(exc)!='array'){
+                          exc     = [exc];
                     }
                     
                     var params    = Object.assign({},mod_root.base,mod.base);
@@ -1221,7 +1227,7 @@
               }//component
               
               
-              //function datatype(v){return Object.prototype.toString.call(v).slice(8,-1).toLowerCase()}
+              function dtype(v){return Object.prototype.toString.call(v).slice(8,-1).toLowerCase()}
               
               
   //:
