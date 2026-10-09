@@ -513,7 +513,8 @@
   //:
   
   
-  
+        inspect.build   = build;
+        
         function build(args){
         
               var str     = '';
@@ -551,6 +552,8 @@
   //:
   
   
+        inspect.format    = format;
+        
         function format(args){
         
               if(typeof args[0]!=='string')return args;
