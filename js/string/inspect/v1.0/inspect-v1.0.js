@@ -37,6 +37,9 @@
                     'regexp'      : 'red'
               };
               
+              
+              var esc   = '\u001b';
+              
                                                                                 // default options
               var ctx   = {
                     seen      : [],
@@ -75,8 +78,10 @@
                     var style   = inspect.styles[styleType];
                     
                     if(style){
-                          return '\u001b['+inspect.colors[style][0]+'m'+str+
-                                 '\u001b['+inspect.colors[style][1]+'m';
+                          var str2    = '\u001b['+inspect.colors[style][0]+'m'+
+                                        str+
+                                        '\u001b['+inspect.colors[style][1]+'m';
+                          return str2;
                     }else{
                           return str;
                     }
@@ -208,12 +213,26 @@
                     
               }//formatArray
               
-              
+/*
               function formatError(value){
               
                     return '['+Error.prototype.toString.call(value)+']';
                     
               }//formatError
+*/
+
+              function formatError(value) {
+              
+                  var str;
+                  if(value instanceof Error){
+                        str   = value.stack || `${value.name}: ${value.message}`;
+                  }else{
+                        str   = typeof value==='object' ? JSON.stringify(value, null, 2) : String(value);
+                  }
+                  return str;
+                  
+              }//formatError
+              
               
               
               function formatValue(ctx,value,recurseTimes){
