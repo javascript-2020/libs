@@ -518,7 +518,6 @@
         function build(...args){
         
               var str     = '';
-              var args    = [...args];
               args        = args.map(v=>{
               
                     var type    = datatype(v);
