@@ -483,7 +483,7 @@
         obj.test    = function(){
         
         
-              obj.log('helloworld');
+              log('helloworld');
               
               var test    = {
                     hello:'world',
@@ -492,7 +492,7 @@
                     debug:true
               };
               
-              obj.log(test);
+              log(test);
               
               
               var str   = [...Array(250)].reduce(
@@ -506,20 +506,20 @@
                     },'x');
               [...Array(3)].forEach(()=>obj.log(str));
               
-              obj.log('helloworld');
+              log('helloworld');
               
-              obj.log('function',()=>alert(1));
-              obj.log('date',new Date());
+              log('function',()=>alert(1));
+              log('date',new Date());
               
-              obj.error(new Error('my-error'));
+              error(new Error('my-error'));
               
-              obj.warn('warning');
+              warn('warning');
               
-              obj.log(null);
+              log(null);
               
-              obj.log(undefined);
+              log(undefined);
               
-              obj.log([1,2,3]);
+              log([1,2,3]);
               
               
         }//test
