@@ -515,7 +515,7 @@
   
         inspect.build   = build;
         
-        function build(args){
+        function build(...args){
         
               var str     = '';
               var args    = [...args];
@@ -540,9 +540,9 @@
         }//build
         
         
-        build.html    = function(args){
+        build.html    = function(...args){
         
-              var txt     = build(args);
+              var txt     = build(...args);
               var html    = ansi(txt);
               return html;
               
