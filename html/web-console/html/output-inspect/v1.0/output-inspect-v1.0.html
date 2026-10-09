@@ -124,7 +124,7 @@
         
               var list      = [];
               
-              var promise   = ext.load.libs('js/string/inspect.js').then(result=>{
+              var promise   = ext.load.libs('js/string/inspect/v1.0/inspect-v1.0.js').then(result=>{
               
                    [inspect]    = result;
                    
@@ -184,36 +184,81 @@
   //:
   
   
-        obj.clear   = function(){return clear()}
-        fn.clear    = function(){return clear.apply(null,arguments)}
+        obj.clear   = clear;
         
-        function clear(){
+        function clear(...args){
         
-              /*
-              if(chk['console-persist'].checked){
-                    var node            = fn.log('console.clear override');
-                    node.classList.add('sys');
-                    return;
-              }
-              */
-              
               root.replaceChildren();
+              
+              if(args.length){
+                    log(...args)
+              }
               
         }//clear
         
         
-        obj.log   = function(){return log.apply(null,arguments)}
-        fn.log    = function(){return log.apply(null,arguments)}
+        obj.log   = log;
         
         function log(...args){
         
-              var html          = build.html(arguments);
+              var html    = inspect.build.html(...args);
+              var node    = log.display(html);
+              return node;
+              
+        }//log
+        
+        
+        log.display    = function(html){
+        
               var node          = ui.log.cloneNode(true);
               node.innerHTML    = html;
               disp(node);
               return node;
               
-        }//log
+        }//display
+        
+        
+        obj.error   = error;
+        
+        function error(){
+        
+              var html    = inspect.build.html(arguments);
+              var node    = error.display(html);
+              return node;
+              
+        }//error
+        
+        
+        error.display   = function(html){
+        
+              var node            = ui.error.cloneNode(true);
+              node.innerHTML      = html;
+              disp(node);
+              return node;
+              
+        }//display
+        
+        
+        obj.warn    = warn;
+        
+        function warn(){
+        
+              var html    = inspect.build.html(arguments);
+              var node    = warn.display(html);
+              return node;
+              
+        }//warn
+        
+        
+        warn.display    = function(html){
+        
+              var node            = ui.warn.cloneNode(true);
+              node.innerHTML      = html;
+              disp(node);
+              return node;
+              
+        }//display
+        
         
         
         obj.groupCollapsed    = function(){return groupCollapsed.apply(null,arguments)}
@@ -221,43 +266,18 @@
         
         function groupCollapsed(...args){
         
-              var out   = format(arguments);
+              var out   = inspect.format(arguments);
               var div   = disp.apply(null,out);
               return div;
               
         }//groupCollapsed
         
         
-        obj.error   = function(){return error.apply(null,arguments)}
-        fn.error    = function(){return error.apply(null,arguments)}
-        
-        function error(){
-        
-              var html            = build.html(arguments);
-              var node            = ui.error.cloneNode(true);
-              node.innerHTML      = html;
-              disp(node);
-              return node;
-              
-        }//error
         
         
-        obj.warn    = function(){return warn.apply(null,arguments)}
-        fn.warn     = function(){return warn.apply(null,arguments)}
-        
-        function warn(){
-        
-              var html            = build.html(arguments);
-              var node            = ui.warn.cloneNode(true);
-              node.innerHTML      = html;
-              disp(node);
-              return node;
-              
-        }//warn
         
         
-        obj.node    = function(){return node.apply(null,arguments)}
-        fn.node     = function(){return node.apply(null,arguments)}
+        obj.node    = node;
         
         function node(node){
         
@@ -269,12 +289,11 @@
         
         
         
-        obj.write    = function(){return write.apply(null,arguments)}
-        fn.write    = function(){return write.apply(null,arguments)}
+        obj.write    = write;
         
         function write(){
         
-              var html            = build.html(arguments);
+              var html            = inspect.build.html(arguments);
               
               var span            = document.createElement('span');
               span.innerHTML      = html;
