@@ -222,9 +222,9 @@
         
         obj.error   = error;
         
-        function error(){
+        function error(...args){
         
-              var html    = inspect.build.html(arguments);
+              var html    = inspect.build.html(...args);
               var node    = error.display(html);
               return node;
               
@@ -243,9 +243,9 @@
         
         obj.warn    = warn;
         
-        function warn(){
+        function warn(...args){
         
-              var html    = inspect.build.html(arguments);
+              var html    = inspect.build.html(...args);
               var node    = warn.display(html);
               return node;
               
@@ -263,15 +263,15 @@
         
         
         
-        obj.groupCollapsed    = function(){return groupCollapsed.apply(null,arguments)}
+        obj.groupCollapsed    = groupcollapsed;
         
-        function groupCollapsed(...args){
+        function groupcollapsed(...args){
         
               var out   = inspect.format(arguments);
               var div   = disp.apply(null,out);
               return div;
               
-        }//groupCollapsed
+        }//groupcollapsed
         
         
         
