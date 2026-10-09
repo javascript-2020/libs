@@ -543,7 +543,7 @@
         build.html    = function(args){
         
               var txt     = build(args);
-              var html    = ansi_html(txt);
+              var html    = ansi(txt);
               return html;
               
         }//html
@@ -699,6 +699,94 @@
               
         }//fn
         
+        
+        function ansi(text) {
+                                                                                // Escape HTML special characters to prevent injection/rendering issues
+            const safeText = text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+                
+            // Map ANSI codes to their corresponding CSS styles using your dictionary values
+            const colorMap = {
+                1: { style: 'font-weight: bold;', end: 22 },
+                3: { style: 'font-style: italic;', end: 23 },
+                4: { style: 'text-decoration: underline;', end: 24 },
+                7: { style: 'filter: invert(100%);', end: 27 },
+                30: { style: 'color: black;', end: 39 },
+                31: { style: 'color: red;', end: 39 },
+                32: { style: 'color: green;', end: 39 },
+                33: { style: 'color: goldenrod;', end: 39 },
+                34: { style: 'color: blue;', end: 39 },
+                35: { style: 'color: magenta;', end: 39 },
+                36: { style: 'color: cyan;', end: 39 },
+                37: { style: 'color: white;', end: 39 },
+                90: { style: 'color: gray;', end: 39 }
+            };
+            
+            // Reverse map for end codes
+            const endToStarts = {};
+            for (const [startCode, data] of Object.entries(colorMap)) {
+                if (!endToStarts[data.end]) endToStarts[data.end] = [];
+                endToStarts[data.end].push(Number(startCode));
+            }
+            
+            let activeStyles = [];
+            
+            // Regex to match ANSI escape sequences (e.g., \x1b[31m or \u001b[1;31m)
+            const ansiRegex = /\x1b\[([0-9;]*)m/g;
+            
+            // Split text by ANSI sequences and process chunks
+            let parts = safeText.split(ansiRegex);
+            let result = [];
+            
+            for (let i = 0; i < parts.length; i++) {
+                if (i % 2 === 0) {
+                    // Regular text content
+                    const part = parts[i];
+                    if (part) {
+                        if (activeStyles.length > 0) {
+                            const combinedStyle = activeStyles.join(' ');
+                            result.push(`<span style="${combinedStyle}">${part}</span>`);
+                        } else {
+                            result.push(part);
+                        }
+                    }
+                } else {
+                    // ANSI control code group
+                    const codesStr = parts[i];
+                    if (!codesStr || codesStr === '0') {
+                        activeStyles = [];
+                        continue;
+                    }
+                    
+                    const codes = codesStr.split(';').map(Number);
+                    for (const code of codes) {
+                        if (code === 0) {
+                            activeStyles = [];
+                        } else if (colorMap[code]) {
+                            const styleStr = colorMap[code].style;
+                            if (!activeStyles.includes(styleStr)) {
+                                activeStyles.push(styleStr);
+                            }
+                        } else if (endToStarts[code]) {
+                            for (const startCode of endToStarts[code]) {
+                                const styleStr = colorMap[startCode]?.style;
+                                const index = activeStyles.indexOf(styleStr);
+                                if (index > -1) {
+                                    activeStyles.splice(index, 1);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            return result.join('');
+            
+        }  //ansi
         
         
         return inspect;
