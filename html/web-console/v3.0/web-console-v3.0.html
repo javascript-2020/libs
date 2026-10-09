@@ -254,18 +254,6 @@
   //:
   
   
-        function update(){
-                                                                                debug('update');
-              if(fullsize){
-              
-                    if(update.initial)return;
-                    
-              }
-              
-        }//update
-        
-        
-        
   //  standard
   
   
@@ -301,8 +289,6 @@
                     obj.height    = height;
               }
               
-              update();
-              
         }//clear
         
         
@@ -315,8 +301,6 @@
               if(echo){
                     window.console.log.apply(window.console,arguments);
               }
-              
-              update();
               
         }//log
         
@@ -338,8 +322,6 @@
                     window.console.error.apply(window.console,arguments);
               }
               
-              update();
-              
         }//error
         
         
@@ -359,8 +341,6 @@
               if(echo){
                     window.console.warn.apply(window.console,arguments);
               }
-              
-              update();
               
         }//warn
         
@@ -382,8 +362,6 @@
               if(echo){
                     window.console.log.apply(window.console,arguments);
               }
-              
-              update();
               
         }//write
         
@@ -410,8 +388,6 @@
               if(echo){
                     window.console.debug.apply(window.console,args);
               }
-              
-              update();
               
         }//debug
         
