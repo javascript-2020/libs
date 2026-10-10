@@ -90,152 +90,10 @@
               
               
               
-              function isBoolean(arg){
-              
-                    return typeof arg==='boolean';
-                    
-              }//iisBoolean
-              
-              
-              function isUndefined(arg) {
-              
-                    return arg===void 0;
-                    
-              }//isUndefined
-              
-              
-              function isFunction(arg) {
-              
-                    return typeof arg==='function';
-                    
-              }//isFunction
-              
-              
-              function isString(arg){
-              
-                    return typeof arg==='string';
-                    
-              }//isString
-              
-              
-              function isNumber(arg) {
-              
-                    return typeof arg==='number';
-                    
-              }//isNumber
-              
-              
-              function isNull(arg) {
-              
-                    return arg===null;
-                    
-              }//isNull
-              
-              
-              function hasOwn(obj,prop){
-              
-                    return Object.prototype.hasOwnProperty.call(obj,prop);
-                    
-              }//hasOwn
-              
-              
-              function isRegExp(re){
-              
-                    return isObject(re) && objectToString(re)==='[object RegExp]';
-                    
-              }//isRegExp
-              
-              
-              function isObject(arg) {
-              
-                    return typeof arg==='object' && arg!==null;
-                    
-              }//isObject
-              
-              
-              function isError(e) {
-              
-                    return isObject(e) && (objectToString(e)==='[object Error]' || e instanceof Error);
-                    
-              }//isError
-              
-              
-              function isDate(d) {
-              
-                    return isObject(d) && objectToString(d)==='[object Date]';
-                    
-              }//isDate
-              
-              
-              function objectToString(o) {
-              
-                    return Object.prototype.toString.call(o);
-                    
-              }//objectToString
-              
-              
-              function arrayToHash(array) {
-              
-                    var hash    = {};
-                    array.forEach(function(val,idx){
-                    
-                          hash[val]   = true;
-                          
-                    });
-                    return hash;
-                    
-              }//arrayToHash
-              
               
   //:
   
   
-              function formatArray(ctx,value,recurseTimes,visibleKeys,keys){
-              
-                    var output    = [];
-                    for(var i=0,l=value.length;i<l;++i){
-                    
-                          if(hasOwn(value,String(i))){
-                                output.push(formatProperty(ctx,value,recurseTimes,visibleKeys,String(i),true));
-                          }else{
-                                output.push('');
-                          }
-                          
-                    }//for
-                    
-                    keys.forEach(function(key){
-                    
-                          if(!key.match(/^\d+$/)){
-                                output.push(formatProperty(ctx,value,recurseTimes,visibleKeys,key,true));
-                          }
-                          
-                    });
-                    return output;
-                    
-              }//formatArray
-              
-/*
-              function formatError(value){
-              
-                    return '['+Error.prototype.toString.call(value)+']';
-                    
-              }//formatError
-*/
-
-              function formatError(value) {
-              
-                  var str;
-                  if(value instanceof Error){
-                        str   = value.stack || `${value.name}: ${value.message}`;
-                  }else{
-                        str   = typeof value==='object' ? JSON.stringify(value, null, 2) : String(value);
-                  }
-                  return str;
-                  
-              }//formatError
-              
-              
-              
               function formatValue(ctx,value,recurseTimes){
               
                                                                                 // Provide a hook for user-specified inspect functions.
@@ -359,7 +217,9 @@
                     
                     ctx.seen.pop();
                     
-                    return reduceToSingleString(output,base,braces);
+                    
+                    var str   = reduceToSingleString(output,base,braces);
+                    return str;
                     
               }//formatValue
               
@@ -410,9 +270,11 @@
                                 str   = ctx.stylize('[Setter]','special');
                           }
                     }
+                    
                     if(!hasOwn(visibleKeys,key)){
                           name    = '['+key+']';
                     }
+                    
                     if(!str){
                           if(ctx.seen.indexOf(desc.value)<0){
                                 if(isNull(recurseTimes)){
@@ -422,17 +284,9 @@
                                 }
                                 if(str.indexOf('\n')>-1){
                                       if(array){
-                                            str   = str.split('\n').map(function(line){
-                                            
-                                                  return '  '+line;
-                                                  
-                                            }).join('\n').substr(2);
+                                            str   = str.split('\n').map(line=>'  '+line).join('\n').substr(2);
                                       }else{
-                                            str   = '\n'+str.split('\n').map(function(line){
-                                            
-                                                  return '   '+line;
-                                                  
-                                            }).join('\n');
+                                            str   = '\n'+str.split('\n').map(line=>'   '+line).join('\n');
                                       }
                                 }
                           }else{
@@ -461,6 +315,9 @@
               }//formatProperty
               
               
+  //:
+  
+  
               function formatPrimitive(ctx, value) {
               
                     if(isUndefined(value))
@@ -483,6 +340,152 @@
                           return ctx.stylize('null','null');
                           
               }//formatPrimitive
+              
+              
+              function formatArray(ctx,value,recurseTimes,visibleKeys,keys){
+              
+                    var output    = [];
+                    for(var i=0,l=value.length;i<l;++i){
+                    
+                          if(hasOwn(value,String(i))){
+                                output.push(formatProperty(ctx,value,recurseTimes,visibleKeys,String(i),true));
+                          }else{
+                                output.push('');
+                          }
+                          
+                    }//for
+                    
+                    keys.forEach(function(key){
+                    
+                          if(!key.match(/^\d+$/)){
+                                output.push(formatProperty(ctx,value,recurseTimes,visibleKeys,key,true));
+                          }
+                          
+                    });
+                    return output;
+                    
+              }//formatArray
+              
+/*
+              function formatError(value){
+              
+                    return '['+Error.prototype.toString.call(value)+']';
+                    
+              }//formatError
+*/
+
+              function formatError(value) {
+              
+                  var str;
+                  if(value instanceof Error){
+                        str   = value.stack || `${value.name}: ${value.message}`;
+                  }else{
+                        str   = typeof value==='object' ? JSON.stringify(value, null, 2) : String(value);
+                  }
+                  return str;
+                  
+              }//formatError
+              
+              
+  //:
+  
+  
+              function isBoolean(arg){
+              
+                    return typeof arg==='boolean';
+                    
+              }//iisBoolean
+              
+              
+              function isUndefined(arg) {
+              
+                    return arg===void 0;
+                    
+              }//isUndefined
+              
+              
+              function isFunction(arg) {
+              
+                    return typeof arg==='function';
+                    
+              }//isFunction
+              
+              
+              function isString(arg){
+              
+                    return typeof arg==='string';
+                    
+              }//isString
+              
+              
+              function isNumber(arg) {
+              
+                    return typeof arg==='number';
+                    
+              }//isNumber
+              
+              
+              function isNull(arg) {
+              
+                    return arg===null;
+                    
+              }//isNull
+              
+              
+              function hasOwn(obj,prop){
+              
+                    return Object.prototype.hasOwnProperty.call(obj,prop);
+                    
+              }//hasOwn
+              
+              
+              function isRegExp(re){
+              
+                    return isObject(re) && objectToString(re)==='[object RegExp]';
+                    
+              }//isRegExp
+              
+              
+              function isObject(arg) {
+              
+                    return typeof arg==='object' && arg!==null;
+                    
+              }//isObject
+              
+              
+              function isError(e) {
+              
+                    return isObject(e) && (objectToString(e)==='[object Error]' || e instanceof Error);
+                    
+              }//isError
+              
+              
+              function isDate(d) {
+              
+                    return isObject(d) && objectToString(d)==='[object Date]';
+                    
+              }//isDate
+              
+              
+              function objectToString(o) {
+              
+                    return Object.prototype.toString.call(o);
+                    
+              }//objectToString
+              
+              
+              function arrayToHash(array) {
+              
+                    var hash    = {};
+                    array.forEach(function(val,idx){
+                    
+                          hash[val]   = true;
+                          
+                    });
+                    return hash;
+                    
+              }//arrayToHash
+              
               
               
               function reduceToSingleString(output,base,braces){
