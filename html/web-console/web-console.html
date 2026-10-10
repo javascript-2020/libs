@@ -11,7 +11,6 @@
     {all:initial;font-family:arial;display:block;min-height:50px}
     
     
-    
   #ftr
     {/*display:flex;*/gap:10px;display:none}
     
@@ -32,8 +31,8 @@
     
             </style>
             
+            
             <output-inspect component=parent></output-inspect>
-            <!-- <output-jsconsole v1.0 component=parent></output-jsconsole> -->
             
             
             <div id=ftr>
@@ -97,8 +96,6 @@
   
   
         var inspect;
-        var jsconsole;
-        var m       = {};
         
         
         obj.host    = host;
@@ -124,8 +121,6 @@
         var fullsize;
         var height;
         
-        
-        update.initial      = true;
         
         
         var rd              = {};
@@ -158,14 +153,7 @@
               
               
               inspect         = mod['output-inspect'];
-              m.inspect       = inspect;
               inspect.initmod({df});
-              
-              /*
-              jsconsole       = mod['output-jsconsole'];
-              m.jsconsole     = jsconsole;
-              jsconsole.initmod({df});
-              */
               
               
               await Promise.all([
@@ -180,6 +168,7 @@
         async function libs(){
         
               var list    = [];
+              
               
               /*
               var promise   = import('https://cdn.jsdelivr.net/npm/ansi_up/+esm').then(({AnsiUp})=>{
@@ -253,7 +242,7 @@
               }
               
               
-              setTimeout(()=>update.initial=false,50);
+              
               
         }//initdom
         
@@ -261,17 +250,102 @@
   //:
   
   
-        function update(){
-                                                                                debug('update');
-              if(fullsize){
+  //  standard
+  
+  
+        var api         = [
+                                'assert','clear','count','countReset','debug','dir','dirxml','error','group','groupCollapsed',
+                                'groupEnd','info','log','profile','profileEnd','table','time',
+                                'timeEnd','timeLog','timeStamp','trace','warn'
+                          ];
+                          
+        api.forEach(name=>{
+        
+              var fn      = ()=>{};
+              if(window.console[name]){
+                    fn    = window.console[name].bind(window.console);
+              }
+              obj[name]   = fn;
               
-                    if(update.initial)return;
-                    
-                    jsconsole.update();
+        });
+        
+        
+        obj.clear   = clear;
+        
+        function clear(...args){
+        
+              inspect.clear(...args);
+              
+              if(echo){
+                    window.console.clear();
               }
               
-        }//update
+              if(fullsize){
+                                                                                //console.log('clear',height);
+                    obj.height    = height;
+              }
+              
+        }//clear
         
+        
+        obj.log   = log;
+        
+        function log(...args){
+        
+              inspect.log(...args);
+              
+              if(echo){
+                    window.console.log.apply(window.console,arguments);
+              }
+              
+        }//log
+        
+        
+        log.display   = function(html){
+        
+              inspect.log.display(html);
+              
+        }//display
+        
+        
+        obj.error   = error
+        
+        function error(...args){
+        
+              inspect.error(...args);
+              
+              if(echo){
+                    window.console.error.apply(window.console,arguments);
+              }
+              
+        }//error
+        
+        
+        error.display   = function(html){
+        
+              inspect.error.display(html);
+              
+        }//display
+        
+        
+        obj.warn    = warn;
+        
+        function warn(...args){
+        
+              inspect.warn(...args);
+              
+              if(echo){
+                    window.console.warn.apply(window.console,arguments);
+              }
+              
+        }//warn
+        
+        
+        warn.display    = function(html){
+        
+              inspect.warn.display(html);
+              
+        }//display
         
         
   //  ext
@@ -279,13 +353,11 @@
   
         obj.write   = function(...args){
         
-              m[mode].write(...args);
+              inspect.write(...args);
               
               if(echo){
                     window.console.log.apply(window.console,arguments);
               }
-              
-              update();
               
         }//write
         
@@ -307,95 +379,18 @@
         
               args.unshift('[ debug ]');
               
-              m[mode].log(...args);
+              inspect.log(...args);
               
               if(echo){
                     window.console.debug.apply(window.console,args);
               }
               
-              update();
-              
         }//debug
         
         
+        obj.sys   = function(...args){
         
-        
-        
-  //  standard
-  
-  
-        var api         = [
-                                'assert','clear','count','countReset','debug','dir','dirxml','error','group','groupCollapsed',
-                                'groupEnd','info','log','profile','profileEnd','table','time',
-                                'timeEnd','timeLog','timeStamp','trace','warn'
-                          ];
-                          
-        api.forEach(name=>{
-        
-              var fn      = ()=>{};
-              if(window.console[name]){
-                    fn    = window.console[name].bind(window.console);
-              }
-              obj[name]   = fn;
-              
-        });
-        
-        
-        obj.log   = function(...args){
-        
-              m[mode].log(...args);
-              
-              if(echo){
-                    window.console.log.apply(window.console,arguments);
-              }
-              
-              update();
-              
-        }//log
-        
-        
-        obj.clear   = function(...args){
-        
-              m[mode].clear(args);
-              
-              if(echo){
-                    window.console.clear();
-              }
-              
-              if(fullsize){
-                                                                                //console.log('clear',height);
-                    obj.height    = height;
-              }
-              
-              update();
-              
-        }//clear
-        
-        
-        obj.error   = function(...args){
-        
-              m[mode].error(...args);
-              
-              if(echo){
-                    window.console.error.apply(window.console,arguments);
-              }
-              
-              update();
-              
-        }//error
-        
-        
-        obj.warn    = function(...args){
-        
-              m[mode].warn(...args);
-              
-              if(echo){
-                    window.console.warn.apply(window.console,arguments);
-              }
-              
-              update();
-              
-        }//warn
+        }//sys
         
         
         
@@ -460,7 +455,7 @@
         obj.test    = function(){
         
         
-              obj.log('helloworld');
+              log('helloworld');
               
               var test    = {
                     hello:'world',
@@ -469,7 +464,7 @@
                     debug:true
               };
               
-              obj.log(test);
+              log(test);
               
               
               var str   = [...Array(250)].reduce(
@@ -483,20 +478,22 @@
                     },'x');
               [...Array(3)].forEach(()=>obj.log(str));
               
-              obj.log('helloworld');
+              log('helloworld');
               
-              obj.log('function',()=>alert(1));
-              obj.log('date',new Date());
+              log('function',()=>alert(1));
+              log('date',new Date());
               
-              obj.error(new Error('my-error'));
+              error(new Error('my-error'));
               
-              obj.warn('warning');
+              warn('warning');
               
-              obj.log(null);
+              log(null);
               
-              obj.log(undefined);
+              log(undefined);
               
-              obj.log([1,2,3]);
+              var arr     = [1,2,3];
+              arr.hello   = 'world';
+              log(arr);
               
               
         }//test
