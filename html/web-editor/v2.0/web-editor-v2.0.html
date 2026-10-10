@@ -1435,7 +1435,7 @@
               `;
               
               var lines   = txt.split('\n');
-              txt         = lines.reduce((a,c)=>a+c.slice(14))
+              txt         = lines.reduce((a,c)=>a+c.slice(14)+'\n')
               
               editor.setValue(txt,-1);
               editor.focus();
