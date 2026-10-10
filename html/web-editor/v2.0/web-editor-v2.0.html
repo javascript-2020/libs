@@ -1385,6 +1385,9 @@
                     const cafe = "Caf\u00E9 \u00A9 2026"; // Accent & copyright symbol
                     const nbsp = "test\u00A0string"; // Non-breaking space
               `;
+              
+              txt   = txt.split('\n').reduce((a,c)=>a+c.slice(20)+'\n')
+              
               editor.setValue(txt,-1);
               editor.focus();
               
@@ -1434,8 +1437,7 @@
                     
               `;
               
-              var lines   = txt.split('\n');
-              txt         = lines.reduce((a,c)=>a+c.slice(20)+'\n')
+              txt   = txt.split('\n').reduce((a,c)=>a+c.slice(20)+'\n')
               
               editor.setValue(txt,-1);
               editor.focus();
