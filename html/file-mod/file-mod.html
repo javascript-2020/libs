@@ -1,6 +1,6 @@
 
 
-<file-mod v2.0>
+<file-mod>
 
       <template shadowrootmode=open>
       
@@ -42,7 +42,7 @@
 (function filemod({mod,host}){
 
   var obj       = {
-        version   : 'v2.0'
+        version   : 'v2.1'
   };
   
         var df=false,did='file-mod'
@@ -53,16 +53,21 @@
         var ext,$,menumod,menu,complete,source,focus,log
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...list){
         
-              ext             = mod.rd(params,'ext',ext);
-              $               = mod.rd(params,'$',$);
-              menumod         = mod.rd(params,'menumod',menumod);
-              menu            = mod.rd(params,'menu',menu);
-              complete        = mod.rd(params,'complete',complete);
-              source          = mod.rd(params,'source',source);
-              focus           = mod.rd(params,'focus',focus);
-              log             = mod.rd(params,'log',log);
+              list.forEach(params=>{
+              
+                    ext             = mod.rd(params,'ext',ext);
+                    $               = mod.rd(params,'$',$);
+                    menumod         = mod.rd(params,'menumod',menumod);
+                    menu            = mod.rd(params,'menu',menu);
+                    log             = mod.rd(params,'log',log);
+                    
+                    complete        = mod.rd(params,'complete',complete);
+                    source          = mod.rd(params,'source',source);
+                    focus           = mod.rd(params,'focus',focus);
+                    
+              });
               
         }//initmod
         
@@ -111,6 +116,9 @@
             //mod.base.add({filemod,source,log});
             //await mod.auto();
             if(!ext)debugger;
+            
+            
+            mod.base.add({source,complete});
             
             
             localfile                 = mod['local-file'];
