@@ -603,7 +603,7 @@
                     var oy    = e.pageY-my;
                     mx        = e.pageX;
                     my        = e.pageY;
-                    
+                                                                                console.log('mm',ox,oy,dragtype);
                     e.preventDefault();
                     
                     if(dragtype==='pos'){
