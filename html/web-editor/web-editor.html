@@ -269,6 +269,7 @@
                                     
                                     <div id=sample class=menu-opt>sample text</div>
                                     <div id=sample2 class=menu-opt>sample 2</div>
+                                    <div id=sample3 class=menu-opt>sample 3</div>
                                     
                               </div menu-1>
                         </div>
@@ -1444,6 +1445,50 @@
               
         }//sample2
         
+        
+        click2.sample3    = function(){
+        
+              var txt   = `
+                    <!DOCTYPE html>
+                    <html lang="en" class="dark-theme">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Parser Test Document</title>
+                        <link rel="stylesheet" href="styles.css" crossorigin="anonymous">
+                        <scr`+`ipt src="app.js" defer type="module"></scr`+`ipt>
+                    </head>
+                    <body data-user-role="admin" class="container" id="main-layout">
+                        <header class="site-header">
+                            <nav aria-label="Main Navigation">
+                                <ul class="nav-list" hidden>
+                                    <li><a href="#home" class="active">Home</a></li>
+                                    <li><a href="#about" data-analytics-id="nav-about">About</a></li>
+                                </ul>
+                            </nav>
+                        </header>
+                        <main role="main">
+                            <section id="hero" style="padding: 2rem;">
+                                <h1>Welcome to the Code Parser</h1>
+                                <p class="lead" draggable="true">Testing tags, attributes, and safety boundaries.</p>
+                                <input type="text" placeholder="Enter search term..." required disabled />
+                                <img src="banner.jpg" alt="Hero banner image" width="100%" height="auto">
+                            </section>
+                            <custom-widget data-config='{"mode": "pro", "items": 5}' active></custom-widget>
+                        </main>
+                        <footer class="site-footer">
+                            <p>&copy; 2026 Developer Tools Inc.</p>
+                        </footer>
+                    </body>
+                    </html>
+              `;
+              
+              txt   = txt.split('\n').reduce((a,c)=>a+c.slice(20)+'\n')
+              
+              editor.setValue(txt,-1);
+              editor.focus();
+              
+        }//sample3
         
   //:
   
