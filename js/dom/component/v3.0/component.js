@@ -1005,7 +1005,7 @@
               }//inst
               
               
-              async function auto({inc,exc}={}){
+              async function auto({inc,exc,initmod,init,initdom}={}){
                                                                                 debug('auto');
                     if(!inc){
                           inc     = mod.list;
@@ -1020,7 +1020,7 @@
                           exc     = [exc];
                     }
                     
-                    var params    = Object.assign({},mod_root.base,mod.base);
+                    var params    = Object.assign({},mod_root.base,mod.base,initmod);
                     
                     await Promise.all(
                           inc.map(async(arg,i)=>{
@@ -1043,10 +1043,10 @@
                                       fn.initmod(params);
                                 }
                                 if(typeof fn.init=='function'){
-                                      await fn.init();
+                                      await fn.init(init);
                                 }
                                 if(typeof fn.initdom=='function'){
-                                      await fn.initdom();
+                                      await fn.initdom(initdom);
                                 }
                                 
                           })
@@ -1055,16 +1055,23 @@
               }//auto
               
               
-              function initmod(fn){
+              function initmod(fn,initmod){
               
-                    if(typeof fn!='function'){
-                          if(typeof fn.initmod!='function'){
-                                return;
-                          }
-                          fn    = fn.initmod;
+                    if(dtype(fn)!='array'){
+                          fn    = [fn];
                     }
-                    var params    = Object.assign({},mod_root.base,mod.base);
-                    fn(params);
+                    var params    = Object.assign({},mod_root.base,mod.base,initmod);
+                    fn.forEach(fn=>{
+                    
+                          if(typeof fn!='function'){
+                                if(typeof fn.initmod!='function'){
+                                      return;
+                                }
+                                fn    = fn.initmod;
+                          }
+                          fn(params);
+                          
+                    });
                     
               }//initmod
               
