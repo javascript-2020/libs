@@ -1147,7 +1147,13 @@
                           
                                 var rule    = rules[j];
                                 
+                                var f   = false;
+                                
                                 if(rule.selectorText===selector){
+                                      f   = true;
+                                }
+                                
+                                if(f){
                                       switch(rtype){
                                       
                                         case 'cssText'    :
