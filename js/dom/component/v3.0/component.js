@@ -1084,7 +1084,7 @@
                           fn    = [fn];
                     }
                     await Promise.all(
-                          fn.map(fn=>{
+                          fn.map(async fn=>{
                           
                                 if(typeof fn!='function'){
                                       if(typeof fn.init!='function'){
@@ -1106,7 +1106,7 @@
                           fn    = [fn];
                     }
                     await Promise.all(
-                          fn.map(fn=>{
+                          fn.map(async fn=>{
                           
                                 if(typeof fn!='function'){
                                       if(typeof fn.initdom!='function'){
