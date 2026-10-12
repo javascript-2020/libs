@@ -59,6 +59,8 @@
               mod.full              = full_list;      // obj
               
               mod.initmod           = initmod;
+              mod.init              = init;
+              mod.initdom           = initdom;
               mod.auto              = auto;
               mod.complete          = complete;
               mod.create            = create;
@@ -1055,12 +1057,12 @@
               }//auto
               
               
-              function initmod(fn,initmod){
+              function initmod(fn,...initmod){
               
                     if(dtype(fn)!='array'){
                           fn    = [fn];
                     }
-                    var params    = Object.assign({},mod_root.base,mod.base,initmod);
+                    var params    = Object.assign({},mod_root.base,mod.base,...initmod);
                     fn.forEach(fn=>{
                     
                           if(typeof fn!='function'){
@@ -1074,6 +1076,50 @@
                     });
                     
               }//initmod
+              
+              
+              async function init(fn,...params){
+              
+                    if(dtype(fn)!='array'){
+                          fn    = [fn];
+                    }
+                    await Promise.all(
+                          fn.map(fn=>{
+                          
+                                if(typeof fn!='function'){
+                                      if(typeof fn.init!='function'){
+                                            return;
+                                      }
+                                      fn    = fn.init;
+                                }
+                                await fn(...params);
+                                
+                          })
+                    );
+                    
+              }//init
+              
+              
+              async function initdom(fn,...params){
+              
+                    if(dtype(fn)!='array'){
+                          fn    = [fn];
+                    }
+                    await Promise.all(
+                          fn.map(fn=>{
+                          
+                                if(typeof fn!='function'){
+                                      if(typeof fn.initdom!='function'){
+                                            return;
+                                      }
+                                      fn    = fn.initdom;
+                                }
+                                await fn(...params);
+                                
+                          })
+                    );
+                    
+              }//initdom
               
               
               async function complete(){
