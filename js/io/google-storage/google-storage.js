@@ -586,7 +586,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               }
               
               var json    = await res.json();
-                                                                                      console.log(json);
+                                                                                      //console.log(json);
                                                                                       //console.log(path);
               var list    = [];
               
