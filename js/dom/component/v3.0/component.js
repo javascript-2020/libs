@@ -979,7 +979,7 @@
               
               
               rd.root   = function(root){
-              
+                                                                                if(!root)debugger;
                     var nn    = root.nodeName.toLowerCase();
                     var inst;
                     
