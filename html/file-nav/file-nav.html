@@ -1,7 +1,7 @@
 
 
 
-<file-nav v2.0>
+<file-nav>
 
       <template shadowrootmode=open>
       
@@ -170,10 +170,10 @@
       <script>
       
       
-(function file_nav({mod,dom,host}){
+(function file_nav({mod,host}){
 
   var obj   = {
-        version   : 'v2.0'
+        version   : 'v2.1'
   };
   
         var df=false,did='file-nav';
@@ -181,9 +181,9 @@
         var ext,$,datatype
         ;
         
-        obj.initmod   = function(...params){
+        obj.initmod   = function(...list){
         
-              params.forEach(params=>{
+              list.forEach(params=>{
               
                     ext         = mod.rd(params,'ext',ext);
                     $           = mod.rd(params,'$',$);
@@ -371,7 +371,8 @@
               var path      = ui.rd.path();
               
               var result    = await callback('file','add',path,name);
-              if(result===false){
+              //if(result===false){
+              if(!result){
                     update(path);
                     return;
               }
@@ -392,7 +393,8 @@
               var name      = cur.filename;
               
               var result    = await callback('file','rem',path,name);
-              if(result===false){
+              //if(result===false){
+              if(!result){
                     cur.rem();
                     update(path);
                     return;
@@ -423,11 +425,12 @@
                           var blob      = input.files[i];
                           var name      = blob.name;
                           var result    = await callback('file','upload',path,name,blob);
-                          if(result){
-                                var {url,auth}    = result;
-                                var fn            = path+blob.name;
-                                await file.upload(url,auth,fn,blob);
+                          if(!result){
+                                continue;
                           }
+                          var {url,auth}    = result;
+                          var fn            = path+blob.name;
+                          await file.upload(url,auth,fn,blob);
                           
                     }//for
                     
@@ -452,7 +455,8 @@
               var abs       = path+name;
               
               var result    = await callback('file','download',path,name);
-              if(result===false){
+              //if(result===false){
+              if(!result){
                     return;
               }
               
@@ -625,7 +629,7 @@
         }//update
         
         
-  //:
+  //file:
   
   
         file.add    = async function(url,auth,path,filename){
@@ -678,6 +682,9 @@
         }//download
         
         
+  //dir:
+  
+  
         dir.read    = async function(url,auth,path){
                                                                                 debug('dir.read',path);
               var result    = await server.readdir(url,auth,path);
