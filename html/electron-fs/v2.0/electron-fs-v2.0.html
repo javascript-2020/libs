@@ -46,7 +46,7 @@
       
       <script>
       
-(function({mod,dom,host}){
+(function({mod,host}){
 
   var obj   = {
         version   : 'v2.0',
@@ -55,17 +55,22 @@
         var df=false,did='electron-fs'
         ;
         
-        var ext,$,menu,source,filemod,log
+        var ext,$,menu,source,filemod,log,debug
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...list){
         
-              ext         = mod.rd(params,'ext',ext);
-              $           = mod.rd(params,'$',$);
-              menu        = mod.rd(params,'menu',menu);
-              source      = mod.rd(params,'source',source);
-              filemod     = mod.rd(params,'filemod',filemod);
-              log         = mod.rd(params,'log',log);
+              list.forEach(params=>{
+              
+                    ext         = mod.rd(params,'ext',ext);
+                    $           = mod.rd(params,'$',$);
+                    menu        = mod.rd(params,'menu',menu);
+                    source      = mod.rd(params,'source',source);
+                    filemod     = mod.rd(params,'filemod',filemod);
+                    log         = mod.rd(params,'log',log);
+                    debug       = mod.rd(params,'debug',debug);
+                    
+              });
               
         }//initmod
         
@@ -73,8 +78,6 @@
   //vars:-
   
   
-  
-  //:
   
         var electron;
         
@@ -84,7 +87,6 @@
         var filetype    = 'electron';
         
         var shadow;
-        var ui          = {};
         var icon;
         
         
@@ -108,10 +110,16 @@
               }
                                                                                 debug('enabled');
               filenav                   = mod['file-nav'];
-              //filenav.rd.params         = rd.params;
+              
+              filenav.file.add          = file.add;
+              filenav.file.rem          = file.rem;
               filenav.file.click        = file.click;
               filenav.file.dblclick     = file.dblclick;
+              
               filenav.dir.read          = dir.read;
+              filenav.dir.add           = dir.add;
+              filenav.dir.rem           = dir.rem;
+              filenav.dir.clear         = dir.clear;
               filenav.dir.click         = dir.click;
               filenav.dir.dblclick      = dir.dblclick;
               
@@ -211,23 +219,51 @@
         }//update
         
         
-  //:
+  //file:
   
-        file.click    = function(path,filename){
-                                                                                debug('file.click',path,filename);
+  
+        file.click    = function(path,name){
+                                                                                debug('file.click',path,name);
         }//click
         
         
-        file.dblclick   = function(path,filename){
-                                                                                debug('file.dblclick',path,filename);
-              load.ui(path,filename);
+        file.dblclick   = function(path,name){
+                                                                                debug('file.dblclick',path,name);
+              load.ui(path,name);
               
         }//dblclick
         
         
+        file.add    = async function(path,name){
+                                                                                debug('file.add',path,name);
+              path             += name;
+              var {ok,error}    = await electron.file.add({path});
+              if(error){
+                    console.error(error);
+                    return;
+              }
+              
+        }//add
+        
+        
+        file.rem    = async function(path,name){
+                                                                                debug('file.rem',path,name);
+              path             += name;
+              var {ok,error}    = await electron.file.del({path});
+              if(error){
+                    console.error(error);
+                    return;
+              }
+              
+        }//rem
+        
+        
+  //dir:
+  
+  
         dir.read    = async function(path){
                                                                                 debug('dir.read',path);
-              var {files,dirs,error}    = await electron.dirRead({path});
+              var {files,dirs,error}    = await electron.dir.read({path});
               
               if(error){
                     console.error(error);
@@ -241,13 +277,46 @@
         }//read
         
         
-        dir.click   = function(path,filename){
+        dir.add   = async function(path,name){
+                                                                                debug('dir.add',path,name);
+              path             += name;
+              var {ok,error}    = await electron.dir.add({path});
+              if(error){
+                    console.error(error);
+                    return;
+              }
+              
+        }//add
+        
+        
+        dir.rem   = async function(path,name){
+                                                                                debug('dir.rem',path,name);
+              path             += name;
+              var {ok,error}    = await electron.dir.del({path});
+              if(error){
+              
+        }//rem
+        
+        
+        dir.clear   = async function(path,name){
+                                                                                debug('dir.clear',path,name);
+              path             += name;
+              var {ok,error}    = await electron.dir.clear({path});
+              if(error){
+                    console.error(error);
+                    return;
+              }
+              
+        }//clear
+        
+        
+        dir.click   = function(path,name){
         }//click
         
         
-        dir.dblclick    = function(path,filename){
-                                                                                debug('dir.dblclick',path,filename);
-              var abs   = path+filename;
+        dir.dblclick    = function(path,name){
+                                                                                debug('dir.dblclick',path,name);
+              var abs   = path+name;
               filenav.update(abs);
               
         }//dblclick
@@ -318,7 +387,7 @@
         async function load(file){
                                                                                 debug('load',file);
               var path    = file.abs;
-              var buf     = await electron.readFile({path});
+              var buf     = await electron.file.read({path});
               var blob    = new Blob([buf]);
               return blob;
               
@@ -387,7 +456,7 @@
               var path      = file.abs;
               var buf       = await blob.arrayBuffer();
               buf           = new Uint8Array(buf);
-              var {error}   = await electron.writeFile({path,buf});
+              var {error}   = await electron.file.write({path,buf});
               if(error){
                                                                                 console.error(error);
                     return false;
@@ -403,7 +472,7 @@
         
   //:
   
-  
+/*
         function debug(...args){
         
               if(!df && !obj.df)return;
@@ -415,10 +484,11 @@
               console.groupEnd();
               
         }//debug
-        
-        
-        
-        
+*/
+
+
+
+
   return obj;
   
 })
