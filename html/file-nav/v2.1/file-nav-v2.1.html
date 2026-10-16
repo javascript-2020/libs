@@ -625,7 +625,7 @@
         }//update
         
         
-  //:
+  //file:
   
   
         file.add    = async function(url,auth,path,filename){
@@ -678,6 +678,9 @@
         }//download
         
         
+  //dir:
+  
+  
         dir.read    = async function(url,auth,path){
                                                                                 debug('dir.read',path);
               var result    = await server.readdir(url,auth,path);
