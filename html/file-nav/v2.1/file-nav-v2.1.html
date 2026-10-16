@@ -371,7 +371,8 @@
               var path      = ui.rd.path();
               
               var result    = await callback('file','add',path,name);
-              if(result===false){
+              //if(result===false){
+              if(!result){
                     update(path);
                     return;
               }
@@ -392,7 +393,8 @@
               var name      = cur.filename;
               
               var result    = await callback('file','rem',path,name);
-              if(result===false){
+              //if(result===false){
+              if(!result){
                     cur.rem();
                     update(path);
                     return;
@@ -423,11 +425,12 @@
                           var blob      = input.files[i];
                           var name      = blob.name;
                           var result    = await callback('file','upload',path,name,blob);
-                          if(result){
-                                var {url,auth}    = result;
-                                var fn            = path+blob.name;
-                                await file.upload(url,auth,fn,blob);
+                          if(!result){
+                                continue;
                           }
+                          var {url,auth}    = result;
+                          var fn            = path+blob.name;
+                          await file.upload(url,auth,fn,blob);
                           
                     }//for
                     
@@ -452,7 +455,8 @@
               var abs       = path+name;
               
               var result    = await callback('file','download',path,name);
-              if(result===false){
+              //if(result===false){
+              if(!result){
                     return;
               }
               
