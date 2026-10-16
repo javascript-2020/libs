@@ -294,6 +294,9 @@
               path             += name;
               var {ok,error}    = await electron.dir.del({path});
               if(error){
+                    console.error(error);
+                    return;
+              }
               
         }//rem
         
