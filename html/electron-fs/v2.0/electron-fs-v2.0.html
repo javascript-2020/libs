@@ -171,7 +171,7 @@
         btn.load    = function(){
                                                                                 debug('btn.load');
               if(filenav.cur.type!=='file'){
-                    alert('no file selected');
+                    log.red('no file selected');
                     return;
               }
               
@@ -187,10 +187,11 @@
         btn.save    = function(){
                                                                                 debug('btn.save');
               if(filenav.cur.type!=='file'){
-                    alert('no file selected');
+                    log.red('no file selected');
                     return;
               }
               
+              debugger;
               
               var path        = filenav.cur.path;
               var filename    = filenav.cur.filename;
