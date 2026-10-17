@@ -101,6 +101,7 @@
         obj.init    = async function(){
         
               mod.initmod(obj);
+                                                                                debug=eval(debug.mod);
                                                                                 debug('init',obj.version);
                                                                                 
               electron                  = window.electronAPI;
@@ -123,8 +124,10 @@
               filenav.dir.click         = dir.click;
               filenav.dir.dblclick      = dir.dblclick;
               
+              
               await mod.auto();
               
+              console.log('electron-fs init complete');
               
         }//init
         
@@ -157,6 +160,7 @@
               $(shadow,'[value=save]').onclick        = btn.save;
               $(shadow,'[value=dir]').onclick         = btn.dir;
               
+              console.log('electron-fs.initdom.complete');
               
         }//initdom
         
@@ -167,7 +171,7 @@
         btn.load    = function(){
                                                                                 debug('btn.load');
               if(filenav.cur.type!=='file'){
-                    alert('no file selected');
+                    log.red('no file selected');
                     return;
               }
               
@@ -183,10 +187,9 @@
         btn.save    = function(){
                                                                                 debug('btn.save');
               if(filenav.cur.type!=='file'){
-                    alert('no file selected');
+                    log.red('no file selected');
                     return;
               }
-              
               
               var path        = filenav.cur.path;
               var filename    = filenav.cur.filename;
@@ -397,18 +400,19 @@
         }//load
         
         
-        save.ui   = async function(path,filename){
-                                                                                debug('save.ui',path,filename);
-              var title       = `${path}${filename}`;
+        save.ui   = async function(path,name){
+                                                                                debug('save.ui',path,name);
+              var title       = `${path}${name}`;
+              var abs         = path+name;
               
               var file;
               if(filemod){
                     file            = filemod.newfile({
                     
                           filetype    : filetype,
-                          abs         : path,
+                          abs         : abs,
                           path        : path,
-                          name        : filename,
+                          name        : name,
                           
                           kind        : 'file',
                           size        : null,
@@ -424,9 +428,9 @@
                     file            = {
                     
                           filetype    : filetype,
-                          abs         : `${path}${filename}`,
+                          abs         : abs,
                           path        : path,
-                          name        : filename,
+                          name        : name,
                           
                           kind        : 'file',
                           size        : null,
