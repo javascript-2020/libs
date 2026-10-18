@@ -612,7 +612,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                     });
               }
               
-              return {list};
+              return {list,json};
               
         }//full
         
