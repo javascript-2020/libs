@@ -620,8 +620,8 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               
               list.sort((file1,file2)=>{
               
-                    var parts1    = file1.name.split('/');
-                    var parts2    = file2.name.split('/');
+                    var parts1    = file1.abs.split('/');
+                    var parts2    = file2.abs.split('/');
                     
                     var n   = Math.max(parts1.length,parts2.length);
                     for(var i=0;i<n;i++){
