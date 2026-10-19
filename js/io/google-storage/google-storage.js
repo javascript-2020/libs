@@ -435,6 +435,11 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               var len             = path.length;
               path2               = t.slice(len,i);
               
+              var relpath         = path2+name;
+              if(kind=='dir'){
+                    relpath      += '/';
+              }
+              
               var abs             = '/'+item.name;
               
               
@@ -443,15 +448,16 @@ curl -X POST --data-binary @OBJECT_LOCATION \
               file.ft             = filetype;
               file.filetype       = filetype;
               
+              file.name           = name;
+              
               file.abs            = abs;
               file.path           = abs;
               
               file.rel            = path2;
-              file.name           = name;
+              file.relpath        = relpath;
               
               file.kind           = kind;
               file.type           = kind;
-              file.size           = item.size;
               
               file.size           = item.size;
               file.md5            = item.md5Hash;
