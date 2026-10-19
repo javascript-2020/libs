@@ -618,7 +618,24 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                     });
               }
               
-              list.sort((file1,file2)=>list.sort((file1,file2)=>file1.abs.localeCompare(file2.abs)));
+              list.sort((file1,file2)=>{
+              
+                    var parts1    = file1.name.split('/');
+                    var parts2    = file2.name.split('/');
+                    
+                    var n   = Math.max(parts1.length,parts2.length);
+                    for(var i=0;i<n;i++){
+                    
+                          if(parts1[i]===undefined)return -1; // file1 is a parent of file2
+                          if(parts2[i]===undefined)return 1;  // file2 is a parent of file1
+                          
+                          var comp    = parts1[i].localeCompare(parts2[i]);
+                          if(comp!=0)return comp;
+                          
+                    }//for
+                    return 0;
+                    
+              });
               return {list,json};
               
         }//full
