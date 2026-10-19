@@ -618,6 +618,7 @@ curl -X POST --data-binary @OBJECT_LOCATION \
                     });
               }
               
+              list.sort((file1,file2)=>list.sort((file1,file2)=>file1.name.localeCompare(file2.name)));
               return {list,json};
               
         }//full
