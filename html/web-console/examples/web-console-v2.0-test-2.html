@@ -4,13 +4,15 @@
 
 <script src='https://libs.ext-code.com/js/dom/component/v3.0/component.js?hdr'></script>
 
-<web-console v2.0 component></web-console>
+<web-console component h='100%' style='heighht:100%'></web-console>
 
 <script>
 
         function ready(){
         
               mod['web-console'].test();
+              
+              mod['web-console'].log(new Proxy({},{}))
               
         }//ready
         
