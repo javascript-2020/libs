@@ -76,7 +76,7 @@
               ontop.root                  = document.createElement('div');
               ontop.root.id               = 'viewport-manager-ontop';
               ontop.root.style.zIndex     = 2;
-              par.append(ontop);
+              par.append(ontop.root);
               
         }//initdom
         
