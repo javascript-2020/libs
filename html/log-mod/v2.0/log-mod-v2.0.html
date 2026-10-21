@@ -92,6 +92,30 @@
   //:
   
   
+        function pin(fn){
+        
+              return pin;
+              
+              
+              function pin(){
+              
+                    log.config.time   = null;
+                    var nlog          = fn(...arguments);
+                    return nlog;
+                    
+              }//pin
+              
+        }//pin
+        
+        var fns   = [
+          log,
+          red,green,orange,
+          error,ok,warning
+        ];
+        fns.forEach(fn=>fn.pin=pin(fn));
+        
+        
+        
         function log(){
         
               var str         = [...arguments].join(' ');
@@ -126,11 +150,13 @@
         }//log
         
         
-        obj.red   = function(){return red.apply(null,arguments)}
+        
+        
+        obj.red   = red;
         
         function red(){
         
-              var nlog    = log.apply(null,arguments);
+              var nlog                  = log.apply(null,arguments);
               nlog.style.borderColor    = 'red';
               nlog.style.color          = 'red';
               return nlog;
@@ -138,16 +164,16 @@
         }//red
         
         
-        obj.green   = function(){return green.apply(null,arguments)}
+        obj.green   = green;
         
         function green(){
         
-              if(obj.green.config){
-                    log.config    = obj.green.config;
+              if(green.config){
+                    log.config          = green.config;
               }
-              obj.green.config    = null;
+              green.config              = null;
               
-              var nlog    = log.apply(null,arguments);
+              var nlog                  = log.apply(null,arguments);
               nlog.style.borderColor    = 'green';
               nlog.style.color          = 'green';
               return nlog;
@@ -155,9 +181,11 @@
         }//green
         
         
-        obj.orange    = function(){
+        obj.orange    = orange;
         
-              var nlog    = log.apply(null,arguments);
+        function orange(){
+        
+              var nlog                  = log.apply(null,arguments);
               nlog.style.borderColor    = 'darkorange';
               nlog.style.color          = 'darkorange';
               return nlog;
@@ -168,9 +196,12 @@
   //:
   
   
-        obj.error   = function(err){
+        obj.error   = error;
         
-              var str   = err;
+        function error(err){
+        
+              var str     = err;
+              
               if(err?.message){
                     str   = err.message;
               }
@@ -183,9 +214,11 @@
         }//error
         
         
-        obj.ok    = function(){
+        obj.ok    = ok;
         
-              var str   = [...arguments].join(' ');
+        function ok(){
+        
+              var str     = [...arguments].join(' ');
               if(!str){
                     str   = 'ok';
               }
@@ -195,9 +228,11 @@
         }//ok
         
         
-        obj.warning   = function(){
+        obj.warning   = warning;
         
-              var nlog    = obj.orange.apply(null,arguments);
+        function warning(){
+        
+              var nlog    = orange.apply(null,arguments);
               return nlog;
               
         }//warning
