@@ -136,7 +136,7 @@
                     setTimeout(rem,log.config.time);
               }
               
-              log.config    = def;
+              log.config    = structuredClone(def);
               
               return nlog;
               
