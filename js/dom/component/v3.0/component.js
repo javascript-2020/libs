@@ -233,7 +233,10 @@
                     
                     build.host.attrs({root,html,i1});
                     
-                    if(i3==-1)return;
+                    if(i3==-1){
+                          build.host.html.full({root,html});
+                          return;
+                    }
                     
                     if(i3!=-1 && i3<i2){
                           //build.host.template({root,html});
@@ -305,6 +308,13 @@
                     root.innerHTML    = html2;
                     
               }//html
+              
+              
+              build.host.html.full   = function({root,html}){
+              
+                    root.innerHTML    = html;
+                    
+              }//full
               
               
               async function loader({root,mod,mod2}){
