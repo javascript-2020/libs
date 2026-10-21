@@ -6,6 +6,9 @@
       
       <style>
       
+  html
+    {font-family:arial}
+    
   [type=button]
     {padding:5px 10px;font-size:16px;cursor:pointer}
     
@@ -16,7 +19,7 @@
       
       <input value='click me' type=button>
       
-      <log-mod component v2.0></log-mod>
+      <log-mod v2.0 component></log-mod>
       
       
       <script>
@@ -42,7 +45,11 @@
         
               $('[value="click me"]').onclick   = e=>log.green('ok');
               
+              
               log.ok();
+              
+              log.error.pin(Error('my error'));
+              
               
               
         }//initdom
@@ -50,6 +57,7 @@
         
         
       </script>
+      
       
       
       
