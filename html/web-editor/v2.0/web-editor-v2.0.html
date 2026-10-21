@@ -1005,7 +1005,7 @@
               $(shadow,'#filename').textContent   = fn;
               $(shadow,'#filename').title         = title;
               
-              obj.mode    = ext;
+              set.mode(ext);
               
               //var mode    = modelist.getModeForPath(fn).mode
               //editor.session.setMode(mode)
@@ -1251,7 +1251,7 @@
         obj.set.mode    = set.mode;
         
         set.mode    = async function(v){
-        
+                                                                                debug('set.mode',v);
               switch(v){
               
                 case 'js'   : v='javascript';       break;
