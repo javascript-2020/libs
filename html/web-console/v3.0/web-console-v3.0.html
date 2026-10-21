@@ -63,16 +63,15 @@
       <script>
       
       
-(function web_console({mod,host}){
+(function({mod,host}){
 
   var obj   = {
         version   : 'v3.0',
   };
   
-        var df=false,did='web-console'
-        ;
+        var df=false,did='web-console';
         
-        var ext,$,ace,embed,config={},callback
+        var ext,$,ace,embed,config={},callback,debug
         ;
         
         obj.initmod   = function(...list){
@@ -86,6 +85,7 @@
                     config      = mod.rd(params,'config',config,{});
                     echo        = mod.rd(params,'echo',echo);
                     callback    = mod.rd(params,'callback',callback,callback);
+                    debug       = mod.rd(params,'debug',debug);
                     
               });
               
@@ -136,6 +136,7 @@
         obj.init    = async function(){
         
               mod.initmod(obj);
+                                                                                debug=eval(debug.mod);
                                                                                 debug('init',obj.version);
               var dom_config    = mod.rd.config(host);
               config            = Object.assign(config,dom_config);
@@ -348,7 +349,7 @@
         }//display
         
         
-  //  ext
+  //ext:
   
   
         obj.write   = function(...args){
