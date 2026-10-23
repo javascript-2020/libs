@@ -50,9 +50,10 @@
                   
                   <div id=btns>
                         <input value=run type=button>
+                        <input value=kill type=button>
+                        <input value=reset type=button>
                         <div class=spc></div>
                         <input value=clear type=button>
-                        <input value=reset type=button>
                   </div>
                   
                   <div id=hldr part=hldr>
@@ -75,15 +76,11 @@
         version   : 'v2.1',
   };
   
-        var df=true,did='snippet-html-console'
+        var df=true,did='snippet-html-console';
+        
+        var ext,$,menu,ace,menumod,log,config={}
         ;
         
-        
-        
-        var ext,$,menu,ace,menumod,log,config={};
-        
-        
-        mod.initmod(obj);
         
         obj.initmod   = function(...list){
         
@@ -219,15 +216,15 @@
               var shadow                          = host.shadowRoot;
               
               
-              //filemod.initdom();
-              //editor.initdom({mode:'html',txt:def.html});
               editor.setvalue(def.html);
               
               if(src){
                     editor.filename(src);
               }
               
+              
               $(shadow,'[value=run]').onclick         = btn.run;
+              $(shadow,'[value=kill]').onclick        = btn.kill;
               $(shadow,'[value=clear]').onclick       = btn.clear;
               $(shadow,'[value=reset]').onclick       = btn.reset;
               
@@ -236,13 +233,8 @@
               iframe                                  = $(hldr,'iframe');
               
               
-              //console.initdom();
                                                                           debug('def.console.height',def.console.height);
               console.height    = def.console.height;
-              
-              
-              //clear();
-              //console.log('ready');
               
               
         }//initdom
@@ -273,6 +265,7 @@
               
         }//reset
         
+        
         btn.run   = function(){
         
               run();
@@ -280,7 +273,13 @@
         }//run
         
         
+        btn.kill    = function(){
+        }//kill
         
+        
+  //:
+  
+  
         obj.clear   = function(){return clear()}
         
         function clear(){
@@ -321,6 +320,15 @@
               }//onload
               
         }//run
+        
+        
+        obj.kill    = kill;
+        
+        function kill(){
+        
+              hldr.replaceChildren();
+              
+        }//kill
         
         
         var sandbox   = `
