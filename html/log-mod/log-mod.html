@@ -59,7 +59,7 @@
         def.time              = 4000;
         def.console           = true;
         
-        log.config            = def;
+        log.config            = structuredClone(def);
         
         
   //:
@@ -124,6 +124,7 @@
               nlog.onclick    = rem;
               
               $(nlog,'#log-text').textContent   = str;
+              $(nlog,'#log-close').onclick      = rem;
               
               log.root.append(nlog);
               
@@ -136,7 +137,7 @@
                     setTimeout(rem,log.config.time);
               }
               
-              log.config    = def;
+              log.config    = structuredClone(def);
               
               return nlog;
               
@@ -229,6 +230,7 @@
         
         
         obj.warning   = warning;
+        obj.warn      = warning;
         
         function warning(){
         
