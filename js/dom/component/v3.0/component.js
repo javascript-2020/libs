@@ -1362,11 +1362,13 @@
               menu.add.style();
               
               if(typeof log=='undefined'){
+                    log   = null;
                     if(mod['log-mod']){
                           log       = mod['log-mod'];
                     }
               }
               if(typeof filemod=='undefined'){
+                    filemod   = null;
                     if(mod['file-mod']){
                           filemod   = mod['file-mod'];
                     }
