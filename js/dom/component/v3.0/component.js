@@ -1335,13 +1335,16 @@
         version='v1.0';
         df=true,did='html';
         
+/*
         if(typeof ace=='undefined'){
               ace   = null;
         }
         if(typeof log=='undefined'){
               log   = null;
         }
-        
+*/
+
+
         //Object.assign(window,{ext,$,datatype,menumod,keydown,debug,ls});
         
         menu    = null;
@@ -1358,9 +1361,19 @@
               menu.initmod({keydown});
               menu.add.style();
               
-              
-              log       = mod['log-mod'];
-              filemod   = mod['file-mod'];
+              if(typeof log=='undefined'){
+                    if(mod['log-mod']){
+                          log       = mod['log-mod'];
+                    }
+              }
+              if(typeof filemod=='undefined'){
+                    if(mod['file-mod']){
+                          filemod   = mod['file-mod'];
+                    }
+              }
+              if(typeof ace=='undefined'){
+                    ace   = null;
+              }
               
               
               mod.base.add({
