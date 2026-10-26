@@ -57,9 +57,9 @@
         var $,debug,vm,src
         ;
         
-        obj.initmod   = function(...params){
+        obj.initmod   = function(...list){
         
-              params.forEach(params=>{
+              list.forEach(params=>{
               
                     $             = mod.rd(params,'$',$);
                     debug         = mod.rd(params,'debug',debug);
@@ -227,7 +227,7 @@
   
   
         btn.icon    = function(){
-        
+                                                                                debug('btn.icon');
               if(viewport.status=='hidden'){
                     viewport.show();
               }else{
