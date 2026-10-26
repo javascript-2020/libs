@@ -1141,6 +1141,7 @@
                                 if(typeof obj.init?.complete=='function'){
                                       await obj.init.complete();
                                 }
+                                                                                //  call complete of sub mod's
                                 var mod2    = mod.child.find(o=>o.name===name);
                                 mod2.complete();
                                 
