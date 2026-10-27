@@ -25,10 +25,10 @@
                   <local-file component></local-file>
                   <file-server component></file-server>
                   <github-fs component></github-fs>
-                  <db-files component></db-files>
+                  <db-files v2.0 component></db-files>
                   <google-storage component></google-storage>
                   <ftp-server component></ftp-server>
-                  <electron-fs component></electron-fs>
+                  <electron-fs v2.0 component></electron-fs>
                   
             </div>
             
@@ -45,7 +45,7 @@
         version   : 'v2.1'
   };
   
-        var df=false,did='file-mod'
+        var df=true,did='file-mod'
         ;
         
         
@@ -112,6 +112,8 @@
                   menumod   = menu.menumod;
             }
             
+            
+            export_icon_css();
             
             //mod.base.add({filemod,source,log});
             //await mod.auto();
@@ -186,6 +188,8 @@
             await mod.auto();
             
             
+            console.log('file-mod.init.complete');
+            
         }//init
         
         
@@ -193,7 +197,7 @@
   
   
         obj.initdom   = function(){
-        
+                                                                                debug('initdom');
               shadow                            = host.shadowRoot;
               
               root                              = $(shadow,'#root');
@@ -447,7 +451,7 @@
   
         function export_icon_css(){
         
-              var style   = $(shadow,'style');
+              var style   = $(host.shadowRoot,'style');
                                                                                 //console.log(style);
               var sheet   = style.sheet;
               var rules   = sheet.cssRules;
