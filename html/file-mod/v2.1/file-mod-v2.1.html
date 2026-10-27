@@ -113,6 +113,8 @@
             }
             
             
+            export_icon_css();
+            
             //mod.base.add({filemod,source,log});
             //await mod.auto();
             if(!ext)debugger;
@@ -182,7 +184,6 @@
             electron.load.complete            = complete.load;
             electron.save.complete            = complete.save;
             
-            export_icon_css();
             
             await mod.auto();
             
