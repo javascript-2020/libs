@@ -250,6 +250,7 @@
               hldr                                    = $(shadow,'#hldr');
               proxy                                   = $(hldr,'iframe');
               
+              create();
               events();
               
                                                                           debug('def.console.height',def.console.height);
@@ -381,7 +382,7 @@
               var fn          = await upload();
               var src         = sandbox_url+'?fn='+fn;
                                                                                 debug(src);
-              create.iframe({src,onload});
+              create({src,onload});
               
               
               return promise;
