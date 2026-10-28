@@ -78,7 +78,7 @@
   
         var df=true,did='snippet-html-console';
         
-        var ext,$,menu,ace,menumod,log,config={}
+        var ext,$,menu,ace,menumod,log,config={},debug
         ;
         
         
@@ -92,6 +92,7 @@
                     ace           = mod.rd(params,'ace',ace);
                     menumod       = mod.rd(params,'menumod',menumod);
                     log           = mod.rd(params,'log',log);
+                    debug         = mod.rd(params,'debug',debug);
                     
                     config        = mod.rd(params,'config',config,config);
                     
@@ -115,7 +116,7 @@
         obj.filemod   = null;
         var editor;
         obj.editor    = null;
-        var console;
+        var webconsole;
         obj.console   = null;
         
         
@@ -126,6 +127,8 @@
         
         
         var hldr;
+        var proxy;
+        var sandbox_url   = 'https://sandbox.ext-code.com/html-sandbox-v5.0/html-sandbox-v5.0.html';
         var iframe;
         
         
@@ -153,6 +156,7 @@
         obj.init    = async function(){
         
               mod.initmod(obj);
+                                                                                debug=eval(debug.mod);
                                                                                 debug('init',obj.version);
                                                                                 
               var dom_config          = mod.rd.config(host);
@@ -178,11 +182,11 @@
               obj.filemod       = filemod;
               editor            = mod['web-editor'];
               obj.editor        = editor;
-              console           = mod['web-console'];
-              obj.console       = console;
+              webconsole        = mod['web-console'];
+              obj.console       = webconsole;
               
-              editor.initmod({config:config['web-editor']});
-              console.initmod({config:config['web-console']});
+              editor.initmod({config:config['web-editor'],kd});
+              webconsole.initmod({config:config['web-console']});
               
               
               await mod.auto();
@@ -208,6 +212,20 @@
         }//src
         
         
+        function events(){
+        
+              proxy.contentWindow.addEventListener('message',e=>{
+              
+                    if(e.data?.type==='console'){
+                          var {name,html}   = e.data;
+                          webconsole[name].display(html);
+                    }
+                    
+              });
+              
+        }//events
+        
+        
   //:
   
   
@@ -230,8 +248,9 @@
               
               
               hldr                                    = $(shadow,'#hldr');
-              iframe                                  = $(hldr,'iframe');
+              proxy                                   = $(hldr,'iframe');
               
+              events();
               
                                                                           debug('def.console.height',def.console.height);
               console.height    = def.console.height;
@@ -274,6 +293,9 @@
         
         
         btn.kill    = function(){
+        
+              kill();
+              
         }//kill
         
         
@@ -284,62 +306,134 @@
         
         function clear(){
                                                                                 debug('clear');
-              hldr.replaceChildren();
-              hldr.style.height     = def.iframe.height;
-              var niframe           = iframe.cloneNode(true);
-              hldr.append(niframe);
-              console.clear();
+              //create();
+              webconsole.clear();
               
         }//clear
         
         
         
-        obj.run   = function(){return run()}
+  //:
+  
+  
+        function create({onload:ponload,sandbox,permissions}={}){
         
-        function run(){
-                                                                                debug('run');
-              hldr.replaceChildren();
+              if(iframe){
+                    iframe.remove();
+              }
+              iframe    = document.createElement('iframe');
               
-              var html              = editor.getvalue();
-              html                  = sandbox+html;
+              sandbox       ||= def.sandbox;
+              iframe.setAttribute('sandbox',sandbox);
+              
+              permissions   ||= def.permissions;
+              iframe.setAttribute('permissions',permissions);
+              
+              iframe.src      = sandbox_url;
+              iframe.onload   = onload;
               
               hldr.style.height     = def.iframe.height;
-              
-              var niframe           = iframe.cloneNode(true);
-              niframe.console       = console;
-              niframe.srcdoc        = html;
-              niframe.onload        = onload;
-              hldr.append(niframe);
+              proxy.contentDocument.body.append(iframe);
               
               
               function onload(){
               
-                    var h   = niframe.contentDocument.documentElement.scrollHeight;
-                    hldr.style.height   = h+'px';
+                    if(typeof ponload=='function'){
+                          ponload();
+                    }
                     
               }//onload
+              
+        }//create
+        
+        
+        function send(payload){
+        
+              var resolve,promise=new Promise(res=>resolve=res);
+              
+              var msgid   = crypto.randomUUID();
+              
+              proxy.contentWindow.addEventListener('message',onmessage);
+              iframe.contentWindow.postMessage({msgid,payload},'*');
+              
+              return promise;
+              
+              
+              function onmessage(e){
+              
+                    if(e.data?.msgid!==msgid)return;
+                    proxy.contentWindow.removeEventListener('message',onmessage);
+                    var {result,error}    = e.data;
+                    resolve({result,error});
+                    
+              }//onmessage
+              
+        }//send
+        
+        
+        obj.run   = function(){return run()}
+        
+        async function run(){
+                                                                                debug('run');
+              var html        = editor.getvalue();
+              var echo    = true;
+              
+              var fn          = await upload();
+              var src         = sandbox_url+'?fn='+fn;
+                                                                                debug(src);
+              create.iframe({src,onload});
+              
+              
+              return promise;
+              
+              
+              async function upload(){
+                                                                                debug('upload');
+                    var {result,error}    = await send({type:'upload',html,echo});
+                    if(error){
+                                                                                debug(error);
+                          log.red(error);
+                          return;
+                    }
+                                                                                debug('ok');
+                    var fn    = result;
+                    return fn;
+                    
+              }//upload
+              
+              
+              async function onload(){
+                                                                                debug('onload');
+                    iframe.onload   = null;
+                    iframe.contentWindow.focus();
+                    
+                    //var h   = niframe.contentDocument.documentElement.scrollHeight;
+                    //hldr.style.height   = h+'px';
+                    
+                    resolve();
+                    
+              }//onload
+              
+              
+              
               
         }//run
         
         
+        
+        
+  //:
+  
+  
         obj.kill    = kill;
         
         function kill(){
         
-              hldr.replaceChildren();
+              create();
               
         }//kill
         
         
-        var sandbox   = `
-        
-              <script>
-              
-                    window.console    = window.frameElement.console;
-                    
-              </scr`+`ipt>
-              
-        `;
         
         
   //:
@@ -371,7 +465,7 @@
         
   //:
   
-  
+/*
         function debug(...args){
         
               if(!df && !obj.df)return;
@@ -383,9 +477,10 @@
               window.console.groupEnd();
               
         }//debug
-        
-        
-        
+*/
+
+
+
   return obj;
   
 //snippet_html_console
