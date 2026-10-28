@@ -224,7 +224,7 @@
         function events(){
         
               proxy.contentWindow.addEventListener('message',e=>{
-                                                                                console.log('proxy',e.data);
+                                                                                //console.log('proxy',e.data);
                     if(e.data?.type==='console'){
                           var {name,html}   = e.data;
                           webconsole[name].display(html);
