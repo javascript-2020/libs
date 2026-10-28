@@ -328,7 +328,7 @@
   //:
   
   
-        function create({onload:ponload,sandbox,permissions}={}){
+        function create({src,onload:ponload,sandbox,permissions}={}){
         
               if(iframe){
                     iframe.remove();
@@ -341,7 +341,7 @@
               permissions   ||= def.permissions;
               iframe.setAttribute('permissions',permissions);
               
-              iframe.src      = sandbox_url;
+              iframe.src      = src||sandbox_url;
               iframe.onload   = onload;
               
               hldr.style.height     = def.iframe.height;
