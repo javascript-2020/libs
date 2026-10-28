@@ -387,6 +387,8 @@
         
         async function run(){
                                                                                 debug('run');
+              var resolve,promise=new Promise(res=>resolve=res);
+              
               var html        = editor.getvalue();
               var echo    = true;
               
@@ -394,7 +396,6 @@
               var src         = sandbox_url+'?fn='+fn;
                                                                                 debug(src);
               create({src,onload});
-              
               
               return promise;
               
