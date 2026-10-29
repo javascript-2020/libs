@@ -141,14 +141,92 @@
         
         var def               = {};
         def.html              = null;
-        def.sandbox           = 'allow-scripts allow-same-origin';
-        def.permissions       = '';
+        def.sandbox           = 'standard';
+        def.permissions       = 'standard';
         
         def.iframe            = {};
         def.iframe.height     = '300px';
         
         def.console           = {};
         def.console.height    = '200px';
+        
+        
+        
+        
+        var values    = [
+              'allow-downloads',
+              'allow-forms',
+              'allow-modals',
+              'allow-orientation-lock',
+              'allow-pointer-lock',
+              'allow-popups',
+              'allow-popups-to-escape-sandbox',
+              'allow-presentation',
+              'allow-same-origin',
+              'allow-scripts',
+              'allow-storage-access-by-user-activation',
+              'allow-top-navigation',
+              'allow-top-navigation-by-user-activation',
+              'allow-top-navigation-to-custom-protocols'
+        ];
+        
+        
+        preset.sandbox              = {};
+        preset.sandbox.min          = 'allow-scripts';
+        preset.sandbox.standard     = 'allow-downloads allow-forms allow-same-origin allow-scripts';
+        preset.sandbox.trusted      = 'allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-storage-access-by-user-activation';
+        preset.sandbox.all          = values.join(' ');
+        
+        
+        var values  = [
+              'accelerometer',
+              'ambient-light-sensor',
+              'autoplay',
+              'battery',
+              'bluetooth',
+              'browsing-topics',
+              'camera',
+              'captured-surface-control',
+              'clipboard-read',
+              'clipboard-write',
+              'compute-pressure',
+              'cross-origin-isolated', // <--- Added
+              'deferred-fetch',        // <--- Added
+              'display-capture',
+              'encrypted-media',
+              'fullscreen',
+              'gamepad',
+              'geolocation',
+              'gyroscope',
+              'hid',
+              'idle-detection',
+              'local-fonts',
+              'local-network',         // <--- Added
+              'magnetometer',
+              'microphone',
+              'midi',
+              'payment',
+              'picture-in-picture',
+              'publickey-credentials-get',
+              'screen-wake-lock',
+              'serial',
+              'speaker-selection',
+              'storage-access',
+              'usb',
+              'web-share',
+              'window-management',
+              'xr-spatial-tracking'
+        ];
+        
+        preset.allow              = {};
+        preset.allow.min          = `autoplay; encrypted-media; picture-in-picture;`
+        preset.allow.standard     = `clipboard-write; clipboard-read; autoplay; cross-origin-isolated; encrypted-media; picture-in-picture;
+                                      screen-wake-lock; web-share;`;
+        preset.allow.trusted      = `clipboard-write; clipboard-read; camera; cross-origin-isolated; microphone; geolocation; accelerometer; gyroscope; local-network
+                                       magnetometer; payment; usb; serial; bluetooth; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture;
+                                       screen-wake-lock; web-share;`;
+        allow.preset.all          = allow.values.join('; ');+';'
+        
         
         
         
@@ -328,20 +406,40 @@
   //:
   
   
-        function create({src,onload:ponload,sandbox,permissions}={}){
-        
+        function create({src,onload:ponload,sandbox,allow}={}){
+                                                                                debug('create');
               if(iframe){
                     iframe.remove();
               }
               iframe    = document.createElement('iframe');
               
-              sandbox       ||= def.sandbox;
+              
+              if(typeof sandbox=='string'){
+                    sandbox   = preset.sandbox[sandbox];
+              }
+              sandbox   ||= def.sandbox;
               iframe.setAttribute('sandbox',sandbox);
               
-              permissions   ||= def.permissions;
-              iframe.setAttribute('permissions',permissions);
               
-              iframe.src      = src||sandbox_url;
+              if(typeof allow=='string'){
+                    allow   = preset.allow[allow];
+              }
+              allow   ||= def.allow;
+              iframe.setAttribute('allow',allow);
+              
+              src       ||= sandbox_url;
+              
+              
+                                                                                debug('crossOriginIsolated',window.crossOriginIsolated);
+              var url     = new URL(src);
+              if(window.crossOriginIsolated){
+                    url.searchParams.set('isolate','');
+              }
+              var search    = url.search.replace(/=(?=&|$)/g,'');
+              src           = url.origin+url.pathname+search+url.hash;
+                                                                                debug(src);
+                                                                                
+              iframe.src      = src;
               iframe.onload   = onload;
               
               hldr.style.height     = def.iframe.height;
