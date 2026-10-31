@@ -427,13 +427,6 @@
         }//kd
         
         
-        btn.clear   = function(){
-        
-              clear();
-              
-        }//clear
-        
-        
         btn.reset   = function(){
         
               editor.setvalue(def.html);
@@ -453,6 +446,34 @@
               kill();
               
         }//kill
+        
+        
+        btn.clear   = function(){
+        
+              clear();
+              
+        }//clear
+        
+        
+        btn.editor    = function(){
+        
+              $(shadow,'web-editor').scrollIntoView({behavior:'smooth'});
+              
+        }//editor
+        
+        
+        btn.html    = function(){
+        
+              $(shadow,'#hldr').scrollIntoView({behavior:'smooth'});
+              
+        }//html
+        
+        
+        btn['web-console']    = function(){
+        
+              $(shadow,'web-console').scrollIntoView({behavior:'smooth'});
+              
+        }//web-console
         
         
   //:
