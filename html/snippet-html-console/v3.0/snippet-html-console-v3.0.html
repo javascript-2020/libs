@@ -27,6 +27,14 @@
     
   #hdr
     {display:flex;gap:10px}
+    
+  #top
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAS1BMVEVHcEw5bOm1x/RGdeI7bug+cOc/cOewxPWww/VZgd5EcuQ7buiIoeJSfeNAcOSyxfVBcOc/cOc7behCc+mEo+9BcOVBceVskeptkelz5smuAAAAGXRSTlMA/h0e4H6BZGQGMc8DB1thbaLx54NWWVBQITEPTgAAAI1JREFUKM/l0tkKAjEMBdB0i5qm7Wwu//+lTtCBTmkGFN+8r4cb0hKAH4QChioYqFYeTZORax98k2E3nF0T/mLDlHPS9YLGoOoJZWfNpTvPmkvXL4vvu3Tjo5R77Ll0I9nzyVLPb6IgDOK54eu06otXn1pO5GBjcNR/3JtB+fGN4d+4lCNmaw9PlD874CcAoAWw1RhOtAAAAABJRU5ErkJggg==);
+    }
+  #bottom
+    {content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAB8ElEQVR4AeyUv0vDQBiGm55aFcRNUVFEcBIUEf+DLk4u0s3NSXBxcbQoOtqKizi4uVQRxMFFpBUUt+Ls0MmCi4ti+usS+xQLJeTS5Gp1aeGld9+93/vcpemFQ//00QanUrZAuvvWAgMcnDRHEWMduBYYYKlsRRHjPwMDktIQ0jYEYx1pnVgH5OzpgJ1PpG3zzqNu26N1BrflUfu5zTzBSxsvkejm63x0Kz/h3LFqjvfkKT9Lr8pD3RNc6OpbNssibZrhKzZAg5fw4K31iN4VL68n2KheiZZtDFiWMWdWxCnBqjDW8OClR+Wr1z3BEfl12dNt7WImkGAAzBtFjTU81Onpk4ULxip5gm+OpotDg+97BBFAMIDrh48FIWwpDFsypsYaHrz9lc99epmr5Amm6Tw+UyKIQOYAsjk7+ZwrTyHG1FjDg7cZFG9TMCaCHCefuMuW1lAVWnvjg0DJ9AXG6Dy5WQwNI9aCQunxDcbsPDk1HSh9gcA01E8e6SqtIr+/Kb2NCgymmZOnk+NniDG1oFKCuW+5/loRGaoNKcHHj2/r1evvvhWREQjMTmXIXuSv0orIIMsN7nriWMyQ3WEr0SOsOG9t7ZuxX1WvWXrIIMs3GOPtwVg2cziyk0mMbNe+GfvVTw8ZZLnJ9cRuxt+ufQMAAP//aQvfuAAAAAZJREFUAwCF1KFMLhMwmAAAAABJRU5ErkJggg==);
+    }
   #html
     {padding:2px;
       content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAS1BMVEVHcEwBAAABAQEBAQEBAQEAAAAAAAAAAAACAQEDAgICAQEAAAABAQEBAQEBAQEEAgMBAQIBAQEBAAEAAAABAQEBAQEBAQEAAAAAAACLhqpGAAAAGHRSTlMA2j1LJMHk6hkLN9ZkoDEEK4fM+nu5V/aR0vjZAAAA0UlEQVQoz83TyxKDIAwFUDDy9oHY2vz/lxYFIdSOqy7qBpIzMNwBGfujbwY733AveX/DGwZz7epzyYhL3EJ/bClCch0QmA+ibxWlPWbdi2tmJVLfFdL0gWM8OFAnap447CNxojGWmljjVGMskWNl91RTrOqeOVRVtVtrAQodUyi70jlilUKiYuCQF0+xsnJ0cAynn7GypnZ1r3KsZlGZDiUW0VqUWI2mcqqxplZ3jzcGq0uxrGw1Loj3ueCYKztdH4wRNdbXR6j8DZttmH/7U7wBzCoJvse7IFIAAAAASUVORK5CYII=);
@@ -81,6 +89,8 @@
                   <div id=hdr>
                         <file-mod v2.1 component></file-mod>
                         <div class=spc></div>
+                        <img id=top class=icon>
+                        <img id=bottom class=icon>
                         <img id=html title=html class=icon>
                         <img id=web-console title=console class=icon>
                         <img id=open title='open in editor' class=icon>
@@ -368,6 +378,10 @@
                     editor.filename(src);
               }
               
+              
+              $(shadow,'#html').onclick               = btn.html;
+              $(shadow,'#web-console').onclick        = btn['web-console'];
+              $(shadow,'#open').onclick               = btn.open;
               
               $(shadow,'[value=run]').onclick         = btn.run;
               $(shadow,'[value=kill]').onclick        = btn.kill;
