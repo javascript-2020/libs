@@ -316,7 +316,7 @@
       
       
 /*
-
+        https://cdn.jsdelivr.net/npm/ace-builds/src-min-noconflict/ace.js
         https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/ace.js
         https://ajaxorg.github.io/ace-builds/src-noconflict/ace.js
         
@@ -502,14 +502,14 @@
               }
                                                                                 debug('load ace');
               var src   = [
-                    'https://cdn.jsdelivr.net/npm/ace-builds@1.37.0/src-min-noconflict/ace.js',
+                    'https://cdn.jsdelivr.net/npm/ace-builds/src-min-noconflict/ace.js',
                     'https://ajaxorg.github.io/ace-builds/src-noconflict/ace.js',
               ];
               
               var resolve,promise=new Promise(res=>resolve=res);
               
               var script      = document.createElement('script');
-              script.src      = src[1];
+              script.src      = src[0];
               script.onload   = onload;
               document.head.append(script);
               
@@ -1193,6 +1193,8 @@
 */
 
 
+        //obj.height:
+        
         Object.defineProperty(obj,'height',{
         
               set   : v=>{
@@ -1213,6 +1215,8 @@
               
         });
         
+        
+        //obj.mode:
         
         Object.defineProperty(obj,'mode',{
         
