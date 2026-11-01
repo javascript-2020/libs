@@ -162,6 +162,9 @@
               return nn;
               
         }//nodename
+
+        
+        $.point={};
         
         $.point.full    = function(x,y){
           
