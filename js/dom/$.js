@@ -163,6 +163,23 @@
               
         }//nodename
         
+        $.point.full    = function(x,y){
+          
+              var element = document.elementFromPoint(x, y);
+            
+              while(element && element.shadowRoot){
+                
+                    var node    = element.shadowRoot.elementFromPoint(x,y);
+                    if (!node||node===element){
+                          break;
+                    }
+                    element   = node;
+                    
+              }//while
+            
+              return element;
+              
+        }//point.full
         
         
         //$.computed:b
