@@ -94,7 +94,32 @@ function keysmod(){
               
         }//clr
         
-        
+/*
+    if (key === '\r' || key === '\n') {
+        console.log('Key detected: ENTER');
+        return;
+    }
+
+    // 3. Check for Backspace / Delete
+    if (key === '\u007f' || key === '\b') {
+        console.log('Key detected: BACKSPACE');
+        return;
+    }
+
+    // 4. Check for Arrow Keys (Escape sequences starting with ESC [)
+    if (key === '\u001b[A') { console.log('Key detected: UP ARROW'); return; }
+    if (key === '\u001b[B') { console.log('Key detected: DOWN ARROW'); return; }
+    if (key === '\u001b[C') { console.log('Key detected: RIGHT ARROW'); return; }
+    if (key === '\u001b[D') { console.log('Key detected: LEFT ARROW'); return; }
+
+    // 5. Check for Ctrl + [Letter] combinations (Ctrl+A is \u0001, Ctrl+Z is \u001a)
+    const charCode = key.charCodeAt(0);
+    if (charCode >= 1 && charCode <= 26 && key.length === 1) {
+        const letter = String.fromCharCode(charCode + 96);
+        console.log(`Key detected: CTRL + ${letter.toUpperCase()}`);
+        return;
+    }
+*/
         
   return obj;
   
