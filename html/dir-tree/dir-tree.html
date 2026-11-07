@@ -373,6 +373,23 @@
         }//close
         
         
+        obj.path    = function(o){
+        
+              var path    = o.name;
+              
+              while(o.parent){
+              
+                    o   = o.parent;
+                    path    = o.name+'/'+path;
+                    
+              }//while
+              
+              path    = '/'+path;
+              return path;
+              
+        }//path
+        
+        
   //:
   
   
