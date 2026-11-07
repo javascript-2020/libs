@@ -188,7 +188,7 @@
                     var o   = data[key];
                     if(o.directory){
                           var dir       = o.directory;
-                          data2[key]    = build(dir);
+                          data2[key]    = convert.jszip(dir);
                     }
                     if(o.file){
                           data2[key]    = null;
