@@ -56,39 +56,43 @@
       
       <script>
       
-(function({mod,dom,host}){
+(function({mod,host}){
 
   var obj   = {
         version   : 'v1.0',
   };
   
-      var df=false,did='dir-tree'
-      ;
-      
-      
-      
-      obj.initmod   = function(params){
-      }//initmod
-      
-      
+        var df=false,did='dir-tree'
+        ;
+        
+        
+        
+        obj.initmod   = function(...list){
+        
+              list.forEach(params=>{
+              });
+              
+        }//initmod
+        
+        
   //vars:
   
   
-      var tree;
-      var dir;
-      var file;
-      
-      
+        var tree;
+        var dir;
+        var file;
+        
+        
   //:
   
   
-      obj.init    = function(){
-      
-            mod.initmod(obj);
-            
-      }//init
-      
-      
+        obj.init    = function(){
+        
+              mod.initmod(obj);
+              
+        }//init
+        
+        
   //:
   
   
@@ -113,215 +117,262 @@
   //:
   
   
-      var cur;
-      
-      var index   = 0;
-      var cols    = ['rgba(173,216,230,0.15)','rgba(211,211,211,0.15)'];
-      
-      
+        var cur;
+        
+        var index   = 0;
+        var cols    = ['rgba(173,216,230,0.15)','rgba(211,211,211,0.15)'];
+        
+        
   //:
   
   
   
   
-      obj.build   = function(data){return build(data)}
-      
-      function build(data,par=null){
-      
-            var data2   = [];
-            
-            for(var key in data){
-            
-                  var v       = data[key];
-                  var type    = datatype(v);
-                  if(type=='object'){
-                        var d       = {type:'dir',name:key,parent:par}
-                        var o       = build(v,d);
-                        d.list      = o;
-                        data2.push(d);
-                  }else{
-                        data2.push({type:'file',name:key,parent:par});
-                  }
-                  
-            }//for
-            
-            return data2;
-            
-      }//build
-      
-      
-      function depth(o){
-      
-            var c   = 0;
-            while(o){
-            
-                  c++;
-                  o   = o.parent;
-                  
-            }//while
-            return c-1;
-            
-      }//depth
-      
-      
-      obj.display   = function(data,options){return display(data,null,options)}
-      
-      function display(data,par,options){
-      
-            if(!par){
-                  cur     = data;
-                  par     = tree;
-                  index   = 0;
-            }
-            
-            var list    = $(par,'.dir-list')||par;
-            
-            var n   = data.length;
-            for(var i=0;i<n;i++){
-            
-            
-                  let o         = data[i];
-                  var indent    = depth(o);
-                  index++;
-                                                                                debug(index,o.name,indent);
-                                                                                
-                  if(o.type=='file'){
-                        let nfile                           = file.cloneNode(true);
-                        o.node                              = nfile;
-                        nfile.onclick                       = e=>click_file(nfile,o);
-                        $(nfile,'.spc').style.width         = indent*30+'px';
-                        nfile.style.background              = cols[index%2];
-                        $(nfile,'.file-name').textContent   = o.name;
-                        highlight(nfile);
-                        list.append(nfile);
-                  }
-                  
-                  if(o.type=='dir'){
-                        let ndir                          = dir.cloneNode(true);
-                        o.node                            = ndir;
-                        var hdr                           = $(ndir,'.dir-hdr');
-                        $(ndir,'.dir-hdr').onclick        = e=>click_dir(ndir,o);
-                        hdr.style.background              = cols[index%2];
-                        $(ndir,'.spc').style.width        = indent*30+'px';
-                        $(ndir,'.dir-name').textContent   = o.name;
-                        highlight($(ndir,'.dir-hdr'));
-                        list.append(ndir);
-                        display(o.list,ndir,options);
-                  }
-                  
-            }//for
-            
-            
-            function highlight(node){
-            
-                  var prev;
-                  node.onmouseenter   = e=>(prev=node.style.background,node.style.background='lightyellow');
-                  node.onmouseleave   = e=>node.style.background=prev;
-                  
-            }//hightlight
-            
-            
-            function click_dir(ndir,o){
-            
-                  var result    = options?.callback?.dir(o.name,o);
-                  
-                  if(result!==false){
-                        var hdr   = $(ndir,'.dir-hdr');
-                        if($(hdr,'.expand').classList.contains('close')){
-                              open(ndir);
-                              return;
-                        }
-                        
-                        close(ndir);
-                  }
-                  
-            }//click
-            
-            
-            function click_file(nfile,o){
-            
-                  options?.callback?.file(o.name,o);
-                  
-            }//click_file
-            
-      }//display
-      
-      
-      obj.clear   = function(){return clear()}
-      
-      function clear(){
-      
-            tree.replaceChildren();
-            
-      }//clear
-      
-      
-      function open(ndir){
-      
-            if(typeof ndir=='string'){
-                  var o   = find(ndir);
-                  ndir    = o.node;
-            }
-            
-            var hdr   = $(ndir,'.dir-hdr');
-            $(hdr,'.expand').classList.remove('close');
-            hdr.parentNode.style.maxHeight    = '';
-            
-      }//open
-      
-      
-      function close(ndir){
-      
-            if(typeof ndir=='string'){
-                  var o   = find(ndir);
-                  ndir    = o.node;
-            }
-            
-            var hdr   = $(ndir,'.dir-hdr');
-            $(hdr,'.expand').classList.add('close');
-            hdr.parentNode.style.maxHeight    = '40px';
-            
-      }//close
-      
-      
-      
-      obj.find    = function(path){return find(path)}
-      
-      function find(path){
-      
-            var parts   = path.split('/').filter(Boolean);
-            var o       = cur.find(o=>o.name===parts[0]);
-            var n       = parts.length;
-            for(var i=1;i<n;i++){
-            
-                  o   = o.list.find(o=>o.name===parts[i]);
-                  
-            }//for
-            return o;
-            
-      }//find
-      
-      
-      obj.open    = function(path){
-      
-            var o   = find(path);
-            if(!o)return;
-            open(o.node);
-            return o;
-            
-      }//open
-      
-      
-      obj.close   = function(path){
-      
-            var o   = find(path);
-            if(!o)return;
-            close(o.node);
-            return o;
-            
-      }//close
-      
-      
+        obj.build   = function(data){return build(data)}
+        
+        function build(data,par=null){
+        
+              var data2   = [];
+              
+              for(var key in data){
+              
+                    var v       = data[key];
+                    var type    = datatype(v);
+                    if(type=='object'){
+                          var d       = {type:'dir',name:key,parent:par}
+                          var o       = build(v,d);
+                          d.list      = o;
+                          data2.push(d);
+                    }else{
+                          data2.push({type:'file',name:key,parent:par});
+                    }
+                    
+              }//for
+              
+              return data2;
+              
+        }//build
+        
+        
+        
+        
+        obj.convert   = convert;
+        
+        function convert(){
+        }//convert
+        
+        
+        
+        /*
+        var files       = {
+                                resource-cache    : {directory:{
+                                      'maniferst.json'          : {file:{github:{repo,path:path+'manifest.json'}}},
+                                      'resource-cache.js'       : {file:{github:{repo,path:path+'extension.js'}}},
+                                      'resource-cache.png'      : {file:{github:{repo,path:path+'icon.png'}}},
+                                      'content-script.js'       : {file:{github:{repo,path:path+'content-script.js'}}},
+                                      cache                     : {directory:{}},
+                                      html                      : {directory:{
+                                            'resource-cache.html'   : {file:{github:{repo,path:path+'html/resource-cache.html'}}},
+                                      }
+                                      'file-server-full.js'     : {file:{github:{repo,path:path+'file-server-full.js'}}},
+                                }
+                          };
+        */
+        
+        convert.jszip   = function(data){
+        
+              var data2   = {};
+              
+              for(var key in data){
+              
+                    var o   = data[key];
+                    if(o.directory){
+                          var dir       = o.directory;
+                          data2[key]    = build(dir);
+                    }
+                    if(o.file){
+                          data2[key]    = null;
+                    }
+                    
+              }//for
+              
+              return data2;
+              
+        }//jszip
+        
+        
+        function depth(o){
+        
+              var c   = 0;
+              while(o){
+              
+                    c++;
+                    o   = o.parent;
+                    
+              }//while
+              return c-1;
+              
+        }//depth
+        
+        
+        obj.display   = function(data,options){return display(data,null,options)}
+        
+        function display(data,par,options){
+        
+              if(!par){
+                    cur     = data;
+                    par     = tree;
+                    index   = 0;
+              }
+              
+              var list    = $(par,'.dir-list')||par;
+              
+              var n   = data.length;
+              for(var i=0;i<n;i++){
+              
+              
+                    let o         = data[i];
+                    var indent    = depth(o);
+                    index++;
+                                                                                  debug(index,o.name,indent);
+                                                                                  
+                    if(o.type=='file'){
+                          let nfile                           = file.cloneNode(true);
+                          o.node                              = nfile;
+                          nfile.onclick                       = e=>click_file(nfile,o);
+                          $(nfile,'.spc').style.width         = indent*30+'px';
+                          nfile.style.background              = cols[index%2];
+                          $(nfile,'.file-name').textContent   = o.name;
+                          highlight(nfile);
+                          list.append(nfile);
+                    }
+                    
+                    if(o.type=='dir'){
+                          let ndir                          = dir.cloneNode(true);
+                          o.node                            = ndir;
+                          var hdr                           = $(ndir,'.dir-hdr');
+                          $(ndir,'.dir-hdr').onclick        = e=>click_dir(ndir,o);
+                          hdr.style.background              = cols[index%2];
+                          $(ndir,'.spc').style.width        = indent*30+'px';
+                          $(ndir,'.dir-name').textContent   = o.name;
+                          highlight($(ndir,'.dir-hdr'));
+                          list.append(ndir);
+                          display(o.list,ndir,options);
+                    }
+                    
+              }//for
+              
+              
+              function highlight(node){
+              
+                    var prev;
+                    node.onmouseenter   = e=>(prev=node.style.background,node.style.background='lightyellow');
+                    node.onmouseleave   = e=>node.style.background=prev;
+                    
+              }//hightlight
+              
+              
+              function click_dir(ndir,o){
+              
+                    var result    = options?.callback?.dir(o.name,o);
+                    
+                    if(result!==false){
+                          var hdr   = $(ndir,'.dir-hdr');
+                          if($(hdr,'.expand').classList.contains('close')){
+                                open(ndir);
+                                return;
+                          }
+                          
+                          close(ndir);
+                    }
+                    
+              }//click
+              
+              
+              function click_file(nfile,o){
+              
+                    options?.callback?.file(o.name,o);
+                    
+              }//click_file
+              
+        }//display
+        
+        
+        obj.clear   = function(){return clear()}
+        
+        function clear(){
+        
+              tree.replaceChildren();
+              
+        }//clear
+        
+        
+        function open(ndir){
+        
+              if(typeof ndir=='string'){
+                    var o   = find(ndir);
+                    ndir    = o.node;
+              }
+              
+              var hdr   = $(ndir,'.dir-hdr');
+              $(hdr,'.expand').classList.remove('close');
+              hdr.parentNode.style.maxHeight    = '';
+              
+        }//open
+        
+        
+        function close(ndir){
+        
+              if(typeof ndir=='string'){
+                    var o   = find(ndir);
+                    ndir    = o.node;
+              }
+              
+              var hdr   = $(ndir,'.dir-hdr');
+              $(hdr,'.expand').classList.add('close');
+              hdr.parentNode.style.maxHeight    = '40px';
+              
+        }//close
+        
+        
+        
+        obj.find    = function(path){return find(path)}
+        
+        function find(path){
+        
+              var parts   = path.split('/').filter(Boolean);
+              var o       = cur.find(o=>o.name===parts[0]);
+              var n       = parts.length;
+              for(var i=1;i<n;i++){
+              
+                    o   = o.list.find(o=>o.name===parts[i]);
+                    
+              }//for
+              return o;
+              
+        }//find
+        
+        
+        obj.open    = function(path){
+        
+              var o   = find(path);
+              if(!o)return;
+              open(o.node);
+              return o;
+              
+        }//open
+        
+        
+        obj.close   = function(path){
+        
+              var o   = find(path);
+              if(!o)return;
+              close(o.node);
+              return o;
+              
+        }//close
+        
+        
   //:
   
   
