@@ -154,8 +154,9 @@
         }//build
         
         
-        
-        
+  //:
+  
+  
         obj.convert   = convert;
         
         function convert(){
@@ -164,6 +165,9 @@
         
         
         /*
+        
+        jszip
+        
         var files       = {
                                 resource-cache    : {directory:{
                                       'maniferst.json'          : {file:{github:{repo,path:path+'manifest.json'}}},
@@ -179,7 +183,7 @@
                           };
         */
         
-        convert.jszip   = function(data){
+        convert.jszip   = function(data,opts={}){
         
               var data2   = {};
               
@@ -188,7 +192,7 @@
                     var o   = data[key];
                     if(o.directory){
                           var dir       = o.directory;
-                          data2[key]    = convert.jszip(dir);
+                          data2[key]    = convert.jszip(dir,{initial:false});
                     }
                     if(o.file){
                           data2[key]    = null;
@@ -196,11 +200,23 @@
                     
               }//for
               
+              if(opts.initial!==false){
+                    if(opts.build){
+                          data2   = build(data2);
+                    }
+                    if(opts.disp){
+                          display(data2);
+                    }
+              }
+              
               return data2;
               
         }//jszip
         
         
+  //:
+  
+  
         function depth(o){
         
               var c   = 0;
