@@ -79,7 +79,7 @@
         
               var list    = [];
               
-              var promise   = await net.import('https://esm.sh/json5').then({result,error}=>{
+              var promise   = await net.import('https://esm.sh/json5').then(({result,error})=>{
               
                     if(error){
                           log.red(error);
