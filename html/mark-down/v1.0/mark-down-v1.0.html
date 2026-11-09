@@ -110,11 +110,11 @@
         }//libs
         
         
-        rd.attr.src   = function(){
+        rd.attr.src   = async function(){
         
               if(!host.hasAttribute('src'))return;
               var src   = host.getAttribute('src');
-              var {txt,error}   = await get(src);
+              var {txt,error}   = await net.fetch(src);
               if(error){
                     log.red(error);
                     return;
