@@ -14,6 +14,9 @@
             
             </style>
             
+            <div id=root>
+            </div>
+            
       </template>
       
       <script>
@@ -26,7 +29,7 @@
   
         var df=true,did='mark-down';
         
-        var debug
+        var debug,$
         ;
         
         obj.initmod   = function(...list){
@@ -34,6 +37,7 @@
               list.forEach(params=>{
               
                     debug   = mod.rd(params,'debug',debug);
+                    $       = mod.rd(params,'$',$);
                     
               });
               
