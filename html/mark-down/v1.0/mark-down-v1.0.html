@@ -1,0 +1,192 @@
+
+
+<mark-down class=markdown-body>
+
+      <template shadowrootmode=open>
+      
+            <link rel=stylesheet href='/css/github-markdown-light.css'>
+            
+            <style>
+            
+            </style>
+            
+      </template>
+      
+                  var link    = document.createElement('link');
+                  link.setAttribute('rel','stylesheet');
+                  link.setAttribute('href','/css/github-markdown-light.css');
+                  link.setAttribute('crossorigin','anonymous');
+                  document.head.append(link);
+                  
+                  var link    = document.createElement('link');
+                  link.setAttribute('rel','stylesheet');
+                  link.setAttribute('href','../../../css/page.css');
+                  link.setAttribute('crossorigin','anonymous');
+                  document.head.append(link);
+                  
+      <script>
+      
+(function({mod,host}){
+
+  var obj   = {
+        version   : 'v1.0',
+  };
+  
+        var df=true,did='mark-down';
+        
+        
+        obj.initmod   = function(...list){
+        
+              list.forEach(params=>{
+              
+              });
+              
+        }//initmod
+        
+        
+  //vars:
+  
+  
+        var json5;
+        
+        var src;
+        var def   = {};
+        
+        
+        var rd    = {};
+        rd.attr   = {};
+        var net   = {};
+        
+  //:
+  
+  
+        obj.init    = async function(){
+        }//init
+        
+        
+        async function libs(){
+        
+              var list    = [];
+              
+              var promise   = await net.import('https://esm.sh/json5').then({result,error}=>{
+              
+                    if(error){
+                          log.red(error);
+                          return;
+                    }
+                    json5   = result;
+                    
+              });
+              list.push(promise);
+              
+              var promise   = await net.fetch('/css/page.css').then({txt,error}=>{
+              
+                    if(error){
+                          log.red(error);
+                          return;
+                    }
+                    var sheet                       = new CSSStyleSheet();
+                    sheet.replaceSync(txt);
+                    shadowRoot.adoptedStyleSheets   = [sheet];
+                    
+              });
+              list.push(promise);
+              
+              await Promise.all(list);
+              
+        }//libs
+        
+        
+        rd.attr.src   = function(){
+        
+              if(!host.hasAttribute('src'))return;
+              src   = host.getAttribute('src');
+              var {txt,error}   = await get(src);
+              if(error){
+                    log.red(error);
+                    return;
+              }
+              def.md    = txt;
+              
+        }//src
+        
+        
+  //:
+  
+  
+        obj.initdom   = async function(){
+        
+              shadow    = host.shadowRoot;
+              
+        }//initdom
+        
+        
+  //:
+  
+  
+  //:
+  
+  
+        net.fetch(url){
+        
+              var err;
+              try{
+              
+                    var res   = await fetch(url);
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.message;
+                    return {error};
+              }
+              if(!res.ok){
+                    var error   = await res.text();
+                    return {error};
+              }
+              
+              var txt   = await res.text();
+              return {txt};
+              
+        }//get
+        
+        
+        net.import    = function(url){
+        
+              var err;
+              try{
+              
+                    var result    = await import(url);
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    var error   = err.message;
+                    return {error};
+              }
+              return {result};
+              
+        }//import
+        
+        
+        
+  return obj;
+  
+//mark-down
+})
+
+      </script>
+      
+</mark-down>
+
+
+
+
