@@ -205,7 +205,8 @@
                           data2   = build(data2);
                     }
                     if(opts.disp){
-                          display(data2);
+                          var {callback}    = opts;
+                          display(data2,{callback});
                     }
               }
               
