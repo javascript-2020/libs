@@ -133,8 +133,6 @@
                                                                                 debug('initdom');
               shadow    = host.shadowRoot;
               
-              var html    = md.render(mdtxt.readme);
-              shadow.append(html);
               
         }//initdom
         
@@ -142,6 +140,14 @@
   //:
   
   
+        obj.set   = function(txt){
+        
+              var html    = md.render(txt);
+              shadow.replaceChildren();
+              shadow.append(html);
+              
+        }//set
+        
   //:
   
   
