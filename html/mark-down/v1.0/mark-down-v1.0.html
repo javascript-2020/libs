@@ -6,24 +6,16 @@
       
             <link rel=stylesheet href='/css/github-markdown-light.css'>
             
+            <script src='https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js'></script>
+            <script src='https://cdn.jsdelivr.net/npm/markdown-it-attrs@4.3.1/markdown-it-attrs.browser.min.js'></script>
+            <script src='https://cdn.jsdelivr.net/npm/markdown-it-container@4.0.0/dist/markdown-it-container.min.js'></script>
+            
             <style>
             
             </style>
             
       </template>
       
-                  var link    = document.createElement('link');
-                  link.setAttribute('rel','stylesheet');
-                  link.setAttribute('href','/css/github-markdown-light.css');
-                  link.setAttribute('crossorigin','anonymous');
-                  document.head.append(link);
-                  
-                  var link    = document.createElement('link');
-                  link.setAttribute('rel','stylesheet');
-                  link.setAttribute('href','../../../css/page.css');
-                  link.setAttribute('crossorigin','anonymous');
-                  document.head.append(link);
-                  
       <script>
       
 (function({mod,host}){
@@ -48,8 +40,8 @@
   
   
         var json5;
+        var md;
         
-        var src;
         var def   = {};
         
         
@@ -61,6 +53,25 @@
   
   
         obj.init    = async function(){
+        
+              mod.initmod(obj);
+              
+              await libs();
+              
+              md    = markdownit({
+                    html          : true,
+                    breaks        : false,
+                    linkify       : true,
+                    linkTarget    : '_blank',
+              });
+              md.use(markdownItAttrs,{leftDelimiter:'{',rightDelimiter:'}',allowedAttributes:['id','class',/^data-.*$/]});
+              
+              
+              await mod.auto();
+              
+              await initdom();
+              
+              
         }//init
         
         
@@ -79,6 +90,7 @@
               });
               list.push(promise);
               
+/*
               var promise   = await net.fetch('/css/page.css').then({txt,error}=>{
               
                     if(error){
@@ -91,7 +103,8 @@
                     
               });
               list.push(promise);
-              
+*/
+
               await Promise.all(list);
               
         }//libs
@@ -100,7 +113,7 @@
         rd.attr.src   = function(){
         
               if(!host.hasAttribute('src'))return;
-              src   = host.getAttribute('src');
+              var src   = host.getAttribute('src');
               var {txt,error}   = await get(src);
               if(error){
                     log.red(error);
@@ -117,6 +130,9 @@
         obj.initdom   = async function(){
         
               shadow    = host.shadowRoot;
+              
+              var html    = md.render(mdtxt.readme);
+              shadow.append(html);
               
         }//initdom
         
