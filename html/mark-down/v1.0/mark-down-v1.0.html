@@ -26,11 +26,15 @@
   
         var df=true,did='mark-down';
         
+        var debug
+        ;
         
         obj.initmod   = function(...list){
         
               list.forEach(params=>{
               
+                    debug   = mod.rd(params,'debug',debug);
+                    
               });
               
         }//initmod
@@ -55,7 +59,7 @@
         obj.init    = async function(){
         
               mod.initmod(obj);
-              
+                                                                                debug('init');
               await libs();
               
               md    = markdownit({
@@ -126,7 +130,7 @@
   
   
         obj.initdom   = async function(){
-        
+                                                                                debug('initdom');
               shadow    = host.shadowRoot;
               
               var html    = md.render(mdtxt.readme);
