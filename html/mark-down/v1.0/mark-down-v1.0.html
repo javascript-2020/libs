@@ -53,6 +53,8 @@
         var def   = {};
         
         var shadow;
+        var root;
+        
         
         var rd    = {};
         rd.attr   = {};
@@ -136,8 +138,15 @@
   
         obj.initdom   = async function(){
                                                                                 debug('initdom');
-              shadow    = host.shadowRoot;
+              shadow          = host.shadowRoot;
               
+              
+              root            = $(shadow,'#root');
+              
+              
+              if(def.md){
+                    set(def.md);
+              }
               
         }//initdom
         
@@ -145,11 +154,13 @@
   //:
   
   
-        obj.set   = function(txt){
+        obj.set   = set;
+        
+        function set(txt){
         
               var html    = md.render(txt);
               
-              $(shadow,'#root').innerHTML   = html;
+              root.innerHTML   = html;
               
         }//set
         
