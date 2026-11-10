@@ -1258,8 +1258,11 @@
                                                                                 debug('set.mode',v);
               switch(v){
               
-                case 'js'   : v='javascript';       break;
-                case 'py'   : v='python';           break;
+                case 'mjs'      :
+                case 'cjs'      :
+                case 'js'       : v='javascript';       break;
+                case 'py'       : v='python';           break;
+                case 'md'       : v='markdown';         break;
                 
               }//switch
               
