@@ -68,7 +68,7 @@
         
               mod.initmod(obj);
                                                                                 debug('init');
-              await libs();
+              await Promise.all([libs(),rd.attr.src()]);
               
               md    = markdownit({
                     html          : true,
