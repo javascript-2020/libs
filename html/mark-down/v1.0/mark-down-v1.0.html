@@ -51,6 +51,7 @@
         var md;
         
         var def   = {};
+        var base;
         
         var shadow;
         var root;
@@ -89,6 +90,7 @@
         
               var list    = [];
               
+/*
               var promise   = await net.import('https://esm.sh/json5').then(({result,error})=>{
               
                     if(error){
@@ -99,7 +101,8 @@
                     
               });
               list.push(promise);
-              
+*/
+
 /*
               var promise   = await net.fetch('/css/page.css').then({txt,error}=>{
               
@@ -167,11 +170,24 @@
         }//set
         
         
+        set.base    = function(base_url){
+        
+              base    = base_url;
+              
+        }//base
+        
+        
   //:
   
   
         net.fetch   = async function(url){
         
+              var txt;
+              if(cache[url]){
+                    txt   = cache[url];
+                    return {txt};
+              }
+              
               var err;
               try{
               
@@ -192,7 +208,9 @@
                     return {error};
               }
               
-              var txt   = await res.text();
+              txt           = await res.text();
+              cache[url]    = txt;
+              
               return {txt};
               
         }//import
