@@ -163,11 +163,15 @@
   
         obj.set   = set;
         
-        function set(txt){
+        function set(txt,opts={}){
         
               var html    = md.render(txt);
               
               root.innerHTML   = html;
+              
+              if(opts.build!==false){
+                    build();
+              }
               
         }//set
         
@@ -182,12 +186,17 @@
   //:
   
   
-        function fn(){
+        function build(){
         
               $.all(root,'a').forEach(a=>{
+              
+                    if(a.href.startsWith('https://')){
+                          a.setAttribute('target','_blank');
+                    }
+                    
               });
               
-        }//fn
+        }//build
         
         
   //:
