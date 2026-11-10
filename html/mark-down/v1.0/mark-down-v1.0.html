@@ -127,11 +127,13 @@
         
               if(!host.hasAttribute('src'))return;
               var src   = host.getAttribute('src');
+              
               var {txt,error}   = await net.fetch(src);
               if(error){
                     log.red(error);
                     return;
               }
+              
               def.md    = txt;
               
         }//src
@@ -175,6 +177,17 @@
               base    = base_url;
               
         }//base
+        
+        
+  //:
+  
+  
+        function fn(){
+        
+              $.all(root,'a').forEach(a=>{
+              });
+              
+        }//fn
         
         
   //:
@@ -236,6 +249,10 @@
               return {result};
               
         }//import
+        
+        
+        
+        
         
         
         
