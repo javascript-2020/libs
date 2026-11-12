@@ -1275,28 +1275,29 @@
                 
               }//switch
               
-              $(shadow,'#mode-menu-root .spinner').style.display   = '';
               
+              var supported   = ace.modelist.modes.some(m=>m.extRe.test(v) || m.name.toLowerCase()===v.toLowerCase());
+              console.log(supported);
+              if(!supported)return;
+              
+              
+              $(shadow,'#mode-menu-root .spinner').style.display   = '';
               
               var path      = `ace/mode/${v}`;
               
-              //var t         = ace.modelist.getModeForPath(v);
-              var supported   = ace.modelist.modes.some(m=>m.extRe.test(v) || m.name.toLowerCase()===v.toLowerCase());
-              console.log(supported);
-    //});
-    
+              
               //console.log('getModeForPath',t);
               //var mode    = modelist.getModeForPath(fn).mode
               //editor.session.setMode(mode)
               
-              //var result    = await loadmodule(path);
+              var result    = await loadmodule(path);
                                                                                 console.log('set.mode',result);
-              if(supported){
+              //if(supported){
                     editor.session.setMode(path);
                     $(shadow,'#mode-menu-root #mode').textContent   = v;
-              }else{
+              //}else{
                     //log.error('failed to load :',v);
-              }
+              //}
               
               $(shadow,'#mode-menu-root .spinner').style.display   = 'none';
               
