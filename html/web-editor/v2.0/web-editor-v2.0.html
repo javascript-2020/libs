@@ -1272,6 +1272,7 @@
               var path      = `ace/mode/${v}`;
               
               var modelist = ace.require('ace/ext/modelist');
+              console.log('modelist',modelist);
               var t         = modelist.getModeForPath(fn);
               console.log('getModeForPath',t);
               //var mode    = modelist.getModeForPath(fn).mode
