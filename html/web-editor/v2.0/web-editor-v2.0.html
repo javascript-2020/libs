@@ -1277,29 +1277,22 @@
               
               
               var supported   = ace.modelist.modes.some(m=>m.extRe.test(v) || m.name.toLowerCase()===v.toLowerCase());
-              console.log(supported);
-              if(!supported)return;
+              if(!supported){
+                    return false;
+              }
               
               
               $(shadow,'#mode-menu-root .spinner').style.display   = '';
               
               var path      = `ace/mode/${v}`;
+              await loadmodule(path);
               
-              
-              //console.log('getModeForPath',t);
-              //var mode    = modelist.getModeForPath(fn).mode
-              //editor.session.setMode(mode)
-              
-              var result    = await loadmodule(path);
-                                                                                console.log('set.mode',result);
-              //if(supported){
-                    editor.session.setMode(path);
-                    $(shadow,'#mode-menu-root #mode').textContent   = v;
-              //}else{
-                    //log.error('failed to load :',v);
-              //}
+              editor.session.setMode(path);
+              $(shadow,'#mode-menu-root #mode').textContent   = v;
               
               $(shadow,'#mode-menu-root .spinner').style.display   = 'none';
+              
+              return true;
               
         }//mode
         
@@ -1311,9 +1304,9 @@
               ace.config.loadModule(path,module=>{
               
                     if(!module){
-                                                                                console.error('Failed to load module : '+path);
+                                                                                //console.error('Failed to load module : '+path);
                     }else{
-                                                                                console.log('Successfully loaded module :',path);
+                                                                                //console.log('Successfully loaded module :',path);
                     }
                     var result    = !!module;
                     resolve(result);
