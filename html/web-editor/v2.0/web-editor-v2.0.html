@@ -1275,17 +1275,15 @@
                 
               }//switch
               
-              
-              var supported   = ace.modelist.modes.some(m=>m.extRe.test(v) || m.name.toLowerCase()===v.toLowerCase());
-              if(!supported){
-                    return false;
-              }
-              
-              
-              $(shadow,'#mode-menu-root .spinner').style.display   = '';
-              
               var path      = `ace/mode/${v}`;
-              await loadmodule(path);
+              
+              if(ace.modelist){
+                    var supported   = ace.modelist.modes.some(m=>m.extRe.test(v) || m.name.toLowerCase()===v.toLowerCase());
+                    if(supported){
+                          $(shadow,'#mode-menu-root .spinner').style.display   = '';
+                          await loadmodule(path);
+                    }
+              }
               
               editor.session.setMode(path);
               $(shadow,'#mode-menu-root #mode').textContent   = v;
