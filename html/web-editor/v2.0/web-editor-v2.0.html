@@ -981,7 +981,7 @@
   
         obj.filename    = filename;
         
-        function filename(file){
+        function filename(file,{){
         
               var src         = deficon;
               var filename    = 'html-editor';
@@ -1266,8 +1266,15 @@
                 
               }//switch
               
-              var path      = `ace/mode/${v}`;
               $(shadow,'#mode-menu-root .spinner').style.display   = '';
+              
+              
+              var path      = `ace/mode/${v}`;
+              
+              
+              //var mode    = modelist.getModeForPath(fn).mode
+              //editor.session.setMode(mode)
+              
               var result    = await loadmodule(path);
               if(result){
                     editor.session.setMode(path);
@@ -1275,6 +1282,7 @@
               }else{
                     log.error('failed to load :',v);
               }
+              
               $(shadow,'#mode-menu-root .spinner').style.display   = 'none';
               
         }//mode
@@ -1287,9 +1295,9 @@
               ace.config.loadModule(path,module=>{
               
                     if(!module){
-                                                                                //console.error('Failed to load module : '+path);
+                                                                                console.error('Failed to load module : '+path);
                     }else{
-                                                                                //console.log('Successfully loaded module :',path);
+                                                                                console.log('Successfully loaded module :',path);
                     }
                     var result    = !!module;
                     resolve(result);
