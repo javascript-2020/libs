@@ -498,6 +498,7 @@
 
               if(ace){
                                                                                 debug('ace');
+                    complete();
                     return;
               }
                                                                                 debug('load ace');
@@ -520,10 +521,17 @@
               
                     ace       = window.ace;
                     obj.ace   = ace;
-                    
+                    complete();
                     resolve(ace);
                     
               }//onload
+              
+              
+              function complete(){
+              
+                    ace.config.loadModule('ace/ext/modelist',modelist=>ace.modelist=modelist);
+                    
+              }//complete
               
         }//libs
         
