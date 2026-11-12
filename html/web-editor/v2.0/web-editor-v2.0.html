@@ -1229,7 +1229,7 @@
         
         Object.defineProperty(obj,'mode',{
         
-              set   : set.mode,
+              set   : (...args)=>set.mode(...args),
               get   : ()=>{
               
                     var mode    = editor.session.getMode().$id;
