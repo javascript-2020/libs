@@ -1276,6 +1276,7 @@
               //editor.session.setMode(mode)
               
               var result    = await loadmodule(path);
+                                                                                console.log('set.mode',result);
               if(result){
                     editor.session.setMode(path);
                     $(shadow,'#mode-menu-root #mode').textContent   = v;
