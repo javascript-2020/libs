@@ -1,6 +1,6 @@
 
 
-<file-server v2.0>
+<file-server>
 
       <template shadowrootmode=open>
       
@@ -73,7 +73,7 @@
                               server
                         </label>
                         <div class=spc></div>
-                        <input value='quit' type=button>
+                        <input value=quit type=button>
                         <input value=download type=button>
                         <input value=docs type=button>
                   </div>
@@ -116,19 +116,17 @@
 (function file_server({mod,host}){
 
   var obj   = {
-        version   : 'v2.0'
+        version   : 'v2.1'
   };
   
-        var df=false,did='file-server'
+        var df=false,did='file-server';
+        
+        var ext,$,datatype,menu,source,filemod,debug
         ;
         
+        obj.initmod   = function(...list){
         
-        var ext,$,datatype,menu,source,filemod
-        ;
-        
-        obj.initmod   = function(...params){
-        
-              params.forEach(params=>{
+              list.forEach(params=>{
               
                     ext           = mod.rd(params,'ext',ext);
                     $             = mod.rd(params,'$',$);
@@ -181,6 +179,7 @@
         obj.init    = async function(){
         
               mod.initmod(obj);
+                                                                                debug=eval(debug.mod);
                                                                                 debug('init',obj.version);
                                                                                 
               await libs();
@@ -291,15 +290,48 @@
         
         btn.download    = async function(e){
         
-              var {create_archive}    = await import('https://code.ext-code.com/nodejs/servers/file-server/create-archive.m.js');
-              create_archive();
+              var owner     = 'javascript-2020';
+              var repo      = 'code';
+              var branch    = 'main';
+              var path      = '/nodejs/servers/file-server/file-server.js';
+              
+              var err;
+              try{
+              
+                    var res       = await fetch(`https://raw.githubusercontent.com/${owner}/${repo}/${branch}${path}`);
+                    
+              }//try
+              catch(err2){
+              
+                    err   = err2;
+                    
+              }//catch
+              if(err){
+                    log.red.pin('error downloaading file-server');
+                    log.red.pin(err.message);
+                    return;
+              }
+              if(!res.ok){
+                    var txt   = await res.text();
+                    log.red.pin('error downloaading file-server');
+                    log.red.pin(txt);
+                    return;
+              }
+              
+              var blob      = await res.blob();
+              var url       = window.URL.createObjectURL(blob);
+              
+              var a         = document.createElement('a');
+              a.href        = url;
+              a.download    = 'file-server.js';
+              a.click();
               
         }//download
         
         
         btn.docs    = function(){
         
-              window.open('https://ext-code.com/code/nodejs/servers/file-server/file-server.html');
+              window.open('https://ext-code.com/html-components/list/file-server/file-server.html');
               
         }//docs
         
@@ -321,7 +353,7 @@
         
         
         btn['open-tab']   = function(){
-                                                                                debug('btn.update');
+                                                                                debug('btn[open-tab]');
               var url       = ui.url.value;
               window.open(url,'_blank');
               
@@ -714,6 +746,7 @@
   //:
   
   
+/*
         function debug(...args){
         
               if(!df && !obj.df)return;
@@ -723,11 +756,11 @@
               console.groupEnd();
               
         }//debug
-        
-        
-        
-        
-        
+*/
+
+
+
+
   return obj;
   
 //file_server
