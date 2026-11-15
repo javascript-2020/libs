@@ -101,7 +101,6 @@
         async function libs(){
         
               [getmime]   = await ext.load.libs('/js/string/getmime/getmime.js');
-              console.log('*****',getmime);
               
         }//libs
   //:
@@ -319,7 +318,8 @@
               
               function click_file(nfile,o){
               
-                    options?.callback?.file(o.name,o);
+                    var mime    = getmime(o.name);
+                    options?.callback?.file(o.name,o,mime);
                     
               }//click_file
               
