@@ -100,9 +100,12 @@
         
         async function libs(){
         
-              [getmime]   = await ext.load.libs('/js/string/getmime/getmime.js');
+              [getmime]     = await ext.load.libs('/js/string/getmime/getmime.js');
+              obj.getmime   = getmime;
               
         }//libs
+        
+        
   //:
   
   
