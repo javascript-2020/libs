@@ -162,16 +162,16 @@
               return nn;
               
         }//nodename
-
+        
         
         $.point={};
         
         $.point.full    = function(x,y){
-          
+        
               var element = document.elementFromPoint(x, y);
-            
+              
               while(element && element.shadowRoot){
-                
+              
                     var node    = element.shadowRoot.elementFromPoint(x,y);
                     if (!node||node===element){
                           break;
@@ -179,7 +179,7 @@
                     element   = node;
                     
               }//while
-            
+              
               return element;
               
         }//point.full
@@ -829,7 +829,7 @@
               var mx;
               var my;
               var timer;
-              var delay   = 500;
+              var delay   = 1500;
               var last;
               
               
@@ -846,7 +846,7 @@
                     
                     last    = e;
                     clearTimeout(timer);
-                    timer   = setTimeout(mu,500,last);
+                    timer   = setTimeout(mu,delay,last);
                     
               }//md
               
@@ -869,7 +869,7 @@
                     
                     last    = e;
                     clearTimeout(timer);
-                    timer   = setTimeout(mu,500,last);
+                    timer   = setTimeout(mu,delay,last);
                     
               }//mm
               
