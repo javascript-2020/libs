@@ -62,14 +62,17 @@
         version   : 'v1.0',
   };
   
-        var df=false,did='dir-tree'
+        var df=false,did='dir-tree';
+        
+        var ext
         ;
-        
-        
         
         obj.initmod   = function(...list){
         
               list.forEach(params=>{
+              
+                    ext   = mod.rd(params,'ext',ext);
+                    
               });
               
         }//initmod
@@ -86,13 +89,21 @@
   //:
   
   
-        obj.init    = function(){
-                                                                                debug('init');
+        obj.init    = async function(){
+        
               mod.initmod(obj);
+                                                                                debug('init');
+              await libs();
               
         }//init
         
         
+        async function libs(){
+        
+              [getmime]   = await ext.load.libs('/js/string/getmime/getmime.js');
+              console.log(getmime);
+              
+        }//libs
   //:
   
   
