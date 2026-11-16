@@ -72,32 +72,32 @@
 (function db_files({mod,dom,host}){
 
   var obj   = {
-        version   : 'v1.0'
+        version   : 'v2.0'
   };
   
-        var df=true,did='db-files'
-        ;
+        var df=false,did='db-files';
         
-        
-  //initmod:
-  
         var ext,$,datatype,menumod,source,filemod,log
         ;
         
-        obj.initmod   = function(params){
+        obj.initmod   = function(...list){
         
-              ext         = mod.rd(params,'ext',ext);
-              $           = mod.rd(params,'$',$);
-              datatype    = mod.rd(params,'datatype',datatype);
-              menumod     = mod.rd(params,'menumod',menumod);
+              list.forEach(params=>{
               
-              menu.root   = mod.rd(params,'menu',menu);
-              
-              source      = mod.rd(params,'source',source);
-              
-              filemod     = mod.rd(params,'filemod',filemod);
-              
-              log         = mod.rd(params,'log',log);
+                    ext         = mod.rd(params,'ext',ext);
+                    $           = mod.rd(params,'$',$);
+                    datatype    = mod.rd(params,'datatype',datatype);
+                    menumod     = mod.rd(params,'menumod',menumod);
+                    
+                    menu.root   = mod.rd(params,'menu',menu);
+                    
+                    source      = mod.rd(params,'source',source);
+                    
+                    filemod     = mod.rd(params,'filemod',filemod);
+                    
+                    log         = mod.rd(params,'log',log);
+                    
+              });
               
         }//initmod
         
