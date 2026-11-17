@@ -342,6 +342,7 @@
               }
               
               $.slider('web-editor','#slider-1','#hldr',{md:show.glass,mu:hide.glass},{root:shadow,mode:'horiz'});
+              
               $(shadow,'[value=run]').onclick             = btn.run;
               $(shadow,'[value=kill]').onclick            = btn.kill;
               $(shadow,'[value=clear]').onclick           = btn.clear;
@@ -360,6 +361,7 @@
               
               events();
               
+              $.slider('#hldr','#slider-2','web-console',{md:show.glass,mu:hide.glass},{root:shadow,mode:'horiz'});
               
               
                                                                           debug('def.console.height',def.console.height);
