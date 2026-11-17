@@ -576,8 +576,10 @@
         }//upload
         
         
-        
-        sandbox.create    = function({fn,onload,sandbox,allow}={}){
+  //:
+  
+  
+        sandbox.create    = function({fn,onload,sandbox:sandbox_attr,allow}={}){
                                                                                 debug('sandbox.create');
               hldr.classList.add('.loading');
               
@@ -587,12 +589,12 @@
               sandbox.iframe              = document.createElement('iframe');
               
               
-              sandbox                   ||= def.sandbox;
-              if(sandbox in preset.sandbox){
-                    sandbox               = preset.sandbox[sandbox];
+              sandbox_attr              ||= def.sandbox;
+              if(sandbox_attr in preset.sandbox){
+                    sandbox_attr          = preset.sandbox[sandbox_attr];
               }
-              sandbox.iframe.setAttribute('sandbox',sandbox);
-                                                                                debug('sandbox',sandbox);
+              sandbox.iframe.setAttribute('sandbox',sandbox_attr);
+                                                                                debug('sandbox',sandbox_attr);
               allow                     ||= def.allow;
               if(allow in preset.allow){
                     allow                 = preset.allow[allow];
