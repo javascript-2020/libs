@@ -334,9 +334,10 @@
               shadow                                      = host.shadowRoot;
               
               
-              $(shadow,'#btn-editor').onclick             = btn-editor;
-              $(shadow,'#btn-html').onclick               = btn.html;
-              $(shadow,'#btn-web-console').onclick        = btn['web-console'];
+              $.all(shadow,'#btn-editor').forEach(btn=>btn.onclick=btn-editor);
+              $.all(shadow,'#btn-html').forEach(btn=>btn.onclick= btn.html);
+              $.all(shadow,'#btn-web-console').forEach(btn=>btn.onclick=btn['web-console']);
+              
               $(shadow,'#open').onclick                   = btn.open;
               
               
