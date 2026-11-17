@@ -264,6 +264,9 @@
                     $(shadow,'#controls').style.display           = '';
               }
               
+              $(shadow,'#page-up').onclick                        = btn['page-up'];
+              $(shadow,'#page-down').onclick                      = btn['page-down'];
+              
               chk.persist     = $.chkbox(shadow,'#console-persist');
               $.chkbox(shadow,'#console-wrap',btn['console-wrap'])
               
@@ -282,6 +285,38 @@
   //:
   
   
+        var timer     = {};
+        timer.delay   = 500;
+        
+        
+        btn['page-up']    = function(){
+        
+              if(timer['page-up']){
+                  clearTimeout(timer['page-up']);
+                  timer['page-up']    = null;
+                  inspect.top();
+                  return;
+              }
+              
+              timer['page-up']    = setTimeout(inspect['page-up'],timer.delay);
+              
+        }//page-up
+        
+        
+        btn['page-down']    = function(){
+        
+              if(timer['page-down']){
+                  clearTimeout(timer['page-down']);
+                  timer['page-down']    = null;
+                  inspect.bottom();
+                  return;
+              }
+              
+              timer['page-down']    = setTimeout(inspect['page-down'],timer.delay);
+              
+        }//page-down
+        
+        
         btn['console-wrap']   = function(chk){
         
               inspect.set.wordwrap(chk.checked);
