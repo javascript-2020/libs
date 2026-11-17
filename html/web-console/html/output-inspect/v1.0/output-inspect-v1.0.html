@@ -23,21 +23,27 @@
   .log
     {border-color:lightgray}
   .log .icon
-    {}
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAfCAMAAADHso01AAAAUVBMVEVHcEwAAAAHBwcCAgIAAAADAwMHBwcAAAABAQECAgICAgIAAAAHBwcBAQEFBQUBAQEAAAAAAAAAAAACAgIBAQECAgICAgIBAQEBAQECAgIAAAB/oXohAAAAGnRSTlMA3AQWtA8d+qBaa/EqeQqG187lR6k1PryTULyTS+gAAAFaSURBVCjPjZNZkoQgEERZBARkR9G6/0EHRG2jNSY6fwx8VlJkIUI/iCiJZset2VAy7BuyKXq+glxEoYNIjDH7odsQvBBeQ8Sg6wOHEIo6PTYNftA6ewiDiDlCyTkIcGSntsDIefSsms9isINYEGJKxGnHHGOOiFFoWTlzEm2u2ZLcvtrxQF7OovD8H57MRi5Mpku9Y5qFNuTEdBxOdU8pAISzZzW71EqsMytUbl73Jg60atzTjq1UVfKI0lTnKEeAbDtmxlUdw1C6FgKWOUwv5nKn1Tnx69yk6hhB7BR6Lt18zXncl+mkMX1Ss0tKidbV7A+qN/QMdQonleiGCed0tz7a0grdMR1Le7Gk3rYwxFJyq6a0nVniRe1hE6TCc6AS/FwjW21LbnnBEGY3MnTHmJ84ee9Xau+XiRVY6TkqWrVP9LqKLeMwfqlcFxkRWfBD4fYrWfoQQz/pD4afGUitjEv2AAAAAElFTkSuQmCC);
+      }
   .log .txt
     {}
     
   .warn
     {border-color:darkorange;color:darkorange;background:hsla(28,100%,90%,1)}
   .warn .icon
-    {}
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAnFBMVEVHcEwAAAERDgQTFBMBAgUKCQMrJAkLCwwEBAcAAAMSDwUEBAMBAQQAAAQAAAMBAQMaFgYAAQUAAAIAAAMAAAT+1Cr/1yrKqSL/1ioBAQD/1So8Mgz2zSn/2Suqjh7OrCOWfRvZtSV3YxbhvCb60SrrxChqWRRZShGOdxoSDwSdgxyFbxjvxyi8nSHGpSIhGwdLPw9FOg65myFPQhBGjdkYAAAAFXRSTlMAHuAEKNv8DBl9685GY7iQ8jSid1o7Ckk7AAABGUlEQVQoz72T13KDMBBFTW/G2E5WlgQS1WCK45L//7eIMhkTRN6S+yJmLxKcw7DZ/F/0g/ZLu1Vdf721dlli6Ku1b+bRPVhrFS/B6OkeVmon7DAtqqP87XSVs6jD8X4ra7VjVcR3s4FsZ8mg9h+sJSSMctOXQgFLCHkU+OLZEqgUM05IVdBz+Paztb0LBnQlpKSA+MKNE57F/FSTDAONPoMFFALAaU1asaLr3I0WVBEFoPmNJAwAinLmRkCJTQBRGcZYrHM31q6EMemzP0X0r27eBdQwjM26HW7DL24GqD6s6a2N25NvNwPUMEsft2R8inDjTJ/Z4AxN6XKYrhg3lJHZ5fFpkbhxR3VWoMpiOBO6pshia3/913wBbVgetPNZGUAAAAAASUVORK5CYII=);
+      }
   .warn .txt
     {}
     
   .error
     {border-color:darkred;color:darkred;background:hsla(0,100%,90%,1)}
   .error .icon
-    {}
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAUVBMVEVHcEz5BBv1CR7yBhz6BBv5BRv2BRv3BRvtCB34BBv5BBvoCh72BRv1BhzuCB31Bhz1BRv1BRv5BBvxBx3wBx31Bhv0Bhv5BBv2BRv3BRz6BBsHSiWYAAAAGnRSTlMA8BIz/tOp2Bre+wu1iCNsn5XnQix3ZPVQympwXjcAAADpSURBVCjPhZNZAsQQDECjDEV1oWbJ/Q86uphGt3l/6dMIEoAVGwZlMGHUECzsCJLhDyZDIStH5LzAVZttG9wjmjrberU+dgn3WqLsrVz/eMwJed5HLgVGca5FnMJR47lGPabQ4ZVGl6rW11q18DTX2jxB4rVGCepOK2B3moG40+KfpjuNdSIUyUlpRk94QUsjBzPqkdBID0auhYUqQT6ka2m37IxPpb0NvVTyJAftgL7JXut2ijtzrk23NFOfYzkkmnyw3patWEJaVYpDI8t6a3QbfWl9LOeI92SB7/l+yIC7zzwAr4/b5BcoXDitvd++tgAAAABJRU5ErkJggg==);
+      }
   .error .txt
     {}
     
@@ -56,13 +62,18 @@
             <div id=root style='display:none'>
             
                   <div class='log item'>
+                        <img class=icon>
                         <div class=txt></div>
                   </div>
                   
                   <div class='warn item'>
+                        <img class=icon>
+                        <div class=txt></div>
                   </div>
                   
                   <div class='error item'>
+                        <img class=icon>
+                        <div class=txt></div>
                   </div>
                   
                   <div class=group-collapsed>
@@ -253,8 +264,8 @@
         
         error.display   = function(html){
         
-              var node            = ui.error.cloneNode(true);
-              node.innerHTML      = html;
+              var node                    = ui.error.cloneNode(true);
+              $(node,'.txt').innerHTML    = html;
               disp(node);
               return node;
               
@@ -274,8 +285,8 @@
         
         warn.display    = function(html){
         
-              var node            = ui.warn.cloneNode(true);
-              node.innerHTML      = html;
+              var node                    = ui.warn.cloneNode(true);
+              $(node,'.txt').innerHTML    = html;
               disp(node);
               return node;
               
