@@ -219,7 +219,12 @@
                     node.style.height    = '16px';
               }
               root.append(node);
-              host.scrollTop    = 999_999_999;
+              
+                                                                                console.log(root.scrollTop,root.offsetHeight,root.scrollHeight);
+                                                                                console.log(root.scrollTop+root.offsetHeight);
+              if(root.scrollTop+root.offsetHeight>root.scollHeight-50){
+                    host.scrollTop    = 999_999_999;
+              }
               
         }//disp
         
