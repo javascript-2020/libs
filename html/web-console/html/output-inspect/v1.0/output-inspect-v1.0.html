@@ -237,6 +237,19 @@
   //:
   
   
+        obj.top   = function(){
+        
+              host.scrollTop    = 0;
+              
+        }//top
+        
+        obj.bottom    = function(){
+        
+              host.scrollTop    = 999_999_999;
+              
+        }//bottom
+        
+        
         obj['page-up']    = function(){
         
               var t   = host.scrollTop;
