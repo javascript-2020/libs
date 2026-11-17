@@ -54,13 +54,15 @@
       }
       
       
-  #iframe-btns,#web-console-btns
+  #iframe-btns, #web-console-btns
     {display:flex;margin:0 20px;gap:10px}
-  #iframe-btns [type],#web-console-btns [type]
+  #iframe-btns [type], #web-console-btns [type]
     {margin-right:10px}
     
   #hldr
     {border:1px solid lightgray}
+  .loading
+    {border-color:orange !important}
     
   iframe
     {width:100%;height:100%;border:none}
@@ -82,8 +84,18 @@
     
             </style>
             
+            <style sandbox-proxy>
+            
+  body
+    {margin:0}
+  iframe
+    {border:none;width:100%;height:100%}
+    
+            </style>
+            
             <div id=root>
             
+            <!--
                   <div id=title>
                         <div class=spc></div>
                         <div id=mod-name>
@@ -91,7 +103,7 @@
                         </div>
                         <img id=icon>
                   </div>
-                  
+            -->>
                   <div id=hdr>
                         <file-mod v2.1 component></file-mod>
                         <div class=spc></div>
@@ -112,7 +124,7 @@
                   </div>
                   
                   <div id=hldr part=hldr>
-                        <iframe></iframe>
+                        <iframe sandbox-proxy></iframe>
                   </div>
                   
                   <div id=web-console-btns>
@@ -126,23 +138,16 @@
                   
             </div>
             
-            
-            <style id=proxy>
-                  body{margin:0}
-                  iframe{border:none;width:100%;height:100%}
-            </style>
-            
-            
       </template>
       
       
       <script>
       
       
-(function snippet_html_console({mod,host}){
+(function({mod,host}){
 
   var obj   = {
-        version   : 'v2.1',
+        version   : 'v3.0',
   };
   
         var df=true,did='snippet-html-console';
@@ -195,11 +200,12 @@
         
         var src;
         
+        var control_url   = 'https://sandbox.ext-code.com/html-sandbox-v6.0/html-sandbox-control-v6.0.html';
+        var control       = {};
+        var sandbox_url   = 'https://sandbox.ext-code.com/html-sandbox-v6.0/html-sandbox-v6.0.html';
+        var sandbox       = {};
         
         var hldr;
-        var proxy;
-        var sandbox_url   = 'https://sandbox.ext-code.com/html-sandbox-v5.0/html-sandbox-v5.0.html';
-        var iframe;
         
         
         var def               = {};
@@ -238,7 +244,8 @@
         preset.sandbox              = {};
         preset.sandbox.min          = 'allow-scripts';
         preset.sandbox.standard     = 'allow-downloads allow-forms allow-same-origin allow-scripts';
-        preset.sandbox.trusted      = 'allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-storage-access-by-user-activation';
+        preset.sandbox.trusted      = `allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin
+                                        allow-scripts allow-storage-access-by-user-activation`;
         preset.sandbox.all          = values.join(' ');
         
         
@@ -254,8 +261,8 @@
               'clipboard-read',
               'clipboard-write',
               'compute-pressure',
-              'cross-origin-isolated', // <--- Added
-              'deferred-fetch',        // <--- Added
+              'cross-origin-isolated',
+              'deferred-fetch',
               'display-capture',
               'encrypted-media',
               'fullscreen',
@@ -265,7 +272,8 @@
               'hid',
               'idle-detection',
               'local-fonts',
-              'local-network',         // <--- Added
+              'local-network',
+              'loopback-network',
               'magnetometer',
               'microphone',
               'midi',
@@ -286,8 +294,8 @@
         preset.allow.min          = `autoplay; encrypted-media; picture-in-picture;`
         preset.allow.standard     = `clipboard-write; clipboard-read; autoplay; cross-origin-isolated; encrypted-media; picture-in-picture;
                                       screen-wake-lock; web-share;`;
-        preset.allow.trusted      = `clipboard-write; clipboard-read; camera; cross-origin-isolated; microphone; geolocation; accelerometer; gyroscope; local-network
-                                       magnetometer; payment; usb; serial; bluetooth; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture;
+        preset.allow.trusted      = `clipboard-write; clipboard-read; camera; cross-origin-isolated; microphone; geolocation; accelerometer; gyroscope; local-network;
+                                      loopback-network; magnetometer; payment; usb; serial; bluetooth; xr-spatial-tracking; autoplay; encrypted-media; picture-in-picture;
                                        screen-wake-lock; web-share;`;
         preset.allow.all          = values.join('; ');+';'
         
@@ -365,7 +373,7 @@
         
         function events(){
         
-              proxy.contentWindow.addEventListener('message',e=>{
+              sandbox.proxy.contentWindow.addEventListener('message',e=>{
                                                                                 //console.log('proxy',e.data);
                     if(e.data?.type==='console'){
                           var {name,html}   = e.data;
@@ -403,11 +411,14 @@
               
               
               hldr                                        = $(shadow,'#hldr');
-              proxy                                       = $(hldr,'iframe');
-              var style                                   = $(shadow,'style#proxy');
-              proxy.contentDocument.head.append(style);
               
-              create();
+              sandbox.proxy                               = $(hldr,'iframe');
+              var style                                   = $(shadow,'style[sandbox-proxy]');
+              sandbox.proxy.contentDocument.head.append(style);
+              
+              control.create();
+              sandbox.create();
+              
               events();
               
                                                                           debug('def.console.height',def.console.height);
@@ -495,65 +506,44 @@
   //:
   
   
-        function create({src,onload:ponload,sandbox,allow}={}){
-                                                                                debug('create');
-              if(iframe){
-                    iframe.remove();
-              }
-              iframe    = document.createElement('iframe');
+        control.create    = function(){
+                                                                                debug('create.control');
+              var resolve,promise=new Promise(res=>resolve=res);
               
+              control.proxy                 = document.createElement('iframe');
+              control.proxy.style.display   = 'none';
+              control.proxy.onload          = onload;
+              shadow.append(control.proxy);
               
-              sandbox   ||= def.sandbox;
-              if(sandbox in preset.sandbox){
-                    sandbox   = preset.sandbox[sandbox];
-              }
-              iframe.setAttribute('sandbox',sandbox);
-              
-              
-              allow   ||= def.allow;
-              if(allow in preset.allow){
-                    allow   = preset.allow[allow];
-              }
-              iframe.setAttribute('allow',allow);
-              
-              src       ||= sandbox_url;
-              
-              
-                                                                                debug('crossOriginIsolated',window.crossOriginIsolated);
-              var url     = new URL(src);
-              if(window.crossOriginIsolated){
-                    url.searchParams.set('isolate','');
-              }
-              var search    = url.search.replace(/=(?=&|$)/g,'');
-              src           = url.origin+url.pathname+search+url.hash;
-                                                                                debug(src);
-                                                                                
-              iframe.src      = src;
-              iframe.onload   = onload;
-              
-              hldr.style.height     = def.iframe.height;
-              proxy.contentDocument.body.append(iframe);
+              return promise;
               
               
               function onload(){
-              
-                    if(typeof ponload=='function'){
-                          ponload();
-                    }
+                                                                                debug('control.proxy.onload');
+                    control.iframe          = document.createElement('iframe');
+                    control.iframe.src      = control_url;
+                    control.iframe.onload   = onload;
+                    
+                    
+                    function onload(){
+                    
+                          resolve();
+                          
+                    }//onload
                     
               }//onload
               
-        }//create
+        }//control
         
         
-        function send(payload){
+        control.send    = function(payload){
         
               var resolve,promise=new Promise(res=>resolve=res);
               
               var msgid   = crypto.randomUUID();
               
-              proxy.contentWindow.addEventListener('message',onmessage);
-              iframe.contentWindow.postMessage({msgid,payload},'*');
+              control.proxy.contentWindow.addEventListener('message',onmessage);
+              control.iframe.contentWindow.postMessage({msgid,payload},'*');
               
               return promise;
               
@@ -561,8 +551,9 @@
               function onmessage(e){
               
                     if(e.data?.msgid!==msgid)return;
-                    proxy.contentWindow.removeEventListener('message',onmessage);
+                    control.proxy.contentWindow.removeEventListener('message',onmessage);
                     var {result,error}    = e.data;
+                    
                     resolve({result,error});
                     
               }//onmessage
@@ -570,6 +561,83 @@
         }//send
         
         
+        control.upload    = async function(html,echo){
+                                                                                debug('upload');
+              var {result,error}    = await control.send({type:'upload',html,echo});
+              if(error){
+                                                                                debug(error);
+                    log.red(error);
+                    return {error};
+              }
+                                                                                debug('ok');
+              var fn    = result;
+              return {fn};
+              
+        }//upload
+        
+        
+        
+        create.sandbox    = function({fn,onload,sandbox,allow}={}){
+                                                                                debug('create');
+              hldr.classList.add('.loading');
+              
+              if(sandbox.iframe){
+                    sandbox.iframe.remove();
+              }
+              sandbox.iframe    = document.createElement('iframe');
+              
+              
+              sandbox   ||= def.sandbox;
+              if(sandbox in preset.sandbox){
+                    sandbox   = preset.sandbox[sandbox];
+              }
+              sandbox.iframe.setAttribute('sandbox',sandbox);
+                                                                                debug('sandbox',sandbox);
+              allow   ||= def.allow;
+              if(allow in preset.allow){
+                    allow   = preset.allow[allow];
+              }
+              sandbox.iframe.setAttribute('allow',allow);
+                                                                                debug('allow',allow);
+                                                                                debug('crossOriginIsolated',window.crossOriginIsolated);
+              var url     = new URL(sandbox_url);
+              
+              if(fn){
+                    url.searchParams.set('fn',fn);
+              }
+              if(window.crossOriginIsolated){
+                    url.searchParams.set('isolate','');
+              }
+                                                                                //  remove the ugly = from isolate=
+              var search    = url.search.replace(/=(?=&|$)/g,'');
+              var src       = url.origin+url.pathname+search+url.hash;
+                                                                                debug(src);
+                                                                                
+              sandbox.iframe.src      = src;
+              sandbox.iframe.onload   = iframe_onload;
+              
+              hldr.style.height     = def.iframe.height;
+              sandbox.proxy.contentDocument.body.append(sandbox.iframe);
+              
+              
+              function iframe_onload(){
+              
+                    hldr.classList.remove('loading');
+                    
+                    sandbox.iframe.contentWindow.focus();
+                    
+                    if(typeof onload=='function'){
+                          onload();
+                    }
+                    
+              }//onload
+              
+        }//create
+        
+        
+  //:
+  
+  
         obj.run   = function(){return run()}
         
         async function run(){
@@ -577,36 +645,19 @@
               var resolve,promise=new Promise(res=>resolve=res);
               
               var html        = editor.getvalue();
-              var echo    = true;
+              var echo        = true;
               
-              var fn          = await upload();
-              var src         = sandbox_url+'?fn='+fn;
-                                                                                debug(src);
-              create({src,onload});
+              var {fn,error}    = await control.upload(html,echo);
+              if(error)return;
+              
+              sandbox.create({fn,onload});
               
               return promise;
               
               
-              async function upload(){
-                                                                                debug('upload');
-                    var {result,error}    = await send({type:'upload',html,echo});
-                    if(error){
-                                                                                debug(error);
-                          log.red(error);
-                          return;
-                    }
-                                                                                debug('ok');
-                    var fn    = result;
-                    return fn;
-                    
-              }//upload
-              
-              
               async function onload(){
                                                                                 debug('onload');
-                    iframe.onload   = null;
-                    iframe.contentWindow.focus();
-                    
+                                                                                
                     //var h   = niframe.contentDocument.documentElement.scrollHeight;
                     //hldr.style.height   = h+'px';
                     
