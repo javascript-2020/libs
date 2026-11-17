@@ -15,14 +15,23 @@
   .item
     {border:none;border-bottom:1px solid;box-sizing:border-box;padding:2px 10px;white-space:pre}
     
+  .icon
+    {width:20px;height:20px;border:1px solid lightgray;border-radius:3px;box-sizing:border-box}
+    
   .log
     {border-color:lightgray}
+  .log .icon
+    {}
     
   .warn
     {border-color:darkorange;color:darkorange;background:hsl(28,100%,90%);}
+  .warn .icon
+    {}
     
   .error
     {border-color:darkred;color:darkred;background:hsl(0,100%,90%);}
+  .error .icon
+    {}
     
     
   .sys
@@ -30,7 +39,7 @@
     
   .caret
     {width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #333;display:inline-block;transition:transform 0.2s ease;}
-  .caret .oppen
+  .caret .open
     {transform:rotate(180deg);}
     
     
