@@ -12,7 +12,8 @@
     {font-family:arial}
     
   #root
-    {display:flex;flex-direction:column;gap:10px;border:1px solid lightgray;padding:10px;border-radius:5px;
+    {display:flex;flex-direction:column;gap:10px;
+      border:1px solid lightgray;padding:10px;border-radius:5px;
       /*height:100%*/
     }
     
@@ -557,6 +558,7 @@
               function onmessage(e){
               
                     if(e.data?.msgid!==msgid)return;
+                    
                     control.proxy.contentWindow.removeEventListener('message',onmessage);
                     var {result,error}    = e.data;
                     
