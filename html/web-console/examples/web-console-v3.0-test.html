@@ -12,11 +12,19 @@
         <script>
         
         
-                function ready(){
+                async function ready(){
                 
                       mod['web-console'].test();
                       
                       mod['web-console'].log(new Proxy({},{}))
+                      
+                      
+                      for(var i=0;i<10;i++){
+                      
+                            console.log(i);
+                            await new Promise(res=>setTimeout(res,1000));
+                            
+                      }//for
                       
                 }//ready
                 
