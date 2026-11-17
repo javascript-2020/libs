@@ -519,14 +519,14 @@
               
               
               function onload(){
-                                                                                debug('control.proxy.onload');
+                                                                                debug('control.proxy onload');
                     control.iframe          = document.createElement('iframe');
                     control.iframe.src      = control_url;
                     control.iframe.onload   = onload;
                     
                     
                     function onload(){
-                    
+                                                                                debug('control.iframe onload');
                           resolve();
                           
                     }//onload
@@ -562,7 +562,7 @@
         
         
         control.upload    = async function(html,echo){
-                                                                                debug('upload');
+                                                                                debug('control.upload');
               var {result,error}    = await control.send({type:'upload',html,echo});
               if(error){
                                                                                 debug(error);
@@ -577,30 +577,30 @@
         
         
         
-        create.sandbox    = function({fn,onload,sandbox,allow}={}){
-                                                                                debug('create');
+        sandbox.create    = function({fn,onload,sandbox,allow}={}){
+                                                                                debug('sandbox.create');
               hldr.classList.add('.loading');
               
               if(sandbox.iframe){
                     sandbox.iframe.remove();
               }
-              sandbox.iframe    = document.createElement('iframe');
+              sandbox.iframe              = document.createElement('iframe');
               
               
-              sandbox   ||= def.sandbox;
+              sandbox                   ||= def.sandbox;
               if(sandbox in preset.sandbox){
-                    sandbox   = preset.sandbox[sandbox];
+                    sandbox               = preset.sandbox[sandbox];
               }
               sandbox.iframe.setAttribute('sandbox',sandbox);
                                                                                 debug('sandbox',sandbox);
-              allow   ||= def.allow;
+              allow                     ||= def.allow;
               if(allow in preset.allow){
-                    allow   = preset.allow[allow];
+                    allow                 = preset.allow[allow];
               }
               sandbox.iframe.setAttribute('allow',allow);
                                                                                 debug('allow',allow);
                                                                                 debug('crossOriginIsolated',window.crossOriginIsolated);
-              var url     = new URL(sandbox_url);
+              var url                     = new URL(sandbox_url);
               
               if(fn){
                     url.searchParams.set('fn',fn);
@@ -609,19 +609,19 @@
                     url.searchParams.set('isolate','');
               }
                                                                                 //  remove the ugly = from isolate=
-              var search    = url.search.replace(/=(?=&|$)/g,'');
-              var src       = url.origin+url.pathname+search+url.hash;
+              var search                  = url.search.replace(/=(?=&|$)/g,'');
+              var src                     = url.origin+url.pathname+search+url.hash;
                                                                                 debug(src);
                                                                                 
-              sandbox.iframe.src      = src;
-              sandbox.iframe.onload   = iframe_onload;
+              sandbox.iframe.src          = src;
+              sandbox.iframe.onload       = iframe_onload;
               
-              hldr.style.height     = def.iframe.height;
+              hldr.style.height           = def.iframe.height;
               sandbox.proxy.contentDocument.body.append(sandbox.iframe);
               
               
               function iframe_onload(){
-              
+                                                                                debug('sandbox.iframe onload');
                     hldr.classList.remove('loading');
                     
                     sandbox.iframe.contentWindow.focus();
