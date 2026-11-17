@@ -237,6 +237,29 @@
   //:
   
   
+        obj['page-up']    = function(){
+        
+              var t   = host.scrollTop;
+              var h   = host.offsetHeight;
+              t      -= h;
+              host.scrollTop    = t;
+              
+        }//page-up
+        
+        
+        obj['page-down']    = function(){
+        
+              var t   = host.scrollTop;
+              var h   = host.offsetHeight;
+              t      += h;
+              host.scrollTop    = t;
+              
+        }//page-down
+        
+        
+  //:
+  
+  
         obj.clear   = clear;
         
         function clear(...args){
