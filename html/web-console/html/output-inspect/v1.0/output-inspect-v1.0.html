@@ -24,12 +24,12 @@
     {}
     
   .warn
-    {border-color:darkorange;color:darkorange;background:hsl(28,100%,90%);}
+    {border-color:darkorange;color:darkorange;background:hsla(28,100%,90%,1)}
   .warn .icon
     {}
     
   .error
-    {border-color:darkred;color:darkred;background:hsl(0,100%,90%);}
+    {border-color:darkred;color:darkred;background:hsla(0,100%,90%,1)}
   .error .icon
     {}
     
@@ -118,8 +118,8 @@
         cur.node        = null;
         
         
-        var fn          = {};
-        
+        var set         = {};
+        obj.set         = set;
         
         
   //:
@@ -158,6 +158,7 @@
               
               
               root                            = $(shadow,'#root');
+              obj.root                        = root;
               
               ui.log                          = $(root,'.log');
               ui.log.remove();
@@ -319,7 +320,18 @@
         }//write
         
         
+  //:
+  
+  
+        set.wordwrap    = function(v){
         
+              if(v){
+                    root.style.whiteSpace   = 'pre-wrap';
+              }else{
+                    root.style.whiteSpace   = 'pre';
+              }
+              
+        }//wordwrap
         
   //:
   
@@ -538,6 +550,7 @@
         
         
   //:
+  
   
         function ansi_html(text) {
                                                                                 // Escape HTML special characters to prevent injection/rendering issues
