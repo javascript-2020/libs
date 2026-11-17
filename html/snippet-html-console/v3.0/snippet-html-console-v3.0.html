@@ -515,6 +515,7 @@
               }
               control.proxy                 = document.createElement('iframe');
               control.proxy.style.display   = 'none';
+              control.proxy.toggleAttribute('control-proxy',true);
               control.proxy.onload          = onload;
               shadow.append(control.proxy);
               
@@ -525,6 +526,7 @@
                                                                                 debug('control.proxy onload');
                     control.iframe          = document.createElement('iframe');
                     control.iframe.src      = control_url;
+                    control.proxy.toggleAttribute('control-iframe',true);
                     control.iframe.onload   = onload;
                     control.proxy.contentDocument.body.append(control.iframe);
                     
