@@ -587,8 +587,6 @@
   
         sandbox.create    = function({fn,onload,sandbox:sandbox_attr,allow}={}){
                                                                                 debug('sandbox.create');
-              hldr.classList.add('.loading');
-              
               if(sandbox.iframe){
                     sandbox.iframe.remove();
               }
@@ -630,8 +628,6 @@
               
               function iframe_onload(){
                                                                                 debug('sandbox.iframe onload');
-                    hldr.classList.remove('loading');
-                    
                     sandbox.iframe.contentWindow.focus();
                     
                     if(typeof onload=='function'){
@@ -652,6 +648,8 @@
                                                                                 debug('run');
               var resolve,promise=new Promise(res=>resolve=res);
               
+              hldr.classList.add('loading');
+              
               var html        = editor.getvalue();
               var echo        = true;
               
@@ -665,7 +663,8 @@
               
               async function onload(){
                                                                                 debug('onload');
-                                                                                
+                    hldr.classList.remove('loading');
+                    
                     //var h   = niframe.contentDocument.documentElement.scrollHeight;
                     //hldr.style.height   = h+'px';
                     
