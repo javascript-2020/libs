@@ -215,13 +215,13 @@
         
               cur.node    = node;
               
-                                                                                console.log(host.scrollTop,host.offsetHeight);
-                                                                                console.log(host.scrollTop+host.offsetHeight,host.scrollHeight);
               var scroll    = false;
               if(host.scrollTop+host.offsetHeight>host.scollHeight-50){
                     scroll    = true;
               }
-              
+                                                                                console.log(host.scrollTop,host.offsetHeight);
+                                                                                console.log(host.scrollTop+host.offsetHeight,host.scrollHeight,scroll);
+                                                                                
               if(node.textContent==''){
                     node.style.height    = '16px';
               }
