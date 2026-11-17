@@ -603,19 +603,9 @@
         }//create
         
         
-  //:
-  
-  
-        obj.run   = function(){return run()}
-        
-        async function run(){
-                                                                                debug('run');
+        sandbox.run   = async function(){
+                                                                                debug('sandbox.run');
               var resolve,promise=new Promise(res=>resolve=res);
-              
-              hldr.classList.add('loading');
-              
-              var html            = editor.getvalue();
-              var echo            = true;
               
               var {fn,error}      = await control.upload(html,echo);
               if(error)return;
@@ -627,17 +617,28 @@
               
               async function onload(){
                                                                                 debug('onload');
-                    hldr.classList.remove('loading');
-                    
-                    //var h   = niframe.contentDocument.documentElement.scrollHeight;
-                    //hldr.style.height   = h+'px';
-                    
                     resolve();
                     
               }//onload
               
+        }//run
+        
+        
+  //:
+  
+  
+        obj.run   = function(){return run()}
+        
+        async function run(){
+                                                                                debug('run');
+              hldr.classList.add('loading');
               
+              var html            = editor.getvalue();
+              var echo            = true;
               
+              await sandbox.run(html,echo);
+              
+              hldr.classList.remove('loading');
               
         }//run
         
