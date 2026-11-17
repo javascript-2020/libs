@@ -523,6 +523,7 @@
                     control.iframe          = document.createElement('iframe');
                     control.iframe.src      = control_url;
                     control.iframe.onload   = onload;
+                    control.proxy.contentDocument.body.append(control.iframe);
                     
                     
                     function onload(){
