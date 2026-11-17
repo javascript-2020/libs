@@ -650,10 +650,10 @@
               
               hldr.classList.add('loading');
               
-              var html        = editor.getvalue();
-              var echo        = true;
+              var html            = editor.getvalue();
+              var echo            = true;
               
-              var {fn,error}    = await control.upload(html,echo);
+              var {fn,error}      = await control.upload(html,echo);
               if(error)return;
               
               sandbox.create({fn,onload});
