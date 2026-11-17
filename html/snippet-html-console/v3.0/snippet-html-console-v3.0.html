@@ -334,7 +334,7 @@
               shadow                                      = host.shadowRoot;
               
               
-              $.all(shadow,'#btn-editor').forEach(btn=>{console.log(btn);btn.onclick=btn.editor});
+              $.all(shadow,'#btn-editor').forEach(img=>img.onclick=btn.editor);
               $.all(shadow,'#btn-html').forEach(btn=>btn.onclick= btn.html);
               $.all(shadow,'#btn-web-console').forEach(btn=>btn.onclick=btn['web-console']);
               
@@ -389,6 +389,9 @@
         }//kd
         
         
+  //:
+  
+  
         btn.reset   = function(){
         
               editor.setvalue(def.html);
@@ -439,6 +442,9 @@
         }//web-console
         
         
+  //:
+  
+  
         show.glass    = function(){
         
               glass.style.display   = '';
