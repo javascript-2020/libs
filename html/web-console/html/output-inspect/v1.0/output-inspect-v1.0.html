@@ -22,6 +22,8 @@
     {border-color:lightgray}
   .log .icon
     {}
+  .log .txt
+    {}
     
   .warn
     {border-color:darkorange;color:darkorange;background:hsla(28,100%,90%,1)}
@@ -49,6 +51,7 @@
             <div id=root style='display:none'>
             
                   <div class='log item'>
+                        <div class=txt></div>
                   </div>
                   
                   <div class='warn item'>
@@ -222,8 +225,8 @@
         
         log.display    = function(html){
         
-              var node          = ui.log.cloneNode(true);
-              node.innerHTML    = html;
+              var node                    = ui.log.cloneNode(true);
+              $(node,'.txt').innerHTML    = html;
               disp(node);
               return node;
               
