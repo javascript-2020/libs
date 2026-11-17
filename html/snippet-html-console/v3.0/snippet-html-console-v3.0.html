@@ -345,6 +345,7 @@
               
               
               hldr                                        = $(shadow,'#hldr');
+              glass                                       = $(hldr,'#glass');
               
               sandbox.proxy                               = $(hldr,'iframe');
               var style                                   = $(shadow,'style[sandbox-proxy]');
@@ -354,6 +355,7 @@
               sandbox.create();
               
               events();
+              
               
               
                                                                           debug('def.console.height',def.console.height);
@@ -422,6 +424,20 @@
               $(shadow,'web-console').scrollIntoView({behavior:'smooth'});
               
         }//web-console
+        
+        
+        show.glass    = function(){
+        
+              glass.style.display   = '';
+              
+        }//glass
+        
+        
+        hide.glass    = function(){
+        
+              glass.style.display   = 'none';
+              
+        }//glass
         
         
   //:
