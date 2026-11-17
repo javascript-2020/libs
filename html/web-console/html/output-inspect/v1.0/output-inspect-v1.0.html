@@ -17,6 +17,8 @@
     
   .icon
     {width:20px;height:20px;border:1px solid lightgray;border-radius:3px;box-sizing:border-box}
+  .txt
+    {}
     
   .log
     {border-color:lightgray}
@@ -29,12 +31,15 @@
     {border-color:darkorange;color:darkorange;background:hsla(28,100%,90%,1)}
   .warn .icon
     {}
+  .warn .txt
+    {}
     
   .error
     {border-color:darkred;color:darkred;background:hsla(0,100%,90%,1)}
   .error .icon
     {}
-    
+  .error .txt
+    {}
     
   .sys
     {color:gray;font-style:italic}
@@ -112,6 +117,7 @@
         
         
         var shadow;
+        var style;
         var root;
         
         var ui          = {};
@@ -159,6 +165,7 @@
                                                                                 debug('initdom');
               shadow                          = host.shadowRoot;
               
+              style                           = $(shadow,'style');
               
               root                            = $(shadow,'#root');
               obj.root                        = root;
@@ -328,10 +335,22 @@
   
         set.wordwrap    = function(v){
         
+              var sheet   = style.sheet;
+              var rule;
+              var n       = sheet.cssRules.length;
+              for(var i=0;i<n;i++){
+              
+                    rule    = sheet.cssRules[i];
+                    if(rule.selectorText==='.txt'){
+                          break;
+                    }
+                    
+              }//for
+              
               if(v){
-                    root.style.whiteSpace   = 'pre-wrap';
+                    rule.style.whiteSpace   = 'pre-wrap';
               }else{
-                    root.style.whiteSpace   = 'pre';
+                    rule.style.whiteSpace   = 'pre';
               }
               
         }//wordwrap
