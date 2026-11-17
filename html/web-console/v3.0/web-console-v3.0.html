@@ -101,7 +101,7 @@
         var def             = {};
         def.fullsize        = false;
         def.height          = '200px';
-        def.controls        = true;
+        def.controls        = false;
         
         
         var mode    = 'inspect';
@@ -266,8 +266,10 @@
   //:
   
   
-        btn['console-wrap']   = function(){
+        btn['console-wrap']   = function(chk){
         
+              inspect.set.wordwrap(chk.checked);
+              
         }//console-wrap
         
         
