@@ -500,7 +500,7 @@
               var node                    = ui.marker.cloneNode(true);
               
               var time                    = Date.now()-time;
-              node.textContent.replace('{time}',time);
+              node.textContent            = node.textContent.replace('{time}',time);
               
               disp(node);
               return node;
