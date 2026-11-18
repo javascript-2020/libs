@@ -71,6 +71,8 @@
             
             <div id=root style='display:none'>
             
+                  <div class=top></div>
+                  
                   <div class='log item'>
                         <div class=hdr>
                               <img class=icon>
@@ -93,7 +95,7 @@
                   </div>
                   
                   <div class=group-collapsed>
-                        <div class=top>
+                        <div class=hdr>
                               <div class=caret></div>
                               <div class=txt>
                               </div>
@@ -101,6 +103,8 @@
                         <div class=main>
                         </div>
                   </div>
+                  
+                  <div class=bottom></div>
                   
             </div>
             
@@ -197,6 +201,7 @@
               root                            = $(shadow,'#root');
               obj.root                        = root;
               
+              
               ui.log                          = $(root,'.log');
               ui.log.remove();
               
@@ -209,35 +214,11 @@
               ui.groupcollapsed               = $(root,'.group-collapsed');
               ui.groupcollapsed.remove();
               
-              root.replaceChildren();
+              
+              clear();
               root.style.display    = '';
               
         }//initdom
-        
-        
-  //:
-  
-        function disp(node){
-        
-              cur.node    = node;
-              
-              var scroll    = false;
-              if(host.scrollTop+host.offsetHeight>host.scrollHeight-50){
-                    scroll    = true;
-              }
-                                                                                console.log(host.scrollTop,host.offsetHeight);
-                                                                                console.log(host.scrollTop+host.offsetHeight,host.scrollHeight,scroll);
-                                                                                
-              if(node.textContent==''){
-                    node.style.height    = '16px';
-              }
-              root.append(node);
-              
-              if(scroll){
-                    host.scrollTop    = 999_999_999;
-              }
-              
-        }//disp
         
         
   //:
@@ -262,7 +243,8 @@
               var t   = host.scrollTop;
               var h   = host.offsetHeight;
               t      -= h-20;
-              host.scrollTop    = t;
+              scroll(t);
+              //host.scrollTop    = t;
               
         }//page-up
         
@@ -272,9 +254,65 @@
               var t   = host.scrollTop;
               var h   = host.offsetHeight;
               t      += h-20;
-              host.scrollTop    = t;
+              scroll(t);
+              //host.scrollTop    = t;
               
         }//page-down
+        
+        
+        async function scroll(y){
+        
+              var t       = host.scrollTop;
+              var yt      = y-t;
+              var n       = 20;
+              var time    = 100;
+              
+              for(var i=0;i<n;i++){
+              
+                    var x             = i/n;
+                    var y1            = t+ease(x)*yt;
+                    host.scrollTop    = y1;
+                    
+                    await new Promise(res=>setTimeout(res,time/n));
+                    
+              }//for
+              
+              host.scrollTop    = y;
+              
+              
+              function ease(t){
+              
+                  return t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
+                  
+              }//ease
+              
+              
+        }//scroll
+        
+        
+  //:
+  
+        function disp(node){
+        
+              cur.node    = node;
+              
+              var scroll    = false;
+              if(host.scrollTop+host.offsetHeight>host.scrollHeight-50){
+                    scroll    = true;
+              }
+                                                                                console.log(host.scrollTop,host.offsetHeight);
+                                                                                console.log(host.scrollTop+host.offsetHeight,host.scrollHeight,scroll);
+                                                                                
+              if(node.textContent==''){
+                    node.style.height    = '16px';
+              }
+              bottom.insertBefore(node);
+              
+              if(scroll){
+                    host.scrollTop    = 999_999_999;
+              }
+              
+        }//disp
         
         
   //:
