@@ -12,8 +12,7 @@
     
   #controls
     {display:flex;gap:3px;margin-bottom:5px}
-  #console-wrap
-    {margin-right:5px}
+    
     
   #page-up
     {padding:2px;
@@ -27,9 +26,24 @@
   .spc
     {flex:1}
     
+  #spc
+    {width:25px}
+    
+  #marker
+    {}
+    
+  #console-wrap
+    {margin-right:5px}
+    
+    
   .icon
     {width:25px;height:25px;border:1px solid lightgray;border-radius:3px;cursor:pointer;box-sizing:border-box}
   .icon:hover
+    {background:hsla(60,100%,94%,0.3)}
+    
+  .icon2
+    {height:25px;border:1px solid lightgray;border-radius:3px;cursor:pointer;box-sizing:border-box;background:whitesmoke}
+  .icon2:hover
     {background:hsla(60,100%,94%,0.3)}
     
   .radio
@@ -52,7 +66,11 @@
                   <img id=page-up class=icon>
                   <img id=page-down class=icon>
                   
+                  
                   <div class=spc></div>
+                  
+                  <div id=spc class=icon2></div>
+                  <div id=marker class=icon2>-</div>
                   
                   <span id=console-persist class=radio>
                         <input type=checkbox>
@@ -269,6 +287,9 @@
               $(shadow,'#page-up').onclick                        = btn['page-up'];
               $(shadow,'#page-down').onclick                      = btn['page-down'];
               
+              $(shadow,'#spc').onclick                            = btn.spc;
+              $(shadow,'#marker').onclick                         = btn.marker;
+              
               chk.persist     = $.chkbox(shadow,'#console-persist');
               $.chkbox(shadow,'#console-wrap',btn['console-wrap'])
               
@@ -319,6 +340,20 @@
               inspect['page-down']();
               
         }//page-down
+        
+        
+        btn.spc   = function(){
+        
+              inspect.sys.spc();
+              
+        }//spc
+        
+        
+        btn.marker    = function(){
+        
+              inspect.sys.marker();
+              
+        }//marker
         
         
         btn['console-wrap']   = function(chk){
