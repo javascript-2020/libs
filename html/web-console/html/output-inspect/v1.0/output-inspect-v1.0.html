@@ -531,7 +531,7 @@
                                             });
               parts                       = parts.flat();
               
-              var dec                     = $.all(ui.marker,'.dec').at(-1);
+              var dec                     = $.all(node,'.dec').at(-1);
               parts.forEach(child=>node.insertBefore(child,dec));
               
               
