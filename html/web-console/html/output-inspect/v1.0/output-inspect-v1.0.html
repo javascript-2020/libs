@@ -162,27 +162,29 @@
   //:
   
   
-        var api         = {};
-        obj.api         = api;
+        var api               = {};
+        obj.api               = api;
         
         
         var inspect;
         
-        var start_time  = Date.now();
+        var start_time        = Date.now();
+        var status            = 'play';
+        var pause_list        = [];
         
         var shadow;
         var style;
         var root;
         
-        var ui          = {};
-        var chk         = {};
+        var ui                = {};
+        var chk               = {};
         
-        var cur         = {};
-        cur.node        = null;
+        var cur               = {};
+        cur.node              = null;
         
         
-        var set         = {};
-        obj.set         = set;
+        var set               = {};
+        obj.set               = set;
         
         
   //:
@@ -326,10 +328,37 @@
         }//scroll
         
         
+        obj.stop    = function(){
+        
+              status    = 'stop';
+              
+        }//stop
+        
+        
+        obj.pause   = function(){
+        
+              status    = 'pause';
+              
+        }//pause
+        
+        
+        obj.play    = function(){
+        
+              status    = 'play';
+              
+              pause_list.forEach(node=>disp(node));
+              pause_list    = [];
+              
+        }//play
+        
+        
   //:
+  
   
         function disp(node){
         
+              if(status=='stop')return;
+              
               cur.node    = node;
               
               var scroll    = false;
@@ -341,6 +370,12 @@
               if(node.textContent==''){
                     node.style.height    = '16px';
               }
+              
+              if(status=='pause'){
+                    pause_list.push(node);
+                    return;
+              }
+              
               root.append(node);
               
               if(scroll){
