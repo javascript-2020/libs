@@ -175,6 +175,7 @@
         var root;
         var chk             = {};
         obj.chk             = chk;
+        var info            = {};
         
         
         
@@ -183,7 +184,6 @@
         rd.attr             = {};
         var btn             = {};
         var set             = {};
-        var me              = {};
         
         
         
@@ -309,8 +309,11 @@
                     $(shadow,'#controls').style.display           = '';
               }
               
-              $(shadow,'#info').onmouseenter                      = me.info;
-              //$(shadow,'#info').onmouseleave                      = ml.info;
+              info.root                                           = $(shadow,'#info');
+              info.card                                           = $(info.root,'#card');
+              $(info.card,'#version').textContent                 = obj.version;
+              info.root.onmouseenter                              = info.me;
+              info.root.onmouseleave                              = info.ml;
               
               $(shadow,'#page-up').onclick                        = btn['page-up'];
               $(shadow,'#page-down').onclick                      = btn['page-down'];
@@ -336,14 +339,14 @@
   //:
   
   
-        me.info   = function(){
+        info.me   = function(){
         
               $(shadow,'#info #card').style.display   = '';
               
         }//info
         
         
-        ml.info   = function(){
+        info.ml   = function(){
         
               $(shadow,'#info #card').style.display   = 'none';
               
