@@ -62,7 +62,12 @@
     
   .marker
     {text-align:center;font-size:12px}
-    
+  .marker .dec
+    {margin:0 30px}
+  .marker .txt
+    {}
+  .marker .txt-spc
+    {width:5px}
     
   .sys
     {color:gray;font-style:italic}
@@ -115,7 +120,10 @@
                   </div>
                   
                   <div class='marker sys'>
-                        <div class=txt>-----     {time}     -----</div>
+                        <div class=dec>-----</div>
+                        <div class=txt></div>
+                        <div class=txt-spc></div>
+                        <div class=dec>-----</div>
                   </div>
                   
                   <div class=bottom></div>
@@ -234,6 +242,10 @@
               
               ui.marker                       = $(root,'.marker');
               ui.marker.remove();
+              ui.marker.txt                   = $(ui.marker,'.txt');
+              ui.marker.txt.remove();
+              ui.marker.spc                   = $(ui.marker,'.txt-spc');
+              ui.marker.spc.remove();
               
               
               clear();
@@ -502,9 +514,30 @@
               var format                  = ms=>String(ms).replace(/\B(?=(\d{3})+(?!\d))/g, '_');
               var time                    = Date.now()-time;
               time                        = format(time);
-              var str                     = node.textContent;
-              str                         = str.replace('{time}',time);
-              node.textContent            = str;
+              
+              var parts                   = time.split('_');
+              
+              parts                       = parts.map((str,i)=>{
+              
+                                                  var node            = ui.marker.txt.cloneNode(true);
+                                                  node.textContent    = str;
+                                                  var result          = [node];
+                                                  if(i<parts.length-1){
+                                                        var spc       = ui.marker.spc.cloneNode(true);
+                                                        result.push(spc);
+                                                  }
+                                                  return result;
+                                                  
+                                            });
+              parts                       = parts.flat();
+              
+              var dec                     = $.all(ui.marker,'.dec').at(-1);
+              parts.forEach(child=>node.insertBefore(child,dec));
+              
+              
+              //var str                     = node.textContent;
+              //str                         = str.replace('{time}',time);
+              //node.textContent            = str;
               
               disp(node);
               return node;
