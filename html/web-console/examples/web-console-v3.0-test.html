@@ -17,6 +17,7 @@
         
         <div style='margin-bottom:30px'>
               <input value=test type=button onclick=test()>
+              <input value=log type=button onclick=log()>
         </div>
         
         <web-console v3.0 component h=100% controls></web-console>
@@ -47,6 +48,20 @@
                 }//test
                 
                 
+                log.ct    = 0;
+                
+                function log(){
+                
+                      log.ct++;
+                      mod['web-console'].log(log.ct);
+                      
+                }//log
+                
+                
+                
         </script>
+        
+        
+        
         
         
