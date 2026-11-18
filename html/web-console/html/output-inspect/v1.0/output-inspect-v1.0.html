@@ -226,14 +226,17 @@
   
         obj.top   = function(){
         
-              host.scrollTop    = 0;
+              //host.scrollTop    = 0;
+              scroll(0);
               
         }//top
         
         
         obj.bottom    = function(){
         
-              host.scrollTop    = 999_999_999;
+              //host.scrollTop    = 999_999_999;
+              var t   = host.scrollTop-host.offsetHeight;
+              scroll(t);
               
         }//bottom
         
