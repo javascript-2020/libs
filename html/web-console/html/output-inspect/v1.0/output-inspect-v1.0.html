@@ -57,6 +57,13 @@
   .error .txt
     {}
     
+  .spc
+    {height:16px}
+    
+  .marker
+    {text-align:center}
+    
+    
   .sys
     {color:gray;font-style:italic}
     
@@ -101,6 +108,15 @@
                               </div>
                         </div>
                         <div class=main>
+                        </div>
+                  </div>
+                  
+                  <div class=spc>
+                  </div>
+                  
+                  <div class=marker>
+                        <div class=txt>
+                              ---   ===   ---
                         </div>
                   </div>
                   
@@ -214,6 +230,12 @@
               ui.groupcollapsed               = $(root,'.group-collapsed');
               ui.groupcollapsed.remove();
               
+              ui.spc                          = $(root,'.spc');
+              ui.spc.remove();
+              
+              ui.marker                       = $(root,'.marker');
+              ui.marker.remove();
+              
               
               clear();
               root.style.display    = '';
@@ -317,7 +339,7 @@
         }//disp
         
         
-  //:
+  //standard:
   
   
         obj.clear   = clear;
@@ -410,8 +432,9 @@
         
         
         
-        
-        
+  //ext:
+  
+  
         obj.node    = node;
         
         function node(node){
@@ -442,6 +465,41 @@
               return span;
               
         }//write
+        
+        
+  //sys:
+  
+  
+        obj.sys   = sys;
+        
+        function sys(){}
+        
+        
+        sys.spc   = function(){
+        
+              sys.spc.display();
+              
+        }//spc
+        
+        sys.spc.display   = function(){
+        
+              var node                    = ui.spc.cloneNode(true);
+              disp(node);
+              return node;
+              
+        }//display
+        
+        
+        sys.marker    = function(){
+        }//marker
+        
+        sys.marker.display   = function(){
+        
+              var node                    = ui.marker.cloneNode(true);
+              disp(node);
+              return node;
+              
+        }//display
         
         
   //:
