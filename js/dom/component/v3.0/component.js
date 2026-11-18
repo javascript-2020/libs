@@ -277,7 +277,8 @@
                     var node        = div.firstElementChild;
                                                                                 if(!node)debugger;
                     var opts            = {mode:'open'};
-                    if(html.indexOf('shadowrootdelegatesfocus')<i2){
+                    var i   = html.indexOf('shadowrootdelegatesfocus');
+                    if(i!=-1 && i<i2){
                           opts.delegatesFocus   = true;
                     }
                     root.attachShadow(opts);
@@ -294,7 +295,8 @@
                     var html2           = html.slice(i2+1,i5);
                     
                     var opts            = {mode:'open'};
-                    if(html.indexOf('shadowrootdelegatesfocus')<i2){
+                    var i   = html.indexOf('shadowrootdelegatesfocus');
+                    if(i!=-1 && i<i2){
                           opts.delegatesFocus   = true;
                     }
                     root.attachShadow(opts);
