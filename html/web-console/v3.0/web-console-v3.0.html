@@ -11,8 +11,10 @@
     {all:initial;font-family:arial;display:block;min-height:50px}
     
   #controls
-    {display:flex;gap:3px;margin-bottom:5px}
+    {display:flex;gap:3px;margin-bottom:5px;position:relative;padding:0 20px}
     
+  #info
+    {position:absolute;left:0;top:0;width:15px;height:15px;cursor:pointer}
     
   #page-up
     {padding:2px;
@@ -63,6 +65,8 @@
             
             <div id=controls style='display:none'>
             
+                  <img id=info>
+                  
                   <img id=page-up class=icon>
                   <img id=page-down class=icon>
                   
@@ -159,6 +163,7 @@
         rd.attr             = {};
         var btn             = {};
         var set             = {};
+        var me              = {};
         
         
         
@@ -283,6 +288,9 @@
               if(def.controls){
                     $(shadow,'#controls').style.display           = '';
               }
+              
+              $(shadow,'#info').onmouseenter                      = me.info;
+              $(shadow,'#info').onmouseleave                      = ml.info;
               
               $(shadow,'#page-up').onclick                        = btn['page-up'];
               $(shadow,'#page-down').onclick                      = btn['page-down'];
