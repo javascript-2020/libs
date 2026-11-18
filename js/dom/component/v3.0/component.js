@@ -239,8 +239,11 @@
                     }
                     
                     if(i3!=-1 && i3<i2){
-                          //build.host.template({root,html});
-                          build.host.template2({root,html,i2});
+                          //if(root.setHTMLUnsafe){
+                                //build.host.template({root,html});
+                          //}else{
+                                build.host.template2({root,html,i2});
+                          //}
                     }else{
                           build.host.html({root,html,i1});
                     }
@@ -273,7 +276,11 @@
                     div.setHTMLUnsafe(html);
                     var node        = div.firstElementChild;
                                                                                 if(!node)debugger;
-                    root.attachShadow({mode:'open'});
+                    var opts            = {mode:'open'};
+                    if(html.indexOf('shadowrootdelegatesfocus')<i2){
+                          opts.delegatesFocus   = true;
+                    }
+                    root.attachShadow(opts);
                     root.shadowRoot.append(...node.shadowRoot.childNodes);
                     root.append(...div.childNodes);
                     
@@ -286,7 +293,11 @@
                     var i5              = html.lastIndexOf('<',i4);
                     var html2           = html.slice(i2+1,i5);
                     
-                    root.attachShadow({mode:'open'});
+                    var opts            = {mode:'open'};
+                    if(html.indexOf('shadowrootdelegatesfocus')<i2){
+                          opts.delegatesFocus   = true;
+                    }
+                    root.attachShadow(opts);
                     root.shadowRoot.innerHTML   = html2;
                     
                     var i6              = html.indexOf('>',i4);
