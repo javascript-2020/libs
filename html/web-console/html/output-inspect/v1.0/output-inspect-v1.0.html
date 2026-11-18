@@ -499,8 +499,12 @@
         
               var node                    = ui.marker.cloneNode(true);
               
+              var format                  = ms=>String(ms).replace(/\B(?=(\d{3})+(?!\d))/g, '_');
               var time                    = Date.now()-time;
-              node.textContent            = node.textContent.replace('{time}',time);
+              time                        = format(time);
+              var str                     = node.textContent;
+              str                         = str.replace('{time}',time);
+              node.textContent            = str;
               
               disp(node);
               return node;
