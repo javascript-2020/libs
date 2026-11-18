@@ -1,7 +1,7 @@
 
 
 
-<web-console>
+<web-console tab-index=0>
 
       <template shadowrootmode=open>
       
@@ -304,7 +304,9 @@
               }
               
               
-              shadow              = host.shadowRoot;
+              host.onkeydown                                      = kd;
+              
+              shadow                                              = host.shadowRoot;
               
               
               if(def.controls){
@@ -323,7 +325,7 @@
               $(shadow,'#spc').onclick                            = btn.spc;
               $(shadow,'#marker').onclick                         = btn.marker;
               
-              chk.persist     = $.chkbox(shadow,'#console-persist');
+              chk.persist                                         = $.chkbox(shadow,'#console-persist');
               $.chkbox(shadow,'#console-wrap',btn['console-wrap'])
               
               
@@ -341,6 +343,32 @@
   //:
   
   
+        function kd(e){
+        
+              if(e.key=='PageUp'){
+                    if(e.shiftKey){
+                          inspect.top();
+                    }else{
+                          inspect['page-up']();
+                    }
+              }
+              if(e.key=='PageDown'){
+                    if(e.shiftKey){
+                          inspect.bottom();
+                    }else{
+                          inspect['page-down']();
+                    }
+              }
+              if(e.key=='Space'){
+                    inspect.sys.spc();
+              }
+              if(e.key=='-'){
+                    inspect.sys.marker();
+              }
+              
+        }//kd
+        
+        
         info.me   = function(){
         
               $(shadow,'#info #card').style.display   = '';
