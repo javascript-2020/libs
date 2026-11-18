@@ -61,7 +61,7 @@
     {height:12px}
     
   .marker
-    {text-align:center;font-size:12px}
+    {display:flex;justify-content:center;font-size:12px}
   .marker .dec
     {margin:0 30px}
   .marker .txt
@@ -168,7 +168,7 @@
         
         var inspect;
         
-        var start       = Date.now();
+        var start_time  = Date.now();
         
         var shadow;
         var style;
@@ -512,7 +512,7 @@
               var node                    = ui.marker.cloneNode(true);
               
               var format                  = ms=>String(ms).replace(/\B(?=(\d{3})+(?!\d))/g, '_');
-              var time                    = Date.now()-time;
+              var time                    = Date.now()-start_time;
               time                        = format(time);
               
               var parts                   = time.split('_');
