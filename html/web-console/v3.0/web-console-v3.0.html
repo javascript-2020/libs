@@ -288,7 +288,7 @@
   
   
         var timer     = {};
-        timer.delay   = 500;
+        timer.delay   = 300;
         
         
         btn['page-up']    = function(){
@@ -300,7 +300,15 @@
                   return;
               }
               
-              timer['page-up']    = setTimeout(inspect['page-up'],timer.delay);
+              timer['page-up']    = setTimeout(click,timer.delay);
+              
+              
+              function click(){
+              
+                    timer['page-up']    = null;
+                    inspect['page-up']();
+                    
+              }//click
               
         }//page-up
         
@@ -314,7 +322,15 @@
                   return;
               }
               
-              timer['page-down']    = setTimeout(inspect['page-down'],timer.delay);
+              timer['page-down']    = setTimeout(click,timer.delay);
+              
+              
+              function click(){
+              
+                    timer['page-down']    = null;
+                    inspect['page-down']();
+                    
+              }//click
               
         }//page-down
         
