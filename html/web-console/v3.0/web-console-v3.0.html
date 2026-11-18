@@ -287,50 +287,36 @@
   //:
   
   
-        var timer     = {};
-        timer.delay   = 300;
+        var timer             = {};
+        timer.delay           = 300;
+        timer['page-up']      = Date.now();
+        timer['page-down']    = Date.now();
         
         
         btn['page-up']    = function(){
         
-              if(timer['page-up']){
-                  clearTimeout(timer['page-up']);
-                  timer['page-up']    = null;
-                  inspect.top();
+              var d   = Date.now()-timer['page-up'];
+              if(d<timer.delay){
+                  inspect.bottom();
                   return;
               }
               
-              timer['page-up']    = setTimeout(click,timer.delay);
-              
-              
-              function click(){
-              
-                    timer['page-up']    = null;
-                    inspect['page-up']();
-                    
-              }//click
+              timer['page-up']    = Date.now();
+              inspect['page-up']();
               
         }//page-up
         
         
         btn['page-down']    = function(){
         
-              if(timer['page-down']){
-                  clearTimeout(timer['page-down']);
-                  timer['page-down']    = null;
+              var d   = Date.now()-timer['page-down'];
+              if(d<timer.delay){
                   inspect.bottom();
                   return;
               }
               
-              timer['page-down']    = setTimeout(click,timer.delay);
-              
-              
-              function click(){
-              
-                    timer['page-down']    = null;
-                    inspect['page-down']();
-                    
-              }//click
+              timer['page-down']    = Date.now();
+              inspect['page-down']();
               
         }//page-down
         
