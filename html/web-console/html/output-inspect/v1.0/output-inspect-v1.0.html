@@ -115,7 +115,7 @@
                   </div>
                   
                   <div class='marker sys'>
-                        <div class=txt>-----     =======     -----</div>
+                        <div class=txt>-----     {time}     -----</div>
                   </div>
                   
                   <div class=bottom></div>
@@ -160,6 +160,7 @@
         
         var inspect;
         
+        var start       = Date.now();
         
         var shadow;
         var style;
@@ -497,6 +498,10 @@
         sys.marker.display   = function(){
         
               var node                    = ui.marker.cloneNode(true);
+              
+              var time                    = Date.now()-time;
+              node.textContent.replace('{time}',time);
+              
               disp(node);
               return node;
               
