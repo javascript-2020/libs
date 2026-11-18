@@ -1,11 +1,25 @@
 
 
-        <style>html{height:350px}</style>
+        <style>
+        
+  html{height:350px}
+  input
+    {font-size:16px;padding:5px 10px}
+  input[type]
+    {cursor:pointer}
+  input[type=checkbox]
+    {width:20px;height:20px}
+    
+        </style>
         
         <script src='https://libs.ext-code.com/js/dom/component/v3.0/component.js?hdr'></script>
         
         
-        <web-console v3.0 component h='100%' controls></web-console>
+        <div style='margin-bottom:30px'>
+              <input value=test type=button onclick=test()>
+        </div>
+        
+        <web-console v3.0 component h=100% controls></web-console>
         
         
         
@@ -18,7 +32,11 @@
                       
                       mod['web-console'].log(new Proxy({},{}))
                       
-                      
+                }//ready
+                
+                
+                async function test(){
+                
                       for(var i=0;i<25;i++){
                       
                             mod['web-console'].log(i);
@@ -26,7 +44,7 @@
                             
                       }//for
                       
-                }//ready
+                }//test
                 
                 
         </script>
