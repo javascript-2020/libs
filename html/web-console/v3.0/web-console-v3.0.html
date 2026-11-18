@@ -308,6 +308,7 @@
               
               shadow                                              = host.shadowRoot;
     shadow.addEventListener('click', () => {
+      console.log('click');
         $(shadow,'#controls').focus();
     });
     
