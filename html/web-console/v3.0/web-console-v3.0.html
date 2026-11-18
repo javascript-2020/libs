@@ -351,25 +351,35 @@
   
         function kd(e){
                                                                                 console.log(e.key);
-              if(e.key=='PageUp'){
+              var f=true;
+              switch(e.key){
+              
+                case 'PageUp'   :
                     if(e.shiftKey){
                           inspect.top();
                     }else{
                           inspect['page-up']();
                     }
-              }
-              if(e.key=='PageDown'){
+                    break;
+                case 'PageDown'   :
                     if(e.shiftKey){
                           inspect.bottom();
                     }else{
                           inspect['page-down']();
                     }
-              }
-              if(e.key==' '){
+                    break;
+                case ' '    :
                     inspect.sys.spc();
-              }
-              if(e.key=='-'){
+                    break;
+                case '-'    :
                     inspect.sys.marker();
+                    break;
+                default : f=false;
+                
+              }//switch
+              
+              if(f){
+                e.preventDefault();
               }
               
         }//kd
