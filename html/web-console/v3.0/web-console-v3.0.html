@@ -51,6 +51,8 @@
     
   .spc
     {flex:1}
+  .active
+    {border-color:orange}
     
   #spc
     {width:25px}
@@ -108,7 +110,7 @@
                   
                   <img id=stop class=icon>
                   <img id=pause class=icon>
-                  <img id=play class=icon>
+                  <img id=play class='icon active'>
                   
                   <div class=spc></div>
                   
@@ -324,14 +326,7 @@
               host.onkeydown                                      = kd;
               
               shadow                                              = host.shadowRoot;
-/*
-    shadow.addEventListener('click', () => {
-      console.log('click');
-        $(shadow,'#controls').focus();
-    });
-*/
-
-
+              
               if(def.controls){
                     $(shadow,'#controls').style.display           = '';
               }
@@ -344,6 +339,10 @@
               
               $(shadow,'#page-up').onclick                        = btn['page-up'];
               $(shadow,'#page-down').onclick                      = btn['page-down'];
+              
+              $(shadow,'#stop').onclick                           = btn.stop;
+              $(shadow,'#pause').onclick                          = btn.pause;
+              $(shadow,'#play').onclick                           = btn.play;
               
               $(shadow,'#spc').onclick                            = btn.spc;
               $(shadow,'#marker').onclick                         = btn.marker;
@@ -448,6 +447,54 @@
               inspect['page-down']();
               
         }//page-down
+        
+        
+        btn.stop    = function(){
+        
+              inspect.stop();
+              
+              ['#stop','#pause','#play'].forEach(id=>{
+              
+                    if(id=='#stop'){
+                          $(shadow,id).classList.add('active');
+                    }
+                    $(shadow,id).classList.remove('active');
+                    
+              });
+              
+        }//stop
+        
+        
+        btn.pause   = function(){
+        
+              inspect.pause();
+              
+              ['#stop','#pause','#play'].forEach(id=>{
+              
+                    if(id=='#pause'){
+                          $(shadow,id).classList.add('active');
+                    }
+                    $(shadow,id).classList.remove('active');
+                    
+              });
+              
+        }//pause
+        
+        
+        btn.play    = function(){
+        
+              inspect.play();
+              
+              ['#stop','#pause','#play'].forEach(id=>{
+              
+                    if(id=='#play'){
+                          $(shadow,id).classList.add('active');
+                    }
+                    $(shadow,id).classList.remove('active');
+                    
+              });
+              
+        }//play
         
         
         btn.spc   = function(){
