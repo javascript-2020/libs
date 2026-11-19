@@ -438,6 +438,14 @@
         
         
         btn.show    = function(){
+        
+              var node    = $(shadow,'output-inspect');
+              if(node.style.height==='0'){
+                    node.style.height   = '';
+              }else{
+                    node.style.height   = 0;
+              }
+              
         }//show
         
         
