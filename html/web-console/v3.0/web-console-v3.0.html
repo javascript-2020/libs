@@ -418,8 +418,8 @@
               var root                                            = $(shadow,'#search-root');
               search.filter                                       = $.chkbox(root,'#filter',btn.filter);
               search.input                                        = $(root,'#search');
-              //search.input.oninput                                =
-              search.input.onkeydown                              = search.oninput;
+              search.input.oninput                                = search.oninput;
+              //search.input.onkeydown                              =
               
               $(shadow,'#spc').onclick                            = btn.spc;
               $(shadow,'#marker').onclick                         = btn.marker;
@@ -625,7 +625,7 @@
         
         search.oninput    = function(e){
         
-              e.stopPropagation();
+              //e.stopPropagation();
               if(search.filter.checked){
                     var str   = search.input.value;
                     inspect.filter(str);
