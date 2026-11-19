@@ -361,6 +361,28 @@
   //:
   
   
+        obj.filter    = filter;
+        
+        function filter(value){
+        
+              list.forEach(o=>{
+              
+                    if(o.txt.indexOf(value)==-1){
+                          o.node.style.display    = 'none';
+                    }
+                    
+              });
+              
+        }//filter
+        
+        
+        filter.off    = function(){
+        
+              list.forEach(o=>o.node.style.display='');
+              
+        }//off
+        
+        
         function disp(node){
         
               if(status=='stop')return;
@@ -395,7 +417,7 @@
               wrap    = node.offsetHeight;
               set.wordwrap(m);
                                                                                 console.log(nowrap,pre,wrap,txt);
-              list.push({nowrap,pre,wrap,txt});
+              list.push({nowrap,pre,wrap,txt,node});
               
               if(scroll){
                     host.scrollTop    = 999_999_999;
