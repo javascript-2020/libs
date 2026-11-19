@@ -420,6 +420,7 @@
               search.input                                        = $(root,'#search');
               search.input.oninput                                = search.oninput;
               search.input.onkeydown                              = e=>e.stopPropagation();
+              search.input.onfocus                                = e=>search.input.select();
               
               $(shadow,'#spc').onclick                            = btn.spc;
               $(shadow,'#marker').onclick                         = btn.marker;
