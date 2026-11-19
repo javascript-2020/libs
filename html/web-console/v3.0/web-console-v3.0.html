@@ -61,7 +61,10 @@
     {display:inline-flex;align-items:center;gap:3px}
   #filter
     {display:inline-flex;align-items:center}
-    
+  #search-clear
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAB8lBMVEVHcEyOHRhsWl2aJyJxHx6bFQ16MTNlLy+cGBGUJSKEGxWbHxmAIBu/HxSWFhGFJyJuHh1MNjeWFAyVMCyaGhGiGhGfGBCPHBeVGBOHHBeWHxifJiGZKCGyJh2KGRiBIByJGxe9MijIQTiZEw10HR2gMSywKCDLOjGpGg+oGxSnFg6oHBSiHxekHhajHhaMHRurHRSwKSCfGRKPFxCaGhSxHRLDQzmbFRB+IBuwJh2rJh6bJiK+Iha9NiuzKSCNFxKPFhC8KyGvIReFGBLCMSSTEwyLFBCJFg+hJR7FNy6OFA27NCqNFhWoGA+tHxWdFxCnIBWrIReoKCHMSD+5MCXYRz2/MSmuKyOsKiOwJx6XJh+3KyTQPDLYQDevLSK3KCG+Jx/PMSXRST3bcGfRSj+yMCXEQDWzGQ6uGA2pFw7QJxy/GxGkFQyqEwufFQy4Fw28GA/OIxmtFQzaZFnFNSnCJxy0Fg2wFQzGHRTKIBbVKh7da2ClEgvgPjTri4O6HRPPTUPKQjbiOjDidW3UWU/YRTvvpqHYW1PfcWbMRjzcLSPgMynIPTLlenPZNy7TMifnhX3ng3roSD7pWE7oUkzuVEvuoJn0ubbxq6fDGxG4Gw/WWE7ecGTMSUDqg4DrlY7tT0TuYVbfSUDzYFnyXVXytLG4Q/qNAAAAZ3RSTlMATgIcCvIIBc0aPl44/q4UDwT+CtXX3lV/aoY3I6JJHkPw8PYYDbL59LL3q5aZeSrf0sKQo/T45iq2gijv01Kcs9rHdrP3xKuS1+aVW+3s6d/Rr+WO9KxOPmFxj+v3wEmt8PX282vL3D9FWAAAAhFJREFUKM9jUE1NS0ny9JZmYkAHwvEJNgzeyTOmL53WHBwigyqpaueSWOrEoD5t+oy2trb5xbZ2SAYIh7vEtipKqTCotdTV1U2YOKGuQ8lKFSrJFBEWOrk1TgGoXt5DqXrivN7mOR3VjbKcYFmZ6JjJC5Ws+MEcQYUgs+Le5uri9pYeNWaguZGeixZPsWWEW8XCaGlWXF08u6GzxJLZWlZ9ypJWNQtkZwpwG3a2tzQ0lpQ6OdZOnaruwY/mSRkdxbkg6azaBZMUo9gwAoFd3LCkp6S/aVKtIyMDNqAfWNrXVNtXKiuITVZYz6aqu6mfN92UG4ssvy5vVVd3VX16erqBNIYspzZvVlVXloEYUDrDiBlNllkzuzCrKiuAi0s0Awh02FH1amZXFmZl+YkzMPCIAKU1UKzn155VUVlYaCoJ4vCIZGZkilojZFl007MrKivrpSBGAuUzM03gIcOkl1Ews6Kynk8AKsAllpmpBTee0Te/ILuCVxQRC4z+OTkc8lBHc5QDpbM1xJEcI8makyMFYUpklgGl042R/SIokZdjDg4cfbEioHQ6zCyYa+3z8sCuk8gpKi/L1/JBD0WjPFY5IM1Rk1teVsTHgh7KXOZCDkBB5ZrconKwQjTgLKTMCJHO5cNMHgwCDkJ8wgxuebm5rArYEgCPF9BQSdeaPGOs6QNovDuDgL2ruwpWWQYVNy8AZ7mGL3iyyLYAAAAASUVORK5CYII=);
+    }
   .spc
     {flex:1}
   .active
@@ -134,6 +137,7 @@
                               <input type=checkbox checked>
                               filter
                         </span>
+                        <img id=search-clear class=icon>
                         <input id=search>
                   </span>
                   
@@ -420,7 +424,7 @@
               search.input                                        = $(root,'#search');
               search.input.oninput                                = search.oninput;
               search.input.onkeydown                              = e=>e.stopPropagation();
-              search.input.onfocus                                = e=>search.input.select();
+              //search.input.onfocus                                = e=>search.input.select();
               
               $(shadow,'#spc').onclick                            = btn.spc;
               $(shadow,'#marker').onclick                         = btn.marker;
@@ -620,6 +624,7 @@
               }else{
                     inspect.filter.off();
               }
+              search.input.focus();
               
         }//filter
         
