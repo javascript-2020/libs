@@ -118,7 +118,7 @@
                   <div id=marker class=icon2>-</div>
                   
                   <span id=echo class=radio>
-                        <input type=checkbox>
+                        <input type=checkbox checked>
                         echo
                   </span>
                   
@@ -210,6 +210,10 @@
         rd.attr             = {};
         var btn             = {};
         var set             = {};
+        var show            = {};
+        obj.show            = show;
+        var hide            = {};
+        obj.hide            = hide;
         
         
         
@@ -529,6 +533,24 @@
               inspect.set.wordwrap(chk.checked);
               
         }//console-wrap
+        
+        
+  //:
+  
+  
+        show.echo   = function(v){
+        
+              $(shadow,'#echo').style.display   = 'none';
+              
+        }//echo
+        
+        
+        hide.echo   = function(v){
+        
+              $(shadow,'#echo').style.display   = '';
+              
+        }//echo
+        
         
         
   //:
