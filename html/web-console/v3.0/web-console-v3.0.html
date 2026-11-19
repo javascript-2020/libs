@@ -57,6 +57,10 @@
       content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAAAP1BMVEVHcExHbd9BaeJDauFCauFHbuBae95CauJIbuBOcd1Oct5GbeFPc+BEa+Fog9xJbt9IbuBHbeBdfdx0itRBaeKYKudmAAAAFHRSTlMAOvTi8asX/HAkMcFI0QdXhJYOAwgLJzoAAACYSURBVCjPpdPBDoMgEARQhEUEFQud///W0qZGQmEOdq4vcVkYlYpJ7KSG8QYwj3nEQVCyH7nP04fh7PYkDEjyjMsRlpkx3HrEljWqaBsYv5f0jMuSS2ZcjnAt2WE4SYFwteSAgXWjDOP/4J19/KxAl8UGei3x5qXSJ9Fta2vmdeiWSfMq6nMoKfL+M7T6S3pDv8lW2nZeeQG8lyCAOh3WxQAAAABJRU5ErkJggg==);
     }
     
+  #search-root
+    {display:inline-flex;align-items:center}
+  #filter
+    {display:inline-flex;align-items:center}
     
   .spc
     {flex:1}
@@ -102,6 +106,11 @@
   .radio:has([type=checkbox]:disabled)>*
     {cursor:default}
     
+  input
+    {font-size:16px;padding:5px 10px;box-sizing:border-box}
+  input[type]
+    {cursor:pointer}
+    
     
             </style>
             
@@ -116,6 +125,16 @@
                   <img id=stop class=icon>
                   <img id=pause class=icon>
                   <img id=play class='icon active'>
+                  
+                  <div class=spc></div>
+                  
+                  <span id=search-root>
+                        <span id=filter>
+                              <input type=checkbox>
+                              filter
+                        </span>
+                        <input id=search>
+                  </span>
                   
                   <div class=spc></div>
                   
