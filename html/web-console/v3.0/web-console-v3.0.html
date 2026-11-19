@@ -463,7 +463,8 @@
         
         info.ml   = function(){
         
-              $(shadow,'#info #card').style.display   = 'none';
+              var ml    = ()=>$(shadow,'#info #card').style.display='none';
+              setTimeout(ml,750);
               
         }//info
         
