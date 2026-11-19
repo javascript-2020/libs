@@ -8,7 +8,7 @@
             <style>
             
   :host
-    {all:initial;font-family:arial;display:flex;flex-direction:column;min-height:50px;box-sizing:border-box;transition:0.3s}
+    {all:initial;font-family:arial;display:flex;flex-direction:column;min-height:50px;box-sizing:border-box}
     
   #controls
     {display:flex;gap:3px;margin-bottom:0px;position:relative;padding:5px;padding-right:30px}
@@ -450,6 +450,10 @@
         btn.collapse    = function(){
         
               var node    = $(shadow,'output-inspect');
+              
+              host.style.transition   = '0.3s';
+              host.ontransitionend    = end;
+              
               if(host.style.height==='20px'){
                     host.style.height   = '';
                     //node.style.flex     = 1;
@@ -459,6 +463,13 @@
                     //node.style.flex     = 'initial';
                     $(shadow,'#collapse').style.transform   = 'rotateZ(-90deg)';
               }
+              
+              
+              function end(){
+                console.log('transition.end');
+                    host.style.transition   = '';
+                    
+              }//end
               
         }//show
         
