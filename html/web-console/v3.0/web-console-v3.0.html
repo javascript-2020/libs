@@ -442,8 +442,10 @@
               var node    = $(shadow,'output-inspect');
               if(node.style.height==='0'){
                     node.style.height   = '';
+                    node.style.flex     = 1;
               }else{
                     node.style.height   = 0;
+                    node.style.flex     = 'initial';
               }
               
         }//show
