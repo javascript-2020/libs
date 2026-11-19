@@ -421,7 +421,7 @@
               
               var root                                            = $(shadow,'#search-root');
               search.filter                                       = $.chkbox(root,'#filter',btn.filter);
-              $(root,'#search-clear').onclick                     = e=>search.input.value='';
+              $(root,'#search-clear').onclick                     = e=>{search.input.value='';search.input.focus()}
               search.input                                        = $(root,'#search');
               search.input.oninput                                = search.oninput;
               search.input.onkeydown                              = e=>e.stopPropagation();
