@@ -419,7 +419,7 @@
               search.filter                                       = $.chkbox(root,'#filter',btn.filter);
               search.input                                        = $(root,'#search');
               search.input.oninput                                = search.oninput;
-              //search.input.onkeydown                              =
+              search.input.onkeydown                              = e=>e.stopPropagation();
               
               $(shadow,'#spc').onclick                            = btn.spc;
               $(shadow,'#marker').onclick                         = btn.marker;
