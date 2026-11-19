@@ -447,12 +447,12 @@
         btn.show    = function(){
         
               var node    = $(shadow,'output-inspect');
-              if(node.style.height==='0px'){
+              if(host.style.height==='0px'){
                     host.style.height   = '';
                     //node.style.flex     = 1;
                     $(shadow,'#show').style.transform   = '';
               }else{
-                    host.style.height   = 0;
+                    host.style.height   = '20px';
                     //node.style.flex     = 'initial';
                     $(shadow,'#show').style.transform   = 'rotateZ(-90deg)';
               }
