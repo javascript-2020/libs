@@ -26,6 +26,11 @@
   #info #card #version
     {background:hsla(195,53%,79%,0.3);padding:5px 10px}
     
+  #show
+    {
+      content:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAllBMVEVHcEx5v/t7x/x8y/t6w/tzrPp5wft4vft2s/t6xPtzq/qD4fuE6PyD4/x3uft0rvpzrfpzqvp2t/t4vftzrPp9z/uE5/xzqvqC3vyG7Pxzq/p9z/t9zvt7x/t4u/t0rfqG7fyB3PuF6/xzqvp0rvpztvp1s/pzq/p2tvt0rfp0r/p4vvt3uft7yft9z/t/0/uA1/uB3PvwEQhmAAAAJXRSTlMAsQcl/oMgDBYD/P7+w71srZ2di8P1i/ZhamC+c3/FNzja6drpqMuQXgAAAKNJREFUGNOV0NcOgzAMBVATGhJTVlkFuoeglNLx/z/XLLUgnvBLoiMr8TXAnCLsf2dEH6Xv57YmJwmCULRg7nnLj6/U3j9udU0Rjmdh79fGEX2BtPv1AKWyZ29xbilr3RAKbf3CMta6FdgnbV1nrLmI94tsbOtKfInbbGQhykFwNzCXokmUDIz8csbGmtUwcTw1QB5Ji/h4U5ymKeWTBTIG8+sLrq4Xj2f1vAwAAAAASUVORK5CYII=);
+    }
+    
   #page-up
     {padding:2px;
       content:url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAsCAMAAAAgsQpJAAAAP1BMVEVHcExEpvVCpvZLpu5Mpexare1EpfNBpvRFpvNGpvNSp+xuq9xHpvFiq+RHpvFMpu5CpvRTp+mrtLlQp+xBpvbrVekHAAAAFHRSTlMA9P1dHz2e3sy7KgR3CoxQ6xUBM2Gq4CQAAAEASURBVDjL7dVJEoMgEAVQBILM8/3PmsQWFQewKskuf+PmFWh3gwj9JCY9GkmmOMr80IgXEly0uR3MFGwsOjDzMEHFelDMbyk5boY/ytcERxpx9NOqqhDMneITxrnQ3e0ow1AR13FLTb2755oy0qpHnlxBuevllZSHnnsSew5fS8nnSZmefq7ScJCLS9MsjdKeywQOc4kAUlOkVkeXX65AdCaLmw5HgUiBxKus3AqR0kMlaXEwMSuMBmQeoJsOb90GLmtmFldYXAWLtHBixNbVEOSY5uHSTAd0Dl8bWpuW+drWdA8v84ffge+LGo+hD917DKzqw0gEt+HebyfED67XJz8tJngV1cZbAAAAAElFTkSuQmCC);
@@ -105,7 +110,8 @@
                         </div>
                   </div>
                   
-                  <img id=page-up class=icon tabindex=0>
+                  <img id=show class=icon>
+                  <img id=page-up class=icon>
                   <img id=page-down class=icon>
                   
                   <img id=stop class=icon>
@@ -204,6 +210,10 @@
         var info            = {};
         
         
+        var timer                 = {};
+        timer.delay               = 300;
+        timer['page-up']          = Date.now();
+        timer['page-down']        = Date.now();
         
         
         var rd              = {};
@@ -346,6 +356,8 @@
               info.root.onmouseenter                              = info.me;
               info.root.onmouseleave                              = info.ml;
               
+              $(shadow,'#show').onclick                           = btn.show;
+              
               $(shadow,'#page-up').onclick                        = btn['page-up'];
               $(shadow,'#page-down').onclick                      = btn['page-down'];
               
@@ -425,10 +437,8 @@
         }//info
         
         
-        var timer             = {};
-        timer.delay           = 300;
-        timer['page-up']      = Date.now();
-        timer['page-down']    = Date.now();
+        btn.show    = function(){
+        }//show
         
         
         btn['page-up']    = function(){
