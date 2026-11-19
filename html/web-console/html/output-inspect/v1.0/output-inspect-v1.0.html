@@ -173,7 +173,7 @@
         var status            = 'play';
         var pause_list        = [];
         
-        
+        var mode              = 'pre';
         var list              = [];
         
         
@@ -385,11 +385,19 @@
               root.append(node);
               
               var txt   = node.textContent.trim();
-              node.style.whiteSpace   = 'pre';
-              var pre     = node.offsetHeight;
-              node.style.whiteSpace   = 'pre-wrap';
-              var wrap    = node.offsetHeight;
-              //node.style.whiteSpace   = '';
+              var pre;
+              var wrap;
+              if(mode=='pre'){
+                    pre     = node.offsetHeight;
+                    set.wordwrap(true);
+                    wrap    = node.offsetHeight;
+                    set.wordwrap(false);
+              }else{
+                    wrap    = node.offsetHeight;
+                    set.wordwrap(false);
+                    pre     = node.offsetHeight;
+                    set.wordwrap(true);
+              }
                                                                                 console.log(pre,wrap,txt);
               list.push({pre,wrap,txt});
               
@@ -614,9 +622,11 @@
               }//for
               
               if(v){
+                    mode                    = 'pre-wrap';
                     root.style.width        = '100%';
                     rule.style.whiteSpace   = 'pre-wrap';
               }else{
+                    mode                    = 'pre';
                     root.style.width        = '';
                     rule.style.whiteSpace   = 'pre';
               }
