@@ -168,13 +168,19 @@
         
         var inspect;
         
+        
         var start_time        = Date.now();
         var status            = 'play';
         var pause_list        = [];
         
+        
+        var list              = [];
+        
+        
         var shadow;
         var style;
         var root;
+        
         
         var ui                = {};
         var chk               = {};
@@ -377,6 +383,11 @@
               }
               
               root.append(node);
+              
+              var h     = node.offsetHeight;
+              var txt   = node.textContent;
+                                                                                console.log(h,txt);
+              list.push({h,txt});
               
               if(scroll){
                     host.scrollTop    = 999_999_999;
