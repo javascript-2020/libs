@@ -385,20 +385,18 @@
               root.append(node);
               
               var txt   = node.textContent.trim();
+              var nowrap;
               var pre;
               var wrap;
-              if(mode=='pre'){
-                    pre     = node.offsetHeight;
-                    set.wordwrap(true);
-                    wrap    = node.offsetHeight;
-                    set.wordwrap(false);
-              }else{
-                    wrap    = node.offsetHeight;
-                    set.wordwrap(false);
-                    pre     = node.offsetHeight;
-                    set.wordwrap(true);
-              }
-                                                                                console.log(pre,wrap,txt);
+              var m   = mode;
+              set.wordwrap('nowrap');
+              nowrap    = node.offsetHeight;
+              set.wordwrap('pre');
+              pre     = node.offsetHeight;
+              set.wordwrap('pre-wrap');
+              wrap    = node.offsetHeight;
+              set.wordwrap(m);
+                                                                                console.log(nowrap,pre,wrap,txt);
               list.push({pre,wrap,txt});
               
               if(scroll){
