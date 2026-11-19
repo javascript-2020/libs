@@ -197,43 +197,45 @@
         var inspect;
         
         
-        obj.host    = host;
+        obj.host                  = host;
         
         
-        var def             = {};
-        def.fullsize        = false;
-        def.height          = '200px';
-        def.controls        = false;
+        var def                   = {};
+        def.fullsize              = false;
+        def.height                = '200px';
+        def.controls              = false;
         
-        
-        var mode            = 'inspect';
-        var echo            = true;
+        var mode                  = 'inspect';
+        var echo                  = true;
         
         var fullsize;
         var height;
         
+        var listeners             = {};
+        listeners.height          = [];
         
         var shadow;
         var root;
-        var chk             = {};
-        obj.chk             = chk;
-        var info            = {};
+        var chk                   = {};
+        obj.chk                   = chk;
+        var info                  = {};
         
         
         var timer                 = {};
         timer.delay               = 300;
         timer['page-up']          = Date.now();
         timer['page-down']        = Date.now();
+        timer.anim                = null;
         
         
-        var rd              = {};
-        rd.attr             = {};
-        var btn             = {};
-        var set             = {};
-        var show            = {};
-        obj.show            = show;
-        var hide            = {};
-        obj.hide            = hide;
+        var rd                    = {};
+        rd.attr                   = {};
+        var btn                   = {};
+        var set                   = {};
+        var show                  = {};
+        obj.show                  = show;
+        var hide                  = {};
+        obj.hide                  = hide;
         
         
         
@@ -470,8 +472,11 @@
                     }
                     
                     
+                    timer.anim    = window.requestAnimationFrame(()=>anim('height'));
+                    
                     function end(){
-                      console.log('transition.end');
+                    
+                          window.cancelAnimationFrame(timer.anim);
                           host.style.transition   = '';
                           
                     }//end
@@ -631,7 +636,24 @@
         
         
         
+  //:
+  
+  
+        on.height   = function(fn){
         
+              if(listeners.height.includes(fn))return;
+              listeners.height.push(fn);
+              
+        }//height
+        
+        
+        function anim(type){
+                                                                                console.log('anim',type);
+              listeners[type].forEach(fn=>fn());
+              
+              timer.anim    = window.requestAnimationFrame(()=>anim(type));
+              
+        }//anim
         
         
   //:
