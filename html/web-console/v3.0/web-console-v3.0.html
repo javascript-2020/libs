@@ -129,10 +129,22 @@
                         persist
                   </span>
                   
-                  <span id=console-wrap class=radio>
-                        <input type=checkbox>
-                        wrap
+                  <span id=ws>
+                        <span id=nowrap class=radio>
+                              <input type=checkbox>
+                              no wrap
+                        </span>
+                        <span id=pre class=radio>
+                              <input type=checkbox>
+                              pre
+                        </span>
+                        <span id=pre-wrap class=radio>
+                              <input type=checkbox>
+                              wrap
+                        </span>
                   </span>
+                  
+                  
                   
                   <span id=console-clear class=radio>
                         clear
@@ -384,8 +396,10 @@
               
               $.chkbox(shadow,'#echo',btn.echo);
               chk.persist                                         = $.chkbox(shadow,'#console-persist');
-              $.chkbox(shadow,'#console-wrap',btn['console-wrap']);
               
+              var root        = $(shadow,'#ws');
+              var grp         = $.chkbox.group(root,'#no-wrap','#pre','#pre-wrap');
+              grp.callback    = btn.wrap;
               
               if(height){
                                                                                 debug('height',height);
@@ -585,9 +599,9 @@
         }//echo
         
         
-        btn['console-wrap']   = function(chk){
+        btn.wrap   = function(chk,id){
         
-              inspect.set.wordwrap(chk.checked);
+              inspect.set.wordwrap(id);
               
         }//console-wrap
         
