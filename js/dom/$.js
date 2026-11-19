@@ -890,7 +890,7 @@
         
         $.slider    = function(node1,slider_node,node2,callback,params={}){
         
-              callback    ||= {};
+              callback      ||= {};
               
               var minw        = params.minw||40;
               var minh        = params.minh||40;
@@ -950,28 +950,42 @@
               
               slider.vert   = function(ox){
               
-                    var w1    = node1.offsetWidth;
-                    var w2    = node2.offsetWidth;
+                    if(node1){
+                          var w1    = node1.offsetWidth;
+                          if(w1+ox<minw)return;
+                    }
+                    if(node2){
+                          var w2    = node2.offsetWidth;
+                          if(w2-ox<minw)return;
+                    }
                                                                                 params.df && console.log(ox,w1,w2);
-                    if(w1+ox<minw)return;
-                    if(w2-ox<minw)return;
-                    
-                    node1.style.width   = w1+ox+'px';
-                    node2.style.width   = w2-ox+'px';
+                    if(node1){
+                          node1.style.width   = w1+ox+'px';
+                    }
+                    if(node2){
+                          node2.style.width   = w2-ox+'px';
+                    }
                     
               }//vert
               
               
               slider.horiz    = function(oy){
               
-                    var h1    = node1.offsetHeight;
-                    var h2    = node2.offsetHeight;
+                    if(node1){
+                          var h1    = node1.offsetHeight;
+                          if(h1+oy<minh)return;
+                    }
+                    if(node2){
+                          var h2    = node2.offsetHeight;
+                          if(h2-oy<minh)return;
+                    }
                                                                                 params.df && console.log(oy,h1,h2);
-                    if(h1+oy<minh)return;
-                    if(h2-oy<minh)return;
-                    
-                    node1.style.height    = h1+oy+'px'
-                    node2.style.height    = h2-oy+'px';
+                    if(node1){
+                          node1.style.height    = h1+oy+'px'
+                    }
+                    if(node2){
+                          node2.style.height    = h2-oy+'px';
+                    }
                     
               }//horiz
               
