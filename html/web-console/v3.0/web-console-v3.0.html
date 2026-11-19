@@ -447,31 +447,38 @@
         }//info
         
         
-        btn.collapse    = function(){
+        {
         
-              var node    = $(shadow,'output-inspect');
+              let h;
               
-              host.style.transition   = '0.3s';
-              host.ontransitionend    = end;
+              btn.collapse    = function(){
               
-              if(host.style.height==='20px'){
-                    host.style.height   = '';
-                    //node.style.flex     = 1;
-                    $(shadow,'#collapse').style.transform   = '';
-              }else{
-                    host.style.height   = '20px';
-                    //node.style.flex     = 'initial';
-                    $(shadow,'#collapse').style.transform   = 'rotateZ(-90deg)';
-              }
-              
-              
-              function end(){
-                console.log('transition.end');
-                    host.style.transition   = '';
+                    var node    = $(shadow,'output-inspect');
                     
-              }//end
+                    host.style.transition   = '0.3s';
+                    host.ontransitionend    = end;
+                    
+                    if(host.style.height==='20px'){
+                          host.style.height   = h+'px';
+                          //node.style.flex     = 1;
+                          $(shadow,'#collapse').style.transform   = '';
+                    }else{
+                          h   = host.offsetHeight;
+                          host.style.height   = '20px';
+                          //node.style.flex     = 'initial';
+                          $(shadow,'#collapse').style.transform   = 'rotateZ(-90deg)';
+                    }
+                    
+                    
+                    function end(){
+                      console.log('transition.end');
+                          host.style.transition   = '';
+                          
+                    }//end
+                    
+              }//show
               
-        }//show
+        }
         
         
         btn['page-up']    = function(){
