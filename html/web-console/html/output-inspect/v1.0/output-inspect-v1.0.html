@@ -384,10 +384,14 @@
               
               root.append(node);
               
-              var h     = node.offsetHeight;
               var txt   = node.textContent.trim();
-                                                                                console.log(h,txt);
-              list.push({h,txt});
+              node.style.whiteSpace   = 'pre';
+              var pre     = node.offsetHeight;
+              node.style.whiteSpace   = 'pre-wrap';
+              var wrap    = node.offsetHeight;
+              node.style.whiteSpace   = '';
+                                                                                console.log(pre,wrap,txt);
+              list.push({pre,wrap,txt});
               
               if(scroll){
                     host.scrollTop    = 999_999_999;
