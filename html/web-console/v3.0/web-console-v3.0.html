@@ -211,6 +211,12 @@
         var fullsize;
         var height;
         
+        var timer                 = {};
+        timer.delay               = 300;
+        timer['page-up']          = Date.now();
+        timer['page-down']        = Date.now();
+        timer.anim                = null;
+        
         var listeners             = {};
         listeners.height          = [];
         
@@ -220,13 +226,7 @@
         obj.chk                   = chk;
         var info                  = {};
         
-        
-        var timer                 = {};
-        timer.delay               = 300;
-        timer['page-up']          = Date.now();
-        timer['page-down']        = Date.now();
-        timer.anim                = null;
-        
+        var slider                = {};
         
         var rd                    = {};
         rd.attr                   = {};
@@ -393,7 +393,7 @@
               }
               
               
-              $.slider(host,'#slider',null,null,{root:shadow,mode:'horiz'});
+              $.slider(host,'#slider',null,slider,{root:shadow,mode:'horiz'});
               
         }//initdom
         
@@ -649,13 +649,22 @@
         }//height
         
         
-        function anim(type){
-                                                                                console.log('anim',type);
+        function anim(type,auto=true){
+                                                                                //console.log('anim',type);
               listeners[type].forEach(fn=>fn());
               
-              timer.anim    = window.requestAnimationFrame(()=>anim(type));
+              if(auto){
+                    timer.anim    = window.requestAnimationFrame(()=>anim(type,auto));
+              }
               
         }//anim
+        
+        
+        slider.mm   = function(){
+        
+              anim('height',false);
+              
+        }//mm
         
         
   //:
