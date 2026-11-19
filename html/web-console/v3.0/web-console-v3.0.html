@@ -456,14 +456,16 @@
         
         info.me   = function(){
         
-              $(shadow,'#info #card').style.display   = '';
+              var card    = $(shadow,'#info #card');
+              card.style.display   = '';
               
         }//info
         
         
         info.ml   = function(){
         
-              var ml    = ()=>$(shadow,'#info #card').style.display='none';
+              var card    = $(shadow,'#info #card');
+              var ml      = ()=>card.style.display='none';
               setTimeout(ml,750);
               
         }//info
