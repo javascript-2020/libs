@@ -117,6 +117,11 @@
                   <div id=spc class=icon2></div>
                   <div id=marker class=icon2>-</div>
                   
+                  <span id=console-echo class=radio>
+                        <input type=checkbox>
+                        echo
+                  </span>
+                  
                   <span id=console-persist class=radio>
                         <input type=checkbox>
                         persist
@@ -185,8 +190,8 @@
         def.controls        = false;
         
         
-        var mode    = 'inspect';
-        var echo    = true;
+        var mode            = 'inspect';
+        var echo            = true;
         
         var fullsize;
         var height;
@@ -347,8 +352,9 @@
               $(shadow,'#spc').onclick                            = btn.spc;
               $(shadow,'#marker').onclick                         = btn.marker;
               
+              $.chkbox(shadow,'#echo',btn.echo);
               chk.persist                                         = $.chkbox(shadow,'#console-persist');
-              $.chkbox(shadow,'#console-wrap',btn['console-wrap'])
+              $.chkbox(shadow,'#console-wrap',btn['console-wrap']);
               
               
               if(height){
@@ -367,35 +373,35 @@
   
         function kd(e){
                                                                                 console.log(e.key);
-              var f=true;
+              var f   = true;
               switch(e.key){
               
-                case 'PageUp'   :
-                    if(e.shiftKey){
-                          inspect.top();
-                    }else{
-                          inspect['page-up']();
-                    }
-                    break;
+                case 'PageUp'     :
+                                    if(e.shiftKey){
+                                          inspect.top();
+                                    }else{
+                                          inspect['page-up']();
+                                    }
+                                    break;
                 case 'PageDown'   :
-                    if(e.shiftKey){
-                          inspect.bottom();
-                    }else{
-                          inspect['page-down']();
-                    }
-                    break;
-                case ' '    :
-                    inspect.sys.spc();
-                    break;
-                case '-'    :
-                    inspect.sys.marker();
-                    break;
-                default : f=false;
-                
+                                    if(e.shiftKey){
+                                          inspect.bottom();
+                                    }else{
+                                          inspect['page-down']();
+                                    }
+                                    break;
+                case ' '          :
+                                    inspect.sys.spc();
+                                    break;
+                case '-'          :
+                                    inspect.sys.marker();
+                                    break;
+                default           :
+                                    f   = false;
+                                    
               }//switch
               
               if(f){
-                //e.preventDefault();
               }
               
         }//kd
@@ -509,6 +515,13 @@
               inspect.sys.marker();
               
         }//marker
+        
+        
+        btn.echo    = function(chk){
+        
+              echo    = chk.checked;
+              
+        }//echo
         
         
         btn['console-wrap']   = function(chk){
