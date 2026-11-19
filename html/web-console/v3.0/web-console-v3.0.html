@@ -69,6 +69,9 @@
   #marker
     {width:25px;text-align:center;margin-right:5px}
     
+  #persist
+    {margin-right:5px}
+    
   #ws
     {margin-right:5px}
     
@@ -124,7 +127,7 @@
                         echo
                   </span>
                   
-                  <span id=console-persist class=radio>
+                  <span id=persist class=radio>
                         <input type=checkbox>
                         persist
                   </span>
@@ -395,7 +398,7 @@
               $(shadow,'#marker').onclick                         = btn.marker;
               
               $.chkbox(shadow,'#echo',btn.echo);
-              chk.persist                                         = $.chkbox(shadow,'#console-persist');
+              chk.persist                                         = $.chkbox(shadow,'#persist');
               
               var root        = $(shadow,'#ws');
               var grp         = $.chkbox.group(root,'#nowrap','#pre','#pre-wrap');
