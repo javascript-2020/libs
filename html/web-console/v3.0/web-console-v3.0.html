@@ -443,9 +443,11 @@
               if(node.style.height==='0px'){
                     node.style.height   = '';
                     node.style.flex     = 1;
+                    $(shadow,'#show').style.transform   = '';
               }else{
                     node.style.height   = 0;
                     node.style.flex     = 'initial';
+                    $(shadow,'#show').style.transform   = 'rotateZ(90deg)';
               }
               
         }//show
