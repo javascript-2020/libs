@@ -642,12 +642,12 @@
                     function formatDuration(ms){
                     
                           var units   = [
-                                              ['month',Math.floor(ms/2_629_746_000)],
-                                              ['day',Math.floor((ms%2_629_746_000)/86_400_000)],
-                                              ['hour',Math.floor((ms%86_400_000)/3_600_000)],
-                                              ['min',Math.floor((ms%3_600_000)/60_000)],
-                                              ['sec',Math.floor((ms%60_000)/1_000)],
-                                              ['ms',Math.floor(ms%1_000)],
+                                              ['month', Math.floor(ms/2_629_746_000)],
+                                              ['day',   Math.floor((ms%2_629_746_000)/86_400_000)],
+                                              ['hour',  Math.floor((ms%86_400_000)/3_600_000)],
+                                              ['min',   Math.floor((ms%3_600_000)/60_000)],
+                                              ['sec',   Math.floor((ms%60_000)/1_000)],
+                                              ['ms',    Math.floor(ms%1_000)],
                                         ];
                                         
                           var first   = units.findIndex(([,value])=>value>0);
