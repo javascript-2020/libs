@@ -608,7 +608,7 @@
   
   
         set.wordwrap    = function(v){
-        
+                                                                                debug('set.wordwrap',v);
               var sheet   = style.sheet;
               var rule;
               var n       = sheet.cssRules.length;
@@ -621,18 +621,25 @@
                     
               }//for
               
-              if(v){
+              if(v=='pre-wrap'){
                     mode                    = 'pre-wrap';
                     root.style.width        = '100%';
                     rule.style.whiteSpace   = 'pre-wrap';
-              }else{
+              }
+              if(v=='pre'){
                     mode                    = 'pre';
                     root.style.width        = '';
                     rule.style.whiteSpace   = 'pre';
               }
+              if(v=='nowrap'){
+                    mode                    = 'nowrap';
+                    root.style.width        = '';
+                    rule.style.whiteSpace   = 'nowrap';
+              }
               
               
         }//wordwrap
+        
         
   //:
   
