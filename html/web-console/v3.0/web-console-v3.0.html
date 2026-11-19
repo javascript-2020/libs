@@ -260,6 +260,7 @@
         var chk                   = {};
         obj.chk                   = chk;
         var info                  = {};
+        var search                = {};
         
         var slider                = {};
         
@@ -413,6 +414,11 @@
               $(shadow,'#stop').onclick                           = btn.stop;
               $(shadow,'#pause').onclick                          = btn.pause;
               $(shadow,'#play').onclick                           = btn.play;
+              
+              var root                                            = $(shadow,'#search-root');
+              search.filter                                       = $.chkbox(root,'#filter',btn.filter);
+              search.input                                        = $(root,'#search');
+              search.input.oninput                                = search.oninput;
               
               $(shadow,'#spc').onclick                            = btn.spc;
               $(shadow,'#marker').onclick                         = btn.marker;
@@ -602,6 +608,28 @@
               });
               
         }//play
+        
+        
+        btn.filter    = function(chk){
+        
+              if(chk.checked){
+                    var str   = search.input.value;
+                    inspect.filter(str);
+              }else{
+                    inspect.filter.off();
+              }
+              
+        }//filter
+        
+        
+        search.oninput    = function(){
+        
+              if(search.filter.checked){
+                    var str   = search.input.value;
+                    inspect.filter(str);
+              }
+              
+        }//oninput
         
         
         btn.spc   = function(){
