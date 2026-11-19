@@ -587,38 +587,80 @@
         
         sys.marker.display   = function(){
         
-              var node                    = ui.marker.cloneNode(true);
-              
-              var format                  = ms=>String(ms).replace(/\B(?=(\d{3})+(?!\d))/g, '_');
+              var marker                  = ui.marker.cloneNode(true);
+              var dec                     = $.all(marker,'.dec').at(-1);
               var time                    = Date.now()-start_time;
-              time                        = format(time);
               
-              var parts                   = time.split('_');
+              type3();
               
-              parts                       = parts.map((str,i)=>{
-              
-                                                  var node            = ui.marker.txt.cloneNode(true);
-                                                  node.textContent    = str;
-                                                  var result          = [node];
-                                                  if(i<parts.length-1){
-                                                        var spc       = ui.marker.spc.cloneNode(true);
-                                                        result.push(spc);
-                                                  }
-                                                  return result;
-                                                  
-                                            });
-              parts                       = parts.flat();
-              
-              var dec                     = $.all(node,'.dec').at(-1);
-              parts.forEach(child=>node.insertBefore(child,dec));
+              disp(marker);
+              return marker;
               
               
-              //var str                     = node.textContent;
-              //str                         = str.replace('{time}',time);
-              //node.textContent            = str;
+              function type1(){
               
-              disp(node);
-              return node;
+                    //var str                     = node.textContent;
+                    //str                         = str.replace('{time}',time);
+                    //node.textContent            = str;
+                    
+              }//type1
+              
+              
+              function type2(){
+              
+                    var format                  = ms=>String(ms).replace(/\B(?=(\d{3})+(?!\d))/g, '_');
+                    time                        = format(time);
+                    
+                    var parts                   = time.split('_');
+                    
+                    parts                       = parts.map((str,i)=>{
+                    
+                                                        var node            = ui.marker.txt.cloneNode(true);
+                                                        node.textContent    = str;
+                                                        var result          = [node];
+                                                        if(i<parts.length-1){
+                                                              var spc       = ui.marker.spc.cloneNode(true);
+                                                              result.push(spc);
+                                                        }
+                                                        return result;
+                                                        
+                                                  });
+                    parts                       = parts.flat();
+                    parts.forEach(child=>marker.insertBefore(child,dec));
+                    
+              }//type2
+              
+              
+              
+              function type3(){
+              
+                    var node            = ui.marker.txt.cloneNode(true);
+                    node.textContent    = formatDuration(time);
+                    marker.insertBefore(node,dec);
+                    
+                    
+                    function formatDuration(ms){
+                    
+                          var units   = [
+                                              ['month',Math.floor(ms/2_629_746_000)],
+                                              ['day',Math.floor((ms%2_629_746_000)/86_400_000)],
+                                              ['hour',Math.floor((ms%86_400_000)/3_600_000)],
+                                              ['min',Math.floor((ms%3_600_000)/60_000)],
+                                              ['sec',Math.floor((ms%60_000)/1_000)],
+                                              ['ms',Math.floor(ms%1_000)],
+                                        ];
+                                        
+                          var first   = units.findIndex(([,value])=>value>0);
+                          if(first===-1)return '0 ms';
+                          
+                          var arr   = units.slice(first);
+                          arr       = arr.map(([label,value])=>`${value} ${label}${value===1 || label==='ms' ? '' : 's'}`)
+                          var str   = arr.join(', ');
+                          return str;
+                          
+                    }//formatDuration
+                    
+              }//type3
               
         }//display
         
