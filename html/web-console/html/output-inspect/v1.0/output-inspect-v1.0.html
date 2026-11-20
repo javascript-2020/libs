@@ -116,6 +116,9 @@
                         </div>
                   </div>
                   
+                  <div class=sys>
+                  </div>
+                  
                   <div class='spc sys'>
                   </div>
                   
@@ -244,6 +247,9 @@
               
               ui.groupcollapsed               = $(root,'.group-collapsed');
               ui.groupcollapsed.remove();
+              
+              ui.sys                          = $(root,'.sys');
+              ui.sys.remove();
               
               ui.spc                          = $(root,'.spc');
               ui.spc.remove();
@@ -561,7 +567,22 @@
   
         obj.sys   = sys;
         
-        function sys(){}
+        function sys(...args){
+        
+              var str   = args.join(' ');
+              sys..display(str);
+              
+        }//sys
+        
+        
+        sys.display   = function(str){
+        
+              var node            = ui.sys.cloneNode(true);
+              node.textContent    = str;
+              disp(node);
+              return node;
+              
+        }//display
         
         
         sys.spc   = function(){
