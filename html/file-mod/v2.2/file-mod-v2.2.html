@@ -110,9 +110,12 @@
             }
             
             
+            
             //mod.base.add({filemod,source,log});
             //await mod.auto();
             if(!ext)debugger;
+            
+            export_icon_css();
             
             
             mod.base.add({source,complete});
@@ -201,9 +204,11 @@
               var style                         = $(shadow,'style');
               menu.add.style(shadow);
               
+              /*
               if(!import_icon_css()){
                     export_icon_css();
               }
+              */
               
               /*
               localfile.initdom();
@@ -488,7 +493,7 @@
         
         function export_icon_css(){
         
-              var style   = $(shadow,'style');
+              var style   = $(host.shadowRoot,'style');
                                                                                 //console.log(style);
               var sheet   = style.sheet;
               var rules   = sheet.cssRules;
