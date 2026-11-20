@@ -367,6 +367,7 @@
               
               
               hldr                                        = $(shadow,'#hldr');
+              hldr.style.height                           = def.iframe.height;
               glass                                       = $(hldr,'#glass');
               
               sandbox.proxy                               = $(hldr,'iframe');
@@ -609,6 +610,7 @@
                                                                                 
               sandbox.iframe.src          = src;
               sandbox.iframe.onload       = iframe_onload;
+              
               
               //hldr.style.height           = def.iframe.height;
               sandbox.proxy.contentDocument.body.append(sandbox.iframe);
