@@ -780,6 +780,11 @@
         
         function clear(...args){
         
+              if(chk.persist.checked){
+                    inspect.sys(`console.clear() was prevented due to 'persist'`);
+                    return;
+              }
+              
               inspect.clear(...args);
               
               if(echo){
