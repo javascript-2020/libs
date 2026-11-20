@@ -444,6 +444,30 @@
   //:
   
   
+        obj.import_icon_css   = import_icon_css;
+        
+        function import_icon_css(){
+        
+              for(var sheet of document.styleSheets){
+              
+                    var rules   = sheet.cssRules;
+                                                                                console.log(rules);
+                    var rule    = [...rules].find(rule=>rule.selectorText=='.icon');
+                    
+                    if(rule){
+                                                                                console.log(rule);
+                          var css     = rule.cssText;
+                          
+                          var style   = $(shadow,'style');
+                          var index   = style.sheet.cssRules.length;
+                          style.sheet.insertRule(css,index);
+                    }
+                    
+              }//for
+              
+        }//import_icon_css
+        
+        
         function export_icon_css(){
         
               var style   = $(shadow,'style');
