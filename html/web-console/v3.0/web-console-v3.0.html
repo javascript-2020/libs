@@ -422,10 +422,12 @@
               }
               
               info.root                                           = $(shadow,'#info');
-              info.card                                           = $(info.root,'#card');
-              $(info.card,'#version').textContent                 = obj.version;
-              info.root.onmouseenter                              = info.me;
-              info.root.onmouseleave                              = info.ml;
+              if(info.root){
+                    info.card                                     = $(info.root,'#card');
+                    $(info.card,'#version').textContent           = obj.version;
+                    info.root.onmouseenter                        = info.me;
+                    info.root.onmouseleave                        = info.ml;
+              }
               
               $(shadow,'#collapse').onclick                       = btn.collapse;
               
