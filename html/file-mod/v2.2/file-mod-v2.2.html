@@ -448,25 +448,40 @@
   
         obj.import_icon_css   = import_icon_css;
         
-        function import_icon_css(root=document){
+        function import_icon_css({root=document,css}={}){
         
-              for(var sheet of root.styleSheets){
-              
-                    var rules   = sheet.cssRules;
-                                                                                //console.log(rules);
-                    var rule    = [...rules].find(rule=>rule.selectorText=='.icon');
+              if(!css){
+                    for(var sheet of root.styleSheets){
                     
-                    if(rule){
-                                                                                console.log(rule);
-                          var css     = rule.cssText;
+                          var rules   = sheet.cssRules;
+                                                                                      //console.log(rules);
+                          var rule    = [...rules].find(rule=>rule.selectorText=='.icon');
                           
-                          var style   = $(shadow,'style');
-                          var index   = style.sheet.cssRules.length;
-                          style.sheet.insertRule(css,index);
-                          return true;
-                    }
-                    
-              }//for
+                          if(rule){
+                                                                                      console.log(rule);
+                                css     = rule.cssText;
+                                break;
+                          }
+                          
+                    }//for
+              }
+              if(!css)return;
+              
+              var style   = $(shadow,'style');
+              var index   = style.sheet.cssRules.length;
+              style.sheet.insertRule(css,index);
+              
+              github.import_icon_css(css);
+              localfile.import_icon_css(css);
+              fileserver.import_icon_css(css);
+              dbfiles.import_icon_css(css);
+              googlestorage.import_icon_css(css);
+              ftpserver.import_icon_css(css);
+              electron.import_icon_css(css);
+              
+              registry.forEach(entry=>entry.mod.import_icon_css(css));
+              
+              return true;
               
         }//import_icon_css
         
