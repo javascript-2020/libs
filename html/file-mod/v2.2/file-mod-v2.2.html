@@ -448,9 +448,8 @@
   
         obj.import_icon_css   = import_icon_css;
         
-        function import_icon_css(){
+        function import_icon_css(root=document){
         
-              var root    = document;
               for(var sheet of root.styleSheets){
               
                     var rules   = sheet.cssRules;
