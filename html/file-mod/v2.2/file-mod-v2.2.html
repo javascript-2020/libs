@@ -201,7 +201,9 @@
               var style                         = $(shadow,'style');
               menu.add.style(shadow);
               
-              export_icon_css();
+              if(!import_icon_css()){
+                    export_icon_css();
+              }
               
               /*
               localfile.initdom();
@@ -461,6 +463,7 @@
                           var style   = $(shadow,'style');
                           var index   = style.sheet.cssRules.length;
                           style.sheet.insertRule(css,index);
+                          return true;
                     }
                     
               }//for
