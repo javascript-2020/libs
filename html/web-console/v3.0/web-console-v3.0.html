@@ -179,6 +179,9 @@
                         clear
                   </span>
                   
+                  <span id=icons>
+                  </span>
+                  
                   <div id=info>
                         <img>
                         <div id=card style='display:none'>
@@ -273,8 +276,9 @@
         var root;
         var chk                   = {};
         obj.chk                   = chk;
-        var info                  = {};
+        var icons;
         var search                = {};
+        var info                  = {};
         
         var slider                = {};
         
@@ -288,6 +292,7 @@
         obj.hide                  = hide;
         var on                    = {};
         obj.on                    = {};
+        obj.add                   = {};
         
         
         
@@ -446,6 +451,8 @@
               var root        = $(shadow,'#ws');
               var grp         = $.chkbox.group(root,'#nowrap','#pre','#pre-wrap');
               grp.callback    = btn.wrap;
+              
+              icons                                               = $(shadow,'#icons');
               
               if(height){
                                                                                 debug('height',height);
@@ -764,6 +771,23 @@
         }//mm
         
         
+        obj.add.icon    = function(...args){
+        
+              args.forEach(node=>{
+              
+                    if(datatype.nodename(node)==='img'){
+                          node.classList.add(icon);
+                    }else{
+                          node.classList.add(icon2);
+                    }
+                    icons.append(node);
+                    
+              });
+              
+        }//icon
+        
+        
+        
         
   //:
   //standard:
@@ -972,6 +996,26 @@
   
         function int(str){return (/^\d+$/.test(str)) ? Number(str) : str}
         
+        function datatype(v){return Object.prototype.toString.call(v).slice(8,-1).toLowerCase()}
+        
+        datatype.nodename   = function(v){
+        
+              if(!datatype.is.node(v))return null;
+              var name   = v.nodeName.toLowerCase();
+              return name;
+              
+        }//nodename
+        
+        datatype.is   = {};
+        datatype.is.node    = function(v){
+        
+              var test    = (typeof v=='object'             &&
+                            v!==null                        &&
+                            typeof v.nodeType=='number'     &&
+                            typeof v.nodeName=='string');
+              return test;
+              
+        }//node
         
         
   //:
