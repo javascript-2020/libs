@@ -122,7 +122,7 @@
                   </div>
             -->
                   <div id=hdr>
-                        <file-mod v2.1 component></file-mod>
+                        <file-mod v2.2 component></file-mod>
                         <div class=spc></div>
                         <img id=btn-html title=html class=icon>
                         <img id=btn-web-console title=console class=icon>
@@ -341,6 +341,7 @@
         
               shadow                                      = host.shadowRoot;
               
+              filemod.import_icon_css();
               
               $.all(shadow,'#btn-editor').forEach(icon=>icon.onclick=btn.editor);
               $.all(shadow,'#btn-html').forEach(icon=>icon.onclick=btn.html);
