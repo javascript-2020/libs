@@ -450,7 +450,8 @@
         
         function import_icon_css(){
         
-              for(var sheet of document.styleSheets){
+              var root    = document;
+              for(var sheet of root.styleSheets){
               
                     var rules   = sheet.cssRules;
                                                                                 //console.log(rules);
