@@ -149,9 +149,11 @@
                   
                   <div id=slider-2></div>
                   
-                  <div id=web-console-btns>
+                  <div id=web-console-btns style='display:none'>
+                        <!--
                         <input value=clear type=button>
                         <div class=spc></div>
+                        -->
                         <img id=btn-editor class=icon>
                         <img id=btn-html title=html class=icon>
                   </div>
@@ -343,6 +345,9 @@
               $.all(shadow,'#btn-editor').forEach(icon=>icon.onclick=btn.editor);
               $.all(shadow,'#btn-html').forEach(icon=>icon.onclick=btn.html);
               $.all(shadow,'#btn-web-console').forEach(icon=>icon.onclick=btn['web-console']);
+              
+              $.all(shadow,'#webconsole-btns .icon').forEach(icon=>webconsole.add.icon(icon));
+              
               
               $(shadow,'#open').onclick                   = btn.open;
               
