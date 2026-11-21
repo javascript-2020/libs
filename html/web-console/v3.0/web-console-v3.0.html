@@ -8,7 +8,9 @@
             <style>
             
   :host
-    {all:initial;font-family:arial;display:flex;flex-direction:column;min-height:50px;box-sizing:border-box}
+    {all:initial;font-family:arial;min-height:50px;box-sizing:border-box;
+      display:flex;flex-direction:column
+    }
     
   #controls
     {display:flex;gap:3px;flex-wrap:wrap;margin-bottom:0px;position:relative;padding:5px 0 5px 0}
@@ -992,6 +994,13 @@
               con.element.style[prop]   = value;
               
         }//style
+        
+        
+        set.wordwrap    = function(v){
+        
+              inspect.set.wordwrap(v);
+              
+        }//wordwrap
         
         
   //:
