@@ -458,7 +458,7 @@
         btn.open    = function(){
         
               var id          = Math.random().toString(36).slice(2,7);
-              var url         = new URL(`https://ext-code.com/utils/editors/html-editor/v6.0/html-editor-v6.0.html?opener=${id}`);
+              var url         = new URL(`https://ext-code.com/utils/editors/html-editor/v6.0/html-editor-v6.0.html`);
               url.searchParams.set('opener',id);
               var win         = window.open(url);
               if(win){
