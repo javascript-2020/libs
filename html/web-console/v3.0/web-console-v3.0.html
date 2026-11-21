@@ -315,6 +315,7 @@
                     target    = embed;
               }
               
+              rd.height();
               rd.attr.fullsize();
               rd.attr.h();
               rd.attr.height();
@@ -356,6 +357,15 @@
   //:
   
   
+        rd.height   = function(){
+        
+              if(host.offsetHeight!=101){
+                    def.height    = host.offsetHeight;
+              }
+              
+        }//height
+        
+        
         rd.attr.fullsize   = function(){
         
               if(!target.hasAttribute('fullsize'))return;
