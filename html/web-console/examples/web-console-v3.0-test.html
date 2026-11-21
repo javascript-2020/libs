@@ -28,7 +28,11 @@
               <input value=clear type=button onclick="mod['web-console'].clear()">
         </div>
         
-        <web-console v3.0 component h=100% controls></web-console>
+        <web-console v3.0 component controls>
+              <config>
+                    {slider:false}
+              </config>
+        </web-console>
         
         
         
@@ -36,7 +40,7 @@
         
         
                 async function ready(){
-                
+                      return;
                       mod['web-console'].test();
                       
                       mod['web-console'].log(new Proxy({},{}))
