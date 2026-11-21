@@ -474,7 +474,9 @@
                                                                                 debug('height',height);
                     set.height(height);
               }
-              
+              if(config.slider===false){
+                    hide.slider();
+              }
               
               $.slider(host,'#slider',null,slider,{root:shadow,mode:'horiz'});
               
