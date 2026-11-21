@@ -455,6 +455,30 @@
         }//web-console
         
         
+        btn.open    = function(){
+        
+              var id          = Math.random().toString(36).slice(2,7);
+              var url         = new URL(`https://ext-code.com/utils/editors/html-editor/v6.0/html-editor-v6.0.html?opener=${id}`);
+              url.searchParams.set('opener',id);
+              var win         = window.open(url);
+              if(win){
+                    window.addEventListener('message',onmessage);
+              }
+              
+              
+              function onmessage(e){
+              
+                    if(e.data?.id!==id)return;
+                    window.removeEventListener('message',onmessage);
+                    var html      = editor.getValue();
+                    var payload   = {type:'editor.set',html};
+                    win.postMessage(payload,'*');
+                    
+              }//onmessage
+              
+        }//open
+        
+        
   //:
   
   
