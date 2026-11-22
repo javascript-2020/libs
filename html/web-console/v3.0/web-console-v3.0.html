@@ -86,6 +86,9 @@
   #ws
     {margin-right:7px}
     
+  #icons
+    {display:flex;gap:3px}
+    
   output-inspect
     {flex:1;border:1px solid lightgray}
     
@@ -177,7 +180,7 @@
                   
                   
                   
-                  <span id=console-clear class=radio>
+                  <span id=clear class=radio>
                         clear
                   </span>
                   
@@ -468,6 +471,8 @@
               var grp         = $.chkbox.group(root,'#nowrap','#pre','#pre-wrap');
               grp.callback    = btn.wrap;
               
+              $(shadow,'#clear').onclick                          = btn.clear;
+              
               icons                                               = $(shadow,'#icons');
               
               if(height){
@@ -712,6 +717,13 @@
               inspect.set.wordwrap(id);
               
         }//console-wrap
+        
+        
+        btn.clear   = function(){
+        
+              inspect.clear();
+              
+        }//clear
         
         
   //:
