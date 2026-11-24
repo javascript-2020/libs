@@ -277,11 +277,14 @@
                     var node        = div.firstElementChild;
                                                                                 if(!node)debugger;
                     var opts            = {mode:'open'};
+                    
                     var i   = html.indexOf('shadowrootdelegatesfocus');
                     if(i!=-1 && i<i2){
                           opts.delegatesFocus   = true;
                     }
+                    
                     root.attachShadow(opts);
+                    
                     root.shadowRoot.append(...node.shadowRoot.childNodes);
                     root.append(...div.childNodes);
                     
@@ -295,11 +298,14 @@
                     var html2           = html.slice(i2+1,i5);
                     
                     var opts            = {mode:'open'};
+                    
                     var i   = html.indexOf('shadowrootdelegatesfocus');
                     if(i!=-1 && i<i2){
                           opts.delegatesFocus   = true;
                     }
+                    
                     root.attachShadow(opts);
+                    
                     root.shadowRoot.innerHTML   = html2;
                     
                     var i6              = html.indexOf('>',i4);
@@ -1362,6 +1368,15 @@
         //Object.assign(window,{ext,$,datatype,menumod,keydown,debug,ls});
         
         menu    = null;
+        
+        
+        var style           = document.createElement('style');
+        style.textContent   = `
+        
+              config {display:none}
+              
+        `
+        document.head.append(style);
         
         
     //:
