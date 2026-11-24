@@ -310,7 +310,7 @@
         scroll.ease   = t=>(t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2);
         
         async function scroll(y,{time=100,n=20}={}){
-                                                                                console.log('scroll');
+                                                                                //console.log('scroll');
               var t       = host.scrollTop;
               var yt      = y-t;
               
@@ -330,10 +330,10 @@
         
         
         scroll.x    = async function(x,{time=100,n=20}={}){
-                                                                                console.log('scroll.x');
+                                                                                //console.log('scroll.x');
               var l       = host.scrollLeft;
               var xt      = x-l;
-                                                                                console.log(x,l,xt,time,n);
+                                                                                //console.log(x,l,xt,time,n);
               for(var i=0;i<n;i++){
               
                     var i1            = i/n;
@@ -393,7 +393,7 @@
         
         
         obj.scroll.right.end   = function(){
-        
+                                                                                console.log(host.scrollWidth,host.offsetWidth);
               var t   = host.scrollWidth-host.offsetWidth+30;
               scroll(t);
               
