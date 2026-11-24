@@ -1145,11 +1145,9 @@
   //:
   
   
-        obj.test    = function(){
+        obj.test    = function({long=true}){
         
-              var large   = false;
-              
-              
+        
               log('helloworld');
               
               var test    = {
@@ -1161,7 +1159,7 @@
               
               log(test);
               
-              if(large){
+              if(long){
                     var str   = [...Array(250)].reduce(
                           (a,v,i)=>{
                           
