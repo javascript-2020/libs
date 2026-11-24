@@ -528,6 +528,15 @@
                                           }
                                           break;
                                           
+                case 'Home'             :
+                                          inspect.scroll.left.start();
+                                          break;
+                                          
+                case 'End'
+                                        :
+                                          inspect.scroll.right.end();
+                                          break;
+                                          
                 case 'PageUp'           :
                                           if(e.shiftKey){
                                                 inspect.top();
