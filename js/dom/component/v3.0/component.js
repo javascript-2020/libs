@@ -1373,8 +1373,9 @@
         var style           = document.createElement('style');
         style.textContent   = `
         
-              [component] config {display:none}
-              
+              [component] config, [component_] config
+                {display:none}
+                
         `
         document.head.append(style);
         
