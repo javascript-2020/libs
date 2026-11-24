@@ -271,7 +271,6 @@
   
         obj.top   = function(){
         
-              //host.scrollTop    = 0;
               scroll(0);
               
         }//top
@@ -279,7 +278,6 @@
         
         obj.bottom    = function(){
         
-              //host.scrollTop    = 999_999_999;
               var t   = host.scrollHeight-host.offsetHeight+30;
               scroll(t);
               
@@ -292,7 +290,6 @@
               var h   = host.offsetHeight;
               t      -= h-20;
               scroll(t);
-              //host.scrollTop    = t;
               
         }//page-up
         
@@ -303,22 +300,24 @@
               var h   = host.offsetHeight;
               t      += h-20;
               scroll(t);
-              //host.scrollTop    = t;
               
         }//page-down
         
         
-        async function scroll(y){
+        
+        obj.scroll    = scroll;
+        
+        scroll.ease   = t=>(t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2);
+        
+        async function scroll(y,{time=100,n=20}={}){
         
               var t       = host.scrollTop;
               var yt      = y-t;
-              var n       = 20;
-              var time    = 100;
               
               for(var i=0;i<n;i++){
               
-                    var x             = i/n;
-                    var y1            = t+ease(x)*yt;
+                    var i1            = i/n;
+                    var y1            = t+scroll.ease(i1)*yt;
                     host.scrollTop    = y1;
                     
                     await new Promise(res=>setTimeout(res,time/n));
@@ -327,32 +326,104 @@
               
               host.scrollTop    = y;
               
+        }//scroll
+        
+        
+        scroll.x    = async function(x,{time=100,n=20}={}){
+        
+              var l       = host.scrollLeft;
+              var xt      = x-l;
               
-              function ease(t){
+              for(var i=0;i<n;i++){
               
-                  return t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
-                  
-              }//ease
+                    var i1            = i/n;
+                    var x1            = l+scroll.ease(i1)*xt;
+                    host.scrollTop    = x1;
+                    
+                    await new Promise(res=>setTimeout(res,time/n));
+                    
+              }//for
               
+              host.scrollLeft    = x;
               
         }//scroll
         
         
-        obj.stop    = function(){
+        obj.scroll.up   = function(dy=25){
+        
+              var y   = host.scrollTop;
+              y      -= dy;
+              scroll(y);
+              
+        }//up
+        
+        
+        obj.scroll.down   = function(dy=25){
+        
+              var y   = host.scrollTop;
+              y      += dy;
+              scroll(y);
+              
+        }//down
+        
+        
+        obj.scroll.left   = function(dx=25){
+        
+              var x   = host.scrollLeft;
+              x      -= dx;
+              scroll.x(x);
+              
+        }//left
+        
+        
+        obj.scroll.left.start   = function(){
+        
+              scroll.x(0);
+              
+        }//start
+        
+        
+        obj.scroll.right    = function(dx=25){
+        
+              var x   = host.scrollLeft;
+              x      -= dx;
+              scroll.x(x);
+              
+        }//right
+        
+        
+        obj.scroll.rigt.end   = function(){
+        
+              var t   = host.scrollWidth-host.offsetWidth+30;
+              scroll(t);
+              
+        }//end
+        
+        
+  //:
+  
+  
+        obj.stop    = stop;
+        
+        function stop(){
         
               status    = 'stop';
               
         }//stop
         
         
-        obj.pause   = function(){
+        obj.pause   = pause;
+        
+        function pause(){
         
               status    = 'pause';
               
         }//pause
         
         
-        obj.play    = function(){
+        obj.play    = play;
+        
+        function play(){
         
               status    = 'play';
               
@@ -360,6 +431,41 @@
               pause_list    = [];
               
         }//play
+        
+        
+        obj.play.toggle   = function(){
+        
+              if(status=='play'){
+                    pause();
+              }else{
+                    play();
+              }
+              
+        }//toggle
+        
+        
+  //:
+  
+  
+        obj.read    = function(){
+        
+              var list2   = list.map(o=>{
+              
+                    var {txt}   =o;
+                    return txt;
+                    
+              });
+              return list2;
+              
+        }//read
+        
+        
+        obj.read.full   = function(){
+        
+              var list2   = structuredClone(list);
+              return list2;
+              
+        }//full
         
         
   //:
@@ -421,8 +527,9 @@
               set.wordwrap('pre-wrap');
               var wrap      = node.offsetHeight;
               set.wordwrap(m);
+              var ts        = Date.now();
                                                                                 //console.log(nowrap,pre,wrap,txt);
-              list.push({nowrap,pre,wrap,txt,node});
+              list.push({nowrap,pre,wrap,txt,node,ts});
               
               
               if(scroll){
@@ -432,6 +539,7 @@
         }//disp
         
         
+  //:
   //standard:
   
   
@@ -525,7 +633,7 @@
         
         
         
-        
+  //:
   //ext:
   
   
@@ -561,6 +669,7 @@
         }//write
         
         
+  //:
   //sys:
   
   
@@ -718,6 +827,10 @@
               
               
         }//wordwrap
+        
+        
+        //obj.status:
+        Object.defineProperty(obj,'status',{get:()=>status});
         
         
   //:
