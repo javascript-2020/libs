@@ -501,42 +501,90 @@
         function kd(e){
                                                                                 console.log(e.key);
               var f   = true;
+              
               switch(e.key){
               
-                case 'PageUp'     :
-                                    if(e.shiftKey){
-                                          inspect.top();
-                                    }else{
-                                          inspect['page-up']();
-                                    }
-                                    break;
-                case 'PageDown'   :
-                                    if(e.shiftKey){
-                                          inspect.bottom();
-                                    }else{
-                                          inspect['page-down']();
-                                    }
-                                    break;
-                case ' '          :
-                                    inspect.sys.spc();
-                                    break;
-                case '-'          :
-                                    inspect.sys.marker();
-                                    break;
-                case 'Escape'     :
-                                    inspect.clear();
-                                    break;
+                case 'ArrowUp'          :
+                                          inspect.scroll.up();
+                                          break;
+                                          
+                case 'ArrowDown'        :
+                                          inspect.scroll.down();
+                                          break;
+                                          
+                case 'ArrowLeft'        :
+                                          if(e.shiftKey){
+                                                inspect.scroll.left.start();
+                                          }else{
+                                                inspect.scroll.left();
+                                          }
+                                          break;
+                                          
+                case 'ArrowRight'       :
+                                          if(e.shiftKey){
+                                                inspect.scroll.right.end();
+                                          }else{
+                                                inspect.scroll.right();
+                                          }
+                                          break;
+                                          
+                case 'PageUp'           :
+                                          if(e.shiftKey){
+                                                inspect.top();
+                                          }else{
+                                                inspect['page-up']();
+                                          }
+                                          break;
+                                          
+                case 'PageDown'         :
+                                          if(e.shiftKey){
+                                                inspect.bottom();
+                                          }else{
+                                                inspect['page-down']();
+                                          }
+                                          break;
+                                          
+                case ' '                :
+                                          inspect.sys.spc();
+                                          break;
+                                          
+                case '-'                :
+                                          inspect.sys.marker();
+                                          break;
+                                          
+                case 'Escape'           :
+                                          inspect.clear();
+                                          break;
+                                          
+                case 'p'                :
+                                          if(inspect.status=='play'){
+                                                btn.pause();
+                                          }else{
+                                                btn.play();
+                                          }
+                                          break;
+                                          
+                case 's'                :
+                                          btn.stop();
+                                          break;
+                                          
+                                          
                 default           :
                                     f   = false;
                                     
               }//switch
               
               if(f){
+                    e.preventDefault();
+                    e.stopPropagation();
               }
               
         }//kd
         
         
+  //:
+  
+  
         info.me   = function(){
         
               var card              = $(shadow,'#info #card');
@@ -817,6 +865,34 @@
               });
               
         }//icon
+        
+        
+  //:
+  
+  
+        obj.read    = function(){
+        
+              var list   = inspect.read();
+              return list;
+              
+        }//read
+        
+        
+        obj.read.full   = function(){
+        
+              var list    = inspect.read.full();
+              return list;
+              
+        }//full
+        
+        
+        obj.read.txt    = function(){
+        
+              var list    = inspect.read();
+              var txt     = list..join('\n');
+              return txt;
+              
+        }//txt
         
         
         
