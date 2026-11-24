@@ -310,7 +310,7 @@
         scroll.ease   = t=>(t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2);
         
         async function scroll(y,{time=100,n=20}={}){
-        
+                                                                                console.log('scroll');
               var t       = host.scrollTop;
               var yt      = y-t;
               
