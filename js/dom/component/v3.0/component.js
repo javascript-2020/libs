@@ -1373,7 +1373,7 @@
         var style           = document.createElement('style');
         style.textContent   = `
         
-              config {display:none}
+              [component] config {display:none}
               
         `
         document.head.append(style);
