@@ -35,7 +35,7 @@
         
         <web-console v3.0 component controls>
               <config>
-                    {slider:false}
+                    {slider:true}
               </config>
         </web-console>
         
@@ -52,7 +52,7 @@
                       //mod['web-console'].hide.echo();
                       
                       
-                      mod['web-console'].test();
+                      mod['web-console'].test({long:false});
                       
                       mod['web-console'].log(new Proxy({},{}))
                       
@@ -65,6 +65,10 @@
                       
                       
                       mod['web-console'].focus();
+                      
+                      
+                      var txt   = mod['web-console'].read.text();
+                      console.log(txt);
                       
                 }//ready
                 
