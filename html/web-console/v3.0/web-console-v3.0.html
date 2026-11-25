@@ -1041,11 +1041,18 @@
               args.forEach(v=>{
               
                     var str   = JSON.stringify(v,null,4);
-                    obj.log(str);
+                    log(str);
                     
               });
               
         }//json
+        
+        
+        obj.json.display    = function(html){
+        
+              log.display(html);
+              
+        }//display
         
         
         obj.debug   = function(...args){
